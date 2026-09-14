@@ -43,13 +43,13 @@
 	desc = "Усовершенствованный капюшон для крестовых походов против ереси, состоящий из освященного нанометалла и ткани. Обеспечивает очень хорошую защиту от еретиков и нечисти."
 	resistance_flags = FIRE_PROOF
 
-/obj/item/clothing/head/helmet/ntci_helmet
+/obj/item/clothing/head/helmet/specops
 	name = "tactical helmet"
 	desc = "Облегчённый военный шлем с проверенным временем дизайном. Использование современных технологий обеспечивает защиту от осколков и винтовочных калибров."
 	icon = 'modular_bandastation/objects/icons/obj/clothing/head/helmet.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/helmet.dmi'
-	icon_state = "ntci_helmet"
-	base_icon_state = "ntci_helmet"
+	icon_state = "specops_helmet"
+	base_icon_state = "specops_helmet"
 	armor_type = /datum/armor/pmc
 	clothing_flags = STACKABLE_HELMET_EXEMPT
 	resistance_flags = FIRE_PROOF | ACID_PROOF
@@ -61,9 +61,74 @@
 	pickup_sound = 'sound/items/handling/helmet/helmet_pickup1.ogg'
 	drop_sound = 'sound/items/handling/helmet/helmet_drop1.ogg'
 
-/obj/item/clothing/head/helmet/ntci_helmet/Initialize(mapload)
+/obj/item/clothing/head/helmet/specops/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/seclite_attachable, light_icon_state = "flight")
+
+/obj/item/clothing/head/helmet/toggleable/nvg
+	name = "tactical NVG helmet"
+	desc = "Облегчённый военный шлем с проверенным временем дизайном. Использование современных технологий обеспечивает защиту от осколков и винтовочных калибров. Этот имеет прикрепленный прибор ночного видения."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/head/helmet.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/helmet.dmi'
+	icon_state = "specops_helmet_nvg"
+	base_icon_state = "specops_helmet_nvg"
+	armor_type = /datum/armor/pmc
+	clothing_flags = STACKABLE_HELMET_EXEMPT
+	resistance_flags = FIRE_PROOF | ACID_PROOF
+	hair_mask = /datum/hair_mask/standard_hat_middle
+	flags_inv = null
+	dog_fashion = null
+	sound_vary = TRUE
+	equip_sound = 'sound/items/handling/helmet/helmet_equip1.ogg'
+	pickup_sound = 'sound/items/handling/helmet/helmet_pickup1.ogg'
+	drop_sound = 'sound/items/handling/helmet/helmet_drop1.ogg'
+
+	toggle_message = "You push up the NVG on your helmet."
+	alt_toggle_message = "You push down the NVG on your helmet."
+	actions_types = list(/datum/action/item_action/toggle)
+
+	visor_toggle_up_sound = SFX_VISOR_UP
+	visor_toggle_down_sound = SFX_VISOR_DOWN
+
+	var/nvg_active = FALSE
+
+/obj/item/clothing/head/helmet/toggleable/nvg/attack_self(mob/user)
+	. = ..()
+	update_nvg(user)
+
+/obj/item/clothing/head/helmet/toggleable/nvg/proc/update_nvg(mob/living/carbon/human/user)
+	if(!ishuman(user))
+		return
+	var/is_on_head = (user.head == src)
+	var/is_lowered = up
+	if(is_on_head && is_lowered)
+		if(!nvg_active)
+			nvg_active = TRUE
+			apply_nvg(user)
+			user.update_sight()
+	else
+		if(nvg_active)
+			nvg_active = FALSE
+			remove_nvg(user)
+			user.update_sight()
+
+/obj/item/clothing/head/helmet/toggleable/nvg/proc/apply_nvg(mob/living/carbon/human/user)
+	ADD_TRAIT(user, TRAIT_TRUE_NIGHT_VISION, REF(src))
+	flash_protect = FLASH_PROTECTION_SENSITIVE
+	playsound(src, 'sound/items/night_vision_on.ogg', 30, TRUE, -3)
+
+/obj/item/clothing/head/helmet/toggleable/nvg/proc/remove_nvg(mob/living/carbon/human/user)
+	REMOVE_TRAIT(user, TRAIT_TRUE_NIGHT_VISION, REF(src))
+	flash_protect = FLASH_PROTECTION_NONE
+	playsound(src, 'sound/machines/click.ogg', 30, TRUE, -3)
+
+/obj/item/clothing/head/helmet/toggleable/nvg/equipped(mob/user, slot)
+	..()
+	update_nvg(user)
+
+/obj/item/clothing/head/helmet/toggleable/nvg/dropped(mob/user)
+	..()
+	update_nvg(user)
 
 // MARK: USSP
 /obj/item/clothing/head/helmet/marine/ussp_officer_kaska
