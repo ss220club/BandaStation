@@ -43,6 +43,7 @@
 /datum/action/cooldown/spell
 	name = "Spell"
 	desc = "A wizard spell."
+	// SS220 ADDITION
 	/// Text shown when the spell is granted outside its normal action button.
 	var/gain_desc
 	background_icon_state = "bg_spell"

@@ -70,7 +70,7 @@
 	RegisterSignal(hallucinator, COMSIG_MOB_REQUESTING_SCREENTIP_NAME_FROM_USER, PROC_REF(screentip_name_override))
 	RegisterSignal(hallucinator, COMSIG_LIVING_PERCEIVE_EXAMINE_NAME, PROC_REF(examine_name_override))
 
-	var/list/mob/living/carbon/human/funny_looking_mobs = get_delusion_targets()
+	var/list/mob/living/carbon/human/funny_looking_mobs = get_delusion_targets() // SS220 EDIT: extendability
 
 	for(var/mob/living/carbon/human/found_human as anything in funny_looking_mobs)
 		var/image/funny_image = make_delusion_image(found_human)
@@ -91,6 +91,7 @@
 		QDEL_IN(src, duration)
 	return TRUE
 
+// SS220 ADDITION
 /// Returns the humans whose appearances this delusion replaces.
 /datum/hallucination/delusion/proc/get_delusion_targets()
 	. = list()
