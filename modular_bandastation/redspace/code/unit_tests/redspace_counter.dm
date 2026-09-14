@@ -1,0 +1,33 @@
+#if defined(UNIT_TESTS) || defined(SPACEMAN_DMM)
+
+/datum/unit_test/redspace_counter
+
+/datum/unit_test/redspace_counter/Run()
+	if(redspace_counter_display_value(null) != "?")
+		return Fail("An unavailable sample must be shown as unknown")
+	if(redspace_counter_display_value(-10) != "-10")
+		return Fail("The lower display boundary must show -10")
+	if(redspace_counter_display_value(-10.1) != "10-")
+		return Fail("Values below -10 must show 10-")
+	if(redspace_counter_display_value(10) != "10")
+		return Fail("The upper display boundary must show 10")
+	if(redspace_counter_display_value(10.1) != "10+")
+		return Fail("Values above 10 must show 10+")
+	if(redspace_counter_display_value(3.4) != "3")
+		return Fail("Values inside the display range must be rounded")
+	if(redspace_counter_display_value(3.6) != "4")
+		return Fail("Values inside the display range must be rounded")
+	if(redspace_counter_icon_state("?") != "counter_on_unknown")
+		return Fail("Unknown readings must use the placeholder icon state")
+	if(redspace_counter_icon_state("10+") != "counter_on_above_10")
+		return Fail("High readings must use the above-ten icon state")
+	if(redspace_counter_icon_state("0") != "counter_on_0")
+		return Fail("Zero must use the counter zero icon state")
+	if(redspace_counter_icon_state("4") != "counter_on_4")
+		return Fail("Positive readings must use their numeric icon state")
+	if(redspace_counter_icon_state("-9") != "counter_on_minus_9")
+		return Fail("Negative readings must use their numeric icon state")
+	if(redspace_counter_icon_state("10-") != "counter_on_unknown")
+		return Fail("The unavailable lower-bound sprite must use the unknown icon state")
+
+#endif
