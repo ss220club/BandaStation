@@ -21,7 +21,6 @@
 	if(M.stat == DEAD || !M.client)
 		return FALSE
 	. = ..()
-	make_friend()
 	get_ghost()
 
 /datum/brain_trauma/special/imaginary_friend/on_life(seconds_per_tick)
@@ -43,11 +42,10 @@
 
 //If the friend goes afk, make a brand new friend. Plenty of fish in the sea of imagination.
 /datum/brain_trauma/special/imaginary_friend/proc/reroll_friend()
-	if(friend.client) //reconnected
+	if(friend && friend.client) //reconnected
 		return
 	friend_initialized = FALSE
 	QDEL_NULL(friend)
-	make_friend()
 	get_ghost()
 
 /datum/brain_trauma/special/imaginary_friend/proc/make_friend()
@@ -72,9 +70,62 @@
 		qdel(src)
 		return
 
+	// Запускаем асинхронный опрос призрака
+	INVOKE_ASYNC(src, PROC_REF(ask_ghost_appearance), ghost)
+
+/datum/brain_trauma/special/imaginary_friend/proc/ask_ghost_appearance(mob/dead/observer/ghost)
+	if(!ghost || !ghost.client)
+		return
+
+	var/list/choices = list("Свой персонаж", "Случайный человек", "Выбрать из окружающих")
+	var/choice = tgui_alert(ghost, "Кем вы хотите выглядеть?", "Внешний вид", choices)
+
+	if(!ghost || !ghost.client || QDELETED(src) || QDELETED(owner))
+		return
+
+	var/mob/living/carbon/copied_target = null
+
+	if(choice == "Выбрать из окружающих")
+		var/list/possible_targets = list()
+		for(var/mob/living/carbon/C in GLOB.carbon_list)
+			if(!C.real_name) continue
+			possible_targets[C.real_name] = C
+
+		if(!length(possible_targets))
+			to_chat(ghost, span_warning("Не найдено подходящих существ. Выбран случайный внешний вид."))
+			choice = "Случайный человек"
+		else
+			var/target_name = tgui_input_list(ghost, "Выберите существо для копирования:", "Внешний вид", possible_targets)
+			if(target_name)
+				copied_target = possible_targets[target_name]
+			else
+				choice = "Случайный человек"
+
+	if(!ghost || !ghost.client || QDELETED(src) || QDELETED(owner))
+		return
+
+	make_friend()
 	friend.PossessByPlayer(ghost.ckey)
 	friend.attach_to_owner(owner)
-	friend.setup_appearance()
+
+	if(choice == "Свой персонаж")
+		friend.setup_friend_from_prefs(ghost.client.prefs)
+	else if(choice == "Выбрать из окружающих" && copied_target)
+		friend.real_name = copied_target.real_name
+		friend.name = friend.real_name
+		var/icon/final_icon = icon()
+		var/old_dir = copied_target.dir
+		for(var/d in list(NORTH, SOUTH, EAST, WEST))
+			copied_target.setDir(d)
+			var/icon/temp_icon = getFlatIcon(copied_target)
+			final_icon.Insert(temp_icon, dir = d)
+		copied_target.setDir(old_dir)
+		friend.human_icon = final_icon
+		friend.Show()
+		friend.copy_tts_from(copied_target)
+	else
+		friend.setup_friend()
+
 	friend_initialized = TRUE
 	friend.log_message("became [key_name(owner)]'s split personality.", LOG_GAME)
 	message_admins("[ADMIN_LOOKUPFLW(friend)] became [ADMIN_LOOKUPFLW(owner)]'s split personality.")
@@ -137,13 +188,6 @@
 	owner.imaginary_group += src
 	greet()
 
-/// Copies appearance from passed player prefs, or randomises them if none are provided
-/mob/eye/imaginary_friend/proc/setup_appearance(datum/preferences/appearance_from_prefs = null)
-	if(appearance_from_prefs)
-		INVOKE_ASYNC(src, PROC_REF(setup_friend_from_prefs), appearance_from_prefs)
-	else
-		INVOKE_ASYNC(src, PROC_REF(setup_friend))
-
 /// Randomise friend name and appearance
 /mob/eye/imaginary_friend/proc/setup_friend()
 	gender = pick(MALE, FEMALE)
@@ -196,25 +240,29 @@
 	return group_clients
 
 /mob/eye/imaginary_friend/proc/Show()
-	if(!client || !owner) //nobody home
+	if(!owner)
 		return
 
-	var/list/friend_clients = group_clients() - src.client
-	//Remove old image from group
+	var/list/friend_clients = group_clients()
+	if(src.client)
+		friend_clients -= src.client
+
+	// Remove old image from group
 	remove_image_from_clients(current_image, friend_clients)
 
-	//Generate image from the static icon and the current dir
+	// Generate image from the static icon and the current dir
 	current_image = image(human_icon, src, , MOB_LAYER, dir=src.dir)
 	current_image.override = TRUE
 	current_image.name = name
 	if(hidden)
 		current_image.alpha = 150
 
-	//Add new image to owner and friend
+	// Add new image to owner and friend
 	if(!hidden)
 		add_image_to_clients(current_image, friend_clients)
 
-	src.client.images |= current_image
+	if(src.client)
+		src.client.images |= current_image
 
 /mob/eye/imaginary_friend/Destroy()
 	owner.client?.images -= current_image
@@ -229,6 +277,28 @@
 	// BANDASTATION ADD Start - TTS
 	var/message_to_tts = LAZYACCESS(message_mods, MODE_TTS_MESSAGE_OVERRIDE) || raw_message
 	speaker.cast_tts(src, message_to_tts, is_radio = !!radio_freq, tts_seed_override = LAZYACCESS(message_mods, MODE_TTS_SEED_OVERRIDE), channel_override = radio_freq ? CHANNEL_TTS_RADIO : null, radio_freq = radio_freq)
+
+/mob/eye/imaginary_friend/proc/copy_tts_from(mob/living/copied_target)
+	if(!copied_target)
+		return
+
+	// Получаем TTS-компонент оригинального моба
+	var/datum/component/target_tts = copied_target.GetComponent(/datum/component/tts_component)
+	if(!target_tts)
+		return
+
+	var/datum/component/friend_tts = src.GetComponent(/datum/component/tts_component) || src.AddComponent(/datum/component/tts_component)
+	if(!friend_tts)
+		return
+
+	if("tts_voice" in target_tts.vars)
+		friend_tts.vars["tts_voice"] = target_tts.vars["tts_voice"]
+
+	if("tts_profile" in target_tts.vars)
+		friend_tts.vars["tts_profile"] = target_tts.vars["tts_profile"]
+
+	if("tts_seed" in target_tts.vars)
+		friend_tts.vars["tts_seed"] = target_tts.vars["tts_seed"]
 	// BANDASTATION ADD End - TTS
 
 /mob/eye/imaginary_friend/send_speech(message, range = IMAGINARY_FRIEND_SPEECH_RANGE, obj/source = src, bubble_type = bubble_icon, list/spans = list(), datum/language/message_language = null, list/message_mods = list(), forced = null)
@@ -270,14 +340,17 @@
 	var/dead_rendered = "[span_name("[name] (Imaginary friend of [owner])")] [messagepart]"
 
 	var/language = message_language || owner.get_selected_language()
-	Hear(src, language, message, null, null, null, spans, message_mods) // We always hear what we say
-	var/group = owner.imaginary_group - src // The people in our group don't, so we have to exclude ourselves not to hear twice
+	Hear(src, language, message, null, null, null, spans, message_mods)
+	var/group = owner.imaginary_group - src
+
+	var/list/actual_hearers = list(src)
+
 	for(var/mob/person in group)
 		person.Hear(src, language, message, null, null, null, spans, message_mods, range)
 
-	// Speech bubble, but only for those who have runechat off
+	// Speech bubble, who was within range and had runechat turned off
 	var/list/speech_bubble_recipients = list()
-	for(var/mob/user as anything in (group + src)) // Add ourselves back in
+	for(var/mob/user in actual_hearers)
 		if((safe_read_pref(user.client, /datum/preference/toggle/enable_runechat) || (SSlag_switch.measures[DISABLE_RUNECHAT] && !HAS_TRAIT(src, TRAIT_BYPASS_MEASURES))))
 			speech_bubble_recipients.Add(user.client)
 
@@ -433,16 +506,37 @@
 	remove_thinking_indicator()
 	remove_typing_indicator()
 
-/mob/eye/imaginary_friend/Move(NewLoc, Dir = 0)
+/mob/eye/imaginary_friend/Move(atom/NewLoc, Dir = 0)
 	if(world.time < move_delay)
 		return FALSE
+
 	setDir(Dir)
+
+	if(!hidden && NewLoc)
+		if(!NewLoc.CanPass(src, NewLoc))
+			return FALSE
+
+		for(var/atom/movable/AM in NewLoc)
+
+			if(AM.density && ismob(AM))
+				return FALSE
+
+			if(!AM.CanPass(src, NewLoc) && !istype(AM, /obj/structure/railing))
+				return FALSE
+
 	if(get_dist(src, owner) > distance_allowance || (require_los && !can_see(owner, src, distance_allowance)))
 		recall()
 		move_delay = world.time + 10
 		return FALSE
+
 	abstract_move(NewLoc)
-	move_delay = world.time + 1
+
+	var/delay_modifier = hidden ? 1 : 2
+
+	if((Dir & (Dir - 1)) && !hidden)
+		delay_modifier = 3
+
+	move_delay = world.time + delay_modifier
 
 /mob/eye/imaginary_friend/setDir(newdir)
 	. = ..()
@@ -488,6 +582,12 @@
 /datum/action/innate/imaginary_hide/Activate()
 	var/mob/eye/imaginary_friend/fake_friend = owner
 	fake_friend.hidden = !fake_friend.hidden
+
+	if(fake_friend.hidden)
+		to_chat(fake_friend, span_notice("Вы прячетесь. Теперь вы бестелесны и можете проходить сквозь стены."))
+	else
+		to_chat(fake_friend, span_notice("Вы появляетесь на виду и теперь двигаетесь как обычный человек."))
+
 	fake_friend.Show()
 	build_all_button_icons(UPDATE_BUTTON_NAME|UPDATE_BUTTON_ICON)
 
