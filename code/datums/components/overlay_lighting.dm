@@ -176,6 +176,7 @@
 		GRID_CELL_REMOVE(grid_cell.dynamic_light_sources, src)
 
 // BANDASTATION EDIT: Correct determination of the lighting direction
+
 /datum/component/overlay_lighting/proc/is_turf_in_directional_light(turf/T)
 	if(!directional)
 		return TRUE
@@ -186,31 +187,38 @@
 		return FALSE
 	var/dx = T.x - holder_turf.x
 	var/dy = T.y - holder_turf.y
-	// The source tile itself is always considered part of the light.
+	// The source tile itself is always part of the light.
 	if(!dx && !dy)
 		return TRUE
-	var/distance = max(abs(dx), abs(dy))
-	// Do not affect turfs outside this light's range.
-	if(distance > lumcount_range)
-		return FALSE
+	var/forward
+	var/left
 	switch(current_direction)
 		if(NORTH)
-			return dy > 0 && abs(dx) <= dy
+			forward = dy
+			left = -dx
 		if(SOUTH)
-			return dy < 0 && abs(dx) <= abs(dy)
+			forward = -dy
+			left = dx
 		if(EAST)
-			return dx > 0 && abs(dy) <= dx
+			forward = dx
+			left = dy
 		if(WEST)
-			return dx < 0 && abs(dy) <= abs(dx)
-		if(NORTHEAST)
-			return dx > 0 && dy > 0
-		if(NORTHWEST)
-			return dx < 0 && dy > 0
-		if(SOUTHEAST)
-			return dx > 0 && dy < 0
-		if(SOUTHWEST)
-			return dx < 0 && dy < 0
-	return FALSE
+			forward = -dx
+			left = -dy
+		else
+			return FALSE
+	// Behind the light source.
+	if(forward < 0)
+		return FALSE
+	// Do not affect turfs outside the light's range.
+	if(forward > lumcount_range)
+		return FALSE
+	// The close-range cone extends one tile to either side
+	// of the source.
+	if(forward == 0)
+		return abs(left) <= 1
+	// Approximation of the main directional light mask.
+	return abs(left) <= forward + 1
 
 /// Populates the affected_turfs lazylist, adding to its contents the effects of being near the light.
 /datum/component/overlay_lighting/proc/register_new_cells()
