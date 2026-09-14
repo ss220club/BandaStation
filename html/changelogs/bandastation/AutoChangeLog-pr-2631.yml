@@ -1,6 +1,0 @@
-author: "anstapi"
-delete-after: True
-changes:
-  - rscadd: "Добавлена статуя СРТ."
-  - image: "Добавлен новый icon - SRT."
-  - map: "Centcom обновлен новыми статуями."
