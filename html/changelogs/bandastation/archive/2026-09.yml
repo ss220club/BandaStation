@@ -164,3 +164,225 @@
       отверстия, дрон-узел не будет улетать, мгновенно проваливая защиту от волн.
   - rscadd: Каждые 5 минут стоимость экспорта 2–4 случайных видов груза утраивается
       — lets go gambling!
+2026-09-14:
+  PetyaFX:
+  - bugfix: Исправлена некорректная очистка компонетов эффекта водоворота, приводившая
+      к нестабильному выполнению CI теста.
+  Voyaker-coder:
+  - bugfix: Исправлена проблема с некорректным отображением жизненного статуса на
+      мониторах экипажа.
+  anstapi:
+  - rscadd: Добавлена статуя СРТ.
+  - image: Добавлен новый icon - SRT.
+  - map: Centcom обновлен новыми статуями.
+  tgstation:
+  - bugfix: Лечение фруктового сока теперь работает корректно
+  - rscadd: Руководители революции могут задать «рекомендацию по конвертации» — короткое
+      сообщение, отправляемое каждому конвертируемому игроку через их интерфейс антагониста,
+      чтобы привести революцию в порядок. Однако это, в конечном счёте, лишь *рекомендация*.
+      Вам не навязывают её, но ожидается, что вы её соблюдёте.
+  - qol: Усиленные окна намекают, что их можно крепить при осмотре
+  - bugfix: Окна из пластитаниума теперь находятся в правильном состоянии после постройки
+  - bugfix: Кошки больше не пытаются убежать от себя самих после кошиной драки, а
+      убегают от кошки, которая действительно победила
+  - bugfix: Ревенанты больше не являются неуязвимыми для всех повреждений
+  - balance: Пистолет .38 Truestrike теперь наносит 20 урона и имеет лучшую пробивную
+      способность
+  - balance: Копья больше не ломаются от переиспользования без ремонта
+  - bugfix: 'Исправлено: существование боргов иногда приводило к краху меню орбиты'
+  - qol: Интерфейс ИИ при сбое теперь отображает количество в данный момент взломанных
+      АПЦ
+  - bugfix: Чат теперь прокручивается корректно при некоторых сообщениях с переносом
+      строк
+  - bugfix: Перемещение теплового зрения отдела смерти на их ИФФ-визоры
+  - spellcheck: Тактические ЭФФ-визоры теперь называются ИФФ-визоры
+  - qol: Участники отдела смерти больше не могут просматривать записи службы безопасности
+      с помощью взгляда
+  - bugfix: PDA психолога теперь можно окрашивать
+  - qol: «PDA» в окрасчике PDA теперь называется «Assistant PDA», что действительно
+      верно
+  - rscadd: Добавлены нож-подушка и щит-матрас
+  - rscadd: 'Нож-подушка наносит урон выносливости и позволяет заряжаться при вооружении:
+      чтобы зарядить, просто продолжайте двигаться в одном направлении, это расходует
+      выносливость, чем дольше вы бежите, тем больше расход'
+  - rscadd: Щит-матрас наносит урон выносливости и позволяет укрепляться, увеличивая
+      вероятность блока и урон выносливости; щит легко ломается, так как остаётся
+      матрасом
+  - rscadd: Теперь можно купить нож-подушку и щит-матрас у продавца игрушек
+  - rscadd: В обслуживании теперь есть шанс появления ножа-подушки и щита-матраса
+  - rscdel: Ревенант больше не может влиять на консоль эвакуационного шаттла с помощью
+      Сбоя
+  - bugfix: 'Исправлено: ДНК-консоли могли печатать аномальные мутации'
+  - bugfix: Исправлено странное поведение, при котором список мутаций в ДНК-консоли
+      сжимался до одной колонки
+  - balance: Существа, подвергнутые остановке времени, теперь слегка более остановлены
+      (химикаты перестают метаболизироваться, кровотечение приостанавливается и т.д.)
+  - balance: Бомбы Синдиката больше не движутся к детонации при остановке времени
+  - refactor: Небольшой рефакторинг функции timestop, в первую очередь его взаимодействия
+      с голопаразитами — сообщайте о любых проблемах при следующем применении
+  - bugfix: Установка связей SHIFT+номер теперь работает
+  - bugfix: Плиты льдяной луны больше не учитываются в победе Блоба
+  - qol: Сделаны проверки видимости Candela немного более мягкими
+  - bugfix: 'Исправлено: светящиеся ядра модов могли не заряжаться от сети'
+  - code_imp: Оптимизация функции compare() за счёт добавления проверки суммарных
+      молей
+  - qol: Хвост автоматически прекращает движение губы, когда владелец теряет сознание
+      или находится в критическом состоянии, а не при его смерти
+  - bugfix: Мобы, брошенные из капсул, больше не имеют повреждённого ИИ, застрявшего
+      на попытке сопротивляться
+  - sound: Моды теперь издают звуки шагов
+  - sound: Магнитные загрушки теперь издают звуки шагов
+  - sound: Роботизированные конечности теперь издают звуки шагов (применяется только
+      при ношании без обуви)
+  - sound: При ударе, победе или разрушении роботизированных конечностей воспроизводится
+      альтернативный звук
+  - image: Откат/перерисовка нескольких стен и полов из проекта «floors and walls
+      pr»
+  - bugfix: 'Исправлено: некоторые частицы были невидимы на объектах на полу (или
+      на полу самом)'
+  - bugfix: Игроки с местоимениями it/its больше не нарушают радиосообщения
+  - bugfix: Исправлена инвертированная логика при отсечении связанного предмета
+  - bugfix: pAИ снова имеют кнопки языка и навигации в своём интерфейсе
+  - bugfix: ИИ больше не застревают в тяжёлом крите навсегда после возрождения
+  - bugfix: Объявления о завершении радиационной бури теперь отображаются корректно
+  - bugfix: 'Диспенсеры химикатов (и, возможно, несколько других мест) теперь корректно
+      ограничивают текст при использовании `Input: Enable TGUI`'
+  - rscadd: Добавлены звуки удара для банок
+  - sound: Добавлен звук can_hit.ogg
+  - rscadd: 'Добавлена новая машина на трудовом лагере на Лаваленде: Produceporter.
+      Отправляйте выращенные культуры персоналу обслуживания в обмен на трудовые очки!'
+  - rscadd: Пресс номерных знаков теперь начисляет 10 трудовых очков за каждый новый
+      нажатый номер
+  - qol: Консоль лагеря теперь может принимать ID заключённого прямо из руки
+  - sound: Добавлены звуковые эффекты для пресса номерных знаков
+  - bugfix: Мобы, захваченные агрессивным захватом и должные бежать с места, теперь
+      делают это.
+  - bugfix: Cable-based robotic limb repairs are no longer impossible while not wearing
+      an uniform.
+  - bugfix: De-hardcoded HUDs for jobs & antags, report any icons missing.
+  - bugfix: Шина для ремонта роботизированных конечностей теперь возможна безнарушения
+      формы.
+  - balance: Меню орбиты теперь должно отображать HUD-интерфейсы предателей, как и
+      задумывалось изначально, вместо того, чтобы некоторые анты показывали только
+      значок «rev».
+  - bugfix: Венты шахт теперь корректно сбрасываются при потере.
+  - balance: Cosmic spell recharge condition changed to "crit targets within a tile
+      of a cosmic field" instead of "on a cosmic field"
+  - balance: Orbit menu should now show antag HUDs as it was seemingly supposed to
+      from the start, instead of some antags simply showing a rev icon.
+  - bugfix: Orbit menu should now show antag HUDs as it was seemingly supposed to
+      from the start, instead of some antags simply showing a rev icon.
+  - refactor: ore vents now reset properly on losses.
+  - bugfix: Research discounts from toxins can now be purchased again.
+  - balance: Условие перезарядки космического заклинания изменено с «критические цели
+      на космическом поле» на «критические цели в пределах одного тайла от космического
+      поля».
+  - code_imp: The logic for determining a discount has been cleaned up a bit.
+  - rscadd: Cosmic spell recharge condition changed to "crit targets within a tile
+      of a cosmic field" instead of "on a cosmic field"
+  - rscdel: Убрано «захардкожено» HUD-дизайн для ролей и предателей. Сообщите, если
+      какие-либо иконки отсутствуют.
+  - rscadd: Species features like wings and tails will appear "meshed over" when wearing
+      certain equipment like spacesuits or biosuits.
+  - rscadd: Fixes space phase deducting a charge on entrance and edit. Now only deducts
+      a charge on exit
+  - rscadd: 'Исправлено: фаза пространства теперь списывает заряд только при выходе,
+      а не при входе и редактировании.'
+  - spellcheck: All heretic armor hoods are consistently known by their name, rather
+      than "ominous hood"
+  - refactor: breaks up navigate code into a proc for the choice vs the line creation
+  - admin: Magboots (and similar forms of gravity negation) prevent you from falling
+      on shuttle movement
+  - balance: Void spell recharge condition changed to "Stand near freezing enemies"
+      instead of "Crit freezing enemies"
+  - bugfix: Магнитные ботинки (и подобные отрицанию гравитации) предотвращают падение
+      при движении шаттла.
+  - bugfix: Условие перезарядки бездны изменено с «Критическое заморозка врагов» на
+      «Стоять рядом с замёрзшими врагами».
+  - qol: Pressing backspace while unfocused now clears your command bar.
+  - qol: Research discounts from toxins can now be purchased again.
+  - rscdel: Скидки на исследования за токсины теперь можно приобрести снова.
+  - bugfix: Anchored Items cant be looted with quick inserting from bags
+  - bugfix: typepath suggestions are now filtered on the frontend
+  - qol: Подсказки typepath теперь фильтруются на клиенте.
+  - rscadd: Added purple luxury medipens. These are given instead when bought with
+      a jellyperson's bank account. They are jelly-friendly, however heal less than
+      normal luxury pens. They also make you more purple. Sprite by Bieyes.
+  - rscadd: Костюмы-костюмы больше не полностью скрывают хвосты ящеров.
+  - admin: Spacesuits no longer fully conceal lizard tails
+  - balance: Other apes, like gorillas, can have fun popping balloons with foam darts
+      as well. They can also perform some monkey emotes now.
+  - code_imp: Species features like wings and tails will appear "meshed over" when
+      wearing certain equipment like spacesuits or biosuits.
+  - code_imp: Эволюционные особенности, такие как крылья и хвосты, будут отображаться
+      «поверх» при надевании определённого оборудования, такого как костюмы или биокостюмы.
+  - code_imp: Cleaned up code that prevents tinfoil hats from being equipped on throw.
+      Report any oddities
+  - code_imp: Biosuits and beepeeker suit sprites now altar when worn by digitigrade
+      mobs.
+  - code_imp: Спрайты биокостюмов и костюмов beepeeker теперь «альтерируются» при
+      надевании цифигридальными мобами.
+  - admin: Painting and Trophy manager no longer permanently deletes itself after
+      the first close
+  - bugfix: Логика определения скидки немного упрощена.
+  - qol: Upon scanning a target with a gas analyzer, its UI will update constantly
+      as the target's gas mixture changes (so long as you stay in range). No more
+      spam clicking to see the status of your gas canister.
+  - qol: Aprons and Overall sprites now altar when worn by digitigrade mobs.
+  - spellcheck: Спрайты фартуков и комбинезонов теперь «альтерируются» при надевании
+      цифигридальными мобами.
+  - spellcheck: Grammar pass on a lot of atmos related content.
+  - spellcheck: Все капюшоны ереси теперь одинаково называются по своему имени, а
+      не «зловещим капюшоном».
+  - spellcheck: Antinoblium renamed to Anti-Noblium
+  - refactor: The double-ended chainsaw spear
+  - refactor: Двухсторонний расческа-ставня.
+  - qol: Gas chamber UIs now default to showing information pertaining to whichever
+      gas is held within
+  - qol: The Captain is now treated as a member of every department, for the purpose
+      of department-related vendor discounts.
+  - bugfix: The logic for determining a discount has been cleaned up a bit.
+  - bugfix: Капитан теперь считается членом каждого отдела для целей скидок у продавцов.
+  - spellcheck: fixes a typo in diluted regenerative jelly description
+  - bugfix: Donk. Flechette rounds aren't stealthy embeds and can be hand removed
+  - bugfix: Face decals (like pie) now appear on monkeys' faces instead of above it
+  - rscadd: Donk. Пули типа «флешет» не являются стелс-вшивками и могут быть удалены
+      вручную.
+  - rscdel: Miners no longer spawn with marker beacons
+  - balance: Humans can take CSL
+  - balance: люди могут принимать CSL.
+  - rscadd: Admin VV topic to navigate a player to a marked object
+  - rscadd: breaks up navigate code into a proc for the choice vs the line creation
+  - rscadd: разделяет код навигации на отдельную процедуру для выбора vs создания
+      линии.
+  - refactor: Fucked with how space parallax/the renderer thinks about "where" it
+      is being displayed pretty heavily. Please report any weird visuals!
+  - bugfix: Админ-тема VV для навигации игрока к помеченному объекту.
+  - code_imp: Adds support for pre-sawnoff guns and cleans up sawnoff behavoir
+  - rscadd: AI tracking from the crew monitoring console now works for people who
+      have set an ID card honorific too
+  - rscadd: Отслеживание ИИ с консоли мониторинга экипажа теперь работает для людей,
+      у которых установлен почётный титул на ID-карте.
+  - code_imp: Vampire fangs now handle all vampire blood-draining effects.
+  - rscadd: Pressing backspace while unfocused now clears your command bar.
+  - image: Нажатие Backspace при потере фокуса теперь очищает строку команд.
+  - bugfix: Parallax draws as expected again
+  - bugfix: Строка команд теперь начинается с «Say», а не с режима «Command».
+  - bugfix: The Command bar now starts on Say instead of Command mode.
+  - refactor: Refactored the code for damage and types of damage a little (also armor
+      but not as much). Make sure to report any oddity with it.
+  - bugfix: Goldgrub no longer reproduce unless hand fed ores
+  - rscadd: Золотограб не размножается без ручного кормления рудой.
+  - qol: Atmos mix tank output starts disabled.
+  - bugfix: Закреплённые предметы нельзя вынуть быстрой вставкой из мешков.
+  - qol: Command bar's last used mode is now persistent between rounds.
+  - bugfix: Chat Highlight sounds are off by default now.
+  - code_imp: Звуки подсветки чата выключены по умолчанию.
+  - bugfix: Atmos multi-z pipes rendering weirdly when connecting with omni-pipes
+  - bugfix: Chat Highlights won't trigger on self-actions or radio channel names.
+  - bugfix: Подсветка чата не срабатывает при самодействиях или названиях радиоканалов.
+  - qol: Thermo machines input pipe takes on pipe color (visually, mechanically no
+      changes)
+  - qol: Added purple luxury medipens. These are given instead when bought with a
+      jellyperson's bank account. They are jelly-friendly, however heal less than
+      normal luxury pens. They also make you more purple. Sprite by Bieyes.
