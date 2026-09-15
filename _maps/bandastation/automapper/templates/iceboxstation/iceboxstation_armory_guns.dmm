@@ -28,6 +28,7 @@
 	},
 /obj/structure/rack/gunrack,
 /obj/effect/spawner/armory_spawn/eguns,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /turf/open/floor/iron/dark/textured,
 /area/station/security/armory/upper)
 "L" = (
