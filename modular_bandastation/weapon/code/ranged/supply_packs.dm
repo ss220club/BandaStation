@@ -11,12 +11,11 @@
 
 /datum/supply_pack/security/gp9_pistols
 	name = "GP-9 Pistols Crate"
-	desc = "В этом ящике находятся два пистолета GP-9 калибра 9x25мм, а также четыре нелетальных магазина калибра 9x25мм НТ."
+	desc = "В этом ящике находятся два пистолета GP-9 калибра 9x25мм, и четыре магазина калибра 9x25мм НТ."
 	cost = CARGO_CRATE_VALUE * 10
 	access_view = ACCESS_SECURITY
 	contains = list(
-		/obj/item/gun/ballistic/automatic/pistol/gp9/no_mag = 2,
-		/obj/item/ammo_box/magazine/c9x25mm_pistol/rubber = 4,
+		/obj/item/storage/toolbox/guncase/ntcase/pistol/gp9 = 1,
 	)
 	crate_name = "GP-9 handguns crate"
 
@@ -72,33 +71,29 @@
 	cost = CARGO_CRATE_VALUE * 6
 	access_view = ACCESS_WEAPONS
 	contains = list(
-		/obj/item/gun/ballistic/automatic/pistol/gp9/no_mag = 1,
-		/obj/item/ammo_box/magazine/c9x25mm_pistol/starts_empty = 1,
+		/obj/item/storage/toolbox/guncase/ntcase/pistol/gp9/no_ammo = 1,
 	)
 
-/datum/supply_pack/goody/c9x25mmrubber
+/datum/supply_pack/goody/c9x25mm/rubber
 	name = "9x25mm NT Rubber Ammo Box"
 	desc = "В этом ящике находится коробка резиновых патронов калибра 9x25мм НТ."
 	cost = CARGO_CRATE_VALUE * 2
-	access_view = ACCESS_WEAPONS
 	contains = list(
 		/obj/item/ammo_box/c9x25mm/rubber = 1,
 	)
 
-/datum/supply_pack/goody/c9x25mmhp
+/datum/supply_pack/goody/c9x25mm/hp
 	name = "9x25mm NT HP Ammo Box"
 	desc = "В этом ящике находится коробка экспансивных патронов калибра 9x25мм НТ."
 	cost = CARGO_CRATE_VALUE * 2
-	access_view = ACCESS_WEAPONS
 	contains = list(
 		/obj/item/ammo_box/c9x25mm/hp = 1,
 	)
 
-/datum/supply_pack/goody/c9x25mmap
+/datum/supply_pack/goody/c9x25mm/ap
 	name = "9x25mm NT AP Ammo Box"
 	desc = "В этом ящике находится коробка бронебойных патронов калибра 9x25мм НТ."
 	cost = CARGO_CRATE_VALUE * 2
-	access_view = ACCESS_WEAPONS
 	contains = list(
 		/obj/item/ammo_box/c9x25mm/ap = 1,
 	)
@@ -131,7 +126,3 @@
 	contains = list(
 		/obj/item/clothing/accessory/holster = 2
 	)
-
-// MARK: GUNCASE
-/obj/item/storage/toolbox/guncase/soviet
-	desc = "Оружейный кейс. Символ СССП отпечатан на боковой стороне."

@@ -68,13 +68,13 @@
 /turf/open/floor/iron/white/diagonal,
 /area/station/maintenance/ghetto/starboard)
 "abn" = (
-/obj/effect/spawner/random/armory/disablers,
 /obj/effect/turf_decal/bot_white,
 /obj/structure/window/reinforced/spawner/directional/east{
 	pixel_x = 3
 	},
-/obj/structure/rack,
 /obj/effect/turf_decal/tile/dark_red/diagonal_edge,
+/obj/structure/rack/gunrack,
+/obj/effect/spawner/armory_spawn/disablers,
 /turf/open/floor/iron/dark/textured_large,
 /area/station/security/armory)
 "abq" = (
@@ -831,6 +831,7 @@
 	pixel_y = -2
 	},
 /obj/effect/turf_decal/tile/dark_red/diagonal_edge,
+/obj/item/clothing/suit/hooded/ablative,
 /turf/open/floor/iron/dark/textured_large,
 /area/station/security/armory)
 "alp" = (
@@ -16123,9 +16124,9 @@
 /area/station/maintenance/department/security/ghetto)
 "dSh" = (
 /obj/effect/turf_decal/bot_white,
-/obj/structure/rack,
-/obj/effect/spawner/random/armory/e_gun,
 /obj/effect/turf_decal/tile/dark_red/diagonal_edge,
+/obj/structure/rack/gunrack,
+/obj/effect/spawner/armory_spawn/eguns,
 /turf/open/floor/iron/dark/textured_large,
 /area/station/security/armory)
 "dSo" = (
@@ -19847,9 +19848,9 @@
 /area/station/maintenance/ghetto/central/aft)
 "ePH" = (
 /obj/effect/turf_decal/bot_white,
-/obj/structure/rack,
 /obj/effect/turf_decal/tile/dark_red/diagonal_edge,
-/obj/effect/spawner/random/armory/shotgun,
+/obj/structure/rack/gunrack,
+/obj/effect/spawner/armory_spawn/shotguns,
 /turf/open/floor/iron/dark/textured_large,
 /area/station/security/armory)
 "ePN" = (
@@ -32833,12 +32834,9 @@
 	},
 /obj/structure/window/reinforced/spawner/directional/north,
 /obj/effect/turf_decal/bot_white,
-/obj/structure/rack,
-/obj/item/gun/energy/ionrifle,
-/obj/item/gun/energy/temperature/security,
 /obj/effect/turf_decal/tile/dark_red/diagonal_edge,
-/obj/item/gun/ballistic/automatic/battle_rifle,
-/obj/item/clothing/suit/hooded/ablative,
+/obj/structure/rack/gunrack,
+/obj/effect/spawner/armory_spawn/misc,
 /turf/open/floor/iron/dark/textured_large,
 /area/station/security/armory)
 "hTS" = (
@@ -34023,10 +34021,10 @@
 /area/station/engineering/main)
 "ijt" = (
 /obj/effect/turf_decal/bot_white,
-/obj/structure/rack,
-/obj/effect/spawner/random/armory/laser_gun,
 /obj/effect/turf_decal/tile/dark_red/diagonal_edge,
 /obj/machinery/light_switch/directional/east,
+/obj/structure/rack/gunrack,
+/obj/effect/spawner/armory_spawn/laser,
 /turf/open/floor/iron/dark/textured_large,
 /area/station/security/armory)
 "iju" = (
@@ -67731,6 +67729,16 @@
 /obj/machinery/door/firedoor,
 /turf/open/floor/iron,
 /area/station/maintenance/disposal/incinerator)
+"qxv" = (
+/obj/effect/turf_decal/bot_white,
+/obj/structure/window/reinforced/spawner/directional/east{
+	pixel_x = 3
+	},
+/obj/effect/turf_decal/tile/dark_red/diagonal_edge,
+/obj/structure/rack/gunrack,
+/obj/effect/spawner/armory_spawn/dragnets,
+/turf/open/floor/iron/dark/textured_large,
+/area/station/security/armory)
 "qxw" = (
 /obj/structure/sink/directional/south,
 /obj/effect/turf_decal/siding/wood{
@@ -74804,14 +74812,7 @@
 /turf/open/floor/plating,
 /area/station/maintenance/port/aft)
 "sjF" = (
-/obj/effect/spawner/random/armory/dragnet,
-/obj/effect/turf_decal/bot_white,
-/obj/structure/window/reinforced/spawner/directional/east{
-	pixel_x = 3
-	},
-/obj/structure/rack,
-/obj/effect/turf_decal/tile/dark_red/diagonal_edge,
-/turf/open/floor/iron/dark/textured_large,
+/turf/open/floor/iron/dark,
 /area/station/security/armory)
 "sjI" = (
 /obj/machinery/portable_atmospherics/pump,
@@ -193296,7 +193297,7 @@ kJd
 xcz
 jLu
 lka
-vDV
+sjF
 dNj
 kEZ
 oxu
@@ -193813,7 +193814,7 @@ uEO
 dPv
 hTL
 abn
-sjF
+qxv
 wcJ
 cqI
 xcz
