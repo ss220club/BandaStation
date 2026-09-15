@@ -115,7 +115,7 @@
 
 /datum/antagonist/vampire/proc/get_ability(path)
 	for(var/datum/power as anything in powers)
-		if(power.type == path)
+		if(power?.type == path)
 			return power
 	return null
 
