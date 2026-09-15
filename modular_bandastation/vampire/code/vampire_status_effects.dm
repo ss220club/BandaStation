@@ -53,6 +53,22 @@
 /datum/movespeed_modifier/vampire_cloak
 	multiplicative_slowdown = -0.25
 
+/datum/status_effect/blood_tendril_slow
+	id = "vampire_tendril_slow"
+	duration = 6 SECONDS
+	tick_interval = STATUS_EFFECT_NO_TICK
+	alert_type = null
+
+/datum/status_effect/blood_tendril_slow/on_apply()
+	owner.add_movespeed_modifier(/datum/movespeed_modifier/blood_tendril_slow, update = TRUE)
+	return TRUE
+
+/datum/status_effect/blood_tendril_slow/on_remove()
+	owner.remove_movespeed_modifier(/datum/movespeed_modifier/blood_tendril_slow, update = TRUE)
+
+/datum/movespeed_modifier/blood_tendril_slow
+	multiplicative_slowdown = 0.5
+
 /datum/status_effect/vampire_gladiator
 	id = "vampire_gladiator"
 	duration = 30 SECONDS

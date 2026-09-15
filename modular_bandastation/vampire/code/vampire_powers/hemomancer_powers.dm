@@ -120,7 +120,7 @@
 /datum/action/cooldown/spell/pointed/vampire_blood_tendrils/proc/apply_slowdown(turf/target_turf, mob/living/user)
 	for(var/mob/living/target in range(area_of_affect, target_turf))
 		if(target.affects_vampire(user))
-			target.set_timed_status_effect(6 SECONDS, /datum/status_effect/staggered)
+			target.set_timed_status_effect(6 SECONDS, /datum/status_effect/blood_tendril_slow)
 			target.visible_message(span_warning("[target] опутан кровавыми щупальцами!"))
 			new /obj/effect/temp_visual/blood_tendril/long(get_turf(target))
 
