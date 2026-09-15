@@ -26,16 +26,8 @@
 /obj/effect/turf_decal/tile/red/half/contrasted{
 	dir = 4
 	},
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/structure/rack/gunrack,
 /obj/effect/spawner/armory_spawn/eguns,
-/turf/open/floor/iron/dark/textured,
-/area/station/security/armory/upper)
-"F" = (
-/obj/effect/turf_decal/tile/red/anticorner/contrasted,
-/obj/machinery/atmospherics/components/unary/vent_pump/on/layer4{
-	dir = 1
-	},
 /turf/open/floor/iron/dark/textured,
 /area/station/security/armory/upper)
 "L" = (
@@ -133,7 +125,7 @@ P
 "}
 (2,1,2) = {"
 E
-F
+P
 P
 P
 P
