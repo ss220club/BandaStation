@@ -1,0 +1,71 @@
+["usable blood"]
+nominative = "доступная кровь"
+genitive = "доступной крови"
+dative = "доступной крови"
+accusative = "доступную кровь"
+instrumental = "доступной кровью"
+prepositional = "доступной крови"
+gender = "female"
+
+["vampiric claws"]
+nominative = "вампирские когти"
+genitive = "вампирских когтей"
+dative = "вампирским когтям"
+accusative = "вампирские когти"
+instrumental = "вампирскими когтями"
+prepositional = "вампирских когтях"
+gender = "plural"
+
+["blood barrier"]
+nominative = "кровавый барьер"
+genitive = "кровавого барьера"
+dative = "кровавому барьеру"
+accusative = "кровавый барьер"
+instrumental = "кровавым барьером"
+prepositional = "кровавом барьере"
+gender = "male"
+
+["shadow snare"]
+nominative = "теневая ловушка"
+genitive = "теневой ловушки"
+dative = "теневой ловушке"
+accusative = "теневую ловушку"
+instrumental = "теневой ловушкой"
+prepositional = "теневой ловушке"
+gender = "female"
+
+["shadow anchor"]
+nominative = "теневой якорь"
+genitive = "теневого якоря"
+dative = "теневому якорю"
+accusative = "теневой якорь"
+instrumental = "теневым якорем"
+prepositional = "теневом якоре"
+gender = "male"
+
+["demonic grasp"]
+nominative = "демоническая хватка"
+genitive = "демонической хватки"
+dative = "демонической хватке"
+accusative = "демоническую хватку"
+instrumental = "демонической хваткой"
+prepositional = "демонической хватке"
+gender = "female"
+
+["coagulated blood wall"]
+nominative = "стена из свернувшейся крови"
+genitive = "стены из свернувшейся крови"
+dative = "стене из свернувшейся крови"
+accusative = "стену из свернувшейся крови"
+instrumental = "стеной из свернувшейся крови"
+prepositional = "стене из свернувшейся крови"
+gender = "female"
+
+["vampire coffin"]
+nominative = "вампирский гроб"
+genitive = "вампирского гроба"
+dative = "вампирскому гробу"
+accusative = "вампирский гроб"
+instrumental = "вампирским гробом"
+prepositional = "вампирском гробе"
+gender = "male"

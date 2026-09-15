@@ -25,7 +25,7 @@
 
 /datum/reagent/consumable/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, metabolization_ratio)
 	. = ..()
-	if(!ishuman(affected_mob) || HAS_TRAIT(affected_mob, TRAIT_NOHUNGER))
+	if(!ishuman(affected_mob) || HAS_TRAIT(affected_mob, TRAIT_NOHUNGER) || affected_mob.mind?.has_antag_datum(/datum/antagonist/vampire)) // SS220 EDIT: vampires
 		return
 
 	var/mob/living/carbon/human/affected_human = affected_mob

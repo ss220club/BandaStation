@@ -66,8 +66,9 @@
 		if(. == SUCCESSFUL_BLOCK || victim.check_block(src, 0, "[name]", LEAP_ATTACK))
 			blocked = TRUE
 
-		take_bodypart_damage(10 + 5 * extra_speed, check_armor = TRUE, wound_bonus = extra_speed * 5)
-		Paralyze(2 SECONDS)
+		if(!HAS_TRAIT(src, TRAIT_NO_THROW_SELF_IMPACT))// SS220 EDIT
+			take_bodypart_damage(10 + 5 * extra_speed, check_armor = TRUE, wound_bonus = extra_speed * 5)
+			Paralyze(2 SECONDS)
 		oof_noise = TRUE
 
 		if(blocked)
