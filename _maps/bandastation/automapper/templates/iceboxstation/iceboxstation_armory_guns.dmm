@@ -8,6 +8,13 @@
 /obj/effect/spawner/armory_spawn/shotguns,
 /turf/open/floor/iron/dark/textured,
 /area/station/security/armory)
+"i" = (
+/obj/machinery/recharger,
+/obj/structure/table,
+/obj/effect/turf_decal/tile/red/half/contrasted,
+/obj/item/radio/intercom/directional/north,
+/turf/open/floor/iron/dark/textured,
+/area/station/security/armory)
 "v" = (
 /obj/effect/turf_decal/tile/red/half/contrasted{
 	dir = 4
@@ -31,6 +38,9 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /turf/open/floor/iron/dark/textured,
 /area/station/security/armory/upper)
+"I" = (
+/turf/closed/wall,
+/area/station/security/armory)
 "L" = (
 /obj/machinery/camera/directional/north{
 	c_tag = "Armory - Internal - Lower"
@@ -85,11 +95,11 @@
 T
 P
 P
-P
+I
 P
 "}
 (2,1,1) = {"
-P
+i
 P
 P
 P

@@ -1,4 +1,7 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"ad" = (
+/turf/closed/wall/r_wall,
+/area/station/command/heads_quarters/hos)
 "ay" = (
 /obj/item/clothing/glasses/hud/security/sunglasses/gars{
 	pixel_x = 3;
@@ -18,6 +21,7 @@
 	},
 /obj/structure/rack,
 /obj/effect/turf_decal/bot/left,
+/obj/item/clothing/suit/hooded/ablative,
 /turf/open/floor/iron/dark/textured_large,
 /area/station/security/armory)
 "br" = (
@@ -468,6 +472,28 @@
 /obj/machinery/holopad/secure,
 /turf/open/floor/iron/dark/textured,
 /area/station/security/armory)
+"AB" = (
+/obj/effect/turf_decal/bot/right,
+/obj/machinery/newscaster/directional/north,
+/obj/structure/rack/gunrack,
+/obj/effect/spawner/armory_spawn/misc,
+/turf/open/floor/iron/dark/textured_large,
+/area/station/security/armory)
+"AT" = (
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 4
+	},
+/obj/effect/turf_decal/trimline/red,
+/obj/effect/turf_decal/trimline/red/corner,
+/obj/effect/turf_decal/trimline/red/corner{
+	dir = 4
+	},
+/obj/machinery/light/floor,
+/obj/structure/cable,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/turf/open/floor/iron/dark/textured,
+/area/station/security/armory)
 "Eh" = (
 /obj/structure/lattice,
 /turf/open/space/basic,
@@ -537,10 +563,52 @@
 /obj/machinery/light/floor,
 /turf/open/floor/iron/dark/textured,
 /area/station/security/armory)
+"ML" = (
+/obj/effect/turf_decal/siding/thinplating_new/dark/corner{
+	dir = 4
+	},
+/obj/effect/turf_decal/trimline/red/corner{
+	dir = 4
+	},
+/obj/effect/turf_decal/trimline/red/filled/line,
+/obj/effect/turf_decal/siding/thinplating_new/dark,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/turf/open/floor/iron/dark/textured,
+/area/station/security/armory)
+"NY" = (
+/obj/effect/spawner/structure/window/reinforced,
+/obj/machinery/door/poddoor/preopen{
+	id = "hosprivacy";
+	name = "HoS Privacy Blast Door"
+	},
+/obj/structure/cable,
+/turf/open/floor/plating,
+/area/station/security/armory)
 "Ob" = (
 /obj/structure/table/reinforced,
 /obj/machinery/recharger,
 /turf/open/floor/iron/dark/textured_large,
+/area/station/security/armory)
+"Oh" = (
+/obj/structure/rack,
+/obj/effect/spawner/random/armory/bulletproof_armor,
+/obj/effect/spawner/random/armory/bulletproof_helmet,
+/obj/effect/turf_decal/bot/right,
+/obj/machinery/light_switch/directional/south,
+/turf/open/floor/iron/dark/textured_large,
+/area/station/security/armory)
+"PC" = (
+/obj/effect/turf_decal/siding/thinplating_new/dark/corner,
+/obj/effect/turf_decal/trimline/red/corner,
+/obj/effect/turf_decal/trimline/red/filled/line{
+	dir = 1
+	},
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 1
+	},
+/obj/structure/cable,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/turf/open/floor/iron/dark/textured,
 /area/station/security/armory)
 "Rm" = (
 /obj/effect/turf_decal/bot,
@@ -630,6 +698,25 @@
 /area/station/security/armory)
 
 (1,1,1) = {"
+Eh
+ad
+ad
+ad
+ad
+ad
+td
+td
+NY
+td
+td
+AB
+PC
+AT
+ML
+Oh
+td
+"}
+(2,1,1) = {"
 Sa
 Ij
 Ij
@@ -648,7 +735,7 @@ WX
 wX
 td
 "}
-(2,1,1) = {"
+(3,1,1) = {"
 Eh
 Ij
 Ij
@@ -667,7 +754,7 @@ ex
 hd
 br
 "}
-(3,1,1) = {"
+(4,1,1) = {"
 Eh
 Ij
 Ij
@@ -686,7 +773,7 @@ Ob
 lM
 oa
 "}
-(4,1,1) = {"
+(5,1,1) = {"
 Eh
 Ij
 Ij
@@ -705,7 +792,7 @@ tr
 hn
 br
 "}
-(5,1,1) = {"
+(6,1,1) = {"
 Eh
 Ij
 Ij
@@ -724,7 +811,7 @@ iu
 kb
 td
 "}
-(6,1,1) = {"
+(7,1,1) = {"
 Eh
 Ij
 Ij
@@ -743,7 +830,7 @@ ld
 ay
 td
 "}
-(7,1,1) = {"
+(8,1,1) = {"
 Eh
 Ij
 Ij
@@ -762,25 +849,6 @@ dD
 dm
 td
 "}
-(8,1,1) = {"
-Eh
-Ij
-Ij
-Ij
-Ij
-Ij
-Eh
-Ij
-Ij
-Ij
-td
-td
-td
-td
-td
-td
-td
-"}
 (9,1,1) = {"
 Eh
 Ij
@@ -792,21 +860,21 @@ Eh
 Ij
 Ij
 Ij
-Ij
-Ij
-Ij
-Ij
-Ij
-Ij
-Ij
+td
+td
+td
+td
+td
+td
+td
 "}
 (10,1,1) = {"
 Eh
-Eh
-Eh
-Eh
-Eh
-Eh
+Ij
+Ij
+Ij
+Ij
+Ij
 Eh
 Ij
 Ij
@@ -820,6 +888,25 @@ Ij
 Ij
 "}
 (11,1,1) = {"
+Eh
+Eh
+Eh
+Eh
+Eh
+Eh
+Eh
+Ij
+Ij
+Ij
+Ij
+Ij
+Ij
+Ij
+Ij
+Ij
+Ij
+"}
+(12,1,1) = {"
 Sa
 Eh
 Eh

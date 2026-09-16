@@ -636,7 +636,7 @@ trait_name = "Station"
 map_files = ["nebulastation_gamma_port.dmm"]
 directory = "_maps/bandastation/automapper/templates/nebulastation/"
 required_map = "NebulaStation.dmm"
-coordinates = [163, 116, 1]
+coordinates = [162, 116, 1]
 trait_name = "Station"
 
 [templates.nebulastation_rd_photocopier]
