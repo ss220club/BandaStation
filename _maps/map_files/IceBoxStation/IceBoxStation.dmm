@@ -360,6 +360,23 @@
 	},
 /turf/open/floor/iron,
 /area/station/commons/dorms)
+"agz" = (
+/obj/structure/statue/grave{
+	name = "Хель Кириэн";
+	desc = "Могила в честь офицера Центрального Командования, который погиб за Кибериаду при Редспейс шторме..."
+	},
+/obj/item/sign/flag/nanotrasen,
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 5
+	},
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 9
+	},
+/obj/item/bouquet/rose,
+/turf/open/misc/dirt{
+	initial_gas_mix = "ICEMOON_ATMOS"
+	},
+/area/icemoon/underground/explored)
 "agF" = (
 /obj/structure/rack,
 /obj/item/storage/box/teargas{
@@ -596,6 +613,10 @@
 /obj/structure/chair/stool/directional/east,
 /turf/open/floor/iron,
 /area/station/commons/dorms)
+"akH" = (
+/turf/open/misc/asteroid/snow/icemoon,
+/turf/closed/wall,
+/area/station/service/chapel)
 "akI" = (
 /obj/structure/table/glass,
 /obj/item/stack/medical/wrap/gauze{
@@ -1620,14 +1641,6 @@
 "awx" = (
 /turf/open/floor/iron,
 /area/station/commons/locker)
-"awy" = (
-/obj/effect/turf_decal/weather/snow/corner{
-	dir = 6
-	},
-/turf/open/misc/dirt{
-	initial_gas_mix = "ICEMOON_ATMOS"
-	},
-/area/icemoon/underground/explored)
 "awz" = (
 /obj/machinery/navbeacon{
 	codes_txt = "patrol;next_patrol=CHW";
@@ -2580,6 +2593,11 @@
 /obj/structure/cable,
 /turf/open/floor/iron/white/textured,
 /area/station/security/medical)
+"aKw" = (
+/obj/structure/lattice/catwalk,
+/obj/machinery/atmospherics/pipe/heat_exchanging/simple,
+/turf/open/openspace/icemoon,
+/area/icemoon/underground/explored)
 "aKI" = (
 /obj/structure/disposalpipe/segment,
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer2{
@@ -3493,6 +3511,17 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /turf/open/floor/iron/freezer,
 /area/station/service/kitchen/coldroom)
+"aYC" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 6
+	},
+/obj/item/banner/command/mundane{
+	pixel_x = 4
+	},
+/turf/open/misc/dirt{
+	initial_gas_mix = "ICEMOON_ATMOS"
+	},
+/area/icemoon/underground/explored)
 "aYJ" = (
 /turf/open/floor/iron/white,
 /area/station/science/research)
@@ -5312,10 +5341,11 @@
 /area/icemoon/surface/outdoors/less_spawns)
 "bxb" = (
 /obj/machinery/atmospherics/pipe/heat_exchanging/simple{
-	dir = 4
+	dir = 9
 	},
+/obj/structure/lattice/catwalk,
 /turf/open/floor/plating/snowed/smoothed/icemoon,
-/area/icemoon/underground/unexplored/rivers/deep/shoreline)
+/area/icemoon/underground/explored)
 "bxe" = (
 /turf/closed/wall/r_wall,
 /area/station/maintenance/solars/starboard/fore)
@@ -7506,6 +7536,15 @@
 /obj/structure/sign/warning/no_smoking/directional/north,
 /turf/open/floor/iron/dark,
 /area/station/engineering/atmos/storage)
+"cbS" = (
+/obj/structure/statue/improvised_grave{
+	desc = "Безымянная могила, ничем не отличается от других."
+	},
+/obj/item/bouquet,
+/turf/open/misc/dirt{
+	initial_gas_mix = "ICEMOON_ATMOS"
+	},
+/area/icemoon/underground/explored)
 "ccg" = (
 /obj/machinery/light/directional/west,
 /obj/effect/turf_decal/tile/yellow/opposingcorners,
@@ -7668,6 +7707,12 @@
 	},
 /turf/open/floor/iron/white,
 /area/station/science/xenobiology)
+"cdn" = (
+/obj/item/flashlight/lantern/on,
+/turf/open/misc/dirt{
+	initial_gas_mix = "ICEMOON_ATMOS"
+	},
+/area/icemoon/underground/explored)
 "cef" = (
 /obj/machinery/biogenerator,
 /obj/effect/turf_decal/trimline/green/filled/line{
@@ -8038,6 +8083,23 @@
 /obj/structure/sign/warning/cold_temp/directional/north,
 /turf/open/floor/plating,
 /area/station/maintenance/aft/lesser)
+"cjD" = (
+/obj/structure/statue/grave{
+	name = "Мария Карлайл";
+	desc = "Могила в честь офицера Центрального Командования, который погиб за Кибериаду при Редспейс шторме..."
+	},
+/obj/item/sign/flag/nanotrasen,
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 5
+	},
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 9
+	},
+/obj/item/bouquet/rose,
+/turf/open/misc/dirt{
+	initial_gas_mix = "ICEMOON_ATMOS"
+	},
+/area/icemoon/underground/explored)
 "cjE" = (
 /obj/structure/disposalpipe/segment,
 /obj/effect/mapping_helpers/airlock/access/all/security/general,
@@ -8074,6 +8136,17 @@
 /obj/machinery/light/small/dim/directional/north,
 /turf/open/floor/iron,
 /area/station/maintenance/starboard/fore)
+"cjZ" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 10
+	},
+/obj/item/banner/command/mundane{
+	pixel_x = -15
+	},
+/turf/open/misc/dirt{
+	initial_gas_mix = "ICEMOON_ATMOS"
+	},
+/area/icemoon/underground/explored)
 "cke" = (
 /obj/structure/cable,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
@@ -8272,12 +8345,6 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/visible,
 /turf/open/floor/plating,
 /area/station/maintenance/port/aft)
-"cnj" = (
-/obj/structure/fence/door{
-	name = "graveyard"
-	},
-/turf/open/floor/plating/snowed/smoothed/icemoon,
-/area/icemoon/underground/explored)
 "cnp" = (
 /obj/structure/minecart_rail{
 	dir = 4
@@ -9337,9 +9404,6 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /turf/open/floor/iron/dark,
 /area/station/security/courtroom)
-"cBY" = (
-/turf/open/misc/asteroid/snow/icemoon,
-/area/icemoon/underground/unexplored/rivers/deep/shoreline)
 "cCb" = (
 /obj/structure/flora/tree/pine/style_random,
 /turf/open/misc/asteroid/snow/icemoon,
@@ -10249,6 +10313,15 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /turf/open/floor/carpet/royalblue,
 /area/station/command/heads_quarters/captain)
+"cQe" = (
+/obj/item/flashlight/flare/candle/infinite,
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 8
+	},
+/turf/open/misc/dirt{
+	initial_gas_mix = "ICEMOON_ATMOS"
+	},
+/area/icemoon/underground/explored)
 "cQf" = (
 /obj/structure/cable,
 /turf/open/floor/iron,
@@ -12437,12 +12510,6 @@
 /obj/effect/turf_decal/siding/thinplating,
 /turf/open/floor/plating/snowed/smoothed/icemoon,
 /area/icemoon/underground/explored)
-"dvk" = (
-/obj/structure/fence/corner{
-	dir = 9
-	},
-/turf/open/floor/plating/snowed/smoothed/icemoon,
-/area/icemoon/underground/unexplored/rivers/deep/shoreline)
 "dvl" = (
 /obj/machinery/camera/motion/directional/north{
 	c_tag = "Armory - External"
@@ -12508,6 +12575,12 @@
 	},
 /turf/open/floor/plating/snowed/icemoon,
 /area/icemoon/surface/outdoors/less_spawns)
+"dwd" = (
+/obj/structure/fence/post{
+	dir = 8
+	},
+/turf/open/misc/asteroid/snow/icemoon,
+/area/icemoon/underground/explored)
 "dwj" = (
 /obj/machinery/atmospherics/components/binary/pump/off,
 /obj/machinery/atmospherics/pipe/layer_manifold/supply/hidden{
@@ -12676,6 +12749,15 @@
 /obj/machinery/door/firedoor,
 /turf/open/floor/iron/sepia,
 /area/station/security/prison/rec)
+"dxY" = (
+/obj/item/flashlight/lantern/on,
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 4
+	},
+/turf/open/misc/dirt{
+	initial_gas_mix = "ICEMOON_ATMOS"
+	},
+/area/icemoon/underground/explored)
 "dyf" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
@@ -14737,7 +14819,10 @@
 /turf/open/floor/iron/white,
 /area/station/medical/treatment_center)
 "efM" = (
-/obj/structure/closet/crate/grave,
+/obj/structure/statue/improvised_grave{
+	desc = "Безымянная могила, ничем не отличается от других."
+	},
+/obj/item/bouquet/poppy,
 /turf/open/misc/dirt{
 	initial_gas_mix = "ICEMOON_ATMOS"
 	},
@@ -16193,6 +16278,10 @@
 /obj/machinery/biogenerator,
 /turf/open/floor/iron/dark,
 /area/station/service/hydroponics/garden)
+"eBG" = (
+/obj/structure/sign/warning/secure_area/directional/north,
+/turf/open/openspace/icemoon,
+/area/icemoon/underground/explored)
 "eBI" = (
 /obj/structure/cable,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
@@ -18808,6 +18897,15 @@
 /obj/structure/chair/sofa/middle/brown,
 /turf/open/floor/carpet/blue,
 /area/station/security/prison/work)
+"fnN" = (
+/obj/structure/statue/improvised_grave{
+	desc = "Безымянная могила, ничем не отличается от других."
+	},
+/obj/item/clothing/head/costume/garland,
+/turf/open/misc/dirt{
+	initial_gas_mix = "ICEMOON_ATMOS"
+	},
+/area/icemoon/underground/explored)
 "foc" = (
 /turf/closed/wall/r_wall,
 /area/station/maintenance/department/security)
@@ -19693,6 +19791,15 @@
 /obj/structure/sign/warning/secure_area/directional/north,
 /turf/closed/mineral/random/snow,
 /area/icemoon/underground/explored)
+"fCo" = (
+/obj/structure/statue/improvised_grave{
+	desc = "Безымянная могила, ничем не отличается от других."
+	},
+/obj/item/clothing/head/costume/garland/sunflower,
+/turf/open/misc/dirt{
+	initial_gas_mix = "ICEMOON_ATMOS"
+	},
+/area/icemoon/underground/explored)
 "fCA" = (
 /obj/structure/disposalpipe/segment,
 /obj/structure/cable,
@@ -20452,10 +20559,21 @@
 /turf/open/floor/iron,
 /area/station/command/heads_quarters/qm)
 "fOH" = (
-/obj/structure/fence/post{
-	dir = 1
+/obj/structure/statue/grave{
+	name = "Остин Миллер";
+	desc = "Могила в честь офицера Центрального Командования, который погиб за Кибериаду при Редспейс шторме..."
 	},
-/turf/open/floor/plating/snowed/smoothed/icemoon,
+/obj/item/sign/flag/nanotrasen,
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 5
+	},
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 9
+	},
+/obj/item/bouquet/rose,
+/turf/open/misc/dirt{
+	initial_gas_mix = "ICEMOON_ATMOS"
+	},
 /area/icemoon/underground/explored)
 "fOR" = (
 /obj/structure/disposalpipe/trunk,
@@ -22509,6 +22627,15 @@
 	dir = 4
 	},
 /turf/open/floor/plating/snowed/smoothed/icemoon,
+/area/icemoon/underground/explored)
+"gse" = (
+/obj/structure/statue/improvised_grave{
+	desc = "Безымянная могила, ничем не отличается от других."
+	},
+/obj/item/clothing/head/costume/garland/poppy,
+/turf/open/misc/dirt{
+	initial_gas_mix = "ICEMOON_ATMOS"
+	},
 /area/icemoon/underground/explored)
 "gsk" = (
 /obj/structure/reflector/single/anchored{
@@ -26311,6 +26438,13 @@
 /obj/effect/mapping_helpers/airlock/unres/delayed,
 /turf/open/floor/plating,
 /area/station/maintenance/starboard/fore)
+"hxf" = (
+/obj/structure/lattice/catwalk,
+/obj/machinery/atmospherics/pipe/heat_exchanging/simple{
+	dir = 10
+	},
+/turf/open/openspace/icemoon,
+/area/icemoon/underground/explored)
 "hxs" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
@@ -28573,12 +28707,6 @@
 /obj/effect/landmark/event_spawn,
 /turf/open/floor/iron/dark,
 /area/station/engineering/circuit_workshop)
-"ieb" = (
-/obj/machinery/atmospherics/pipe/heat_exchanging/simple{
-	dir = 9
-	},
-/turf/open/floor/plating/snowed/smoothed/icemoon,
-/area/icemoon/underground/explored)
 "iem" = (
 /obj/structure/railing{
 	dir = 8
@@ -32566,6 +32694,10 @@
 /obj/machinery/power/apc/auto_name/directional/south,
 /turf/open/floor/plating,
 /area/station/maintenance/department/medical/morgue)
+"joo" = (
+/obj/structure/closet/emcloset,
+/turf/closed/wall,
+/area/station/maintenance/starboard/fore)
 "jpd" = (
 /obj/machinery/vending/coffee,
 /turf/open/floor/iron,
@@ -38611,10 +38743,6 @@
 	pixel_x = -1;
 	pixel_y = 6
 	},
-/obj/item/flashlight/flare/candle/infinite{
-	pixel_x = -11;
-	pixel_y = 11
-	},
 /obj/item/trash/candle{
 	pixel_x = 9;
 	pixel_y = -1
@@ -40337,6 +40465,14 @@
 	},
 /turf/open/floor/glass/reinforced,
 /area/station/engineering/atmos/pumproom)
+"lwx" = (
+/obj/item/toy/snowball{
+	pixel_x = -9;
+	pixel_y = 17
+	},
+/obj/item/banner/command/mundane,
+/turf/open/misc/asteroid/snow/icemoon,
+/area/icemoon/underground/explored)
 "lwF" = (
 /obj/structure/lattice/catwalk,
 /obj/structure/railing,
@@ -40400,6 +40536,14 @@
 /obj/machinery/atmospherics/pipe/bridge_pipe/cyan/visible,
 /turf/open/floor/iron,
 /area/station/engineering/atmos)
+"lxw" = (
+/obj/item/toy/snowball{
+	pixel_x = 6;
+	pixel_y = 5
+	},
+/obj/item/banner/command/mundane,
+/turf/open/misc/asteroid/snow/icemoon,
+/area/icemoon/underground/explored)
 "lxR" = (
 /obj/effect/spawner/random/structure/crate_abandoned,
 /turf/open/floor/plating,
@@ -42155,6 +42299,33 @@
 	dir = 4
 	},
 /area/mine/production)
+"lYe" = (
+/obj/structure/statue/angel{
+	pixel_y = -9;
+	pixel_x = -48;
+	desc = "Хранитель усопших душ. На основании виднеется надпись: Да хранит он Ваши души от последствий Редспейса..."
+	},
+/obj/item/flashlight/flare/candle/infinite{
+	pixel_y = -8;
+	pixel_x = 5
+	},
+/obj/item/flashlight/flare/candle/infinite{
+	pixel_y = -8;
+	pixel_x = -5
+	},
+/obj/item/flashlight/flare/candle/infinite{
+	pixel_y = -2;
+	pixel_x = -10
+	},
+/obj/item/flashlight/flare/candle/infinite{
+	pixel_y = -2;
+	pixel_x = 11
+	},
+/obj/item/flashlight/flare/candle/infinite{
+	pixel_y = -10
+	},
+/turf/open/misc/asteroid/snow/icemoon,
+/area/icemoon/underground/explored)
 "lYj" = (
 /obj/effect/turf_decal/tile/green/half/contrasted{
 	dir = 8
@@ -44803,6 +44974,14 @@
 /obj/effect/mapping_helpers/airlock/access/all/supply/mining_station,
 /turf/open/floor/iron/smooth,
 /area/mine/eva)
+"mNb" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 1
+	},
+/turf/open/misc/dirt{
+	initial_gas_mix = "ICEMOON_ATMOS"
+	},
+/area/icemoon/underground/explored)
 "mNi" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
@@ -45142,13 +45321,6 @@
 /obj/machinery/light/directional/west,
 /turf/open/floor/plating,
 /area/station/cargo/storage)
-"mSQ" = (
-/obj/structure/fence{
-	dir = 2
-	},
-/obj/structure/sign/warning/secure_area/directional/south,
-/turf/open/misc/asteroid/snow/icemoon,
-/area/icemoon/underground/explored)
 "mSY" = (
 /obj/machinery/atmospherics/components/unary/vent_pump/on/layer4,
 /obj/structure/sign/warning/secure_area/directional/north,
@@ -49760,6 +49932,15 @@
 /obj/effect/turf_decal/delivery,
 /turf/open/floor/iron,
 /area/station/science/xenobiology)
+"ode" = (
+/obj/structure/statue/improvised_grave{
+	desc = "Безымянная могила, ничем не отличается от других."
+	},
+/obj/item/clothing/head/costume/garland/lily,
+/turf/open/misc/dirt{
+	initial_gas_mix = "ICEMOON_ATMOS"
+	},
+/area/icemoon/underground/explored)
 "odw" = (
 /obj/effect/spawner/random/engineering/tracking_beacon,
 /turf/open/floor/iron,
@@ -51109,6 +51290,15 @@
 /obj/machinery/newscaster/directional/east,
 /turf/open/floor/iron,
 /area/station/security/prison/workout)
+"owi" = (
+/obj/structure/statue/improvised_grave{
+	desc = "Безымянная могила, ничем не отличается от других."
+	},
+/obj/item/bouquet/sunflower,
+/turf/open/misc/dirt{
+	initial_gas_mix = "ICEMOON_ATMOS"
+	},
+/area/icemoon/underground/explored)
 "owk" = (
 /obj/effect/turf_decal/tile/red/anticorner/contrasted{
 	dir = 8
@@ -52488,6 +52678,12 @@
 /obj/structure/cable,
 /turf/open/floor/iron,
 /area/station/engineering/lobby)
+"oLX" = (
+/obj/item/flashlight/lantern/on{
+	invisibility = 1
+	},
+/turf/open/misc/asteroid/snow/icemoon,
+/area/icemoon/underground/explored)
 "oMa" = (
 /obj/structure/marker_beacon/burgundy,
 /obj/effect/turf_decal/weather/snow/corner{
@@ -53785,14 +53981,6 @@
 /obj/machinery/door/firedoor,
 /turf/open/floor/plating,
 /area/station/security/brig/upper)
-"pgo" = (
-/obj/effect/turf_decal/weather/snow/corner{
-	dir = 10
-	},
-/turf/open/misc/dirt{
-	initial_gas_mix = "ICEMOON_ATMOS"
-	},
-/area/icemoon/underground/explored)
 "pgp" = (
 /obj/structure/rack,
 /obj/item/storage/toolbox/electrical{
@@ -53851,6 +54039,15 @@
 /obj/item/organ/tail/monkey,
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/open/misc/asteroid/snow/icemoon,
+/area/icemoon/underground/explored)
+"pgO" = (
+/obj/item/flashlight/lantern/on,
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 8
+	},
+/turf/open/misc/dirt{
+	initial_gas_mix = "ICEMOON_ATMOS"
+	},
 /area/icemoon/underground/explored)
 "pgY" = (
 /obj/machinery/cryo_cell,
@@ -55508,6 +55705,10 @@
 /obj/machinery/computer/security/telescreen/entertainment/directional/north,
 /turf/open/floor/iron/grimy,
 /area/station/commons/vacant_room/office)
+"pFZ" = (
+/obj/item/banner/command/mundane,
+/turf/open/misc/asteroid/snow/icemoon,
+/area/icemoon/underground/explored)
 "pGd" = (
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer2{
 	dir = 1
@@ -55615,6 +55816,15 @@
 "pHD" = (
 /turf/open/floor/iron/white,
 /area/station/medical/chemistry)
+"pHG" = (
+/obj/structure/statue/improvised_grave{
+	desc = "Безымянная могила, ничем не отличается от других."
+	},
+/obj/item/clothing/head/costume/garland/rainbowbunch,
+/turf/open/misc/dirt{
+	initial_gas_mix = "ICEMOON_ATMOS"
+	},
+/area/icemoon/underground/explored)
 "pHQ" = (
 /obj/structure/cable,
 /obj/machinery/door/airlock/glass{
@@ -58218,6 +58428,15 @@
 	},
 /turf/open/floor/iron/smooth,
 /area/station/engineering/lobby)
+"qrA" = (
+/obj/item/flashlight/flare/candle/infinite,
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 4
+	},
+/turf/open/misc/dirt{
+	initial_gas_mix = "ICEMOON_ATMOS"
+	},
+/area/icemoon/underground/explored)
 "qrB" = (
 /obj/effect/turf_decal/siding/wood{
 	dir = 8
@@ -59563,12 +59782,6 @@
 /obj/effect/mapping_helpers/airlock/access/all/engineering/general,
 /turf/open/floor/plating,
 /area/station/engineering/storage_shared)
-"qNe" = (
-/obj/machinery/atmospherics/pipe/heat_exchanging/simple{
-	dir = 10
-	},
-/turf/open/floor/plating/snowed/smoothed/icemoon,
-/area/icemoon/underground/explored)
 "qNf" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
@@ -61924,14 +62137,6 @@
 /obj/machinery/newscaster/directional/south,
 /turf/open/floor/iron,
 /area/station/commons/fitness)
-"rsG" = (
-/obj/item/toy/snowball{
-	pixel_x = -11;
-	pixel_y = -2
-	},
-/obj/structure/sign/warning/secure_area/directional/north,
-/turf/open/misc/asteroid/snow/icemoon,
-/area/icemoon/underground/explored)
 "rsL" = (
 /obj/structure/cable,
 /turf/open/floor/circuit,
@@ -62684,6 +62889,19 @@
 	dir = 10
 	},
 /area/mine/eva)
+"rDr" = (
+/obj/item/flashlight/flare/candle/infinite{
+	pixel_x = 12;
+	pixel_y = 14
+	},
+/obj/item/flashlight/flare/candle/infinite{
+	pixel_x = -12;
+	pixel_y = 14
+	},
+/turf/open/misc/dirt{
+	initial_gas_mix = "ICEMOON_ATMOS"
+	},
+/area/icemoon/underground/explored)
 "rDJ" = (
 /obj/structure/ladder{
 	name = "upper dispenser access"
@@ -65014,13 +65232,6 @@
 	},
 /turf/open/floor/iron,
 /area/station/hallway/primary/starboard)
-"snJ" = (
-/obj/structure/fence{
-	dir = 2
-	},
-/obj/structure/sign/warning/secure_area/directional/north,
-/turf/open/misc/asteroid/snow/icemoon,
-/area/icemoon/underground/explored)
 "snL" = (
 /obj/item/pickaxe{
 	desc = "Someone left their pickaxe out here, must not have known about the boulder processing machines inside.";
@@ -66310,6 +66521,12 @@
 	},
 /turf/open/floor/iron,
 /area/station/science/explab)
+"sFn" = (
+/obj/item/flashlight/flare/candle/infinite,
+/turf/open/misc/dirt{
+	initial_gas_mix = "ICEMOON_ATMOS"
+	},
+/area/icemoon/underground/explored)
 "sFA" = (
 /obj/machinery/sparker/directional/west{
 	id = "testigniter"
@@ -68575,6 +68792,19 @@
 /obj/machinery/atmospherics/components/unary/vent_pump/on/layer4,
 /turf/open/floor/iron,
 /area/mine/laborcamp)
+"tnm" = (
+/obj/item/flashlight/flare/candle/infinite{
+	pixel_x = -12;
+	pixel_y = 14
+	},
+/obj/item/flashlight/flare/candle/infinite{
+	pixel_x = 12;
+	pixel_y = 14
+	},
+/turf/open/misc/dirt{
+	initial_gas_mix = "ICEMOON_ATMOS"
+	},
+/area/icemoon/underground/explored)
 "tnp" = (
 /obj/structure/table,
 /obj/item/folder/blue{
@@ -68983,12 +69213,6 @@
 /obj/effect/mapping_helpers/airlock/access/all/engineering/atmos,
 /turf/open/floor/iron,
 /area/station/engineering/atmos/pumproom)
-"tuk" = (
-/obj/structure/closet/crate/grave,
-/turf/open/misc/dirt/dark{
-	initial_gas_mix = "ICEMOON_ATMOS"
-	},
-/area/icemoon/underground/explored)
 "tur" = (
 /turf/open/floor/iron/cafeteria{
 	dir = 8
@@ -69998,14 +70222,6 @@
 /obj/machinery/status_display/ai/directional/south,
 /turf/open/floor/iron,
 /area/station/hallway/primary/port)
-"tJD" = (
-/obj/effect/turf_decal/weather/snow/corner{
-	dir = 5
-	},
-/turf/open/misc/dirt/dark{
-	initial_gas_mix = "ICEMOON_ATMOS"
-	},
-/area/icemoon/underground/explored)
 "tJE" = (
 /obj/structure/cable,
 /obj/structure/disposalpipe/segment{
@@ -74359,11 +74575,6 @@
 /obj/structure/cable,
 /turf/open/floor/iron,
 /area/station/service/bar)
-"uXk" = (
-/turf/open/misc/dirt/dark{
-	initial_gas_mix = "ICEMOON_ATMOS"
-	},
-/area/icemoon/underground/explored)
 "uXu" = (
 /obj/machinery/power/terminal{
 	dir = 4
@@ -74520,12 +74731,12 @@
 /turf/open/floor/plating/snowed/smoothed/icemoon,
 /area/icemoon/surface/outdoors/nospawn)
 "var" = (
-/obj/machinery/light/small/directional/east,
 /obj/effect/turf_decal/weather/snow/corner{
 	dir = 9
 	},
 /obj/structure/sign/departments/holy/directional/east,
-/turf/open/floor/plating/snowed/icemoon,
+/obj/structure/sign/nanotrasen/directional/north,
+/turf/open/misc/asteroid/snow/icemoon,
 /area/icemoon/underground/explored)
 "vav" = (
 /obj/machinery/disposal/bin,
@@ -75598,6 +75809,20 @@
 	},
 /turf/open/floor/plating,
 /area/station/maintenance/fore/lesser)
+"vql" = (
+/obj/structure/fence/door{
+	name = "graveyard"
+	},
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 10
+	},
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 6
+	},
+/turf/open/misc/dirt{
+	initial_gas_mix = "ICEMOON_ATMOS"
+	},
+/area/icemoon/underground/explored)
 "vqv" = (
 /obj/effect/turf_decal/stripes/line,
 /turf/open/floor/iron,
@@ -77162,6 +77387,14 @@
 /obj/effect/landmark/generic_maintenance_landmark,
 /turf/open/floor/plating,
 /area/station/maintenance/port/lesser)
+"vNk" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 5
+	},
+/turf/open/misc/dirt{
+	initial_gas_mix = "ICEMOON_ATMOS"
+	},
+/area/icemoon/underground/explored)
 "vNs" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
@@ -77221,6 +77454,10 @@
 /obj/effect/turf_decal/stripes/corner,
 /turf/open/floor/iron/white,
 /area/station/science/xenobiology)
+"vOY" = (
+/obj/structure/closet/emcloset,
+/turf/open/floor/plating,
+/area/station/service/chapel)
 "vPc" = (
 /obj/machinery/camera/directional/east{
 	c_tag = "Security Post - Engineering"
@@ -77917,12 +78154,6 @@
 "vYH" = (
 /turf/open/floor/iron/white,
 /area/station/medical/pharmacy)
-"vYU" = (
-/obj/structure/fence{
-	dir = 4
-	},
-/turf/open/floor/plating/snowed/smoothed/icemoon,
-/area/icemoon/underground/unexplored/rivers/deep/shoreline)
 "vZa" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/components/unary/vent_pump/on/layer4,
@@ -79137,10 +79368,6 @@
 /obj/structure/flora/grass/brown/style_2,
 /turf/open/misc/asteroid/snow/icemoon,
 /area/icemoon/surface/outdoors/nospawn)
-"wtv" = (
-/obj/machinery/atmospherics/pipe/heat_exchanging/simple,
-/turf/open/floor/plating/snowed/smoothed/icemoon,
-/area/icemoon/underground/explored)
 "wtM" = (
 /obj/machinery/door/airlock/external{
 	dir = 4;
@@ -79808,6 +80035,23 @@
 	},
 /turf/open/floor/plating,
 /area/station/maintenance/aft/greater)
+"wDR" = (
+/obj/item/sign/flag/nanotrasen,
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 5
+	},
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 9
+	},
+/obj/item/bouquet/rose,
+/obj/structure/statue/grave{
+	name = "Эдвард Клейм";
+	desc = "Могила в честь офицера Центрального Командования, который погиб за Кибериаду при Редспейс шторме..."
+	},
+/turf/open/misc/dirt{
+	initial_gas_mix = "ICEMOON_ATMOS"
+	},
+/area/icemoon/underground/explored)
 "wDS" = (
 /obj/structure/fence/door{
 	dir = 8
@@ -83717,6 +83961,12 @@
 /obj/structure/sign/warning/secure_area/directional/north,
 /turf/open/misc/asteroid/snow/icemoon,
 /area/icemoon/surface/outdoors/less_spawns)
+"xEr" = (
+/obj/structure/fence/post{
+	dir = 1
+	},
+/turf/open/misc/asteroid/snow/icemoon,
+/area/icemoon/underground/explored)
 "xEx" = (
 /obj/machinery/holopad,
 /turf/open/floor/iron/dark/side,
@@ -85295,12 +85545,6 @@
 /obj/structure/cable,
 /turf/open/floor/plating,
 /area/station/maintenance/disposal)
-"yba" = (
-/obj/structure/fence/corner{
-	dir = 2
-	},
-/turf/open/floor/plating/snowed/smoothed/icemoon,
-/area/icemoon/underground/unexplored/rivers/deep/shoreline)
 "ybb" = (
 /obj/effect/turf_decal/trimline/green/filled/line{
 	dir = 1
@@ -192739,8 +192983,8 @@ jre
 sjd
 jre
 iDt
-thA
-thA
+iDt
+iDt
 thA
 thA
 thA
@@ -192997,7 +193241,7 @@ aIB
 dhH
 xvE
 iDt
-thA
+iDt
 thA
 thA
 thA
@@ -193239,22 +193483,22 @@ iDt
 iDt
 iDt
 qau
-lvt
-mcI
-lvt
+eBG
+hxf
+aKw
 bxb
-cBY
-vYU
-thA
-thA
-thA
-thA
+iDt
+qpH
+iDt
+iDt
+iDt
+iDt
 iDt
 iDt
 scw
 iDt
 iDt
-thA
+iDt
 thA
 thA
 thA
@@ -193496,16 +193740,16 @@ scw
 iDt
 cCb
 gsd
-xvp
-qNe
-wtv
-ieb
-dvk
-yba
-thA
-thA
-thA
-thA
+wWw
+wWw
+wWw
+wWw
+wWw
+qhR
+iDt
+iDt
+iDt
+cCb
 xMq
 scw
 iDt
@@ -193753,16 +193997,16 @@ iDt
 scw
 iDt
 iDt
-tfX
-snJ
-nvB
-mSQ
-yba
-thA
-thA
-thA
-thA
-thA
+scw
+iDt
+scw
+iDt
+scw
+iDt
+iDt
+iDt
+iDt
+iDt
 xMq
 xMq
 scw
@@ -194010,17 +194254,17 @@ iDt
 iDt
 iDt
 iDt
-iDt
-evh
-iDt
-iDt
-iDt
-thA
-thA
-thA
-thA
-thA
-thA
+ctC
+aKb
+xEr
+aKb
+aKb
+aKb
+xEr
+aKb
+xEr
+aKb
+hxJ
 xMq
 keA
 keA
@@ -194267,17 +194511,17 @@ scw
 scw
 iDt
 scw
+aDG
 iDt
-iDt
-iDt
-iDt
-iDt
-thA
-thA
-thA
-thA
-thA
-thA
+lwx
+kOi
+pgO
+rbZ
+cQe
+rbZ
+cQe
+cjZ
+dwd
 xMq
 xuo
 xiu
@@ -194524,17 +194768,17 @@ xkW
 keA
 lPl
 iDt
+aDG
 iDt
-scw
-iDt
-iDt
-scw
-iDt
-cCb
-iDt
-thA
-thA
-thA
+agz
+tnm
+ode
+pHG
+fCo
+pHG
+gse
+cSj
+aDG
 psb
 jkX
 gUQ
@@ -194781,18 +195025,18 @@ tBs
 vcf
 tBs
 iDt
+aDG
 iDt
+lxw
+mNb
+sFn
+ebB
+cdn
+sFn
+ebB
+cSj
+dwd
 iDt
-iDt
-iDt
-iDt
-iDt
-iDt
-iDt
-iDt
-scw
-iDt
-scw
 iDt
 iDt
 iDt
@@ -195038,20 +195282,20 @@ vRz
 wMj
 vRz
 iDt
-mxK
-jTf
+bNC
+iDt
 fOH
-pJm
-pJm
-pJm
-fOH
-pJm
-xvp
+tnm
+cbS
+pHG
+ode
+fnN
+owi
+cSj
+aDG
 iDt
 iDt
-iDt
-iDt
-iDt
+scw
 iDt
 iDt
 thA
@@ -195296,16 +195540,16 @@ rQh
 tBs
 tBs
 tBs
-iDt
-kOi
-rbZ
-rbZ
-rbZ
-pgo
-iDt
-aDG
-iDt
-iDt
+oLX
+lYe
+mNb
+ebB
+cdn
+ebB
+ebB
+sFn
+cSj
+dwd
 iDt
 iDt
 iDt
@@ -195553,19 +195797,19 @@ bJi
 uDl
 feQ
 tBs
-kOi
+iDt
+wDR
+tnm
+ode
+fCo
 efM
-ebB
-tuk
-ebB
-efM
-pgo
-jai
-rsG
+pHG
+ode
+cSj
+aDG
+nbB
 scw
 iDt
-iDt
-scw
 iDt
 iDt
 iDt
@@ -195810,16 +196054,16 @@ baR
 kAn
 kMN
 tBs
-ebB
-ebB
-ebB
-uXk
-uXk
-ebB
-cSj
-cnj
-scw
 iDt
+pFZ
+mNb
+sFn
+ebB
+cdn
+sFn
+ebB
+ebB
+vql
 iDt
 scw
 iDt
@@ -196067,16 +196311,16 @@ rtp
 tBs
 tBs
 tBs
-ebB
-efM
-ebB
-efM
-uXk
-efM
-awy
-jai
-wkB
 iDt
+cjD
+rDr
+pHG
+fnN
+ode
+gse
+fnN
+cSj
+rcY
 var
 keA
 sys
@@ -196324,16 +196568,16 @@ vMl
 kTk
 hhz
 qEJ
-tJD
-yav
+sNF
+pFZ
+vNk
+dxY
 ebB
+sFn
 yav
-ebB
-awy
-iDt
-rcY
-iDt
-xMq
+qrA
+aYC
+akH
 wrX
 kpg
 wrX
@@ -196589,9 +196833,9 @@ ibM
 ibM
 wrX
 wrX
-xMq
-xMq
+iDt
 wrX
+vOY
 csJ
 wrX
 xMq
@@ -260565,7 +260809,7 @@ kKL
 kKL
 kKL
 kKL
-kKL
+joo
 kKL
 kKL
 gkP
