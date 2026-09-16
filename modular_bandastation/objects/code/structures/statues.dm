@@ -209,16 +209,15 @@
 	abstract_type = /obj/structure/statue/normandy_soo
 
 /obj/structure/statue/angel
-	name = "Ангел"
+	name = "Angel"
 	desc = "Хранитель усопших душ..."
 	icon = 'modular_bandastation/objects/icons/obj/structures/statuewide.dmi'
 	icon_state = "angel"
 	anchored = TRUE
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF
-	abstract_type = /obj/structure/statue/angel
 
 /obj/structure/statue/grave
-	name = "Могила"
+	name = "Grave"
 	desc = "Могила с качественным надгробным камнем."
 	icon = 'modular_bandastation/objects/icons/obj/structures/statue_graves.dmi'
 	icon_state = "statue_grave"
@@ -226,7 +225,7 @@
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF
 
 /obj/structure/statue/improvised_grave
-	name = "Могила"
+	name = "Unnamed Grave"
 	desc = "Безымянная могила с каменным крестом."
 	icon = 'modular_bandastation/objects/icons/obj/structures/statue_graves.dmi'
 	icon_state = "improvised_grave"
