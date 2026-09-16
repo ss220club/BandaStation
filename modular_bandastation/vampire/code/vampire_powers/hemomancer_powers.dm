@@ -215,6 +215,7 @@
 	add_vampire_ability(50)
 
 /obj/effect/dummy/phased_mob/spell_jaunt/vampire_blood_pool
+	icon_state = "red_1"
 
 /obj/effect/dummy/phased_mob/spell_jaunt/vampire_blood_pool/phased_check(mob/living/user, direction)
 	. = ..()
