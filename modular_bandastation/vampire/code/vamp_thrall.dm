@@ -66,6 +66,7 @@
 /datum/action/cooldown/spell/vampire_thrall_commune
 	name = "Вампирское общение"
 	desc = "Телепатически общайтесь со своим вампиром-хозяином и его рабами."
+	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "vamp_communication"
 	cooldown_time = 2 SECONDS
 	spell_requirements = NONE
@@ -78,7 +79,7 @@
 		to_chat(owner, span_warning("Ваша связь с хозяином угасла."))
 		return
 
-	var/message = tgui_input_text(owner, "Введите сообщение для сети вашего вампира.", "Общение рабов")
+	var/message = tgui_input_text(owner, "Введите сообщение для сети вашего хозяина.", "Общение рабов")
 	if(!message)
 		return
 	if(QDELETED(src) || QDELETED(owner) || !master?.owner?.current)
@@ -86,7 +87,7 @@
 			to_chat(owner, span_warning("Ваша связь с хозяином угасла."))
 		return
 	var/list/recipients = list(master.owner.current)
-	for(var/datum/antagonist/vampire_thrall/network_thrall as anything in master.get_thralls())
+	for(var/datum/antagonist/vampire_thrall/network_thrall as anything in master.network_thrall)
 		if(network_thrall.owner?.current)
 			recipients += network_thrall.owner.current
 	for(var/mob/living/recipient as anything in recipients)
