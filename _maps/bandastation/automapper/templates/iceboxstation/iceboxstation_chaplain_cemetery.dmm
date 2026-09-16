@@ -1,0 +1,743 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"aG" = (
+/obj/item/clothing/head/costume/garland/lily,
+/obj/structure/statue/improvised_grave{
+	desc = "Безымянная могила, ничем не отличается от других.";
+	name = "Безымянная могила";
+	density = 0
+	},
+/obj/item/flashlight/flare/candle/infinite{
+	anchored = 1;
+	light_range = 5;
+	pixel_y = 9;
+	pixel_x = 9
+	},
+/turf/open/misc/dirt{
+	initial_gas_mix = "ICEMOON_ATMOS"
+	},
+/area/icemoon/underground/explored)
+"bm" = (
+/obj/structure/statue/angel{
+	pixel_y = -20;
+	pixel_x = -48;
+	desc = "Хранитель усопших душ. На основании виднеется надпись: Да хранит он Ваши души от последствий Редспейса...";
+	light_range = 2;
+	light_power = 2;
+	light_color = "#ffcc66"
+	},
+/obj/item/flashlight/flare/candle/infinite{
+	pixel_y = -13;
+	pixel_x = -10;
+	anchored = 1
+	},
+/obj/item/flashlight/flare/candle/infinite{
+	pixel_y = -14;
+	pixel_x = 11;
+	anchored = 1
+	},
+/obj/item/flashlight/flare/candle/infinite{
+	pixel_y = -20;
+	anchored = 1
+	},
+/obj/item/flashlight/flare/candle/infinite{
+	pixel_y = -19;
+	pixel_x = -5;
+	anchored = 1
+	},
+/obj/item/flashlight/flare/candle/infinite{
+	pixel_y = -19;
+	pixel_x = 5;
+	anchored = 1
+	},
+/turf/open/misc/asteroid/snow/icemoon,
+/area/icemoon/underground/explored)
+"bo" = (
+/obj/effect/turf_decal/weather/snow/corner,
+/turf/open/misc/dirt{
+	initial_gas_mix = "ICEMOON_ATMOS"
+	},
+/area/icemoon/underground/explored)
+"bC" = (
+/obj/item/clothing/head/costume/garland/lily,
+/obj/structure/statue/improvised_grave{
+	desc = "Безымянная могила, ничем не отличается от других.";
+	name = "Безымянная могила";
+	density = 0
+	},
+/turf/open/misc/dirt{
+	initial_gas_mix = "ICEMOON_ATMOS"
+	},
+/area/icemoon/underground/explored)
+"dv" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 10
+	},
+/obj/item/banner/command/mundane{
+	pixel_x = -15
+	},
+/turf/open/misc/dirt{
+	initial_gas_mix = "ICEMOON_ATMOS"
+	},
+/area/icemoon/underground/explored)
+"eW" = (
+/turf/closed/wall,
+/area/station/service/chapel)
+"gE" = (
+/obj/item/sign/flag/nanotrasen,
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 5
+	},
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 9
+	},
+/obj/item/bouquet/rose,
+/obj/structure/statue/grave{
+	name = "Эдвард Клейм";
+	desc = "Могила в честь офицера Центрального Командования, который погиб за Кибериаду при Редспейс шторме...";
+	density = 0
+	},
+/obj/item/flashlight/flare/candle/infinite{
+	pixel_y = 7;
+	anchored = 1;
+	pixel_x = 9
+	},
+/obj/item/flashlight/flare/candle/infinite{
+	pixel_y = 7;
+	anchored = 1;
+	pixel_x = -10
+	},
+/turf/open/misc/dirt{
+	initial_gas_mix = "ICEMOON_ATMOS"
+	},
+/area/icemoon/underground/explored)
+"gO" = (
+/obj/structure/fence{
+	dir = 8
+	},
+/turf/open/misc/asteroid/snow/icemoon,
+/area/icemoon/underground/explored)
+"gX" = (
+/obj/structure/statue/grave{
+	name = "Мария Карлайл";
+	desc = "Могила в честь офицера Центрального Командования, который погиб за Кибериаду при Редспейс шторме...";
+	density = 0
+	},
+/obj/item/sign/flag/nanotrasen,
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 5
+	},
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 9
+	},
+/obj/item/bouquet/rose,
+/obj/item/flashlight/flare/candle/infinite{
+	pixel_y = 7;
+	anchored = 1;
+	pixel_x = 9
+	},
+/obj/item/flashlight/flare/candle/infinite{
+	pixel_y = 7;
+	anchored = 1;
+	pixel_x = -10
+	},
+/turf/open/misc/dirt{
+	initial_gas_mix = "ICEMOON_ATMOS"
+	},
+/area/icemoon/underground/explored)
+"hp" = (
+/obj/structure/statue/improvised_grave{
+	desc = "Безымянная могила, ничем не отличается от других.";
+	name = "Богдан Захарин";
+	density = 0
+	},
+/obj/item/clothing/head/costume/garland/rainbowbunch,
+/obj/item/flashlight/flare/candle/infinite{
+	anchored = 1;
+	light_range = 5;
+	pixel_y = 9;
+	pixel_x = 9
+	},
+/turf/open/misc/dirt{
+	initial_gas_mix = "ICEMOON_ATMOS"
+	},
+/area/icemoon/underground/explored)
+"hA" = (
+/obj/structure/fence{
+	dir = 1
+	},
+/turf/open/misc/asteroid/snow/icemoon,
+/area/icemoon/underground/explored)
+"iw" = (
+/obj/item/clothing/head/costume/garland/sunflower,
+/obj/structure/statue/improvised_grave{
+	desc = "Безымянная могила, ничем не отличается от других.";
+	name = "Безымянная могила";
+	density = 0
+	},
+/turf/open/misc/dirt{
+	initial_gas_mix = "ICEMOON_ATMOS"
+	},
+/area/icemoon/underground/explored)
+"iI" = (
+/obj/structure/fence/post{
+	dir = 8
+	},
+/turf/open/misc/asteroid/snow/icemoon,
+/area/icemoon/underground/explored)
+"ko" = (
+/obj/structure/sign/warning/secure_area/directional/north,
+/turf/open/misc/asteroid/snow/icemoon,
+/area/icemoon/underground/explored)
+"ky" = (
+/obj/item/toy/snowball{
+	pixel_x = -9;
+	pixel_y = 17
+	},
+/obj/item/banner/command/mundane,
+/turf/open/misc/asteroid/snow/icemoon,
+/area/icemoon/underground/explored)
+"kW" = (
+/turf/closed/wall/ice,
+/area/icemoon/underground/explored)
+"nc" = (
+/obj/item/clothing/head/costume/garland/sunflower,
+/obj/structure/statue/improvised_grave{
+	desc = "Безымянная могила, ничем не отличается от других.";
+	name = "Безымянная могила";
+	density = 0
+	},
+/obj/item/flashlight/flare/candle/infinite{
+	anchored = 1;
+	light_range = 5;
+	pixel_y = 9;
+	pixel_x = -9
+	},
+/turf/open/misc/dirt{
+	initial_gas_mix = "ICEMOON_ATMOS"
+	},
+/area/icemoon/underground/explored)
+"nH" = (
+/obj/structure/fence/corner{
+	dir = 8
+	},
+/turf/open/misc/asteroid/snow/icemoon,
+/area/icemoon/underground/explored)
+"nR" = (
+/obj/item/clothing/head/costume/garland/rainbowbunch,
+/obj/structure/statue/improvised_grave{
+	desc = "Безымянная могила, ничем не отличается от других.";
+	name = "Безымянная могила";
+	density = 0
+	},
+/turf/open/misc/dirt{
+	initial_gas_mix = "ICEMOON_ATMOS"
+	},
+/area/icemoon/underground/explored)
+"oF" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 4
+	},
+/turf/open/misc/dirt{
+	initial_gas_mix = "ICEMOON_ATMOS"
+	},
+/area/icemoon/underground/explored)
+"pI" = (
+/obj/item/toy/snowball{
+	pixel_x = 6;
+	pixel_y = 5
+	},
+/obj/item/banner/command/mundane,
+/turf/open/misc/asteroid/snow/icemoon,
+/area/icemoon/underground/explored)
+"qP" = (
+/turf/open/misc/dirt{
+	initial_gas_mix = "ICEMOON_ATMOS"
+	},
+/area/icemoon/underground/explored)
+"rg" = (
+/obj/structure/fence{
+	dir = 8
+	},
+/turf/open/floor/plating/snowed/smoothed/icemoon,
+/area/icemoon/underground/explored)
+"ru" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 8
+	},
+/turf/open/misc/dirt{
+	initial_gas_mix = "ICEMOON_ATMOS"
+	},
+/area/icemoon/underground/explored)
+"vv" = (
+/turf/closed/mineral/random/snow,
+/area/icemoon/underground/explored)
+"xl" = (
+/obj/structure/statue/improvised_grave{
+	desc = "Безымянная могила, ничем не отличается от других.";
+	name = "Безымянная могила";
+	density = 0
+	},
+/obj/item/clothing/head/costume/garland,
+/obj/item/flashlight/flare/candle/infinite{
+	anchored = 1;
+	light_range = 5;
+	pixel_y = 9;
+	pixel_x = 9
+	},
+/turf/open/misc/dirt{
+	initial_gas_mix = "ICEMOON_ATMOS"
+	},
+/area/icemoon/underground/explored)
+"yy" = (
+/obj/structure/statue/improvised_grave{
+	desc = "Могила, ничем не отличается от других.";
+	name = "Хизер Уотсон";
+	density = 0
+	},
+/obj/item/clothing/head/costume/garland/lily,
+/obj/item/flashlight/flare/candle/infinite{
+	anchored = 1;
+	light_range = 5;
+	pixel_y = 9;
+	pixel_x = -9
+	},
+/turf/open/misc/dirt{
+	initial_gas_mix = "ICEMOON_ATMOS"
+	},
+/area/icemoon/underground/explored)
+"AB" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 6
+	},
+/turf/open/misc/dirt{
+	initial_gas_mix = "ICEMOON_ATMOS"
+	},
+/area/icemoon/underground/explored)
+"Bj" = (
+/obj/structure/fence/door{
+	name = "graveyard"
+	},
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 10
+	},
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 6
+	},
+/turf/open/misc/dirt{
+	initial_gas_mix = "ICEMOON_ATMOS"
+	},
+/area/icemoon/underground/explored)
+"Bm" = (
+/obj/structure/fence/post{
+	dir = 1
+	},
+/turf/open/misc/asteroid/snow/icemoon,
+/area/icemoon/underground/explored)
+"Cd" = (
+/obj/item/clothing/head/costume/garland/poppy,
+/obj/structure/statue/improvised_grave{
+	desc = "Безымянная могила, ничем не отличается от других.";
+	name = "Безымянная могила";
+	density = 0
+	},
+/turf/open/misc/dirt{
+	initial_gas_mix = "ICEMOON_ATMOS"
+	},
+/area/icemoon/underground/explored)
+"Es" = (
+/obj/effect/spawner/structure/window/hollow/reinforced/middle{
+	dir = 4
+	},
+/obj/structure/cable,
+/obj/machinery/door/poddoor/shutters/preopen{
+	dir = 8;
+	id = "lower_chapel_shutters";
+	name = "Graveyard Shutters"
+	},
+/turf/open/floor/plating,
+/area/station/service/chapel)
+"Fi" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 5
+	},
+/turf/open/misc/dirt{
+	initial_gas_mix = "ICEMOON_ATMOS"
+	},
+/area/icemoon/underground/explored)
+"IE" = (
+/obj/structure/statue/grave{
+	name = "Хель Кириэн";
+	desc = "Могила в честь офицера Центрального Командования, который погиб за Кибериаду при Редспейс шторме...";
+	density = 0
+	},
+/obj/item/sign/flag/nanotrasen,
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 5
+	},
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 9
+	},
+/obj/item/bouquet/rose,
+/obj/item/flashlight/flare/candle/infinite{
+	pixel_y = 7;
+	anchored = 1;
+	pixel_x = 9
+	},
+/obj/item/flashlight/flare/candle/infinite{
+	pixel_y = 7;
+	anchored = 1;
+	pixel_x = -10
+	},
+/turf/open/misc/dirt{
+	initial_gas_mix = "ICEMOON_ATMOS"
+	},
+/area/icemoon/underground/explored)
+"IJ" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 1
+	},
+/turf/open/misc/dirt{
+	initial_gas_mix = "ICEMOON_ATMOS"
+	},
+/area/icemoon/underground/explored)
+"Jh" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 9
+	},
+/obj/structure/sign/departments/holy/directional/east,
+/obj/structure/sign/nanotrasen/directional/north,
+/turf/open/misc/asteroid/snow/icemoon,
+/area/icemoon/underground/explored)
+"Kf" = (
+/obj/structure/statue/grave{
+	name = "Остин Миллер";
+	desc = "Могила в честь офицера Центрального Командования, который погиб за Кибериаду при Редспейс шторме...";
+	density = 0
+	},
+/obj/item/sign/flag/nanotrasen,
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 5
+	},
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 9
+	},
+/obj/item/bouquet/rose,
+/obj/item/flashlight/flare/candle/infinite{
+	pixel_y = 7;
+	anchored = 1;
+	pixel_x = 9
+	},
+/obj/item/flashlight/flare/candle/infinite{
+	pixel_y = 7;
+	anchored = 1;
+	pixel_x = -10
+	},
+/turf/open/misc/dirt{
+	initial_gas_mix = "ICEMOON_ATMOS"
+	},
+/area/icemoon/underground/explored)
+"Ly" = (
+/obj/structure/fence/corner{
+	dir = 10
+	},
+/turf/open/misc/asteroid/snow/icemoon,
+/area/icemoon/underground/explored)
+"LI" = (
+/obj/item/bouquet,
+/obj/structure/statue/improvised_grave{
+	desc = "Могила, полностью идентичная могиле справа.";
+	name = "Джанетта Де Кюстин";
+	density = 0
+	},
+/obj/item/flashlight/flare/candle/infinite{
+	anchored = 1;
+	light_range = 5;
+	pixel_y = 9;
+	pixel_x = 9
+	},
+/turf/open/misc/dirt{
+	initial_gas_mix = "ICEMOON_ATMOS"
+	},
+/area/icemoon/underground/explored)
+"Mt" = (
+/obj/item/clothing/head/costume/garland/poppy,
+/obj/structure/statue/improvised_grave{
+	desc = "Безымянная могила, ничем не отличается от других.";
+	name = "Безымянная могила";
+	density = 0
+	},
+/obj/item/flashlight/flare/candle/infinite{
+	anchored = 1;
+	light_range = 5;
+	pixel_y = 9;
+	pixel_x = -9
+	},
+/turf/open/misc/dirt{
+	initial_gas_mix = "ICEMOON_ATMOS"
+	},
+/area/icemoon/underground/explored)
+"MK" = (
+/obj/item/banner/command/mundane{
+	pixel_x = 4
+	},
+/turf/open/misc/asteroid/snow/icemoon,
+/area/icemoon/underground/explored)
+"MM" = (
+/obj/structure/statue/improvised_grave{
+	desc = "Могила, ничем не отличается от других.";
+	name = "Эллиот Ренаскор";
+	density = 0
+	},
+/obj/item/clothing/head/costume/garland/lily,
+/obj/item/book/bible,
+/turf/open/misc/dirt{
+	initial_gas_mix = "ICEMOON_ATMOS"
+	},
+/area/icemoon/underground/explored)
+"No" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 8
+	},
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 4
+	},
+/turf/open/misc/dirt{
+	initial_gas_mix = "ICEMOON_ATMOS"
+	},
+/area/icemoon/underground/explored)
+"QC" = (
+/obj/structure/closet/emcloset,
+/turf/open/floor/plating,
+/area/station/service/chapel)
+"Ry" = (
+/obj/structure/statue/improvised_grave{
+	desc = "Могила, полностью идентичная могиле слева.";
+	name = "Джанетт Де Кюстин";
+	density = 0
+	},
+/obj/item/bouquet/sunflower,
+/obj/item/flashlight/flare/candle/infinite{
+	anchored = 1;
+	light_range = 5;
+	pixel_y = 9;
+	pixel_x = -9
+	},
+/turf/open/misc/dirt{
+	initial_gas_mix = "ICEMOON_ATMOS"
+	},
+/area/icemoon/underground/explored)
+"TN" = (
+/obj/item/banner/command/mundane,
+/turf/open/misc/asteroid/snow/icemoon,
+/area/icemoon/underground/explored)
+"Um" = (
+/obj/structure/statue/improvised_grave{
+	desc = "Могила, ничем не отличается от других.";
+	name = "Киф Веспер";
+	density = 0
+	},
+/obj/item/clothing/head/costume/garland/poppy,
+/turf/open/misc/dirt{
+	initial_gas_mix = "ICEMOON_ATMOS"
+	},
+/area/icemoon/underground/explored)
+"UU" = (
+/obj/item/bouquet/sunflower,
+/obj/structure/statue/improvised_grave{
+	desc = "Безымянная могила, ничем не отличается от других.";
+	name = "Безымянная могила";
+	density = 0
+	},
+/turf/open/misc/dirt{
+	initial_gas_mix = "ICEMOON_ATMOS"
+	},
+/area/icemoon/underground/explored)
+"UV" = (
+/turf/open/misc/asteroid/snow/icemoon,
+/area/icemoon/underground/explored)
+"VK" = (
+/obj/structure/fence/corner{
+	dir = 5
+	},
+/turf/open/misc/asteroid/snow/icemoon,
+/area/icemoon/underground/explored)
+"VO" = (
+/obj/item/clothing/head/costume/garland,
+/obj/structure/statue/improvised_grave{
+	desc = "Безымянная могила, ничем не отличается от других.";
+	name = "Безымянная могила";
+	density = 0
+	},
+/turf/open/misc/dirt{
+	initial_gas_mix = "ICEMOON_ATMOS"
+	},
+/area/icemoon/underground/explored)
+"WI" = (
+/obj/structure/fence{
+	dir = 4
+	},
+/turf/open/misc/asteroid/snow/icemoon,
+/area/icemoon/underground/explored)
+"ZV" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 9
+	},
+/turf/open/misc/dirt{
+	initial_gas_mix = "ICEMOON_ATMOS"
+	},
+/area/icemoon/underground/explored)
+
+(1,1,1) = {"
+nH
+hA
+Bm
+hA
+hA
+hA
+Bm
+hA
+Bm
+Ly
+UV
+vv
+"}
+(2,1,1) = {"
+gO
+ky
+ZV
+ru
+ru
+ru
+ru
+ru
+dv
+iI
+UV
+vv
+"}
+(3,1,1) = {"
+gO
+IE
+qP
+yy
+nR
+nc
+nR
+Mt
+bo
+gO
+UV
+kW
+"}
+(4,1,1) = {"
+gO
+pI
+IJ
+qP
+qP
+qP
+qP
+qP
+bo
+iI
+UV
+UV
+"}
+(5,1,1) = {"
+rg
+Kf
+oF
+Um
+LI
+bC
+VO
+UU
+bo
+gO
+UV
+UV
+"}
+(6,1,1) = {"
+eW
+bm
+UV
+IJ
+qP
+qP
+qP
+qP
+bo
+VK
+Ly
+UV
+"}
+(7,1,1) = {"
+eW
+gE
+ru
+MM
+Ry
+Cd
+nR
+bC
+bo
+UV
+gO
+ko
+"}
+(8,1,1) = {"
+eW
+TN
+IJ
+qP
+qP
+qP
+qP
+qP
+qP
+No
+Bj
+UV
+"}
+(9,1,1) = {"
+eW
+gX
+qP
+hp
+VO
+aG
+iw
+xl
+bo
+UV
+WI
+Jh
+"}
+(10,1,1) = {"
+eW
+TN
+Fi
+oF
+qP
+qP
+oF
+oF
+AB
+MK
+eW
+eW
+"}
+(11,1,1) = {"
+eW
+eW
+Es
+Es
+eW
+Es
+Es
+eW
+eW
+UV
+eW
+QC
+"}
