@@ -340,7 +340,7 @@
 			return
 	to_chat(user, span_danger("Вы начинаете помечать [coffin.declent_ru(ACCUSATIVE)]!"))
 	coffin.Beam(user, icon_state = "drainbeam", maxdistance = 1, time = 10 SECONDS)
-	playsound(coffin, 'modular_bandastation/vampire/sound/misc/enter_blood.ogg', 20)
+	playsound(coffin, 'sound/effects/magic/enter_blood.ogg', 20)
 	for(var/obj/machinery/light/L in range(5, user))
 		L.flicker()
 	var/obj/effect/lair_rune/rune = new /obj/effect/lair_rune(get_turf(coffin), user)
