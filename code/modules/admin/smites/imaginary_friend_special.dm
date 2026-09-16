@@ -36,12 +36,13 @@
 			return FALSE
 		polled_friend_count = how_many
 
+		// BANDASTATION EDIT START
 		var/confirm_ghosts = tgui_alert(user, "Вы уверены, что хотите предложить роль призракам?", "Подтверждение", list("Да", "Отмена"))
 		if(confirm_ghosts != "Да")
 			return FALSE
 
 	return TRUE
-
+	// BANDASTATION EDIT END
 
 /// Try to offer the role to ghosts
 /datum/smite/custom_imaginary_friend/proc/poll_ghosts(client/user, mob/living/target)
@@ -78,9 +79,11 @@
 		to_chat(user, span_warning("Selected player no longer has a client, aborting."))
 		return
 
+	// BANDASTATION EDIT START
 	var/confirm_player = tgui_alert(user, "Вы уверены, что хотите выбрать [friend_candidate_client.ckey]?", "Подтверждение", list("Да", "Отмена"))
 	if(confirm_player != "Да")
 		return
+	// BANDASTATION EDIT END
 
 	if(isliving(friend_candidate_client.mob))
 		var/end_them_choice = tgui_alert(user,
@@ -129,11 +132,10 @@
 		to_chat(user, span_warning("No provided imaginary friend candidates had clients, aborting."))
 		return
 
-	// Запускаем асинхронный опрос для каждого выбранного кандидата
+	// BANDASTATION EDIT START
 	for(var/client/friend_candidate_client as anything in final_clients)
 		INVOKE_ASYNC(src, PROC_REF(setup_friend_async), friend_candidate_client, target)
 
-// Асинхронная процедура для настройки друга через смайт
 /datum/smite/custom_imaginary_friend/proc/setup_friend_async(client/friend_candidate_client, mob/living/target)
 	if(!friend_candidate_client || QDELETED(target))
 		return
@@ -169,7 +171,6 @@
 	if(isliving(client_mob))
 		client_mob.ghostize()
 
-	// Теперь, когда внешность выбрана, создаем моба и помещаем туда игрока
 	var/mob/eye/imaginary_friend/friend_mob = client_mob.change_mob_type(
 		new_type = /mob/eye/imaginary_friend,
 		location = get_turf(client_mob),
@@ -194,6 +195,7 @@
 		friend_mob.copy_tts_from(copied_target)
 	else
 		friend_mob.setup_friend()
+		// BANDASTATION EDIT END
 
 #undef CHOICE_PICK_PLAYER
 #undef CHOICE_POLL_GHOSTS

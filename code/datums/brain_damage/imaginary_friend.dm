@@ -16,6 +16,7 @@
 	var/mob/eye/imaginary_friend/friend
 	var/friend_initialized = FALSE
 
+// BANDASTATION EDIT START
 /datum/brain_trauma/special/imaginary_friend/on_gain()
 	var/mob/living/M = owner
 	if(M.stat == DEAD || !M.client)
@@ -47,6 +48,7 @@
 	friend_initialized = FALSE
 	QDEL_NULL(friend)
 	get_ghost()
+// BANDASTATION EDIT END
 
 /datum/brain_trauma/special/imaginary_friend/proc/make_friend()
 	friend = new(get_turf(owner))
@@ -70,7 +72,7 @@
 		qdel(src)
 		return
 
-	// Запускаем асинхронный опрос призрака
+	// BANDASTATION EDIT START
 	INVOKE_ASYNC(src, PROC_REF(ask_ghost_appearance), ghost)
 
 /datum/brain_trauma/special/imaginary_friend/proc/ask_ghost_appearance(mob/dead/observer/ghost)
@@ -125,6 +127,7 @@
 		friend.copy_tts_from(copied_target)
 	else
 		friend.setup_friend()
+	// BANDASTATION EDIT END
 
 	friend_initialized = TRUE
 	friend.log_message("became [key_name(owner)]'s split personality.", LOG_GAME)
@@ -147,12 +150,12 @@
 	var/mob/living/owner
 	var/bubble_icon = "default"
 
+	// BANDASTATION EDIT START
 	/// Max distance we can be from our owner before we teleport to them
 	var/distance_allowance = 9
 	/// If TRUE, we must keep line of sight with the owner
 	var/require_los = FALSE
-	/// Whether our host and other imaginary friends can hear us only when nearby or practically anywhere.
-	var/extended_message_range = TRUE
+	// BANDASTATION EDIT END
 
 /mob/eye/imaginary_friend/Login()
 	. = ..()
@@ -239,6 +242,7 @@
 			group_clients += person.client
 	return group_clients
 
+// BANDASTATION EDIT START
 /mob/eye/imaginary_friend/proc/Show()
 	if(!owner)
 		return
@@ -247,17 +251,17 @@
 	if(src.client)
 		friend_clients -= src.client
 
-	// Remove old image from group
 	remove_image_from_clients(current_image, friend_clients)
+	// BANDASTATION EDIT END
 
-	// Generate image from the static icon and the current dir
+	//Generate image from the static icon and the current dir
 	current_image = image(human_icon, src, , MOB_LAYER, dir=src.dir)
 	current_image.override = TRUE
 	current_image.name = name
 	if(hidden)
 		current_image.alpha = 150
 
-	// Add new image to owner and friend
+	//Add new image to owner and friend
 	if(!hidden)
 		add_image_to_clients(current_image, friend_clients)
 
@@ -282,7 +286,6 @@
 	if(!copied_target)
 		return
 
-	// Получаем TTS-компонент оригинального моба
 	var/datum/component/target_tts = copied_target.GetComponent(/datum/component/tts_component)
 	if(!target_tts)
 		return
@@ -318,13 +321,11 @@
 	message = check_for_custom_say_emote(message, message_mods)
 	message = capitalize(message)
 
+	// BANDASTATION EDIT START
 	if(message_mods[MODE_SING])
 		var/randomnote = pick("♩", "♪", "♫")
 		message = "[randomnote] [capitalize(message)] [randomnote]"
 		spans |= SPAN_SINGING
-
-	if(extended_message_range)
-		range = IMAGINARY_FRIEND_EXTENDED_SPEECH_RANGE
 
 	var/eavesdrop_range = 0
 
@@ -340,8 +341,8 @@
 	var/dead_rendered = "[span_name("[name] (Imaginary friend of [owner])")] [messagepart]"
 
 	var/language = message_language || owner.get_selected_language()
-	Hear(src, language, message, null, null, null, spans, message_mods)
-	var/group = owner.imaginary_group - src
+	Hear(src, language, message, null, null, null, spans, message_mods) // We always hear what we say
+	var/group = owner.imaginary_group - src // The people in our group don't, so we have to exclude ourselves not to hear twice
 
 	var/list/actual_hearers = list(src)
 
@@ -353,6 +354,7 @@
 	for(var/mob/user in actual_hearers)
 		if((safe_read_pref(user.client, /datum/preference/toggle/enable_runechat) || (SSlag_switch.measures[DISABLE_RUNECHAT] && !HAS_TRAIT(src, TRAIT_BYPASS_MEASURES))))
 			speech_bubble_recipients.Add(user.client)
+			// BANDASTATION EDIT END
 
 	var/image/bubble = image('icons/mob/effects/talk.dmi', src, "[bubble_type][say_test(message)]", FLY_LAYER)
 	SET_PLANE_EXPLICIT(bubble, ABOVE_GAME_PLANE, src)
@@ -506,6 +508,7 @@
 	remove_thinking_indicator()
 	remove_typing_indicator()
 
+// BANDASTATION EDIT START
 /mob/eye/imaginary_friend/Move(atom/NewLoc, Dir = 0)
 	if(world.time < move_delay)
 		return FALSE
@@ -537,6 +540,7 @@
 		delay_modifier = 3
 
 	move_delay = world.time + delay_modifier
+	// BANDASTATION EDIT END
 
 /mob/eye/imaginary_friend/setDir(newdir)
 	. = ..()
@@ -583,10 +587,12 @@
 	var/mob/eye/imaginary_friend/fake_friend = owner
 	fake_friend.hidden = !fake_friend.hidden
 
+	// BANDASTATION EDIT START
 	if(fake_friend.hidden)
 		to_chat(fake_friend, span_notice("Вы прячетесь. Теперь вы бестелесны и можете проходить сквозь стены."))
 	else
 		to_chat(fake_friend, span_notice("Вы появляетесь на виду и теперь двигаетесь как обычный человек."))
+	// BANDASTATION EDIT END
 
 	fake_friend.Show()
 	build_all_button_icons(UPDATE_BUTTON_NAME|UPDATE_BUTTON_ICON)
