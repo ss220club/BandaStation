@@ -16,7 +16,7 @@
 	mid_sounds = 'sound/machines/sm/loops/calm.ogg'
 	mid_length = 4 SECONDS
 	end_sound = 'sound/machines/sm/loops/calm_end.ogg'
-	volume = 40
+	volume = 20 // BANDASTATION EDIT: orig volume = 40, less ear damage
 	extra_range = 25
 	falloff_exponent = 10
 	falloff_distance = 5
@@ -26,7 +26,7 @@
 /datum/looping_sound/destabilized_crystal
 	mid_sounds = list('sound/machines/sm/loops/delamming.ogg')
 	mid_length = 6 SECONDS
-	volume = 55
+	volume = 25 // BANDASTATION EDIT: orig volume = 55, less ear damage
 	extra_range = 35
 	vary = TRUE
 	use_sound_tokens = TRUE
@@ -34,7 +34,7 @@
 /datum/looping_sound/hypertorus
 	mid_sounds = list('sound/machines/hypertorus/loops/hypertorus_nominal.ogg')
 	mid_length = 6 SECONDS
-	volume = 55
+	volume = 35 // BANDASTATION EDIT: orig volume = 55, less ear damage
 	extra_range = 15
 	vary = TRUE
 	use_sound_tokens = TRUE
@@ -66,7 +66,7 @@
 /datum/looping_sound/clock
 	mid_sounds = list('sound/ambience/misc/ticking_clock.ogg')
 	mid_length = 4 SECONDS
-	volume = 50
+	volume = 30 // BANDASTATION EDIT: orig volume = 50, less ear damage
 	ignore_walls = FALSE
 
 /datum/looping_sound/grill
