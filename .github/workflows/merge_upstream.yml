@@ -2,6 +2,12 @@ name: Merge Upstream
 
 on:
   workflow_dispatch:
+    inputs:
+      translate_changes:
+        description: Translate changelog entries with LLM
+        required: false
+        default: true
+        type: boolean
 
 jobs:
   merge-upstream:
@@ -35,14 +41,14 @@ jobs:
       - name: Run the script
         env:
           GITHUB_TOKEN: ${{ env.GH_TOKEN }}
-          TARGET_REPO: "ss220club/BandaStation"
+          TARGET_REPO: ${{ github.repository }}
           TARGET_BRANCH: "master"
           UPSTREAM_REPO: "tgstation/tgstation"
           UPSTREAM_BRANCH: "master"
           MERGE_BRANCH: "merge-upstream"
           CHANGELOG_AUTHOR: "tgstation"
-          TRANSLATE_CHANGES: "true"
-          G4F_API_KEY: ${{ secrets.G4F_API_KEY }}
+          TRANSLATE_CHANGES: ${{ inputs.translate_changes }}
+          LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
           LOG_LEVEL: ${{ runner.debug && 'DEBUG' || 'INFO' }}
         run: |
           git config --global user.email "action@github.com"

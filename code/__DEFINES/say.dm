@@ -80,6 +80,8 @@
 #define MODE_TTS_IDENTIFIER "tts_identifier"
 /// Override the mob's name
 #define MODE_SPEAKER_NAME_OVERRIDE "speaker_name_override"
+/// Override the mob's gender
+#define MODE_SPEAKER_GENDER_OVERRIDE "speaker_gender_override"
 
 // BANDASTATION ADDITION START - TTS
 #define MODE_TTS_FILTERS "tts_filters"
@@ -102,6 +104,7 @@
 #define SPAN_SOAPBOX "soapbox"
 #define SPAN_COLOSSUS "colossus"
 #define SPAN_DANGER "danger"
+#define SPAN_REVENWARNING "revenwarning"
 //bitflag #defines for return value of the radio() proc.
 /// Makes the message use italics
 #define ITALICS (1<<0)

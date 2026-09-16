@@ -700,7 +700,7 @@
 /obj/item/storage/belt/sheath/examine(mob/user)
 	. = ..()
 	if(length(contents))
-		. += span_notice("Alt-click it to quickly draw the blade.")
+		. += span_notice("Нажмите Alt+ЛКМ, чтобы быстро достать клинок.")
 
 /obj/item/storage/belt/sheath/click_alt(mob/user)
 	if(!length(contents))

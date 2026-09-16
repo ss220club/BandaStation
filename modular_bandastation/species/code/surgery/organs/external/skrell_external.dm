@@ -59,6 +59,7 @@
 		EXTERNAL_ADJACENT = BODY_ADJ_LAYER,
 	)
 	feature_key = FEATURE_SKRELL_HEAD_TENTACLE
+	offset_location = UPPER_BODY
 	color_source = ORGAN_COLOR_INHERIT
 
 /datum/bodypart_overlay/mutant/head_tentacle/get_global_feature_list()
@@ -88,6 +89,7 @@
 		EXTERNAL_ADJACENT = BODY_ADJ_LAYER,
 	)
 	feature_key = FEATURE_SKRELL_CLOTH_WRAP
+	offset_location = UPPER_BODY
 	color_source = ORGAN_COLOR_INHERIT
 	var/cloth_wrap_key = NONE
 	var/skrell_cloth_wrap_color = "#FFFFFF"
@@ -164,6 +166,7 @@
 		EXTERNAL_ADJACENT = BODY_ADJ_LAYER,
 	)
 	feature_key = FEATURE_SKRELL_HEAD_TENTACLE_ORNAMENT
+	offset_location = UPPER_BODY
 	color_source = ORGAN_COLOR_INHERIT
 	var/skrell_ornament_key = NONE
 

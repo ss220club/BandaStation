@@ -23,6 +23,26 @@
 	righthand_file = 'modular_bandastation/weapon/icons/melee/inhands/righthand.dmi'
 	hitsound = 'sound/items/weapons/bladeslice.ogg'
 
+/obj/item/melee/sabre/centcom_tanto
+	name = "fleet officer's tantos"
+	desc = "Приливы и Отливы: Парные танто. Один забирает защиту, второй — жизнь. Движения владельца подобны штормовому морю."
+	icon = 'modular_bandastation/weapon/icons/melee/sword.dmi'
+	icon_state = "centcom_tanto"
+	inhand_icon_state = "centcom_tanto"
+	lefthand_file = 'modular_bandastation/weapon/icons/melee/inhands/lefthand.dmi'
+	righthand_file = 'modular_bandastation/weapon/icons/melee/inhands/righthand.dmi'
+	force = 20
+	hitsound = 'sound/items/weapons/bladeslice.ogg'
+	block_chance = 50
+	armour_penetration = 35
+	attack_icon = 'modular_bandastation/weapon/icons/melee/sword.dmi'
+	attack_icon_state = "tanto_attack"
+	attack_speed = 4
+
+/obj/item/melee/sabre/centcom_tanto/Initialize(mapload)
+	. = ..()
+	AddComponent(/datum/component/two_handed, require_twohands = TRUE)
+
 /datum/storage/centcom_sabre_belt
 	max_slots = 1
 	do_rustle = FALSE
@@ -72,3 +92,32 @@
 
 /obj/item/storage/belt/sheath/centcom_katana/PopulateContents()
 	new /obj/item/melee/sabre/centcom/katana(src)
+
+/datum/storage/centcom_tanto_belt
+	max_slots = 1
+	do_rustle = FALSE
+	max_specific_storage = WEIGHT_CLASS_BULKY
+	click_alt_open = FALSE
+
+/datum/storage/centcom_tanto_belt/New(atom/parent, max_slots, max_specific_storage, max_total_storage)
+	. = ..()
+	set_holdable(/obj/item/melee/sabre/centcom_tanto)
+
+/obj/item/storage/belt/sheath/tanto
+	name = "fleet officer's tanto sheath's"
+	desc = "Матово-чёрные двойные ножны для танто, перевязанные серебряной нитью. Сконструированы так, что оба танто можно достать одновременно за доли секунды"
+	icon = 'modular_bandastation/weapon/icons/melee/sheath.dmi'
+	worn_icon = 'modular_bandastation/weapon/icons/melee/sheath_onmob.dmi'
+	lefthand_file = 'modular_bandastation/weapon/icons/melee/inhands/lefthand.dmi'
+	righthand_file = 'modular_bandastation/weapon/icons/melee/inhands/righthand.dmi'
+	icon_state = "tanto_sheath"
+	worn_icon_state = "tanto_sheath"
+	inhand_icon_state = "tanto_sheath"
+	storage_type = /datum/storage/centcom_tanto_belt
+
+/obj/item/storage/belt/sheath/tanto/Initialize(mapload)
+	. = ..()
+	AddComponent(/datum/component/two_handed, require_twohands = TRUE)
+
+/obj/item/storage/belt/sheath/tanto/PopulateContents()
+	new /obj/item/melee/sabre/centcom_tanto(src)

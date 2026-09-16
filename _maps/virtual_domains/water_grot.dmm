@@ -131,7 +131,7 @@
 /obj/structure/flora/rock/pile/style_random,
 /obj/effect/abstract/whirlpool,
 /obj/effect/abstract/mist,
-/turf/open/water/groundwater,
+/turf/open/water/groundwater/whirlpool,
 /area/virtual_domain)
 "tp" = (
 /obj/structure/flora/bush/fullgrass/style_random,
@@ -277,7 +277,7 @@
 "Qz" = (
 /obj/effect/abstract/whirlpool,
 /obj/effect/abstract/mist,
-/turf/open/water/groundwater,
+/turf/open/water/groundwater/whirlpool,
 /area/virtual_domain)
 "Uj" = (
 /obj/structure/table/wood,

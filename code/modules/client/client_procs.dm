@@ -657,7 +657,8 @@ GLOBAL_LIST_INIT(unrecommended_builds, list(
 	QDEL_NULL(void)
 	QDEL_NULL(tooltips)
 	QDEL_NULL(loot_panel)
-	QDEL_NULL(parallax_rock)
+	QDEL_LIST(parallax_instances)
+	eye_parallax = null
 	QDEL_NULL(tgui_who_panel) // BANDASTATION ADDITION - TGUI Who
 	seen_messages = null
 	Master.UpdateTickRate()
@@ -1028,6 +1029,11 @@ GLOBAL_LIST_INIT(unrecommended_builds, list(
 		if(NAMEOF(src, view))
 			view_size.setDefault(var_value)
 			return TRUE
+		// BANDASTATION EDIT START: Restricted donator level editing
+		if(NAMEOF(src, donator_level))
+			if(!usr?.client?.holder || get_player_admin_flags(usr.client) != R_EVERYTHING)
+				return FALSE
+		// BANDASTATION EDIT END: Restricted donator level editing
 	. = ..()
 
 /client/proc/rescale_view(change, min, max)
@@ -1038,7 +1044,12 @@ GLOBAL_LIST_INIT(unrecommended_builds, list(
 		return
 	var/atom/old_eye = eye
 	eye = new_eye
+
+	// Draws to the default map
+	eye_parallax = create_parallax("")
+	eye_parallax.set_perspective(eye)
 	SEND_SIGNAL(src, COMSIG_CLIENT_SET_EYE, old_eye, new_eye)
+
 /**
  * Updates the keybinds for special keys
  *
@@ -1102,6 +1113,29 @@ GLOBAL_LIST_INIT(unrecommended_builds, list(
 	generate_clickcatcher()
 	var/list/actualview = getviewsize(view)
 	void.UpdateGreed(actualview[1],actualview[2])
+
+/client/proc/apply_parallax()
+	if(length(parallax_instances))
+		screen |= parallax_instances
+
+/// Gets a parallax holder if one exists on the specified map
+/client/proc/get_parallax(map)
+	for(var/atom/movable/screen/parallax_home/instance as anything in parallax_instances)
+		if(instance.submap == map)
+			return instance
+
+/// Creates a new parallax holder if one does not already exist on the passed in map
+/client/proc/create_parallax(map)
+	var/atom/movable/screen/parallax_home/existing = get_parallax(map)
+	if(existing)
+		return existing
+	return new /atom/movable/screen/parallax_home(null, null, src, map)
+
+/// Deletes the parallax holder for the passed in map
+/client/proc/delete_parallax(map)
+	var/atom/movable/screen/parallax_home/existing = get_parallax(map)
+	if(existing)
+		qdel(existing)
 
 /client/proc/AnnouncePR(announcement)
 	if(get_chat_toggles(src) & CHAT_PULLR)

@@ -80,7 +80,8 @@
 	return ..()
 
 /datum/weather/rad_storm/end()
-	if(..())
+	. = ..()
+	if(!.)
 		return
 	priority_announce("Радиационная угроза миновала. Пожалуйста, вернитесь на свои рабочие места.", "Обнаружена аномалия")
 	status_alarm(FALSE)

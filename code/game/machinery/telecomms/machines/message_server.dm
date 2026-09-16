@@ -61,8 +61,8 @@
 	return ..()
 
 /obj/item/blackbox
-	name = "\proper the blackbox"
-	desc = "A strange relic, capable of recording data on extradimensional vertices. It lives inside the blackbox recorder for safe keeping."
+	name = "the blackbox"
+	desc = "Странная реликвия, способная записывать данные во внепространственных вершинах. Она хранится внутри чёрного ящика для сохранности."
 	icon = 'icons/obj/machines/telecomms.dmi'
 	icon_state = "blackcube"
 	inhand_icon_state = "blackcube"
