@@ -2,6 +2,8 @@
 	volume = 10
 	extra_range = -5
 
+/obj/machinery/power/supermatter_crystal/hugbox
+
 /obj/machinery/power/supermatter_crystal/hugbox/Initialize(mapload)
 	. = ..()
 	QDEL_NULL(soundloop)
