@@ -28,14 +28,17 @@
 /turf/open/floor/stone,
 /area/icemoon/underground/explored)
 "gE" = (
-/obj/item/sign/flag/nanotrasen,
+/obj/item/sign/flag/nanotrasen{
+	pixel_y = -2;
+	pixel_x = -1;
+	anchored = 1
+	},
 /obj/effect/turf_decal/weather/snow/corner{
 	dir = 5
 	},
 /obj/effect/turf_decal/weather/snow/corner{
 	dir = 9
 	},
-/obj/item/bouquet/rose,
 /obj/structure/statue/grave{
 	name = "Эдвард Клейм";
 	desc = "Могила в честь офицера Центрального Командования, который погиб за Кибериаду при Редспейс шторме...";
@@ -45,11 +48,6 @@
 	pixel_y = 7;
 	anchored = 1;
 	pixel_x = 9
-	},
-/obj/item/flashlight/flare/candle/infinite{
-	pixel_y = 7;
-	anchored = 1;
-	pixel_x = -10
 	},
 /turf/open/misc/dirt{
 	initial_gas_mix = "ICEMOON_ATMOS"
@@ -67,23 +65,21 @@
 	desc = "Могила в честь офицера Центрального Командования, который погиб за Кибериаду при Редспейс шторме...";
 	density = 0
 	},
-/obj/item/sign/flag/nanotrasen,
+/obj/item/sign/flag/nanotrasen{
+	pixel_y = -2;
+	pixel_x = -1;
+	anchored = 1
+	},
 /obj/effect/turf_decal/weather/snow/corner{
 	dir = 5
 	},
 /obj/effect/turf_decal/weather/snow/corner{
 	dir = 9
 	},
-/obj/item/bouquet/rose,
 /obj/item/flashlight/flare/candle/infinite{
 	pixel_y = 7;
 	anchored = 1;
 	pixel_x = 9
-	},
-/obj/item/flashlight/flare/candle/infinite{
-	pixel_y = 7;
-	anchored = 1;
-	pixel_x = -10
 	},
 /turf/open/misc/dirt{
 	initial_gas_mix = "ICEMOON_ATMOS"
@@ -166,13 +162,6 @@
 	name = "Безымянная могила";
 	density = 0
 	},
-/obj/item/clothing/head/costume/garland,
-/obj/item/flashlight/flare/candle/infinite{
-	anchored = 1;
-	light_range = 5;
-	pixel_y = 9;
-	pixel_x = 9
-	},
 /obj/effect/turf_decal/weather/snow/corner{
 	dir = 4
 	},
@@ -195,7 +184,6 @@
 	name = "Безымянная могила";
 	density = 0
 	},
-/obj/item/bouquet,
 /turf/open/misc/dirt{
 	initial_gas_mix = "ICEMOON_ATMOS"
 	},
@@ -222,7 +210,12 @@
 	name = "Безымянная могила";
 	density = 0
 	},
-/obj/item/clothing/head/costume/garland,
+/obj/item/flashlight/flare/candle/infinite{
+	anchored = 1;
+	light_range = 5;
+	pixel_y = 9;
+	pixel_x = -9
+	},
 /turf/open/misc/dirt{
 	initial_gas_mix = "ICEMOON_ATMOS"
 	},
@@ -310,17 +303,6 @@
 	},
 /turf/open/misc/asteroid/snow/icemoon,
 /area/icemoon/underground/explored)
-"xS" = (
-/obj/item/toy/snowball{
-	pixel_x = 6;
-	pixel_y = 5
-	},
-/obj/item/banner/command/mundane{
-	anchored = 1;
-	pixel_y = 17
-	},
-/turf/open/misc/asteroid/snow/icemoon,
-/area/icemoon/underground/explored)
 "AB" = (
 /obj/effect/turf_decal/weather/snow/corner{
 	dir = 6
@@ -334,22 +316,11 @@
 	density = 0
 	},
 /obj/item/clothing/head/costume/garland/poppy,
-/turf/open/misc/dirt{
-	initial_gas_mix = "ICEMOON_ATMOS"
-	},
-/area/icemoon/underground/explored)
-"AY" = (
-/obj/item/clothing/head/costume/garland/rainbowbunch,
-/obj/structure/statue/improvised_grave{
-	desc = "Безымянная могила, ничем не отличается от других.";
-	name = "Безымянная могила";
-	density = 0
-	},
-/obj/effect/turf_decal/weather/snow/corner{
-	dir = 8
-	},
-/obj/effect/turf_decal/weather/snow/corner{
-	dir = 4
+/obj/item/flashlight/flare/candle/infinite{
+	anchored = 1;
+	light_range = 5;
+	pixel_y = 9;
+	pixel_x = 9
 	},
 /turf/open/misc/dirt{
 	initial_gas_mix = "ICEMOON_ATMOS"
@@ -391,48 +362,22 @@
 	},
 /turf/open/floor/plating,
 /area/station/service/chapel)
-"Ex" = (
-/obj/effect/turf_decal/weather/snow/corner{
-	dir = 9
-	},
-/turf/open/floor/stone,
-/area/icemoon/underground/explored)
 "Fd" = (
 /obj/structure/statue/improvised_grave{
 	desc = "Могила, ничем не отличается от других.";
 	name = "Эллиот Ренаскор";
 	density = 0
 	},
-/obj/item/clothing/head/costume/garland/lily,
-/obj/item/book/bible,
+/obj/item/book/bible{
+	pixel_y = -6;
+	pixel_x = 7;
+	anchored = 1
+	},
 /obj/effect/turf_decal/weather/snow/corner{
 	dir = 9
 	},
 /obj/effect/turf_decal/weather/snow/corner{
 	dir = 5
-	},
-/turf/open/misc/dirt{
-	initial_gas_mix = "ICEMOON_ATMOS"
-	},
-/area/icemoon/underground/explored)
-"Ga" = (
-/obj/item/clothing/head/costume/garland/lily,
-/obj/structure/statue/improvised_grave{
-	desc = "Безымянная могила, ничем не отличается от других.";
-	name = "Безымянная могила";
-	density = 0
-	},
-/obj/item/flashlight/flare/candle/infinite{
-	anchored = 1;
-	light_range = 5;
-	pixel_y = 9;
-	pixel_x = 9
-	},
-/obj/effect/turf_decal/weather/snow/corner{
-	dir = 4
-	},
-/obj/effect/turf_decal/weather/snow/corner{
-	dir = 8
 	},
 /turf/open/misc/dirt{
 	initial_gas_mix = "ICEMOON_ATMOS"
@@ -462,18 +407,16 @@
 	desc = "Могила в честь офицера Центрального Командования, который погиб за Кибериаду при Редспейс шторме...";
 	density = 0
 	},
-/obj/item/sign/flag/nanotrasen,
+/obj/item/sign/flag/nanotrasen{
+	pixel_y = -2;
+	pixel_x = -1;
+	anchored = 1
+	},
 /obj/effect/turf_decal/weather/snow/corner{
 	dir = 5
 	},
 /obj/effect/turf_decal/weather/snow/corner{
 	dir = 9
-	},
-/obj/item/bouquet/rose,
-/obj/item/flashlight/flare/candle/infinite{
-	pixel_y = 7;
-	anchored = 1;
-	pixel_x = 9
 	},
 /obj/item/flashlight/flare/candle/infinite{
 	pixel_y = 7;
@@ -516,41 +459,22 @@
 	},
 /turf/open/misc/asteroid/snow/icemoon,
 /area/icemoon/underground/explored)
-"Jn" = (
-/obj/item/clothing/head/costume/garland/sunflower,
-/obj/structure/statue/improvised_grave{
-	desc = "Безымянная могила, ничем не отличается от других.";
-	name = "Безымянная могила";
-	density = 0
-	},
-/obj/effect/turf_decal/weather/snow/corner{
-	dir = 4
-	},
-/obj/effect/turf_decal/weather/snow/corner{
-	dir = 8
-	},
-/turf/open/misc/dirt{
-	initial_gas_mix = "ICEMOON_ATMOS"
-	},
-/area/icemoon/underground/explored)
 "Kf" = (
 /obj/structure/statue/grave{
 	name = "Остин Миллер";
 	desc = "Могила в честь офицера Центрального Командования, который погиб за Кибериаду при Редспейс шторме...";
 	density = 0
 	},
-/obj/item/sign/flag/nanotrasen,
+/obj/item/sign/flag/nanotrasen{
+	pixel_y = -2;
+	pixel_x = -1;
+	anchored = 1
+	},
 /obj/effect/turf_decal/weather/snow/corner{
 	dir = 5
 	},
 /obj/effect/turf_decal/weather/snow/corner{
 	dir = 9
-	},
-/obj/item/bouquet/rose,
-/obj/item/flashlight/flare/candle/infinite{
-	pixel_y = 7;
-	anchored = 1;
-	pixel_x = 9
 	},
 /obj/item/flashlight/flare/candle/infinite{
 	pixel_y = 7;
@@ -560,6 +484,18 @@
 /turf/open/misc/dirt{
 	initial_gas_mix = "ICEMOON_ATMOS"
 	},
+/area/icemoon/underground/explored)
+"Kr" = (
+/obj/structure/fence/door{
+	dir = 8
+	},
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 9
+	},
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 10
+	},
+/turf/open/floor/stone,
 /area/icemoon/underground/explored)
 "LA" = (
 /obj/item/banner/command/mundane{
@@ -653,7 +589,6 @@
 	},
 /area/icemoon/underground/explored)
 "Pz" = (
-/obj/item/bouquet/sunflower,
 /obj/structure/statue/improvised_grave{
 	desc = "Безымянная могила, ничем не отличается от других.";
 	name = "Безымянная могила";
@@ -694,25 +629,43 @@
 	},
 /turf/open/misc/asteroid/snow/icemoon,
 /area/icemoon/underground/explored)
-"Qu" = (
-/obj/item/clothing/head/costume/garland/poppy,
-/obj/structure/statue/improvised_grave{
-	desc = "Безымянная могила, ничем не отличается от других.";
-	name = "Безымянная могила";
-	density = 0
-	},
-/obj/effect/turf_decal/weather/snow/corner{
-	dir = 8
-	},
-/obj/effect/turf_decal/weather/snow/corner{
-	dir = 4
-	},
-/turf/open/misc/dirt{
-	initial_gas_mix = "ICEMOON_ATMOS"
-	},
-/area/icemoon/underground/explored)
 "QC" = (
-/obj/structure/closet/emcloset,
+/obj/structure/table/wood,
+/obj/item/clothing/head/costume/garland/sunflower,
+/obj/item/clothing/head/costume/garland/sunflower,
+/obj/item/clothing/head/costume/garland/sunflower,
+/obj/item/clothing/head/costume/garland/poppy{
+	pixel_y = 3;
+	pixel_x = -5
+	},
+/obj/item/clothing/head/costume/garland/poppy{
+	pixel_y = 3;
+	pixel_x = -5
+	},
+/obj/item/clothing/head/costume/garland/poppy{
+	pixel_y = 3;
+	pixel_x = -5
+	},
+/obj/item/clothing/head/costume/garland/poppy{
+	pixel_y = 3;
+	pixel_x = -5
+	},
+/obj/item/clothing/head/costume/garland/lily{
+	pixel_y = 13;
+	pixel_x = 4
+	},
+/obj/item/clothing/head/costume/garland/lily{
+	pixel_y = 13;
+	pixel_x = 4
+	},
+/obj/item/clothing/head/costume/garland/lily{
+	pixel_y = 13;
+	pixel_x = 4
+	},
+/obj/item/clothing/head/costume/garland/lily{
+	pixel_y = 13;
+	pixel_x = 4
+	},
 /turf/open/floor/plating,
 /area/station/service/chapel)
 "Rr" = (
@@ -728,29 +681,6 @@
 	density = 0
 	},
 /obj/item/clothing/head/costume/garland/rainbowbunch,
-/turf/open/misc/dirt{
-	initial_gas_mix = "ICEMOON_ATMOS"
-	},
-/area/icemoon/underground/explored)
-"SE" = (
-/obj/item/clothing/head/costume/garland/sunflower,
-/obj/structure/statue/improvised_grave{
-	desc = "Безымянная могила, ничем не отличается от других.";
-	name = "Безымянная могила";
-	density = 0
-	},
-/obj/item/flashlight/flare/candle/infinite{
-	anchored = 1;
-	light_range = 5;
-	pixel_y = 9;
-	pixel_x = -9
-	},
-/obj/effect/turf_decal/weather/snow/corner{
-	dir = 8
-	},
-/obj/effect/turf_decal/weather/snow/corner{
-	dir = 4
-	},
 /turf/open/misc/dirt{
 	initial_gas_mix = "ICEMOON_ATMOS"
 	},
@@ -782,7 +712,7 @@ vv
 (2,1,1) = {"
 nH
 hA
-Bm
+Kr
 hA
 hA
 Bm
@@ -796,7 +726,7 @@ vv
 (3,1,1) = {"
 gO
 Qe
-Ex
+No
 bo
 bo
 bo
@@ -812,9 +742,9 @@ gO
 IE
 Hq
 xp
-AY
-SE
-AY
+Pz
+Pz
+Pz
 Nr
 rx
 fw
@@ -823,7 +753,7 @@ UV
 "}
 (5,1,1) = {"
 rg
-xS
+LA
 No
 bo
 bo
@@ -841,7 +771,7 @@ Kf
 Hq
 IJ
 lz
-wm
+Pz
 nE
 Pz
 Rr
@@ -869,8 +799,8 @@ gE
 Hq
 Fd
 Pu
-Qu
-AY
+Pz
+Pz
 wm
 qP
 No
@@ -897,8 +827,8 @@ gX
 Hq
 Mn
 PP
-Ga
-Jn
+oF
+oF
 oF
 AB
 MK
