@@ -180,14 +180,18 @@
 /obj/structure/blood_barrier/Initialize(mapload)
 	. = ..()
 	START_PROCESSING(SSobj, src)
+
 /obj/structure/blood_barrier/Destroy()
 	STOP_PROCESSING(SSobj, src)
 	return ..()
-/obj/structure/blood_barrier/process()
-	take_damage(20, sound_effect = FALSE)
+
+/obj/structure/blood_barrier/process(seconds_per_tick)
+	take_damage(10 * seconds_per_tick, sound_effect = FALSE)
+
 /obj/structure/blood_barrier/atom_destruction(damage_flag)
 	new /obj/effect/decal/cleanable/blood(loc)
 	return ..()
+
 /obj/structure/blood_barrier/CanPass(atom/movable/mover, border_dir)
 	..()
 	if(!isliving(mover))
@@ -334,7 +338,7 @@
 	STOP_PROCESSING(SSobj, src)
 	return ..()
 
-/datum/vampire_passive/blood_spill/process()
+/datum/vampire_passive/blood_spill/process(seconds_per_tick)
 	if(!owner)
 		return
 	var/datum/antagonist/vampire/vampire = owner.mind?.has_antag_datum(/datum/antagonist/vampire)
@@ -344,17 +348,17 @@
 	for(var/mob/living/carbon/human/target in view(7, owner))
 		if(!target.get_blood_volume() || !target.affects_vampire(owner) || target.stat)
 			continue
-		var/drain_amount = rand(5, 10)
+		var/drain_amount = rand(5, 10) * seconds_per_tick / 2
 		target.bleed(drain_amount)
-		target.Beam(owner, icon_state = "drainbeam", time = 2 SECONDS)
-		target.adjust_brute_loss(2)
-		owner.heal_overall_damage(8, 2, TRUE)
-		owner.adjust_stamina_loss(-15)
-		owner.AdjustStun(-2 SECONDS)
-		owner.AdjustKnockdown(-2 SECONDS)
-		owner.AdjustImmobilized(-2 SECONDS)
+		target.Beam(owner, icon_state = "drainbeam", time = seconds_per_tick SECONDS)
+		target.adjust_brute_loss(seconds_per_tick)
+		owner.heal_overall_damage(4 * seconds_per_tick, seconds_per_tick, TRUE)
+		owner.adjust_stamina_loss(-7.5 * seconds_per_tick)
+		owner.AdjustStun(-seconds_per_tick SECONDS)
+		owner.AdjustKnockdown(-seconds_per_tick SECONDS)
+		owner.AdjustImmobilized(-seconds_per_tick SECONDS)
 		if(++beam_number >= max_beams)
 			break
-	vampire.subtract_usable_blood(10)
+	vampire.subtract_usable_blood(5 * seconds_per_tick)
 	if(!vampire.bloodusable || owner.stat == DEAD)
 		vampire.remove_ability(src)

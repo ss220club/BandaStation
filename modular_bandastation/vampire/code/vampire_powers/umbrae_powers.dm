@@ -92,13 +92,13 @@
 		return
 	qdel(src)
 
-/obj/item/restraints/legcuffs/beartrap/vampire_shadow_snare/process()
+/obj/item/restraints/legcuffs/beartrap/vampire_shadow_snare/process(seconds_per_tick)
 	var/turf/snare_turf = get_turf(src)
 	if(!snare_turf)
 		qdel(src)
 		return
 	if(snare_turf.get_lumcount() * 10 > 2)
-		remaining_integrity -= 50
+		remaining_integrity -= 25 * seconds_per_tick
 	if(remaining_integrity <= 0)
 		visible_message(span_notice("[src.declent_ru(NOMINATIVE)] увядает."))
 		qdel(src)
@@ -292,8 +292,10 @@
 /datum/action/cooldown/spell/pointed/vampire_shadow_boxing/New(Target)
 	. = ..()
 	add_vampire_ability(50)
+
 /datum/action/cooldown/spell/pointed/vampire_shadow_boxing/is_valid_target(atom/cast_on)
 	return ..() && isliving(cast_on)
+
 /datum/action/cooldown/spell/pointed/vampire_shadow_boxing/cast(mob/living/target)
 	. = ..()
 	if(target.affects_vampire(owner))
@@ -333,17 +335,17 @@
 	STOP_PROCESSING(SSfastprocess, src)
 	return ..()
 
-/datum/vampire_passive/eternal_darkness/process()
+/datum/vampire_passive/eternal_darkness/process(seconds_per_tick)
 	if(!owner)
 		return
 	var/datum/antagonist/vampire/vampire = owner.mind?.has_antag_datum(/datum/antagonist/vampire)
 	for(var/mob/living/target in view(8, owner))
 		if(target.affects_vampire(owner))
-			target.adjust_bodytemperature(-3 * TEMPERATURE_DAMAGE_COEFFICIENT)
+			target.adjust_bodytemperature(-15 * TEMPERATURE_DAMAGE_COEFFICIENT * seconds_per_tick)
 	for(var/obj/projectile/projectile in view(8, owner))
 		if(projectile.armor_flag == ENERGY || projectile.armor_flag == LASER)
-			projectile.damage *= 0.7
-	vampire.subtract_usable_blood(0.25)
+			projectile.damage *= 0.7 ** (seconds_per_tick / 0.2)
+	vampire.subtract_usable_blood(1.25 * seconds_per_tick)
 	if(!vampire.bloodusable || owner.stat == DEAD)
 		vampire.remove_ability(src)
 
