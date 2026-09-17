@@ -1,4 +1,3 @@
-// Copied from traitor
 /datum/dynamic_ruleset/roundstart/vampire
 	name = "Vampires"
 	config_tag = "Roundstart Vampire"
