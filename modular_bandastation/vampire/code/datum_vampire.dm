@@ -151,7 +151,7 @@
 		return
 	if(ishuman(vampire_mob))
 		var/mob/living/carbon/human/human_target = vampire_mob
-		human_target.set_hunger_icon('modular_bandastation/vampire/icons/screen_hunger_vampire.dmi')
+		update_food_icon(human_target, 'modular_bandastation/vampire/icons/screen_hunger_vampire.dmi')
 		human_target.AddComponent(/datum/component/vampire_biter)
 		human_target.AddComponent(/datum/component/vampire_holywater)
 
@@ -175,7 +175,7 @@
 
 	if(ishuman(vampire_mob))
 		var/mob/living/carbon/human/human_target = vampire_mob
-		human_target.reset_hunger_icon()
+		reset_food_icon(human_target)
 		var/datum/component/vampire_biter/vampire_biter = human_target.GetComponent(/datum/component/vampire_biter)
 		QDEL_NULL(vampire_biter)
 		var/datum/component/vampire_holywater/vampire_holywater = human_target.GetComponent(/datum/component/vampire_holywater)
@@ -345,6 +345,20 @@
 	SIGNAL_HANDLER
 	if(vampire_mob == owner?.current)
 		update_blood_hud()
+		if(ishuman(vampire_mob))
+			update_food_icon(vampire_mob, 'modular_bandastation/vampire/icons/screen_hunger_vampire.dmi')
+
+/datum/antagonist/vampire/proc/update_food_icon(mob/living/vampire_mob, icon_file)
+	var/atom/movable/screen/hunger/hunger_bar = vampire_mob.hud_used?.screen_objects[HUD_MOB_HUNGER]
+	if(!hunger_bar)
+		return
+	hunger_bar.set_food_icon(icon_file)
+
+/datum/antagonist/vampire/proc/reset_food_icon(mob/living/vampire_mob)
+	var/atom/movable/screen/hunger/hunger_bar = vampire_mob.hud_used?.screen_objects[HUD_MOB_HUNGER]
+	if(!hunger_bar)
+		return
+	hunger_bar.reset_food_icon()
 
 /datum/antagonist/vampire/proc/handle_vampire_cloak(mob/living/vampire_mob)
 	if(!ishuman(vampire_mob))
