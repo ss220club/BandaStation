@@ -87,7 +87,7 @@
 			to_chat(owner, span_warning("Ваша связь с хозяином угасла."))
 		return
 	var/list/recipients = list(master.owner.current)
-	for(var/datum/antagonist/vampire_thrall/network_thrall as anything in master.network_thrall)
+	for(var/datum/antagonist/vampire_thrall/network_thrall as anything in master.get_thralls())
 		if(network_thrall.owner?.current)
 			recipients += network_thrall.owner.current
 	for(var/mob/living/recipient as anything in recipients)
