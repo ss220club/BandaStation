@@ -27,7 +27,7 @@
 		if(metabolized + seconds_per_tick * 1 SECONDS * metabolization_ratio >= 1 MINUTES)
 			affected_mob.mind.remove_antag_datum(/datum/antagonist/vampire_thrall)
 			chem.holder?.remove_reagent(chem.type, chem.volume)
-			affected_mob.visible_message(span_userdanger("[affected_mob] отшатывается; краски возвращаются на [affected_mob.p_their()] кожу, а вместе с ними — контроль над собой!"))
+			affected_mob.visible_message(span_userdanger("[affected_mob.declent_ru(NOMINATIVE)] отшатывается; краски возвращаются на [affected_mob.ru_p_them()] кожу, а вместе с ними — контроль над собой!"))
 			return COMSIG_MOB_STOP_REAGENT_TICK
 
 	var/datum/antagonist/vampire/vampire = affected_mob.mind?.has_antag_datum(/datum/antagonist/vampire)
