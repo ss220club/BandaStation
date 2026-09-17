@@ -15,14 +15,15 @@
 
 	backpack = /obj/item/storage/backpack/blueshield
 	backpack_contents = list(
-		/obj/item/storage/box/deathimp
+		/obj/item/storage/box/deathimp,
+		/obj/item/modular_computer/pda/heads/blueshield
 	)
 	satchel = /obj/item/storage/backpack/satchel/blueshield
 	duffelbag = /obj/item/storage/backpack/duffelbag/blueshield
 
 	head = /obj/item/clothing/head/beret/blueshield
 	box = /obj/item/storage/box/survival/security
-	belt = /obj/item/modular_computer/pda/heads/blueshield
+	belt = /obj/item/melee/baton/security/electrostaff/loaded
 
 /datum/outfit/plasmaman/blueshield
 	name = "Blueshield Plasmaman"
