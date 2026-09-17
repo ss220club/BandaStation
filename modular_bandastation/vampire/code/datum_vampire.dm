@@ -226,9 +226,9 @@
 
 	log_combat(caster, target_human, "bitten & drained of blood (vampire)")
 	caster.visible_message(
-		span_danger("[caster] грубо хватает [target_human] за шею и вонзает [caster.p_their()] клыки!"),
-		span_danger("Вы вонзаете клыки в [target_human] и начинаете высасывать [target_human.p_their()] кровь."),
-		span_notice("Вы слышите тихий прокол и влажный чавкающий звук."),
+		span_danger("[caster.declent_ru(NOMINATIVE)] грубо хватает [target_human.declent_ru(ACCUSATIVE)] за шею и вонзает свои клыки!"),
+		span_danger("Вы вонзаете клыки в [target_human.declent_ru(ACCUSATIVE)] и начинаете высасывать [target_human.ru_p_them()] кровь."),
+		span_notice("Вы слышите влажный чавкающий звук."),
 	)
 
 	while(do_after(caster, suck_rate, target_human, cog_icon = null))
@@ -252,7 +252,7 @@
 			if(target_human.blood_volume <= BLOOD_VOLUME_BAD && blood_volume_warning > BLOOD_VOLUME_BAD)
 				to_chat(caster, span_danger("Объём крови вашей жертвы опасно низок."))
 			else if(target_human.blood_volume <= BLOOD_VOLUME_OKAY && blood_volume_warning > BLOOD_VOLUME_OKAY)
-				to_chat(caster, span_warning("У вашей жертвы небезопасно мало крови."))
+				to_chat(caster, span_warning("У вашей жертвы слишком мало крови!"))
 			blood_volume_warning = target_human.blood_volume
 		else
 			to_chat(caster, span_warning("Вы обескровили свою жертву!"))
@@ -558,6 +558,6 @@
 /datum/antagonist/vampire/greet()
 	. = ..()
 	to_chat(owner.current, span_danger("Вы — вампир!"))
-	to_chat(owner.current, span_notice("Чтобы укусить кого-то, выберите голову, включите намерение навредить и используйте пустую руку. Пейте кровь, чтобы получить новые силы. \
+	to_chat(owner.current, span_notice("Чтобы укусить кого-то, выберите голову, включите боевой режим и используйте пустую руку. Пейте кровь, чтобы получить новые силы. \
 		Вы слабы перед святыми предметами, светом звёзд и огнём. Не выходите в космос и избегайте капеллана, часовни и особенно святой воды."))
 	owner.announce_objectives()

@@ -27,7 +27,7 @@
 		return
 
 	var/datum/objective/obey_master = new
-	obey_master.explanation_text = "Подчиняйтесь приказам [master.owner.current] и защищайте [master.owner.current.p_them()]."
+	obey_master.explanation_text = "Подчиняйтесь приказам [master.owner.current] и защищайте [master.owner.current.ru_p_them()]."
 	obey_master.completed = TRUE
 	objectives = list(obey_master)
 	master.add_thrall(src)

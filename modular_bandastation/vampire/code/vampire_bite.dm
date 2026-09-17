@@ -24,7 +24,7 @@
 	if(!source.can_unarmed_attack())
 		return COMPONENT_CANCEL_ATTACK_CHAIN
 	if(source.is_mouth_covered())
-		to_chat(source, span_warning("Ваша маска или намордник не позволяют укусить [target]!"))
+		to_chat(source, span_warning("Ваша маска или намордник не позволяют укусить [target.declent_ru(ACCUSATIVE)]!"))
 		return COMPONENT_CANCEL_ATTACK_CHAIN
 
 	var/mob/living/carbon/human/victim = target

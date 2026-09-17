@@ -24,7 +24,7 @@
 /datum/vampire_passive/New()
 	..()
 	if(!gain_desc)
-		gain_desc = "Теперь вы можете использовать [src]."
+		gain_desc = "Теперь вы можете использовать [src.declent_ru(INSTRUMENTAL)]."
 
 /datum/vampire_passive/Destroy(force, ...)
 	owner = null
@@ -398,7 +398,7 @@
 	if(!tool.tool_use_check(user, 30))
 		return ITEM_INTERACT_BLOCKING
 	igniting = TRUE
-	to_chat(user, span_notice("Вы пытаетесь поджечь [src] с помощью [tool]."))
+	to_chat(user, span_notice("Вы пытаетесь поджечь [src.declent_ru(ACCUSATIVE)] с помощью [tool.declent_ru(INSTRUMENTAL)]."))
 	to_chat(vampire, span_warning("На ваше логово напали!"))
 	if(tool.use_tool(src, user, 15 SECONDS, amount = 30))
 		fire_act(tool.get_temperature())
@@ -433,7 +433,7 @@
 
 /obj/structure/closet/crate/coffin/vampire/burn()
 	playsound(src, 'sound/effects/hallucinations/wail.ogg', 20, extrarange = 5)
-	visible_message(span_danger("Огонь вырывается из [src], когда он разрушается!"))
+	visible_message(span_danger("Огонь вырывается из [src.declent_ru(GENITIVE)], когда он разрушается!"))
 	var/turf/coffin_turf = get_turf(src)
 	for(var/turf/turf in range(1, src))
 		if(turf == coffin_turf)

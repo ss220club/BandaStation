@@ -31,7 +31,7 @@
 /datum/action/cooldown/spell/pointed/vampire_enthrall/cast(mob/living/carbon/human/target)
 	. = ..()
 	var/mob/living/user = owner
-	user.visible_message(span_warning("[user] кусает [target] за шею!"), span_warning("Вы кусаете [target] за шею и начинаете передавать силу."))
+	user.visible_message(span_warning("[user.declent_ru(NOMINATIVE)] кусает [target.declent_ru(ACCUSATIVE)] за шею!"), span_warning("Вы кусаете [target.declent_ru(ACCUSATIVE)] за шею и начинаете передавать силу."))
 	to_chat(target, span_warning("Вы чувствуете, как щупальца зла проникают в ваш разум."))
 	if(!do_after(user, 15 SECONDS, target = target))
 		to_chat(user, span_warning("Вы или ваша цель сдвинулись."))
@@ -45,21 +45,21 @@
 	var/datum/antagonist/vampire_thrall/thrall = new(vampire)
 	if(!target.mind.add_antag_datum(thrall))
 		qdel(thrall)
-		to_chat(user, span_warning("Разум [target] ускользает из вашей хватки."))
+		to_chat(user, span_warning("Разум [target.declent_ru(ACCUSATIVE)] ускользает из вашей хватки."))
 		return
 	target.Stun(4 SECONDS)
 	log_combat(user, target, "vampire enthralled")
 
 /datum/action/cooldown/spell/pointed/vampire_enthrall/proc/can_enthrall(mob/living/user, mob/living/carbon/human/target)
 	if(!target.mind)
-		to_chat(user, span_warning("Разум [target] недоступен для подчинения."))
+		to_chat(user, span_warning("Разум [target.declent_ru(ACCUSATIVE)] недоступен для подчинения."))
 		return FALSE
 	var/datum/antagonist/vampire/vampire = user.mind.has_antag_datum(/datum/antagonist/vampire)
 	if(vampire.subclass.thrall_cap <= length(vampire.get_thralls()))
 		to_chat(user, span_warning("У вас недостаточно сил, чтобы подчинить кого-то ещё."))
 		return FALSE
 	if(HAS_TRAIT(target, TRAIT_MINDSHIELD) || target.mind.has_antag_datum(/datum/antagonist/vampire) || target.mind.has_antag_datum(/datum/antagonist/vampire_thrall) || HAS_MIND_TRAIT(target, TRAIT_HOLY))
-		target.visible_message(span_warning("[target], похоже, сопротивляется подчинению!"), span_notice("Вы чувствуете знакомое ощущение в черепе, быстро исчезающее без следа."))
+		target.visible_message(span_warning("[capitalize(target.declent_ru(NOMINATIVE))], похоже, сопротивляется подчинению!"), span_notice("Вы чувствуете знакомое ощущение в голове, быстро исчезающее без следа."))
 		return FALSE
 	return TRUE
 
@@ -156,7 +156,7 @@
 /datum/action/cooldown/spell/pointed/vampire_switch_places
 	name = "Подпространственный обмен"
 	desc = "Поменяйтесь местами с целью."
-	gain_desc = "Вы обрели способность меняться местами с выбранным мобом."
+	gain_desc = "Вы обрели способность меняться местами с выбранным существом."
 	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "subspace_swap"
 	cooldown_time = 30 SECONDS
