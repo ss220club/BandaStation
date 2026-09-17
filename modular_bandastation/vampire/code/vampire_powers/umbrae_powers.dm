@@ -340,12 +340,16 @@
 	if(!owner)
 		return
 	var/datum/antagonist/vampire/vampire = owner.mind?.has_antag_datum(/datum/antagonist/vampire)
-	for(var/mob/living/target in view(8, owner))
-		if(target.affects_vampire(owner))
-			target.adjust_bodytemperature(-15 * TEMPERATURE_DAMAGE_COEFFICIENT * seconds_per_tick)
-	for(var/obj/projectile/projectile in view(8, owner))
-		if(projectile.armor_flag == ENERGY || projectile.armor_flag == LASER)
-			projectile.damage *= 0.7 ** (seconds_per_tick / 0.2)
+	for(var/atom/target as anything in view(8, owner))
+		if(isliving(target))
+			var/mob/living/living_target = target
+			if(living_target.affects_vampire(owner))
+				living_target.adjust_bodytemperature(-15 * TEMPERATURE_DAMAGE_COEFFICIENT * seconds_per_tick)
+		else if(isprojectile(target))
+			var/obj/projectile/projectile = target
+			if(projectile.armor_flag == ENERGY || projectile.armor_flag == LASER)
+				projectile.damage *= 0.7 ** (seconds_per_tick / 0.2)
+
 	vampire.subtract_usable_blood(1.25 * seconds_per_tick)
 	if(!vampire.bloodusable || owner.stat == DEAD)
 		vampire.remove_ability(src)
