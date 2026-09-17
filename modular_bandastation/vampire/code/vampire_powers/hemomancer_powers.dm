@@ -320,7 +320,7 @@
 
 /datum/action/cooldown/spell/vampire_blood_spill/cast(atom/cast_on)
 	. = ..()
-	var/datum/antagonist/vampire/vampire = owner.mind.has_antag_datum(/datum/antagonist/vampire)
+	var/datum/antagonist/vampire/vampire = get_vampire()
 	var/datum/vampire_passive/blood_spill/rite = vampire.get_ability(/datum/vampire_passive/blood_spill)
 	if(rite)
 		vampire.remove_ability(rite)

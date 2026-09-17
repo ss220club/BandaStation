@@ -114,6 +114,7 @@
 	if(istype(power, /datum/action/cooldown/spell))
 		var/datum/action/cooldown/spell/spell = power
 		spell.Grant(owner.current)
+		spell.GetComponent(/datum/component/vampire_ability)?.set_vampire(src)
 	else if(istype(power, /datum/vampire_passive))
 		var/datum/vampire_passive/passive = power
 		passive.owner = owner.current

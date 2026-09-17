@@ -38,7 +38,7 @@
 		return
 	if(QDELETED(user) || QDELETED(target) || !can_enthrall(user, target))
 		return
-	var/datum/antagonist/vampire/vampire = user.mind?.has_antag_datum(/datum/antagonist/vampire)
+	var/datum/antagonist/vampire/vampire = get_vampire()
 	if(!vampire)
 		return
 	SEND_SIGNAL(src, COMSIG_VAMPIRE_ABILITY_DEDUCT_BLOOD)
@@ -54,7 +54,7 @@
 	if(!target.mind)
 		to_chat(user, span_warning("Разум [target] недоступен для подчинения."))
 		return FALSE
-	var/datum/antagonist/vampire/vampire = user.mind.has_antag_datum(/datum/antagonist/vampire)
+	var/datum/antagonist/vampire/vampire = get_vampire()
 	if(vampire.subclass.thrall_cap <= length(vampire.get_thralls()))
 		to_chat(user, span_warning("У вас недостаточно сил, чтобы подчинить кого-то ещё."))
 		return FALSE
@@ -81,7 +81,7 @@
 /datum/action/cooldown/spell/vampire_commune/cast(atom/cast_on)
 	. = ..()
 	var/mob/living/user = owner
-	var/datum/antagonist/vampire/vampire = user.mind?.has_antag_datum(/datum/antagonist/vampire)
+	var/datum/antagonist/vampire/vampire = get_vampire()
 	var/datum/antagonist/vampire_thrall/speaker_thrall = user.mind?.has_antag_datum(/datum/antagonist/vampire_thrall)
 	if(!vampire)
 		vampire = speaker_thrall?.get_master()
@@ -220,7 +220,7 @@
 
 /datum/action/cooldown/spell/aoe/vampire_rally_thralls/get_things_to_cast_on(atom/center)
 	. = list()
-	var/datum/antagonist/vampire/vampire = owner.mind?.has_antag_datum(/datum/antagonist/vampire)
+	var/datum/antagonist/vampire/vampire = get_vampire()
 	for(var/datum/antagonist/vampire_thrall/thrall as anything in vampire?.get_thralls())
 		if(thrall.owner?.current && get_dist(center, thrall.owner.current) <= aoe_radius)
 			. += thrall.owner.current
@@ -253,7 +253,7 @@
 	if(net)
 		qdel(net)
 	else
-		user.apply_status_effect(/datum/status_effect/vampire_thrall_net, user.mind.has_antag_datum(/datum/antagonist/vampire))
+		user.apply_status_effect(/datum/status_effect/vampire_thrall_net, get_vampire())
 
 /datum/action/cooldown/spell/aoe/vampire_hysteria
 	name = "Массовая истерия"

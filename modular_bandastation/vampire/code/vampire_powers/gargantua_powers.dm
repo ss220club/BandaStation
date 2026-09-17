@@ -125,7 +125,7 @@
 	var/obj/machinery/door/door = bumped
 	if(!door.density || door.operating || door.locked || door.allowed(owner))
 		return
-	var/datum/antagonist/vampire/vampire = owner?.mind?.has_antag_datum(/datum/antagonist/vampire)
+	var/datum/antagonist/vampire/vampire = get_vampire()
 	if(!vampire?.bloodusable)
 		return
 	vampire.subtract_usable_blood(5)

@@ -13,7 +13,7 @@
 /datum/action/cooldown/spell/vampire_cloak/cast(atom/cast_on)
 	. = ..()
 	var/mob/living/carbon/human/user = owner
-	var/datum/antagonist/vampire/vampire = user.mind.has_antag_datum(/datum/antagonist/vampire)
+	var/datum/antagonist/vampire/vampire = get_vampire()
 	if(istype(user))
 		if(!vampire.iscloaking)
 			vampire.iscloaking = TRUE
@@ -31,7 +31,7 @@
 	return ..()
 
 /datum/action/cooldown/spell/vampire_cloak/proc/disable_cloak(mob/living/carbon/human/user)
-	var/datum/antagonist/vampire/vampire = user.mind?.has_antag_datum(/datum/antagonist/vampire)
+	var/datum/antagonist/vampire/vampire = get_vampire()
 	if(!vampire?.iscloaking)
 		return
 	vampire.iscloaking = FALSE
@@ -41,7 +41,7 @@
 /datum/action/cooldown/spell/vampire_cloak/proc/update_vampire_cloak(datum/source)
 	SIGNAL_HANDLER
 	var/mob/living/user = owner
-	var/datum/antagonist/vampire/vampire = user.mind?.has_antag_datum(/datum/antagonist/vampire)
+	var/datum/antagonist/vampire/vampire = get_vampire()
 	vampire?.handle_vampire_cloak(user)
 
 /datum/action/cooldown/spell/pointed/vampire_shadow_snare
@@ -315,7 +315,7 @@
 
 /datum/action/cooldown/spell/vampire_eternal_darkness/cast(atom/cast_on)
 	. = ..()
-	var/datum/antagonist/vampire/vampire = owner.mind.has_antag_datum(/datum/antagonist/vampire)
+	var/datum/antagonist/vampire/vampire = get_vampire()
 	var/datum/vampire_passive/eternal_darkness/darkness = vampire.get_ability(/datum/vampire_passive/eternal_darkness)
 	if(darkness)
 		vampire.remove_ability(darkness)

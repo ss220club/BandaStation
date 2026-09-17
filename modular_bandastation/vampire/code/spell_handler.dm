@@ -2,6 +2,8 @@
 /datum/component/vampire_ability
 	var/required_blood
 	var/deduct_blood_on_cast
+	/// The vampire that granted this action.
+	var/datum/weakref/vampire_ref
 
 /datum/component/vampire_ability/Initialize(required_blood = 0, deduct_blood_on_cast = TRUE)
 	if(!istype(parent, /datum/action/cooldown/spell))
@@ -15,15 +17,18 @@
 	RegisterSignal(parent, COMSIG_SPELL_AFTER_CAST, PROC_REF(after_cast))
 	RegisterSignal(parent, COMSIG_VAMPIRE_ABILITY_DEDUCT_BLOOD, PROC_REF(deduct_blood))
 
-/datum/component/vampire_ability/proc/get_vampire(datum/action/cooldown/spell/spell)
-	return spell.owner?.mind?.has_antag_datum(/datum/antagonist/vampire)
+/datum/component/vampire_ability/proc/set_vampire(datum/antagonist/vampire/vampire)
+	vampire_ref = WEAKREF(vampire)
+
+/datum/component/vampire_ability/proc/get_vampire()
+	return vampire_ref?.resolve()
 
 /datum/component/vampire_ability/proc/calculate_blood_cost(datum/antagonist/vampire/vampire)
 	return round(required_blood * (1 + vampire.nullified / 100))
 
 /datum/component/vampire_ability/proc/can_cast(datum/action/cooldown/spell/spell, feedback)
 	SIGNAL_HANDLER
-	var/datum/antagonist/vampire/vampire = get_vampire(spell)
+	var/datum/antagonist/vampire/vampire = get_vampire()
 	if(!vampire)
 		return SPELL_CANCEL_CAST
 	if(spell.owner.stat >= DEAD)
@@ -55,14 +60,14 @@
 	SIGNAL_HANDLER
 	if(!required_blood)
 		return
-	var/datum/antagonist/vampire/vampire = get_vampire(spell)
+	var/datum/antagonist/vampire/vampire = get_vampire()
 	vampire?.subtract_usable_blood(calculate_blood_cost(vampire))
 
 /datum/component/vampire_ability/proc/after_cast(datum/action/cooldown/spell/spell, atom/cast_on)
 	SIGNAL_HANDLER
 	if(!required_blood)
 		return
-	var/datum/antagonist/vampire/vampire = get_vampire(spell)
+	var/datum/antagonist/vampire/vampire = get_vampire()
 	if(!vampire)
 		return
 	to_chat(spell.owner, span_boldnotice("У вас осталось [vampire.bloodusable] единиц доступной крови."))
@@ -76,3 +81,6 @@
 	overlay_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	overlay_icon_state = "bg_vampire_border"
 	AddComponent(/datum/component/vampire_ability, required_blood, deduct_blood_on_cast)
+
+/datum/action/cooldown/spell/proc/get_vampire() as /datum/antagonist/vampire
+	return GetComponent(/datum/component/vampire_ability)?.get_vampire()

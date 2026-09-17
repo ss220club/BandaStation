@@ -60,7 +60,7 @@
 	user.set_resting(FALSE, instant = TRUE)
 
 	to_chat(user, span_notice("Вы наполняете тело чистой кровью и снимаете все обездвиживающие эффекты."))
-	var/datum/antagonist/vampire/vampire = user.mind?.has_antag_datum(/datum/antagonist/vampire)
+	var/datum/antagonist/vampire/vampire = get_vampire()
 	if(!vampire)
 		return
 
@@ -121,14 +121,14 @@
 		ui.open()
 
 /datum/action/cooldown/spell/vampire_specialize/ui_data(mob/user)
-	var/datum/antagonist/vampire/vamp = user.mind.has_antag_datum(/datum/antagonist/vampire)
+	var/datum/antagonist/vampire/vamp = get_vampire()
 	var/list/data = list("subclasses" = vamp.subclass)
 	return data
 
 /datum/action/cooldown/spell/vampire_specialize/ui_act(action, list/params)
 	if(..())
 		return
-	var/datum/antagonist/vampire/vamp = usr.mind.has_antag_datum(/datum/antagonist/vampire)
+	var/datum/antagonist/vampire/vamp = get_vampire()
 
 	if(vamp.subclass)
 		vamp.upgrade_tiers -= type
@@ -350,7 +350,7 @@
 	playsound(user, 'modular_bandastation/vampire/sound/misc/im_here1.ogg', 30)
 	new /obj/structure/closet/crate/coffin/vampire(get_turf(coffin), user, rune)
 	qdel(coffin)
-	var/datum/antagonist/vampire/V = user.mind.has_antag_datum(/datum/antagonist/vampire)
+	var/datum/antagonist/vampire/V = get_vampire()
 	V.has_lair = TRUE
 	V.upgrade_tiers -= type
 	V.remove_ability(src)
