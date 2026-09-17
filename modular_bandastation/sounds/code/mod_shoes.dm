@@ -1,5 +1,5 @@
 /obj/item/clothing/shoes/mod
-    var/step_volume = 30
+	var/step_volume = 30
 
 /obj/item/clothing/shoes/mod/update_footstep_sounds()
 	switch(slowdown)
