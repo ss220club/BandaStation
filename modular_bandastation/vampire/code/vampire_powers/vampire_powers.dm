@@ -117,10 +117,17 @@
 		ui.set_autoupdate(FALSE)
 		ui.open()
 
+/datum/action/cooldown/spell/vampire_specialize/ui_static_data(mob/user)
+	var/list/subclasses = list()
+	for(var/subclass_type in list(SUBCLASS_UMBRAE, SUBCLASS_HEMOMANCER, SUBCLASS_GARGANTUA, SUBCLASS_DANTALION))
+		var/datum/vampire_subclass/subclass = new subclass_type
+		subclasses += list(subclass.get_ui_data())
+		qdel(subclass)
+	return list("subclasses" = subclasses)
+
 /datum/action/cooldown/spell/vampire_specialize/ui_data(mob/user)
 	var/datum/antagonist/vampire/vamp = get_vampire()
-	var/list/data = list("subclasses" = vamp.subclass)
-	return data
+	return list("selected_subclass" = vamp?.subclass?.id)
 
 /datum/action/cooldown/spell/vampire_specialize/ui_act(action, list/params)
 	if(..())
@@ -128,22 +135,18 @@
 	var/datum/antagonist/vampire/vamp = get_vampire()
 
 	if(vamp.subclass)
-		vamp.remove_spell_ability(src)
 		return
 
-	switch(action)
-		if("umbrae")
-			vamp.add_subclass(SUBCLASS_UMBRAE)
-			vamp.remove_spell_ability(src)
-		if("hemomancer")
-			vamp.add_subclass(SUBCLASS_HEMOMANCER)
-			vamp.remove_spell_ability(src)
-		if("gargantua")
-			vamp.add_subclass(SUBCLASS_GARGANTUA)
-			vamp.remove_spell_ability(src)
-		if("dantalion")
-			vamp.add_subclass(SUBCLASS_DANTALION)
-			vamp.remove_spell_ability(src)
+	var/list/subclass_types = list(
+		"umbrae" = SUBCLASS_UMBRAE,
+		"hemomancer" = SUBCLASS_HEMOMANCER,
+		"gargantua" = SUBCLASS_GARGANTUA,
+		"dantalion" = SUBCLASS_DANTALION,
+	)
+	var/subclass_type = subclass_types[action]
+	if(!subclass_type)
+		return
+	vamp.add_subclass(subclass_type)
 
 
 /datum/antagonist/vampire/proc/add_subclass(subclass_to_add, announce = TRUE, log_choice = TRUE)

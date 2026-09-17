@@ -1,97 +1,42 @@
-import { Button, Divider, Section, Stack } from 'tgui-core/components';
+import { Box, Button, Divider, Section, Stack } from 'tgui-core/components';
 
 import { useBackend } from '../backend';
 import { Window } from '../layouts';
 
-type Specialization = {
-  action: 'hemomancer' | 'umbrae' | 'gargantua' | 'dantalion';
+type Power = {
+  name?: string;
   description: string;
-  fullPower: string[];
-  name: string;
-  powers: string[];
+  blood_required?: number;
 };
 
-const specializations: Specialization[] = [
-  {
-    action: 'hemomancer',
-    name: 'Гемомант',
-    description: 'Специализируется на магии крови и управлении окружающей кровью.',
-    powers: [
-      'Вампирские когти: Открываются при 150 крови. Призывайте прочные когти, быстро атакующие, высасывающие кровь цели и исцеляющие вас.',
-      'Кровавый барьер: Открывается при 250 крови. Выберите две клетки и создайте между ними стену.',
-      'Кровавые щупальца: Открываются при 250 крови. После короткой задержки замедляют всех в выбранной области 3×3.',
-      'Кровавый бассейн: Открывается при 400 крови. Быстро перемещайтесь, оставляя за собой брызги крови.',
-      'Чувства хищника: Открываются при 600 крови. Находите людей на том же секторе, что и вы.',
-      'Кровавое извержение: Открывается при 800 крови. Превращайте ближайшие лужи крови в шипы, пронзающие стоящих на них.',
-    ],
-    fullPower: [
-      'Ритуал несущего кровь: Быстро высасывайте кровь ближайших людей, исцеляясь и снимая обездвиживающие эффекты.',
-    ],
-  },
-  {
-    action: 'umbrae',
-    name: 'Умбра',
-    description: 'Специализируется на тьме, скрытности, засадах и мобильности.',
-    powers: [
-      'Покров тьмы: Открывается при 150 крови. Станьте почти невидимы и быстрее двигайтесь во тьме, но получайте больше ожогов.',
-      'Теневой якорь: Открывается при 250 крови. Создайте якорь и вернитесь к нему вторым применением. Между Z-уровнями не работает.',
-      'Теневая ловушка: Открывается при 250 крови. Призывайте незаметную ловушку, ослепляющую и обездвиживающую первую жертву, но увядающую на свету.',
-      'Тёмный проход: Открывается при 400 крови. Телепортируйтесь на видимую клетку.',
-      'Погасить: Открывается при 600 крови. Гасите ближайшие источники света.',
-      'Теневой бой: Открывается при 800 крови. Посылайте теневые копии к цели, оставаясь рядом.',
-    ],
-    fullPower: [
-      'Вечная тьма: Окутайте себя нечестивой тьмой. Ближайшие существа замерзают, а снаряды внутри наносят меньше урона.',
-      'Вы также получаете постоянное рентгеновское зрение.',
-    ],
-  },
-  {
-    action: 'gargantua',
-    name: 'Гаргантюа',
-    description: 'Специализируется на стойкости и уроне в ближнем бою.',
-    powers: [
-      'Омоложение: Исцеляйтесь быстрее в зависимости от полученного урона.',
-      'Кровавое усиление: Открывается при 150 крови. На 30 секунд получите сопротивление физическому урону, оглушению и урону выносливости. Пока активно, нельзя стрелять.',
-      'Сейсмический топот: Открывается при 250 крови. Создайте ударную волну, отбрасывающую людей.',
-      'Кровавый рывок: Открывается при 250 крови. Ненадолго ускорьтесь.',
-      'Кровавое усиление II: Открывается при 400 крови. Атаки в ближнем бою наносят на 10 урона больше.',
-      'Подавляющая сила: Открывается при 600 крови. Выбивайте двери, в которые врезаетесь, и сопротивляйтесь толчкам и притягиванию.',
-      'Демоническая хватка: Открывается при 800 крови. Пошлите демоническую руку, чтобы опутать и швырнуть кого-то.',
-      'Рывок: Открывается при 800 крови. Врежьтесь в цель, разрушая препятствия и сбивая жертв.',
-    ],
-    fullPower: [
-      'Осквернённая дуэль: Прыгните к видимому врагу и создайте арену, сильно увеличив регенерацию и сопротивление внутренним повреждениям.',
-    ],
-  },
-  {
-    action: 'dantalion',
-    name: 'Данталион',
-    description: 'Специализируется на порабощении и иллюзиях.',
-    powers: [
-      'Порабощение: Открывается при 150 крови. Подчините цель, оставаясь неподвижным. Не действует на людей с защитой разума или уже порабощённых.',
-      'Предел рабов: Начните с одного раба. Предел увеличивается при 400, 600 крови и полной силе, максимум до четырёх.',
-      'Общение с рабами: Открывается при 150 крови. Общайтесь с рабами; они могут отвечать в том же канале.',
-      'Подпространственный обмен: Открывается при 250 крови. Поменяйтесь местами с целью.',
-      'Усмирение: Открывается при 250 крови. Не позволяйте цели причинять вред 40 секунд.',
-      'Приманка: Открывается при 400 крови. Ненадолго станьте невидимы и оставьте иллюзию.',
-      'Сбор рабов: Открывается при 600 крови. Снимайте обездвиживающие эффекты с ближайших рабов.',
-      'Кровавая связь: Открывается при 800 крови. Ближайшие рабы делят с вами получаемый урон, пока остаются в радиусе.',
-    ],
-    fullPower: [
-      'Массовая истерия: Ослепите ближайших жертв и заставьте их видеть других случайными животными.',
-    ],
-  },
-];
+type Specialization = {
+  id: string;
+  name: string;
+  description: string;
+  powers: Power[];
+  full_powers: Power[];
+};
+
+type Data = {
+  subclasses: Specialization[];
+  selected_subclass?: string;
+};
 
 export function SpecMenu() {
+  const { act, data } = useBackend<Data>();
+  const { selected_subclass, subclasses } = data;
+
   return (
     <Window title="Меню специализации" width={1100} height={600} theme="nologo">
       <Window.Content>
         <Stack fill>
-          {specializations.map((specialization) => (
+          {subclasses.map((subclass) => (
             <SpecializationColumn
-              key={specialization.action}
-              specialization={specialization}
+              key={subclass.id}
+              specialization={subclass}
+              canSelect={!selected_subclass}
+              selected={selected_subclass === subclass.id}
+              onSelect={() => act(subclass.id)}
             />
           ))}
         </Stack>
@@ -100,8 +45,15 @@ export function SpecMenu() {
   );
 }
 
-function SpecializationColumn({ specialization }: { specialization: Specialization }) {
-  const { act } = useBackend();
+type SpecializationColumnProps = {
+  specialization: Specialization;
+  canSelect: boolean;
+  selected: boolean;
+  onSelect: () => void;
+};
+
+function SpecializationColumn(props: SpecializationColumnProps) {
+  const { canSelect, onSelect, selected, specialization } = props;
 
   return (
     <Stack.Item grow basis="25%">
@@ -110,33 +62,43 @@ function SpecializationColumn({ specialization }: { specialization: Specializati
         scrollable
         title={specialization.name}
         buttons={
-          <Button content="Выбрать" onClick={() => act(specialization.action)} />
+          <Button
+            content={selected ? 'Выбрано' : canSelect ? 'Выбрать' : 'Недоступно'}
+            disabled={!canSelect || selected}
+            onClick={onSelect}
+          />
         }
       >
-        <h3>{specialization.description}</h3>
-        {specialization.powers.map((power) => (
-          <PowerDescription key={power} power={power} />
-        ))}
-        <b>Полная сила</b>
+        <Box mb={1}>{specialization.description}</Box>
+        <Stack vertical>
+          {specialization.powers.map((power, index) => (
+            <PowerDescription key={`${power.name}-${index}`} power={power} />
+          ))}
+        </Stack>
         <Divider />
-        {specialization.fullPower.map((power) => (
-          <PowerDescription key={power} power={power} />
-        ))}
+        <Box bold>Полная сила</Box>
+        <Stack vertical mt={1}>
+          {specialization.full_powers.map((power, index) => (
+            <PowerDescription key={`${power.name}-${index}`} power={power} />
+          ))}
+        </Stack>
       </Section>
     </Stack.Item>
   );
 }
 
-function PowerDescription({ power }: { power: string }) {
-  const separator = power.indexOf(': ');
-  if (separator === -1) {
-    return <p>{power}</p>;
-  }
+function PowerDescription({ power }: { power: Power }) {
+  const { blood_required, description, name } = power;
 
   return (
-    <p>
-      <b>{power.slice(0, separator)}</b>
-      {power.slice(separator)}
-    </p>
+    <Stack.Item>
+      {name && <Box bold inline mr={0.5}>{name}</Box>}
+      <Box inline>{description}</Box>
+      {blood_required !== undefined && (
+        <Box color="label" inline ml={0.5}>
+          ({blood_required} крови)
+        </Box>
+      )}
+    </Stack.Item>
   );
 }

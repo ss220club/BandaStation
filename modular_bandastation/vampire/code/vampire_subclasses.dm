@@ -1,6 +1,10 @@
 /datum/vampire_subclass
+	/// Stable identifier used by the specialization UI.
+	var/id
 	/// The subclass' name. Used for blackbox logging.
 	var/name = "накричать на кодербуса"
+	/// Short player-facing specialization summary.
+	var/description
 	/// A list of powers that a vampire unlocks. The value of the list entry is equal to the blood total required for the vampire to unlock it.
 	var/list/standard_powers
 	/// A list of the powers a vampire unlocks when it reaches full power.
@@ -23,8 +27,38 @@
 	for(var/thing in fully_powered_abilities)
 		vamp.add_ability(thing, announce)
 
+/datum/vampire_subclass/proc/get_ui_data()
+	var/list/data = list(
+		"id" = id,
+		"name" = name,
+		"description" = description,
+		"powers" = list(),
+		"full_powers" = list(),
+	)
+	for(var/power_type in standard_powers)
+		data["powers"] += list(get_power_ui_data(power_type, standard_powers[power_type]))
+	for(var/power_type in fully_powered_abilities)
+		data["full_powers"] += list(get_power_ui_data(power_type))
+	return data
+
+/datum/vampire_subclass/proc/get_power_ui_data(power_type, blood_required)
+	var/datum/vampire_passive/passive = new power_type
+	var/list/data = list("description" = passive.gain_desc)
+	if(!isnull(blood_required))
+		data["blood_required"] = blood_required
+	if(istype(passive, /datum/vampire_passive/grant_spell))
+		var/datum/vampire_passive/grant_spell/grant_spell = passive
+		var/datum/action/cooldown/spell/spell = new grant_spell.spell_type
+		data["name"] = spell.name
+		data["description"] = spell.desc
+		qdel(spell)
+	qdel(passive)
+	return data
+
 /datum/vampire_subclass/umbrae
+	id = "umbrae"
 	name = "Умбра"
+	description = "Специализируется на тьме, скрытности, засадах и мобильности."
 	standard_powers = list(/datum/vampire_passive/grant_spell/cloak = 150,
 							/datum/vampire_passive/grant_spell/shadow_snare = 250,
 							/datum/vampire_passive/grant_spell/soul_anchor = 250,
@@ -40,7 +74,9 @@
 							"Покажите станции, почему боятся темноты.")
 
 /datum/vampire_subclass/hemomancer
+	id = "hemomancer"
 	name = "Гемомант"
+	description = "Специализируется на магии крови и управлении окружающей кровью."
 	standard_powers = list(/datum/vampire_passive/grant_spell/vamp_claws = 150,
 							/datum/vampire_passive/grant_spell/blood_tendrils = 250,
 							/datum/vampire_passive/grant_spell/blood_barrier = 250,
@@ -55,7 +91,9 @@
 							"Покажите станции, что вы на вершине силы.")
 
 /datum/vampire_subclass/gargantua
+	id = "gargantua"
 	name = "Гаргантюа"
+	description = "Специализируется на стойкости и уроне в ближнем бою."
 	standard_powers = list(/datum/vampire_passive/grant_spell/blood_swell = 150,
 							/datum/vampire_passive/grant_spell/blood_rush = 250,
 							/datum/vampire_passive/grant_spell/stomp = 250,
@@ -72,7 +110,9 @@
 							"Покажите станции, что вы на вершине силы.") // I think multiple vampires competing would be cool
 
 /datum/vampire_subclass/dantalion
+	id = "dantalion"
 	name = "Данталион"
+	description = "Специализируется на порабощении и иллюзиях."
 	standard_powers = list(/datum/vampire_passive/grant_spell/enthrall = 150,
 							/datum/vampire_passive/grant_spell/commune = 150,
 							/datum/vampire_passive/grant_spell/pacify = 250,
