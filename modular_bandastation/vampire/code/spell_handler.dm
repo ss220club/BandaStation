@@ -19,6 +19,8 @@
 
 /datum/component/vampire_ability/proc/set_vampire(datum/antagonist/vampire/vampire)
 	vampire_ref = WEAKREF(vampire)
+	var/datum/action/cooldown/spell/spell = parent
+	spell.build_all_button_icons(UPDATE_BUTTON_STATUS)
 
 /datum/component/vampire_ability/proc/get_vampire()
 	return vampire_ref?.resolve()
