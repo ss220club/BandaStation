@@ -65,30 +65,72 @@
 
 /datum/action/cooldown/spell/vampire_commune
 	name = "Общение с рабами"
-	desc = "Телепатически общайтесь со своими рабами."
+	desc = "Телепатически общайтесь со своими рабами и вампиром-хозяином."
 	gain_desc = "Вы обрели способность общаться со своими рабами телепатически."
 	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "vamp_communication"
 	cooldown_time = 2 SECONDS
+	spell_requirements = NONE
+	check_flags = AB_CHECK_INCAPACITATED|AB_CHECK_CONSCIOUS
 
-/datum/action/cooldown/spell/vampire_commune/New(Target)
+/datum/action/cooldown/spell/vampire_commune/New(Target, granted_to_thrall = FALSE)
 	. = ..()
-	add_vampire_ability()
+	if(!granted_to_thrall)
+		add_vampire_ability()
 
 /datum/action/cooldown/spell/vampire_commune/cast(atom/cast_on)
 	. = ..()
 	var/mob/living/user = owner
-	var/message = tgui_input_text(user, "Введите сообщение для рабов.", "Общение рабов")
+	var/datum/antagonist/vampire/vampire = user.mind?.has_antag_datum(/datum/antagonist/vampire)
+	var/datum/antagonist/vampire_thrall/speaker_thrall = user.mind?.has_antag_datum(/datum/antagonist/vampire_thrall)
+	if(!vampire)
+		vampire = speaker_thrall?.get_master()
+	if(!vampire?.owner?.current)
+		to_chat(user, span_warning("Ваша связь с хозяином угасла."))
+		return
+
+	var/message = tgui_input_text(user, "Введите сообщение для сети вашего хозяина.", "Общение рабов", max_length = MAX_MESSAGE_LEN)
 	if(!message || QDELETED(user))
 		return
-	var/datum/antagonist/vampire/vampire = user.mind?.has_antag_datum(/datum/antagonist/vampire)
-	if(!vampire)
+
+	var/list/filter_result = CAN_BYPASS_FILTER(user) ? null : is_ic_filtered(message)
+	if(filter_result)
+		REPORT_CHAT_FILTER_TO_USER(user, filter_result)
 		return
-	for(var/datum/antagonist/vampire_thrall/thrall as anything in vampire.get_thralls())
-		if(thrall.owner?.current)
-			to_chat(thrall.owner.current, span_notice("[user.real_name] (Вампир-хозяин): [message]"))
-	to_chat(user, span_notice("[user.real_name] (Вампир-хозяин): [message]"))
-	log_say("(VAMPIRE) [message]", list("CONNECTION" = user))
+	var/list/soft_filter_result = CAN_BYPASS_FILTER(user) ? null : is_soft_ic_filtered(message)
+	if(soft_filter_result)
+		if(tgui_alert(user, "Ваше сообщение содержит «[soft_filter_result[CHAT_FILTER_INDEX_WORD]]». [soft_filter_result[CHAT_FILTER_INDEX_REASON]] Продолжить?", "Слово с предупреждением", list("Да", "Нет")) != "Да")
+			return
+		message_admins("[ADMIN_LOOKUPFLW(user)] has passed the soft filter for \"[soft_filter_result[CHAT_FILTER_INDEX_WORD]]\". Message: \"[html_encode(message)]\"")
+		log_admin_private("[key_name(user)] has passed the soft filter for \"[soft_filter_result[CHAT_FILTER_INDEX_WORD]]\". Message: \"[message]\"")
+
+	if(QDELETED(src) || QDELETED(user) || !vampire.owner?.current)
+		if(!QDELETED(user))
+			to_chat(user, span_warning("Ваша связь с хозяином угасла."))
+		return
+
+	var/title = speaker_thrall ? "Раб" : "Вампир-хозяин"
+	var/span = speaker_thrall ? "hypnophrase italics" : "hypnophrase bold"
+	var/speaker_name = findtextEx(user.name, user.real_name) ? user.name : "[user.real_name] (в облике [user.name])"
+	var/formatted_message = "<span class='[span]'><b>[title] [speaker_name]:</b> [message]</span>"
+	var/list/recipients = list(vampire.owner.current)
+	for(var/datum/antagonist/vampire_thrall/network_thrall as anything in vampire.get_thralls())
+		if(network_thrall.owner?.current)
+			recipients |= network_thrall.owner.current
+	for(var/mob/living/recipient as anything in recipients)
+		to_chat(recipient, formatted_message, type = MESSAGE_TYPE_RADIO, avoid_highlighting = recipient == user)
+		if(recipient != user)
+			user.cast_tts(
+				recipient,
+				message,
+				is_local = FALSE,
+				effects = list(/datum/singleton/sound_effect/telepathy),
+				channel_override = CHANNEL_TTS_TELEPATHY,
+				check_deafness = FALSE
+			)
+	for(var/mob/dead/ghost as anything in GLOB.dead_mob_list)
+		to_chat(ghost, "[FOLLOW_LINK(ghost, user)] [formatted_message]", type = MESSAGE_TYPE_RADIO)
+	user.log_talk(message, LOG_SAY, tag = "vampire")
 
 /datum/action/cooldown/spell/pointed/vampire_pacify
 	name = "Усмирение"

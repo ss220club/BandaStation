@@ -11,7 +11,7 @@
 	/// The vampire whose commands this thrall must obey.
 	var/datum/weakref/master_ref
 	/// The telepathic communication action granted to this thrall.
-	var/datum/action/cooldown/spell/vampire_thrall_commune/thrall_commune
+	var/datum/action/cooldown/spell/vampire_commune/thrall_commune
 
 /datum/antagonist/vampire_thrall/New(datum/antagonist/vampire/master)
 	master_ref = WEAKREF(master)
@@ -46,7 +46,7 @@
 		thrall_mob.AddComponent(/datum/component/vampire_holywater)
 	if(thrall_commune)
 		return
-	thrall_commune = new
+	thrall_commune = new(null, TRUE)
 	thrall_commune.Grant(thrall_mob)
 	get_master()?.update_thrall_huds()
 
@@ -62,34 +62,3 @@
 		thrall_commune.Remove(thrall_mob)
 		QDEL_NULL(thrall_commune)
 	return ..()
-
-/datum/action/cooldown/spell/vampire_thrall_commune
-	name = "Вампирское общение"
-	desc = "Телепатически общайтесь со своим вампиром-хозяином и его рабами."
-	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
-	button_icon_state = "vamp_communication"
-	cooldown_time = 2 SECONDS
-	spell_requirements = NONE
-
-/datum/action/cooldown/spell/vampire_thrall_commune/cast(atom/cast_on)
-	. = ..()
-	var/datum/antagonist/vampire_thrall/thrall = owner.mind?.has_antag_datum(/datum/antagonist/vampire_thrall)
-	var/datum/antagonist/vampire/master = thrall?.get_master()
-	if(!master?.owner?.current)
-		to_chat(owner, span_warning("Ваша связь с хозяином угасла."))
-		return
-
-	var/message = tgui_input_text(owner, "Введите сообщение для сети вашего хозяина.", "Общение рабов")
-	if(!message)
-		return
-	if(QDELETED(src) || QDELETED(owner) || !master?.owner?.current)
-		if(!QDELETED(owner))
-			to_chat(owner, span_warning("Ваша связь с хозяином угасла."))
-		return
-	var/list/recipients = list(master.owner.current)
-	for(var/datum/antagonist/vampire_thrall/network_thrall as anything in master.get_thralls())
-		if(network_thrall.owner?.current)
-			recipients += network_thrall.owner.current
-	for(var/mob/living/recipient as anything in recipients)
-		to_chat(recipient, span_notice("[owner.real_name] (Раб): [message]"))
-	log_say("(VAMPIRE THRALL) [message]", list("CONNECTION" = owner))
