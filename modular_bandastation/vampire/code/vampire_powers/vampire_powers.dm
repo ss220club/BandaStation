@@ -362,7 +362,7 @@
 	anchored = TRUE
 	armor_type = /datum/armor/vampire_coffin
 	/// Owner of this coffin.
-	var/mob/living/vampire
+	var/datum/weakref/vampire_ref
 	/// The rune created with this coffin.
 	var/obj/effect/lair_rune/lair_rune
 	/// Whether the coffin is currently being ignited with a welder.
@@ -382,12 +382,16 @@
 	. = ..()
 	name = "[name] [user?.mind?.name]"
 	desc += "<br>Владелец этого гроба, возможно, никому не был дорог или даже ещё не умер.<br>[span_warning("Кажется, он неуязвим для всего, кроме лазеров и огня! Особенно для огня!")]"
-	vampire = user
+	vampire_ref = WEAKREF(user)
 	lair_rune = rune
 
 /obj/structure/closet/crate/coffin/vampire/Destroy()
+	vampire_ref = null
 	QDEL_NULL(lair_rune)
 	return ..()
+
+/obj/structure/closet/crate/coffin/vampire/proc/get_vampire() as /mob/living
+	return vampire_ref?.resolve()
 
 /obj/structure/closet/crate/coffin/vampire/wrench_act(mob/living/user, obj/item/tool)
 	return ITEM_INTERACT_BLOCKING
@@ -399,7 +403,9 @@
 		return ITEM_INTERACT_BLOCKING
 	igniting = TRUE
 	to_chat(user, span_notice("Вы пытаетесь поджечь [src] с помощью [tool]."))
-	to_chat(vampire, span_warning("На ваше логово напали!"))
+	var/mob/living/vampire = get_vampire()
+	if(vampire)
+		to_chat(vampire, span_warning("На ваше логово напали!"))
 	if(tool.use_tool(src, user, 15 SECONDS, amount = 30))
 		fire_act(tool.get_temperature())
 	igniting = FALSE
@@ -415,7 +421,9 @@
 	. = ..()
 	if(!COOLDOWN_FINISHED(src, fire_act_cooldown))
 		return
-	to_chat(vampire, span_warning("На ваше логово напали!"))
+	var/mob/living/vampire = get_vampire()
+	if(vampire)
+		to_chat(vampire, span_warning("На ваше логово напали!"))
 	switch(rand(1, 4))
 		if(1)
 			visible_message(span_danger("Древесина воет, а огонь вспыхивает, казалось бы, из ниоткуда!"))
@@ -449,7 +457,7 @@
 	var/mob/living/carbon/vampire = owner
 	if(istype(vampire.loc, /obj/structure/closet/crate/coffin/vampire))
 		var/obj/structure/closet/crate/coffin/vampire/coffin = vampire.loc
-		if(coffin.vampire != vampire)
+		if(coffin.get_vampire() != vampire)
 			return
 		vampire.adjust_brute_loss(-3)
 		vampire.adjust_fire_loss(-3)
