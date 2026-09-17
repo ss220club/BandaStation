@@ -23,7 +23,6 @@
 	/// Additional burn damage dealt by a powered Harm attack.
 	var/burn_damage = 5
 
-	cell_hit_cost = round(STANDARD_CELL_CHARGE * 1.5)
 	stamina_damage = 80
 	var/depleted_stamina_damage = 20
 	cooldown = (3.5 SECONDS)
@@ -33,6 +32,7 @@
 
 // Initialize the two-handed and reskin components.
 /obj/item/melee/baton/security/electrostaff/Initialize(mapload)
+	cell_hit_cost = round(STANDARD_CELL_CHARGE * 1.5)
 	. = ..()
 
 	AddComponent(/datum/component/two_handed, \
@@ -219,6 +219,7 @@
 
 // Select the correct world and in-hand sprite for the current state.
 /obj/item/melee/baton/security/electrostaff/update_icon_state()
+	. = ..()
 	var/icon_suffix = ""
 
 	if(HAS_TRAIT(src, TRAIT_WIELDED))
