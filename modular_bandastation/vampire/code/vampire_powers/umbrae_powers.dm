@@ -294,6 +294,7 @@
 	add_vampire_ability(50)
 
 /datum/action/cooldown/spell/pointed/vampire_shadow_boxing/is_valid_target(atom/cast_on)
+/datum/action/cooldown/spell/pointed/vampire_shadow_boxing/is_valid_target(atom/cast_on)
 	return ..() && isliving(cast_on)
 
 /datum/action/cooldown/spell/pointed/vampire_shadow_boxing/cast(mob/living/target)
