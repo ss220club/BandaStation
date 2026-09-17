@@ -1,6 +1,6 @@
 /obj/item/melee/baton/security/electrostaff
 	name = "electrostaff"
-	desc = "Шоковая палка, только более мощная, двуручная и доступная наиболее авторитетным членам силовых структур Nanotrasen. А еще у неё нет тупого конца."
+	desc = "Шоковая дубинка, только более мощная, двуручная и доступная наиболее авторитетным членам силовых структур Нанотрейзен. А ещё у неё нет тупого конца."
 	icon = 'modular_bandastation/weapon/icons/melee/electrostaff.dmi'
 	base_icon_state = "electrostaff_orange"
 	icon_state = "electrostaff_orange"
