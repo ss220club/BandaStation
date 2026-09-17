@@ -333,7 +333,7 @@
 	if(!owner)
 		return
 	var/datum/antagonist/vampire/vampire = owner.mind?.has_antag_datum(/datum/antagonist/vampire)
-	for(var/atom/target as anything in view(8, owner))
+	for(var/atom/target as mob|obj in view(8, owner))
 		if(isliving(target))
 			var/mob/living/living_target = target
 			if(living_target.affects_vampire(owner))
