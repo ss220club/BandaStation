@@ -20,3 +20,4 @@
 #include "code/vampire_powers/gargantua_powers.dm"
 #include "code/vampire_powers/hemomancer_powers.dm"
 #include "code/vampire_powers/umbrae_powers.dm"
+#include "code/vampire_spell_passives.dm"

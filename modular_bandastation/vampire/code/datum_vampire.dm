@@ -33,11 +33,11 @@
 
 	/// Powers that all vampires unlock and at what blood total level they unlock them
 	var/list/upgrade_tiers = list(
-		/datum/action/cooldown/spell/vampire_rejuvenate = 0,
-		/datum/action/cooldown/spell/aoe/vampire_glare = 0,
+		/datum/vampire_passive/grant_spell/rejuvenate = 0,
+		/datum/vampire_passive/grant_spell/glare = 0,
 		/datum/vampire_passive/vision = 100,
-		/datum/action/cooldown/spell/vampire_specialize = 150,
-		/datum/action/cooldown/spell/pointed/vampire_lair = 150,
+		/datum/vampire_passive/grant_spell/specialize = 150,
+		/datum/vampire_passive/grant_spell/lair = 150,
 		/datum/vampire_passive/regen = 200,
 		/datum/vampire_passive/vision/advanced = 500,
 	)
@@ -107,7 +107,7 @@
 	message_admins("[key_name_admin(admin)] set [key_name_admin(owner)]'s usable vampire blood from [old_usable] to [bloodusable].")
 	log_admin("[key_name(admin)] set [key_name(owner)]'s usable vampire blood from [old_usable] to [bloodusable].")
 
-/datum/antagonist/vampire/proc/force_add_ability(path)
+/datum/antagonist/vampire/proc/force_add_ability(path, announce = FALSE)
 	var/datum/power = new path()
 	powers += power
 
@@ -120,15 +120,19 @@
 		passive.owner = owner.current
 		passive.on_apply(src)
 
+	if(announce)
+		announce_new_power(power)
+	return power
+
 /datum/antagonist/vampire/proc/get_ability(path)
 	for(var/datum/power as anything in powers)
 		if(power?.type == path)
 			return power
 	return null
 
-/datum/antagonist/vampire/proc/add_ability(path)
+/datum/antagonist/vampire/proc/add_ability(path, announce = FALSE)
 	if(!get_ability(path))
-		force_add_ability(path)
+		force_add_ability(path, announce)
 
 /datum/antagonist/vampire/proc/remove_ability(datum/ability)
 	if(ability && (ability in powers))
@@ -140,9 +144,18 @@
 		if(owner?.current)
 			owner.current.update_sight()
 
+/datum/antagonist/vampire/proc/remove_spell_ability(datum/action/cooldown/spell/spell)
+	for(var/datum/vampire_passive/grant_spell/grant_spell as anything in powers)
+		if(grant_spell.get_granted_spell() != spell)
+			continue
+		upgrade_tiers -= grant_spell.type
+		remove_ability(grant_spell)
+		return
+	remove_ability(spell)
+
 /datum/antagonist/vampire/proc/remove_all_powers()
-	for(var/power in powers)
-		remove_ability(power)
+	while(length(powers))
+		remove_ability(powers[1])
 
 /datum/antagonist/vampire/apply_innate_effects(mob/living/mob_override)
 	. = ..()
@@ -276,38 +289,33 @@
 
 /datum/antagonist/vampire/proc/clear_subclass(give_specialize_power = TRUE)
 	if(give_specialize_power)
-		upgrade_tiers[/datum/action/cooldown/spell/vampire_specialize] = 150
+		upgrade_tiers[/datum/vampire_passive/grant_spell/specialize] = 150
 	remove_all_powers()
 	QDEL_NULL(subclass)
 	check_vampire_upgrade()
 
 /datum/antagonist/vampire/proc/check_vampire_upgrade(announce = TRUE)
-	var/list/old_powers = powers.Copy()
-
 	for(var/ptype in upgrade_tiers)
 		var/level = upgrade_tiers[ptype]
 		if(bloodtotal >= level)
-			add_ability(ptype)
+			add_ability(ptype, announce)
 
 	if(!subclass)
 		return
-	subclass.add_subclass_ability(src)
-	check_full_power_upgrade()
+	subclass.add_subclass_ability(src, announce)
+	check_full_power_upgrade(announce)
 
-	if(announce)
-		announce_new_power(old_powers)
-
-/datum/antagonist/vampire/proc/check_full_power_upgrade()
+/datum/antagonist/vampire/proc/check_full_power_upgrade(announce = FALSE)
 	if(subclass?.full_power_override || (length(drained_humans) >= FULLPOWER_DRAINED_REQUIREMENT && bloodtotal >= FULLPOWER_BLOODTOTAL_REQUIREMENT))
-		subclass?.add_full_power_abilities(src)
+		subclass?.add_full_power_abilities(src, announce)
 
-/datum/antagonist/vampire/proc/announce_new_power(list/old_powers)
-	for(var/power in powers)
-		if(power in old_powers)
-			continue
-		if(istype(power, /datum/vampire_passive))
-			var/datum/vampire_passive/passive = power
-			to_chat(owner.current, span_boldnotice("[passive.gain_desc]"))
+/datum/antagonist/vampire/proc/announce_new_power(datum/power)
+	var/gain_desc
+	if(istype(power, /datum/vampire_passive))
+		var/datum/vampire_passive/passive = power
+		gain_desc = passive.gain_desc
+	if(gain_desc && owner?.current)
+		to_chat(owner.current, span_boldnotice(gain_desc))
 
 /datum/antagonist/vampire/proc/check_sun()
 	var/turf/turf_loc = get_turf(owner.current)

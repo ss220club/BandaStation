@@ -31,14 +31,12 @@
 	return ..()
 
 /datum/vampire_passive/proc/on_apply(datum/antagonist/vampire/V)
-	to_chat(owner, gain_desc)
 	owner.update_sight() // Life updates conditionally, so vision passives must force an update when granted.
 	return
 
 /datum/action/cooldown/spell/vampire_rejuvenate
 	name = "Омоложение"
 	desc = "Используйте запас крови, чтобы оживить тело и снять все обездвиживающие эффекты."
-	gain_desc = "Теперь вы можете использовать омоложение."
 	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "vampire_rejuvinate"
 	cooldown_time = 20 SECONDS
@@ -97,7 +95,6 @@
 /datum/action/cooldown/spell/vampire_specialize
 	name = "Выбрать специализацию"
 	desc = "Выберите подкласс вампира, в который хотите развиться."
-	gain_desc = "Теперь вы можете выбрать вампирскую специализацию для развития."
 	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	cooldown_time = 2 SECONDS
 	button_icon_state = "select_class"
@@ -131,27 +128,22 @@
 	var/datum/antagonist/vampire/vamp = get_vampire()
 
 	if(vamp.subclass)
-		vamp.upgrade_tiers -= type
-		vamp.remove_ability(src)
+		vamp.remove_spell_ability(src)
 		return
 
 	switch(action)
 		if("umbrae")
 			vamp.add_subclass(SUBCLASS_UMBRAE)
-			vamp.upgrade_tiers -= type
-			vamp.remove_ability(src)
+			vamp.remove_spell_ability(src)
 		if("hemomancer")
 			vamp.add_subclass(SUBCLASS_HEMOMANCER)
-			vamp.upgrade_tiers -= type
-			vamp.remove_ability(src)
+			vamp.remove_spell_ability(src)
 		if("gargantua")
 			vamp.add_subclass(SUBCLASS_GARGANTUA)
-			vamp.upgrade_tiers -= type
-			vamp.remove_ability(src)
+			vamp.remove_spell_ability(src)
 		if("dantalion")
 			vamp.add_subclass(SUBCLASS_DANTALION)
-			vamp.upgrade_tiers -= type
-			vamp.remove_ability(src)
+			vamp.remove_spell_ability(src)
 
 
 /datum/antagonist/vampire/proc/add_subclass(subclass_to_add, announce = TRUE, log_choice = TRUE)
@@ -166,7 +158,6 @@
 /datum/action/cooldown/spell/aoe/vampire_glare
 	name = "Взгляд"
 	desc = "Ваши глаза вспыхивают, оглушая и лишая речи тех, кто перед вами. На окружающих эффект слабее."
-	gain_desc = "Теперь вы можете использовать взгляд."
 	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "vampire_glare"
 	check_flags = AB_CHECK_PHASED
@@ -309,7 +300,6 @@
 /datum/action/cooldown/spell/pointed/vampire_lair
 	name = "Логово"
 	desc = "Выберите себе гроб, который станет центральным элементом вашего нового логова."
-	gain_desc = "Теперь вы можете создать логово."
 	button_icon = 'modular_bandastation/vampire/icons/obj/items.dmi' // tg coffin icon is too big
 	button_icon_state = "coffin"
 	cooldown_time = 2 SECONDS
@@ -352,8 +342,7 @@
 	qdel(coffin)
 	var/datum/antagonist/vampire/V = get_vampire()
 	V.has_lair = TRUE
-	V.upgrade_tiers -= type
-	V.remove_ability(src)
+	V.remove_spell_ability(src)
 
 /obj/structure/closet/crate/coffin/vampire
 	name = "vampire coffin"
@@ -541,7 +530,6 @@
 /datum/action/cooldown/spell/aoe/vampire_raise_vampires
 	name = "Поднять вампиров"
 	desc = "Призывает смертоносных вампиров из блюспейса."
-	gain_desc = "Вы обрели способность поднимать вампиров. Эта чрезвычайно мощная способность по области действует на всех людей рядом: вампиры и рабы исцеляются, трупы становятся вампирами, остальные оглушаются, получают повреждения мозга и погибают."
 	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "revive_thrall"
 	sound = 'modular_bandastation/vampire/sound/magic/wandodeath.ogg'

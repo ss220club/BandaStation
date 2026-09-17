@@ -1,7 +1,6 @@
 /datum/action/cooldown/spell/vampire_vamp_claws
 	name = "Вампирские когти"
 	desc = "Направьте магию крови, чтобы выковать смертоносные вампирские когти, высасывающие кровь и быстро наносящие удары. Нельзя использовать, если вы держите непередаваемый предмет."
-	gain_desc = "Вы обрели способность превращать руки в вампирские когти."
 	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "vampire_claws"
 	cooldown_time = 30 SECONDS
@@ -98,7 +97,6 @@
 /datum/action/cooldown/spell/pointed/vampire_blood_tendrils
 	name = "Кровавые щупальца"
 	desc = "После задержки призовите небольшое поле ужасных кровавых щупалец, которое опутает и замедлит людей в области."
-	gain_desc = "Вы обрели способность призывать кровавые щупальца, замедляющие людей в выбранной области."
 	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "blood_tendrils"
 	cooldown_time = 30 SECONDS
@@ -133,7 +131,6 @@
 /datum/action/cooldown/spell/pointed/vampire_blood_barrier
 	name = "Кровавый барьер"
 	desc = "Выберите две точки на расстоянии не более трёх клеток друг от друга, чтобы создать между ними барьер."
-	gain_desc = "Вы обрели способность призывать между двумя точками кристаллическую стену из крови. Барьер легко разрушить, но вы можете свободно проходить сквозь него."
 	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "blood_barrier"
 	cooldown_time = 1 MINUTES
@@ -205,7 +202,6 @@
 /datum/action/cooldown/spell/jaunt/ethereal_jaunt/vampire_blood_pool
 	name = "Кровавая лужа"
 	desc = "Превратитесь в лужу крови, став неуязвимым и способным проходить через всё, кроме стен и космоса. При движении вы оставляете кровавый след."
-	gain_desc = "Вы обрели способность превращаться в лужу крови, чтобы с высокой мобильностью уходить от преследователей."
 	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "blood_pool"
 	cooldown_time = 30 SECONDS
@@ -244,7 +240,6 @@
 /datum/action/cooldown/spell/vampire_predator_senses
 	name = "Чувства хищника"
 	desc = "Выследите добычу — ей негде спрятаться..."
-	gain_desc = "Ваши чувства обострились: теперь от вас никто не скроется."
 	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "predator_sense"
 	cooldown_time = 20 SECONDS
@@ -278,7 +273,6 @@
 /datum/action/cooldown/spell/aoe/vampire_blood_eruption
 	name = "Кровавое извержение"
 	desc = "Из каждой лужи крови в радиусе четырёх клеток вырывается шип из живой крови, ранящий стоящих на ней."
-	gain_desc = "Вы обрели способность превращать лужи крови в оружие против стоящих на них."
 	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "blood_spikes"
 	cooldown_time = 200 SECONDS
@@ -311,7 +305,6 @@
 /datum/action/cooldown/spell/vampire_blood_spill
 	name = "Ритуал несущего кровь"
 	desc = "При включении все вокруг начинают обильно истекать кровью. Вы высасываете её и омолаживаете себя."
-	gain_desc = "Вы обрели способность вырывать из людей саму жизненную силу и поглощать её, исцеляясь."
 	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "blood_bringers_rite"
 	cooldown_time = 2 SECONDS

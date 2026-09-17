@@ -15,7 +15,6 @@
 /datum/action/cooldown/spell/pointed/vampire_enthrall
 	name = "Подчинение"
 	desc = "Используйте большую часть своей силы, чтобы обратить верность тех, кто никому не предан, только себе."
-	gain_desc = "Вы обрели способность подчинять людей своей воле."
 	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "vampire_enthrall"
 	cooldown_time = 1 MINUTES
@@ -66,7 +65,6 @@
 /datum/action/cooldown/spell/vampire_commune
 	name = "Общение с рабами"
 	desc = "Телепатически общайтесь со своими рабами и вампиром-хозяином."
-	gain_desc = "Вы обрели способность общаться со своими рабами телепатически."
 	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "vamp_communication"
 	cooldown_time = 2 SECONDS
@@ -135,7 +133,6 @@
 /datum/action/cooldown/spell/pointed/vampire_pacify
 	name = "Усмирение"
 	desc = "Временно усмирите цель, лишив её возможности причинять вред."
-	gain_desc = "Вы обрели способность усмирять чьи-то агрессивные наклонности, не позволяя причинять физический вред."
 	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "pacify"
 	cooldown_time = 30 SECONDS
@@ -156,7 +153,6 @@
 /datum/action/cooldown/spell/pointed/vampire_switch_places
 	name = "Подпространственный обмен"
 	desc = "Поменяйтесь местами с целью."
-	gain_desc = "Вы обрели способность меняться местами с выбранным существом."
 	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "subspace_swap"
 	cooldown_time = 30 SECONDS
@@ -184,7 +180,6 @@
 /datum/action/cooldown/spell/vampire_decoy
 	name = "Создать приманку"
 	desc = "Ненадолго станьте невидимым и создайте иллюзию-приманку, чтобы обмануть добычу."
-	gain_desc = "Вы обрели способность становиться невидимым и создавать иллюзии-приманки."
 	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "decoy"
 	cooldown_time = 40 SECONDS
@@ -208,7 +203,6 @@
 /datum/action/cooldown/spell/aoe/vampire_rally_thralls
 	name = "Сбор рабов"
 	desc = "Снимает все обездвиживающие эффекты с ваших рабов поблизости."
-	gain_desc = "Вы обрели способность снимать все обездвиживающие эффекты с ближайших рабов."
 	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "thralls_up"
 	cooldown_time = 100 SECONDS
@@ -237,7 +231,6 @@
 /datum/action/cooldown/spell/vampire_blood_bond
 	name = "Кровавая связь"
 	desc = "Создаёт между вами и ближайшими рабами сеть, поровну распределяющую весь получаемый урон."
-	gain_desc = "Вы обрели способность делить урон между собой и рабами."
 	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "blood_bond"
 	cooldown_time = 2 SECONDS
@@ -258,7 +251,6 @@
 /datum/action/cooldown/spell/aoe/vampire_hysteria
 	name = "Массовая истерия"
 	desc = "Наложите мощную иллюзию: после краткого ослепления все поблизости будут видеть друг друга случайными животными."
-	gain_desc = "Вы обрели способность после краткого ослепления заставлять всех поблизости видеть друг друга случайными животными."
 	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "hysteria"
 	cooldown_time = 180 SECONDS

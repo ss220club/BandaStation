@@ -1,7 +1,6 @@
 /datum/action/cooldown/spell/vampire_blood_swell
 	name = "Кровавое усиление"
 	desc = "Наполните тело кровью, чтобы сильно сопротивляться оглушению и физическому урону. Пока способность активна, вы не можете стрелять из дальнобойного оружия."
-	gain_desc = "Вы обрели способность временно сопротивляться сильному оглушению и физическому урону."
 	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "blood_swell"
 	cooldown_time = 40 SECONDS
@@ -19,7 +18,6 @@
 /datum/action/cooldown/spell/vampire_stomp
 	name = "Сейсмический топот"
 	desc = "Ударьте ногой о пол, пустив по корпусу станции мощную ударную волну, отбрасывающую людей. Нельзя использовать со связанными болой или подобным предметом ногами."
-	gain_desc = "Вы обрели способность отбрасывать людей мощным топотом."
 	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "seismic_stomp"
 	cooldown_time = 60 SECONDS
@@ -82,7 +80,6 @@
 /datum/action/cooldown/spell/vampire_overwhelming_force
 	name = "Подавляющая сила"
 	desc = "Включите силу, чтобы выбивать двери, в которые вы врезаетесь."
-	gain_desc = "Вы обрели способность выбивать двери ценой небольшого количества крови."
 	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "OH_YEAAAAH"
 	cooldown_time = 2 SECONDS
@@ -134,7 +131,6 @@
 /datum/action/cooldown/spell/vampire_blood_rush
 	name = "Кровавый рывок"
 	desc = "Наполните себя магией крови, чтобы ускориться и освободиться от пут на ногах."
-	gain_desc = "Вы обрели способность временно двигаться с высокой скоростью."
 	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "blood_rush"
 	cooldown_time = 30 SECONDS
@@ -167,7 +163,6 @@
 /datum/action/cooldown/spell/pointed/projectile/vampire_demonic_grasp
 	name = "Демоническая хватка"
 	desc = "Призовите руку демонической энергии, которая опутает и швырнёт цель согласно вашему намерению: разоружение толкает, захват притягивает."
-	gain_desc = "Вы обрели способность опутывать и сбивать людей с толку демоническими отростками."
 	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "demonic_grasp"
 	cooldown_time = 30 SECONDS
@@ -213,7 +208,6 @@
 /datum/action/cooldown/spell/pointed/vampire_charge
 	name = "Таран"
 	desc = "Рваните к точке на экране, нанося большой урон, оглушая цели и разрушая стены и другие объекты."
-	gain_desc = "Теперь вы можете нестись к цели на экране, нанося огромный урон и разрушая постройки."
 	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "vampire_charge"
 	cooldown_time = 30 SECONDS
@@ -237,7 +231,6 @@
 /datum/action/cooldown/spell/pointed/vampire_arena
 	name = "Осквернённая дуэль"
 	desc = "Прыгните к кому-то. При приземлении вы создадите арену, где будете лечить физический урон и ожоги, быстрее восстанавливаться от усталости и лучше сопротивляться длительному урону. Повторное применение завершит заклинание раньше."
-	gain_desc = "Теперь вы можете прыгнуть к цели и запереть её на призванной арене."
 	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "duel"
 	cooldown_time = 30 SECONDS

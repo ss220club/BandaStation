@@ -1,7 +1,6 @@
 /datum/action/cooldown/spell/vampire_cloak
 	name = "Покров тьмы"
 	desc = "Включает или выключает сокрытие во тьме. Во тьме при включённой способности вы движетесь быстрее."
-	gain_desc = "Вы обрели способность «Покров тьмы»: во тьме она делает вас почти невидимым и очень ловким."
 	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "vampire_cloak"
 	cooldown_time = 2 SECONDS
@@ -47,7 +46,6 @@
 /datum/action/cooldown/spell/pointed/vampire_shadow_snare
 	name = "Теневая ловушка"
 	desc = "Призовите ловушку на полу. Тот, кто пересечёт её, ослепнет, погасит свои источники света и окажется опутанным."
-	gain_desc = "Вы обрели способность призывать ловушку, ослепляющую, опутывающую и гасящую свет у пересёкших её."
 	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "shadow_snare"
 	cooldown_time = 20 SECONDS
@@ -135,7 +133,6 @@
 /datum/action/cooldown/spell/vampire_soul_anchor
 	name = "Якорь души"
 	desc = "После задержки призовите межпространственный якорь. Повторное применение телепортирует вас к нему. Через две минуты вас принудительно вернёт назад."
-	gain_desc = "Вы обрели способность запоминать точку в пространстве и возвращаться к ней по желанию. Если не вернуться добровольно за две минуты, вас вернёт принудительно."
 	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "shadow_anchor"
 	cooldown_time = 3 MINUTES
@@ -227,7 +224,6 @@
 /datum/action/cooldown/spell/pointed/vampire_dark_passage
 	name = "Тёмный проход"
 	desc = "Телепортируйтесь на выбранную клетку."
-	gain_desc = "Вы обрели способность перемещаться на небольшое расстояние к выбранной клетке."
 	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "dark_passage"
 	cooldown_time = 40 SECONDS
@@ -260,7 +256,6 @@
 /datum/action/cooldown/spell/aoe/vampire_extinguish
 	name = "Погасить"
 	desc = "Погасите все источники света вокруг себя."
-	gain_desc = "Вы обрели способность гасить ближайшие источники света."
 	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "vampire_extinguish"
 	cooldown_time = 20 SECONDS
@@ -283,7 +278,6 @@
 /datum/action/cooldown/spell/pointed/vampire_shadow_boxing
 	name = "Теневой бой"
 	desc = "Выберите кого-то, чтобы ваша тень избила его. Для работы нужно находиться не далее двух клеток."
-	gain_desc = "Вы обрели способность заставлять свою тень сражаться за вас."
 	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "shadow_boxing"
 	cooldown_time = 30 SECONDS
@@ -305,7 +299,6 @@
 /datum/action/cooldown/spell/vampire_eternal_darkness
 	name = "Вечная тьма"
 	desc = "При включении вы окутываете область вокруг себя тьмой и медленно понижаете температуру тел людей поблизости. Энергетические снаряды в радиусе действия тускнеют."
-	gain_desc = "Вы обрели способность окутывать область вокруг себя тьмой. Лишь самый яркий свет способен пробить ваши нечестивые силы."
 	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "eternal_darkness"
 	cooldown_time = 2 SECONDS
