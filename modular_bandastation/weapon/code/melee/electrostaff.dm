@@ -188,7 +188,7 @@
 
 	final_block_chance = clamp(effective_block_chance, 0, 100)
 
-	return ..()
+	return ..(owner, hitby, attack_text, final_block_chance, damage, attack_type, damage_type)
 
 // Define the available color reskins for the electrostaff.
 /datum/atom_skin/electrostaff
@@ -242,8 +242,8 @@
 	var/charge_used = ..()
 
 	if(!has_power() && HAS_TRAIT(src, TRAIT_WIELDED))
-		var/mob/living/user = loc
-		if(user)
+		if(isliving(loc))
+			var/mob/living/user = loc
 			user.update_held_items()
 
 	return charge_used
