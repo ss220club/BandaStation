@@ -193,7 +193,9 @@
 	return ..()
 
 /obj/structure/blood_barrier/CanPass(atom/movable/mover, border_dir)
-	..()
+	. = ..()
+	if(.)
+		return
 	if(!isliving(mover))
 		return FALSE
 	var/mob/living/living_mover = mover
