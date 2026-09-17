@@ -129,7 +129,7 @@
 	var/datum/antagonist/vampire/vamp = get_vampire()
 	return list("selected_subclass" = vamp?.subclass?.id)
 
-/datum/action/cooldown/spell/vampire_specialize/ui_act(action, list/params)
+/datum/action/cooldown/spell/vampire_specialize/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
 	if(..())
 		return
 	var/datum/antagonist/vampire/vamp = get_vampire()
@@ -147,6 +147,8 @@
 	if(!subclass_type)
 		return
 	vamp.add_subclass(subclass_type)
+	ui.close()
+	return TRUE
 
 
 /datum/antagonist/vampire/proc/add_subclass(subclass_to_add, announce = TRUE, log_choice = TRUE)
