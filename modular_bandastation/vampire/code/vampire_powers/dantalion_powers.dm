@@ -2,8 +2,8 @@
 	var/new_cap = 2
 
 /datum/vampire_passive/increment_thrall_cap/New()
-	. = ..()
 	gain_desc = "Теперь вы можете подчинить ещё одного человека — вплоть до [new_cap]."
+	. = ..()
 
 /datum/vampire_passive/increment_thrall_cap/on_apply(datum/antagonist/vampire/vampire)
 	vampire.subclass.thrall_cap = max(vampire.subclass.thrall_cap, new_cap)
