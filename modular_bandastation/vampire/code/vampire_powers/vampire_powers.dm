@@ -585,14 +585,17 @@
 			target.visible_message(span_warning("[target], похоже, оглушён энергией!"))
 			target.SetKnockdown(40 SECONDS)
 		return
+	if(target.ckey && is_banned_from(target.ckey, list(ROLE_SYNDICATE, ROLE_VAMPIRE)))
+		target.visible_message(span_warning("[target] остаётся безжизненным."))
+		return
 	for(var/obj/item/implant/mindshield/mindshield in target.implants)
 		mindshield.removed(target)
 	for(var/obj/item/implant/uplink/traitor_implant in target.implants)
 		traitor_implant.removed(target)
 	target.visible_message(span_warning("В глазах [target] появляется жуткое красное свечение!"))
-
 	log_combat(user, target, "sired", addition = "(Vampire)")
-	var/datum/antagonist/vampire/new_vampire = target.mind.add_antag_datum(/datum/antagonist/vampire)
+
+	var/datum/antagonist/vampire/new_vampire = target.mind.add_antag_datum(/datum/antagonist/vampire/bodyguard)
 	var/datum/objective/protect/protect_objective = new
 	protect_objective.target = user.mind
 	protect_objective.explanation_text = "Защищайте [user.real_name]."

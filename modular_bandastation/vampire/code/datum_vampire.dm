@@ -14,6 +14,8 @@
 	antag_hud_name = "vampire"
 	hud_icon = 'modular_bandastation/vampire/icons/mob/huds/vampire_antag.dmi'
 
+	var/give_objectives = TRUE
+
 	var/bloodtotal = 0
 	var/bloodusable = 0
 	/// What vampire subclass the vampire is.
@@ -47,6 +49,9 @@
 	/// Did the vampire build a lair?
 	var/has_lair = FALSE
 
+/datum/antagonist/vampire/bodyguard
+	give_objectives = FALSE
+
 /datum/antagonist/vampire/Destroy(force, ...)
 	draining = null
 	remove_all_powers()
@@ -62,7 +67,8 @@
 	return ..()
 
 /datum/antagonist/vampire/on_gain()
-	forge_objectives()
+	if(give_objectives)
+		forge_objectives()
 	return ..()
 
 /datum/antagonist/vampire/proc/adjust_nullification(base, extra)
@@ -507,11 +513,6 @@
 	blood_objective.update_explanation_text()
 	objectives += blood_objective
 
-	var/datum/objective/assassinate/assassinate_objective = new
-	assassinate_objective.owner = owner
-	assassinate_objective.find_target(list(src))
-	objectives += assassinate_objective
-
 	if(prob(5))
 		var/datum/objective/protect/protect_objective = new
 		protect_objective.owner = owner
@@ -527,6 +528,15 @@
 		steal_objective.owner = owner
 		steal_objective.find_target(list(src))
 		objectives += steal_objective
+
+	var/list/datum/mind/blacklist = list()
+	for(var/datum/objective/protect/protect_objective in objectives)
+		blacklist += protect_objective.target
+
+	var/datum/objective/assassinate/assassinate_objective = new
+	assassinate_objective.owner = owner
+	assassinate_objective.find_target(list(src), blacklist)
+	objectives += assassinate_objective
 
 	var/datum/objective/vampire/lair/lair_objective = new
 	lair_objective.owner = owner
