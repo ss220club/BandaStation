@@ -16,13 +16,13 @@
 	var/mob/eye/imaginary_friend/friend
 	var/friend_initialized = FALSE
 
-// BANDASTATION EDIT START
 /datum/brain_trauma/special/imaginary_friend/on_gain()
 	var/mob/living/M = owner
 	if(M.stat == DEAD || !M.client)
 		return FALSE
 	. = ..()
 	get_ghost()
+	// make_friend() // BANDASTATION EDIT
 
 /datum/brain_trauma/special/imaginary_friend/on_life(seconds_per_tick)
 	if(get_dist(owner, friend) > 9)
@@ -43,12 +43,12 @@
 
 //If the friend goes afk, make a brand new friend. Plenty of fish in the sea of imagination.
 /datum/brain_trauma/special/imaginary_friend/proc/reroll_friend()
-	if(friend && friend.client) //reconnected
+	if(friend && friend.client) // BANDASTATION EDIT
 		return
 	friend_initialized = FALSE
 	QDEL_NULL(friend)
 	get_ghost()
-// BANDASTATION EDIT END
+	// make_friend() // BANDASTATION EDIT
 
 /datum/brain_trauma/special/imaginary_friend/proc/make_friend()
 	friend = new(get_turf(owner))
@@ -72,7 +72,7 @@
 		qdel(src)
 		return
 
-	// BANDASTATION EDIT START
+// BANDASTATION EDIT START: Imaginary friend selection
 	INVOKE_ASYNC(src, PROC_REF(ask_ghost_appearance), ghost)
 
 /datum/brain_trauma/special/imaginary_friend/proc/ask_ghost_appearance(mob/dead/observer/ghost)
@@ -127,7 +127,7 @@
 		friend.copy_tts_from(copied_target)
 	else
 		friend.setup_friend()
-	// BANDASTATION EDIT END
+// BANDASTATION EDIT END: Imaginary friend selection
 
 	friend_initialized = TRUE
 	friend.log_message("became [key_name(owner)]'s split personality.", LOG_GAME)
@@ -150,12 +150,12 @@
 	var/mob/living/owner
 	var/bubble_icon = "default"
 
-	// BANDASTATION EDIT START
 	/// Max distance we can be from our owner before we teleport to them
 	var/distance_allowance = 9
 	/// If TRUE, we must keep line of sight with the owner
 	var/require_los = FALSE
-	// BANDASTATION EDIT END
+	/// Whether our host and other imaginary friends can hear us only when nearby or practically anywhere.
+	var/extended_message_range = FALSE
 
 /mob/eye/imaginary_friend/Login()
 	. = ..()
@@ -190,6 +190,17 @@
 		owner.imaginary_group = list(owner)
 	owner.imaginary_group += src
 	greet()
+	
+// BANDASTATION EDIT START
+/**
+/// Copies appearance from passed player prefs, or randomises them if none are provided
+/mob/eye/imaginary_friend/proc/setup_appearance(datum/preferences/appearance_from_prefs = null)
+	if(appearance_from_prefs)
+		INVOKE_ASYNC(src, PROC_REF(setup_friend_from_prefs), appearance_from_prefs)
+	else
+		INVOKE_ASYNC(src, PROC_REF(setup_friend))
+**/
+// BANDASTATION EDIT END
 
 /// Randomise friend name and appearance
 /mob/eye/imaginary_friend/proc/setup_friend()
@@ -242,17 +253,13 @@
 			group_clients += person.client
 	return group_clients
 
-// BANDASTATION EDIT START
 /mob/eye/imaginary_friend/proc/Show()
-	if(!owner)
+	if(!client || !owner) //nobody home
 		return
 
-	var/list/friend_clients = group_clients()
-	if(src.client)
-		friend_clients -= src.client
-
+	var/list/friend_clients = group_clients() - src.client
+	//Remove old image from group
 	remove_image_from_clients(current_image, friend_clients)
-	// BANDASTATION EDIT END
 
 	//Generate image from the static icon and the current dir
 	current_image = image(human_icon, src, , MOB_LAYER, dir=src.dir)
@@ -321,11 +328,13 @@
 	message = check_for_custom_say_emote(message, message_mods)
 	message = capitalize(message)
 
-	// BANDASTATION EDIT START
 	if(message_mods[MODE_SING])
 		var/randomnote = pick("♩", "♪", "♫")
 		message = "[randomnote] [capitalize(message)] [randomnote]"
 		spans |= SPAN_SINGING
+
+	if(extended_message_range)
+		range = IMAGINARY_FRIEND_EXTENDED_SPEECH_RANGE
 
 	var/eavesdrop_range = 0
 
@@ -344,17 +353,16 @@
 	Hear(src, language, message, null, null, null, spans, message_mods) // We always hear what we say
 	var/group = owner.imaginary_group - src // The people in our group don't, so we have to exclude ourselves not to hear twice
 
-	var/list/actual_hearers = list(src)
+	var/list/actual_hearers = list(src) // BANDASTATION EDIT: Imaginary friend selection
 
 	for(var/mob/person in group)
 		person.Hear(src, language, message, null, null, null, spans, message_mods, range)
 
 	// Speech bubble, who was within range and had runechat turned off
 	var/list/speech_bubble_recipients = list()
-	for(var/mob/user in actual_hearers)
+	for(var/mob/user in actual_hearers) // BANDASTATION EDIT START: Imaginary friend selection
 		if((safe_read_pref(user.client, /datum/preference/toggle/enable_runechat) || (SSlag_switch.measures[DISABLE_RUNECHAT] && !HAS_TRAIT(src, TRAIT_BYPASS_MEASURES))))
 			speech_bubble_recipients.Add(user.client)
-			// BANDASTATION EDIT END
 
 	var/image/bubble = image('icons/mob/effects/talk.dmi', src, "[bubble_type][say_test(message)]", FLY_LAYER)
 	SET_PLANE_EXPLICIT(bubble, ABOVE_GAME_PLANE, src)
@@ -508,13 +516,12 @@
 	remove_thinking_indicator()
 	remove_typing_indicator()
 
-// BANDASTATION EDIT START
-/mob/eye/imaginary_friend/Move(atom/NewLoc, Dir = 0)
+/mob/eye/imaginary_friend/Move(atom/NewLoc, Dir = 0) // BANDASTATION EDIT: Imaginary friend movement
 	if(world.time < move_delay)
 		return FALSE
-
 	setDir(Dir)
 
+	// BANDASTATION EDIT START: Imaginary friend movement
 	if(!hidden && NewLoc)
 		if(!NewLoc.CanPass(src, NewLoc))
 			return FALSE
@@ -526,21 +533,22 @@
 
 			if(!AM.CanPass(src, NewLoc) && !istype(AM, /obj/structure/railing))
 				return FALSE
+	// BANDASTATION EDIT END: Imaginary friend movement
 
 	if(get_dist(src, owner) > distance_allowance || (require_los && !can_see(owner, src, distance_allowance)))
 		recall()
 		move_delay = world.time + 10
 		return FALSE
-
 	abstract_move(NewLoc)
 
+	// BANDASTATION EDIT START: Imaginary friend movement
 	var/delay_modifier = hidden ? 1 : 2
 
 	if((Dir & (Dir - 1)) && !hidden)
 		delay_modifier = 3
 
 	move_delay = world.time + delay_modifier
-	// BANDASTATION EDIT END
+	// BANDASTATION EDIT END: Imaginary friend movement
 
 /mob/eye/imaginary_friend/setDir(newdir)
 	. = ..()
@@ -587,12 +595,12 @@
 	var/mob/eye/imaginary_friend/fake_friend = owner
 	fake_friend.hidden = !fake_friend.hidden
 
-	// BANDASTATION EDIT START
+	// BANDASTATION EDIT START: Imaginary friend selection
 	if(fake_friend.hidden)
 		to_chat(fake_friend, span_notice("Вы прячетесь. Теперь вы бестелесны и можете проходить сквозь стены."))
 	else
 		to_chat(fake_friend, span_notice("Вы появляетесь на виду и теперь двигаетесь как обычный человек."))
-	// BANDASTATION EDIT END
+	// BANDASTATION EDIT END : Imaginary friend selection
 
 	fake_friend.Show()
 	build_all_button_icons(UPDATE_BUTTON_NAME|UPDATE_BUTTON_ICON)

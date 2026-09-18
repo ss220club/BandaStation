@@ -1,3 +1,7 @@
+// BANDASTATION EDIT START
+// #define CHOICE_RANDOM_APPEARANCE "Random"
+// #define CHOICE_PREFS_APPEARANCE "Look-a-like"
+// BANDASTATION EDIT END#define CHOICE_PICK_PLAYER "Pick player"
 #define CHOICE_PICK_PLAYER "Pick player"
 #define CHOICE_POLL_GHOSTS "Offer to ghosts"
 #define CHOICE_END_THEM "Do it!"
@@ -6,8 +10,8 @@
 /**
  * Custom imaginary friend.
  *
- * Allows the admin to select the ckey to put into the imaginary friend.
- * Appearance is chosen by the player themselves now.
+ * Allows the admin to select the ckey to put into the imaginary friend and whether the imaginary friend looks like the
+ * ckey's character
  *
  * Is not tied to the brain trauma and can be used on all mobs, technically. Including cyborgs and simple/basic mobs.
  *
@@ -15,12 +19,24 @@
  **/
 /datum/smite/custom_imaginary_friend
 	name = "Imaginary Friend (Special)"
+	// var/random_appearance // BANDASTATION EDIT: Imaginary friend selection
 	/// Are we polling for ghosts
 	var/ghost_polling
 	/// How many imaginary friends should be added when polling
 	var/polled_friend_count
 
 /datum/smite/custom_imaginary_friend/configure(client/user)
+	// BANDASTATION EDIT START: Imaginary friend selection
+	/**
+	var/appearance_choice = tgui_alert(user,
+		"Do you want the imaginary friend(s) to share name and appearance with their currently selected character preferences?",
+		"Imaginary Friend Appearance?",
+		list(CHOICE_PREFS_APPEARANCE, CHOICE_RANDOM_APPEARANCE, CHOICE_CANCEL))
+	if (isnull(appearance_choice) || appearance_choice == CHOICE_CANCEL)
+		return FALSE
+	random_appearance = appearance_choice == CHOICE_RANDOM_APPEARANCE
+	**/
+	// BANDASTATION EDIT END: Imaginary friend selection
 	var/client_selection_choice = tgui_alert(user,
 		"Do you want to pick a specific player, or poll for ghosts?",
 		"Imaginary Friend Selection?",
@@ -36,13 +52,14 @@
 			return FALSE
 		polled_friend_count = how_many
 
-		// BANDASTATION EDIT START
+		// BANDASTATION EDIT START: Imaginary friend selection
+		// return TRUE
 		var/confirm_ghosts = tgui_alert(user, "Вы уверены, что хотите предложить роль призракам?", "Подтверждение", list("Да", "Отмена"))
 		if(confirm_ghosts != "Да")
 			return FALSE
 
 	return TRUE
-	// BANDASTATION EDIT END
+	// BANDASTATION EDIT END: Imaginary friend selection
 
 /// Try to offer the role to ghosts
 /datum/smite/custom_imaginary_friend/proc/poll_ghosts(client/user, mob/living/target)
@@ -79,11 +96,11 @@
 		to_chat(user, span_warning("Selected player no longer has a client, aborting."))
 		return
 
-	// BANDASTATION EDIT START
+	// BANDASTATION EDIT START: Imaginary friend selection
 	var/confirm_player = tgui_alert(user, "Вы уверены, что хотите выбрать [friend_candidate_client.ckey]?", "Подтверждение", list("Да", "Отмена"))
 	if(confirm_player != "Да")
 		return
-	// BANDASTATION EDIT END
+	// BANDASTATION EDIT END: Imaginary friend selection
 
 	if(isliving(friend_candidate_client.mob))
 		var/end_them_choice = tgui_alert(user,
@@ -132,8 +149,9 @@
 		to_chat(user, span_warning("No provided imaginary friend candidates had clients, aborting."))
 		return
 
-	// BANDASTATION EDIT START
 	for(var/client/friend_candidate_client as anything in final_clients)
+
+// BANDASTATION EDIT START: Imaginary friend selection
 		INVOKE_ASYNC(src, PROC_REF(setup_friend_async), friend_candidate_client, target)
 
 /datum/smite/custom_imaginary_friend/proc/setup_friend_async(client/friend_candidate_client, mob/living/target)
@@ -195,8 +213,24 @@
 		friend_mob.copy_tts_from(copied_target)
 	else
 		friend_mob.setup_friend()
-		// BANDASTATION EDIT END
 
+	/**
+	var/mob/client_mob = friend_candidate_client.mob
+		if(isliving(client_mob))
+			client_mob.ghostize()
+
+		var/mob/eye/imaginary_friend/friend_mob = client_mob.change_mob_type(
+			new_type = /mob/eye/imaginary_friend,
+			location = get_turf(client_mob),
+			delete_old_mob = TRUE,
+		)
+		friend_mob.attach_to_owner(target)
+		friend_mob.setup_appearance(random_appearance ? null : friend_candidate_client.prefs)
+
+#undef CHOICE_RANDOM_APPEARANCE
+#undef CHOICE_PREFS_APPEARANCE
+**/
+//BANDASTATION EDIT END: Imaginary friend selection
 #undef CHOICE_PICK_PLAYER
 #undef CHOICE_POLL_GHOSTS
 #undef CHOICE_END_THEM
