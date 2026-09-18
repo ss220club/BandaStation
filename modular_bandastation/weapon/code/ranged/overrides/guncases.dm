@@ -310,8 +310,8 @@
 
 /obj/item/storage/toolbox/guncase/pistol/trappiste_small_case
 	icon_state = "yellowcase_s"
-	worn_icon_state = "yellowcase_s"
-	inhand_icon_state = "yellowcase_s"
+	worn_icon_state = "yellowcase"
+	inhand_icon_state = "yellowcase"
 
 /obj/item/storage/toolbox/guncase/pistol/trappiste_small_case/examine(mob/user)
 	. = ..()
