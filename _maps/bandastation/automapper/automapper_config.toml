@@ -363,6 +363,13 @@ required_map = "IceBoxStation.dmm"
 coordinates = [102, 178, 2]
 trait_name = "Station"
 
+[templates.iceboxstation_armory_guns2]
+map_files = ["iceboxstation_armory_guns2.dmm"]
+directory = "_maps/bandastation/automapper/templates/iceboxstation/"
+required_map = "IceBoxStation.dmm"
+coordinates = [102, 179, 3]
+trait_name = "Station"
+
 [templates.iceboxstation_kitchen_zoo]
 map_files = ["iceboxstation_kitchen_zoo.dmm"]
 directory = "_maps/bandastation/automapper/templates/iceboxstation/"

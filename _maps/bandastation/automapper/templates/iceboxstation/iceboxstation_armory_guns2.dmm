@@ -1,0 +1,37 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/obj/structure/railing,
+/obj/structure/cable,
+/obj/machinery/door/firedoor/border_only,
+/obj/effect/turf_decal/tile/red/half/contrasted{
+	dir = 1
+	},
+/obj/structure/rack/gunrack,
+/obj/effect/spawner/armory_spawn/dragnets,
+/turf/open/floor/iron/dark/textured,
+/area/station/security/armory/upper)
+"m" = (
+/obj/effect/turf_decal/tile/red/half/contrasted{
+	dir = 4
+	},
+/obj/structure/rack/gunrack,
+/obj/effect/spawner/armory_spawn/eguns,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/turf/open/floor/iron/dark/textured,
+/area/station/security/armory/upper)
+"s" = (
+/turf/template_noop,
+/area/template_noop)
+
+(1,1,1) = {"
+s
+s
+s
+a
+"}
+(2,1,1) = {"
+m
+s
+s
+s
+"}
