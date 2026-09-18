@@ -92,65 +92,6 @@
 
 	return rejuv_multiplier
 
-/datum/action/cooldown/spell/vampire_specialize
-	name = "Выбрать специализацию"
-	desc = "Выберите подкласс вампира, в который хотите развиться."
-	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
-	cooldown_time = 2 SECONDS
-	button_icon_state = "select_class"
-
-/datum/action/cooldown/spell/vampire_specialize/New(Target)
-	. = ..()
-	add_vampire_ability()
-
-/datum/action/cooldown/spell/vampire_specialize/cast(atom/cast_on)
-	. = ..()
-	ui_interact(owner)
-
-/datum/action/cooldown/spell/vampire_specialize/ui_state(mob/user)
-	return GLOB.always_state
-
-/datum/action/cooldown/spell/vampire_specialize/ui_interact(mob/user, datum/tgui/ui = null)
-	ui = SStgui.try_update_ui(user, src, ui)
-	if(!ui)
-		ui = new(user, src, "SpecMenu", "Меню специализации")
-		ui.set_autoupdate(FALSE)
-		ui.open()
-
-/datum/action/cooldown/spell/vampire_specialize/ui_static_data(mob/user)
-	var/list/subclasses = list()
-	for(var/subclass_type in list(SUBCLASS_UMBRAE, SUBCLASS_HEMOMANCER, SUBCLASS_GARGANTUA, SUBCLASS_DANTALION))
-		var/datum/vampire_subclass/subclass = new subclass_type
-		subclasses += list(subclass.get_ui_data())
-		qdel(subclass)
-	return list("subclasses" = subclasses)
-
-/datum/action/cooldown/spell/vampire_specialize/ui_data(mob/user)
-	var/datum/antagonist/vampire/vamp = get_vampire()
-	return list("selected_subclass" = vamp?.subclass?.id)
-
-/datum/action/cooldown/spell/vampire_specialize/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
-	if(..())
-		return
-	var/datum/antagonist/vampire/vamp = get_vampire()
-
-	if(vamp.subclass)
-		return
-
-	var/list/subclass_types = list(
-		"umbrae" = SUBCLASS_UMBRAE,
-		"hemomancer" = SUBCLASS_HEMOMANCER,
-		"gargantua" = SUBCLASS_GARGANTUA,
-		"dantalion" = SUBCLASS_DANTALION,
-	)
-	var/subclass_type = subclass_types[action]
-	if(!subclass_type)
-		return
-	vamp.add_subclass(subclass_type)
-	ui.close()
-	return TRUE
-
-
 /datum/antagonist/vampire/proc/add_subclass(subclass_to_add, announce = TRUE, log_choice = TRUE)
 	var/datum/vampire_subclass/new_subclass = new subclass_to_add
 	subclass = new_subclass

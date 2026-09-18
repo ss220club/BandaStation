@@ -32,8 +32,8 @@
 	spell_type = /datum/action/cooldown/spell/aoe/vampire_glare
 	gain_desc = "Теперь вы можете использовать взгляд."
 
-/datum/vampire_passive/grant_spell/specialize
-	spell_type = /datum/action/cooldown/spell/vampire_specialize
+
+/datum/vampire_passive/unlock_specialization
 	gain_desc = "Теперь вы можете выбрать вампирскую специализацию для развития."
 
 /datum/vampire_passive/grant_spell/lair

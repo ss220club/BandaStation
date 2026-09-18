@@ -10,7 +10,7 @@
 	stinger_sound = 'modular_bandastation/vampire/sound/misc/vampalert.ogg'
 	antag_flags = parent_type::antag_flags | ANTAG_OBSERVER_VISIBLE_PANEL
 
-	ui_name = "AntagInfoGeneric"
+	ui_name = "AntagInfoVampire"
 	antag_hud_name = "vampire"
 	hud_icon = 'modular_bandastation/vampire/icons/mob/huds/vampire_antag.dmi'
 
@@ -36,11 +36,13 @@
 		/datum/vampire_passive/grant_spell/rejuvenate = 0,
 		/datum/vampire_passive/grant_spell/glare = 0,
 		/datum/vampire_passive/vision = 100,
-		/datum/vampire_passive/grant_spell/specialize = 150,
+		/datum/vampire_passive/unlock_specialization = 150,
 		/datum/vampire_passive/grant_spell/lair = 150,
 		/datum/vampire_passive/regen = 200,
 		/datum/vampire_passive/vision/advanced = 500,
 	)
+	/// Upgrade tiers that have been consumed and should not be granted again.
+	var/list/spent_upgrade_tiers = list()
 
 	/// List of victims' REF IDs we have drained and how much blood from each
 	var/list/drained_humans = list()
@@ -51,6 +53,7 @@
 
 /datum/antagonist/vampire/bodyguard
 	give_objectives = FALSE
+	show_in_antagpanel = FALSE
 
 /datum/antagonist/vampire/Destroy(force, ...)
 	draining = null
@@ -76,6 +79,47 @@
 
 /datum/antagonist/vampire/antag_panel_data()
 	return "Класс: [subclass ? subclass.name : "N/A"] | Всего крови: [bloodtotal] | Доступно крови: [bloodusable]"
+
+/datum/antagonist/vampire/ui_interact(mob/user, datum/tgui/ui)
+	. = ..()
+	ui?.set_autoupdate(FALSE)
+
+/datum/antagonist/vampire/ui_static_data(mob/user)
+	. = ..()
+	var/list/subclasses = list()
+	for(var/subclass_type in list(SUBCLASS_UMBRAE, SUBCLASS_HEMOMANCER, SUBCLASS_GARGANTUA, SUBCLASS_DANTALION))
+		var/datum/vampire_subclass/vampire_subclass = new subclass_type
+		subclasses += list(vampire_subclass.get_ui_data())
+		qdel(vampire_subclass)
+	.["subclasses"] = subclasses
+
+/datum/antagonist/vampire/ui_data(mob/user)
+	return list(
+		"selected_subclass" = subclass?.id,
+		"can_select_subclass" = !!get_ability(/datum/vampire_passive/unlock_specialization),
+	)
+
+/datum/antagonist/vampire/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
+	. = ..()
+	if(.)
+		return
+	if(subclass || !get_ability(/datum/vampire_passive/unlock_specialization))
+		return
+
+	var/list/subclass_types = list(
+		"umbrae" = SUBCLASS_UMBRAE,
+		"hemomancer" = SUBCLASS_HEMOMANCER,
+		"gargantua" = SUBCLASS_GARGANTUA,
+		"dantalion" = SUBCLASS_DANTALION,
+	)
+	var/subclass_type = subclass_types[action]
+	if(!subclass_type)
+		return
+	add_subclass(subclass_type)
+	spent_upgrade_tiers += /datum/vampire_passive/unlock_specialization
+	remove_ability(get_ability(/datum/vampire_passive/unlock_specialization))
+	ui.close()
+	return TRUE
 
 /datum/antagonist/vampire/get_admin_commands()
 	. = ..()
@@ -289,13 +333,15 @@
 
 /datum/antagonist/vampire/proc/clear_subclass(give_specialize_power = TRUE)
 	if(give_specialize_power)
-		upgrade_tiers[/datum/vampire_passive/grant_spell/specialize] = 150
+		spent_upgrade_tiers -= /datum/vampire_passive/unlock_specialization
 	remove_all_powers()
 	QDEL_NULL(subclass)
 	check_vampire_upgrade()
 
 /datum/antagonist/vampire/proc/check_vampire_upgrade(announce = TRUE)
 	for(var/ptype in upgrade_tiers)
+		if(ptype in spent_upgrade_tiers)
+			continue
 		var/level = upgrade_tiers[ptype]
 		if(bloodtotal >= level)
 			add_ability(ptype, announce)
