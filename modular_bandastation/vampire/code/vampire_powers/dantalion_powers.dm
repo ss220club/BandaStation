@@ -60,7 +60,7 @@
 	if(vampire.subclass.thrall_cap <= length(vampire.get_thralls()))
 		to_chat(user, span_warning("У вас недостаточно сил, чтобы подчинить кого-то ещё."))
 		return FALSE
-	if(HAS_TRAIT(target, TRAIT_MINDSHIELD) || HAS_TRAIT(target, VAMPIRE_LIKE_TRAIT) || HAS_MIND_TRAIT(target, TRAIT_HOLY))
+	if(HAS_TRAIT(target, TRAIT_MINDSHIELD) || HAS_TRAIT(target, TRAIT_VAMPIRE_LIKE) || HAS_MIND_TRAIT(target, TRAIT_HOLY))
 		target.visible_message(span_warning("[capitalize(target.declent_ru(NOMINATIVE))], похоже, сопротивляется подчинению!"), span_notice("Вы чувствуете знакомое ощущение в голове, быстро исчезающее без следа."))
 		return FALSE
 	return TRUE

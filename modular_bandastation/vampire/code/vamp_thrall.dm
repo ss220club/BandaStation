@@ -42,7 +42,7 @@
 	var/mob/living/thrall_mob = mob_override || owner.current
 	if(!thrall_mob)
 		return
-	ADD_TRAIT(thrall_mob, VAMPIRE_LIKE_TRAIT, REF(src))
+	ADD_TRAIT(thrall_mob, TRAIT_VAMPIRE_LIKE, REF(src))
 	if(ishuman(thrall_mob))
 		thrall_mob.AddComponent(/datum/component/vampire_holywater)
 	if(thrall_commune)
@@ -55,7 +55,7 @@
 	var/datum/antagonist/vampire/master = get_master()
 	var/mob/living/thrall_mob = mob_override || owner.current
 	if(thrall_mob)
-		REMOVE_TRAIT(thrall_mob, VAMPIRE_LIKE_TRAIT, REF(src))
+		REMOVE_TRAIT(thrall_mob, TRAIT_VAMPIRE_LIKE, REF(src))
 	if(ishuman(thrall_mob))
 		var/datum/component/vampire_holywater/vampire_holywater = thrall_mob.GetComponent(/datum/component/vampire_holywater)
 		QDEL_NULL(vampire_holywater)

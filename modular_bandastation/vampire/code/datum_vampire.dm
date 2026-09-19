@@ -206,8 +206,8 @@
 	var/mob/living/vampire_mob = mob_override || owner.current
 	if(!vampire_mob)
 		return
-	ADD_TRAIT(vampire_mob, VAMPIRE_TRAIT, REF(src))
-	ADD_TRAIT(vampire_mob, VAMPIRE_LIKE_TRAIT, REF(src))
+	ADD_TRAIT(vampire_mob, TRAIT_VAMPIRE, REF(src))
+	ADD_TRAIT(vampire_mob, TRAIT_VAMPIRE_LIKE, REF(src))
 	if(!ishuman(vampire_mob))
 		return
 
@@ -230,8 +230,8 @@
 	var/mob/living/vampire_mob = mob_override || owner.current
 	if(!vampire_mob)
 		return
-	REMOVE_TRAIT(vampire_mob, VAMPIRE_TRAIT, REF(src))
-	REMOVE_TRAIT(vampire_mob, VAMPIRE_LIKE_TRAIT, REF(src))
+	REMOVE_TRAIT(vampire_mob, TRAIT_VAMPIRE, REF(src))
+	REMOVE_TRAIT(vampire_mob, TRAIT_VAMPIRE_LIKE, REF(src))
 	if(!ishuman(vampire_mob))
 		return
 
