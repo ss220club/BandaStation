@@ -16,7 +16,7 @@
 	var/block_chance_two_handed = 50
 	block_sound = 'sound/items/weapons/block_blade.ogg'
 
-	slot_flags = ITEM_SLOT_BELT | ITEM_SLOT_BACK | ITEM_SLOT_OCLOTHING
+	slot_flags = ITEM_SLOT_BELT | ITEM_SLOT_BACK | ITEM_SLOT_SUITSTORE
 	w_class = WEIGHT_CLASS_BULKY
 	force = 5
 	var/two_hand_force = 10
