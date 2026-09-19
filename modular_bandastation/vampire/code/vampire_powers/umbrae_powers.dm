@@ -12,36 +12,16 @@
 /datum/action/cooldown/spell/vampire_cloak/cast(atom/cast_on)
 	. = ..()
 	var/mob/living/carbon/human/user = owner
-	var/datum/antagonist/vampire/vampire = get_vampire()
+	var/cloak_state
 	if(istype(user))
-		if(!vampire.iscloaking)
-			vampire.iscloaking = TRUE
-			MODIFY_PHYSIOLOGY(user, BURN, 1.1)
-			RegisterSignal(user, COMSIG_LIVING_IGNITED, PROC_REF(update_vampire_cloak))
-		else
-			disable_cloak(user)
-	to_chat(user, span_notice("Теперь во тьме вас будут [vampire.iscloaking ? "не замечать" : "видеть"]."))
+		cloak_state = SEND_SIGNAL(owner, COMSIG_VAMPIRE_ABILITY_TOGGLE_CLOAK)
+	to_chat(user, span_notice("Теперь во тьме вас будут [cloak_state & COMPONENT_VAMPIRE_ABILITY_CLOAK_ENABLED ? "не замечать" : "видеть"]."))
 
 
 /datum/action/cooldown/spell/vampire_cloak/Remove(mob/living/removed_from)
-	if(ishuman(removed_from))
-		var/mob/living/carbon/human/user = removed_from
-		disable_cloak(user)
+	if(removed_from)
+		SEND_SIGNAL(removed_from, COMSIG_VAMPIRE_ABILITY_DISABLE_CLOAK)
 	return ..()
-
-/datum/action/cooldown/spell/vampire_cloak/proc/disable_cloak(mob/living/carbon/human/user)
-	var/datum/antagonist/vampire/vampire = get_vampire()
-	if(!vampire?.iscloaking)
-		return
-	vampire.iscloaking = FALSE
-	UnregisterSignal(user, COMSIG_LIVING_IGNITED)
-	MODIFY_PHYSIOLOGY(user, BURN, 1 / 1.1)
-
-/datum/action/cooldown/spell/vampire_cloak/proc/update_vampire_cloak(datum/source)
-	SIGNAL_HANDLER
-	var/mob/living/user = owner
-	var/datum/antagonist/vampire/vampire = get_vampire()
-	vampire?.handle_vampire_cloak(user)
 
 /datum/action/cooldown/spell/pointed/vampire_shadow_snare
 	name = "Теневая ловушка"
@@ -309,43 +289,11 @@
 
 /datum/action/cooldown/spell/vampire_eternal_darkness/cast(atom/cast_on)
 	. = ..()
-	var/datum/antagonist/vampire/vampire = get_vampire()
-	var/datum/vampire_passive/eternal_darkness/darkness = vampire.get_ability(/datum/vampire_passive/eternal_darkness)
-	if(darkness)
-		vampire.remove_ability(darkness)
-	else
-		owner.set_light(8, -6, "#ddd6cf")
-		vampire.force_add_ability(/datum/vampire_passive/eternal_darkness)
+	SEND_SIGNAL(owner, COMSIG_VAMPIRE_OWNER_TOGGLE_ETERNAL_DARKNESS)
 
-/datum/vampire_passive/eternal_darkness
-	gain_desc = "Вы окружаете себя противоестественной тьмой, замораживая тех, кто рядом, и ослабляя энергетические снаряды."
-
-/datum/vampire_passive/eternal_darkness/New()
-	. = ..()
-	START_PROCESSING(SSfastprocess, src)
-
-/datum/vampire_passive/eternal_darkness/Destroy(force, ...)
-	owner.set_light(0)
-	STOP_PROCESSING(SSfastprocess, src)
+/datum/action/cooldown/spell/vampire_eternal_darkness/Remove(mob/living/removed_from)
+	removed_from?.remove_status_effect(/datum/status_effect/vampire_eternal_darkness)
 	return ..()
-
-/datum/vampire_passive/eternal_darkness/process(seconds_per_tick)
-	if(!owner)
-		return
-	var/datum/antagonist/vampire/vampire = owner.mind?.has_antag_datum(/datum/antagonist/vampire)
-	for(var/atom/target as mob|obj in view(8, owner))
-		if(isliving(target))
-			var/mob/living/living_target = target
-			if(living_target.affects_vampire(owner))
-				living_target.adjust_bodytemperature(-15 * TEMPERATURE_DAMAGE_COEFFICIENT * seconds_per_tick)
-		else if(isprojectile(target))
-			var/obj/projectile/projectile = target
-			if(projectile.armor_flag == ENERGY || projectile.armor_flag == LASER)
-				projectile.damage *= 0.7 ** (seconds_per_tick / 0.2)
-
-	vampire.subtract_usable_blood(1.25 * seconds_per_tick)
-	if(!vampire.bloodusable || owner.stat == DEAD)
-		vampire.remove_ability(src)
 
 /datum/vampire_passive/vision/xray
 	gain_desc = "Теперь вы видите сквозь стены — если вдруг не заметили."

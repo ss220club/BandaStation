@@ -40,13 +40,8 @@
 		return
 	if(QDELETED(user) || QDELETED(target) || !can_enthrall(user, target))
 		return
-	var/datum/antagonist/vampire/vampire = get_vampire()
-	if(!vampire)
-		return
 	SEND_SIGNAL(src, COMSIG_VAMPIRE_ABILITY_DEDUCT_BLOOD)
-	var/datum/antagonist/vampire_thrall/thrall = new(vampire)
-	if(!target.mind.add_antag_datum(thrall))
-		qdel(thrall)
+	if(!(SEND_SIGNAL(owner, COMSIG_VAMPIRE_ABILITY_ENTHRALL, target) & COMPONENT_VAMPIRE_ABILITY_ENTHRALLED))
 		to_chat(user, span_warning("Разум [target.declent_ru(ACCUSATIVE)] ускользает из вашей хватки."))
 		return
 	target.Stun(4 SECONDS)
@@ -56,8 +51,7 @@
 	if(!target.mind)
 		to_chat(user, span_warning("Разум [target.declent_ru(ACCUSATIVE)] недоступен для подчинения."))
 		return FALSE
-	var/datum/antagonist/vampire/vampire = get_vampire()
-	if(vampire.subclass.thrall_cap <= length(vampire.get_thralls()))
+	if(!(SEND_SIGNAL(owner, COMSIG_VAMPIRE_ABILITY_CAN_ENTHRALL) & COMPONENT_VAMPIRE_ABILITY_CAN_ENTHRALL))
 		to_chat(user, span_warning("У вас недостаточно сил, чтобы подчинить кого-то ещё."))
 		return FALSE
 	if(HAS_TRAIT(target, TRAIT_MINDSHIELD) || HAS_TRAIT(target, TRAIT_VAMPIRE_LIKE) || HAS_MIND_TRAIT(target, TRAIT_HOLY))
@@ -82,11 +76,9 @@
 /datum/action/cooldown/spell/vampire_commune/cast(atom/cast_on)
 	. = ..()
 	var/mob/living/user = owner
-	var/datum/antagonist/vampire/vampire = get_vampire()
-	var/datum/antagonist/vampire_thrall/speaker_thrall = user.mind?.has_antag_datum(/datum/antagonist/vampire_thrall)
-	if(!vampire)
-		vampire = speaker_thrall?.get_master()
-	if(!vampire?.owner?.current)
+	var/list/recipients = list()
+	SEND_SIGNAL(owner, COMSIG_VAMPIRE_NETWORK_GET_RECIPIENTS, recipients)
+	if(!length(recipients))
 		to_chat(user, span_warning("Ваша связь с хозяином угасла."))
 		return
 
@@ -105,20 +97,17 @@
 		message_admins("[ADMIN_LOOKUPFLW(user)] has passed the soft filter for \"[soft_filter_result[CHAT_FILTER_INDEX_WORD]]\". Message: \"[html_encode(message)]\"")
 		log_admin_private("[key_name(user)] has passed the soft filter for \"[soft_filter_result[CHAT_FILTER_INDEX_WORD]]\". Message: \"[message]\"")
 
-	if(QDELETED(src) || QDELETED(user) || !vampire.owner?.current)
+	if(QDELETED(src) || QDELETED(user) || !length(recipients))
 		if(!QDELETED(user))
 			to_chat(user, span_warning("Ваша связь с хозяином угасла."))
 		return
 
-	var/title = speaker_thrall ? "Раб" : "Вампир-хозяин"
-	var/span = speaker_thrall ? "hypnophrase italics" : "hypnophrase bold"
+	var/is_thrall = HAS_TRAIT(user, TRAIT_VAMPIRE_LIKE) && !HAS_TRAIT(user, TRAIT_VAMPIRE)
+	var/title = is_thrall ? "Раб" : "Вампир-хозяин"
+	var/span = is_thrall ? "hypnophrase italics" : "hypnophrase bold"
 	var/speaker_name = findtextEx(user.name, user.real_name) ? user.name : "[user.real_name] (в облике [user.name])"
 	var/formatted_message = "<span class='[span]'><b>[title] [speaker_name]:</b> [message]</span>"
-	var/list/recipients = list(vampire.owner.current)
-	for(var/datum/antagonist/vampire_thrall/network_thrall as anything in vampire.get_thralls())
-		if(network_thrall.owner?.current)
-			recipients |= network_thrall.owner.current
-	for(var/mob/living/recipient as anything in recipients)
+	for(var/mob/living/recipient in recipients)
 		to_chat(recipient, formatted_message, type = MESSAGE_TYPE_RADIO, avoid_highlighting = recipient == user)
 		if(recipient != user)
 			user.cast_tts(
@@ -217,10 +206,7 @@
 
 /datum/action/cooldown/spell/aoe/vampire_rally_thralls/get_things_to_cast_on(atom/center)
 	. = list()
-	var/datum/antagonist/vampire/vampire = get_vampire()
-	for(var/datum/antagonist/vampire_thrall/thrall as anything in vampire?.get_thralls())
-		if(thrall.owner?.current && get_dist(center, thrall.owner.current) <= aoe_radius)
-			. += thrall.owner.current
+	SEND_SIGNAL(owner, COMSIG_VAMPIRE_ABILITY_GET_THRALLS_IN_RANGE, center, aoe_radius, .)
 
 /datum/action/cooldown/spell/aoe/vampire_rally_thralls/cast_on_thing_in_aoe(mob/living/carbon/human/thrall, atom/caster)
 	var/image/overlay = image('modular_bandastation/vampire/icons/effects/vampire_effects.dmi', "rallyoverlay", layer = EFFECTS_LAYER)
@@ -249,7 +235,7 @@
 	if(net)
 		qdel(net)
 	else
-		user.apply_status_effect(/datum/status_effect/vampire_thrall_net, get_vampire())
+		SEND_SIGNAL(owner, COMSIG_VAMPIRE_ABILITY_TOGGLE_THRALL_NET)
 
 /datum/action/cooldown/spell/aoe/vampire_hysteria
 	name = "Массовая истерия"

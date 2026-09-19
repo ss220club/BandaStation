@@ -122,10 +122,8 @@
 	var/obj/machinery/door/door = bumped
 	if(!door.density || door.operating || door.locked || door.allowed(owner))
 		return
-	var/datum/antagonist/vampire/vampire = get_vampire()
-	if(!vampire?.bloodusable)
+	if(!(SEND_SIGNAL(src, COMSIG_VAMPIRE_ABILITY_CONSUME_BLOOD, 5) & COMPONENT_VAMPIRE_ABILITY_BLOOD_CONSUMED))
 		return
-	vampire.subtract_usable_blood(5)
 	INVOKE_ASYNC(door, TYPE_PROC_REF(/obj/machinery/door, open), BYPASS_DOOR_CHECKS)
 
 /datum/action/cooldown/spell/vampire_blood_rush

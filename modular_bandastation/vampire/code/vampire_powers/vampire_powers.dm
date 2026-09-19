@@ -57,11 +57,8 @@
 	user.set_resting(FALSE, instant = TRUE)
 
 	to_chat(user, span_notice("Вы наполняете тело чистой кровью и снимаете все обездвиживающие эффекты."))
-	var/datum/antagonist/vampire/vampire = get_vampire()
-	if(!vampire)
-		return
-
-	var/rejuv_mult = vampire.get_rejuv_mult()
+	var/rejuv_mult = 0
+	SEND_SIGNAL(owner, COMSIG_VAMPIRE_ABILITY_GET_REJUV_MULT, &rejuv_mult)
 	if(rejuv_mult)
 		heal(user, rejuv_mult)
 
@@ -285,9 +282,7 @@
 	playsound(user, 'modular_bandastation/vampire/sound/misc/im_here1.ogg', 30)
 	new /obj/structure/closet/crate/coffin/vampire(get_turf(coffin), user, rune)
 	qdel(coffin)
-	var/datum/antagonist/vampire/V = get_vampire()
-	V.has_lair = TRUE
-	V.remove_spell_ability(src)
+	SEND_SIGNAL(owner, COMSIG_VAMPIRE_ABILITY_COMPLETE_LAIR, src)
 
 /obj/structure/closet/crate/coffin/vampire
 	name = "vampire coffin"

@@ -78,7 +78,7 @@
 		user.adjust_stamina_loss(-20 * heal_boost)
 		user.heal_overall_damage(4 * heal_boost, 4 * heal_boost)
 		user.AdjustKnockdown(-1 SECONDS * heal_boost)
-	if(!vampire.get_ability(/datum/vampire_passive/blood_spill) && !--durability)
+	if(!user.has_status_effect(/datum/status_effect/vampire_blood_spill) && !--durability)
 		to_chat(user, span_warning("Ваши когти разбиваются!"))
 		qdel(src)
 
@@ -315,45 +315,8 @@
 
 /datum/action/cooldown/spell/vampire_blood_spill/cast(atom/cast_on)
 	. = ..()
-	var/datum/antagonist/vampire/vampire = get_vampire()
-	var/datum/vampire_passive/blood_spill/rite = vampire.get_ability(/datum/vampire_passive/blood_spill)
-	if(rite)
-		vampire.remove_ability(rite)
-	else
-		vampire.force_add_ability(/datum/vampire_passive/blood_spill)
+	SEND_SIGNAL(owner, COMSIG_VAMPIRE_OWNER_TOGGLE_BLOOD_SPILL)
 
-/datum/vampire_passive/blood_spill
-	var/max_beams = 10
-
-/datum/vampire_passive/blood_spill/New()
-	. = ..()
-	START_PROCESSING(SSobj, src)
-
-/datum/vampire_passive/blood_spill/Destroy(force, ...)
-	STOP_PROCESSING(SSobj, src)
+/datum/action/cooldown/spell/vampire_blood_spill/Remove(mob/living/removed_from)
+	removed_from?.remove_status_effect(/datum/status_effect/vampire_blood_spill)
 	return ..()
-
-/datum/vampire_passive/blood_spill/process(seconds_per_tick)
-	if(!owner)
-		return
-	var/datum/antagonist/vampire/vampire = owner.mind?.has_antag_datum(/datum/antagonist/vampire)
-	if(!vampire)
-		return
-	var/beam_number = 0
-	for(var/mob/living/carbon/human/target in view(7, owner))
-		if(!target.get_blood_volume() || !target.affects_vampire(owner) || target.stat)
-			continue
-		var/drain_amount = rand(5, 10) * seconds_per_tick / 2
-		target.bleed(drain_amount)
-		target.Beam(owner, icon_state = "drainbeam", time = seconds_per_tick SECONDS)
-		target.adjust_brute_loss(seconds_per_tick)
-		owner.heal_overall_damage(4 * seconds_per_tick, seconds_per_tick, TRUE)
-		owner.adjust_stamina_loss(-7.5 * seconds_per_tick)
-		owner.AdjustStun(-seconds_per_tick SECONDS)
-		owner.AdjustKnockdown(-seconds_per_tick SECONDS)
-		owner.AdjustImmobilized(-seconds_per_tick SECONDS)
-		if(++beam_number >= max_beams)
-			break
-	vampire.subtract_usable_blood(5 * seconds_per_tick)
-	if(!vampire.bloodusable || owner.stat == DEAD)
-		vampire.remove_ability(src)

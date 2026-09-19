@@ -16,6 +16,7 @@
 	RegisterSignal(parent, COMSIG_SPELL_BEFORE_CAST, PROC_REF(before_cast))
 	RegisterSignal(parent, COMSIG_SPELL_AFTER_CAST, PROC_REF(after_cast))
 	RegisterSignal(parent, COMSIG_VAMPIRE_ABILITY_DEDUCT_BLOOD, PROC_REF(deduct_blood))
+	RegisterSignal(parent, COMSIG_VAMPIRE_ABILITY_CONSUME_BLOOD, PROC_REF(consume_blood))
 
 /datum/component/vampire_ability/proc/set_vampire(datum/antagonist/vampire/vampire)
 	vampire_ref = WEAKREF(vampire)
@@ -65,6 +66,14 @@
 	var/datum/antagonist/vampire/vampire = get_vampire()
 	vampire?.subtract_usable_blood(calculate_blood_cost(vampire))
 
+/datum/component/vampire_ability/proc/consume_blood(datum/action/cooldown/spell/spell, blood_amount)
+	SIGNAL_HANDLER
+	var/datum/antagonist/vampire/vampire = get_vampire()
+	if(!vampire?.bloodusable)
+		return
+	vampire.subtract_usable_blood(blood_amount)
+	return COMPONENT_VAMPIRE_ABILITY_BLOOD_CONSUMED
+
 /datum/component/vampire_ability/proc/after_cast(datum/action/cooldown/spell/spell, atom/cast_on)
 	SIGNAL_HANDLER
 	if(!required_blood)
@@ -83,6 +92,3 @@
 	overlay_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	overlay_icon_state = "bg_vampire_border"
 	AddComponent(/datum/component/vampire_ability, required_blood, deduct_blood_on_cast)
-
-/datum/action/cooldown/spell/proc/get_vampire() as /datum/antagonist/vampire
-	return GetComponent(/datum/component/vampire_ability)?.get_vampire()

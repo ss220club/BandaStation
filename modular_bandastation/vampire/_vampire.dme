@@ -13,6 +13,7 @@
 #include "code/vampire_holywater.dm"
 #include "code/vampire_hud.dm"
 #include "code/vampire_objectives.dm"
+#include "code/vampire_owner_abilities.dm"
 #include "code/vampire_powers/dantalion_powers.dm"
 #include "code/vampire_powers/gargantua_powers.dm"
 #include "code/vampire_powers/hemomancer_powers.dm"

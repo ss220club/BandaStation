@@ -216,6 +216,7 @@
 	human_target.AddComponent(/datum/component/vampire_biter)
 	human_target.AddComponent(/datum/component/vampire_holywater)
 	human_target.AddComponent(/datum/component/vampire_coffin_regeneration)
+	human_target.AddComponent(/datum/component/vampire_owner_abilities, src)
 
 	update_blood_hud()
 	check_vampire_upgrade(FALSE)
@@ -247,6 +248,8 @@
 	QDEL_NULL(vampire_holywater)
 	var/datum/component/vampire_coffin_regeneration = human_target.GetComponent(/datum/component/vampire_coffin_regeneration)
 	QDEL_NULL(vampire_coffin_regeneration)
+	var/datum/component/vampire_owner_abilities/vampire_owner_abilities = human_target.GetComponent(/datum/component/vampire_owner_abilities)
+	QDEL_NULL(vampire_owner_abilities)
 	human_target.alpha = 255
 
 	UnregisterSignal(vampire_mob, list(

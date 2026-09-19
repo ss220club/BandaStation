@@ -240,3 +240,68 @@
 		return
 
 	living_target.adjust_brute_loss(brute_damage_amount)
+
+/datum/status_effect/vampire_blood_spill
+	id = "vampire_blood_spill"
+	tick_interval = 2 SECONDS
+	alert_type = null
+	var/datum/weakref/vampire_ref
+
+/datum/status_effect/vampire_blood_spill/on_creation(mob/living/new_owner, datum/weakref/new_vampire_ref)
+	vampire_ref = new_vampire_ref
+	return ..()
+
+/datum/status_effect/vampire_blood_spill/tick(seconds_between_ticks)
+	var/datum/antagonist/vampire/vampire = vampire_ref?.resolve()
+	if(!vampire || owner.stat == DEAD || !vampire.bloodusable)
+		qdel(src)
+		return
+	var/beam_number = 0
+	for(var/mob/living/carbon/human/target in view(7, owner))
+		if(!target.get_blood_volume() || !target.affects_vampire(owner) || target.stat)
+			continue
+		var/drain_amount = rand(5, 10) * seconds_between_ticks / 2
+		target.bleed(drain_amount)
+		target.Beam(owner, icon_state = "drainbeam", time = seconds_between_ticks SECONDS)
+		target.adjust_brute_loss(seconds_between_ticks)
+		owner.heal_overall_damage(4 * seconds_between_ticks, seconds_between_ticks, TRUE)
+		owner.adjust_stamina_loss(-7.5 * seconds_between_ticks)
+		owner.AdjustStun(-seconds_between_ticks SECONDS)
+		owner.AdjustKnockdown(-seconds_between_ticks SECONDS)
+		owner.AdjustImmobilized(-seconds_between_ticks SECONDS)
+		if(++beam_number >= 10)
+			break
+	vampire.subtract_usable_blood(5 * seconds_between_ticks)
+
+/datum/status_effect/vampire_eternal_darkness
+	id = "vampire_eternal_darkness"
+	tick_interval = 1 SECONDS
+	alert_type = null
+	var/datum/weakref/vampire_ref
+
+/datum/status_effect/vampire_eternal_darkness/on_creation(mob/living/new_owner, datum/weakref/new_vampire_ref)
+	vampire_ref = new_vampire_ref
+	return ..()
+
+/datum/status_effect/vampire_eternal_darkness/on_apply()
+	owner.set_light(8, -6, "#ddd6cf")
+	return TRUE
+
+/datum/status_effect/vampire_eternal_darkness/on_remove()
+	owner.set_light(0)
+
+/datum/status_effect/vampire_eternal_darkness/tick(seconds_between_ticks)
+	var/datum/antagonist/vampire/vampire = vampire_ref?.resolve()
+	if(!vampire || owner.stat == DEAD || !vampire.bloodusable)
+		qdel(src)
+		return
+	for(var/atom/target as mob|obj in view(8, owner))
+		if(isliving(target))
+			var/mob/living/living_target = target
+			if(living_target.affects_vampire(owner))
+				living_target.adjust_bodytemperature(-15 * TEMPERATURE_DAMAGE_COEFFICIENT * seconds_between_ticks)
+		else if(isprojectile(target))
+			var/obj/projectile/projectile = target
+			if(projectile.armor_flag == ENERGY || projectile.armor_flag == LASER)
+				projectile.damage *= 0.7 ** (seconds_between_ticks / 0.2)
+	vampire.subtract_usable_blood(1.25 * seconds_between_ticks)
