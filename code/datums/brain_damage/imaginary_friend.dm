@@ -156,7 +156,7 @@
 	/// If TRUE, we must keep line of sight with the owner
 	var/require_los = FALSE
 	/// Whether our host and other imaginary friends can hear us only when nearby or practically anywhere.
-	var/extended_message_range = FALSE
+	var/extended_message_range = FALSE // BANDASTATION EDIT
 
 /mob/eye/imaginary_friend/Login()
 	. = ..()
@@ -273,8 +273,7 @@
 	if(!hidden)
 		add_image_to_clients(current_image, friend_clients)
 
-	if(src.client)
-		src.client.images |= current_image
+	src.client.images |= current_image
 
 /mob/eye/imaginary_friend/Destroy()
 	owner.client?.images -= current_image
@@ -356,10 +355,9 @@
 	var/list/actual_hearers = list(src) // BANDASTATION EDIT: Imaginary friend selection
 
 	for(var/mob/person in group)
-		if(get_dist(src, person) <= 7)
-			person.Hear(src, language, message, null, null, null, spans, message_mods, range)
+		person.Hear(src, language, message, null, null, null, spans, message_mods, range)
 
-	// Speech bubble, who was within range and had runechat turned off
+	// Speech bubble, but only for those who have runechat off
 	var/list/speech_bubble_recipients = list()
 	for(var/mob/user in actual_hearers) // BANDASTATION EDIT: Imaginary friend selection
 		if((safe_read_pref(user.client, /datum/preference/toggle/enable_runechat) || (SSlag_switch.measures[DISABLE_RUNECHAT] && !HAS_TRAIT(src, TRAIT_BYPASS_MEASURES))))

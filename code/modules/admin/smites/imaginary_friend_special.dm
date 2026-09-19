@@ -52,7 +52,7 @@
 			return FALSE
 		polled_friend_count = how_many
 
-		// BANDASTATION EDIT START: Imaginary friend selection
+	// BANDASTATION EDIT START: Imaginary friend selection
 		// return TRUE
 		var/confirm_ghosts = tgui_alert(user, "Вы уверены, что хотите предложить роль призракам?", "Подтверждение", list("Да", "Отмена"))
 		if(confirm_ghosts != "Да")
@@ -214,7 +214,7 @@
 	else
 		friend_mob.setup_friend()
 
-	/**
+/**
 	var/mob/client_mob = friend_candidate_client.mob
 		if(isliving(client_mob))
 			client_mob.ghostize()
