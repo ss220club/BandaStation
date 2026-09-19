@@ -10,6 +10,7 @@
 #include "code/spell_handler.dm"
 #include "code/vampire_bite.dm"
 #include "code/vampire_coffin_regeneration.dm"
+#include "code/vampire_effects.dm"
 #include "code/vampire_holywater.dm"
 #include "code/vampire_hud.dm"
 #include "code/vampire_objectives.dm"

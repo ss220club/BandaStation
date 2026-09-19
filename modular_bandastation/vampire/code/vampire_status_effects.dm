@@ -168,7 +168,8 @@
 		return
 	source.do_attack_animation(owner, ATTACK_EFFECT_PUNCH)
 	owner.apply_damage(8, BRUTE)
-	shadow_to_animation(get_turf(source), get_turf(owner), source)
+	var/obj/effect/immortality_talisman/effect = new(get_turf(source))
+	effect.shadow_to_animation(get_turf(owner), source)
 
 /datum/status_effect/vampire_charging
 	id = "vampire_charging"

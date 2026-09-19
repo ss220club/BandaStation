@@ -174,21 +174,13 @@
 	else
 		if(!do_teleport(user, end_turf, channel = TELEPORT_CHANNEL_MAGIC))
 			return
-	shadow_to_animation(start_turf, end_turf, user)
+	var/obj/effect/immortality_talisman/effect = new(start_turf)
+	effect.shadow_to_animation(end_turf, user)
 	SEND_SIGNAL(src, COMSIG_VAMPIRE_ABILITY_DEDUCT_BLOOD)
 
 /datum/action/cooldown/spell/vampire_soul_anchor/proc/restore_visibility(mob/living/user, previous_alpha)
 	if(!QDELETED(user))
 		user.alpha = previous_alpha
-
-/proc/shadow_to_animation(turf/start_turf, turf/end_turf, mob/user)
-	var/obj/effect/immortality_talisman/effect = new(start_turf)
-	effect.dir = user.dir
-	var/x_difference = end_turf.x - start_turf.x
-	var/y_difference = end_turf.y - start_turf.y
-	var/distance = sqrt(x_difference ** 2 + y_difference ** 2)
-	animate(effect, time = distance, alpha = 0, pixel_x = x_difference * 32, pixel_y = y_difference * 32)
-	QDEL_IN(effect, distance)
 
 /obj/structure/shadow_anchor
 	name = "shadow anchor"
