@@ -5,6 +5,7 @@
 #include "code/melee/sledgehammer.dm"
 #include "code/melee/tsf_katana.dm"
 #include "code/melee/vibroblade.dm"
+#include "code/melee/electrostaff.dm"
 #include "code/melee/centcom/_enchantment_datum.dm"
 #include "code/melee/centcom/baseball_bat.dm"
 #include "code/melee/centcom/legendary_swords.dm"
@@ -12,6 +13,7 @@
 
 // MARK: Crafting
 #include "code/crafting/nt_cane.dm"
+#include "code/crafting/electrostaff.dm"
 
 // MARK: Ranged - General
 #include "code/ranged/supply_packs.dm"
