@@ -699,7 +699,7 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 	/mob/living/carbon = list(
 		"TRAIT_BRAINLESS_CARBON" = TRAIT_BRAINLESS_CARBON,
 		"TRAIT_COLD_BLOODED" = TRAIT_COLD_BLOODED,
-		"TRAIT_NO_THROW_SELF_IMPACT" = TRAIT_NO_THROW_SELF_IMPACT // SS220 Addition
+		"TRAIT_NO_THROW_SELF_IMPACT" = TRAIT_NO_THROW_SELF_IMPACT, // BANDASTATION EDIT: Expose self-impact immunity to carbons
 	),
 	/mob/dead/observer = list(
 		"TRAIT_NO_OBSERVE" = TRAIT_NO_OBSERVE,

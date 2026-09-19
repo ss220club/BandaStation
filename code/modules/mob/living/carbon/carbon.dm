@@ -66,9 +66,13 @@
 		if(. == SUCCESSFUL_BLOCK || victim.check_block(src, 0, "[name]", LEAP_ATTACK))
 			blocked = TRUE
 
-		if(!HAS_TRAIT(src, TRAIT_NO_THROW_SELF_IMPACT))// SS220 EDIT
+		// BANDASTATION EDIT START: Skip collision damage for charge-immune mobs
+		// take_bodypart_damage(10 + 5 * extra_speed, check_armor = TRUE, wound_bonus = extra_speed * 5)
+		// Paralyze(2 SECONDS)
+		if(!HAS_TRAIT(src, TRAIT_NO_THROW_SELF_IMPACT))
 			take_bodypart_damage(10 + 5 * extra_speed, check_armor = TRUE, wound_bonus = extra_speed * 5)
 			Paralyze(2 SECONDS)
+		// BANDASTATION EDIT END: Skip collision damage for charge-immune mobs
 		oof_noise = TRUE
 
 		if(blocked)
