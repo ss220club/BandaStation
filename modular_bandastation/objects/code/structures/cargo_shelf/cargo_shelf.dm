@@ -2,6 +2,14 @@
 #define CARGO_SHELF_VERTICAL_OFFSET 10
 #define CARGO_SHELF_USE_DELAY (1 SECONDS)
 
+/datum/armor/structure_cargo_shelf
+	melee = 20
+	bullet = 10
+	laser = 10
+	bomb = 10
+	fire = 70
+	acid = 60
+
 /obj/structure/cargo_shelf
 	name = "Полка для ящиков"
 	desc = "Полка для хранения ящиков."
@@ -9,8 +17,8 @@
 	icon_state = "rack"
 	density = TRUE
 	anchored = TRUE
-	layer = BELOW_OBJ_LAYER - 0.01
 	gender = FEMALE
+	armor_type = /datum/armor/structure_cargo_shelf
 
 	VAR_FINAL/capacity = CARGO_SHELF_CAPACITY
 	var/use_delay = CARGO_SHELF_USE_DELAY
@@ -74,7 +82,7 @@
 			crate.layer = BELOW_OBJ_LAYER
 		if(2)
 			crate.pixel_y = CARGO_SHELF_VERTICAL_OFFSET * 1
-			crate.layer = BELOW_OBJ_LAYER + 0.02
+			crate.layer = BELOW_OBJ_LAYER + 0.01
 		if(3)
 			crate.pixel_y = CARGO_SHELF_VERTICAL_OFFSET * 2
 			crate.layer = ABOVE_MOB_LAYER + 0.02
@@ -165,6 +173,35 @@
 
 	if(crate_count())
 		. += span_notice("Вы можете сдвинуть ящик с полки.")
+
+/obj/structure/cargo_shelf/wrench_act(mob/living/user, obj/item/tool)
+	set_anchored(!anchored)
+
+	user.visible_message(
+		span_notice("[user] [anchored ? "закрепляет" : "открепляет"] полку для ящиков."),
+		span_notice("Вы [anchored ? "закрепляете" : "открепляете"] полку для ящиков.")
+	)
+
+	tool.play_tool_sound(src, 75)
+
+	return ITEM_INTERACT_SUCCESS
+
+/obj/structure/cargo_shelf/screwdriver_act(mob/living/user, obj/item/tool)
+	if(anchored)
+		balloon_alert(user, "Сначала открутите полку!")
+		return ITEM_INTERACT_BLOCKING
+
+	if(crate_count())
+		balloon_alert(user, "Сначала уберите ящики с полки!")
+		return ITEM_INTERACT_BLOCKING
+
+	if(!tool.use_tool(src, user, 20))
+		return ITEM_INTERACT_BLOCKING
+
+	new /obj/item/cargo_shelf_parts(drop_location())
+	qdel(src)
+
+	return ITEM_INTERACT_SUCCESS
 
 #undef CARGO_SHELF_CAPACITY
 #undef CARGO_SHELF_VERTICAL_OFFSET

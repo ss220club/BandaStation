@@ -134,4 +134,5 @@
 
 #include "code/mecha/mecha.dm"
 
-#include "code/structures/cargo_shelf.dm"
+#include "code/structures/cargo_shelf/cargo_shelf.dm"
+#include "code/structures/cargo_shelf/cargo_shelf_part.dm"
