@@ -7,6 +7,7 @@
 	inhand_icon_state = "electrostaff_orange"
 	lefthand_file = 'modular_bandastation/weapon/icons/melee/inhands/electrostaff_lefthand.dmi'
 	righthand_file = 'modular_bandastation/weapon/icons/melee/inhands/electrostaff_righthand.dmi'
+	worn_icon_state = "baton"
 	/// What sound plays when its opening
 	var/sound_on = 'modular_bandastation/weapon/sound/melee/electrostaff_on.ogg'
 
