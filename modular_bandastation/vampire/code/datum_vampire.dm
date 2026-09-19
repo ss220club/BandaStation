@@ -206,11 +206,14 @@
 	var/mob/living/vampire_mob = mob_override || owner.current
 	if(!vampire_mob)
 		return
-	if(ishuman(vampire_mob))
-		var/mob/living/carbon/human/human_target = vampire_mob
-		update_food_icon(human_target, 'modular_bandastation/vampire/icons/screen_hunger_vampire.dmi')
-		human_target.AddComponent(/datum/component/vampire_biter)
-		human_target.AddComponent(/datum/component/vampire_holywater)
+	if(!ishuman(vampire_mob))
+		return
+
+	var/mob/living/carbon/human/human_target = vampire_mob
+	update_food_icon(human_target, 'modular_bandastation/vampire/icons/screen_hunger_vampire.dmi')
+	human_target.AddComponent(/datum/component/vampire_biter)
+	human_target.AddComponent(/datum/component/vampire_holywater)
+	human_target.AddComponent(/datum/component/vampire_coffin_regeneration)
 
 	update_blood_hud()
 	check_vampire_upgrade(FALSE)
@@ -223,21 +226,24 @@
 /datum/antagonist/vampire/remove_innate_effects(mob/living/mob_override)
 	. = ..()
 	var/mob/living/vampire_mob = mob_override || owner.current
-	remove_all_powers()
 	if(!vampire_mob)
 		return
+	if(!ishuman(vampire_mob))
+		return
+
+	var/mob/living/carbon/human/human_target = vampire_mob
+	remove_all_powers()
 	vampire_mob.remove_alt_appearance(get_thrall_hud_key("vampire"))
 	clear_thrall_huds()
 	vampire_mob?.hud_used?.remove_screen_object(HUD_MOB_VAMPIRE_BLOOD)
-
-	if(ishuman(vampire_mob))
-		var/mob/living/carbon/human/human_target = vampire_mob
-		reset_food_icon(human_target)
-		var/datum/component/vampire_biter/vampire_biter = human_target.GetComponent(/datum/component/vampire_biter)
-		QDEL_NULL(vampire_biter)
-		var/datum/component/vampire_holywater/vampire_holywater = human_target.GetComponent(/datum/component/vampire_holywater)
-		QDEL_NULL(vampire_holywater)
-		human_target.alpha = 255
+	reset_food_icon(human_target)
+	var/datum/component/vampire_biter/vampire_biter = human_target.GetComponent(/datum/component/vampire_biter)
+	QDEL_NULL(vampire_biter)
+	var/datum/component/vampire_holywater/vampire_holywater = human_target.GetComponent(/datum/component/vampire_holywater)
+	QDEL_NULL(vampire_holywater)
+	var/datum/component/vampire_coffin_regeneration = human_target.GetComponent(/datum/component/vampire_coffin_regeneration)
+	QDEL_NULL(vampire_coffin_regeneration)
+	human_target.alpha = 255
 
 	REMOVE_TRAITS_IN(vampire_mob, "vampire")
 	UnregisterSignal(vampire_mob, list(

@@ -17,3 +17,5 @@
 
 /// Sent to a vampire spell to deduct its configured blood cost.
 #define COMSIG_VAMPIRE_ABILITY_DEDUCT_BLOOD "vampire_ability_deduct_blood"
+/// From /datum/status_effect/incapacitating/sleeping/tick(): (seconds_between_ticks)
+#define COMSIG_LIVING_STATUS_SLEEP_TICK "living_sleeping_tick"

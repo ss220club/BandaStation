@@ -386,38 +386,6 @@
 		new /obj/effect/hotspot(turf)
 	return ..()
 
-/datum/status_effect/incapacitating/sleeping/tick(seconds_between_ticks)
-	. = ..()
-	if(!iscarbon(owner) || !owner.mind?.has_antag_datum(/datum/antagonist/vampire))
-		return
-
-	var/mob/living/carbon/vampire = owner
-	if(istype(vampire.loc, /obj/structure/closet/crate/coffin/vampire))
-		var/obj/structure/closet/crate/coffin/vampire/coffin = vampire.loc
-		if(coffin.get_vampire() != vampire)
-			return
-		vampire.adjust_brute_loss(-3)
-		vampire.adjust_fire_loss(-3)
-		vampire.adjust_tox_loss(-3, forced = TRUE)
-		vampire.adjust_oxy_loss(-3)
-		if(prob(25))
-			for(var/datum/disease/disease as anything in vampire.diseases)
-				disease.cure()
-		for(var/obj/item/bodypart/bodypart as anything in vampire.bodyparts)
-			if(bodypart.brute_dam || bodypart.burn_dam)
-				bodypart.heal_damage(3, 3)
-				break
-		for(var/obj/item/organ/organ as anything in vampire.organs)
-			if(organ.damage)
-				organ.apply_organ_damage(-2)
-				break
-	else if(istype(vampire.loc, /obj/structure/closet/crate/coffin))
-		vampire.adjust_brute_loss(-1)
-		vampire.adjust_fire_loss(-1)
-		vampire.adjust_tox_loss(-1, forced = TRUE)
-		vampire.adjust_oxy_loss(-1)
-
-
 /obj/effect/lair_rune
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	anchored = TRUE
