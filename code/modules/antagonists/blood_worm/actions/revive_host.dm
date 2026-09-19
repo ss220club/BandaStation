@@ -94,7 +94,7 @@
 		if (feedback)
 			host.balloon_alert(owner, "мозг слишком повреждён!")
 		return FALSE
-	if (host.health <= HEALTH_THRESHOLD_DEAD)
+	if (host.health <= host.dead_threshold)
 		if (feedback)
 			host.balloon_alert(owner, "тело слишком повреждено!")
 		return FALSE
