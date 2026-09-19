@@ -16,6 +16,7 @@
 	exp_required_type_department = EXP_TYPE_SUPPLY
 	exp_granted_type = EXP_TYPE_CREW
 	config_tag = "EXPLORER"
+	tgui_icon = FA_ICON_BINOCULARS
 
 	plasmaman_outfit = /datum/outfit/plasmaman/explorer
 
