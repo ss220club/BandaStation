@@ -133,3 +133,6 @@
 #include "code/structures/crates_lockers/closets/secure/nanotrasen_representative.dm"
 
 #include "code/mecha/mecha.dm"
+
+#include "code/structures/cargo_shelf/cargo_shelf.dm"
+#include "code/structures/cargo_shelf/cargo_shelf_part.dm"
