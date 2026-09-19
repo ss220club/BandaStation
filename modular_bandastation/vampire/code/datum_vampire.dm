@@ -189,7 +189,7 @@
 			owner.current.update_sight()
 
 /datum/antagonist/vampire/proc/remove_spell_ability(datum/action/cooldown/spell/spell)
-	for(var/datum/vampire_passive/grant_spell/grant_spell as anything in powers)
+	for(var/datum/vampire_passive/grant_spell/grant_spell in powers)
 		if(grant_spell.get_granted_spell() != spell)
 			continue
 		upgrade_tiers -= grant_spell.type
