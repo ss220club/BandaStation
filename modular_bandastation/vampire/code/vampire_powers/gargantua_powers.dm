@@ -33,7 +33,7 @@
 	var/mob/living/carbon/user = owner
 	if(user.legcuffed)
 		if(feedback)
-			to_chat(user, span_warning("Ваши ноги связаны!"))
+			user.balloon_alert(user, "ноги связаны")
 		return FALSE
 	return TRUE
 

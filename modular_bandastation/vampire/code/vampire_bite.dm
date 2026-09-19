@@ -33,13 +33,13 @@
 		return
 	var/datum/species/species = victim.dna.species
 	if(species.exotic_bloodtype && (species.exotic_bloodtype::reagent_type != /datum/reagent/blood))
-		to_chat(source, span_warning("В [victim] не кровь!"))
+		to_chat(source, span_warning("В [victim.declent_ru(PREPOSITIONAL)] не кровь!"))
 		return COMPONENT_CANCEL_ATTACK_CHAIN
 	if(!victim.get_blood_volume())
-		to_chat(source, span_warning("В [victim] нет крови!"))
+		to_chat(source, span_warning("В [victim.declent_ru(PREPOSITIONAL)] нет крови!"))
 		return COMPONENT_CANCEL_ATTACK_CHAIN
 	if(HAS_TRAIT(victim, TRAIT_VAMPIRE_LIKE))
-		to_chat(source, span_warning("Ваши клыки не могут пронзить холодную плоть [victim]!"))
+		to_chat(source, span_warning("Ваши клыки не могут пронзить холодную плоть [victim.declent_ru(GENITIVE)]!"))
 		return COMPONENT_CANCEL_ATTACK_CHAIN
 
 	vampire.draining = victim

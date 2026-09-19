@@ -105,7 +105,7 @@
 	var/obj/item/assembly/flash/flash = used
 	if(!flash.try_use_flash(user))
 		return ITEM_INTERACT_SUCCESS
-	user.visible_message(span_danger("[user] направляет [used.declent_ru(ACCUSATIVE)] на [src.declent_ru(ACCUSATIVE)]!"), span_danger("Вы направляете [used.declent_ru(ACCUSATIVE)] на [src.declent_ru(ACCUSATIVE)]!"))
+	user.visible_message(span_danger("[capitalize(user.declent_ru(NOMINATIVE))] направляет [used.declent_ru(ACCUSATIVE)] на [src.declent_ru(ACCUSATIVE)]!"), span_danger("Вы направляете [used.declent_ru(ACCUSATIVE)] на [src.declent_ru(ACCUSATIVE)]!"))
 	visible_message(span_notice("[src.declent_ru(NOMINATIVE)] увядает."))
 	qdel(src)
 	return ITEM_INTERACT_SUCCESS
@@ -137,7 +137,7 @@
 	. = ..()
 	var/mob/living/user = owner
 	if(making_anchor)
-		to_chat(user, span_notice("Ваш якорь ещё не готов!"))
+		user.balloon_alert(user, "якорь ещё не готов")
 		return
 	if(!anchor)
 		var/turf/anchor_turf = get_turf(user)

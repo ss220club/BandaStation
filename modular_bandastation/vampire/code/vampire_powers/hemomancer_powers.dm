@@ -63,7 +63,7 @@
 		return
 	var/mob/living/carbon/carbon_target = target
 	if(isalien(carbon_target) && !xenomorph_acid_boosted && carbon_target.ckey && carbon_target.stat != DEAD)
-		to_chat(user, span_warning("Когда [carbon_target] истекает кислотой, вы добавляете её в свои когти!"))
+		to_chat(user, span_warning("Когда [carbon_target.declent_ru(NOMINATIVE)] истекает кислотой, вы добавляете её в свои когти!"))
 		xenomorph_acid_boosted = TRUE
 		durability += 5
 		blood_drain_amount *= 1.5
@@ -79,7 +79,7 @@
 		user.heal_overall_damage(4 * heal_boost, 4 * heal_boost)
 		user.AdjustKnockdown(-1 SECONDS * heal_boost)
 	if(!user.has_status_effect(/datum/status_effect/vampire_blood_spill) && !--durability)
-		to_chat(user, span_warning("Ваши когти разбиваются!"))
+		user.balloon_alert(user, "когти разбились!")
 		qdel(src)
 
 /obj/item/vamp_claws/melee_attack_chain(mob/user, atom/target, params)
@@ -91,7 +91,7 @@
 	. = ..()
 	if(.)
 		return
-	to_chat(user, span_notice("Вы развеиваете свои когти!"))
+	user.balloon_alert(user, "когти развеяны!")
 	qdel(src)
 
 /datum/action/cooldown/spell/pointed/vampire_blood_tendrils
@@ -119,7 +119,7 @@
 	for(var/mob/living/target in range(area_of_affect, target_turf))
 		if(target.affects_vampire(user))
 			target.set_timed_status_effect(6 SECONDS, /datum/status_effect/blood_tendril_slow)
-			target.visible_message(span_warning("[target] опутан кровавыми щупальцами!"))
+			target.visible_message(span_warning("[capitalize(target.declent_ru(NOMINATIVE))] опутан кровавыми щупальцами!"))
 			new /obj/effect/temp_visual/blood_tendril/long(get_turf(target))
 
 /obj/effect/temp_visual/blood_tendril
@@ -295,7 +295,7 @@
 	spike.color = blood.color
 	playsound(target, 'modular_bandastation/vampire/sound/misc/demon_attack1.ogg', 50, TRUE)
 	target.apply_damage(50, BRUTE, BODY_ZONE_CHEST)
-	target.visible_message(span_warning("[target] пронзён шипом из живой крови!"))
+	target.visible_message(span_warning("[capitalize(target.declent_ru(NOMINATIVE))] пронзён шипом из живой крови!"))
 
 /obj/effect/temp_visual/blood_spike
 	icon = 'modular_bandastation/vampire/icons/effects/vampire_effects.dmi'

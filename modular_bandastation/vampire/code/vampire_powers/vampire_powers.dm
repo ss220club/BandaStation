@@ -178,7 +178,7 @@
 				to_chat(user, span_warning("На вас повязка на глазах!"))
 				return
 	user.mob_light(range = 3, power = 1, color = LIGHT_COLOR_BLOOD_MAGIC, duration = 2 SECONDS)
-	user.visible_message(span_warning("Глаза [user] испускают ослепительную вспышку!"))
+	user.visible_message(span_warning("Глаза [user.declent_ru(GENITIVE)] испускают ослепительную вспышку!"))
 	return ..()
 
 /datum/action/cooldown/spell/aoe/vampire_glare/cast_on_thing_in_aoe(mob/living/target, mob/living/user)
@@ -470,13 +470,13 @@
 /datum/action/cooldown/spell/aoe/vampire_raise_vampires/proc/raise_vampire(mob/living/user, mob/living/carbon/human/target)
 	if(!user?.mind || !target?.mind)
 		if(target)
-			target.visible_message("[target], похоже, слишком глуп, чтобы понять происходящее.")
+			target.visible_message("[capitalize(target.declent_ru(NOMINATIVE))], похоже, слишком глуп, чтобы понять происходящее.")
 		return
 	if(!target.can_have_blood() || !target.get_blood_volume())
-		target.visible_message("[target] выглядит невозмутимо!")
+		target.visible_message("[capitalize(target.declent_ru(NOMINATIVE))] выглядит невозмутимо!")
 		return
 	if(HAS_TRAIT(target, TRAIT_VAMPIRE_LIKE))
-		target.visible_message(span_notice("[target] выглядит посвежевшим!"))
+		target.visible_message(span_notice("[capitalize(target.declent_ru(NOMINATIVE))] выглядит посвежевшим!"))
 		target.heal_overall_damage(brute = 60, burn = 60)
 		for(var/obj/item/bodypart/bodypart as anything in target.bodyparts)
 			if(prob(25))
@@ -485,20 +485,20 @@
 		return
 	if(target.stat != DEAD)
 		if(target.IsKnockdown())
-			target.visible_message(span_warning("[target], похоже, испытывает боль!"))
+			target.visible_message(span_warning("[capitalize(target.declent_ru(NOMINATIVE))], похоже, испытывает боль!"))
 			target.adjust_organ_loss(ORGAN_SLOT_BRAIN, 60)
 		else
-			target.visible_message(span_warning("[target], похоже, оглушён энергией!"))
+			target.visible_message(span_warning("[capitalize(target.declent_ru(NOMINATIVE))], похоже, оглушён энергией!"))
 			target.SetKnockdown(40 SECONDS)
 		return
 	if(target.ckey && is_banned_from(target.ckey, list(ROLE_SYNDICATE, ROLE_VAMPIRE)))
-		target.visible_message(span_warning("[target] остаётся безжизненным."))
+		target.visible_message(span_warning("[capitalize(target.declent_ru(NOMINATIVE))] остаётся безжизненным."))
 		return
 	for(var/obj/item/implant/mindshield/mindshield in target.implants)
 		mindshield.removed(target)
 	for(var/obj/item/implant/uplink/traitor_implant in target.implants)
 		traitor_implant.removed(target)
-	target.visible_message(span_warning("В глазах [target] появляется жуткое красное свечение!"))
+	target.visible_message(span_warning("В глазах [target.declent_ru(GENITIVE)] появляется жуткое красное свечение!"))
 	log_combat(user, target, "sired", addition = "(Vampire)")
 
 	var/datum/antagonist/vampire/new_vampire = target.mind.add_antag_datum(/datum/antagonist/vampire/bodyguard)

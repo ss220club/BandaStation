@@ -65,7 +65,7 @@
 			vampire.adjust_nullification(20, 4)
 		if(13 to INFINITY)
 			affected_mob.visible_message(
-				span_danger("[affected_mob] внезапно вспыхивает!"),
+				span_danger("[affected_mob.declent_ru(NOMINATIVE)] внезапно вспыхивает!"),
 				span_userdanger("Вас внезапно охватывает священное пламя!"),
 				span_danger("Вы слышите, как что-то внезапно вспыхивает!"),
 			)

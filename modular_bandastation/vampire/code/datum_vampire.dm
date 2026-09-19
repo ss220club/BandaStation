@@ -272,7 +272,7 @@
 		bonus_force = nullrod.sanctify_force
 
 	if(!get_ability(/datum/vampire_passive/full))
-		to_chat(owner.current, span_warning("Сила [source] мешает вашим собственным силам!"))
+		to_chat(owner.current, span_warning("Сила [source.declent_ru(GENITIVE)] мешает вашим собственным силам!"))
 		adjust_nullification(30 + bonus_force, 15 + bonus_force)
 
 /// Fire consumes blood while it can still harm the vampire, matching the fire handler's protection threshold.
@@ -303,7 +303,7 @@
 
 	while(do_after(caster, suck_rate, target_human, cog_icon = null))
 		if(caster.is_mouth_covered())
-			to_chat(caster, span_warning("Ваша маска или намордник не позволяют укусить [target_human]!"))
+			to_chat(caster, span_warning("Ваша маска или намордник не позволяют укусить [target_human.declent_ru(ACCUSATIVE)]!"))
 			break
 		var/can_give_usable_blood = target_human.ckey || target_human.get_ghost(FALSE)
 		var/at_blood_drain_limit = drained_humans[unique_suck_id] >= BLOOD_DRAIN_LIMIT
@@ -313,7 +313,7 @@
 
 		target_human.blood_volume = max(target_human.blood_volume - 25, 0)
 		if(at_blood_drain_limit)
-			to_chat(caster, span_warning("Вы выпили из крови [target_human] почти всю жизненную силу и больше не получите доступной крови!"))
+			to_chat(caster, span_warning("Вы выпили из крови [target_human.declent_ru(GENITIVE)] почти всю жизненную силу и больше не получите доступной крови!"))
 		else if(usable_blood_gain)
 			adjust_blood(target_human, usable_blood_gain * BLOOD_GAINED_MODIFIER)
 			to_chat(caster, span_notice("<b>Вы накопили [bloodtotal] ед. крови; для использования осталось [bloodusable].</b>"))
@@ -329,11 +329,11 @@
 			break
 
 		if(!can_give_usable_blood)
-			to_chat(caster, span_notice("<b>Питание кровью [target_human] утоляет ваш голод, но не даёт доступной крови.</b>"))
+			to_chat(caster, span_notice("<b>Питание кровью [target_human.declent_ru(GENITIVE)] утоляет ваш голод, но не даёт доступной крови.</b>"))
 		caster.set_nutrition(min(NUTRITION_LEVEL_WELL_FED, caster.nutrition + nutrition_gain))
 
 	draining = null
-	to_chat(caster, span_notice("Вы прекращаете высасывать кровь из [target_human.name]."))
+	to_chat(caster, span_notice("Вы прекращаете высасывать кровь из [target_human.declent_ru(GENITIVE)]."))
 
 #undef BLOOD_GAINED_MODIFIER
 

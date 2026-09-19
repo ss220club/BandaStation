@@ -33,7 +33,7 @@
 /datum/action/cooldown/spell/pointed/vampire_enthrall/cast(mob/living/carbon/human/target)
 	. = ..()
 	var/mob/living/user = owner
-	user.visible_message(span_warning("[user.declent_ru(NOMINATIVE)] кусает [target.declent_ru(ACCUSATIVE)] за шею!"), span_warning("Вы кусаете [target.declent_ru(ACCUSATIVE)] за шею и начинаете передавать силу."))
+	user.visible_message(span_warning("[user.declent_ru(NOMINATIVE)] кусает [target.declent_ru(ACCUSATIVE)] за шею!"), span_warning("Вы кусаете [target.declent_ru(ACCUSATIVE)] за шею и начинаете передавать ей свою вампирскую силу."))
 	to_chat(target, span_warning("Вы чувствуете, как щупальца зла проникают в ваш разум."))
 	if(!do_after(user, 15 SECONDS, target = target))
 		to_chat(user, span_warning("Вы или ваша цель сдвинулись."))
@@ -266,4 +266,3 @@
 		/datum/hallucination/delusion/preset/vampire_hysteria/demon,
 	)
 	target.cause_hallucination(pick(animal_delusions), "vampire mass hysteria")
-
