@@ -6,7 +6,6 @@
 #include "code/datum_vampire.dm"
 #include "code/dynamic_rulesets.dm"
 #include "code/hunger_icon.dm"
-#include "code/nullrod.dm"
 #include "code/spell_handler.dm"
 #include "code/vampire_bite.dm"
 #include "code/vampire_coffin_regeneration.dm"
