@@ -1,0 +1,644 @@
+/datum/antagonist/vampire
+	name = "\proper Вампир"
+	roundend_category = "Вампиры"
+	antagpanel_category = "Вампир"
+	pref_flag = ROLE_VAMPIRE
+	antag_moodlet = /datum/mood_event/focused
+	hijack_speed = 0.5
+	suicide_cry = "Я УМИРАЮ РАДИ НОЧИ!"
+	preview_outfit = /datum/outfit/butler
+	stinger_sound = 'modular_bandastation/vampire/sound/misc/vampalert.ogg'
+	antag_flags = parent_type::antag_flags | ANTAG_OBSERVER_VISIBLE_PANEL
+
+	ui_name = "AntagInfoVampire"
+	antag_hud_name = "vampire"
+	hud_icon = 'modular_bandastation/vampire/icons/mob/huds/vampire_antag.dmi'
+
+	var/give_objectives = TRUE
+
+	var/bloodtotal = 0
+	var/bloodusable = 0
+	/// What vampire subclass the vampire is.
+	var/datum/vampire_subclass/subclass
+	/// Handles the vampire cloak toggle
+	var/iscloaking = FALSE
+	/// The alpha value currently imposed by the vampire cloak, if any.
+	var/cloak_alpha
+	/// List of available active spell actions and passives
+	var/list/powers = list()
+	/// Who the vampire is draining of blood
+	var/mob/living/carbon/human/draining
+	/// Null rods and holy water make abilities cost more
+	var/nullified = 0
+
+	/// Powers that all vampires unlock and at what blood total level they unlock them
+	var/list/upgrade_tiers = list(
+		/datum/vampire_passive/grant_spell/rejuvenate = 0,
+		/datum/vampire_passive/grant_spell/glare = 0,
+		/datum/vampire_passive/vision = 100,
+		/datum/vampire_passive/unlock_specialization = 150,
+		/datum/vampire_passive/grant_spell/lair = 150,
+		/datum/vampire_passive/regen = 200,
+		/datum/vampire_passive/vision/advanced = 500,
+	)
+	/// Upgrade tiers that have been consumed and should not be granted again.
+	var/list/spent_upgrade_tiers = list()
+
+	/// List of victims' REF IDs we have drained and how much blood from each
+	var/list/drained_humans = list()
+	/// Weak references to the thralls bound to this vampire.
+	var/list/thrall_refs = list()
+	/// Did the vampire build a lair?
+	var/has_lair = FALSE
+
+/datum/antagonist/vampire/bodyguard
+	give_objectives = FALSE
+	show_in_antagpanel = FALSE
+
+/datum/antagonist/vampire/Destroy(force, ...)
+	draining = null
+	remove_all_powers()
+	QDEL_NULL(subclass)
+	return ..()
+
+/datum/antagonist/vampire/on_removal()
+	deconvert_thralls()
+	if(owner?.current)
+		log_combat(owner.current, owner.current, "de-vampired")
+		owner.current.alpha = 255
+		owner.current.remove_movespeed_modifier(/datum/movespeed_modifier/vampire_cloak, update = TRUE)
+	return ..()
+
+/datum/antagonist/vampire/on_gain()
+	if(give_objectives)
+		forge_objectives()
+	return ..()
+
+/datum/antagonist/vampire/proc/adjust_nullification(base, extra)
+	nullified = clamp(nullified + extra, base, VAMPIRE_NULLIFICATION_CAP)
+
+/datum/antagonist/vampire/antag_panel_data()
+	return "Класс: [subclass ? subclass.name : "N/A"] | Всего крови: [bloodtotal] | Доступно крови: [bloodusable]"
+
+/datum/antagonist/vampire/ui_interact(mob/user, datum/tgui/ui)
+	. = ..()
+	ui?.set_autoupdate(FALSE)
+
+/datum/antagonist/vampire/ui_static_data(mob/user)
+	. = ..()
+	var/list/subclasses = list()
+	for(var/subclass_type in list(SUBCLASS_UMBRAE, SUBCLASS_HEMOMANCER, SUBCLASS_GARGANTUA, SUBCLASS_DANTALION))
+		var/datum/vampire_subclass/vampire_subclass = new subclass_type
+		subclasses += list(vampire_subclass.get_ui_data())
+		qdel(vampire_subclass)
+	.["subclasses"] = subclasses
+
+/datum/antagonist/vampire/ui_data(mob/user)
+	return list(
+		"selected_subclass" = subclass?.id,
+		"can_select_subclass" = !!get_ability(/datum/vampire_passive/unlock_specialization),
+	)
+
+/datum/antagonist/vampire/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
+	. = ..()
+	if(.)
+		return
+	if(subclass || !get_ability(/datum/vampire_passive/unlock_specialization))
+		return
+
+	var/list/subclass_types = list(
+		"umbrae" = SUBCLASS_UMBRAE,
+		"hemomancer" = SUBCLASS_HEMOMANCER,
+		"gargantua" = SUBCLASS_GARGANTUA,
+		"dantalion" = SUBCLASS_DANTALION,
+	)
+	var/subclass_type = subclass_types[action]
+	if(!subclass_type)
+		return
+	add_subclass(subclass_type)
+	spent_upgrade_tiers += /datum/vampire_passive/unlock_specialization
+	remove_ability(get_ability(/datum/vampire_passive/unlock_specialization))
+	ui.close()
+	return TRUE
+
+/datum/antagonist/vampire/get_admin_commands()
+	. = ..()
+	.["Установить общее количество крови"] = CALLBACK(src, PROC_REF(admin_set_total_blood))
+	.["Установить доступную кровь"] = CALLBACK(src, PROC_REF(admin_set_usable_blood))
+	.["Сбросить класс"] = CALLBACK(src, PROC_REF(clear_subclass))
+
+/datum/antagonist/vampire/proc/admin_set_total_blood(mob/admin)
+	var/new_total = tgui_input_number(admin, "Установите общее количество крови, выпитой вампиром за жизнь.", "Установить общее количество крови", default = bloodtotal, min_value = 0)
+	if(isnull(new_total) || QDELETED(src))
+		return
+	var/old_total = bloodtotal
+	bloodtotal = new_total
+	bloodusable = min(bloodusable, bloodtotal)
+	subtract_usable_blood(0)
+	check_vampire_upgrade()
+	message_admins("[key_name_admin(admin)] set [key_name_admin(owner)]'s total vampire blood from [old_total] to [bloodtotal].")
+	log_admin("[key_name(admin)] set [key_name(owner)]'s total vampire blood from [old_total] to [bloodtotal].")
+
+/datum/antagonist/vampire/proc/admin_set_usable_blood(mob/admin)
+	var/new_usable = tgui_input_number(admin, "Установите текущее количество доступной вампиру крови.", "Установить доступную кровь", default = bloodusable, max_value = bloodtotal, min_value = 0)
+	if(isnull(new_usable) || QDELETED(src))
+		return
+	var/old_usable = bloodusable
+	bloodusable = new_usable
+	update_blood_hud()
+	for(var/datum/action/cooldown/spell/spell in powers)
+		spell.build_all_button_icons()
+	message_admins("[key_name_admin(admin)] set [key_name_admin(owner)]'s usable vampire blood from [old_usable] to [bloodusable].")
+	log_admin("[key_name(admin)] set [key_name(owner)]'s usable vampire blood from [old_usable] to [bloodusable].")
+
+/datum/antagonist/vampire/proc/force_add_ability(path, announce = FALSE)
+	var/datum/power = new path()
+	powers += power
+
+	if(istype(power, /datum/action/cooldown/spell))
+		var/datum/action/cooldown/spell/spell = power
+		spell.Grant(owner.current)
+		spell.GetComponent(/datum/component/vampire_ability)?.set_vampire(src)
+	else if(istype(power, /datum/vampire_passive))
+		var/datum/vampire_passive/passive = power
+		passive.owner = owner.current
+		passive.on_apply(src)
+
+	if(announce)
+		announce_new_power(power)
+	return power
+
+/datum/antagonist/vampire/proc/get_ability(path)
+	for(var/datum/power as anything in powers)
+		if(power?.type == path)
+			return power
+	return null
+
+/datum/antagonist/vampire/proc/add_ability(path, announce = FALSE)
+	if(!get_ability(path))
+		force_add_ability(path, announce)
+
+/datum/antagonist/vampire/proc/remove_ability(datum/ability)
+	if(ability && (ability in powers))
+		powers -= ability
+		if(istype(ability, /datum/action))
+			var/datum/action/action = ability
+			action.Remove(action.owner)
+		qdel(ability)
+		if(owner?.current)
+			owner.current.update_sight()
+
+/datum/antagonist/vampire/proc/remove_spell_ability(datum/action/cooldown/spell/spell)
+	for(var/datum/vampire_passive/grant_spell/grant_spell in powers)
+		if(grant_spell.get_granted_spell() != spell)
+			continue
+		upgrade_tiers -= grant_spell.type
+		remove_ability(grant_spell)
+		return
+	remove_ability(spell)
+
+/datum/antagonist/vampire/proc/remove_all_powers()
+	while(length(powers))
+		remove_ability(powers[1])
+
+/datum/antagonist/vampire/apply_innate_effects(mob/living/mob_override)
+	. = ..()
+	var/mob/living/vampire_mob = mob_override || owner.current
+	if(!vampire_mob)
+		return
+	ADD_TRAIT(vampire_mob, TRAIT_VAMPIRE, REF(src))
+	ADD_TRAIT(vampire_mob, TRAIT_VAMPIRE_LIKE, REF(src))
+	if(!ishuman(vampire_mob))
+		return
+
+	var/mob/living/carbon/human/human_target = vampire_mob
+	update_food_icon(human_target, 'modular_bandastation/vampire/icons/screen_hunger_vampire.dmi')
+	human_target.AddComponent(/datum/component/vampire_biter)
+	human_target.AddComponent(/datum/component/vampire_holywater)
+	human_target.AddComponent(/datum/component/vampire_coffin_regeneration)
+	human_target.AddComponent(/datum/component/vampire_owner_abilities, src)
+
+	update_blood_hud()
+	check_vampire_upgrade(FALSE)
+	RegisterSignal(vampire_mob, COMSIG_ATOM_HOLYATTACK, PROC_REF(holy_attack_reaction))
+	RegisterSignal(vampire_mob, COMSIG_LIVING_LIFE, PROC_REF(on_life))
+	RegisterSignal(vampire_mob, COMSIG_MOB_HUD_CREATED, PROC_REF(on_hud_created))
+	RegisterSignal(vampire_mob, COMSIG_FIRE_STACKS_UPDATED, PROC_REF(on_fire_stacks_updated))
+	update_thrall_huds()
+
+/datum/antagonist/vampire/remove_innate_effects(mob/living/mob_override)
+	. = ..()
+	var/mob/living/vampire_mob = mob_override || owner.current
+	if(!vampire_mob)
+		return
+	REMOVE_TRAIT(vampire_mob, TRAIT_VAMPIRE, REF(src))
+	REMOVE_TRAIT(vampire_mob, TRAIT_VAMPIRE_LIKE, REF(src))
+	if(!ishuman(vampire_mob))
+		return
+
+	var/mob/living/carbon/human/human_target = vampire_mob
+	remove_all_powers()
+	vampire_mob.remove_alt_appearance(get_thrall_hud_key("vampire"))
+	clear_thrall_huds()
+	vampire_mob?.hud_used?.remove_screen_object(HUD_MOB_VAMPIRE_BLOOD)
+	reset_food_icon(human_target)
+	var/datum/component/vampire_biter/vampire_biter = human_target.GetComponent(/datum/component/vampire_biter)
+	QDEL_NULL(vampire_biter)
+	var/datum/component/vampire_holywater/vampire_holywater = human_target.GetComponent(/datum/component/vampire_holywater)
+	QDEL_NULL(vampire_holywater)
+	var/datum/component/vampire_coffin_regeneration = human_target.GetComponent(/datum/component/vampire_coffin_regeneration)
+	QDEL_NULL(vampire_coffin_regeneration)
+	var/datum/component/vampire_owner_abilities/vampire_owner_abilities = human_target.GetComponent(/datum/component/vampire_owner_abilities)
+	QDEL_NULL(vampire_owner_abilities)
+	human_target.alpha = 255
+
+	UnregisterSignal(vampire_mob, list(
+		COMSIG_ATOM_HOLYATTACK,
+		COMSIG_LIVING_LIFE,
+		COMSIG_MOB_HUD_CREATED,
+		COMSIG_FIRE_STACKS_UPDATED,
+	))
+
+/datum/antagonist/vampire/proc/holy_attack_reaction(mob/target, obj/item/source, mob/user, antimagic_flags)
+	SIGNAL_HANDLER
+	if(!HAS_TRAIT(user?.mind, TRAIT_HOLY))
+		return
+	if(!source.force)
+		return
+
+	var/bonus_force = 0
+	if(istype(source, /obj/item/nullrod))
+		var/obj/item/nullrod/nullrod = source
+		bonus_force = nullrod.sanctify_force
+
+	if(!get_ability(/datum/vampire_passive/full))
+		to_chat(owner.current, span_warning("Сила [source.declent_ru(GENITIVE)] мешает вашим собственным силам!"))
+		adjust_nullification(30 + bonus_force, 15 + bonus_force)
+
+/// Fire consumes blood while it can still harm the vampire, matching the fire handler's protection threshold.
+/datum/antagonist/vampire/proc/on_fire_stacks_updated(mob/living/vampire_mob, fire_stacks)
+	SIGNAL_HANDLER
+	if(vampire_mob != owner?.current || vampire_mob.stat == DEAD || !fire_stacks || get_ability(/datum/vampire_passive/full))
+		return
+	if(ishuman(vampire_mob))
+		var/mob/living/carbon/human/human_vampire = vampire_mob
+		if(human_vampire.get_thermal_protection() >= FIRE_SUIT_MAX_TEMP_PROTECT)
+			return
+	subtract_usable_blood(5)
+
+#define BLOOD_GAINED_MODIFIER 0.5
+
+/datum/antagonist/vampire/proc/handle_bloodsucking(mob/living/carbon/human/target_human, suck_rate = 5 SECONDS)
+	draining = target_human
+	var/unique_suck_id = REF(target_human)
+	var/blood_volume_warning = BLOOD_VOLUME_MAXIMUM
+	var/mob/living/caster = owner.current
+
+	log_combat(caster, target_human, "bitten & drained of blood (vampire)")
+	caster.visible_message(
+		span_danger("[caster.declent_ru(NOMINATIVE)] грубо хватает [target_human.declent_ru(ACCUSATIVE)] за шею и вонзает свои клыки!"),
+		span_danger("Вы вонзаете клыки в [target_human.declent_ru(ACCUSATIVE)] и начинаете высасывать [target_human.ru_p_them()] кровь."),
+		span_notice("Вы слышите влажный чавкающий звук."),
+	)
+
+	while(do_after(caster, suck_rate, target_human, cog_icon = null))
+		if(caster.is_mouth_covered())
+			to_chat(caster, span_warning("Ваша маска или намордник не позволяют укусить [target_human.declent_ru(ACCUSATIVE)]!"))
+			break
+		var/can_give_usable_blood = target_human.ckey || target_human.get_ghost(FALSE)
+		var/at_blood_drain_limit = drained_humans[unique_suck_id] >= BLOOD_DRAIN_LIMIT
+		var/usable_blood_gain = can_give_usable_blood && !at_blood_drain_limit && target_human.stat != DEAD ? min(20, target_human.blood_volume) : 0
+		var/nutrition_gain = can_give_usable_blood && !at_blood_drain_limit ? usable_blood_gain / 2 : 5
+		caster.do_attack_animation(target_human, ATTACK_EFFECT_BITE)
+
+		target_human.blood_volume = max(target_human.blood_volume - 25, 0)
+		if(at_blood_drain_limit)
+			to_chat(caster, span_warning("Вы выпили из крови [target_human.declent_ru(GENITIVE)] почти всю жизненную силу и больше не получите доступной крови!"))
+		else if(usable_blood_gain)
+			adjust_blood(target_human, usable_blood_gain * BLOOD_GAINED_MODIFIER)
+			to_chat(caster, span_notice("<b>Вы накопили [bloodtotal] ед. крови; для использования осталось [bloodusable].</b>"))
+
+		if(target_human.blood_volume)
+			if(target_human.blood_volume <= BLOOD_VOLUME_BAD && blood_volume_warning > BLOOD_VOLUME_BAD)
+				to_chat(caster, span_danger("Объём крови вашей жертвы опасно низок."))
+			else if(target_human.blood_volume <= BLOOD_VOLUME_OKAY && blood_volume_warning > BLOOD_VOLUME_OKAY)
+				to_chat(caster, span_warning("У вашей жертвы слишком мало крови!"))
+			blood_volume_warning = target_human.blood_volume
+		else
+			to_chat(caster, span_warning("Вы обескровили свою жертву!"))
+			break
+
+		if(!can_give_usable_blood)
+			to_chat(caster, span_notice("<b>Питание кровью [target_human.declent_ru(GENITIVE)] утоляет ваш голод, но не даёт доступной крови.</b>"))
+		caster.set_nutrition(min(NUTRITION_LEVEL_WELL_FED, caster.nutrition + nutrition_gain))
+
+	draining = null
+	to_chat(caster, span_notice("Вы прекращаете высасывать кровь из [target_human.declent_ru(GENITIVE)]."))
+
+#undef BLOOD_GAINED_MODIFIER
+
+/datum/antagonist/vampire/proc/change_subclass(new_subclass_type)
+	if(isnull(new_subclass_type))
+		return
+	clear_subclass(FALSE)
+	add_subclass(new_subclass_type, log_choice = FALSE)
+
+/datum/antagonist/vampire/proc/clear_subclass(give_specialize_power = TRUE)
+	if(give_specialize_power)
+		spent_upgrade_tiers -= /datum/vampire_passive/unlock_specialization
+	remove_all_powers()
+	QDEL_NULL(subclass)
+	check_vampire_upgrade()
+
+/datum/antagonist/vampire/proc/check_vampire_upgrade(announce = TRUE)
+	for(var/ptype in upgrade_tiers)
+		if(ptype in spent_upgrade_tiers)
+			continue
+		var/level = upgrade_tiers[ptype]
+		if(bloodtotal >= level)
+			add_ability(ptype, announce)
+
+	if(!subclass)
+		return
+	subclass.add_subclass_ability(src, announce)
+	check_full_power_upgrade(announce)
+
+/datum/antagonist/vampire/proc/check_full_power_upgrade(announce = FALSE)
+	if(subclass?.full_power_override || (length(drained_humans) >= FULLPOWER_DRAINED_REQUIREMENT && bloodtotal >= FULLPOWER_BLOODTOTAL_REQUIREMENT))
+		subclass?.add_full_power_abilities(src, announce)
+
+/datum/antagonist/vampire/proc/announce_new_power(datum/power)
+	var/gain_desc
+	if(istype(power, /datum/vampire_passive))
+		var/datum/vampire_passive/passive = power
+		gain_desc = passive.gain_desc
+	if(gain_desc && owner?.current)
+		to_chat(owner.current, span_boldnotice(gain_desc))
+
+/datum/antagonist/vampire/proc/check_sun()
+	var/turf/turf_loc = get_turf(owner.current)
+	if(!turf_loc || turf_loc.is_sunlight_blocked())
+		return
+
+	if(bloodusable >= 10)
+		to_chat(owner.current, span_userdanger("Свет звёзд высасывает ваши силы — покиньте его!"))
+		subtract_usable_blood(10)
+		vamp_burn(10)
+	else
+		to_chat(owner.current, span_userdanger("Ваше тело превращается в пепел — НЕМЕДЛЕННО уйдите от света звёзд!"))
+		owner.current.apply_status_effect(/datum/status_effect/genetic_damage, 100)
+		vamp_burn(85)
+		if(owner.current.health <= HEALTH_THRESHOLD_DEAD)
+			owner.current.dust()
+
+/// Runs the vampire's persistent effects alongside tg's normal living-mob life processing.
+/datum/antagonist/vampire/proc/on_life(mob/living/vampire_mob, seconds_per_tick)
+	SIGNAL_HANDLER
+	if(vampire_mob != owner?.current)
+		return
+	handle_vampire(vampire_mob)
+
+/// Handles effects which need to be checked every life tick.
+/datum/antagonist/vampire/proc/handle_vampire(mob/living/vampire_mob)
+	handle_vampire_cloak(vampire_mob)
+	if(isspaceturf(get_turf(vampire_mob)))
+		check_sun()
+	if(istype(get_area(vampire_mob), /area/station/service/chapel) && !get_ability(/datum/vampire_passive/full) && bloodtotal > 0)
+		vamp_burn(7)
+	nullified = max(0, nullified - 2)
+
+/datum/antagonist/vampire/proc/on_hud_created(mob/living/vampire_mob)
+	SIGNAL_HANDLER
+	if(vampire_mob == owner?.current)
+		update_blood_hud()
+		if(ishuman(vampire_mob))
+			update_food_icon(vampire_mob, 'modular_bandastation/vampire/icons/screen_hunger_vampire.dmi')
+
+/datum/antagonist/vampire/proc/update_food_icon(mob/living/vampire_mob, icon_file)
+	var/atom/movable/screen/hunger/hunger_bar = vampire_mob.hud_used?.screen_objects[HUD_MOB_HUNGER]
+	if(!hunger_bar)
+		return
+	hunger_bar.set_food_icon(icon_file)
+
+/datum/antagonist/vampire/proc/reset_food_icon(mob/living/vampire_mob)
+	var/atom/movable/screen/hunger/hunger_bar = vampire_mob.hud_used?.screen_objects[HUD_MOB_HUNGER]
+	if(!hunger_bar)
+		return
+	hunger_bar.reset_food_icon()
+
+/datum/antagonist/vampire/proc/handle_vampire_cloak(mob/living/vampire_mob)
+	if(!ishuman(vampire_mob))
+		if(!isnull(cloak_alpha) && vampire_mob.alpha == cloak_alpha)
+			vampire_mob.alpha = 255
+		cloak_alpha = null
+		vampire_mob.remove_movespeed_modifier(/datum/movespeed_modifier/vampire_cloak, update = TRUE)
+		return
+
+	var/mob/living/carbon/human/human_owner = vampire_mob
+	var/turf/turf_loc = get_turf(human_owner)
+	if(!turf_loc)
+		if(!isnull(cloak_alpha) && human_owner.alpha == cloak_alpha)
+			human_owner.alpha = 255
+		cloak_alpha = null
+		human_owner.remove_movespeed_modifier(/datum/movespeed_modifier/vampire_cloak, update = TRUE)
+		return
+
+	var/light_available = turf_loc.get_lumcount() * 10
+
+	if(!iscloaking || human_owner.on_fire)
+		if(!isnull(cloak_alpha) && human_owner.alpha == cloak_alpha)
+			human_owner.alpha = 255
+		cloak_alpha = null
+		human_owner.remove_movespeed_modifier(/datum/movespeed_modifier/vampire_cloak, update = TRUE)
+		return
+
+	// Another spell has changed our visibility since the cloak last did. Leave that
+	// spell in control until it restores the cloak's previously applied alpha.
+	if(!isnull(cloak_alpha) && human_owner.alpha != cloak_alpha)
+		if(light_available <= 2)
+			human_owner.add_movespeed_modifier(/datum/movespeed_modifier/vampire_cloak, update = TRUE)
+		else
+			human_owner.remove_movespeed_modifier(/datum/movespeed_modifier/vampire_cloak, update = TRUE)
+		return
+
+	if(light_available <= 2)
+		human_owner.alpha = 40
+		cloak_alpha = 40
+		human_owner.add_movespeed_modifier(/datum/movespeed_modifier/vampire_cloak, update = TRUE)
+		return
+
+	human_owner.alpha = 200
+	cloak_alpha = 200
+	human_owner.remove_movespeed_modifier(/datum/movespeed_modifier/vampire_cloak, update = TRUE)
+
+/datum/antagonist/vampire/proc/adjust_blood(mob/living/carbon/victim, blood_amount = 0)
+	if(victim)
+		var/unique_suck_id = REF(victim)
+		if(!(unique_suck_id in drained_humans))
+			drained_humans[unique_suck_id] = 0
+		if(drained_humans[unique_suck_id] >= BLOOD_DRAIN_LIMIT)
+			return
+		drained_humans[unique_suck_id] += blood_amount
+
+	bloodtotal += blood_amount
+	bloodusable += blood_amount
+	update_blood_hud()
+	check_vampire_upgrade(TRUE)
+
+	for(var/datum/action/cooldown/spell/spell in powers)
+		spell.build_all_button_icons()
+
+/datum/antagonist/vampire/proc/subtract_usable_blood(blood_amount)
+	bloodusable = clamp(bloodusable - blood_amount, 0, bloodtotal)
+	update_blood_hud()
+	for(var/datum/action/cooldown/spell/spell in powers)
+		spell.build_all_button_icons()
+
+/datum/antagonist/vampire/proc/update_blood_hud()
+	var/datum/hud/hud = owner?.current?.hud_used
+	if(!hud)
+		return
+
+	var/atom/movable/screen/vampire_blood/blood_display = hud.screen_objects[HUD_MOB_VAMPIRE_BLOOD]
+	if(!blood_display)
+		blood_display = hud.add_screen_object(/atom/movable/screen/vampire_blood, HUD_MOB_VAMPIRE_BLOOD, HUD_GROUP_INFO, update_screen = TRUE)
+	blood_display.update_maptext()
+
+/datum/antagonist/vampire/proc/add_thrall(datum/antagonist/vampire_thrall/thrall)
+	if(!thrall)
+		return
+	LAZYADD(thrall_refs, WEAKREF(thrall))
+	update_thrall_huds()
+
+/datum/antagonist/vampire/proc/remove_thrall(datum/antagonist/vampire_thrall/thrall)
+	thrall?.owner?.current?.remove_alt_appearance(get_thrall_hud_key("thrall"))
+	for(var/datum/weakref/thrall_ref as anything in thrall_refs)
+		if(thrall_ref.resolve() == thrall)
+			thrall_refs -= thrall_ref
+			break
+	update_thrall_huds()
+
+/datum/antagonist/vampire/proc/get_thralls()
+	var/list/datum/antagonist/vampire_thrall/active_thralls = list()
+	for(var/datum/weakref/thrall_ref as anything in thrall_refs)
+		var/datum/antagonist/vampire_thrall/thrall = thrall_ref.resolve()
+		if(!thrall || thrall.get_master() != src)
+			thrall_refs -= thrall_ref
+			continue
+		active_thralls += thrall
+	return active_thralls
+
+/datum/antagonist/vampire/proc/deconvert_thralls()
+	for(var/datum/antagonist/vampire_thrall/thrall as anything in get_thralls())
+		thrall.owner?.remove_antag_datum(/datum/antagonist/vampire_thrall)
+	thrall_refs.Cut()
+	clear_thrall_huds()
+
+/datum/antagonist/vampire/proc/get_thrall_hud_key(role)
+	return "vampire_network_[role]_[REF(src)]"
+
+/datum/antagonist/vampire/proc/clear_thrall_huds()
+	owner?.current?.remove_alt_appearance(get_thrall_hud_key("vampire"))
+	for(var/datum/antagonist/vampire_thrall/thrall as anything in get_thralls())
+		thrall.owner?.current?.remove_alt_appearance(get_thrall_hud_key("thrall"))
+
+/datum/antagonist/vampire/proc/update_thrall_huds()
+	clear_thrall_huds()
+	var/mob/living/vampire_mob = owner?.current
+	if(!vampire_mob)
+		return
+	vampire_mob.add_alt_appearance(
+		/datum/atom_hud/alternate_appearance/basic/vampire_network,
+		get_thrall_hud_key("vampire"),
+		hud_image_on(vampire_mob),
+		src,
+	)
+	for(var/datum/antagonist/vampire_thrall/thrall as anything in get_thralls())
+		var/mob/living/thrall_mob = thrall.owner?.current
+		if(!thrall_mob)
+			continue
+		thrall_mob.add_alt_appearance(
+			/datum/atom_hud/alternate_appearance/basic/vampire_network,
+			get_thrall_hud_key("thrall"),
+			thrall.hud_image_on(thrall_mob),
+			src,
+		)
+
+/datum/antagonist/vampire/proc/vamp_burn(burn_chance)
+	if(prob(burn_chance) && owner.current.health >= 50)
+		switch(owner.current.health)
+			if(75 to 100)
+				to_chat(owner.current, span_warning("Ваша кожа отслаивается..."))
+			if(50 to 75)
+				to_chat(owner.current, span_warning("Ваша кожа шипит!"))
+		owner.current.adjust_fire_loss(3)
+	else if(owner.current.health < 50)
+		if(!owner.current.on_fire)
+			to_chat(owner.current, span_danger("Ваша кожа загорается!"))
+			INVOKE_ASYNC(owner.current, TYPE_PROC_REF(/mob, emote), "scream")
+		else
+			to_chat(owner.current, span_danger("Вы продолжаете гореть!"))
+		owner.current.adjust_fire_stacks(5)
+		owner.current.ignite_mob()
+
+/datum/antagonist/vampire/vv_edit_var(var_name, var_value)
+	. = ..()
+	check_vampire_upgrade(TRUE)
+
+/datum/antagonist/vampire/forge_objectives()
+	// TODO: make it more similar to traitor or heretic?
+	objectives = list()
+
+	var/datum/objective/vampire/blood/blood_objective = new
+	blood_objective.owner = owner
+	blood_objective.update_explanation_text()
+	objectives += blood_objective
+
+	if(prob(5))
+		var/datum/objective/protect/protect_objective = new
+		protect_objective.owner = owner
+		protect_objective.find_target(list(src))
+		objectives += protect_objective
+	else if(prob(50))
+		var/datum/objective/vampire/specialization/specialization_objective = new
+		specialization_objective.owner = owner
+		specialization_objective.update_explanation_text()
+		objectives += specialization_objective
+	else
+		var/datum/objective/steal/steal_objective = new
+		steal_objective.owner = owner
+		steal_objective.find_target(list(src))
+		objectives += steal_objective
+
+	var/list/datum/mind/blacklist = list()
+	for(var/datum/objective/protect/protect_objective in objectives)
+		blacklist += protect_objective.target
+
+	var/datum/objective/assassinate/assassinate_objective = new
+	assassinate_objective.owner = owner
+	assassinate_objective.find_target(list(src), blacklist)
+	objectives += assassinate_objective
+
+	var/datum/objective/vampire/lair/lair_objective = new
+	lair_objective.owner = owner
+	objectives += lair_objective
+
+	var/datum/objective/ending_objective
+	if(prob(20))
+		ending_objective = new /datum/objective/survive
+	else
+		ending_objective = new /datum/objective/escape
+	ending_objective.owner = owner
+	objectives += ending_objective
+
+/datum/antagonist/vampire/proc/update_specialization_objective()
+	for(var/datum/objective/vampire/specialization/specialization_objective as anything in objectives)
+		specialization_objective.update_explanation_text()
+	owner?.announce_objectives()
+
+/datum/antagonist/vampire/greet()
+	. = ..()
+	to_chat(owner.current, span_danger("Вы — вампир!"))
+	to_chat(owner.current, span_notice("Чтобы укусить кого-то, выберите голову, включите боевой режим и используйте пустую руку. Пейте кровь, чтобы получить новые силы. \
+		Вы слабы перед святыми предметами, светом звёзд и огнём. Не выходите в космос и избегайте капеллана, часовни и особенно святой воды."))
+	owner.announce_objectives()
