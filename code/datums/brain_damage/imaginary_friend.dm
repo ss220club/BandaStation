@@ -21,8 +21,8 @@
 	if(M.stat == DEAD || !M.client)
 		return FALSE
 	. = ..()
-	get_ghost()
 	// make_friend() // BANDASTATION EDIT
+	get_ghost()
 
 /datum/brain_trauma/special/imaginary_friend/on_life(seconds_per_tick)
 	if(get_dist(owner, friend) > 9)
@@ -47,8 +47,8 @@
 		return
 	friend_initialized = FALSE
 	QDEL_NULL(friend)
-	get_ghost()
 	// make_friend() // BANDASTATION EDIT
+	get_ghost()
 
 /datum/brain_trauma/special/imaginary_friend/proc/make_friend()
 	friend = new(get_turf(owner))
@@ -109,6 +109,7 @@
 	make_friend()
 	friend.PossessByPlayer(ghost.ckey)
 	friend.attach_to_owner(owner)
+	//	friend.setup_appearance() // BANDASTATION EDIT
 
 	if(choice == "Свой персонаж")
 		friend.setup_friend_from_prefs(ghost.client.prefs)
@@ -190,7 +191,7 @@
 		owner.imaginary_group = list(owner)
 	owner.imaginary_group += src
 	greet()
-	
+
 // BANDASTATION EDIT START
 /**
 /// Copies appearance from passed player prefs, or randomises them if none are provided
@@ -352,15 +353,15 @@
 	var/language = message_language || owner.get_selected_language()
 	Hear(src, language, message, null, null, null, spans, message_mods) // We always hear what we say
 	var/group = owner.imaginary_group - src // The people in our group don't, so we have to exclude ourselves not to hear twice
-
 	var/list/actual_hearers = list(src) // BANDASTATION EDIT: Imaginary friend selection
 
 	for(var/mob/person in group)
-		person.Hear(src, language, message, null, null, null, spans, message_mods, range)
+		if(get_dist(src, person) <= 7)
+			person.Hear(src, language, message, null, null, null, spans, message_mods, range)
 
 	// Speech bubble, who was within range and had runechat turned off
 	var/list/speech_bubble_recipients = list()
-	for(var/mob/user in actual_hearers) // BANDASTATION EDIT START: Imaginary friend selection
+	for(var/mob/user in actual_hearers) // BANDASTATION EDIT: Imaginary friend selection
 		if((safe_read_pref(user.client, /datum/preference/toggle/enable_runechat) || (SSlag_switch.measures[DISABLE_RUNECHAT] && !HAS_TRAIT(src, TRAIT_BYPASS_MEASURES))))
 			speech_bubble_recipients.Add(user.client)
 

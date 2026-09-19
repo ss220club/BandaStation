@@ -1,7 +1,7 @@
 // BANDASTATION EDIT START
 // #define CHOICE_RANDOM_APPEARANCE "Random"
 // #define CHOICE_PREFS_APPEARANCE "Look-a-like"
-// BANDASTATION EDIT END#define CHOICE_PICK_PLAYER "Pick player"
+// BANDASTATION EDIT END
 #define CHOICE_PICK_PLAYER "Pick player"
 #define CHOICE_POLL_GHOSTS "Offer to ghosts"
 #define CHOICE_END_THEM "Do it!"
@@ -11,7 +11,7 @@
  * Custom imaginary friend.
  *
  * Allows the admin to select the ckey to put into the imaginary friend and whether the imaginary friend looks like the
- * ckey's character
+ * ckey's character.
  *
  * Is not tied to the brain trauma and can be used on all mobs, technically. Including cyborgs and simple/basic mobs.
  *
