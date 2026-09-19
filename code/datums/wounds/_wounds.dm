@@ -730,7 +730,7 @@
 
 	var/scanner_text = "Рана обнаружена: [name]!<br>\
 		Тяжесть: [severity_text_formatted]<br>\
-		Описание: [simple_desc || desc]<br>
+		Описание: [simple_desc || desc]<br>"
 	if(simple_treat_text)
 		scanner_text += "<i>Руководство по лечению: [simple_treat_text]</i><br>"
 	if(homemade_treat_text)
