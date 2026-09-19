@@ -14,8 +14,8 @@
 	var/block_chance_two_handed = 50
 	block_sound = 'sound/items/weapons/block_blade.ogg'
 
-	slot_flags = ITEM_SLOT_BELT
-	w_class = WEIGHT_CLASS_HUGE
+	slot_flags = ITEM_SLOT_BELT | ITEM_SLOT_BACK | ITEM_SLOT_OCLOTHING
+	w_class = WEIGHT_CLASS_BULKY
 	force = 5
 	var/two_hand_force = 10
 	throwforce = 7
@@ -24,6 +24,7 @@
 	var/burn_damage = 5
 
 	stamina_damage = 80
+	stun_armour_penetration = 30
 	var/depleted_stamina_damage = 20
 	cooldown = (3.5 SECONDS)
 	knockdown_time = (2.5 SECONDS)
@@ -70,11 +71,7 @@
 	return cell && cell.charge >= cell_hit_cost
 
 // Allow a powered-down staff to use the stun attack as a physical two-handed strike
-/obj/item/melee/baton/security/electrostaff/try_stun(
-	mob/living/target,
-	mob/living/user,
-	harmbatonning
-)
+/obj/item/melee/baton/security/electrostaff/try_stun(mob/living/target,mob/living/user,harmbatonning)
 	if(!has_power() && HAS_TRAIT(src, TRAIT_WIELDED))
 		var/was_staff_active = active
 		active = TRUE
@@ -85,12 +82,7 @@
 	return ..()
 
 // Replace the electric effect with a physical strike when the staff has no power.
-/obj/item/melee/baton/security/electrostaff/baton_effect(
-	mob/living/target,
-	mob/living/user,
-	stun_override,
-	clumsy
-)
+/obj/item/melee/baton/security/electrostaff/baton_effect(mob/living/target,mob/living/user,stun_override,clumsy)
 	if(!has_power())
 		target.apply_damage(depleted_stamina_damage, STAMINA)
 		target.Knockdown(knockdown_time)
@@ -105,24 +97,14 @@
 	return TRUE
 
 // Mark powered Harm attacks so additional burn damage can be applied afterward.
-/obj/item/melee/baton/security/electrostaff/pre_attack(
-	atom/target,
-	mob/living/user,
-	list/modifiers,
-	list/attack_modifiers
-)
+/obj/item/melee/baton/security/electrostaff/pre_attack(atom/target,mob/living/user,list/modifiers,list/attack_modifiers)
 	if(has_power() && LAZYACCESS(modifiers, RIGHT_CLICK))
 		LAZYSET(attack_modifiers, "electrostaff_harm_attack", TRUE)
 
 	return ..()
 
 // Apply the additional burn damage to powered Harm attacks.
-/obj/item/melee/baton/security/electrostaff/afterattack(
-	atom/target,
-	mob/user,
-	list/modifiers,
-	list/attack_modifiers
-)
+/obj/item/melee/baton/security/electrostaff/afterattack(atom/target,mob/user,list/modifiers,list/attack_modifiers)
 	var/parent_result = ..()
 
 	if(LAZYACCESS(attack_modifiers, "electrostaff_harm_attack") && isliving(target))
@@ -132,10 +114,7 @@
 	return parent_result
 
 // Handle activation when the staff is picked up with both hands
-/obj/item/melee/baton/security/electrostaff/proc/on_wield(
-	obj/item/source,
-	mob/living/carbon/user
-)
+/obj/item/melee/baton/security/electrostaff/proc/on_wield(obj/item/source,mob/living/carbon/user)
 	if(has_power())
 		playsound(src, sound_on, 75, TRUE)
 		turn_on(user)
@@ -148,10 +127,7 @@
 	update_appearance(UPDATE_ICON)
 
 // Handle deactivation when the staff is returned to one-handed use.
-/obj/item/melee/baton/security/electrostaff/proc/on_unwield(
-	obj/item/source,
-	mob/living/carbon/user
-)
+/obj/item/melee/baton/security/electrostaff/proc/on_unwield(obj/item/source,mob/living/carbon/user)
 	if(active && has_power())
 		playsound(src, sound_on, 75, TRUE)
 		turn_off()
@@ -162,33 +138,34 @@
 	update_appearance(UPDATE_ICON)
 
 // Provide a 50% block chance while the staff is properly wielded.
-/obj/item/melee/baton/security/electrostaff/hit_reaction(
-	mob/living/carbon/human/owner,
-	atom/movable/hitby,
-	attack_text = "the attack",
-	final_block_chance = 0,
-	damage = 0,
-	attack_type = MELEE_ATTACK,
-	damage_type = BRUTE
-)
+/obj/item/melee/baton/security/electrostaff/hit_reaction(mob/living/carbon/human/owner,atom/movable/hitby,attack_text = "the attack",final_block_chance = 0,damage = 0,attack_type = MELEE_ATTACK,damage_type = BRUTE)
 
 	if(!HAS_TRAIT(src, TRAIT_WIELDED))
 		return FALSE
+	var/effective_block_chance = block_chance_two_handed
 
-	var/effective_block_chance = final_block_chance
-
-	effective_block_chance = block_chance_two_handed
+	if(!has_power())
+		effective_block_chance *= 0.5
 
 	if(attack_type == THROWN_PROJECTILE_ATTACK)
 		effective_block_chance += 20
+
 	if(attack_type == OVERWHELMING_ATTACK)
 		effective_block_chance = 0
+
 	if(attack_type == LEAP_ATTACK)
 		effective_block_chance = 50
 
 	final_block_chance = clamp(effective_block_chance, 0, 100)
 
-	return ..(owner, hitby, attack_text, final_block_chance, damage, attack_type, damage_type)
+	var/blocked = ..(owner, hitby, attack_text, final_block_chance, damage, attack_type, damage_type)
+
+	if(blocked && cell)
+		deductcharge(round(cell.maxcharge * 0.05))
+	return blocked
+
+
+
 
 // Define the available color reskins for the electrostaff.
 /datum/atom_skin/electrostaff
