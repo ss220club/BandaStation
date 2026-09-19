@@ -38,7 +38,7 @@
 	if(!victim.get_blood_volume())
 		to_chat(source, span_warning("В [victim] нет крови!"))
 		return COMPONENT_CANCEL_ATTACK_CHAIN
-	if(victim.mind?.has_antag_datum(/datum/antagonist/vampire) || victim.mind?.has_antag_datum(/datum/antagonist/vampire_thrall))
+	if(HAS_TRAIT(victim, VAMPIRE_LIKE_TRAIT))
 		to_chat(source, span_warning("Ваши клыки не могут пронзить холодную плоть [victim]!"))
 		return COMPONENT_CANCEL_ATTACK_CHAIN
 
@@ -51,5 +51,5 @@
 	if(!(methods & INGEST) || !ishuman(exposed_mob))
 		return
 	var/mob/living/carbon/human/affected_human = exposed_mob
-	if(affected_human.mind?.has_antag_datum(/datum/antagonist/vampire))
+	if(HAS_TRAIT(affected_human, VAMPIRE_TRAIT))
 		affected_human.set_nutrition(min(NUTRITION_LEVEL_WELL_FED, affected_human.nutrition + reac_volume / 5))

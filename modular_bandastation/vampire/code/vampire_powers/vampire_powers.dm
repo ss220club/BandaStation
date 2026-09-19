@@ -1,7 +1,6 @@
-//This should hold all the vampire related powers
 /mob/living/proc/affects_vampire(mob/user)
 	//Other vampires and thralls aren't affected
-	if(mind?.has_antag_datum(/datum/antagonist/vampire) || mind?.has_antag_datum(/datum/antagonist/vampire_thrall))
+	if(HAS_TRAIT(src, VAMPIRE_LIKE_TRAIT))
 		return FALSE
 	/// Chaplains with their nullrod can block a full power vampire, but a chaplain by themselfs or a crew with a null rod can not.
 	if(can_block_magic(MAGIC_RESISTANCE_HOLY) && HAS_MIND_TRAIT(src, TRAIT_HOLY))
@@ -481,7 +480,7 @@
 	if(!target.can_have_blood() || !target.get_blood_volume())
 		target.visible_message("[target] выглядит невозмутимо!")
 		return
-	if(target.mind.has_antag_datum(/datum/antagonist/vampire) || target.mind.has_antag_datum(/datum/antagonist/vampire_thrall))
+	if(HAS_TRAIT(target, VAMPIRE_LIKE_TRAIT))
 		target.visible_message(span_notice("[target] выглядит посвежевшим!"))
 		target.heal_overall_damage(brute = 60, burn = 60)
 		for(var/obj/item/bodypart/bodypart as anything in target.bodyparts)

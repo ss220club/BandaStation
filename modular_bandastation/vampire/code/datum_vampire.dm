@@ -206,6 +206,8 @@
 	var/mob/living/vampire_mob = mob_override || owner.current
 	if(!vampire_mob)
 		return
+	ADD_TRAIT(vampire_mob, VAMPIRE_TRAIT, REF(src))
+	ADD_TRAIT(vampire_mob, VAMPIRE_LIKE_TRAIT, REF(src))
 	if(!ishuman(vampire_mob))
 		return
 
@@ -228,6 +230,8 @@
 	var/mob/living/vampire_mob = mob_override || owner.current
 	if(!vampire_mob)
 		return
+	REMOVE_TRAIT(vampire_mob, VAMPIRE_TRAIT, REF(src))
+	REMOVE_TRAIT(vampire_mob, VAMPIRE_LIKE_TRAIT, REF(src))
 	if(!ishuman(vampire_mob))
 		return
 
@@ -245,7 +249,6 @@
 	QDEL_NULL(vampire_coffin_regeneration)
 	human_target.alpha = 255
 
-	REMOVE_TRAITS_IN(vampire_mob, "vampire")
 	UnregisterSignal(vampire_mob, list(
 		COMSIG_ATOM_HOLYATTACK,
 		COMSIG_LIVING_LIFE,
