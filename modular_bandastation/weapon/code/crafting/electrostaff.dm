@@ -1,7 +1,7 @@
 // Electrostaff construction kit printed by the Security Protolathe.
 /obj/item/weaponcrafting/gunkit/electrostaff
 	name = "electrostaff parts kit"
-	desc = "Комплект деталей для сборки электростаффа."
+	desc = "Комплект деталей для сборки электро-посоха."
 	custom_materials = list(
 		/datum/material/iron = SHEET_MATERIAL_AMOUNT * 5,
 		/datum/material/glass = SHEET_MATERIAL_AMOUNT,
@@ -11,8 +11,8 @@
 
 // Design for printing the Electrostaff construction kit on a Security Protolathe.
 /datum/design/electrostaff
-	name = "Комплект деталей для электростаффа"
-	desc = "Комплект деталей для сборки электростаффа."
+	name = "Комплект деталей для сборки электро-посоха"
+	desc = "Комплект деталей для сборки электро-посоха."
 	build_type = PROTOLATHE
 	materials = list(
 		/datum/material/iron = SHEET_MATERIAL_AMOUNT * 5,
@@ -35,10 +35,6 @@
 		/obj/item/assembly/signaler/anomaly/flux = 1,
 		/obj/item/weaponcrafting/gunkit/electrostaff = 1,
 	)
-	parts = list(
-		/obj/item/melee/baton/security = 2,
-		/obj/item/assembly/signaler/anomaly/flux = 1,
-		/obj/item/weaponcrafting/gunkit/electrostaff = 1,
-	)
+	crafting_flags = CRAFT_SKIP_MATERIALS_PARITY
 	time = 10 SECONDS
 	category = CAT_WEAPON_MELEE
