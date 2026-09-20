@@ -101,7 +101,6 @@
 		/datum/design/ioncarbine,
 		/datum/design/temp_gun,
 		/datum/design/lasershell,
-		/datum/design/electrostaff,
 	)
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = TECHWEB_TIER_3_POINTS)
 	announce_channels = list(RADIO_CHANNEL_SECURITY)
@@ -118,3 +117,4 @@
 	)
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = TECHWEB_TIER_4_POINTS)
 	announce_channels = list(RADIO_CHANNEL_SECURITY)
+

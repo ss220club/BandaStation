@@ -99,3 +99,24 @@
 		/datum/design/c9x25mm/hp,
 		/datum/design/c9x25mm/ap,
 	)
+
+// Design for printing the Electrostaff construction kit on a Security Protolathe.
+/datum/design/electrostaff
+	name = "Electrostaff"
+	desc = "Комплект деталей для сборки электро-посоха."
+	build_type = PROTOLATHE
+	materials = list(
+		/datum/material/iron = SHEET_MATERIAL_AMOUNT * 5,
+		/datum/material/glass = SHEET_MATERIAL_AMOUNT,
+		/datum/material/gold = SHEET_MATERIAL_AMOUNT * 3,
+		/datum/material/silver = SHEET_MATERIAL_AMOUNT * 1.5,
+	)
+	build_path = /obj/item/weaponcrafting/gunkit/electrostaff
+	category = list(
+		RND_CATEGORY_WEAPONS + RND_SUBCATEGORY_WEAPONS_KITS
+	)
+	departmental_flags = DEPARTMENT_BITFLAG_SECURITY
+
+/datum/techweb_node/electric_weapons/New()
+	. = ..()
+	unlocked_designs += /datum/design/electrostaff
