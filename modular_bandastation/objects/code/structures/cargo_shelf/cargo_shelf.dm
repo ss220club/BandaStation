@@ -11,7 +11,7 @@
 	acid = 60
 
 /obj/structure/cargo_shelf
-	name = "Полка для ящиков"
+	name = "crate shelf"
 	desc = "Полка для хранения ящиков."
 	icon = 'modular_bandastation/aesthetics/rack/icons/rack.dmi'
 	icon_state = "rack"
@@ -49,13 +49,13 @@
 
 /obj/structure/cargo_shelf/proc/can_load(obj/structure/closet/crate/crate, mob/user, y_offset)
 	if(crate_count() >= capacity)
-		balloon_alert(user, "Полка забита под завязку!")
+		balloon_alert(user, "полка забита под завязку!")
 		return FALSE
 
 	var/slot = get_shelf_slot(y_offset)
 
 	if(crates_stored[slot])
-		balloon_alert(user, "Эта полка занята!")
+		balloon_alert(user, "эта полка занята!")
 		return FALSE
 
 	return TRUE
@@ -188,11 +188,11 @@
 
 /obj/structure/cargo_shelf/screwdriver_act(mob/living/user, obj/item/tool)
 	if(anchored)
-		balloon_alert(user, "Сначала открутите полку!")
+		balloon_alert(user, "сначала открутите полку!")
 		return ITEM_INTERACT_BLOCKING
 
 	if(crate_count())
-		balloon_alert(user, "Сначала уберите ящики с полки!")
+		balloon_alert(user, "сначала уберите ящики с полки!")
 		return ITEM_INTERACT_BLOCKING
 
 	if(!tool.use_tool(src, user, 20))
