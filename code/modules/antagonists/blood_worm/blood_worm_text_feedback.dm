@@ -63,29 +63,14 @@
 
 	result += span_notice("У [target.ru_p_theirs()] есть [rounded_volume] юнитов крови[growth_string]. [capitalize(target.ru_p_them())] кровь <b>[synth_string]</b> синтетической.")
 
-/mob/living/basic/blood_worm/get_status_tab_items()
-	return ..() + get_special_status_tab_items()
+/mob/living/basic/blood_worm/proc/get_info_title()
+	. = "Worm Health: [round((health / maxHealth) * 100)]%"
 
-/mob/living/basic/blood_worm/proc/on_host_get_status_tab_items(datum/source, list/items)
-	SIGNAL_HANDLER
-	items += "Worm Health: [round((health / maxHealth) * 100)]%"
-	items += get_special_status_tab_items()
-
-/mob/living/basic/blood_worm/proc/get_special_status_tab_items()
-	. = list()
-
-	var/normal = consumed_normal_blood
-	var/synth = consumed_synth_blood
-	var/total = normal + synth
-
-	var/total_required = cocoon_action?.total_blood_required
-
-	if (total_required > 0)
-		. += "Growth: [FLOOR(total / total_required * 100, 1)]%"
-	. += "Blood Consumed"
-	. += "- Normal: [ceil(normal)]u"
-	. += "- Synthetic: [ceil(synth)]u (MAX: [maximum_synth_blood]u)"
-	. += "- Total: [ceil(total)]u (REQ: [total_required]u)"
+/mob/living/basic/blood_worm/proc/get_info_desc()
+	. = "Blood Consumed<br/>"
+	. += "- Normal: [ceil(consumed_normal_blood)]u<br/>"
+	. += "- Synthetic: [ceil(consumed_synth_blood)]u (MAX: [maximum_synth_blood]u)<br/>"
+	. += "- Total: [ceil(consumed_normal_blood + consumed_synth_blood)]u<br/>"
 
 /// Sends text to the blood worm, whether they are possessing a host or not.
 /mob/living/basic/blood_worm/proc/to_chat_self(text)

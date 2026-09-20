@@ -43,6 +43,8 @@
 		new /datum/stack_recipe_list("Деревянный пол", list(
 			new /datum/stack_recipe("Обычный", /obj/item/stack/tile/wood, 1, 4, 20),
 			new /datum/stack_recipe("Дубовый", /obj/item/stack/tile/wood/oak, 1, 4, 20),
+			new /datum/stack_recipe("Тёмный", /obj/item/stack/tile/wood/darkwood, 1, 4, 20),
+			new /datum/stack_recipe("Светлый", /obj/item/stack/tile/wood/lightwood, 1, 4, 20),
 			new /datum/stack_recipe("Берёзовый", /obj/item/stack/tile/wood/birch, 1, 4, 20),
 			new /datum/stack_recipe("Вишнёвый", /obj/item/stack/tile/wood/cherry, 1, 4, 20),
 			new /datum/stack_recipe("Амарантовый", /obj/item/stack/tile/wood/amaranth, 1, 4, 20),

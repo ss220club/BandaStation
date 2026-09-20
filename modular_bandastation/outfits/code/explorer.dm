@@ -13,7 +13,7 @@
 	duffelbag = /obj/item/storage/backpack/duffelbag/explorer
 
 	box = /obj/item/storage/box/survival/mining
-	belt = /obj/item/modular_computer/pda/explorer
+	belt = /obj/item/modular_computer/pda/crew/explorer
 
 /datum/outfit/plasmaman/explorer
 	name = "Explorer Plasmaman"

@@ -196,7 +196,7 @@
 /datum/emote/living/carbon/human/wag
 	key = "wag"
 	key_third_person = "wags"
-	message = "their tail."
+	message = "wags"
 
 /datum/emote/living/carbon/human/wag/run_emote(mob/user, params, type_override, intentional)
 	. = ..()
@@ -229,7 +229,7 @@
 
 /datum/emote/living/carbon/human/wing/run_emote(mob/user, params, type_override, intentional)
 	. = ..()
-	var/obj/item/organ/wings/functional/wings = user.get_organ_slot(ORGAN_SLOT_EXTERNAL_WINGS)
+	var/obj/item/organ/wings/wings = user.get_organ_slot(ORGAN_SLOT_EXTERNAL_WINGS)
 	if(isnull(wings))
 		CRASH("[type] ran on a mob that has no wings!")
 	if(wings.wings_open)
@@ -238,12 +238,13 @@
 		wings.open_wings()
 
 /datum/emote/living/carbon/human/wing/select_message_type(mob/user, intentional)
-	var/obj/item/organ/wings/functional/wings = user.get_organ_slot(ORGAN_SLOT_EXTERNAL_WINGS)
+	var/obj/item/organ/wings/wings = user.get_organ_slot(ORGAN_SLOT_EXTERNAL_WINGS)
 	var/emote_verb = wings.wings_open ? "closes" : "opens"
 	return "[emote_verb] [message]"
 
 /datum/emote/living/carbon/human/wing/can_run_emote(mob/user, status_check = TRUE, intentional, params)
-	if(!istype(user.get_organ_slot(ORGAN_SLOT_EXTERNAL_WINGS), /obj/item/organ/wings/functional))
+	var/obj/item/organ/wings/wings = user.get_organ_slot(ORGAN_SLOT_EXTERNAL_WINGS)
+	if(!istype(wings) || !wings.has_open_sprite)
 		return FALSE
 	return ..()
 
@@ -290,48 +291,12 @@
 		addtimer(CALLBACK(eyes, TYPE_PROC_REF(/obj/item/organ/eyes, blink), 0.1 SECONDS, FALSE), i * 0.2 SECONDS)
 	eyes.animate_eyelids(user)
 
-///Snowflake emotes only for le epic chimp
-/datum/emote/living/carbon/human/monkey
-
-/datum/emote/living/carbon/human/monkey/can_run_emote(mob/user, status_check = TRUE, intentional, params)
-	if(ismonkey(user))
-		return ..()
-	return FALSE
-
-/datum/emote/living/carbon/human/monkey/gnarl
-	key = "gnarl"
-	key_third_person = "gnarls"
-	message = "gnarls and shows its teeth..."
-	message_mime = "gnarls silently, baring its teeth..."
-
-/datum/emote/living/carbon/human/monkey/roll
-	key = "roll"
-	key_third_person = "rolls"
-	message = "rolls."
-	can_use_flags = EMOTE_CANUSE_REQUIRE_HANDS
-
-/datum/emote/living/carbon/human/monkey/scratch
-	key = "scratch"
-	key_third_person = "scratches"
-	message = "scratches."
-	can_use_flags = EMOTE_CANUSE_REQUIRE_HANDS
-
-/datum/emote/living/carbon/human/monkey/screech/roar
+/datum/emote/living/carbon/human/screech/roar
 	key = "roar"
 	key_third_person = "roars"
 	message = "roars!"
 	message_mime = "acts out a roar."
 	emote_type = EMOTE_AUDIBLE | EMOTE_VISIBLE
-
-/datum/emote/living/carbon/human/monkey/tail
-	key = "tail"
-	message = "waves their tail."
-
-/datum/emote/living/carbon/human/monkey/sign
-	key = "sign"
-	key_third_person = "signs"
-	message_param = "signs the number %t."
-	can_use_flags = EMOTE_CANUSE_REQUIRE_HANDS
 
 /// emotes for glowy goobers
 /datum/emote/living/carbon/human/glow

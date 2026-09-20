@@ -10,7 +10,7 @@
 	ears = /obj/item/radio/headset/headset_cent/commander
 	glasses = /obj/item/clothing/glasses/thermal/eyepatch
 	gloves = /obj/item/clothing/gloves/tackler/combat/insulated
-	head = /obj/item/clothing/head/helmet/space/beret
+	head = /obj/item/clothing/head/beret/centcom
 	mask = /obj/item/cigarette/cigar/havana
 	shoes = /obj/item/clothing/shoes/combat/swat
 	r_pocket = /obj/item/lighter
@@ -198,7 +198,7 @@
 	id_trim = /datum/id_trim/reaper_assassin
 	uniform = /obj/item/clothing/under/costume/buttondown/slacks/service
 	neck = /obj/item/clothing/neck/tie/red/hitman/tied
-	belt = /obj/item/modular_computer/pda/heads
+	belt = /obj/item/modular_computer/pda/crew/heads
 	ears = /obj/item/radio/headset
 	gloves = /obj/item/clothing/gloves/color/black
 	glasses = /obj/item/clothing/glasses/sunglasses
@@ -224,7 +224,7 @@
 	sec_briefcase.contents += new /obj/item/ammo_box/speedloader/c357
 	sec_briefcase.contents += new /obj/item/grenade/c4/x4
 
-	var/obj/item/modular_computer/pda/heads/pda = H.belt
+	var/obj/item/modular_computer/pda/crew/heads/pda = H.belt
 	pda.imprint_id(H.real_name, "Reaper")
 
 	var/obj/item/card/id/W = H.wear_id

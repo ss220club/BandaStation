@@ -9,64 +9,64 @@
 	tacmap_color = TACMAP_AREA_SECURITY
 
 /area/station/security/office
-	name = "\improper Security Office"
+	name = "Security Office"
 	icon_state = "security"
 
 /area/station/security/breakroom
-	name = "\improper Security Break Room"
+	name = "Security Break Room"
 	icon_state = "brig"
 
 /area/station/security/tram
-	name = "\improper Security Transfer Tram"
+	name = "Security Transfer Tram"
 	icon_state = "security"
 
 /area/station/security/lockers
-	name = "\improper Security Locker Room"
+	name = "Security Locker Room"
 	icon_state = "securitylockerroom"
 
 /area/station/security/brig
-	name = "\improper Brig"
+	name = "Brig"
 	icon_state = "brig"
 
 /area/station/security/holding_cell
-	name = "\improper Holding Cell"
+	name = "Holding Cell"
 	icon_state = "holding_cell"
 
 /area/station/security/medical
-	name = "\improper Security Medical"
+	name = "Security Medical"
 	icon_state = "security_medical"
 
 /area/station/security/brig/upper
-	name = "\improper Brig Overlook"
+	name = "Brig Overlook"
 	icon_state = "upperbrig"
 
 /area/station/security/brig/lower
-	name = "\improper Lower Brig"
+	name = "Lower Brig"
 	icon_state = "lower_brig"
 
 /area/station/security/brig/entrance
-	name = "\improper Brig Entrance"
+	name = "Brig Entrance"
 	icon_state = "brigentry"
 
 /area/station/security/courtroom
-	name = "\improper Courtroom"
+	name = "Courtroom"
 	icon_state = "courtroom"
 	sound_environment = SOUND_AREA_LARGE_ENCLOSED
 
 /area/station/security/courtroom/holding
-	name = "\improper Courtroom Prisoner Holding Room"
+	name = "Courtroom Prisoner Holding Room"
 
 /area/station/security/processing
-	name = "\improper Labor Shuttle Dock"
+	name = "Labor Shuttle Dock"
 	icon_state = "sec_labor_processing"
 
 /area/station/security/processing/cremation
-	name = "\improper Security Crematorium"
+	name = "Security Crematorium"
 	icon_state = "sec_cremation"
 	sound_environment = SOUND_AREA_SMALL_ENCLOSED
 
 /area/station/security/interrogation
-	name = "\improper Interrogation Room"
+	name = "Interrogation Room"
 	icon_state = "interrogation"
 	sound_environment = SOUND_AREA_SMALL_ENCLOSED
 
@@ -81,7 +81,7 @@
 	sound_environment = SOUND_AREA_SMALL_ENCLOSED
 
 /area/station/security/armory
-	name = "\improper Armory"
+	name = "Armory"
 	icon_state = "armory"
 	ambience_index = AMBIENCE_DANGER
 	motion_monitored = TRUE
@@ -90,7 +90,7 @@
 	name = "Upper Armory"
 
 /area/station/security/detectives_office
-	name = "\improper Detective's Office"
+	name = "Detective's Office"
 	icon_state = "detective"
 	ambientsounds = list(
 		'sound/ambience/security/ambidet1.ogg',
@@ -98,27 +98,27 @@
 		)
 
 /area/station/security/detectives_office/private_investigators_office
-	name = "\improper Private Investigator's Office"
+	name = "Private Investigator's Office"
 	icon_state = "investigate_office"
 	sound_environment = SOUND_AREA_SMALL_SOFTFLOOR
 
 /area/station/security/range
-	name = "\improper Firing Range"
+	name = "Firing Range"
 	icon_state = "firingrange"
 
 /area/station/security/eva
-	name = "\improper Security EVA"
+	name = "Security EVA"
 	icon_state = "sec_eva"
 
 /area/station/security/execution
 	icon_state = "execution_room"
 
 /area/station/security/execution/transfer
-	name = "\improper Transfer Centre"
+	name = "Transfer Centre"
 	icon_state = "sec_processing"
 
 /area/station/security/execution/education
-	name = "\improper Prisoner Education Chamber"
+	name = "Prisoner Education Chamber"
 
 /area/station/security/mechbay
 	name = "Security Mechbay"
@@ -129,15 +129,15 @@
 */
 
 /area/station/security/checkpoint
-	name = "\improper Security Checkpoint"
+	name = "Security Checkpoint"
 	icon_state = "checkpoint"
 
 /area/station/security/checkpoint/escape
-	name = "\improper Departures Security Checkpoint"
+	name = "Departures Security Checkpoint"
 	icon_state = "checkpoint_esc"
 
 /area/station/security/checkpoint/arrivals
-	name = "\improper Arrivals Security Checkpoint"
+	name = "Arrivals Security Checkpoint"
 	icon_state = "checkpoint_arr"
 
 /area/station/security/checkpoint/supply
@@ -193,48 +193,48 @@
 
 
 /area/station/security/prison
-	name = "\improper Prison Wing"
+	name = "Prison Wing"
 	icon_state = "sec_prison"
 	area_flags = VALID_TERRITORY | BLOBS_ALLOWED | CULT_PERMITTED | PERSISTENT_ENGRAVINGS
 
 //Rad proof
 /area/station/security/prison/toilet
-	name = "\improper Prison Toilet"
+	name = "Prison Toilet"
 	icon_state = "sec_prison_safe"
 
 // Rad proof
 /area/station/security/prison/safe
-	name = "\improper Prison Wing Cells"
+	name = "Prison Wing Cells"
 	icon_state = "sec_prison_safe"
 
 /area/station/security/prison/upper
-	name = "\improper Upper Prison Wing"
+	name = "Upper Prison Wing"
 	icon_state = "prison_upper"
 
 /area/station/security/prison/visit
-	name = "\improper Prison Visitation Area"
+	name = "Prison Visitation Area"
 	icon_state = "prison_visit"
 
 /area/station/security/prison/rec
-	name = "\improper Prison Rec Room"
+	name = "Prison Rec Room"
 	icon_state = "prison_rec"
 
 /area/station/security/prison/mess
-	name = "\improper Prison Mess Hall"
+	name = "Prison Mess Hall"
 	icon_state = "prison_mess"
 
 /area/station/security/prison/work
-	name = "\improper Prison Work Room"
+	name = "Prison Work Room"
 	icon_state = "prison_work"
 
 /area/station/security/prison/shower
-	name = "\improper Prison Shower"
+	name = "Prison Shower"
 	icon_state = "prison_shower"
 
 /area/station/security/prison/workout
-	name = "\improper Prison Gym"
+	name = "Prison Gym"
 	icon_state = "prison_workout"
 
 /area/station/security/prison/garden
-	name = "\improper Prison Garden"
+	name = "Prison Garden"
 	icon_state = "prison_garden"

@@ -72,11 +72,11 @@
 	icon_state = "whirlpool"
 	layer = ABOVE_OPEN_TURF_LAYER
 
-/obj/effect/abstract/whirlpool/Initialize(mapload)
+/turf/open/water/groundwater/whirlpool
+
+/turf/open/water/groundwater/whirlpool/Initialize(mapload)
 	. = ..()
-	var/turf/T = get_turf(src)
-	if(T && !T.GetComponent(/datum/component/chasm))
-		T.AddComponent(/datum/component/chasm, null, mapload)
+	AddComponent(/datum/component/chasm, null, mapload)
 
 /obj/effect/abstract/mist
 	name = "туман"

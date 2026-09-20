@@ -394,7 +394,7 @@
 		return
 
 	if(!(step_count % 2))
-		playsound(current_turf, 'sound/items/modsuit/atrocinator_step.ogg', 50)
+		playsound(current_turf, 'sound/items/modsuit/atrocinator_step.ogg', 35) // BANDASTATION EDIT: orig volume = 50, less ear damage
 	step_count++
 
 #define FLY_TIME (5 SECONDS)

@@ -58,11 +58,11 @@
 		to_chat(src, span_revennotice("[capitalize(target.ru_p_them())] душа пылает разумом."))
 		essence_drained += rand(20, 30)
 
-	if(target.stat != DEAD && !HAS_TRAIT(target, TRAIT_WEAK_SOUL))
+	if(target.stat != DEAD && !HAS_TRAIT(target, TRAIT_LESSER_HUMANOID))
 		to_chat(src, span_revennotice("[capitalize(target.ru_p_them())] душа пылает жизнью!"))
 		essence_drained += rand(40, 50)
 
-	if(!target_has_client && HAS_TRAIT(target, TRAIT_WEAK_SOUL))
+	if(!target_has_client && HAS_TRAIT(target, TRAIT_LESSER_HUMANOID))
 		to_chat(src, span_revennotice("[capitalize(target.ru_p_them())] душа слаба и неразвита. Они не будут стоить многого."))
 		essence_drained = 5
 
@@ -123,7 +123,7 @@
 
 	change_essence_amount(essence_drained, FALSE, target)
 
-	if(essence_drained <= 90 && target.stat != DEAD && !HAS_TRAIT(target, TRAIT_WEAK_SOUL))
+	if(essence_drained <= 90 && target.stat != DEAD && !HAS_TRAIT(target, TRAIT_LESSER_HUMANOID))
 		max_essence += 5
 		to_chat(src, span_revenboldnotice("Поглощение живой души [target] повысило ваш максимальный уровень эссенции. Ваша новая максимальная эссенция - [max_essence]."))
 
