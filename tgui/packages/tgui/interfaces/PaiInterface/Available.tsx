@@ -26,10 +26,10 @@ export function AvailableDisplay(props) {
 
   return (
     <Section
-       buttons={<MemoryDisplay />}
-       fill
-       scrollable
-       title="Доступное ПО"
+      buttons={<MemoryDisplay />}
+      fill
+      scrollable
+      title="Доступное ПО"
     >
       <Table>
         {entries?.map(([name, cost]) => {
