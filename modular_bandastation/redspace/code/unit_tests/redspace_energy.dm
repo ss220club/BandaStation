@@ -24,13 +24,13 @@
 	var/obj/structure/closet/crate/bin/diagonal_bin = allocate(/obj/structure/closet/crate/bin, diagonal_obstacle)
 	if(!redspace_demon_has_obstruction(test_mob, cardinal_target) || !redspace_demon_has_obstruction(diagonal_test_mob, diagonal_target))
 		return Fail("Redspace demon movement must detect dense objects on cardinal and diagonal approach tiles")
-	var/bin_integrity_before = test_bin.atom_integrity
+	var/bin_integrity_before = test_bin.get_integrity()
 	test_mob.melee_attack(test_bin, ignore_cooldown = TRUE)
-	if(test_bin.atom_integrity >= bin_integrity_before)
+	if(test_bin.get_integrity() >= bin_integrity_before)
 		return Fail("Redspace melee demons must be able to damage a trash bin blocking their target")
-	var/diagonal_bin_integrity_before = diagonal_bin.atom_integrity
+	var/diagonal_bin_integrity_before = diagonal_bin.get_integrity()
 	diagonal_test_mob.melee_attack(diagonal_bin, ignore_cooldown = TRUE)
-	if(diagonal_bin.atom_integrity >= diagonal_bin_integrity_before)
+	if(diagonal_bin.get_integrity() >= diagonal_bin_integrity_before)
 		return Fail("Redspace melee demons must be able to damage a diagonal trash bin blocking their target")
 	if(!test_mob.has_faction(FACTION_HELL))
 		return Fail("Redspace demons must retain the inherited Hell faction")

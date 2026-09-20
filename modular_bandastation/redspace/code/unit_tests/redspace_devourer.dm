@@ -18,7 +18,9 @@
 		return Fail("The Devourer AI must search for nearby targets with its restricted targeting strategy and keep living crit victims valid so it can consume them")
 
 	var/turf/ravager_turf = get_safe_random_station_turf_equal_weight()
-	if(!ravager_turf)
+	if(!ravager_turf && SSredspace && length(SSredspace.station_z_levels))
+		ravager_turf = locate(1, 1, SSredspace.station_z_levels[1])
+	if(!ravager_turf || !SSredspace?.is_supported_z(ravager_turf.z))
 		return Fail("The Ravager test requires an available station turf")
 	var/mob/living/basic/demon/redspace/moderate/ravager/ravager = allocate(/mob/living/basic/demon/redspace/moderate/ravager, ravager_turf)
 	var/datum/action/cooldown/mob_cooldown/redspace_beacon/beacon_action = locate(/datum/action/cooldown/mob_cooldown/redspace_beacon) in ravager.actions
@@ -26,9 +28,11 @@
 		return Fail("The Ravager must use the supplied sprite and receive the beacon ability")
 	if(beacon_action.button_icon_state != "demonic_beacon" || beacon_action.cooldown_time < 60 SECONDS)
 		return Fail("The beacon ability must use the beacon sprite and a long cooldown")
-	if(!beacon_action.Activate(ravager) || length(beacon_action.beacons) != 1 || !beacon_action.beacons[1]?.field_source)
+	if(!beacon_action.Activate(ravager) || length(beacon_action.beacons) != 1)
 		return Fail("The Ravager must be able to create a demonic beacon")
 	var/obj/structure/redspace/demonic_beacon/first_beacon = beacon_action.beacons[1]
+	if(!first_beacon?.field_source)
+		return Fail("The Ravager must be able to create a demonic beacon")
 	var/source_id = first_beacon.field_source.source_id
 	if(first_beacon.field_source.strength != 7 || first_beacon.field_source.radius != REDSPACE_HEX_RADIUS || SSredspace.field_sources["[source_id]"] != first_beacon.field_source)
 		return Fail("The demonic beacon must register a seven-point one-hex hotspot")
@@ -77,23 +81,35 @@
 	if(redspace_devourer_can_consume(dead))
 		return Fail("The Devourer must not target dead humans")
 
-	var/turf/source_turf = get_safe_random_station_turf_equal_weight()
+	var/turf/source_turf = get_safe_random_station_turf_equal_weight() || run_loc_floor_bottom_left
 	var/turf/outside_turf
 	for(var/attempt in 1 to 20)
 		var/turf/candidate_turf = get_safe_random_station_turf_equal_weight()
 		if(candidate_turf && candidate_turf.z == source_turf?.z && get_dist(candidate_turf, source_turf) > 5)
 			outside_turf = candidate_turf
 			break
+	if(!outside_turf && source_turf)
+		outside_turf = locate(source_turf.x + 6, source_turf.y, source_turf.z)
+		if(!outside_turf)
+			outside_turf = locate(source_turf.x - 6, source_turf.y, source_turf.z)
+		if(!outside_turf && source_turf == run_loc_floor_bottom_left)
+			outside_turf = run_loc_floor_top_right
+		if(!outside_turf)
+			outside_turf = get_step(source_turf, NORTH)
 	if(!source_turf || !outside_turf)
 		return Fail("The Devourer epicenter fallback test requires two distant station turfs")
 	var/list/saved_field_sources = SSredspace.field_sources
 	var/list/saved_field_cells = SSredspace.field_cells
+	var/list/saved_station_z_levels = SSredspace.station_z_levels.Copy()
+	if(!(source_turf.z in SSredspace.station_z_levels))
+		SSredspace.station_z_levels += source_turf.z
 	var/datum/redspace_field_source/hotspot/test_source = new(0, source_turf, 4.5, 2, REDSPACE_PROFILE_DEMONIC, null, "unit test")
 	SSredspace.field_sources = list("unit_test" = test_source)
 	SSredspace.field_cells = list()
 	var/turf/selected_epicenter = redspace_devourer_get_hottest_turf(outside_turf)
 	SSredspace.field_sources = saved_field_sources
 	SSredspace.field_cells = saved_field_cells
+	SSredspace.station_z_levels = saved_station_z_levels
 	qdel(test_source)
 	if(selected_epicenter != source_turf)
 		return Fail("A Devourer that eats outside the disturbance must still select the source epicenter")
@@ -120,8 +136,8 @@
 	test_door.close(TRUE)
 	capture_devourer.forceMove(run_loc_floor_bottom_left)
 	capture_devourer.next_move = 0
-	var/door_integrity = test_door.atom_integrity
-	if(!redspace_demon_has_obstruction(capture_devourer, door_target_turf) || !redspace_demon_attack_obstruction(capture_devourer, door_target_turf) || (!QDELETED(test_door) && test_door.atom_integrity >= door_integrity))
+	var/door_integrity = test_door.get_integrity()
+	if(!redspace_demon_has_obstruction(capture_devourer, door_target_turf) || !redspace_demon_attack_obstruction(capture_devourer, door_target_turf) || (!QDELETED(test_door) && test_door.get_integrity() >= door_integrity))
 		return Fail("A Devourer carrying a victim must be able to break a closed airlock blocking its path")
 	capture_devourer.release_victim()
 	if(capture_devourer.stored_victim || capture_devourer.transformation_committed || capture_victim.loc == capture_devourer || HAS_TRAIT(capture_victim, TRAIT_STASIS) || capture_energy.zero_energy_damage_percent != capture_devourer.redspace_zero_energy_damage_percent)
@@ -144,9 +160,9 @@
 	var/obj/machinery/door/airlock/instant/retreat_door = allocate(/obj/machinery/door/airlock/instant, retreat_door_turf)
 	retreat_door.close(TRUE)
 	retreat_devourer.next_move = 0
-	var/retreat_door_integrity = retreat_door.atom_integrity
+	var/retreat_door_integrity = retreat_door.get_integrity()
 	var/retreat_step_result = retreat_devourer.devourer_retreat_step(retreat_destination)
-	var/retreat_door_damaged = QDELETED(retreat_door) || retreat_door.atom_integrity < retreat_door_integrity
+	var/retreat_door_damaged = QDELETED(retreat_door) || retreat_door.get_integrity() < retreat_door_integrity
 	if(!retreat_step_result || !retreat_door_damaged)
 		retreat_controller.clear_forced_off()
 		retreat_devourer.release_victim()
@@ -210,10 +226,10 @@
 	var/obj/machinery/door/airlock/instant/detour_door = allocate(/obj/machinery/door/airlock/instant, detour_door_turf)
 	detour_door.close(TRUE)
 	detour_devourer.next_move = 0
-	var/detour_door_integrity = detour_door.atom_integrity
+	var/detour_door_integrity = detour_door.get_integrity()
 	var/turf/detour_destination = get_step(detour_wall_turf, EAST)
 	var/detour_step_result = detour_devourer.devourer_retreat_step(detour_destination, list(detour_start_turf), null)
-	var/detour_door_damaged = QDELETED(detour_door) || detour_door.atom_integrity < detour_door_integrity
+	var/detour_door_damaged = QDELETED(detour_door) || detour_door.get_integrity() < detour_door_integrity
 	detour_wall_turf.ChangeTurf(detour_wall_restore_type)
 	detour_south_wall_turf.ChangeTurf(detour_south_wall_restore_type)
 	detour_devourer.ai_controller.clear_forced_off()

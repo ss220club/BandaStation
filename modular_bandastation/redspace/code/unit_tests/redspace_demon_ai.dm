@@ -49,8 +49,8 @@
 	if(approach_node.get_desired_movement(controller, close_target) != /datum/ai_movement/jps/redspace_demon)
 		return Fail("A smashable obstruction in the approach path must keep JPS so the demon can break it")
 	test_mob.next_move = 0
-	var/bin_integrity = test_bin.atom_integrity
-	if(!redspace_demon_attack_obstruction(test_mob, close_target) || (!QDELETED(test_bin) && test_bin.atom_integrity >= bin_integrity))
+	var/bin_integrity = test_bin.get_integrity()
+	if(!redspace_demon_attack_obstruction(test_mob, close_target) || (!QDELETED(test_bin) && test_bin.get_integrity() >= bin_integrity))
 		return Fail("A transformation movement must attack a smashable obstruction instead of stalling")
 	qdel(test_bin)
 
