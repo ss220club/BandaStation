@@ -440,6 +440,20 @@ required_map = "IceBoxStation.dmm"
 coordinates = [179, 162, 3]
 trait_name = "Station"
 
+[templates.iceboxstation_chaplain_cemetery]
+map_files = ["iceboxstation_chaplain_cemetery.dmm"]
+directory = "_maps/bandastation/automapper/templates/iceboxstation/"
+required_map = "IceBoxStation.dmm"
+coordinates = [166, 131, 2]
+trait_name = "Station"
+
+[templates.iceboxstation_eng_animals]
+map_files = ["iceboxstation_eng_animals.dmm"]
+directory = "_maps/bandastation/automapper/templates/iceboxstation/"
+required_map = "IceBoxStation.dmm"
+coordinates = [119, 87, 3]
+trait_name = "Station"
+
 # TramStation
 [templates.tramstation_detective_office]
 map_files = ["tramstation_detective_office.dmm"]
