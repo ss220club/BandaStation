@@ -830,7 +830,7 @@
 		owner.balloon_alert(owner, "некому призывать")
 		return FALSE
 	var/list/choices = list()
-	for(var/summon_path as anything in summon_options)
+	for(var/summon_path in summon_options)
 		if(get_summoned_count(summon_path) >= summon_options[summon_path][1])
 			continue
 		var/list/options = summon_options[summon_path]
@@ -1419,7 +1419,7 @@
 	// First pass: only unexplored tiles, which stops two-tile shuttling. Second pass allows
 	// revisits so a dead end can be backed out of, but never the tile just left behind.
 	for(var/attempt in 1 to 2)
-		for(var/direction as anything in detour_dirs)
+		for(var/direction in detour_dirs)
 			var/turf/step_turf = get_step(current_turf, direction)
 			if(isnull(step_turf) || step_turf == current_turf)
 				continue
