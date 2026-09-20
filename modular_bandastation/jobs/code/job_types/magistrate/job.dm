@@ -13,6 +13,7 @@
 	exp_required_type_department = EXP_TYPE_JUSTICE
 	exp_granted_type = EXP_TYPE_CREW
 	config_tag = "MAGISTRATE"
+	tgui_icon = FA_ICON_STAMP
 
 	outfit = /datum/outfit/job/magistrate
 
