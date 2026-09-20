@@ -29,6 +29,14 @@
 
 	crates_stored = new /list(capacity)
 
+/obj/structure/cargo_shelf/Destroy()
+	for(var/slot in 1 to length(crates_stored))
+		var/obj/structure/closet/crate/crate = crates_stored[slot]
+		if(crate)
+			crate.forceMove(drop_location())
+
+	return ..()
+
 /obj/structure/cargo_shelf/proc/crate_count()
 	var/count = 0
 
@@ -93,7 +101,7 @@
 
 	crate.forceMove(src)
 	vis_contents += crate
-	crate.mouse_opacity = 2
+	crate.mouse_opacity = MOUSE_OPACITY_OPAQUE
 
 	crate.add_fingerprint(user)
 
@@ -116,7 +124,7 @@
 /obj/structure/closet/crate/mouse_drop_receive(atom/dropped, mob/user, params)
 	var/obj/structure/cargo_shelf/shelf = loc
 	if(!istype(shelf))
-		return
+		return ..()
 
 	shelf.mouse_drop_receive(dropped, user, params)
 
@@ -172,7 +180,7 @@
 		. += span_notice("Вы можете перетащить ящик на полку.")
 
 	if(crate_count())
-		. += span_notice("Вы можете сдвинуть ящик с полки.")
+		. += span_notice("Вы можете снять ящик с полки.")
 
 /obj/structure/cargo_shelf/wrench_act(mob/living/user, obj/item/tool)
 	set_anchored(!anchored)
@@ -195,13 +203,16 @@
 		balloon_alert(user, "сначала уберите ящики с полки!")
 		return ITEM_INTERACT_BLOCKING
 
-	if(!tool.use_tool(src, user, 20))
+	if(!tool.use_tool(src, user, 2 SECONDS))
 		return ITEM_INTERACT_BLOCKING
 
-	new /obj/item/cargo_shelf_parts(drop_location())
-	qdel(src)
+	deconstruct(TRUE)
 
 	return ITEM_INTERACT_SUCCESS
+
+/obj/structure/cargo_shelf/atom_deconstruct(disassembled)
+	if(disassembled)
+		new /obj/item/cargo_shelf_parts(drop_location())
 
 #undef CARGO_SHELF_CAPACITY
 #undef CARGO_SHELF_VERTICAL_OFFSET
