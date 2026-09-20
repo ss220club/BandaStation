@@ -1,0 +1,7 @@
+author: "anstapi"
+delete-after: True
+changes:
+  - rscadd: "Светоч теперь покоряет холл инженерного отдела IceBox."
+  - rscadd: "Добавлена новая статуя ангела, а также две статуи - grave (надгробие и крест)."
+  - image: "Новые статуи используют icons grave (lockers)."
+  - map: "Сделан автомаппер кладбища IceBox."
