@@ -5,6 +5,8 @@
 	base_icon_state = "electrostaff_orange"
 	icon_state = "electrostaff_orange"
 	inhand_icon_state = "electrostaff_orange"
+	inhand_x_dimension = 64
+	inhand_y_dimension = 64
 	lefthand_file = 'modular_bandastation/weapon/icons/melee/inhands/electrostaff_lefthand.dmi'
 	righthand_file = 'modular_bandastation/weapon/icons/melee/inhands/electrostaff_righthand.dmi'
 	worn_icon = 'icons/mob/clothing/belt.dmi'
