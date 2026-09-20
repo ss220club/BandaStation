@@ -215,7 +215,7 @@ effective or pretty fucking useless.
 	var/max_charge = 30 SECONDS
 	// BANDASTATION EDIT START: stealth mode refactor
 	/// The amount of charge used per second
-	var/usage_per_tick = 1.5 SECONDS
+	var/charge_rate = 1.5 SECONDS
 	/// The minimum alpha value for the stealth mode
 	var/min_alpha = 1
 	// BANDASTATION EDIT END: stealth mode refactor
@@ -265,7 +265,7 @@ effective or pretty fucking useless.
 /datum/action/item_action/stealth_mode/process(seconds_per_tick)
 	if(!stealth_engaged)
 		// Recharge over time
-		charge = min(max_charge, charge + (usage_per_tick * 2) * seconds_per_tick) // BANDASTATION EDIT: stealth mode refactor
+		charge = min(max_charge, charge + (charge_rate * 2) * seconds_per_tick) // BANDASTATION EDIT: stealth mode refactor
 		build_all_button_icons(UPDATE_BUTTON_STATUS)
 		return
 
@@ -276,12 +276,12 @@ effective or pretty fucking useless.
 	var/turf/our_turf = get_turf(owner)
 	if(our_turf?.check_lumcount_above(0.3))
 		// Decay charge while invisible+ in the light
-		charge = max(0, charge - usage_per_tick * seconds_per_tick) // BANDASTATION EDIT: stealth mode refactor
+		charge = max(0, charge - charge_rate * seconds_per_tick) // BANDASTATION EDIT: stealth mode refactor
 		build_all_button_icons(UPDATE_BUTTON_STATUS)
 
 	else if(recharge_while_active)
 		// Return charage while invisible + in the darkness + recharge_while_active
-		charge = min(max_charge, charge + (usage_per_tick * 1.5) * seconds_per_tick) // BANDASTATION EDIT: stealth mode refactor
+		charge = min(max_charge, charge + (charge_rate * 1.5) * seconds_per_tick) // BANDASTATION EDIT: stealth mode refactor
 		build_all_button_icons(UPDATE_BUTTON_STATUS)
 
 	animate(owner, alpha = get_alpha(), time = 1 SECONDS, flags = ANIMATION_PARALLEL)
@@ -294,7 +294,7 @@ effective or pretty fucking useless.
 /datum/action/item_action/stealth_mode/weaker
 	charge = 15 SECONDS
 	max_charge = 15 SECONDS
-	usage_per_tick = 0.75 SECONDS // BANDASTATION EDIT: stealth mode refactor
+	charge_rate = 0.75 SECONDS // BANDASTATION EDIT: stealth mode refactor
 	min_alpha = 20
 	recharge_while_active = FALSE
 
