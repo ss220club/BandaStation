@@ -95,6 +95,12 @@
 	greyscale_colors = CIRCUIT_COLOR_ENGINEERING
 	build_path = /obj/machinery/redspace_rift_scanner
 	specific_parts = TRUE
+	custom_materials = list(
+		/datum/material/iron = SHEET_MATERIAL_AMOUNT * 8,
+		/datum/material/glass = SHEET_MATERIAL_AMOUNT * 4,
+		/datum/material/titanium = SHEET_MATERIAL_AMOUNT,
+		/datum/material/bluespace = HALF_SHEET_MATERIAL_AMOUNT,
+	)
 	req_components = list(
 		/datum/stock_part/capacitor/tier3 = 2,
 		/datum/stock_part/scanning_module/tier3 = 2,

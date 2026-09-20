@@ -29,9 +29,12 @@
 /datum/unit_test/redspace_sensor_recipes/Run()
 	var/datum/design/redspace_sensor/sensor_design = new
 	var/datum/design/redspace_counter/counter_design = new
-	if(sensor_design.materials[/datum/material/iron] != SMALL_MATERIAL_AMOUNT * 4 || sensor_design.materials[/datum/material/glass] != SMALL_MATERIAL_AMOUNT * 4 || sensor_design.materials[/datum/material/bluespace] != HALF_SHEET_MATERIAL_AMOUNT)
+	var/datum/material/iron_material = SSmaterials.get_material(/datum/material/iron)
+	var/datum/material/glass_material = SSmaterials.get_material(/datum/material/glass)
+	var/datum/material/bluespace_material = SSmaterials.get_material(/datum/material/bluespace)
+	if(sensor_design.materials[iron_material] != SMALL_MATERIAL_AMOUNT * 4 || sensor_design.materials[glass_material] != SMALL_MATERIAL_AMOUNT * 4 || sensor_design.materials[bluespace_material] != HALF_SHEET_MATERIAL_AMOUNT)
 		return Fail("Redspace sensors must use half a bluespace sheet and increased iron and glass requirements")
-	if(counter_design.materials[/datum/material/iron] != SMALL_MATERIAL_AMOUNT * 3 || counter_design.materials[/datum/material/glass] != SMALL_MATERIAL_AMOUNT * 3 || counter_design.materials[/datum/material/bluespace] != HALF_SHEET_MATERIAL_AMOUNT)
+	if(counter_design.materials[iron_material] != SMALL_MATERIAL_AMOUNT * 3 || counter_design.materials[glass_material] != SMALL_MATERIAL_AMOUNT * 3 || counter_design.materials[bluespace_material] != HALF_SHEET_MATERIAL_AMOUNT)
 		return Fail("Redspace counters must use half a bluespace sheet and increased iron and glass requirements")
 	qdel(sensor_design)
 	qdel(counter_design)

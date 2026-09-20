@@ -8,6 +8,11 @@
 	w_class = WEIGHT_CLASS_SMALL
 	item_flags = NOBLUDGEON
 	resistance_flags = FIRE_PROOF
+	custom_materials = list(
+		/datum/material/iron = SMALL_MATERIAL_AMOUNT * 4,
+		/datum/material/glass = SMALL_MATERIAL_AMOUNT * 4,
+		/datum/material/bluespace = HALF_SHEET_MATERIAL_AMOUNT,
+	)
 
 	/// Stable identifier shown by the scientific console.
 	var/sensor_id

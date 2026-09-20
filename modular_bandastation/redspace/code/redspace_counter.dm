@@ -10,7 +10,7 @@
 		return "10-"
 	if(value > REDSPACE_COUNTER_MAX_DISPLAY_VALUE)
 		return "10+"
-	return "[round(value)]"
+	return "[round(value, 1)]"
 
 /// Maps normalized readings to the counter.dmi states.
 /proc/redspace_counter_icon_state(reading)
@@ -42,6 +42,11 @@
 	w_class = WEIGHT_CLASS_SMALL
 	slot_flags = ITEM_SLOT_BELT
 	item_flags = NOBLUDGEON
+	custom_materials = list(
+		/datum/material/iron = SMALL_MATERIAL_AMOUNT * 3,
+		/datum/material/glass = SMALL_MATERIAL_AMOUNT * 3,
+		/datum/material/bluespace = HALF_SHEET_MATERIAL_AMOUNT,
+	)
 
 	/// Normalized reading represented by the current icon_state.
 	var/displayed_reading = "?"

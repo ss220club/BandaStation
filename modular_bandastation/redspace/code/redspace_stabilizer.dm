@@ -522,6 +522,12 @@
 	greyscale_colors = CIRCUIT_COLOR_ENGINEERING
 	build_path = /obj/machinery/redspace_stabilizer
 	specific_parts = TRUE
+	custom_materials = list(
+		/datum/material/iron = SHEET_MATERIAL_AMOUNT * 10,
+		/datum/material/glass = SHEET_MATERIAL_AMOUNT * 5,
+		/datum/material/titanium = SHEET_MATERIAL_AMOUNT * 2,
+		/datum/material/bluespace = SHEET_MATERIAL_AMOUNT,
+	)
 	req_components = list(
 		/datum/stock_part/capacitor/tier3 = 2,
 		/datum/stock_part/micro_laser/tier3 = 2,
