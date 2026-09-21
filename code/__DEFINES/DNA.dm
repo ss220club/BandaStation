@@ -104,6 +104,14 @@
 #define FEATURE_SKRELL_CLOTH_WRAP "skrell_cloth_wrap"
 #define FEATURE_SKRELL_CLOTH_WRAP_TOGGLE "skrell_cloth_wrap_toggle"
 #define FEATURE_SKRELL_CLOTH_WRAP_COLOR "skrell_cloth_wrap_color"
+
+#define FEATURE_VOX_SNOUT "vox_snout"
+#define FEATURE_VOX_SNOUT_COLOR "vox_snout_color"
+#define FEATURE_VOX_TAIL "tail_vox"
+#define FEATURE_VOX_QUILLS "vox_quills"
+#define FEATURE_VOX_QUILLS_COLOR "vox_quills_color"
+#define FEATURE_VOX_FACIAL_QUILLS "vox_facial_quills"
+#define FEATURE_VOX_FACIAL_QUILLS_COLOR "vox_facial_quills_color"
 // BANDASTATION ADDITION END - Species Features
 
 // flag for the transfer_flag argument from dna/proc/copy_dna().
@@ -160,6 +168,8 @@
 #define ORGAN_SLOT_EXTERNAL_HEAD_TENTACLE "head_tentacles"
 #define ORGAN_SLOT_EXTERNAL_HEAD_TENTACLE_ORNAMENT "tentacle_ornament"
 #define ORGAN_SLOT_EXTERNAL_HEAD_CLOTH_WRAP "cloth_wrap"
+#define ORGAN_SLOT_EXTERNAL_VOX_QUILLS "vox_quills"
+#define ORGAN_SLOT_EXTERNAL_VOX_FACIAL_QUILLS "vox_facial_quills"
 /// BADNASTATION ADDITION END - Species
 
 /// Xenomorph organ slots

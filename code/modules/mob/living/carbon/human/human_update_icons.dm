@@ -182,8 +182,19 @@ There are several things that need to be remembered:
 		return
 
 	var/icon_file = 'icons/mob/clothing/hands.dmi'
+	// BANDASTATION EDIT START: SPECIES CLOTHING ICONS
+	var/mutant_override = FALSE
+	var/species_id = dna.species.id
+	if(worn_item.worn_icon_species?[species_id])
+		icon_file = worn_item.worn_icon_species[species_id]
+		mutant_override = TRUE
 
-	var/mutable_appearance/gloves_overlay = gloves.build_worn_icon(default_layer = GLOVES_LAYER, default_icon_file = icon_file, bodyshape = bodyshape)
+	if(!(icon_exists(icon_file, RESOLVE_ICON_STATE(worn_item))))
+		icon_file = 'icons/mob/clothing/hands.dmi'
+		mutant_override = FALSE
+	// BANDASTATION EDIT END: SPECIES CLOTHING ICONS
+
+	var/mutable_appearance/gloves_overlay = gloves.build_worn_icon(default_layer = GLOVES_LAYER, default_icon_file = icon_file, override_file = mutant_override ? icon_file : null, bodyshape = bodyshape)
 
 	var/feature_y_offset = 0
 	//needs to be typed, hand_bodyparts can have nulls
@@ -223,8 +234,18 @@ There are several things that need to be remembered:
 			return
 
 		var/icon_file = 'icons/mob/clothing/eyes.dmi'
+		// BANDASTATION EDIT START: SPECIES CLOTHING ICONS
+		var/mutant_override = FALSE
+		if(worn_item.worn_icon_species?[my_head.limb_id])
+			icon_file = worn_item.worn_icon_species[my_head.limb_id]
+			mutant_override = TRUE
 
-		var/mutable_appearance/glasses_overlay = glasses.build_worn_icon(default_layer = GLASSES_LAYER, default_icon_file = icon_file, bodyshape = bodyshape)
+		if(!(icon_exists(icon_file, RESOLVE_ICON_STATE(worn_item))))
+			icon_file = 'icons/mob/clothing/eyes.dmi'
+			mutant_override = FALSE
+		// BANDASTATION EDIT END: SPECIES CLOTHING ICONS
+
+		var/mutable_appearance/glasses_overlay = glasses.build_worn_icon(default_layer = GLASSES_LAYER, default_icon_file = icon_file, override_file = mutant_override ? icon_file : null, bodyshape = bodyshape)
 		apply_height(glasses_overlay, UPPER_BODY)
 		my_head.worn_glasses_offset?.apply_offset(glasses_overlay)
 		overlays_standing[GLASSES_LAYER] = glasses_overlay

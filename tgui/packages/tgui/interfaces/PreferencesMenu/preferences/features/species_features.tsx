@@ -281,3 +281,19 @@ export const skrell_cloth_wrap_color: Feature<string> = {
   name: 'Ткань для щупалец: цвет',
   component: FeatureColorInput,
 };
+
+// MARK: Vox features
+export const vox_snout_color: Feature<string> = {
+  name: 'Клюв - цвет',
+  component: FeatureColorInput,
+};
+
+export const vox_quills_color: Feature<string> = {
+  name: 'Перья - цвет',
+  component: FeatureColorInput,
+};
+
+export const vox_facial_quills_color: Feature<string> = {
+  name: 'Перья на лице - цвет',
+  component: FeatureColorInput,
+};

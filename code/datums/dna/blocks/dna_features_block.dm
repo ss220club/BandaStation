@@ -220,4 +220,11 @@
 
 /datum/dna_block/feature/skrell_cloth_wrap_color/apply_to_mob(mob/living/carbon/human/target, dna_hash)
 	target.dna.features[feature_key] = sanitize_hexcolor(get_block(dna_hash))
+
+// MARK: Vox
+/datum/dna_block/feature/accessory/vox_quills
+	feature_key = FEATURE_VOX_QUILLS
+
+/datum/dna_block/feature/accessory/vox_facial_quills
+	feature_key = FEATURE_VOX_FACIAL_QUILLS
 // BANDASTATION ADD END - Species

@@ -210,6 +210,7 @@
 #define SPECIES_VULPKANIN "vulpkanin"
 #define SPECIES_TAJARAN "tajaran"
 #define SPECIES_SKRELL "skrell"
+#define SPECIES_VOX "vox"
 /// BANDASTATION ADDITION END - Species
 
 // Like species IDs, but not specifically attached a species.
@@ -1101,6 +1102,7 @@ GLOBAL_ALIST_INIT(human_heights_to_offsets, alist(
 #define BUTT_SPRITE_VULPKANIN "vulpkanin"
 #define BUTT_SPRITE_SKRELL "skrell"
 #define BUTT_SPRITE_TAJARAN "tajaran"
+#define BUTT_SPRITE_VOX "vox"
 /// BANDASTATION ADDITION END - Species
 
 /// Distance which you can see someone's ID card

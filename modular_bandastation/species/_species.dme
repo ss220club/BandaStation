@@ -82,3 +82,23 @@
 
 #include "code/human/sprite_accessories/vulpkanin/hair_masks.dm"
 #include "code/species_helpers.dm"
+
+// VOX
+#include "code/human/species_type/vox.dm"
+#include "code/human/sprite_accessories/vox/vox_misc.dm"
+#include "code/human/sprite_accessories/vox/vox_facial_quills.dm"
+#include "code/human/sprite_accessories/vox/vox_quills.dm"
+
+#include "code/surgery/bodyparts/vox_bodyparts.dm"
+#include "code/surgery/organs/internal/vox_internal.dm"
+#include "code/surgery/organs/external/vox_external.dm"
+#include "code/preferences/species_features/vox/vox_snout_color.dm"
+
+#include "code/language/vox-pidgin.dm"
+
+#include "code/clothing/outfits/vox.dm"
+#include "code/preferences/species_features/vox/facial_quills/vox_facial_quills.dm"
+#include "code/preferences/species_features/vox/facial_quills/vox_facial_quills_color.dm"
+
+#include "code/preferences/species_features/vox/quills/vox_quills.dm"
+#include "code/preferences/species_features/vox/quills/vox_quills_color.dm"
