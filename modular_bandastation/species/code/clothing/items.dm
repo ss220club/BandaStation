@@ -6,7 +6,6 @@
 		SPECIES_VULPKANIN = 'icons/bandastation/mob/species/vulpkanin/clothing/modsuits.dmi',
 		SPECIES_TAJARAN = 'icons/bandastation/mob/species/tajaran/clothing/modsuits.dmi',
 		SPECIES_SKRELL = 'icons/bandastation/mob/species/skrell/clothing/modsuits.dmi',
-
 	)
 
 /obj/item/clothing/suit/mod
@@ -55,16 +54,6 @@
 /obj/item/clothing/ears
 	worn_icon_species = list(
 		SPECIES_VOX = 'icons/bandastation/mob/species/vox/clothing/ears.dmi'
-	)
-/*
-/obj/item/clothing/under
-	worn_icon_species = list(
-		SPECIES_VOX = 'icons/bandastation/mob/species/vox/clothing/uniform.dmi'
-	)
-*/
-/obj/item/storage/backpack
-	worn_icon_species = list(
-		SPECIES_VOX = 'icons/bandastation/mob/species/vox/clothing/back.dmi'
 	)
 
 /obj/item/clothing/gloves
