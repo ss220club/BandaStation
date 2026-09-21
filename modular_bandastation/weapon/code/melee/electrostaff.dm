@@ -9,8 +9,8 @@
 	inhand_y_dimension = 64
 	lefthand_file = 'modular_bandastation/weapon/icons/melee/inhands/electrostaff_lefthand.dmi'
 	righthand_file = 'modular_bandastation/weapon/icons/melee/inhands/electrostaff_righthand.dmi'
-	worn_icon = 'icons/mob/clothing/belt.dmi'
-	worn_icon_state = "baton"
+	worn_icon = 'modular_bandastation/weapon/icons/melee/wornicon/worn_electrostaff.dmi'
+	worn_icon_state = "electrostaff_orange"
 	/// What sound plays when its opening
 	var/sound_on = 'modular_bandastation/weapon/sound/melee/electrostaff_on.ogg'
 
@@ -176,7 +176,7 @@
 	abstract_type = /datum/atom_skin/electrostaff
 	change_base_icon_state = TRUE
 	change_inhand_icon_state = TRUE
-	change_worn_icon_state = FALSE
+	change_worn_icon_state = TRUE
 
 /datum/atom_skin/electrostaff/orange
 	preview_name = "Orange"
@@ -197,6 +197,7 @@
 	preview_name = "Blue"
 	new_icon_state = "electrostaff_blue"
 	new_inhand_icon_state = "electrostaff_blue"
+
 
 // Select the correct world and in-hand sprite for the current state.
 /obj/item/melee/baton/security/electrostaff/update_icon_state()
