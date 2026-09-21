@@ -459,7 +459,7 @@
 			H.Paralyze(8 SECONDS)
 		if(H.staminaloss && !H.IsSleeping())
 			var/total_health = (H.health - H.staminaloss)
-			if(total_health <= HEALTH_THRESHOLD_CRIT && !IS_UNCONSCIOUS_OR_CRIT(H))
+			if(total_health <= H.crit_threshold && !IS_UNCONSCIOUS_OR_CRIT(H))
 				H.visible_message(span_warning("[capitalize(user.declent_ru(NOMINATIVE))] наносит сокрушительный удар голове [H.declent_ru(GENITIVE)], вырубая [H.ru_p_them()]!"), \
 								span_userdanger("[capitalize(user.declent_ru(NOMINATIVE))] вырубает вас!"), span_hear("Вы слышите противный звук удара по телу!"), null, user)
 				to_chat(user, span_danger("Вы наносите сокрушительный удар голове [H.declent_ru(GENITIVE)], вырубая [H.ru_p_them()]!"))
