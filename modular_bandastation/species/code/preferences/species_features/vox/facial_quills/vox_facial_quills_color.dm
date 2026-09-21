@@ -1,5 +1,5 @@
 /datum/preference/color/vox_facial_quills_color
-	priority = PREFERENCE_PRORITY_LATE_BODY_TYPE
+	priority = PREFERENCE_PRIORITY_BODYPARTS
 	savefile_key = "vox_facial_quills_color"
 	savefile_identifier = PREFERENCE_CHARACTER
 	category = PREFERENCE_CATEGORY_SUPPLEMENTAL_FEATURES
