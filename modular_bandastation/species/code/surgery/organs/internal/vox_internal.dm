@@ -6,7 +6,6 @@
 
 /obj/item/organ/eyes/vox
 	name = "vox eyeballs"
-	desc = "Глаза синеватого оттенка, но по своей структуре - глаза обычного гуманоида."
 	icon = 'icons/bandastation/mob/species/vox/organs.dmi'
 
 	eye_icon = 'icons/bandastation/mob/species/vox/vox_eyes.dmi'
