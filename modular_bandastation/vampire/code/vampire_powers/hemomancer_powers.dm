@@ -4,6 +4,7 @@
 	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "vampire_claws"
 	cooldown_time = 30 SECONDS
+	check_flags = AB_CHECK_CONSCIOUS|AB_CHECK_PHASED|AB_CHECK_HANDS_BLOCKED
 
 /datum/action/cooldown/spell/vampire_vamp_claws/New(Target)
 	. = ..()
