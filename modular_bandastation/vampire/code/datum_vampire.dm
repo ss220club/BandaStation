@@ -80,10 +80,6 @@
 /datum/antagonist/vampire/antag_panel_data()
 	return "Класс: [subclass ? subclass.name : "N/A"] | Всего крови: [bloodtotal] | Доступно крови: [bloodusable]"
 
-/datum/antagonist/vampire/ui_interact(mob/user, datum/tgui/ui)
-	. = ..()
-	ui?.set_autoupdate(FALSE)
-
 /datum/antagonist/vampire/ui_static_data(mob/user)
 	. = ..()
 	var/list/subclasses = list()
@@ -95,6 +91,8 @@
 
 /datum/antagonist/vampire/ui_data(mob/user)
 	return list(
+		"total_blood" = bloodtotal,
+		"specialization_blood_required" = upgrade_tiers[/datum/vampire_passive/unlock_specialization],
 		"selected_subclass" = subclass?.id,
 		"can_select_subclass" = !!get_ability(/datum/vampire_passive/unlock_specialization),
 	)

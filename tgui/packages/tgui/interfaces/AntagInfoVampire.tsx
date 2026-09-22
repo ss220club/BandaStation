@@ -5,9 +5,11 @@ import {
   BlockQuote,
   Box,
   Button,
+  Icon,
   Section,
   Stack,
   Tabs,
+  Tooltip,
 } from 'tgui-core/components';
 
 import { useBackend } from '../backend';
@@ -29,13 +31,18 @@ type Specialization = {
 };
 
 type Data = {
+  total_blood: number;
+  specialization_blood_required: number;
   can_select_subclass: boolean;
   objectives: Objective[];
   subclasses: Specialization[];
   selected_subclass?: string;
 };
 
-const IntroductionSection = ({ objectives }: { objectives: Objective[] }) => (
+const IntroductionSection = ({
+  objectives,
+  specialization_blood_required,
+}: Pick<Data, 'objectives' | 'specialization_blood_required'>) => (
   <Section title="Вы Вампир!" fill scrollable fontSize="14px">
     <Stack vertical>
       <Stack.Item textAlign="center" italic>
@@ -46,9 +53,9 @@ const IntroductionSection = ({ objectives }: { objectives: Objective[] }) => (
         <Box bold mb={0.5} color="#e05b65">
           Выберите свой путь
         </Box>
-        Достигнув <b>150 единиц крови</b>, откройте раздел «Специализации» и
-        выберите специализацию. Изучите способности каждого пути: они
-        определяют, как будет развиваться ваша сила.
+        Достигнув <b>{specialization_blood_required} единиц крови</b>, откройте
+        раздел «Специализации» и выберите специализацию. Изучите способности
+        каждого пути: они определяют, как будет развиваться ваша сила.
       </Stack.Item>
       <Stack.Divider />
       <Stack.Item lineHeight={1.6}>
@@ -60,14 +67,19 @@ const IntroductionSection = ({ objectives }: { objectives: Objective[] }) => (
 
 export const AntagInfoVampire = () => {
   const { data } = useBackend<Data>();
-  const { objectives } = data;
+  const { objectives, total_blood, specialization_blood_required } = data;
   const [currentTab, setCurrentTab] = useState(0);
 
   const tabs = [
     {
       label: 'Информация',
       icon: 'info',
-      content: <IntroductionSection objectives={objectives} />,
+      content: (
+        <IntroductionSection
+          objectives={objectives}
+          specialization_blood_required={specialization_blood_required}
+        />
+      ),
     },
     {
       label: 'Специализации',
@@ -93,6 +105,15 @@ export const AntagInfoVampire = () => {
                 </Tabs.Tab>
               ))}
             </Tabs>
+          </Stack.Item>
+          <Stack.Item>
+            <Box className="Vampire__blood-total">
+              <Icon name="tint" mr={1} />
+              Всего выпито крови: <b>{total_blood}</b>
+              <Box color="label" fontSize="12px" mt={0.5}>
+                Накопленная кровь открывает новые способности.
+              </Box>
+            </Box>
           </Stack.Item>
           <Stack.Item grow minHeight={0}>
             {tabs[currentTab].content}
@@ -154,7 +175,18 @@ type SpecializationContentProps = {
 };
 
 function SpecializationContent(props: SpecializationContentProps) {
+  const { data } = useBackend<Data>();
   const { canSelect, onSelect, selected, specialization } = props;
+  const { total_blood, specialization_blood_required } = data;
+  const selectionTooltip = selected
+    ? 'Это ваша специализация.'
+    : data.selected_subclass
+      ? 'Вы уже выбрали другую специализацию.'
+      : !canSelect && total_blood < specialization_blood_required
+        ? `Для выбора специализации нужно выпить ещё ${specialization_blood_required - total_blood} крови (всего ${specialization_blood_required}).`
+        : canSelect
+          ? 'Выбрать этот путь развития.'
+          : 'Выбор специализации недоступен.';
 
   return (
     <Section
@@ -174,6 +206,7 @@ function SpecializationContent(props: SpecializationContentProps) {
               icon={selected ? 'check' : canSelect ? 'plus' : 'lock'}
               color={selected ? 'good' : 'red'}
               disabled={!canSelect || selected}
+              tooltip={selectionTooltip}
               onClick={onSelect}
             >
               {selected
@@ -209,7 +242,10 @@ function PowerGroup({ powers, title }: { powers: Power[]; title: string }) {
 }
 
 function PowerDescription({ power }: { power: Power }) {
+  const { data } = useBackend<Data>();
   const { blood_required, description, name } = power;
+  const thresholdReached =
+    blood_required !== undefined && data.total_blood >= blood_required;
 
   return (
     <Stack.Item>
@@ -217,9 +253,22 @@ function PowerDescription({ power }: { power: Power }) {
         <Box mb={0.5}>
           <b>{name || 'Пассивная способность'}</b>
           {blood_required !== undefined && (
-            <Box as="span" color="#e05b65" ml={1}>
-              {blood_required} крови
-            </Box>
+            <Tooltip
+              content={
+                thresholdReached
+                  ? 'Порог крови достигнут. Способность относится к этому пути.'
+                  : `Для открытия на этом пути нужно выпить ещё ${blood_required - data.total_blood} крови.`
+              }
+            >
+              <Box
+                as="span"
+                ml={1}
+                className={`Vampire__blood-requirement Vampire__blood-requirement--${thresholdReached ? 'reached' : 'locked'}`}
+              >
+                <Icon name={thresholdReached ? 'check' : 'lock'} mr={0.5} />
+                {blood_required} крови
+              </Box>
+            </Tooltip>
           )}
         </Box>
       )}
