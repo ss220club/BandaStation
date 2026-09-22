@@ -303,6 +303,7 @@
 	duration = 35 SECONDS
 
 /obj/effect/temp_visual/elite_tumor_wall/gargantua/CanAllowThrough(atom/movable/mover, border_dir)
+	. = ..()
 	return FALSE
 
 #undef ARENA_SIZE
