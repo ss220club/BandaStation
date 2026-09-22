@@ -1,5 +1,14 @@
+import '../styles/interfaces/AntagInfoVampire.scss';
+
 import { useState } from 'react';
-import { Box, Button, Section, Stack, Tabs } from 'tgui-core/components';
+import {
+  BlockQuote,
+  Box,
+  Button,
+  Section,
+  Stack,
+  Tabs,
+} from 'tgui-core/components';
 
 import { useBackend } from '../backend';
 import { Window } from '../layouts';
@@ -27,14 +36,22 @@ type Data = {
 };
 
 const IntroductionSection = ({ objectives }: { objectives: Objective[] }) => (
-  <Section title="Вы Вампир!" fill scrollable>
+  <Section title="Вы Вампир!" fill scrollable fontSize="14px">
     <Stack vertical>
-      <Stack.Item>
-        Пейте кровь живых, чтобы усиливать свои вампирские способности. Достигнув
-        150 единиц крови, выберите специализацию в разделе «Специализации».
+      <Stack.Item textAlign="center" italic>
+        Пейте кровь живых, чтобы усиливать свои вампирские способности.
       </Stack.Item>
       <Stack.Divider />
-      <Stack.Item>
+      <Stack.Item fontSize="12px" lineHeight={1.6}>
+        <Box bold mb={0.5} color="#e05b65">
+          Выберите свой путь
+        </Box>
+        Достигнув <b>150 единиц крови</b>, откройте раздел «Специализации» и
+        выберите специализацию. Изучите способности каждого пути: они
+        определяют, как будет развиваться ваша сила.
+      </Stack.Item>
+      <Stack.Divider />
+      <Stack.Item lineHeight={1.6}>
         <ObjectivePrintout objectives={objectives} />
       </Stack.Item>
     </Stack>
@@ -60,9 +77,9 @@ export const AntagInfoVampire = () => {
   ];
 
   return (
-    <Window title="Вампир" width={750} height={635} theme="nologo">
+    <Window title="Вампир" width={750} height={635} theme="Vampire">
       <Window.Content>
-        <Stack vertical fill>
+        <Stack vertical fill g="0.75rem">
           <Stack.Item>
             <Tabs fluid>
               {tabs.map((tab, index) => (
@@ -77,7 +94,9 @@ export const AntagInfoVampire = () => {
               ))}
             </Tabs>
           </Stack.Item>
-          <Stack.Item grow>{tabs[currentTab].content}</Stack.Item>
+          <Stack.Item grow minHeight={0}>
+            {tabs[currentTab].content}
+          </Stack.Item>
         </Stack>
       </Window.Content>
     </Window>
@@ -100,13 +119,13 @@ const SpecializationInfo = () => {
   }
 
   return (
-    <Stack vertical fill>
-      <Stack.Item>
-        <Tabs fluid>
+    <Stack fill>
+      <Stack.Item width="125px" shrink={0}>
+        <Tabs fluid vertical>
           {subclasses.map((subclass, index) => (
             <Tabs.Tab
               key={subclass.id}
-              icon="info"
+              icon={subclass.id === selected_subclass ? 'check' : 'info'}
               selected={currentTab === index}
               onClick={() => setCurrentTab(index)}
             >
@@ -115,7 +134,7 @@ const SpecializationInfo = () => {
           ))}
         </Tabs>
       </Stack.Item>
-      <Stack.Item grow>
+      <Stack.Item grow minWidth={0}>
         <SpecializationContent
           canSelect={can_select_subclass && !selected_subclass}
           onSelect={() => act(specialization.id)}
@@ -141,19 +160,30 @@ function SpecializationContent(props: SpecializationContentProps) {
     <Section
       fill
       scrollable
-      textAlign="center"
-      title={specialization.name}
-      buttons={
-        <Button
-          disabled={!canSelect || selected}
-          onClick={onSelect}
-        >
-          {selected ? 'Выбрано' : canSelect ? 'Выбрать' : 'Недоступно'}
-        </Button>
+      title={
+        <Box textAlign="center" fontSize="24px" color="#e05b65" my={0.5}>
+          {specialization.name}
+        </Box>
       }
     >
       <Stack vertical>
-        <Stack.Item>{specialization.description}</Stack.Item>
+        <Stack.Item textAlign="center">
+          <Box lineHeight={1.6}>{specialization.description}</Box>
+          <Box my={1}>
+            <Button
+              icon={selected ? 'check' : canSelect ? 'plus' : 'lock'}
+              color={selected ? 'good' : 'red'}
+              disabled={!canSelect || selected}
+              onClick={onSelect}
+            >
+              {selected
+                ? 'Ваша специализация'
+                : canSelect
+                  ? 'Выбрать специализацию'
+                  : 'Недоступно'}
+            </Button>
+          </Box>
+        </Stack.Item>
         <Stack.Divider />
         <PowerGroup title="Способности пути" powers={specialization.powers} />
         <Stack.Divider />
@@ -165,9 +195,11 @@ function SpecializationContent(props: SpecializationContentProps) {
 
 function PowerGroup({ powers, title }: { powers: Power[]; title: string }) {
   return (
-    <Stack.Item textAlign="left">
+    <Stack.Item>
+      <Box bold fontSize="14px" mb={1}>
+        {title}
+      </Box>
       <Stack vertical>
-        <Stack.Item bold>{title}:</Stack.Item>
         {powers.map((power, index) => (
           <PowerDescription key={`${power.name}-${index}`} power={power} />
         ))}
@@ -181,13 +213,19 @@ function PowerDescription({ power }: { power: Power }) {
 
   return (
     <Stack.Item>
-      &bull; {name && <Box bold inline mr={0.5}>{name}</Box>}
-      <Box inline>{description}</Box>
-      {blood_required !== undefined && (
-        <Box color="label" inline ml={0.5}>
-          ({blood_required} крови)
+      {(name || blood_required !== undefined) && (
+        <Box mb={0.5}>
+          <b>{name || 'Пассивная способность'}</b>
+          {blood_required !== undefined && (
+            <Box as="span" color="#e05b65" ml={1}>
+              {blood_required} крови
+            </Box>
+          )}
         </Box>
       )}
+      <BlockQuote>
+        <Box lineHeight={1.5}>{description}</Box>
+      </BlockQuote>
     </Stack.Item>
   );
 }

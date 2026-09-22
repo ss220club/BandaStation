@@ -1,0 +1,17 @@
+.theme-Vampire {
+  --vampire-background: radial-gradient(
+    circle,
+    #10090b 54%,
+    #1e0b10 80%,
+    #300e17 100%
+  );
+
+  .TitleBar,
+  .Window {
+    background: var(--vampire-background);
+  }
+
+  .Window__content {
+    background-image: none;
+  }
+}
