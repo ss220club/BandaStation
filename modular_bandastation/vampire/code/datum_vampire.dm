@@ -55,6 +55,12 @@
 	give_objectives = FALSE
 	show_in_antagpanel = FALSE
 
+/datum/antagonist/vampire/can_be_owned(datum/mind/new_owner)
+	var/datum/mind/tested = new_owner || owner
+	if(is_species(tested.current, /datum/species/human/vampire))
+		return FALSE
+	return ..()
+
 /datum/antagonist/vampire/Destroy(force, ...)
 	draining = null
 	remove_all_powers()
@@ -204,6 +210,9 @@
 	var/mob/living/vampire_mob = mob_override || owner.current
 	if(!vampire_mob)
 		return
+	// Mind transfers can bring an existing antagonist into a vampire-species body.
+	if(is_species(vampire_mob, /datum/species/human/vampire))
+		vampire_mob.set_species(/datum/species/human)
 	ADD_TRAIT(vampire_mob, TRAIT_VAMPIRE, REF(src))
 	ADD_TRAIT(vampire_mob, TRAIT_VAMPIRE_LIKE, REF(src))
 	ADD_TRAIT(vampire_mob, TRAIT_NO_MIRROR_REFLECTION, REF(src))
