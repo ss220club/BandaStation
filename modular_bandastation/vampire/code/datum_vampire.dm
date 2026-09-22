@@ -208,6 +208,8 @@
 		return
 	ADD_TRAIT(vampire_mob, TRAIT_VAMPIRE, REF(src))
 	ADD_TRAIT(vampire_mob, TRAIT_VAMPIRE_LIKE, REF(src))
+	ADD_TRAIT(vampire_mob, TRAIT_NO_MIRROR_REFLECTION, REF(src))
+	ADD_TRAIT(vampire_mob, TRAIT_UNHOLY_BANEABLE, REF(src))
 	if(!ishuman(vampire_mob))
 		return
 
@@ -233,6 +235,8 @@
 		return
 	REMOVE_TRAIT(vampire_mob, TRAIT_VAMPIRE, REF(src))
 	REMOVE_TRAIT(vampire_mob, TRAIT_VAMPIRE_LIKE, REF(src))
+	REMOVE_TRAIT(vampire_mob, TRAIT_NO_MIRROR_REFLECTION, REF(src))
+	REMOVE_TRAIT(vampire_mob, TRAIT_UNHOLY_BANEABLE, REF(src))
 	if(!ishuman(vampire_mob))
 		return
 
