@@ -96,6 +96,7 @@
 		to_chat(user, span_warning("Вы чувствуете НЕВЕРОЯТНУЮ СИЛУ!"))
 		active = TRUE
 		RegisterSignal(user, COMSIG_MOVABLE_BUMP, PROC_REF(force_open_door))
+		RegisterSignal(user, COMSIG_MOB_STATCHANGE, PROC_REF(on_stat_change))
 		user.status_flags &= ~CANPUSH
 		user.move_resist = MOVE_FORCE_STRONG
 	else
@@ -111,9 +112,14 @@
 	active = FALSE
 	if(!user)
 		return
-	UnregisterSignal(user, COMSIG_MOVABLE_BUMP)
+	UnregisterSignal(user, list(COMSIG_MOVABLE_BUMP, COMSIG_MOB_STATCHANGE))
 	user.move_resist = MOVE_FORCE_DEFAULT
 	user.status_flags |= CANPUSH
+
+/datum/action/cooldown/spell/vampire_overwhelming_force/proc/on_stat_change(mob/living/source, new_stat, old_stat)
+	SIGNAL_HANDLER
+	if(new_stat == DEAD)
+		deactivate(source)
 
 /datum/action/cooldown/spell/vampire_overwhelming_force/proc/force_open_door(datum/source, atom/bumped)
 	SIGNAL_HANDLER
@@ -160,7 +166,7 @@
 
 /datum/action/cooldown/spell/pointed/projectile/vampire_demonic_grasp
 	name = "Демоническая хватка"
-	desc = "Призовите руку демонической энергии, которая опутает и швырнёт цель согласно вашему намерению: разоружение толкает, захват притягивает."
+	desc = "Призовите руку демонической энергии, которая опутает и швырнёт цель: в боевом режиме толкнёт её, в обычном — притянет к вам."
 	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "demonic_grasp"
 	cooldown_time = 30 SECONDS
@@ -170,6 +176,13 @@
 /datum/action/cooldown/spell/pointed/projectile/vampire_demonic_grasp/New(Target)
 	. = ..()
 	add_vampire_ability(20)
+
+/datum/action/cooldown/spell/pointed/projectile/vampire_demonic_grasp/cast(atom/cast_on)
+	. = ..()
+	if(!.)
+		return
+	var/mob/living/user = owner
+	to_chat(user, span_notice(user.combat_mode ? "Демоническая хватка оттолкнёт цель." : "Демоническая хватка притянет цель."))
 
 /obj/projectile/magic/demonic_grasp
 	name = "demonic grasp"

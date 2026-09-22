@@ -4,14 +4,15 @@
 	id = "vampire_blood_swell"
 	duration = 30 SECONDS
 	tick_interval = STATUS_EFFECT_NO_TICK
-	alert_type = null
+	alert_type = /atom/movable/screen/alert/status_effect/vampire_blood_swell
+	show_duration = TRUE
 	var/bonus_unarmed_damage_applied = FALSE
 
 /datum/status_effect/vampire_blood_swell/on_apply()
 	var/mob/living/carbon/human/human_owner = owner
 	if(!istype(human_owner))
 		return FALSE
-	ADD_TRAIT(human_owner, TRAIT_CHUNKYFINGERS_IGNORE_BATON, REF(src))
+	ADD_TRAIT(human_owner, TRAIT_NOGUNS, REF(src))
 	MODIFY_PHYSIOLOGY(human_owner, BRUTE, 0.4)
 	MODIFY_PHYSIOLOGY(human_owner, BURN, 0.5)
 	MODIFY_PHYSIOLOGY(human_owner, STAMINA, 0.5)
@@ -20,19 +21,35 @@
 	if(vampire?.get_ability(/datum/vampire_passive/blood_swell_upgrade))
 		bonus_unarmed_damage_applied = TRUE
 		human_owner.AddElement(/datum/element/bonus_unarmed_damage, 10)
+	to_chat(human_owner, span_notice("Кровь переполняет ваше тело. Вы не можете стрелять, пока действует усиление."))
+	RegisterSignal(human_owner, COMSIG_MOB_STATCHANGE, PROC_REF(on_stat_change))
 	return TRUE
 
 /datum/status_effect/vampire_blood_swell/on_remove()
 	var/mob/living/carbon/human/human_owner = owner
 	if(!istype(human_owner))
 		return
-	REMOVE_TRAIT(human_owner, TRAIT_CHUNKYFINGERS_IGNORE_BATON, REF(src))
+	REMOVE_TRAIT(human_owner, TRAIT_NOGUNS, REF(src))
 	MODIFY_PHYSIOLOGY(human_owner, BRUTE, 1 / 0.4)
 	MODIFY_PHYSIOLOGY(human_owner, BURN, 1 / 0.5)
 	MODIFY_PHYSIOLOGY(human_owner, STAMINA, 1 / 0.5)
 	MODIFY_PHYSIOLOGY(human_owner, PHYS_COEFF_STUN, 1 / 0.5)
 	if(bonus_unarmed_damage_applied)
 		human_owner.RemoveElement(/datum/element/bonus_unarmed_damage, 10)
+	UnregisterSignal(human_owner, COMSIG_MOB_STATCHANGE)
+	if(human_owner.stat != DEAD)
+		to_chat(human_owner, span_notice("Кровавое усиление рассеивается."))
+
+/datum/status_effect/vampire_blood_swell/proc/on_stat_change(mob/living/source, new_stat, old_stat)
+	SIGNAL_HANDLER
+	if(new_stat == DEAD)
+		qdel(src)
+
+/atom/movable/screen/alert/status_effect/vampire_blood_swell
+	name = "Кровавое усиление"
+	desc = "Вы сильно сопротивляетесь физическому урону и оглушению, но не можете использовать огнестрельное оружие."
+	icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
+	icon_state = "blood_swell"
 
 /datum/status_effect/vampire_blood_rush
 	id = "vampire_blood_rush"
