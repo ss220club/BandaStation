@@ -280,7 +280,9 @@
 		qdel(rune)
 		return
 	playsound(user, 'modular_bandastation/vampire/sound/misc/im_here1.ogg', 30)
-	new /obj/structure/closet/crate/coffin/vampire(get_turf(coffin), user, rune)
+	var/obj/structure/closet/crate/coffin/vampire/vampire_coffin = new(get_turf(coffin), user, rune)
+	for(var/atom/movable/content in coffin.contents)
+		content.forceMove(vampire_coffin)
 	qdel(coffin)
 	SEND_SIGNAL(owner, COMSIG_VAMPIRE_ABILITY_COMPLETE_LAIR, src)
 
