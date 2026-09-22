@@ -76,7 +76,7 @@
 		to_chat(caster, span_notice("<b>Вы накопили [bloodtotal] ед. крови; для использования осталось [bloodusable].</b>"))
 	else
 		to_chat(caster, span_notice("<b>Питание кровью [victim.declent_ru(GENITIVE)] утоляет ваш голод, но не даёт доступной крови.</b>"))
-	caster.set_nutrition(min(NUTRITION_LEVEL_WELL_FED, caster.nutrition + (usable_blood_gain || 5)))
+	caster.set_nutrition(min(NUTRITION_LEVEL_WELL_FED, caster.nutrition + (usable_blood_gain || 5)), forced = TRUE)
 	return blood_drained
 
 /datum/antagonist/vampire/proc/handle_bloodsucking(mob/living/carbon/human/target_human, suck_rate = 5 SECONDS)
@@ -121,4 +121,4 @@
 		return
 	var/mob/living/carbon/human/affected_human = exposed_mob
 	if(HAS_TRAIT(affected_human, TRAIT_VAMPIRE))
-		affected_human.set_nutrition(min(NUTRITION_LEVEL_WELL_FED, affected_human.nutrition + reac_volume / 5))
+		affected_human.set_nutrition(min(NUTRITION_LEVEL_WELL_FED, affected_human.nutrition + reac_volume / 5), forced = TRUE)
