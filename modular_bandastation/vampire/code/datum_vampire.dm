@@ -335,7 +335,6 @@
 		vamp_burn(10)
 	else
 		to_chat(owner.current, span_userdanger("Ваше тело превращается в пепел — НЕМЕДЛЕННО уйдите от света звёзд!"))
-		owner.current.apply_status_effect(/datum/status_effect/genetic_damage, 100)
 		vamp_burn(85)
 		if(owner.current.health <= HEALTH_THRESHOLD_DEAD)
 			owner.current.dust()
