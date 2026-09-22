@@ -275,11 +275,13 @@
 	playsound(user, 'sound/effects/meteorimpact.ogg', 100, TRUE)
 	new /obj/effect/temp_visual/stomp(get_turf(user))
 	user.apply_status_effect(/datum/status_effect/vampire_gladiator)
-	for(var/turf/turf in orange(ARENA_SIZE, get_turf(target)))
-		if(get_dist(turf, get_turf(target)) == ARENA_SIZE)
-			all_temp_walls += new /obj/structure/vampire_arena_wall(turf)
+	arena_trap(get_turf(target))
 	timer = addtimer(CALLBACK(src, PROC_REF(dispel), user), 30 SECONDS, TIMER_STOPPABLE)
 	RegisterSignal(user, COMSIG_LIVING_DEATH, PROC_REF(on_owner_death))
+
+/datum/action/cooldown/spell/pointed/vampire_arena/proc/arena_trap(turf/target_turf)
+	for(var/turf/wall_turf in border_diamond_range_turfs(target_turf, ARENA_SIZE))
+		all_temp_walls += new /obj/effect/temp_visual/elite_tumor_wall/gargantua(wall_turf, src)
 
 /datum/action/cooldown/spell/pointed/vampire_arena/proc/on_owner_death(datum/source)
 	SIGNAL_HANDLER
@@ -290,18 +292,17 @@
 		deltimer(timer)
 		timer = null
 	UnregisterSignal(user, COMSIG_LIVING_DEATH)
-	for(var/obj/structure/vampire_arena_wall/wall as anything in all_temp_walls)
+	for(var/obj/effect/temp_visual/elite_tumor_wall/gargantua/wall in all_temp_walls)
 		qdel(wall)
 	all_temp_walls.Cut()
 	user.remove_status_effect(/datum/status_effect/vampire_gladiator)
 	user.visible_message(span_warning("Арена начинает рассеиваться."))
 	StartCooldown()
 
-#undef ARENA_SIZE
+/obj/effect/temp_visual/elite_tumor_wall/gargantua
+	duration = 35 SECONDS
 
-/obj/structure/vampire_arena_wall
-	name = "coagulated blood wall"
-	desc = "Временная стена из свернувшейся крови."
-	density = TRUE
-	anchored = TRUE
-	max_integrity = 100
+/obj/effect/temp_visual/elite_tumor_wall/gargantua/CanAllowThrough(atom/movable/mover, border_dir)
+	return FALSE
+
+#undef ARENA_SIZE
