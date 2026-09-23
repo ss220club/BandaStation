@@ -136,6 +136,7 @@
 	button_icon_state = "blood_barrier"
 	cooldown_time = 1 MINUTES
 	cast_range = 7
+	unset_after_click = FALSE
 	var/max_walls = 3
 	var/turf/start_turf
 
@@ -145,6 +146,10 @@
 
 /datum/action/cooldown/spell/pointed/vampire_blood_barrier/before_cast(atom/cast_on)
 	return ..() | SPELL_NO_IMMEDIATE_COOLDOWN
+
+/datum/action/cooldown/spell/pointed/vampire_blood_barrier/on_deactivation(mob/on_who, refund_cooldown = TRUE)
+	. = ..()
+	start_turf = null
 
 /datum/action/cooldown/spell/pointed/vampire_blood_barrier/cast(atom/cast_on)
 	. = ..()
@@ -165,6 +170,7 @@
 	SEND_SIGNAL(src, COMSIG_VAMPIRE_ABILITY_DEDUCT_BLOOD)
 	start_turf = null
 	StartCooldown()
+	unset_click_ability(owner, refund_cooldown = FALSE)
 
 /obj/structure/blood_barrier
 	name = "blood barrier"
