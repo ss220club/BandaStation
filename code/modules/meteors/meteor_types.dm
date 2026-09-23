@@ -33,7 +33,7 @@
 	var/lifetime = DEFAULT_METEOR_LIFETIME
 
 	///Used by Stray Meteor event to indicate meteor type (the type of sensor that "detected" it) in announcement
-	var/signature = "motion"
+	var/signature = "движения"
 
 /obj/effect/meteor/Initialize(mapload, turf/target)
 	. = ..()
@@ -259,7 +259,7 @@
 	meteorsound = 'sound/effects/bamf.ogg'
 	meteordrop = list(/obj/item/stack/ore/plasma)
 	threat = SEVERITY_FLAMING_METEOR
-	signature = "thermal"
+	signature = "тепла"
 
 /obj/effect/meteor/flaming/meteor_effect()
 	..()
@@ -274,7 +274,7 @@
 	hits = 9
 	meteordrop = list(/obj/item/stack/ore/uranium)
 	threat = SEVERITY_IRRADIATED_METEOR
-	signature = "radiation"
+	signature = "радиации"
 
 /obj/effect/meteor/irradiated/meteor_effect()
 	..()
@@ -292,7 +292,7 @@
 	heavy = TRUE
 	meteorsound = 'sound/effects/break_stone.ogg'
 	threat = SEVERITY_CLUSTER_METEOR
-	signature = "ordnance"
+	signature = "артиллерии"
 	///Number of fragmentation meteors to be spawned
 	var/cluster_count = 8
 
@@ -324,7 +324,7 @@
 	meteordrop = list(/mob/living/basic/carp)
 	dropamt = 1
 	threat = SEVERITY_FROZEN_CARP
-	signature = "fishing and trawling"
+	signature = "рыболовства"
 
 /obj/effect/meteor/carp/Initialize(mapload)
 	if(prob(2))
@@ -340,7 +340,7 @@
 	hits = 12
 	meteordrop = list(/obj/item/stack/ore/bluespace_crystal)
 	threat = SEVERITY_BLUESPACE_METEOR
-	signature = "bluespace flux"
+	signature = "блюспейс потоков"
 
 /obj/effect/meteor/bluespace/Bump(atom/bumped_atom)
 	..()
@@ -357,7 +357,7 @@
 	meteorsound = 'sound/items/bikehorn.ogg'
 	threat = SEVERITY_BANANIUM_METEOR
 	movement_type = PHASING
-	signature = "comedy"
+	signature = "комедии"
 
 /obj/effect/meteor/banana/meteor_effect()
 	..()
@@ -378,7 +378,7 @@
 	icon_state = "bluespace"
 	hits = 6
 	threat = SEVERITY_EMP_METEOR
-	signature = "electromagnetic interference"
+	signature = "электромагнитных помех"
 
 /obj/effect/meteor/emp/Move()
 	. = ..()
@@ -401,7 +401,7 @@
 	meteordrop = list(/obj/item/food/meat/slab/human, /obj/item/organ/heart, /obj/item/organ/lungs, /obj/item/organ/appendix)
 	var/meteorgibs = /obj/effect/gibspawner/generic
 	threat = SEVERITY_MEATY_ORE
-	signature = "culinary material"
+	signature = "кулинарных ингридиентов"
 
 /obj/effect/meteor/meaty/setup_extra_drops()
 	meteordrop += pick(subtypesof(/obj/item/food/meat/slab/human/mutant))
@@ -424,7 +424,7 @@
 	color = "#5EFF00"
 	meteordrop = list(/obj/item/food/meat/slab/xeno, /obj/item/organ/tongue/alien)
 	meteorgibs = /obj/effect/gibspawner/xeno
-	signature = "exotic culinary material"
+	signature = "экзотических кулинарных ингридиентов"
 
 /obj/effect/meteor/meaty/xeno/setup_extra_drops()
 	meteordrop += subtypesof(/obj/item/organ/alien)
@@ -444,7 +444,7 @@
 	meteorsound = 'sound/effects/bamf.ogg'
 	meteordrop = list(/obj/item/stack/ore/plasma)
 	threat = SEVERITY_TUNGSKA_METEOR
-	signature = "armageddon"
+	signature = "армаггедона"
 
 /obj/effect/meteor/tunguska/Move()
 	. = ..()

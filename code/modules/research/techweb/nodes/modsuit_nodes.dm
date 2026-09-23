@@ -1,6 +1,6 @@
 /datum/techweb_node/mod_suit
-	display_name = "Modular Suits"
-	description = "Specialized back mounted power suits with various different modules."
+	display_name = "Модульные костюмы"
+	description = "Специализированные силовые костюмы, устанавливаемые на спине, с различными МОДулями."
 	node_flags = parent_type::node_flags | TECHWEB_NODE_STARTER
 	prerequisite_nodes = list(/datum/techweb_node/robotics)
 	unlocked_designs = list(
@@ -19,8 +19,8 @@
 	)
 
 /datum/techweb_node/mod_equip
-	display_name = "Modular Suit Equipment"
-	description = "More advanced modules, to improve modular suits."
+	display_name = "Оборудование для модульных костюмов"
+	description = "Более совершенные МОДули для улучшения модульных костюмов."
 	prerequisite_nodes = list(/datum/techweb_node/mod_suit)
 	unlocked_designs = list(
 		/datum/design/modlink_scryer,
@@ -35,8 +35,8 @@
 	announce_channels = list(RADIO_CHANNEL_SCIENCE)
 
 /datum/techweb_node/mod_service
-	display_name = "Civilian Modular Suits"
-	description = "Civilian MODsuits for dignified living."
+	display_name = "Гражданские МОДули"
+	description = "Гражданские модульные костюмы для достойной жизни."
 	prerequisite_nodes = list(/datum/techweb_node/mod_suit)
 	unlocked_designs = list(
 		/datum/design/module/mod_clamp,
@@ -49,8 +49,8 @@
 	announce_channels = list(RADIO_CHANNEL_SCIENCE, RADIO_CHANNEL_SERVICE)
 
 /datum/techweb_node/mod_entertainment
-	display_name = "Entertainment Modular Suits"
-	description = "Powered suits for protection against low-humor environments."
+	display_name = "Развлекательные МОДули"
+	description = "Модульные костюмы для защиты против среды с низким содержанием юмора."
 	prerequisite_nodes = list(/datum/techweb_node/mod_suit)
 	unlocked_designs = list(
 		/datum/design/mod_plating/cosmohonk,
@@ -62,8 +62,8 @@
 	announce_channels = list(RADIO_CHANNEL_SCIENCE, RADIO_CHANNEL_SERVICE)
 
 /datum/techweb_node/mod_medical
-	display_name = "Medical Modular Suits"
-	description = "Medical MODsuits for quick rescue purposes."
+	display_name = "Медицинские МОДули"
+	description = "Медицинский МОДкостюм для быстрых спасательных операций."
 	prerequisite_nodes = list(/datum/techweb_node/mod_suit, /datum/techweb_node/chem_synthesis)
 	unlocked_designs = list(
 		/datum/design/mod_plating/medical,
@@ -76,8 +76,8 @@
 	announce_channels = list(RADIO_CHANNEL_SCIENCE, RADIO_CHANNEL_MEDICAL)
 
 /datum/techweb_node/mod_engi
-	display_name = "Engineering Modular Suits"
-	description = "Engineering suits, for powered engineers."
+	display_name = "Инженерные МОДули"
+	description = "Инженерный МОДкостюм для работ в особо опасных условиях."
 	prerequisite_nodes = list(/datum/techweb_node/mod_equip)
 	unlocked_designs = list(
 		/datum/design/mod_plating/engineering,
@@ -90,8 +90,8 @@
 	announce_channels = list(RADIO_CHANNEL_SCIENCE, RADIO_CHANNEL_ENGINEERING)
 
 /datum/techweb_node/mod_security
-	display_name = "Security Modular Suits"
-	description = "Security suits for space crime handling."
+	display_name = "МОДули службы безопасности"
+	description = "МОДкостюмы службы безопасности для ловли криминальных косманавтов."
 	prerequisite_nodes = list(/datum/techweb_node/mod_equip)
 	unlocked_designs = list(
 		/datum/design/module/mirage,
@@ -107,8 +107,8 @@
 	announce_channels = list(RADIO_CHANNEL_SCIENCE, RADIO_CHANNEL_SECURITY)
 
 /datum/techweb_node/mod_medical_adv
-	display_name = "Field Surgery Modules"
-	description = "Medical MODsuit equipment designed for conducting surgical operations in field conditions."
+	display_name = "МОДули полевой хирургии"
+	description = "Медицинские МОДули, разработанное для проведения хирургических операций в полевых условиях."
 	prerequisite_nodes = list(/datum/techweb_node/mod_medical, /datum/techweb_node/surgery_adv)
 	unlocked_designs = list(
 		/datum/design/module/defibrillator,
@@ -120,8 +120,8 @@
 	announce_channels = list(RADIO_CHANNEL_SCIENCE, RADIO_CHANNEL_MEDICAL)
 
 /datum/techweb_node/mod_engi_adv
-	display_name = "Advanced Engineering Modular Suits"
-	description = "Advanced Engineering suits, for advanced powered engineers."
+	display_name = "Продвинутые инженерные МОДули"
+	description = "Продвинутые инженерные МОДули для работы в особо опасных условиях."
 	prerequisite_nodes = list(/datum/techweb_node/mod_engi)
 	unlocked_designs = list(
 		/datum/design/mod_plating/atmospheric,
@@ -138,8 +138,8 @@
 		node_flags |= TECHWEB_NODE_STARTER
 
 /datum/techweb_node/mod_anomaly
-	display_name = "Anomalock Modular Suits"
-	description = "Modules for MODsuits that require anomaly cores to function."
+	display_name = "Аномалок МОДули"
+	description = "МОДули для МОДкостюмов, что требуют аномальные ядра для функциональности."
 	prerequisite_nodes = list(/datum/techweb_node/mod_engi_adv, /datum/techweb_node/anomaly_research)
 	unlocked_designs = list(
 		/datum/design/module/mod_antigrav,

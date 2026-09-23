@@ -1,6 +1,6 @@
 /datum/techweb_node/programming
-	display_name = "Programming"
-	description = "Dedicate an entire shift to program a fridge to greet you when opened."
+	display_name = "Программирование"
+	description = "Разработка базовых интегральных плат для автоматизации простейших операций."
 	node_flags = parent_type::node_flags | TECHWEB_NODE_STARTER
 	prerequisite_nodes = list(/datum/techweb_node/robotics)
 	unlocked_designs = list(
@@ -92,8 +92,8 @@
 	)
 
 /datum/techweb_node/circuit_shells
-	display_name = "Advanced Circuit Shells"
-	description = "Adding brains to more things."
+	display_name = "Продвинутые оболочки для плат"
+	description = "Разработка оболочек для интегральных плат для расширения функциональности."
 	prerequisite_nodes = list(/datum/techweb_node/programming)
 	unlocked_designs = list(
 		/datum/design/wiremod_shell/assembly,
@@ -115,8 +115,8 @@
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = TECHWEB_TIER_1_POINTS)
 
 /datum/techweb_node/bci
-	display_name = "Brain-Computer Interface"
-	description = "Embedded brain circuits. May occasionally stream Nanotrasen ads in dreams."
+	display_name = "Нейрокомпьютерный интерфейс"
+	description = "Встраиваемый нейрокомпьютерный интерфейс для прямого взаимодействия между центральной нервной системой и электронными устройствами."
 	prerequisite_nodes = list(/datum/techweb_node/circuit_shells, /datum/techweb_node/passive_implants)
 	unlocked_designs = list(
 		/datum/design/board/bci_implanter,
@@ -135,8 +135,8 @@
 	discount_experiments = list(/datum/experiment/scanning/people/skillchip = TECHWEB_TIER_2_POINTS)
 
 /datum/techweb_node/programmed_robot
-	display_name = "Programmed Robot"
-	description = "Grants access to movable shells, allowing for remote operations and pranks."
+	display_name = "Программируемые роботы"
+	description = "Предоставляет доступ к подвижным оболочкам, позволяя осуществлять дистанционные операции."
 	prerequisite_nodes = list(/datum/techweb_node/circuit_shells)
 	unlocked_designs = list(
 		/datum/design/wiremod_shell/drone,
@@ -146,8 +146,8 @@
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = TECHWEB_TIER_2_POINTS)
 
 /datum/techweb_node/programmed_server
-	display_name = "Programmed Server"
-	description = "Grants access to a server shell that has a very high capacity for components."
+	display_name = "Программируемые сервера"
+	description = "Предоставляет доступ к серверной оболочке, обладающей исключительно высокой емкостью для компонентов."
 	prerequisite_nodes = list(/datum/techweb_node/bci)
 	unlocked_designs = list(
 		/datum/design/wiremod_shell/server,

@@ -27,14 +27,14 @@ function getButtonColors(
     return {
       backgroundColor: 'rgba(64, 34, 34, 0.5)',
       borderColor: 'darkred',
-      tooltip: `You cannot select this personality with ${invalid}.`,
+      tooltip: `Эта индивидуальность несовместима с ${invalid}.`,
     };
   }
   if (disabled) {
     return {
       backgroundColor: 'rgba(64, 64, 64, 0.5)',
       borderColor: '#666666',
-      tooltip: 'You are at the maximum number of personalities.',
+      tooltip: 'В вас сосредоточено максимальное количество индивидуальностей.',
     };
   }
   if (selected) {
@@ -236,7 +236,7 @@ function getAllSelectedPersonalitiesString(
     }
   }
   if (personalityNames.length === 0) {
-    return 'You have no personality.';
+    return 'У вас нет индивидуальностей.';
   }
   personalityNames.sort((a, b) => (a < b ? -1 : 1));
   let finalString = '';
@@ -251,10 +251,10 @@ function getAllSelectedPersonalitiesString(
       if (finalString[finalString.length - 1] !== ' ') {
         finalString += ' ';
       }
-      finalString += 'and ';
+      finalString += 'и ';
     }
   }
-  return `You are ${finalString}.`;
+  return `Вы ${finalString}.`;
 }
 
 export function PersonalityPage() {
@@ -328,7 +328,7 @@ export function PersonalityPage() {
         <Stack.Item mb={1}>
           <Input
             fluid
-            placeholder="Search..."
+            placeholder="Поиск..."
             value={searchQuery}
             onChange={(v) => setSearchQuery(v)}
           />

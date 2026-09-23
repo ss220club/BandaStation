@@ -1,10 +1,9 @@
 /datum/heretic_knowledge/armor
-	name = "Armorer's Ritual"
-	desc = "Create a set of Eldritch Armor. \
-		Eldritch Armor provides great protection while also acting as a focus when hooded."
-	transmute_text = "Transmute a table (or a suit) and a mask."
-	gain_text = "The Rusted Hills welcomed the Blacksmith in their generosity. And the Blacksmith \
-		returned their generosity in kind."
+	name = "Ритуал брони"
+	desc = "Позволяет создать Потустороннюю броню. \
+		Потусторонняя броня обеспечивает отличную защиту, в тоже время, когда надет капюшон служит фокусировщиком заклинаний."
+	transmute_text = "Трансмутируйте стол (или комбинезон) и маску."
+	gain_text = "Ржавые Холмы приветствовали Кузнеца своей щедростью. И Кузнец ответил взаимностью на их щедрость."
 
 	required_atoms = list(
 		list(/obj/structure/table, /obj/item/clothing/suit) = 1,

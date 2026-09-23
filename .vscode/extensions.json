@@ -8,6 +8,9 @@
 		"anturk.dmi-editor",
 		"esbenp.prettier-vscode",
 		"biomejs.biome",
+		"emilast.LogFileHighlighter",
+		"earshinov.filter-lines",
+		"tombi-toml.tombi",
 		"ss13.ss13buildflags",
 		"BehaviorTreeG.behaviortreeg"
 	]

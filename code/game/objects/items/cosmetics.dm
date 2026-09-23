@@ -200,7 +200,7 @@
 	custom_materials = list(/datum/material/iron = SMALL_MATERIAL_AMOUNT * 0.7)
 
 /obj/item/razor/suicide_act(mob/living/user)
-	user.visible_message(span_suicide("[user] begins shaving [user.p_them()]self without the razor guard! It looks like [user.p_theyre()] trying to commit suicide!"))
+	user.visible_message(span_suicide("[user] begins shaving [user.p_them()]self without the razor guard! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	if (ishuman(user))
 		shave(user, BODY_ZONE_PRECISE_MOUTH)
 		shave(user, BODY_ZONE_HEAD) //doesn't need to be BODY_ZONE_HEAD specifically, but whatever

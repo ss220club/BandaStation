@@ -1,6 +1,6 @@
 /datum/techweb_node/atmos
-	display_name = "Atmospherics"
-	description = "Maintaining station air and related life support systems."
+	display_name = "Атмосферика"
+	description = "Поддержание атмосферы станции и связанных с ней систем жизнеобеспечения."
 	node_flags = parent_type::node_flags | TECHWEB_NODE_STARTER
 	unlocked_designs = list(
 		/datum/design/board/atmos_control,
@@ -22,8 +22,8 @@
 	)
 
 /datum/techweb_node/gas_compression
-	display_name = "Gas Compression"
-	description = "Highly pressurized gases hold potential for unlocking immense energy capabilities."
+	display_name = "Компрессия газов"
+	description = "Газы под высоким давлением обладают потенциалом для раскрытия огромных энергетических возможностей."
 	prerequisite_nodes = list(/datum/techweb_node/atmos)
 	unlocked_designs = list(
 		/datum/design/board/tank_compressor,
@@ -51,8 +51,8 @@
 	announce_channels = list(RADIO_CHANNEL_ENGINEERING)
 
 /datum/techweb_node/plasma_control
-	display_name = "Controlled Plasma"
-	description = "Experiments with high-pressure gases and electricity resulting in crystallization and controlled plasma reactions."
+	display_name = "Контролируемая плазма"
+	description = "Эксперименты с газами высокого давления и электричеством, приводящие к кристаллизации и контролируемым плазменным реакциям."
 	prerequisite_nodes = list(/datum/techweb_node/gas_compression, /datum/techweb_node/energy_manipulation)
 	unlocked_designs = list(
 		/datum/design/board/electrolyzer,
@@ -67,8 +67,8 @@
 	announce_channels = list(RADIO_CHANNEL_ENGINEERING)
 
 /datum/techweb_node/fusion
-	display_name = "Fusion"
-	description = "Investigating fusion reactor technology to achieve sustainable and efficient energy production through controlled plasma reactions involving noble gases."
+	display_name = "Синтез"
+	description = "Исследование технологии термоядерного реактора для достижения устойчивого и эффективного производства энергии посредством управляемых плазменных реакций с участием благородных газов."
 	prerequisite_nodes = list(/datum/techweb_node/plasma_control)
 	unlocked_designs = list(
 		/datum/design/board/HFR_core,
@@ -88,8 +88,8 @@
 	announce_channels = list(RADIO_CHANNEL_ENGINEERING)
 
 /datum/techweb_node/exp_tools
-	display_name = "Experimental Tools"
-	description = "Enhances the functionality and versatility of station tools."
+	display_name = "Экспериментальные инструменты"
+	description = "Повышение функциональности и универсальности станционного инструментария."
 	prerequisite_nodes = list(/datum/techweb_node/fusion)
 	unlocked_designs = list(
 		/datum/design/board/flatpacker,
@@ -110,8 +110,8 @@
 	announce_channels = list(RADIO_CHANNEL_ENGINEERING)
 
 /datum/techweb_node/rcd_upgrade
-	display_name = "Rapid Construction Device Upgrades"
-	description = "New designs and enhancements for RCD and RPD."
+	display_name = "Улучшение устройства быстрого строительства"
+	description = "Новые технологии усовершенствования для УБС и БРТ."
 	prerequisite_nodes = list(/datum/techweb_node/exp_tools, /datum/techweb_node/parts_bluespace)
 	unlocked_designs = list(
 		/datum/design/rcd_upgrade/silo_link,

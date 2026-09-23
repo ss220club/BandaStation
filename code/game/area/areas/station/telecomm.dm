@@ -18,30 +18,30 @@
 	tacmap_color = TACMAP_AREA_ENGINEERING
 
 /area/station/tcommsat/maints
-	name = "\improper Telecomms Maintenance Room"
+	name = "Telecomms Maintenance Room"
 
 /area/station/tcommsat/computer
-	name = "\improper Telecomms Control Room"
+	name = "Telecomms Control Room"
 	icon_state = "tcomsatcomp"
 	sound_environment = SOUND_AREA_MEDIUM_SOFTFLOOR
 
 /area/station/tcommsat/server
-	name = "\improper Telecomms Server Room"
+	name = "Telecomms Server Room"
 	icon_state = "tcomsatcham"
 
 /area/station/tcommsat/server/upper
-	name = "\improper Upper Telecomms Server Room"
+	name = "Upper Telecomms Server Room"
 
 /*
 * On-Station Telecommunications Areas
 */
 
 /area/station/comms
-	name = "\improper Communications Relay"
+	name = "Communications Relay"
 	icon_state = "tcomsatcham"
 	sound_environment = SOUND_AREA_STANDARD_STATION
 
 /area/station/server
-	name = "\improper Messaging Server Room"
+	name = "Messaging Server Room"
 	icon_state = "server"
 	sound_environment = SOUND_AREA_STANDARD_STATION

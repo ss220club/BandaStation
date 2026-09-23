@@ -219,15 +219,15 @@
 	name = "Primary Tram Maintenance"
 
 /area/station/maintenance/tram/left
-	name = "\improper Port Tram Underpass"
+	name = "Port Tram Underpass"
 	icon_state = "mainttramL"
 
 /area/station/maintenance/tram/mid
-	name = "\improper Central Tram Underpass"
+	name = "Central Tram Underpass"
 	icon_state = "mainttramM"
 
 /area/station/maintenance/tram/right
-	name = "\improper Starboard Tram Underpass"
+	name = "Starboard Tram Underpass"
 	icon_state = "mainttramR"
 
 /*
@@ -239,73 +239,73 @@
 	icon_state = "disposal"
 
 /area/station/maintenance/hallway/abandoned_command
-	name = "\improper Abandoned Command Hallway"
+	name = "Abandoned Command Hallway"
 	icon_state = "maint_bridge"
 
 /area/station/maintenance/hallway/abandoned_recreation
-	name = "\improper Abandoned Recreation Hallway"
+	name = "Abandoned Recreation Hallway"
 	icon_state = "maint_dorms"
 
 /area/station/maintenance/disposal/incinerator
-	name = "\improper Incinerator"
+	name = "Incinerator"
 	icon_state = "incinerator"
 	tacmap_color = TACMAP_AREA_ENGINEERING
 
 /area/station/maintenance/space_hut
-	name = "\improper Space Hut"
+	name = "Space Hut"
 	icon_state = "spacehut"
 
 /area/station/maintenance/space_hut/cabin
 	name = "Abandoned Cabin"
 
 /area/station/maintenance/space_hut/plasmaman
-	name = "\improper Abandoned Plasmaman Friendly Startup"
+	name = "Abandoned Plasmaman Friendly Startup"
 
 /area/station/maintenance/space_hut/observatory
-	name = "\improper Space Observatory"
+	name = "Space Observatory"
 
 /*
 * Radation Storm Shelters
 */
 
 /area/station/maintenance/radshelter
-	name = "\improper Radstorm Shelter"
+	name = "Radstorm Shelter"
 	icon_state = "radstorm_shelter"
 
 /area/station/maintenance/radshelter/medical
-	name = "\improper Medical Radstorm Shelter"
+	name = "Medical Radstorm Shelter"
 
 /area/station/maintenance/radshelter/sec
-	name = "\improper Security Radstorm Shelter"
+	name = "Security Radstorm Shelter"
 
 /area/station/maintenance/radshelter/service
-	name = "\improper Service Radstorm Shelter"
+	name = "Service Radstorm Shelter"
 
 /area/station/maintenance/radshelter/civil
-	name = "\improper Civilian Radstorm Shelter"
+	name = "Civilian Radstorm Shelter"
 
 /area/station/maintenance/radshelter/sci
-	name = "\improper Science Radstorm Shelter"
+	name = "Science Radstorm Shelter"
 
 /area/station/maintenance/radshelter/cargo
-	name = "\improper Cargo Radstorm Shelter"
+	name = "Cargo Radstorm Shelter"
 
 /*
 * External Hull Access Areas
 */
 
 /area/station/maintenance/external
-	name = "\improper External Hull Access"
+	name = "External Hull Access"
 	icon_state = "amaint"
 
 /area/station/maintenance/external/aft
-	name = "\improper Aft External Hull Access"
+	name = "Aft External Hull Access"
 
 /area/station/maintenance/external/port
-	name = "\improper Port External Hull Access"
+	name = "Port External Hull Access"
 
 /area/station/maintenance/external/port/bow
-	name = "\improper Port Bow External Hull Access"
+	name = "Port Bow External Hull Access"
 
 /*
 * Station Specific Areas
@@ -316,107 +316,107 @@
 
 //1
 /area/station/maintenance/floor1
-	name = "\improper 1st Floor Maint"
+	name = "1st Floor Maint"
 
 /area/station/maintenance/floor1/port
-	name = "\improper 1st Floor Central Port Maint"
+	name = "1st Floor Central Port Maint"
 	icon_state = "maintcentral"
 
 /area/station/maintenance/floor1/port/fore
-	name = "\improper 1st Floor Fore Port Maint"
+	name = "1st Floor Fore Port Maint"
 	icon_state = "maintfore"
 /area/station/maintenance/floor1/port/aft
-	name = "\improper 1st Floor Aft Port Maint"
+	name = "1st Floor Aft Port Maint"
 	icon_state = "maintaft"
 
 /area/station/maintenance/floor1/starboard
-	name = "\improper 1st Floor Central Starboard Maint"
+	name = "1st Floor Central Starboard Maint"
 	icon_state = "maintcentral"
 
 /area/station/maintenance/floor1/starboard/fore
-	name = "\improper 1st Floor Fore Starboard Maint"
+	name = "1st Floor Fore Starboard Maint"
 	icon_state = "maintfore"
 
 /area/station/maintenance/floor1/starboard/aft
-	name = "\improper 1st Floor Aft Starboard Maint"
+	name = "1st Floor Aft Starboard Maint"
 	icon_state = "maintaft"
 //2
 /area/station/maintenance/floor2
-	name = "\improper 2nd Floor Maint"
+	name = "2nd Floor Maint"
 /area/station/maintenance/floor2/port
-	name = "\improper 2nd Floor Central Port Maint"
+	name = "2nd Floor Central Port Maint"
 	icon_state = "maintcentral"
 
 /area/station/maintenance/floor2/port/fore
-	name = "\improper 2nd Floor Fore Port Maint"
+	name = "2nd Floor Fore Port Maint"
 	icon_state = "maintfore"
 
 /area/station/maintenance/floor2/port/aft
-	name = "\improper 2nd Floor Aft Port Maint"
+	name = "2nd Floor Aft Port Maint"
 	icon_state = "maintaft"
 
 /area/station/maintenance/floor2/starboard
-	name = "\improper 2nd Floor Central Starboard Maint"
+	name = "2nd Floor Central Starboard Maint"
 	icon_state = "maintcentral"
 
 /area/station/maintenance/floor2/starboard/fore
-	name = "\improper 2nd Floor Fore Starboard Maint"
+	name = "2nd Floor Fore Starboard Maint"
 	icon_state = "maintfore"
 
 /area/station/maintenance/floor2/starboard/aft
-	name = "\improper 2nd Floor Aft Starboard Maint"
+	name = "2nd Floor Aft Starboard Maint"
 	icon_state = "maintaft"
 //3
 /area/station/maintenance/floor3
-	name = "\improper 3rd Floor Maint"
+	name = "3rd Floor Maint"
 
 /area/station/maintenance/floor3/port
-	name = "\improper 3rd Floor Central Port Maint"
+	name = "3rd Floor Central Port Maint"
 	icon_state = "maintcentral"
 
 /area/station/maintenance/floor3/port/fore
-	name = "\improper 3rd Floor Fore Port Maint"
+	name = "3rd Floor Fore Port Maint"
 	icon_state = "maintfore"
 
 /area/station/maintenance/floor3/port/aft
-	name = "\improper 3rd Floor Aft Port Maint"
+	name = "3rd Floor Aft Port Maint"
 	icon_state = "maintaft"
 
 /area/station/maintenance/floor3/starboard
-	name = "\improper 3rd Floor Central Starboard Maint"
+	name = "3rd Floor Central Starboard Maint"
 	icon_state = "maintcentral"
 
 /area/station/maintenance/floor3/starboard/fore
-	name = "\improper 3rd Floor Fore Starboard Maint"
+	name = "3rd Floor Fore Starboard Maint"
 	icon_state = "maintfore"
 
 /area/station/maintenance/floor3/starboard/aft
-	name = "\improper 3rd Floor Aft Starboard Maint"
+	name = "3rd Floor Aft Starboard Maint"
 	icon_state = "maintaft"
 //4
 /area/station/maintenance/floor4
-	name = "\improper 4th Floor Maint"
+	name = "4th Floor Maint"
 
 /area/station/maintenance/floor4/port
-	name = "\improper 4th Floor Central Port Maint"
+	name = "4th Floor Central Port Maint"
 	icon_state = "maintcentral"
 
 /area/station/maintenance/floor4/port/fore
-	name = "\improper 4th Floor Fore Port Maint"
+	name = "4th Floor Fore Port Maint"
 	icon_state = "maintfore"
 
 /area/station/maintenance/floor4/port/aft
-	name = "\improper 4th Floor Aft Port Maint"
+	name = "4th Floor Aft Port Maint"
 	icon_state = "maintaft"
 
 /area/station/maintenance/floor4/starboard
-	name = "\improper 4th Floor Central Starboard Maint"
+	name = "4th Floor Central Starboard Maint"
 	icon_state = "maintcentral"
 
 /area/station/maintenance/floor4/starboard/fore
-	name = "\improper 4th Floor Fore Starboard Maint"
+	name = "4th Floor Fore Starboard Maint"
 	icon_state = "maintfore"
 
 /area/station/maintenance/floor4/starboard/aft
-	name = "\improper 4th Floor Aft Starboard Maint"
+	name = "4th Floor Aft Starboard Maint"
 	icon_state = "maintaft"

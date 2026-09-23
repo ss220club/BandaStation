@@ -18,9 +18,9 @@
 	var/recharge_description = "Recharge spells by doing things."
 	/// Describes the various levels of the passive
 	var/list/passive_descriptions = list(
-		"Grants you a passive ability based on your heretic type. This ability will upgrade as you gain more power.",
-		"Your passive ability has been upgraded, doing something else.",
-		"Your passive ability has been upgraded to its final form, granting you a powerful new ability.",
+		"Предоставляет вам пассивную способность, зависящую от пути вашего еретика. Эта способность будет улучшаться по мере того, как вы будете набирать больше силы.",
+		"Ваша пассивная способность была улучшена, и теперь делает что-то ещё.",
+		"Ваша пассивная способность была улучшена до предела, что дарует вам новую мощную способность.",
 	)
 
 /datum/status_effect/heretic_passive/on_apply()
@@ -84,12 +84,12 @@
 // Level 2 grants lava immunity
 // Level 3 grants resistance to high pressure
 /datum/status_effect/heretic_passive/ash
-	name = "Vow of Destruction"
-	recharge_description = "Recharge spells by standing near living, burning foes."
+	name = "Клятва Разрушения"
+	recharge_description = "Перезаряжает заклинания, пока вы стоите рядом с живыми горящими врагами."
 	passive_descriptions = list(
-		"Heat and ash storm immunity.",
-		"Lava immunity.",
-		"Resistance to high and low pressure."
+		"Невосприимчивость к жару и пепельным бурям.",
+		"Невосприимчивость к лаве.",
+		"Устойчивость к низкому и высокому давлению."
 	)
 	/// Tracks total seconds nearby mobs are on fire, used to determine when to recharge spells
 	VAR_PRIVATE/seconds_of_fire = 0
@@ -137,14 +137,14 @@
 // Level 2 Makes you immune to fall damage/stun from falling
 // Level 3 only has the cooldown reduction (nothing else added)
 /datum/status_effect/heretic_passive/blade
-	name = "Dance of the Brand"
+	name = "Танец Клейма"
 	id = "blade_passive"
 	recharge_description = "Recharge spells by knocking brave foes into critical condition. \
 		(Brave foes are anyone who struck you first.)"
 	passive_descriptions = list(
-		"Being attacked while wielding a Heretic Blade in either hand will deliver a free, instant counterattack to the attacker. This effect can only trigger once every 20 seconds.",
-		"Immunity to fall damage.",
-		"Cooldown of the riposte reduced to 10 seconds."
+		"Держа в руке еретический клинок, вы автоматически парируете удар, контратакуя напавшего на вас. Данный эффект может сработать раз в 20 секунд.",
+		"Невосприимчивость к урону от падений.",
+		"Время перезарядки парирования уменьшено до 10 секунд."
 	)
 	/// The cooldown before we can riposte again
 	var/base_cooldown = 20 SECONDS
@@ -200,7 +200,7 @@
 /datum/status_effect/heretic_passive/blade/proc/z_impact_react(datum/source, levels, turf/fell_on)
 	SIGNAL_HANDLER
 	new /obj/effect/temp_visual/mook_dust(fell_on)
-	owner.visible_message(span_notice("[owner] lands on [fell_on] safely, and quite stylishly on [p_their()] feet!"))
+	owner.visible_message(span_notice("[owner.declent_ru(NOMINATIVE)] безопасно, и весьма стильно, приземляется на [fell_on.declent_ru(ACCUSATIVE)]!"))
 	INVOKE_ASYNC(owner, TYPE_PROC_REF(/atom, SpinAnimation), 0.5 SECONDS, 0)
 	INVOKE_ASYNC(owner, TYPE_PROC_REF(/mob/, emote), "flip")
 	return ZIMPACT_CANCEL_DAMAGE | ZIMPACT_NO_MESSAGE | ZIMPACT_NO_SPIN
@@ -271,31 +271,31 @@
 /// Does the actual counter-attack
 /datum/status_effect/heretic_passive/blade/proc/counter_attack(mob/living/carbon/human/source, mob/living/target, obj/item/melee/sickly_blade/weapon, attack_text)
 	playsound(get_turf(source), 'sound/items/weapons/parry.ogg', 100, TRUE)
-	source.balloon_alert(source, "riposte used")
+	source.balloon_alert(source, "применён ответный удар")
 	source.visible_message(
-		span_warning("[source] leans into [attack_text] and delivers a sudden riposte back at [target]!"),
-		span_warning("You lean into [attack_text] and deliver a sudden riposte back at [target]!"),
-		span_hear("You hear a clink, followed by a stab."),
+		span_warning("[source.declent_ru(NOMINATIVE)] подаётся навстречу [attack_text] и наносит внезапный ответный удар по [target.declent_ru(DATIVE)]!"),
+		span_warning("Вы подаётесь навстречу [attack_text] и наносите внезапный ответный удар по [target.declent_ru(DATIVE)]!"),
+		span_hear("Вы слышите звон, за которым следует удар."),
 	)
 	weapon.melee_attack_chain(source, target)
 
 /// Gives feedback to the user
 /datum/status_effect/heretic_passive/blade/proc/reset_riposte(mob/living/carbon/human/source)
 	riposte_ready = TRUE
-	source.balloon_alert(source, "riposte ready")
+	source.balloon_alert(source, "ответый удар готов")
 
 //---- Cosmic Passive
 // Level 1 Cosmic fields will speed up the caster and provide stamina regen
 // Level 2 Cosmic fields will disable any nearby bombs/TTVs/Syndicate Bombs
 // Level 3 Cosmic fields will temporarily slow down bullets that pass through them
 /datum/status_effect/heretic_passive/cosmic
-	name = "Chosen of the Stars"
+	name = "Избранник Звёзд"
 	id = "cosmic_passive"
 	recharge_description = "Recharge spells by knocking foes standing in cosmic fields into critical condition."
 	passive_descriptions = list(
-		"Cosmic fields speed you up and regenerate stamina.",
-		"Cosmic fields disrupt grenades or signalers from being activated and turn off already primed grenades.",
-		"Cosmic fields slow projectiles down."
+		"Космические поля ускоряют вас и восстанавливают выносливость.",
+		"Космические поля препятствуют активации гранат и удалённых активаторов, а также отключают уже активированные гранаты.",
+		"Космические поля замедляют полет снарядов."
 	)
 
 /datum/status_effect/heretic_passive/cosmic/tick(seconds_between_ticks)
@@ -357,13 +357,13 @@
 // Level 2, organs and raw meat heals you. You also become a voracious glutton who likes all food. No slowdown from being fat
 // Level 3, being fat gives damage resistance
 /datum/status_effect/heretic_passive/flesh
-	name = "Ravenous Hunger"
+	name = "Зверский голод"
 	id = "flesh_passive"
 	recharge_description = "Recharge spells by summoning monsters into reality."
 	passive_descriptions = list(
-		"Immunity to Diseases, Disgust and space ants.",
-		"Eating organs or meat now heals you, gain the voracious and gluttonous trait and being fat doesn't slow you down.",
-		"Gain a flat 25% damage and stamina damage reduction when fat as well as baton resistance."
+		"Иммунитет к болезням, отвращению и космическим муравьям.",
+		"Употребление в пищу органов или мяса теперь лечит вас, вы приобретаете черты прожорливости, а ожирение не замедляет вашу скорость.",
+		"В состоянии ожирения урон по вам, и по вашей выносливости снижен на 25%, также становитесь устойчивы к оглушающей дубинке."
 	)
 
 /datum/status_effect/heretic_passive/flesh/on_apply()
@@ -445,13 +445,13 @@
 // Level 2 Gains X-ray Vision
 // Level 3 your grasp no longer goes on cooldown when opening things
 /datum/status_effect/heretic_passive/lock
-	name = "Open Invitation"
+	name = "Открытое приглашение"
 	id = "lock_passive"
 	recharge_description = "Recharge spells by researching knowledge."
 	passive_descriptions = list(
-		"Shock insulation, all knowledges researched from the shop are cheaper",
-		"X-ray vision, you can see through walls and objects.",
-		"Grasp no longer goes on cooldown when used to open a door or locker."
+		"Устойчивость к току, все знания, полученные в магазине, стоят дешевле",
+		"Рентгеновское зрение, позволяющее видеть сквозь объекты и стены.",
+		"При использовании на дверь или шкафчик, Хватка больше не уходит на перезарядку."
 	)
 	/// Tracks points needed to be spent to recharge
 	var/points_to_recharge = 2
@@ -500,13 +500,13 @@
 // Level 2 grants sleep immunity
 // Level 3, Mind gate + Ringleader's rise will channel the moon amulet effects
 /datum/status_effect/heretic_passive/moon
-	name = "Do You Hear The Voices Too?"
+	name = "Ты тоже слышишь Голоса?"
 	id = "moon_passive"
 	recharge_description = "Recharge spells by applying Moonlight Amulets to heathens."
 	passive_descriptions = list(
-		"Can no longer develop brain traumas, passively regenerates brain health, (this bonus is halved in combat).",
-		"Sleep immunity, increases the ratio at which your brain damage regenerates.",
-		"Mind gate and Ringleader's rise will channel the moon amulet effects, further inreases brain regeneration."
+		"Вы защищены от травм мозга, и пассивно восстанавливаете его здоровье (в бою, восстановление снижается наполовину)",
+		"Вас более не могут усыпить, а также скорость восстановления травм мозга увеличена вдвое",
+		"Врата Разуму и Восстание Зачинщиков усиливают действие Лунного амулета, ещё сильнее ускоряя скорость восстановления травм мозга."
 	)
 	/// Built-in moon amulet which channels through your spells
 	var/obj/item/clothing/neck/moon_amulet/amulet
@@ -577,14 +577,14 @@
 // Level 2 will heal wounds when standing on rust
 // Level 3 will restore lost limbs when standing on rust
 /datum/status_effect/heretic_passive/rust
-	name = "Leeching Walk"
+	name = "Высасывающая прогулка"
 	id = "rust_passive"
 	recharge_description = "Recharge spells by a rusting a large number of tiles. \
 		(Rusting from items and summons are not counted.)"
 	passive_descriptions = list(
-		"Standing on Rusted tiles heals and purge chems off your body.",
-		"Standing on Rusted tiles closes up your wounds and heals your organs, you may now rust reinforced floors and walls, healing effect increased.",
-		"Standing on Rusted tiles regenerates your limbs, you may now rust titanium and plastitanium walls, healing effect increased."
+		"Стоя на ржавчине, вы исцеляете организм и очищаете его от химических веществ",
+		"Стоя на ржавчине, ваши раны заживают, а органы исцеляются. Также ржавению поддаются усиленные полы и стены. Эффект заживления увеличен.",
+		"Стоя на ржавчине вы восстанавливаете утерянные конечности, также ржавчине поддаются титановые полы и стены. Эффект заживления увеличен."
 	)
 	/// Counts tiles rusted, total
 	var/rust_counter = 0
@@ -689,13 +689,13 @@
 // Level 2 No breathe
 // Level 3 No slip on water/ice
 /datum/status_effect/heretic_passive/void
-	name = "Aristocrat's Way"
+	name = "Путь Аристократа"
 	id = "void_passive"
 	recharge_description = "Recharge spells by freezing nearby foes."
 	passive_descriptions = list(
-		"Cold and low pressure immunity.",
-		"You no longer need to breathe.",
-		"Water, ice and slippery surfaces no slip you."
+		"Невосприимчивость к холоду и низкому давлению.",
+		"Вам более не требуется дышать.",
+		"Вы больше не подскальзываетесь на воде, льде и иных скользких поверхностях."
 	)
 	/// Tracks total seconds nearby mobs are exposed to cold temperature, used to determine when to recharge spells
 	VAR_PRIVATE/seconds_of_cold = 0

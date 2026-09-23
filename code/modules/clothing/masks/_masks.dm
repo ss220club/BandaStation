@@ -19,6 +19,18 @@
 	var/use_radio_beeps_tts = FALSE
 	/// A list of sound overrides for emotes, which can play when the mask is worn on the mask slot
 	var/list/emote_sounds
+	/// Define posibiliaty of mask to be adjusted
+	var/can_be_adjusted = TRUE // BANDASTATION EDIT - Surgery mask fix
+
+// BANDASTATION ADDITION START - Surgery mask fix
+/obj/item/clothing/mask/Initialize(mapload)
+	. = ..()
+	if(!can_be_adjusted)
+		if(islist(actions_types))
+			actions_types -= list(/datum/action/item_action/toggle)
+		else
+			actions_types = list()
+// BANDASTATION ADDITION END - Surgery mask fix
 
 /obj/item/clothing/mask/equipped(mob/living/equipper, slot)
 	. = ..()
@@ -66,6 +78,11 @@
 
 //Proc that moves gas/breath masks out of the way, disabling them and allowing pill/food consumption
 /obj/item/clothing/mask/visor_toggling(mob/living/user)
+	// BANDASTATION ADDITION START - Surgery mask fix
+	if(!can_be_adjusted)
+		return
+	// BANDASTATION ADDITION END - Surgery mask fix
+
 	. = ..()
 	if(up)
 		if(adjusted_flags)

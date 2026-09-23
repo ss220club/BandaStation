@@ -1,7 +1,7 @@
 ///TTS preference is disbaled entirely, no sound will be played.
-#define TTS_SOUND_OFF "Disabled"
+#define TTS_SOUND_OFF "Выключен"
 ///TTS preference is enabled, and will give full text-to-speech.
-#define TTS_SOUND_ENABLED "Enabled"
+#define TTS_SOUND_ENABLED "Включен"
 ///TTS preference is set to only play blips of a sound, rather than speech.
 #define TTS_SOUND_BLIPS "Blips Only"
 ///TTS filter to activate start/stop radio clicks on speech.
@@ -9,11 +9,11 @@
 ///TTS filter to activate a silicon effect on speech.
 #define TTS_FILTER_SILICON "silicon"
 //Hear all TTS over radio.
-#define TTS_SOUND_ALL_RADIO "Enabled"
+#define TTS_SOUND_ALL_RADIO "Включен"
 //Hear all TTS over departmental radio channels only.
-#define TTS_SOUND_DEPARTMENTAL_RADIO "Departmental Radio Only"
+#define TTS_SOUND_DEPARTMENTAL_RADIO "Только радио отделов"
 //Hear no TTS over radio.
-#define TTS_SOUND_NO_RADIO "Disabled"
+#define TTS_SOUND_NO_RADIO "Выключен"
 //Flag for TTS ghost radio
 #define TTS_GHOST_RADIO "GHOST RADIO"
 #define TTS_BLIPS_MASCULINE "Masculine"

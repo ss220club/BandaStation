@@ -85,6 +85,7 @@ INITIALIZE_IMMEDIATE(/mob/living/carbon/human/dummy)
 	return TRUE
 
 /mob/living/carbon/human/dummy/proc/wipe_state()
+	dna.species.create_fresh_body(src) // BANDASTATION ADDITION - Add body modifications
 	delete_equipment()
 	update_lips(null, null, null, update = FALSE)
 	cut_overlays(TRUE)

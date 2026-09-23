@@ -3120,7 +3120,7 @@
 	dir = 4
 	},
 /obj/structure/table/reinforced/plastitaniumglass,
-/obj/item/ai_module/law/malf,
+/obj/item/ai_module/combat,
 /turf/open/floor/iron,
 /area/virtual_domain)
 "Ah" = (
@@ -4924,12 +4924,6 @@
 	},
 /obj/structure/grille/broken,
 /obj/effect/decal/cleanable/glass,
-/turf/open/floor/plating,
-/area/virtual_domain)
-"OX" = (
-/obj/machinery/fax{
-	pixel_y = 9
-	},
 /turf/open/floor/plating,
 /area/virtual_domain)
 "Pa" = (
@@ -8077,7 +8071,7 @@ ps
 ps
 uS
 uS
-OX
+fh
 Xs
 fh
 uS

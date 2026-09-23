@@ -86,6 +86,8 @@ SUBSYSTEM_DEF(security_level)
 
 	selected_level.post_set_security_level(user) // BANDASTATION EDIT - Gamma Shuttle (add mob/user argument)
 
+	selected_level.post_set_security_level(user) // BANDASTATION EDIT - Gamma Shuttle (add mob/user argument)
+
 	SEND_SIGNAL(src, COMSIG_SECURITY_LEVEL_CHANGED, selected_level.number_level)
 	SSblackbox.record_feedback("tally", "security_level_changes", 1, selected_level.name)
 // BANDASTATION ADDITION - END

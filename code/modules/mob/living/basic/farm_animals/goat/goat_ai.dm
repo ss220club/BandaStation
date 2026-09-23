@@ -4,9 +4,9 @@
 	blackboard = list(
 		BB_TARGETING_STRATEGY = /datum/targeting_strategy/basic,
 		BB_BASIC_MOB_SPEAK_LINES = list(
-			BB_EMOTE_SAY = list("EHEHEHEHEH", "eh?"),
-			BB_EMOTE_HEAR = list("brays."),
-			BB_EMOTE_SEE = list("shakes their head.", "stamps a foot.", "glares around."),
+			BB_EMOTE_SAY = list("беее", "бе?"),
+			BB_EMOTE_HEAR = list("блеет."),
+			BB_EMOTE_SEE = list("трясет головой.", "топает ногой.", "пялится вокруг."),
 			BB_SPEAK_CHANCE = 3,
 		),
 	)
