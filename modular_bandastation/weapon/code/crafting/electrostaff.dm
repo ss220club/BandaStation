@@ -1,6 +1,6 @@
 // Electrostaff construction kit printed by the Security Protolathe.
 /obj/item/weaponcrafting/gunkit/electrostaff
-	name = "electrostaff parts kit"
+	name = "Комплект деталей для сборки электро-посоха."
 	desc = "Комплект деталей для сборки электро-посоха."
 	custom_materials = list(
 		/datum/material/iron = SHEET_MATERIAL_AMOUNT * 5,
