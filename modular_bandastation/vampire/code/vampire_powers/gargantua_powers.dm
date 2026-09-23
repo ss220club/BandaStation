@@ -315,7 +315,7 @@
 	return ..()
 
 /datum/thrownthing/vampire_charge/proc/hit_target(atom/target)
-	if(QDELETED(target) || REF(target) in struck_atoms)
+	if(QDELETED(target) || (REF(target) in struck_atoms))
 		return
 	// Enter() can bump the next tile before check_endpoint runs in zero gravity.
 	if((thrownthing.loc == target_turf || dist_travelled >= maxrange) && get_turf(target) != thrownthing.loc)
