@@ -226,17 +226,121 @@
 
 /datum/action/cooldown/spell/pointed/vampire_charge/New(Target)
 	. = ..()
-	add_vampire_ability(30)
+	add_vampire_ability(30, deduct_blood_on_cast = FALSE)
 
 /datum/action/cooldown/spell/pointed/vampire_charge/can_cast_spell(feedback = TRUE)
 	var/mob/living/user = owner
-	return user?.body_position == STANDING_UP && ..()
+	return user?.body_position == STANDING_UP && !user.throwing && !user.buckled && isturf(user.loc) && ..()
+
+/datum/action/cooldown/spell/pointed/vampire_charge/before_cast(atom/cast_on)
+	. = ..()
+	if(. & SPELL_CANCEL_CAST)
+		return
+	var/mob/living/user = owner
+	var/turf/destination = get_turf(cast_on)
+	if(!destination || destination == user.loc || !can_cast_spell())
+		return . | SPELL_CANCEL_CAST
+	// No thrower means no walking momentum. Defer movement until after the cast commits.
+	if(!user.throw_at(cast_on, cast_range, 1, spin = FALSE, gentle = TRUE, quickstart = FALSE, throw_type_path = /datum/thrownthing/vampire_charge))
+		return . | SPELL_CANCEL_CAST
 
 /datum/action/cooldown/spell/pointed/vampire_charge/cast(atom/target)
 	. = ..()
-	var/mob/living/user = owner
-	user.apply_status_effect(/datum/status_effect/vampire_charging)
-	user.throw_at(target, cast_range, 1, user, FALSE, callback = CALLBACK(user, TYPE_PROC_REF(/mob/living, remove_status_effect), /datum/status_effect/vampire_charging))
+	SEND_SIGNAL(src, COMSIG_VAMPIRE_ABILITY_DEDUCT_BLOOD)
+
+/// The charge's effects belong to this throw, never to later throws of the same mob.
+/datum/thrownthing/vampire_charge
+	/// Prevent an obstacle damaged before movement from being damaged again on impact.
+	var/list/struck_atoms = list()
+	/// Only smash obstacles during movement driven by this throw.
+	var/advancing = FALSE
+
+/datum/thrownthing/vampire_charge/New(thrownthing, target, init_dir, maxrange, speed, thrower, diagonals_first, force, gentle, callback, target_zone)
+	. = ..()
+	RegisterSignal(thrownthing, COMSIG_MOVABLE_ATTEMPTED_MOVE, PROC_REF(on_attempted_move))
+	RegisterSignal(thrownthing, COMSIG_MOVABLE_PRE_MOVE, PROC_REF(check_endpoint))
+	RegisterSignal(thrownthing, COMSIG_MOVABLE_PRE_THROW, PROC_REF(on_rethrow))
+	RegisterSignal(thrownthing, COMSIG_MOVABLE_PRE_IMPACT, PROC_REF(on_pre_impact))
+
+/datum/thrownthing/vampire_charge/Destroy()
+	if(thrownthing)
+		UnregisterSignal(thrownthing, list(COMSIG_MOVABLE_ATTEMPTED_MOVE, COMSIG_MOVABLE_PRE_MOVE, COMSIG_MOVABLE_PRE_THROW, COMSIG_MOVABLE_PRE_IMPACT))
+	return ..()
+
+/// gentle suppresses carbon self-damage, but objects also need their ordinary hitby skipped.
+/datum/thrownthing/vampire_charge/proc/on_pre_impact(atom/movable/source, atom/target, datum/thrownthing/throwingdatum)
+	SIGNAL_HANDLER
+	if(throwingdatum == src)
+		return COMPONENT_MOVABLE_IMPACT_NEVERMIND
+
+/// Finish this charge before another throw replaces its entry in SSthrowing.
+/datum/thrownthing/vampire_charge/proc/on_rethrow(atom/movable/source)
+	SIGNAL_HANDLER
+	if(source.throwing == src)
+		finalize()
+
+/datum/thrownthing/vampire_charge/tick()
+	advancing = TRUE
+	. = ..()
+	advancing = FALSE
+
+/// Stop at the selected destination/range even without gravity.
+/datum/thrownthing/vampire_charge/proc/check_endpoint(atom/movable/source, atom/newloc)
+	SIGNAL_HANDLER
+	if(advancing && source.throwing == src && (source.loc == target_turf || dist_travelled >= maxrange))
+		return COMPONENT_MOVABLE_BLOCK_PRE_MOVE
+
+/// Destroy breakable obstacles before Enter()/Bump() ends the throw.
+/datum/thrownthing/vampire_charge/proc/on_attempted_move(atom/movable/source, atom/newloc)
+	SIGNAL_HANDLER
+	if(!advancing || source.throwing != src || !isturf(newloc) || source.loc == target_turf || dist_travelled >= maxrange)
+		return
+	if(iswallturf(newloc))
+		hit_target(newloc)
+	if(newloc.density)
+		return
+	for(var/obj/obstacle in newloc)
+		if(!obstacle.density || obstacle.CanPass(source, get_dir(newloc, source)))
+			continue
+		hit_target(obstacle)
+		if(!QDELETED(obstacle) && obstacle.density)
+			break
+
+/datum/thrownthing/vampire_charge/finalize(hit = FALSE, atom/target = null)
+	if(hit && !QDELETED(target))
+		hit_target(target)
+	if(QDELETED(target))
+		target = null
+		hit = FALSE
+	return ..()
+
+/datum/thrownthing/vampire_charge/proc/hit_target(atom/target)
+	if(QDELETED(target) || REF(target) in struck_atoms)
+		return
+	// Enter() can bump the next tile before check_endpoint runs in zero gravity.
+	if((thrownthing.loc == target_turf || dist_travelled >= maxrange) && get_turf(target) != thrownthing.loc)
+		return
+	if(!isliving(target) && !iswallturf(target) && !target.uses_integrity)
+		return
+	struck_atoms += REF(target)
+	var/mob/living/user = thrownthing
+	// Announce before damage can delete the obstacle or replace its turf.
+	playsound(get_turf(user), 'sound/effects/meteorimpact.ogg', 100, TRUE)
+	user.visible_message(span_danger("[capitalize(user.declent_ru(NOMINATIVE))] врезается в [target.declent_ru(ACCUSATIVE)]!"), span_userdanger("Вы врезаетесь в [target.declent_ru(ACCUSATIVE)]!"))
+	log_combat(user, target, "rammed (vampire charge)")
+	if(isliving(target))
+		var/mob/living/victim = target
+		if(victim.check_block(user, 60, "таран", LEAP_ATTACK) == SUCCESSFUL_BLOCK)
+			return
+		shake_camera(victim, 4, 3)
+		victim.adjust_brute_loss(60)
+		victim.Knockdown(12 SECONDS)
+		victim.adjust_confusion(10 SECONDS)
+	else if(iswallturf(target))
+		var/turf/closed/wall/wall = target
+		wall.dismantle_wall(devastated = TRUE)
+	else
+		target.take_damage(150, BRUTE, MELEE)
 
 #define ARENA_SIZE 3
 /datum/action/cooldown/spell/pointed/vampire_arena

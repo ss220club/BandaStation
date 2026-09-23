@@ -188,44 +188,6 @@
 	var/obj/effect/immortality_talisman/effect = new(get_turf(source))
 	effect.shadow_to_animation(get_turf(owner), source)
 
-/datum/status_effect/vampire_charging
-	id = "vampire_charging"
-	duration = 5 SECONDS
-	tick_interval = STATUS_EFFECT_NO_TICK
-	alert_type = null
-
-/datum/status_effect/vampire_charging/on_apply()
-	ADD_TRAIT(owner, TRAIT_NO_THROW_SELF_IMPACT, REF(src))
-	RegisterSignal(owner, COMSIG_MOVABLE_IMPACT, PROC_REF(on_throw_impact))
-	return TRUE
-
-/datum/status_effect/vampire_charging/on_remove()
-	REMOVE_TRAIT(owner, TRAIT_NO_THROW_SELF_IMPACT, REF(src))
-	UnregisterSignal(owner, COMSIG_MOVABLE_IMPACT)
-
-/datum/status_effect/vampire_charging/proc/on_throw_impact(mob/living/source, atom/hit_atom, datum/thrownthing/throwingdatum)
-	SIGNAL_HANDLER
-	var/hit_something = FALSE
-	if(isliving(hit_atom))
-		var/mob/living/living_target = hit_atom
-		shake_camera(living_target, 4, 3)
-		living_target.adjust_brute_loss(60)
-		living_target.Knockdown(12 SECONDS)
-		living_target.adjust_confusion(10 SECONDS)
-		hit_something = TRUE
-	else if(iswallturf(hit_atom))
-		var/turf/closed/wall/wall = hit_atom
-		wall.dismantle_wall(devastated = TRUE) // Idk who decided that this is perfectly balanced
-		hit_something = TRUE
-	else if(hit_atom.uses_integrity)
-		hit_atom.take_damage(150, BRUTE, MELEE)
-		hit_something = TRUE
-	if(!hit_something)
-		return
-	playsound(get_turf(source), 'sound/effects/meteorimpact.ogg', 100, TRUE)
-	source.visible_message(span_danger("[capitalize(source.declent_ru(NOMINATIVE))] врезается в [hit_atom.declent_ru(ACCUSATIVE)]!"), span_userdanger("Вы врезаетесь в [hit_atom.declent_ru(ACCUSATIVE)]!"))
-
-
 /**
  * Attached to a human. Adds unarmed damage.
  */
