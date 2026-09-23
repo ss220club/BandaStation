@@ -224,6 +224,15 @@
 	. = ..()
 	add_vampire_ability(50)
 
+/datum/action/cooldown/spell/jaunt/ethereal_jaunt/vampire_blood_pool/enter_jaunt(mob/living/jaunter, turf/loc_override)
+	. = ..()
+	if(.)
+		jaunter.apply_status_effect(/datum/status_effect/vampire_blood_pool)
+
+/datum/action/cooldown/spell/jaunt/ethereal_jaunt/vampire_blood_pool/on_jaunt_exited(obj/effect/dummy/phased_mob/jaunt, mob/living/unjaunter)
+	. = ..()
+	unjaunter.remove_status_effect(/datum/status_effect/vampire_blood_pool)
+
 /datum/action/cooldown/spell/jaunt/ethereal_jaunt/vampire_blood_pool/begin_jaunt_exit(mob/living/cast_on, obj/effect/dummy/phased_mob/spell_jaunt/holder, turf/found_exit)
 	do_jaunt_in(cast_on, holder, found_exit)
 

@@ -75,6 +75,7 @@
 		return COMPONENT_VAMPIRE_ABILITY_CLOAK_TOGGLED
 	var/mob/living/carbon/human/user = source
 	cloak_active = TRUE
+	user.apply_status_effect(/datum/status_effect/vampire_cloak)
 	vampire.iscloaking = TRUE
 	MODIFY_PHYSIOLOGY(user, BURN, 1.1)
 	RegisterSignal(user, COMSIG_LIVING_IGNITED, PROC_REF(update_cloak))
@@ -87,6 +88,7 @@
 	if(!cloak_active)
 		return
 	cloak_active = FALSE
+	source.remove_status_effect(/datum/status_effect/vampire_cloak)
 	UnregisterSignal(source, COMSIG_LIVING_IGNITED)
 	if(ishuman(source))
 		var/mob/living/carbon/human/user = source

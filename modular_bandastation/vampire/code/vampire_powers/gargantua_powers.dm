@@ -79,7 +79,7 @@
 
 /datum/action/cooldown/spell/vampire_overwhelming_force
 	name = "Подавляющая сила"
-	desc = "Включите силу, чтобы выбивать двери, в которые вы врезаетесь."
+	desc = "Включите силу, чтобы выбивать двери, в которые вы врезаетесь. Используйте способность повторно, чтобы отключить её."
 	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "OH_YEAAAAH"
 	cooldown_time = 2 SECONDS
@@ -96,9 +96,9 @@
 		to_chat(user, span_warning("Вы чувствуете НЕВЕРОЯТНУЮ СИЛУ!"))
 		active = TRUE
 		RegisterSignal(user, COMSIG_MOVABLE_BUMP, PROC_REF(force_open_door))
-		RegisterSignal(user, COMSIG_MOB_STATCHANGE, PROC_REF(on_stat_change))
 		user.status_flags &= ~CANPUSH
 		user.move_resist = MOVE_FORCE_STRONG
+		user.apply_status_effect(/datum/status_effect/vampire_overwhelming_force)
 	else
 		deactivate()
 
@@ -112,13 +112,15 @@
 	active = FALSE
 	if(!user)
 		return
-	UnregisterSignal(user, list(COMSIG_MOVABLE_BUMP, COMSIG_MOB_STATCHANGE))
+	UnregisterSignal(user, COMSIG_MOVABLE_BUMP)
 	user.move_resist = MOVE_FORCE_DEFAULT
 	user.status_flags |= CANPUSH
+	user.remove_status_effect(/datum/status_effect/vampire_overwhelming_force)
 
-/datum/action/cooldown/spell/vampire_overwhelming_force/proc/on_stat_change(mob/living/source, new_stat, old_stat)
+/datum/action/cooldown/spell/vampire_overwhelming_force/update_status_on_signal(mob/living/source, new_stat, old_stat)
 	SIGNAL_HANDLER
-	if(new_stat == DEAD)
+	. = ..()
+	if(source.stat == DEAD)
 		deactivate(source)
 
 /datum/action/cooldown/spell/vampire_overwhelming_force/proc/force_open_door(datum/source, atom/bumped)

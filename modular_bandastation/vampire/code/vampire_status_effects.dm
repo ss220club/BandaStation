@@ -1,5 +1,17 @@
 /// Temporary effects used exclusively by vampire abilities.
 
+/datum/status_effect/vampire_overwhelming_force
+	id = "vampire_overwhelming_force"
+	duration = STATUS_EFFECT_PERMANENT
+	tick_interval = STATUS_EFFECT_NO_TICK
+	alert_type = /atom/movable/screen/alert/status_effect/vampire_overwhelming_force
+
+/atom/movable/screen/alert/status_effect/vampire_overwhelming_force
+	name = "Подавляющая сила"
+	desc = "Вы выбиваете незапертые двери, в которые врезаетесь, расходуя кровь. Используйте способность повторно, чтобы отключить её."
+	icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
+	icon_state = "OH_YEAAAAH"
+
 /datum/status_effect/vampire_blood_swell
 	id = "vampire_blood_swell"
 	duration = 30 SECONDS
@@ -55,7 +67,14 @@
 	id = "vampire_blood_rush"
 	duration = 10 SECONDS
 	tick_interval = STATUS_EFFECT_NO_TICK
-	alert_type = null
+	alert_type = /atom/movable/screen/alert/status_effect/vampire_blood_rush
+	show_duration = TRUE
+
+/atom/movable/screen/alert/status_effect/vampire_blood_rush
+	name = "Кровавый рывок"
+	desc = "Магия крови ускоряет ваше движение."
+	icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
+	icon_state = "blood_rush"
 
 /datum/status_effect/vampire_blood_rush/on_apply()
 	owner.add_movespeed_modifier(/datum/movespeed_modifier/vampire_blood_rush, update = TRUE)
@@ -90,8 +109,9 @@
 	id = "vampire_gladiator"
 	duration = 30 SECONDS
 	tick_interval = 2 SECONDS
-	alert_type = null
+	alert_type = /atom/movable/screen/alert/status_effect/vampire_gladiator
 	var/list/boosted_bodyparts
+	show_duration = TRUE
 
 /datum/status_effect/vampire_gladiator/on_apply()
 	var/mob/living/carbon/human/human_owner = owner
@@ -119,7 +139,7 @@
 /datum/status_effect/vampire_thrall_net
 	id = "vampire_thrall_net"
 	tick_interval = 2 SECONDS
-	alert_type = null
+	alert_type = /atom/movable/screen/alert/status_effect/vampire_thrall_net
 	var/blood_cost_per_tick = 5
 	var/datum/antagonist/vampire/vampire
 	var/list/datum/weakref/network_members = list()
@@ -233,7 +253,7 @@
 /datum/status_effect/vampire_blood_spill
 	id = "vampire_blood_spill"
 	tick_interval = 2 SECONDS
-	alert_type = null
+	alert_type = /atom/movable/screen/alert/status_effect/vampire_blood_spill
 	var/datum/weakref/vampire_ref
 
 /datum/status_effect/vampire_blood_spill/on_creation(mob/living/new_owner, datum/weakref/new_vampire_ref)
@@ -265,7 +285,7 @@
 /datum/status_effect/vampire_eternal_darkness
 	id = "vampire_eternal_darkness"
 	tick_interval = 1 SECONDS
-	alert_type = null
+	alert_type = /atom/movable/screen/alert/status_effect/vampire_eternal_darkness
 	var/datum/weakref/vampire_ref
 
 /datum/status_effect/vampire_eternal_darkness/on_creation(mob/living/new_owner, datum/weakref/new_vampire_ref)
@@ -294,3 +314,147 @@
 			if(projectile.armor_flag == ENERGY || projectile.armor_flag == LASER)
 				projectile.damage *= 0.7 ** (seconds_between_ticks / 0.2)
 	vampire.subtract_usable_blood(1.25 * seconds_between_ticks)
+
+/atom/movable/screen/alert/status_effect/vampire_gladiator
+	name = "Гладиатор"
+	desc = "Вы сопротивляетесь ранам и восстанавливаете здоровье и выносливость."
+	icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
+	icon_state = "duel"
+
+/atom/movable/screen/alert/status_effect/vampire_thrall_net
+	name = "Кровавая связь"
+	desc = "Урон распределяется между вами и ближайшими рабами. Связь расходует кровь."
+	icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
+	icon_state = "blood_bond"
+
+/atom/movable/screen/alert/status_effect/vampire_blood_spill
+	name = "Ритуал несущего кровь"
+	desc = "Вы поглощаете кровь окружающих и восстанавливаете силы. Ритуал расходует кровь."
+	icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
+	icon_state = "blood_bringers_rite"
+
+/atom/movable/screen/alert/status_effect/vampire_eternal_darkness
+	name = "Вечная тьма"
+	desc = "Вы создаёте тьму, охлаждаете врагов и ослабляете энергетические снаряды. Способность расходует кровь."
+	icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
+	icon_state = "eternal_darkness"
+
+/datum/status_effect/vampire_cloak
+	id = "vampire_cloak"
+	duration = STATUS_EFFECT_PERMANENT
+	tick_interval = STATUS_EFFECT_NO_TICK
+	alert_type = /atom/movable/screen/alert/status_effect/vampire_cloak
+
+/atom/movable/screen/alert/status_effect/vampire_cloak
+	name = "Покров тьмы"
+	desc = "Покров включён: в темноте вы менее заметны и движетесь быстрее. Вы более уязвимы к ожогам."
+	icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
+	icon_state = "vampire_cloak"
+
+/datum/status_effect/vampire_decoy
+	parent_type = /datum/status_effect/vampire_invisibility
+	id = "vampire_decoy"
+	duration = 6 SECONDS
+	tick_interval = STATUS_EFFECT_NO_TICK
+	alert_type = /atom/movable/screen/alert/status_effect/vampire_decoy
+	show_duration = TRUE
+
+/atom/movable/screen/alert/status_effect/vampire_decoy
+	name = "Невидимость приманки"
+	desc = "Вы временно невидимы, пока приманка отвлекает врагов."
+	icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
+	icon_state = "decoy"
+
+/datum/status_effect/vampire_soul_anchor
+	id = "vampire_soul_anchor"
+	duration = 2 MINUTES
+	tick_interval = STATUS_EFFECT_NO_TICK
+	alert_type = /atom/movable/screen/alert/status_effect/vampire_soul_anchor
+	show_duration = TRUE
+
+/atom/movable/screen/alert/status_effect/vampire_soul_anchor
+	name = "Якорь души"
+	desc = "Якорь готов. Повторно используйте способность, чтобы вернуться к нему."
+	icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
+	icon_state = "shadow_anchor"
+
+/datum/status_effect/vampire_anchor_invisibility
+	parent_type = /datum/status_effect/vampire_invisibility
+	id = "vampire_anchor_invisibility"
+	duration = 4 SECONDS
+	tick_interval = STATUS_EFFECT_NO_TICK
+	alert_type = /atom/movable/screen/alert/status_effect/vampire_anchor_invisibility
+	show_duration = TRUE
+
+/atom/movable/screen/alert/status_effect/vampire_anchor_invisibility
+	name = "Тень якоря"
+	desc = "Якорь души временно скрывает вас от глаз."
+	icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
+	icon_state = "shadow_anchor"
+
+/datum/status_effect/vampire_rejuvenation
+	id = "vampire_rejuvenation"
+	duration = 14 SECONDS
+	tick_interval = STATUS_EFFECT_AUTO_TICK
+	alert_type = /atom/movable/screen/alert/status_effect/vampire_rejuvenation
+	show_duration = TRUE
+	var/healing_multiplier
+
+/datum/status_effect/vampire_rejuvenation/on_apply(rejuv_mult)
+	if(owner.stat == DEAD)
+		return FALSE
+	healing_multiplier = rejuv_mult
+	return TRUE
+
+/datum/status_effect/vampire_rejuvenation/tick(seconds_between_ticks)
+	if(owner.stat == DEAD)
+		qdel(src)
+		return
+	// Spread the former five pulses evenly over the fourteen-second duration.
+	var/healing = healing_multiplier * seconds_between_ticks / 14
+	owner.adjust_brute_loss(-10 * healing)
+	owner.adjust_oxy_loss(-25 * healing)
+	owner.adjust_tox_loss(-10 * healing, forced = TRUE)
+	owner.adjust_fire_loss(-10 * healing)
+	if(owner.reagents)
+		for(var/datum/reagent/toxin/toxin in owner.reagents.reagent_list)
+			owner.reagents.remove_reagent(toxin.type, 10 * healing)
+
+/atom/movable/screen/alert/status_effect/vampire_rejuvenation
+	name = "Омоложение"
+	desc = "Кровь постепенно восстанавливает ваше здоровье и очищает тело от токсинов."
+	icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
+	icon_state = "vampire_rejuvinate"
+
+/datum/status_effect/vampire_blood_pool
+	id = "vampire_blood_pool"
+	duration = STATUS_EFFECT_PERMANENT
+	tick_interval = STATUS_EFFECT_NO_TICK
+	alert_type = /atom/movable/screen/alert/status_effect/vampire_blood_pool
+
+/atom/movable/screen/alert/status_effect/vampire_blood_pool
+	name = "Кровавая лужа"
+	desc = "Вы приняли форму лужи крови."
+	icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
+	icon_state = "blood_pool"
+
+/// Shared visibility ownership for Decoy and Soul Anchor; only the final effect restores alpha.
+/datum/status_effect/vampire_invisibility
+	id = "vampire_invisibility"
+	tick_interval = STATUS_EFFECT_NO_TICK
+	alert_type = null
+	var/previous_alpha
+
+/datum/status_effect/vampire_invisibility/on_apply()
+	previous_alpha = owner.alpha
+	for(var/datum/status_effect/vampire_invisibility/other in owner.status_effects)
+		previous_alpha = other.previous_alpha
+		break
+	owner.alpha = 0
+	return TRUE
+
+/datum/status_effect/vampire_invisibility/on_remove()
+	for(var/datum/status_effect/vampire_invisibility/other in owner.status_effects)
+		return
+	if(owner.alpha == 0)
+		owner.alpha = previous_alpha

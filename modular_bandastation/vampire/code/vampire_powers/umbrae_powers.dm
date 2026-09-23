@@ -125,6 +125,8 @@
 	add_vampire_ability(30, FALSE)
 
 /datum/action/cooldown/spell/vampire_soul_anchor/Destroy(force, ...)
+	var/mob/living/user = owner
+	user?.remove_status_effect(/datum/status_effect/vampire_soul_anchor)
 	if(fake_recall_timer)
 		deltimer(fake_recall_timer)
 	QDEL_NULL(anchor)
@@ -144,12 +146,14 @@
 		making_anchor = TRUE
 		if(do_after(user, 5 SECONDS, timed_action_flags = IGNORE_USER_LOC_CHANGE|IGNORE_TARGET_LOC_CHANGE|IGNORE_INCAPACITATED|IGNORE_HELD_ITEM, show_progress = FALSE, cog_icon = null) && !QDELETED(src) && !QDELETED(user))
 			anchor = new(anchor_turf)
+			user.apply_status_effect(/datum/status_effect/vampire_soul_anchor)
 			fake_recall_timer = addtimer(CALLBACK(src, PROC_REF(recall), user, TRUE), 2 MINUTES, TIMER_STOPPABLE)
 		making_anchor = FALSE
 		return
 	recall(user)
 
 /datum/action/cooldown/spell/vampire_soul_anchor/proc/recall(mob/living/user, fake = FALSE)
+	user.remove_status_effect(/datum/status_effect/vampire_soul_anchor)
 	StartCooldown()
 	if(fake_recall_timer)
 		deltimer(fake_recall_timer)
@@ -168,19 +172,13 @@
 			if(target != user)
 				decoy.set_target(target)
 				break
-		var/previous_alpha = user.alpha
-		user.alpha = 0
-		addtimer(CALLBACK(src, PROC_REF(restore_visibility), user, previous_alpha), 4 SECONDS)
+		user.apply_status_effect(/datum/status_effect/vampire_anchor_invisibility)
 	else
 		if(!do_teleport(user, end_turf, channel = TELEPORT_CHANNEL_MAGIC))
 			return
 	var/obj/effect/immortality_talisman/effect = new(start_turf)
 	effect.shadow_to_animation(end_turf, user)
 	SEND_SIGNAL(src, COMSIG_VAMPIRE_ABILITY_DEDUCT_BLOOD)
-
-/datum/action/cooldown/spell/vampire_soul_anchor/proc/restore_visibility(mob/living/user, previous_alpha)
-	if(!QDELETED(user))
-		user.alpha = previous_alpha
 
 /obj/structure/shadow_anchor
 	name = "shadow anchor"
