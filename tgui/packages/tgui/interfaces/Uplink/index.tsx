@@ -196,9 +196,9 @@ export class Uplink extends Component<any, UplinkState> {
             <Box>{item.desc}</Box>
             {(item.lock_other_purchases && (
               <NoticeBox mt={1}>
-                Taking this item will lock you from further purchasing from the
-                marketplace. Additionally, if you have already purchased an
-                item, you will not be able to purchase this.
+                Покупка этого предмета навсегда заблокирует возможность
+                дальнейших покупок. К тому же, если вы купили любой другой
+                предмет, то вы не сможете купить этот.
               </NoticeBox>
             )) ||
               null}
@@ -243,7 +243,7 @@ export class Uplink extends Component<any, UplinkState> {
                             selected={currentTab === 0}
                             onClick={() => this.setState({ currentTab: 0 })}
                           >
-                            Primary Objectives
+                            Основные задачи
                           </Tabs.Tab>
                         )}
                         <Tabs.Tab
@@ -256,7 +256,7 @@ export class Uplink extends Component<any, UplinkState> {
                           selected={currentTab === 2}
                           onClick={() => this.setState({ currentTab: 2 })}
                         >
-                          Market
+                          Рынок
                         </Tabs.Tab>
                       </Tabs>
                     </Stack.Item>
@@ -272,7 +272,7 @@ export class Uplink extends Component<any, UplinkState> {
                         px={2}
                         onClick={() => act('lock')}
                       >
-                        Lock
+                        Закрыть
                       </Button>
                     </Stack.Item>
                   )}
@@ -308,7 +308,7 @@ export class Uplink extends Component<any, UplinkState> {
                         align={'top'}
                         as="span"
                       >
-                        SHOP LOCKED
+                        РЫНОК ЗАБЛОКИРОВАН
                       </Box>
                     </Dimmer>
                   )) ||

@@ -144,7 +144,7 @@
 	if(owner.on_fire)
 		return
 
-	return "[owner.p_They()] [owner.p_are()] covered in something flammable."
+	return "[capitalize(owner.ru_p_they())] [genderize_ru(owner.gender, "покрыт", "покрыта", "покрыто", "покрыты")] чем-то легковоспламеняющимся."
 
 /datum/status_effect/fire_handler/fire_stacks/proc/owner_touched_sparks()
 	SIGNAL_HANDLER
@@ -247,7 +247,7 @@
 
 	on_fire = TRUE
 	if(!silent)
-		owner.visible_message(span_warning("[owner] catches fire!"), span_userdanger("You're set on fire!"))
+		owner.visible_message(span_warning("[owner.declent_ru(NOMINATIVE)] загорается!"), span_userdanger("Вы загорелись!"))
 
 	if(moblight_type)
 		if(moblight)
@@ -343,11 +343,11 @@
 
 /datum/status_effect/fire_handler/wet_stacks/get_examine_text(mob/examiner)
 	if(stacks <= WET_STACKS_DAMP)
-		return "[owner.p_They()] seem[owner.p_s()] damp."
+		return "[capitalize(owner.ru_p_they())] выглядит немного [genderize_ru(owner.gender, "влажным", "влажной", "влажным", "влажными")]."
 	else if(stacks >= WET_STACKS_SOAKED)
-		return "[owner.p_They()] look[owner.p_s()] completely soaked."
+		return "[capitalize(owner.ru_p_they())] выглядит [genderize_ru(owner.gender, "насквозь промокшим", "насквозь промокшей", "насквозь промокшим", "насквозь промокшими")]"
 	else
-		return "[owner.p_They()] appear[owner.p_s()] to be dripping wet."
+		return "[capitalize(owner.ru_p_they())] выглядит [genderize_ru(owner.gender, "промокшим до нитки", "промокшей до нитки", "промокшим до нитки", "промокшими до нитки")]"
 
 /datum/status_effect/fire_handler/wet_stacks/cache_stacks()
 	. = ..()
