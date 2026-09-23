@@ -38,56 +38,56 @@
 		return TRUE
 	// Software related ui actions
 	if(available_software[action] && !installed_software.Find(action))
-		balloon_alert(ui.user, "software unavailable!")
+		balloon_alert(ui.user, "программное обеспечение недоступно!")
 		return FALSE
 	switch(action)
-		if("Atmospheric Sensor")
+		if("Атмосферный датчик")
 			atmos_analyzer.attack_self(src)
 			return TRUE
-		if("Crew Manifest")
+		if("Список членов экипажа")
 			ai_roster()
 			return TRUE
-		if("Crew Monitor")
+		if("Монитор экипажа")
 			crew_monitor.attack_self(src) // BANDASTATION REPLACEMENT: GLOB.crewmonitor.show(usr, src)
 			return TRUE
-		if("Digital Messenger")
+		if("Цифровой мессенджер")
 			modularInterface?.interact(usr)
 			return TRUE
-		if("Door Jack")
+		if("Дверной взломщик")
 			// Look to door_jack.dm for implementation
 			door_jack(params["mode"])
 			return TRUE
-		if("Encryption Slot")
+		if("Слот для ключа шифрования")
 			balloon_alert(usr, "radio frequencies [!encrypt_mod ? "enabled" : "disabled"]")
 			encrypt_mod = !encrypt_mod
 			radio.subspace_transmission = !radio.subspace_transmission
 			return TRUE
-		if("Host Scan")
+		if("Сканирование хоста")
 			host_scan(params["mode"])
 			return TRUE
-		if("Internal GPS")
+		if("Встроенный GPS")
 			internal_gps.attack_self(src)
 			return TRUE
-		if("Music Synthesizer")
+		if("Музыкальный синтезатор")
 			instrument.interact(src)
 			return TRUE
-		if("Medical HUD")
+		if("Медицинский ИЛС")
 			toggle_hud(PAI_TOGGLE_MEDICAL_HUD)
 			return TRUE
-		if("Newscaster")
+		if("Ведущий новостей")
 			newscaster.ui_interact(src)
 			return TRUE
-		if("Photography Module")
+		if("Модуль фотографии")
 			// Look to pai_camera.dm for implementation
 			use_camera(usr, params["mode"])
 			return TRUE
-		if("Remote Signaler")
+		if("Удаленный сигнализатор")
 			signaler.ui_interact(src)
 			return TRUE
-		if("Security HUD")
+		if("Охранный ИЛС")
 			toggle_hud(PAI_TOGGLE_SECURITY_HUD)
 			return TRUE
-		if("Universal Translator")
+		if("Универсальный переводчик")
 			grant_languages()
 			ui.send_full_update()
 			return TRUE
@@ -112,19 +112,19 @@
 	var/datum/hud/pai/pAIhud = hud_used
 	pAIhud?.update_software_buttons()
 	switch(selection)
-		if("Atmospheric Sensor")
+		if("Атмосферный датчик")
 			atmos_analyzer = new(src)
-		if("Digital Messenger")
+		if("Цифровой мессенджер")
 			create_modularInterface()
-		if("Internal GPS")
+		if("Встроенный GPS")
 			internal_gps = new(src)
-		if("Music Synthesizer")
+		if("Музыкальный синтезатор")
 			instrument = new(src)
-		if("Newscaster")
+		if("Ведущий новостей")
 			newscaster = new(src)
-		if("Photography Module")
+		if("Модуль фотографии")
 			aicamera = new /obj/item/camera/siliconcam/pai_camera(src)
-		if("Remote Signaler")
+		if("Удаленный сигнализатор")
 			signaler = new(src)
 	return TRUE
 
@@ -208,10 +208,10 @@
 		if(PAI_SCAN_MASTER)
 			var/mob/living/resolved_master = find_master()
 			if(isnull(resolved_master))
-				balloon_alert(src, "no master detected!")
+				balloon_alert(src, "мастер не обнаружен!")
 				return FALSE
 			if(!is_valid_z_level(get_turf(src), get_turf(resolved_master)))
-				balloon_alert(src, "master out of range!")
+				balloon_alert(src, "мастер вне досягаемости!")
 				return FALSE
 			healthscan(src, resolved_master)
 			return TRUE
