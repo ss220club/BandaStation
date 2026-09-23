@@ -99,7 +99,7 @@
 
 	ADD_TRAIT(cast_on, TRAIT_IMMOBILIZED, REF(src))
 
- // BANDASTATION EDIT START: allow custom jaunt exit timing
+// BANDASTATION EDIT START: allow custom jaunt exit timing
 	begin_jaunt_exit(cast_on, holder, found_exit) // BANDASTATION EDIT: allow custom jaunt exit timing
 // No empty line here on purpose.
 /// Schedule the exit animation after selecting a safe exit turf and stopping movement.
