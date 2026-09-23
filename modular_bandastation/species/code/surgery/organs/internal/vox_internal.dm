@@ -30,6 +30,7 @@
 	safe_oxygen_min = 0
 	safe_oxygen_max = 2
 	oxy_damage_type = TOX
+	oxy_breath_dam_min = 10
 
 	safe_nitro_min = 10
 
@@ -39,42 +40,18 @@
 	languages_native = list(/datum/language/vox)
 	liked_foodtypes = BUGS | TECH
 	disliked_foodtypes = NONE
+	modifies_speech = TRUE
+	var/static/list/speech_replacements = list(
+		new /regex("к+", "g") = "кик",
+		new /regex("К+", "g") = "КИК",
+		new /regex("ч+", "g") = "чич",
+		new /regex("Ч+", "g") = "ЧИЧ",
+	)
 
-//	VOX EDIBLE CIRCUITS
-/obj/item/circuitboard
-	max_integrity = 60
-	integrity_failure = 0
-	var/obj/item/food/circuitboard/vox_snack
-
-/obj/item/food/circuitboard
-	name = "temporary vox snack item"
-	spawn_blacklisted = TRUE
-	bite_consumption = 1
-	food_reagents = list(/datum/reagent/consumable/nutriment = INFINITY)
-	tastes = list("кремний" = 1, "медь" = 1)
-	foodtypes = TECH
-
-	var/datum/weakref/circuitboard
-
-/obj/item/food/circuitboard/make_edible()
+/obj/item/organ/tongue/vox/Initialize(mapload)
 	. = ..()
-	AddComponentFrom(SOURCE_EDIBLE_INNATE, /datum/component/edible, after_eat = CALLBACK(src, PROC_REF(after_eat)))
-
-/obj/item/food/circuitboard/proc/after_eat(mob/eater)
-	var/obj/item/circuitboard/real_circuitboard = circuitboard.resolve()
-	if (real_circuitboard)
-		real_circuitboard.take_damage(15, sound_effect = FALSE, damage_flag = CONSUME)
-	else
-		qdel(src)
-
-/obj/item/circuitboard/attack(mob/living/target, mob/living/user, list/modifiers, list/attack_modifiers)
-	if(user.combat_mode || !isvox(user)) //|| ispickedupmob(src)
-		return ..()
-	if(isnull(vox_snack))
-		create_vox_snack()
-	vox_snack.attack(target, user, modifiers)
-
-/obj/item/circuitboard/proc/create_vox_snack()
-	vox_snack = new
-	vox_snack.name = name
-	vox_snack.circuitboard = WEAKREF(src)
+	AddComponent(\
+		/datum/component/speechmod,\
+		replacements = speech_replacements,\
+		should_modify_speech = CALLBACK(src, PROC_REF(should_modify_speech))\
+	)

@@ -8,7 +8,6 @@
 	adjustable = FALSE
 	actions_types = null
 
-// Vox Nitrogen Tank
 /obj/item/tank/internals/nitrogen
 	name = "nitrogen internals tank"
 	desc = "A tank of nitrogen gas designed specifically for use as internals, tuned for the respiratory needs of a Vox. If you're not a Vox, you probably shouldn't use this."

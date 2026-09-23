@@ -1,6 +1,6 @@
 /datum/language/vox
 	name = "Вокс-пиджин"
-	desc = "Общий язык различных кораблей Воксов. Он звучит как хаотичный визг."
+	desc = "Общий язык различных кораблей воксов. Он звучит как хаотичный визг."
 	key = "V"
 	flags = LANGUAGE_TONGUELESS_SPEECH
 	space_chance = 60
