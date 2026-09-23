@@ -6,13 +6,13 @@
 	weight = 10
 	min_pop = 3
 	max_antag_cap = list("denominator" = 24)
+	blacklisted_roles = list(JOB_CHAPLAIN, JOB_HEAD_OF_PERSONNEL)
 
 // Only "normal" blood species are allowed to be vampires
 /datum/dynamic_ruleset/roundstart/vampire/is_valid_candidate(mob/candidate, client/candidate_client)
 	. = ..()
 	if(!.)
 		return
-
 	var/species_type = candidate_client.prefs.read_preference(/datum/preference/choiced/species)
 	var/datum/species/species = GLOB.species_prototypes[species_type]
 
