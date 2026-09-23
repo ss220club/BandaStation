@@ -131,13 +131,21 @@
 /datum/status_effect/vampire_thrall_net/on_apply()
 	if(!vampire)
 		return FALSE
+	var/turf/owner_turf = get_turf(owner)
+	if(!owner_turf)
+		return FALSE
 	network_members += WEAKREF(owner)
 	for(var/datum/antagonist/vampire_thrall/thrall as anything in vampire.get_thralls())
-		if(thrall.owner?.current && get_dist(owner, thrall.owner.current) <= 7 && thrall.owner.current.stat != DEAD)
+		var/turf/thrall_turf = get_turf(thrall.owner?.current)
+		if(thrall_turf && thrall_turf.z == owner_turf.z && get_dist(owner_turf, thrall_turf) <= 7 && thrall.owner.current.stat != DEAD)
 			network_members += WEAKREF(thrall.owner.current)
 	return length(network_members) > 1
 
 /datum/status_effect/vampire_thrall_net/tick(seconds_between_ticks)
+	var/turf/owner_turf = get_turf(owner)
+	if(!owner_turf)
+		qdel(src)
+		return
 	var/list/mob/living/members = list()
 	var/total_brute_damage = 0
 	var/total_burn_damage = 0
@@ -145,7 +153,8 @@
 	var/total_oxy_damage = 0
 	for(var/datum/weakref/member_ref as anything in network_members)
 		var/mob/living/member = member_ref.resolve()
-		if(!member || member.stat == DEAD || get_dist(owner, member) > 7)
+		var/turf/member_turf = get_turf(member)
+		if(!member_turf || member.stat == DEAD || member_turf.z != owner_turf.z || get_dist(owner_turf, member_turf) > 7)
 			continue
 		members += member
 		total_brute_damage += member.get_brute_loss()

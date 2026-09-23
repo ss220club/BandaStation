@@ -173,9 +173,15 @@
 	add_thralls_to_targets(vampire.get_thralls(), targets, center, range)
 
 /datum/component/vampire_owner_abilities/proc/add_thralls_to_targets(list/thralls, list/targets, atom/center = null, range = INFINITY)
+	var/turf/center_turf = get_turf(center)
+	if(center && !center_turf)
+		return
 	for(var/datum/antagonist/vampire_thrall/thrall in thralls)
 		var/mob/living/thrall_mob = thrall.owner?.current
-		if(!thrall_mob || (center && get_dist(center, thrall_mob) > range))
+		if(!thrall_mob)
+			continue
+		var/turf/thrall_turf = get_turf(thrall_mob)
+		if(center && (!thrall_turf || thrall_turf.z != center_turf.z || get_dist(center_turf, thrall_turf) > range))
 			continue
 		targets += thrall_mob
 

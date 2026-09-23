@@ -13,7 +13,7 @@
 	src.required_blood = required_blood
 	src.deduct_blood_on_cast = deduct_blood_on_cast
 	RegisterSignal(parent, COMSIG_SPELL_CAN_CAST_CHECK, PROC_REF(can_cast))
-	RegisterSignal(parent, COMSIG_SPELL_BEFORE_CAST, PROC_REF(before_cast))
+	RegisterSignal(parent, COMSIG_SPELL_CAST, PROC_REF(on_cast))
 	RegisterSignal(parent, COMSIG_SPELL_AFTER_CAST, PROC_REF(after_cast))
 	RegisterSignal(parent, COMSIG_VAMPIRE_ABILITY_DEDUCT_BLOOD, PROC_REF(deduct_blood))
 	RegisterSignal(parent, COMSIG_VAMPIRE_ABILITY_CONSUME_BLOOD, PROC_REF(consume_blood))
@@ -54,7 +54,8 @@
 		return SPELL_CANCEL_CAST
 	return NONE
 
-/datum/component/vampire_ability/proc/before_cast(datum/action/cooldown/spell/spell, atom/cast_on)
+/// Payment happens after all before_cast overrides have accepted the target.
+/datum/component/vampire_ability/proc/on_cast(datum/action/cooldown/spell/spell, atom/cast_on)
 	SIGNAL_HANDLER
 	if(deduct_blood_on_cast)
 		SEND_SIGNAL(spell, COMSIG_VAMPIRE_ABILITY_DEDUCT_BLOOD)

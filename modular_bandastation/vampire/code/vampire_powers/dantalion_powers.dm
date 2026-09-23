@@ -185,12 +185,13 @@
 	var/mob/living/user = owner
 	var/mob/living/basic/illusion/escape/decoy = new(get_turf(user))
 	decoy.full_setup(user, target_mob = user, life = 20 SECONDS, damage = 0)
+	var/previous_alpha = user.alpha
 	user.alpha = 0
-	addtimer(CALLBACK(src, PROC_REF(restore_visibility), user), 6 SECONDS)
+	addtimer(CALLBACK(src, PROC_REF(restore_visibility), user, previous_alpha), 6 SECONDS)
 
-/datum/action/cooldown/spell/vampire_decoy/proc/restore_visibility(mob/living/user)
+/datum/action/cooldown/spell/vampire_decoy/proc/restore_visibility(mob/living/user, previous_alpha)
 	if(!QDELETED(user))
-		user.alpha = initial(user.alpha)
+		user.alpha = previous_alpha
 
 /datum/action/cooldown/spell/aoe/vampire_rally_thralls
 	name = "Сбор рабов"

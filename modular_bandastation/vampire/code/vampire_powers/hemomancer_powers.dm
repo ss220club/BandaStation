@@ -207,7 +207,6 @@
 	button_icon_state = "blood_pool"
 	cooldown_time = 30 SECONDS
 	jaunt_duration = 3 SECONDS
-	jaunt_in_time = 0
 	jaunt_type = /obj/effect/dummy/phased_mob/spell_jaunt/vampire_blood_pool
 	jaunt_in_type = /obj/effect/temp_visual/dir_setting/cult/phase
 	jaunt_out_type = /obj/effect/temp_visual/dir_setting/cult/phase/out
