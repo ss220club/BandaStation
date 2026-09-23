@@ -207,6 +207,7 @@
 	button_icon_state = "blood_pool"
 	cooldown_time = 30 SECONDS
 	jaunt_duration = 3 SECONDS
+	jaunt_in_time = 0.1 SECONDS // Time spent reappearing; the normal pre-animation wait is skipped below.
 	jaunt_type = /obj/effect/dummy/phased_mob/spell_jaunt/vampire_blood_pool
 	jaunt_in_type = /obj/effect/temp_visual/dir_setting/cult/phase
 	jaunt_out_type = /obj/effect/temp_visual/dir_setting/cult/phase/out
@@ -216,6 +217,9 @@
 /datum/action/cooldown/spell/jaunt/ethereal_jaunt/vampire_blood_pool/New(Target)
 	. = ..()
 	add_vampire_ability(50)
+
+/datum/action/cooldown/spell/jaunt/ethereal_jaunt/vampire_blood_pool/begin_jaunt_exit(mob/living/cast_on, obj/effect/dummy/phased_mob/spell_jaunt/holder, turf/found_exit)
+	do_jaunt_in(cast_on, holder, found_exit)
 
 /datum/action/cooldown/spell/jaunt/ethereal_jaunt/do_steam_effects(turf/loc)
 	return // No steam effects
