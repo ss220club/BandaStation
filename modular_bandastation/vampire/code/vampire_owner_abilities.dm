@@ -1,8 +1,6 @@
 /datum/component/vampire_owner_abilities
 	dupe_mode = COMPONENT_DUPE_UNIQUE
 	var/datum/weakref/vampire_ref
-	/// Tracks the physiology change independently of the antagonist's cloak state.
-	var/cloak_active = FALSE
 
 /datum/component/vampire_owner_abilities/Initialize(datum/antagonist/vampire/vampire)
 	if(!isliving(parent))
@@ -70,33 +68,16 @@
 	var/datum/antagonist/vampire/vampire = vampire_ref?.resolve()
 	if(!vampire || !ishuman(source))
 		return
-	if(cloak_active)
+	if(source.has_status_effect(/datum/status_effect/vampire_cloak))
 		disable_cloak(source)
 		return COMPONENT_VAMPIRE_ABILITY_CLOAK_TOGGLED
-	var/mob/living/carbon/human/user = source
-	cloak_active = TRUE
-	user.apply_status_effect(/datum/status_effect/vampire_cloak)
-	vampire.iscloaking = TRUE
-	MODIFY_PHYSIOLOGY(user, BURN, 1.1)
-	RegisterSignal(user, COMSIG_LIVING_IGNITED, PROC_REF(update_cloak))
-	vampire.handle_vampire_cloak(user)
-	return COMPONENT_VAMPIRE_ABILITY_CLOAK_TOGGLED | COMPONENT_VAMPIRE_ABILITY_CLOAK_ENABLED
+	if(source.apply_status_effect(/datum/status_effect/vampire_cloak, vampire_ref))
+		return COMPONENT_VAMPIRE_ABILITY_CLOAK_TOGGLED | COMPONENT_VAMPIRE_ABILITY_CLOAK_ENABLED
 
 /datum/component/vampire_owner_abilities/proc/disable_cloak(mob/living/source)
 	SIGNAL_HANDLER
-	var/datum/antagonist/vampire/vampire = vampire_ref?.resolve()
-	if(!cloak_active)
-		return
-	cloak_active = FALSE
-	source.remove_status_effect(/datum/status_effect/vampire_cloak)
-	UnregisterSignal(source, COMSIG_LIVING_IGNITED)
-	if(ishuman(source))
-		var/mob/living/carbon/human/user = source
-		MODIFY_PHYSIOLOGY(user, BURN, 1 / 1.1)
-	if(vampire)
-		vampire.iscloaking = FALSE
-		vampire.handle_vampire_cloak(source)
-	return COMPONENT_VAMPIRE_ABILITY_CLOAK_TOGGLED
+	if(source.remove_status_effect(/datum/status_effect/vampire_cloak))
+		return COMPONENT_VAMPIRE_ABILITY_CLOAK_TOGGLED
 
 /datum/component/vampire_owner_abilities/proc/update_cloak(mob/living/source)
 	SIGNAL_HANDLER

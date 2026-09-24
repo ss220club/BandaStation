@@ -5,6 +5,43 @@
 	duration = STATUS_EFFECT_PERMANENT
 	tick_interval = STATUS_EFFECT_NO_TICK
 	alert_type = /atom/movable/screen/alert/status_effect/vampire_overwhelming_force
+	var/datum/weakref/spell_ref
+	var/previous_move_resist
+	var/previous_canpush
+
+/datum/status_effect/vampire_overwhelming_force/on_apply(datum/action/cooldown/spell/vampire_overwhelming_force/spell)
+	spell_ref = WEAKREF(spell)
+	previous_move_resist = owner.move_resist
+	previous_canpush = owner.status_flags & CANPUSH
+	owner.status_flags &= ~CANPUSH
+	owner.move_resist = MOVE_FORCE_STRONG
+	RegisterSignal(owner, COMSIG_MOVABLE_BUMP, PROC_REF(force_open_door))
+	RegisterSignal(owner, COMSIG_LIVING_DEATH, PROC_REF(on_death))
+	to_chat(owner, span_warning("Вы чувствуете НЕВЕРОЯТНУЮ СИЛУ!"))
+	return TRUE
+
+/datum/status_effect/vampire_overwhelming_force/on_remove()
+	UnregisterSignal(owner, list(COMSIG_MOVABLE_BUMP, COMSIG_LIVING_DEATH))
+	if(owner.move_resist == MOVE_FORCE_STRONG)
+		owner.move_resist = previous_move_resist
+	if(previous_canpush)
+		owner.status_flags |= CANPUSH
+
+/datum/status_effect/vampire_overwhelming_force/proc/on_death()
+	SIGNAL_HANDLER
+	qdel(src)
+
+/datum/status_effect/vampire_overwhelming_force/proc/force_open_door(datum/source, atom/bumped)
+	SIGNAL_HANDLER
+	if(!istype(bumped, /obj/machinery/door))
+		return
+	var/obj/machinery/door/door = bumped
+	if(!door.density || door.operating || door.locked || door.allowed(owner))
+		return
+	var/datum/action/cooldown/spell/spell = spell_ref?.resolve()
+	if(!spell || !(SEND_SIGNAL(spell, COMSIG_VAMPIRE_ABILITY_CONSUME_BLOOD, 5) & COMPONENT_VAMPIRE_ABILITY_BLOOD_CONSUMED))
+		return
+	INVOKE_ASYNC(door, TYPE_PROC_REF(/obj/machinery/door, open), BYPASS_DOOR_CHECKS)
 
 /atom/movable/screen/alert/status_effect/vampire_overwhelming_force
 	name = "Подавляющая сила"
@@ -344,6 +381,40 @@
 	duration = STATUS_EFFECT_PERMANENT
 	tick_interval = STATUS_EFFECT_NO_TICK
 	alert_type = /atom/movable/screen/alert/status_effect/vampire_cloak
+	var/datum/weakref/vampire_ref
+	var/physiology_applied = FALSE
+
+/datum/status_effect/vampire_cloak/on_apply(datum/weakref/new_vampire_ref)
+	vampire_ref = new_vampire_ref
+	var/datum/antagonist/vampire/vampire = vampire_ref?.resolve()
+	if(!vampire || !ishuman(owner))
+		return FALSE
+	var/mob/living/carbon/human/user = owner
+	MODIFY_PHYSIOLOGY(user, BURN, 1.1)
+	physiology_applied = TRUE
+	vampire.iscloaking = TRUE
+	RegisterSignal(owner, COMSIG_LIVING_IGNITED, PROC_REF(update_cloak))
+	vampire.handle_vampire_cloak(owner)
+	return TRUE
+
+/datum/status_effect/vampire_cloak/on_remove()
+	if(!physiology_applied)
+		return
+	UnregisterSignal(owner, COMSIG_LIVING_IGNITED)
+	if(ishuman(owner))
+		var/mob/living/carbon/human/user = owner
+		MODIFY_PHYSIOLOGY(user, BURN, 1 / 1.1)
+	var/datum/antagonist/vampire/vampire = vampire_ref?.resolve()
+	if(vampire)
+		vampire.iscloaking = FALSE
+		vampire.handle_vampire_cloak(owner)
+	else
+		owner.remove_movespeed_modifier(/datum/movespeed_modifier/vampire_cloak, update = TRUE)
+
+/datum/status_effect/vampire_cloak/proc/update_cloak()
+	SIGNAL_HANDLER
+	var/datum/antagonist/vampire/vampire = vampire_ref?.resolve()
+	vampire?.handle_vampire_cloak(owner)
 
 /atom/movable/screen/alert/status_effect/vampire_cloak
 	name = "Покров тьмы"

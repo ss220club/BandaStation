@@ -83,7 +83,6 @@
 	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "OH_YEAAAAH"
 	cooldown_time = 2 SECONDS
-	var/active
 
 /datum/action/cooldown/spell/vampire_overwhelming_force/New(Target)
 	. = ..()
@@ -92,47 +91,14 @@
 /datum/action/cooldown/spell/vampire_overwhelming_force/cast(atom/cast_on)
 	. = ..()
 	var/mob/living/user = owner
-	if(!active)
-		to_chat(user, span_warning("Вы чувствуете НЕВЕРОЯТНУЮ СИЛУ!"))
-		active = TRUE
-		RegisterSignal(user, COMSIG_MOVABLE_BUMP, PROC_REF(force_open_door))
-		user.status_flags &= ~CANPUSH
-		user.move_resist = MOVE_FORCE_STRONG
-		user.apply_status_effect(/datum/status_effect/vampire_overwhelming_force)
+	if(user.has_status_effect(/datum/status_effect/vampire_overwhelming_force))
+		user.remove_status_effect(/datum/status_effect/vampire_overwhelming_force)
 	else
-		deactivate()
+		user.apply_status_effect(/datum/status_effect/vampire_overwhelming_force, src)
 
 /datum/action/cooldown/spell/vampire_overwhelming_force/Remove(mob/living/removed_from)
-	deactivate(removed_from)
+	removed_from?.remove_status_effect(/datum/status_effect/vampire_overwhelming_force)
 	return ..()
-
-/datum/action/cooldown/spell/vampire_overwhelming_force/proc/deactivate(mob/living/user = owner)
-	if(!active)
-		return
-	active = FALSE
-	if(!user)
-		return
-	UnregisterSignal(user, COMSIG_MOVABLE_BUMP)
-	user.move_resist = MOVE_FORCE_DEFAULT
-	user.status_flags |= CANPUSH
-	user.remove_status_effect(/datum/status_effect/vampire_overwhelming_force)
-
-/datum/action/cooldown/spell/vampire_overwhelming_force/update_status_on_signal(mob/living/source, new_stat, old_stat)
-	SIGNAL_HANDLER
-	. = ..()
-	if(source.stat == DEAD)
-		deactivate(source)
-
-/datum/action/cooldown/spell/vampire_overwhelming_force/proc/force_open_door(datum/source, atom/bumped)
-	SIGNAL_HANDLER
-	if(!istype(bumped, /obj/machinery/door))
-		return
-	var/obj/machinery/door/door = bumped
-	if(!door.density || door.operating || door.locked || door.allowed(owner))
-		return
-	if(!(SEND_SIGNAL(src, COMSIG_VAMPIRE_ABILITY_CONSUME_BLOOD, 5) & COMPONENT_VAMPIRE_ABILITY_BLOOD_CONSUMED))
-		return
-	INVOKE_ASYNC(door, TYPE_PROC_REF(/obj/machinery/door, open), BYPASS_DOOR_CHECKS)
 
 /datum/action/cooldown/spell/vampire_blood_rush
 	name = "Кровавый рывок"
