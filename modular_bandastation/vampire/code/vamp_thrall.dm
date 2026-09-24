@@ -4,9 +4,9 @@
 	antag_hud_name = "vampthrall"
 	hud_icon = 'modular_bandastation/vampire/icons/mob/huds/vampire_antag.dmi'
 	ui_name = "AntagInfoBrainwashed"
-	antagpanel_category = ANTAG_GROUP_CREW
 	show_name_in_check_antagonists = TRUE
 	antag_flags = ANTAG_FAKE|ANTAG_SKIP_GLOBAL_LIST
+	show_in_antagpanel = FALSE
 
 	/// The vampire whose commands this thrall must obey.
 	var/datum/weakref/master_ref
