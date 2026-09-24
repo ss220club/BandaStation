@@ -296,8 +296,9 @@
 
 /obj/structure/closet/crate/coffin/vampire/Initialize(mapload, mob/living/user, obj/effect/lair_rune/rune)
 	. = ..()
-	name = "[name] [user?.mind?.name]"
 	desc += "<br>Владелец этого гроба, возможно, никому не был дорог или даже ещё не умер.<br>[span_warning("Кажется, он неуязвим для всего, кроме лазеров и огня! Особенно для огня!")]"
+	if(user?.mind?.name)
+		desc += "<br>На крышке гроба высечено имя: «[html_encode(user.mind.name)]»."
 	vampire_ref = WEAKREF(user)
 	lair_rune = rune
 
