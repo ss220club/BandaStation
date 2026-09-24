@@ -150,7 +150,8 @@
 	if(!.)
 		return
 	var/mob/living/user = owner
-	to_chat(user, span_notice(user.combat_mode ? "Демоническая хватка оттолкнёт цель." : "Демоническая хватка притянет цель."))
+	var/message = user.combat_mode ? "Демоническая хватка оттолкнёт цель." : "Демоническая хватка притянет цель."
+	to_chat(user, span_notice(message))
 
 /obj/projectile/magic/demonic_grasp
 	name = "demonic grasp"
