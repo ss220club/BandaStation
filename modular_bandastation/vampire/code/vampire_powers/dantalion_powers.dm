@@ -104,9 +104,17 @@
 
 	var/is_thrall = HAS_TRAIT(user, TRAIT_VAMPIRE_LIKE) && !HAS_TRAIT(user, TRAIT_VAMPIRE)
 	var/title = is_thrall ? "Раб" : "Вампир-хозяин"
-	var/span = is_thrall ? "hypnophrase italics" : "hypnophrase bold"
-	var/speaker_name = findtextEx(user.name, user.real_name) ? user.name : "[user.real_name] (в облике [user.name])"
-	var/formatted_message = "<span class='[span]'><b>[title] [speaker_name]:</b> [message]</span>"
+	var/speaker_name = user.name
+	if(!findtextEx(speaker_name, user.real_name))
+		speaker_name = "[user.real_name] (в облике [speaker_name])"
+
+	var/formatted_message = "<b>[title] [speaker_name]:</b> [message]"
+	if(is_thrall)
+		formatted_message = span_italics(formatted_message)
+	else
+		formatted_message = span_bold(formatted_message)
+	formatted_message = span_hypnophrase(formatted_message)
+
 	for(var/mob/living/recipient in recipients)
 		to_chat(recipient, formatted_message, type = MESSAGE_TYPE_RADIO, avoid_highlighting = recipient == user)
 		if(recipient != user)
