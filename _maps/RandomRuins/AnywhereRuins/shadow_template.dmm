@@ -1,0 +1,3651 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"an" = (
+/obj/effect/mob_spawn/corpse/human/skeleton,
+/obj/effect/decal/cleanable/blood/old,
+/turf/open/floor/wood/ebonite,
+/area/ruin/shadow_template)
+"av" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 4
+	},
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 5
+	},
+/turf/open/misc/asteroid/moon,
+/area/icemoon/surface/outdoors/nospawn)
+"bh" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/wood/ebonite,
+/area/ruin/shadow_template)
+"bv" = (
+/obj/effect/turf_decal/siding/thinplating/dark{
+	dir = 6
+	},
+/turf/open/floor/wood/ebonite,
+/area/ruin/shadow_template)
+"bD" = (
+/obj/structure/bookcase/random/religion,
+/obj/item/book/granter/action/spell/blind{
+	pixel_y = 15;
+	pixel_x = -5
+	},
+/obj/item/book{
+	pixel_y = 15;
+	pixel_x = 4
+	},
+/turf/open/floor/wood/ebonite,
+/area/ruin/shadow_template)
+"bE" = (
+/obj/effect/turf_decal/siding/thinplating/dark{
+	dir = 8
+	},
+/turf/open/floor/wood/ebonite,
+/area/ruin/shadow_template)
+"ct" = (
+/obj/effect/turf_decal/siding/dark{
+	dir = 1
+	},
+/obj/effect/turf_decal/siding/dark,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/carpet/black,
+/area/ruin/shadow_template)
+"cD" = (
+/turf/open/floor/carpet/black,
+/area/ruin/shadow_template)
+"cZ" = (
+/obj/effect/turf_decal/siding/dark{
+	dir = 1
+	},
+/turf/open/floor/carpet/black,
+/area/ruin/shadow_template)
+"df" = (
+/obj/structure/bookcase/random/religion,
+/obj/item/book/manual/wiki{
+	pixel_y = 15;
+	pixel_x = -4
+	},
+/turf/open/floor/wood/ebonite,
+/area/ruin/shadow_template)
+"dj" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 1
+	},
+/obj/effect/turf_decal/weather/snow/corner,
+/turf/open/misc/asteroid/moon,
+/area/icemoon/surface/outdoors/nospawn)
+"do" = (
+/obj/effect/turf_decal/siding/dark{
+	dir = 5
+	},
+/turf/open/floor/carpet/black,
+/area/ruin/shadow_template)
+"ef" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 6
+	},
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 10
+	},
+/turf/open/misc/asteroid/moon,
+/area/icemoon/surface/outdoors/nospawn)
+"ep" = (
+/obj/effect/turf_decal/siding/dark/corner{
+	dir = 4
+	},
+/obj/effect/turf_decal/siding/dark/corner,
+/turf/open/floor/carpet/black,
+/area/ruin/shadow_template)
+"eA" = (
+/obj/structure/altar/dark,
+/turf/open/indestructible/stone,
+/area/icemoon/surface/outdoors/nospawn)
+"eN" = (
+/obj/effect/turf_decal/siding/dark{
+	dir = 8
+	},
+/obj/effect/turf_decal/siding/dark/corner{
+	dir = 1
+	},
+/turf/open/floor/carpet/black,
+/area/ruin/shadow_template)
+"fo" = (
+/obj/effect/decal/cleanable/blood/old{
+	icon_state = "bubblegumfoot"
+	},
+/turf/open/floor/wood/ebonite,
+/area/ruin/shadow_template)
+"fq" = (
+/obj/item/paper/crumpled/awaymissions/shadow_template,
+/turf/open/floor/wood/tile/ebonite,
+/area/ruin/shadow_template)
+"fs" = (
+/obj/effect/turf_decal/siding/dark,
+/obj/item/flashlight/flare/candle,
+/turf/open/floor/carpet/black,
+/area/ruin/shadow_template)
+"fA" = (
+/obj/item/reagent_containers/cup/glass/bottle/holywater{
+	pixel_y = -10
+	},
+/turf/open/floor/wood/tile/ebonite,
+/area/ruin/shadow_template)
+"gk" = (
+/obj/structure/table/wood/fancy/black,
+/turf/open/floor/wood/tile/ebonite,
+/area/ruin/shadow_template)
+"gD" = (
+/obj/item/kirbyplants/organic/plant7,
+/obj/item/paper/crumpled/awaymissions/shadow_template/two,
+/turf/open/floor/wood/tile/ebonite,
+/area/ruin/shadow_template)
+"gW" = (
+/obj/effect/turf_decal/siding/dark{
+	dir = 9
+	},
+/turf/open/floor/carpet/black,
+/area/ruin/shadow_template)
+"hp" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 10
+	},
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 5
+	},
+/turf/open/misc/asteroid/moon,
+/area/icemoon/surface/outdoors/nospawn)
+"hs" = (
+/obj/effect/turf_decal/siding/dark{
+	dir = 5
+	},
+/obj/effect/turf_decal/siding/dark{
+	dir = 6
+	},
+/obj/effect/turf_decal/siding/dark/corner{
+	dir = 4
+	},
+/obj/effect/turf_decal/siding/dark/corner,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/carpet/black,
+/area/ruin/shadow_template)
+"hx" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 9
+	},
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 5
+	},
+/turf/open/misc/asteroid/moon,
+/area/icemoon/surface/outdoors/nospawn)
+"iv" = (
+/obj/structure/railing{
+	dir = 4
+	},
+/obj/structure/platform/plastitanium,
+/turf/open/indestructible/stone,
+/area/icemoon/surface/outdoors/nospawn)
+"iC" = (
+/obj/structure/chair/pew/right,
+/turf/open/floor/wood/ebonite,
+/area/ruin/shadow_template)
+"iR" = (
+/obj/effect/turf_decal/siding/dark{
+	dir = 9
+	},
+/obj/effect/turf_decal/siding/dark/corner{
+	dir = 1
+	},
+/turf/open/floor/carpet/black,
+/area/ruin/shadow_template)
+"je" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 4
+	},
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 8
+	},
+/turf/open/misc/asteroid/moon,
+/area/icemoon/surface/outdoors/nospawn)
+"jo" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 6
+	},
+/turf/open/misc/asteroid/snow/icemoon,
+/area/icemoon/surface/outdoors/nospawn)
+"jG" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 10
+	},
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 6
+	},
+/turf/open/misc/asteroid/moon,
+/area/icemoon/surface/outdoors/nospawn)
+"jI" = (
+/obj/effect/turf_decal/siding/thinplating/dark/corner{
+	dir = 4
+	},
+/turf/open/floor/wood/ebonite,
+/area/ruin/shadow_template)
+"jK" = (
+/turf/closed/indestructible/resin,
+/area/ruin)
+"jS" = (
+/obj/structure/bookcase/random/religion,
+/turf/open/floor/wood/ebonite,
+/area/ruin/shadow_template)
+"kj" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 9
+	},
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 10
+	},
+/turf/open/misc/asteroid/moon,
+/area/icemoon/surface/outdoors/nospawn)
+"lo" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 5
+	},
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 6
+	},
+/turf/open/misc/asteroid/moon,
+/area/icemoon/surface/outdoors/nospawn)
+"lB" = (
+/obj/structure/altar/dark/tree,
+/turf/open/indestructible/stone,
+/area/icemoon/surface/outdoors/nospawn)
+"lY" = (
+/obj/effect/turf_decal/siding/dark{
+	dir = 1
+	},
+/obj/item/flashlight/flare/candle,
+/turf/open/floor/carpet/black,
+/area/ruin/shadow_template)
+"mr" = (
+/obj/structure/chair/pew/left,
+/obj/effect/turf_decal/siding/thinplating/dark/corner{
+	dir = 1
+	},
+/turf/open/floor/wood/ebonite,
+/area/ruin/shadow_template)
+"mD" = (
+/obj/structure/mineral_door/silver/dark,
+/turf/open/floor/wood/tile/ebonite,
+/area/ruin/shadow_template)
+"ni" = (
+/obj/effect/turf_decal/siding/dark{
+	dir = 4
+	},
+/obj/effect/turf_decal/siding/dark/corner{
+	dir = 4
+	},
+/obj/effect/decal/cleanable/blood/old{
+	icon_state = "gibbl3"
+	},
+/turf/open/floor/carpet/black,
+/area/ruin/shadow_template)
+"nr" = (
+/obj/effect/turf_decal/siding/dark{
+	dir = 5
+	},
+/obj/effect/turf_decal/siding/dark/corner{
+	dir = 4
+	},
+/turf/open/floor/carpet/black,
+/area/ruin/shadow_template)
+"nt" = (
+/obj/structure/flora/rock/pile/icy/style_random,
+/turf/open/misc/asteroid/snow/icemoon,
+/area/icemoon/surface/outdoors/nospawn)
+"nG" = (
+/obj/item/storage/fancy/candle_box{
+	pixel_x = -15;
+	pixel_y = -13
+	},
+/turf/open/floor/wood/tile/ebonite,
+/area/ruin/shadow_template)
+"nH" = (
+/obj/effect/decal/cleanable/blood/old{
+	icon_state = "bloodyhands_left"
+	},
+/obj/item/clothing/neck/crow,
+/turf/open/floor/wood/ebonite,
+/area/ruin/shadow_template)
+"nY" = (
+/obj/effect/turf_decal/siding/dark{
+	dir = 4
+	},
+/obj/effect/decal/cleanable/blood/old{
+	icon_state = "gibbl5"
+	},
+/turf/open/floor/carpet/black,
+/area/ruin/shadow_template)
+"nZ" = (
+/obj/effect/turf_decal/siding/dark{
+	dir = 6
+	},
+/turf/open/floor/carpet/black,
+/area/ruin/shadow_template)
+"of" = (
+/obj/effect/turf_decal/siding/thinplating/dark{
+	dir = 4
+	},
+/obj/effect/mob_spawn/corpse/human/skeleton,
+/turf/open/floor/wood/ebonite,
+/area/ruin/shadow_template)
+"oN" = (
+/obj/structure/platform/plastitanium,
+/obj/structure/railing{
+	dir = 4
+	},
+/obj/item/flashlight/flare/candle{
+	pixel_y = 5
+	},
+/turf/open/floor/wood/ebonite,
+/area/ruin/shadow_template)
+"pi" = (
+/obj/effect/decal/cleanable/blood/old{
+	icon_state = "bloodyhands_right"
+	},
+/obj/structure/platform/plastitanium,
+/turf/open/floor/wood/ebonite,
+/area/ruin/shadow_template)
+"pk" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 9
+	},
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 4
+	},
+/turf/open/misc/asteroid/moon,
+/area/icemoon/surface/outdoors/nospawn)
+"qb" = (
+/obj/item/lighter/skull,
+/turf/open/floor/wood/ebonite,
+/area/ruin/shadow_template)
+"qu" = (
+/obj/effect/turf_decal/weather/snow/corner,
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 1
+	},
+/turf/open/misc/asteroid/moon,
+/area/icemoon/surface/outdoors/nospawn)
+"qD" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/siding/thinplating/dark{
+	dir = 6
+	},
+/turf/open/floor/wood/ebonite,
+/area/ruin/shadow_template)
+"qW" = (
+/obj/effect/turf_decal/siding/dark{
+	dir = 1
+	},
+/obj/effect/turf_decal/siding/dark,
+/obj/item/clothing/gloves/color/white,
+/turf/open/floor/carpet/black,
+/area/ruin/shadow_template)
+"rl" = (
+/obj/structure/glowshroom/shadowshroom/stat,
+/turf/open/floor/grass/shadowgrass,
+/area/ruin/shadow_template)
+"rr" = (
+/obj/effect/turf_decal/siding/dark/corner{
+	dir = 4
+	},
+/turf/open/floor/carpet/black,
+/area/ruin/shadow_template)
+"rt" = (
+/obj/effect/turf_decal/siding/dark{
+	dir = 8
+	},
+/obj/effect/decal/cleanable/blood/old{
+	icon_state = "gibbl4"
+	},
+/turf/open/floor/carpet/black,
+/area/ruin/shadow_template)
+"ry" = (
+/obj/item/clothing/shoes/winterboots,
+/turf/open/floor/carpet/black,
+/area/ruin/shadow_template)
+"rD" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 6
+	},
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 5
+	},
+/turf/open/misc/asteroid/moon,
+/area/icemoon/surface/outdoors/nospawn)
+"rI" = (
+/obj/effect/decal/cleanable/blood/old{
+	icon_state = "floor5"
+	},
+/turf/open/floor/wood/tile/ebonite,
+/area/ruin/shadow_template)
+"rJ" = (
+/obj/item/clothing/head/helmet/chaplain,
+/turf/open/floor/wood/tile/ebonite,
+/area/ruin/shadow_template)
+"so" = (
+/obj/effect/turf_decal/siding/thinplating/dark/corner,
+/turf/open/floor/wood/ebonite,
+/area/ruin/shadow_template)
+"td" = (
+/turf/open/floor/grass/shadowgrass,
+/area/ruin/shadow_template)
+"ug" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/siding/thinplating/dark{
+	dir = 8
+	},
+/turf/open/floor/wood/ebonite,
+/area/ruin/shadow_template)
+"uD" = (
+/obj/structure/glowshroom/shadowshroom/stat,
+/turf/open/floor/grass/shadowgrass,
+/area/icemoon/surface/outdoors/nospawn)
+"vm" = (
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 9
+	},
+/turf/open/indestructible/stone,
+/area/icemoon/surface/outdoors/nospawn)
+"wj" = (
+/obj/effect/turf_decal/siding/thinplating/dark{
+	dir = 10
+	},
+/turf/open/floor/wood/ebonite,
+/area/ruin/shadow_template)
+"wq" = (
+/obj/structure/platform/plastitanium,
+/obj/structure/railing{
+	pixel_y = 5
+	},
+/obj/item/flashlight/flare/candle{
+	pixel_y = 5
+	},
+/turf/open/floor/wood/ebonite,
+/area/ruin/shadow_template)
+"wE" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/item/book/bible{
+	pixel_y = -15;
+	pixel_x = -10
+	},
+/turf/open/floor/wood/tile/ebonite,
+/area/ruin/shadow_template)
+"wG" = (
+/obj/effect/turf_decal/siding/dark{
+	dir = 5
+	},
+/obj/effect/turf_decal/siding/dark{
+	dir = 6
+	},
+/obj/effect/turf_decal/siding/dark/corner{
+	dir = 4
+	},
+/obj/effect/turf_decal/siding/dark/corner,
+/turf/open/floor/carpet/black,
+/area/ruin/shadow_template)
+"wZ" = (
+/turf/open/floor/wood/tile/ebonite,
+/area/ruin/shadow_template)
+"xk" = (
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 1
+	},
+/turf/open/indestructible/stone,
+/area/icemoon/surface/outdoors/nospawn)
+"xu" = (
+/obj/structure/chair/pew/left,
+/turf/open/floor/wood/ebonite,
+/area/ruin/shadow_template)
+"yi" = (
+/obj/structure/shadowling_cocoon,
+/turf/open/floor/grass/shadowgrass,
+/area/ruin/shadow_template)
+"yp" = (
+/obj/effect/turf_decal/siding/dark{
+	dir = 4
+	},
+/obj/effect/decal/cleanable/dirt,
+/obj/item/clothing/head/costume/ushanka,
+/turf/open/floor/carpet/black,
+/area/ruin/shadow_template)
+"zH" = (
+/turf/closed/indestructible/resin,
+/area/ruin/shadow_template)
+"zQ" = (
+/obj/structure/glowshroom/shadowshroom,
+/turf/open/floor/grass/shadowgrass,
+/area/icemoon/surface/outdoors/nospawn)
+"zU" = (
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/carpet/black,
+/area/ruin/shadow_template)
+"Ah" = (
+/turf/open/floor/wood/ebonite,
+/area/ruin/shadow_template)
+"Al" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/siding/thinplating/dark{
+	dir = 4
+	},
+/turf/open/floor/wood/ebonite,
+/area/ruin/shadow_template)
+"Ap" = (
+/obj/structure/railing{
+	dir = 4
+	},
+/turf/open/floor/wood/tile/ebonite,
+/area/ruin/shadow_template)
+"Aq" = (
+/obj/effect/turf_decal/siding/dark{
+	dir = 6
+	},
+/obj/effect/turf_decal/siding/dark/corner,
+/turf/open/floor/carpet/black,
+/area/ruin/shadow_template)
+"Ay" = (
+/obj/effect/turf_decal/siding/thinplating/dark{
+	dir = 1
+	},
+/obj/structure/platform/plastitanium,
+/turf/open/floor/wood/ebonite,
+/area/ruin/shadow_template)
+"AU" = (
+/obj/effect/turf_decal/siding/thinplating/dark{
+	dir = 1
+	},
+/turf/open/floor/wood/ebonite,
+/area/ruin/shadow_template)
+"AX" = (
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 4
+	},
+/turf/open/indestructible/stone,
+/area/icemoon/surface/outdoors/nospawn)
+"Bb" = (
+/obj/structure/bookcase/random/religion,
+/obj/item/soulstone{
+	pixel_y = 15
+	},
+/turf/open/floor/wood/ebonite,
+/area/ruin/shadow_template)
+"BC" = (
+/obj/effect/turf_decal/siding/thinplating/dark{
+	dir = 4
+	},
+/turf/open/floor/wood/ebonite,
+/area/ruin/shadow_template)
+"BL" = (
+/obj/effect/turf_decal/weather/snow/corner,
+/turf/open/misc/asteroid/moon,
+/area/icemoon/surface/outdoors/nospawn)
+"BV" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 9
+	},
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 6
+	},
+/turf/open/misc/asteroid/moon,
+/area/icemoon/surface/outdoors/nospawn)
+"BW" = (
+/obj/item/paper/crumpled/awaymissions/shadow_template/one,
+/turf/open/floor/carpet/black,
+/area/ruin/shadow_template)
+"CN" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 9
+	},
+/obj/effect/turf_decal/weather/snow/corner,
+/turf/open/misc/asteroid/moon,
+/area/icemoon/surface/outdoors/nospawn)
+"DU" = (
+/obj/effect/turf_decal/siding/thinplating_new/dark,
+/turf/open/indestructible/stone,
+/area/icemoon/surface/outdoors/nospawn)
+"Ea" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 6
+	},
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 9
+	},
+/turf/open/misc/asteroid/moon,
+/area/icemoon/surface/outdoors/nospawn)
+"Eo" = (
+/obj/structure/railing{
+	dir = 8
+	},
+/obj/structure/platform/plastitanium,
+/turf/open/indestructible/stone,
+/area/icemoon/surface/outdoors/nospawn)
+"Ey" = (
+/turf/closed/indestructible/opsglass,
+/area/ruin/shadow_template)
+"EH" = (
+/obj/effect/mob_spawn/corpse/human/skeleton,
+/turf/open/floor/carpet/black,
+/area/ruin/shadow_template)
+"FU" = (
+/obj/item/kirbyplants/organic/plant9,
+/turf/open/floor/wood/tile/ebonite,
+/area/ruin/shadow_template)
+"Gj" = (
+/obj/effect/decal/cleanable/blood/old{
+	icon_state = "floor4"
+	},
+/turf/open/floor/wood/ebonite,
+/area/ruin/shadow_template)
+"GM" = (
+/obj/effect/turf_decal/siding/dark{
+	dir = 8
+	},
+/turf/open/floor/carpet/black,
+/area/ruin/shadow_template)
+"HM" = (
+/obj/effect/turf_decal/siding/thinplating/dark,
+/turf/open/floor/wood/ebonite,
+/area/ruin/shadow_template)
+"HP" = (
+/obj/item/flashlight/flare/candle,
+/turf/open/floor/carpet/black,
+/area/ruin/shadow_template)
+"HV" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/siding/thinplating/dark{
+	dir = 1
+	},
+/turf/open/floor/wood/ebonite,
+/area/ruin/shadow_template)
+"Iw" = (
+/obj/structure/platform/plastitanium,
+/obj/structure/railing{
+	dir = 1
+	},
+/obj/item/flashlight/flare/candle{
+	pixel_y = 5
+	},
+/turf/open/floor/wood/ebonite,
+/area/ruin/shadow_template)
+"IC" = (
+/obj/effect/turf_decal/siding/dark{
+	dir = 4
+	},
+/turf/open/floor/carpet/black,
+/area/ruin/shadow_template)
+"IH" = (
+/obj/structure/displaycase/trophy{
+	pixel_y = 10;
+	pixel_x = -1
+	},
+/turf/open/floor/wood/ebonite,
+/area/ruin/shadow_template)
+"Jh" = (
+/obj/effect/turf_decal/siding/thinplating/dark{
+	dir = 9
+	},
+/turf/open/floor/wood/ebonite,
+/area/ruin/shadow_template)
+"Jn" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 10
+	},
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 9
+	},
+/turf/open/misc/asteroid/moon,
+/area/icemoon/surface/outdoors/nospawn)
+"JC" = (
+/obj/effect/turf_decal/siding/dark{
+	dir = 4
+	},
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/carpet/black,
+/area/ruin/shadow_template)
+"Ka" = (
+/obj/effect/turf_decal/siding/dark,
+/mob/living/basic/faithless,
+/turf/open/floor/carpet/black,
+/area/ruin/shadow_template)
+"Ko" = (
+/obj/structure/platform/plastitanium,
+/turf/open/floor/wood/tile/ebonite,
+/area/ruin/shadow_template)
+"Kx" = (
+/obj/structure/platform/plastitanium,
+/turf/open/floor/wood/ebonite,
+/area/ruin/shadow_template)
+"KJ" = (
+/obj/effect/turf_decal/siding/dark,
+/turf/open/floor/carpet/black,
+/area/ruin/shadow_template)
+"KO" = (
+/turf/open/misc/asteroid/moon,
+/area/icemoon/surface/outdoors/nospawn)
+"KU" = (
+/obj/effect/turf_decal/siding/dark{
+	dir = 9
+	},
+/obj/effect/turf_decal/siding/dark{
+	dir = 10
+	},
+/obj/effect/turf_decal/siding/dark/corner{
+	dir = 1
+	},
+/obj/effect/turf_decal/siding/dark/corner{
+	dir = 8
+	},
+/turf/open/floor/carpet/black,
+/area/ruin/shadow_template)
+"Lh" = (
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 6
+	},
+/turf/open/indestructible/stone,
+/area/icemoon/surface/outdoors/nospawn)
+"Lz" = (
+/obj/structure/bookcase/random/religion,
+/obj/item/reagent_containers/cup/glass/trophy/gold_cup{
+	pixel_y = 28
+	},
+/turf/open/floor/wood/ebonite,
+/area/ruin/shadow_template)
+"LM" = (
+/obj/structure/chair/pew/right,
+/turf/open/floor/grass/shadowgrass,
+/area/ruin/shadow_template)
+"LX" = (
+/obj/structure/railing{
+	dir = 8
+	},
+/obj/structure/glowshroom/shadowshroom/stat,
+/turf/open/floor/grass/shadowgrass,
+/area/ruin/shadow_template)
+"Mj" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 8
+	},
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 4
+	},
+/turf/open/misc/asteroid/moon,
+/area/icemoon/surface/outdoors/nospawn)
+"ML" = (
+/obj/structure/altar/dark/two,
+/turf/open/indestructible/stone,
+/area/icemoon/surface/outdoors/nospawn)
+"MM" = (
+/turf/open/misc/asteroid/snow/icemoon,
+/area/icemoon/surface/outdoors/nospawn)
+"MU" = (
+/obj/structure/mineral_door/silver,
+/turf/open/floor/wood/tile/ebonite,
+/area/ruin/shadow_template)
+"Ng" = (
+/obj/effect/turf_decal/siding/thinplating/dark{
+	dir = 5
+	},
+/turf/open/floor/wood/ebonite,
+/area/ruin/shadow_template)
+"Nm" = (
+/turf/closed/indestructible/iron{
+	opacity = 1
+	},
+/area/ruin/shadow_template)
+"Nu" = (
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/wood/tile/ebonite,
+/area/ruin/shadow_template)
+"Oe" = (
+/obj/structure/chair/pew/right,
+/obj/effect/turf_decal/siding/thinplating/dark/corner{
+	dir = 4
+	},
+/turf/open/floor/wood/ebonite,
+/area/ruin/shadow_template)
+"Og" = (
+/obj/effect/turf_decal/siding/thinplating/dark/corner{
+	dir = 8
+	},
+/turf/open/floor/wood/ebonite,
+/area/ruin/shadow_template)
+"Ox" = (
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 10
+	},
+/turf/open/indestructible/stone,
+/area/icemoon/surface/outdoors/nospawn)
+"Oz" = (
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 5
+	},
+/turf/open/indestructible/stone,
+/area/icemoon/surface/outdoors/nospawn)
+"OJ" = (
+/obj/effect/turf_decal/siding/dark{
+	dir = 1
+	},
+/obj/effect/turf_decal/siding/dark,
+/turf/open/floor/carpet/black,
+/area/ruin/shadow_template)
+"Pj" = (
+/obj/effect/turf_decal/siding/dark/corner{
+	dir = 1
+	},
+/turf/open/floor/carpet/black,
+/area/ruin/shadow_template)
+"Pm" = (
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 8
+	},
+/turf/open/indestructible/stone,
+/area/icemoon/surface/outdoors/nospawn)
+"Pp" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 10
+	},
+/turf/open/misc/asteroid/moon,
+/area/icemoon/surface/outdoors/nospawn)
+"Ps" = (
+/obj/structure/table/wood/fancy/black,
+/obj/item/clothing/suit/armor/vest/cuirass{
+	pixel_y = 5
+	},
+/turf/open/floor/carpet/black,
+/area/ruin/shadow_template)
+"PD" = (
+/obj/effect/turf_decal/siding/dark/corner{
+	dir = 8
+	},
+/turf/open/floor/carpet/black,
+/area/ruin/shadow_template)
+"PN" = (
+/obj/structure/table/wood/fancy/black,
+/obj/item/book_of_babel{
+	pixel_y = 5
+	},
+/obj/item/clothing/accessory/gloves_accessory/ring{
+	pixel_y = 5
+	},
+/turf/open/floor/wood/ebonite,
+/area/ruin/shadow_template)
+"Qg" = (
+/obj/effect/turf_decal/siding/dark{
+	dir = 8
+	},
+/mob/living/basic/faithless,
+/turf/open/floor/carpet/black,
+/area/ruin/shadow_template)
+"Qm" = (
+/obj/effect/turf_decal/siding/dark{
+	dir = 10
+	},
+/obj/effect/turf_decal/siding/dark/corner{
+	dir = 8
+	},
+/turf/open/floor/carpet/black,
+/area/ruin/shadow_template)
+"QL" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 4
+	},
+/turf/open/misc/asteroid/moon,
+/area/icemoon/surface/outdoors/nospawn)
+"Rg" = (
+/mob/living/basic/faithless,
+/turf/open/floor/wood/ebonite,
+/area/ruin/shadow_template)
+"Sa" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/siding/thinplating/dark{
+	dir = 1
+	},
+/obj/structure/platform/plastitanium,
+/turf/open/floor/wood/ebonite,
+/area/ruin/shadow_template)
+"SB" = (
+/obj/effect/turf_decal/siding/thinplating/dark{
+	dir = 8
+	},
+/obj/structure/platform/plastitanium,
+/turf/open/floor/wood/ebonite,
+/area/ruin/shadow_template)
+"SZ" = (
+/turf/open/floor/iron/stairs/old{
+	dir = 1
+	},
+/area/ruin/shadow_template)
+"Tg" = (
+/obj/structure/chair/pew,
+/turf/open/floor/wood/ebonite,
+/area/ruin/shadow_template)
+"Tn" = (
+/obj/structure/chair/pew,
+/turf/open/floor/grass/shadowgrass,
+/area/ruin/shadow_template)
+"TD" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 5
+	},
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 9
+	},
+/turf/open/misc/asteroid/moon,
+/area/icemoon/surface/outdoors/nospawn)
+"TE" = (
+/turf/open/floor/grass/shadowgrass,
+/area/icemoon/surface/outdoors/nospawn)
+"TJ" = (
+/obj/effect/turf_decal/siding/dark{
+	dir = 10
+	},
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/turf_decal/siding/dark/corner{
+	dir = 8
+	},
+/turf/open/floor/carpet/black,
+/area/ruin/shadow_template)
+"TK" = (
+/obj/structure/railing{
+	dir = 8
+	},
+/turf/open/floor/wood/tile/ebonite,
+/area/ruin/shadow_template)
+"Ui" = (
+/obj/structure/altar,
+/obj/item/flashlight/flare/candle,
+/turf/open/floor/carpet/black,
+/area/ruin/shadow_template)
+"UX" = (
+/turf/open/indestructible/stone,
+/area/icemoon/surface/outdoors/nospawn)
+"Vs" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 1
+	},
+/turf/open/misc/asteroid/moon,
+/area/icemoon/surface/outdoors/nospawn)
+"Wj" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 5
+	},
+/turf/open/misc/asteroid/moon,
+/area/icemoon/surface/outdoors/nospawn)
+"Wq" = (
+/obj/effect/turf_decal/siding/thinplating/dark{
+	dir = 5
+	},
+/obj/structure/platform/plastitanium,
+/turf/open/floor/wood/ebonite,
+/area/ruin/shadow_template)
+"Ws" = (
+/obj/effect/turf_decal/siding/thinplating/dark/corner{
+	dir = 1
+	},
+/turf/open/floor/wood/ebonite,
+/area/ruin/shadow_template)
+"Wx" = (
+/obj/item/kirbyplants/organic/plant7,
+/turf/open/floor/wood/tile/ebonite,
+/area/ruin/shadow_template)
+"XQ" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 6
+	},
+/turf/open/misc/asteroid/moon,
+/area/icemoon/surface/outdoors/nospawn)
+"Yh" = (
+/turf/open/floor/iron/stairs/old{
+	dir = 1
+	},
+/area/icemoon/surface/outdoors/nospawn)
+"YR" = (
+/obj/structure/platform/plastitanium,
+/obj/structure/railing{
+	pixel_y = 5;
+	dir = 8
+	},
+/obj/item/flashlight/flare/candle{
+	pixel_y = 5
+	},
+/turf/open/floor/wood/ebonite,
+/area/ruin/shadow_template)
+"Zd" = (
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/wood/ebonite,
+/area/ruin/shadow_template)
+"Zg" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 9
+	},
+/turf/open/misc/asteroid/moon,
+/area/icemoon/surface/outdoors/nospawn)
+"Zz" = (
+/obj/effect/turf_decal/siding/dark{
+	dir = 6
+	},
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/turf_decal/siding/dark/corner,
+/turf/open/floor/carpet/black,
+/area/ruin/shadow_template)
+"ZN" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 8
+	},
+/turf/open/misc/asteroid/moon,
+/area/icemoon/surface/outdoors/nospawn)
+"ZR" = (
+/obj/effect/decal/cleanable/blood/old{
+	icon_state = "gib5"
+	},
+/turf/open/floor/wood/ebonite,
+/area/ruin/shadow_template)
+"ZY" = (
+/turf/open/indestructible/plating,
+/area/ruin/shadow_template)
+
+(1,1,1) = {"
+MM
+nt
+TE
+uD
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+TE
+TE
+uD
+MM
+MM
+MM
+MM
+MM
+MM
+TE
+uD
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+"}
+(2,1,1) = {"
+uD
+TE
+vm
+KO
+Ox
+MM
+MM
+MM
+MM
+MM
+TE
+uD
+MM
+nt
+MM
+MM
+MM
+MM
+MM
+MM
+nt
+MM
+MM
+MM
+uD
+TE
+uD
+TE
+TE
+MM
+MM
+MM
+zQ
+TE
+TE
+TE
+TE
+MM
+MM
+nt
+MM
+MM
+MM
+MM
+uD
+uD
+TE
+MM
+MM
+MM
+"}
+(3,1,1) = {"
+MM
+uD
+KO
+UX
+KO
+Pp
+MM
+nt
+MM
+uD
+TE
+TE
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+TE
+uD
+MM
+MM
+MM
+MM
+TE
+uD
+TE
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+TE
+TE
+TE
+MM
+MM
+"}
+(4,1,1) = {"
+MM
+Vs
+KO
+eA
+KO
+MM
+MM
+MM
+MM
+TE
+uD
+MM
+MM
+MM
+kj
+MM
+MM
+hx
+Pp
+MM
+MM
+MM
+MM
+MM
+MM
+kj
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+kj
+MM
+MM
+MM
+MM
+MM
+TE
+uD
+MM
+MM
+"}
+(5,1,1) = {"
+MM
+MM
+UX
+UX
+DU
+BL
+MM
+Ea
+MM
+MM
+MM
+MM
+pk
+je
+XQ
+MM
+MM
+MM
+rD
+MM
+hp
+MM
+MM
+TD
+je
+XQ
+MM
+Ea
+MM
+MM
+hx
+ef
+MM
+MM
+MM
+MM
+TD
+Mj
+Mj
+Mj
+QL
+ZN
+Pp
+MM
+MM
+MM
+MM
+TE
+MM
+MM
+"}
+(6,1,1) = {"
+MM
+KO
+Oz
+AX
+KO
+uD
+MM
+MM
+MM
+MM
+MM
+BV
+MM
+MM
+MM
+MM
+nt
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+BV
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+Wj
+BL
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+"}
+(7,1,1) = {"
+MM
+MM
+av
+KO
+TE
+TE
+uD
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+nt
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+Wj
+ef
+MM
+MM
+MM
+MM
+MM
+MM
+"}
+(8,1,1) = {"
+nt
+MM
+MM
+MM
+MM
+TE
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+TE
+uD
+MM
+MM
+nt
+MM
+MM
+MM
+MM
+MM
+MM
+nt
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+nt
+"}
+(9,1,1) = {"
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+nt
+MM
+MM
+TE
+uD
+UX
+UX
+TE
+TE
+MM
+MM
+MM
+UX
+UX
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+TE
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+"}
+(10,1,1) = {"
+MM
+MM
+Jn
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+TE
+UX
+zH
+UX
+UX
+uD
+TE
+MM
+UX
+Nm
+UX
+UX
+uD
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+TE
+uD
+TE
+MM
+MM
+nt
+MM
+MM
+MM
+MM
+MM
+MM
+Jn
+MM
+MM
+MM
+"}
+(11,1,1) = {"
+MM
+nt
+dj
+MM
+nt
+MM
+MM
+MM
+TE
+uD
+UX
+MM
+MM
+MM
+zH
+Nm
+Nm
+Ey
+rl
+td
+zH
+Nm
+Nm
+Nm
+UX
+uD
+TE
+MM
+MM
+UX
+UX
+UX
+MM
+MM
+TE
+UX
+UX
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+Zg
+BL
+MM
+MM
+MM
+"}
+(12,1,1) = {"
+MM
+MM
+rD
+MM
+MM
+MM
+MM
+TE
+TE
+UX
+Nm
+MM
+nt
+MM
+MM
+Nm
+rl
+td
+td
+td
+rl
+wZ
+Nm
+UX
+uD
+TE
+TE
+uD
+UX
+UX
+Nm
+UX
+UX
+MM
+uD
+Nm
+UX
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+Wj
+BL
+MM
+MM
+MM
+"}
+(13,1,1) = {"
+MM
+BV
+MM
+MM
+MM
+MM
+MM
+uD
+UX
+UX
+zH
+Nm
+ZY
+ZY
+zH
+Nm
+Nu
+td
+td
+td
+wZ
+wZ
+Nm
+Nm
+zH
+Ey
+zH
+Nm
+Nm
+UX
+Nm
+zH
+zH
+zH
+zH
+zH
+UX
+UX
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+qu
+MM
+MM
+uD
+"}
+(14,1,1) = {"
+MM
+jo
+Ea
+MM
+MM
+MM
+MM
+MM
+zH
+Nm
+Nm
+wq
+Nu
+wZ
+wZ
+wZ
+wZ
+AU
+rl
+Ah
+wj
+wZ
+wZ
+Wx
+cZ
+Ps
+KJ
+gD
+Nm
+zH
+zH
+Wx
+gk
+gk
+Wx
+zH
+zH
+zH
+MM
+MM
+MM
+uD
+MM
+MM
+nt
+MM
+lo
+MM
+uD
+TE
+"}
+(15,1,1) = {"
+uD
+MM
+MM
+BV
+MM
+MM
+MM
+uD
+UX
+Nm
+oN
+IH
+wZ
+Jh
+bE
+bE
+bE
+Ws
+Ah
+Ah
+Og
+ug
+wj
+wZ
+do
+IC
+nZ
+wE
+df
+zH
+wZ
+wZ
+wZ
+wZ
+wZ
+wZ
+zH
+uD
+MM
+MM
+uD
+TE
+TE
+MM
+MM
+MM
+MM
+MM
+TE
+uD
+"}
+(16,1,1) = {"
+TE
+TE
+MM
+MM
+MM
+MM
+uD
+TE
+UX
+Nm
+wZ
+wZ
+wZ
+Sa
+Ah
+Ah
+pi
+Zd
+fo
+Zd
+ZR
+Kx
+HM
+wZ
+Nu
+rl
+wZ
+fA
+jS
+zH
+bE
+bE
+bE
+bE
+wj
+wZ
+zH
+uD
+TE
+UX
+UX
+TE
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+uD
+"}
+(17,1,1) = {"
+TE
+uD
+MM
+MM
+MM
+MM
+MM
+TE
+uD
+Ey
+rl
+wZ
+Jh
+mr
+KU
+nH
+xu
+KU
+Ah
+Ah
+Ah
+Ah
+Og
+bE
+bE
+td
+rl
+wZ
+Iw
+Nm
+Ah
+iR
+GM
+Qm
+HM
+wZ
+zH
+TE
+UX
+Nm
+UX
+TE
+uD
+MM
+MM
+kj
+MM
+MM
+MM
+MM
+"}
+(18,1,1) = {"
+uD
+MM
+MM
+Ea
+MM
+MM
+MM
+TE
+TE
+Ey
+td
+rl
+Ah
+Tg
+qW
+an
+Tg
+OJ
+Rg
+Ah
+Ah
+Ah
+Ah
+Zd
+td
+td
+zH
+zH
+Nm
+Nm
+Ah
+cZ
+cD
+KJ
+HM
+wZ
+zH
+zH
+zH
+zH
+zH
+UX
+TE
+MM
+MM
+Wj
+Pp
+MM
+MM
+MM
+"}
+(19,1,1) = {"
+MM
+MM
+CN
+MM
+MM
+uD
+MM
+uD
+UX
+Ey
+rl
+td
+Ah
+Tg
+OJ
+qb
+Tg
+OJ
+Ah
+Ah
+Ah
+Ah
+Ah
+rl
+rl
+zH
+zH
+rl
+rl
+td
+Ah
+cZ
+cD
+KJ
+HM
+wZ
+rl
+yi
+yi
+zH
+MM
+MM
+MM
+MM
+MM
+MM
+Vs
+ef
+MM
+MM
+"}
+(20,1,1) = {"
+MM
+MM
+dj
+MM
+TE
+UX
+UX
+UX
+UX
+Nm
+Kx
+wZ
+AU
+Tg
+ct
+Ah
+Tg
+OJ
+Ah
+bh
+Ah
+Ah
+HM
+wZ
+rl
+Nm
+rl
+td
+td
+Ah
+Ah
+cZ
+cD
+KJ
+Og
+bE
+Ah
+td
+yi
+Nm
+MM
+MM
+nt
+MM
+MM
+MM
+lo
+MM
+MM
+MM
+"}
+(21,1,1) = {"
+MM
+TD
+XQ
+MM
+uD
+UX
+Nm
+UX
+zH
+Nm
+rl
+Nu
+AU
+Tg
+OJ
+Ah
+Tg
+OJ
+Ah
+Ah
+Ah
+Ah
+HM
+wZ
+Ah
+Nm
+td
+td
+Ah
+Ah
+Ah
+cZ
+cD
+KJ
+Ah
+Ah
+Ah
+rl
+yi
+Nm
+UX
+UX
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+"}
+(22,1,1) = {"
+MM
+MM
+MM
+nt
+MM
+Nm
+zH
+zH
+Nm
+rl
+td
+SB
+Ws
+Tn
+OJ
+Ah
+Tg
+OJ
+bh
+iR
+GM
+TJ
+HM
+wZ
+Ko
+Nm
+rl
+wZ
+AU
+Ah
+Ah
+cZ
+cD
+KJ
+Ah
+so
+BC
+td
+zH
+zH
+Nm
+UX
+MM
+MM
+MM
+TD
+Pp
+MM
+MM
+MM
+"}
+(23,1,1) = {"
+MM
+hx
+Pp
+MM
+MM
+iv
+Nm
+Nu
+rl
+td
+Ah
+Ah
+rl
+LM
+OJ
+td
+iC
+OJ
+Ah
+lY
+cD
+KJ
+HM
+wZ
+Ap
+zH
+wZ
+wZ
+AU
+Ah
+Ah
+cZ
+cD
+KJ
+Ah
+HM
+wZ
+Ap
+zH
+UX
+UX
+UX
+MM
+MM
+MM
+MM
+qu
+MM
+MM
+MM
+"}
+(24,1,1) = {"
+MM
+MM
+Vs
+Pp
+MM
+Yh
+MU
+eN
+GM
+rt
+GM
+Qg
+td
+td
+td
+rl
+td
+PD
+GM
+Pj
+BW
+Ka
+Og
+bE
+SZ
+mD
+iR
+GM
+GM
+GM
+GM
+Pj
+cD
+KJ
+Ah
+Ah
+SZ
+Ko
+Nm
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+rD
+MM
+nt
+MM
+"}
+(25,1,1) = {"
+nt
+MM
+Vs
+QL
+Mj
+Yh
+MU
+cD
+EH
+ry
+zU
+cD
+cD
+td
+td
+cD
+cD
+HP
+HP
+HP
+Ui
+fs
+Ah
+Ah
+SZ
+mD
+cZ
+cD
+cD
+cD
+cD
+cD
+cD
+KJ
+Ah
+Ah
+SZ
+Ko
+Nm
+MM
+MM
+MM
+TE
+uD
+MM
+MM
+MM
+MM
+MM
+MM
+"}
+(26,1,1) = {"
+MM
+Zg
+XQ
+MM
+MM
+Yh
+MU
+ni
+yp
+IC
+IC
+nY
+td
+rl
+td
+td
+JC
+ep
+IC
+rr
+cD
+KJ
+so
+BC
+SZ
+mD
+nr
+IC
+IC
+IC
+IC
+rr
+cD
+KJ
+Ah
+Ah
+SZ
+Ko
+Nm
+UX
+MM
+uD
+TE
+TE
+TE
+MM
+MM
+MM
+uD
+MM
+"}
+(27,1,1) = {"
+MM
+rD
+MM
+MM
+MM
+Eo
+Nm
+wZ
+wZ
+wZ
+Ng
+jI
+rl
+xu
+cZ
+rl
+xu
+OJ
+Ah
+lY
+cD
+KJ
+HM
+wZ
+TK
+zH
+wZ
+wZ
+AU
+Ah
+Ah
+cZ
+cD
+KJ
+Ah
+HM
+wZ
+LX
+zH
+UX
+UX
+UX
+TE
+TE
+MM
+MM
+MM
+uD
+TE
+MM
+"}
+(28,1,1) = {"
+MM
+MM
+MM
+nt
+MM
+zH
+Nm
+Nm
+Nm
+Nu
+wZ
+Wq
+jI
+Tg
+OJ
+Ah
+Tg
+OJ
+Ah
+nr
+IC
+Zz
+HM
+wZ
+Ko
+Nm
+bD
+wZ
+AU
+Ah
+Ah
+cZ
+cD
+KJ
+Ah
+Ah
+td
+td
+zH
+Nm
+zH
+UX
+TE
+MM
+MM
+MM
+MM
+MM
+TE
+MM
+"}
+(29,1,1) = {"
+nt
+MM
+MM
+MM
+uD
+UX
+zH
+UX
+zH
+Nm
+wZ
+wZ
+HV
+Tg
+OJ
+Ah
+Tg
+OJ
+bh
+Ah
+Ah
+Ah
+HM
+wZ
+Ah
+Nm
+Bb
+wZ
+AU
+Ah
+Ah
+cZ
+cD
+KJ
+Ah
+Ah
+Ah
+rl
+yi
+zH
+UX
+UX
+TE
+MM
+MM
+MM
+Jn
+MM
+uD
+TE
+"}
+(30,1,1) = {"
+MM
+Jn
+MM
+MM
+TE
+UX
+UX
+UX
+UX
+Nm
+Kx
+wZ
+AU
+Tg
+OJ
+Zd
+Tg
+OJ
+Ah
+Ah
+Ah
+Ah
+HM
+wZ
+rl
+zH
+FU
+wZ
+Ng
+BC
+BC
+cZ
+cD
+KJ
+so
+BC
+Ah
+td
+yi
+zH
+MM
+TE
+uD
+TE
+MM
+Zg
+XQ
+MM
+MM
+MM
+"}
+(31,1,1) = {"
+MM
+Wj
+Pp
+MM
+MM
+TE
+uD
+MM
+UX
+Ey
+rl
+wZ
+AU
+Tg
+OJ
+Ah
+Tg
+OJ
+Ah
+Ah
+Zd
+Ah
+Ah
+rl
+td
+zH
+Nm
+wZ
+wZ
+wZ
+wZ
+cZ
+cD
+KJ
+HM
+wZ
+rl
+yi
+yi
+zH
+MM
+MM
+TE
+MM
+MM
+qu
+MM
+MM
+MM
+MM
+"}
+(32,1,1) = {"
+MM
+MM
+qu
+MM
+MM
+MM
+MM
+MM
+uD
+td
+td
+td
+Gj
+Tg
+OJ
+Rg
+Tg
+ct
+Ah
+Ah
+Ah
+Ah
+Ah
+Ah
+td
+rl
+Nm
+Nm
+zH
+zH
+wZ
+cZ
+cD
+KJ
+HM
+wZ
+zH
+zH
+zH
+zH
+Nm
+MM
+MM
+MM
+MM
+qu
+MM
+MM
+MM
+MM
+"}
+(33,1,1) = {"
+zQ
+MM
+qu
+MM
+nt
+MM
+MM
+TE
+TE
+Ey
+td
+rl
+of
+Oe
+hs
+Ah
+iC
+wG
+Ah
+Ah
+Ah
+Ah
+so
+Al
+BC
+td
+rl
+Nu
+Iw
+Nm
+wZ
+nr
+td
+Aq
+Ah
+rl
+zH
+MM
+MM
+Nm
+MM
+MM
+MM
+MM
+MM
+qu
+MM
+MM
+MM
+MM
+"}
+(34,1,1) = {"
+zQ
+MM
+rD
+MM
+MM
+MM
+TE
+uD
+UX
+zH
+rl
+rI
+rJ
+Ay
+Ah
+Ah
+Kx
+Ah
+Ah
+Ah
+Ah
+Kx
+HM
+wZ
+wZ
+td
+wZ
+wZ
+Lz
+Nm
+wZ
+td
+rl
+wZ
+td
+td
+Nm
+uD
+MM
+MM
+MM
+MM
+nt
+MM
+TD
+XQ
+MM
+MM
+MM
+MM
+"}
+(35,1,1) = {"
+TE
+MM
+MM
+MM
+MM
+MM
+uD
+UX
+UX
+Nm
+YR
+IH
+fq
+Ng
+Ah
+td
+rl
+Ah
+Ah
+Ah
+so
+BC
+bv
+wZ
+gW
+GM
+rl
+nG
+jS
+zH
+rl
+td
+td
+td
+td
+rl
+Nm
+uD
+TE
+TE
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+"}
+(36,1,1) = {"
+MM
+MM
+MM
+Ea
+MM
+MM
+MM
+UX
+Nm
+zH
+zH
+wq
+wZ
+wZ
+rl
+rl
+td
+td
+BC
+BC
+qD
+wZ
+wZ
+FU
+cZ
+PN
+KJ
+FU
+Nm
+zH
+zH
+rl
+td
+rl
+rl
+zH
+Nm
+jK
+uD
+TE
+TE
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+nt
+MM
+"}
+(37,1,1) = {"
+MM
+MM
+Ea
+MM
+MM
+MM
+MM
+MM
+uD
+uD
+zH
+Nm
+zH
+zH
+Nm
+Nm
+td
+rl
+wZ
+wZ
+wZ
+wZ
+Nm
+Nm
+Ey
+zH
+zH
+Nm
+zH
+MM
+zH
+zH
+zH
+zH
+zH
+zH
+MM
+MM
+uD
+TE
+MM
+MM
+MM
+MM
+MM
+kj
+MM
+MM
+MM
+MM
+"}
+(38,1,1) = {"
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+TE
+Nm
+MM
+zQ
+zQ
+TE
+Nm
+wZ
+wZ
+wZ
+wZ
+wZ
+wZ
+Nm
+uD
+uD
+TE
+uD
+MM
+MM
+MM
+zH
+uD
+TE
+uD
+uD
+zH
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+Wj
+Pp
+MM
+MM
+MM
+"}
+(39,1,1) = {"
+MM
+nt
+kj
+MM
+nt
+MM
+MM
+MM
+MM
+uD
+TE
+MM
+MM
+TE
+Nm
+Nm
+Nm
+ZY
+zH
+zH
+Ey
+Nm
+Nm
+zH
+TE
+TE
+MM
+MM
+MM
+MM
+MM
+MM
+TE
+TE
+TE
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+qu
+MM
+MM
+MM
+"}
+(40,1,1) = {"
+MM
+MM
+dj
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+TE
+uD
+Nm
+uD
+TE
+MM
+MM
+MM
+MM
+zH
+uD
+TE
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+TE
+MM
+MM
+MM
+MM
+MM
+MM
+nt
+MM
+MM
+MM
+Zg
+je
+XQ
+MM
+MM
+MM
+"}
+(41,1,1) = {"
+MM
+TD
+XQ
+MM
+TE
+uD
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+TE
+TE
+TE
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+nt
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+nt
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+rD
+MM
+MM
+uD
+TE
+MM
+"}
+(42,1,1) = {"
+MM
+MM
+MM
+MM
+uD
+TE
+TE
+MM
+MM
+MM
+nt
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+nt
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+vm
+Pm
+Pm
+Ox
+TE
+TE
+"}
+(43,1,1) = {"
+uD
+MM
+MM
+KO
+KO
+TE
+uD
+MM
+MM
+MM
+MM
+MM
+Zg
+Pp
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+hp
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+Zg
+Mj
+Mj
+ef
+MM
+MM
+xk
+UX
+UX
+DU
+uD
+MM
+"}
+(44,1,1) = {"
+TE
+uD
+vm
+UX
+KO
+XQ
+MM
+MM
+MM
+MM
+MM
+Zg
+QL
+QL
+ZN
+ZN
+je
+je
+jG
+MM
+MM
+MM
+MM
+MM
+Zg
+je
+je
+je
+jG
+MM
+MM
+MM
+MM
+MM
+MM
+BV
+MM
+Zg
+XQ
+MM
+MM
+MM
+MM
+MM
+xk
+lB
+UX
+DU
+MM
+MM
+"}
+(45,1,1) = {"
+TE
+TE
+KO
+UX
+DU
+MM
+MM
+MM
+MM
+hx
+Mj
+XQ
+MM
+MM
+Wj
+XQ
+MM
+MM
+MM
+MM
+MM
+hx
+ef
+MM
+rD
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+nt
+MM
+MM
+MM
+TD
+XQ
+MM
+MM
+MM
+MM
+MM
+TE
+xk
+UX
+UX
+DU
+MM
+MM
+"}
+(46,1,1) = {"
+uD
+MM
+xk
+ML
+KO
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+uD
+TE
+Oz
+AX
+AX
+Lh
+MM
+MM
+"}
+(47,1,1) = {"
+MM
+MM
+xk
+MM
+DU
+KO
+uD
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+uD
+TE
+uD
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+TE
+uD
+uD
+MM
+TE
+TE
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+uD
+TE
+TE
+uD
+MM
+MM
+MM
+MM
+"}
+(48,1,1) = {"
+MM
+MM
+Oz
+QL
+uD
+TE
+TE
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+nt
+MM
+uD
+TE
+TE
+TE
+uD
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+uD
+MM
+TE
+TE
+uD
+MM
+MM
+MM
+MM
+MM
+nt
+MM
+MM
+MM
+MM
+uD
+MM
+MM
+MM
+MM
+MM
+"}
+(49,1,1) = {"
+MM
+nt
+MM
+MM
+TE
+TE
+MM
+MM
+nt
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+uD
+TE
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+nt
+MM
+"}
+(50,1,1) = {"
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+nt
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+MM
+"}

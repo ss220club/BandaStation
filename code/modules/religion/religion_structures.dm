@@ -43,6 +43,38 @@
 	pushed_mob.forceMove(loc)
 	return ..()
 
+/obj/structure/altar/dark
+	name = "\improper Тёмный алтарь"
+	desc = "Мрачный алтарь, покрытый странными символами. Кажется, он чего-то ждет."
+	icon_state = "convertaltar-dark"
+	var/dark_response = "Ты начал видеть истину, ту, что всегда была скрыта... В темноте..."
+	var/your_answer = "Узрел"
+
+/obj/structure/altar/dark/attack_hand(mob/living/user, list/modifiers)
+	if(!Adjacent(user))
+		return ..()
+	var/response = tgui_input_text(user, "Что ты готов произнести?", "Темный алтарь", max_length = 50, encode = FALSE,)
+	if(isnull(response))
+		return
+	response = trim(response)
+	if(response == "[your_answer]")
+		to_chat(user, span_purple("[dark_response]"))
+		perform_dark_ritual()
+	else
+		to_chat(user, span_danger("Сегодня Они не услышали тебя"))
+
+/obj/structure/altar/dark/proc/perform_dark_ritual()
+	new /obj/effect/temp_visual/shadow_phase_smoke(loc)
+	playsound(src, pick('sound/effects/hallucinations/behind_you1.ogg', 'sound/effects/hallucinations/i_see_you1.ogg', 'sound/effects/hallucinations/im_here1.ogg'), 75, TRUE)
+
+/obj/structure/altar/dark/two
+	dark_response = "Ты чувствуешь, как иная сила пробуждается внутри тебя... Рождается."
+	your_answer = "Боль"
+
+/obj/structure/altar/dark/tree
+	dark_response = "Ты искал его, но он нашёл тебя сам, внутри тёмных уголков твоей души... Истина."
+	your_answer = "Смысл"
+
 /// This one actually has relevance to chaplains
 /obj/structure/altar/of_gods
 	name = "Altar of the Gods"

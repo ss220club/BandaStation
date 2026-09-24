@@ -50,6 +50,14 @@ GLOBAL_VAR_INIT(glowshrooms, 0)
 	icon_state = "shadowshroom"
 	myseed = /obj/item/seeds/glowshroom/shadowshroom
 
+/obj/structure/glowshroom/shadowshroom/stat
+	min_delay_spread = 0
+	max_delay_spread = 0
+	spread_into_adjacent_chance = 0
+	idle_decay_min = 0
+	idle_decay_max = 0
+	endurance_decay_rate = 0
+
 /// Mapping object, a glowshroom that doesn't spread or die
 /obj/structure/glowshroom/single
 
