@@ -102,7 +102,7 @@
 
 // Design for printing the Electrostaff construction kit on a Security Protolathe.
 /datum/design/electrostaff
-	name = "Электро-посох"
+	name = "electrostaff"
 	desc = "Комплект деталей для сборки электро-посоха."
 	build_type = PROTOLATHE
 	materials = list(

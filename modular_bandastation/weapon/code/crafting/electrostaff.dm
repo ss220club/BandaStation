@@ -1,6 +1,6 @@
 // Electrostaff construction kit printed by the Security Protolathe.
 /obj/item/weaponcrafting/gunkit/electrostaff
-	name = "Комплект деталей для сборки электро-посоха."
+	name = "electrostaff"
 	desc = "Комплект деталей для сборки электро-посоха."
 	custom_materials = list(
 		/datum/material/iron = SHEET_MATERIAL_AMOUNT * 5,
@@ -12,7 +12,7 @@
 
 // Assemble the Electrostaff from two stun batons, an Electrostaff parts kit, and a flux anomaly.
 /datum/crafting_recipe/electrostaff
-	name = "Electrostaff"
+	name = "electrostaff"
 	result = /obj/item/melee/baton/security/electrostaff/loaded
 	reqs = list(
 		/obj/item/melee/baton/security = 2,
