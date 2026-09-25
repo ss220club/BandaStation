@@ -2,10 +2,8 @@
 /obj/item/organ/snout/vox
 	name = "vox snout"
 	bodypart_overlay = /datum/bodypart_overlay/mutant/snout/vox
-	dna_block = null
+	dna_block = /datum/dna_block/feature/accessory/vox_snout
 	icon_state = "snout"
-
-	sprite_accessory_override = /datum/sprite_accessory/vox_snout/default
 
 /datum/bodypart_overlay/mutant/snout/vox
 	feature_key = FEATURE_VOX_SNOUT
@@ -16,16 +14,7 @@
 /obj/item/organ/tail/vox
 	name = "vox tail"
 	bodypart_overlay = /datum/bodypart_overlay/mutant/tail/vox
-	wag_flags = WAG_ABLE
 	dna_block = null
-
-/obj/item/organ/tail/vox/on_mob_insert(mob/living/carbon/owner)
-	. = ..()
-	add_verb(owner, /mob/living/carbon/human/proc/emote_wag)
-
-/obj/item/organ/tail/vox/on_mob_remove(mob/living/carbon/owner)
-	. = ..()
-	remove_verb(owner, /mob/living/carbon/human/proc/emote_wag)
 
 /datum/bodypart_overlay/mutant/tail/vox
 	feature_key = FEATURE_VOX_TAIL

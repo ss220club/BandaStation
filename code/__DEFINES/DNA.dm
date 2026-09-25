@@ -112,6 +112,11 @@
 #define FEATURE_VOX_QUILLS_COLOR "vox_quills_color"
 #define FEATURE_VOX_FACIAL_QUILLS "vox_facial_quills"
 #define FEATURE_VOX_FACIAL_QUILLS_COLOR "vox_facial_quills_color"
+
+#define FEATURE_VOX_LIMB_MARKINGS "vox_limb_markings"
+#define FEATURE_VOX_LIMB_MARKINGS_COLOR "vox_limb_markings_color"
+#define FEATURE_VOX_BODY_MARKINGS "vox_body_markings"
+#define FEATURE_VOX_BODY_MARKINGS_COLOR "vox_body_markings_color"
 // BANDASTATION ADDITION END - Species Features
 
 // flag for the transfer_flag argument from dna/proc/copy_dna().

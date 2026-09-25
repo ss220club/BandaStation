@@ -6,12 +6,14 @@
 		SPECIES_VULPKANIN = 'icons/bandastation/mob/species/vulpkanin/clothing/modsuits.dmi',
 		SPECIES_TAJARAN = 'icons/bandastation/mob/species/tajaran/clothing/modsuits.dmi',
 		SPECIES_SKRELL = 'icons/bandastation/mob/species/skrell/clothing/modsuits.dmi',
+		SPECIES_VOX = 'icons/bandastation/mob/species/vox/clothing/modsuits.dmi'
 	)
 
 /obj/item/clothing/suit/mod
 	worn_icon_species = list(
 		SPECIES_VULPKANIN = 'icons/bandastation/mob/species/vulpkanin/clothing/modsuits.dmi',
 		SPECIES_TAJARAN = 'icons/bandastation/mob/species/tajaran/clothing/modsuits.dmi',
+		SPECIES_VOX = 'icons/bandastation/mob/species/vox/clothing/modsuits.dmi'
 	)
 
 /obj/item/mod/module
@@ -19,6 +21,7 @@
 		SPECIES_VULPKANIN = 'icons/bandastation/mob/species/vulpkanin/clothing/modules.dmi',
 		SPECIES_TAJARAN = 'icons/bandastation/mob/species/tajaran/clothing/modules.dmi',
 		SPECIES_SKRELL = 'icons/bandastation/mob/species/skrell/clothing/modules.dmi',
+		SPECIES_VOX = 'icons/bandastation/mob/species/vox/clothing/modules.dmi'
 	)
 
 /obj/item/clothing/suit
@@ -63,5 +66,5 @@
 
 /obj/item/clothing/shoes
 	worn_icon_species = list(
-		SPECIES_VOX = 'icons/bandastation/mob/species/vox/clothing/shoes.dmi'
+		SPECIES_VOX = 'icons/bandastation/mob/species/vox/clothing/feet.dmi'
 	)

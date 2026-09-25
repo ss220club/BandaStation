@@ -2,7 +2,7 @@
 	name = "vox breath mask"
 	desc = "A weirdly-shaped breath mask, this one seems to designed for a vox beak."
 	icon = 'icons/bandastation/mob/species/vox/clothing/mask.dmi'
-	icon_state = "voxmask2"
+	icon_state = "voxmask"
 	body_parts_covered = NONE
 	flags_cover = NONE
 	adjustable = FALSE

@@ -130,6 +130,8 @@ SUBSYSTEM_DEF(accessories) // just 'accessories' for brevity
 	feature_list[FEATURE_VOX_TAIL] = INIT_ACCESSORY(/datum/sprite_accessory/tails/vox)
 	feature_list[FEATURE_VOX_QUILLS] = INIT_OPTIONAL_ACCESSORY(/datum/sprite_accessory/vox_quills)
 	feature_list[FEATURE_VOX_FACIAL_QUILLS] = INIT_OPTIONAL_ACCESSORY(/datum/sprite_accessory/vox_facial_quills)
+	feature_list[FEATURE_VOX_LIMB_MARKINGS] = INIT_ACCESSORY(/datum/sprite_accessory/vox_limb_markings)
+	feature_list[FEATURE_VOX_BODY_MARKINGS] = INIT_OPTIONAL_ACCESSORY(/datum/sprite_accessory/vox_body_markings)
 	/// BANDASTATION ADDITION END - Species
 
 /// This proc just initializes all /datum/sprite_accessory/hair_gradient into an list indexed by gradient-style name

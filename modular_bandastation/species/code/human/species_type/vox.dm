@@ -18,11 +18,17 @@
 	mutantliver = /obj/item/organ/liver/vox
 	mutantstomach = /obj/item/organ/stomach/vox
 	mutant_organs = list(
-		/obj/item/organ/snout/vox = "Vox beak",
+		/obj/item/organ/snout/vox = "Armalis beak",
 		/obj/item/organ/tail/vox = "Vox tail",
 		/obj/item/organ/quills/vox = "Ruffhawk",
 		/obj/item/organ/facial_quills/vox = "None",
 	)
+
+	body_markings = list(
+		/datum/bodypart_overlay/simple/body_marking/vox_limb = "Default",
+		/datum/bodypart_overlay/simple/body_marking/vox_body = SPRITE_ACCESSORY_NONE,
+	)
+
 	exotic_bloodtype = /datum/blood_type/vox
 
 	bodypart_overrides = list(
@@ -38,7 +44,8 @@
 	outfit_important_for_life = /datum/outfit/vox
 
 /datum/species/vox/pre_equip_species_outfit(datum/job/job, mob/living/carbon/human/equipping, visuals_only = FALSE)
-	give_important_for_life(equipping)
+	if(!visuals_only)
+		give_important_for_life(equipping)
 
 /datum/species/vox/prepare_human_for_preview(mob/living/carbon/human/human)
 	human.dna.features[FEATURE_VOX_QUILLS_COLOR] = "#361512"
@@ -97,7 +104,7 @@
 			SPECIES_PERK_TYPE = SPECIES_POSITIVE_PERK,
 			SPECIES_PERK_ICON = "microchip",
 			SPECIES_PERK_NAME = "Питание электроникой",
-			SPECIES_PERK_DESC = "[plural_form] способны питаться электронными компонентами, в том числе печатными платами.",
+			SPECIES_PERK_DESC = "[plural_form] способны питаться электронными компонентами.",
 		),
 		list(
 			SPECIES_PERK_TYPE = SPECIES_NEGATIVE_PERK,

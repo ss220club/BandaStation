@@ -10,8 +10,8 @@
 	return SSaccessories.feature_list[FEATURE_VOX_FACIAL_QUILLS]
 
 /datum/preference/choiced/species_feature/vox_facial_quills/icon_for(value)
-	var/datum/universal_icon/final_icon = uni_icon('icons/bandastation/mob/species/vox/bodyparts.dmi', "__TEMPLATE")
-	final_icon.blend_color(COLOR_ASSISTANT_GRAY, ICON_MULTIPLY)
+	var/datum/universal_icon/final_icon = uni_icon('icons/bandastation/mob/species/vox/bodyparts.dmi', "_template")
+	final_icon.blend_color(COLOR_LIGHT_YELLOW, ICON_MULTIPLY)
 
 	if(value != SPRITE_ACCESSORY_NONE)
 		var/datum/sprite_accessory/facial_quills = get_accessory_for_value(value)

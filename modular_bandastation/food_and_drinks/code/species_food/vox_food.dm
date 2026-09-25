@@ -36,7 +36,6 @@ GLOBAL_LIST_INIT(vox_edible_items, typecacheof(list(
 	snack.source_item = WEAKREF(source)
 	source.obj_flags |= NO_DEBRIS_AFTER_DECONSTRUCTION
 
-//	snack.make_edible()
 	return snack
 
 /obj/item

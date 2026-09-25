@@ -1,13 +1,13 @@
 /obj/item/bodypart/head/vox
 	icon_greyscale = 'icons/bandastation/mob/species/vox/bodyparts.dmi'
 	limb_id = SPECIES_VOX
-	is_dimorphic = TRUE
+	is_dimorphic = FALSE
 	head_flags = HEAD_EYESPRITES|HEAD_EYECOLOR|HEAD_EYEHOLES|HEAD_DEBRAIN
 
 /obj/item/bodypart/chest/vox
 	icon_greyscale = 'icons/bandastation/mob/species/vox/bodyparts.dmi'
 	limb_id = SPECIES_VOX
-	is_dimorphic = TRUE
+	is_dimorphic = FALSE
 
 /obj/item/bodypart/chest/vox/get_butt_sprite()
 	return icon('icons/mob/butts.dmi', BUTT_SPRITE_VOX)
@@ -29,14 +29,6 @@
 	unarmed_attack_effect = ATTACK_EFFECT_CLAW
 	unarmed_attack_sound = 'sound/items/weapons/slice.ogg'
 	unarmed_miss_sound = 'sound/items/weapons/slashmiss.ogg'
-
-/obj/item/bodypart/leg/left/vox
-	icon_greyscale = 'icons/bandastation/mob/species/vox/bodyparts.dmi'
-	limb_id = SPECIES_VOX
-
-/obj/item/bodypart/leg/right/vox
-	icon_greyscale = 'icons/bandastation/mob/species/vox/bodyparts.dmi'
-	limb_id = SPECIES_VOX
 
 /obj/item/bodypart/leg/left/digitigrade/vox
 	icon_greyscale = 'icons/bandastation/mob/species/vox/bodyparts.dmi'

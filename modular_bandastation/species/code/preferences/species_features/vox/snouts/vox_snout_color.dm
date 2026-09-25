@@ -2,7 +2,7 @@
 	priority = PREFERENCE_PRIORITY_BODYPARTS
 	savefile_key = "vox_snout_color"
 	savefile_identifier = PREFERENCE_CHARACTER
-	category = PREFERENCE_CATEGORY_SECONDARY_FEATURES
+	category = PREFERENCE_CATEGORY_SUPPLEMENTAL_FEATURES
 	relevant_organ = /obj/item/organ/snout/vox
 
 /datum/preference/color/vox_snout_color/create_default_value()

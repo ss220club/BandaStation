@@ -222,9 +222,37 @@
 	target.dna.features[feature_key] = sanitize_hexcolor(get_block(dna_hash))
 
 // MARK: Vox
+/datum/dna_block/feature/accessory/vox_snout
+	feature_key = FEATURE_VOX_SNOUT
+
 /datum/dna_block/feature/accessory/vox_quills
 	feature_key = FEATURE_VOX_QUILLS
 
 /datum/dna_block/feature/accessory/vox_facial_quills
 	feature_key = FEATURE_VOX_FACIAL_QUILLS
+
+/datum/dna_block/feature/vox_limb_markings_color
+	block_length = DNA_BLOCK_SIZE_COLOR
+	feature_key = FEATURE_VOX_LIMB_MARKINGS_COLOR
+
+/datum/dna_block/feature/vox_limb_markings_color/create_unique_block(mob/living/carbon/human/target)
+	return sanitize_hexcolor(target.dna.features[feature_key], include_crunch = FALSE)
+
+/datum/dna_block/feature/vox_limb_markings_color/apply_to_mob(mob/living/carbon/human/target, dna_hash)
+	target.dna.features[feature_key] = sanitize_hexcolor(get_block(dna_hash))
+
+/datum/dna_block/feature/vox_body_markings
+	block_length = DNA_BLOCK_SIZE_COLOR
+	feature_key = FEATURE_VOX_BODY_MARKINGS
+
+/datum/dna_block/feature/vox_body_markings_color
+	block_length = DNA_BLOCK_SIZE_COLOR
+	feature_key = FEATURE_VOX_LIMB_MARKINGS_COLOR
+
+/datum/dna_block/feature/vox_body_markings_color/create_unique_block(mob/living/carbon/human/target)
+	return sanitize_hexcolor(target.dna.features[feature_key], include_crunch = FALSE)
+
+/datum/dna_block/feature/vox_body_markings_color/apply_to_mob(mob/living/carbon/human/target, dna_hash)
+	target.dna.features[feature_key] = sanitize_hexcolor(get_block(dna_hash))
+
 // BANDASTATION ADD END - Species
