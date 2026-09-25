@@ -55,7 +55,7 @@
 
 /obj/item/storage/toolbox/guncase
 	name = "gun case"
-	desc = "A weapon's case. Has a blood-red 'S' stamped on the cover."
+	desc = "Прочный кейс для оружия с вставками из пенопласта, расположение которых обеспечивает надежную фиксацию оружия, магазинов и дополнительного снаряжения."
 	icon = 'icons/obj/storage/case.dmi'
 	icon_state = "infiltrator_case"
 	lefthand_file = 'icons/mob/inhands/equipment/toolbox_lefthand.dmi'
@@ -77,7 +77,7 @@
 
 /obj/item/storage/toolbox/guncase/traitor
 	name = "makarov gun case"
-	desc = "A weapon's case. Has a blood-red 'S' stamped on the cover. There seems to be a strange switch along the side inside a plastic flap."
+	desc = "Кейс для оружия. На крышке выбита кроваво-красная буква «S». Похоже сбоку под пластиковым выступом, находится какой-то странный переключатель."
 	icon_state = "pistol_case"
 	base_icon_state = "pistol_case"
 	// What ammo box do we spawn in our case?
@@ -93,12 +93,12 @@
 
 /obj/item/storage/toolbox/guncase/traitor/examine(mob/user)
 	. = ..()
-	. += span_notice("Activate the Evidence Disposal Explosive using Alt-Right-Click.")
+	. += span_notice("Активируйте взрывное устройство для уничтожения улик, нажав АЛЬТ-ПКМ.")
 
 /obj/item/storage/toolbox/guncase/traitor/add_context(atom/source, list/context, obj/item/held_item, mob/user)
 	. = ..()
 
-	context[SCREENTIP_CONTEXT_ALT_RMB] = "Activate Evidence Disposal Explosive"
+	context[SCREENTIP_CONTEXT_ALT_RMB] = "Активировать взрывчатку для уничтожения улик"
 	return CONTEXTUAL_SCREENTIP_SET
 
 /obj/item/storage/toolbox/guncase/traitor/PopulateContents()
@@ -117,16 +117,16 @@
 /obj/item/storage/toolbox/guncase/traitor/click_alt_secondary(mob/user)
 	. = ..()
 	if(currently_exploding)
-		user.balloon_alert(user, "already exploding!")
+		user.balloon_alert(user, "уже взрывается!")
 		return
 
-	var/i_dont_even_think_once_about_blowing_stuff_up = tgui_alert(user, "Would you like to activate the evidence disposal bomb now?", "BYE BYE", list("Yes","No"))
+	var/i_dont_even_think_once_about_blowing_stuff_up = tgui_alert(user, "Хотите активировать бомбу для уничтожения улик прямо сейчас?", "ПОКА ПОКА", list("Да","Нет"))
 
-	if(i_dont_even_think_once_about_blowing_stuff_up != "Yes" || currently_exploding || QDELETED(user) || QDELETED(src) || !user.can_perform_action(src, NEED_DEXTERITY|NEED_HANDS|ALLOW_RESTING))
+	if(i_dont_even_think_once_about_blowing_stuff_up != "Да" || currently_exploding || QDELETED(user) || QDELETED(src) || !user.can_perform_action(src, NEED_DEXTERITY|NEED_HANDS|ALLOW_RESTING))
 		return
 
 	explosion_timer = addtimer(CALLBACK(src, PROC_REF(think_fast_chucklenuts)), 5 SECONDS, (TIMER_UNIQUE|TIMER_OVERRIDE))
-	to_chat(user, span_warning("You prime [src]'s evidence disposal bomb!"))
+	to_chat(user, span_warning("Вы активируете бомбу уничтожения улик [src]!"))
 	log_bomber(user, "has activated a", src, "for detonation")
 	playsound(src, 'sound/items/weapons/armbomb.ogg', 50, TRUE)
 	currently_exploding = TRUE
@@ -245,7 +245,7 @@
 
 /obj/item/storage/toolbox/guncase/soviet
 	name = "ancient gun case"
-	desc = "A weapon's case. Has the symbol of the Third Soviet Union stamped on the side."
+	desc = "Оружейный кейс с символикой СССП отпечатаной на верхней части."
 	icon_state = "sakhno_case"
 	inhand_icon_state = "sakhno_case"
 	weapon_to_spawn = /obj/effect/spawner/random/sakhno
