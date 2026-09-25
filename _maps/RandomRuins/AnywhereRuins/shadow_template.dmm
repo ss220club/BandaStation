@@ -13,6 +13,12 @@
 	},
 /turf/open/misc/asteroid/moon,
 /area/icemoon/surface/outdoors/nospawn)
+"aL" = (
+/obj/structure/statue/gargoyle{
+	dir = 4
+	},
+/turf/open/indestructible/stone,
+/area/icemoon/surface/outdoors/nospawn)
 "bh" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/wood/ebonite,
@@ -52,6 +58,12 @@
 "cD" = (
 /turf/open/floor/carpet/black,
 /area/ruin/shadow_template)
+"cE" = (
+/obj/structure/statue/gargoyle{
+	dir = 8
+	},
+/turf/open/indestructible/stone,
+/area/icemoon/surface/outdoors/nospawn)
 "cZ" = (
 /obj/effect/turf_decal/siding/dark{
 	dir = 1
@@ -88,12 +100,24 @@
 	},
 /turf/open/misc/asteroid/moon,
 /area/icemoon/surface/outdoors/nospawn)
+"ei" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 8
+	},
+/turf/open/floor/iron/stairs/old{
+	dir = 4
+	},
+/area/icemoon/surface/outdoors/nospawn)
 "ep" = (
 /obj/effect/turf_decal/siding/dark/corner{
 	dir = 4
 	},
 /obj/effect/turf_decal/siding/dark/corner,
 /turf/open/floor/carpet/black,
+/area/ruin/shadow_template)
+"ew" = (
+/obj/structure/statue/dark_column/half,
+/turf/open/floor/wood/tile/ebonite,
 /area/ruin/shadow_template)
 "eA" = (
 /obj/structure/altar/dark,
@@ -131,6 +155,7 @@
 /area/ruin/shadow_template)
 "gk" = (
 /obj/structure/table/wood/fancy/black,
+/obj/item/table_clock,
 /turf/open/floor/wood/tile/ebonite,
 /area/ruin/shadow_template)
 "gD" = (
@@ -167,6 +192,11 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/carpet/black,
 /area/ruin/shadow_template)
+"hu" = (
+/obj/structure/platform/plastitanium,
+/obj/item/shadow_mirror,
+/turf/open/floor/wood/tile/ebonite,
+/area/ruin/shadow_template)
 "hx" = (
 /obj/effect/turf_decal/weather/snow/corner{
 	dir = 9
@@ -176,11 +206,25 @@
 	},
 /turf/open/misc/asteroid/moon,
 /area/icemoon/surface/outdoors/nospawn)
+"hT" = (
+/obj/effect/turf_decal/siding/thinplating_new/dark,
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 8
+	},
+/turf/open/indestructible/stone,
+/area/icemoon/surface/outdoors/nospawn)
+"hU" = (
+/obj/structure/table/wood/fancy/black,
+/turf/open/floor/wood/ebonite,
+/area/ruin/shadow_template)
 "iv" = (
 /obj/structure/railing{
 	dir = 4
 	},
-/obj/structure/platform/plastitanium,
+/obj/structure/statue/gargoyle,
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 1
+	},
 /turf/open/indestructible/stone,
 /area/icemoon/surface/outdoors/nospawn)
 "iC" = (
@@ -269,6 +313,13 @@
 	},
 /turf/open/floor/wood/ebonite,
 /area/ruin/shadow_template)
+"my" = (
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 9
+	},
+/obj/structure/statue/dark_column,
+/turf/open/indestructible/stone,
+/area/icemoon/surface/outdoors/nospawn)
 "mD" = (
 /obj/structure/mineral_door/silver/dark,
 /turf/open/floor/wood/tile/ebonite,
@@ -348,7 +399,7 @@
 /obj/effect/decal/cleanable/blood/old{
 	icon_state = "bloodyhands_right"
 	},
-/obj/structure/platform/plastitanium,
+/obj/structure/statue/dark_column,
 /turf/open/floor/wood/ebonite,
 /area/ruin/shadow_template)
 "pk" = (
@@ -435,6 +486,23 @@
 "td" = (
 /turf/open/floor/grass/shadowgrass,
 /area/ruin/shadow_template)
+"tr" = (
+/obj/effect/turf_decal/weather/snow/corner,
+/turf/open/floor/iron/stairs/old,
+/area/icemoon/surface/outdoors/nospawn)
+"tA" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 10
+	},
+/turf/open/floor/iron/stairs/old,
+/area/icemoon/surface/outdoors/nospawn)
+"tG" = (
+/obj/effect/turf_decal/siding/thinplating_new/dark,
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 4
+	},
+/turf/open/indestructible/stone,
+/area/icemoon/surface/outdoors/nospawn)
 "ug" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/turf_decal/siding/thinplating/dark{
@@ -446,9 +514,24 @@
 /obj/structure/glowshroom/shadowshroom/stat,
 /turf/open/floor/grass/shadowgrass,
 /area/icemoon/surface/outdoors/nospawn)
+"vg" = (
+/obj/structure/statue/gargoyle{
+	dir = 4
+	},
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 1
+	},
+/turf/open/indestructible/stone,
+/area/icemoon/surface/outdoors/nospawn)
 "vm" = (
 /obj/effect/turf_decal/siding/thinplating_new/dark{
 	dir = 9
+	},
+/turf/open/indestructible/stone,
+/area/icemoon/surface/outdoors/nospawn)
+"vL" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 6
 	},
 /turf/open/indestructible/stone,
 /area/icemoon/surface/outdoors/nospawn)
@@ -456,6 +539,11 @@
 /obj/effect/turf_decal/siding/thinplating/dark{
 	dir = 10
 	},
+/turf/open/floor/wood/ebonite,
+/area/ruin/shadow_template)
+"wo" = (
+/obj/effect/turf_decal/siding/thinplating/dark/corner,
+/obj/structure/statue/dark_column/half,
 /turf/open/floor/wood/ebonite,
 /area/ruin/shadow_template)
 "wq" = (
@@ -514,12 +602,45 @@
 /obj/item/clothing/head/costume/ushanka,
 /turf/open/floor/carpet/black,
 /area/ruin/shadow_template)
+"yE" = (
+/obj/structure/statue/gargoyle{
+	dir = 8
+	},
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 1
+	},
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 8
+	},
+/turf/open/indestructible/stone,
+/area/icemoon/surface/outdoors/nospawn)
+"zq" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 9
+	},
+/turf/open/floor/iron/stairs/old{
+	dir = 4
+	},
+/area/icemoon/surface/outdoors/nospawn)
+"zA" = (
+/obj/structure/statue/dark_bowl/light,
+/turf/open/indestructible/stone,
+/area/icemoon/surface/outdoors/nospawn)
 "zH" = (
 /turf/closed/indestructible/resin,
 /area/ruin/shadow_template)
 "zQ" = (
 /obj/structure/glowshroom/shadowshroom,
 /turf/open/floor/grass/shadowgrass,
+/area/icemoon/surface/outdoors/nospawn)
+"zS" = (
+/obj/structure/statue/gargoyle{
+	dir = 8
+	},
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 4
+	},
+/turf/open/indestructible/stone,
 /area/icemoon/surface/outdoors/nospawn)
 "zU" = (
 /obj/effect/decal/cleanable/dirt,
@@ -552,7 +673,7 @@
 /obj/effect/turf_decal/siding/thinplating/dark{
 	dir = 1
 	},
-/obj/structure/platform/plastitanium,
+/obj/structure/statue/dark_column,
 /turf/open/floor/wood/ebonite,
 /area/ruin/shadow_template)
 "AU" = (
@@ -584,6 +705,11 @@
 /obj/effect/turf_decal/weather/snow/corner,
 /turf/open/misc/asteroid/moon,
 /area/icemoon/surface/outdoors/nospawn)
+"BN" = (
+/obj/structure/statue/dark_bowl/light,
+/obj/effect/turf_decal/weather/snow/corner,
+/turf/open/indestructible/stone,
+/area/icemoon/surface/outdoors/nospawn)
 "BV" = (
 /obj/effect/turf_decal/weather/snow/corner{
 	dir = 9
@@ -594,9 +720,15 @@
 /turf/open/misc/asteroid/moon,
 /area/icemoon/surface/outdoors/nospawn)
 "BW" = (
-/obj/item/paper/crumpled/awaymissions/shadow_template/one,
+/obj/structure/statue/dark_bowl/light,
 /turf/open/floor/carpet/black,
 /area/ruin/shadow_template)
+"BY" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 1
+	},
+/turf/open/indestructible/stone,
+/area/icemoon/surface/outdoors/nospawn)
 "CN" = (
 /obj/effect/turf_decal/weather/snow/corner{
 	dir = 9
@@ -621,12 +753,24 @@
 /obj/structure/railing{
 	dir = 8
 	},
-/obj/structure/platform/plastitanium,
+/obj/structure/statue/gargoyle{
+	dir = 8
+	},
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 1
+	},
 /turf/open/indestructible/stone,
 /area/icemoon/surface/outdoors/nospawn)
 "Ey" = (
 /turf/closed/indestructible/opsglass,
 /area/ruin/shadow_template)
+"ED" = (
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 5
+	},
+/obj/structure/statue/dark_column,
+/turf/open/indestructible/stone,
+/area/icemoon/surface/outdoors/nospawn)
 "EH" = (
 /obj/effect/mob_spawn/corpse/human/skeleton,
 /turf/open/floor/carpet/black,
@@ -655,6 +799,12 @@
 /obj/item/flashlight/flare/candle,
 /turf/open/floor/carpet/black,
 /area/ruin/shadow_template)
+"HT" = (
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 4
+	},
+/turf/open/indestructible/stone,
+/area/icemoon/surface/outdoors/nospawn)
 "HV" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/turf_decal/siding/thinplating/dark{
@@ -683,6 +833,7 @@
 	pixel_y = 10;
 	pixel_x = -1
 	},
+/obj/item/instrument/violin/golden,
 /turf/open/floor/wood/ebonite,
 /area/ruin/shadow_template)
 "Jh" = (
@@ -717,7 +868,7 @@
 /turf/open/floor/wood/tile/ebonite,
 /area/ruin/shadow_template)
 "Kx" = (
-/obj/structure/platform/plastitanium,
+/obj/structure/statue/dark_column,
 /turf/open/floor/wood/ebonite,
 /area/ruin/shadow_template)
 "KJ" = (
@@ -726,6 +877,10 @@
 /area/ruin/shadow_template)
 "KO" = (
 /turf/open/misc/asteroid/moon,
+/area/icemoon/surface/outdoors/nospawn)
+"KR" = (
+/obj/structure/statue/dark_bowl,
+/turf/open/indestructible/stone,
 /area/icemoon/surface/outdoors/nospawn)
 "KU" = (
 /obj/effect/turf_decal/siding/dark{
@@ -774,6 +929,15 @@
 	dir = 4
 	},
 /turf/open/misc/asteroid/moon,
+/area/icemoon/surface/outdoors/nospawn)
+"Mr" = (
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 1
+	},
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 4
+	},
+/turf/open/indestructible/stone,
 /area/icemoon/surface/outdoors/nospawn)
 "ML" = (
 /obj/structure/altar/dark/two,
@@ -833,6 +997,13 @@
 /obj/effect/turf_decal/siding/dark,
 /turf/open/floor/carpet/black,
 /area/ruin/shadow_template)
+"OV" = (
+/obj/effect/turf_decal/siding/dark/corner{
+	dir = 1
+	},
+/obj/item/paper/crumpled/awaymissions/shadow_template/one,
+/turf/open/floor/carpet/black,
+/area/ruin/shadow_template)
 "Pj" = (
 /obj/effect/turf_decal/siding/dark/corner{
 	dir = 1
@@ -864,6 +1035,13 @@
 	},
 /turf/open/floor/carpet/black,
 /area/ruin/shadow_template)
+"PE" = (
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 8
+	},
+/obj/effect/turf_decal/weather/snow/corner,
+/turf/open/indestructible/stone,
+/area/icemoon/surface/outdoors/nospawn)
 "PN" = (
 /obj/structure/table/wood/fancy/black,
 /obj/item/book_of_babel{
@@ -890,6 +1068,13 @@
 	},
 /turf/open/floor/carpet/black,
 /area/ruin/shadow_template)
+"Qr" = (
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 5
+	},
+/obj/structure/statue/dark_column/half,
+/turf/open/indestructible/stone,
+/area/icemoon/surface/outdoors/nospawn)
 "QL" = (
 /obj/effect/turf_decal/weather/snow/corner{
 	dir = 4
@@ -905,16 +1090,27 @@
 /obj/effect/turf_decal/siding/thinplating/dark{
 	dir = 1
 	},
-/obj/structure/platform/plastitanium,
+/obj/structure/statue/dark_column,
 /turf/open/floor/wood/ebonite,
+/area/ruin/shadow_template)
+"Si" = (
+/obj/item/paper/crumpled/awaymissions/shadow_template/escape,
+/turf/open/floor/carpet/black,
 /area/ruin/shadow_template)
 "SB" = (
 /obj/effect/turf_decal/siding/thinplating/dark{
 	dir = 8
 	},
-/obj/structure/platform/plastitanium,
+/obj/structure/statue/dark_column/half,
 /turf/open/floor/wood/ebonite,
 /area/ruin/shadow_template)
+"SD" = (
+/obj/structure/statue/dark_bowl/light,
+/obj/effect/turf_decal/weather/snow/corner{
+	dir = 8
+	},
+/turf/open/indestructible/stone,
+/area/icemoon/surface/outdoors/nospawn)
 "SZ" = (
 /turf/open/floor/iron/stairs/old{
 	dir = 1
@@ -956,20 +1152,62 @@
 	},
 /turf/open/floor/wood/tile/ebonite,
 /area/ruin/shadow_template)
+"TM" = (
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 10
+	},
+/obj/structure/statue/dark_column/half,
+/turf/open/indestructible/stone,
+/area/icemoon/surface/outdoors/nospawn)
+"TU" = (
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 4
+	},
+/obj/effect/turf_decal/weather/snow/corner,
+/turf/open/indestructible/stone,
+/area/icemoon/surface/outdoors/nospawn)
+"Ud" = (
+/turf/open/floor/iron/stairs/old,
+/area/icemoon/surface/outdoors/nospawn)
 "Ui" = (
 /obj/structure/altar,
 /obj/item/flashlight/flare/candle,
 /turf/open/floor/carpet/black,
 /area/ruin/shadow_template)
+"US" = (
+/obj/structure/table/wood/fancy/black,
+/obj/item/flashlight/lamp/green{
+	pixel_y = 10;
+	pixel_x = -8
+	},
+/obj/item/newspaper{
+	pixel_y = -15
+	},
+/turf/open/floor/wood/tile/ebonite,
+/area/ruin/shadow_template)
 "UX" = (
 /turf/open/indestructible/stone,
 /area/icemoon/surface/outdoors/nospawn)
+"Va" = (
+/obj/structure/displaycase/trophy{
+	pixel_y = 10;
+	pixel_x = -1
+	},
+/obj/item/clothing/head/helmet/skull,
+/turf/open/floor/wood/ebonite,
+/area/ruin/shadow_template)
 "Vs" = (
 /obj/effect/turf_decal/weather/snow/corner{
 	dir = 1
 	},
 /turf/open/misc/asteroid/moon,
 /area/icemoon/surface/outdoors/nospawn)
+"VE" = (
+/obj/item/kirbyplants/organic/plant7{
+	pixel_y = 5
+	},
+/turf/open/floor/wood/tile/ebonite,
+/area/ruin/shadow_template)
 "Wj" = (
 /obj/effect/turf_decal/weather/snow/corner{
 	dir = 5
@@ -980,7 +1218,7 @@
 /obj/effect/turf_decal/siding/thinplating/dark{
 	dir = 5
 	},
-/obj/structure/platform/plastitanium,
+/obj/structure/statue/dark_column,
 /turf/open/floor/wood/ebonite,
 /area/ruin/shadow_template)
 "Ws" = (
@@ -999,6 +1237,10 @@
 	},
 /turf/open/misc/asteroid/moon,
 /area/icemoon/surface/outdoors/nospawn)
+"XV" = (
+/obj/structure/statue/dark_column,
+/turf/open/floor/wood/tile/ebonite,
+/area/ruin/shadow_template)
 "Yh" = (
 /turf/open/floor/iron/stairs/old{
 	dir = 1
@@ -1104,7 +1346,7 @@ MM
 (2,1,1) = {"
 uD
 TE
-vm
+my
 KO
 Ox
 MM
@@ -1157,9 +1399,9 @@ MM
 MM
 uD
 KO
-UX
+KR
 KO
-Pp
+tA
 MM
 nt
 MM
@@ -1211,7 +1453,7 @@ Vs
 KO
 eA
 KO
-MM
+Ud
 MM
 MM
 MM
@@ -1261,9 +1503,9 @@ MM
 MM
 MM
 UX
+KR
 UX
-DU
-BL
+tr
 MM
 Ea
 MM
@@ -1312,7 +1554,7 @@ MM
 (6,1,1) = {"
 MM
 KO
-Oz
+Qr
 AX
 KO
 uD
@@ -1481,15 +1723,15 @@ MM
 MM
 TE
 uD
-UX
-UX
+Pm
+Ox
 TE
 TE
 MM
 MM
 MM
-UX
-UX
+vm
+Ox
 MM
 MM
 MM
@@ -1534,15 +1776,15 @@ MM
 TE
 UX
 zH
-UX
-UX
+cE
+Ox
 uD
 TE
 MM
-UX
+yE
 Nm
 UX
-UX
+Pm
 uD
 MM
 MM
@@ -1580,8 +1822,8 @@ MM
 MM
 TE
 uD
-UX
-MM
+Pm
+Ox
 MM
 MM
 zH
@@ -1599,14 +1841,14 @@ uD
 TE
 MM
 MM
-UX
-UX
-UX
+vm
+Pm
+Ox
 MM
 MM
 TE
-UX
-UX
+Pm
+Ox
 MM
 MM
 MM
@@ -1631,9 +1873,9 @@ MM
 MM
 TE
 TE
-UX
+xk
 Nm
-MM
+BN
 nt
 MM
 MM
@@ -1650,16 +1892,16 @@ uD
 TE
 TE
 uD
-UX
+Pm
 UX
 Nm
 UX
-UX
+PE
 MM
 uD
 Nm
 UX
-MM
+Ox
 MM
 MM
 MM
@@ -1682,7 +1924,7 @@ MM
 MM
 MM
 uD
-UX
+vm
 UX
 zH
 Nm
@@ -1710,9 +1952,9 @@ zH
 zH
 zH
 zH
+zA
 UX
-UX
-MM
+Ox
 MM
 MM
 MM
@@ -1757,14 +1999,14 @@ gD
 Nm
 zH
 zH
-Wx
+VE
+US
 gk
-gk
 Wx
 zH
 zH
 zH
-MM
+tG
 MM
 MM
 uD
@@ -1786,7 +2028,7 @@ MM
 MM
 MM
 uD
-UX
+xk
 Nm
 oN
 IH
@@ -1838,7 +2080,7 @@ MM
 MM
 uD
 TE
-UX
+xk
 Nm
 wZ
 wZ
@@ -1869,8 +2111,8 @@ wZ
 zH
 uD
 TE
-UX
-UX
+Pm
+Pm
 TE
 MM
 MM
@@ -1922,7 +2164,7 @@ zH
 TE
 UX
 Nm
-UX
+aL
 TE
 uD
 MM
@@ -1975,7 +2217,7 @@ zH
 zH
 zH
 zH
-UX
+tG
 TE
 MM
 MM
@@ -1994,7 +2236,7 @@ MM
 uD
 MM
 uD
-UX
+xk
 Ey
 rl
 td
@@ -2043,12 +2285,12 @@ MM
 dj
 MM
 TE
-UX
-UX
-UX
+vm
+Pm
+Pm
 UX
 Nm
-Kx
+hU
 wZ
 AU
 Tg
@@ -2095,9 +2337,9 @@ TD
 XQ
 MM
 uD
-UX
+xk
 Nm
-UX
+zA
 zH
 Nm
 rl
@@ -2130,8 +2372,8 @@ Ah
 rl
 yi
 Nm
-UX
-UX
+SD
+Ox
 MM
 MM
 MM
@@ -2166,24 +2408,24 @@ GM
 TJ
 HM
 wZ
-Ko
+XV
 Nm
 rl
 wZ
 AU
-Ah
+Kx
 Ah
 cZ
 cD
 KJ
 Ah
-so
+wo
 BC
 td
 zH
 zH
 Nm
-UX
+DU
 MM
 MM
 MM
@@ -2233,9 +2475,9 @@ HM
 wZ
 Ap
 zH
-UX
-UX
-UX
+HT
+AX
+Lh
 MM
 MM
 MM
@@ -2265,7 +2507,7 @@ rl
 td
 PD
 GM
-Pj
+OV
 BW
 Ka
 Og
@@ -2305,7 +2547,7 @@ QL
 Mj
 Yh
 MU
-cD
+Si
 EH
 ry
 zU
@@ -2335,7 +2577,7 @@ KJ
 Ah
 Ah
 SZ
-Ko
+hu
 Nm
 MM
 MM
@@ -2370,7 +2612,7 @@ JC
 ep
 IC
 rr
-cD
+BW
 KJ
 so
 BC
@@ -2389,7 +2631,7 @@ Ah
 SZ
 Ko
 Nm
-UX
+hT
 MM
 uD
 TE
@@ -2442,8 +2684,8 @@ wZ
 LX
 zH
 UX
-UX
-UX
+Pm
+Ox
 TE
 TE
 MM
@@ -2478,24 +2720,24 @@ IC
 Zz
 HM
 wZ
-Ko
+ew
 Nm
 bD
 wZ
 AU
-Ah
+Kx
 Ah
 cZ
 cD
 KJ
 Ah
-Ah
+Kx
 td
 td
 zH
 Nm
 zH
-UX
+DU
 TE
 MM
 MM
@@ -2511,9 +2753,9 @@ MM
 MM
 MM
 uD
-UX
+xk
 zH
-UX
+zA
 zH
 Nm
 wZ
@@ -2546,8 +2788,8 @@ Ah
 rl
 yi
 zH
-UX
-UX
+zA
+Lh
 TE
 MM
 MM
@@ -2563,12 +2805,12 @@ Jn
 MM
 MM
 TE
-UX
-UX
-UX
+Oz
+AX
+AX
 UX
 Nm
-Kx
+hU
 wZ
 AU
 Tg
@@ -2618,7 +2860,7 @@ MM
 TE
 uD
 MM
-UX
+xk
 Ey
 rl
 wZ
@@ -2650,8 +2892,8 @@ rl
 yi
 yi
 zH
-MM
-MM
+UX
+Ox
 TE
 MM
 MM
@@ -2703,7 +2945,7 @@ zH
 zH
 zH
 Nm
-MM
+DU
 MM
 MM
 MM
@@ -2754,8 +2996,8 @@ zH
 MM
 MM
 Nm
-MM
-MM
+zS
+Lh
 MM
 MM
 MM
@@ -2774,7 +3016,7 @@ MM
 MM
 TE
 uD
-UX
+xk
 zH
 rl
 rI
@@ -2825,11 +3067,11 @@ MM
 MM
 MM
 uD
-UX
+vm
 UX
 Nm
 YR
-IH
+Va
 fq
 Ng
 Ah
@@ -2877,7 +3119,7 @@ Ea
 MM
 MM
 MM
-UX
+Mr
 Nm
 zH
 zH
@@ -2951,15 +3193,15 @@ zH
 zH
 Nm
 zH
-MM
+UX
 zH
 zH
 zH
 zH
 zH
 zH
-MM
-MM
+zA
+AX
 uD
 TE
 MM
@@ -2985,7 +3227,7 @@ MM
 MM
 TE
 Nm
-MM
+zA
 zQ
 zQ
 TE
@@ -3001,16 +3243,16 @@ uD
 uD
 TE
 uD
-MM
-MM
-MM
+AX
+AX
+HT
 zH
 uD
 TE
 uD
 uD
 zH
-MM
+tG
 MM
 MM
 MM
@@ -3037,9 +3279,9 @@ MM
 MM
 uD
 TE
+HT
 MM
-MM
-TE
+uD
 Nm
 Nm
 Nm
@@ -3094,12 +3336,12 @@ MM
 TE
 uD
 Nm
-uD
-TE
+aL
+TU
 MM
 MM
 MM
-MM
+vg
 zH
 uD
 TE
@@ -3146,14 +3388,14 @@ MM
 MM
 TE
 TE
-TE
+Lh
 MM
 MM
 MM
 MM
-MM
-MM
-MM
+Oz
+AX
+Lh
 MM
 MM
 MM
@@ -3175,8 +3417,8 @@ MM
 MM
 MM
 rD
-MM
-MM
+zq
+ei
 uD
 TE
 MM
@@ -3227,9 +3469,9 @@ MM
 MM
 MM
 vm
-Pm
-Pm
-Ox
+UX
+UX
+TM
 TE
 TE
 "}
@@ -3278,8 +3520,8 @@ Mj
 ef
 MM
 MM
-xk
-UX
+BY
+KR
 UX
 DU
 uD
@@ -3288,7 +3530,7 @@ MM
 (44,1,1) = {"
 TE
 uD
-vm
+my
 UX
 KO
 XQ
@@ -3330,7 +3572,7 @@ MM
 MM
 MM
 MM
-xk
+BY
 lB
 UX
 DU
@@ -3341,9 +3583,9 @@ MM
 TE
 TE
 KO
+KR
 UX
-DU
-MM
+tA
 MM
 MM
 MM
@@ -3383,7 +3625,7 @@ MM
 MM
 TE
 xk
-UX
+KR
 UX
 DU
 MM
@@ -3395,7 +3637,7 @@ MM
 xk
 ML
 KO
-MM
+tr
 MM
 MM
 MM
@@ -3434,10 +3676,10 @@ MM
 MM
 uD
 TE
-Oz
+ED
 AX
 AX
-Lh
+vL
 MM
 MM
 "}
@@ -3445,9 +3687,9 @@ MM
 MM
 MM
 xk
-MM
-DU
-KO
+KR
+UX
+Ud
 uD
 MM
 MM
@@ -3496,7 +3738,7 @@ MM
 (48,1,1) = {"
 MM
 MM
-Oz
+ED
 QL
 uD
 TE

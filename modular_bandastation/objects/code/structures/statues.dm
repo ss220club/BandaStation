@@ -277,3 +277,60 @@
 	icon_state = "srt"
 	anchored = TRUE
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF
+
+///MARK: Secret event structures
+/obj/structure/statue/gargoyle
+	name = "статуя горгульи"
+	desc = "Темная, потрескавшаяся от времени статуя горгульи"
+	icon = 'modular_bandastation/objects/icons/obj/structures/gargoyle_32x64.dmi'
+	icon_state = "gargoyle"
+	layer = ABOVE_MOB_LAYER
+	anchored = TRUE
+	max_integrity = 1000
+	abstract_type = /obj/structure/statue/gargoyle
+
+/obj/structure/statue/dark_column
+	name = "тёмная колонна"
+	desc = "Тёмная, вся в рунах - от неё словно выворачивает душу наизнанку..."
+	icon = 'modular_bandastation/objects/icons/obj/structures/statuelarge.dmi'
+	icon_state = "column_dark"
+	layer = ABOVE_MOB_LAYER
+	pixel_y = 7
+	anchored = TRUE
+	max_integrity = 1000
+	abstract_type = /obj/structure/statue/dark_column
+
+/obj/structure/statue/dark_column/half
+	name = "треснувшая тёмная колонна"
+	icon_state = "column_dark_half"
+
+/obj/structure/statue/dark_bowl
+	name = "тёмная чаша"
+	desc = "Тёмная чаша, судя по всему - принадлежащая для разжигания огня"
+	icon = 'modular_bandastation/objects/icons/obj/structures/bowl.dmi'
+	icon_state = "dark_bowl"
+	layer = ABOVE_MOB_LAYER
+	anchored = TRUE
+	max_integrity = 1000
+	abstract_type = /obj/structure/statue/gargoyle
+
+/obj/structure/statue/dark_bowl/light
+	name = "зажжённая тёмная чаша"
+	desc = "Тёмная чаша, из которой выходит мрачное пламя - от него не исходит свет, и никогда не будет исходить тепло..."
+	icon_state = "dark_bowl_light"
+
+/obj/structure/statue/dark_bowl/proc/ignite()
+	if(istype(src, /obj/structure/statue/dark_bowl/light))
+		return
+	var/turf/bowl_turf = get_turf(src)
+	if(!bowl_turf)
+		return
+	var/obj/structure/statue/dark_bowl/light/lit_bowl = new(bowl_turf)
+	lit_bowl.dir = dir
+	qdel(src)
+
+/obj/item/shadow_mirror
+	name = "Тёмное Зеркало"
+	desc = "Оно не отражает ничего - лишь показывает Тьму"
+	icon = 'icons/obj/clothing/head/utility.dmi'
+	icon_state = "shadowmirror"
