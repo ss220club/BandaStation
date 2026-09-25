@@ -236,7 +236,7 @@
 
 /datum/outfit/centcom/specops/equipped
 	name = "NT SpecOps - Operative (Rifleman)"
-	back = /obj/item/mod/control/pre_equipped/specops
+	back = /obj/item/storage/backpack/duffelbag/syndie/centcom/ammo
 	backpack_contents = list(
 		/obj/item/storage/box/survival/centcom,
 		/obj/item/clothing/head/beret/ert/specops,
@@ -260,13 +260,17 @@
 	suit = /obj/item/clothing/suit/armor/vest/specops/parka
 	head = /obj/item/clothing/head/helmet/toggleable/nvg
 
+/datum/outfit/centcom/specops/equipped/modsuit
+	name = "NT SpecOps - Operative (Rifleman/MOD)"
+	back = /obj/item/mod/control/pre_equipped/specops
+
 /datum/id_trim/centcom/specops/unmarked
 	assignment = "Operative"
 
 /datum/outfit/centcom/specops/equipped/medic
 	name = "NT SpecOps - Operative (Medic)"
 	id_trim = /datum/id_trim/centcom/specops/medic
-	back = /obj/item/mod/control/pre_equipped/specops
+	back = /obj/item/storage/backpack/duffelbag/syndie/centcom/med
 	backpack_contents = list(
 		/obj/item/storage/box/survival/centcom/specops,
 		/obj/item/clothing/head/beret/ert/specops,
@@ -289,10 +293,13 @@
 	suit = /obj/item/clothing/suit/armor/vest/specops/parka
 	head = /obj/item/clothing/head/helmet/toggleable/nvg
 
+/datum/outfit/centcom/specops/equipped/medic/modsuit
+	name = "NT SpecOps - Operative (Medic/MOD)"
+	back = /obj/item/mod/control/pre_equipped/specops
+
 /datum/outfit/centcom/specops/equipped/machinegunner
 	name = "NT SpecOps - Operative (Machinegunner)"
 	id_trim = /datum/id_trim/centcom/specops/machinegunner
-	back = /obj/item/mod/control/pre_equipped/specops
 	backpack_contents = list(
 		/obj/item/storage/box/survival/centcom/specops,
 		/obj/item/clothing/head/beret/ert/specops,
@@ -318,10 +325,13 @@
 	suit = /obj/item/clothing/suit/armor/swat/specops
 	head = /obj/item/clothing/head/helmet/toggleable/nvg
 
+/datum/outfit/centcom/specops/equipped/machinegunner/modsuit
+	name = "NT SpecOps - Operative (Machinegunner/MOD)"
+	back = /obj/item/mod/control/pre_equipped/specops
+
 /datum/outfit/centcom/specops/equipped/breacher
 	name = "NT SpecOps - Operative (Breacher)"
 	id_trim = /datum/id_trim/centcom/specops/breacher
-	back = /obj/item/mod/control/pre_equipped/specops
 	backpack_contents = list(
 		/obj/item/storage/box/survival/centcom/specops,
 		/obj/item/clothing/head/beret/ert/specops,
@@ -346,10 +356,13 @@
 	suit = /obj/item/clothing/suit/armor/vest/specops/parka
 	head = /obj/item/clothing/head/helmet/toggleable/nvg
 
+/datum/outfit/centcom/specops/equipped/breacher/modsuit
+	name = "NT SpecOps - Operative (Breacher/MOD)"
+	back = /obj/item/mod/control/pre_equipped/specops
+
 /datum/outfit/centcom/specops/equipped/sniper
 	name = "NT SpecOps - Operative (Sniper)"
 	id_trim = /datum/id_trim/centcom/specops/sniper
-	back = /obj/item/mod/control/pre_equipped/specops
 	backpack_contents = list(
 		/obj/item/storage/box/survival/centcom/specops,
 		/obj/item/clothing/head/beret/ert/specops,
@@ -374,3 +387,7 @@
 	uniform = /obj/item/clothing/under/hoodie_black
 	suit = /obj/item/clothing/suit/armor/vest/specops/parka
 	head = /obj/item/clothing/head/helmet/toggleable/nvg
+
+/datum/outfit/centcom/specops/equipped/sniper/modsuit
+	name = "NT SpecOps - Operative (Sniper/MOD)"
+	back = /obj/item/mod/control/pre_equipped/specops
