@@ -188,7 +188,7 @@ GAME_VERB(/mob, me_verb, VERB_ME, null)
 	message = copytext(message, customsaypos + 1)
 	if (!message)
 		mods[MODE_CUSTOM_SAY_ERASE_INPUT] = TRUE
-		// message = "an interesting thing to say" // BANDASTATION REMOVAL
+		message = "..." // BANDASTATION EDIT - TTS (Replacing the "an interesting thing to say" with "..." so that it is not voiced by TTS)
 	return message
 /**
  * Extracts and cleans message of any extenstions at the begining of the message
