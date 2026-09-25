@@ -333,7 +333,7 @@
 			def_zone = targeting,
 			attack_flag = MELEE,
 			absorb_text = span_notice("Ваша броня защитила вашу [targeting_human_readable]!"),
-			soften_text = span_warning("Ваша броня смягчила удар, нанесенный в вашу [targeting_human_readable]!"),
+			soften_text = span_warning("Ваша броня смягчила удар, нанесённый в вашу [targeting_human_readable]!"),
 			armour_penetration = attacking_item.armour_penetration,
 			weak_against_armour = attacking_item.weak_against_armour,
 		), ARMOR_MAX_BLOCK)

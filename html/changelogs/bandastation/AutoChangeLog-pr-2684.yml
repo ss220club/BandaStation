@@ -1,0 +1,4 @@
+author: "Co0kie-GG"
+delete-after: True
+changes:
+  - bugfix: "Кастомная речь и эмоуты в рации теперь работают корректно для всех"

@@ -4,7 +4,7 @@
 	jobtype = /datum/job/blueshield
 	uniform = /obj/item/clothing/under/rank/blueshield
 	suit = /obj/item/clothing/suit/armor/vest/blueshield_jacket
-	suit_store = /obj/item/gun/energy/eg_14
+	suit_store = /obj/item/melee/baton/security/electrostaff/loaded
 	gloves = /obj/item/clothing/gloves/tackler/combat
 	id = /obj/item/card/id/advanced/nanotrasen_official
 	id_trim = /datum/id_trim/job/blueshield
@@ -15,14 +15,15 @@
 
 	backpack = /obj/item/storage/backpack/blueshield
 	backpack_contents = list(
-		/obj/item/storage/box/deathimp
+		/obj/item/storage/box/deathimp,
+		/obj/item/gun/energy/eg_14
 	)
 	satchel = /obj/item/storage/backpack/satchel/blueshield
 	duffelbag = /obj/item/storage/backpack/duffelbag/blueshield
 
 	head = /obj/item/clothing/head/beret/blueshield
 	box = /obj/item/storage/box/survival/security
-	belt = /obj/item/modular_computer/pda/heads/blueshield
+	belt = /obj/item/modular_computer/pda/crew/heads/blueshield
 
 /datum/outfit/plasmaman/blueshield
 	name = "Blueshield Plasmaman"

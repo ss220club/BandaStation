@@ -111,8 +111,8 @@ GLOBAL_LIST_EMPTY(objects_by_id_tag)
 			message_verb_continuous = "слабо " + ru_attack_verb(message_verb_continuous)
 
 		user.visible_message(
-			span_danger("[capitalize(user.declent_ru(NOMINATIVE))] [message_verb_continuous] [declent_ru(ACCUSATIVE)] с помощью [attacking_item.declent_ru(GENITIVE)][damage ? "." : ", [no_damage_feedback]!"]"),
-			span_danger("Вы [message_verb_simple] [declent_ru(ACCUSATIVE)] с помощью [attacking_item.declent_ru(GENITIVE)][damage ? "." : ", [no_damage_feedback]!"]"),
+			span_danger("[capitalize(user.declent_ru(NOMINATIVE))] [ru_attack_verb(message_verb_continuous)] [declent_ru(ACCUSATIVE)] с помощью [attacking_item.declent_ru(GENITIVE)][damage ? "." : ", [no_damage_feedback]!"]"),
+			span_danger("Вы [ru_attack_verb(message_verb_simple)] [declent_ru(ACCUSATIVE)] с помощью [attacking_item.declent_ru(GENITIVE)][damage ? "." : ", [no_damage_feedback]!"]"),
 			null,
 			COMBAT_MESSAGE_RANGE,
 		)

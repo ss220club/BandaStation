@@ -440,6 +440,20 @@ required_map = "IceBoxStation.dmm"
 coordinates = [179, 162, 3]
 trait_name = "Station"
 
+[templates.iceboxstation_chaplain_cemetery]
+map_files = ["iceboxstation_chaplain_cemetery.dmm"]
+directory = "_maps/bandastation/automapper/templates/iceboxstation/"
+required_map = "IceBoxStation.dmm"
+coordinates = [166, 131, 2]
+trait_name = "Station"
+
+[templates.iceboxstation_eng_animals]
+map_files = ["iceboxstation_eng_animals.dmm"]
+directory = "_maps/bandastation/automapper/templates/iceboxstation/"
+required_map = "IceBoxStation.dmm"
+coordinates = [119, 87, 3]
+trait_name = "Station"
+
 # TramStation
 [templates.tramstation_detective_office]
 map_files = ["tramstation_detective_office.dmm"]
@@ -827,4 +841,83 @@ map_files = ["wawastation_wrynroach.dmm"]
 directory = "_maps/bandastation/automapper/templates/wawastation/"
 required_map = "wawastation.dmm"
 coordinates = [39, 80, 1]
+trait_name = "Station"
+
+# KiloStation
+
+[templates.kilostation_blueshield_zoo]
+map_files = ["kilostation_blueshield_zoo.dmm"]
+directory = "_maps/bandastation/automapper/templates/kilostation/"
+required_map = "KiloStation.dmm"
+coordinates = [121, 113, 1]
+trait_name = "Station"
+
+[templates.kilostation_ntr]
+map_files = ["kilostation_ntr.dmm"]
+directory = "_maps/bandastation/automapper/templates/kilostation/"
+required_map = "KiloStation.dmm"
+coordinates = [121, 104, 1]
+trait_name = "Station"
+
+[templates.kilostation_magistrate]
+map_files = ["kilostation_magistrate.dmm"]
+directory = "_maps/bandastation/automapper/templates/kilostation/"
+required_map = "KiloStation.dmm"
+coordinates = [104, 112, 1]
+trait_name = "Station"
+
+[templates.kilostation_armory]
+map_files = ["kilostation_armory.dmm"]
+directory = "_maps/bandastation/automapper/templates/kilostation/"
+required_map = "KiloStation.dmm"
+coordinates = [78, 68, 1]
+trait_name = "Station"
+
+[templates.kilostation_perma_cryo]
+map_files = ["kilostation_perma_cryo.dmm"]
+directory = "_maps/bandastation/automapper/templates/kilostation/"
+required_map = "KiloStation.dmm"
+coordinates = [32, 95, 1]
+trait_name = "Station"
+
+[templates.kilostation_cryo]
+map_files = ["kilostation_cryo.dmm"]
+directory = "_maps/bandastation/automapper/templates/kilostation/"
+required_map = "KiloStation.dmm"
+coordinates = [73, 113, 1]
+trait_name = "Station"
+
+[templates.kilostation_med_stasis]
+map_files = ["kilostation_med_stasis.dmm"]
+directory = "_maps/bandastation/automapper/templates/kilostation/"
+required_map = "KiloStation.dmm"
+coordinates = [75, 139, 1]
+trait_name = "Station"
+
+[templates.kilostation_library_galactic_map]
+map_files = ["kilostation_library_galactic_map.dmm"]
+directory = "_maps/bandastation/automapper/templates/kilostation/"
+required_map = "KiloStation.dmm"
+coordinates = [97, 128, 1]
+trait_name = "Station"
+
+[templates.kilostation_bridge_galactic_map]
+map_files = ["kilostation_bridge_galactic_map.dmm"]
+directory = "_maps/bandastation/automapper/templates/kilostation/"
+required_map = "KiloStation.dmm"
+coordinates = [117, 110, 1]
+trait_name = "Station"
+
+[templates.kilostation_rat_disposal]
+map_files = ["kilostation_rat_disposal.dmm"]
+directory = "_maps/bandastation/automapper/templates/kilostation/"
+required_map = "KiloStation.dmm"
+coordinates = [145, 98, 1]
+trait_name = "Station"
+
+[templates.kilostation_wrynroach]
+map_files = ["kilostation_wrynroach.dmm"]
+directory = "_maps/bandastation/automapper/templates/kilostation/"
+required_map = "KiloStation.dmm"
+coordinates = [127, 151, 1]
 trait_name = "Station"
