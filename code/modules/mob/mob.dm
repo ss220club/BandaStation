@@ -1449,6 +1449,10 @@ GAME_VERB_NATIVE(/mob, DisDblClick, ".dblclick", null, argu = null as anything, 
 /mob/proc/adjust_nutrition(change, forced = FALSE) //Honestly FUCK the oldcoders for putting nutrition on /mob someone else can move it up because holy hell I'd have to fix SO many typechecks
 	if(HAS_TRAIT(src, TRAIT_NOHUNGER) && !forced)
 		return
+	// BANDASTATION ADDITION START - Vampire: reject ordinary gains; blood feeding uses forced.
+	if(change > 0 && HAS_TRAIT(src, TRAIT_VAMPIRE) && !forced)
+		return
+	// BANDASTATION ADDITION END
 
 	nutrition = max(0, nutrition + change)
 
@@ -1464,6 +1468,10 @@ GAME_VERB_NATIVE(/mob, DisDblClick, ".dblclick", null, argu = null as anything, 
 /mob/proc/set_nutrition(set_to, forced = FALSE) //Seriously fuck you oldcoders.
 	if(HAS_TRAIT(src, TRAIT_NOHUNGER) && !forced)
 		return
+	// BANDASTATION ADDITION START - Vampire: also cover feeding sources that set nutrition directly.
+	if(set_to > nutrition && HAS_TRAIT(src, TRAIT_VAMPIRE) && !forced)
+		return
+	// BANDASTATION ADDITION END
 
 	nutrition = max(0, set_to)
 

@@ -1,0 +1,49 @@
+.theme-Vampire {
+  --vampire-background: radial-gradient(
+    circle,
+    #10090b 54%,
+    #1e0b10 80%,
+    #300e17 100%
+  );
+
+  .TitleBar,
+  .Window {
+    background: var(--vampire-background);
+  }
+
+  .Window__content {
+    background-image: none;
+  }
+
+  .Vampire__blood-total {
+    padding: 0.75rem;
+    border: 1px solid rgba(224, 91, 101, 0.3);
+    border-radius: 4px;
+    background: rgba(224, 91, 101, 0.08);
+    color: #e05b65;
+    font-size: 16px;
+    text-align: center;
+  }
+
+  .Vampire__blood-requirement {
+    display: inline-block;
+    padding: 0.15rem 0.5rem;
+    border: 1px solid;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: bold;
+    white-space: nowrap;
+
+    &--locked {
+      color: #e99ba2;
+      border-color: rgba(224, 91, 101, 0.35);
+      background: rgba(224, 91, 101, 0.12);
+    }
+
+    &--reached {
+      color: #91cba1;
+      border-color: rgba(145, 203, 161, 0.35);
+      background: rgba(145, 203, 161, 0.1);
+    }
+  }
+}

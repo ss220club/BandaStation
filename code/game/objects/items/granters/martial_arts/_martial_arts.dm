@@ -11,6 +11,11 @@
 		CRASH("Someone attempted to learn [type], which did not have a martial arts set.")
 	if(!isliving(user))
 		return FALSE
+	// BANDASTATION ADDITION START - Vampire
+	if(HAS_TRAIT(user, TRAIT_VAMPIRE))
+		to_chat(user, span_warning("Ваши вампирские силы не позволяют освоить это боевое искусство!"))
+		return FALSE
+	// BANDASTATION ADDITION END
 	if(locate(martial) in user.martial_arts)
 		to_chat(user, span_warning("Вы уже освоили [martial_name]!"))
 		return FALSE

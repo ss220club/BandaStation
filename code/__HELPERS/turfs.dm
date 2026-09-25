@@ -563,9 +563,12 @@ Turf and target are separate in case you want to teleport some distance from a t
 /turf/proc/is_sunlight_blocked(occlusion_distance = 20)
 	if(HAS_TRAIT(src, TRAIT_TURF_SUN_BLOCKED))
 		return TRUE
-
-	var/target_x = round(sin(SSsun.azimuth), 0.01)
-	var/target_y = round(cos(SSsun.azimuth), 0.01)
+	// BANDASTATION EDIT START: Use cached sun direction components
+	// var/target_x = round(sin(SSsun.azimuth), 0.01)
+	// var/target_y = round(cos(SSsun.azimuth), 0.01)
+	var/target_x = SSsun.sun_x
+	var/target_y = SSsun.sun_y
+	// BANDASTATION EDIT END: Use cached sun direction components
 	var/x_hit = x
 	var/y_hit = y
 	var/turf/hit
