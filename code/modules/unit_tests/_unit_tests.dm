@@ -232,6 +232,7 @@
 #include "leash.dm"
 #include "lesserform.dm"
 #include "light_replacer.dm"
+#include "lighting_test.dm"
 #include "limbsanity.dm"
 #include "ling_decap.dm"
 #include "liver.dm"
