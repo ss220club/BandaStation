@@ -84,7 +84,7 @@
 	research_tree_icon_state = "rustgrenade"
 	drafting_tier = 4
 
-/datum/heretic_knowledge/spell/crimson_cleave
+/datum/heretic_knowledge/crimson_cleave
 	name = "Багровый тесак"
 	desc = "Позволяет выковать Багровый тесак — устрашающее оружие, жаждущее крови.<br>\
 		Его удары исцеляют вас на величину наносимого урона, а само оно способно поражать сразу нескольких врагов. \
