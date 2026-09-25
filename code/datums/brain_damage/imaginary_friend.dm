@@ -355,7 +355,8 @@
 	var/list/actual_hearers = list(src) // BANDASTATION EDIT: Imaginary friend selection
 
 	for(var/mob/person in group)
-		person.Hear(src, language, message, null, null, null, spans, message_mods, range)
+		if(person.z == z && get_dist(src, person) <= range)
+			person.Hear(src, language, message, null, null, null, spans, message_mods, range)
 
 	// Speech bubble, but only for those who have runechat off
 	var/list/speech_bubble_recipients = list()
