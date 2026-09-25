@@ -309,7 +309,6 @@
 		/obj/item/ammo_box/magazine/cm40/ap,
 		/obj/item/ammo_box/magazine/cm40/incendiary,
 		/obj/item/ammo_box/magazine/cm40/hp,
-		/obj/item/gun/ballistic/rocketlauncher/oneuse/heap,
 	)
 	suit = /obj/item/clothing/suit/armor/swat/specops
 	suit_store = /obj/item/gun/ballistic/automatic/cm40
