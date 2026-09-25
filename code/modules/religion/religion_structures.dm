@@ -66,6 +66,10 @@
 /obj/structure/altar/dark/proc/perform_dark_ritual()
 	new /obj/effect/temp_visual/shadow_phase_smoke(loc)
 	playsound(src, pick('sound/effects/hallucinations/behind_you1.ogg', 'sound/effects/hallucinations/i_see_you1.ogg', 'sound/effects/hallucinations/im_here1.ogg'), 75, TRUE)
+	for(var/obj/structure/statue/dark_bowl/bowl in view(2, src))
+		if(istype(bowl, /obj/structure/statue/dark_bowl/light))
+			continue
+		bowl.ignite()
 
 /obj/structure/altar/dark/two
 	dark_response = "Ты чувствуешь, как иная сила пробуждается внутри тебя... Рождается."
