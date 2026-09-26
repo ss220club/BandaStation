@@ -161,17 +161,10 @@
 	if(!istype(shelf))
 		return
 
-	if(istype(over, /obj/structure/closet/crate))
-		over = shelf
-
-	if(!isturf(over) && !istype(over, /obj/structure/cargo_shelf))
+	if(!isturf(over))
 		return
 
-	if(!shelf.remove_crate(src))
-		return
-
-	if(isturf(over))
-		forceMove(over)
+	forceMove(over)
 
 /obj/structure/cargo_shelf/examine(mob/user)
 	. = ..()
