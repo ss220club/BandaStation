@@ -29,6 +29,8 @@
 	zone = BODY_ZONE_HEAD
 	slot = ORGAN_SLOT_EXTERNAL_VOX_QUILLS
 
+	use_mob_sprite_as_obj_sprite = TRUE
+
 	organ_flags = parent_type::organ_flags | ORGAN_EXTERNAL
 
 /datum/bodypart_overlay/mutant/quills/vox
@@ -50,6 +52,8 @@
 
 	zone = BODY_ZONE_HEAD
 	slot = ORGAN_SLOT_EXTERNAL_VOX_FACIAL_QUILLS
+
+	use_mob_sprite_as_obj_sprite = TRUE
 
 	organ_flags = parent_type::organ_flags | ORGAN_EXTERNAL
 
