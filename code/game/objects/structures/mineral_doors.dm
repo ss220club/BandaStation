@@ -224,6 +224,38 @@
 	max_integrity = 300
 	rad_insulation = RAD_HEAVY_INSULATION
 
+/obj/structure/mineral_door/silver/dark
+	name = "silver dark door"
+	icon_state = "silverdark"
+	desc = "Серебряная дверь, покрытая странными символами. Кажется, она чего-то ждет."
+	resistance_flags = INDESTRUCTIBLE
+	var/your_answer = "В темноте рождается истина"
+
+/obj/structure/mineral_door/silver/dark/attack_hand(mob/living/user, list/modifiers)
+	if(!Adjacent(user))
+		return ..()
+	if(door_opened)
+		return
+	var/response = tgui_input_text(user, "Произнесите заклинание", "Серебряная дверь", max_length = 50, encode = FALSE,)
+	if(isnull(response))
+		return
+	response = trim(response)
+	if(response == "[your_answer]")
+		to_chat(user, span_purple("Они впустили тебя..."))
+		new /obj/effect/temp_visual/shadow_phase_smoke(loc)
+		playsound(src, pick('sound/effects/hallucinations/behind_you1.ogg', 'sound/effects/hallucinations/i_see_you1.ogg', 'sound/effects/hallucinations/im_here1.ogg'), 75, TRUE)
+		unlock_and_open()
+	else
+		to_chat(user, span_danger("Они не услышали тебя"))
+
+/obj/structure/mineral_door/silver/dark/proc/unlock_and_open()
+	if(door_opened || isSwitchingStates)
+		return
+	Open()
+
+/obj/structure/mineral_door/silver/dark/TryToSwitchState(atom/user)
+	return
+
 /obj/structure/mineral_door/gold
 	name = "gold door"
 	icon_state = "gold"

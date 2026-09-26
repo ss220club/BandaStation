@@ -201,6 +201,15 @@
 /turf/open/floor/grass/fairy/spawniconchange()
 	icon_state = "fairygrass[rand(0,3)]"
 
+/turf/open/floor/grass/shadowgrass
+	name = "shadowgrass patch"
+	desc = "This grass is too magical to look real..."
+	icon_state = "shadowgrass"
+	floor_tile = /obj/item/stack/tile/fairygrass
+
+/turf/open/floor/grass/shadowgrass/spawniconchange()
+	icon_state = "shadowgrass[rand(0,3)]"
+
 /turf/open/floor/hay
 	name = "hay"
 	desc = "HOW hungry?"
@@ -236,7 +245,6 @@
 	barefootstep = FOOTSTEP_SAND
 	clawfootstep = FOOTSTEP_SAND
 	heavyfootstep = FOOTSTEP_GENERIC_HEAVY
-
 
 /turf/open/floor/fake_snow/Initialize(mapload)
 	. = ..()

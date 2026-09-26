@@ -115,6 +115,15 @@
 	unpickable = TRUE
 	enclosed_for_terrain = TRUE
 
+/datum/map_template/ruin/icemoon/shadow_template
+	name = "The Shadow Template"
+	id = "shadowtemplate"
+	description = "A mysterious, weathered temple of magical slabs, serving as a home to the darkest of entities."
+	prefix = "_maps/RandomRuins/AnywhereRuins/"
+	suffix = "shadow_template.dmm"
+	always_place = TRUE
+	enclosed_for_terrain = TRUE
+
 // below ground only
 
 /datum/map_template/ruin/icemoon/underground
