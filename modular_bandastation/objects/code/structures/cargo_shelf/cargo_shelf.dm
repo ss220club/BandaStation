@@ -19,6 +19,7 @@
 	anchored = TRUE
 	gender = FEMALE
 	armor_type = /datum/armor/structure_cargo_shelf
+	custom_materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 6)
 
 	VAR_FINAL/capacity = CARGO_SHELF_CAPACITY
 	var/use_delay = CARGO_SHELF_USE_DELAY
