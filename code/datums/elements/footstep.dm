@@ -145,7 +145,7 @@
 	if(forced || SHOULD_ATOM_DISABLE_FOOTSTEPS(source) || !momentum_change)
 		return
 
-	if(source.body_position == LYING_DOWN && !source.buckled) // BANDASTATION EDIT: buckled mobs are not making crawl sound
+	if(source.body_position == LYING_DOWN && !source.buckled) // BANDASTATION EDIT: buckled mobs do not make crawl sounds
 		play_craw_step(source)
 		return
 
