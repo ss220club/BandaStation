@@ -51,7 +51,7 @@ const RecordInfo = (props) => {
   if (!foundRecord) return <NoticeBox>Ничего не выбрано.</NoticeBox>;
 
   const { act, data } = useBackend<SecurityRecordsData>();
-  const { available_statuses } = data;
+  const { available_statuses, pai_integrated } = data;
   const [open, setOpen] = useLocalState<boolean>('printOpen', false);
 
   const { min_age, max_age } = data;
@@ -90,15 +90,17 @@ const RecordInfo = (props) => {
                   Распечатать
                 </Button>
               </Stack.Item>
-              <Stack.Item>
-                <Button.Confirm
-                  icon="trash"
-                  onClick={() => act('delete_record', { crew_ref: crew_ref })}
-                  tooltip="Удаляет запись."
-                >
-                  Удалить
-                </Button.Confirm>
-              </Stack.Item>
+              {!pai_integrated && (
+                <Stack.Item>
+                  <Button.Confirm
+                    icon="trash"
+                    onClick={() => act('delete_record', { crew_ref: crew_ref })}
+                    tooltip="Удаляет запись."
+                  >
+                    Удалить
+                  </Button.Confirm>
+                </Stack.Item>
+              )}
             </Stack>
           }
           fill

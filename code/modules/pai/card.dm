@@ -24,6 +24,13 @@
 	var/mob/living/silicon/pai/pai
 	/// Prevents a crew member from hitting "request pAI" repeatedly
 	var/request_spam = FALSE
+	/// Extra software is restricted to cards manufactured for Syndicate operatives.
+	var/syndicate_hardware = FALSE
+
+/obj/item/pai_card/syndicate
+	name = "syndicate personal AI device"
+	desc = "A modified personal AI device with expanded memory and clandestine software."
+	syndicate_hardware = TRUE
 
 /obj/item/pai_card/Initialize(mapload)
 	. = ..()

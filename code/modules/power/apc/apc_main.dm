@@ -470,13 +470,27 @@
 	. = ..()
 	if(!QDELETED(remote_control_user) && user == remote_control_user)
 		. = UI_INTERACTIVE
+	if(istype(user, /mob/living/silicon/pai))
+		var/mob/living/silicon/pai/pai_user = user
+		if(pai_user.active_remote_apc == src && pai_user.card?.syndicate_hardware && ("Remote Machinery" in pai_user.installed_software) && pai_user.client)
+			. = UI_INTERACTIVE
 
 /obj/machinery/power/apc/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
+	var/mob/living/silicon/pai/pai_user
+	if(istype(ui?.user, /mob/living/silicon/pai))
+		pai_user = ui.user
+		if(pai_user.active_remote_apc != src || !pai_user.card?.syndicate_hardware || !("Remote Machinery" in pai_user.installed_software))
+			return FALSE
+		if(!COOLDOWN_FINISHED(pai_user, remote_apc_action))
+			balloon_alert(pai_user, "APC control recharging")
+			return FALSE
 	. = ..()
 	var/mob/user = ui.user
 
 	if(. || !can_use(user, 1) || (locked && !HAS_SILICON_ACCESS(user) && !failure_timer && action != "toggle_nightshift"))
 		return
+	if(pai_user)
+		COOLDOWN_START(pai_user, remote_apc_action, 30 SECONDS)
 	switch(action)
 		if("lock")
 			if(HAS_SILICON_ACCESS(user))
@@ -541,6 +555,10 @@
 
 /obj/machinery/power/apc/ui_close(mob/user)
 	. = ..()
+	if(istype(user, /mob/living/silicon/pai))
+		var/mob/living/silicon/pai/pai_user = user
+		if(pai_user.active_remote_apc == src)
+			pai_user.active_remote_apc = null
 	if(user == remote_control_user)
 		disconnect_remote_access()
 
