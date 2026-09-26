@@ -5524,6 +5524,7 @@
 #include "code\modules\mob\living\basic\icemoon\ice_demon\ice_demon.dm"
 #include "code\modules\mob\living\basic\icemoon\ice_demon\ice_demon_abilities.dm"
 #include "code\modules\mob\living\basic\icemoon\ice_demon\ice_demon_ai.dm"
+#include "code\modules\mob\living\basic\icemoon\ice_demon\dark_guardian.dm"
 #include "code\modules\mob\living\basic\icemoon\ice_whelp\ice_whelp.dm"
 #include "code\modules\mob\living\basic\icemoon\ice_whelp\ice_whelp_abilities.dm"
 #include "code\modules\mob\living\basic\icemoon\ice_whelp\ice_whelp_ai.dm"

@@ -395,6 +395,10 @@
 	},
 /turf/open/floor/wood/ebonite,
 /area/ruin/shadow_template)
+"oV" = (
+/mob/living/basic/mining/dark_guardian,
+/turf/open/floor/grass/shadowgrass,
+/area/icemoon/surface/outdoors/nospawn)
 "pi" = (
 /obj/effect/decal/cleanable/blood/old{
 	icon_state = "bloodyhands_right"
@@ -510,6 +514,13 @@
 	},
 /turf/open/floor/wood/ebonite,
 /area/ruin/shadow_template)
+"uk" = (
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 10
+	},
+/mob/living/basic/mining/dark_guardian,
+/turf/open/indestructible/stone,
+/area/icemoon/surface/outdoors/nospawn)
 "uD" = (
 /obj/structure/glowshroom/shadowshroom/stat,
 /turf/open/floor/grass/shadowgrass,
@@ -710,6 +721,11 @@
 /obj/effect/turf_decal/weather/snow/corner,
 /turf/open/indestructible/stone,
 /area/icemoon/surface/outdoors/nospawn)
+"BR" = (
+/obj/effect/turf_decal/siding/thinplating_new/dark,
+/mob/living/basic/mining/dark_guardian,
+/turf/open/indestructible/stone,
+/area/icemoon/surface/outdoors/nospawn)
 "BV" = (
 /obj/effect/turf_decal/weather/snow/corner{
 	dir = 9
@@ -842,6 +858,10 @@
 	},
 /turf/open/floor/wood/ebonite,
 /area/ruin/shadow_template)
+"Jm" = (
+/mob/living/basic/mining/dark_guardian,
+/turf/open/misc/asteroid/moon,
+/area/icemoon/surface/outdoors/nospawn)
 "Jn" = (
 /obj/effect/turf_decal/weather/snow/corner{
 	dir = 10
@@ -988,6 +1008,13 @@
 /obj/effect/turf_decal/siding/thinplating_new/dark{
 	dir = 5
 	},
+/turf/open/indestructible/stone,
+/area/icemoon/surface/outdoors/nospawn)
+"OB" = (
+/obj/effect/turf_decal/siding/thinplating_new/dark{
+	dir = 9
+	},
+/mob/living/basic/mining/dark_guardian,
 /turf/open/indestructible/stone,
 /area/icemoon/surface/outdoors/nospawn)
 "OJ" = (
@@ -1348,7 +1375,7 @@ uD
 TE
 my
 KO
-Ox
+uk
 MM
 MM
 MM
@@ -1607,7 +1634,7 @@ MM
 MM
 MM
 av
-KO
+Jm
 TE
 TE
 uD
@@ -3468,7 +3495,7 @@ MM
 MM
 MM
 MM
-vm
+OB
 UX
 UX
 TM
@@ -3479,7 +3506,7 @@ TE
 uD
 MM
 MM
-KO
+Jm
 KO
 TE
 uD
@@ -3627,7 +3654,7 @@ TE
 xk
 KR
 UX
-DU
+BR
 MM
 MM
 "}
@@ -3741,7 +3768,7 @@ MM
 ED
 QL
 uD
-TE
+oV
 TE
 MM
 MM
