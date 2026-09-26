@@ -3,8 +3,6 @@
 #define TTS_JOB_REPLACEMENTS "tts_job_replacements"
 
 #define FILE_CLEANUP_DELAY 30 SECONDS
-#define TTS_CLIENT_PLAYBACK_BASE_OFFSET 0.5 SECONDS
-#define TTS_CLIENT_PLAYBACK_MAX_PING_OFFSET 3 SECONDS
 
 SUBSYSTEM_DEF(tts220)
 	name = "Text-to-Speech 220"
@@ -56,6 +54,11 @@ SUBSYSTEM_DEF(tts220)
 	VAR_PRIVATE/list/tts_effects_queue = list()
 	/// Lazy list of request that need to performed to TTS provider API
 	VAR_PRIVATE/list/tts_requests_queue
+
+	/// Time each pending playback request was first queued: `filename` => `world.time`
+	VAR_PRIVATE/list/tts_queue_timestamps = list()
+	/// TTS messages won't play if their requests took longer than this duration of time.
+	VAR_PRIVATE/message_timeout = 7 SECONDS
 
 	/// List of currently existing binding of atom and sound channel: `atom` => `sound_channel`.
 	VAR_PRIVATE/list/tts_local_channels_by_owner = list()
@@ -154,6 +157,8 @@ SUBSYSTEM_DEF(tts220)
 	var/free_rps = clamp(tts_rps_limit - tts_rps, 0, tts_rps_limit)
 	var/requests = LAZYCOPY_RANGE(tts_requests_queue, 1, clamp(LAZYLEN(tts_requests_queue), 0, free_rps) + 1)
 	for(var/request in requests)
+		if(world.time - request[4] > message_timeout)
+			continue
 		var/text = request[1]
 		var/datum/tts_seed/seed = request[2]
 		var/datum/callback/proc_callback = request[3]
@@ -161,6 +166,13 @@ SUBSYSTEM_DEF(tts220)
 		provider.request(text, seed, proc_callback)
 		tts_rps_counter++
 	LAZYCUT(tts_requests_queue, 1, clamp(LAZYLEN(tts_requests_queue), 0, free_rps) + 1)
+
+	var/list/expired_requests = list()
+	for(var/filename in tts_queue)
+		if(world.time - tts_queue_timestamps[filename] > message_timeout)
+			expired_requests += filename
+	tts_queue -= expired_requests
+	tts_queue_timestamps -= expired_requests
 
 	if(sanitized_messages_caching)
 		sanitized_messages_cache.Cut()
@@ -227,7 +239,7 @@ SUBSYSTEM_DEF(tts220)
 		tts_rps_counter++
 		return TRUE
 
-	LAZYADD(tts_requests_queue, list(list(text, seed, proc_callback)))
+	LAZYADD(tts_requests_queue, list(list(text, seed, proc_callback, world.time)))
 	return TRUE
 
 /datum/controller/subsystem/tts220/proc/get_tts(
@@ -304,13 +316,18 @@ SUBSYSTEM_DEF(tts220)
 	)
 
 	if(LAZYLEN(tts_queue[filename]))
-		tts_reused++
-		tts_rrps_counter++
-		LAZYADD(tts_queue[filename], play_tts_cb)
-		return
+		// The pending request already expired - drop it and issue a fresh one.
+		if(world.time - tts_queue_timestamps[filename] > message_timeout)
+			drop_pending_tts(filename)
+		else
+			tts_reused++
+			tts_rrps_counter++
+			LAZYADD(tts_queue[filename], play_tts_cb)
+			return
 
 	queue_request(text, tts_seed, CALLBACK(src, PROC_REF(get_tts_callback), filename, tts_seed))
 
+	tts_queue_timestamps[filename] = world.time
 	LAZYADD(tts_queue[filename], play_tts_cb)
 
 /datum/controller/subsystem/tts220/proc/get_tts_callback(filename, datum/tts_seed/seed, datum/http_response/response)
@@ -321,6 +338,7 @@ SUBSYSTEM_DEF(tts220)
 		provider.timed_out_requests++
 		log_game(span_warning("Error connecting to [provider.name] TTS API. Please inform a maintainer or server host."))
 		message_admins(span_warning("Error connecting to [provider.name] TTS API. Please inform a maintainer or server host."))
+		drop_pending_tts(filename)
 		return
 
 	if(response.status_code != 200)
@@ -335,12 +353,14 @@ SUBSYSTEM_DEF(tts220)
 				tts_errors += "[response.status_code]"
 				tts_errors["[response.status_code]"] = 1
 		tts_error_raw = response.error
+		drop_pending_tts(filename)
 		return
 
 	tts_request_succeeded++
 
 	var/voice = provider.process_response(response)
 	if(!voice)
+		drop_pending_tts(filename)
 		return
 
 	rustutils_file_write_b64decode(voice, "[filename].ogg")
@@ -348,11 +368,22 @@ SUBSYSTEM_DEF(tts220)
 	if(!CONFIG_GET(flag/tts_cache_enabled))
 		addtimer(CALLBACK(src, PROC_REF(cleanup_tts_file), "[filename].ogg"), FILE_CLEANUP_DELAY)
 
+	// The request took too long - the message is stale and should not be played.
+	if(world.time - tts_queue_timestamps[filename] > message_timeout)
+		drop_pending_tts(filename)
+		return
+
 	for(var/datum/callback/cb in tts_queue[filename])
 		cb.InvokeAsync()
 		tts_queue[filename] -= cb
 
 	tts_queue -= filename
+	tts_queue_timestamps -= filename
+
+/// Drops all pending playback callbacks for a filename - the request failed or timed out.
+/datum/controller/subsystem/tts220/proc/drop_pending_tts(filename)
+	tts_queue -= filename
+	tts_queue_timestamps -= filename
 
 /datum/controller/subsystem/tts220/proc/queue_sound_effect_processing(
 	pure_filename, list/effects, processed_filename, datum/callback/output_tts_cb
@@ -412,13 +443,11 @@ SUBSYSTEM_DEF(tts220)
 )
 	var/channel_volume_preference_path = get_volume_preference_for_channel(channel_override)
 	var/list/valid_listeners = list()
-	var/highest_ping = 0
 	for(var/mob/listener as anything in listeners)
 		var/client/listener_client = listener?.client
 		if(!listener_client?.prefs?.read_preference(channel_volume_preference_path))
 			continue
 		valid_listeners += listener
-		highest_ping = max(highest_ping, listener_client.avgping || listener_client.lastping)
 	if(!length(valid_listeners))
 		return
 
@@ -457,12 +486,14 @@ SUBSYSTEM_DEF(tts220)
 			output.channel = get_local_channel_by_owner(speaker)
 			output.wait = TRUE
 	var/reserved_channel
-	if(!output.channel)
+	/// The per-owner channel is persistent and reused by sequential messages of the same speaker - it must not be stopped when this sound ends
+	var/shared_channel = FALSE
+	if(output.channel)
+		shared_channel = TRUE
+	else
 		reserved_channel = SSsounds.reserve_sound_channel()
 		output.channel = reserved_channel || SSsounds.random_available_channel()
 	var/sound_length = SSsounds.get_sound_length(filename2play) || FILE_CLEANUP_DELAY
-	// Calculate threed_sound cleanup delay based on listeners avg ping
-	var/client_playback_offset = TTS_CLIENT_PLAYBACK_BASE_OFFSET + min(ceil(highest_ping / 100), TTS_CLIENT_PLAYBACK_MAX_PING_OFFSET)
 
 	if(self_listener)
 		self_listener.playsound_local(
@@ -481,13 +512,13 @@ SUBSYSTEM_DEF(tts220)
 		)
 
 	if(length(threed_listeners)) // Empty 3d sounds do not pick up listeners anyways
-		new /datum/threed_sound(
+		var/datum/threed_sound/sound_3d = new /datum/threed_sound(
 			speaker,
 			output,
 			threed_listeners,
 			volume = 100,
 			sound_range = SOUND_RANGE,
-			sound_length = sound_length + client_playback_offset,
+			sound_length = sound_length,
 			channel = output.channel,
 			preference_volume = channel_volume_preference_path,
 			preference_signal = channel_override == CHANNEL_TTS_RADIO ? COMSIG_MOB_TTS_RADIO_VOLUME_PREFERENCE_APPLIED : COMSIG_MOB_TTS_VOLUME_PREFERENCE_APPLIED,
@@ -495,8 +526,9 @@ SUBSYSTEM_DEF(tts220)
 			falloff_distance = SOUND_DEFAULT_FALLOFF_DISTANCE,
 			pressure_affected = TRUE
 		)
+		sound_3d.shared_channel = shared_channel
 	if(reserved_channel)
-		addtimer(CALLBACK(SSsounds, TYPE_PROC_REF(/datum/controller/subsystem/sounds, free_sound_channel), reserved_channel), sound_length + client_playback_offset, TIMER_DELETE_ME)
+		addtimer(CALLBACK(SSsounds, TYPE_PROC_REF(/datum/controller/subsystem/sounds, free_sound_channel), reserved_channel), sound_length, TIMER_DELETE_ME)
 
 	if(postSFX)
 		for(var/mob/listener as anything in valid_listeners)
@@ -657,5 +689,3 @@ SUBSYSTEM_DEF(tts220)
 #undef TTS_JOB_REPLACEMENTS
 
 #undef FILE_CLEANUP_DELAY
-#undef TTS_CLIENT_PLAYBACK_BASE_OFFSET
-#undef TTS_CLIENT_PLAYBACK_MAX_PING_OFFSET
