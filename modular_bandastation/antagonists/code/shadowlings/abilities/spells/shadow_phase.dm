@@ -28,7 +28,7 @@
 	channel_time = 0
 	min_req = 1
 	max_req = 3
-	required_thralls = 5
+	required_thralls = 20
 	var/phase_duration = 12 SECONDS
 	var/static/sfx_enter = 'sound/effects/magic/teleport_app.ogg'
 
