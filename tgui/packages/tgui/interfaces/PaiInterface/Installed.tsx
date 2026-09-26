@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useBackend } from 'tgui/backend';
-import { Button, NoticeBox, Section, Stack } from 'tgui-core/components';
+import { Button, NoticeBox, ProgressBar, Section, Stack } from 'tgui-core/components';
 
 import { DOOR_JACK, HOST_SCAN, PHOTO_MODE, SOFTWARE_DESC } from './constants';
 import type { PaiData } from './types';
@@ -66,9 +66,48 @@ function SoftwareButtons(props: SoftwareButtonsProps) {
   const { currentSelection } = props;
 
   const { act, data } = useBackend<PaiData>();
-  const { door_jack, languages, master_name } = data;
+  const { chemical_reserve, door_jack, languages, master_name } = data;
 
   switch (currentSelection) {
+    case 'Camera Network':
+      return (
+        <Button icon="video" onClick={() => act(currentSelection)}>
+          Connect / Disconnect Cameras
+        </Button>
+      );
+    case 'Security Records':
+      return (
+        <Button icon="id-card" onClick={() => act(currentSelection)}>
+          Open Security Records
+        </Button>
+      );
+    case 'Syndicate Radio':
+      return <>Channel active. Use :t before your message.</>;
+    case 'Remote Machinery':
+      return (
+        <>
+          Click a visible APC to open its control window. Door controls: Shift+Click
+          to open or close, Ctrl+Click for bolts, Ctrl+Shift+Click for emergency
+          access, and Alt+Right Click to toggle electrification.
+        </>
+      );
+    case 'Medical Injector':
+      return (
+        <Stack vertical>
+          <Stack.Item>
+            <ProgressBar minValue={0} maxValue={30} value={chemical_reserve}>
+              Injector reserve: {chemical_reserve} / 30
+            </ProgressBar>
+          </Stack.Item>
+          <Stack.Item>
+            {['Epinephrine', 'Salbutamol', 'Mannitol', 'Pentetic Acid', 'Saline Glucose'].map((reagent) => (
+              <Button key={reagent} onClick={() => act(currentSelection, { reagent })}>
+                Inject {reagent} (5u)
+              </Button>
+            ))}
+          </Stack.Item>
+        </Stack>
+      );
     case 'Door Jack':
       return (
         <>
