@@ -26,7 +26,10 @@ GLOBAL_DATUM(main_supermatter_engine, /obj/machinery/power/supermatter_crystal)
 	critical_machine = TRUE
 	base_icon_state = "sm"
 	icon_state = "sm"
-	light_on = FALSE
+	light_on = TRUE
+	light_range = MINIMUM_USEFUL_LIGHT_RANGE
+	light_power = 2
+	light_color = SUPERMATTER_COLOUR
 
 	///The id of our supermatter
 	var/uid = 1
@@ -186,6 +189,9 @@ GLOBAL_DATUM(main_supermatter_engine, /obj/machinery/power/supermatter_crystal)
 	/// If the SM is decorated with holiday lights
 	var/holiday_lights = FALSE
 
+	/// The emissive light mask for the SM
+	var/light_mask_icon = "sm-emissive"
+
 	/// Cooldown for sending emergency alerts to the common radio channel
 	COOLDOWN_DECLARE(common_radio_cooldown)
 
@@ -303,7 +309,7 @@ GLOBAL_DATUM(main_supermatter_engine, /obj/machinery/power/supermatter_crystal)
 	var/accumulated_energy = accumulate_energy(ZAP_ENERGY_ACCUMULATION_NORMAL, energy = internal_energy * zap_transmission_rate * delta_time)
 	if(accumulated_energy && (last_power_zap + (4 - internal_energy * 0.001) SECONDS) < world.time)
 		var/discharged_energy = discharge_energy(ZAP_ENERGY_ACCUMULATION_NORMAL)
-		playsound(src, 'sound/items/weapons/emitter2.ogg', 70, TRUE)
+		playsound(src, 'sound/items/weapons/emitter2.ogg', 35, TRUE) // BANDASTATION EDIT: orig volume = 70, less ear damage
 		hue_angle_shift = clamp(903 * log(10, (internal_energy + 8000)) - 3590, -50, 240)
 		var/zap_color = color_matrix_rotate_hue(hue_angle_shift)
 		supermatter_zap(
@@ -521,6 +527,8 @@ GLOBAL_DATUM(main_supermatter_engine, /obj/machinery/power/supermatter_crystal)
 		else
 			. += mutable_appearance(icon, "holiday_lights")
 			. += emissive_appearance(icon, "holiday_lights_e", src, alpha = src.alpha)
+	if(light_mask_icon)
+		. += emissive_appearance(icon, light_mask_icon, src, alpha = src.alpha)
 	return .
 
 /obj/machinery/power/supermatter_crystal/update_icon(updates)

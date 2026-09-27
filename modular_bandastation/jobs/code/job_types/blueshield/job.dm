@@ -12,6 +12,7 @@
 	exp_required_type_department = EXP_TYPE_SECURITY
 	exp_granted_type = EXP_TYPE_COMMAND
 	config_tag = "BLUESHIELD"
+	tgui_icon = FA_ICON_SHIELD
 
 	outfit = /datum/outfit/job/blueshield
 	plasmaman_outfit = /datum/outfit/plasmaman/blueshield

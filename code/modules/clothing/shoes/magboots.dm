@@ -69,7 +69,7 @@ GAME_VERB_SRC(/obj/item/clothing/shoes/magboots, toggle, usr, "Toggle Magboots",
 			AddElement(/datum/element/adjust_fishing_difficulty, magpulse_fishing_modifier)
 		else if(magpulse_fishing_modifier != fishing_modifier)
 			RemoveElement(/datum/element/adjust_fishing_difficulty)
-		AddComponent(/datum/component/shoe_footstep, active_step_sounds, volume = 50)
+		AddComponent(/datum/component/shoe_footstep, active_step_sounds, volume = 30) // BANDASTATION EDIT: orig volume = 50, less ear damage
 	else
 		if(fishing_modifier)
 			AddElement(/datum/element/adjust_fishing_difficulty, fishing_modifier)
@@ -77,7 +77,7 @@ GAME_VERB_SRC(/obj/item/clothing/shoes/magboots, toggle, usr, "Toggle Magboots",
 			RemoveElement(/datum/element/adjust_fishing_difficulty)
 		detach_clothing_traits(active_traits)
 		slowdown -= slowdown_active
-		AddComponent(/datum/component/shoe_footstep, inactive_step_sounds, volume = 50)
+		AddComponent(/datum/component/shoe_footstep, inactive_step_sounds, volume = 30) // BANDASTATION EDIT: orig volume = 50, less ear damage
 
 	update_appearance()
 	balloon_alert(user, "mag-pulse [magpulse ? "enabled" : "disabled"]")

@@ -69,6 +69,8 @@ GLOBAL_LIST_EMPTY(features_by_species)
 		BODY_ZONE_R_LEG = /obj/item/bodypart/leg/right,
 		BODY_ZONE_CHEST = /obj/item/bodypart/chest,
 	)
+	///A list to override what gets put in a species' survival box. keys are defined in code\__DEFINES\survival_box.dm
+	var/list/survival_box_overrides = list()
 	///Internal organs that are unique to this race, like a tail or other cosmetic organs. list(typepath of organ 1, typepath of organ 2 = "Round").
 	var/list/mutant_organs = list()
 	///Replaces default brain with a different organ
@@ -1215,7 +1217,7 @@ GLOBAL_LIST_EMPTY(features_by_species)
 		humi.apply_damage(burn_damage, BURN, spread_damage = TRUE, wound_clothing = FALSE)
 
 	// For cold damage, we cap at the threshold if you're dead
-	if(humi.get_fire_loss() >= abs(HEALTH_THRESHOLD_DEAD) && humi.stat == DEAD)
+	if(humi.get_fire_loss() >= abs(humi.dead_threshold) && humi.stat == DEAD)
 		return
 
 	// Apply some burn / brute damage to the body (Dependent if the person is hulk or not)
