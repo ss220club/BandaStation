@@ -28,7 +28,7 @@
 	button_icon_state = "shadow_glare"
 	cooldown_time = 20 SECONDS
 	required_thralls = 0
-	max_range = 2
+	max_range = 3
 	requires_dark_user = FALSE
 	requires_dark_target = FALSE
 	channel_time = 0

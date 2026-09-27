@@ -22,6 +22,9 @@ GLOBAL_VAR_INIT(shadowling_hive, null)
 // Stamina regen modifiers
 #define SHADOWLING_DARK_STAMINA_PER_LIMB_DIM   1
 #define SHADOWLING_DARK_STAMINA_PER_LIMB_DEEP  2
+// Regeneration after death
+#define SHADOWLING_DEAD_HEAL_MULTIPLIER 0.5
+#define SHADOWLING_DEATHCOMA_TRAIT "shadowling_deathcoma"
 
 GLOBAL_VAR_INIT(is_shadowling_roundender_started, FALSE)
 

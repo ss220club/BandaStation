@@ -14,7 +14,7 @@
 	// Shadowling related
 	min_req = 1
 	max_req = 10
-	required_thralls = 20
+	required_thralls = 0
 	var/dark_square_radius = 3
 	var/shroom_square_radius = 2
 	var/blind_duration = 3 SECONDS
