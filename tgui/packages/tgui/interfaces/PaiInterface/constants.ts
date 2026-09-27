@@ -52,14 +52,14 @@ export const SOFTWARE_DESC = {
     Includes a printer and lenses.`,
   'Remote Signaler': `A remote signalling device to transmit and receive
     codes.`,
-  'Security HUD': `Syndicate-only security status overlay.`,
-  'Thermal Vision': `Syndicate optics that reveal heat signatures through walls.`,
-  'Night Vision': `Standard pAI low-light optics. Toggle to see in darkness.`,
-  'Medical Injector': `Injects five units of a selected medicine, including Pentetic Acid, into the card holder. The shared 30-unit reserve regains five units each minute. Injections have a ten-second cooldown.`,
-  'Camera Network': `Connects to station cameras. Use the camera actions to move between feeds and end the view.`,
-  'Remote Machinery': `Controls visible airlocks with hotkeys and opens the APC's native interface on click. Door actions share a seven-second cooldown; APC actions share a separate thirty-second cooldown. Works while folded inside the card, without Camera Network.`,
-  'Security Records': `Opens an internal security records console. Changes are not announced to nearby players; administrative records remain intact.`,
-  'Syndicate Radio': `Installs a locked Syndicate encryption key. Speak on the encrypted channel with :t.`,
+ 'Security HUD': `Модуль ИЛС службы безопасности.`,
+  'Thermal Vision': `Тепловизор, позволяющий видеть сигнатуры сквозь стены.`,
+  'Night Vision': `Оптика обычного ПИИ для наблюдения в темноте. Можно включать и выключать.`,
+  'Medical Injector': `Вводит носителю платы 5 единиц выбранного лекарства. Общий запас 30 единиц восстанавливается по 5 единиц в минуту. Перезарядка после укола — 10 секунд.`,
+  'Camera Network': `Подключает ПИИ к сети камер станции. Переключение камер и выход доступны через действия камеры.`,
+  'Remote Machinery': `Позволяет управлять шлюзами и АПЦ. Действия с дверьми имеют общую перезарядку 7 секунд, для АПЦ — перезарядка 30 секунд.`,
+  'Security Records': `Записи охраны объекта. Позволяет просматривать и редактировать данные.`,
+  'Syndicate Radio': `Встроенный ключ шифрования Синдиката. Для связи используйте :t.`,
   'Universal Translator': `Translation module for non-common languages.`,
 } as const;
 

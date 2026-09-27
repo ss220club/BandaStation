@@ -72,23 +72,26 @@ function SoftwareButtons(props: SoftwareButtonsProps) {
     case 'Camera Network':
       return (
         <Button icon="video" onClick={() => act(currentSelection)}>
-          Connect / Disconnect Cameras
+          Подключить / отключить камеры
         </Button>
       );
     case 'Security Records':
       return (
         <Button icon="id-card" onClick={() => act(currentSelection)}>
-          Open Security Records
+          Открыть записи СБ
         </Button>
       );
     case 'Syndicate Radio':
-      return <>Channel active. Use :t before your message.</>;
+      return <>Канал активен. Для передачи используйте :t перед сообщением.</>;
     case 'Remote Machinery':
       return (
         <>
-          Click a visible APC to open its control window. Door controls: Shift+Click
-          to open or close, Ctrl+Click for bolts, Ctrl+Shift+Click for emergency
-          access, and Alt+Right Click to toggle electrification.
+          АПЦ: ЛКМ — открыть окно управления, ПКМ — блокировка интерфейса,
+          Ctrl+ЛКМ — главный выключатель, Shift+ЛКМ — освещение,
+          Ctrl+Shift+ЛКМ — питание окружения, Alt+ЛКМ — оборудование.
+          Общий КД действий с АПЦ — 30 секунд. Двери: Shift+ЛКМ — открыть
+          или закрыть, Ctrl+ЛКМ — болты, Ctrl+Shift+ЛКМ — аварийный доступ,
+          Alt+ЛКМ — электрификация. Общий КД дверей — 7 секунд.
         </>
       );
     case 'Medical Injector':
@@ -96,13 +99,19 @@ function SoftwareButtons(props: SoftwareButtonsProps) {
         <Stack vertical>
           <Stack.Item>
             <ProgressBar minValue={0} maxValue={30} value={chemical_reserve}>
-              Injector reserve: {chemical_reserve} / 30
+              Запас инъектора: {chemical_reserve} / 30
             </ProgressBar>
           </Stack.Item>
           <Stack.Item>
-            {['Epinephrine', 'Salbutamol', 'Mannitol', 'Pentetic Acid', 'Saline Glucose'].map((reagent) => (
+            {[
+              ['Epinephrine', 'Эпинефрин'],
+              ['Salbutamol', 'Сальбутамол'],
+              ['Mannitol', 'Маннитол'],
+              ['Pentetic Acid', 'ДТПА'],
+              ['Saline Glucose', 'Физраствор'],
+            ].map(([reagent, label]) => (
               <Button key={reagent} onClick={() => act(currentSelection, { reagent })}>
-                Inject {reagent} (5u)
+                Ввести {label} (5 ед.)
               </Button>
             ))}
           </Stack.Item>

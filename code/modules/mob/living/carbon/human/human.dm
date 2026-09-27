@@ -152,10 +152,10 @@
 
 ///////HUDs///////
 	if(href_list["hud"])
-		var/mob/living/silicon/pai/syndicate_pai_viewer = usr
-		if(!istype(syndicate_pai_viewer) || !syndicate_pai_viewer.card?.syndicate_hardware || !("Security HUD" in syndicate_pai_viewer.installed_software))
-			syndicate_pai_viewer = null
-		if(!ishuman(usr) && !isobserver(usr) && !syndicate_pai_viewer)
+		var/mob/living/silicon/pai/pai_viewer = usr
+		if(!istype(pai_viewer) || !("Security HUD" in pai_viewer.installed_software))
+			pai_viewer = null
+		if(!ishuman(usr) && !isobserver(usr) && !pai_viewer)
 			return
 		var/mob/human_or_ghost_user = usr
 		var/perpname = get_face_name(get_id_name(""))

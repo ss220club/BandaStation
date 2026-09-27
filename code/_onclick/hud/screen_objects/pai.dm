@@ -84,6 +84,20 @@
 	var/mob/living/silicon/pai/pAI = usr
 	pAI.newscaster.ui_interact(usr)
 
+/atom/movable/screen/pai/camera_network
+	name = "Camera Network"
+	icon = 'icons/hud/screen_ai.dmi'
+	icon_state = "camera"
+	screen_loc = ui_pai_camera_network
+	required_software = "Camera Network"
+
+/atom/movable/screen/pai/camera_network/Click()
+	if(!..())
+		return
+	var/mob/living/silicon/pai/syndicate/pAI = usr
+	if(istype(pAI))
+		pAI.use_camera_network()
+
 /atom/movable/screen/pai/host_monitor
 	name = "Host Health Scan"
 	icon_state = "host_monitor"

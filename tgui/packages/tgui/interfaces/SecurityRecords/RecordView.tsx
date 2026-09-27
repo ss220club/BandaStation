@@ -25,7 +25,7 @@ export const SecurityRecordView = (props) => {
   if (!foundRecord) return <NoticeBox>Ничего не выбрано.</NoticeBox>;
 
   const { data } = useBackend<SecurityRecordsData>();
-  const { assigned_view } = data;
+  const { assigned_view, pai_integrated } = data;
 
   const [open] = useLocalState<boolean>('printOpen', false);
 
@@ -41,7 +41,7 @@ export const SecurityRecordView = (props) => {
           </Stack.Item>
         </Stack>
       </Stack.Item>
-      <Stack.Item grow>{open ? <RecordPrint /> : <RecordInfo />}</Stack.Item>
+      <Stack.Item grow>{open && !pai_integrated ? <RecordPrint /> : <RecordInfo />}</Stack.Item>
     </Stack>
   );
 };
@@ -80,16 +80,18 @@ const RecordInfo = (props) => {
         <Section
           buttons={
             <Stack>
-              <Stack.Item>
-                <Button
-                  height="1.7rem"
-                  icon="print"
-                  onClick={() => setOpen(true)}
-                  tooltip="Распечатать уголовное дело или постер."
-                >
-                  Распечатать
-                </Button>
-              </Stack.Item>
+              {!pai_integrated && (
+                <Stack.Item>
+                  <Button
+                    height="1.7rem"
+                    icon="print"
+                    onClick={() => setOpen(true)}
+                    tooltip="Распечатать уголовное дело или постер."
+                  >
+                    Распечатать
+                  </Button>
+                </Stack.Item>
+              )}
               {!pai_integrated && (
                 <Stack.Item>
                   <Button.Confirm

@@ -470,19 +470,19 @@
 	. = ..()
 	if(!QDELETED(remote_control_user) && user == remote_control_user)
 		. = UI_INTERACTIVE
-	if(istype(user, /mob/living/silicon/pai))
-		var/mob/living/silicon/pai/pai_user = user
-		if(pai_user.active_remote_apc == src && pai_user.card?.syndicate_hardware && ("Remote Machinery" in pai_user.installed_software) && pai_user.client)
+	if(istype(user, /mob/living/silicon/pai/syndicate))
+		var/mob/living/silicon/pai/syndicate/pai_user = user
+		if(pai_user.active_remote_apc == src && ("Remote Machinery" in pai_user.installed_software) && pai_user.client)
 			. = UI_INTERACTIVE
 
 /obj/machinery/power/apc/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
-	var/mob/living/silicon/pai/pai_user
-	if(istype(ui?.user, /mob/living/silicon/pai))
+	var/mob/living/silicon/pai/syndicate/pai_user
+	if(istype(ui?.user, /mob/living/silicon/pai/syndicate))
 		pai_user = ui.user
-		if(pai_user.active_remote_apc != src || !pai_user.card?.syndicate_hardware || !("Remote Machinery" in pai_user.installed_software))
+		if(pai_user.active_remote_apc != src || !("Remote Machinery" in pai_user.installed_software))
 			return FALSE
 		if(!COOLDOWN_FINISHED(pai_user, remote_apc_action))
-			balloon_alert(pai_user, "APC control recharging")
+			balloon_alert(pai_user, "управление АПЦ перезаряжается")
 			return FALSE
 	. = ..()
 	var/mob/user = ui.user
@@ -555,8 +555,8 @@
 
 /obj/machinery/power/apc/ui_close(mob/user)
 	. = ..()
-	if(istype(user, /mob/living/silicon/pai))
-		var/mob/living/silicon/pai/pai_user = user
+	if(istype(user, /mob/living/silicon/pai/syndicate))
+		var/mob/living/silicon/pai/syndicate/pai_user = user
 		if(pai_user.active_remote_apc == src)
 			pai_user.active_remote_apc = null
 	if(user == remote_control_user)

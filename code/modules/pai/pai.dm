@@ -60,21 +60,7 @@
 	var/master_dna
 	/// Used as currency to purchase different abilities
 	var/ram = 100
-	/// Private copy of the software catalogue for Syndicate hardware.
-	var/list/syndicate_software
-	var/chemical_reserve = 30
-	/// One recharge loop restores five units per minute while the tank is not full.
-	var/chemical_recharge_running = FALSE
-	COOLDOWN_DECLARE(chemical_injection)
-	var/thermal_active = FALSE
 	var/night_vision_active = FALSE
-	/// Portable camera console owned by this pAI.
-	var/obj/machinery/computer/camera_advanced/syndicate_pai/camera_console
-	var/obj/machinery/computer/records/security/syndicate_pai/records_console
-	COOLDOWN_DECLARE(remote_door_action)
-	COOLDOWN_DECLARE(remote_apc_action)
-	/// APC whose native interface this pAI is currently controlling.
-	var/obj/machinery/power/apc/active_remote_apc
 	/// The current leash to the owner
 	var/datum/component/leash/leash
 
@@ -108,6 +94,7 @@
 		"Remote Signaler" = 10,
 		"Host Scan" = 20,
 		"Medical HUD" = 20,
+		"Security HUD" = 20,
 		"Night Vision" = 15,
 		"Crew Monitor" = 35,
 		"Door Jack" = 35,
@@ -139,6 +126,38 @@
 /mob/living/silicon/pai/add_sensors() //pAIs have to buy their HUDs
 	return
 
+/// Syndicate hardware creates this mob instead of changing the ordinary pAI at runtime.
+/mob/living/silicon/pai/syndicate
+	ram = 250
+	var/chemical_reserve = 30
+	var/chemical_recharge_running = FALSE
+	COOLDOWN_DECLARE(chemical_injection)
+	var/thermal_active = FALSE
+	var/obj/machinery/computer/camera_advanced/syndicate_pai/camera_console
+	var/obj/machinery/computer/records/security/syndicate_pai/records_console
+	COOLDOWN_DECLARE(remote_door_action)
+	COOLDOWN_DECLARE(remote_apc_action)
+	var/obj/machinery/power/apc/active_remote_apc
+	var/list/syndicate_software = list(
+		"Thermal Vision" = 35,
+		"Medical Injector" = 60,
+		"Camera Network" = 30,
+		"Remote Machinery" = 60,
+		"Security Records" = 25,
+		"Syndicate Radio" = 5,
+	)
+
+/mob/living/silicon/pai/syndicate/Initialize(mapload)
+	available_software = available_software.Copy()
+	available_software.Remove("Night Vision")
+	available_software += syndicate_software
+	return ..()
+
+/mob/living/silicon/pai/syndicate/Destroy()
+	QDEL_NULL(camera_console)
+	QDEL_NULL(records_console)
+	return ..()
+
 /mob/living/silicon/pai/can_interact_with(atom/target)
 	if(target == signaler) // Bypass for signaler
 		return TRUE
@@ -162,8 +181,6 @@
 	QDEL_NULL(instrument)
 	QDEL_NULL(internal_gps)
 	QDEL_NULL(crew_monitor) // BANDASTATION ADDITION
-	QDEL_NULL(camera_console)
-	QDEL_NULL(records_console)
 	QDEL_NULL(newscaster)
 	QDEL_NULL(signaler)
 	QDEL_NULL(leash)
@@ -231,12 +248,6 @@
 		pai_card = new(newcardloc)
 		pai_card.set_personality(src)
 	card = pai_card
-	if(card.syndicate_hardware)
-		ram = 250
-		syndicate_software = available_software.Copy()
-		syndicate_software.Remove("Night Vision")
-		syndicate_software += list("Security HUD" = 20, "Thermal Vision" = 35, "Medical Injector" = 60, "Camera Network" = 30, "Remote Machinery" = 60, "Security Records" = 25, "Syndicate Radio" = 5)
-		available_software = syndicate_software
 	forceMove(pai_card)
 	toggle_leash()
 	addtimer(VARSET_WEAK_CALLBACK(src, holochassis_ready, TRUE), HOLOCHASSIS_INIT_TIME)
@@ -280,6 +291,14 @@
 
 /mob/living/silicon/pai/screwdriver_act(mob/living/user, obj/item/tool)
 	return radio.screwdriver_act(user, tool)
+
+/// The Syndicate's built-in key stays in the internal radio when a carrier removes their chip.
+/obj/item/radio/headset/silicon/pai/remove_keys(mob/living/user)
+	. = list()
+	if(!keyslot)
+		return
+	. += keyslot
+	user.put_in_hands(keyslot)
 
 /mob/living/silicon/pai/updatehealth()
 	if(HAS_TRAIT(src, TRAIT_GODMODE))
