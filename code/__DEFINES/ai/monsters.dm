@@ -226,8 +226,6 @@
 #define BB_DEMON_SLIP_ABILITY "demon_slip_ability"
 ///the turf we are escaping to
 #define BB_ESCAPE_DESTINATION "escape_destination"
-#define BB_DARK_GUARDIAN_BEAM_ABILITY "dark_guardian_beam"
-#define BB_DARK_GUARDIAN_TELEPORT_ABILITY "dark_guardian_teleport"
 
 /// Corpse we have consumed
 #define BB_LEGION_CORPSE "legion_corpse"
