@@ -485,6 +485,10 @@ SUBSYSTEM_DEF(tts220)
 		if(speaking_mob.client)
 			output.channel = get_local_channel_by_owner(speaker)
 			output.wait = TRUE
+	if(!output.channel && channel_override)
+		// Channels like CHANNEL_TTS_RADIO are persistent per-listener queues - sequential messages line up on them instead of overlapping
+		output.channel = channel_override
+		output.wait = TRUE
 	var/reserved_channel
 	/// The per-owner channel is persistent and reused by sequential messages of the same speaker - it must not be stopped when this sound ends
 	var/shared_channel = FALSE
