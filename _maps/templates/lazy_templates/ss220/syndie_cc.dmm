@@ -841,10 +841,10 @@
 /area/centcom/syndicate_base/control)
 "bSN" = (
 /obj/structure/table/glass,
-/obj/item/mmi/syndie,
-/obj/item/mmi/syndie,
-/obj/item/mmi/syndie,
-/obj/item/mmi/syndie,
+/obj/item/brain_processor/organic/syndie,
+/obj/item/brain_processor/organic/syndie,
+/obj/item/brain_processor/organic/syndie,
+/obj/item/brain_processor/organic/syndie,
 /obj/effect/turf_decal/line/dark_blue/line/contrasted,
 /turf/open/floor/iron/dark,
 /area/centcom/syndicate_base/control)

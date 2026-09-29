@@ -84,8 +84,7 @@ SUBSYSTEM_DEF(security_level)
 	else
 		can_fire = FALSE
 
-	if(SSshuttle.emergency.mode == SHUTTLE_CALL || SSshuttle.emergency.mode == SHUTTLE_RECALL) // By god this is absolutely shit
-		SSshuttle.emergency.alert_coeff_change(selected_level.shuttle_call_time_mod)
+	selected_level.post_set_security_level(user) // BANDASTATION EDIT - Gamma Shuttle (add mob/user argument)
 
 	selected_level.post_set_security_level(user) // BANDASTATION EDIT - Gamma Shuttle (add mob/user argument)
 
