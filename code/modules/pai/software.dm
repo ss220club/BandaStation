@@ -176,6 +176,8 @@
 			return FALSE
 		switch(action)
 			if("Thermal Vision")
+				if(!card?.syndicate_hardware || !("Thermal Vision" in installed_software))
+					return FALSE
 				thermal_active = !thermal_active
 				if(thermal_active)
 					ADD_TRAIT(src, TRAIT_THERMAL_VISION, "syndicate_pai_thermal")
@@ -193,6 +195,8 @@
 				records_console.ui_interact(src)
 				return TRUE
 			if("Syndicate Radio")
+				if(!card?.syndicate_hardware || !("Syndicate Radio" in installed_software))
+					return FALSE
 				balloon_alert(src, "Канал Синдиката: :t")
 				return TRUE
 		return FALSE
