@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useBackend } from 'tgui/backend';
 import {
   Box,
@@ -23,6 +24,133 @@ type Props = {
   item: Recipe;
   mode: BooleanLike;
 };
+
+type IngredientProps = {
+  amount: number;
+  atom_id: string;
+  busy?: BooleanLike;
+  mode?: BooleanLike;
+};
+
+function RecipeIngredient(props: IngredientProps) {
+  const { amount, atom_id: raw_id, mode, busy } = props;
+  const { act, data } = useBackend<CraftingData>();
+  const [isOpen, setIsOpen] = useState(false);
+
+  const atom_id = Number(raw_id);
+
+  const recipe =
+    mode === MODE.cooking
+      ? data?.recipes?.find((r) => r.id === atom_id)
+      : undefined;
+
+  if (!recipe) {
+    return <AtomContent atom_id={raw_id} amount={amount} />;
+  }
+
+  const craftable = Boolean(data?.craftability?.[recipe.ref]);
+
+  return (
+    <Box style={{ position: 'relative', display: 'block' }}>
+      <Box
+        style={{ cursor: 'pointer', textDecoration: 'underline dotted' }}
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        <AtomContent atom_id={raw_id} amount={amount} />
+      </Box>
+
+      {isOpen && (
+        <Box
+          style={{
+            position: 'absolute',
+            top: '100%',
+            left: '0',
+            zIndex: 100,
+            backgroundColor: '#1b1b1b',
+            border: '1px solid #444',
+            borderRadius: '4px',
+            boxShadow: '0 4px 12px rgba(0,0,0,0.6)',
+            minWidth: '220px',
+          }}
+          p={1}
+        >
+          <Stack mb={1} align="center" justify="space-between">
+            <Stack.Item bold style={{ textTransform: 'capitalize' }}>
+              {recipe.name}
+            </Stack.Item>
+            <Stack.Item>
+              <Button
+                compact
+                icon="xmark"
+                color="transparent"
+                onClick={() => setIsOpen(false)}
+              />
+            </Stack.Item>
+          </Stack>
+
+          {recipe.reqs && (
+            <Box mb={1}>
+              {Object.keys(recipe.reqs).map((req_id) => (
+                <RecipeIngredient
+                  key={req_id}
+                  atom_id={req_id}
+                  amount={recipe.reqs[req_id]}
+                  mode={mode}
+                  busy={busy}
+                />
+              ))}
+            </Box>
+          )}
+
+          {!!recipe.steps?.length && (
+            <Box mb={1}>
+              <GroupTitle title="Steps" />
+              <ul style={{ paddingLeft: '20px', margin: 0 }}>
+                {recipe.steps.map((step) => (
+                  <li key={step}>{step}</li>
+                ))}
+              </ul>
+            </Box>
+          )}
+
+          {!recipe.non_craftable && (
+            <Stack>
+              <Stack.Item grow>
+                <Button
+                  fluid
+                  disabled={!craftable || busy}
+                  icon={busy ? 'circle-notch' : 'utensils'}
+                  iconSpin={!!busy}
+                  onClick={() => {
+                    act('make', { recipe: recipe.ref });
+                    setIsOpen(false);
+                  }}
+                >
+                  Создать
+                </Button>
+              </Stack.Item>
+              {!!recipe.mass_craftable && (
+                <Stack.Item>
+                  <Button
+                    disabled={!craftable || busy}
+                    icon="repeat"
+                    iconSpin={!!busy}
+                    tooltip="Продолжать создание, пока не закончатся ингредиенты."
+                    tooltipPosition="top"
+                    onClick={() => {
+                      act('make_mass', { recipe: recipe.ref });
+                      setIsOpen(false);
+                    }}
+                  />
+                </Stack.Item>
+              )}
+            </Stack>
+          )}
+        </Box>
+      )}
+    </Box>
+  );
+}
 
 export function RecipeContentCompact(props: Props) {
   const { item, craftable, busy, mode } = props;
@@ -206,10 +334,12 @@ export function RecipeContent(props: FullProps) {
                       }
                     />
                     {Object.keys(item.reqs).map((atom_id) => (
-                      <AtomContent
+                      <RecipeIngredient
                         key={atom_id}
                         atom_id={atom_id}
                         amount={item.reqs[atom_id]}
+                        mode={mode}
+                        busy={busy}
                       />
                     ))}
                   </Box>
