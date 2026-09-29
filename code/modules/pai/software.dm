@@ -60,8 +60,10 @@
 		if("Encryption Slot")
 			balloon_alert(usr, "radio frequencies [!encrypt_mod ? "enabled" : "disabled"]")
 			encrypt_mod = !encrypt_mod
+			//BANDASTATION EDIT START PAI
 			radio.subspace_transmission = encrypt_mod || has_integrated_radio()
 			radio.recalculateChannels()
+			//BANDASTATION EDIT END PAI
 			return TRUE
 		if("Host Scan")
 			host_scan(params["mode"])
@@ -85,15 +87,18 @@
 		if("Remote Signaler")
 			signaler.ui_interact(src)
 			return TRUE
+		//BANDASTATION EDIT START PAI
 		if("Security HUD")
 			if(!("Security HUD" in installed_software))
 				return FALSE
+		//BANDASTATION EDIT END PAI
 			toggle_hud(PAI_TOGGLE_SECURITY_HUD)
 			return TRUE
 		if("Universal Translator")
 			grant_languages()
 			ui.send_full_update()
 			return TRUE
+		//BANDASTATION EDIT START PAI
 		if("Night Vision")
 			if(!("Night Vision" in installed_software))
 				return FALSE
@@ -104,6 +109,7 @@
 				REMOVE_TRAIT(src, TRAIT_NIGHT_VISION, "syndicate_pai_night")
 			update_sight()
 			return TRUE
+		//BANDASTATION EDIT END PAI
 	return FALSE
 
 /**
@@ -145,6 +151,7 @@
 			signaler = new(src)
 	return TRUE
 
+//BANDASTATION EDIT START SYNDICATE PAI
 /mob/living/silicon/pai/proc/has_integrated_radio()
 	return FALSE
 
@@ -327,7 +334,7 @@
 		return FALSE
 	var/atom/viewpoint = holoform ? src : card
 	var/turf/eye_turf = get_turf(viewpoint)
-	return eye_turf && target in view(7, eye_turf)
+	return eye_turf && (target in view(7, eye_turf))
 
 /// Open the APC's native interface from either the folded card or holoform.
 /mob/living/silicon/pai/syndicate/ClickOn(atom/target, params)
@@ -504,7 +511,7 @@
 	if(user == owner_pai)
 		return TRUE
 	return ..()
-
+//BANDASTATION EDIT END SYNDICATE PAI
 /**
  * Changes the image displayed on the pAI.
  *

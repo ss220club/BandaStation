@@ -84,6 +84,7 @@
 	var/mob/living/silicon/pai/pAI = usr
 	pAI.newscaster.ui_interact(usr)
 
+//BANDASTATION EDIT START PAI CAMERA
 /atom/movable/screen/pai/camera_network
 	name = "Camera Network"
 	icon = 'icons/hud/screen_ai.dmi'
@@ -97,6 +98,7 @@
 	var/mob/living/silicon/pai/syndicate/pAI = usr
 	if(istype(pAI))
 		pAI.use_camera_network()
+//BANDASTATION EDIT END PAI CAMERA
 
 /atom/movable/screen/pai/host_monitor
 	name = "Host Health Scan"

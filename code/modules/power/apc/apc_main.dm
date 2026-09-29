@@ -470,6 +470,7 @@
 	. = ..()
 	if(!QDELETED(remote_control_user) && user == remote_control_user)
 		. = UI_INTERACTIVE
+	//BANDASTATION EDIT START SYNDICATE PAI
 	if(istype(user, /mob/living/silicon/pai/syndicate))
 		var/mob/living/silicon/pai/syndicate/pai_user = user
 		if(pai_user.active_remote_apc == src && ("Remote Machinery" in pai_user.installed_software) && pai_user.client)
@@ -484,13 +485,16 @@
 		if(!COOLDOWN_FINISHED(pai_user, remote_apc_action))
 			balloon_alert(pai_user, "управление АПЦ перезаряжается")
 			return FALSE
+	//BANDASTATION EDIT END SYNDICATE PAI
 	. = ..()
 	var/mob/user = ui.user
 
 	if(. || !can_use(user, 1) || (locked && !HAS_SILICON_ACCESS(user) && !failure_timer && action != "toggle_nightshift"))
 		return
+	//BANDASTATION EDIT START SYNDICATE PAI
 	if(pai_user)
 		COOLDOWN_START(pai_user, remote_apc_action, 30 SECONDS)
+	//BANDASTATION EDIT END SYNDICATE PAI
 	switch(action)
 		if("lock")
 			if(HAS_SILICON_ACCESS(user))
@@ -555,10 +559,12 @@
 
 /obj/machinery/power/apc/ui_close(mob/user)
 	. = ..()
+	//BANDASTATION EDIT START SYNDICATE PAI
 	if(istype(user, /mob/living/silicon/pai/syndicate))
 		var/mob/living/silicon/pai/syndicate/pai_user = user
 		if(pai_user.active_remote_apc == src)
 			pai_user.active_remote_apc = null
+	//BANDASTATION EDIT END SYNDICATE PAI
 	if(user == remote_control_user)
 		disconnect_remote_access()
 
