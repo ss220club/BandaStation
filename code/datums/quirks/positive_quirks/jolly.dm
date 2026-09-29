@@ -3,7 +3,7 @@
 	desc = "Иногда вы просто чувствуете себя счастливым без всякой причины."
 	icon = FA_ICON_GRIN
 	value = 4
-	quirk_flags = QUIRK_HUMAN_ONLY|QUIRK_MOODLET_BASED|QUIRK_PROCESSES|QUIRK_TRAUMALIKE
+	quirk_flags = QUIRK_HUMAN_ONLY|QUIRK_PROCESSES|QUIRK_TRAUMALIKE
 	medical_record_text = "Пациент демонстрирует постоянную эутимию независимо от обстоятельств. Это уже слишком, если честно."
 	medical_symptom_text = "Exhibits persistent feelings of happiness and elevated mood, which may lead to unrealistic optimism and risk-taking behaviors."
 	mail_goodies = list(/obj/item/clothing/mask/joy)
