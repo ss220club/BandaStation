@@ -16,7 +16,7 @@
 
 /obj/item/clothing/under/rank/magistrate/formal
 	name = "formal magistrate's uniform"
-	desc = "Формальный чёрный костюм с золотой отделкой и стильным красным галстуком. На этой униформе указано звание «Магистрат», а на левом плече вышито «ИСН Кибериада»."
+	desc = "Формальный чёрный костюм с золотой отделкой и стильным красным галстуком. На этой униформе указано звание «Магистрат», на левом плече вышито - «ИСН Кибериада»."
 	icon = 'modular_bandastation/objects/icons/obj/clothing/under/magistrate.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/under/magistrate.dmi'
 	icon_state = "magistrate_formal"

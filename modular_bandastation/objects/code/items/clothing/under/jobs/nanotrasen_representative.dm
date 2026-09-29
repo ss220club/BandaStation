@@ -1,6 +1,6 @@
 /obj/item/clothing/under/rank/nanotrasen_representative
 	name = "Nanotrasen Representative's uniform"
-	desc = "Изящные чёрные хлопковые брюки и белая рубашка с синей и золотой отделкой."
+	desc = "Изящные чёрные хлопковые брюки и белая рубашка с сине-золотой отделкой."
 	icon = 'modular_bandastation/objects/icons/obj/clothing/under/nanotrasen_representative.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/under/nanotrasen_representative.dmi'
 	icon_state = "nanotrasen_representative"
@@ -8,7 +8,7 @@
 
 /obj/item/clothing/under/rank/nanotrasen_representative/skirt
 	name = "Nanotrasen Representative's skirt"
-	desc = "Шелковистая чёрная юбка и белая рубашка с синей и золотой отделкой."
+	desc = "Шелковистая чёрная юбка и белая рубашка с сине-золотой отделкой."
 	icon_state = "nanotrasen_representative_skirt"
 	can_adjust = FALSE
 
