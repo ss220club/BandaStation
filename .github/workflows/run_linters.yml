@@ -159,7 +159,6 @@ jobs:
 
           tools/bootstrap/python -m mapmerge2.dmm_test $MAPS
           tools/bootstrap/python -m tools.maplint.source $MAPS
-<<<<<<< HEAD
       - name: Check Cutter
         if: steps.linter-setup.conclusion == 'success' && !cancelled()
         run: tools/bootstrap/python -m tools.icon_cutter.check
@@ -189,5 +188,3 @@ jobs:
       - name: Run TGUI Checks
         if: steps.linter-setup.conclusion == 'success' && !cancelled()
         run: tools/build/build.sh --ci lint tgui-test
-=======
->>>>>>> db44da9cc07119213635001c1f8c6cb406074046
