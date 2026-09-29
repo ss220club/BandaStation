@@ -10,7 +10,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v7
-<<<<<<< HEAD
       - name: Install required packages
         run: |
           sudo apt-get update
@@ -64,65 +63,6 @@ jobs:
       - name: Give Linters A Go
         id: linter-setup
         run: ":"
-=======
-
-      # Grab pre-requisites
-      - parallel:
-        - name: Restore SpacemanDMM cache
-          uses: actions/cache@v6
-          with:
-            path: ~/SpacemanDMM
-            key: ${{ runner.os }}-spacemandmm-${{ hashFiles('dependencies.sh') }}
-            restore-keys: |
-              ${{ runner.os }}-spacemandmm-
-
-        - name: Setup Bun
-          uses: ./.github/actions/setup_bun
-
-        - name: Restore Bootstrap cache
-          uses: actions/cache@v6
-          with:
-            path: tools/bootstrap/.cache
-            key: ${{ runner.os }}-bootstrap-${{ hashFiles('/tools/requirements.txt') }}
-            restore-keys: |
-              ${{ runner.os }}-bootstrap-
-
-        - name: Restore Rust cache
-          uses: actions/cache@v6
-          with:
-            path: ~/.cargo
-            key: ${{ runner.os }}-rust-${{ hashFiles('/tools/ci/ci_dependencies.sh')}}
-            restore-keys: |
-              ${{ runner.os }}-rust-
-
-        - name: Restore Cutter cache
-          uses: actions/cache@v6
-          with:
-            path: tools/icon_cutter/cache
-            key: ${{ runner.os }}-cutter-${{ hashFiles('dependencies.sh') }}
-
-        - name: Setup .NET SDK
-          uses: actions/setup-dotnet@v6
-          with:
-            dotnet-version: 9.x
-
-        - name: Install OpenDream
-          uses: robinraju/release-downloader@v1.13
-          with:
-            repository: "OpenDreamProject/OpenDream"
-            tag: "latest"
-            fileName: "DMCompiler_linux-x64.tar.gz"
-            extract: true
-
-        - name: Install tools
-          run: |
-            pip3 install setuptools
-            bash tools/ci/install_spaceman_dmm.sh dreamchecker
-            bash tools/ci/install_ripgrep.sh
-            tools/bootstrap/python -c ''
-
-      # Actually run the checks
->>>>>>> db44da9cc07119213635001c1f8c6cb406074046
       - name: Ensure genesis_call.dme is unchanged
         if: ${{ !cancelled() }}
         background: true

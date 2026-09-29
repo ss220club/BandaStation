@@ -33,7 +33,6 @@ jobs:
     timeout-minutes: 55
     steps:
       - uses: actions/checkout@v7
-<<<<<<< HEAD
       - name: Install required packages
         run: |
           sudo dpkg --add-architecture i386
@@ -41,11 +40,6 @@ jobs:
           sudo apt-get install zlib1g-dev:i386
       - name: Restore BYOND from Cache
         uses: ./.github/actions/restore_or_install_byond
-=======
-
-      - name: Configure BYOND version
-        uses: ./.github/actions/configure_byond_version
->>>>>>> db44da9cc07119213635001c1f8c6cb406074046
         with:
           major: ${{ inputs.major }}
           minor: ${{ inputs.minor }}

@@ -8,12 +8,7 @@ export BYOND_MAJOR=516
 export BYOND_MINOR=1685
 
 #rust_g git tag
-<<<<<<< HEAD
-export RUST_G_VERSION=6.2.0
-export RUST_UTILS_VERSION=0.2.1
-=======
 export RUST_G_VERSION=7.0.0
->>>>>>> db44da9cc07119213635001c1f8c6cb406074046
 
 # Bun version
 export BUN_VERSION=1.3.5
