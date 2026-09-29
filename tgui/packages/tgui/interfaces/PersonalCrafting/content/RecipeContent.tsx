@@ -102,6 +102,19 @@ function RecipeIngredient(props: IngredientProps) {
             </Box>
           )}
 
+          {recipe.chem_catalysts && (
+            <Box mb={1}>
+              <GroupTitle title="Catalysts" />
+              {Object.keys(recipe.chem_catalysts).map((catalyst_id) => (
+                <AtomContent
+                  key={catalyst_id}
+                  atom_id={catalyst_id}
+                  amount={recipe.chem_catalysts[catalyst_id]}
+                />
+              ))}
+            </Box>
+          )}
+
           {!!recipe.steps?.length && (
             <Box mb={1}>
               <GroupTitle title="Steps" />
