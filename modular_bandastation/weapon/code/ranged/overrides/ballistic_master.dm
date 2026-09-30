@@ -336,6 +336,9 @@
 /obj/item/gun/ballistic/automatic/l6_saw/toy
 	recoil = 0
 
+/obj/item/gun/energy/lasercannon
+	pin = /obj/item/firing_pin
+
 // Prevents gun sizes from changing due to suppressors
 /obj/item/gun/ballistic/install_suppressor(obj/item/suppressor/new_suppressor)
 	. = ..()

@@ -431,9 +431,13 @@
 /turf/open/floor/mineral/plastitanium/pod,
 /area/centcom/central_command_areas/supply)
 "abU" = (
-/obj/structure/sign/flag/nanotrasen/directional/west,
-/turf/open/floor/iron/smooth_edge,
-/area/centcom/central_command_areas/ferry)
+/obj/effect/turf_decal/caution{
+	dir = 8
+	},
+/turf/open/floor/iron/smooth_half{
+	dir = 1
+	},
+/area/centcom/central_command_areas/armory)
 "abX" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/green/hidden,
 /obj/structure/light_fake/small/directional/north,
@@ -784,12 +788,13 @@
 /turf/open/floor/iron/dark,
 /area/centcom/central_command_areas/engine)
 "adE" = (
-/obj/machinery/door/airlock/centcom,
-/obj/effect/mapping_helpers/airlock/access/all/admin/general,
-/obj/effect/mapping_helpers/airlock/autoname,
-/obj/effect/mapping_helpers/airlock/cutaiwire,
-/turf/open/floor/iron/smooth_edge,
-/area/centcom/central_command_areas/ferry)
+/obj/effect/turf_decal/stripes/line{
+	dir = 8
+	},
+/obj/structure/table/reinforced,
+/obj/structure/light_fake/spot/directional/west,
+/turf/open/floor/iron/smooth,
+/area/centcom/central_command_areas/armory)
 "adF" = (
 /obj/machinery/computer/station_alert{
 	dir = 8
@@ -1354,20 +1359,6 @@
 /obj/structure/table/reinforced,
 /obj/structure/window/reinforced/spawner/directional/south,
 /obj/machinery/button/door/indestructible{
-	pixel_x = -7;
-	name = "Light ERT Gear";
-	id = "CC_Light_1";
-	pixel_y = 16;
-	req_access = list("cent_captain")
-	},
-/obj/machinery/button/door/indestructible{
-	pixel_x = -7;
-	name = "Heavy ERT Gear";
-	id = "CC_Heavy_1";
-	pixel_y = 6;
-	req_access = list("cent_captain")
-	},
-/obj/machinery/button/door/indestructible{
 	pixel_x = 6;
 	id = "CC_Mech_1";
 	name = "Combat Exosuit Storage";
@@ -1874,16 +1865,10 @@
 	},
 /area/centcom/central_command_areas/hallway)
 "aib" = (
-/obj/structure/rack,
-/obj/item/deployable_turret_folded{
-	pixel_x = -5;
-	pixel_y = 1
+/obj/effect/turf_decal/stripes/white/end{
+	color = "#439C1E"
 	},
-/obj/item/deployable_turret_folded{
-	pixel_x = 8;
-	pixel_y = 1
-	},
-/obj/effect/turf_decal/stripes/red/end,
+/obj/machinery/vending/nta/light,
 /turf/open/floor/iron/smooth_large,
 /area/centcom/central_command_areas/armory)
 "aic" = (
@@ -1908,22 +1893,16 @@
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/supplypod/loading/four)
 "aii" = (
-/obj/structure/rack,
-/obj/item/storage/box/emps{
-	pixel_y = 9
-	},
-/obj/item/storage/box/emps{
-	pixel_y = 3
-	},
 /obj/structure/light_fake/spot/directional/west,
 /obj/structure/sign/warning/directional/west,
+/obj/structure/rack/gunrack,
 /obj/effect/turf_decal/stripes/white/line{
-	color = "#439C1E";
-	dir = 8
+	dir = 8;
+	color = "#6b8cc4"
 	},
 /obj/effect/turf_decal/stripes/white/line{
-	color = "#439C1E";
-	dir = 4
+	dir = 4;
+	color = "#6b8cc4"
 	},
 /turf/open/floor/iron/smooth_large,
 /area/centcom/central_command_areas/armory)
@@ -2130,23 +2109,6 @@
 	},
 /turf/open/floor/iron/smooth_large,
 /area/centcom/central_command_areas/briefing)
-"akb" = (
-/obj/structure/closet/crate/centcom,
-/obj/item/mod/module/jetpack/advanced,
-/obj/item/mod/module/jetpack/advanced,
-/obj/item/mod/module/jetpack/advanced,
-/obj/item/mod/module/jetpack/advanced,
-/obj/item/mod/module/jetpack/advanced,
-/obj/item/mod/module/jetpack/advanced,
-/obj/item/mod/module/jetpack/advanced,
-/obj/item/mod/module/jetpack/advanced,
-/obj/item/mod/module/jetpack/advanced,
-/obj/item/mod/module/jetpack/advanced,
-/obj/effect/turf_decal/stripes/end{
-	dir = 4
-	},
-/turf/open/floor/iron/smooth_large,
-/area/centcom/central_command_areas/armory)
 "akc" = (
 /obj/structure/sign/warning/vacuum/directional/east,
 /obj/structure/broken_flooring/singular/always_floorplane/directional/north,
@@ -2766,22 +2728,8 @@
 /turf/open/floor/iron/dark/smooth_large,
 /area/centcom/central_command_areas/supply)
 "ant" = (
-/obj/item/bodybag/environmental/nanotrasen{
-	pixel_y = 12
-	},
-/obj/item/bodybag/environmental/nanotrasen{
-	pixel_y = 6
-	},
-/obj/item/bodybag/environmental/nanotrasen,
-/obj/structure/table/reinforced,
-/obj/structure/sign/departments/medbay/directional/south,
-/obj/effect/turf_decal/stripes/white/line{
-	color = "#6b8cc4"
-	},
-/obj/effect/turf_decal/stripes/white/line{
-	dir = 1;
-	color = "#6b8cc4"
-	},
+/obj/effect/turf_decal/stripes/red/end,
+/obj/machinery/vending/nta/heavy,
 /turf/open/floor/iron/smooth_large,
 /area/centcom/central_command_areas/armory)
 "anu" = (
@@ -2941,24 +2889,10 @@
 	},
 /area/centcom/central_command_areas/ert)
 "aoq" = (
-/obj/structure/rack,
-/obj/item/knife/combat{
-	pixel_y = 9
-	},
-/obj/item/knife/combat{
-	pixel_x = 3;
-	pixel_y = 6
-	},
-/obj/item/knife/combat{
-	pixel_x = 6;
-	pixel_y = 3
-	},
-/obj/item/knife/combat{
-	pixel_x = 9
-	},
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
 	},
+/obj/structure/rack,
 /turf/open/floor/iron/smooth,
 /area/centcom/central_command_areas/armory)
 "aor" = (
@@ -3048,31 +2982,9 @@
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/supply)
 "aoR" = (
-/obj/structure/table/reinforced,
-/obj/item/radio{
-	pixel_x = -8;
-	pixel_y = 9
-	},
-/obj/item/radio{
-	pixel_y = 9;
-	pixel_x = -4
-	},
-/obj/item/radio{
-	pixel_y = 9
-	},
-/obj/item/radio{
-	pixel_y = 9;
-	pixel_x = 4
-	},
-/obj/item/radio{
-	pixel_y = 9;
-	pixel_x = 8
-	},
-/obj/item/storage/lockbox/loyalty,
-/obj/effect/turf_decal/stripes/line{
-	dir = 8
-	},
-/turf/open/floor/iron/smooth,
+/obj/structure/light_fake/spot/directional/east,
+/obj/structure/sign/poster/official/nanotrasen_logo/directional/east,
+/turf/open/floor/iron/smooth_half,
 /area/centcom/central_command_areas/armory)
 "aoS" = (
 /obj/structure/table/reinforced/titaniumglass,
@@ -3129,17 +3041,20 @@
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/supplypod/loading/three)
 "api" = (
-/obj/structure/rack,
-/obj/item/deployable_turret_folded{
-	pixel_x = -5;
-	pixel_y = 1
+/obj/effect/turf_decal/stripes/white/end{
+	color = "#6b8cc4";
+	dir = 4
 	},
-/obj/item/deployable_turret_folded{
-	pixel_x = 8;
-	pixel_y = 1
+/obj/structure/table/reinforced,
+/obj/item/storage/medkit/toxin,
+/obj/item/storage/medkit/brute{
+	pixel_y = 4
 	},
-/obj/effect/turf_decal/stripes/line{
-	dir = 1
+/obj/item/storage/medkit/fire{
+	pixel_y = 8
+	},
+/obj/item/storage/medkit/regular{
+	pixel_y = 12
 	},
 /turf/open/floor/iron/smooth_large,
 /area/centcom/central_command_areas/armory)
@@ -3416,24 +3331,6 @@
 /obj/machinery/door/airlock/maintenance_hatch,
 /turf/open/floor/catwalk_floor,
 /area/centcom/central_command_areas/evacuation/ship)
-"aqx" = (
-/obj/structure/table/reinforced,
-/obj/structure/sign/departments/engineering/directional/north,
-/obj/item/stock_parts/power_store/cell/hyper{
-	pixel_y = 10
-	},
-/obj/item/stock_parts/power_store/cell/hyper{
-	pixel_y = 4
-	},
-/obj/item/stock_parts/power_store/cell/hyper{
-	pixel_y = -2
-	},
-/obj/effect/turf_decal/stripes/line,
-/obj/effect/turf_decal/stripes/line{
-	dir = 1
-	},
-/turf/open/floor/iron/smooth_large,
-/area/centcom/central_command_areas/armory)
 "aqE" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/visible,
 /obj/effect/turf_decal/tile/yellow/anticorner/contrasted{
@@ -3475,7 +3372,6 @@
 /turf/open/floor/engine,
 /area/centcom/central_command_areas/engine)
 "aqN" = (
-/obj/machinery/door/poddoor/shutters/indestructible/preopen,
 /obj/effect/turf_decal/loading_area,
 /turf/open/floor/mineral/plastitanium/pod,
 /area/centcom/central_command_areas/supply)
@@ -3610,10 +3506,11 @@
 /turf/closed/indestructible/riveted,
 /area/centcom/central_command_areas/engine)
 "arE" = (
-/obj/effect/turf_decal/delivery,
-/turf/open/floor/iron/smooth_edge{
-	dir = 8
+/obj/effect/turf_decal/stripes/red/end{
+	dir = 1
 	},
+/obj/machinery/vending/nta/ultra_heavy,
+/turf/open/floor/iron/smooth_large,
 /area/centcom/central_command_areas/armory)
 "arG" = (
 /obj/machinery/power/shuttle_engine/propulsion,
@@ -3906,22 +3803,8 @@
 	},
 /area/centcom/central_command_areas/briefing)
 "ate" = (
-/obj/structure/rack,
-/obj/item/storage/box/smoke_grenade{
-	pixel_x = -8;
-	pixel_y = 9
-	},
-/obj/item/storage/box/flashbangs{
-	pixel_x = 9;
-	pixel_y = 9
-	},
-/obj/item/storage/box/flashbangs{
-	pixel_x = 9
-	},
-/obj/item/storage/box/teargas{
-	pixel_x = -8
-	},
 /obj/effect/turf_decal/stripes/line,
+/obj/structure/rack,
 /turf/open/floor/iron/smooth_large,
 /area/centcom/central_command_areas/armory)
 "atf" = (
@@ -3977,17 +3860,8 @@
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/supplypod/loading/three)
 "atw" = (
-/obj/structure/table/reinforced,
-/obj/item/storage/toolbox/mechanical,
-/obj/item/storage/toolbox/emergency{
-	pixel_x = 3;
-	pixel_y = 6
-	},
-/obj/item/storage/toolbox/electrical{
-	pixel_x = 6
-	},
-/obj/effect/turf_decal/stripes/end{
-	dir = 8
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
 	},
 /turf/open/floor/iron/smooth_edge{
 	dir = 1
@@ -4242,33 +4116,10 @@
 /turf/closed/indestructible/riveted,
 /area/centcom/central_command_areas/bar)
 "auS" = (
-/obj/structure/rack,
-/obj/item/clothing/mask/gas/sechailer/swat{
-	pixel_x = -7;
-	pixel_y = 6
+/obj/effect/turf_decal/stripes/red/end{
+	dir = 1
 	},
-/obj/item/clothing/mask/gas/sechailer/swat/spacepol{
-	pixel_x = 7;
-	pixel_y = 6
-	},
-/obj/item/clothing/mask/gas/sechailer/swat{
-	pixel_x = -7;
-	pixel_y = 3
-	},
-/obj/item/clothing/mask/gas/sechailer/swat{
-	pixel_x = -7
-	},
-/obj/item/clothing/mask/gas/sechailer/swat/spacepol{
-	pixel_x = 7;
-	pixel_y = 3
-	},
-/obj/item/clothing/mask/gas/sechailer/swat/spacepol{
-	pixel_x = 7
-	},
-/obj/effect/turf_decal/stripes/white/end{
-	color = "#6b8cc4";
-	dir = 8
-	},
+/obj/machinery/vending/nta/heavy,
 /turf/open/floor/iron/smooth_large,
 /area/centcom/central_command_areas/armory)
 "auT" = (
@@ -4405,8 +4256,11 @@
 /turf/open/floor/plating,
 /area/centcom/central_command_areas/prison)
 "avN" = (
-/obj/machinery/vending/nta/heavy,
-/obj/effect/turf_decal/stripes/line,
+/obj/effect/turf_decal/stripes/white/end{
+	color = "#6b8cc4";
+	dir = 8
+	},
+/obj/structure/table/reinforced,
 /turf/open/floor/iron/smooth_large,
 /area/centcom/central_command_areas/armory)
 "avO" = (
@@ -4481,46 +4335,17 @@
 /turf/open/floor/engine,
 /area/centcom/central_command_areas/engine)
 "awp" = (
-/obj/item/grenade/barrier{
-	pixel_y = 12;
-	pixel_x = -7
-	},
-/obj/structure/rack,
-/obj/item/grenade/barrier{
-	pixel_y = 9;
-	pixel_x = -7
-	},
-/obj/item/grenade/barrier{
-	pixel_y = 6;
-	pixel_x = -7
-	},
-/obj/item/grenade/barrier{
-	pixel_y = 3;
-	pixel_x = -7
-	},
 /obj/structure/light_fake/spot/directional/west,
 /obj/structure/sign/warning/directional/west,
-/obj/item/grenade/c4{
-	pixel_x = 10;
-	pixel_y = 12
-	},
-/obj/item/grenade/c4{
-	pixel_x = 10;
-	pixel_y = 6
-	},
-/obj/item/grenade/c4{
-	pixel_x = 10
-	},
-/obj/item/grenade/c4{
-	pixel_x = 10;
-	pixel_y = -6
-	},
-/obj/effect/turf_decal/stripes/red/line{
-	dir = 8
-	},
-/obj/effect/turf_decal/stripes/red/line{
+/obj/effect/turf_decal/stripes/white/line{
+	color = "#439C1E";
 	dir = 4
 	},
+/obj/effect/turf_decal/stripes/white/line{
+	color = "#439C1E";
+	dir = 8
+	},
+/obj/structure/rack/gunrack,
 /turf/open/floor/iron/smooth_large,
 /area/centcom/central_command_areas/armory)
 "aws" = (
@@ -4726,19 +4551,13 @@
 /turf/open/floor/iron/dark/smooth_large,
 /area/centcom/central_command_areas/hallway)
 "axq" = (
-/obj/machinery/door/poddoor/shutters/indestructible{
-	dir = 8;
-	name = "Heavy Gear";
-	id = "CC_Heavy_1"
-	},
 /obj/effect/turf_decal/stripes/end{
 	dir = 1
 	},
-/obj/machinery/button/door/indestructible{
-	name = "Heavy ERT Gear";
-	id = "CC_Heavy_1";
-	req_access = list("cent_captain");
-	pixel_y = 24
+/obj/machinery/door/poddoor/shutters/indestructible/preopen{
+	dir = 8;
+	name = "Medical Supplies";
+	id = "CC_Medical_Supplies"
 	},
 /turf/open/floor/iron/smooth_edge{
 	dir = 8
@@ -4878,19 +4697,13 @@
 /turf/open/floor/iron/smooth_large,
 /area/centcom/central_command_areas/ert)
 "aye" = (
-/obj/machinery/door/poddoor/shutters/indestructible{
-	dir = 4;
-	id = "CC_Light_1";
-	name = "Light Gear"
-	},
 /obj/effect/turf_decal/stripes/end{
 	dir = 1
 	},
-/obj/machinery/button/door/indestructible{
-	name = "Light ERT Gear";
-	id = "CC_Light_1";
-	req_access = list("cent_captain");
-	pixel_y = 24
+/obj/machinery/door/poddoor/shutters/indestructible/preopen{
+	dir = 4;
+	name = "Engineering Supplies";
+	id = "CC_Engineering_Supplies"
 	},
 /turf/open/floor/iron/smooth_edge{
 	dir = 4
@@ -5213,9 +5026,11 @@
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/supply)
 "azB" = (
-/obj/effect/spawner/structure/window/reinforced/indestructible,
-/turf/open/floor/plating,
-/area/centcom/central_command_areas/ferry)
+/obj/effect/turf_decal/stripes/corner{
+	dir = 1
+	},
+/turf/open/floor/iron/smooth_edge,
+/area/centcom/central_command_areas/armory)
 "azD" = (
 /obj/effect/turf_decal/stripes/line,
 /obj/structure/railing,
@@ -5326,11 +5141,11 @@
 /turf/open/floor/wood/tile,
 /area/centcom/central_command_areas/planetary_port/hotel)
 "aAm" = (
-/obj/effect/spawner/random/engineering/canister,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/turf_decal/bot_red,
 /obj/structure/sign/warning/no_smoking/directional/east,
 /obj/effect/decal/cleanable/cobweb/cobweb2,
+/obj/structure/reagent_dispensers/kvasstank,
 /turf/open/floor/plating,
 /area/centcom/central_command_areas/maintance)
 "aAp" = (
@@ -5635,19 +5450,9 @@
 /turf/open/floor/iron/white,
 /area/centcom/central_command_areas/hospital)
 "aBC" = (
-/obj/structure/table/reinforced,
-/obj/item/gun/energy/e_gun/nuclear{
-	pixel_y = 10
-	},
-/obj/item/gun/energy/e_gun/nuclear{
-	pixel_y = 5
-	},
-/obj/item/gun/energy/e_gun/nuclear,
-/obj/item/gun/energy/e_gun/nuclear{
-	pixel_y = -5
-	},
+/obj/machinery/vending/nta/medium,
 /obj/effect/turf_decal/stripes/white/end{
-	color = "#439C1E";
+	color = "#6b8cc4";
 	dir = 1
 	},
 /turf/open/floor/iron/smooth_large,
@@ -5715,22 +5520,9 @@
 	},
 /area/centcom/central_command_areas/ert)
 "aCc" = (
-/obj/machinery/door/poddoor/ert{
-	name = "Second Port";
-	id = "CC_Port2_2"
-	},
-/obj/effect/mapping_helpers/airlock/autoname,
-/obj/machinery/door/airlock/centcom,
-/obj/effect/mapping_helpers/airlock/access/all/admin/general,
-/obj/effect/mapping_helpers/airlock/cutaiwire,
-/obj/machinery/button/door/indestructible{
-	name = "Second Port";
-	id = "CC_Port2_2";
-	req_access = list("cent_general");
-	pixel_y = -24
-	},
+/obj/structure/light_fake/spot/directional/south,
 /turf/open/floor/iron/smooth_half,
-/area/centcom/central_command_areas/ferry)
+/area/centcom/central_command_areas/armory)
 "aCe" = (
 /obj/effect/turf_decal/line/dark_blue/line{
 	dir = 4
@@ -5955,42 +5747,11 @@
 /turf/open/floor/iron/white,
 /area/centcom/central_command_areas/hospital)
 "aCP" = (
-/obj/structure/rack,
-/obj/item/grenade/frag{
-	pixel_y = 10;
-	pixel_x = -3
-	},
-/obj/item/grenade/frag{
-	pixel_y = 7;
-	pixel_x = -3
-	},
-/obj/item/grenade/frag{
-	pixel_y = 4;
-	pixel_x = -3
-	},
-/obj/item/grenade/chem_grenade/incendiary{
-	pixel_x = 8;
-	pixel_y = 10
-	},
-/obj/item/grenade/chem_grenade/incendiary{
-	pixel_x = 8;
-	pixel_y = 7
-	},
-/obj/item/grenade/chem_grenade/incendiary{
-	pixel_x = 8;
-	pixel_y = 4
-	},
-/obj/item/grenade/frag{
-	pixel_y = 1;
-	pixel_x = -3
-	},
-/obj/item/grenade/chem_grenade/incendiary{
-	pixel_x = 8;
-	pixel_y = 1
-	},
-/obj/effect/turf_decal/stripes/red/end{
+/obj/effect/turf_decal/stripes/white/end{
+	color = "#439C1E";
 	dir = 1
 	},
+/obj/machinery/vending/nta/light,
 /turf/open/floor/iron/smooth_large,
 /area/centcom/central_command_areas/armory)
 "aCQ" = (
@@ -6134,8 +5895,16 @@
 /turf/open/floor/wood/parquet,
 /area/centcom/central_command_areas/bar)
 "aDr" = (
-/obj/effect/turf_decal/delivery,
-/turf/open/floor/iron/smooth_half,
+/obj/effect/turf_decal/stripes/red/line{
+	dir = 8
+	},
+/obj/effect/turf_decal/stripes/red/line{
+	dir = 4
+	},
+/obj/structure/sign/warning/directional/east,
+/obj/structure/light_fake/spot/directional/east,
+/obj/structure/rack/gunrack,
+/turf/open/floor/iron/smooth_large,
 /area/centcom/central_command_areas/armory)
 "aDu" = (
 /obj/vehicle/sealed/mecha/odysseus,
@@ -6186,10 +5955,16 @@
 /turf/closed/indestructible/riveted,
 /area/centcom/central_command_areas/bar)
 "aDD" = (
-/obj/effect/turf_decal/delivery/white{
-	color = "#6B8CC4"
+/obj/effect/turf_decal/stripes/line{
+	dir = 8
 	},
-/turf/open/floor/iron/smooth_half,
+/obj/machinery/door/poddoor/shutters/indestructible{
+	dir = 8;
+	name = "Heavy Armory Gear";
+	id = "CC_Heavy_Armory_1"
+	},
+/obj/effect/turf_decal/delivery/red,
+/turf/open/floor/iron/smooth_large,
 /area/centcom/central_command_areas/armory)
 "aDE" = (
 /obj/effect/spawner/random/structure/chair_flipped{
@@ -6304,12 +6079,13 @@
 /turf/open/floor/iron/smooth_large,
 /area/centcom/central_command_areas/briefing)
 "aDZ" = (
-/obj/machinery/door/poddoor/shutters/indestructible{
-	dir = 8;
-	name = "Heavy Gear";
-	id = "CC_Heavy_1"
-	},
 /obj/effect/turf_decal/stripes/end,
+/obj/structure/sign/departments/medbay/directional/south,
+/obj/machinery/door/poddoor/shutters/indestructible/preopen{
+	dir = 8;
+	name = "Medical Supplies";
+	id = "CC_Medical_Supplies"
+	},
 /turf/open/floor/iron/smooth_edge{
 	dir = 8
 	},
@@ -6596,16 +6372,10 @@
 	},
 /area/centcom/central_command_areas/bar)
 "aFd" = (
-/obj/structure/closet/emcloset,
-/obj/item/tank/internals/emergency_oxygen/engi,
-/obj/item/tank/internals/emergency_oxygen/engi,
-/obj/item/tank/internals/emergency_oxygen/engi,
-/obj/item/clothing/mask/gas,
-/obj/item/clothing/mask/gas,
-/obj/item/clothing/mask/gas,
-/obj/machinery/status_display/ai/directional/north,
-/obj/effect/turf_decal/stripes/end,
-/turf/open/floor/iron/smooth,
+/obj/structure/light_fake/spot/directional/west,
+/turf/open/floor/iron/smooth_half{
+	dir = 1
+	},
 /area/centcom/central_command_areas/ferry)
 "aFf" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden{
@@ -6629,23 +6399,12 @@
 /turf/open/floor/plating/airless,
 /area/centcom/central_command_areas/ferry)
 "aFn" = (
-/obj/structure/rack,
-/obj/item/storage/medkit/regular{
-	pixel_y = 12
-	},
-/obj/item/storage/medkit/fire{
-	pixel_y = 8
-	},
-/obj/item/storage/medkit/brute{
-	pixel_y = 4
-	},
-/obj/structure/table/reinforced,
-/obj/effect/turf_decal/stripes/white/end{
-	color = "#6b8cc4";
+/obj/effect/turf_decal/stripes/line{
 	dir = 4
 	},
-/obj/item/storage/medkit/toxin,
-/turf/open/floor/iron/smooth_large,
+/obj/structure/table/reinforced,
+/obj/structure/light_fake/spot/directional/east,
+/turf/open/floor/iron/smooth,
 /area/centcom/central_command_areas/armory)
 "aFp" = (
 /obj/machinery/door/poddoor/ert{
@@ -6690,19 +6449,10 @@
 	},
 /area/centcom/central_command_areas/armory)
 "aFE" = (
-/obj/machinery/door/poddoor/ert{
-	name = "Second Port";
-	id = "CC_Port2_2"
-	},
-/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
-/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
-/obj/structure/cable/layer3,
-/obj/effect/mapping_helpers/airlock/autoname,
-/obj/machinery/door/airlock/centcom,
-/obj/effect/mapping_helpers/airlock/access/all/admin/general,
-/obj/effect/mapping_helpers/airlock/cutaiwire,
-/turf/open/floor/iron/smooth_half,
-/area/centcom/central_command_areas/ferry)
+/obj/effect/turf_decal/stripes/red/end,
+/obj/machinery/vending/nta/ultra_heavy,
+/turf/open/floor/iron/smooth_large,
+/area/centcom/central_command_areas/armory)
 "aFF" = (
 /obj/machinery/mech_bay_recharge_port{
 	dir = 8
@@ -7286,11 +7036,16 @@
 /turf/open/floor/iron/dark/diagonal,
 /area/centcom/central_command_areas/bar)
 "aHD" = (
-/obj/effect/turf_decal/delivery/red,
 /obj/machinery/door/poddoor/shutters/indestructible{
 	dir = 4;
-	id = "CC_Assault_1";
-	name = "Assault Gear"
+	id = "CC_Ember_Armory_1";
+	name = "Ember ERT Gear"
+	},
+/obj/effect/turf_decal/stripes/line{
+	dir = 4
+	},
+/obj/effect/turf_decal/delivery/white{
+	color = "#439C1E"
 	},
 /turf/open/floor/iron/smooth_large,
 /area/centcom/central_command_areas/armory)
@@ -7425,24 +7180,6 @@
 	},
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/planetary_port)
-"aIh" = (
-/obj/structure/rack,
-/obj/item/tank/internals/emergency_oxygen/double,
-/obj/item/tank/internals/emergency_oxygen/double,
-/obj/item/tank/internals/emergency_oxygen/double,
-/obj/item/tank/internals/emergency_oxygen/double,
-/obj/item/tank/internals/emergency_oxygen/double,
-/obj/item/tank/internals/emergency_oxygen/double,
-/obj/item/tank/internals/emergency_oxygen/double,
-/obj/item/tank/internals/emergency_oxygen/double,
-/obj/item/tank/internals/emergency_oxygen/double,
-/obj/item/tank/internals/emergency_oxygen/double,
-/obj/effect/turf_decal/stripes/white/end{
-	color = "#6b8cc4";
-	dir = 4
-	},
-/turf/open/floor/iron/smooth_large,
-/area/centcom/central_command_areas/armory)
 "aIi" = (
 /obj/effect/decal/cleanable/glass,
 /turf/open/floor/catwalk_floor/iron_dark,
@@ -7575,25 +7312,6 @@
 	},
 /turf/open/floor/iron/dark,
 /area/centcom/central_command_areas/engine)
-"aII" = (
-/obj/structure/rack,
-/obj/item/storage/box/pepper_spray{
-	pixel_y = 7
-	},
-/obj/item/storage/box/flashes{
-	pixel_y = 3
-	},
-/obj/effect/turf_decal/stripes/line{
-	dir = 8
-	},
-/turf/open/floor/iron/smooth,
-/area/centcom/central_command_areas/armory)
-"aIJ" = (
-/obj/structure/light_fake/spot/directional/east,
-/obj/effect/turf_decal/delivery,
-/obj/structure/sign/poster/official/nanotrasen_logo/directional/east,
-/turf/open/floor/iron/smooth_large,
-/area/centcom/central_command_areas/armory)
 "aIL" = (
 /obj/effect/turf_decal/tile/yellow/half/contrasted{
 	dir = 4
@@ -7657,14 +7375,6 @@
 /obj/machinery/griddle,
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/bar)
-"aIW" = (
-/obj/structure/light_fake/spot/directional/east,
-/obj/effect/turf_decal/delivery/white{
-	color = "#6B8CC4"
-	},
-/obj/structure/sign/poster/official/nanotrasen_logo/directional/east,
-/turf/open/floor/iron/smooth_half,
-/area/centcom/central_command_areas/armory)
 "aIY" = (
 /obj/effect/turf_decal/line/dark_blue{
 	dir = 4
@@ -7896,8 +7606,10 @@
 /turf/open/floor/mineral/plastitanium/pod/dark,
 /area/centcom/central_command_areas/cabin/soo)
 "aJH" = (
-/obj/machinery/vending/nta/light,
-/obj/effect/turf_decal/stripes/line,
+/obj/structure/tank_dispenser/oxygen,
+/obj/effect/turf_decal/stripes/end{
+	dir = 4
+	},
 /turf/open/floor/iron/smooth_large,
 /area/centcom/central_command_areas/armory)
 "aJI" = (
@@ -8066,38 +7778,20 @@
 /turf/open/floor/plating/airless,
 /area/centcom/central_command_areas/engine)
 "aKm" = (
-/obj/structure/rack,
-/obj/item/knife/combat{
-	pixel_y = 9
-	},
-/obj/item/knife/combat{
-	pixel_x = 3;
-	pixel_y = 6
-	},
-/obj/item/knife/combat{
-	pixel_x = 6;
-	pixel_y = 3
-	},
-/obj/item/knife/combat{
-	pixel_x = 9
-	},
-/obj/item/knife/combat{
-	pixel_y = 9
-	},
-/obj/item/knife/combat{
-	pixel_x = 3;
-	pixel_y = 6
-	},
-/obj/item/knife/combat{
-	pixel_x = 6;
-	pixel_y = 3
-	},
-/obj/item/knife/combat{
-	pixel_x = 9
-	},
 /obj/structure/light_fake/spot/directional/south,
-/obj/effect/turf_decal/stripes/line{
-	dir = 1
+/obj/effect/turf_decal/stripes/white/line{
+	dir = 1;
+	color = "#6b8cc4"
+	},
+/obj/effect/turf_decal/stripes/white/line{
+	color = "#6b8cc4"
+	},
+/obj/structure/table/reinforced,
+/obj/item/storage/medkit/advanced{
+	pixel_y = 8
+	},
+/obj/item/storage/medkit/surgery{
+	pixel_y = 4
 	},
 /turf/open/floor/iron/smooth_large,
 /area/centcom/central_command_areas/armory)
@@ -8105,6 +7799,7 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 4
 	},
+/obj/structure/table/reinforced,
 /turf/open/floor/iron/smooth,
 /area/centcom/central_command_areas/armory)
 "aKp" = (
@@ -8293,30 +7988,10 @@
 /turf/open/space/basic,
 /area/space)
 "aKT" = (
+/obj/effect/turf_decal/stripes/end{
+	dir = 8
+	},
 /obj/structure/table/reinforced,
-/obj/item/storage/box/zipties{
-	pixel_x = -5;
-	pixel_y = 13
-	},
-/obj/item/grenade/c4{
-	pixel_x = 10;
-	pixel_y = 11
-	},
-/obj/item/grenade/c4{
-	pixel_x = 10;
-	pixel_y = 5
-	},
-/obj/item/storage/box/zipties{
-	pixel_x = -5;
-	pixel_y = 3
-	},
-/obj/item/grenade/c4{
-	pixel_x = 10;
-	pixel_y = -1
-	},
-/obj/effect/turf_decal/stripes/line{
-	dir = 1
-	},
 /turf/open/floor/iron/smooth_large,
 /area/centcom/central_command_areas/armory)
 "aKU" = (
@@ -8486,19 +8161,11 @@
 /turf/open/floor/iron/dark,
 /area/centcom/central_command_areas/supplypod/loading/ert)
 "aLr" = (
-/obj/structure/table/reinforced,
-/obj/item/storage/medkit/advanced{
-	pixel_y = 8
+/obj/machinery/status_display/evac/directional/north,
+/turf/open/floor/iron/smooth_half{
+	dir = 1
 	},
-/obj/item/storage/medkit/surgery{
-	pixel_y = 4
-	},
-/obj/effect/turf_decal/stripes/white/end{
-	color = "#6b8cc4";
-	dir = 8
-	},
-/turf/open/floor/iron/smooth_edge,
-/area/centcom/central_command_areas/armory)
+/area/centcom/central_command_areas/ferry)
 "aLs" = (
 /turf/open/floor/iron/smooth_edge,
 /area/centcom/central_command_areas/armory)
@@ -8619,41 +8286,17 @@
 /turf/open/floor/iron/smooth_large,
 /area/centcom/central_command_areas/evacuation/ship)
 "aLL" = (
-/obj/item/grenade/barrier{
-	pixel_y = 12;
-	pixel_x = -7
+/obj/effect/turf_decal/stripes/white/end{
+	color = "#6b8cc4";
+	dir = 8
 	},
-/obj/structure/rack,
-/obj/item/grenade/barrier{
-	pixel_y = 9;
-	pixel_x = -7
+/obj/structure/table/reinforced,
+/obj/item/storage/medkit/brute,
+/obj/item/storage/medkit/fire{
+	pixel_y = 6
 	},
-/obj/item/grenade/barrier{
-	pixel_y = 6;
-	pixel_x = -7
-	},
-/obj/item/grenade/barrier{
-	pixel_y = 3;
-	pixel_x = -7
-	},
-/obj/item/grenade/barrier{
-	pixel_y = 12;
-	pixel_x = 7
-	},
-/obj/item/grenade/barrier{
-	pixel_y = 9;
-	pixel_x = 7
-	},
-/obj/item/grenade/barrier{
-	pixel_y = 6;
-	pixel_x = 7
-	},
-/obj/item/grenade/barrier{
-	pixel_y = 3;
-	pixel_x = 7
-	},
-/obj/effect/turf_decal/stripes/line{
-	dir = 1
+/obj/item/storage/medkit/regular{
+	pixel_y = 12
 	},
 /turf/open/floor/iron/smooth_large,
 /area/centcom/central_command_areas/armory)
@@ -8725,13 +8368,6 @@
 	pixel_y = 7;
 	id = "CC_Assault_1";
 	name = "Assault Gear";
-	req_access = list("cent_captain")
-	},
-/obj/machinery/button/door/indestructible{
-	pixel_x = -7;
-	pixel_y = -3;
-	id = "CC_Energy_1";
-	name = "Energy Counter-Combat Gear";
 	req_access = list("cent_captain")
 	},
 /turf/open/floor/iron/smooth_large,
@@ -8818,13 +8454,16 @@
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/planetary_port)
 "aMi" = (
-/obj/effect/turf_decal/delivery/white{
-	color = "#439C1E"
-	},
 /obj/machinery/door/poddoor/shutters/indestructible{
 	dir = 4;
-	id = "CC_Energy_1";
-	name = "Energy Counter-Combat Gear"
+	id = "CC_Red_Armory_1";
+	name = "Red ERT Gear"
+	},
+/obj/effect/turf_decal/stripes/line{
+	dir = 4
+	},
+/obj/effect/turf_decal/delivery/white{
+	color = "#52B4E9"
 	},
 /turf/open/floor/iron/smooth_large,
 /area/centcom/central_command_areas/armory)
@@ -9037,30 +8676,11 @@
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/planetary_port)
 "aNj" = (
+/obj/effect/turf_decal/stripes/end{
+	dir = 4
+	},
 /obj/structure/table/reinforced,
-/obj/item/radio{
-	pixel_x = -8;
-	pixel_y = 9
-	},
-/obj/item/radio{
-	pixel_y = 9;
-	pixel_x = -4
-	},
-/obj/item/radio{
-	pixel_y = 9
-	},
-/obj/item/radio{
-	pixel_y = 9;
-	pixel_x = 4
-	},
-/obj/item/radio{
-	pixel_y = 9;
-	pixel_x = 8
-	},
-/obj/item/storage/lockbox/loyalty,
-/obj/effect/turf_decal/stripes/line{
-	dir = 1
-	},
+/obj/item/tank/internals/emergency_oxygen/double,
 /turf/open/floor/iron/smooth_large,
 /area/centcom/central_command_areas/armory)
 "aNl" = (
@@ -9125,14 +8745,20 @@
 /turf/open/floor/light,
 /area/centcom/central_command_areas/bar)
 "aNB" = (
-/obj/structure/rack,
-/obj/item/storage/medkit/tactical{
-	pixel_y = 10
+/obj/structure/table/reinforced,
+/obj/item/bodybag/environmental/nanotrasen,
+/obj/item/bodybag/environmental/nanotrasen{
+	pixel_y = 6
 	},
-/obj/item/storage/medkit/tactical,
-/obj/effect/turf_decal/stripes/line,
-/obj/item/gun/medbeam{
-	pixel_y = 4
+/obj/item/bodybag/environmental/nanotrasen{
+	pixel_y = 12
+	},
+/obj/effect/turf_decal/stripes/white/line{
+	dir = 1;
+	color = "#6b8cc4"
+	},
+/obj/effect/turf_decal/stripes/white/line{
+	color = "#6b8cc4"
 	},
 /turf/open/floor/iron/smooth_large,
 /area/centcom/central_command_areas/armory)
@@ -9144,10 +8770,15 @@
 /turf/open/floor/plating,
 /area/centcom/central_command_areas/maintance)
 "aNF" = (
-/obj/structure/table/reinforced,
-/obj/machinery/status_display/evac/directional/north,
-/obj/machinery/recharger,
-/turf/open/floor/iron/smooth_large,
+/obj/structure/closet/emcloset,
+/obj/item/tank/internals/emergency_oxygen/engi,
+/obj/item/tank/internals/emergency_oxygen/engi,
+/obj/item/tank/internals/emergency_oxygen/engi,
+/obj/item/clothing/mask/gas,
+/obj/item/clothing/mask/gas,
+/obj/item/clothing/mask/gas,
+/obj/effect/turf_decal/stripes/end,
+/turf/open/floor/iron/smooth,
 /area/centcom/central_command_areas/ferry)
 "aNI" = (
 /obj/effect/turf_decal/siding/wood{
@@ -9319,15 +8950,15 @@
 "aOv" = (
 /obj/machinery/button/door/indestructible{
 	pixel_y = 8;
-	id = "CC_Assault_1";
-	name = "Assault Gear";
+	id = "CC_Ember_Armory_1";
+	name = "Ember ERT Gear";
 	req_access = list("cent_captain");
 	pixel_x = -24
 	},
 /obj/machinery/button/door/indestructible{
 	pixel_y = -8;
-	id = "CC_Energy_1";
-	name = "Energy Counter-Combat Gear";
+	id = "CC_Red_Armory_1";
+	name = "Red ERT Gear";
 	req_access = list("cent_captain");
 	pixel_x = -24
 	},
@@ -9657,14 +9288,8 @@
 /turf/open/floor/engine,
 /area/centcom/central_command_areas/engine)
 "aQh" = (
-/obj/machinery/computer/camera_advanced{
-	dir = 8
-	},
-/obj/effect/turf_decal/stripes/white/line{
-	dir = 8
-	},
-/turf/open/floor/iron/dark/diagonal,
-/area/centcom/central_command_areas/ferry)
+/turf/open/floor/iron/smooth_edge,
+/area/centcom/central_command_areas/ert)
 "aQj" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/visible/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/visible,
@@ -9689,11 +9314,6 @@
 /area/centcom/central_command_areas/supply)
 "aQq" = (
 /obj/structure/sign/poster/official/nanotrasen_logo/directional/west,
-/obj/structure/statue/dummy/srt{
-	dir = 4;
-	pixel_x = -11;
-	pixel_y = 0
-	},
 /turf/open/floor/iron/smooth_half{
 	dir = 1
 	},
@@ -9705,9 +9325,11 @@
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/planetary_port)
 "aQs" = (
-/obj/structure/light_fake/spot/directional/north,
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
+	},
 /turf/open/floor/iron/smooth_edge,
-/area/centcom/central_command_areas/ferry)
+/area/centcom/central_command_areas/armory)
 "aQt" = (
 /obj/structure/table/reinforced,
 /obj/item/storage/toolbox/electrical{
@@ -9861,21 +9483,17 @@
 /turf/open/floor/iron/dark/smooth_large,
 /area/centcom/central_command_areas/engine)
 "aQZ" = (
-/obj/item/clipboard,
-/obj/item/folder/red,
-/obj/item/stamp/denied{
-	pixel_x = 3;
-	pixel_y = 3
+/obj/machinery/door/poddoor/shutters/indestructible{
+	dir = 8;
+	id = "CC_Gamma_Armory_1";
+	name = "Gamma ERT Gear"
 	},
-/obj/item/stamp,
-/obj/structure/table/reinforced,
-/obj/effect/turf_decal/tile/neutral/fourcorners,
-/obj/item/radio/headset/headset_cent{
-	pixel_x = -9
+/obj/effect/turf_decal/stripes/line{
+	dir = 8
 	},
-/obj/structure/sign/poster/official/no_erp/directional/north,
+/obj/effect/turf_decal/delivery/red,
 /turf/open/floor/iron/smooth_large,
-/area/centcom/central_command_areas/ferry)
+/area/centcom/central_command_areas/armory)
 "aRe" = (
 /obj/machinery/conveyor{
 	dir = 8;
@@ -10094,23 +9712,6 @@
 /obj/machinery/duct,
 /turf/open/floor/iron/dark/smooth_large,
 /area/centcom/central_command_areas/hallway)
-"aSw" = (
-/obj/structure/table/reinforced,
-/obj/machinery/cell_charger{
-	pixel_x = 2;
-	pixel_y = 12
-	},
-/obj/machinery/recharger{
-	pixel_x = -6
-	},
-/obj/machinery/recharger{
-	pixel_x = 6
-	},
-/obj/effect/turf_decal/stripes/end{
-	dir = 4
-	},
-/turf/open/floor/iron/smooth_large,
-/area/centcom/central_command_areas/armory)
 "aSy" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden{
 	dir = 8
@@ -10267,25 +9868,12 @@
 /turf/open/floor/iron/smooth_edge,
 /area/centcom/central_command_areas/evacuation/ship)
 "aTf" = (
-/obj/structure/rack,
-/obj/item/knife/combat{
-	pixel_y = 9
-	},
-/obj/item/knife/combat{
-	pixel_x = 3;
-	pixel_y = 6
-	},
-/obj/item/knife/combat{
-	pixel_x = 6;
-	pixel_y = 3
-	},
-/obj/item/knife/combat{
-	pixel_x = 9
-	},
 /obj/structure/light_fake/spot/directional/south,
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
 	},
+/obj/effect/turf_decal/stripes/line,
+/obj/structure/table/reinforced,
 /turf/open/floor/iron/smooth_large,
 /area/centcom/central_command_areas/armory)
 "aTi" = (
@@ -10370,14 +9958,19 @@
 	},
 /area/centcom/central_command_areas/hallway)
 "aTD" = (
-/obj/structure/chair/office{
-	dir = 4
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/obj/structure/cable/layer3,
+/obj/effect/mapping_helpers/airlock/autoname,
+/obj/machinery/door/airlock/centcom,
+/obj/effect/mapping_helpers/airlock/access/all/admin/general,
+/obj/machinery/door/poddoor/ert{
+	name = "Second Port";
+	id = "CC_Port2_2"
 	},
-/obj/structure/light_fake/small/directional/west,
-/turf/open/floor/iron/smooth_half{
-	dir = 1
-	},
-/area/centcom/central_command_areas/ferry)
+/obj/effect/mapping_helpers/airlock/cutaiwire,
+/turf/open/floor/iron/smooth_half,
+/area/centcom/central_command_areas/armory)
 "aTF" = (
 /obj/structure/steam_vent,
 /turf/open/floor/plating,
@@ -10431,19 +10024,9 @@
 /turf/open/floor/iron/smooth,
 /area/centcom/central_command_areas/armory)
 "aTX" = (
-/obj/structure/closet/crate/centcom,
-/obj/item/mod/module/magboot,
-/obj/item/mod/module/magboot,
-/obj/item/mod/module/magboot,
-/obj/item/mod/module/magboot,
-/obj/item/mod/module/magboot,
-/obj/item/mod/module/magboot,
-/obj/item/mod/module/magboot,
-/obj/item/mod/module/magboot,
-/obj/item/mod/module/magboot,
-/obj/item/mod/module/magboot,
-/obj/effect/turf_decal/stripes/end{
-	dir = 8
+/obj/machinery/vending/nta/medium,
+/obj/effect/turf_decal/stripes/white/end{
+	color = "#6b8cc4"
 	},
 /turf/open/floor/iron/smooth_large,
 /area/centcom/central_command_areas/armory)
@@ -10514,12 +10097,12 @@
 /turf/open/floor/iron/dark,
 /area/centcom/central_command_areas/engine)
 "aUo" = (
-/obj/machinery/door/poddoor/shutters/indestructible{
-	dir = 4;
-	id = "CC_Light_1";
-	name = "Light Gear"
-	},
 /obj/effect/turf_decal/stripes/end,
+/obj/machinery/door/poddoor/shutters/indestructible/preopen{
+	dir = 4;
+	name = "Engineering Supplies";
+	id = sss
+	},
 /turf/open/floor/iron/smooth_edge{
 	dir = 4
 	},
@@ -11019,11 +10602,24 @@
 /turf/open/floor/iron/dark/textured_half,
 /area/centcom/central_command_areas/hallway)
 "aWq" = (
-/obj/machinery/holopad/secure,
+/obj/machinery/button/door/indestructible{
+	name = "Heavy Armory Gear";
+	id = "CC_Heavy_Armory_1";
+	req_access = list("cent_captain");
+	pixel_y = -8;
+	pixel_x = 24
+	},
+/obj/machinery/button/door/indestructible{
+	name = "Gamma ERT Gear";
+	id = "CC_Gamma_Armory_1";
+	req_access = list("cent_captain");
+	pixel_y = 8;
+	pixel_x = 24
+	},
 /turf/open/floor/iron/smooth_half{
 	dir = 1
 	},
-/area/centcom/central_command_areas/ferry)
+/area/centcom/central_command_areas/armory)
 "aWr" = (
 /obj/effect/turf_decal/board_number/six{
 	pixel_x = -1;
@@ -11096,21 +10692,25 @@
 /turf/open/floor/iron/dark/textured_large,
 /area/centcom/central_command_areas/supplypod/loading/ert)
 "aWB" = (
-/obj/effect/turf_decal/delivery/white{
-	color = "#6B8CC4"
-	},
-/turf/open/floor/iron/smooth_edge{
+/obj/effect/turf_decal/line/dark_blue/line{
 	dir = 8
+	},
+/obj/machinery/button/door/indestructible{
+	name = "Medical Supplies";
+	id = "CC_Medical_Supplies";
+	req_access = list("cent_captain");
+	pixel_x = 24
+	},
+/turf/open/floor/iron/smooth_half{
+	dir = 1
 	},
 /area/centcom/central_command_areas/armory)
 "aWC" = (
-/obj/effect/turf_decal/stripes/white/line{
-	dir = 8
-	},
-/obj/machinery/computer/shuttle/specops{
-	dir = 8
-	},
-/turf/open/floor/iron/dark/diagonal,
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/obj/structure/cable/layer3,
+/obj/machinery/status_display/ai/directional/north,
+/turf/open/floor/iron/smooth_half,
 /area/centcom/central_command_areas/ferry)
 "aWD" = (
 /obj/effect/turf_decal/stripes/line{
@@ -11180,14 +10780,17 @@
 /turf/closed/indestructible/riveted,
 /area/centcom/central_command_areas/hospital)
 "aWV" = (
-/obj/machinery/computer/shuttle/ferry/request{
+/obj/machinery/door/poddoor/shutters/indestructible{
+	dir = 8;
+	name = "Heavy Armory Gear";
+	id = "CC_Heavy_Armory_1"
+	},
+/obj/effect/turf_decal/stripes/line{
 	dir = 8
 	},
-/obj/effect/turf_decal/stripes/white/line{
-	dir = 6
-	},
-/turf/open/floor/iron/dark/diagonal,
-/area/centcom/central_command_areas/ferry)
+/obj/effect/turf_decal/delivery/red,
+/turf/open/floor/iron/smooth_large,
+/area/centcom/central_command_areas/armory)
 "aWW" = (
 /obj/machinery/light/small/directional/west,
 /turf/open/floor/stone,
@@ -11588,30 +11191,10 @@
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/supplypod/loading/one)
 "aYK" = (
-/obj/structure/table/reinforced,
-/obj/item/storage/box/zipties{
-	pixel_x = -5;
-	pixel_y = 13
-	},
-/obj/item/grenade/c4{
-	pixel_x = 10;
-	pixel_y = 11
-	},
-/obj/item/grenade/c4{
-	pixel_x = 10;
-	pixel_y = 5
-	},
-/obj/item/storage/box/zipties{
-	pixel_x = -5;
-	pixel_y = 3
-	},
-/obj/item/grenade/c4{
-	pixel_x = 10;
-	pixel_y = -1
-	},
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
 	},
+/obj/structure/table/reinforced,
 /turf/open/floor/iron/smooth,
 /area/centcom/central_command_areas/armory)
 "aYL" = (
@@ -11707,8 +11290,18 @@
 /turf/open/floor/mineral/plastitanium/pod,
 /area/centcom/central_command_areas/supply)
 "aZh" = (
-/obj/structure/tank_dispenser/oxygen,
-/obj/structure/sign/warning/no_smoking/circle/directional/east,
+/obj/structure/table/reinforced,
+/obj/item/storage/toolbox/electrical{
+	pixel_x = 6
+	},
+/obj/item/storage/toolbox/mechanical,
+/obj/item/storage/toolbox/emergency{
+	pixel_x = 3;
+	pixel_y = 6
+	},
+/obj/effect/turf_decal/stripes/end{
+	dir = 8
+	},
 /turf/open/floor/iron/smooth_large,
 /area/centcom/central_command_areas/armory)
 "aZn" = (
@@ -11859,9 +11452,16 @@
 /turf/open/floor/stone,
 /area/centcom/central_command_areas/planetary_port/restroom)
 "aZL" = (
-/obj/structure/light_fake/spot/directional/south,
+/obj/machinery/door/airlock/centcom,
+/obj/effect/mapping_helpers/airlock/autoname,
+/obj/machinery/door/poddoor/ert{
+	name = "Second Port";
+	id = "CC_Port2_2"
+	},
+/obj/effect/mapping_helpers/airlock/access/all/admin/general,
+/obj/effect/mapping_helpers/airlock/cutaiwire,
 /turf/open/floor/iron/smooth_half,
-/area/centcom/central_command_areas/ferry)
+/area/centcom/central_command_areas/armory)
 "aZP" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 5
@@ -11875,14 +11475,11 @@
 	},
 /area/centcom/central_command_areas/ferry)
 "aZR" = (
-/obj/structure/table/reinforced,
-/obj/item/gun/energy/ionrifle{
-	pixel_y = 10
-	},
-/obj/item/gun/energy/ionrifle,
 /obj/effect/turf_decal/stripes/white/end{
-	color = "#439C1E"
+	color = "#6b8cc4";
+	dir = 4
 	},
+/obj/structure/table/reinforced,
 /turf/open/floor/iron/smooth_large,
 /area/centcom/central_command_areas/armory)
 "aZT" = (
@@ -11924,14 +11521,20 @@
 /turf/closed/indestructible/riveted,
 /area/centcom/central_command_areas/engine)
 "aZY" = (
-/obj/structure/rack,
-/obj/item/storage/medkit/regular{
+/obj/structure/table/reinforced,
+/obj/machinery/cell_charger{
+	pixel_x = 2;
 	pixel_y = 12
 	},
-/obj/item/storage/medkit/fire{
-	pixel_y = 6
+/obj/machinery/recharger{
+	pixel_x = -6
 	},
-/obj/item/storage/medkit/brute,
+/obj/machinery/recharger{
+	pixel_x = 6
+	},
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
+	},
 /obj/effect/turf_decal/stripes/line,
 /turf/open/floor/iron/smooth_large,
 /area/centcom/central_command_areas/armory)
@@ -14130,6 +13733,10 @@
 	},
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/planetary_port)
+"fvo" = (
+/obj/structure/sign/flag/nanotrasen/directional/west,
+/turf/closed/indestructible/riveted,
+/area/centcom/central_command_areas/armory)
 "fvN" = (
 /obj/structure/railing/platform,
 /obj/effect/turf_decal/tile/dark/full{
@@ -15012,7 +14619,9 @@
 /turf/open/floor/grass,
 /area/centcom/central_command_areas/planetary_port/plaza)
 "hql" = (
-/obj/structure/statue/dummy/srt,
+/obj/effect/turf_decal/stripes/corner{
+	dir = 4
+	},
 /turf/open/floor/iron/smooth_edge{
 	dir = 1
 	},
@@ -15818,6 +15427,18 @@
 	},
 /turf/open/floor/wood,
 /area/centcom/central_command_areas/arboretum)
+"jiu" = (
+/obj/machinery/button/door/indestructible{
+	name = "Gamma ERT Gear";
+	id = "CC_Gamma_Armory_1";
+	req_access = list("cent_captain");
+	pixel_y = 8;
+	pixel_x = 24
+	},
+/turf/open/floor/iron/smooth_half{
+	dir = 1
+	},
+/area/centcom/central_command_areas/armory)
 "jjq" = (
 /turf/open/floor/carpet/black,
 /area/centcom/central_command_areas/courtroom)
@@ -17416,6 +17037,20 @@
 	dir = 1
 	},
 /area/centcom/central_command_areas/armory)
+"nnV" = (
+/obj/effect/turf_decal/line/dark_blue/line{
+	dir = 4
+	},
+/obj/machinery/button/door/indestructible{
+	name = "Engineering Supplies";
+	id = "CC_Engineering_Supplies";
+	req_access = list("cent_captain");
+	pixel_x = -24
+	},
+/turf/open/floor/iron/smooth_half{
+	dir = 1
+	},
+/area/centcom/central_command_areas/armory)
 "noS" = (
 /obj/effect/turf_decal/siding/wood{
 	dir = 4
@@ -17755,7 +17390,6 @@
 /area/centcom/central_command_areas/hallway)
 "nRQ" = (
 /obj/machinery/scanner_gate/preset_guns,
-/obj/machinery/door/poddoor/shutters/indestructible/preopen,
 /obj/machinery/door/window/brigdoor/right/directional/south{
 	req_access = list("cent_general")
 	},
@@ -18070,6 +17704,15 @@
 	},
 /turf/open/floor/iron/dark,
 /area/centcom/central_command_areas/hallway)
+"ouo" = (
+/obj/machinery/button/door/indestructible{
+	name = "Second Port";
+	id = "CC_Port2_2";
+	req_access = list("cent_general");
+	pixel_y = -24
+	},
+/turf/open/floor/iron/smooth_half,
+/area/centcom/central_command_areas/armory)
 "ovn" = (
 /obj/structure/table/reinforced/plastitaniumglass,
 /obj/effect/spawner/random/food_or_drink/dinner,
@@ -76685,14 +76328,14 @@ aib
 aYa
 aBC
 aii
-aZR
+aTX
 aYa
 aFp
 aAM
 aYa
-aJH
-aOL
-aOL
+aZh
+aPx
+aPx
 aKT
 aYa
 afy
@@ -76948,8 +76591,8 @@ aPx
 aDB
 aYa
 aZY
-aOL
-aOL
+aPx
+aPx
 aTf
 aYa
 avO
@@ -77205,8 +76848,8 @@ aPx
 aDB
 aYa
 aJH
-aOL
-aOL
+aPx
+aPx
 aNj
 aYa
 awM
@@ -77450,14 +77093,14 @@ aWr
 avz
 agG
 aFP
+atw
+aFD
+aFD
+aFD
+aFD
+aFD
 aLs
-axB
-aKn
-aKn
-aKn
-aeh
-aLs
-aji
+aYa
 aPx
 aDB
 aYa
@@ -77707,18 +77350,18 @@ avV
 aCG
 aew
 aFP
+aQs
+axB
+aKn
+aFn
+aKn
+aeh
 aLs
-ate
-avi
-aXW
-aeQ
-aoq
-aLs
-aJZ
+aji
 aPx
 aDB
 aaY
-aju
+nnV
 aDK
 ayk
 aju
@@ -77964,14 +77607,14 @@ agp
 aBD
 agG
 aFP
+aQs
+ate
+avi
+aXW
+aeQ
+aoq
 aLs
-ahh
-aII
-aYK
-aoR
-atB
-aLs
-aEo
+aJZ
 aDB
 aDB
 aZC
@@ -78221,18 +77864,18 @@ aUu
 aCs
 aAN
 akW
-hql
-aFD
-aFD
-aFD
-aFD
-aFD
+azB
+ahh
+aYK
+adE
+aYK
+atB
 aLs
-aYa
+aEo
 aDB
 aPx
 aeJ
-aGe
+aWB
 aJL
 apS
 aGe
@@ -78478,13 +78121,13 @@ agc
 atc
 aYE
 aYa
-atw
-arE
+aJZ
 aFD
 aFD
 aFD
-aWB
-aLr
+aFD
+aFD
+aLs
 aYa
 aDB
 aPx
@@ -78735,20 +78378,20 @@ aBi
 agh
 aYo
 aBi
-aqx
-aDr
-aTX
-aZh
-auS
-aDD
-ant
+aJZ
+abU
+aFD
+aWq
+jiu
+abU
+aLs
 aYa
-aFE
+aDB
 aCc
 aYa
 avN
-aOL
-aOL
+aPx
+aPx
 aLL
 aYa
 awM
@@ -78992,20 +78635,20 @@ aFG
 aVI
 axO
 aBi
-aSw
-aIJ
-akb
+aQZ
+aQZ
+aQZ
 aYa
-aIh
-aIW
-aFn
+aDD
+aWV
+aDD
 aYa
-avj
-aLe
+aDB
+ouo
 aYa
 aNB
-aOL
-aOL
+aPx
+aPx
 aKm
 aYa
 aDu
@@ -79249,20 +78892,20 @@ aya
 aVI
 axA
 aBi
-aBi
+auS
+aDr
+ant
 aYa
+arE
+aDr
+aFE
 aYa
-aYa
-aYa
-aYa
-aYa
-aYa
-avj
+aTD
 aZL
 aYa
-avN
-aOL
-aOL
+aZR
+aoR
+aPx
 api
 aYa
 aFF
@@ -79504,17 +79147,17 @@ aDl
 aya
 aya
 aVI
-aes
-aIE
+aQh
 aBi
-aQZ
-aMb
-aTD
-aWq
-adE
-aMb
-abU
-avj
+aYa
+aYa
+aYa
+aYa
+aYa
+aYa
+aYa
+fvo
+aWC
 aLe
 aYa
 aYa
@@ -79763,19 +79406,19 @@ any
 aVI
 aes
 aIE
-aBi
-aNF
-aWV
-aQh
-aWC
 amD
+aNF
+aFd
+aMb
+wjx
+aMb
 aFd
 afU
 avj
 aLe
 aWQ
+aFd
 wjx
-aMb
 aQq
 aMb
 aWg
@@ -80021,13 +79664,13 @@ aVI
 aes
 aIE
 amD
-amD
-azB
-azB
-azB
-amD
-amD
-aQs
+aLr
+aMb
+aMb
+aMb
+aMb
+aMb
+afU
 avj
 aLe
 anI
