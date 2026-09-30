@@ -32,6 +32,7 @@
 	break_apcs_in_dark(turfs_shrooms)
 	weaken_shaded_mobs(turfs_dark, blind_duration)
 	disable_lights_in_area(turfs_dark)
+	damage_synthetics(turfs_dark)
 
 	playsound(center, sfx_emp, 70, TRUE)
 	new /obj/effect/temp_visual/circle_wave/shadow_veil(center)
@@ -84,8 +85,6 @@
 /datum/action/cooldown/shadowling/veil/proc/weaken_shaded_mobs(list/turfs, duration)
 	var/datum/team/shadow_hive/hive = get_shadow_hive()
 	for(var/turf/T in turfs)
-		if(!_is_dark(T))
-			continue
 		for(var/mob/living/carbon/human/M in T)
 			if(!M)
 				continue
@@ -104,3 +103,21 @@
 	for(var/turf/T in turfs)
 		for(var/obj/structure/glowshroom/G in T)
 			qdel(G)
+
+/datum/action/cooldown/shadowling/veil/proc/damage_synthetics(list/turfs)
+	if(!islist(turfs))
+		return
+	for(var/turf/T in turfs)
+		for(var/obj/vehicle/sealed/mecha/M in T)
+			if(QDELETED(M))
+				continue
+			M.take_damage(50, BRUTE)
+		for(var/mob/living/silicon/S in T)
+			if(QDELETED(S))
+				continue
+			S.flash_act(affect_silicon = TRUE)
+			S.adjust_brute_loss(50)
+		for(var/mob/living/basic/bot/B in T)
+			if(QDELETED(B))
+				continue
+			B.adjust_brute_loss(50)

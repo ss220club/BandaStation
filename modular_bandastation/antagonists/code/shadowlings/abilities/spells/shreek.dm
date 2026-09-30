@@ -39,6 +39,9 @@
 
 	var/list_disorient = range(disorient_radius, H)
 	var/list_knock = range(knock_radius, H)
+
+	affect_synthetics(list_disorient)
+
 	for(var/mob/living/L in list_disorient)
 		if(L == H)
 			continue
@@ -117,3 +120,20 @@
 		var/chance = clamp(SHREEK_LIGHT_BREAK_CHANCE_BASE - (SHREEK_LIGHT_BREAK_CHANCE_FALLOFF * d), SHREEK_LIGHT_BREAK_CHANCE_MIN, SHREEK_LIGHT_BREAK_CHANCE_BASE)
 		if(prob(chance))
 			L.break_light_tube()
+
+/datum/action/cooldown/shadowling/shreek/proc/affect_synthetics(list/turfs)
+	if(!islist(turfs))
+		return
+	for(var/turf/T in turfs)
+		for(var/obj/vehicle/sealed/mecha/M in T)
+			if(QDELETED(M))
+				continue
+			M.take_damage(150, BRUTE)
+		for(var/mob/living/silicon/S in T)
+			if(QDELETED(S))
+				continue
+			S.adjust_brute_loss(150)
+		for(var/mob/living/basic/bot/B in T)
+			if(QDELETED(B))
+				continue
+			B.adjust_brute_loss(150)
