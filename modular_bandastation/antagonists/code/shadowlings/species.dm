@@ -325,9 +325,11 @@
 	iris_overlay = "eyes_cyber_glow_iris"
 	eye_icon_state = "eyes_glow_gs"
 	icon_eyes_path = 'modular_bandastation/augmentation_preferences/icons/human_face.dmi'
+	sight_flags = SEE_MOBS
 	pepperspray_protect = TRUE
 	color_cutoffs = null
 	flash_protect = FLASH_PROTECTION_SENSITIVE
+	see_invisible = SEE_INVISIBLE_LIVING
 	eye_color_left = "#ff0000"
 	eye_color_right = "#ff0000"
 
