@@ -155,7 +155,7 @@
 // ERT & Marine Commander ID Access
 /datum/id_trim/centcom/ert/commander/New()
 	. = ..()
-	access = access = list(ACCESS_CENT_GENERAL, ACCESS_CENT_SPECOPS, ACCESS_CENT_LIVING) | (SSid_access.get_region_access_list(list(REGION_ALL_STATION)) - ACCESS_CHANGE_IDS)
+	access = list(ACCESS_CENT_GENERAL, ACCESS_CENT_SPECOPS, ACCESS_CENT_LIVING) | (SSid_access.get_region_access_list(list(REGION_ALL_STATION)) - ACCESS_CHANGE_IDS)
 
 // DeathSquad outifit
 /datum/outfit/centcom/death_commando
