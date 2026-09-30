@@ -15,7 +15,7 @@
 	min_req = 1
 	max_req = 10
 	required_thralls = 0
-	var/dark_square_radius = 3
+	var/dark_square_radius = 4
 	var/shroom_square_radius = 2
 	var/blind_duration = 3 SECONDS
 	var/static/sfx_emp = 'sound/effects/empulse.ogg'
@@ -89,14 +89,14 @@
 		for(var/mob/living/carbon/human/M in T)
 			if(!M)
 				continue
-			if(M.glasses)
-				continue
 			if(hive)
 				if(M in hive.lings)
 					continue
 				if(M in hive.thralls)
 					continue
 			M.set_temp_blindness(3 SECONDS)
+			M.adjust_staggered(5 SECONDS)
+			M.adjust_stamina_loss(50)
 
 /datum/action/cooldown/shadowling/veil/proc/replace_glowshrooms(list/turfs)
 	if(!islist(turfs))

@@ -26,7 +26,7 @@
 	name = "Взгляд"
 	desc = "Сокрующий взгляд в сторону куда вы смотрите, позволяющий оглушать и обессиливать ваших врагов."
 	button_icon_state = "shadow_glare"
-	cooldown_time = 20 SECONDS
+	cooldown_time = 15 SECONDS
 	required_thralls = 0
 	max_range = 3
 	requires_dark_user = FALSE
@@ -58,8 +58,6 @@
 	var/mob/living/carbon/human/T = target
 	if(!istype(T))
 		return FALSE
-	if(T.glasses)
-		return FALSE
 	if(!in_front_cone(H, T, fov_degree))
 		return FALSE
 	var/turf/tt = get_turf(T)
@@ -68,14 +66,12 @@
 	return TRUE
 
 /datum/action/cooldown/shadowling/glare/DoEffectOnTargets(mob/living/carbon/human/H, list/targets)
-	if(!islist(targets) || !length(targets))
-		if(istype(H))
-			play_glare_fx(H)
-			H.balloon_alert(H, "промах")
-		return TRUE
-
+	if(!istype(H))
+		return FALSE
 	play_glare_fx(H)
-	var/hit = FALSE
+	if(!length(targets))
+		H.balloon_alert(H, "промах")
+		return TRUE
 	for(var/mob/living/carbon/human/T in targets)
 		if(QDELETED(T) || T.stat == DEAD)
 			continue
@@ -83,8 +79,7 @@
 			continue
 		apply_glare_primary(T)
 		addtimer(CALLBACK(src, PROC_REF(apply_glare_knock), T), knock_delay)
-		hit = TRUE
-	return hit
+	return TRUE
 
 /datum/action/cooldown/shadowling/glare/proc/apply_glare_primary(mob/living/carbon/human/T)
 	if(!istype(T))

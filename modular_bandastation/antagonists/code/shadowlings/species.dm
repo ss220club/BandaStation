@@ -164,9 +164,14 @@
 			continue
 		robotic_organs += O
 	for(var/obj/item/organ/O in robotic_organs)
-		if(!QDELETED(O))
-			O.mob_remove(src, special = TRUE)
-			QDEL_NULL(O)
+		if(QDELETED(O))
+			continue
+		if(O.slot == ORGAN_SLOT_BRAIN)
+			var/obj/item/organ/brain/shadow/shadowling/new_brain = new
+			new_brain.replace_into(src)
+			continue
+		O.mob_remove(src, special = TRUE)
+		QDEL_NULL(O)
 
 // MARK: Claws
 /obj/item/knife/combat/umbral_claw
