@@ -10,7 +10,6 @@
 	)
 
 
-// Assemble the Electrostaff from two stun batons, an Electrostaff parts kit, and a flux anomaly.
 /datum/crafting_recipe/electrostaff
 	name = "electrostaff"
 	result = /obj/item/melee/baton/security/electrostaff/loaded
@@ -18,6 +17,17 @@
 		/obj/item/melee/baton/security = 2,
 		/obj/item/assembly/signaler/anomaly/flux = 1,
 		/obj/item/weaponcrafting/gunkit/electrostaff = 1,
+	)
+	blacklist = list(
+		/obj/item/melee/baton/security/electrostaff,
+		/obj/item/melee/baton/security/stunsword,
+		/obj/item/melee/baton/security/stunsword/loaded,
+		/obj/item/melee/baton/security/cattleprod,
+		/obj/item/melee/baton/security/cattleprod/loaded,
+		/obj/item/melee/baton/security/cattleprod/teleprod,
+		/obj/item/melee/baton/security/cattleprod/telecrystalprod,
+		/obj/item/melee/baton/security/boomerang,
+		/obj/item/melee/baton/security/boomerang/loaded,
 	)
 	crafting_flags = CRAFT_SKIP_MATERIALS_PARITY
 	time = 10 SECONDS
