@@ -311,10 +311,12 @@
 
 /obj/item/gun/grenadelauncher
 	icon = 'modular_bandastation/weapon/icons/ranged/ballistic48x32.dmi'
-	worn_icon_state = "riotshotgun"
+	worn_icon = 'icons/mob/clothing/back.dmi'
+	worn_icon_state = "cshotgun"
 	SET_BASE_PIXEL(-8, 0)
 
 /obj/item/gun/grenadelauncher/tactical
+	name = "tactical pneumatic grenade launcher"
 	slot_flags = ITEM_SLOT_BACK | ITEM_SLOT_BELT | ITEM_SLOT_SUITSTORE
 
 /obj/item/gun/ballistic/rifle/sniper_rifle
@@ -358,6 +360,8 @@
 	righthand_file = 'icons/mob/inhands/weapons/64x_guns_right.dmi'
 	inhand_x_dimension = 64
 	inhand_y_dimension = 64
+	worn_icon = 'icons/mob/clothing/back.dmi'
+	worn_icon_state = "cshotgun"
 
 // Prevents gun sizes from changing due to suppressors
 /obj/item/gun/ballistic/install_suppressor(obj/item/suppressor/new_suppressor)
