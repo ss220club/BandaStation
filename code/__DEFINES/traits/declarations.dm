@@ -1748,7 +1748,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 /// Objects with this trait may become a new prison for a revenant, in the event of its ectoplasm dispersing
 #define TRAIT_COZY_REVENANT_HOME "cozy_revenant_home"
 
-// BANDASTATION EDIT START: Vampire collision and identity traits. Not at the end to dont cause constant conflicts.
+// BANDASTATION EDIT START: Vampire collision and identity traits
 /// Prevents a thrown carbon mob from taking damage or being paralyzed by colliding with another carbon mob.
 #define TRAIT_NO_THROW_SELF_IMPACT "no_throw_self_impact"
 /// Given to vampires.
