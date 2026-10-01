@@ -398,17 +398,17 @@
 	. = ..()
 	if(iscarbon(owner))
 		owner.add_traits(vision_traits, REF(src))
-		RegisterSignal(owner, COMSIG_CARBON_UPDATE_SIGHT_CUTOFFS, PROC_REF(update_vision))
+		RegisterSignal(owner, COMSIG_MOB_UPDATE_SIGHT, PROC_REF(update_vision))
 		owner.update_sight()
 
 /datum/vampire_passive/vision/Destroy(force, ...)
 	if(iscarbon(owner))
-		UnregisterSignal(owner, COMSIG_CARBON_UPDATE_SIGHT_CUTOFFS)
+		UnregisterSignal(owner, COMSIG_MOB_UPDATE_SIGHT)
 		owner.remove_traits(vision_traits, REF(src))
 		owner.update_sight()
 	return ..()
 
-/datum/vampire_passive/vision/proc/update_vision(mob/living/carbon/vampire, list/new_sight_flags)
+/datum/vampire_passive/vision/proc/update_vision(mob/living/carbon/vampire)
 	SIGNAL_HANDLER
 	vampire.lighting_cutoff = max(vampire.lighting_cutoff, lighting_cutoff)
 
