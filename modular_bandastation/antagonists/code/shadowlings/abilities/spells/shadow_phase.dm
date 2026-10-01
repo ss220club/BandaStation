@@ -71,10 +71,13 @@
 	var/obj/effect/dummy/phased_mob/shadowling/P = p_ref?.resolve()
 	if(!istype(P))
 		return
-	var/mob/living/L = P.jaunter
-	if(!istype(L))
+	var/mob/living/carbon/human/H = P.jaunter
+	if(!istype(H))
 		return
-	P.eject_jaunter(FALSE)
+	if(H.loc != P)
+		return
+	if(exit_phase(H, forced_out = FALSE))
+		StartCooldown()
 
 /datum/action/cooldown/shadowling/shadow_phase/proc/fade_out(mob/living/carbon/human/H, fade_time = 0.3 SECONDS)
 	if(!istype(H)) return

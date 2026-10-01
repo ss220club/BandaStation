@@ -64,6 +64,10 @@
 	if(istype(A, /obj/item/flashlight/flare))
 		var/obj/item/flashlight/flare/F = A
 		F.turn_off()
+	// snowflake for glowsticks
+	if(istype(A, /obj/item/flashlight/glowstick))
+		var/obj/item/flashlight/glowstick/G = A
+		G.turn_off()
 	A.extinguish()
 	A.on_saboteur(src, 30 SECONDS)
 
