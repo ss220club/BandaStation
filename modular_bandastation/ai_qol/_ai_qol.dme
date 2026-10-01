@@ -1,0 +1,7 @@
+#include "_ai_qol.dm"
+
+#include "code/door_request.dm"
+
+#include "code/ai_open.dm"
+
+#include "code/ai_autoapprove.dm"
