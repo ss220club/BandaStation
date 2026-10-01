@@ -233,7 +233,7 @@
 /datum/component/reskinable_item/proc/add_tags(atom/source, mob/user, list/tags)
 	SIGNAL_HANDLER
 
-	tags["reskinnable"] = "This item is able to be reskinned! Alt-Click to do so!"
+	tags["перекрашиваемый"] = "Этот предмет можно перекрасить! Нажмите Alt-ЛКМ по нему!"
 
 /// Called when alt clicked and the item has unique reskin options
 /datum/component/reskinable_item/proc/on_click_alt_reskin(datum/source, mob/user)
