@@ -6494,7 +6494,6 @@
 /turf/open/floor/iron/dark,
 /area/centcom/central_command_areas/engine)
 "aFc" = (
-/obj/machinery/duct,
 /obj/structure/closet/secure_closet/freezer/empty/open,
 /obj/effect/spawner/random/food_or_drink/slime_jelly_donuts,
 /obj/effect/spawner/random/food_or_drink/slime_jelly_donuts,
