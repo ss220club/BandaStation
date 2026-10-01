@@ -298,6 +298,11 @@
 	overlays |= created_overlay
 	overlays |= source.make_fire_emissive(created_overlay)
 
+#define WET_STACKS_DAMP 3
+#define WET_STACKS_DRIPPING 7.5
+#define WET_STACKS_SOAKED 15
+#define WET_STACKS_MINIMUM_VFX WET_STACKS_DAMP
+
 /datum/status_effect/fire_handler/wet_stacks
 	id = "wet_stacks"
 
@@ -315,14 +320,12 @@
 	if(HAS_TRAIT(owner, TRAIT_SLIPPERY_WHEN_WET))
 		become_slippery()
 	ADD_TRAIT(owner, TRAIT_IS_WET,  TRAIT_STATUS_EFFECT(id))
-	owner.add_shared_particles(/particles/droplets)
 
 /datum/status_effect/fire_handler/wet_stacks/on_remove()
 	. = ..()
 	REMOVE_TRAIT(owner, TRAIT_IS_WET, TRAIT_STATUS_EFFECT(id))
 	if(HAS_TRAIT(owner, TRAIT_SLIPPERY_WHEN_WET))
 		no_longer_slippery()
-	owner.remove_shared_particles(/particles/droplets)
 
 /datum/status_effect/fire_handler/wet_stacks/proc/update_wet_stack_modifier()
 	SIGNAL_HANDLER
@@ -339,7 +342,19 @@
 	REMOVE_TRAIT(owner, TRAIT_NO_SLIP_WATER, TRAIT_STATUS_EFFECT(id))
 
 /datum/status_effect/fire_handler/wet_stacks/get_examine_text(mob/examiner)
-	return "[capitalize(owner.ru_p_they())] выглядит немного [genderize_ru(owner.gender, "мокрым", "мокрой", "мокрым", "мокрыми")]."
+	if(stacks <= WET_STACKS_DAMP)
+		return "[capitalize(owner.ru_p_they())] выглядит немного [genderize_ru(owner.gender, "влажным", "влажной", "влажным", "влажными")]."
+	else if(stacks >= WET_STACKS_SOAKED)
+		return "[capitalize(owner.ru_p_they())] выглядит [genderize_ru(owner.gender, "насквозь промокшим", "насквозь промокшей", "насквозь промокшим", "насквозь промокшими")]"
+	else
+		return "[capitalize(owner.ru_p_they())] выглядит [genderize_ru(owner.gender, "промокшим до нитки", "промокшей до нитки", "промокшим до нитки", "промокшими до нитки")]"
+
+/datum/status_effect/fire_handler/wet_stacks/cache_stacks()
+	. = ..()
+	if(stacks > WET_STACKS_MINIMUM_VFX)
+		owner.add_shared_particles(/particles/droplets)
+	if(stacks <= WET_STACKS_MINIMUM_VFX)
+		owner.remove_shared_particles(/particles/droplets)
 
 /datum/status_effect/fire_handler/wet_stacks/tick(seconds_between_ticks)
 	var/decay = HAS_TRAIT(owner, TRAIT_WET_FOR_LONGER) ? -0.035 : -0.5
@@ -357,3 +372,8 @@
 
 /datum/status_effect/fire_handler/wet_stacks/check_basic_mob_immunity(mob/living/basic/basic_owner)
 	return !(basic_owner.basic_mob_flags & IMMUNE_TO_GETTING_WET)
+
+#undef WET_STACKS_MINIMUM_VFX
+#undef WET_STACKS_DAMP
+#undef WET_STACKS_DRIPPING
+#undef WET_STACKS_SOAKED
