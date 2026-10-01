@@ -64,31 +64,77 @@ jobs:
         id: linter-setup
         run: ":"
       - name: Ensure genesis_call.dme is unchanged
-        if: steps.linter-setup.conclusion == 'success' && !cancelled()
+        if: ${{ !cancelled() }}
+        background: true
         run: bash tools/ci/check_genesis.sh
-      - name: Run Grep Checks
-        if: steps.linter-setup.conclusion == 'success' && !cancelled()
+
+      - name: Run grep checks
+        if: ${{ !cancelled() }}
+        background: true
         run: bash tools/ci/check_grep.sh
-      - name: Ticked File Enforcement
-        if: steps.linter-setup.conclusion == 'success' && !cancelled()
+
+      - name: Ticked file enforcement
+        if: ${{ !cancelled() }}
+        background: true
         run: |
           tools/bootstrap/python tools/ticked_file_enforcement/ticked_file_enforcement.py < tools/ticked_file_enforcement/schemas/tgstation_dme.json
           tools/bootstrap/python tools/ticked_file_enforcement/ticked_file_enforcement.py < tools/ticked_file_enforcement/schemas/unit_tests.json
-      - name: Check Define Sanity
-        if: steps.linter-setup.conclusion == 'success' && !cancelled()
+
+      - name: Check define sanity
+        if: ${{ !cancelled() }}
+        background: true
         run: tools/bootstrap/python -m define_sanity.check
-      - name: Check Trait Validity
-        if: steps.linter-setup.conclusion == 'success' && !cancelled()
+
+      - name: Check trait validity
+        if: ${{ !cancelled() }}
+        background: true
         run: tools/bootstrap/python -m trait_validity.check
+
       - name: Run DreamChecker
-        if: steps.linter-setup.conclusion == 'success' && !cancelled()
+        if: ${{ !cancelled() }}
+        background: true
         shell: bash
         run: ~/dreamchecker 2>&1 | bash tools/ci/annotate_dm.sh
+
       - name: Run OpenDream
-        if: steps.linter-setup.conclusion == 'success' && !cancelled()
+        if: ${{ !cancelled() }}
+        background: true
         run: ./DMCompiler_linux-x64/DMCompiler tgstation.dme --suppress-unimplemented --define=CIBUILDING | bash tools/ci/annotate_od.sh
-      - name: Check for Map & Maplint File Edits
+
+      - name: Check Icon Cutter
+        if: ${{ !cancelled() }}
+        background: true
+        run: tools/bootstrap/python -m tools.icon_cutter.check
+
+      - name: Run DMI tests
+        if: ${{ !cancelled() }}
+        background: true
+        run: tools/bootstrap/python -m dmi.test
+
+      - name: Check file directories
+        if: ${{ !cancelled() }}
+        background: true
+        run: bash tools/ci/check_filedirs.sh tgstation.dme
+
+      - name: Check changelogs
+        if: ${{ !cancelled() }}
+        background: true
+        run: bash tools/ci/check_changelogs.sh
+
+      - name: Check miscellaneous files
+        if: ${{ !cancelled() }}
+        background: true
+        run: bash tools/ci/check_misc.sh
+
+      - name: Run TGUI checks
+        if: ${{ !cancelled() }}
+        background: true
+        run: tools/build/build.sh --ci lint tgui-test
+
+      - name: Check for map and/or maplint file edits
         id: map-filter
+        if: ${{ !cancelled() }}
+        background: true
         uses: dorny/paths-filter@v4
         with:
           list-files: shell
@@ -99,8 +145,11 @@ jobs:
             map_edits:
               - '**.dmm'
 
-      - name: Run Map Checks
-        if: steps.linter-setup.conclusion == 'success' && !cancelled() && (steps.map-filter.outputs.tool_edits == 'true' || steps.map-filter.outputs.map_edits == 'true')
+      - name: Wait for map screener
+        wait: map-filter
+
+      - name: Run map checks
+        if: ${{ !cancelled() && (steps.map-filter.outputs.tool_edits == 'true' || steps.map-filter.outputs.map_edits == 'true') }}
         run: |
           if [ "${{ steps.map-filter.outputs.tool_edits }}" = "true" ]; then
             MAPS=$(find . -type f -name "*.dmm")
