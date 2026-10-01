@@ -325,7 +325,7 @@
 	iris_overlay = "eyes_cyber_glow_iris"
 	eye_icon_state = "eyes_glow_gs"
 	icon_eyes_path = 'modular_bandastation/augmentation_preferences/icons/human_face.dmi'
-	sight_flags = SEE_MOBS
+	organ_traits = list(TRAIT_THERMAL_VISION)
 	pepperspray_protect = TRUE
 	color_cutoffs = null
 	flash_protect = FLASH_PROTECTION_SENSITIVE
