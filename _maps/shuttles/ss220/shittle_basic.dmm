@@ -1,0 +1,148 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/closed/wall/mineral/titanium,
+/area/shuttle/shittle)
+"b" = (
+/obj/item/radio/intercom/directional/east,
+/obj/effect/mapping_helpers/broken_floor,
+/obj/structure/chair/wood{
+	dir = 8
+	},
+/turf/open/floor/mineral/titanium/blue,
+/area/shuttle/shittle)
+"c" = (
+/obj/structure/chair{
+	dir = 8
+	},
+/obj/effect/mapping_helpers/burnt_floor,
+/turf/open/floor/mineral/titanium/blue,
+/area/shuttle/shittle)
+"h" = (
+/obj/effect/spawner/structure/window/reinforced/shuttle,
+/obj/structure/barricade/wooden/crude,
+/turf/open/floor/plating,
+/area/shuttle/shittle)
+"k" = (
+/obj/effect/spawner/structure/window/reinforced/shuttle,
+/obj/effect/mapping_helpers/damaged_window,
+/obj/structure/barricade/wooden/crude,
+/turf/open/floor/plating,
+/area/shuttle/shittle)
+"q" = (
+/obj/machinery/door/airlock/titanium{
+	name = "Shuttle Airlock"
+	},
+/obj/structure/fans/tiny,
+/obj/docking_port/mobile/shittle,
+/turf/open/floor/mineral/titanium/blue,
+/area/shuttle/shittle)
+"w" = (
+/obj/machinery/computer/camera_advanced/shuttle_docker/shittle,
+/turf/open/floor/mineral/titanium/blue,
+/area/shuttle/shittle)
+"x" = (
+/obj/item/storage/pod/directional/west,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/chair{
+	dir = 4
+	},
+/turf/open/floor/mineral/titanium/blue,
+/area/shuttle/shittle)
+"A" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/mapping_helpers/burnt_floor,
+/obj/structure/chair/comfy/black{
+	dir = 1
+	},
+/turf/open/floor/mineral/titanium/blue,
+/area/shuttle/shittle)
+"F" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/mapping_helpers/burnt_floor,
+/obj/structure/chair/stool/directional/east,
+/turf/open/floor/plating,
+/area/shuttle/shittle)
+"I" = (
+/obj/structure/chair/comfy/shuttle{
+	dir = 4
+	},
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/mineral/titanium/blue,
+/area/shuttle/shittle)
+"M" = (
+/obj/machinery/power/shuttle_engine/propulsion/burst,
+/turf/closed/wall/mineral/titanium,
+/area/shuttle/shittle)
+"O" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/chair{
+	dir = 8
+	},
+/turf/open/floor/plating,
+/area/shuttle/shittle)
+"R" = (
+/obj/machinery/light/directional/north,
+/obj/machinery/computer/shuttle/shittle,
+/turf/open/floor/mineral/titanium/blue,
+/area/shuttle/shittle)
+"S" = (
+/obj/structure/chair/comfy/shuttle{
+	dir = 8
+	},
+/obj/effect/mapping_helpers/burnt_floor,
+/turf/open/floor/mineral/titanium/blue,
+/area/shuttle/shittle)
+"U" = (
+/obj/effect/mapping_helpers/burnt_floor,
+/turf/open/floor/plating,
+/area/shuttle/shittle)
+"V" = (
+/obj/effect/spawner/structure/window/reinforced/shuttle,
+/turf/open/floor/plating,
+/area/shuttle/shittle)
+"Z" = (
+/obj/effect/mapping_helpers/broken_floor,
+/turf/open/floor/mineral/titanium/blue,
+/area/shuttle/shittle)
+
+(1,1,1) = {"
+a
+a
+a
+k
+a
+M
+"}
+(2,1,1) = {"
+a
+w
+I
+F
+x
+M
+"}
+(3,1,1) = {"
+h
+R
+A
+Z
+U
+q
+"}
+(4,1,1) = {"
+a
+c
+O
+S
+b
+M
+"}
+(5,1,1) = {"
+a
+a
+a
+V
+a
+M
+"}

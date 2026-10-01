@@ -699,6 +699,7 @@
 	dir = 4
 	},
 /obj/effect/decal/cleanable/dirt,
+/obj/effect/landmark/start/mercenary,
 /turf/open/floor/stone,
 /area/centcom/central_command_areas/evacuation/ship)
 "adr" = (
@@ -1088,6 +1089,7 @@
 /obj/effect/turf_decal/siding/wood{
 	dir = 4
 	},
+/obj/effect/landmark/latejoin,
 /turf/open/floor/stone,
 /area/centcom/central_command_areas/evacuation/ship)
 "aeT" = (
@@ -3094,6 +3096,7 @@
 /obj/machinery/atmospherics/components/unary/vent_pump/on{
 	dir = 8
 	},
+/obj/effect/landmark/start/mercenary,
 /turf/open/floor/stone,
 /area/centcom/central_command_areas/evacuation/ship)
 "aoZ" = (
@@ -4088,6 +4091,7 @@
 	dir = 8
 	},
 /obj/effect/decal/cleanable/dirt,
+/obj/effect/landmark/start/mercenary,
 /turf/open/floor/stone,
 /area/centcom/central_command_areas/evacuation/ship)
 "aue" = (
@@ -5181,8 +5185,8 @@
 	dir = 4;
 	dwidth = 2;
 	height = 7;
-	name = "recovery ship";
-	shuttle_id = "pod_away";
+	name = "NT/E.I. Trade Post: Dock 6";
+	shuttle_id = "shittle_home";
 	width = 5
 	},
 /turf/open/space/basic,
@@ -6034,10 +6038,6 @@
 /obj/item/folder/blue{
 	pixel_x = 2;
 	pixel_y = 2
-	},
-/obj/item/gun/ballistic/automatic/pistol/m1911{
-	pixel_y = 7;
-	pixel_x = 2
 	},
 /turf/open/floor/iron/dark,
 /area/centcom/central_command_areas/evacuation/ship)
@@ -7509,6 +7509,7 @@
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer2{
 	dir = 4
 	},
+/obj/effect/landmark/start/mercenary,
 /turf/open/floor/stone,
 /area/centcom/central_command_areas/evacuation/ship)
 "aIx" = (
@@ -8598,6 +8599,7 @@
 /area/centcom/central_command_areas/engine)
 "aLF" = (
 /obj/structure/flora/grass/jungle/b/style_3,
+/obj/effect/landmark/latejoin,
 /turf/open/floor/grass,
 /area/centcom/central_command_areas/evacuation/ship)
 "aLG" = (
@@ -8903,6 +8905,7 @@
 	pixel_x = -15;
 	pixel_y = -6
 	},
+/obj/effect/landmark/latejoin,
 /turf/open/floor/grass,
 /area/centcom/central_command_areas/evacuation/ship)
 "aMD" = (
@@ -9153,6 +9156,7 @@
 /obj/effect/turf_decal/siding/wood{
 	dir = 8
 	},
+/obj/effect/landmark/start/mercenary,
 /turf/open/floor/stone,
 /area/centcom/central_command_areas/evacuation/ship)
 "aNK" = (
@@ -14471,6 +14475,10 @@
 	},
 /turf/open/floor/stone,
 /area/centcom/central_command_areas/planetary_port/plaza)
+"ghO" = (
+/obj/effect/landmark/latejoin,
+/turf/open/floor/grass,
+/area/centcom/central_command_areas/evacuation/ship)
 "ghP" = (
 /obj/effect/turf_decal/line/dark_blue{
 	dir = 4
@@ -15903,6 +15911,11 @@
 /obj/effect/turf_decal/line/dark_blue/line/stripes,
 /turf/open/floor/iron/dark/smooth_large,
 /area/centcom/central_command_areas/control)
+"jsd" = (
+/obj/structure/flora/bush/sparsegrass,
+/obj/effect/landmark/latejoin,
+/turf/open/floor/grass,
+/area/centcom/central_command_areas/evacuation/ship)
 "jtK" = (
 /obj/effect/baseturf_helper{
 	baseturf = /turf/open/floor/grass
@@ -17012,6 +17025,13 @@
 /obj/machinery/papershredder,
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/planetary_port)
+"mbD" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 8
+	},
+/obj/effect/landmark/latejoin,
+/turf/open/floor/stone,
+/area/centcom/central_command_areas/evacuation/ship)
 "mcY" = (
 /obj/structure/chair/office/tactical{
 	dir = 1
@@ -18906,6 +18926,15 @@
 /obj/structure/light_fake/spot/directional/east,
 /turf/open/floor/iron/dark/textured_half,
 /area/centcom/central_command_areas/hallway)
+"pOM" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden{
+	dir = 8
+	},
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/landmark/start/mercenary/leader,
+/turf/open/floor/stone,
+/area/centcom/central_command_areas/evacuation/ship)
 "pPm" = (
 /obj/structure/chair/sofa/corp/left{
 	dir = 8
@@ -55587,7 +55616,7 @@ aEv
 aLt
 apH
 aLF
-aBR
+ghO
 aMC
 aLG
 aLt
@@ -55846,7 +55875,7 @@ awP
 aud
 aIv
 aNI
-aNI
+mbD
 aLw
 acK
 aJE
@@ -56101,7 +56130,7 @@ awT
 aLm
 aHL
 aHJ
-aHJ
+pOM
 aHJ
 aHJ
 aci
@@ -56614,9 +56643,9 @@ aIp
 aME
 aLt
 aaX
-aBR
-aLG
-aBR
+ghO
+jsd
+ghO
 aBR
 aLt
 aLt
