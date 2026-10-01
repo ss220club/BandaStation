@@ -7,7 +7,7 @@
 /obj/item/clothing/glasses/hud/security/sunglasses/centcom_officer
 	name = "fleet officer's HUDSunglasses"
 	desc = "Продвинутый ИЛС-визор, стилизованный под солнцезащитные очки. Почти никто не укроется."
-	clothing_traits = list(TRAIT_SECURITY_HUD, TRAIT_MATERIAL_VISON, TRAIT_THERMAL_VISION)
+	clothing_traits = list(TRAIT_SECURITY_HUD, TRAIT_THERMAL_VISION)
 
 // MARK: TSF
 /obj/item/clothing/glasses/hud/security/sunglasses/tsf
@@ -15,7 +15,7 @@
 	icon_state = "sunhudmed"
 
 /obj/item/clothing/glasses/thermal/eyepatch/tsf_commander
-	clothing_traits = list(TRAIT_SECURITY_HUD, TRAIT_MATERIAL_VISON, TRAIT_THERMAL_VISION)
+	clothing_traits = list(TRAIT_SECURITY_HUD, TRAIT_THERMAL_VISION)
 
 // MARK: Miscellaneous
 /obj/item/clothing/glasses/meson/sunglasses
