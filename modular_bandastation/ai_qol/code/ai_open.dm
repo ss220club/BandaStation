@@ -91,7 +91,7 @@
 	if(A)
 
 		if(A.hackProof)
-			to_chat(user, span_warning("Ошибка: Фаерволл [A] блокирует ваше управление."))
+			to_chat(user, span_warning("Ошибка: фаерволл [A] блокирует ваше управление."))
 			return
 
 		if(!A.hasPower())
@@ -118,7 +118,7 @@
 				return
 
 			if(get_dist(A, target) > 5)
-				to_chat(user, span_warning("Действие сброшено: Цель переместилась."))
+				to_chat(user, span_warning("Действие сброшено: цель переместилась."))
 				return
 
 			A.open()
@@ -204,7 +204,7 @@
 
 	// Проверки шлюза
 	if(door.hackProof)
-		to_chat(user, span_warning("Ошибка: Фаерволл [door] блокирует ваше управление."))
+		to_chat(user, span_warning("Ошибка: фаерволл [door] блокирует ваше управление."))
 		return
 	if(!door.hasPower())
 		to_chat(user, span_warning("Ошибка: шлюз [door] отключен."))
@@ -240,10 +240,10 @@
 		if("bolt")
 			if(door.locked)
 				door.unbolt()
-				door.visible_message(span_notice("Шлюз щёлкает: [src] поднимает болты."), vision_distance = COMBAT_MESSAGE_RANGE)
+				door.visible_message(span_notice("Шлюз щёлкает: [src] опускает болты."), vision_distance = COMBAT_MESSAGE_RANGE)
 			else
 				door.bolt()
-				door.visible_message(span_danger("Шлюз щёлкает: [src] опускает болты."), vision_distance = COMBAT_MESSAGE_RANGE)
+				door.visible_message(span_danger("Шлюз щёлкает: [src] поднимает болты."), vision_distance = COMBAT_MESSAGE_RANGE)
 
 		if("deny")
 			playsound(door, 'sound/machines/buzz/buzz-sigh.ogg', 25, FALSE, SILENCED_SOUND_EXTRARANGE, ignore_walls = FALSE)

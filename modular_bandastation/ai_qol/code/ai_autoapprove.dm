@@ -8,10 +8,12 @@
 	return ..()
 
 GAME_VERB_DESC(/mob/living/silicon/ai, door_autoapprove_verb, "Airlock Auto-Approve", "Настройка автоодобрения запросов на шлюзы (по имени).", "AI Commands")
-	if(incapacitated)
+	if(incapacitated())
 		return
+
 	if(!door_autoapprove)
 		door_autoapprove = new(src)
+
 	door_autoapprove.ui_interact(usr)
 
 
@@ -34,10 +36,12 @@ GAME_VERB_DESC(/mob/living/silicon/ai, door_autoapprove_verb, "Airlock Auto-Appr
 	return GLOB.always_state
 
 /datum/ai_door_autoapprove/ui_status(mob/user, datum/ui_state/state)
-	if(!owner_ai || owner_ai.incapacitated)
+	if(!owner_ai || owner_ai.incapacitated())
 		return UI_CLOSE
+
 	if(user == owner_ai || (owner_ai.deployed_shell && user == owner_ai.deployed_shell))
 		return UI_INTERACTIVE
+
 	return UI_CLOSE
 
 /datum/ai_door_autoapprove/ui_interact(mob/user, datum/tgui/ui)
@@ -73,11 +77,12 @@ GAME_VERB_DESC(/mob/living/silicon/ai, door_autoapprove_verb, "Airlock Auto-Appr
 			var/new_name = params["name"]
 			if(!istext(new_name))
 				return FALSE
+
 			new_name = trim(new_name)
 			if(!length(new_name))
 				return FALSE
 
-			var/key = lowertext(new_name)
+			var/key = LOWER_TEXT(new_name)
 			key = copytext_char(key, 1, 64)
 			new_name = copytext_char(new_name, 1, 64)
 
@@ -104,11 +109,9 @@ GAME_VERB_DESC(/mob/living/silicon/ai, door_autoapprove_verb, "Airlock Auto-Appr
 	if(!requester)
 		return null
 
-	// Кто "видит" имя: ядро AI или deployed_shell
 	var/mob/living/viewer = deployed_shell ? deployed_shell : src
 
 	var/display_name
-
 	if(hascall(requester, "get_examine_name"))
 		display_name = call(requester, "get_examine_name")(viewer)
 	else
@@ -117,7 +120,8 @@ GAME_VERB_DESC(/mob/living/silicon/ai, door_autoapprove_verb, "Airlock Auto-Appr
 	if(!istext(display_name))
 		return null
 
-	return lowertext(trim("[display_name]"))
+	return LOWER_TEXT(trim("[display_name]"))
+
 
 /mob/living/silicon/ai/proc/is_requester_autoapproved(mob/living/requester)
 	if(!door_autoapprove || !door_autoapprove.enabled)

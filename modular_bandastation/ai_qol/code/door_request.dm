@@ -19,7 +19,7 @@
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 	if(hackProof)
-		to_chat(user, span_warning("Ошибка: фаерволл шлюза блокирует запрос ИИ."))
+		to_chat(user, span_warning("Тут нет кнопки на запрос ИИ."))
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 	// Автоодобрение
