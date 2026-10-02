@@ -430,14 +430,6 @@ GAME_VERB(/mob/living/silicon/ai, toggle_anchor, "Toggle Floor Bolts", "AI Comma
 
 	// BANDA STATION ADDITION - AI DOOR
 
-	if(href_list["open_door"])
-		if(usr == src || (deployed_shell && usr == deployed_shell))
-			var/obj/machinery/door/airlock/door = locate(href_list["open_door"]) in SSmachines.get_machines_by_type_and_subtypes(/obj/machinery/door/airlock)
-			var/mob/living/requester = locate(href_list["user"]) in GLOB.mob_list
-			if(door && requester)
-				fulfill_door_request(requester, door, href_list["action"])
-			return
-
 	if(href_list["open"])
 		if(usr == src || (deployed_shell && usr == deployed_shell))
 			var/mob/living/target = locate(href_list["open"])
