@@ -17,3 +17,13 @@
 
 /obj/item/reagent_containers/blood/moth
 	blood_type = /datum/blood_type/moth
+
+/datum/blood_type/vox
+	name = "VOX"
+	color = BLOOD_COLOR_VOX
+	compatible_types = list(
+		/datum/blood_type/vox,
+	)
+
+/obj/item/reagent_containers/blood/vox
+	blood_type = /datum/blood_type/vox
