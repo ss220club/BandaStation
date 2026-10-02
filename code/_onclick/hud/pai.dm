@@ -15,6 +15,10 @@
 	add_screen_object(/atom/movable/screen/pai/rest, HUD_MOB_REST)
 	add_screen_object(/atom/movable/screen/pai/light, HUD_CYBORG_LAMP)
 	add_screen_object(/atom/movable/screen/pai/newscaster, HUD_PAI_NEWSCASTER)
+	//BANDASTATION EDIT START PAI CAMERA
+	if(istype(mymob, /mob/living/silicon/pai/syndicate))
+		add_screen_object(/atom/movable/screen/pai/camera_network, HUD_PAI_CAMERA_NETWORK)
+	//BANDASTATION EDIT END PAI CAMERA
 	add_screen_object(/atom/movable/screen/pai/host_monitor, HUD_PAI_HOST_MONITOR)
 	add_screen_object(/atom/movable/screen/pai/crew_manifest, HUD_AI_CREW_MANIFEST)
 	add_screen_object(/atom/movable/screen/pai/state_laws, HUD_AI_STATE_LAWS)
@@ -31,4 +35,4 @@
 	for(var/button_key in screen_objects)
 		var/atom/movable/screen/pai/button = screen_objects[button_key]
 		if(istype(button) && button.required_software)
-			button.color = owner.installed_software.Find(button.required_software) ? null : COLOR_GRAY
+			button.color = owner.installed_software.Find(button.required_software) ? (istype(button, /atom/movable/screen/pai/camera_network) ? COLOR_PAI_GREEN : null) : COLOR_GRAY  //BANDASTATION EDIT PAI CAMERA

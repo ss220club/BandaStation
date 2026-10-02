@@ -50,7 +50,7 @@ const RestrictedView = (props) => {
 
 /** Logged in view */
 const AuthView = (props) => {
-  const { act } = useBackend<SecurityRecordsData>();
+  const { act, data } = useBackend<SecurityRecordsData>();
 
   return (
     <>
@@ -65,15 +65,17 @@ const AuthView = (props) => {
           <Stack.Item>
             <NoticeBox align="right" info>
               Обеспечивайте безопасность рабочего места.
-              <Button
-                align="right"
-                icon="lock"
-                color="good"
-                ml={2}
-                onClick={() => act('logout')}
-              >
-                Выйти
-              </Button>
+              {!data.pai_integrated && (
+                <Button
+                  align="right"
+                  icon="lock"
+                  color="good"
+                  ml={2}
+                  onClick={() => act('logout')}
+                >
+                  Выйти
+                </Button>
+              )}
             </NoticeBox>
           </Stack.Item>
         </Stack>

@@ -112,6 +112,7 @@
 #define HUD_PAI_NEWSCASTER "painewscaster"
 #define HUD_PAI_HOST_MONITOR "paimonitor"
 #define HUD_PAI_GPS "paigps"
+#define HUD_PAI_CAMERA_NETWORK "paicameranetwork"
 
 #define HUD_GHOST_SPAWNERS "ghost_spawners"
 #define HUD_GHOST_ORBIT "ghost_orbit"
@@ -358,6 +359,7 @@
 #define ui_pai_internal_gps "SOUTH:5,CENTER"
 #define ui_pai_mod_int "SOUTH:5,CENTER+1"
 #define ui_pai_newscaster "SOUTH:5,CENTER+2"
+#define ui_pai_camera_network "SOUTH:5,CENTER+3"
 #define ui_pai_take_picture "SOUTH:5,EAST-3:28"
 #define ui_pai_view_images "SOUTH:5,EAST-2:28"
 #define ui_pai_radio "SOUTH:5,EAST-1:28"

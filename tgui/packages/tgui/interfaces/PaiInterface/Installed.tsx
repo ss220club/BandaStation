@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useBackend } from 'tgui/backend';
-import { Button, NoticeBox, Section, Stack } from 'tgui-core/components';
+import { Button, NoticeBox, ProgressBar, Section, Stack } from 'tgui-core/components';
 
 import { DOOR_JACK, HOST_SCAN, PHOTO_MODE, SOFTWARE_DESC } from './constants';
 import type { PaiData } from './types';
@@ -66,9 +66,57 @@ function SoftwareButtons(props: SoftwareButtonsProps) {
   const { currentSelection } = props;
 
   const { act, data } = useBackend<PaiData>();
-  const { door_jack, languages, master_name } = data;
+  const { chemical_reserve, door_jack, languages, master_name } = data;
 
   switch (currentSelection) {
+    case 'Camera Network':
+      return (
+        <Button icon="video" onClick={() => act(currentSelection)}>
+          Подключить / отключить камеры
+        </Button>
+      );
+    case 'Security Records':
+      return (
+        <Button icon="id-card" onClick={() => act(currentSelection)}>
+          Открыть записи СБ
+        </Button>
+      );
+    case 'Syndicate Radio':
+      return <>Канал активен. Для передачи используйте :t перед сообщением.</>;
+    case 'Remote Machinery':
+      return (
+        <>
+          АПЦ: ЛКМ — открыть окно управления, ПКМ — блокировка интерфейса,
+          Ctrl+ЛКМ — главный выключатель, Shift+ЛКМ — освещение,
+          Ctrl+Shift+ЛКМ — питание окружения, Alt+ЛКМ — оборудование.
+          Общий КД действий с АПЦ — 30 секунд. Двери: Shift+ЛКМ — открыть
+          или закрыть, Ctrl+ЛКМ — болты, Ctrl+Shift+ЛКМ — аварийный доступ,
+          Alt+ЛКМ — электрификация. Общий КД дверей — 7 секунд.
+        </>
+      );
+    case 'Medical Injector':
+      return (
+        <Stack vertical>
+          <Stack.Item>
+            <ProgressBar minValue={0} maxValue={30} value={chemical_reserve}>
+              Запас инъектора: {chemical_reserve} / 30
+            </ProgressBar>
+          </Stack.Item>
+          <Stack.Item>
+            {[
+              ['Epinephrine', 'Эпинефрин'],
+              ['Salbutamol', 'Сальбутамол'],
+              ['Mannitol', 'Маннитол'],
+              ['Pentetic Acid', 'ДТПА'],
+              ['Saline Glucose', 'Физраствор'],
+            ].map(([reagent, label]) => (
+              <Button key={reagent} onClick={() => act(currentSelection, { reagent })}>
+                Ввести {label} (5 ед.)
+              </Button>
+            ))}
+          </Stack.Item>
+        </Stack>
+      );
     case 'Door Jack':
       return (
         <>

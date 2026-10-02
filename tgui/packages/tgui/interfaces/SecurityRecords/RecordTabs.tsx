@@ -22,7 +22,7 @@ import type { SecurityRecord, SecurityRecordsData } from './types';
 /** Tabs on left, with search bar */
 export const SecurityRecordTabs = (props) => {
   const { act, data } = useBackend<SecurityRecordsData>();
-  const { higher_access, records = [], station_z } = data;
+  const { higher_access, records = [], station_z, pai_integrated } = data;
 
   const errorMessage = !records.length
     ? 'Записи не найдены.'
@@ -69,15 +69,17 @@ export const SecurityRecordTabs = (props) => {
               Создать
             </Button>
           </Stack.Item>
-          <Stack.Item>
-            <Button.Confirm
-              content="Очистить"
-              disabled={!higher_access || !station_z}
-              icon="trash"
-              onClick={() => act('purge_records')}
-              tooltip="Очищает всю базу данных преступников."
-            />
-          </Stack.Item>
+          {!pai_integrated && (
+            <Stack.Item>
+              <Button.Confirm
+                content="Очистить"
+                disabled={!higher_access || !station_z}
+                icon="trash"
+                onClick={() => act('purge_records')}
+                tooltip="Очищает всю базу данных преступников."
+              />
+            </Stack.Item>
+          )}
         </Stack>
       </Stack.Item>
     </Stack>

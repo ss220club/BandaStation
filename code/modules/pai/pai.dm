@@ -60,6 +60,7 @@
 	var/master_dna
 	/// Used as currency to purchase different abilities
 	var/ram = 100
+	var/night_vision_active = FALSE //BANDASTATION EDIT PAI
 	/// The current leash to the owner
 	var/datum/component/leash/leash
 
@@ -82,7 +83,7 @@
 
 	// Static lists
 	/// List of all available downloads
-	var/static/list/available_software = list(
+	var/list/available_software = list( //BANDASTATION EDIT PAI
 		"Atmospheric Sensor" = 5,
 		"Crew Manifest" = 5,
 		"Digital Messenger" = 5,
@@ -94,6 +95,7 @@
 		"Host Scan" = 20,
 		"Medical HUD" = 20,
 		"Security HUD" = 20,
+		"Night Vision" = 15, //BANDASTATION EDIT PAI
 		"Crew Monitor" = 35,
 		"Door Jack" = 35,
 		"Internal GPS" = 35,
@@ -123,6 +125,40 @@
 
 /mob/living/silicon/pai/add_sensors() //pAIs have to buy their HUDs
 	return
+
+//BANDASTATION EDIT START SYNDICATE PAI
+/// Syndicate hardware creates this mob instead of changing the ordinary pAI at runtime.
+/mob/living/silicon/pai/syndicate
+	ram = 250
+	var/chemical_reserve = 30
+	var/chemical_recharge_running = FALSE
+	COOLDOWN_DECLARE(chemical_injection)
+	var/thermal_active = FALSE
+	var/obj/machinery/computer/camera_advanced/syndicate_pai/camera_console
+	var/obj/machinery/computer/records/security/syndicate_pai/records_console
+	COOLDOWN_DECLARE(remote_door_action)
+	COOLDOWN_DECLARE(remote_apc_action)
+	var/obj/machinery/power/apc/active_remote_apc
+	var/list/syndicate_software = list(
+		"Thermal Vision" = 35,
+		"Medical Injector" = 60,
+		"Camera Network" = 30,
+		"Remote Machinery" = 60,
+		"Security Records" = 25,
+		"Syndicate Radio" = 5,
+	)
+
+/mob/living/silicon/pai/syndicate/Initialize(mapload)
+	available_software = available_software.Copy()
+	available_software.Remove("Night Vision")
+	available_software += syndicate_software
+	return ..()
+
+/mob/living/silicon/pai/syndicate/Destroy()
+	QDEL_NULL(camera_console)
+	QDEL_NULL(records_console)
+	return ..()
+//BANDASTATION EDIT END SYNDICATE PAI
 
 /mob/living/silicon/pai/can_interact_with(atom/target)
 	if(target == signaler) // Bypass for signaler
@@ -257,6 +293,16 @@
 
 /mob/living/silicon/pai/screwdriver_act(mob/living/user, obj/item/tool)
 	return radio.screwdriver_act(user, tool)
+
+//BANDASTATION EDIT START SYNDICATE PAI
+/// The Syndicate's built-in key stays in the internal radio when a carrier removes their chip.
+/obj/item/radio/headset/silicon/pai/remove_keys(mob/living/user)
+	. = list()
+	if(!keyslot)
+		return
+	. += keyslot
+	user.put_in_hands(keyslot)
+//BANDASTATION EDIT END SYNDICATE PAI
 
 /mob/living/silicon/pai/updatehealth()
 	if(HAS_TRAIT(src, TRAIT_GODMODE))
