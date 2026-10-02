@@ -10,7 +10,6 @@
 	)
 
 
-// Assemble the Electrostaff from two stun batons, an Electrostaff parts kit, and a flux anomaly.
 /datum/crafting_recipe/electrostaff
 	name = "electrostaff"
 	result = /obj/item/melee/baton/security/electrostaff/loaded
@@ -22,3 +21,11 @@
 	crafting_flags = CRAFT_SKIP_MATERIALS_PARITY
 	time = 10 SECONDS
 	category = CAT_WEAPON_MELEE
+
+/datum/crafting_recipe/electrostaff/New()
+	LAZYADD(blacklist, typecacheof(
+		/obj/item/melee/baton/security,
+		ignore_root_path = TRUE,
+	))
+	blacklist -= /obj/item/melee/baton/security/loaded
+	return ..()
