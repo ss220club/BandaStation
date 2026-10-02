@@ -18,17 +18,14 @@
 		/obj/item/assembly/signaler/anomaly/flux = 1,
 		/obj/item/weaponcrafting/gunkit/electrostaff = 1,
 	)
-	blacklist = list(
-		/obj/item/melee/baton/security/electrostaff,
-		/obj/item/melee/baton/security/stunsword,
-		/obj/item/melee/baton/security/stunsword/loaded,
-		/obj/item/melee/baton/security/cattleprod,
-		/obj/item/melee/baton/security/cattleprod/loaded,
-		/obj/item/melee/baton/security/cattleprod/teleprod,
-		/obj/item/melee/baton/security/cattleprod/telecrystalprod,
-		/obj/item/melee/baton/security/boomerang,
-		/obj/item/melee/baton/security/boomerang/loaded,
-	)
 	crafting_flags = CRAFT_SKIP_MATERIALS_PARITY
 	time = 10 SECONDS
 	category = CAT_WEAPON_MELEE
+
+/datum/crafting_recipe/electrostaff/New()
+	LAZYADD(blacklist, typecacheof(
+		/obj/item/melee/baton/security,
+		ignore_root_path = TRUE,
+	))
+	blacklist -= /obj/item/melee/baton/security/loaded
+	return ..()
