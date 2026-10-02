@@ -1,6 +1,7 @@
 /datum/atom_skin/m1911
 	abstract_type = /datum/atom_skin/m1911
 	change_base_icon_state = TRUE
+	change_worn_icon_state = FALSE
 
 /datum/atom_skin/m1911/default
 	preview_name = "Default"
@@ -27,6 +28,7 @@
 /datum/atom_skin/m1911gold
 	abstract_type = /datum/atom_skin/m1911gold
 	change_base_icon_state = TRUE
+	change_worn_icon_state = FALSE
 
 /datum/atom_skin/m1911gold/default
 	preview_name = "Default"
