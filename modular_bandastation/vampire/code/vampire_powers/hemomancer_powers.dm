@@ -1,0 +1,342 @@
+/datum/action/cooldown/spell/vampire_vamp_claws
+	name = "Вампирские когти"
+	desc = "Направьте магию крови, чтобы выковать смертоносные вампирские когти, высасывающие кровь и быстро наносящие удары. Нельзя использовать, если вы держите невыпадающий предмет."
+	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
+	button_icon_state = "vampire_claws"
+	cooldown_time = 30 SECONDS
+	check_flags = AB_CHECK_CONSCIOUS|AB_CHECK_PHASED|AB_CHECK_HANDS_BLOCKED
+
+/datum/action/cooldown/spell/vampire_vamp_claws/New(Target)
+	. = ..()
+	add_vampire_ability(30)
+
+/datum/action/cooldown/spell/vampire_vamp_claws/can_cast_spell(feedback = TRUE)
+	if(!..())
+		return FALSE
+	var/mob/living/carbon/user = owner
+	if(!user)
+		return FALSE
+	for(var/obj/item/held_item as anything in user.held_items)
+		if(held_item && HAS_TRAIT(held_item, TRAIT_NODROP))
+			return FALSE
+	return TRUE
+
+/datum/action/cooldown/spell/vampire_vamp_claws/cast(atom/cast_on)
+	. = ..()
+	var/mob/living/carbon/user = owner
+	if(user.get_num_held_items())
+		to_chat(user, span_notice("Вы роняете то, что держали: из ваших пальцев вырастают большие клинки!"))
+		user.drop_all_held_items()
+	else
+		to_chat(user, span_notice("Из ваших пальцев вырастают большие кровавые клинки!"))
+	var/obj/item/vamp_claws/claws = new(get_turf(user))
+	user.put_in_hands(claws)
+
+/obj/item/vamp_claws
+	name = "vampiric claws"
+	desc = "Пара потусторонних когтей из живой крови."
+	icon = 'modular_bandastation/vampire/icons/effects/vampire_effects.dmi'
+	icon_state = "vamp_claws"
+	w_class = WEIGHT_CLASS_BULKY
+	obj_flags = ABSTRACT | DROPDEL
+	force = 10
+	armour_penetration = 20
+	sharpness = SHARP_EDGED
+	hitsound = 'modular_bandastation/vampire/sound/weapons/bladeslice.ogg'
+	attack_verb_continuous = list("slashes", "stabs", "slices", "scratches")
+	attack_verb_simple = list("slash", "stab", "slice", "scratch")
+	var/durability = 15
+	var/blood_drain_amount = 15
+	var/blood_absorbed_amount = 5
+	var/xenomorph_acid_boosted = FALSE
+	var/heal_boost = 1
+
+/obj/item/vamp_claws/Initialize(mapload)
+	. = ..()
+	AddComponent(/datum/component/two_handed, require_twohands = TRUE)
+	ADD_TRAIT(src, TRAIT_NODROP, REF(src))
+
+/obj/item/vamp_claws/attack(mob/living/target, mob/living/user, params)
+	if(..())
+		return
+	var/datum/antagonist/vampire/vampire = user.mind?.has_antag_datum(/datum/antagonist/vampire)
+	if(!vampire || !iscarbon(target))
+		return
+	var/mob/living/carbon/carbon_target = target
+	if(isalien(carbon_target) && !xenomorph_acid_boosted && carbon_target.ckey && carbon_target.stat != DEAD)
+		to_chat(user, span_warning("Когда [carbon_target.declent_ru(NOMINATIVE)] истекает кислотой, вы добавляете её в свои когти!"))
+		xenomorph_acid_boosted = TRUE
+		durability += 5
+		blood_drain_amount *= 1.5
+		blood_absorbed_amount *= 1.5
+		force *= 1.5
+		heal_boost = 2
+		damtype = BURN
+		hitsound = 'modular_bandastation/vampire/sound/weapons/sear.ogg'
+	if(carbon_target.ckey && carbon_target.stat != DEAD && carbon_target.affects_vampire(user) && (isalien(carbon_target) || carbon_target.get_blood_volume()))
+		carbon_target.bleed(blood_drain_amount)
+		vampire.adjust_blood(carbon_target, blood_absorbed_amount)
+		user.adjust_stamina_loss(-20 * heal_boost)
+		user.heal_overall_damage(4 * heal_boost, 4 * heal_boost)
+		user.AdjustKnockdown(-1 SECONDS * heal_boost)
+	if(!user.has_status_effect(/datum/status_effect/vampire_blood_spill) && !--durability)
+		user.balloon_alert(user, "когти разбились!")
+		qdel(src)
+
+/obj/item/vamp_claws/melee_attack_chain(mob/user, atom/target, params)
+	. = ..()
+	if(HAS_TRAIT(src, TRAIT_WIELDED))
+		user.changeNext_move(CLICK_CD_MELEE * 0.5)
+
+/obj/item/vamp_claws/attack_self(mob/user)
+	. = ..()
+	if(.)
+		return
+	user.balloon_alert(user, "когти развеяны!")
+	qdel(src)
+
+/datum/action/cooldown/spell/pointed/vampire_blood_tendrils
+	name = "Кровавые щупальца"
+	desc = "После задержки призовите небольшое поле ужасных кровавых щупалец, которое опутает и замедлит людей в области."
+	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
+	button_icon_state = "blood_tendrils"
+	cooldown_time = 30 SECONDS
+	cast_range = 7
+	var/area_of_affect = 1
+
+/datum/action/cooldown/spell/pointed/vampire_blood_tendrils/New(Target)
+	. = ..()
+	add_vampire_ability(10)
+
+/datum/action/cooldown/spell/pointed/vampire_blood_tendrils/cast(atom/cast_on)
+	. = ..()
+	var/turf/target_turf = get_turf(cast_on)
+	playsound(target_turf, 'sound/effects/magic/enter_blood.ogg', 20)
+	for(var/turf/open/turf in range(area_of_affect, target_turf))
+		new /obj/effect/temp_visual/blood_tendril(turf)
+	addtimer(CALLBACK(src, PROC_REF(apply_slowdown), target_turf, owner), 0.5 SECONDS)
+
+/datum/action/cooldown/spell/pointed/vampire_blood_tendrils/proc/apply_slowdown(turf/target_turf, mob/living/user)
+	for(var/mob/living/target in range(area_of_affect, target_turf))
+		if(target.affects_vampire(user))
+			target.set_timed_status_effect(6 SECONDS, /datum/status_effect/blood_tendril_slow)
+			target.visible_message(span_warning("[capitalize(target.declent_ru(NOMINATIVE))] опутан кровавыми щупальцами!"))
+			new /obj/effect/temp_visual/blood_tendril/long(get_turf(target))
+
+/obj/effect/temp_visual/blood_tendril
+	icon = 'modular_bandastation/vampire/icons/effects/vampire_effects.dmi'
+	icon_state = "blood_tendril"
+/obj/effect/temp_visual/blood_tendril/long
+	duration = 2 SECONDS
+
+/datum/action/cooldown/spell/pointed/vampire_blood_barrier
+	name = "Кровавый барьер"
+	desc = "Выберите две точки на расстоянии не более трёх клеток друг от друга, чтобы создать между ними барьер."
+	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
+	button_icon_state = "blood_barrier"
+	cooldown_time = 1 MINUTES
+	cast_range = 7
+	unset_after_click = FALSE
+	var/max_walls = 3
+	var/turf/start_turf
+
+/datum/action/cooldown/spell/pointed/vampire_blood_barrier/New(Target)
+	. = ..()
+	add_vampire_ability(40, FALSE)
+
+/datum/action/cooldown/spell/pointed/vampire_blood_barrier/before_cast(atom/cast_on)
+	return ..() | SPELL_NO_IMMEDIATE_COOLDOWN
+
+/datum/action/cooldown/spell/pointed/vampire_blood_barrier/on_deactivation(mob/on_who, refund_cooldown = TRUE)
+	. = ..()
+	start_turf = null
+
+/datum/action/cooldown/spell/pointed/vampire_blood_barrier/cast(atom/cast_on)
+	. = ..()
+	var/turf/target_turf = get_turf(cast_on)
+	if(target_turf == start_turf)
+		to_chat(owner, span_notice("Вы отменяете выбор целевой клетки."))
+		start_turf = null
+		return
+	if(!start_turf || get_dist(owner, start_turf) > cast_range)
+		start_turf = target_turf
+		to_chat(owner, span_notice("Выберите другой конец кровавого барьера."))
+		return
+	var/wall_count = 0
+	for(var/turf/turf as anything in get_line(target_turf, start_turf))
+		if(wall_count++ >= max_walls)
+			break
+		new /obj/structure/blood_barrier(turf)
+	SEND_SIGNAL(src, COMSIG_VAMPIRE_ABILITY_DEDUCT_BLOOD)
+	start_turf = null
+	StartCooldown()
+	unset_click_ability(owner, refund_cooldown = FALSE)
+
+/obj/structure/blood_barrier
+	name = "blood barrier"
+	desc = "Гротескное сооружение из кристаллизованной крови. Оно медленно тает."
+	max_integrity = 100
+	icon_state = "blood_barrier"
+	icon = 'modular_bandastation/vampire/icons/effects/vampire_effects.dmi'
+	density = TRUE
+	anchored = TRUE
+
+/obj/structure/blood_barrier/Initialize(mapload)
+	. = ..()
+	START_PROCESSING(SSobj, src)
+
+/obj/structure/blood_barrier/Destroy()
+	STOP_PROCESSING(SSobj, src)
+	return ..()
+
+/obj/structure/blood_barrier/process(seconds_per_tick)
+	take_damage(10 * seconds_per_tick, sound_effect = FALSE)
+
+/obj/structure/blood_barrier/atom_destruction(damage_flag)
+	new /obj/effect/decal/cleanable/blood(loc)
+	return ..()
+
+/obj/structure/blood_barrier/CanPass(atom/movable/mover, border_dir)
+	. = ..()
+	if(.)
+		return
+	if(!isliving(mover))
+		return FALSE
+	var/mob/living/living_mover = mover
+	var/datum/antagonist/vampire/vampire = living_mover.mind?.has_antag_datum(/datum/antagonist/vampire)
+	return vampire && is_type_in_list(vampire.subclass, list(SUBCLASS_HEMOMANCER, SUBCLASS_ANCIENT))
+
+/datum/action/cooldown/spell/jaunt/ethereal_jaunt/vampire_blood_pool
+	name = "Кровавая лужа"
+	desc = "Превратитесь в лужу крови, став неуязвимым и способным проходить через всё, кроме стен и космоса. При движении вы оставляете кровавый след."
+	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
+	button_icon_state = "blood_pool"
+	cooldown_time = 30 SECONDS
+	jaunt_duration = 3 SECONDS
+	jaunt_in_time = 0.1 SECONDS // Time spent reappearing; the normal pre-animation wait is skipped below.
+	jaunt_type = /obj/effect/dummy/phased_mob/spell_jaunt/vampire_blood_pool
+	jaunt_in_type = /obj/effect/temp_visual/dir_setting/cult/phase
+	jaunt_out_type = /obj/effect/temp_visual/dir_setting/cult/phase/out
+	sound = 'sound/effects/magic/enter_blood.ogg'
+	exit_jaunt_sound = 'sound/effects/magic/exit_blood.ogg'
+
+/datum/action/cooldown/spell/jaunt/ethereal_jaunt/vampire_blood_pool/New(Target)
+	. = ..()
+	add_vampire_ability(50)
+
+/datum/action/cooldown/spell/jaunt/ethereal_jaunt/vampire_blood_pool/enter_jaunt(mob/living/jaunter, turf/loc_override)
+	. = ..()
+	if(.)
+		jaunter.apply_status_effect(/datum/status_effect/vampire_blood_pool)
+
+/datum/action/cooldown/spell/jaunt/ethereal_jaunt/vampire_blood_pool/on_jaunt_exited(obj/effect/dummy/phased_mob/jaunt, mob/living/unjaunter)
+	. = ..()
+	unjaunter.remove_status_effect(/datum/status_effect/vampire_blood_pool)
+
+/datum/action/cooldown/spell/jaunt/ethereal_jaunt/vampire_blood_pool/begin_jaunt_exit(mob/living/cast_on, obj/effect/dummy/phased_mob/spell_jaunt/holder, turf/found_exit)
+	do_jaunt_in(cast_on, holder, found_exit)
+
+/datum/action/cooldown/spell/jaunt/ethereal_jaunt/do_steam_effects(turf/loc)
+	return // No steam effects
+
+/obj/effect/dummy/phased_mob/spell_jaunt/vampire_blood_pool
+	phased_mob_icon_state = "red_1"
+
+/obj/effect/dummy/phased_mob/spell_jaunt/vampire_blood_pool/phased_check(mob/living/user, direction)
+	. = ..()
+	if(!.)
+		return
+	var/turf/destination = .
+	if(destination.density || isspaceturf(destination))
+		to_chat(user, span_warning("Вы не можете пройти через стены или космос в этой форме."))
+		return null
+
+/obj/effect/dummy/phased_mob/spell_jaunt/vampire_blood_pool/relaymove(mob/living/user, direction)
+	var/turf/old_turf = get_turf(src)
+	. = ..()
+	if(get_turf(src) != old_turf)
+		new /obj/effect/decal/cleanable/blood(old_turf)
+
+/datum/action/cooldown/spell/vampire_predator_senses
+	name = "Чувства хищника"
+	desc = "Выследите добычу — ей негде спрятаться..."
+	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
+	button_icon_state = "predator_sense"
+	cooldown_time = 20 SECONDS
+
+/datum/action/cooldown/spell/vampire_predator_senses/New(Target)
+	. = ..()
+	add_vampire_ability()
+
+/datum/action/cooldown/spell/vampire_predator_senses/cast(atom/cast_on)
+	. = ..()
+	var/mob/living/user = owner
+	var/list/prey = list()
+	for(var/mob/living/carbon/human/target in GLOB.alive_mob_list)
+		if(target != user && target.mind && target.z == user.z)
+			prey[target.real_name] = target
+	if(!length(prey))
+		to_chat(user, span_warning("Здесь нет добычи для охоты."))
+		return
+	var/target_name = tgui_input_list(user, "Кого выследить", "Запах крови", prey)
+	if(!target_name)
+		return
+	var/mob/living/carbon/human/target = prey[target_name]
+	if(QDELETED(user) || QDELETED(target) || target.z != user.z)
+		to_chat(user, span_warning("Запах крови этой цели угас."))
+		return
+	var/message = "[target_name] находится в [get_area(target)], [dir2text(get_dir(user, target))] от вас."
+	if((target.maxHealth - target.health >= 40) || target.get_bleed_rate())
+		message += " Цель ранена."
+	to_chat(user, span_notice(message))
+
+/datum/action/cooldown/spell/aoe/vampire_blood_eruption
+	name = "Кровавое извержение"
+	desc = "Из каждой лужи крови в радиусе четырёх клеток вырывается шип из живой крови, ранящий стоящих на ней."
+	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
+	button_icon_state = "blood_spikes"
+	cooldown_time = 200 SECONDS
+	aoe_radius = 4
+
+/datum/action/cooldown/spell/aoe/vampire_blood_eruption/New(Target)
+	. = ..()
+	add_vampire_ability(100)
+
+/datum/action/cooldown/spell/aoe/vampire_blood_eruption/get_things_to_cast_on(atom/center)
+	. = list()
+	for(var/mob/living/target in range(aoe_radius, center))
+		if(target.affects_vampire(owner) && target.client && locate(/obj/effect/decal/cleanable/blood) in get_turf(target))
+			. += target
+
+/datum/action/cooldown/spell/aoe/vampire_blood_eruption/cast_on_thing_in_aoe(mob/living/target, atom/caster)
+	var/turf/turf = get_turf(target)
+	var/obj/effect/decal/cleanable/blood/blood = locate(/obj/effect/decal/cleanable/blood) in turf
+	var/obj/effect/temp_visual/blood_spike/spike = new(turf)
+	spike.color = blood.color
+	playsound(target, 'modular_bandastation/vampire/sound/misc/demon_attack1.ogg', 50, TRUE)
+	target.apply_damage(50, BRUTE, BODY_ZONE_CHEST)
+	target.visible_message(span_warning("[capitalize(target.declent_ru(NOMINATIVE))] пронзён шипом из живой крови!"))
+
+/obj/effect/temp_visual/blood_spike
+	icon = 'modular_bandastation/vampire/icons/effects/vampire_effects.dmi'
+	icon_state = "bloodspike_white"
+	duration = 0.3 SECONDS
+
+/datum/action/cooldown/spell/vampire_blood_spill
+	name = "Ритуал несущего кровь"
+	desc = "При включении все вокруг начинают обильно истекать кровью. Вы высасываете её и омолаживаете себя."
+	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
+	button_icon_state = "blood_bringers_rite"
+	cooldown_time = 2 SECONDS
+
+/datum/action/cooldown/spell/vampire_blood_spill/New(Target)
+	. = ..()
+	add_vampire_ability(10)
+
+/datum/action/cooldown/spell/vampire_blood_spill/cast(atom/cast_on)
+	. = ..()
+	SEND_SIGNAL(owner, COMSIG_VAMPIRE_OWNER_TOGGLE_BLOOD_SPILL)
+
+/datum/action/cooldown/spell/vampire_blood_spill/Remove(mob/living/removed_from)
+	removed_from?.remove_status_effect(/datum/status_effect/vampire_blood_spill)
+	return ..()
