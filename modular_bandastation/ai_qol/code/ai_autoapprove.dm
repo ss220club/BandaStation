@@ -8,7 +8,7 @@
 	return ..()
 
 GAME_VERB_DESC(/mob/living/silicon/ai, door_autoapprove_verb, "Airlock Auto-Approve", "Настройка автоодобрения запросов на шлюзы (по имени).", "AI Commands")
-	if(incapacitated())
+	if(incapacitated)
 		return
 
 	if(!door_autoapprove)
@@ -36,7 +36,7 @@ GAME_VERB_DESC(/mob/living/silicon/ai, door_autoapprove_verb, "Airlock Auto-Appr
 	return GLOB.always_state
 
 /datum/ai_door_autoapprove/ui_status(mob/user, datum/ui_state/state)
-	if(!owner_ai || owner_ai.incapacitated())
+	if(!owner_ai || owner_ai.incapacitated)
 		return UI_CLOSE
 
 	if(user == owner_ai || (owner_ai.deployed_shell && user == owner_ai.deployed_shell))
