@@ -35,7 +35,10 @@ ADMIN_VERB(change_title_screen_notice, R_ADMIN, "Лобби: Изменить у
 	if(isnull(new_notice))
 		return
 
-	var/persist_notice = tgui_alert(usr, "Перенести уведомление в следующие раунды?", "Уведомление в лобби", list("Да", "Нет")) == "Да"
+	var/alert_response = tgui_alert(usr, "Перенести уведомление в следующие раунды?", "Уведомление в лобби", list("Да", "Нет"))
+	if(isnull(alert_response))
+		return
+	var/persist_notice = alert_response == "Да"
 	var/announce_text
 	if(new_notice == "")
 		announce_text = "УВЕДОМЛЕНИЕ В ЛОББИ УДАЛЕНО."
