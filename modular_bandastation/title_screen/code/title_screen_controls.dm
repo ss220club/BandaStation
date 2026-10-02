@@ -46,8 +46,8 @@ ADMIN_VERB(change_title_screen_notice, R_ADMIN, "Лобби: Изменить у
 		announce_text = "УВЕДОМЛЕНИЕ В ЛОББИ ОБНОВЛЕНО: [new_notice]"
 
 	SStitle.set_notice(new_notice, persist_notice)
-	log_admin("Title Screen: [key_name(usr)] setted the title screen notice[persist_notice ? " (persistent)" : ""], which contains: [new_notice]")
-	message_admins("Title Screen: [key_name_admin(usr)] setted the title screen notice[persist_notice ? " (persistent)" : ""], which contains: [new_notice]")
+	log_admin("Title Screen: [key_name(usr)] set the title screen notice[persist_notice ? " (persistent)" : ""], which contains: [new_notice]")
+	message_admins("Title Screen: [key_name_admin(usr)] set the title screen notice[persist_notice ? " (persistent)" : ""], which contains: [new_notice]")
 
 	for(var/mob/dead/new_player/new_player as anything in GLOB.new_player_list)
 		to_chat(new_player, span_boldannounce(emoji_parse(announce_text)))
