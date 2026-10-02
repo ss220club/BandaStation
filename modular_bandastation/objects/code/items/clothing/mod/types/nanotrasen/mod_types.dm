@@ -14,7 +14,7 @@
 	theme = /datum/mod_theme/specops
 	starting_frequency = MODLINK_FREQ_CENTCOM
 	applied_cell = /obj/item/stock_parts/power_store/cell/bluespace
-	applied_core = /obj/item/mod/core/infinite
+	applied_core = /obj/item/mod/core/standard
 	applied_modules = list(
 		/obj/item/mod/module/storage/bluespace,
 		/obj/item/mod/module/holster,
