@@ -1,4 +1,4 @@
 directory = "_maps/map_files/Cyberiad/maintenance_modules/"
 
-[rooms.secmainteast]
-modules = ["secmainteast_1.dmm"]
+[rooms.arrivals_ghetto_west_lower]
+modules = ["arrivals_ghetto_west_lower_1.dmm"]
