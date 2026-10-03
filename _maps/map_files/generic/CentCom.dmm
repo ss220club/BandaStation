@@ -1396,7 +1396,9 @@
 	},
 /obj/item/toy/figure/dsquad{
 	pixel_x = 14;
-	pixel_y = 5
+	pixel_y = 5;
+	name = "Командир 'Бум-Бум'";
+	desc = "Старик что взорвал немало станций.. Конечно же лишь в игре."
 	},
 /obj/machinery/button/door/indestructible{
 	name = "Engineering Supplies";
@@ -1510,7 +1512,6 @@
 /turf/open/floor/carpet/black,
 /area/centcom/central_command_areas/cabin/soo)
 "agr" = (
-/obj/vehicle/sealed/mecha/ripley/cargo,
 /obj/effect/turf_decal/bot,
 /obj/structure/railing{
 	dir = 9
@@ -1518,6 +1519,7 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 9
 	},
+/obj/vehicle/sealed/mecha/ripley,
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/supply)
 "agt" = (
@@ -2027,6 +2029,13 @@
 /obj/item/kirbyplants/organic/plant10{
 	pixel_y = 12
 	},
+/obj/item/toy/figure/bartender{
+	pixel_x = -10;
+	pixel_y = 2;
+	name = "Крест";
+	toysay = "Тебе налить как обычно?";
+	desc = "Лучший собеседник, рассказчик и отличный бармен. Иногда собутыльник."
+	},
 /turf/open/floor/wood/large,
 /area/centcom/central_command_areas/bar)
 "aje" = (
@@ -2115,6 +2124,21 @@
 	dir = 4
 	},
 /obj/structure/light_fake/spot/directional/east,
+/obj/item/storage/medkit/toxin{
+	pixel_y = 2
+	},
+/obj/item/storage/medkit/fire{
+	pixel_y = 6
+	},
+/obj/item/storage/medkit/brute{
+	pixel_y = 4
+	},
+/obj/item/storage/medkit/o2{
+	pixel_y = 8
+	},
+/obj/item/storage/medkit/advanced{
+	pixel_y = 6
+	},
 /turf/open/floor/iron/white,
 /area/centcom/central_command_areas/hospital)
 "ajY" = (
@@ -2136,6 +2160,10 @@
 "akc" = (
 /obj/structure/sign/warning/vacuum/directional/east,
 /obj/structure/broken_flooring/singular/always_floorplane/directional/north,
+/obj/machinery/nuclearbomb/beer{
+	name = "Ядрёна-бомба";
+	desc = "А она действительно настолько ядрёна? Вам стоит проверить."
+	},
 /turf/open/floor/plating,
 /area/centcom/central_command_areas/maintance)
 "ake" = (
@@ -2173,12 +2201,12 @@
 "akk" = (
 /obj/effect/turf_decal/bot_white,
 /obj/structure/closet/crate/secure/weapon,
-/obj/item/gun/energy/lasercannon,
-/obj/item/gun/energy/lasercannon,
-/obj/item/gun/energy/lasercannon,
-/obj/item/gun/energy/lasercannon,
-/obj/item/gun/energy/lasercannon,
-/obj/item/gun/energy/lasercannon,
+/obj/item/gun/energy/laser/assault,
+/obj/item/gun/energy/laser/assault,
+/obj/item/gun/energy/laser/assault,
+/obj/item/gun/energy/laser/assault,
+/obj/item/gun/energy/laser/assault,
+/obj/item/gun/energy/laser/assault,
 /turf/open/floor/iron/dark/smooth_large,
 /area/centcom/central_command_areas/supply)
 "akn" = (
@@ -2622,7 +2650,9 @@
 	pixel_y = -1
 	},
 /obj/item/toy/figure/clown{
-	pixel_x = 3
+	pixel_x = 3;
+	name = "Хонкер";
+	desc = "Он выглядит смешно."
 	},
 /obj/structure/mirror/broken/directional/north,
 /turf/open/floor/plating,
@@ -2909,6 +2939,19 @@
 /obj/item/stack/spacecash/c100,
 /obj/item/stack/spacecash/c200,
 /obj/effect/turf_decal/line/dark_blue,
+/obj/item/reagent_containers/cup/glass/bottle/beer/almost_empty{
+	pixel_x = -3;
+	pixel_y = 14;
+	name = "Охота \"Космическая\"";
+	desc = "Пивасик."
+	},
+/obj/item/toy/figure/hos{
+	pixel_x = 6;
+	pixel_y = 8;
+	name = "Джеймс";
+	desc = "Он любит пить пиво, курить сигары и собирать пушки.";
+	toysay = "Принеси мне еще одну бутылку, будь другом."
+	},
 /turf/open/floor/iron/smooth_edge{
 	dir = 8
 	},
@@ -3673,18 +3716,13 @@
 /area/centcom/central_command_areas/hallway)
 "asf" = (
 /obj/effect/turf_decal/bot_white,
+/obj/item/gun/ballistic/shotgun/automatic/combat,
+/obj/item/gun/ballistic/shotgun/automatic/combat,
+/obj/item/gun/ballistic/shotgun/automatic/combat,
+/obj/item/gun/ballistic/shotgun/automatic/combat,
+/obj/item/gun/ballistic/shotgun/automatic/combat,
+/obj/item/gun/ballistic/shotgun/automatic/combat,
 /obj/structure/closet/crate/secure/weapon,
-/obj/item/gun/ballistic/shotgun/automatic/combat,
-/obj/item/gun/ballistic/shotgun/automatic/combat,
-/obj/item/gun/ballistic/shotgun/automatic/combat,
-/obj/item/gun/ballistic/shotgun/automatic/combat,
-/obj/item/gun/ballistic/shotgun/automatic/combat,
-/obj/item/gun/ballistic/shotgun/automatic/combat,
-/obj/item/gun/ballistic/shotgun/automatic/combat,
-/obj/item/gun/ballistic/shotgun/automatic/combat,
-/obj/item/gun/ballistic/shotgun/automatic/combat,
-/obj/item/gun/ballistic/shotgun/automatic/combat,
-/obj/item/gun/ballistic/shotgun/automatic/combat,
 /turf/open/floor/iron/dark/smooth_large,
 /area/centcom/central_command_areas/supply)
 "asg" = (
@@ -4384,7 +4422,7 @@
 /turf/open/floor/iron/smooth_large,
 /area/centcom/central_command_areas/armory)
 "avO" = (
-/obj/vehicle/sealed/mecha/marauder/loaded/ert,
+/obj/vehicle/sealed/mecha/marauder/seraph,
 /turf/open/floor/iron/recharge_floor,
 /area/centcom/central_command_areas/armory)
 "avQ" = (
@@ -5482,17 +5520,27 @@
 /obj/structure/table/reinforced,
 /obj/machinery/button/door/indestructible{
 	pixel_y = 7;
-	id = "cc_eng1"
+	id = "cc_eng1";
+	color = "#FF0000";
+	name = "AZ-5"
 	},
 /obj/machinery/button/door/indestructible{
 	pixel_x = -6;
 	pixel_y = -3;
-	id = "cc_eng2"
+	id = "cc_eng2";
+	name = "AZ-1"
 	},
 /obj/machinery/button/door/indestructible{
 	pixel_x = 6;
 	pixel_y = -3;
-	id = "cc_eng3"
+	id = "cc_eng3";
+	name = "AZ-6-7/9"
+	},
+/obj/item/toy/plush/moth{
+	pixel_x = 14;
+	pixel_y = 11;
+	desc = "Она точно не уничтожит этот корабль. Доверьтесь ей.";
+	name = "Молька."
 	},
 /turf/open/floor/iron/dark/smooth_large,
 /area/centcom/central_command_areas/engine)
@@ -5825,6 +5873,13 @@
 	dir = 4
 	},
 /obj/structure/light_fake/small/directional/east,
+/obj/item/toy/figure/qm{
+	pixel_x = 0;
+	pixel_y = -6;
+	name = "Уолтер";
+	desc = "Он найдет вас и доставит вам Депешу.";
+	toysay = "ВАМ ДЕПЕША!!!"
+	},
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/supply)
 "aCD" = (
@@ -6570,6 +6625,13 @@
 	pixel_x = 8;
 	pixel_y = -5
 	},
+/obj/item/toy/figure/warden{
+	pixel_x = 8;
+	pixel_y = 17;
+	name = "Сержант Женя";
+	desc = "Это Женя. Женя следит за тем, чтобы вы не взяли лишнего. Не расстраивайте Женю.";
+	toysay = "Привет! Это я, Женя!"
+	},
 /obj/item/storage/crayons{
 	pixel_x = 9;
 	pixel_y = 9
@@ -6837,6 +6899,7 @@
 	dir = 1
 	},
 /obj/effect/turf_decal/tile/blue,
+/obj/machinery/wall_healer/free/directional/west,
 /turf/open/floor/iron/white,
 /area/centcom/central_command_areas/hospital)
 "aGp" = (
@@ -7360,7 +7423,9 @@
 /turf/open/space/basic,
 /area/space/nearstation)
 "aIk" = (
-/obj/effect/spawner/random/structure/grille,
+/obj/machinery/vending/sovietsoda{
+	displayed_currency_name = "Р"
+	},
 /turf/open/floor/plating,
 /area/centcom/central_command_areas/maintance)
 "aIl" = (
@@ -8062,6 +8127,13 @@
 	dir = 4
 	},
 /obj/structure/light_fake/small/directional/south,
+/obj/item/toy/figure/janitor{
+	pixel_x = -14;
+	pixel_y = -4;
+	name = "Боб";
+	desc = "Помним правила.";
+	toysay = "Помним правила!!!"
+	},
 /turf/open/floor/iron/dark/diagonal,
 /area/centcom/central_command_areas/maintance)
 "aKs" = (
@@ -8228,7 +8300,6 @@
 /obj/item/mod/module/quick_carry/advanced,
 /obj/item/mod/module/status_readout,
 /obj/item/mod/module/storage/bluespace,
-/obj/item/mod/module/visor/thermal,
 /obj/item/mod/module/visor/sechud,
 /obj/item/mod/module/shock_absorber,
 /obj/item/mod/module/shooting_assistant,
@@ -8237,6 +8308,8 @@
 /obj/item/mod/module/jump_jet,
 /obj/item/mod/module/fishing_glove,
 /obj/item/mod/module/flamethrower,
+/obj/item/mod/module/emp_shield/advanced,
+/obj/item/mod/module/dna_lock/reinforced,
 /turf/open/floor/iron/smooth_large,
 /area/centcom/central_command_areas/armory)
 "aKU" = (
@@ -8858,6 +8931,12 @@
 	pixel_x = 7;
 	pixel_y = 8
 	},
+/obj/item/reagent_containers/syringe/contraband/fentanyl{
+	pixel_x = -5;
+	pixel_y = -2;
+	desc = "Грязный и потрепанный шприц. На нем грубо написано мелким шрифтов - 'РУКИ ПРОЧЬ!! СООБСТВЕННОСТЬ ШИ!'";
+	name = "грязный шприц"
+	},
 /turf/open/floor/iron/dark,
 /area/centcom/central_command_areas/maintance)
 "aMH" = (
@@ -9016,12 +9095,13 @@
 /area/centcom/central_command_areas/cabin/soo)
 "aNv" = (
 /obj/structure/table/reinforced,
-/obj/item/storage/medkit/tactical/premium{
-	pixel_y = 10
-	},
 /obj/item/flamethrower/full,
 /obj/item/holosign_creator/atmos,
 /obj/effect/decal/cleanable/dirt,
+/obj/item/storage/medkit/tactical{
+	pixel_x = 3;
+	pixel_y = 12
+	},
 /turf/open/floor/plating,
 /area/centcom/central_command_areas/prison)
 "aNz" = (
@@ -10060,11 +10140,21 @@
 	pixel_x = -6;
 	pixel_y = 10
 	},
-/obj/item/firing_pin/implant/mindshield,
-/obj/item/firing_pin/implant/pindicate{
-	pixel_y = -3
-	},
 /obj/effect/decal/cleanable/dirt,
+/obj/item/reagent_containers/syringe/lethal/execution{
+	pixel_x = 5;
+	pixel_y = 0
+	},
+/obj/item/reagent_containers/syringe/bioterror{
+	pixel_x = 8;
+	pixel_y = 7
+	},
+/obj/item/toy/figure/mime{
+	pixel_x = -9;
+	pixel_y = -4;
+	name = "Йебок";
+	desc = "..."
+	},
 /turf/open/floor/plating,
 /area/centcom/central_command_areas/prison)
 "aSM" = (
@@ -10624,6 +10714,19 @@
 /obj/effect/spawner/random/entertainment/lighter{
 	pixel_x = 8;
 	pixel_y = -3
+	},
+/obj/item/reagent_containers/cup/glass/bottle/rootbeer{
+	pixel_x = -10;
+	pixel_y = 12;
+	name = "Пиво \"Корнеплод\"";
+	desc = "От одного запаха уже чувствуешь силу земли."
+	},
+/obj/item/toy/figure/roboticist{
+	pixel_x = -2;
+	pixel_y = 13;
+	toysay = "Ыэееэ... Дурак ты!";
+	name = "Этамин";
+	desc = "Он просто чилловый парень."
 	},
 /turf/open/floor/iron/smooth_edge{
 	dir = 1
@@ -11470,7 +11573,6 @@
 /turf/open/floor/mineral/plastitanium/pod,
 /area/centcom/central_command_areas/supply)
 "aYC" = (
-/obj/vehicle/sealed/mecha/ripley/cargo,
 /obj/effect/turf_decal/bot,
 /obj/structure/railing{
 	dir = 1
@@ -11478,6 +11580,7 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
 	},
+/obj/vehicle/sealed/mecha/ripley,
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/supply)
 "aYD" = (
@@ -16499,6 +16602,13 @@
 	},
 /turf/open/floor/iron/dark,
 /area/centcom/central_command_areas/control)
+"kCj" = (
+/obj/effect/turf_decal/bot,
+/obj/effect/spawner/random/engineering/material_rare,
+/obj/effect/spawner/random/engineering/material_rare,
+/obj/structure/closet/crate/secure/cargo,
+/turf/open/floor/iron/dark/smooth_large,
+/area/centcom/central_command_areas/supply)
 "kCT" = (
 /turf/open/floor/iron/dark/textured_half,
 /area/centcom/central_command_areas/hallway)
@@ -16680,6 +16790,13 @@
 /obj/structure/flora/bush/ferny/style_random,
 /turf/open/floor/grass,
 /area/centcom/central_command_areas/planetary_port/plaza)
+"kUp" = (
+/obj/effect/turf_decal/delivery,
+/obj/structure/closet/crate/centcom,
+/obj/effect/spawner/random/engineering/vending_restock/medical,
+/obj/effect/spawner/random/engineering/vending_restock/engineering,
+/turf/open/floor/iron/dark/smooth_large,
+/area/centcom/central_command_areas/supply)
 "kWY" = (
 /obj/machinery/light/floor,
 /turf/open/floor/wood/tile,
@@ -17143,6 +17260,13 @@
 /obj/effect/spawner/random/food_or_drink/booze,
 /turf/open/floor/wood/tile,
 /area/centcom/central_command_areas/planetary_port/club)
+"mkt" = (
+/obj/effect/turf_decal/bot,
+/obj/effect/spawner/random/engineering/material,
+/obj/effect/spawner/random/engineering/material,
+/obj/structure/closet/crate/secure/cargo,
+/turf/open/floor/iron/dark/smooth_large,
+/area/centcom/central_command_areas/supply)
 "mkH" = (
 /turf/open/floor/iron/stairs/right{
 	color = "#45464a"
@@ -17945,6 +18069,12 @@
 	},
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/planetary_port)
+"ocg" = (
+/obj/effect/turf_decal/bot,
+/obj/effect/spawner/random/medical,
+/obj/structure/closet/crate/medical/department,
+/turf/open/floor/iron/dark/smooth_large,
+/area/centcom/central_command_areas/supply)
 "odo" = (
 /obj/structure/rack,
 /obj/structure/sign/poster/official/moth_piping/directional/west,
@@ -19070,6 +19200,13 @@
 "pRe" = (
 /turf/open/floor/carpet,
 /area/centcom/central_command_areas/planetary_port/club)
+"pSa" = (
+/obj/effect/turf_decal/bot,
+/obj/structure/closet/crate/engineering,
+/obj/effect/spawner/random/engineering/toolbox,
+/obj/effect/spawner/random/engineering/toolbox,
+/turf/open/floor/iron/dark/smooth_large,
+/area/centcom/central_command_areas/supply)
 "pSB" = (
 /obj/structure/fake_stairs/stone,
 /obj/structure/fake_stairs/stone{
@@ -19520,6 +19657,20 @@
 /obj/structure/mirror/directional/west,
 /turf/open/floor/wood/large,
 /area/centcom/central_command_areas/cabin)
+"qHk" = (
+/obj/effect/turf_decal/bot,
+/obj/structure/closet/crate/centcom,
+/obj/effect/spawner/random/food_or_drink/donkpockets,
+/obj/effect/spawner/random/food_or_drink/donkpockets,
+/turf/open/floor/iron/dark/smooth_large,
+/area/centcom/central_command_areas/supply)
+"qIJ" = (
+/obj/effect/turf_decal/bot,
+/obj/effect/spawner/random/engineering/material_cheap,
+/obj/effect/spawner/random/engineering/material_cheap,
+/obj/structure/closet/crate/secure/cargo,
+/turf/open/floor/iron/dark/smooth_large,
+/area/centcom/central_command_areas/supply)
 "qJi" = (
 /obj/item/kirbyplants/random,
 /turf/open/floor/wood/large,
@@ -19530,6 +19681,15 @@
 	},
 /turf/open/floor/carpet/black,
 /area/centcom/central_command_areas/courtroom)
+"qJP" = (
+/obj/effect/turf_decal/bot,
+/obj/effect/spawner/random/medical/medkit_rare,
+/obj/effect/spawner/random/medical/medkit_rare,
+/obj/effect/spawner/random/medical/medkit,
+/obj/effect/spawner/random/medical/medkit,
+/obj/structure/closet/crate/medical,
+/turf/open/floor/iron/dark/smooth_large,
+/area/centcom/central_command_areas/supply)
 "qKi" = (
 /obj/structure/chair/sofa/left/brown{
 	dir = 8
@@ -20899,6 +21059,18 @@
 	},
 /turf/open/floor/wood,
 /area/centcom/central_command_areas/admin)
+"tzG" = (
+/obj/structure/lattice/catwalk,
+/obj/structure/marker_beacon/jade,
+/obj/item/toy/figure/assistant{
+	pixel_x = 9;
+	pixel_y = 12;
+	toysay = "ЭТО Я!! СТЭН ПРОД!!!";
+	name = "Стэн";
+	desc = "ЧТО ОН ТУТ ЗАБЫЛ!? И ЧТО ОН ЗАТЕЯЛ!?"
+	},
+/turf/open/space/basic,
+/area/space/nearstation)
 "tAj" = (
 /obj/structure/table/wood,
 /obj/item/book/manual/wiki/security_space_law{
@@ -22726,6 +22898,13 @@
 	},
 /turf/open/floor/carpet/green,
 /area/centcom/central_command_areas/courtroom)
+"wEW" = (
+/obj/effect/turf_decal/delivery,
+/obj/structure/closet/crate/centcom,
+/obj/effect/spawner/random/engineering/vending_restock/common,
+/obj/effect/spawner/random/engineering/vending_restock/engineering,
+/turf/open/floor/iron/dark/smooth_large,
+/area/centcom/central_command_areas/supply)
 "wGe" = (
 /obj/effect/turf_decal/siding/wideplating/dark,
 /obj/structure/flora/bush/grassy/style_random,
@@ -22872,6 +23051,11 @@
 	},
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/planetary_port)
+"wSQ" = (
+/obj/structure/light_fake/spot/directional/north,
+/obj/structure/closet/crate/large/hats,
+/turf/open/floor/plating,
+/area/centcom/central_command_areas/supply)
 "wTF" = (
 /obj/structure/railing/platform{
 	dir = 1
@@ -23219,11 +23403,11 @@
 /area/centcom/central_command_areas/planetary_port/club)
 "xLN" = (
 /obj/structure/closet/cabinet,
-/obj/item/gun/ballistic/revolver/mateba,
 /obj/item/ammo_box/speedloader/c357,
 /obj/item/ammo_box/speedloader/c357,
 /obj/item/ammo_box/speedloader/c357,
 /obj/item/clothing/accessory/holster/tacticool,
+/obj/item/gun/ballistic/revolver/mateba/old,
 /turf/open/floor/iron/dark/small,
 /area/centcom/central_command_areas/cabin/soo)
 "xNA" = (
@@ -72237,7 +72421,7 @@ adS
 aFc
 axa
 aVX
-aGU
+wSQ
 aJp
 aYC
 alq
@@ -73020,8 +73204,8 @@ aRE
 aYp
 arh
 aDR
-aLa
-aLa
+wEW
+kUp
 aXi
 aYn
 aTi
@@ -73269,13 +73453,13 @@ awZ
 abn
 aiF
 aOG
-aPQ
+qJP
 aPQ
 aGp
 aKJ
 aRE
 aYp
-aPQ
+pSa
 aDR
 aKJ
 aKJ
@@ -73527,15 +73711,15 @@ aHf
 aiF
 aOG
 aPQ
-aPQ
+qHk
 aGp
-aPQ
+ocg
 aRE
 aYp
 aPQ
 aDR
 aKJ
-aPQ
+kCj
 aMc
 aYn
 aEG
@@ -73791,8 +73975,8 @@ aRE
 aYp
 aPQ
 aDR
-aPQ
-aPQ
+mkt
+qIJ
 aMc
 ajg
 aJQ
@@ -82709,7 +82893,7 @@ aaa
 aaa
 aaa
 aaa
-avr
+tzG
 ahU
 ahU
 ahU

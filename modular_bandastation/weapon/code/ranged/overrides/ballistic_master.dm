@@ -142,6 +142,11 @@
 	icon = 'icons/obj/weapons/guns/ballistic.dmi'
 	recoil = 0.2
 
+/obj/item/gun/ballistic/revolver/mateba/old
+	icon = 'modular_bandastation/weapon/icons/ranged/ballistic.dmi'
+	desc = "Полуавтоматический револьвер серии Mateba Model 6 Unica сборки старого образца. Такие уже давно не делают..."
+	icon_state = "mateba_old"
+
 /obj/item/gun/ballistic/revolver/golden
 	icon = 'icons/obj/weapons/guns/ballistic.dmi'
 
