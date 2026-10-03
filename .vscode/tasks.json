@@ -33,14 +33,14 @@
 			"args": [
 				"-DSKIP_LAVALAND",
 				"-DSKIP_SPACE_LEVELS",
-				"-DFORCE_MAP=\"runtimestation\""
+				"-DFORCE_MAP=\"cyberiad\"" // temp
 			],
 			"windows": {
 				"command": ".\\tools\\build\\build.bat",
 				"args": [
 					"-DSKIP_LAVALAND",
 					"-DSKIP_SPACE_LEVELS",
-					"-DFORCE_MAP=\"runtimestation\""
+					"-DFORCE_MAP=\"cyberiad\"" // temp
 				]
 			},
 			"options": {

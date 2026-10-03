@@ -1,0 +1,4 @@
+directory = "_maps/map_files/Cyberiad/maintenance_modules/"
+
+[rooms.secmainteast]
+modules = ["secmainteast_1.dmm"]
