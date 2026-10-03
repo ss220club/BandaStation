@@ -181,3 +181,21 @@
 		/obj/item/gun/energy/ionrifle,
 		/obj/item/gun/energy/temperature/security,
 	)
+
+/obj/effect/spawner/armory_spawn/ember_armory
+	guns = list(
+		/obj/item/gun/energy/laser,
+		/obj/item/gun/energy/disabler/smg,
+		/obj/item/gun/energy/ionrifle,
+		/obj/item/gun/energy/temperature/security,
+		/obj/item/gun/energy/e_gun,
+	)
+
+/obj/effect/spawner/armory_spawn/red_armory
+	guns = list(
+		/obj/item/gun/energy/laser/assault,
+		/obj/item/gun/ballistic/automatic/laser,
+		/obj/item/gun/ballistic/shotgun/automatic/combat,
+		/obj/item/gun/ballistic/automatic/cm5,
+		/obj/item/gun/ballistic/automatic/wt550,
+	)
