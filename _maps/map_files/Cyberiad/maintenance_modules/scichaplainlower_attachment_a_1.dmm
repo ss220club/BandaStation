@@ -1,0 +1,1099 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"ab" = (
+/obj/structure/flora/bush/lavendergrass/style_random,
+/mob/living/basic/butterfly,
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/garden)
+"ad" = (
+/obj/structure/flora/bush/fullgrass/style_random,
+/obj/structure/railing/corner{
+	dir = 4
+	},
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/garden)
+"aw" = (
+/obj/structure/railing/corner,
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/garden)
+"aS" = (
+/obj/effect/turf_decal/weather/dirt,
+/obj/effect/turf_decal/weather/dirt{
+	dir = 1
+	},
+/turf/open/water,
+/area/station/maintenance/ghetto/garden)
+"aU" = (
+/obj/structure/railing{
+	dir = 1
+	},
+/obj/effect/decal/cleanable/generic,
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/flora/bush/fullgrass/style_random,
+/obj/effect/turf_decal/weather/dirt{
+	dir = 1
+	},
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/garden)
+"bL" = (
+/obj/effect/turf_decal/weather/dirt{
+	dir = 4
+	},
+/obj/effect/turf_decal/weather/dirt{
+	dir = 8
+	},
+/obj/structure/flora/rock/pile/style_random,
+/turf/open/water,
+/area/station/maintenance/ghetto/garden)
+"ca" = (
+/obj/effect/turf_decal/weather/dirt{
+	dir = 4
+	},
+/obj/effect/turf_decal/weather/dirt{
+	dir = 8
+	},
+/obj/structure/flora/grass/jungle/b/style_random,
+/turf/open/water,
+/area/station/maintenance/ghetto/garden)
+"cm" = (
+/obj/effect/turf_decal/weather/dirt{
+	dir = 4
+	},
+/obj/effect/turf_decal/weather/dirt{
+	dir = 8
+	},
+/obj/machinery/light/warm/directional/north,
+/turf/open/water,
+/area/station/maintenance/ghetto/garden)
+"er" = (
+/obj/structure/railing{
+	dir = 8
+	},
+/obj/structure/flora/bush/grassy/style_random,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/weather/dirt{
+	dir = 8
+	},
+/obj/machinery/airalarm/directional/north,
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/garden)
+"eR" = (
+/obj/structure/flora/bush/grassy/style_random,
+/obj/machinery/light/warm/directional/east,
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/garden)
+"ff" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/railing/corner{
+	dir = 1
+	},
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/garden)
+"fC" = (
+/obj/structure/railing{
+	dir = 1
+	},
+/obj/effect/turf_decal/siding/thinplating_new{
+	dir = 1
+	},
+/turf/open/floor/iron/stairs/right{
+	dir = 8
+	},
+/area/station/maintenance/ghetto/garden)
+"hB" = (
+/obj/effect/turf_decal/weather/dirt{
+	dir = 8
+	},
+/obj/effect/turf_decal/weather/dirt{
+	dir = 4
+	},
+/turf/open/water,
+/area/station/maintenance/ghetto/garden)
+"hP" = (
+/obj/structure/flora/rock/pile/style_random,
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/garden)
+"hU" = (
+/obj/structure/flora/bush/grassy/style_random,
+/obj/structure/railing/corner{
+	dir = 8
+	},
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/garden)
+"hY" = (
+/obj/structure/chair/pew/left,
+/obj/effect/spawner/random/maintenance,
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/garden)
+"iT" = (
+/obj/structure/flora/bush/lavendergrass/style_random,
+/turf/open/floor/asphalt,
+/area/station/maintenance/ghetto/garden)
+"iV" = (
+/obj/structure/flora/bush/fullgrass/style_random,
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/garden)
+"ku" = (
+/obj/structure/flora/bush/fullgrass/style_random,
+/mob/living/basic/butterfly,
+/turf/open/floor/asphalt,
+/area/station/maintenance/ghetto/garden)
+"kT" = (
+/obj/structure/railing{
+	dir = 4
+	},
+/obj/structure/flora/rock/pile/style_2,
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/flora/bush/fullgrass/style_random,
+/obj/effect/turf_decal/weather/dirt{
+	dir = 4
+	},
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/garden)
+"kX" = (
+/obj/structure/flora/bush/lavendergrass/style_random,
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/garden)
+"kY" = (
+/obj/structure/flora/bush/jungle/b/style_random,
+/obj/structure/flora/bush/grassy/style_random,
+/obj/structure/railing{
+	dir = 1
+	},
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/garden)
+"lH" = (
+/obj/machinery/light/floor,
+/turf/open/floor/asphalt,
+/area/station/maintenance/ghetto/garden)
+"lQ" = (
+/obj/effect/turf_decal/weather/dirt{
+	dir = 8
+	},
+/obj/effect/turf_decal/weather/dirt{
+	dir = 4
+	},
+/obj/structure/flora/grass/jungle/b/style_random,
+/turf/open/water,
+/area/station/maintenance/ghetto/garden)
+"ma" = (
+/obj/structure/railing,
+/obj/structure/flora/bush/grassy/style_random,
+/obj/structure/flora/bush/jungle/c/style_random,
+/obj/structure/flora/rock/pile,
+/obj/effect/turf_decal/weather/dirt,
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/garden)
+"mf" = (
+/obj/machinery/light/floor,
+/obj/structure/flora/bush/fullgrass/style_random,
+/mob/living/basic/butterfly,
+/turf/open/floor/asphalt,
+/area/station/maintenance/ghetto/garden)
+"mp" = (
+/obj/structure/railing{
+	dir = 4
+	},
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/flora/bush/grassy/style_random,
+/obj/effect/turf_decal/weather/dirt{
+	dir = 4
+	},
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/garden)
+"mx" = (
+/turf/open/floor/asphalt,
+/area/station/maintenance/ghetto/garden)
+"mI" = (
+/obj/structure/railing{
+	dir = 8
+	},
+/obj/effect/turf_decal/siding/thinplating_new{
+	dir = 8
+	},
+/turf/open/floor/iron/stairs/left,
+/area/station/maintenance/ghetto/garden)
+"oe" = (
+/obj/structure/railing{
+	dir = 1
+	},
+/obj/structure/flora/bush/jungle/b/style_random,
+/obj/structure/flora/bush/grassy/style_random,
+/obj/effect/turf_decal/weather/dirt{
+	dir = 1
+	},
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/garden)
+"pt" = (
+/obj/structure/flora/bush/grassy/style_random,
+/obj/machinery/light/directional/west,
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/garden)
+"pO" = (
+/obj/structure/railing{
+	dir = 4
+	},
+/obj/effect/turf_decal/siding/thinplating_new{
+	dir = 4
+	},
+/turf/open/floor/iron/stairs/right,
+/area/station/maintenance/ghetto/garden)
+"qJ" = (
+/obj/structure/flora/bush/fullgrass/style_random,
+/obj/machinery/light/directional/west,
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/garden)
+"sZ" = (
+/obj/machinery/door/airlock/wood,
+/obj/effect/mapping_helpers/airlock/autoname,
+/obj/machinery/door/firedoor,
+/obj/structure/cable,
+/obj/modular_map_connector,
+/turf/open/floor/iron/dark/smooth_large,
+/area/station/maintenance/ghetto/garden)
+"tg" = (
+/obj/structure/floodlight_frame/completed,
+/obj/structure/cable,
+/obj/machinery/power/apc/auto_name/directional/north,
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/garden)
+"tG" = (
+/obj/structure/railing,
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/flora/bush/fullgrass/style_random,
+/obj/effect/turf_decal/weather/dirt,
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/garden)
+"tI" = (
+/obj/structure/cable,
+/turf/open/floor/asphalt,
+/area/station/maintenance/ghetto/garden)
+"uw" = (
+/obj/structure/railing{
+	dir = 1
+	},
+/obj/structure/flora/bush/jungle/b/style_random,
+/obj/structure/flora/bush/grassy/style_random,
+/obj/effect/decal/cleanable/generic,
+/obj/effect/turf_decal/weather/dirt{
+	dir = 1
+	},
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/garden)
+"uB" = (
+/obj/structure/railing{
+	dir = 8
+	},
+/obj/structure/flora/bush/jungle/b/style_random,
+/obj/effect/turf_decal/weather/dirt{
+	dir = 8
+	},
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/garden)
+"uV" = (
+/obj/structure/flora/rock/style_2,
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/garden)
+"uW" = (
+/obj/structure/flora/bush/jungle/b/style_random,
+/obj/structure/flora/tree/jungle/small/style_random,
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/garden)
+"wd" = (
+/obj/structure/railing{
+	dir = 8
+	},
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/generic,
+/obj/effect/turf_decal/weather/dirt{
+	dir = 8
+	},
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/garden)
+"wH" = (
+/obj/effect/turf_decal/weather/dirt{
+	dir = 8
+	},
+/obj/effect/turf_decal/weather/dirt{
+	dir = 4
+	},
+/obj/effect/turf_decal/weather/dirt{
+	dir = 4
+	},
+/obj/structure/flora/grass/jungle/b/style_random,
+/turf/open/water,
+/area/station/maintenance/ghetto/garden)
+"xe" = (
+/obj/structure/flora/bush/fullgrass/style_random,
+/turf/open/floor/asphalt,
+/area/station/maintenance/ghetto/garden)
+"yg" = (
+/obj/structure/railing/corner{
+	dir = 4
+	},
+/obj/structure/flora/bush/jungle/b/style_random,
+/obj/effect/decal/cleanable/generic,
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/light/floor,
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/garden)
+"yJ" = (
+/obj/machinery/light/directional/east,
+/obj/structure/spacevine{
+	can_spread = 0;
+	pixel_x = 32
+	},
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/garden)
+"zw" = (
+/obj/structure/railing{
+	dir = 4
+	},
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/generic,
+/obj/effect/turf_decal/weather/dirt{
+	dir = 4
+	},
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/garden)
+"zx" = (
+/obj/machinery/firealarm/directional/north,
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/garden)
+"zC" = (
+/mob/living/basic/snake,
+/obj/structure/flora/bush/jungle/b/style_random,
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/garden)
+"zK" = (
+/obj/structure/railing/corner,
+/obj/structure/flora/bush/fullgrass/style_random,
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/garden)
+"Ax" = (
+/turf/open/floor/iron/stairs/medium{
+	dir = 4
+	},
+/area/station/maintenance/ghetto/garden)
+"AD" = (
+/obj/structure/railing{
+	dir = 10
+	},
+/obj/machinery/light/floor,
+/obj/structure/flora/bush/fullgrass/style_random,
+/obj/effect/turf_decal/weather/dirt{
+	dir = 10
+	},
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/garden)
+"BE" = (
+/obj/structure/flora/bush/jungle/b/style_random,
+/obj/structure/spacevine{
+	can_spread = 0;
+	pixel_x = 32
+	},
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/garden)
+"Cc" = (
+/turf/closed/wall,
+/area/station/maintenance/ghetto/garden)
+"CQ" = (
+/turf/closed/wall/rust,
+/area/station/maintenance/ghetto/garden)
+"Dt" = (
+/obj/structure/flora/bush/jungle/b/style_random,
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/garden)
+"DC" = (
+/obj/structure/railing,
+/obj/effect/turf_decal/siding/thinplating_new,
+/turf/open/floor/iron/stairs/left{
+	dir = 8
+	},
+/area/station/maintenance/ghetto/garden)
+"DH" = (
+/obj/structure/flora/bush/fullgrass/style_random,
+/obj/structure/railing/corner{
+	dir = 1
+	},
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/garden)
+"DN" = (
+/obj/structure/flora/bush/jungle/b/style_random,
+/obj/structure/railing/corner{
+	dir = 8
+	},
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/garden)
+"EJ" = (
+/obj/structure/railing,
+/obj/structure/flora/bush/grassy/style_random,
+/obj/structure/flora/rock/pile,
+/obj/effect/turf_decal/weather/dirt,
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/garden)
+"FW" = (
+/obj/structure/flora/bush/jungle/b/style_random,
+/turf/open/floor/asphalt,
+/area/station/maintenance/ghetto/garden)
+"Gz" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/modular_map_root/cyberiad{
+	key = scichaplainlower_attachment_b
+	},
+/turf/open/floor/iron/dark/smooth_large,
+/area/station/maintenance/ghetto/garden)
+"Jb" = (
+/obj/structure/chair/pew/left{
+	dir = 1
+	},
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/garden)
+"Jv" = (
+/obj/structure/chair/pew/right,
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/garden)
+"JK" = (
+/obj/structure/flora/bush/jungle/b/style_random,
+/obj/machinery/firealarm/directional/south,
+/obj/machinery/light/warm/directional/south,
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/garden)
+"JP" = (
+/obj/structure/flora/bush/jungle/b/style_random,
+/obj/structure/flora/bush/grassy/style_random,
+/obj/structure/railing,
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/garden)
+"JR" = (
+/obj/structure/flora/bush/fullgrass/style_random,
+/obj/structure/floodlight_frame/completed,
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/garden)
+"Lu" = (
+/obj/effect/turf_decal/weather/dirt{
+	dir = 4
+	},
+/obj/structure/flora/grass/jungle/b/style_random,
+/turf/open/water,
+/area/station/maintenance/ghetto/garden)
+"Lv" = (
+/obj/structure/flora/rock/pile/style_2,
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/garden)
+"LB" = (
+/obj/structure/railing{
+	dir = 1
+	},
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/weather/dirt{
+	dir = 1
+	},
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/garden)
+"LZ" = (
+/obj/structure/railing{
+	dir = 6
+	},
+/obj/structure/flora/rock/pile,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/weather/dirt{
+	dir = 6
+	},
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/garden)
+"MV" = (
+/obj/structure/railing{
+	dir = 1
+	},
+/obj/structure/flora/bush/jungle/b/style_random,
+/obj/effect/decal/cleanable/generic,
+/obj/effect/turf_decal/weather/dirt{
+	dir = 1
+	},
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/garden)
+"Ns" = (
+/obj/structure/flora/bush/fullgrass/style_random,
+/obj/structure/flora/rock/style_2,
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/garden)
+"Nu" = (
+/obj/structure/chair/pew/left{
+	dir = 4
+	},
+/obj/effect/spawner/random/maintenance/two,
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/garden)
+"Oe" = (
+/obj/structure/spacevine{
+	can_spread = 0;
+	pixel_y = -32
+	},
+/obj/structure/chair/pew/right{
+	dir = 1
+	},
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/garden)
+"Op" = (
+/obj/structure/railing{
+	dir = 5
+	},
+/obj/structure/flora/rock/pile,
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/flora/bush/fullgrass/style_random,
+/obj/effect/turf_decal/weather/dirt{
+	dir = 5
+	},
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/garden)
+"OR" = (
+/obj/structure/railing{
+	dir = 8
+	},
+/obj/structure/flora/bush/fullgrass/style_random,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/weather/dirt{
+	dir = 8
+	},
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/garden)
+"Px" = (
+/obj/structure/railing{
+	dir = 4
+	},
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/weather/dirt{
+	dir = 4
+	},
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/garden)
+"Qi" = (
+/obj/structure/flora/rock/pile/style_2,
+/obj/structure/railing/corner{
+	dir = 4
+	},
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/garden)
+"Ri" = (
+/obj/structure/flora/bush/grassy/style_random,
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/garden)
+"Rp" = (
+/obj/structure/flora/tree/jungle/style_random,
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/garden)
+"Ry" = (
+/obj/structure/railing{
+	dir = 1
+	},
+/obj/structure/flora/rock/pile,
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/flora/bush/jungle/b/style_random,
+/obj/effect/turf_decal/weather/dirt{
+	dir = 1
+	},
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/garden)
+"RA" = (
+/obj/effect/turf_decal/weather/dirt,
+/obj/effect/turf_decal/weather/dirt{
+	dir = 1
+	},
+/obj/structure/flora/grass/jungle/b/style_random,
+/turf/open/water,
+/area/station/maintenance/ghetto/garden)
+"Si" = (
+/obj/effect/turf_decal/weather/dirt{
+	dir = 10
+	},
+/obj/structure/flora/rock/pile/style_random,
+/turf/open/water,
+/area/station/maintenance/ghetto/garden)
+"Sj" = (
+/obj/structure/spacevine{
+	can_spread = 0;
+	pixel_x = 32
+	},
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/garden)
+"SM" = (
+/obj/structure/railing,
+/obj/structure/flora/rock/pile,
+/obj/structure/flora/bush/fullgrass/style_random,
+/obj/effect/turf_decal/weather/dirt,
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/garden)
+"Tx" = (
+/obj/structure/flora/tree/jungle/small/style_random,
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/garden)
+"TO" = (
+/obj/structure/chair/pew,
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/garden)
+"Ue" = (
+/obj/structure/chair/pew/right{
+	dir = 4
+	},
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/garden)
+"US" = (
+/obj/structure/flora/bush/jungle/b/style_random,
+/obj/structure/floodlight_frame/completed,
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/garden)
+"UT" = (
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/garden)
+"UV" = (
+/obj/structure/railing,
+/obj/structure/flora/bush/grassy/style_random,
+/obj/effect/turf_decal/weather/dirt,
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/garden)
+"Vm" = (
+/obj/machinery/light/floor,
+/obj/structure/flora/bush/fullgrass/style_random,
+/turf/open/floor/asphalt,
+/area/station/maintenance/ghetto/garden)
+"Vz" = (
+/obj/structure/floodlight_frame/completed,
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/garden)
+"Wi" = (
+/obj/structure/railing{
+	dir = 4
+	},
+/obj/structure/flora/bush/grassy/style_random,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/weather/dirt{
+	dir = 4
+	},
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/garden)
+"Xc" = (
+/mob/living/basic/snake,
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/garden)
+"Xu" = (
+/obj/effect/turf_decal/weather/dirt{
+	dir = 4
+	},
+/obj/effect/turf_decal/weather/dirt{
+	dir = 8
+	},
+/obj/structure/flora/bush/large/style_2{
+	pixel_y = 0
+	},
+/turf/open/water,
+/area/station/maintenance/ghetto/garden)
+"Yh" = (
+/mob/living/basic/snake,
+/obj/structure/spacevine{
+	can_spread = 0;
+	pixel_x = 32
+	},
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/garden)
+"Yt" = (
+/obj/effect/turf_decal/weather/dirt,
+/obj/effect/turf_decal/weather/dirt{
+	dir = 1
+	},
+/obj/structure/flora/rock/pile/style_random,
+/turf/open/water,
+/area/station/maintenance/ghetto/garden)
+"YB" = (
+/obj/structure/flora/bush/fullgrass/style_random,
+/obj/structure/flora/tree/jungle/style_random,
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/garden)
+"Zr" = (
+/obj/structure/railing{
+	dir = 8
+	},
+/obj/effect/decal/cleanable/generic,
+/obj/structure/flora/bush/fullgrass/style_random,
+/obj/effect/turf_decal/weather/dirt{
+	dir = 8
+	},
+/obj/structure/flora/tree/jungle/style_random,
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/garden)
+"Zy" = (
+/mob/living/basic/butterfly,
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/garden)
+"Zz" = (
+/obj/structure/sign/departments/restroom/directional/south,
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/garden)
+"ZQ" = (
+/obj/structure/spacevine{
+	can_spread = 0;
+	pixel_y = -32
+	},
+/obj/structure/flora/bush/fullgrass/style_random,
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/garden)
+"ZX" = (
+/turf/open/floor/iron/stairs/medium,
+/area/station/maintenance/ghetto/garden)
+
+(1,1,1) = {"
+Cc
+Cc
+Cc
+Cc
+Cc
+Cc
+Cc
+CQ
+Cc
+Cc
+Cc
+Cc
+Cc
+Cc
+Cc
+Cc
+Cc
+Cc
+Cc
+"}
+(2,1,1) = {"
+Cc
+iV
+iV
+pt
+Dt
+UT
+Dt
+iV
+Ri
+pt
+ma
+RA
+uw
+UT
+hP
+qJ
+iV
+iV
+Cc
+"}
+(3,1,1) = {"
+Cc
+iV
+iV
+Tx
+lH
+xe
+mx
+mx
+lH
+UT
+EJ
+aS
+LB
+Rp
+Xc
+iV
+iV
+iV
+Cc
+"}
+(4,1,1) = {"
+Cc
+UT
+UT
+UT
+FW
+Dt
+JR
+hY
+ku
+Ri
+UV
+aS
+aU
+Dt
+iV
+UT
+UT
+Rp
+Cc
+"}
+(5,1,1) = {"
+Cc
+iV
+Dt
+Ri
+mx
+UT
+YB
+TO
+mx
+iV
+tG
+aS
+oe
+Dt
+UT
+Dt
+Dt
+UT
+Cc
+"}
+(6,1,1) = {"
+Cc
+ZQ
+Ri
+Ri
+mx
+Ns
+Vz
+Jv
+FW
+UT
+SM
+RA
+aU
+UT
+Tx
+Ri
+UT
+iV
+Cc
+"}
+(7,1,1) = {"
+Cc
+Tx
+UT
+UT
+mf
+mx
+xe
+mx
+lH
+Ri
+UV
+RA
+Ry
+UT
+ab
+UT
+Ri
+Zz
+Cc
+"}
+(8,1,1) = {"
+Cc
+mp
+zw
+zw
+Px
+ad
+lH
+aw
+Wi
+kT
+LZ
+aS
+Op
+yg
+UT
+iV
+mx
+mx
+Gz
+"}
+(9,1,1) = {"
+Cc
+cm
+Xu
+ca
+bL
+fC
+Ax
+DC
+lQ
+wH
+hB
+Lu
+Si
+LB
+UT
+Tx
+mx
+JK
+Cc
+"}
+(10,1,1) = {"
+Cc
+er
+OR
+wd
+OR
+DH
+Vm
+DN
+Zr
+uB
+uB
+AD
+aS
+MV
+Dt
+Dt
+mx
+Jb
+Cc
+"}
+(11,1,1) = {"
+Cc
+tg
+Dt
+Ue
+Nu
+UT
+FW
+iV
+Vz
+zC
+uV
+hU
+mI
+ff
+Dt
+US
+mx
+Oe
+Cc
+"}
+(12,1,1) = {"
+sZ
+tI
+mx
+iT
+mx
+mx
+mx
+mx
+xe
+xe
+mx
+mx
+ZX
+mx
+mx
+mx
+mx
+Dt
+Cc
+"}
+(13,1,1) = {"
+Cc
+zx
+UT
+uW
+Dt
+iV
+UT
+Ri
+iV
+iV
+Tx
+zK
+pO
+Qi
+Lv
+Dt
+Ri
+UT
+Cc
+"}
+(14,1,1) = {"
+Cc
+UT
+iV
+iV
+kX
+kX
+Ri
+Dt
+UT
+UT
+Zy
+JP
+aS
+kY
+UT
+Tx
+Ri
+UT
+Cc
+"}
+(15,1,1) = {"
+Cc
+iV
+iV
+Rp
+Ri
+UT
+Tx
+iV
+UT
+iV
+iV
+JP
+RA
+kY
+iV
+Dt
+iV
+iV
+Cc
+"}
+(16,1,1) = {"
+Cc
+Sj
+Sj
+yJ
+BE
+Dt
+Sj
+Yh
+BE
+yJ
+Sj
+JP
+Yt
+kY
+Ri
+eR
+Ri
+UT
+Cc
+"}
+(17,1,1) = {"
+Cc
+Cc
+Cc
+Cc
+Cc
+Cc
+Cc
+Cc
+Cc
+Cc
+Cc
+Cc
+Cc
+Cc
+Cc
+Cc
+Cc
+Cc
+Cc
+"}

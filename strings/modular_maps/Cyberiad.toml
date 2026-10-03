@@ -6,6 +6,9 @@ modules = ["arrivalscargolower_1.dmm"]
 [rooms.arrivalscargolower_attachment_a]
 modules = ["arrivalscargolower_attachment_a_1.dmm"]
 
+[rooms.arrivalscargolower_attachment_b]
+modules = ["arrivalscargolower_attachment_b_1.dmm"]
+
 [rooms.arrivalscargosouthconnectorlower]
 modules = ["arrivalscargosouthconnectorlower_1.dmm"]
 
