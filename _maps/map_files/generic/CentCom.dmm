@@ -17661,10 +17661,6 @@
 /obj/structure/statue/dummy/srt,
 /turf/open/floor/iron/dark/textured_half,
 /area/centcom/central_command_areas/hallway)
-"njC" = (
-/obj/structure/lattice,
-/turf/closed/indestructible/riveted,
-/area/centcom/central_command_areas/srt/brief_srt)
 "njG" = (
 /obj/effect/turf_decal/line/dark_blue/line,
 /turf/open/floor/iron/dark/textured_half,
@@ -82238,7 +82234,7 @@ aaa
 aaa
 aaa
 aaa
-njC
+gWY
 aDl
 iiF
 wmp
