@@ -1,3 +1,5 @@
+#define MODE_ANONYMOUS_RADIO "anonymous_radio" // BANDASTATION ADD: Removing the display name during radio communication
+
 /*
 Miauw's big Say() rewrite.
 This file has the basic atom/movable level speech procs.
@@ -161,15 +163,20 @@ GLOBAL_LIST_INIT(freqtospan, list(
 	//Basic span
 	var/freq_color = get_radio_color(radio_freq, radio_freq_color)
 	var/spanpart1 = "<span class='[radio_freq ? get_radio_span(radio_freq) : "game say"]' [freq_color ? "style='color:[freq_color];'" : ""]>"
-	//Start name span.
-	var/spanpart2 = "<span class='name'>"
+	//Start name span. // BANDASTATION ADD: Removing the display name during radio communication
+	var/spanpart2 = radio_freq ? "" : "<span class='name'>"
 	//Radio freq/name display
 	var/freqpart = radio_freq ? "\[[get_radio_name(radio_freq, radio_freq_name)]\] " : ""
 	//Speaker name
 	var/namepart = message_mods[MODE_SPEAKER_NAME_OVERRIDE] || speaker.get_message_voice(visible_name)
+	var/is_anonymous_radio = radio_freq && LAZYACCESS(message_mods, MODE_ANONYMOUS_RADIO)
 
-	//End name span.
-	var/endspanpart = "</span>"
+	var/jobpart = ""
+	if(!is_anonymous_radio)
+		jobpart = compose_job(speaker, message_language, raw_message, radio_freq)
+
+	//End name span. // BANDASTATION ADD: Removing the display name during radio communication
+	var/endspanpart = radio_freq ? "" : "</span>"
 
 	// Language icon.
 	var/languageicon = ""
@@ -185,7 +192,12 @@ GLOBAL_LIST_INIT(freqtospan, list(
 	var/messagepart = speaker.generate_messagepart(raw_message, spans, message_mods)
 	messagepart = " <span class='message'>[messagepart]</span></span>"
 
-	return "[spanpart1][spanpart2][freqpart][languageicon][compose_track_href(speaker, namepart)]["<span style='color: [speaker.chat_color]'>[namepart]</span>"][compose_job(speaker, message_language, raw_message, radio_freq)][endspanpart][messagepart]" // BANDASTATION Addition: span with color
+	// BANDASTATION ADD BEGIN: Removing the display name during radio communication
+	if(radio_freq)
+		return "[spanpart1][freqpart][languageicon][messagepart]"
+
+	return "[spanpart1][spanpart2][freqpart][languageicon][compose_track_href(speaker, namepart)]["<span style='color: [speaker.chat_color]'>[namepart]</span>"][jobpart][endspanpart][messagepart]"
+	// BANDASTATION ADD END
 
 /atom/movable/proc/compose_track_href(atom/movable/speaker, message_langs, raw_message, radio_freq)
 	return ""
@@ -401,7 +413,7 @@ INITIALIZE_IMMEDIATE(/atom/movable/virtualspeaker)
 		// can know their job even if they don't carry an ID.
 		var/datum/record/crew/found_record = find_record(name)
 		if(found_record)
-			gender = found_record.get_byond_gender()
+			gender = LOWER_TEXT(found_record.gender)
 			job = found_record.rank
 		else
 			job = "Unknown"
