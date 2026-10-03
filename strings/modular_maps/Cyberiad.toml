@@ -1,4 +1,14 @@
 directory = "_maps/map_files/Cyberiad/maintenance_modules/"
 
-[rooms.arrivals_ghetto_west_lower]
-modules = ["arrivals_ghetto_west_lower_1.dmm"]
+[rooms.arrivalscargolower]
+modules = ["arrivalscargolower_1.dmm"]
+
+[rooms.arrivalscargolower_attachment_a]
+modules = ["arrivalscargolower_attachment_a_1.dmm"]
+
+[rooms.arrivalscargosouthconnectorlower]
+modules = ["arrivalscargosouthconnectorlower_1.dmm"]
+
+[rooms.arrivalscargosouthconnectorlower_attachment_a]
+modules = ["arrivalscargosouthconnectorlower_attachment_a_1.dmm"]
+
