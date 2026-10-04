@@ -121,15 +121,11 @@ SUBSYSTEM_DEF(accessories) // just 'accessories' for brevity
 
 	// skrell
 	feature_list[FEATURE_SKRELL_HEAD_TENTACLE] = INIT_ACCESSORY(/datum/sprite_accessory/skrell_head_tentacle)
-<<<<<<< HEAD
-
-	// kidan
-	feature_list[FEATURE_KIDAN_ANTENNAE] = INIT_ACCESSORY(/datum/sprite_accessory/antennae/kidan)
-=======
 	feature_list[FEATURE_SKRELL_HEAD_TENTACLE_ORNAMENT] = INIT_ACCESSORY(/datum/sprite_accessory/skrell_tentacle_ornament)
 	feature_list[FEATURE_SKRELL_CLOTH_WRAP] = INIT_ACCESSORY(/datum/sprite_accessory/skrell_cloth_wrap)
 	feature_list[FEATURE_SKRELL_CLOTH_WRAP_TOGGLE] = INIT_ACCESSORY(/datum/sprite_accessory/skrell_cloth_wrap_toggle)
->>>>>>> upstream/master
+	// kidan
+	feature_list[FEATURE_KIDAN_ANTENNAE] = INIT_ACCESSORY(/datum/sprite_accessory/antennae/kidan)
 	/// BANDASTATION ADDITION END - Species
 
 /// This proc just initializes all /datum/sprite_accessory/hair_gradient into an list indexed by gradient-style name

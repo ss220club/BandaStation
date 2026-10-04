@@ -100,6 +100,7 @@
 #define FEATURE_TAJARAN_FACIAL_HAIR_COLOR "tajaran_facial_hair_color"
 
 #define FEATURE_SKRELL_HEAD_TENTACLE "skrell_head_tentacle"
+#define FEATURE_KIDAN_ANTENNAE "kidan_antennae"
 // BANDASTATION ADDITION END - Species Features
 
 // flag for the transfer_flag argument from dna/proc/copy_dna().
