@@ -1,0 +1,179 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/closed/wall,
+/area/station/commons/locker)
+"b" = (
+/obj/effect/turf_decal/tile/neutral/half/contrasted,
+/obj/structure/table,
+/obj/structure/bedsheetbin,
+/turf/open/floor/iron/showroomfloor,
+/area/station/commons/locker)
+"c" = (
+/obj/effect/turf_decal/tile/green/fourcorners,
+/obj/machinery/power/apc/auto_name/directional/south,
+/obj/structure/cable,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/turf/open/floor/iron/white,
+/area/station/common/cryopods)
+"e" = (
+/obj/effect/turf_decal/tile/green/fourcorners,
+/obj/machinery/atmospherics/components/unary/vent_pump/on/layer4{
+	dir = 4
+	},
+/turf/open/floor/iron/white,
+/area/station/common/cryopods)
+"f" = (
+/obj/effect/turf_decal/tile/green/fourcorners,
+/obj/machinery/airalarm/directional/east,
+/obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer2{
+	dir = 8
+	},
+/turf/open/floor/iron/white,
+/area/station/common/cryopods)
+"p" = (
+/obj/effect/turf_decal/tile/green/fourcorners,
+/obj/machinery/computer/cryopod/directional/south,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/turf/open/floor/iron/white,
+/area/station/common/cryopods)
+"t" = (
+/obj/machinery/cryopod,
+/obj/machinery/camera/directional/north{
+	c_tag = "Cryodorms"
+	},
+/obj/item/radio/intercom/directional/north,
+/turf/open/floor/iron/white,
+/area/station/common/cryopods)
+"u" = (
+/turf/closed/wall,
+/area/station/commons/fitness/recreation)
+"z" = (
+/turf/template_noop,
+/area/template_noop)
+"C" = (
+/obj/effect/turf_decal/tile/green/fourcorners,
+/obj/structure/cable,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/machinery/holopad,
+/turf/open/floor/iron/white,
+/area/station/common/cryopods)
+"G" = (
+/obj/machinery/light_switch/directional/south,
+/obj/effect/turf_decal/tile/green/fourcorners,
+/obj/machinery/newscaster/directional/west,
+/turf/open/floor/iron/white,
+/area/station/common/cryopods)
+"I" = (
+/obj/machinery/light/directional/north,
+/obj/machinery/washing_machine,
+/obj/effect/turf_decal/bot,
+/obj/effect/turf_decal/tile/blue/opposingcorners,
+/obj/effect/turf_decal/tile/neutral/opposingcorners{
+	dir = 1
+	},
+/turf/open/floor/iron/showroomfloor,
+/area/station/commons/locker)
+"J" = (
+/obj/machinery/light/directional/west,
+/obj/machinery/cryopod,
+/turf/open/floor/iron/white,
+/area/station/common/cryopods)
+"K" = (
+/obj/machinery/cryopod,
+/turf/open/floor/iron/white,
+/area/station/common/cryopods)
+"O" = (
+/obj/machinery/light/directional/east,
+/obj/structure/extinguisher_cabinet/directional/north,
+/obj/machinery/cryopod,
+/turf/open/floor/iron/white,
+/area/station/common/cryopods)
+"Q" = (
+/obj/machinery/vending/autodrobe,
+/obj/effect/turf_decal/delivery,
+/obj/effect/turf_decal/tile/neutral/half/contrasted,
+/turf/open/floor/iron/dark,
+/area/station/commons/locker)
+"T" = (
+/obj/machinery/firealarm/directional/north,
+/obj/machinery/washing_machine,
+/obj/effect/turf_decal/bot,
+/obj/effect/turf_decal/tile/blue/opposingcorners,
+/obj/effect/turf_decal/tile/neutral/opposingcorners{
+	dir = 1
+	},
+/turf/open/floor/iron/showroomfloor,
+/area/station/commons/locker)
+"W" = (
+/turf/closed/wall,
+/area/station/commons/toilet/restrooms)
+"X" = (
+/obj/effect/mapping_helpers/airlock/autoname,
+/obj/machinery/door/airlock/public/glass,
+/obj/structure/cable,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/turf/open/floor/iron/white,
+/area/station/common/cryopods)
+
+(1,1,1) = {"
+u
+u
+u
+"}
+(2,1,1) = {"
+J
+G
+W
+"}
+(3,1,1) = {"
+K
+e
+W
+"}
+(4,1,1) = {"
+K
+p
+W
+"}
+(5,1,1) = {"
+t
+C
+X
+"}
+(6,1,1) = {"
+K
+c
+W
+"}
+(7,1,1) = {"
+O
+f
+W
+"}
+(8,1,1) = {"
+a
+a
+a
+"}
+(9,1,1) = {"
+b
+z
+z
+"}
+(10,1,1) = {"
+T
+z
+z
+"}
+(11,1,1) = {"
+I
+z
+z
+"}
+(12,1,1) = {"
+Q
+z
+z
+"}
