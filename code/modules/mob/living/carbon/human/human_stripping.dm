@@ -232,6 +232,9 @@ GLOBAL_LIST_INIT(strippable_human_items, create_strippable_list(list(
 	key = STRIPPABLE_ITEM_HEADPOCKET
 
 /datum/strippable_item/headpocket/proc/get_tentacle(atom/source)
+	RETURN_TYPE(/obj/item/organ/head_tentacle)
+	if(!ishuman(source))
+		return null
 	var/mob/living/carbon/human/human_source = source
 	return human_source.get_organ_by_type(/obj/item/organ/head_tentacle)
 
@@ -239,9 +242,12 @@ GLOBAL_LIST_INIT(strippable_human_items, create_strippable_list(list(
 	return get_tentacle(source)
 
 /datum/strippable_item/headpocket/get_item(atom/source)
+	RETURN_TYPE(/obj/item)
 	return locate(/obj/item) in get_tentacle(source)?.contents
 
 /datum/strippable_item/headpocket/get_obscuring(atom/source)
+	if(!ishuman(source))
+		return STRIPPABLE_OBSCURING_NONE
 	var/mob/living/carbon/human/human_source = source
 	if (human_source.obscured_slots & HIDEHAIR)
 		return STRIPPABLE_OBSCURING_COMPLETELY
@@ -265,7 +271,7 @@ GLOBAL_LIST_INIT(strippable_human_items, create_strippable_list(list(
 /datum/strippable_item/headpocket/finish_equip(atom/source, obj/item/equipping, mob/user)
 	var/obj/item/organ/head_tentacle/tentacle = get_tentacle(source)
 	if (!tentacle?.atom_storage.attempt_insert(equipping, user, override = TRUE))
-		user.put_in_hands(equipping)
+		equipping.forceMove(user.drop_location())
 		return
 
 	finish_equip_mob(equipping, source, user)
