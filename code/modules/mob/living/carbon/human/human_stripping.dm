@@ -233,14 +233,13 @@ GLOBAL_LIST_INIT(strippable_human_items, create_strippable_list(list(
 
 /datum/strippable_item/headpocket/proc/get_tentacle(atom/source)
 	var/mob/living/carbon/human/human_source = source
-	return istype(human_source) ? human_source.get_organ_by_type(/obj/item/organ/head_tentacle) : null
+	return human_source.get_organ_by_type(/obj/item/organ/head_tentacle)
 
 /datum/strippable_item/headpocket/should_show(atom/source, mob/user)
-	return !!get_tentacle(source)
+	return get_tentacle(source)
 
 /datum/strippable_item/headpocket/get_item(atom/source)
-	var/obj/item/organ/head_tentacle/tentacle = get_tentacle(source)
-	return locate(/obj/item) in tentacle?.contents
+	return locate(/obj/item) in get_tentacle(source)?.contents
 
 /datum/strippable_item/headpocket/get_obscuring(atom/source)
 	var/mob/living/carbon/human/human_source = source
@@ -279,7 +278,7 @@ GLOBAL_LIST_INIT(strippable_human_items, create_strippable_list(list(
 	source.visible_message(
 		span_warning("[capitalize(user.declent_ru(NOMINATIVE))] пытается опустошить полость в щупальцах у [source.declent_ru(GENITIVE)]."),
 		span_userdanger("[capitalize(user.declent_ru(NOMINATIVE))] пытается опустошить вашу полость в щупальцах!"),
-		blind_message = span_userdanger("Вы чувствуете, что кто-то пытается опустошить вашу полость в щупальцах!."),
+		blind_message = span_hear("Вы слышите шорох."),
 		ignored_mobs = user,
 	)
 
@@ -287,8 +286,7 @@ GLOBAL_LIST_INIT(strippable_human_items, create_strippable_list(list(
 	return start_unequip_mob(item, source, user, strip_delay = POCKET_STRIP_DELAY, hidden = TRUE)
 
 /datum/strippable_item/headpocket/finish_unequip(atom/source, mob/user)
-	var/obj/item/item = get_item(source)
-	return !isnull(item) && item.forceMove(source.drop_location())
+	return get_item(source)?.forceMove(source.drop_location())
 
 /datum/strippable_item/mob_item_slot/pocket
 	/// Which pocket we're referencing. Used for visible text.
