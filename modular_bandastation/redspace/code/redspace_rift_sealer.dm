@@ -222,6 +222,7 @@ GLOBAL_LIST_EMPTY(redspace_active_rift_sealers)
 		try_start_sealing()
 	else
 		stop_sealing("установка закрытия откреплена")
+		closed = FALSE
 
 /obj/machinery/redspace_rift_sealer/proc/try_start_sealing(mob/user)
 	if(active || closed || !anchored || machine_stat & BROKEN || !SSredspace?.initialized)

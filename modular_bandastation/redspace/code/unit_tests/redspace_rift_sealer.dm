@@ -148,4 +148,44 @@
 	if(locate(/obj/item/circuitboard/machine/redspace_rift_sealer) in destroyed_sealer_turf)
 		return Fail("Destroying a rift sealer must destroy its circuit board")
 
+/datum/unit_test/redspace_rift_sealer_reuse
+
+/datum/unit_test/redspace_rift_sealer_reuse/Run()
+	var/turf/first_turf = run_loc_floor_bottom_left
+	if(!SSredspace.is_supported_z(first_turf.z))
+		first_turf = locate(1, 1, SSredspace.station_z_levels[1])
+
+	var/datum/redspace_field_source/hotspot/first_hotspot = SSredspace.register_hotspot(first_turf, 4, 2)
+	var/obj/machinery/redspace_rift_sealer/sealer = allocate(/obj/machinery/redspace_rift_sealer, first_turf)
+	var/first_source_id = first_hotspot?.source_id
+	var/datum/redspace_field_source/hotspot/second_hotspot
+	var/failure_reason
+	if(!first_hotspot || !sealer)
+		failure_reason = "The first hotspot and sealer must be available"
+	else
+		sealer.set_anchored(TRUE)
+		if(!sealer.active || sealer.target_source != first_hotspot || !first_hotspot.complete_sealing())
+			failure_reason = "The sealer must close its first hotspot"
+		else if(!sealer.closed || sealer.active || sealer.target_source || SSredspace.field_sources["[first_source_id]"])
+			failure_reason = "A successful seal must remove the first hotspot and leave the sealer idle"
+		else
+			sealer.set_anchored(FALSE)
+			if(sealer.closed)
+				failure_reason = "Unanchoring the sealer must clear its completed state"
+			else
+				second_hotspot = SSredspace.register_hotspot(first_turf, 4, 2)
+				sealer.set_anchored(TRUE)
+				if(!second_hotspot || !sealer.active || sealer.closed || sealer.target_source != second_hotspot)
+					failure_reason = "The reanchored sealer must start closing the next hotspot"
+
+	if(sealer)
+		sealer.stop_sealing("unit test cleanup")
+		qdel(sealer)
+	if(first_hotspot && SSredspace.field_sources["[first_source_id]"] == first_hotspot)
+		SSredspace.remove_source(first_source_id, "unit test cleanup")
+	if(second_hotspot)
+		SSredspace.remove_source(second_hotspot.source_id, "unit test cleanup")
+	if(failure_reason)
+		return Fail(failure_reason)
+
 #endif
