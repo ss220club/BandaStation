@@ -332,7 +332,7 @@
 	name = "Слабые возмущения редспейса"
 	report_message = "В окрестностях станции фиксируются слабые возмущения редспейса. Ожидаются редкие локальные отклонения без существенной угрозы для смены."
 	redspace_intensity = REDSPACE_INTENSITY_CALM
-	weight = 80
+	weight = 8
 	dynamic_threat_id = "Redspace Calm"
 
 /// The default profile creates an observable but manageable science and engineering problem.
@@ -340,7 +340,7 @@
 	name = "Возмущение редспейса"
 	report_message = "В окрестностях станции наблюдается возмущение редспейса. Научному и инженерному отделам следует подготовить наблюдение и локальную стабилизацию зон риска."
 	redspace_intensity = REDSPACE_INTENSITY_DISTURBANCE
-	weight = 15
+	weight = 2
 	dynamic_threat_id = "Redspace Disturbance"
 
 /// The storm profile is a declared major round feature with frequent, telegraphed local effects.
@@ -348,5 +348,5 @@
 	name = "Шторм редспейса"
 	report_message = "Станция проходит через активный шторм редспейса. Ожидаются существенные локальные воздействия, а стабилизация границы является приоритетной задачей."
 	redspace_intensity = REDSPACE_INTENSITY_STORM
-	weight = 5
+	weight = 1
 	dynamic_threat_id = "Redspace Storm"
