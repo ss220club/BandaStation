@@ -28,7 +28,7 @@
 		for(var/datum/reagent/blood/usable_reagent as anything in requirement.reagents?.reagent_list)
 			if(!istype(usable_reagent, /datum/reagent/blood))
 				continue
-			blood_samples[usable_reagent.data["blood_DNA"]] = TRUE
+			blood_samples[usable_reagent.data[BLOOD_DATA_DNA]] = TRUE
 
 	return TRUE
 
@@ -80,7 +80,7 @@
 	log_combat(user, to_curse, "cursed via heretic ritual", addition = "([name])")
 	var/obj/item/codex_cicatrix/morbus/cursed_book = locate() in selected_atoms
 	curse(to_curse, cursed_book)
-	to_chat(user, span_hierophant("Вы накладываете [name] на [to_curse.real_name]."))
+	to_chat(user, span_mansus("Вы накладываете [name] на [to_curse.real_name]."))
 
 	fingerprints = null
 	blood_samples = null
@@ -90,7 +90,7 @@
 		if(!to_drain.reagents?.reagent_list)
 			continue
 		for(var/datum/reagent/to_match in to_drain.reagents.reagent_list)
-			if(to_match.data["blood_DNA"] != to_curse.dna.unique_enzymes)
+			if(to_match.data[BLOOD_DATA_DNA] != to_curse.dna.unique_enzymes)
 				continue
 			to_drain.reagents.remove_reagent(to_match.type, 5)
 	return TRUE
@@ -139,6 +139,7 @@
 	desc = "Позволяет трансформировать топор, а также левую и правую ногу, чтобы наложить проклятие паралича на члена экипажа. \
 		Пока жертва проклята, она не сможет ходить. Вы можете усилить проклятие использовав предмет, к которому прикасалась жертва \
 		или который покрыт её кровью, чтобы увеличить длительность проклятия."
+	transmute_text = "Трансмутируйте топор, левую и правую ногу."
 	gain_text = "Человеческая плоть слаба. Заставь их истекать кровью. Покажи им их хрупкость."
 
 	duration = 5 MINUTES
@@ -171,9 +172,9 @@
 /datum/heretic_knowledge/curse/corrosion
 	abstract_type = /datum/heretic_knowledge/curse/corrosion
 	name = "Проклятие коррозии"
-	desc = "Позволяет трансмутировать кусачки, лужу рвоты и сердце, чтобы наслать проклятие болезни на члена экипажа. \
-		Во время действия проклятия жертву будет постоянно рвать, а её органы будут постоянно получать повреждения. Вы можете усилить проклятие использовав предмет, к которому прикасалась жертва \
+	desc = "Во время действия проклятия жертву будет постоянно рвать, а её органы будут постоянно получать повреждения. Вы можете усилить проклятие использовав предмет, к которому прикасалась жертва \
 		или который покрыт её кровью, чтобы увеличить длительность проклятия."
+	transmute_text = "Трансмутируйте кусачки, рвоту и сердце."
 	gain_text = "Человеческое тело временно. Его разрушение так же неостановимо, как появление ржавчины на металле. Покажи им всё."
 
 	duration = 3 MINUTES

@@ -20,9 +20,11 @@
 	threshold_penalty = 5
 
 	/// Have we been bone gel'd?
-	var/gelled
+	var/gelled = FALSE
 	/// Have we been taped?
-	var/taped
+	var/taped = FALSE
+	/// Another method is causing our bones to heal
+	var/healing = FALSE
 	/// If we did the gel + surgical tape healing method for fractures, how many ticks does it take to heal by default
 	var/regen_ticks_needed
 	/// Our current counter for gel + surgical tape regeneration
@@ -89,7 +91,7 @@
 		next_trauma_cycle = world.time + (rand(100-WOUND_BONE_HEAD_TIME_VARIANCE, 100+WOUND_BONE_HEAD_TIME_VARIANCE) * 0.01 * trauma_cycle_cooldown)
 
 	var/is_bone_limb = ((limb.biological_state & BIO_BONE) && !(limb.biological_state & (BIO_FLESH|BIO_CHITIN)))
-	if(!gelled || (!taped && !is_bone_limb))
+	if(!healing && (!gelled || (!taped && !is_bone_limb)))
 		return
 
 	regen_ticks_current++
@@ -157,7 +159,7 @@
 			// This is not arm wound, so we don't care
 			return
 
-	if(gun.recoil > 0 && severity >= WOUND_SEVERITY_SEVERE && prob(25 * (severity - 1)))
+	if(gun.calculate_recoil(victim, gun.recoil) > 1 && severity >= WOUND_SEVERITY_SEVERE && prob(25 * (severity - 1)))
 		if(!HAS_TRAIT(victim, TRAIT_ANALGESIA))
 			to_chat(victim, span_danger("The fracture in your [limb.ru_plaintext_zone[PREPOSITIONAL]] explodes with pain as [gun] kicks back!"))
 		victim.apply_damage(rand(1, 3) * (severity - 1) * gun.weapon_weight, BRUTE, limb, wound_bonus = CANT_WOUND, wound_clothing = FALSE)
@@ -286,7 +288,7 @@
 /datum/wound/blunt/bone/moderate/try_handling(mob/living/user)
 	if(user.usable_hands <= 0 || user.pulling != victim)
 		return FALSE
-	if(!isnull(user.hud_used?.zone_select) && user.zone_selected != limb.body_zone)
+	if(!isnull(user.hud_used?.screen_objects[HUD_MOB_ZONE_SELECTOR]) && user.zone_selected != limb.body_zone)
 		return FALSE
 
 	if(user.grab_state == GRAB_PASSIVE)

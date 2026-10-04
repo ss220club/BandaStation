@@ -1,7 +1,7 @@
 SUBSYSTEM_DEF(modpacks)
 	name = "Modpacks"
 	init_stage = INITSTAGE_FIRST
-	flags = SS_NO_FIRE
+	ss_flags = SS_NO_FIRE
 	var/list/loaded_modpacks = list()
 
 /datum/controller/subsystem/modpacks/Initialize()
@@ -31,10 +31,7 @@ SUBSYSTEM_DEF(modpacks)
 
 	return SS_INIT_SUCCESS
 
-/client/verb/modpacks_list()
-	set name = "Modpacks List"
-	set category = "OOC"
-
+GAME_VERB(/client, modpacks_list, "Modpacks List", "OOC")
 	if(!mob || !SSmodpacks.initialized)
 		return
 

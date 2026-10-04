@@ -5,7 +5,7 @@
 	id_trim = /datum/id_trim/job/lawyer
 	uniform = /obj/item/clothing/under/costume/buttondown/slacks/service
 	suit = /obj/item/clothing/suit/toggle/lawyer/black
-	belt = /obj/item/modular_computer/pda/lawyer
+	belt = /obj/item/modular_computer/pda/crew/lawyer
 	ears = /obj/item/radio/headset/lawyer
 	shoes = /obj/item/clothing/shoes/laceup
 	neck = /obj/item/clothing/neck/tie/black/tied

@@ -1,6 +1,7 @@
 #include "_defines220.dm"
 
 #include "code/defines/~is_helpers.dm"
+#include "code/defines/ai.dm"
 #include "code/defines/atom_hud.dm"
 #include "code/signals_atom.dm"
 #include "code/signals_item.dm"
@@ -10,6 +11,7 @@
 #include "code/defines/jobs.dm"
 #include "code/defines/keybindings.dm"
 #include "code/defines/misc.dm"
+#include "code/defines/mob_defines.dm"
 #include "code/defines/preferences.dm"
 #include "code/defines/spans.dm"
 #include "code/defines/subsystems.dm"

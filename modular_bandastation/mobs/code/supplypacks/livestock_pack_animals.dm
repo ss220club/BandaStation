@@ -48,7 +48,7 @@
 	desc = "Кошка говорит 'мяу'! В комплекте ошейник и игрушка."
 	crate_name = "ящик с кошкой"
 
-/datum/supply_pack/critter/cat/generate()
+/datum/supply_pack/critter/cat/generate(atom/A, datum/bank_account/paying_account, crate_override)
 	. = ..()
 	// 5% chance to replace with fat cat
 	if(prob(5))
@@ -81,7 +81,7 @@
 	desc = "Что говорит лиса? Содержит одну лису."
 	crate_name = "ящик с лисой"
 
-/datum/supply_pack/critter/fox/generate()
+/datum/supply_pack/critter/fox/generate(atom/A, datum/bank_account/paying_account, crate_override)
 	. = ..()
 	// 30% chance to replace with forest fox
 	if(prob(30))
@@ -109,7 +109,7 @@
 	contains = list(/mob/living/basic/frog)
 	crate_name = "ящик с лягушками"
 
-/datum/supply_pack/critter/frog/generate()
+/datum/supply_pack/critter/frog/generate(atom/A, datum/bank_account/paying_account, crate_override)
 	. = ..()
 	for(var/i in 1 to rand(1, 3))
 		new /mob/living/basic/frog(.)
@@ -122,7 +122,7 @@
 	crate_name = "ящик с ядовитыми лягушками"
 	order_flags = ORDER_INVISIBLE
 
-/datum/supply_pack/critter/frog/toxic/generate()
+/datum/supply_pack/critter/frog/toxic/generate(atom/A, datum/bank_account/paying_account, crate_override)
 	. = ..()
 	// 25% chance to do screaming toxic frog
 	if(prob(25))
@@ -138,7 +138,7 @@
 	crate_name = "ящик с кричащими лягушками"
 	order_flags = ORDER_INVISIBLE
 
-/datum/supply_pack/critter/frog/scream/generate()
+/datum/supply_pack/critter/frog/scream/generate(atom/A, datum/bank_account/paying_account, crate_override)
 	. = ..()
 	for(var/i in 1 to rand(1, 3))
 		new /mob/living/basic/frog/scream(.)
@@ -150,7 +150,7 @@
 	contains = list(/mob/living/basic/snail)
 	crate_name = "ящик с улитками"
 
-/datum/supply_pack/critter/snail/generate()
+/datum/supply_pack/critter/snail/generate(atom/A, datum/bank_account/paying_account, crate_override)
 	. = ..()
 	for(var/i in 1 to rand(1, 5))
 		new /mob/living/basic/snail(.)
@@ -210,7 +210,7 @@
 	contains = list(/mob/living/basic/goose/gosling)
 	crate_name = "ящик с гусятами"
 
-/datum/supply_pack/critter/gosling/generate()
+/datum/supply_pack/critter/gosling/generate(atom/A, datum/bank_account/paying_account, crate_override)
 	. = ..()
 	for(var/i in 1 to rand(1, 3))
 		new /mob/living/basic/goose/gosling(.)
@@ -222,7 +222,7 @@
 	contains = list(/mob/living/basic/mouse/hamster)
 	crate_name = "ящик с хомяками"
 
-/datum/supply_pack/critter/hamster/generate()
+/datum/supply_pack/critter/hamster/generate(atom/A, datum/bank_account/paying_account, crate_override)
 	. = ..()
 	for(var/i in 1 to rand(1, 5))
 		new /mob/living/basic/mouse/hamster(.)
@@ -234,12 +234,12 @@
 	contains = list(/mob/living/basic/possum)
 	crate_name = "ящик с опоссумами"
 
-/datum/supply_pack/critter/possum/generate()
+/datum/supply_pack/critter/possum/generate(atom/A, datum/bank_account/paying_account, crate_override)
 	. = ..()
 	for(var/i in 1 to rand(1, 5))
 		new /mob/living/basic/possum(.)
 
-/datum/supply_pack/critter/pig/generate()
+/datum/supply_pack/critter/pig/generate(atom/A, datum/bank_account/paying_account, crate_override)
 	. = ..()
 	var/rand_int = rand(1, 30)
 	switch(rand_int)

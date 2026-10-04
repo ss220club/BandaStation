@@ -403,11 +403,13 @@
 	if(isliving(interacting_with))
 		return ITEM_INTERACT_SKIP_TO_ATTACK
 
+	var/spell_name = source.name // Spell action is deleted in cast_spell() if we're out of charges
+
 	if(!cast_spell(interacting_with, user))
 		return ITEM_INTERACT_BLOCKING
 
 	user.do_attack_animation(interacting_with)
-	log_combat(user, interacting_with, "used a cult spell on", source.name, "")
+	log_combat(user, interacting_with, "used a cult spell on", spell_name)
 	SSblackbox.record_feedback("tally", "cult_spell_invoke", 1, "[name]")
 	return ITEM_INTERACT_SUCCESS
 
@@ -781,11 +783,11 @@
 		construct_thing.balloon_alert(user, "out of blood!")
 		return FALSE
 	if(uses > missing_health)
-		construct_thing.adjust_health(-missing_health)
+		construct_thing.adjust_brute_loss(-missing_health)
 		construct_thing.visible_message(span_warning("[construct_thing] is fully healed by [user]'s blood magic!"))
 		uses -= missing_health
 	else
-		construct_thing.adjust_health(-uses)
+		construct_thing.adjust_brute_loss(-uses)
 		construct_thing.visible_message(span_warning("[construct_thing] is partially healed by [user]'s blood magic!"))
 		uses = 0
 	playsound(get_turf(construct_thing), 'sound/effects/magic/staff_healing.ogg', 25)

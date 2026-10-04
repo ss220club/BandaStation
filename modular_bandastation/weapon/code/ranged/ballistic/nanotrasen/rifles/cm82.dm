@@ -49,17 +49,9 @@
 		overlay_y = 13 \
 	)
 
-/obj/item/gun/ballistic/automatic/cm82/examine(mob/user)
-	. = ..()
-	. += span_notice("Вы можете [EXAMINE_HINT("изучить подробнее")], чтобы узнать немного больше об этом оружии.")
-
-/obj/item/gun/ballistic/automatic/cm82/examine_more(mob/user)
-	. = ..()
-	. += "Относительно новое боевое оружие. Точная, надежная и простая в использовании, CM-82 практически в одночасье заменила АРГ \"Пограничник\" в качестве штурмовой винтовки Нанотрейзен и с тех пор пользуется огромной популярностью."
+/obj/item/gun/ballistic/automatic/cm82/add_deep_lore()
+	AddElement(/datum/element/examine_lore, \
+		lore = "Относительно новое боевое оружие. Точная, надежная и простая в использовании, CM-82 практически в одночасье заменила АРГ \"Пограничник\" в качестве штурмовой винтовки Нанотрейзен и с тех пор пользуется огромной популярностью.")
 
 /obj/item/gun/ballistic/automatic/cm82/no_mag
 	spawnwithmagazine = FALSE
-
-/obj/item/gun/ballistic/automatic/ar
-	accepted_magazine_type = /obj/item/ammo_box/magazine/c223
-	spawn_magazine_type = /obj/item/ammo_box/magazine/c223

@@ -141,6 +141,7 @@
 	var/datum/job/picked_job = pick(SSjob.get_valid_overflow_jobs())
 	chosen_job_name = LOWER_TEXT(picked_job.title) // like Chief Engineers vs like chief engineers
 	SSjob.set_overflow_role(picked_job.type)
+	UnregisterSignal(SSjob, COMSIG_SUBSYSTEM_POST_INITIALIZE)
 
 /datum/station_trait/slow_shuttle
 	name = "Медленный шаттл"
@@ -149,10 +150,7 @@
 	show_in_report = TRUE
 	report_message = "Из-за удаленности нашей станции снабжения, время полета грузового шаттла до вашего отдела снабжения будет больше."
 	blacklist = list(/datum/station_trait/quick_shuttle)
-
-/datum/station_trait/slow_shuttle/on_round_start()
-	. = ..()
-	SSshuttle.supply.callTime *= 1.5
+	trait_to_give = STATION_TRAIT_SLOW_SHUTTLE
 
 /datum/station_trait/bot_languages
 	name = "Неисправность языковой матрицы ботов"
@@ -223,7 +221,7 @@
 
 /datum/station_trait/revenge_of_pun_pun/proc/arm_monke()
 	SIGNAL_HANDLER
-	var/mob/living/carbon/human/species/monkey/punpun/punpun = GLOB.the_one_and_only_punpun
+	var/mob/living/punpun = GLOB.the_one_and_only_punpun
 	if(!punpun)
 		return
 	var/weapon_type = pick_weight(weapon_types)
@@ -761,5 +759,15 @@
 	show_in_report = TRUE
 	report_message = "Our station subdivision informed us that this station may have been built with a number of structural weaknesses due to defective construction materials. Be on the lookout for them and try not to let anything explode."
 	trait_to_give = STATION_TRAIT_SPAWN_WEAKPOINTS
+
+///A negative trait that empties the food and drink products available from vending machines throughout the station.
+/datum/station_trait/vending_shortage
+	name = "Vending products shortage"
+	trait_type = STATION_TRAIT_NEGATIVE
+	weight = 3
+	show_in_report = TRUE
+	can_revert = FALSE // because it touches every maploaded vending machine on the station.
+	report_message = "We haven't had the time to take care of the station's food and drink vending machines. Food and drink products are empty and need to be restocked."
+	trait_to_give = STATION_TRAIT_VENDING_SHORTAGE
 
 #undef GLOW_NEBULA

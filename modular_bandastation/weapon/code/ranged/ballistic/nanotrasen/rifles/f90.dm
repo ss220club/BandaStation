@@ -21,7 +21,7 @@
 	can_suppress = TRUE
 	suppressor_x_offset = 8
 	burst_size = 1
-	fire_delay = 1 SECONDS
+	fire_delay = 0.7 SECONDS
 	actions_types = list()
 	recoil = 1
 	rack_sound = 'modular_bandastation/weapon/sound/ranged/smg_rack.ogg'

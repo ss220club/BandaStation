@@ -1,6 +1,6 @@
 /obj/item/gun/ballistic/automatic/fn4
 	name = "FN-VI \"Sharp\""
-	desc = "Стандартная боевая винтовка армии Республики Элизиум в калибре 7.62x51мм."
+	desc = "Стандартная боевая винтовка вооруженных сил Республики Элизиум в калибре 7.62x51мм."
 	icon = 'modular_bandastation/weapon/icons/ranged/ballistic48x32.dmi'
 	icon_state = "fn4"
 	worn_icon = 'modular_bandastation/weapon/icons/ranged/guns_back.dmi'
@@ -38,6 +38,7 @@
 /obj/item/gun/ballistic/automatic/fn4/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/automatic_fire, fire_delay)
+	ADD_TRAIT(src, TRAIT_CONTRABAND, INNATE_TRAIT)
 
 /obj/item/gun/ballistic/automatic/fn4/no_mag
 	spawnwithmagazine = FALSE

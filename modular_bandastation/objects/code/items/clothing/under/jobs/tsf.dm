@@ -3,6 +3,7 @@
 	icon = 'modular_bandastation/objects/icons/obj/clothing/under/tsf.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/under/tsf.dmi'
 	can_adjust = FALSE
+	armor_type = /datum/armor/clothing_under/centcom_military
 
 /obj/item/clothing/under/rank/tsf/commander
 	name = "federate commander suit"

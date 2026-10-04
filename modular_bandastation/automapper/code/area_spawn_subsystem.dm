@@ -3,7 +3,7 @@ SUBSYSTEM_DEF(area_spawn)
 	dependencies = list(
 		/datum/controller/subsystem/atoms
 	)
-	flags = SS_NO_FIRE
+	ss_flags = SS_NO_FIRE
 
 	// Can't be on tile or a neighbor.
 	// Usually things where it's important to be sure the players can walk up to them, but aren't dense.
@@ -399,7 +399,8 @@ GLOBAL_LIST_EMPTY(turf_test_effects)
 /**
  * Show overlay over area of priorities. Wall priority over open priority.
  */
-ADMIN_VERB(test_area_spawner, R_DEBUG, "Test Area Spawner", "Show area spawner placement candidates as an overlay.", ADMIN_CATEGORY_DEBUG, area/area)
+ADMIN_VERB(test_area_spawner, R_DEBUG, "Test Area Spawner", "Show area spawner placement candidates as an overlay.", ADMIN_CATEGORY_DEBUG)
+	VERB_ARG_TYPED(area, VERB_ARG_TYPE_AREA, VERB_ARG_SOURCE_WORLD, /area)
 	for(var/obj/effect/turf_test/effect_to_remove as anything in GLOB.turf_test_effects)
 		qdel(effect_to_remove)
 

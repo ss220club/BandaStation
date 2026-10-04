@@ -30,6 +30,7 @@ type Pack = {
   desc: string;
   cost: number;
   id: typePath;
+  highlight?: boolean;
 };
 
 type Category = {
@@ -53,13 +54,13 @@ const CooldownEstimate = (props) => {
     (cost >= COST_MODERATE_BOUND && 'yellow') ||
     'green';
   const cooldownText =
-    (cost >= COST_VERY_LONG_BOUND && 'Очень долго') ||
-    (cost >= COST_LONG_BOUND && 'Долго') ||
-    (cost >= COST_MODERATE_BOUND && 'Умеренно') ||
-    'Недолго';
+    (cost >= COST_VERY_LONG_BOUND && 'Очень долгое') ||
+    (cost >= COST_LONG_BOUND && 'Долгое') ||
+    (cost >= COST_MODERATE_BOUND && 'Умеренное') ||
+    'Недолгое';
   return (
     <Box as="span" textColor={cooldownColor}>
-      {cooldownText} ожидание.
+      {cooldownText} время ожидания.
     </Box>
   );
 };
@@ -192,7 +193,10 @@ const DepartmentCatalog = () => {
         <Section fill scrollable>
           <Stack vertical>
             {tabCategory.packs.map((pack) => (
-              <Stack.Item className="candystripe" key={pack.name}>
+                      <Stack.Item className="candystripe" key={pack.name}
+              style={{
+    backgroundColor: pack.highlight ? 'rgba(255, 255, 0, 0.15)' : undefined,
+  }}>
                 <Stack fill>
                   <Stack.Item grow>
                     <Tooltip content={pack.desc}>

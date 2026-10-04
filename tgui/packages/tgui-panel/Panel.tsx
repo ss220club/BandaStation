@@ -22,6 +22,7 @@ import { ReconnectButton } from './reconnect';
 import { settingsVisibleAtom } from './settings/atoms';
 import { SettingsPanel } from './settings/SettingsPanel';
 import { useSettings } from './settings/use-settings';
+import { CommandBar } from './verbs/CommandBar';
 
 export function Panel(props) {
   const [emotes, setEmotes] = useAtom(emotesAtom); // BANDASTATION ADD  - Emote Panel
@@ -42,7 +43,7 @@ export function Panel(props) {
 
   return (
     <Pane theme={settings.theme} canSuspend={false}>
-      <Stack fill vertical>
+      <Stack fill vertical className="Panel__stack">
         <Stack.Item>
           <Section fitted>
             <Stack mr={1} align="center">
@@ -58,7 +59,7 @@ export function Panel(props) {
                   color="grey"
                   selected={emotes.visible}
                   icon="face-grin-beam"
-                  tooltip="Emote Panel"
+                  tooltip="Панель эмоций"
                   tooltipPosition="bottom-start"
                   onClick={toggleEmotes}
                 />
@@ -69,7 +70,7 @@ export function Panel(props) {
                   color="grey"
                   selected={audioVisible}
                   icon="music"
-                  tooltip="Music player"
+                  tooltip="Проигрыватель музыки"
                   tooltipPosition="bottom-start"
                   onClick={() => setAudioVisible((v) => !v)}
                 />
@@ -78,7 +79,9 @@ export function Panel(props) {
                 <Button
                   icon={settingsVisible ? 'times' : 'cog'}
                   selected={settingsVisible}
-                  tooltip={settingsVisible ? 'Close settings' : 'Open settings'}
+                  tooltip={
+                    settingsVisible ? 'Закрыть настройки' : 'Открыть настройки'
+                  }
                   tooltipPosition="bottom-start"
                   onClick={() => setSettingsVisible((v) => !v)}
                 />
@@ -115,18 +118,22 @@ export function Panel(props) {
             <Notifications>
               {game.connectionLostAt && (
                 <Notifications.Item rightSlot={<ReconnectButton />}>
-                  You are either AFK, experiencing lag or the connection has
-                  closed.
+                  Либо вы находитесь AFK, испытываете задержку, либо соединение
+                  прервано.
                 </Notifications.Item>
               )}
               {game.roundRestartedAt && (
                 <Notifications.Item>
-                  The connection has been closed because the server is
-                  restarting. Please wait while you automatically reconnect.
+                  Соединение было закрыто, так как сервер перезапускается.
+                  Пожалуйста, подождите, пока вы автоматически восстановите
+                  подключение.
                 </Notifications.Item>
               )}
             </Notifications>
           </Section>
+        </Stack.Item>
+        <Stack.Item>
+          <CommandBar />
         </Stack.Item>
       </Stack>
     </Pane>

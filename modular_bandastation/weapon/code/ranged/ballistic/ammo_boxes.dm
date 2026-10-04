@@ -138,7 +138,7 @@
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "310speedload"
 	ammo_type = /obj/item/ammo_casing/strilka310
-	max_ammo = 7
+	max_ammo = 8
 	caliber = CALIBER_STRILKA310
 	multiple_sprites = AMMO_BOX_PER_BULLET
 	item_flags = NO_MAT_REDEMPTION
@@ -429,7 +429,7 @@
 // MARK: 9mm
 /obj/item/ammo_box/c9mm
 	name = "ammo box (9mm)"
-	desc = "Коробка с пистолетными патронами калибра 9мм, вмещает 20 патронов."
+	desc = "Коробка с пистолетными патронами калибра 9мм, вмещает 30 патронов."
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "9mmbox-surplus"
 	w_class = WEIGHT_CLASS_SMALL

@@ -16,7 +16,7 @@
 	w_class = WEIGHT_CLASS_BULKY
 	var/content_overlays = FALSE //If this is true, the belt will gain overlays based on what it's holding
 
-/obj/item/storage/belt/suicide_act(mob/living/carbon/user)
+/obj/item/storage/belt/suicide_act(mob/living/user)
 	user.visible_message(span_suicide("[user] begins belting [user.p_them()]self with \the [src]! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	return BRUTELOSS
 
@@ -30,6 +30,7 @@
 /obj/item/storage/belt/Initialize(mapload)
 	. = ..()
 	AddElement(/datum/element/attack_equip)
+	AddElement(/datum/element/strip_accessible_storage)
 	update_appearance()
 
 /obj/item/storage/belt/utility
@@ -468,7 +469,8 @@
 	worn_icon_state = "soulstonebelt"
 	storage_type = /datum/storage/wands_belt
 
-/obj/item/storage/belt/wands/full/PopulateContents()
+/// Put some wands in that bad boy
+/obj/item/storage/belt/wands/full/proc/create_wands()
 	new /obj/item/gun/magic/wand/death(src)
 	new /obj/item/gun/magic/wand/resurrection(src)
 	new /obj/item/gun/magic/wand/polymorph(src)
@@ -477,9 +479,95 @@
 	new /obj/item/gun/magic/wand/fireball(src)
 	new /obj/item/gun/magic/wand/shrink(src)
 
+/obj/item/storage/belt/wands/full/PopulateContents()
+	create_wands()
 	for(var/obj/item/gun/magic/wand/W in contents) //All wands in this pack come in the best possible condition
 		W.max_charges = initial(W.max_charges)
 		W.charges = W.max_charges
+
+/// Filled with budget wands instead of cool ones
+/obj/item/storage/belt/wands/full/discount
+	/// Which wands can appear?
+	var/static/list/possible_options = list(
+		/obj/item/gun/magic/wand/animate,
+		/obj/item/gun/magic/wand/babel,
+		/obj/item/gun/magic/wand/bald,
+		/obj/item/gun/magic/wand/door,
+		/obj/item/gun/magic/wand/fireball,
+		/obj/item/gun/magic/wand/freeze,
+		/obj/item/gun/magic/wand/hallucination,
+		/obj/item/gun/magic/wand/levitate,
+		/obj/item/gun/magic/wand/pax,
+		/obj/item/gun/magic/wand/pizza,
+		/obj/item/gun/magic/wand/plague,
+		/obj/item/gun/magic/wand/prank,
+		/obj/item/gun/magic/wand/rebel,
+		/obj/item/gun/magic/wand/repulse,
+		/obj/item/gun/magic/wand/swap,
+		/obj/item/gun/magic/wand/teleport,
+		/obj/item/gun/magic/wand/tentacles,
+		/obj/item/gun/magic/wand/zap,
+	)
+
+/obj/item/storage/belt/wands/full/discount/create_wands()
+	var/list/available_options = possible_options.Copy()
+	for (var/i in 1 to 6)
+		if (!length(available_options))
+			break
+		var/wand_path = pick_n_take(available_options)
+		new wand_path(src)
+
+/// Not a subtype of bandolier because it acts pretty differently
+/obj/item/storage/belt/wand_bandolier
+	name = "wand bandolier"
+	desc = "A bandolier for holding a whole lot of wands. If worn on your suit, swaps expended wands for fresh ones on the fly."
+	icon_state = "bandolier"
+	inhand_icon_state = "bandolier"
+	worn_icon_state = "bandolier"
+	storage_type = /datum/storage/wands_belt
+	w_class = WEIGHT_CLASS_NORMAL
+
+/obj/item/storage/belt/wand_bandolier/equipped(mob/user, slot)
+	. = ..()
+	if (!(slot & ITEM_SLOT_SUITSTORE))
+		return
+	ADD_CLOTHING_TRAIT(user, TRAIT_GUNFLIP)
+	RegisterSignal(user, COMSIG_MOB_FIRED_GUN, PROC_REF(on_gun_fired))
+
+/obj/item/storage/belt/wand_bandolier/dropped(mob/user)
+	. = ..()
+	REMOVE_CLOTHING_TRAIT(user, TRAIT_GUNFLIP)
+	UnregisterSignal(user, COMSIG_MOB_FIRED_GUN)
+
+/// After we fire a gun, check if it's a wand. If it is and it's empty, do a swap
+/obj/item/storage/belt/wand_bandolier/proc/on_gun_fired(mob/living/wizard, obj/item/gun/magic/wand/old_wand)
+	SIGNAL_HANDLER
+	INVOKE_ASYNC(src, PROC_REF(equip_new_wand), wizard, old_wand)
+
+/obj/item/storage/belt/wand_bandolier/proc/equip_new_wand(mob/living/wizard, obj/item/gun/magic/wand/old_wand)
+	if (!istype(old_wand))
+		return
+	if (!atom_storage.real_location.contents.len) // no other wands
+		return
+	if (old_wand.charges > 1) // It hasn't subtracted yet
+		return
+
+	var/obj/item/fresh_wand
+	for (var/obj/item/gun/magic/wand/checked in atom_storage.real_location.contents)
+		if (checked.charges)
+			fresh_wand = checked
+			break
+	if (!fresh_wand || fresh_wand.on_found())
+		return // Nothing to swap with
+
+	wizard.temporarilyRemoveItemFromInventory(old_wand)
+	if (!wizard.put_in_hands(fresh_wand))
+		return
+	to_chat(wizard, span_notice("You quickly draw [fresh_wand]."))
+	if (atom_storage.attempt_insert(old_wand, wizard))
+		return
+	old_wand.forceMove(wizard.drop_location())
+	to_chat(wizard, span_warning("...and drop [old_wand] on the ground."))
 
 /obj/item/storage/belt/janitor
 	name = "janibelt"
@@ -505,6 +593,11 @@
 	inhand_icon_state = "bandolier"
 	worn_icon_state = "bandolier"
 	storage_type = /datum/storage/bandolier_belt
+
+/obj/item/storage/belt/bandolier/china_lake_extra/PopulateContents()
+	generate_items_inside(list(
+		/obj/item/ammo_casing/a40mm = 12,
+	), src)
 
 /obj/item/storage/belt/fannypack
 	name = "fannypack"
@@ -608,7 +701,7 @@
 /obj/item/storage/belt/sheath/examine(mob/user)
 	. = ..()
 	if(length(contents))
-		. += span_notice("Alt-click it to quickly draw the blade.")
+		. += span_notice("Нажмите Alt+ЛКМ, чтобы быстро достать клинок.")
 
 /obj/item/storage/belt/sheath/click_alt(mob/user)
 	if(!length(contents))
@@ -649,6 +742,12 @@
 	enable_text = "You prepare to counterattack a target..."
 	disable_text = "You relax your stance."
 
+	// BANDASTATION EDIT: START - time as variable
+	var/immobilize_time = 1 SECONDS
+	var/counter_attack_cooldown = 45 SECONDS
+	var/time_to_counter = 1.5 SECONDS
+	// BANDASTATION EDIT: END
+
 	click_action = TRUE
 
 	var/datum/weakref/eyed_fool
@@ -677,8 +776,8 @@
 	if(owner == cast_on)
 		to_chat(owner, span_warning("You can't counterattack yourself!"))
 		return FALSE
-	var/mob/living/target = cast_on
-	if(!target.mind)
+	var/mob/living/target_mob = cast_on // BANDASTATION FIX
+	if(!target_mob.mind) // BANDASTATION FIX
 		to_chat(owner, span_warning("They are too unpredictable to counterattack!"))
 		return FALSE
 	var/obj/item/storage/belt/sheath/oursheath = target
@@ -691,11 +790,11 @@
 		return TRUE
 	var/obj/item/storage/belt/sheath/used_sheath = target
 	RegisterSignal(swordsman, COMSIG_LIVING_CHECK_BLOCK, PROC_REF(counter_attack))
-	swordsman.Immobilize(1 SECONDS)
+	swordsman.Immobilize(immobilize_time) // BANDASTATION EDIT: time as variable
 	eyed_fool = WEAKREF(cast_on)
 	swordsman.visible_message(span_danger("[swordsman] widens [swordsman.p_their()] stance, [swordsman.p_their()] hand hovering over \the [used_sheath]!"), span_notice("You prepare to counterattack [cast_on]!"))
-	addtimer(CALLBACK(src, PROC_REF(relax), swordsman, used_sheath), 1 SECONDS)
-	COOLDOWN_START(used_sheath, full_ability_cooldown, 60 SECONDS)
+	addtimer(CALLBACK(src, PROC_REF(relax), swordsman, used_sheath), time_to_counter) // BANDASTATION EDIT: time as variable
+	COOLDOWN_START(used_sheath, full_ability_cooldown, counter_attack_cooldown) // BANDASTATION EDIT: time as variable
 	unset_ranged_ability(swordsman)
 	return TRUE
 

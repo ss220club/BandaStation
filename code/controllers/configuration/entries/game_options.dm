@@ -44,8 +44,6 @@
 
 /datum/config_entry/flag/allow_ai_multicam // allow ai multicamera mode
 
-/datum/config_entry/flag/disable_human_mood
-
 /datum/config_entry/flag/disable_secborg // disallow secborg model to be chosen.
 
 /datum/config_entry/flag/disable_peaceborg
@@ -62,12 +60,6 @@
 	integer = FALSE
 	min_val = 0
 
-/// Determines how fast traitors scale in general.
-/datum/config_entry/number/traitor_scaling_multiplier
-	default = 1
-	integer = FALSE
-	min_val = 0.01
-
 /datum/config_entry/number/changeling_scaling_coeff //how much does the amount of players get divided by to determine changelings
 	default = 6
 	integer = FALSE
@@ -82,6 +74,16 @@
 	default = 8
 	integer = FALSE
 	min_val = 0
+
+// BANDASTATION EDIT START - Configurable officer positions
+/datum/config_entry/number/security_min_positions
+	default = 5
+	min_val = 0
+
+/datum/config_entry/number/security_max_positions
+	default = 12
+	min_val = 0
+// BANDASTATION EDIT END
 
 /datum/config_entry/number/traitor_objectives_amount
 	default = 2
@@ -396,20 +398,15 @@
 
 /datum/config_entry/flag/enable_night_shifts
 
-/datum/config_entry/flag/randomize_shift_time
-
-/datum/config_entry/flag/shift_time_realtime
-
-/datum/config_entry/number/shift_time_start_hour
-	default = 12
-	min_val = 0
-	max_val = 23
-
 /datum/config_entry/number/monkeycap
 	default = 64
 	min_val = 0
 
 /datum/config_entry/number/ratcap
+	default = 64
+	min_val = 0
+
+/datum/config_entry/number/relicmobcap
 	default = 64
 	min_val = 0
 
@@ -444,13 +441,15 @@
 
 /datum/config_entry/flag/disallow_circuit_sounds
 
-/datum/config_entry/flag/tts_no_whisper
-
 /datum/config_entry/string/tts_http_url
 	protection = CONFIG_ENTRY_LOCKED
 
 /datum/config_entry/string/tts_http_token
 	protection = CONFIG_ENTRY_LOCKED|CONFIG_ENTRY_HIDDEN
+
+/datum/config_entry/string/tts_tram_announcer_override
+
+/datum/config_entry/string/tts_computer_voice_override
 
 /datum/config_entry/number/tts_max_concurrent_requests
 	default = 4
@@ -486,15 +485,30 @@
 /// Disables Quirk point balancing for the server and clients.
 /datum/config_entry/flag/disable_quirk_points
 
+/datum/config_entry/flag/disable_quirk_points/ValidateAndSet(str_val)
+	. = ..()
+	if(.)
+		SSquirks.points_enabled = !config_entry_value
+
 /// The maximum amount of positive quirks one character can have at roundstart.
 /datum/config_entry/number/max_positive_quirks
 	default = 6
 	min_val = -1
 
+/datum/config_entry/number/max_positive_quirks/ValidateAndSet(str_val)
+	. = ..()
+	if(.)
+		SSquirks.max_positive_quirks = config_entry_value
+
 /// Freebie quirk points. Can't go negative because we have no way of enforcing a person has a quirk before they join.
 /datum/config_entry/number/default_quirk_points
 	default = 2
 	min_val = 0
+
+/datum/config_entry/number/default_quirk_points/ValidateAndSet(str_val)
+	. = ..()
+	if(.)
+		SSquirks.default_quirk_points = config_entry_value
 
 /// Max personalities you can have at once
 /datum/config_entry/number/max_personalities
@@ -518,3 +532,7 @@
 
 /datum/config_entry/number/max_shuttle_size
 	default = 250
+
+/datum/config_entry/number/minimum_ascension_time
+	default = 0 // 1 minute
+	min_val = 0

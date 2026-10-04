@@ -1,6 +1,6 @@
 /obj/item/gun/ballistic/automatic/cm15
 	name = "CM-15"
-	desc = "Большой автоматический дробовик 12-го калибра, используемый силами Нанотрейзен."
+	desc = "Большой автоматический дробовик 12-го калибра, используемый боевыми отрядами Нанотрейзен."
 	icon = 'modular_bandastation/weapon/icons/ranged/ballistic48x32.dmi'
 	icon_state = "cm15"
 	worn_icon = 'modular_bandastation/weapon/icons/ranged/guns_back.dmi'
@@ -31,6 +31,7 @@
 	eject_sound = 'modular_bandastation/weapon/sound/ranged/ar_unload.ogg'
 	eject_empty_sound = 'modular_bandastation/weapon/sound/ranged/ar_unload.ogg'
 	rack_sound = 'modular_bandastation/weapon/sound/ranged/ar_cock.ogg'
+	pb_knockback = 2
 
 /obj/item/gun/ballistic/automatic/cm15/Initialize(mapload)
 	. = ..()

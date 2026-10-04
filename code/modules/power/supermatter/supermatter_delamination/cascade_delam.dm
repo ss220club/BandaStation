@@ -1,4 +1,5 @@
 /datum/sm_delam/cascade
+	name = "resonance cascade"
 
 /datum/sm_delam/cascade/can_select(obj/machinery/power/supermatter_crystal/sm)
 	if(!sm.is_main_engine)
@@ -16,44 +17,40 @@
 	if(!..())
 		return FALSE
 
+	if(!announcement_triggered)
+		announce_cascade(sm)
+
 	sm.radio.talk_into(
 		sm,
-		"DANGER: HYPERSTRUCTURE OSCILLATION FREQUENCY OUT OF BOUNDS.",
+		"ОПАСНОСТЬ: ЧАСТОТА КОЛЕБАНИЙ ГИПЕРСТРУКТУРЫ ВЫШЛА ЗА ГРАНИЦЫ.",
 		sm.damage >= sm.emergency_point ? sm.emergency_channel : sm.warning_channel
 	)
 	var/list/messages = list(
-		"Space seems to be shifting around you...",
-		"You hear a high-pitched ringing sound.",
-		"You feel tingling going down your back.",
-		"Something feels very off.",
-		"A drowning sense of dread washes over you.",
+		"Пространство, кажется, искажается вокруг вас...",
+		"Вы слышите пронзительный звон.",
+		"Вы ощущаете покалывание, бегущее по спине.",
+		"Что-то определённо не так.",
+		"Вас накрывает волна тревожного предчувствия.",
 	)
 	dispatch_announcement_to_players(span_danger(pick(messages)), should_play_sound = FALSE)
 
 	return TRUE
 
 /datum/sm_delam/cascade/on_select(obj/machinery/power/supermatter_crystal/sm)
-	message_admins("[sm] is heading towards a cascade. [ADMIN_VERBOSEJMP(sm)]")
-	sm.investigate_log("is heading towards a cascade.", INVESTIGATE_ENGINE)
-
+	. = ..()
 	sm.warp = new(sm)
 	sm.vis_contents += sm.warp
 	animate(sm.warp, time = 1, transform = matrix().Scale(0.5,0.5))
 	animate(time = 9, transform = matrix())
 
-	addtimer(CALLBACK(src, PROC_REF(announce_cascade), sm), 2 MINUTES)
-
 /datum/sm_delam/cascade/on_deselect(obj/machinery/power/supermatter_crystal/sm)
-	message_admins("[sm] will no longer cascade. [ADMIN_VERBOSEJMP(sm)]")
-	sm.investigate_log("will no longer cascade.", INVESTIGATE_ENGINE)
-
+	. = ..()
+	message_admins("[ADMIN_VERBOSEJMP(sm)] will no longer cascade.")
 	sm.vis_contents -= sm.warp
 	QDEL_NULL(sm.warp)
 
 /datum/sm_delam/cascade/delaminate(obj/machinery/power/supermatter_crystal/sm)
-	message_admins("Supermatter [sm] at [ADMIN_VERBOSEJMP(sm)] triggered a cascade delam.")
-	sm.investigate_log("triggered a cascade delam.", INVESTIGATE_ENGINE)
-
+	log_delamination(sm)
 	effect_explosion(sm)
 	effect_emergency_state()
 	effect_cascade_demoralize()
@@ -87,9 +84,13 @@
 		return FALSE
 	if(!can_select(sm))
 		return FALSE
+	if(!sm.should_alert_common())
+		return FALSE
+
 	priority_announce("Внимание: Сканирование аномалий дальнего действия регистрирует отклонение от нормы в количестве гармонического потока, исходящего от \
 	объекта в пределах [station_name()], может произойти резонансный коллапс.",
-	"Ассоциация Обсерваторий Нанотрейзен", 'sound/announcer/alarm/airraid.ogg')
+	"Nanotrasen Star Observation Association", 'sound/announcer/alarm/airraid.ogg')
+	announcement_triggered = TRUE
 	return TRUE
 
 /// Signal calls cant sleep, we gotta do this.

@@ -1,4 +1,6 @@
 /// Helper to format the text that gets thrown onto the chem hud element.
+#define FORMAT_CHEM_MAX_TEXT(charges) MAPTEXT("<div align='center' valign='middle' style='position:relative; top:0px; left:6px'><font color='#dd2828'>[round(charges)]</font></div>")
+/// Helper to format the text that gets thrown onto the chem hud element.
 #define FORMAT_CHEM_CHARGES_TEXT(charges) MAPTEXT("<div align='center' valign='middle' style='position:relative; top:0px; left:6px'><font color='#dd66dd'>[round(charges)]</font></div>")
 
 /datum/antagonist/changeling
@@ -69,11 +71,6 @@
 	/// A reference to our cellular emporium action (which opens the UI for the datum).
 	var/datum/action/cellular_emporium/emporium_action
 
-	/// UI displaying how many chems we have
-	var/atom/movable/screen/ling/chems/lingchemdisplay
-	/// UI displayng our currently active sting
-	var/atom/movable/screen/ling/sting/lingstingdisplay
-
 	/// The name of our "hive" that our ling came from. Flavor.
 	var/hive_name
 
@@ -141,25 +138,15 @@
 	RegisterSignal(living_mob, COMSIG_MOB_LOGIN, PROC_REF(on_login))
 	RegisterSignal(living_mob, COMSIG_LIVING_LIFE, PROC_REF(on_life))
 	RegisterSignal(living_mob, COMSIG_LIVING_POST_FULLY_HEAL, PROC_REF(on_fullhealed))
-	RegisterSignal(living_mob, COMSIG_MOB_GET_STATUS_TAB_ITEMS, PROC_REF(get_status_tab_item))
 	RegisterSignal(living_mob, COMSIG_CARBON_GAIN_ORGAN, PROC_REF(new_brain))
+	RegisterSignal(living_mob, COMSIG_MOB_HUD_CREATED, PROC_REF(on_hud_created))
 	RegisterSignals(living_mob, list(COMSIG_MOB_MIDDLECLICKON, COMSIG_MOB_ALTCLICKON), PROC_REF(on_click_sting))
 	ADD_TRAIT(living_mob, TRAIT_FAKE_SOULLESS, CHANGELING_TRAIT)
 	ADD_TRAIT(living_mob, TRAIT_BRAINLESS_CARBON, CHANGELING_TRAIT)
 	ADD_TRAIT(living_mob, TRAIT_CHANGELING_HIVEMIND, CHANGELING_TRAIT)
 
-	if(living_mob.hud_used)
-		var/datum/hud/hud_used = living_mob.hud_used
-
-		lingchemdisplay = new /atom/movable/screen/ling/chems(null, hud_used)
-		hud_used.infodisplay += lingchemdisplay
-
-		lingstingdisplay = new /atom/movable/screen/ling/sting(null, hud_used)
-		hud_used.infodisplay += lingstingdisplay
-
-		hud_used.show_hud(hud_used.hud_version)
-	else
-		RegisterSignal(living_mob, COMSIG_MOB_HUD_CREATED, PROC_REF(on_hud_created))
+	if (living_mob.hud_used)
+		on_hud_created()
 
 	make_brain_decoy(living_mob)
 
@@ -192,14 +179,8 @@
 	SIGNAL_HANDLER
 
 	var/datum/hud/ling_hud = owner.current.hud_used
-
-	lingchemdisplay = new(null, ling_hud)
-	ling_hud.infodisplay += lingchemdisplay
-
-	lingstingdisplay = new(null, ling_hud)
-	ling_hud.infodisplay += lingstingdisplay
-
-	ling_hud.show_hud(ling_hud.hud_version)
+	ling_hud.add_screen_object(/atom/movable/screen/ling/chems, HUD_CHANGELING_CHEMS, HUD_GROUP_INFO)
+	ling_hud.add_screen_object(/atom/movable/screen/ling/sting, HUD_CHANGELING_STING, HUD_GROUP_INFO, update_screen = TRUE)
 
 /datum/antagonist/changeling/proc/new_brain(mob/living/carbon/ling, obj/item/organ/new_brain)
 	SIGNAL_HANDLER
@@ -215,7 +196,6 @@
 		COMSIG_MOB_LOGIN,
 		COMSIG_LIVING_LIFE,
 		COMSIG_LIVING_POST_FULLY_HEAL,
-		COMSIG_MOB_GET_STATUS_TAB_ITEMS,
 		COMSIG_MOB_MIDDLECLICKON,
 		COMSIG_MOB_ALTCLICKON,
 		COMSIG_MOB_HUD_CREATED,
@@ -228,14 +208,12 @@
 	for(var/mob/eye/imaginary_friend/hivemind/hivemind_member in living_mob.imaginary_group)
 		qdel(hivemind_member)
 
-	if(living_mob.hud_used)
-		var/datum/hud/hud_used = living_mob.hud_used
+	if(!living_mob.hud_used)
+		return
 
-		hud_used.infodisplay -= lingchemdisplay
-		hud_used.infodisplay -= lingstingdisplay
-		QDEL_NULL(lingchemdisplay)
-		QDEL_NULL(lingstingdisplay)
-
+	var/datum/hud/hud_used = living_mob.hud_used
+	hud_used.remove_screen_object(HUD_CHANGELING_CHEMS, update = FALSE)
+	hud_used.remove_screen_object(HUD_CHANGELING_STING)
 	// The old body's brain still remains a decoy, I guess?
 
 /datum/antagonist/changeling/on_removal()
@@ -326,7 +304,7 @@
 	// nothing to handle
 	if(!chosen_sting)
 		return
-	if(!isliving(ling) || clicked == ling || ling.stat != CONSCIOUS)
+	if(!isliving(ling) || clicked == ling || IS_UNCONSCIOUS_OR_CRIT(ling))
 		return
 	// sort-of hack done here: we use in_given_range here because it's quicker.
 	// actual ling stings do pathfinding to determine whether the target's "in range".
@@ -338,11 +316,6 @@
 
 	return COMSIG_MOB_CANCEL_CLICKON
 
-/datum/antagonist/changeling/proc/get_status_tab_item(mob/living/source, list/items)
-	SIGNAL_HANDLER
-	items += "Количество химикатов: [chem_charges]/[total_chem_storage]"
-	items += "Поглощенные ДНК: [absorbed_count]"
-
 /*
  * Adjust the chem charges of the ling by [amount]
  * and clamp it between 0 and override_cap (if supplied) or total_chem_storage (if no override supplied)
@@ -352,8 +325,17 @@
 		return
 	var/cap_to = isnum(override_cap) ? override_cap : total_chem_storage
 	chem_charges = clamp(chem_charges + amount, 0, cap_to)
+	update_chemical_hud(chem_charges)
 
-	lingchemdisplay?.maptext = FORMAT_CHEM_CHARGES_TEXT(chem_charges)
+///Updates the Changeling's chemical HUD to display the information we want it to (chem charges, or max if hovered over).
+/datum/antagonist/changeling/proc/update_chemical_hud(amount)
+	var/atom/movable/screen/ling/chems/chems = owner.current?.hud_used?.screen_objects[HUD_CHANGELING_CHEMS]
+	if(isnull(chems))
+		return
+	if(chems.hovering)
+		chems.maptext = FORMAT_CHEM_MAX_TEXT(total_chem_storage)
+	else
+		chems.maptext = FORMAT_CHEM_CHARGES_TEXT(amount)
 
 /*
  * Remove changeling powers from the current Changeling's purchased_powers list.
@@ -456,7 +438,7 @@
  * Changeling's ability to re-adapt all of their learned powers.
  */
 /datum/antagonist/changeling/proc/readapt()
-	if(!ishuman(owner.current) || ismonkey(owner.current))
+	if(!ishuman(owner.current) || HAS_TRAIT(owner.current, TRAIT_LESSER_HUMANOID))
 		to_chat(owner.current, span_warning("Мы не можем избавиться от нашего развития в такой форме!"))
 		return FALSE
 
@@ -531,7 +513,7 @@
 		if(verbose)
 			to_chat(user, span_warning("Тело [target.declent_ru(GENITIVE)] разрушено до непригодности!"))
 		return FALSE
-	if(!ishuman(target) || ismonkey(target))//Absorbing monkeys is entirely possible, but it can cause issues with transforming. That's what lesser form is for anyway!
+	if(!ishuman(target) || HAS_TRAIT(target, TRAIT_LESSER_HUMANOID))//Absorbing monkeys is entirely possible, but it can cause issues with transforming. That's what lesser form is for anyway!
 		if(verbose)
 			to_chat(user, span_warning("Мы не получим никакой выгоды от поглощения низшего существа."))
 		return FALSE
@@ -586,7 +568,8 @@
 	new_profile.profile_snapshot = entry
 
 	// Grab the target's sechut icon.
-	new_profile.id_icon = target.wear_id?.get_sechud_job_icon_state()
+	new_profile.id_icon = target.wear_id?.get_sechud_job_icon()
+	new_profile.id_icon_state = target.wear_id?.get_sechud_job_icon_state()
 
 	var/list/slots = list("head", "wear_mask", "wear_neck", "back", "wear_suit", "w_uniform", "shoes", "belt", "gloves", "glasses", "ears", "wear_id", "s_store")
 	for(var/slot in slots)
@@ -801,7 +784,7 @@
 
 	chosen_dna.copy_dna(user.dna, COPY_DNA_SE|COPY_DNA_SPECIES)
 
-	for(var/obj/item/bodypart/limb as anything in user.bodyparts)
+	for(var/obj/item/bodypart/limb as anything in user.get_bodyparts())
 		limb.update_limb(is_creating = TRUE)
 
 	user.updateappearance(mutcolor_update = TRUE)
@@ -880,6 +863,7 @@
 		if(istype(new_flesh_item, /obj/item/changeling/id) && chosen_profile.id_icon)
 			var/obj/item/changeling/id/flesh_id = new_flesh_item
 			flesh_id.hud_icon = chosen_profile.id_icon
+			flesh_id.hud_icon_state = chosen_profile.id_icon_state
 
 		if(equip)
 			user.equip_to_slot_or_del(new_flesh_item, slot2slot[slot], indirect_action = TRUE)
@@ -937,6 +921,8 @@
 	var/datum/icon_snapshot/profile_snapshot
 	/// ID HUD icon associated with the profile
 	var/id_icon
+	/// ID HUD icon state associated with the profile
+	var/id_icon_state
 	/// The age of the profile source.
 	var/age
 	/// The body type of the profile source.
@@ -1015,16 +1001,16 @@
 	return parts.Join("<br>")
 
 /datum/antagonist/changeling/get_preview_icon()
-	var/icon/final_icon = render_preview_outfit(/datum/outfit/changeling)
-	var/icon/split_icon = render_preview_outfit(/datum/outfit/job/engineer)
+	var/datum/universal_icon/final_icon = render_preview_outfit(/datum/outfit/changeling)
+	var/datum/universal_icon/split_icon = render_preview_outfit(/datum/outfit/job/engineer)
 
-	final_icon.Shift(WEST, ICON_SIZE_X / 2)
-	final_icon.Shift(EAST, ICON_SIZE_X / 2)
+	final_icon.shift(WEST, ICON_SIZE_X / 2)
+	final_icon.shift(EAST, ICON_SIZE_X / 2)
 
-	split_icon.Shift(EAST, ICON_SIZE_X / 2)
-	split_icon.Shift(WEST, ICON_SIZE_X / 2)
+	split_icon.shift(EAST, ICON_SIZE_X / 2)
+	split_icon.shift(WEST, ICON_SIZE_X / 2)
 
-	final_icon.Blend(split_icon, ICON_OVERLAY)
+	final_icon.blend_icon(split_icon, ICON_OVERLAY)
 
 	return finish_preview_icon(final_icon)
 
@@ -1040,6 +1026,7 @@
 	data["hive_name"] = hive_name
 	data["stolen_antag_info"] = antag_memory
 	data["objectives"] = get_objectives()
+	data["absorbed_dna"] = absorbed_count
 	return data
 
 // Changelings spawned from non-changeling headslugs (IE, due to being transformed into a headslug as a non-ling). Weaker than a normal changeling.
@@ -1064,7 +1051,7 @@
 	name = "\proper Генокрад из космоса"
 
 /datum/antagonist/changeling/space/get_preview_icon()
-	var/icon/final_icon = render_preview_outfit(/datum/outfit/changeling_space)
+	var/datum/universal_icon/final_icon = render_preview_outfit(/datum/outfit/changeling_space)
 	return finish_preview_icon(final_icon)
 
 /datum/antagonist/changeling/space/greet()
@@ -1082,4 +1069,5 @@
 	name = "Changeling (Space)"
 	l_hand = /obj/item/melee/arm_blade
 
+#undef FORMAT_CHEM_MAX_TEXT
 #undef FORMAT_CHEM_CHARGES_TEXT

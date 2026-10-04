@@ -1,4 +1,6 @@
-ADMIN_VERB(cmd_admin_say, R_ADMIN, "ASay", "Send a message to other admins", ADMIN_CATEGORY_HIDDEN, message as text) // BANDASTATION EDIT: Original - ADMIN_CATEGORY_MAIN
+ADMIN_VERB(cmd_admin_say, R_ADMIN, "ASay", "Send a message to other admins", ADMIN_CATEGORY_HIDDEN) // BANDASTATION EDIT: Original - ADMIN_CATEGORY_MAIN
+	VERB_ARG(message, VERB_ARG_TYPE_TEXT, VERB_ARG_SOURCE_INPUT)
+	// BANDASTATION EDIT: START
 	send_message_to_admin_related_chat(
 		user,
 		message,
@@ -8,10 +10,11 @@ ADMIN_VERB(cmd_admin_say, R_ADMIN, "ASay", "Send a message to other admins", ADM
 		LOG_ASAY,
 		permissions
 	)
-
 	BLACKBOX_LOG_ADMIN_VERB("Asay")
+	// BANDASTATION EDIT: END
 
-ADMIN_VERB(cmd_mentor_say, R_MENTOR, "MSay", "Send a message to other mentors", ADMIN_CATEGORY_HIDDEN, message as text) // BANDASTATION EDIT: Original - ADMIN_CATEGORY_MAIN
+ADMIN_VERB(cmd_mentor_say, R_MENTOR, "MSay", "Send a message to other mentors", ADMIN_CATEGORY_HIDDEN) // BANDASTATION EDIT: Original - ADMIN_CATEGORY_MAIN
+	VERB_ARG(message, VERB_ARG_TYPE_TEXT, VERB_ARG_SOURCE_INPUT)
 	send_message_to_admin_related_chat(
 		user,
 		message,
@@ -47,11 +50,15 @@ ADMIN_VERB(cmd_mentor_say, R_MENTOR, "MSay", "Send a message to other mentors", 
 
 	var/custom_asay_color = "<font color=[asay_color]>"
 	message = "[span_class(message_span_class, "[span_prefix("[message_prefix]:")] <EM>[key_name_admin(user)]</EM> [ADMIN_FLW(user.mob)]: [custom_asay_color]<span class='message linkify'>[message]")]</span>[custom_asay_color ? "</font>":null]"
-	to_chat(
-		get_holders_with_rights(target_permissions),
-		type = message_type,
-		html = message
-	)
+	var/holders = get_holders_with_rights(target_permissions)
+	for(var/holder in holders)
+		to_chat(
+			target = holder,
+			type = message_type,
+			html = message,
+			avoid_highlighting = (holder == user),
+			confidential = TRUE,
+		)
 
 	return TRUE
 

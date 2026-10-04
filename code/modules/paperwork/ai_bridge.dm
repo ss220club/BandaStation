@@ -7,10 +7,6 @@
 #define DEFAULT_ANALYZE_PROMPT "You are a secretary. Analyze this fax and return JSON."
 #define DEFAULT_REPLY_PROMPT "You are Central Command. Write a reply."
 
-// Configuration for LLM
-#define OLLAMA_MODEL "deepseek-v3.2:cloud"
-
-
 /// Global singleton for AI bridge, initialized automatically
 GLOBAL_DATUM_INIT(global_ai_bridge, /datum/ai_bridge, new)
 
@@ -50,6 +46,8 @@ GLOBAL_DATUM_INIT(global_ai_bridge, /datum/ai_bridge, new)
 	set waitfor = FALSE
 
 	if(!CONFIG_GET(string/ai_secretary_url))
+		return
+	if(!CONFIG_GET(string/ai_secretary_model))
 		return
 
 	if(!content) content = "(Empty Page)"
@@ -206,13 +204,14 @@ GLOBAL_DATUM_INIT(global_ai_bridge, /datum/ai_bridge, new)
 /datum/ai_bridge/proc/send_ollama_chat(list/messages, temp, datum/callback/cb)
 	var/base_url = CONFIG_GET(string/ai_secretary_url)
 	var/auth_token = CONFIG_GET(string/ai_secretary_token) // Load token
-	if(!base_url) return
+	var/model = CONFIG_GET(string/ai_secretary_model)
+	if(!base_url || !model) return
 
 	// We use /api/chat now
 	var/url = "[base_url]/api/chat"
 
 	var/list/payload = list(
-		"model" = OLLAMA_MODEL,
+		"model" = model,
 		"messages" = messages,
 		"stream" = FALSE,
 		"format" = "json", // Force JSON output
@@ -313,11 +312,14 @@ GLOBAL_DATUM_INIT(global_ai_bridge, /datum/ai_bridge, new)
 /datum/config_entry/string/ai_secretary_token
 	protection = CONFIG_ENTRY_LOCKED
 
+/datum/config_entry/string/ai_secretary_model
+	default = "gpt-oss:20b-cloud"
+	protection = CONFIG_ENTRY_LOCKED
+
 #undef URGENCY_COLOR_LOW
 #undef URGENCY_COLOR_MEDIUM
 #undef URGENCY_COLOR_HIGH
 #undef URGENCY_COLOR_CRITICAL
-#undef OLLAMA_MODEL
 #undef DEFAULT_ANALYZE_PROMPT
 #undef DEFAULT_REPLY_PROMPT
 #undef FAX_TEMPLATE_FILE

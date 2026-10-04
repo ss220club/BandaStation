@@ -59,16 +59,22 @@
 	SEND_SIGNAL(src, COMSIG_MOVELOOP_START)
 	status |= MOVELOOP_STATUS_RUNNING
 	//If this is our first time starting to move with this loop
-	//And we're meant to start instantly
+	//And we want to start consistently fast
 	if(!timer && flags & MOVEMENT_LOOP_START_FAST)
-		timer = world.time
+		// + tick_lag because we want to avoid weird jumping in atoms that were just created (and avoid inconsistencies around subsystem timing)
+		timer = NEXT_VISUAL_TICK + world.tick_lag
 		return
-	timer = world.time + delay
+	//And we're meant to start instantly
+	if(!timer && flags & MOVEMENT_LOOP_START_INSTANT)
+		timer = NEXT_VISUAL_TICK
+		return
+	timer = NEXT_VISUAL_TICK + delay
 
 ///Called when a loop is stopped, doesn't stop the loop itself
 /datum/move_loop/proc/loop_stopped()
 	SHOULD_CALL_PARENT(TRUE)
 	status &= ~MOVELOOP_STATUS_RUNNING
+	EVLOG_TEXT(moving, EVLOG_CATEGORY_MOVELOOPS, "Moveloop stopped")
 	SEND_SIGNAL(src, COMSIG_MOVELOOP_STOP)
 
 /datum/move_loop/proc/info_deleted(datum/source)
@@ -122,9 +128,12 @@
 
 	owner?.processing_move_loop_flags = flags
 	var/result = move() //Result is an enum value. Enums defined in __DEFINES/movement.dm
+
 	if(moving)
 		var/direction = get_dir(old_loc, moving.loc)
 		SEND_SIGNAL(moving, COMSIG_MOVABLE_MOVED_FROM_LOOP, src, old_dir, direction)
+		if(result)
+			EVLOG_PATH(moving, EVLOG_CATEGORY_MOVELOOPS, "Moved using [src]", list(old_loc, moving.loc)) //You might think, this runs a lot; but if not logging, it only does a lookup on the event logger.
 	owner?.processing_move_loop_flags = NONE
 
 	SEND_SIGNAL(src, COMSIG_MOVELOOP_POSTPROCESS, result, delay * visual_delay)
@@ -409,8 +418,11 @@
 	. = ..()
 	movement_path = null
 
+
 /datum/move_loop/has_target/jps/Destroy()
 	avoid = null
+	// Pending pathfinds share this list so we need to clear it to release their callbacks to us
+	on_finish_callbacks.Cut()
 	on_finish_callbacks = null
 	return ..()
 
@@ -427,6 +439,8 @@
 /datum/move_loop/has_target/jps/proc/on_finish_pathing(list/path)
 	movement_path = path
 	is_pathing = FALSE
+	if(moving)
+		EVLOG_PATH(moving, EVLOG_CATEGORY_JPS, "Planned AI path", movement_path)
 	SEND_SIGNAL(src, COMSIG_MOVELOOP_JPS_FINISHED_PATHING, path)
 
 /datum/move_loop/has_target/jps/move()
@@ -434,12 +448,17 @@
 		if(is_pathing)
 			return MOVELOOP_NOT_READY
 		else
+			EVLOG_TEXT(moving, EVLOG_CATEGORY_JPS, "Path recalculating due to lack of path")
 			INVOKE_ASYNC(src, PROC_REF(recalculate_path))
 			return MOVELOOP_FAILURE
 
 	var/turf/next_step = movement_path[1]
 	var/atom/old_loc = moving.loc
 	moving.Move(next_step, get_dir(moving, next_step), FALSE, !(flags & MOVEMENT_LOOP_NO_DIR_UPDATE))
+	// Movement callbacks can stop this loop or delete its mover or target.
+	if(QDELETED(src))
+		return MOVELOOP_FAILURE
+
 	. = (old_loc != moving?.loc) ? MOVELOOP_SUCCESS : MOVELOOP_FAILURE
 
 	// this check if we're on exactly the next tile may be overly brittle for dense objects who may get bumped slightly
@@ -448,6 +467,95 @@
 		if(length(movement_path))
 			movement_path.Cut(1,2)
 	else
+		return handle_move_attempt_failure()
+
+
+/datum/move_loop/has_target/jps/proc/handle_move_attempt_failure()
+	EVLOG_TEXT(moving, EVLOG_CATEGORY_MOVELOOPS, "Path recalculating due to obstruction")
+	INVOKE_ASYNC(src, PROC_REF(recalculate_path))
+	return MOVELOOP_FAILURE
+
+/datum/move_loop/has_target/jps/frustrations
+	///maximum amount of frustrations before we recalculate path
+	var/maximum_frustrations
+	///what is our current frustration?
+	var/current_frustrations = 0
+	///how long before we're able to increment frustration?
+	var/frustration_delay
+	///have we drawn our initial path?
+	var/initial_path_drawn = FALSE
+	///cooldown between frustration increments
+	COOLDOWN_DECLARE(frustration_cooldown)
+
+
+/datum/move_manager/proc/frustrations_move(moving,
+	chasing,
+	delay,
+	timeout,
+	repath_delay,
+	max_path_length,
+	minimum_distance,
+	list/access,
+	simulated_only,
+	turf/avoid,
+	skip_first,
+	subsystem,
+	diagonal_handling,
+	priority,
+	flags,
+	datum/extra_info,
+	initial_path)
+	return add_to_loop(moving,
+		subsystem,
+		/datum/move_loop/has_target/jps/frustrations,
+		priority,
+		flags,
+		extra_info,
+		delay,
+		timeout,
+		chasing,
+		repath_delay,
+		max_path_length,
+		minimum_distance,
+		access,
+		simulated_only,
+		avoid,
+		skip_first,
+		diagonal_handling,
+		initial_path)
+
+/datum/move_loop/has_target/jps/frustrations/setup(delay, timeout, atom/chasing, maximum_frustrations = 10, frustration_delay = 2 SECONDS)
+	. = ..()
+	if(!.)
+		return
+	src.maximum_frustrations = maximum_frustrations
+	src.frustration_delay = frustration_delay
+
+/datum/move_loop/has_target/jps/frustrations/recalculate_path()
+	if(initial_path_drawn && current_frustrations < maximum_frustrations)
+		return
+	return ..()
+
+/datum/move_loop/has_target/jps/frustrations/loop_stopped()
+	. = ..()
+
+/datum/move_loop/has_target/jps/frustrations/on_finish_pathing(list/path)
+	. = ..()
+	if(movement_path)
+		initial_path_drawn = TRUE
+
+/datum/move_loop/has_target/jps/frustrations/handle_move_attempt_failure()
+	if(!initial_path_drawn)
+		INVOKE_ASYNC(src, PROC_REF(recalculate_path))
+		return MOVELOOP_FAILURE
+	if(!COOLDOWN_FINISHED(src, frustration_cooldown))
+		return NONE
+	COOLDOWN_START(src, frustration_cooldown, frustration_delay)
+	current_frustrations++
+	SEND_SIGNAL(src, COMSIG_MOVELOOP_JPS_FRUSTRATION_INCREMENTED, current_frustrations)
+	if(current_frustrations >= maximum_frustrations)
+		current_frustrations = 0
+		EVLOG_TEXT(moving, EVLOG_CATEGORY_MOVELOOPS, "Path recalculating due to obstruction")
 		INVOKE_ASYNC(src, PROC_REF(recalculate_path))
 		return MOVELOOP_FAILURE
 
@@ -655,6 +763,9 @@
 
 /datum/move_loop/has_target/move_towards/proc/handle_move(source, atom/OldLoc, Dir, Forced = FALSE)
 	SIGNAL_HANDLER
+	if(QDELETED(src))
+		return
+
 	if(moving.loc != moving_towards && home) //If we didn't go where we should have, update slope to account for the deviation
 		update_slope()
 
@@ -675,6 +786,8 @@
 **/
 /datum/move_loop/has_target/move_towards/proc/update_slope()
 	SIGNAL_HANDLER
+	if(QDELETED(src))
+		return
 
 	//You'll notice this is rise over run, except we flip the formula upside down depending on the larger number
 	//This is so we never move more then one tile at once
@@ -955,8 +1068,8 @@
 	angle = new_angle
 	x_rate = sin(angle)
 	y_rate = cos(angle)
-	x_sign = SIGN(x_rate)
-	y_sign = SIGN(y_rate)
+	x_sign = sign(x_rate)
+	y_sign = sign(y_rate)
 	x_rate = abs(x_rate)
 	y_rate = abs(y_rate)
 	x_ticker = 0

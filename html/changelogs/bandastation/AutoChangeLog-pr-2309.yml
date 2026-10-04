@@ -1,5 +1,0 @@
-author: "NatWak"
-delete-after: True
-changes:
-  - bugfix: "Исправлен вызов протокола CRAB-17 с помощью подозрительного телефона"
-  - spellcheck: "Исправлены некоторые ошибки в тексте протокола CRAB-17"

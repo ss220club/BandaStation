@@ -1,6 +1,6 @@
 SUBSYSTEM_DEF(http)
 	name = "HTTP"
-	flags = SS_TICKER | SS_BACKGROUND | SS_NO_INIT // Measure in ticks, but also only run if we have the spare CPU.
+	ss_flags = SS_TICKER | SS_BACKGROUND | SS_NO_INIT // Measure in ticks, but also only run if we have the spare CPU.
 	init_stage = INITSTAGE_FIRST
 	wait = 1
 	runlevels = RUNLEVELS_DEFAULT | RUNLEVEL_LOBBY // All the time

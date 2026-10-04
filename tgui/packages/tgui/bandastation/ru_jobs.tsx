@@ -1,6 +1,6 @@
 export const JOBS_RU = {
   Assistant: 'Ассистент',
-  Prisoner: 'Заключенный',
+  Prisoner: 'Заключённый',
   Captain: 'Капитан',
   'Head of Personnel': 'Глава персонала',
   'Head of Security': 'Глава службы безопасности',

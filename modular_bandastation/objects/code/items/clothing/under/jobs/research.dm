@@ -33,3 +33,14 @@
 	icon_state = "robotics_skirt_red"
 	female_sprite_flags = FEMALE_UNIFORM_TOP_ONLY
 	can_adjust = FALSE
+
+/obj/item/clothing/under/scientist/utility
+	name = "science utility uniform"
+	icon = 'modular_bandastation/objects/icons/obj/clothing/under/rnd.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/under/rnd.dmi'
+	icon_state = "util_sci"
+	female_sprite_flags = FEMALE_UNIFORM_TOP_ONLY
+	alt_covers_chest = TRUE
+
+/obj/item/clothing/under/rank/rnd/research_director/turtleneck
+	female_version = /datum/female_uniform/turtleneck

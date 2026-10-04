@@ -3,6 +3,7 @@
 /obj/machinery/computer/security
 	name = "security camera console"
 	desc = "Used to access the various cameras on the station."
+	icon_state = MAP_SWITCH("computer", "/obj/machinery/computer/warrant")
 	icon_screen = "cameras"
 	icon_keyboard = "security_key"
 	circuit = /obj/item/circuitboard/computer/security
@@ -102,6 +103,7 @@
 		active_camera?.on_stop_watching(src)
 		var/obj/machinery/camera/selected_camera = locate(params["camera"]) in SScameras.cameras
 		active_camera = selected_camera
+		cam_screen.set_display(active_camera)
 
 		if(isnull(active_camera))
 			return TRUE
@@ -110,6 +112,17 @@
 		update_active_camera_screen()
 
 		return TRUE
+
+// BANDASTATION ADDITION: Bodycam
+/obj/machinery/computer/security/proc/on_camera_disabled(obj/machinery/camera/camera)
+	if(active_camera != camera)
+		return
+	active_camera.on_stop_watching(src)
+	active_camera = null
+	last_camera_turf = null
+	update_active_camera_screen()
+	SStgui.update_uis(src)
+// BANDASTATION ADDITION END: Bodycam
 
 /obj/machinery/computer/security/proc/update_active_camera_screen()
 	// Show static if can't use the camera
@@ -156,6 +169,7 @@
 	if(length(concurrent_users) == 0 && is_living)
 		active_camera?.on_stop_watching(src)
 		active_camera = null
+		cam_screen?.set_display(null)
 		last_camera_turf = null
 		playsound(src, 'sound/machines/terminal/terminal_off.ogg', 25, FALSE)
 
@@ -191,7 +205,7 @@
 /obj/machinery/computer/security/wooden_tv
 	name = "security camera monitor"
 	desc = "An old TV hooked into the station's camera network."
-	icon_state = "television"
+	icon_state = MAP_SWITCH("television", "/obj/machinery/computer/security/wooden_tv")
 	icon_keyboard = null
 	icon_screen = "detective_tv"
 	pass_flags = PASSTABLE
@@ -199,6 +213,7 @@
 /obj/machinery/computer/security/mining
 	name = "outpost camera console"
 	desc = "Used to access the various cameras on the outpost."
+	icon_state = MAP_SWITCH("computer", "/obj/machinery/computer/security/mining")
 	icon_screen = "mining"
 	icon_keyboard = "mining_key"
 	network = list(CAMERANET_NETWORK_MINE, CAMERANET_NETWORK_AUXBASE)

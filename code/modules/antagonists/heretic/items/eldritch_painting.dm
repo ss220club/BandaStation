@@ -1,7 +1,7 @@
 // The basic eldritch painting
 /obj/item/wallframe/painting/eldritch
 	name = "The Blank Canvas: A Study in Default Subtypes"
-	desc = "An impossible painting made of impossible paint. It should not exist in this reality."
+	desc = "Картина невозможного, созданная невозможной краской. Ей не место в этой реальности."
 	icon = 'icons/obj/signs.dmi'
 	resistance_flags = FLAMMABLE
 	flags_1 = NONE
@@ -11,7 +11,7 @@
 
 /obj/structure/sign/painting/eldritch
 	name = "The Blank Canvas: A Study in Default Subtypes"
-	desc = "An impossible painting made of impossible paint. It should not exist in this reality."
+	desc = "Картина невозможного, созданная невозможной краской. Ей не место в этой реальности."
 	icon = 'icons/obj/signs.dmi'
 	icon_state = "eldritch_painting_debug"
 	custom_materials = list(/datum/material/wood =SHEET_MATERIAL_AMOUNT)
@@ -38,7 +38,7 @@
 	SIGNAL_HANDLER
 	if(!isliving(viewer) || !can_see(viewer, src, range))
 		return
-	if(isnull(viewer.mind) || isnull(viewer.mob_mood) || viewer.stat != CONSCIOUS || viewer.is_blind())
+	if(isnull(viewer.mind) || isnull(viewer.mob_mood) || IS_UNCONSCIOUS_OR_CRIT(viewer) || viewer.is_blind())
 		return
 	if(viewer.has_status_effect(applied_status_effect))
 		return
@@ -173,8 +173,8 @@
 	)
 	// Poppy and harebell are used in heretic rituals
 	var/list/items_to_spawn = list(
-		/obj/item/food/grown/poppy,
-		/obj/item/food/grown/harebell,
+		/obj/item/food/grown/flower/poppy,
+		/obj/item/food/grown/flower/harebell,
 	)
 
 /obj/structure/sign/painting/eldritch/vines/Initialize(mapload)

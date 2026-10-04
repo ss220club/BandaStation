@@ -470,6 +470,9 @@
 	sharpness = NONE
 	embed_type = null
 
+/obj/projectile/bullet/incendiary/c9mm
+	leaves_fire_trail = FALSE
+
 // MARK: 10mm
 /obj/projectile/bullet/c10mm/rubber
 	name = "10mm rubber bullet"
@@ -640,3 +643,22 @@
 	damage = 60
 	armour_penetration = 40
 	wound_falloff_tile = -1
+
+//MARK: Shotgun shells
+/obj/projectile/bullet/shotgun_breaching/on_hit(atom/target, blocked = 0, pierce_hit)
+	if(istype(target, /obj/structure/blob) || istype(target, /obj/structure/carp_rift) || istype(target, /obj/vehicle))
+		target.take_damage(30, damage_type, 0)
+		return BULLET_ACT_BLOCK
+	return ..()
+
+//MARK: NTR cane projectile
+
+/obj/projectile/bullet/nt_cane_diamond
+	name = "diamond shot"
+	icon = 'icons/obj/weapons/guns/projectiles.dmi'
+	icon_state = "energy2"
+	damage = 35
+	speed = 2.5
+	armour_penetration = 10
+	paralyze = 5
+	damage_type = BRUTE

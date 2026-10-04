@@ -81,11 +81,11 @@ required_map = "DeltaStation2.dmm"
 coordinates = [173, 94, 1]
 trait_name = "Station"
 
-[templates.deltastation_armory_hammer]
-map_files = ["deltastation_armory_hammer.dmm"]
+[templates.deltastation_armory_guns]
+map_files = ["deltastation_armory_guns.dmm"]
 directory = "_maps/bandastation/automapper/templates/deltastation/"
 required_map = "DeltaStation2.dmm"
-coordinates = [208, 128, 1]
+coordinates = [208, 130, 1]
 trait_name = "Station"
 
 [templates.deltastation_kitchen_zoo]
@@ -100,13 +100,6 @@ map_files = ["deltastation_rat_disposal.dmm"]
 directory = "_maps/bandastation/automapper/templates/deltastation/"
 required_map = "DeltaStation2.dmm"
 coordinates = [183, 185, 1]
-trait_name = "Station"
-
-[templates.deltastation_robo_mech_core]
-map_files = ["deltastation_robo_mech_core.dmm"]
-directory = "_maps/bandastation/automapper/templates/deltastation/"
-required_map = "DeltaStation2.dmm"
-coordinates = [122, 111, 1]
 trait_name = "Station"
 
 [templates.deltastation_rd_photocopier]
@@ -128,6 +121,20 @@ map_files = ["deltastation_med_stasis.dmm"]
 directory = "_maps/bandastation/automapper/templates/deltastation/"
 required_map = "DeltaStation2.dmm"
 coordinates = [155, 85, 1]
+trait_name = "Station"
+
+[templates.deltastation_sec_closet]
+map_files = ["deltastation_sec_closet.dmm"]
+directory = "_maps/bandastation/automapper/templates/deltastation/"
+required_map = "DeltaStation2.dmm"
+coordinates = [204, 123, 1]
+trait_name = "Station"
+
+[templates.deltastation_wrynroach]
+map_files = ["deltastation_wrynroach.dmm"]
+directory = "_maps/bandastation/automapper/templates/deltastation/"
+required_map = "DeltaStation2.dmm"
+coordinates = [115, 56, 1]
 trait_name = "Station"
 
 # MetaStation
@@ -201,11 +208,11 @@ required_map = "MetaStation.dmm"
 coordinates = [85, 129, 1]
 trait_name = "Station"
 
-[templates.metastation_armory_hammer]
-map_files = ["metastation_armory_hammer.dmm"]
+[templates.metastation_armory_guns]
+map_files = ["metastation_armory_guns.dmm"]
 directory = "_maps/bandastation/automapper/templates/metastation/"
 required_map = "MetaStation.dmm"
-coordinates = [108, 171, 1]
+coordinates = [105, 171, 1]
 trait_name = "Station"
 
 [templates.metastation_kitchen_zoo]
@@ -220,13 +227,6 @@ map_files = ["metastation_rat_disposal.dmm"]
 directory = "_maps/bandastation/automapper/templates/metastation/"
 required_map = "MetaStation.dmm"
 coordinates = [70, 177, 1]
-trait_name = "Station"
-
-[templates.metastation_robo_mech_core]
-map_files = ["metastation_robo_mech_core.dmm"]
-directory = "_maps/bandastation/automapper/templates/metastation/"
-required_map = "MetaStation.dmm"
-coordinates = [110, 96, 1]
 trait_name = "Station"
 
 [templates.metastation_ce_photocopier]
@@ -262,6 +262,20 @@ map_files = ["metastation_med_stasis.dmm"]
 directory = "_maps/bandastation/automapper/templates/metastation/"
 required_map = "MetaStation.dmm"
 coordinates = [78, 104, 1]
+trait_name = "Station"
+
+[templates.metastation_sec_closet]
+map_files = ["metastation_sec_closet.dmm"]
+directory = "_maps/bandastation/automapper/templates/metastation/"
+required_map = "MetaStation.dmm"
+coordinates = [112, 172, 1]
+trait_name = "Station"
+
+[templates.metastation_wrynroach]
+map_files = ["metastation_wrynroach.dmm"]
+directory = "_maps/bandastation/automapper/templates/metastation/"
+required_map = "MetaStation.dmm"
+coordinates = [67, 103, 1]
 trait_name = "Station"
 
 # IceBoxStation
@@ -325,7 +339,7 @@ trait_name = "Station"
 map_files = ["iceboxstation_gamma_port.dmm"]
 directory = "_maps/bandastation/automapper/templates/iceboxstation/"
 required_map = "IceBoxStation.dmm"
-coordinates = [91, 181, 3]
+coordinates = [90, 180, 3]
 trait_name = "Station"
 
 [templates.iceboxstation_library_galactic_map]
@@ -342,11 +356,18 @@ required_map = "IceBoxStation.dmm"
 coordinates = [100, 128, 3]
 trait_name = "Station"
 
-[templates.iceboxstation_armory_hammer]
-map_files = ["iceboxstation_armory_hammer.dmm"]
+[templates.iceboxstation_armory_guns]
+map_files = ["iceboxstation_armory_guns.dmm"]
 directory = "_maps/bandastation/automapper/templates/iceboxstation/"
 required_map = "IceBoxStation.dmm"
-coordinates = [105, 182, 2]
+coordinates = [102, 178, 2]
+trait_name = "Station"
+
+[templates.iceboxstation_armory_guns2]
+map_files = ["iceboxstation_armory_guns2.dmm"]
+directory = "_maps/bandastation/automapper/templates/iceboxstation/"
+required_map = "IceBoxStation.dmm"
+coordinates = [102, 179, 3]
 trait_name = "Station"
 
 [templates.iceboxstation_kitchen_zoo]
@@ -361,13 +382,6 @@ map_files = ["iceboxstation_rat_disposal.dmm"]
 directory = "_maps/bandastation/automapper/templates/iceboxstation/"
 required_map = "IceBoxStation.dmm"
 coordinates = [73, 141, 2]
-trait_name = "Station"
-
-[templates.iceboxstation_robo_mech_core]
-map_files = ["iceboxstation_robo_mech_core.dmm"]
-directory = "_maps/bandastation/automapper/templates/iceboxstation/"
-required_map = "IceBoxStation.dmm"
-coordinates = [177, 120, 3]
 trait_name = "Station"
 
 [templates.iceboxstation_cmo_photocopier]
@@ -417,6 +431,34 @@ map_files = ["iceboxstation_med_stasis.dmm"]
 directory = "_maps/bandastation/automapper/templates/iceboxstation/"
 required_map = "IceBoxStation.dmm"
 coordinates = [141, 116, 3]
+trait_name = "Station"
+
+[templates.iceboxstation_sec_closet]
+map_files = ["iceboxstation_sec_closet.dmm"]
+directory = "_maps/bandastation/automapper/templates/iceboxstation/"
+required_map = "IceBoxStation.dmm"
+coordinates = [110, 183, 3]
+trait_name = "Station"
+
+[templates.iceboxstation_wrynroach]
+map_files = ["iceboxstation_wrynroach.dmm"]
+directory = "_maps/bandastation/automapper/templates/iceboxstation/"
+required_map = "IceBoxStation.dmm"
+coordinates = [179, 162, 3]
+trait_name = "Station"
+
+[templates.iceboxstation_chaplain_cemetery]
+map_files = ["iceboxstation_chaplain_cemetery.dmm"]
+directory = "_maps/bandastation/automapper/templates/iceboxstation/"
+required_map = "IceBoxStation.dmm"
+coordinates = [166, 131, 2]
+trait_name = "Station"
+
+[templates.iceboxstation_eng_animals]
+map_files = ["iceboxstation_eng_animals.dmm"]
+directory = "_maps/bandastation/automapper/templates/iceboxstation/"
+required_map = "IceBoxStation.dmm"
+coordinates = [119, 87, 3]
 trait_name = "Station"
 
 # TramStation
@@ -483,11 +525,11 @@ required_map = "tramstation.dmm"
 coordinates = [54, 96, 2]
 trait_name = "Station"
 
-[templates.tramstation_armory_hammer]
-map_files = ["tramstation_armory_hammer.dmm"]
+[templates.tramstation_armory_guns]
+map_files = ["tramstation_armory_guns.dmm"]
 directory = "_maps/bandastation/automapper/templates/tramstation/"
 required_map = "tramstation.dmm"
-coordinates = [68, 165, 2]
+coordinates = [68, 164, 2]
 trait_name = "Station"
 
 [templates.tramstation_kitchen_zoo]
@@ -502,13 +544,6 @@ map_files = ["tramstation_rat_disposal.dmm"]
 directory = "_maps/bandastation/automapper/templates/tramstation/"
 required_map = "tramstation.dmm"
 coordinates = [187, 133, 1]
-trait_name = "Station"
-
-[templates.tramstation_robo_mech_core]
-map_files = ["tramstation_robo_mech_core.dmm"]
-directory = "_maps/bandastation/automapper/templates/tramstation/"
-required_map = "tramstation.dmm"
-coordinates = [169, 102, 2]
 trait_name = "Station"
 
 [templates.tramstation_hos_photocopier]
@@ -553,11 +588,39 @@ required_map = "tramstation.dmm"
 coordinates = [170, 132, 2]
 trait_name = "Station"
 
+[templates.tramstation_argos_port]
+map_files = ["tramstation_argos_port.dmm"]
+directory = "_maps/bandastation/automapper/templates/tramstation/"
+required_map = "tramstation.dmm"
+coordinates = [23, 130, 2]
+trait_name = "Station"
+
+[templates.tramstation_specops_port]
+map_files = ["tramstation_specops_port.dmm"]
+directory = "_maps/bandastation/automapper/templates/tramstation/"
+required_map = "tramstation.dmm"
+coordinates = [9, 114, 2]
+trait_name = "Station"
+
 [templates.tramstation_med_stasis]
 map_files = ["tramstation_med_stasis.dmm"]
 directory = "_maps/bandastation/automapper/templates/tramstation/"
 required_map = "tramstation.dmm"
 coordinates = [121, 101, 2]
+trait_name = "Station"
+
+[templates.tramstation_sec_closet]
+map_files = ["tramstation_sec_closet.dmm"]
+directory = "_maps/bandastation/automapper/templates/tramstation/"
+required_map = "tramstation.dmm"
+coordinates = [86, 169, 2]
+trait_name = "Station"
+
+[templates.tramstation_wrynroach]
+map_files = ["tramstation_wrynroach.dmm"]
+directory = "_maps/bandastation/automapper/templates/tramstation/"
+required_map = "tramstation.dmm"
+coordinates = [135, 131, 1]
 trait_name = "Station"
 
 # Birdshot
@@ -590,16 +653,278 @@ required_map = "NebulaStation.dmm"
 coordinates = [154, 86, 2]
 trait_name = "Station"
 
-[templates.tramstation_argos_port]
-map_files = ["tramstation_argos_port.dmm"]
-directory = "_maps/bandastation/automapper/templates/tramstation/"
-required_map = "tramstation.dmm"
-coordinates = [23, 130, 2]
+[templates.nebulastation_gamma_port]
+map_files = ["nebulastation_gamma_port.dmm"]
+directory = "_maps/bandastation/automapper/templates/nebulastation/"
+required_map = "NebulaStation.dmm"
+coordinates = [162, 116, 1]
 trait_name = "Station"
 
-[templates.tramstation_specops_port]
-map_files = ["tramstation_specops_port.dmm"]
-directory = "_maps/bandastation/automapper/templates/tramstation/"
-required_map = "tramstation.dmm"
-coordinates = [9, 114, 2]
+[templates.nebulastation_rd_photocopier]
+map_files = ["nebulastation_rd_photocopier.dmm"]
+directory = "_maps/bandastation/automapper/templates/nebulastation/"
+required_map = "NebulaStation.dmm"
+coordinates = [144, 169, 1]
+trait_name = "Station"
+
+[templates.nebulastation_cmo_photocopier]
+map_files = ["nebulastation_cmo_photocopier.dmm"]
+directory = "_maps/bandastation/automapper/templates/nebulastation/"
+required_map = "NebulaStation.dmm"
+coordinates = [111, 173, 1]
+trait_name = "Station"
+
+[templates.nebulastation_library_galactic_map]
+map_files = ["nebulastation_library_galactic_map.dmm"]
+directory = "_maps/bandastation/automapper/templates/nebulastation/"
+required_map = "NebulaStation.dmm"
+coordinates = [99, 127, 1]
+trait_name = "Station"
+
+[templates.nebulastation_meeting_room]
+map_files = ["nebulastation_meeting_room.dmm"]
+directory = "_maps/bandastation/automapper/templates/nebulastation/"
+required_map = "NebulaStation.dmm"
+coordinates = [201, 128, 1]
+trait_name = "Station"
+
+[templates.nebulastation_ntr_blueshield_office]
+map_files = ["nebulastation_ntr_blueshield_office.dmm"]
+directory = "_maps/bandastation/automapper/templates/nebulastation/"
+required_map = "NebulaStation.dmm"
+coordinates = [178, 140, 1]
+trait_name = "Station"
+
+[templates.nebulastation_magistrate_office]
+map_files = ["nebulastation_magistrate_office.dmm"]
+directory = "_maps/bandastation/automapper/templates/nebulastation/"
+required_map = "NebulaStation.dmm"
+coordinates = [152, 130, 2]
+trait_name = "Station"
+
+[templates.nebulastation_rat_disposal]
+map_files = ["nebulastation_rat_disposal.dmm"]
+directory = "_maps/bandastation/automapper/templates/nebulastation/"
+required_map = "NebulaStation.dmm"
+coordinates = [97, 107, 2]
+trait_name = "Station"
+
+[templates.nebulastation_kitchen_zoo]
+map_files = ["nebulastation_kitchen_zoo.dmm"]
+directory = "_maps/bandastation/automapper/templates/nebulastation/"
+required_map = "NebulaStation.dmm"
+coordinates = [69, 149, 2]
+trait_name = "Station"
+
+[templates.nebulastation_argos_specops_ports]
+map_files = ["nebulastation_argos_specops_ports.dmm"]
+directory = "_maps/bandastation/automapper/templates/nebulastation/"
+required_map = "NebulaStation.dmm"
+coordinates = [204, 136, 1]
+trait_name = "Station"
+
+[templates.nebulastation_med_stasis]
+map_files = ["nebulastation_med_stasis.dmm"]
+directory = "_maps/bandastation/automapper/templates/nebulastation/"
+required_map = "NebulaStation.dmm"
+coordinates = [101, 162, 2]
+trait_name = "Station"
+
+[templates.nebulastation_sec_closet]
+map_files = ["nebulastation_sec_closet.dmm"]
+directory = "_maps/bandastation/automapper/templates/nebulastation/"
+required_map = "NebulaStation.dmm"
+coordinates = [169, 114, 1]
+trait_name = "Station"
+
+[templates.nebulastation_wrynroach]
+map_files = ["nebulastation_wrynroach.dmm"]
+directory = "_maps/bandastation/automapper/templates/nebulastation/"
+required_map = "NebulaStation.dmm"
+coordinates = [172, 150, 1]
+trait_name = "Station"
+
+[templates.nebulastation_safe]
+map_files = ["nebulastation_safe.dmm"]
+directory = "_maps/bandastation/automapper/templates/nebulastation/"
+required_map = "NebulaStation.dmm"
+coordinates = [175, 149, 1]
+trait_name = "Station"
+
+# wawastation
+[templates.wawastation_perma_cryo]
+map_files = ["wawastation_perma_cryo.dmm"]
+directory = "_maps/bandastation/automapper/templates/wawastation/"
+required_map = "wawastation.dmm"
+coordinates = [61, 149, 1]
+trait_name = "Station"
+
+[templates.wawastation_armory_gamma]
+map_files = ["wawastation_armory_gamma.dmm"]
+directory = "_maps/bandastation/automapper/templates/wawastation/"
+required_map = "wawastation.dmm"
+coordinates = [63, 125, 2]
+trait_name = "Station"
+
+[templates.wawastation_bridge_map]
+map_files = ["wawastation_bridge_map.dmm"]
+directory = "_maps/bandastation/automapper/templates/wawastation/"
+required_map = "wawastation.dmm"
+coordinates = [105, 138, 2]
+trait_name = "Station"
+
+[templates.wawastation_argos_specops]
+map_files = ["wawastation_argos_specops.dmm"]
+directory = "_maps/bandastation/automapper/templates/wawastation/"
+required_map = "wawastation.dmm"
+coordinates = [95, 59, 2]
+trait_name = "Station"
+
+[templates.wawastation_library_map]
+map_files = ["wawastation_library_map.dmm"]
+directory = "_maps/bandastation/automapper/templates/wawastation/"
+required_map = "wawastation.dmm"
+coordinates = [115, 96, 2]
+trait_name = "Station"
+
+[templates.wawastation_bridge_ntr_bs_hp]
+map_files = ["wawastation_bridge_ntr_bs_hp.dmm"]
+directory = "_maps/bandastation/automapper/templates/wawastation/"
+required_map = "wawastation.dmm"
+coordinates = [92, 120, 1]
+trait_name = "Station"
+
+[templates.wawastation_magistrate]
+map_files = ["wawastation_magistrate.dmm"]
+directory = "_maps/bandastation/automapper/templates/wawastation/"
+required_map = "wawastation.dmm"
+coordinates = [81, 118, 1]
+trait_name = "Station"
+
+[templates.wawastation_lawyer]
+map_files = ["wawastation_lawyer.dmm"]
+directory = "_maps/bandastation/automapper/templates/wawastation/"
+required_map = "wawastation.dmm"
+coordinates = [86, 99, 1]
+trait_name = "Station"
+
+[templates.wawastation_cryo]
+map_files = ["wawastation_cryo.dmm"]
+directory = "_maps/bandastation/automapper/templates/wawastation/"
+required_map = "wawastation.dmm"
+coordinates = [113, 110, 1]
+trait_name = "Station"
+
+[templates.wawastation_rat]
+map_files = ["wawastation_rat.dmm"]
+directory = "_maps/bandastation/automapper/templates/wawastation/"
+required_map = "wawastation.dmm"
+coordinates = [51, 120, 1]
+trait_name = "Station"
+
+[templates.wawastation_stasis]
+map_files = ["wawastation_stasis.dmm"]
+directory = "_maps/bandastation/automapper/templates/wawastation/"
+required_map = "wawastation.dmm"
+coordinates = [58, 71, 1]
+trait_name = "Station"
+
+[templates.wawastation_zoo]
+map_files = ["wawastation_zoo.dmm"]
+directory = "_maps/bandastation/automapper/templates/wawastation/"
+required_map = "wawastation.dmm"
+coordinates = [94, 95, 1]
+trait_name = "Station"
+
+[templates.wawastation_sec_closet]
+map_files = ["wawastation_sec_closet.dmm"]
+directory = "_maps/bandastation/automapper/templates/wawastation/"
+required_map = "wawastation.dmm"
+coordinates = [71, 141, 1]
+trait_name = "Station"
+
+[templates.wawastation_wrynroach]
+map_files = ["wawastation_wrynroach.dmm"]
+directory = "_maps/bandastation/automapper/templates/wawastation/"
+required_map = "wawastation.dmm"
+coordinates = [39, 80, 1]
+trait_name = "Station"
+
+# KiloStation
+
+[templates.kilostation_blueshield_zoo]
+map_files = ["kilostation_blueshield_zoo.dmm"]
+directory = "_maps/bandastation/automapper/templates/kilostation/"
+required_map = "KiloStation.dmm"
+coordinates = [121, 113, 1]
+trait_name = "Station"
+
+[templates.kilostation_ntr]
+map_files = ["kilostation_ntr.dmm"]
+directory = "_maps/bandastation/automapper/templates/kilostation/"
+required_map = "KiloStation.dmm"
+coordinates = [121, 104, 1]
+trait_name = "Station"
+
+[templates.kilostation_magistrate]
+map_files = ["kilostation_magistrate.dmm"]
+directory = "_maps/bandastation/automapper/templates/kilostation/"
+required_map = "KiloStation.dmm"
+coordinates = [104, 112, 1]
+trait_name = "Station"
+
+[templates.kilostation_armory]
+map_files = ["kilostation_armory.dmm"]
+directory = "_maps/bandastation/automapper/templates/kilostation/"
+required_map = "KiloStation.dmm"
+coordinates = [78, 68, 1]
+trait_name = "Station"
+
+[templates.kilostation_perma_cryo]
+map_files = ["kilostation_perma_cryo.dmm"]
+directory = "_maps/bandastation/automapper/templates/kilostation/"
+required_map = "KiloStation.dmm"
+coordinates = [32, 95, 1]
+trait_name = "Station"
+
+[templates.kilostation_cryo]
+map_files = ["kilostation_cryo.dmm"]
+directory = "_maps/bandastation/automapper/templates/kilostation/"
+required_map = "KiloStation.dmm"
+coordinates = [72, 111, 1]
+trait_name = "Station"
+
+[templates.kilostation_med_stasis]
+map_files = ["kilostation_med_stasis.dmm"]
+directory = "_maps/bandastation/automapper/templates/kilostation/"
+required_map = "KiloStation.dmm"
+coordinates = [75, 139, 1]
+trait_name = "Station"
+
+[templates.kilostation_library_galactic_map]
+map_files = ["kilostation_library_galactic_map.dmm"]
+directory = "_maps/bandastation/automapper/templates/kilostation/"
+required_map = "KiloStation.dmm"
+coordinates = [97, 128, 1]
+trait_name = "Station"
+
+[templates.kilostation_bridge_galactic_map]
+map_files = ["kilostation_bridge_galactic_map.dmm"]
+directory = "_maps/bandastation/automapper/templates/kilostation/"
+required_map = "KiloStation.dmm"
+coordinates = [117, 110, 1]
+trait_name = "Station"
+
+[templates.kilostation_rat_disposal]
+map_files = ["kilostation_rat_disposal.dmm"]
+directory = "_maps/bandastation/automapper/templates/kilostation/"
+required_map = "KiloStation.dmm"
+coordinates = [145, 98, 1]
+trait_name = "Station"
+
+[templates.kilostation_wrynroach]
+map_files = ["kilostation_wrynroach.dmm"]
+directory = "_maps/bandastation/automapper/templates/kilostation/"
+required_map = "KiloStation.dmm"
+coordinates = [127, 151, 1]
 trait_name = "Station"

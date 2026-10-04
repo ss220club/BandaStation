@@ -42,21 +42,23 @@
 /obj/item/bodypart/leg/left/digitigrade/vulpkanin
 	icon_greyscale = 'icons/bandastation/mob/species/vulpkanin/bodyparts.dmi'
 	limb_id = BODYPART_ID_DIGITIGRADE
-	bodyshape = BODYSHAPE_DIGITIGRADE
+	species_id = SPECIES_VULPKANIN
+	bodyshape = BODYSHAPE_HUMANOID
 	footprint_sprite = FOOTPRINT_SPRITE_CLAWS
 	footstep_type = FOOTSTEP_MOB_CLAW
 
-/obj/item/bodypart/leg/left/digitigrade/vulpkanin/update_limb(dropping_limb = FALSE, is_creating = FALSE)
+/obj/item/bodypart/leg/left/digitigrade/vulpkanin/Initialize(mapload)
 	. = ..()
-	limb_id = owner?.is_digitigrade_squished() ? SPECIES_VULPKANIN : BODYPART_ID_DIGITIGRADE
+	AddComponent(/datum/component/digitigrade_limb, SPECIES_VULPKANIN, initial(limb_id))
 
 /obj/item/bodypart/leg/right/digitigrade/vulpkanin
 	icon_greyscale = 'icons/bandastation/mob/species/vulpkanin/bodyparts.dmi'
 	limb_id = BODYPART_ID_DIGITIGRADE
-	bodyshape = BODYSHAPE_DIGITIGRADE
+	species_id = SPECIES_VULPKANIN
+	bodyshape = BODYSHAPE_HUMANOID
 	footprint_sprite = FOOTPRINT_SPRITE_CLAWS
 	footstep_type = FOOTSTEP_MOB_CLAW
 
-/obj/item/bodypart/leg/right/digitigrade/vulpkanin/update_limb(dropping_limb = FALSE, is_creating = FALSE)
+/obj/item/bodypart/leg/right/digitigrade/vulpkanin/Initialize(mapload)
 	. = ..()
-	limb_id = owner?.is_digitigrade_squished() ? SPECIES_VULPKANIN : BODYPART_ID_DIGITIGRADE
+	AddComponent(/datum/component/digitigrade_limb, SPECIES_VULPKANIN, initial(limb_id))

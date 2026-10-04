@@ -1,13 +1,13 @@
 SUBSYSTEM_DEF(automatic_transfer)
 	name = "Automatic Transfer"
-	flags = SS_BACKGROUND
+	ss_flags = SS_BACKGROUND
 	runlevels = RUNLEVEL_GAME
 	/// Time when next crew transfer vote will run
 	COOLDOWN_DECLARE(automatic_crew_transfer_vote_cooldown)
 
 /datum/controller/subsystem/automatic_transfer/Initialize()
 	if(!CONFIG_GET(flag/enable_automatic_crew_transfer))
-		flags |= SS_NO_FIRE
+		ss_flags |= SS_NO_FIRE
 		return SS_INIT_NO_NEED
 
 	if(SSticker.current_state < GAME_STATE_PLAYING)

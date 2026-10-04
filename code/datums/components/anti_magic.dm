@@ -99,15 +99,15 @@
 	SIGNAL_HANDLER
 
 	if(antimagic_flags == ALL_MAGIC_RESISTANCE)
-		examine_list["magic-proof"] = "It is thoroughly shielded against all known forms of magic."
+		examine_list["защищающий от магии"] = "Полностью защищён от всех известных форм магии."
 		return
 
 	if(antimagic_flags & MAGIC_RESISTANCE)
-		examine_list["warded"] = "It possesses a general resistance to regular spells and magic."
+		examine_list["оберегающий"] = "Обладает общей устойчивостью к обычным заклинаниям и магии."
 	if(antimagic_flags & MAGIC_RESISTANCE_MIND)
-		examine_list["telepathy-proof"] = "It appears to be insulated against telepathic or mental influence."
+		examine_list["защищающий от телепатии"] = "Изолирован от телепатического или ментального воздействия."
 	if(antimagic_flags & MAGIC_RESISTANCE_HOLY)
-		examine_list["blessed"] = "It is protected by a divine shield against unholy and dark forms of magic."
+		examine_list["освящённый"] = "Защищён божественным щитом от нечестивой и тёмной магии."
 
 /datum/component/anti_magic/proc/on_equip(atom/movable/source, mob/equipper, slot)
 	SIGNAL_HANDLER

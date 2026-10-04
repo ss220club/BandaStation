@@ -1,9 +1,9 @@
 
 // The shattered remnants of your broken limbs fill you with determination!
 /atom/movable/screen/alert/status_effect/determined
-	name = "Решимость"
+	name = "Determined"
 	desc = "Серьёзные раны, которые вы получили, привели ваше тело в состояние «бей или беги»! Пришло время искать путь отступления!"
-	use_user_hud_icon = TRUE
+	use_user_hud_icon = USER_HUD_STYLE_INHERIT
 	overlay_state = "wounded"
 
 /datum/status_effect/determined
@@ -15,16 +15,42 @@
 	. = ..()
 	owner.visible_message(span_danger("[owner] заметно напрягается, стиснув зубы от боли!"), span_notice("<b>Ваши чувства обостряются, когда тело напрягается от полученных ран!</b>"), \
 		vision_distance=COMBAT_MESSAGE_RANGE)
-	if(ishuman(owner))
-		var/mob/living/carbon/human/human_owner = owner
-		human_owner.physiology.bleed_mod *= WOUND_DETERMINATION_BLEED_MOD
+	MODIFY_PHYSIOLOGY(owner, PHYS_COEFF_BLEED, WOUND_DETERMINATION_BLEED_MOD)
+	RegisterSignal(owner, COMSIG_LIVING_UNARMED_ATTACK, PROC_REF(unarmed_strike))
 
 /datum/status_effect/determined/on_remove()
 	owner.visible_message(span_danger("[owner] заметно обмяк[genderize_ru(owner.gender, "", "ла", "ло", "ли")]!"), span_warning("<b>Прилив адреналина иссякает, и ноющая волна боли от ран возвращается...</b>"), vision_distance=COMBAT_MESSAGE_RANGE)
-	if(ishuman(owner))
-		var/mob/living/carbon/human/human_owner = owner
-		human_owner.physiology.bleed_mod /= WOUND_DETERMINATION_BLEED_MOD
+	MODIFY_PHYSIOLOGY(owner, PHYS_COEFF_BLEED, 1/WOUND_DETERMINATION_BLEED_MOD)
+	UnregisterSignal(owner, COMSIG_LIVING_UNARMED_ATTACK)
 	return ..()
+
+/datum/status_effect/determined/proc/unarmed_strike(mob/living/source, atom/attack_target, proximity, modifiers)
+	SIGNAL_HANDLER
+
+	if(!proximity || !isliving(attack_target))
+		return NONE
+
+	var/obj/item/bodypart/arm = source.get_active_hand()
+	var/datum/wound/bruised/arm_bruises = arm.get_wound_type(/datum/wound/bruised)
+	if(!isnull(arm_bruises))
+		arm_bruises.bruise_ticks = initial(arm_bruises.bruise_ticks)
+		return
+	arm_bruises = new /datum/wound/bruised()
+
+	var/wound_source
+
+	if(LAZYACCESS(modifiers, RIGHT_CLICK))
+		wound_source = "defensive injuries from attempting to ward off"
+	else
+		wound_source = "offensive injuries from attempting to fight"
+
+	if(ishuman(attack_target))
+		wound_source += " a humanoid"
+	else if(issilicon(attack_target))
+		wound_source += " something mechanical"
+	else
+		wound_source += " an animal"
+	arm_bruises.apply_wound(arm, TRUE, wound_source = wound_source)
 
 /datum/status_effect/limp
 	id = "limp"
@@ -79,17 +105,25 @@
 	// less limping while we have determination still
 	var/determined_mod = owner.has_status_effect(/datum/status_effect/determined) ? 0.5 : 1
 
-	if(SEND_SIGNAL(owner, COMSIG_CARBON_LIMPING) & COMPONENT_CANCEL_LIMP)
-		return
-
+	var/obj/item/bodypart/leg_about_to_limp
+	var/limp_chance
+	var/limp_slowdown
 	if(next_leg == left)
-		if(prob(limp_chance_left * determined_mod))
-			owner.client.move_delay += slowdown_left * determined_mod
+		leg_about_to_limp = left
+		limp_chance = limp_chance_left
+		limp_slowdown = slowdown_left
 		next_leg = right
 	else
-		if(prob(limp_chance_right * determined_mod))
-			owner.client.move_delay += slowdown_right * determined_mod
+		leg_about_to_limp = right
+		limp_chance = limp_chance_right
+		limp_slowdown = slowdown_right
 		next_leg = left
+
+	if(SEND_SIGNAL(owner, COMSIG_CARBON_LIMPING, leg_about_to_limp) & COMPONENT_CANCEL_LIMP)
+		return
+
+	if(prob(limp_chance * determined_mod))
+		owner.client.move_delay += limp_slowdown * determined_mod
 
 /// We need to make sure that we properly clear these refs if one of the owner's limbs gets deleted
 /datum/status_effect/limp/proc/on_limb_removed(datum/source, obj/item/bodypart/limb_lost, special, dismembered)
@@ -136,6 +170,31 @@
 	if(!slowdown_left && !slowdown_right)
 		carbon_mob.remove_status_effect(src)
 		return
+
+//Quirk variant of limping. Will always be applied as long as you have a leg to stand on.
+/datum/status_effect/limp/quirk
+	id = "limp_quirk"
+	alert_type = null
+
+/datum/status_effect/limp/quirk/update_limp(datum/source)
+	var/mob/living/carbon/carbon_mob = owner
+	left = carbon_mob.get_bodypart(BODY_ZONE_L_LEG)
+	right = carbon_mob.get_bodypart(BODY_ZONE_R_LEG)
+
+	slowdown_left = 0
+	slowdown_right = 0
+	limp_chance_left = 0
+	limp_chance_right = 0
+
+
+	if(left)
+		slowdown_left = 7 //Same as compound fracture
+		limp_chance_left = 70
+
+	else if(right)
+		slowdown_right = 7
+		limp_chance_right = 70
+
 
 /////////////////////////
 //////// WOUNDS /////////

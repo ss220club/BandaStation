@@ -27,6 +27,7 @@ type Job = {
   used_slots: number;
   prioritized: BooleanLike;
   description: string;
+  jobIcon: string;
 };
 
 type Department = {
@@ -49,6 +50,7 @@ type JobEntryProps = {
   jobName: string;
   job: Job;
   department: Department;
+  jobIcon: string;
   onClick: () => void;
 };
 
@@ -167,6 +169,7 @@ function DepartmentEntry(props: DepartmentEntryProps) {
                 key={name}
                 jobName={name}
                 job={job}
+                jobIcon={job.jobIcon}
                 department={department}
                 onClick={() => {
                   act('select_job', { job: name });

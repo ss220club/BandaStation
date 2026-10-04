@@ -2,7 +2,7 @@
 
 SUBSYSTEM_DEF(sounds)
 	name = "Sounds"
-	flags = SS_NO_FIRE
+	ss_flags = SS_NO_FIRE
 	init_stage = INITSTAGE_EARLY
 	var/static/using_channels_max = CHANNEL_HIGHEST_AVAILABLE //BYOND max channels
 	/// Amount of channels to reserve for random usage rather than reservations being allowed to reserve all channels. Also a nice safeguard for when someone screws up.
@@ -114,28 +114,28 @@ SUBSYSTEM_DEF(sounds)
 	var/text_channel = num2text(channel)
 	var/using = using_channels[text_channel]
 	using_channels -= text_channel
-	if(using != TRUE) // datum channel
+	if(using != DATUMLESS) // datum channel
 		using_channels_by_datum[using] -= channel
 		if(!length(using_channels_by_datum[using]))
-			using_channels_by_datum -= using
+			stop_tracking_datum(using)
 	free_channel(channel)
 
 /// Frees all the channels a datum is using.
-/datum/controller/subsystem/sounds/proc/free_datum_channels(datum/D)
-	var/list/L = using_channels_by_datum[D]
+/datum/controller/subsystem/sounds/proc/free_datum_channels(datum/channel_owner)
+	var/list/L = using_channels_by_datum[channel_owner]
 	if(!L)
 		return
 	for(var/channel in L)
 		using_channels -= num2text(channel)
 		free_channel(channel)
-	using_channels_by_datum -= D
+	stop_tracking_datum(channel_owner)
 
 /// Frees all datumless channels
 /datum/controller/subsystem/sounds/proc/free_datumless_channels()
 	free_datum_channels(DATUMLESS)
 
-/// NO AUTOMATIC CLEANUP - If you use this, you better manually free it later! Returns an integer for channel.
-/datum/controller/subsystem/sounds/proc/reserve_sound_channel_datumless()
+/// Reserve a sound channel. Free it later with free_sound_channel()
+/datum/controller/subsystem/sounds/proc/reserve_sound_channel()
 	. = reserve_channel()
 	if(!.) //oh no..
 		return FALSE
@@ -145,16 +145,19 @@ SUBSYSTEM_DEF(sounds)
 	using_channels_by_datum[DATUMLESS] += .
 
 /// Reserves a channel for a datum. Automatic cleanup only when the datum is deleted. Returns an integer for channel.
-/datum/controller/subsystem/sounds/proc/reserve_sound_channel(datum/D)
-	if(!D) //i don't like typechecks but someone will fuck it up
+/datum/controller/subsystem/sounds/proc/reserve_sound_channel_for_datum(datum/channel_owner)
+	if(!channel_owner) //i don't like typechecks but someone will fuck it up
 		CRASH("Attempted to reserve sound channel without datum using the managed proc.")
 	.= reserve_channel()
 	if(!.)
 		CRASH("No more sound channels can be reserved")
 	var/text_channel = num2text(.)
-	using_channels[text_channel] = D
-	LAZYINITLIST(using_channels_by_datum[D])
-	using_channels_by_datum[D] += .
+	using_channels[text_channel] = channel_owner
+	LAZYINITLIST(using_channels_by_datum[channel_owner])
+	using_channels_by_datum[channel_owner] += .
+
+	if(length(using_channels_by_datum[channel_owner]) == 1)
+		RegisterSignal(channel_owner, COMSIG_QDELETING, PROC_REF(tracked_datum_deleted))
 
 /**
  * Reserves a channel and updates the datastructure. Private proc.
@@ -259,5 +262,20 @@ SUBSYSTEM_DEF(sounds)
 		// this is for the assoc subtype
 		if(!isnull(sfx.key))
 			GLOB.sfx_datum_by_key[sfx.key] = new sfx()
+
+
+///Call to free all channels reserved by a datum.
+/datum/controller/subsystem/sounds/proc/stop_tracking_datum(datum/channel_owner)
+	PRIVATE_PROC(TRUE)
+
+	using_channels_by_datum -= channel_owner
+	UnregisterSignal(channel_owner, COMSIG_QDELETING)
+
+/// Handles a tracked datum being deleted, automatically freeing the channels.
+/datum/controller/subsystem/sounds/proc/tracked_datum_deleted(datum/source)
+	SIGNAL_HANDLER
+	PRIVATE_PROC(TRUE)
+
+	free_datum_channels(source)
 
 #undef DATUMLESS

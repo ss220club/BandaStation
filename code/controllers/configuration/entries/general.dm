@@ -103,6 +103,9 @@
 /// log game events
 /datum/config_entry/flag/log_game
 
+/// log minimap drawing events
+/datum/config_entry/flag/log_minimap_drawing
+
 /// log mech data
 /datum/config_entry/flag/log_mecha
 
@@ -167,6 +170,9 @@
 
 /// log shuttle related actions, ie shuttle computers, shuttle manipulator, emergency console
 /datum/config_entry/flag/log_shuttle
+
+/// log image authoring, such as using the modular computer paint app
+/datum/config_entry/flag/log_image
 
 /// logs all timers in buckets on automatic bucket reset (Useful for timer debugging)
 /datum/config_entry/flag/log_timers_on_bucket_reset
@@ -801,8 +807,10 @@
 /datum/config_entry/flag/generate_assets_in_init
 	default = FALSE
 
-/datum/config_entry/number/minimum_ascension_time
-	default = 0 // 1 minute
-	min_val = 0
-
 /datum/config_entry/flag/fishing
+
+/datum/config_entry/string/policy_json_path
+	default = "policy.json"
+
+/datum/config_entry/number_list/ignored_cids
+	default = list()

@@ -3,6 +3,7 @@
 	desc = "Название недостаточно информативное?"
 	icon = 'icons/obj/machines/kitchen.dmi'
 	icon_state = "grinder"
+	base_icon_state = "grinder"
 	density = TRUE
 	circuit = /obj/item/circuitboard/machine/gibber
 	anchored_tabletop_offset = 8
@@ -135,23 +136,19 @@
 	default_unfasten_wrench(user, tool)
 	return ITEM_INTERACT_SUCCESS
 
-/obj/machinery/gibber/attackby(obj/item/P, mob/user, list/modifiers, list/attack_modifiers)
-	if(default_deconstruction_screwdriver(user, "grinder_open", "grinder", P))
-		return
+/obj/machinery/gibber/screwdriver_act(mob/living/user, obj/item/tool)
+	return default_deconstruction_screwdriver(user, tool)
 
-	else if(default_pry_open(P, close_after_pry = TRUE))
-		return
+/obj/machinery/gibber/crowbar_act(mob/living/user, obj/item/tool)
+	return default_pry_open(user, tool, close_after_pry = TRUE, deconstruct_on_fail = TRUE)
 
-	else if(default_deconstruction_crowbar(P))
-		return
-	else
-		return ..()
+/obj/machinery/gibber/update_icon_state()
+	. = ..()
+	icon_state = panel_open ? "[base_icon_state]_open" : base_icon_state
 
-/obj/machinery/gibber/verb/eject()
-	set category = "Object"
-	set name = "Empty gibber"
-	set src in oview(1)
-	if (usr.stat != CONSCIOUS || HAS_TRAIT(usr, TRAIT_HANDS_BLOCKED))
+GAME_VERB_SRC(/obj/machinery/gibber, eject, oview(1), "Empty gibber", null)
+
+	if (IS_UNCONSCIOUS_OR_CRIT(usr) || HAS_TRAIT(usr, TRAIT_HANDS_BLOCKED))
 		return
 	if(!usr.can_perform_action(src))
 		return
@@ -235,12 +232,10 @@
 
 	var/mob/living/carbon/human/agent_whiskey = victim
 	var/drop_chance = 0
-	for (var/obj/item/bodypart/limb as anything in agent_whiskey.bodyparts)
-		if (!limb.butcher_drops)
-			continue
-
-		for (var/obj/item/drop_type as anything in limb.butcher_drops)
-			var/amount = limb.butcher_drops[drop_type] || 1
+	for (var/obj/item/bodypart/limb as anything in agent_whiskey.get_bodyparts())
+		var/list/limb_butcher_drops = limb.get_butcher_drops()
+		for (var/obj/item/drop_type as anything in limb_butcher_drops)
+			var/amount = limb_butcher_drops[drop_type] || 1
 			drop_chance += amount * efficiency
 			if (drop_chance > 1)
 				amount = floor(drop_chance)

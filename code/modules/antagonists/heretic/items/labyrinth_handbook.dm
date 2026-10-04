@@ -1,6 +1,6 @@
 /obj/effect/forcefield/wizard/heretic
 	name = "labyrinth pages"
-	desc = "A field of papers flying in the air, repulsing heathens with impossible force."
+	desc = "Вихрь из страниц, парящий в воздухе, отбрасывающий язычников необъяснимой силой."
 	icon_state = "lintel"
 	initial_duration = 15 SECONDS
 
@@ -15,7 +15,7 @@
 		return
 	var/throwtarget = get_edge_target_turf(loc, get_dir(loc, get_step_away(bumpee, loc)))
 	bumpee.safe_throw_at(throwtarget, 10, 10, src, force = MOVE_FORCE_EXTREMELY_STRONG)
-	visible_message(span_danger("[src] repulses [bumpee] in a storm of paper!"))
+	visible_message(span_danger("[capitalize(src.declent_ru(NOMINATIVE))] отбрасывает [bumpee.declent_ru(ACCUSATIVE)] прочь в вихре страниц!"))
 
 ///A heretic item that spawns a barrier at the clicked turf, 3 uses
 /obj/item/heretic_labyrinth_handbook

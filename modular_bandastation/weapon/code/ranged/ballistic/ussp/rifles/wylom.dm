@@ -28,20 +28,18 @@
 	fire_delay = 2 SECONDS
 	actions_types = list()
 	force = 15 // I mean if you're gonna beat someone with the thing you might as well get damage appropriate for how big the fukken thing is
+	slowdown = 1
+	item_flags = NEEDS_PERMIT | SLOWS_WHILE_IN_HAND
 
-/obj/item/gun/ballistic/automatic/wylom/examine(mob/user)
-	. = ..()
-	. += span_notice("Вы можете [EXAMINE_HINT("изучить подробнее")], чтобы узнать немного больше об этом оружии.")
-
-/obj/item/gun/ballistic/automatic/wylom/examine_more(mob/user)
-	. = ..()
-	. += "Крупнокалиберная винтовка \"Wyłom\" изначально не была создана для использования без вспомогательных средств. \
+/obj/item/gun/ballistic/automatic/wylom/add_deep_lore()
+	AddElement(/datum/element/examine_lore, \
+		lore = "Крупнокалиберная винтовка \"Wyłom\" изначально не была создана для использования без вспомогательных средств. \
 		Первоначальная версия винтовки имела крепления для экзокостюмов, но эта идея быстро провалилась после \
 		ее анонса, поскольку не получила одобрения в связи с существованием более эффективных аналогов для экзокостюмов. \
 		Обычно считается сильным претендентом на определение \"противо-броневого\" оружия, \
 		но есть веские аргументы, чтобы считать его ближе к \"против-всего\".<br><br>\
 		Лазерная этикетка предупреждает пользователей о необходимости остерегаться ударной волны от дульного тормоза... \
-		и не стрелять без опоры, если человек не имеет достаточной силы, чтобы \"справиться\" с отдачей."
+		и не стрелять без опоры, если человек не имеет достаточной силы, чтобы \"справиться\" с отдачей.")
 
 /obj/item/gun/ballistic/automatic/wylom/no_mag
 	spawnwithmagazine = FALSE
@@ -49,6 +47,7 @@
 /obj/item/gun/ballistic/automatic/wylom/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/scope, range_modifier = 2)
+	ADD_TRAIT(src, TRAIT_CONTRABAND, INNATE_TRAIT)
 
 /obj/item/gun/ballistic/automatic/wylom/bulpup
 	name = "AMV/B-92 'Wyłom'"
@@ -56,6 +55,7 @@
 	inhand_icon_state = "wylom_bulpup"
 	worn_icon_state = "wylom_bulpup"
 	recoil = 1.5
+	slowdown = 0.5
 
 /obj/item/gun/ballistic/automatic/wylom/bulpup/examine_more(mob/user)
 	. = ..()

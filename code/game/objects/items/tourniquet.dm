@@ -16,7 +16,7 @@
 		/datum/component/limb_applicable, \
 		valid_zones = GLOB.limb_zones.Copy() + BODY_ZONE_HEAD, \
 		apply_category = LIMB_ITEM_TOURNIQUET, \
-		can_apply = CALLBACK(src, PROC_REF(can_apply_tourniquet)), \
+		do_apply = CALLBACK(src, PROC_REF(do_apply_tourniquet)), \
 	)
 	RegisterSignal(src, COMSIG_ITEM_APPLIED_TO_LIMB, PROC_REF(on_applied_to_limb))
 	RegisterSignal(src, COMSIG_ITEM_UNAPPLIED_FROM_LIMB, PROC_REF(on_removed_from_limb))
@@ -68,16 +68,16 @@
 		return // you win this time
 
 	limb.owner.losebreath += 1 * seconds_per_tick // incapable of breathing
-	limb.owner.apply_damage(1 * seconds_per_tick, OXY, BODY_ZONE_HEAD, forced = TRUE) // no blood getting to brain
+	limb.owner.apply_damage(1 * seconds_per_tick, OXY, BODY_ZONE_HEAD) // no blood getting to brain
 	if(SPT_PROB(6, seconds_per_tick))
-		limb.owner.apply_damage(10, STAMINA, BODY_ZONE_HEAD, forced = TRUE)
+		limb.owner.apply_damage(10, STAMINA, BODY_ZONE_HEAD)
 	if(SPT_PROB(5, seconds_per_tick))
 		limb.owner.adjust_eye_blur(4 SECONDS)
 	if(SPT_PROB(4, seconds_per_tick))
 		limb.owner.adjust_dizzy(4 SECONDS)
 		limb.owner.adjust_confusion(2 SECONDS)
 
-/obj/item/tourniquet/proc/can_apply_tourniquet(mob/user, mob/living/patient, obj/item/bodypart/limb)
+/obj/item/tourniquet/proc/do_apply_tourniquet(mob/user, mob/living/patient, obj/item/bodypart/limb)
 	var/speed_multiplier = 2
 	var/speed_boosted = FALSE
 	for(var/datum/wound/woundies as anything in limb.wounds)

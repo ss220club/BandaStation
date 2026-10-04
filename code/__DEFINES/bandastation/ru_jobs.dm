@@ -1,7 +1,7 @@
 // Keep this in sync with JOBS_RU from tgui\packages\tgui\bandastation\ru_jobs.tsx
 //No department
 #define JOB_ASSISTANT_RU "Ассистент"
-#define JOB_PRISONER_RU "Заключенный"
+#define JOB_PRISONER_RU "Заключённый"
 //Command
 #define JOB_CAPTAIN_RU "Капитан"
 #define JOB_HEAD_OF_PERSONNEL_RU "Глава персонала"

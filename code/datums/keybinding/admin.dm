@@ -42,6 +42,20 @@
 	SSadmin_verbs.dynamic_invoke_verb(user, /datum/admin_verb/admin_ghost)
 	return TRUE
 
+/datum/keybinding/admin/jump_to_ghost
+	hotkey_keys = list("F4")
+	name = "jump_to_ghost"
+	full_name = "Jump to Aghost"
+	description = "Jump your body to your Aghost"
+	keybind_signal = COMSIG_KB_ADMIN_JUMPTOGHOST_DOWN
+
+/datum/keybinding/admin/jump_to_ghost/down(client/user, turf/target, mousepos_x, mousepos_y)
+	. = ..()
+	if(.)
+		return
+	SSadmin_verbs.dynamic_invoke_verb(user, /datum/admin_verb/jump_to_ghost)
+	return TRUE
+
 /datum/keybinding/admin/player_panel_new
 	hotkey_keys = list("F7") // BANDASTATION EDIT
 	name = "player_panel_new"
@@ -157,4 +171,18 @@
 	if(.)
 		return
 	SSadmin_verbs.dynamic_invoke_verb(user, /datum/admin_verb/display_tags)
+	return TRUE
+
+/datum/keybinding/admin/admin_verb_panel
+	hotkey_keys = list("`")
+	name = "admin_verb_panel"
+	full_name = "Admin Verb Panel"
+	description = "Opens the admin verb panel"
+	keybind_signal = COMSIG_KB_ADMIN_VERBPANEL_DOWN
+
+/datum/keybinding/admin/admin_verb_panel/down(client/user, turf/target, mousepos_x, mousepos_y)
+	. = ..()
+	if(.)
+		return
+	SSadmin_verbs.dynamic_invoke_verb(user, /datum/admin_verb/admin_verb_panel)
 	return TRUE

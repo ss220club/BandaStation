@@ -20,12 +20,6 @@
 
 	return ..()
 
-	/// BANDASTATION ADDITION START - Flatpack fix
-/datum/storage/bag_of_holding/New(atom/parent, max_slots, max_specific_storage, max_total_storage)
-	. = ..()
-	set_holdable(cant_hold_list = /obj/item/flatpack)
-	/// BANDASTATION ADDITION END - Flatpack fix
-
 /datum/storage/bag_of_holding/proc/recursive_insertion(obj/item/to_insert, mob/living/user)
 	if(confirm_recursive_insertion(to_insert, user))
 		create_rift(to_insert, user)
@@ -52,6 +46,7 @@
 	message_admins("[ADMIN_LOOKUPFLW(user)] detonated a bag of holding at [ADMIN_VERBOSEJMP(rift_loc)].")
 	user.log_message("detonated a bag of holding at [loc_name(rift_loc)].", LOG_ATTACK, color = "red")
 
+	user.client?.give_award(/datum/award/achievement/jobs/bag_of_holding, user)
 	user.investigate_log("has been gibbed by a bag of holding recursive insertion.", INVESTIGATE_DEATHS)
 	user.gib()
 	var/obj/reality_tear/tear = new(rift_loc)

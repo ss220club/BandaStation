@@ -16,7 +16,6 @@
 	pickup_sound = SFX_GLASSES_PICKUP
 	drop_sound = SFX_GLASSES_DROP
 	equip_sound = SFX_GLASSES_EQUIP
-	var/vision_flags = 0
 	var/invis_view = SEE_INVISIBLE_LIVING // Admin only for now
 	/// Override to allow glasses to set higher than normal see_invis
 	var/invis_override = 0
@@ -37,21 +36,33 @@
 	if(glass_colour_type)
 		AddElement(/datum/element/wearable_client_colour, glass_colour_type, ITEM_SLOT_EYES, GLASSES_TRAIT, forced = forced_glass_color, comsig_toggle = COMSIG_CLICK_ALT_SECONDARY)
 
-/obj/item/clothing/glasses/suicide_act(mob/living/carbon/user)
+/obj/item/clothing/glasses/suicide_act(mob/living/user)
 	user.visible_message(span_suicide("[user] is stabbing \the [src] into [user.p_their()] eyes! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	return BRUTELOSS
 
 /obj/item/clothing/glasses/visor_toggling()
 	. = ..()
 	alternate_worn_layer = up ? ABOVE_BODY_FRONT_HEAD_LAYER : null
-	if(visor_vars_to_toggle & VISOR_VISIONFLAGS)
-		vision_flags ^= initial(vision_flags)
 	if(visor_vars_to_toggle & VISOR_INVISVIEW)
 		invis_view ^= initial(invis_view)
 
 /obj/item/clothing/glasses/adjust_visor(mob/living/user)
 	. = ..()
-	if(. && !user.is_holding(src) && (visor_vars_to_toggle & (VISOR_VISIONFLAGS|VISOR_INVISVIEW)))
+	if(. && !user.is_holding(src) && (visor_vars_to_toggle & (VISOR_INVISVIEW)))
+		user.update_sight()
+
+/obj/item/clothing/glasses/equipped(mob/living/user, slot)
+	. = ..()
+	if (!(slot & ITEM_SLOT_EYES))
+		return
+	if (invis_override || invis_view || !isnull(lighting_cutoff))
+		//This call becomes redundant if thermal/meson/material (etc.) vision flags are present in clothing_traits, but, as of the time of this comment, it isn't really a problem.
+		user.update_sight()
+
+/obj/item/clothing/glasses/dropped(mob/living/user)
+	. = ..()
+	if (invis_override || invis_view || !isnull(lighting_cutoff))
+		//This call becomes redundant if thermal/meson/material (etc.) vision flags are present in clothing_traits, but, as of the time of this comment, it isn't really a problem.
 		user.update_sight()
 
 //called when thermal glasses are emped.
@@ -79,17 +90,17 @@
 	desc = "Used by engineering and mining staff to see basic structural and terrain layouts through walls, regardless of lighting conditions."
 	icon_state = "meson"
 	inhand_icon_state = "meson"
-	clothing_traits = list(TRAIT_MADNESS_IMMUNE)
+	clothing_traits = list(TRAIT_MADNESS_IMMUNE, TRAIT_MESON_VISION)
 	flags_cover = GLASSESCOVERSEYES
-	vision_flags = SEE_TURFS
 	// Mesons get to be lightly green
 	color_cutoffs = list(5, 15, 5)
 	glass_colour_type = /datum/client_colour/glass_colour/lightgreen
 	pickup_sound = SFX_GOGGLES_PICKUP
 	drop_sound = SFX_GOGGLES_DROP
 	equip_sound = SFX_GOGGLES_EQUIP
+	custom_materials = list(/datum/material/iron = HALF_SHEET_MATERIAL_AMOUNT, /datum/material/glass = HALF_SHEET_MATERIAL_AMOUNT)
 
-/obj/item/clothing/glasses/meson/suicide_act(mob/living/carbon/user)
+/obj/item/clothing/glasses/meson/suicide_act(mob/living/user)
 	user.visible_message(span_suicide("[user] is putting \the [src] to [user.p_their()] eyes and overloading the brightness! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	return BRUTELOSS
 
@@ -103,6 +114,7 @@
 	color_cutoffs = list(10, 35, 10)
 	glass_colour_type = /datum/client_colour/glass_colour/lightgreen
 	actions_types = list(/datum/action/item_action/toggle_nv)
+	custom_materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 0.6, /datum/material/glass = SHEET_MATERIAL_AMOUNT * 0.6, /datum/material/uranium = HALF_SHEET_MATERIAL_AMOUNT, /datum/material/plasma = SMALL_MATERIAL_AMOUNT * 3.5)
 
 /obj/item/clothing/glasses/meson/night/update_icon_state()
 	. = ..()
@@ -135,12 +147,13 @@
 	pickup_sound = SFX_GOGGLES_PICKUP
 	drop_sound = SFX_GOGGLES_DROP
 	equip_sound = SFX_GOGGLES_EQUIP
+	custom_materials = list(/datum/material/iron = HALF_SHEET_MATERIAL_AMOUNT, /datum/material/glass = HALF_SHEET_MATERIAL_AMOUNT)
 
 /datum/armor/glasses_science
 	fire = 80
 	acid = 100
 
-/obj/item/clothing/glasses/science/suicide_act(mob/living/carbon/user)
+/obj/item/clothing/glasses/science/suicide_act(mob/living/user)
 	user.visible_message(span_suicide("[user] is tightening \the [src]'s straps around [user.p_their()] neck! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	return OXYLOSS
 
@@ -153,6 +166,7 @@
 	color_cutoffs = list(30, 5, 15)
 	glass_colour_type = /datum/client_colour/glass_colour/lightpurple
 	actions_types = list(/datum/action/item_action/toggle_nv)
+	custom_materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 0.6, /datum/material/glass = SHEET_MATERIAL_AMOUNT * 0.6, /datum/material/uranium = HALF_SHEET_MATERIAL_AMOUNT, /datum/material/plasma = SMALL_MATERIAL_AMOUNT * 3.5)
 
 /obj/item/clothing/glasses/science/night/update_icon_state()
 	. = ..()
@@ -172,6 +186,7 @@
 	pickup_sound = SFX_GOGGLES_PICKUP
 	drop_sound = SFX_GOGGLES_DROP
 	equip_sound = SFX_GOGGLES_EQUIP
+	custom_materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 0.6, /datum/material/glass = SHEET_MATERIAL_AMOUNT * 0.6, /datum/material/uranium = HALF_SHEET_MATERIAL_AMOUNT, /datum/material/plasma = SMALL_MATERIAL_AMOUNT * 3.5)
 
 /obj/item/clothing/glasses/night/update_icon_state()
 	. = ..()
@@ -240,7 +255,10 @@
 /// wizard version
 /obj/item/clothing/glasses/eyepatch/medical/chuuni
 	resistance_flags = FIRE_PROOF | ACID_PROOF
-	clothing_flags = CASTING_CLOTHES
+
+/obj/item/clothing/glasses/eyepatch/medical/chuuni/Initialize(mapload)
+	. = ..()
+	ADD_TRAIT(src, TRAIT_CASTING_CLOTHING, INNATE_TRAIT)
 
 /obj/item/clothing/glasses/eyepatch/medical/chuuni/equipped(mob/living/user, slot)
 	. = ..()
@@ -274,7 +292,7 @@
 	icon_state = "material"
 	inhand_icon_state = "glasses"
 	flags_cover = GLASSESCOVERSEYES
-	vision_flags = SEE_OBJS
+	clothing_traits = list(TRAIT_MATERIAL_VISON)
 	glass_colour_type = /datum/client_colour/glass_colour/lightblue
 	pickup_sound = SFX_GOGGLES_PICKUP
 	drop_sound = SFX_GOGGLES_DROP
@@ -410,7 +428,7 @@
 	icon_state = "sunhudsci"
 	desc = "A pair of tacky purple sunglasses that allow the wearer to recognize various chemical compounds with only a glance."
 	clothing_traits = list(TRAIT_REAGENT_SCANNER, TRAIT_RESEARCH_SCANNER)
-	custom_materials = list(/datum/material/glass = SHEET_MATERIAL_AMOUNT * 0.55, /datum/material/iron = SMALL_MATERIAL_AMOUNT / 2)
+	custom_materials = list(/datum/material/glass = SHEET_MATERIAL_AMOUNT * 0.8, /datum/material/iron = SHEET_MATERIAL_AMOUNT * 0.55)
 
 /obj/item/clothing/glasses/sunglasses/chemical/add_glasses_slapcraft_component()
 	var/static/list/slapcraft_recipe_list = list(/datum/crafting_recipe/scienceglassesremoval)
@@ -491,8 +509,8 @@
 	inhand_icon_state = "welding-g"
 	actions_types = list(/datum/action/item_action/toggle)
 	flash_protect = FLASH_PROTECTION_WELDER
-	flags_cover = GLASSESCOVERSEYES
-	custom_materials = list(/datum/material/iron = SMALL_MATERIAL_AMOUNT*2.5)
+	visor_flags_cover = GLASSESCOVERSEYES
+	custom_materials = list(/datum/material/iron = HALF_SHEET_MATERIAL_AMOUNT, /datum/material/glass = HALF_SHEET_MATERIAL_AMOUNT)
 	tint = 2
 	visor_vars_to_toggle = VISOR_FLASHPROTECT | VISOR_TINT
 	glass_colour_type = /datum/client_colour/glass_colour/gray
@@ -569,7 +587,7 @@
 	desc = "Thermals in the shape of glasses."
 	icon_state = "thermal"
 	inhand_icon_state = "glasses"
-	vision_flags = SEE_MOBS
+	clothing_traits = list(TRAIT_THERMAL_VISION)
 	// Going for an orange color here
 	color_cutoffs = list(25, 8, 5)
 	flash_protect = FLASH_PROTECTION_SENSITIVE
@@ -590,18 +608,9 @@
 	desc = "A pair of xray goggles manufactured by the Syndicate."
 	icon_state = "material"
 	color_cutoffs = null
-	vision_flags = SEE_TURFS|SEE_MOBS|SEE_OBJS
+	clothing_traits = list(TRAIT_XRAY_VISION)
 	glass_colour_type = /datum/client_colour/glass_colour/lightblue
-
-/obj/item/clothing/glasses/thermal/xray/equipped(mob/living/carbon/human/user, slot)
-	. = ..()
-	if(!(slot & ITEM_SLOT_EYES) || !istype(user))
-		return
-	ADD_TRAIT(user, TRAIT_XRAY_VISION, GLASSES_TRAIT)
-
-/obj/item/clothing/glasses/thermal/xray/dropped(mob/living/carbon/human/user)
-	. = ..()
-	REMOVE_TRAIT(user, TRAIT_XRAY_VISION, GLASSES_TRAIT)
+	clothing_traits = list(TRAIT_XRAY_VISION)
 
 /obj/item/clothing/glasses/thermal/syndi
 	name = "chameleon thermals"
@@ -698,7 +707,6 @@
 	flash_protect = FLASH_PROTECTION_WELDER
 	lighting_cutoff = LIGHTING_CUTOFF_HIGH
 	glass_colour_type = FALSE
-	vision_flags = SEE_TURFS
 	clothing_traits = list(
 		TRAIT_REAGENT_SCANNER,
 		TRAIT_MADNESS_IMMUNE,
@@ -706,6 +714,7 @@
 		TRAIT_SECURITY_HUD,
 		TRAIT_DIAGNOSTIC_HUD,
 		TRAIT_BOT_PATH_HUD,
+		TRAIT_MESON_VISION,
 	)
 	var/xray = FALSE
 	pickup_sound = SFX_GOGGLES_PICKUP
@@ -717,17 +726,11 @@
 	AddElement(/datum/element/adjust_fishing_difficulty, -15)
 
 /obj/item/clothing/glasses/debug/click_alt(mob/user)
-	if(!ishuman(user))
-		return CLICK_ACTION_BLOCKING
 	if(xray)
-		vision_flags &= ~SEE_MOBS|SEE_OBJS
 		detach_clothing_traits(TRAIT_XRAY_VISION)
 	else
-		vision_flags |= SEE_MOBS|SEE_OBJS
 		attach_clothing_traits(TRAIT_XRAY_VISION)
 	xray = !xray
-	var/mob/living/carbon/human/human_user = user
-	human_user.update_sight()
 	return CLICK_ACTION_SUCCESS
 
 /obj/item/clothing/glasses/regular/kim

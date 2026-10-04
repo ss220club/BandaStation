@@ -29,6 +29,7 @@
 /obj/item/gun/ballistic/automatic/carwo/Initialize(mapload)
 	. = ..()
 	AddElement(/datum/element/update_icon_updates_onmob)
+	ADD_TRAIT(src, TRAIT_CONTRABAND, INNATE_TRAIT)
 
 /obj/item/gun/ballistic/automatic/carwo/add_seclight_point()
 	AddComponent(\
@@ -44,17 +45,13 @@
 	inhand_icon_state = "[icon_state][magazine ? "":"_nomag"]"
 	worn_icon_state = "[icon_state][magazine ? "":"_nomag"]"
 
-/obj/item/gun/ballistic/automatic/carwo/examine(mob/user)
-	. = ..()
-	. += span_notice("Вы можете [EXAMINE_HINT("изучить подробнее")], чтобы узнать немного больше об этом оружии.")
-
-/obj/item/gun/ballistic/automatic/carwo/examine_more(mob/user)
-	. = ..()
-	. += "Винтовки \"Карво-Кэвил\" создаются компанией \"Карво\" для использования различными пехотными подразделениями ТСФ. \
+/obj/item/gun/ballistic/automatic/carwo/add_deep_lore()
+	AddElement(/datum/element/examine_lore, \
+		lore = "Винтовки \"Карво-Кэвил\" создаются компанией \"Карво\" для использования различными пехотными подразделениями ТСФ. \
 	В соответствии с довольно разумными военными требованиями, предусматривающими использование одного и того же ассортимента патронов и магазинов, \
 	срок службы координаторов по логистике и квартирмейстеров повсеместно был продлен на несколько лет.<br><br>\
 	Хотя в прошлом они обычно продавались только военным, недавний крах некоторых неназванных производителей оружия \
-	заставили Карво открыть многие образцы военного оружия для гражданской продажи, в том числе и этот.<br><br>"
+	заставили Карво открыть многие образцы военного оружия для гражданской продажи, в том числе и этот.<br>")
 
 /obj/item/gun/ballistic/automatic/carwo/no_mag
 	spawnwithmagazine = FALSE
@@ -160,6 +157,12 @@
 
 /obj/item/gun/ballistic/automatic/carwo/auto/black/no_mag
 	spawnwithmagazine = FALSE
+
+/obj/item/gun/ballistic/automatic/carwo/auto/black/suppressed/Initialize(mapload)
+	. = ..()
+	var/obj/item/suppressor/S = new(src)
+	install_suppressor(S)
+	spawnwithmagazine = /obj/item/ammo_box/magazine/c40sol_rifle/long
 
 // MARK: Sol rifles with wooden grips
 /obj/item/gun/ballistic/automatic/carwo/auto/wooden

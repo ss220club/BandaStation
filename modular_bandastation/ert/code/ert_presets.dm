@@ -25,6 +25,8 @@
 	polldesc = "Clown Emergency Response Team"
 
 /datum/ert/inquisition
+	leader_role = /datum/antagonist/ert/commander/inquisitor
+	roles = list(/datum/antagonist/ert/security/inquisitor, /datum/antagonist/ert/medic/inquisitor, /datum/antagonist/ert/chaplain/inquisitor)
 	polldesc = "Inquisition Emergency Response Team"
 
 // MARK: SECURITY

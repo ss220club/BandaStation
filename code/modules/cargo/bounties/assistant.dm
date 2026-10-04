@@ -2,7 +2,7 @@
 	name = "Странный объект"
 	description = "Нанотрейзен интересуется странными объектами. Найдите один в технических туннелях и отправьте сразу же на ЦК."
 	reward = CARGO_CRATE_VALUE * 2.4
-	wanted_types = list(/obj/item/relic = TRUE)
+	wanted_types = list(/obj/item/assembly/relic = TRUE)
 
 /datum/bounty/item/assistant/scooter
 	name = "Scooter"
@@ -143,7 +143,7 @@
 	description = "Коммандор Зот страстно влюблён в Коммандора Зену. Отправьте поставкой герании - её любимые цветы, и он с радостью вас вознаградит."
 	reward = CARGO_CRATE_VALUE * 8
 	required_count = 3
-	wanted_types = list(/obj/item/food/grown/poppy/geranium = TRUE)
+	wanted_types = list(/obj/item/food/grown/flower/poppy/geranium = TRUE)
 	include_subtypes = FALSE
 
 /datum/bounty/item/assistant/poppy
@@ -151,7 +151,7 @@
 	description = "Коммандор Зот очень хочет свести с ума офицера безопасности Оливию. Отправьте поставку маков - её любимых цветов, и он вас с радостью вознаградит."
 	reward = CARGO_CRATE_VALUE * 2
 	required_count = 3
-	wanted_types = list(/obj/item/food/grown/poppy = TRUE)
+	wanted_types = list(/obj/item/food/grown/flower/poppy = TRUE)
 	include_subtypes = FALSE
 
 /datum/bounty/item/assistant/potted_plants
@@ -213,7 +213,7 @@
 
 /datum/bounty/item/assistant/pneumatic_cannon
 	name = "Пневматическая пушка"
-	description = "Мы выясняем, как сильно мы можем запускать осколки суперматтерии из пневматической пушки. Отправьте нам одну как можно скорее."
+	description = "Мы выясняем, как сильно мы можем запускать осколки суперматерии из пневматической пушки. Отправьте нам одну как можно скорее."
 	reward = CARGO_CRATE_VALUE * 4
 	wanted_types = list(/obj/item/pneumatic_cannon/ghetto = TRUE)
 

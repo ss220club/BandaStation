@@ -47,6 +47,7 @@
 #define PARALLAX_HIGH "Высокий"
 #define PARALLAX_MED "Средний"
 #define PARALLAX_LOW "Низкий"
+#define PARALLAX_BOOMER "Старый"
 #define PARALLAX_DISABLE "Отключен"
 
 #define SCALING_METHOD_NORMAL "normal"

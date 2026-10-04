@@ -2,6 +2,7 @@ import { sortBy } from 'es-toolkit';
 import { filter } from 'es-toolkit/compat';
 import { useState } from 'react';
 import { useBackend, useLocalState } from 'tgui/backend';
+import { ReverseJobsRu } from 'tgui/bandastation/ru_jobs';
 import {
   Box,
   Button,
@@ -12,8 +13,6 @@ import {
   Stack,
   Tabs,
 } from 'tgui-core/components';
-
-import { ReverseJobsRu } from '../../bandastation/ru_jobs'; // BANDASTATION EDIT
 import { JOB2ICON } from '../common/JobToIcon';
 import { isRecordMatch } from '../SecurityRecords/helpers';
 import type { MedicalRecord, MedicalRecordData } from './types';

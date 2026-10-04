@@ -88,6 +88,30 @@ const ALTERNATE_ACTIONS: Record<string, AlternateAction> = {
     icon: 'ribbon',
     text: 'Strip accessory',
   },
+
+  deploy: {
+    icon: 'plus',
+    text: 'Deploy MOD',
+  },
+
+  undeploy: {
+    icon: 'minus',
+    text: 'Undeploy MOD',
+  },
+
+  activate_mod: {
+    icon: 'power-off',
+    text: 'Activate MOD',
+  },
+  deactivate_mod: {
+    icon: 'power-off',
+    text: 'Deactivate MOD',
+  },
+
+  access_storage: {
+    icon: 'box-open',
+    text: 'Open',
+  },
 };
 
 const SLOTS: Record<

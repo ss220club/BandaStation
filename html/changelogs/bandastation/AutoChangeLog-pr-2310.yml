@@ -1,5 +1,0 @@
-author: "adskipups"
-delete-after: True
-changes:
-  - bugfix: "Строчка бекстабов для swithblade вернулась."
-  - balance: "switchblade теперь не пригоден для разделки людей"

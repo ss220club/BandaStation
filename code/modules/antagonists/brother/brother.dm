@@ -70,7 +70,11 @@
 	if (flashed.stat == DEAD || issilicon(flashed) || isdrone(flashed))
 		return
 
-	if (flashed.stat != CONSCIOUS)
+	if (flashed.stat != STABLE)
+		flashed.balloon_alert(source, "в критическом состоянии!")
+		return
+
+	if (IS_UNCONSCIOUS(flashed))
 		flashed.balloon_alert(source, "без сознания!")
 		return
 
@@ -133,7 +137,7 @@
 	var/mob/living/carbon/human/dummy/consistent/brother1 = new
 	var/mob/living/carbon/human/dummy/consistent/brother2 = new
 
-	brother1.dna.features[FEATURE_ETHEREAL_COLOR] = GLOB.color_list_ethereal["Faint Red"]
+	brother1.dna.features[FEATURE_MUTANT_COLOR] = GLOB.color_list_ethereal["Faint Red"]
 	brother1.set_species(/datum/species/ethereal)
 
 	brother2.dna.features[FEATURE_MOTH_ANTENNAE] = "Plain"
@@ -141,20 +145,20 @@
 	brother2.dna.features[FEATURE_MOTH_WINGS] = "Plain"
 	brother2.set_species(/datum/species/moth)
 
-	var/icon/brother1_icon = render_preview_outfit(/datum/outfit/job/quartermaster, brother1)
-	var/icon/brother1_blood_icon = icon('icons/effects/blood.dmi', "maskblood")
-	brother1_blood_icon.Blend(BLOOD_COLOR_RED, ICON_MULTIPLY)
-	brother1_icon.Blend(brother1_blood_icon, ICON_OVERLAY)
-	brother1_icon.Shift(WEST, 8)
+	var/datum/universal_icon/brother1_icon = render_preview_outfit(/datum/outfit/job/quartermaster, brother1)
+	var/datum/universal_icon/brother1_blood_icon = uni_icon('icons/effects/blood.dmi', "maskblood")
+	brother1_blood_icon.blend_color(BLOOD_COLOR_RED, ICON_MULTIPLY)
+	brother1_icon.blend_icon(brother1_blood_icon, ICON_OVERLAY)
+	brother1_icon.shift(WEST, 8)
 
-	var/icon/brother2_icon = render_preview_outfit(/datum/outfit/job/scientist/consistent, brother2)
-	var/icon/brother2_blood_icon = icon('icons/effects/blood.dmi', "uniformblood")
-	brother2_blood_icon.Blend(BLOOD_COLOR_RED, ICON_MULTIPLY)
-	brother2_icon.Blend(brother2_blood_icon, ICON_OVERLAY)
-	brother2_icon.Shift(EAST, 8)
+	var/datum/universal_icon/brother2_icon = render_preview_outfit(/datum/outfit/job/scientist/consistent, brother2)
+	var/datum/universal_icon/brother2_blood_icon = uni_icon('icons/effects/blood.dmi', "uniformblood")
+	brother2_blood_icon.blend_color(BLOOD_COLOR_RED, ICON_MULTIPLY)
+	brother2_icon.blend_icon(brother2_blood_icon, ICON_OVERLAY)
+	brother2_icon.shift(EAST, 8)
 
-	var/icon/final_icon = brother1_icon
-	final_icon.Blend(brother2_icon, ICON_OVERLAY)
+	var/datum/universal_icon/final_icon = brother1_icon
+	final_icon.blend_icon(brother2_icon, ICON_OVERLAY)
 
 	qdel(brother1)
 	qdel(brother2)
@@ -218,6 +222,7 @@
 	if (!new_member.has_antag_datum(/datum/antagonist/brother))
 		add_brother(new_member.current)
 	else
+		// the only place a joining member spends a conversion slot; converts get here via add_brother()
 		set_brothers_left(brothers_left - 1)
 
 /datum/team/brother_team/remove_member(datum/mind/member)
@@ -244,7 +249,9 @@
 		return FALSE
 #endif
 
-	set_brothers_left(brothers_left - 1)
+	// this spends a conversion slot via add_member()
+	new_brother.mind.add_antag_datum(/datum/antagonist/brother, src)
+
 	for (var/datum/mind/brother_mind as anything in members)
 		if (brother_mind == new_brother.mind)
 			continue
@@ -252,8 +259,6 @@
 		to_chat(brother_mind, span_notice("[span_bold("[new_brother.real_name]")] пробужден[genderize_ru(new_brother.gender, "", "а", "о", "ы")], чтобы помогать вам как ваш кровный брат!"))
 		if (brothers_left == 0)
 			to_chat(brother_mind, span_notice("Вы больше не можете пробуждать кровных братьев."))
-
-	new_brother.mind.add_antag_datum(/datum/antagonist/brother, src)
 
 	return TRUE
 

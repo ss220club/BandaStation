@@ -8,6 +8,14 @@
 	"editor.insertSpaces": false,
 	"git.branchProtection": ["master"],
 	"gitlens.advanced.blame.customArguments": ["-w"],
+	"json.schemas": [
+		{
+			"fileMatch": ["**/build_flags.jsonc"],
+			"schema": {
+				"allowTrailingCommas": true
+			}
+		}
+	],
 	"tgstationTestExplorer.project.resultsType": "json",
 	"[javascript][typescript][javascriptreact][typescriptreact][css][json][jsonc]": {
 		"editor.defaultFormatter": "biomejs.biome",
@@ -18,6 +26,10 @@
 		"editor.defaultFormatter": "esbenp.prettier-vscode",
 		"editor.formatOnSave": true,
 		"editor.rulers": [80]
+	},
+	"[toml]": {
+		"editor.defaultFormatter": "tombi-toml.tombi",
+		"editor.formatOnSave": true
 	},
 	"workbench.editorAssociations": {
 		"*.dmi": "dmiEditor.dmiEditor"
@@ -83,5 +95,8 @@
 			"patternFlags": "s",
 			"foreground": "#666666"
 		}
-	]
+	],
+	"ss13BuildFlags.baseTask": "Build All",
+	"ss13BuildFlags.configPath": "tools/build/build_flags.jsonc",
+	"ss13BuildFlags.injectionMode": "cli-args"
 }

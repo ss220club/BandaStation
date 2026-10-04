@@ -28,3 +28,9 @@
 		/obj/item/bodypart/leg/left/digitigrade,
 		/obj/item/bodypart/leg/right/digitigrade
 	)
+
+/datum/bodypart_overlay/simple/body_marking/tajaran_limb/can_draw_on_bodypart(obj/item/bodypart/bodypart_owner)
+	. = ..()
+	if(!.)
+		return
+	return CHECK_DIGI_LEGS(bodypart_owner.owner)

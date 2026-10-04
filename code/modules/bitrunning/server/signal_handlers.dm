@@ -43,7 +43,7 @@
 		if(!creature.mind?.has_antag_datum(/datum/antagonist/bitrunning_glitch, check_subtypes = TRUE))
 			return
 
-		INVOKE_ASYNC(src, PROC_REF(station_spawn), arrived, chosen_forge)
+		INVOKE_ASYNC(src, PROC_REF(station_spawn), arrived, chosen_forge, source)
 		return
 
 	if(istype(arrived, /obj/structure/closet/crate/secure/bitrunning/encrypted))
@@ -59,8 +59,8 @@
 /obj/machinery/quantum_server/proc/on_goal_turf_examined(datum/source, mob/examiner, list/examine_text)
 	SIGNAL_HANDLER
 
-	examine_text += span_info("Beneath your gaze, the floor pulses subtly with streams of encoded data.")
-	examine_text += span_info("It seems to be part of the location designated for retrieving encrypted payloads.")
+	examine_text += span_info("Под вашим взглядом пол едва заметно пульсирует потоками закодированных данных.")
+	examine_text += span_info("По видимому, эта часть локации предназначена для для получения зашифрованных полезных данных.")
 
 
 /// Scans over the inbound created_atoms from lazy templates

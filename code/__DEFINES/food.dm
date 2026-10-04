@@ -19,6 +19,7 @@
 #define BUGS (1<<18)
 #define GORE (1<<19)
 #define STONE (1<<20)
+#define EGG (1<<21)
 
 DEFINE_BITFIELD(foodtypes, list(
 	"MEAT" = MEAT,
@@ -42,6 +43,7 @@ DEFINE_BITFIELD(foodtypes, list(
 	"BUGS" = BUGS,
 	"GORE" = GORE,
 	"STONE" = STONE,
+	"EGG" = EGG,
 ))
 
 /// A list of food type names, in order of their flags
@@ -67,6 +69,7 @@ DEFINE_BITFIELD(foodtypes, list(
 	"BUGS", \
 	"GORE", \
 	"STONE", \
+	"EGG", \
 )
 
 /// IC meaning (more or less) for food flags // BANDASTATION EDIT - сверяйте с tgui\packages\tgui\interfaces\PersonalCrafting.tsx
@@ -92,6 +95,7 @@ DEFINE_BITFIELD(foodtypes, list(
 	"Из жуков", \
 	"Месиво", \
 	"Каменное", \
+	"Из яиц", \
 )
 
 /// Food types assigned to all podperson organs
@@ -276,3 +280,6 @@ DEFINE_BITFIELD(food_flags, list(
 #define MEATSLAB_PROCESSED_AMOUNT 3
 /// This should be 1/3 of the amount found in a slab (a portion will be lost when rounding but it's negligible)
 #define MEATDISH_MATERIAL_AMOUNT (MEATSLAB_MATERIAL_AMOUNT / MEATSLAB_PROCESSED_AMOUNT)
+
+/// The multiplier for nutrition when a golem eats this particular type of food.
+#define GOLEMFOOD_PREPARED_MEAL 1.3

@@ -187,6 +187,11 @@
 
 	//the path of the fish_source datum to use for the fishing_spot component
 	var/fish_source_path = /datum/fish_source/vending
+	/**
+	 * used to check for discounting and for displaying discounted prices in the UI; not a static proc-local var because the code for displaying and applying
+	 * discounts isn't unified across DM and tgui
+	 */
+	var/static/datum/id_trim/job/big_boss_trim = /datum/id_trim/job/captain
 
 /datum/armor/machinery_vending
 	melee = 20
@@ -213,9 +218,8 @@
 	set_wires(new /datum/wires/vending(src))
 
 	if(SStts.tts_enabled)
-		var/static/vendor_voice_by_type = list()
-		if(!vendor_voice_by_type[type])
-			vendor_voice_by_type[type] = pick(SStts.available_speakers)
+		var/static/list/vendor_voice_by_type = list()
+		vendor_voice_by_type[type] ||= SStts.random_tts_voice()
 		voice = vendor_voice_by_type[type]
 
 	slogan_list = splittext(product_slogans, ";")

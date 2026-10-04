@@ -42,21 +42,18 @@
 	AddElement(/datum/element/update_icon_updates_onmob)
 	AddComponent(/datum/component/reskinable_item, /datum/atom_skin/bison)
 	AddComponent(/datum/component/automatic_fire, fire_delay)
+	ADD_TRAIT(src, TRAIT_CONTRABAND, INNATE_TRAIT)
 
 /obj/item/gun/ballistic/automatic/bison/update_icon_state()
 	. = ..()
 	inhand_icon_state = "[icon_state][magazine ? "":"_nomag"]"
 
-/obj/item/gun/ballistic/automatic/bison/examine(mob/user)
-	. = ..()
-	. += span_notice("Вы можете [EXAMINE_HINT("изучить подробнее")], чтобы узнать немного больше об этом оружии.")
-
-/obj/item/gun/ballistic/automatic/bison/examine_more(mob/user)
-	. = ..()
-	. += "Пистолет-пулемет ПП-542 или же \"Бисон\" был разработан Оборонной Коллегией СССП для экипажей истребителей и сотрудников милиции, нуждающихся в компактном и скорострельном оружии ближнего боя. <br>\
+/obj/item/gun/ballistic/automatic/bison/add_deep_lore()
+	AddElement(/datum/element/examine_lore, \
+		lore = "Пистолет-пулемет ПП-542 или же \"Бисон\" был разработан Оборонной Коллегией СССП для экипажей истребителей и сотрудников милиции, нуждающихся в компактном и скорострельном оружии ближнего боя. <br>\
 		Созданный на основе древнего чертежа, этот пистолет-пулемет адаптирован для условий 2569 года с использованием легких полимерных материалов и усовершенствованных сплавов. \
 		Комбинирование шнекового магазина на 64 и высокой скорострельности позволяет получать эффективный подавляющий огонь. \
-		Его уникальная конструкция с размещением шнекового магазина перед спусковым крючком минимизирует габариты, что идеально подходит для условий ближнего боя в тесных пространствах."
+		Его уникальная конструкция с размещением шнекового магазина перед спусковым крючком минимизирует габариты, что идеально подходит для условий ближнего боя в тесных пространствах.")
 
 /obj/item/gun/ballistic/automatic/bison/no_mag
 	spawnwithmagazine = FALSE

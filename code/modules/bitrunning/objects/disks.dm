@@ -148,13 +148,13 @@
 		if(initial(thing.name) == choice)
 			granted_item = thing
 
-	balloon_alert(user, "selected")
+	balloon_alert(user, "выбрано")
 	playsound(user, 'sound/items/click.ogg', 50, TRUE)
 	choice_made = choice
 
 /// Tier 1 items. Simple, funny, or helpful.
 /obj/item/disk/bitrunning/item/tier1
-	name = "Снаряжение битраннинга: простое"
+	name = "bitrunning gear: simple"
 	selectable_items = list(
 		/obj/item/pizzabox/infinite,
 		/obj/item/gun/medbeam,
@@ -163,7 +163,7 @@
 
 /// Tier 2 items. More complex, powerful, or useful.
 /obj/item/disk/bitrunning/item/tier2
-	name = "Снаряжение битраннинга: комплексное"
+	name = "bitrunning gear: complex"
 	selectable_items = list(
 		/obj/item/reagent_containers/hypospray/medipen/survival/luxury,
 		/obj/item/gun/ballistic/automatic/pistol,
@@ -172,7 +172,7 @@
 
 /// Tier 3 items. Very powerful, game breaking.
 /obj/item/disk/bitrunning/item/tier3
-	name = "Снаряжение битраннинга: продвинутое"
+	name = "bitrunning gear: advanced"
 	selectable_items = list(
 		/obj/item/gun/energy/e_gun/nuclear,
 		/obj/item/dualsaber/green,
@@ -186,7 +186,7 @@
 		/obj/item/borg/upgrade/modkit/range,
 		/obj/item/borg/upgrade/modkit/damage,
 		/obj/item/borg/upgrade/modkit/cooldown,
-		/obj/item/borg/upgrade/modkit/aoe/mobs,
+		/obj/item/borg/upgrade/modkit/cooldown/aoe/mobs,
 		/obj/item/borg/upgrade/modkit/human_passthrough,
 	)
 
@@ -205,7 +205,7 @@
 	name = "bitrunning gear: proto-kinetic crusher mods"
 	selectable_items = list(
 		/obj/item/crusher_trophy/watcher_wing,
-		/obj/item/crusher_trophy/blaster_tubes/magma_wing,
+		/obj/item/crusher_trophy/magma_wing,
 		/obj/item/crusher_trophy/legion_skull,
 		/obj/item/crusher_trophy/wolf_ear,
 	)
@@ -213,7 +213,7 @@
 /obj/item/disk/bitrunning/item/pkc_mods/premium
 	name = "bitrunning gear: premium proto-kinetic crusher mods"
 	selectable_items = list(
-		/obj/item/crusher_trophy/watcher_wing/ice_wing,
+		/obj/item/crusher_trophy/ice_wing,
 		/obj/item/crusher_trophy/blaster_tubes,
 		/obj/item/crusher_trophy/miner_eye,
 		/obj/item/crusher_trophy/tail_spike,

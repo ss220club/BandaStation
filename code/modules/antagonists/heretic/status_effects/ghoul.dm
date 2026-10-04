@@ -55,7 +55,7 @@
 	if(new_max_health)
 		if(new_max_health < human_target.maxHealth)
 			stamina_mod_applied = (new_max_health / human_target.maxHealth)
-			human_target.physiology.stamina_mod *= stamina_mod_applied
+			MODIFY_PHYSIOLOGY(human_target, STAMINA, stamina_mod_applied)
 		human_target.setMaxHealth(new_max_health)
 		human_target.health = new_max_health
 
@@ -87,7 +87,7 @@
 
 	if(new_max_health)
 		if(isnum(stamina_mod_applied))
-			human_target.physiology.stamina_mod /= stamina_mod_applied
+			MODIFY_PHYSIOLOGY(human_target, STAMINA, 1 / stamina_mod_applied)
 		human_target.setMaxHealth(initial(human_target.maxHealth))
 
 	on_lost_callback?.Invoke(human_target)
@@ -103,7 +103,7 @@
 		qdel(src)
 
 /atom/movable/screen/alert/status_effect/ghoul
-	name = "Flesh Servant"
+	name = "Слуга из плоти"
 	desc = "Вы гуль!"
 	icon_state = "heretic_template"
 	overlay_state = "mind_control"

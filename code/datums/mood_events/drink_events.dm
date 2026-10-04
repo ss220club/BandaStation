@@ -86,3 +86,13 @@
 	description = "Ах, хороший экземпляр Wellcheers. Соленый виноградный вкус отлично поднимает настроение."
 	mood_change = 3
 	timeout = 7 MINUTES
+
+/datum/mood_event/sweetcoffee
+	description = "The bitter sweet taste of coffee was not too bad"
+	mood_change = 2
+	timeout = 5 MINUTES
+
+/datum/mood_event/sweettea
+	description = "Let your worries dissolve like sugar in tea."
+	mood_change = 4
+	timeout = 2.5 MINUTES

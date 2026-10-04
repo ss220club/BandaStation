@@ -187,9 +187,13 @@
 	if(damage > 30 && prob(30))
 		INVOKE_ASYNC(old_body, TYPE_PROC_REF(/mob/living, emote), "scream")
 
-	old_body.apply_damage(damage, damage_type, def_zone, blocked, wound_bonus = CANT_WOUND)
+	var/zone = def_zone
+	if(isbodypart(def_zone)) // If the defined zone is a bodypart, then it is the bodypart of the domain avatar. We don't want that bodypart, we want the real body's bodypart, so we go back to zone.
+		zone = astype(def_zone, /obj/item/bodypart).body_zone
 
-	if(old_body.stat > SOFT_CRIT) // KO!
+	old_body.apply_damage(damage, damage_type, zone, blocked, wound_bonus = CANT_WOUND)
+
+	if(IS_UNCONSCIOUS(old_body)) // KO!
 		full_avatar_disconnect(cause_damage = TRUE)
 
 	nohit = FALSE
@@ -216,8 +220,8 @@
 		/atom/movable/screen/alert/bitrunning,
 		new_master = intruder,
 	)
-	alert.name = "Netpod Breached"
-	alert.desc = "Someone is prying open the netpod. Find an exit."
+	alert.name = "Нарушение работы нетпода"
+	alert.desc = "Кто-то пытается вскрыть нетпод. Найдите выход."
 
 
 /// Triggers when the netpod is taking damage and is under 50%
@@ -230,8 +234,8 @@
 		/atom/movable/screen/alert/bitrunning,
 		new_master = source,
 	)
-	alert.name = "Integrity Compromised"
-	alert.desc = "The netpod is damaged. Find an exit."
+	alert.name = "Целостность нарушена"
+	alert.desc = "Нетпод повреждён. Найдите выход."
 
 
 //if your bitrunning avatar somehow manages to acquire and consume a red pill, they will be ejected from the Matrix
@@ -266,8 +270,8 @@
 		/atom/movable/screen/alert/bitrunning,
 		new_master = hackerman,
 	)
-	alert.name = "Domain Rebooting"
-	alert.desc = "The domain is rebooting. Find an exit."
+	alert.name = "Перезагрузка домена"
+	alert.desc = "Домен перезагружается. Найдите выход."
 
 
 /// Triggers whenever an antag steps onto an exit turf and the server is emagged
@@ -281,8 +285,8 @@
 		/atom/movable/screen/alert/bitrunning,
 		new_master = source,
 	)
-	alert.name = "Security Breach"
-	alert.desc = "A hostile entity is breaching the safehouse. Find an exit."
+	alert.name = "Нарушение работы охранной системы"
+	alert.desc = "Враждебное существо проникает в убежище. Найдите выход."
 
 
 /// Server has spawned a ghost role threat
@@ -295,8 +299,8 @@
 		/atom/movable/screen/alert/bitrunning,
 		new_master = source,
 	)
-	alert.name = "Threat Detected"
-	alert.desc = "Data stream abnormalities present."
+	alert.name = "Обнаружена угроза"
+	alert.desc = "Присутствуют аномалии в потоке данных."
 
 
 /// Returns the mind to the old body

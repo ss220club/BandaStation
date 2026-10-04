@@ -13,8 +13,8 @@
 	force = 10
 	throwforce = 20
 	hitsound = 'sound/items/weapons/bladeslice.ogg'
-	attack_verb_continuous = list("attacks", "slashes", "slices", "tears", "lacerates", "rips", "dices", "rends")
-	attack_verb_simple = list("attack", "slash", "slice", "tear", "lacerate", "rip", "dice", "rend")
+	attack_verb_continuous = list("атакуете", "режете", "рвёте", "пускаете кровь", "разрываете", "рубите", "раздираете")
+	attack_verb_simple = list("атакуете", "режете", "рвёте", "пускаете кровь", "разрываете", "рубите", "раздираете")
 	actions_types = list(/datum/action/item_action/rune_shatter)
 	embed_type = /datum/embedding/rune_carver
 
@@ -26,8 +26,8 @@
 	var/list/datum/weakref/current_runes = list()
 	/// Turfs that you cannot draw carvings on
 	var/static/list/blacklisted_turfs = typecacheof(list(/turf/open/space, /turf/open/openspace, /turf/open/lava))
-	var/list/alt_continuous = list("stabs", "pierces", "impales")
-	var/list/alt_simple = list("stab", "pierce", "impale")
+	var/list/alt_continuous = list("протыкаете", "пронзаете", "нанизываете")
+	var/list/alt_simple = list("протыкаете", "пронзаете", "нанизываете")
 
 /obj/item/melee/rune_carver/Initialize(mapload)
 	. = ..()
@@ -127,7 +127,7 @@
 	current_runes += WEAKREF(new_rune)
 
 /datum/action/item_action/rune_shatter
-	name = "Rune Break"
+	name = "Уничтожение рун"
 	desc = "Уничтожает все руны, вырезанные этим клинком."
 	background_icon_state = "bg_heretic"
 	overlay_icon_state = "bg_heretic_border"

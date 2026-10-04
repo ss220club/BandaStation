@@ -34,7 +34,7 @@
 	///What is our honorific name/title combo to be displayed?
 	var/honorific_title
 
-/obj/item/card/suicide_act(mob/living/carbon/user)
+/obj/item/card/suicide_act(mob/living/user)
 	user.visible_message(span_suicide("[user] begins to swipe [user.p_their()] neck with \the [src]! Кажется, [user.ru_p_they()] пытается совершить самоубийство!"))
 	return BRUTELOSS
 
@@ -67,6 +67,8 @@
 	interaction_flags_click = FORBID_TELEKINESIS_REACH
 	armor_type = /datum/armor/card_id
 	resistance_flags = FIRE_PROOF | ACID_PROOF
+	custom_materials = list(/datum/material/iron = SMALL_MATERIAL_AMOUNT * 2, /datum/material/glass = SMALL_MATERIAL_AMOUNT)
+	item_flags = parent_type::item_flags | NO_MAT_REDEMPTION // A little clemency to the people who fumble and misclick stuff, even if it's already easy enough to destroy one.
 
 	/// The name registered on the card (for example: Dr Bryan See)
 	var/registered_name = null
@@ -818,7 +820,7 @@
 /obj/item/card/id/click_alt(mob/living/user)
 	if(!alt_click_can_use_id(user))
 		return NONE
-	if (registered_account.being_dumped)
+	if (LAZYLEN(registered_account.being_dumped))
 		registered_account.bank_card_talk(span_warning("内部服务器错误"), TRUE)
 		return CLICK_ACTION_SUCCESS
 	if(registered_account.account_debt)
@@ -904,8 +906,8 @@
 	REMOVE_TRAIT(src, TRAIT_NODROP, "psycho")
 	if(user.is_holding(src))
 		user.dropItemToGround(src)
-	for(var/mob/living/carbon/human/viewing_mob in viewers(user, 2))
-		if(viewing_mob.stat || viewing_mob == user)
+	for(var/mob/living/carbon/human/viewing_mob in viewers(2, user))
+		if(IS_UNCONSCIOUS_OR_CRIT(viewing_mob) || viewing_mob == user)
 			continue
 		viewing_mob.say("Что-то не так? [first_name(user.name)]... ты потеешь.", forced = "psycho")
 		break
@@ -1014,6 +1016,10 @@
 /// Returns the trim assignment name.
 /obj/item/card/id/proc/get_trim_assignment()
 	return trim?.assignment || assignment
+
+/// Returns the trim sechud icon state.
+/obj/item/card/id/proc/get_trim_sechud_icon()
+	return trim?.sechud_icon || DEFAULT_HUDS_DMI
 
 /// Returns the trim sechud icon state.
 /obj/item/card/id/proc/get_trim_sechud_icon_state()
@@ -1622,38 +1628,45 @@
 
 /obj/item/card/id/advanced/prisoner/one
 	name = "Prisoner #13-001"
-	registered_name = "Prisoner #13-001"
+	registered_name = "Заключённый #13-001"
 	trim = /datum/id_trim/job/prisoner/one
 
 /obj/item/card/id/advanced/prisoner/two
 	name = "Prisoner #13-002"
-	registered_name = "Prisoner #13-002"
+	registered_name = "Заключённый #13-002"
 	trim = /datum/id_trim/job/prisoner/two
 
 /obj/item/card/id/advanced/prisoner/three
 	name = "Prisoner #13-003"
-	registered_name = "Prisoner #13-003"
+	registered_name = "Заключённый #13-003"
 	trim = /datum/id_trim/job/prisoner/three
 
 /obj/item/card/id/advanced/prisoner/four
 	name = "Prisoner #13-004"
-	registered_name = "Prisoner #13-004"
+	registered_name = "Заключённый #13-004"
 	trim = /datum/id_trim/job/prisoner/four
 
 /obj/item/card/id/advanced/prisoner/five
 	name = "Prisoner #13-005"
-	registered_name = "Prisoner #13-005"
+	registered_name = "Заключённый #13-005"
 	trim = /datum/id_trim/job/prisoner/five
 
 /obj/item/card/id/advanced/prisoner/six
 	name = "Prisoner #13-006"
-	registered_name = "Prisoner #13-006"
+	registered_name = "Заключённый #13-006"
 	trim = /datum/id_trim/job/prisoner/six
 
 /obj/item/card/id/advanced/prisoner/seven
 	name = "Prisoner #13-007"
-	registered_name = "Prisoner #13-007"
+	registered_name = "Заключённый #13-007"
 	trim = /datum/id_trim/job/prisoner/seven
+
+// BANDASTATION MOD START: Brig closet extra items
+/obj/item/card/id/advanced/prisoner/temp
+	name = "Prisoner #13-T"
+	registered_name = "Заключённый #13-T"
+	desc = "ID карта, выдаваемая на срок временного заключения. Ты - число, ты не свободный человек."
+// BANDASTATION MOD END: Brig closet extra items
 
 /obj/item/card/id/advanced/mining
 	name = "mining ID"
@@ -1756,7 +1769,7 @@
 	if(ishuman(interacting_with))
 		interacting_with.balloon_alert(user, "сканируем ID-карту...")
 
-		if(!do_after(user, 2 SECONDS, interacting_with, hidden = TRUE))
+		if(!do_after(user, 2 SECONDS, interacting_with, cog_icon = null))
 			interacting_with.balloon_alert(user, "прервано!")
 			return ITEM_INTERACT_BLOCKING
 

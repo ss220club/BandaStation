@@ -73,9 +73,6 @@ SUBSYSTEM_DEF(security_level)
 /datum/controller/subsystem/security_level/proc/set_level_instantly(datum/security_level/selected_level, announce = TRUE, mob/user)
 	PRIVATE_PROC(TRUE)
 
-	if(SSnightshift.can_fire && (selected_level.number_level >= SEC_LEVEL_RED || current_security_level.number_level >= SEC_LEVEL_RED))
-		SSnightshift.next_fire = world.time + 7 SECONDS // Fire nightshift after the security level announcement is complete
-
 	if(announce)
 		level_announce(selected_level, current_security_level.number_level) // We want to announce BEFORE updating to the new level
 
@@ -87,8 +84,7 @@ SUBSYSTEM_DEF(security_level)
 	else
 		can_fire = FALSE
 
-	if(SSshuttle.emergency.mode == SHUTTLE_CALL || SSshuttle.emergency.mode == SHUTTLE_RECALL) // By god this is absolutely shit
-		SSshuttle.emergency.alert_coeff_change(selected_level.shuttle_call_time_mod)
+	selected_level.post_set_security_level(user) // BANDASTATION EDIT - Gamma Shuttle (add mob/user argument)
 
 	selected_level.post_set_security_level(user) // BANDASTATION EDIT - Gamma Shuttle (add mob/user argument)
 

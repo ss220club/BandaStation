@@ -23,7 +23,7 @@
 	ears = /obj/item/radio/headset/headset_cent/commander
 	glasses = /obj/item/clothing/glasses/hud/security/sunglasses/soo
 	gloves = /obj/item/clothing/gloves/combat
-	head = /obj/item/clothing/head/helmet/space/beret/soo
+	head = /obj/item/clothing/head/beret/centcom/soo
 	mask = /obj/item/cigarette/cigar/havana
 	shoes = /obj/item/clothing/shoes/jackboots/centcom
 	r_pocket = /obj/item/lighter
@@ -42,7 +42,7 @@
 	name = "Nanotrasen Navy Junior Officer Chief"
 
 	suit = /obj/item/clothing/suit/armor/vest
-	suit_store = /obj/item/gun/ballistic/rifle/boltaction
+	suit_store = /obj/item/gun/ballistic/automatic/pistol/cm23
 	belt = /obj/item/melee/baton/security/loaded
 	head = /obj/item/clothing/head/beret/cent_intern
 	l_hand = /obj/item/megaphone
@@ -77,7 +77,7 @@
 	ears = /obj/item/radio/headset/headset_cent/commander
 	glasses = /obj/item/clothing/glasses/hud/security/sunglasses/centcom_officer
 	gloves = /obj/item/clothing/gloves/combat/centcom
-	head = /obj/item/clothing/head/helmet/space/beret
+	head = /obj/item/clothing/head/beret/centcom
 	mask = /obj/item/cigarette/cigar/cohiba
 	shoes = /obj/item/clothing/shoes/laceup
 	r_pocket = /obj/item/modular_computer/pda/heads/centcom
@@ -95,11 +95,11 @@
 	uniform = /obj/item/clothing/under/rank/centcom/official
 	suit = /obj/item/clothing/suit/armor/centcom_formal/field
 	back = /obj/item/storage/backpack/satchel/leather
-	belt = /obj/item/storage/belt/centcom_sabre
+	belt = /obj/item/storage/belt/sheath/centcom_rapier
 	ears = /obj/item/radio/headset/headset_cent/commander
 	glasses = /obj/item/clothing/glasses/hud/security/sunglasses/centcom_officer
 	gloves = /obj/item/clothing/gloves/combat/centcom
-	head = /obj/item/clothing/head/helmet/space/beret
+	head = /obj/item/clothing/head/beret/centcom
 	mask = /obj/item/cigarette/cigar/cohiba
 	shoes = /obj/item/clothing/shoes/jackboots/centcom
 	r_pocket = /obj/item/modular_computer/pda/heads/centcom
@@ -158,13 +158,21 @@
 	access = access = list(ACCESS_CENT_GENERAL, ACCESS_CENT_SPECOPS, ACCESS_CENT_LIVING) | (SSid_access.get_region_access_list(list(REGION_ALL_STATION)) - ACCESS_CHANGE_IDS)
 
 // DeathSquad outifit
+/datum/outfit/centcom/death_commando
+	backpack_contents = list(
+		/obj/item/ammo_box/speedloader/c357 = 1,
+		/obj/item/flashlight/seclite = 1,
+		/obj/item/grenade/c4/x4 = 1,
+		/obj/item/storage/medkit/tactical_lite = 1,
+	)
+
 /datum/outfit/centcom/death_commando/officer
 	backpack_contents = list(
 		/obj/item/ammo_box/speedloader/c357 = 1,
-		/obj/item/flashlight = 1,
+		/obj/item/flashlight/seclite = 1,
 		/obj/item/grenade/c4/x4 = 1,
-		/obj/item/storage/box/flashbangs = 1,
-		/obj/item/storage/medkit/regular = 1,
+		/obj/item/storage/box/syndie_kit/frag_grenades = 1,
+		/obj/item/storage/medkit/tactical_lite = 1,
 		/obj/item/disk/nuclear/death_commando = 1,
 	)
 
@@ -178,3 +186,207 @@
 	// So, this disk is just good for making bomb go boom
 	fake = FALSE
 	SSpoints_of_interest.make_point_of_interest(src)
+
+/obj/item/storage/box/survival/centcom
+	mask_type = /obj/item/clothing/mask/gas/sechailer
+	medipen_type =  /obj/item/reagent_containers/hypospray/medipen/atropine
+
+// SpecOps Operatives
+/datum/outfit/centcom/specops
+	name = "NT SpecOps - Operative (Base)"
+	id = /obj/item/card/id/advanced/black
+	id_trim = /datum/id_trim/centcom/specops
+	uniform = /obj/item/clothing/under/rank/centcom/military
+	back = /obj/item/storage/backpack/satchel/leather
+	backpack_contents = list(
+		/obj/item/storage/box/survival/centcom/specops,
+		/obj/item/lighter/skull,
+		/obj/item/door_remote/omni,
+	)
+	belt = /obj/item/storage/belt/military/holster/specops/full
+	ears = /obj/item/radio/headset/headset_cent/alt/leader
+	glasses = /obj/item/clothing/glasses/hud/security/sunglasses
+	gloves = /obj/item/clothing/gloves/combat
+	head = /obj/item/clothing/head/beret/ert/specops
+	mask = /obj/item/clothing/mask/gas/sechailer/specops
+	shoes = /obj/item/clothing/shoes/combat/swat
+	r_pocket = /obj/item/knife/combat
+	l_pocket = /obj/item/reagent_containers/hypospray/combat/nanites/less
+	implants = list(/obj/item/implant/weapons_auth, /obj/item/implant/empprotection)
+
+/datum/id_trim/centcom/specops/New()
+	. = ..()
+	access = list(ACCESS_CENT_CAPTAIN, ACCESS_CENT_GENERAL, ACCESS_CENT_SPECOPS, ACCESS_CENT_LIVING) | (SSid_access.get_region_access_list(list(REGION_ALL_STATION)) - ACCESS_CHANGE_IDS)
+
+/datum/id_trim/centcom/specops
+	assignment = "NT Special Operative"
+	honorifics = list("Оперативник")
+	honorific_positions = HONORIFIC_POSITION_LAST | HONORIFIC_POSITION_NONE
+	trim_state = "trim_deathcommando"
+
+/obj/item/storage/box/survival/centcom/specops/PopulateContents()
+	. = ..()
+	new /obj/item/extinguisher/mini(src)
+	new /obj/item/radio/off(src)
+	new /obj/item/flashlight/seclite(src)
+	new /obj/item/food/rationpack(src)
+
+/obj/item/reagent_containers/hypospray/combat/nanites/less
+	list_reagents = list(/datum/reagent/medicine/oculine = 10, /datum/reagent/medicine/inacusiate = 10, /datum/reagent/medicine/synaptizine = 20, /datum/reagent/medicine/atropine = 20, /datum/reagent/medicine/syndicate_nanites = 40)
+
+/datum/outfit/centcom/specops/equipped
+	name = "NT SpecOps - Operative (Rifleman)"
+	back = /obj/item/storage/backpack/duffelbag/syndie/centcom/ammo
+	backpack_contents = list(
+		/obj/item/storage/box/survival/centcom,
+		/obj/item/clothing/head/beret/ert/specops,
+		/obj/item/storage/medkit/tactical,
+		/obj/item/grenade/smokebomb = 2,
+		/obj/item/grenade/c4,
+		/obj/item/grenade/c4/x4,
+		/obj/item/ammo_box/magazine/c762x39mm/ap = 2,
+		/obj/item/ammo_box/magazine/c762x39mm/incendiary,
+		/obj/item/ammo_box/magazine/c762x39mm/emp,
+	)
+	suit = /obj/item/clothing/suit/armor/vest/specops
+	suit_store = /obj/item/gun/ballistic/automatic/sabel/auto/gauss/tactical
+	belt = /obj/item/storage/belt/military/holster/specops/full_rifleman
+	head = /obj/item/clothing/head/helmet/specops
+
+/datum/outfit/centcom/specops/equipped/unmarked
+	name = "NT SpecOps - Unknown Operative (Rifleman)"
+	id_trim = /datum/id_trim/centcom/specops/unmarked
+	uniform = /obj/item/clothing/under/shirt_black
+	suit = /obj/item/clothing/suit/armor/vest/specops/parka
+	head = /obj/item/clothing/head/helmet/toggleable/nvg
+
+/datum/outfit/centcom/specops/equipped/modsuit
+	name = "NT SpecOps - Operative (Rifleman/MOD)"
+	back = /obj/item/mod/control/pre_equipped/specops
+
+/datum/id_trim/centcom/specops/unmarked
+	assignment = "Operative"
+
+/datum/outfit/centcom/specops/equipped/medic
+	name = "NT SpecOps - Operative (Medic)"
+	id_trim = /datum/id_trim/centcom/specops/medic
+	back = /obj/item/storage/backpack/duffelbag/syndie/centcom/med
+	backpack_contents = list(
+		/obj/item/storage/box/survival/centcom/specops,
+		/obj/item/clothing/head/beret/ert/specops,
+		/obj/item/storage/medkit/tactical = 2,
+		/obj/item/defibrillator/compact/combat/loaded/nanotrasen,
+		/obj/item/grenade/smokebomb = 1,
+		/obj/item/gun/medbeam,
+		/obj/item/ammo_box/magazine/c762x39mm/ap,
+		/obj/item/ammo_box/magazine/c762x39mm/incendiary,
+		/obj/item/ammo_box/magazine/c762x39mm/emp,
+	)
+
+/datum/id_trim/centcom/specops/medic
+	assignment = "NT Special Operative Medic"
+
+/datum/outfit/centcom/specops/equipped/medic/unmarked
+	name = "NT SpecOps - Unknown Operative (Medic)"
+	id_trim = /datum/id_trim/centcom/specops/unmarked
+	uniform = /obj/item/clothing/under/shirt_white
+	suit = /obj/item/clothing/suit/armor/vest/specops/parka
+	head = /obj/item/clothing/head/helmet/toggleable/nvg
+
+/datum/outfit/centcom/specops/equipped/medic/modsuit
+	name = "NT SpecOps - Operative (Medic/MOD)"
+	back = /obj/item/mod/control/pre_equipped/specops
+
+/datum/outfit/centcom/specops/equipped/machinegunner
+	name = "NT SpecOps - Operative (Machinegunner)"
+	id_trim = /datum/id_trim/centcom/specops/machinegunner
+	backpack_contents = list(
+		/obj/item/storage/box/survival/centcom/specops,
+		/obj/item/clothing/head/beret/ert/specops,
+		/obj/item/storage/medkit/tactical,
+		/obj/item/grenade/c4,
+		/obj/item/grenade/c4/x4,
+		/obj/item/ammo_box/magazine/cm40/ap,
+		/obj/item/ammo_box/magazine/cm40/incendiary,
+		/obj/item/ammo_box/magazine/cm40/hp,
+	)
+	suit = /obj/item/clothing/suit/armor/swat/specops
+	suit_store = /obj/item/gun/ballistic/automatic/cm40
+	belt = /obj/item/storage/belt/military/holster/specops/full_machinegun
+
+/datum/id_trim/centcom/specops/machinegunner
+	assignment = "NT Special Operative Machinegunner"
+
+/datum/outfit/centcom/specops/equipped/machinegunner/unmarked
+	name = "NT SpecOps - Unknown Operative (Machinegunner)"
+	id_trim = /datum/id_trim/centcom/specops/unmarked
+	uniform = /obj/item/clothing/under/tshirt_black
+	suit = /obj/item/clothing/suit/armor/swat/specops
+	head = /obj/item/clothing/head/helmet/toggleable/nvg
+
+/datum/outfit/centcom/specops/equipped/machinegunner/modsuit
+	name = "NT SpecOps - Operative (Machinegunner/MOD)"
+	back = /obj/item/mod/control/pre_equipped/specops
+
+/datum/outfit/centcom/specops/equipped/breacher
+	name = "NT SpecOps - Operative (Breacher)"
+	id_trim = /datum/id_trim/centcom/specops/breacher
+	backpack_contents = list(
+		/obj/item/storage/box/survival/centcom/specops,
+		/obj/item/clothing/head/beret/ert/specops,
+		/obj/item/storage/medkit/tactical,
+		/obj/item/grenade/c4,
+		/obj/item/grenade/c4/x4,
+		/obj/item/ammo_box/magazine/cm15/drum/breacher,
+		/obj/item/ammo_box/magazine/cm15/drum/executioner,
+		/obj/item/ammo_box/magazine/cm15/drum/flechette,
+	)
+	suit = /obj/item/clothing/suit/armor/swat/specops
+	suit_store = /obj/item/gun/ballistic/automatic/cm15
+	belt = /obj/item/storage/belt/military/holster/specops/full_shotgun
+
+/datum/id_trim/centcom/specops/breacher
+	assignment = "NT Special Operative Breacher"
+
+/datum/outfit/centcom/specops/equipped/breacher/unmarked
+	name = "NT SpecOps - Unknown Operative (Breacher)"
+	id_trim = /datum/id_trim/centcom/specops/unmarked
+	uniform = /obj/item/clothing/under/tshirt_black
+	suit = /obj/item/clothing/suit/armor/vest/specops/parka
+	head = /obj/item/clothing/head/helmet/toggleable/nvg
+
+/datum/outfit/centcom/specops/equipped/breacher/modsuit
+	name = "NT SpecOps - Operative (Breacher/MOD)"
+	back = /obj/item/mod/control/pre_equipped/specops
+
+/datum/outfit/centcom/specops/equipped/sniper
+	name = "NT SpecOps - Operative (Sniper)"
+	id_trim = /datum/id_trim/centcom/specops/sniper
+	backpack_contents = list(
+		/obj/item/storage/box/survival/centcom/specops,
+		/obj/item/clothing/head/beret/ert/specops,
+		/obj/item/storage/medkit/tactical,
+		/obj/item/grenade/smokebomb = 2,
+		/obj/item/grenade/c4,
+		/obj/item/grenade/c4/x4,
+		/obj/item/ammo_box/magazine/c338/extended,
+		/obj/item/ammo_box/magazine/c338/extended/hp,
+		/obj/item/ammo_box/magazine/c338/extended/ap,
+		/obj/item/ammo_box/magazine/c338/extended/incendiary,
+	)
+	suit_store = /obj/item/gun/ballistic/automatic/f90
+	belt = /obj/item/storage/belt/military/holster/specops/full_sniper
+
+/datum/id_trim/centcom/specops/sniper
+	assignment = "NT Special Operative Sniper"
+
+/datum/outfit/centcom/specops/equipped/sniper/unmarked
+	name = "NT SpecOps - Unknown Operative (Sniper)"
+	id_trim = /datum/id_trim/centcom/specops/unmarked
+	uniform = /obj/item/clothing/under/hoodie_black
+	suit = /obj/item/clothing/suit/armor/vest/specops/parka
+	head = /obj/item/clothing/head/helmet/toggleable/nvg
+
+/datum/outfit/centcom/specops/equipped/sniper/modsuit
+	name = "NT SpecOps - Operative (Sniper/MOD)"
+	back = /obj/item/mod/control/pre_equipped/specops

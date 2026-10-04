@@ -46,6 +46,8 @@
 	/// The sound this obj makes when something is unbuckled from it
 	var/unbuckle_sound = null
 
+	var/generate_map_preview = FALSE
+
 	uses_integrity = TRUE
 
 /obj/vv_edit_var(vname, vval)
@@ -109,8 +111,8 @@ GLOBAL_LIST_EMPTY(objects_by_id_tag)
 			message_verb_continuous = "слабо " + ru_attack_verb(message_verb_continuous)
 
 		user.visible_message(
-			span_danger("[capitalize(user.declent_ru(NOMINATIVE))] [message_verb_continuous] [declent_ru(ACCUSATIVE)] с помощью [attacking_item.declent_ru(GENITIVE)][damage ? "." : ", [no_damage_feedback]!"]"),
-			span_danger("Вы [message_verb_simple] [declent_ru(ACCUSATIVE)] с помощью [attacking_item.declent_ru(GENITIVE)][damage ? "." : ", [no_damage_feedback]!"]"),
+			span_danger("[capitalize(user.declent_ru(NOMINATIVE))] [ru_attack_verb(message_verb_continuous)] [declent_ru(ACCUSATIVE)] с помощью [attacking_item.declent_ru(GENITIVE)][damage ? "." : ", [no_damage_feedback]!"]"),
+			span_danger("Вы [ru_attack_verb(message_verb_simple)] [declent_ru(ACCUSATIVE)] с помощью [attacking_item.declent_ru(GENITIVE)][damage ? "." : ", [no_damage_feedback]!"]"),
 			null,
 			COMBAT_MESSAGE_RANGE,
 		)
@@ -168,7 +170,7 @@ GLOBAL_LIST_EMPTY(objects_by_id_tag)
 
 /obj/vv_get_dropdown()
 	. = ..()
-	VV_DROPDOWN_OPTION("", "---")
+	VV_DROPDOWN_OPTION("", "--- /obj ---")
 	VV_DROPDOWN_OPTION(VV_HK_MASS_DEL_TYPE, "Delete all of type")
 	VV_DROPDOWN_OPTION(VV_HK_OSAY, "Object Say")
 
@@ -275,8 +277,9 @@ GLOBAL_LIST_EMPTY(objects_by_id_tag)
 
 /// If we can unwrench this object; returns SUCCESSFUL_UNFASTEN and FAILED_UNFASTEN, which are both TRUE, or CANT_UNFASTEN, which isn't.
 /obj/proc/can_be_unfasten_wrench(mob/user, silent)
-	if(!(isfloorturf(loc) || isindestructiblefloor(loc)) && !anchored)
-		to_chat(user, span_warning("[capitalize(declent_ru(NOMINATIVE))] не имеет под собой пол, к которому можно было бы прикрутить!"))
+	if(!is_anchorable_floor(loc) && !anchored)
+		if(!silent)
+			to_chat(user, span_warning("[capitalize(declent_ru(NOMINATIVE))] не имеет под собой пол, к которому можно было бы прикрутить!"))
 		return FAILED_UNFASTEN
 	return SUCCESSFUL_UNFASTEN
 
@@ -330,15 +333,13 @@ GLOBAL_LIST_EMPTY(objects_by_id_tag)
 
 /obj/apply_single_mat_effect(datum/material/material, mat_amount, multiplier)
 	. = ..()
-	if(!(material_flags & MATERIAL_AFFECT_STATISTICS))
-		return
-	change_material_strength(material, mat_amount, multiplier)
+	if(material_flags & MATERIAL_AFFECT_STATISTICS)
+		change_material_strength(material, mat_amount, multiplier)
 
 /obj/remove_single_mat_effect(datum/material/material, mat_amount, multiplier)
 	. = ..()
-	if(!(material_flags & MATERIAL_AFFECT_STATISTICS))
-		return
-	change_material_strength(material, mat_amount, multiplier, remove = TRUE)
+	if(material_flags & MATERIAL_AFFECT_STATISTICS)
+		change_material_strength(material, mat_amount, multiplier, remove = TRUE)
 
 /// Changes force and throwforce of an item based on its properties. Split into a separate proc as to allow items to change theirs based on sharpness and behavior
 /obj/proc/change_material_strength(datum/material/material, mat_amount, multiplier, remove = FALSE)
@@ -359,6 +360,8 @@ GLOBAL_LIST_EMPTY(objects_by_id_tag)
 
 /// Returns modifier to how much damage this object does to a target considered vulnerable to "demolition" (other objects, robots, etc)
 /obj/proc/get_demolition_modifier(obj/target)
+	if(HAS_TRAIT(target, TRAIT_IGNORE_DEMOLITION))
+		return 1
 	if(HAS_TRAIT(target, TRAIT_INVERTED_DEMOLITION))
 		return (1 / demolition_mod)
 	return demolition_mod

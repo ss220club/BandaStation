@@ -31,29 +31,32 @@
 	eject_sound = 'modular_bandastation/weapon/sound/ranged/dshk_unload.ogg'
 	eject_empty_sound = 'modular_bandastation/weapon/sound/ranged/dshk_unload.ogg'
 	suppressed_sound = 'sound/items/weapons/gun/general/heavy_shot_suppressed.ogg'
+	slowdown = 1
+	item_flags = NEEDS_PERMIT | SLOWS_WHILE_IN_HAND
 	var/cover_open = FALSE
 
 /obj/item/gun/ballistic/automatic/dshk/Initialize(mapload)
 	. = ..()
 	AddElement(/datum/element/update_icon_updates_onmob)
 	AddComponent(/datum/component/automatic_fire, 0.2 SECONDS)
+	AddElement(/datum/element/drag_pickup)
+	ADD_TRAIT(src, TRAIT_CONTRABAND, INNATE_TRAIT)
 
 /obj/item/gun/ballistic/automatic/dshk/examine(mob/user)
 	. = ..()
-	. += "<b>АЛЬТ + ЛКМ</b> чтобы [cover_open ? "закрыть" : "открыть"] крышку ствольной коробки."
+	. += "<b>АЛЬТ + ПКМ</b> чтобы [cover_open ? "закрыть" : "открыть"] крышку ствольной коробки."
 	if(cover_open && magazine)
 		. += span_notice("Кажется, вы могли бы использовать <b>пустую руку</b>, чтобы вынуть магазин.")
-	. += span_notice("Вы можете [EXAMINE_HINT("изучить подробнее")], чтобы узнать немного больше об этом оружии.")
 
-/obj/item/gun/ballistic/automatic/dshk/examine_more(mob/user)
-	. = ..()
-	. += "Тяжелый пулемет ДКШ был разработан Оборонной Коллегией СССП в начале 26 века как мощное стационарного оружие для поддержки войск. <br>\
+/obj/item/gun/ballistic/automatic/dshk/add_deep_lore()
+	AddElement(/datum/element/examine_lore, \
+		lore = "Тяжелый пулемет ДКШ был разработан Оборонной Коллегией СССП в начале 26 века как мощное стационарного оружие для поддержки войск. <br>\
 		Созданный на основе древнего дизайна, этот пулемет был разработан с использованием титановых сплавов и керамических покрытий для повышения долговечности в условиях космоса. \
 		Оснащенный калибром 12.7x108 и ленточным питанием на 50 патронов, он обеспечивает мощную огневую поддержку благодаря комбинации своей скорострельности и разрушительной силы калибра, \
 		что делает его идеальным для обороны ключевых позиций. <br>Вместе с появлением и распространением нового пулемета \"Волна-12\", созданным на замену устаревшему ДКШ, \
-		побудило Оборонную Коллегию придумать новые предназначения для этих пулеметов, что привело к появлению самых разных вариантов ДКШ, в том числе ручных, который вы видите сейчас."
+		побудило Оборонную Коллегию придумать новые предназначения для этих пулеметов, что привело к появлению самых разных вариантов ДКШ, в том числе ручных, который вы видите сейчас.")
 
-/obj/item/gun/ballistic/automatic/dshk/click_alt(mob/user)
+/obj/item/gun/ballistic/automatic/dshk/click_alt_secondary(mob/user)
 	cover_open = !cover_open
 	balloon_alert(user, "крышка [cover_open ? "открыта" : "закрыта"]")
 	playsound(src, 'sound/items/weapons/gun/l6/l6_door.ogg', 60, TRUE)
@@ -68,7 +71,7 @@
 	. = ..()
 	. += "dshk_door_[cover_open ? "open" : "closed"]"
 
-/obj/item/gun/ballistic/automatic/dshk/try_fire_gun(atom/target, mob/living/user, params)
+/obj/item/gun/ballistic/automatic/dshk/process_fire(atom/target, mob/living/user, message = TRUE, params = null, zone_override = "", bonus_spread = 0)
 	if(cover_open)
 		balloon_alert(user, "закройте крышку!")
 		return FALSE
@@ -88,8 +91,8 @@
 		return
 	..()
 
-/obj/item/gun/ballistic/automatic/dshk/attackby(obj/item/A, mob/user, list/modifiers, list/attack_modifiers)
-	if(!cover_open && istype(A, accepted_magazine_type))
+/obj/item/gun/ballistic/automatic/dshk/insert_magazine(mob/user, obj/item/ammo_box/magazine/AM, display_message = TRUE)
+	if(!cover_open && istype(AM, accepted_magazine_type))
 		balloon_alert(user, "откройте крышку!")
 		return
 	..()

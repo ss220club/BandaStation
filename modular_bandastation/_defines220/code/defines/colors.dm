@@ -1,6 +1,8 @@
 // MARK: Wood Colors
 #define COLOR_WOOD "#864A2D"
 #define COLOR_OAK "#644526"
+#define COLOR_DARKWOOD "#422017"
+#define COLOR_LIGHTWOOD "#8B6643"
 #define COLOR_BIRCH "#FFECB3"
 #define COLOR_CHERRY "#643412"
 #define COLOR_AMARANTH "#6B2E3E"

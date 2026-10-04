@@ -33,7 +33,7 @@
 	. = ..()
 	if(!.)
 		return
-	for(var/obj/item/bodypart/part as anything in owner.bodyparts)
+	for(var/obj/item/bodypart/part as anything in owner.get_bodyparts())
 		if (part.bodytype & BODYTYPE_ORGANIC)
 			part.add_color_override(bodypart_color, LIMB_COLOR_HULK)
 	owner.update_body_parts()
@@ -43,6 +43,7 @@
 	RegisterSignal(owner, COMSIG_CARBON_ATTACH_LIMB, PROC_REF(texture_limb))
 	RegisterSignal(owner, COMSIG_CARBON_REMOVE_LIMB, PROC_REF(untexture_limb))
 	owner.add_movespeed_mod_immunities("hulk", /datum/movespeed_modifier/damage_slowdown)
+	MODIFY_PHYSIOLOGY(owner, PHYS_COEFF_COLD, 2) //hulks are vulnerable to cold temperatures for some reason, idk low body fat?
 
 /datum/mutation/hulk/proc/on_attack_hand(mob/living/carbon/human/source, atom/target, proximity, modifiers)
 	SIGNAL_HANDLER
@@ -74,13 +75,14 @@
 /datum/mutation/hulk/on_losing(mob/living/carbon/human/owner)
 	if(..())
 		return
-	for(var/obj/item/bodypart/part as anything in owner.bodyparts)
+	for(var/obj/item/bodypart/part as anything in owner.get_bodyparts())
 		part.remove_color_override(LIMB_COLOR_HULK)
 	owner.update_body_parts()
 	owner.clear_mood_event("hulk")
 	UnregisterSignal(owner, COMSIG_LIVING_EARLY_UNARMED_ATTACK)
 	UnregisterSignal(owner, COMSIG_MOB_CLICKON)
 	owner.remove_movespeed_mod_immunities("hulk", /datum/movespeed_modifier/damage_slowdown)
+	MODIFY_PHYSIOLOGY(owner, PHYS_COEFF_COLD, 0.5)
 
 /datum/mutation/hulk/proc/texture_limb(atom/source, obj/item/bodypart/limb)
 	SIGNAL_HANDLER
@@ -242,7 +244,7 @@
 	var/turf/T = get_edge_target_turf(the_hulk, the_hulk.dir)
 	if(!isturf(T))
 		return
-	if(!yeeted_person.stat)
+	if(!IS_UNCONSCIOUS_OR_CRIT(yeeted_person))
 		yeeted_person.emote("scream")
 	yeeted_person.throw_at(T, 10, 6, the_hulk, TRUE, TRUE)
 	log_combat(the_hulk, yeeted_person, "has thrown by tail")
@@ -251,7 +253,7 @@
 	name = "Hulk (Magical)"
 	species_allowed = null //yes skeleton/lizard hulk - note that species that dont have skintone changing (like skellies) get custom handling
 	health_req = 0
-	instability = 0
+	instability = NEGATIVE_STABILITY_NONE
 	scream_delay = 2.5 SECONDS // halved to be more annoying (spell doesn't last long anyways)
 	no_recoil = FALSE
 	mutation_traits = list(
@@ -263,7 +265,7 @@
 /datum/mutation/hulk/superhuman
 	name = "Hulk (Super)"
 	health_req = 0
-	instability = 0
+	instability = NEGATIVE_STABILITY_NONE
 	no_recoil = FALSE
 	mutation_traits = list(
 		TRAIT_CHUNKYFINGERS,

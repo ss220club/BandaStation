@@ -5,7 +5,7 @@
 
 /obj/item/grenade/chem_grenade/rust_sower
 	name = "\improper Rust sower"
-	desc = "A nifty little thing that explodes into rust. Causes borgs and mechs to get utterly obliterated"
+	desc = "Изящная вещица, распространяющая ржавчину при подрыве. Приводит к полному уничтожению боргов и мехов."
 	possible_fuse_time = list("5")
 	stage = GRENADE_READY
 	base_icon_state = "rustgrenade"
@@ -22,6 +22,9 @@
 
 /obj/item/grenade/chem_grenade/rust_sower/Initialize(mapload)
 	. = ..()
+	AddElement(/datum/element/tool_blocker, TOOL_SCREWDRIVER, TOOL_ACT_PRIMARY)
+	AddElement(/datum/element/tool_blocker, TOOL_WRENCH, TOOL_ACT_PRIMARY)
+	AddElement(/datum/element/tool_blocker, TOOL_MULTITOOL, TOOL_ACT_PRIMARY)
 	RegisterSignal(src, COMSIG_ITEM_ON_GRIND, PROC_REF(on_try_grind))
 	var/obj/item/reagent_containers/cup/beaker/large/beaker_one = new(src)
 	var/obj/item/reagent_containers/cup/beaker/large/beaker_two = new(src)
@@ -39,15 +42,6 @@
 	playsound(src, 'sound/items/weapons/rust_sower_explode.ogg', 70, FALSE)
 	qdel(src)
 
-/obj/item/grenade/chem_grenade/rust_sower/screwdriver_act(mob/living/user, obj/item/tool)
-	return NONE
-
-/obj/item/grenade/chem_grenade/rust_sower/wrench_act(mob/living/user, obj/item/tool)
-	return NONE
-
-/obj/item/grenade/chem_grenade/rust_sower/multitool_act(mob/living/user, obj/item/tool)
-	return NONE
-
 /// Returns -1 so that you cant extract the chems
 /obj/item/grenade/chem_grenade/rust_sower/proc/on_try_grind()
 	SIGNAL_HANDLER
@@ -55,7 +49,7 @@
 
 /datum/reagent/heretic_rust
 	name = "Eldritch Rust"
-	description = "A slurry of viscous, chunky brown liquid."
+	description = "Суспензия из вязкой плотной коричневой жидкости."
 	color = COLOR_CARGO_BROWN // Rust color
 	taste_description = "rotten copper"
 	penetrates_skin = NONE
@@ -95,13 +89,13 @@
 			addtimer(CALLBACK(victim, TYPE_PROC_REF(/mob, remove_movespeed_modifier), /datum/movespeed_modifier/reagent/pepperspray), 10 SECONDS)
 		victim.update_damage_hud()
 		victim.adjust_disgust(5)
-		for(var/obj/item/bodypart/robotic_limb in victim.bodyparts)
+		for(var/obj/item/bodypart/robotic_limb in victim.get_bodyparts())
 			if(robotic_limb.biological_state & BIO_ROBOTIC)
 				robotic_limb.receive_damage(5, 5)
 	if(methods & INGEST)
 		if(!holder.has_reagent(/datum/reagent/consumable/milk))
 			if(prob(15))
-				to_chat(exposed_mob, span_danger("[pick("Your head pounds.", "Your mouth feels like it's on fire.", "You feel dizzy.")]"))
+				to_chat(exposed_mob, span_danger("[pick("Ваша голова раскалывается.", "Кажется, словно у вас во рту пожар.", "Вы чувствуете головокружение.")]"))
 			if(prob(10))
 				victim.set_eye_blur_if_lower(2 SECONDS)
 			if(prob(10))

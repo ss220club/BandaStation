@@ -2,6 +2,10 @@
 	name = "MOD crew monitor module"
 	desc = "A module installed into the wrist of the suit, this presents a display of crew sensor data."
 	icon_state = "scanner"
+	custom_materials = list(
+		/datum/material/iron = SHEET_MATERIAL_AMOUNT * 0.75,
+		/datum/material/glass = SHEET_MATERIAL_AMOUNT * 1.5,
+	)
 	module_type = MODULE_ACTIVE
 	complexity = 1
 	active_power_cost = DEFAULT_CHARGE_DRAIN * 0.3
@@ -12,7 +16,6 @@
 
 /datum/design/module/mod_monitor
 	name = "Crew Monitor Module"
-	id = "mod_monitor"
 	materials = list(
 		/datum/material/iron = SHEET_MATERIAL_AMOUNT * 0.75,
 		/datum/material/glass = SHEET_MATERIAL_AMOUNT * 1.5,
@@ -21,4 +24,4 @@
 
 /datum/techweb_node/medbay_equip/New()
 	. = ..()
-	design_ids += "mod_monitor"
+	unlocked_designs += /datum/design/module/mod_monitor

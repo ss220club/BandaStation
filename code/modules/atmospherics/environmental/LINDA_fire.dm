@@ -1,7 +1,7 @@
 /// Returns reactions which will contribute to a hotspot's size.
 /proc/init_hotspot_reactions()
 	var/list/fire_reactions = list()
-	for (var/datum/gas_reaction/reaction as anything in subtypesof(/datum/gas_reaction))
+	for (var/datum/gas_reaction/standard/reaction as anything in subtypesof(/datum/gas_reaction/standard))
 		if(initial(reaction.expands_hotspot))
 			fire_reactions += reaction
 
@@ -25,38 +25,34 @@
 		exposed_temperature = TCMB
 		CRASH("[src].hotspot_expose() called with exposed_temperature < [TCMB]")
 	//If the air doesn't exist we just return false
-	var/list/air_gases = air?.gases
-	if(!air_gases)
+	var/cached_moles = air?.moles
+	if(!cached_moles)
 		return
 
-	. = air_gases[/datum/gas/oxygen]
-	var/oxy = . ? .[MOLES] : 0
-	if (oxy < 0.5)
+	if (cached_moles[/datum/gas/oxygen] < 0.5)
 		return
-	. = air_gases[/datum/gas/plasma]
-	var/plas = . ? .[MOLES] : 0
-	. = air_gases[/datum/gas/tritium]
-	var/trit = . ? .[MOLES] : 0
-	. = air_gases[/datum/gas/hydrogen]
-	var/h2 = . ? .[MOLES] : 0
-	. = air_gases[/datum/gas/freon]
-	var/freon = . ? .[MOLES] : 0
+
+	var/plas_trit_h2_threshold = (\
+		   cached_moles[/datum/gas/plasma] > 0.5\
+		|| cached_moles[/datum/gas/tritium] > 0.5\
+		|| cached_moles[/datum/gas/hydrogen] > 0.5)
+	var/freon_threshold = (cached_moles[/datum/gas/freon] > 0.5)
 	if(active_hotspot)
 		if(soh)
-			if(plas > 0.5 || trit > 0.5 || h2 > 0.5)
+			if(plas_trit_h2_threshold)
 				if(active_hotspot.temperature < exposed_temperature)
 					active_hotspot.temperature = exposed_temperature
 				if(active_hotspot.volume < exposed_volume)
 					active_hotspot.volume = exposed_volume
-			else if(freon > 0.5)
+			else if(freon_threshold)
 				if(active_hotspot.temperature > exposed_temperature)
 					active_hotspot.temperature = exposed_temperature
 				if(active_hotspot.volume < exposed_volume)
 					active_hotspot.volume = exposed_volume
 		return
 
-	if(((exposed_temperature > PLASMA_MINIMUM_BURN_TEMPERATURE) && (plas > 0.5 || trit > 0.5 || h2 > 0.5)) || \
-		((exposed_temperature < FREON_MAXIMUM_BURN_TEMPERATURE) && (freon > 0.5)))
+	if (((exposed_temperature > PLASMA_MINIMUM_BURN_TEMPERATURE) && plas_trit_h2_threshold) || \
+		((exposed_temperature < FREON_MAXIMUM_BURN_TEMPERATURE) && freon_threshold))
 
 		new /obj/effect/hotspot(src, exposed_volume * 25, exposed_temperature)
 		SSair.add_to_active(src)
@@ -230,7 +226,7 @@
 	var/heat_r = heat2colour_r(temperature)
 	var/heat_g = heat2colour_g(temperature)
 	var/heat_b = heat2colour_b(temperature)
-	var/heat_a = 255
+	var/heat_a = 180 // BANDASTATION EDIT: NEW FIRE ICON ORIGINAL: 255
 	var/greyscale_fire = 1 //This determines how greyscaled the fire is.
 
 	if(cold_fire)
@@ -255,7 +251,7 @@
 		sparkle_overlay.alpha = sparkle_amt * 255
 		add_overlay(sparkle_overlay)
 	if(temperature > 400000 && temperature < 1500000) //Lightning because very anime.
-		var/mutable_appearance/lightning_overlay = mutable_appearance('icons/effects/fire.dmi', "overcharged")
+		var/mutable_appearance/lightning_overlay = mutable_appearance('modular_bandastation/aesthetics/fire/icons/fire.dmi', "overcharged") // BANDASTATION EDIT: NEW FIRE ICON
 		lightning_overlay.blend_mode = BLEND_ADD
 		add_overlay(lightning_overlay)
 	if(temperature > 4500000) //This is where noblium happens. Some fusion-y effects.
@@ -282,7 +278,7 @@
 	color = list(LERP(0.3, 1, 1-greyscale_fire) * heat_r,0.3 * heat_g * greyscale_fire,0.3 * heat_b * greyscale_fire, 0.59 * heat_r * greyscale_fire,LERP(0.59, 1, 1-greyscale_fire) * heat_g,0.59 * heat_b * greyscale_fire, 0.11 * heat_r * greyscale_fire,0.11 * heat_g * greyscale_fire,LERP(0.11, 1, 1-greyscale_fire) * heat_b, 0,0,0)
 	alpha = heat_a
 
-#define INSUFFICIENT(path) (!location.air.gases[path] || location.air.gases[path][MOLES] < 0.5)
+#define INSUFFICIENT(path) (!location.air.moles[path] || location.air.moles[path] < 0.5)
 
 /**
  * Regular process proc for hotspots governed by the controller.
@@ -321,6 +317,11 @@
 
 	if(bypassing)
 		set_fire_stage("heavy")
+		// BANDASTATION ADDITION START: NEW FIRE RISES
+		var/mutable_appearance/heavy_heat_overlay = mutable_appearance('modular_bandastation/aesthetics/fire/icons/fire.dmi', "heavy")
+		heavy_heat_overlay.blend_mode = BLEND_ADD
+		add_overlay(heavy_heat_overlay)
+		// BANDASTATION ADDITION END: NEW FIRE RISES
 		if(!cold_fire)
 			location.burn_tile()
 
@@ -337,8 +338,18 @@
 	else
 		if(volume > CELL_VOLUME*0.4)
 			set_fire_stage("medium")
+			// BANDASTATION ADDITION START: NEW FIRE RISES
+			var/mutable_appearance/medium_heat_overlay = mutable_appearance('modular_bandastation/aesthetics/fire/icons/fire.dmi', "medium")
+			medium_heat_overlay.blend_mode = BLEND_ADD
+			add_overlay(medium_heat_overlay)
+			// BANDASTATION ADDITION END: NEW FIRE RISES
 		else
 			set_fire_stage("light")
+			// BANDASTATION ADDITION START: NEW FIRE RISES
+			var/mutable_appearance/light_heat_overlay = mutable_appearance('modular_bandastation/aesthetics/fire/icons/fire.dmi', "light")
+			light_heat_overlay.blend_mode = BLEND_ADD
+			add_overlay(light_heat_overlay)
+			// BANDASTATION ADDITION END: NEW FIRE RISES
 
 	if((visual_update_tick++ % 7) == 0)
 		update_color()

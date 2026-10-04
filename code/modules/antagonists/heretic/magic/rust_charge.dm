@@ -3,7 +3,7 @@
 	name = "Ржавый рывок"
 	desc = "Рывок, который должен начаться на ржавой поверхности, уничтожающий все ржавые объекты по пути. \
 		Наносит большой урон остальным и создает ржавчину вокруг вас во время рывка. \
-		Так как сама ржавчина дает вам эту способность, фокусировка не нунжна."
+		Так как сама ржавчина дает вам эту способность, фокусировка не нужна."
 	charge_distance = 10
 	charge_damage = 25
 	cooldown_time = 45 SECONDS
@@ -14,9 +14,8 @@
 	if(!istype(start_turf) || !HAS_TRAIT(start_turf, TRAIT_RUSTY))
 		return FALSE
 	StartCooldown(135 SECONDS, 135 SECONDS)
-	if(ishuman(owner))
-		var/mob/living/carbon/human/human_owner = owner
-		human_owner.physiology.damage_resistance += 100
+	var/mob/living/living = owner
+	living.damage_resistance += 100
 	RegisterSignal(owner, COMSIG_FINISHED_CHARGE, PROC_REF(affect_aoe))
 	charge_sequence(owner, target_atom, charge_delay, charge_past)
 	StartCooldown()
@@ -65,6 +64,5 @@
 			continue
 		nearby_mob.apply_damage(charge_damage, BRUTE, wound_bonus = CANT_WOUND)
 		nearby_mob.Knockdown(5 SECONDS)
-	if(ishuman(owner))
-		var/mob/living/carbon/human/human_owner = owner
-		human_owner.physiology.damage_resistance -= 100
+	var/mob/living/living = owner
+	living.damage_resistance -= 100

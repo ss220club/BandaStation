@@ -72,7 +72,7 @@
 #define CANKNOCKDOWN (1<<1)
 /// If set, this mob can be knocked unconscious via status effect.
 /// NOTE, does not mean immune to sleep. Unconscious and sleep are two different things.
-/// NOTE, does not relate to the unconscious stat either. Only the status effect.
+/// NOTE, does not relate to the unconscious trait either. Only the status effect.
 #define CANUNCONSCIOUS (1<<2)
 /// If set, this mob can be grabbed or pushed when bumped into
 #define CANPUSH (1<<3)
@@ -118,6 +118,11 @@ DEFINE_BITFIELD(status_flags, list(
 #define GRAB_AGGRESSIVE 1
 #define GRAB_NECK 2
 #define GRAB_KILL 3
+
+// Grab attack chain results
+#define GRAB_SKIP 0
+#define GRAB_FAILURE 1
+#define GRAB_SUCCESS 2
 
 //Grab breakout odds
 #define BASE_GRAB_RESIST_CHANCE 60 //base chance for whether or not you can escape from a grab
@@ -222,8 +227,6 @@ GLOBAL_LIST_INIT(shove_disarming_types, typecacheof(list(
 //Sawn off nerfs
 ///accuracy penalty of sawn off guns
 #define SAWN_OFF_ACC_PENALTY 25
-///added recoil of sawn off guns
-#define SAWN_OFF_RECOIL 1
 
 //ammo box sprite defines
 ///ammo box will always use provided icon state
@@ -293,10 +296,11 @@ DEFINE_BITFIELD(ammo_box_multiload, list(
 #define BODY_ZONE_PRECISE_L_FOOT "l_foot"
 #define BODY_ZONE_PRECISE_R_FOOT "r_foot"
 
-GLOBAL_LIST_INIT(all_body_zones, list(BODY_ZONE_HEAD, BODY_ZONE_CHEST, BODY_ZONE_R_ARM, BODY_ZONE_L_ARM, BODY_ZONE_R_LEG, BODY_ZONE_L_LEG))
-GLOBAL_LIST_INIT(limb_zones, list(BODY_ZONE_R_ARM, BODY_ZONE_L_ARM, BODY_ZONE_R_LEG, BODY_ZONE_L_LEG))
+// These lists are ordered as bodyparts would be ordered
+GLOBAL_LIST_INIT(all_body_zones, list(BODY_ZONE_CHEST, BODY_ZONE_HEAD, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG, BODY_ZONE_L_ARM, BODY_ZONE_R_ARM))
+GLOBAL_LIST_INIT(limb_zones, list(BODY_ZONE_L_LEG, BODY_ZONE_R_LEG, BODY_ZONE_L_ARM, BODY_ZONE_R_ARM))
 GLOBAL_LIST_INIT(arm_zones, list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM))
-GLOBAL_LIST_INIT(leg_zones, list(BODY_ZONE_R_LEG, BODY_ZONE_L_LEG))
+GLOBAL_LIST_INIT(leg_zones, list(BODY_ZONE_L_LEG, BODY_ZONE_R_LEG))
 GLOBAL_LIST_INIT(all_precise_body_zones, list(BODY_ZONE_PRECISE_EYES, BODY_ZONE_PRECISE_MOUTH, BODY_ZONE_PRECISE_GROIN, BODY_ZONE_PRECISE_L_HAND, BODY_ZONE_PRECISE_R_HAND, BODY_ZONE_PRECISE_L_FOOT, BODY_ZONE_PRECISE_R_FOOT))
 
 //We will round to this value in damage calculations.
@@ -406,6 +410,8 @@ GLOBAL_LIST_INIT(all_precise_body_zones, list(BODY_ZONE_PRECISE_EYES, BODY_ZONE_
 #define SILENCE_DEFAULT_MESSAGES "silence_default_messages"
 /// If set in modifiers, default hitsound is silenced
 #define SILENCE_HITSOUND "silence_hitsound"
+/// Set towards the end of an attack with how much actual damage was dealt
+#define DAMAGE_DONE "damage_done"
 
 /// Used in attack chain to set the force of the attack without changing the base force of the item.
 #define SET_ATTACK_FORCE(atk_mods, value) \

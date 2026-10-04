@@ -1,7 +1,8 @@
 import { sortBy } from 'es-toolkit';
-import type { CSSProperties, PropsWithChildren, ReactNode } from 'react';
+import type { CSSProperties, ReactNode } from 'react';
 import { useBackend } from 'tgui/backend';
-import { Button, Section, Stack, Tooltip } from 'tgui-core/components';
+import { Color } from 'tgui-core/color';
+import { Box, Button, Section, Stack, Tooltip } from 'tgui-core/components';
 import { classes } from 'tgui-core/react';
 
 import { JOBS_RU } from '../../../bandastation/ru_jobs'; // BANDASTATION EDIT
@@ -13,7 +14,7 @@ import {
   type PreferencesMenuData,
 } from '../types';
 import { useServerPrefs } from '../useServerPrefs';
-import { JobSlotDropdown } from './JobSlotDropdown'; // BANDASTATION ADD - Pref Job Slots
+import { JobSlotDropdown } from './JobSlotDropdown';
 
 function sortJobs(entries: [string, Job][], head?: string) {
   return sortBy(entries, [
@@ -88,7 +89,7 @@ function createCreateSetPriorityFromName(jobName: string): CreateSetPriority {
 type PriorityButtonsProps = {
   createSetPriority: CreateSetPriority;
   isOverflow: boolean;
-  priority: JobPriority;
+  priority: JobPriority | null;
 };
 
 function PriorityButtons(props: PriorityButtonsProps) {
@@ -163,6 +164,11 @@ function JobRow(props: JobRowProps) {
   const { data } = useBackend<PreferencesMenuData>();
   const { className, job, name } = props;
 
+  const jobPreference = data.job_preferences.find((pref) => pref.job === name);
+  const priority = jobPreference?.priority ?? null;
+  const isOverflow = data.overflow_role === name;
+  const createSetPriority = createCreateSetPriorityFromName(name);
+
   let rightSide: ReactNode;
   const experienceNeeded = data.job_required_experience?.[name];
   const daysLeft = data.job_days_left ? data.job_days_left[name] : 0;
@@ -188,10 +194,6 @@ function JobRow(props: JobRowProps) {
   } else if (data.job_bans && data.job_bans.indexOf(name) !== -1) {
     rightSide = <Stack.Item className="restricted ban">Забанен</Stack.Item>;
   } else {
-    const priority = data.job_preferences[name];
-    const isOverflow = data.overflow_role === name;
-    const createSetPriority = createCreateSetPriorityFromName(name);
-
     rightSide = (
       <>
         <PriorityButtons
@@ -220,7 +222,7 @@ function JobRow(props: JobRowProps) {
 
 type DepartmentProps = {
   department: string;
-} & PropsWithChildren;
+};
 
 function Department(props: DepartmentProps) {
   const { department: name } = props;
@@ -231,39 +233,44 @@ function Department(props: DepartmentProps) {
     return;
   }
 
-  const { departments, jobs } = data.jobs;
+  const { departments, jobs, jobs_sorted } = data.jobs;
   const department = departments[name];
 
-  // This isn't necessarily a bug, it's like this
-  // so that you can remove entire departments without
-  // having to edit the UI.
-  // This is used in events, for instance.
   if (!department) {
     return null;
   }
 
-  const jobsForDepartment = sortJobs(
-    Object.entries(jobs).filter(([_, job]) => job.department === name),
-    department.head,
-  );
+  const jobsForDepartment = jobs_sorted
+    .map((jobName) => [jobName, jobs[jobName]] as const)
+    .filter(([, job]) => job.department === name);
 
   return (
-    <Stack fill vertical g={0}>
-      {jobsForDepartment.map(([jobName, job]) => {
-        return (
-          <JobRow
-            key={jobName}
-            name={jobName}
-            job={job}
-            className={classes([
-              className,
-              `${className}--${name.replace(' ', '')}`,
-              jobName === department.head && 'head',
-            ])}
-          />
-        );
-      })}
-    </Stack>
+    <Box
+      style={
+        {
+          '--department-color': Color.fromHex(department.color)
+            .darken(10)
+            .toString(),
+        } as CSSProperties
+      }
+    >
+      <Stack fill vertical g={0}>
+        {jobsForDepartment.map(([jobName, job]) => {
+          return (
+            <JobRow
+              key={jobName}
+              name={jobName}
+              job={job}
+              className={classes([
+                className,
+                `${className}--${name.replace(' ', '')}`,
+                jobName === department.head && 'head',
+              ])}
+            />
+          );
+        })}
+      </Stack>
+    </Box>
   );
 }
 

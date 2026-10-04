@@ -233,7 +233,7 @@
 /datum/component/reskinable_item/proc/add_tags(atom/source, mob/user, list/tags)
 	SIGNAL_HANDLER
 
-	tags["reskinnable"] = "This item is able to be reskinned! Alt-Click to do so!"
+	tags["перекрашиваемый"] = "Этот предмет можно перекрасить! Нажмите Alt-ЛКМ по нему!"
 
 /// Called when alt clicked and the item has unique reskin options
 /datum/component/reskinable_item/proc/on_click_alt_reskin(datum/source, mob/user)
@@ -258,7 +258,7 @@
 	var/list/atom_skins = get_atom_skins()
 	for(var/reskin_name, reskin_typepath in get_skins_by_name())
 		var/datum/atom_skin/reskin = atom_skins[reskin_typepath]
-		items[reskin_name] = image(icon = reskin.new_icon || atom_parent.icon, icon_state = reskin.new_icon_state || atom_parent.icon_state)
+		items[reskin_name] = reskin.get_preview_icon(atom_parent)
 
 	sort_list(items)
 

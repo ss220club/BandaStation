@@ -35,6 +35,7 @@
 	rpg_title = "Royal Advisor"
 	allow_bureaucratic_error = FALSE
 	job_flags = STATION_JOB_FLAGS | STATION_TRAIT_JOB_FLAGS | JOB_ANTAG_PROTECTED
+	tgui_icon = FA_ICON_RIBBON
 
 /datum/job/veteran_advisor/get_default_roundstart_spawn_point()
 	for(var/obj/effect/landmark/start/spawn_point as anything in GLOB.start_landmarks_list)
@@ -73,7 +74,7 @@
 	head = /obj/item/clothing/head/soft/veteran
 	mask = /obj/item/cigarette/cigar
 	suit = /obj/item/clothing/suit/jacket/leather_trenchcoat
-	belt = /obj/item/storage/belt/holster/detective/full/ert //M1911 pistol
+	accessory = /obj/item/clothing/accessory/holster/detective/veteran_advisor // BANDASTATION EDIT: Accessory holsters
 	ears = /obj/item/radio/headset/heads/hos/advisor
 	glasses = /obj/item/clothing/glasses/eyepatch
 	shoes = /obj/item/clothing/shoes/jackboots

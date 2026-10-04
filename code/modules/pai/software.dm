@@ -16,7 +16,7 @@
 /mob/living/silicon/pai/ui_static_data(mob/user)
 	var/list/data = list()
 	data["available"] = available_software
-	data["directives"] = laws.supplied
+	data["directives"] = laws.inherent
 	data["emagged"] = emagged
 	data["languages"] = languages_granted
 	data["master_name"] = master_name
@@ -122,6 +122,10 @@
 			instrument = new(src)
 		if("Newscaster")
 			newscaster = new(src)
+		// BANDASTATION EDIT START
+		if("Crew Monitor")
+			crew_monitor = new(src)
+		// BANDASTATION EDIT END
 		if("Photography Module")
 			aicamera = new /obj/item/camera/siliconcam/pai_camera(src)
 		if("Remote Signaler")

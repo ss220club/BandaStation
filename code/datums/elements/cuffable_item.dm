@@ -4,6 +4,10 @@
 /datum/element/cuffable_item/Attach(datum/target)
 	. = ..()
 
+// BANDASTATION MOD START: Temp cuffable remove
+#ifdef CUFFABLE_ITEMS_DISABLED
+	return
+#else
 	if(!isitem(target))
 		return ELEMENT_INCOMPATIBLE
 
@@ -13,6 +17,8 @@
 	var/atom/atom_target = target
 	atom_target.flags_1 |= HAS_CONTEXTUAL_SCREENTIPS_1
 	RegisterSignal(atom_target, COMSIG_ATOM_REQUESTING_CONTEXT_FROM_ITEM, PROC_REF(on_requesting_context_from_item))
+#endif
+// BANDASTATION MOD END: Temp cuffable remove
 
 ///Tell the player about the interaction if they examine the item twice.
 /datum/element/cuffable_item/proc/on_examine_more(obj/item/source, mob/user, list/examine_list)
@@ -47,11 +53,22 @@
 	if(cuffs.used || DOING_INTERACTION_WITH_TARGET(user, source))
 		return
 
-	if(HAS_TRAIT_FROM(source, TRAIT_NODROP, CUFFED_ITEM_TRAIT))
-		to_chat(user, span_warning("[source] is already cuffed to your wrist!"))
+	for(var/datum/status_effect/cuffed_item/effect in user.status_effects)
+		if(effect.cuffed == source)
+			to_chat(user, span_warning("[source] is already cuffed to your wrist!"))
+			return
+		if(effect.cuffed_to == user.get_inactive_hand())
+			to_chat(user, span_warning("You already have something cuffed to your opposite wrist!"))
+			return
+
+	if(!user.get_inactive_hand())
+		to_chat(user, span_warning("You don't have another hand to cuff [source] to!"))
 		return
 
 	if(cuffs.handcuffs_clumsiness_check(user))
+		return
+
+	if(SEND_SIGNAL(source, COMSIG_ITEM_PRE_CUFFED_TO_MOB, user, cuffs) & BLOCK_ITEM_CUFF)
 		return
 
 	source.balloon_alert(user, "cuffing item...")

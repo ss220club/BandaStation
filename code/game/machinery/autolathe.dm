@@ -3,6 +3,7 @@
 	desc = "It produces items using iron, glass, plastic and maybe some more."
 	icon = 'icons/obj/machines/lathes.dmi'
 	icon_state = "autolathe"
+	base_icon_state = "autolathe"
 	density = TRUE
 	///Energy cost per full stack of sheets worth of materials used. Material insertion is 40% of this.
 	active_power_usage = 0.025 * STANDARD_CELL_RATE
@@ -24,7 +25,7 @@
 	///Designs related to the autolathe
 	var/datum/techweb/autounlocking/stored_research
 	///Designs imported from technology disks that we can print.
-	var/list/imported_designs = list()
+	var/list/imported_designs
 	///The container to hold materials
 	var/datum/material_container/materials
 	///direction we output onto (if 0, on top of us)
@@ -44,8 +45,7 @@
 	. = ..()
 
 	set_wires(new /datum/wires/autolathe(src))
-	if(!GLOB.autounlock_techwebs[/datum/techweb/autounlocking/autolathe])
-		GLOB.autounlock_techwebs[/datum/techweb/autounlocking/autolathe] = new /datum/techweb/autounlocking/autolathe
+	GLOB.autounlock_techwebs[/datum/techweb/autounlocking/autolathe] ||= new /datum/techweb/autounlocking/autolathe()
 	stored_research = GLOB.autounlock_techwebs[/datum/techweb/autounlocking/autolathe]
 
 	register_context()
@@ -88,14 +88,14 @@
 		return CONTEXTUAL_SCREENTIP_SET
 
 /obj/machinery/autolathe/crowbar_act(mob/living/user, obj/item/tool)
-	. = NONE
-	if(default_deconstruction_crowbar(tool))
-		return ITEM_INTERACT_SUCCESS
+	return default_deconstruction_crowbar(user, tool)
 
 /obj/machinery/autolathe/screwdriver_act(mob/living/user, obj/item/tool)
-	. = ITEM_INTERACT_BLOCKING
-	if(default_deconstruction_screwdriver(user, "autolathe_t", "autolathe", tool))
-		return ITEM_INTERACT_SUCCESS
+	return default_deconstruction_screwdriver(user, tool)
+
+/obj/machinery/autolathe/update_icon_state()
+	. = ..()
+	icon_state = busy ? "[base_icon_state]_n" : panel_open ? "[base_icon_state]_t" : base_icon_state
 
 /obj/machinery/autolathe/proc/AfterMaterialInsert(container, obj/item/item_inserted, last_inserted_id, mats_consumed, amount_inserted, atom/context)
 	SIGNAL_HANDLER
@@ -142,42 +142,48 @@
 	var/datum/asset/spritesheet_batched/research_designs/spritesheet = get_asset_datum(/datum/asset/spritesheet_batched/research_designs)
 	var/size32x32 = "[spritesheet.name]32x32"
 
-	for(var/design_id in designs)
-		var/datum/design/design = SSresearch.techweb_design_by_id(design_id)
+	for(var/design_path in designs)
+		var/datum/design/design = SSresearch.techweb_designs[design_path]
 		if(design.make_reagent)
 			continue
 
 		//compute cost & maximum number of printable items
 		var/coeff = (ispath(design.build_path, /obj/item/stack) ? 1 : creation_efficiency)
 		var/list/cost = list()
-		var/customMaterials = FALSE
+		var/custom_materials = FALSE
 		for(var/datum/material/mat as anything in design.materials)
 			var/mat_cost = design.materials[mat]
 			var/design_cost = OPTIMAL_COST(mat_cost * coeff)
 			if(istype(mat))
 				cost[mat.name] = design_cost
-				customMaterials = FALSE
+				custom_materials = FALSE
 				continue
 
-			var/datum/material_requirement/requirement = SSmaterials.requirements[mat]
-			if (!requirement)
-				stack_trace("Design [design] has an invalid material requirement [requirement]")
+			var/datum/material_requirement/requirement = null
+			if (ispath(mat, /datum/material_slot))
+				var/datum/material_slot/slot = SSmaterials.material_slots[mat]
+				requirement = SSmaterials.requirements[slot.requirement_type]
+			else
+				requirement = SSmaterials.requirements[mat]
+
+			if (!istype(requirement))
+				stack_trace("Design [design] has an invalid material requirement: [mat]")
 				continue
 
 			cost[requirement.get_description()] = design_cost
-			customMaterials = TRUE
+			custom_materials = TRUE
 
 		//create & send ui data
-		var/icon_size = spritesheet.icon_size_id(design.id)
+		var/icon_size = spritesheet.icon_size_id(design.asset_id)
 		var/list/design_data = list(
 			"name" = design.name,
 			"original_name" = design.original_name, // BANDASTATION EDIT - Design Translate
 			"desc" = design.get_description(),
 			"cost" = cost,
-			"id" = design.id,
+			"path" = design_path,
 			"categories" = design.category,
-			"icon" = "[icon_size == size32x32 ? "" : "[icon_size] "][design.id]",
-			"customMaterials" = customMaterials
+			"icon" = "[icon_size == size32x32 ? "" : "[icon_size] "][design.asset_id]",
+			"customMaterials" = custom_materials,
 		)
 
 		output += list(design_data)
@@ -188,7 +194,7 @@
 	var/list/data = materials.ui_static_data()
 
 	data["designs"] = handle_designs(stored_research.researched_designs)
-	if(imported_designs.len)
+	if(LAZYLEN(imported_designs))
 		data["designs"] += handle_designs(imported_designs)
 	if(hacked)
 		data["designs"] += handle_designs(stored_research.hacked_designs)
@@ -204,11 +210,10 @@
 /obj/machinery/autolathe/ui_data(mob/user)
 	var/list/data = list()
 
-	data["materials"] = list()
+	data["materials"] = materials.ui_data()
 	data["materialtotal"] = materials.total_amount()
 	data["materialsmax"] = materials.max_amount
 	data["active"] = busy
-	data["materials"] = materials.ui_data()
 
 	return data
 
@@ -216,6 +221,23 @@
 	. = ..()
 	if(.)
 		return
+
+	if (action == "eject")
+		var/datum/material/material = locate(params["ref"])
+		if(!istype(material))
+			return
+
+		var/amount = text2num(params["amount"])
+		if(isnull(amount))
+			return
+
+		//we use initial(active_power_usage) because higher tier parts will have higher active usage but we have no benefit from it
+		if(!directly_use_energy(ROUND_UP((amount / MAX_STACK_SIZE) * 0.4 * initial(active_power_usage))))
+			say("No power to dispense sheets")
+			return
+
+		materials.retrieve_stack(amount, material)
+		return TRUE
 
 	//sanity checks to start printing
 	if(action != "make")
@@ -231,40 +253,43 @@
 		return
 
 	//validate design
-	var/design_id = params["id"]
-	if(!design_id)
+	var/design_path = text2path(params["design_path"])
+	if(!design_path)
 		return
-	var/valid_design = stored_research.researched_designs[design_id]
-	valid_design ||= stored_research.hacked_designs[design_id]
-	valid_design ||= imported_designs[design_id]
+	var/valid_design = stored_research.researched_designs[design_path]
+	valid_design ||= stored_research.hacked_designs[design_path]
+	valid_design ||= imported_designs?[design_path]
 	if(!valid_design)
 		return
-	var/datum/design/design = SSresearch.techweb_design_by_id(design_id)
+	var/datum/design/design = SSresearch.techweb_designs[design_path]
 	if(isnull(design))
-		stack_trace("got passed an invalid design id: [design_id] and somehow made it past all checks")
+		stack_trace("Autolathe ui_act() got passed an invalid design: \[[design_path]\] and somehow made it past all checks")
 		return
 	if(!(design.build_type & AUTOLATHE))
 		say("This fabricator does not have the necessary keys to decrypt this design.")
 		return
 
 	//validate print quantity
-	var/build_count = params["multiplier"]
-	if(isnull(build_count))
-		return
-	build_count = text2num(build_count)
+	var/build_count = text2num(params["multiplier"])
 	if(isnull(build_count))
 		return
 	build_count = clamp(build_count, 1, 50)
 
 	// Check for materials required. For custom material items decode their required materials
 	var/list/materials_needed = list()
+	var/list/slots_chosen = null
 	var/mat_choice = FALSE
 	for(var/material, amount_needed in design.materials)
-		if(!ispath(material, /datum/material_requirement)) // Material requirement
+		if(!ispath(material, /datum/material_requirement) && !ispath(material, /datum/material_slot)) // Material requirement
 			if(!istype(material, /datum/material))
 				CRASH("Autolathe ui_act got passed an invalid material id: [material]")
 			materials_needed[material] += amount_needed
 			continue
+
+		var/datum/material_slot/slot = null
+		if (ispath(material, /datum/material_slot))
+			slot = SSmaterials.material_slots[material]
+			material = slot.requirement_type
 
 		var/list/choices = list()
 		for(var/datum/material/valid_candidate as anything in SSmaterials.get_materials_by_req(material))
@@ -277,21 +302,24 @@
 
 		var/chosen = tgui_input_list(
 			ui.user,
-			"Select the material to use",
+			"Select the material to use[slot ? " for [LOWER_TEXT(slot.name)]" : ""]",
 			"Material Selection",
 			sort_list(choices),
 		)
-		if(isnull(chosen))
+		if(isnull(chosen) || QDELING(src))
 			return // user cancelled
 
 		material = choices[chosen]
+		if (slot)
+			var/datum/material/proper_mat = material
+			LAZYSET(slots_chosen, slot.type, proper_mat.id)
 
 		if(isnull(material))
 			CRASH("A player chose an invalid custom material in autolathe ui_act: [material]")
 		materials_needed[material] += amount_needed
 
 	//checks for available materials
-	var/material_cost_coefficient = ispath(design.build_path, /obj/item/stack) ? 1 : creation_efficiency
+	var/material_cost_coefficient = (ispath(design.build_path, /obj/item/stack) || design.fixed_cost_efficiency) ? 1 : creation_efficiency
 	if(!materials.has_materials(materials_needed, material_cost_coefficient, build_count))
 		say("Not enough materials to begin production.")
 		return
@@ -306,7 +334,7 @@
 
 	//do the printing sequentially
 	busy = TRUE
-	icon_state = "autolathe_n"
+	update_appearance()
 	SStgui.update_uis(src)
 	// play this after all checks passed individually for each item.
 	print_sound.start()
@@ -324,7 +352,7 @@
 			if(!istype(material, /datum/material/glass) && !istype(material, /datum/material/iron))
 				ui.user.client.give_award(/datum/award/achievement/misc/getting_an_upgrade, ui.user)
 				break
-	addtimer(CALLBACK(src, PROC_REF(do_make_item), design, build_count, build_time_per_item, material_cost_coefficient, charge_per_item, materials_needed, target_location), build_time_per_item)
+	addtimer(CALLBACK(src, PROC_REF(do_make_item), design, build_count, build_time_per_item, material_cost_coefficient, charge_per_item, materials_needed, target_location, slots_chosen), build_time_per_item)
 
 	return TRUE
 
@@ -340,7 +368,7 @@
  * * list/materials_needed - the list of materials to print 1 item
  * * turf/target - the location to drop the printed item on
 */
-/obj/machinery/autolathe/proc/do_make_item(datum/design/design, items_remaining, build_time_per_item, material_cost_coefficient, charge_per_item, list/materials_needed, turf/target)
+/obj/machinery/autolathe/proc/do_make_item(datum/design/design, items_remaining, build_time_per_item, material_cost_coefficient, charge_per_item, list/materials_needed, turf/target, list/slots_chosen)
 	PROTECTED_PROC(TRUE)
 
 	if(items_remaining <= 0) // how
@@ -374,20 +402,22 @@
 	materials.use_materials(materials_needed, material_cost_coefficient, is_stack ? items_remaining : 1)
 
 	var/atom/movable/created
+	var/number_to_make = 1
 	if(is_stack)
 		var/obj/item/stack/stack_item = initial(design.build_path)
 		var/max_stack_amount = initial(stack_item.max_amount)
-		var/number_to_make = (initial(stack_item.amount) * items_remaining)
+		number_to_make = (initial(stack_item.amount) * items_remaining)
 		while(number_to_make > max_stack_amount)
 			created = design.create_result(target, materials_needed, amount = max_stack_amount)
 			if(isitem(created))
 				created.pixel_x = created.base_pixel_x + rand(-6, 6)
 				created.pixel_y = created.base_pixel_y + rand(-6, 6)
 			number_to_make -= max_stack_amount
-		created = design.create_result(target, materials_needed, amount = number_to_make)
-	else
-		created = design.create_result(target, materials_needed)
-		split_materials_uniformly(materials_needed, material_cost_coefficient, created)
+	created = design.create_result(target, materials_needed, amount = number_to_make)
+	if (length(slots_chosen))
+		created.set_material_slots(slots_chosen)
+	if(design.inherit_materials != DESIGN_DONT_INHERIT_MATS)
+		design.transfer_materials(materials_needed, material_cost_coefficient, created)
 
 	if(isitem(created))
 		created.pixel_x = created.base_pixel_x + rand(-6, 6)
@@ -402,7 +432,7 @@
 	if(items_remaining <= 0)
 		finalize_build()
 		return
-	addtimer(CALLBACK(src, PROC_REF(do_make_item), design, items_remaining, build_time_per_item, material_cost_coefficient, charge_per_item, materials_needed, target), build_time_per_item)
+	addtimer(CALLBACK(src, PROC_REF(do_make_item), design, items_remaining, build_time_per_item, material_cost_coefficient, charge_per_item, materials_needed, target, slots_chosen), build_time_per_item)
 
 /**
  * Resets the icon state and busy flag
@@ -411,8 +441,8 @@
 /obj/machinery/autolathe/proc/finalize_build()
 	PROTECTED_PROC(TRUE)
 	print_sound.stop()
-	icon_state = initial(icon_state)
 	busy = FALSE
+	update_appearance()
 	SStgui.update_uis(src)
 
 /obj/machinery/autolathe/mouse_drop_dragged(atom/over, mob/user, src_location, over_location, params)
@@ -459,9 +489,8 @@
 		balloon_alert(user, "close the panel first!")
 		return ITEM_INTERACT_BLOCKING
 
-	user.visible_message(span_notice("[user] begins to load \the [tool] in \the [src]..."),
-		balloon_alert(user, "uploading design..."),
-		span_hear("You hear the chatter of a floppy drive."))
+	user.visible_message(span_notice("[user] begins to load \the [tool] in \the [src]..."), blind_message = span_hear("You hear the chatter of a floppy drive."))
+	balloon_alert(user, "uploading design...")
 	busy = TRUE
 
 	if(!do_after(user, 1.5 SECONDS, target = src))
@@ -472,16 +501,15 @@
 
 	var/obj/item/disk/design_disk/disky = tool
 	var/list/not_imported
-	for(var/datum/design/blueprint as anything in disky.blueprints)
-		if(!blueprint)
-			continue
-		if(blueprint.build_type & AUTOLATHE)
-			imported_designs[blueprint.id] = TRUE
+	for(var/design_path in disky.blueprints)
+		var/datum/design/disk_design = SSresearch.techweb_designs[design_path]
+		if(disk_design.build_type & AUTOLATHE)
+			LAZYSET(imported_designs, design_path, TRUE)
 		else
-			LAZYADD(not_imported, blueprint.name)
+			LAZYADD(not_imported, disk_design.name)
 
 	if(not_imported)
-		to_chat(user, span_warning("The following design[length(not_imported) > 1 ? "s" : ""] couldn't be imported: [english_list(not_imported)]"))
+		to_chat(user, span_warning("The following design[LAZYLEN(not_imported) > 1 ? "s" : ""] couldn't be imported: [english_list(not_imported)]"))
 
 	busy = FALSE
 	update_static_data_for_all_viewers()

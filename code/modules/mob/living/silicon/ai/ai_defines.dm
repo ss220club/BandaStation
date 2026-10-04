@@ -157,6 +157,8 @@
 	VAR_FINAL/atom/lastloc
 	/// The AI's hologram appearance, can be set by a client and is assigned on AI creation
 	VAR_FINAL/mutable_appearance/hologram_appearance
+	/// The AI's hologram color, defaults to blue when nothing is selected
+	VAR_FINAL/ai_holocolor
 	/// The AI's currently used holopad
 	VAR_FINAL/obj/machinery/holopad/current
 
@@ -173,3 +175,11 @@
 	VAR_FINAL/obj/item/multitool/aiMulti
 	/// Helper effect that creates sparks when the AI is damaged
 	VAR_FINAL/datum/effect_system/basic/spark_spread/spark_system
+	// BANDASTATION EDIT START - law change request
+	/// Whether the AI's law change request has already been approved this shift, blocking further requests
+	var/law_change_used = FALSE
+	/// Whether the AI's law change request was rejected, permanently blocking further requests
+	var/law_change_rejected = FALSE
+	/// The law change request datum tied to this AI, if any
+	var/datum/ai_law_change_request/law_change_request
+	// BANDASTATION EDIT END

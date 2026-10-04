@@ -518,7 +518,7 @@ GLOBAL_DATUM_INIT(operations, /datum/operation_holder, new)
 		return 0
 
 	var/obj/item/realtool = tool
-	return (realtool.toolspeed) * (implements[realtool.tool_behaviour] || is_type_in_list(realtool, implements, zebra = TRUE) || 0)
+	return (realtool.toolspeed) * (implements[realtool.tool_behaviour] || is_type_in_list(realtool, implements, zebra = TRUE, return_first_match = TRUE) || 0)
 
 /**
  * Return a radial slice, a list of radial slices, or an assoc list of radial slice to operation info
@@ -850,7 +850,7 @@ GLOBAL_DATUM_INIT(operations, /datum/operation_holder, new)
 	var/result = NONE
 
 	if(patient)
-		was_sleeping = (patient.stat != DEAD && HAS_TRAIT(patient, TRAIT_KNOCKEDOUT))
+		was_sleeping = IS_UNCONSCIOUS_AND_ALIVE(patient)
 		update_surgery_mood(patient, SURGERY_STATE_STARTED)
 		SEND_SIGNAL(patient, COMSIG_ATOM_SURGERY_STARTED, src, operating_on, tool)
 
@@ -1019,7 +1019,7 @@ GLOBAL_DATUM_INIT(operations, /datum/operation_holder, new)
 	// Create a probability to ignore the pain based on drunkenness level
 	var/drunken_ignorance_probability = clamp(drunken_patient, 0, 90)
 
-	if(target.stat >= UNCONSCIOUS || HAS_TRAIT(target, TRAIT_KNOCKEDOUT))
+	if(IS_UNCONSCIOUS(target))
 		return
 	if(HAS_TRAIT(target, TRAIT_ANALGESIA) || HAS_TRAIT(target, TRAIT_STASIS) || drunken_patient && prob(drunken_ignorance_probability)) // BANDASTATION EDIT
 		to_chat(target, span_notice("Вы испытываете притупленное покалывание, пока ваше тело оперируют."))
@@ -1083,7 +1083,7 @@ GLOBAL_DATUM_INIT(operations, /datum/operation_holder, new)
 	if(HAS_TRAIT(patient, TRAIT_ANALGESIA) || HAS_TRAIT(patient, TRAIT_STASIS) || prob(drunk_ignore_prob))
 		patient.clear_mood_event(SURGERY_MOOD_CATEGORY) //incase they gained the trait mid-surgery (or became drunk). has the added side effect that if someone has a bad surgical memory/mood and gets drunk & goes back to surgery, they'll forget they hated it, which is kinda funny imo.
 		return
-	if(patient.stat >= UNCONSCIOUS)
+	if(IS_UNCONSCIOUS(patient))
 		var/datum/mood_event/surgery/target_mood_event = patient.mob_mood?.mood_events[SURGERY_MOOD_CATEGORY]
 		if(!target_mood_event || target_mood_event.surgery_completed) //don't give sleeping mobs trauma. that said, if they fell asleep mid-surgery after already getting the bad mood, lets make sure they wake up to a (hopefully) happy memory.
 			return
@@ -1110,8 +1110,13 @@ GLOBAL_DATUM_INIT(operations, /datum/operation_holder, new)
 	if(!pre_preop(operating_on, surgeon, tool, operation_args))
 		return FALSE
 	// if pre_preop slept, sanity check that everything is still valid
-	if(preop_time != world.time && (patient != get_patient(operating_on) || !surgeon.Adjacent(patient || operating_on) || !surgeon.is_holding(tool) || !operate_check(patient, operating_on, surgeon, tool, operation_args)))
-		return FALSE
+	if(preop_time != world.time)
+		if(patient != get_patient(operating_on))
+			return FALSE
+		if(!in_range(patient || operating_on, surgeon))
+			return FALSE
+		if(!operate_check(patient, operating_on, surgeon, tool, operation_args))
+			return FALSE
 
 	play_operation_sound(operating_on, surgeon, tool, preop_sound)
 	on_preop(operating_on, surgeon, tool, operation_args)
@@ -1298,6 +1303,9 @@ GLOBAL_DATUM_INIT(operations, /datum/operation_holder, new)
 	abstract_type = /datum/surgery_operation/limb
 	/// Body type required to perform this operation
 	var/required_bodytype = NONE
+	/// If TRUE, this operation can be performed on stumps.
+	/// If FALSE, the target limb must be a full limb.
+	var/allow_stumps = FALSE
 
 /datum/surgery_operation/limb/all_blocked_strings()
 	. = ..()
@@ -1309,7 +1317,7 @@ GLOBAL_DATUM_INIT(operations, /datum/operation_holder, new)
 /datum/surgery_operation/limb/get_operation_target(atom/movable/operating_on, body_zone)
 	if (isliving(operating_on))
 		var/mob/living/patient = operating_on
-		return patient.get_bodypart(deprecise_zone(body_zone))
+		return patient.get_bodypart(deprecise_zone(body_zone), allow_stumps)
 	if (!isbodypart(operating_on))
 		return null
 	return operating_on

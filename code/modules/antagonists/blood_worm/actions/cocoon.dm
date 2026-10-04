@@ -1,6 +1,7 @@
 /datum/action/cooldown/mob_cooldown/blood_worm/cocoon
 	cooldown_time = 30 SECONDS
 	shared_cooldown = NONE
+	transparent_when_unavailable = FALSE
 
 	click_to_activate = FALSE
 
@@ -14,6 +15,18 @@
 	var/timer_id = null
 
 	var/cocoon_time = 30 SECONDS
+
+/datum/action/cooldown/mob_cooldown/blood_worm/cocoon/create_button(mob/viewer)
+	var/atom/movable/screen/movable/action_button/button = ..()
+	button.maptext_x = 1
+	return button
+
+/datum/action/cooldown/mob_cooldown/blood_worm/cocoon/update_button_status(atom/movable/screen/movable/action_button/button, force = FALSE)
+	. = ..()
+	var/mob/living/basic/blood_worm/worm = owner
+	var/percentage_shown = "[round((worm.get_consumed_blood() / total_blood_required) * 100, 0.1)]"
+	button.maptext_x = (length(percentage_shown) >= 3) ? 0 : 1
+	button.maptext = MAPTEXT_TINY_UNICODE("<span style='text-align: center'>[percentage_shown]%</span>")
 
 /datum/action/cooldown/mob_cooldown/blood_worm/cocoon/Grant(mob/granted_to)
 	. = ..()
@@ -327,7 +340,7 @@
 	candidates = SSpolling.poll_ghost_candidates(
 		question = "Хотели бы вы стать только что вылупившимся кровяным червем? (x[num_hatchlings])",
 		role = ROLE_BLOOD_WORM_INFESTATION,
-		check_jobban = ROLE_BLOOD_WORM_INFESTATION,
+		check_jobban = ROLE_BLOOD_WORM,
 		poll_time = cocoon_time,
 		ignore_category = POLL_IGNORE_BLOOD_WORM,
 		alert_pic = cocoon_type, // The hatchling icon is too small, and a well-cropped juvenile icon is already used for the main spawn event.
@@ -335,6 +348,10 @@
 		role_name_text = "blood worm",
 		amount_to_pick = num_hatchlings
 	)
+
+	// poll_ghost_candidates returns a single mob instead of a list when exactly 1 candidate signs up, even with amount_to_pick > 1.
+	if (!islist(candidates) && candidates)
+		candidates = list(candidates)
 
 	var/num_candidates = length(candidates)
 
@@ -403,3 +420,9 @@
 
 /obj/structure/blood_worm_cocoon/adult/examine(mob/user)
 	return ..() + span_warning("Его можно сломать, чтобы предотвратить размножение кровяного червя, но на вид он чрезвычайно прочный.")
+
+/datum/action/cooldown/mob_cooldown/blood_worm/cocoon/hatchling/polymorph
+	new_worm_type = /mob/living/basic/blood_worm/juvenile/polymorph
+
+/datum/action/cooldown/mob_cooldown/blood_worm/cocoon/juvenile/polymorph
+	new_worm_type = /mob/living/basic/blood_worm/adult/polymorph

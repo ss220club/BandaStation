@@ -53,18 +53,11 @@ The console is located at computer/gulag_teleporter.dm
 		return
 	toggle_open()
 
-/obj/machinery/gulag_teleporter/attackby(obj/item/I, mob/user)
-	if(!occupant && default_deconstruction_screwdriver(user, "[icon_state]", "[icon_state]",I))
-		update_appearance()
-		return
+/obj/machinery/gulag_teleporter/screwdriver_act(mob/living/user, obj/item/tool)
+	return isnull(occupant) ? default_deconstruction_screwdriver(user, tool) : NONE
 
-	if(default_deconstruction_crowbar(I))
-		return
-
-	if(default_pry_open(I))
-		return
-
-	return ..()
+/obj/machinery/gulag_teleporter/crowbar_act(mob/living/user, obj/item/tool)
+	return default_pry_open(user, tool, deconstruct_on_fail = TRUE)
 
 /obj/machinery/gulag_teleporter/update_icon_state()
 	icon_state = "[base_icon_state][state_open ? "_open" : null]"
@@ -86,7 +79,7 @@ The console is located at computer/gulag_teleporter.dm
 
 
 /obj/machinery/gulag_teleporter/relaymove(mob/living/user, direction)
-	if(user.stat != CONSCIOUS)
+	if(IS_UNCONSCIOUS_OR_CRIT(user))
 		return
 	if(locked)
 		if(message_cooldown <= world.time)
@@ -103,8 +96,7 @@ The console is located at computer/gulag_teleporter.dm
 			return
 		resist_time *= 0.5
 
-	user.changeNext_move(CLICK_CD_BREAKOUT)
-	user.last_special = world.time + CLICK_CD_BREAKOUT
+	user.change_next_special_move(CLICK_CD_BREAKOUT)
 	user.visible_message(
 		span_notice("You see [user] kicking against the door of [src]!"),
 		span_notice("You lean on the back of [src] and start pushing the door open... (this will take about [DisplayTimeText(resist_time)].)"),
@@ -112,7 +104,7 @@ The console is located at computer/gulag_teleporter.dm
 	)
 
 	if(do_after(user, resist_time, target = src))
-		if(!user || user.stat != CONSCIOUS || user.loc != src || state_open || !locked)
+		if(!user || IS_UNCONSCIOUS_OR_CRIT(user) || user.loc != src || state_open || !locked)
 			return
 		locked = FALSE
 		user.visible_message(span_warning("[user] successfully broke out of [src]!"), \

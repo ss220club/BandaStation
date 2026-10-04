@@ -64,12 +64,16 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sink, (-14))
 		context[SCREENTIP_CONTEXT_LMB] = "Wash hands"
 		return CONTEXTUAL_SCREENTIP_SET
 
-	if(is_reagent_container(held_item) && held_item.is_refillable() && !held_item.reagents.holder_full())
-		context[SCREENTIP_CONTEXT_LMB] = "Fill container"
+	if(is_reagent_container(held_item))
+		if(held_item.is_refillable() && !held_item.reagents.holder_full())
+			context[SCREENTIP_CONTEXT_LMB] = "Fill container"
+		if(held_item.reagents.total_volume > 0)
+			context[SCREENTIP_CONTEXT_RMB] = "Drain container"
 		return CONTEXTUAL_SCREENTIP_SET
 
 	if(istype(held_item, /obj/item/mop) || astype(held_item, /obj/item/rag)?.blood_level == 0)
 		context[SCREENTIP_CONTEXT_LMB] = "Wet mop"
+		context[SCREENTIP_CONTEXT_RMB] = "Wash out mop"
 		return CONTEXTUAL_SCREENTIP_SET
 
 	if(istype(held_item, /obj/item/stock_parts/water_recycler) && !has_water_reclaimer)
@@ -89,6 +93,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sink, (-14))
 	if(has_water_reclaimer)
 		. += span_notice("A water recycler is installed. It looks like you could pry it out.")
 	. += span_notice("[reagents.total_volume]/[reagents.maximum_volume] liquids remaining.")
+	. += span_notice("You could [EXAMINE_HINT("right-click")] it with a container to empty it down the drain.")
 
 /obj/structure/sink/attack_hand(mob/living/user, list/modifiers)
 	. = ..()
@@ -219,6 +224,27 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sink, (-14))
 							span_notice("You wash [tool] using [src]."))
 		return ITEM_INTERACT_SUCCESS
 
+/obj/structure/sink/item_interaction_secondary(mob/living/user, obj/item/held_item, list/modifiers)
+	if(!is_reagent_container(held_item) && !istype(held_item, /obj/item/mop))
+		return ..()
+
+	if(busy)
+		to_chat(user, span_warning("Someone's already washing here!"))
+		return ITEM_INTERACT_BLOCKING
+
+	if(held_item.reagents.total_volume <= 0)
+		balloon_alert(user, "already empty!")
+		return ITEM_INTERACT_BLOCKING
+
+	held_item.reagents.clear_reagents()
+	playsound(src, 'sound/effects/slosh.ogg', 25, TRUE)
+
+	user.visible_message(
+		span_notice("[user] empties [held_item] into [src]."),
+		span_notice("You empty [held_item] into [src], washing its contents down the drain."),
+	)
+	return ITEM_INTERACT_SUCCESS
+
 /obj/structure/sink/wrench_act(mob/living/user, obj/item/tool)
 	tool.play_tool_sound(src)
 	deconstruct(TRUE)
@@ -275,6 +301,7 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sink/kitchen, (-16))
 	icon = 'icons/obj/watercloset.dmi'
 	icon_state = "sink_frame"
 	desc = "A sink frame, that needs a water recycler to finish construction."
+	wall_external = TRUE
 	result_path = /obj/structure/sink/greyscale
 	material_flags = MATERIAL_EFFECTS | MATERIAL_ADD_PREFIX | MATERIAL_COLOR | MATERIAL_AFFECT_STATISTICS
 	pixel_shift = 16
@@ -296,10 +323,11 @@ MAPPING_DIRECTIONAL_HELPERS(/obj/structure/sink/kitchen, (-16))
 
 /obj/item/wallframe/sinkframe/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
 	. = NONE
-	if(istype(tool, /obj/item/stock_parts/water_recycler))
+	if(istype(tool, /obj/item/stock_parts/water_recycler) && result_path == /obj/structure/sink/greyscale)
 		qdel(tool)
 		result_path = /obj/structure/sink/greyscale/filled
 		playsound(src, 'sound/machines/click.ogg', 20, TRUE)
+		balloon_alert(user, "water recycler installed!")
 		return ITEM_INTERACT_SUCCESS
 
 /obj/item/wallframe/sinkframe/after_attach(obj/structure/sink/greyscale/attached_to)

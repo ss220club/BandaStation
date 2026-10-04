@@ -1,7 +1,7 @@
 /mob/living/basic/heretic_summon/fire_shark
-	name = "\improper Fire Shark"
+	name = "Fire Shark"
 	real_name = "Fire Shark"
-	desc = "It is a eldritch dwarf space shark, also known as a fire shark."
+	desc = "Это потусторонняя карликовая космическая акула, также известная как огненная акула."
 	icon_state = "fire_shark"
 	icon_living = "fire_shark"
 	pass_flags = PASSTABLE | PASSMOB
@@ -16,7 +16,7 @@
 	obj_damage = 0
 	attack_verb_continuous = "bites"
 	attack_verb_simple = "bite"
-	damage_coeff = list(BRUTE = 1, BURN = 0.25, TOX = 0, STAMINA = 0, OXY = 0)
+	physiology = list(BURN = 0.25, TOX = 0, OXY = 0, STAMINA = 0)
 	faction = list(FACTION_HERETIC)
 	mob_size = MOB_SIZE_TINY
 	speak_emote = list("screams")

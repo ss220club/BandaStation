@@ -330,12 +330,17 @@
 	desc = "It's a stick..?"
 	icon = 'icons/obj/weapons/staff.dmi'
 	icon_state = "godstaff-red"
+	inhand_icon_state = "godstaff-red"
 	icon_angle = -45
 	lefthand_file = 'icons/mob/inhands/weapons/staves_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/staves_righthand.dmi'
 	var/conversion_color = "#ffffff"
 	var/staffcooldown = 0
 	var/staffwait = 30
+
+/obj/item/godstaff/Initialize(mapload)
+	. = ..()
+	AddComponent(/datum/component/walking_aid)
 
 /obj/item/godstaff/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
 	if(SHOULD_SKIP_INTERACTION(interacting_with, src, user))
@@ -358,6 +363,7 @@
 
 /obj/item/godstaff/blue
 	icon_state = "godstaff-blue"
+	inhand_icon_state = "godstaff-blue"
 	conversion_color = "#0000ff"
 
 /obj/item/clothing/gloves/plate
@@ -409,6 +415,7 @@
 	icon = 'icons/obj/weapons/sword.dmi'
 	icon_state = "claymore_old"
 	worn_icon = 'icons/mob/clothing/back.dmi'
+	worn_icon_state = "claymore"
 	force = 30
 	armour_penetration = 15
 

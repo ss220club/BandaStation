@@ -137,6 +137,8 @@
 	sound_environment = SOUND_AREA_LAVALAND
 	ambient_buzz = 'sound/ambience/lavaland/magma.ogg'
 	allow_shuttle_docking = TRUE
+	map_generator = /datum/map_generator/cave_generator/lavaland
+	use_mapgen = FALSE
 
 /area/lavaland/surface
 	name = "Lavaland"
@@ -167,7 +169,7 @@
 	icon_state = "unexplored"
 	area_flags = VALID_TERRITORY
 	area_flags_mapping = UNIQUE_AREA | CAVES_ALLOWED | FLORA_ALLOWED | MOB_SPAWN_ALLOWED
-	map_generator = /datum/map_generator/cave_generator/lavaland
+	use_mapgen = TRUE
 
 /area/lavaland/surface/outdoors/unexplored/danger //megafauna will also spawn here
 	icon_state = "danger"
@@ -189,11 +191,13 @@
 	icon_state = "mining"
 	default_gravity = STANDARD_GRAVITY
 	flags_1 = NONE
+	area_flags = NONE
 	area_flags_mapping = UNIQUE_AREA | FLORA_ALLOWED
 	ambience_index = AMBIENCE_ICEMOON
 	sound_environment = SOUND_AREA_ICEMOON
 	ambient_buzz = 'sound/ambience/lavaland/magma.ogg'
 	allow_shuttle_docking = TRUE
+	skip_minimap_rendering = TRUE
 
 /area/icemoon/surface
 	name = "Icemoon"

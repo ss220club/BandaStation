@@ -75,13 +75,12 @@
 /obj/machinery/fat_sucker/container_resist_act(mob/living/user)
 	if(!free_exit || state_open)
 		to_chat(user, span_notice("The emergency release is not responding! You start pushing against the hull!"))
-		user.changeNext_move(CLICK_CD_BREAKOUT)
-		user.last_special = world.time + CLICK_CD_BREAKOUT
+		user.change_next_special_move(CLICK_CD_BREAKOUT)
 		user.visible_message(span_notice("You see [user] kicking against the door of [src]!"), \
 			span_notice("You lean on the back of [src] and start pushing the door open... (this will take about [DisplayTimeText(breakout_time)].)"), \
 			span_hear("You hear a metallic creaking from [src]."))
-		if(do_after(user, breakout_time, target = src, hidden = TRUE))
-			if(!user || user.stat != CONSCIOUS || user.loc != src || state_open)
+		if(do_after(user, breakout_time, target = src, cog_icon = null))
+			if(!user || IS_UNCONSCIOUS_OR_CRIT(user) || user.loc != src || state_open)
 				return
 			free_exit = TRUE
 			user.visible_message(span_warning("[user] successfully broke out of [src]!"), \
@@ -190,24 +189,17 @@
 				meat.set_custom_materials(list(SSmaterials.get_material(/datum/material/meat/mob_meat, C) = round(SHEET_MATERIAL_AMOUNT * (4/3))))
 			nutrients = 0
 
-/obj/machinery/fat_sucker/screwdriver_act(mob/living/user, obj/item/I)
-	. = TRUE
-	if(..())
-		return
+/obj/machinery/fat_sucker/screwdriver_act(mob/living/user, obj/item/tool)
 	if(occupant)
 		to_chat(user, span_warning("[src] is currently occupied!"))
-		return
+		return ITEM_INTERACT_BLOCKING
 	if(state_open)
 		to_chat(user, span_warning("[src] must be closed to [panel_open ? "close" : "open"] its maintenance hatch!"))
-		return
-	if(default_deconstruction_screwdriver(user, icon_state, icon_state, I))
-		update_appearance()
-		return
-	return FALSE
+		return ITEM_INTERACT_BLOCKING
+	return default_deconstruction_screwdriver(user, tool)
 
-/obj/machinery/fat_sucker/crowbar_act(mob/living/user, obj/item/I)
-	if(default_deconstruction_crowbar(I))
-		return TRUE
+/obj/machinery/fat_sucker/crowbar_act(mob/living/user, obj/item/tool)
+	return default_deconstruction_crowbar(user, tool)
 
 /obj/machinery/fat_sucker/emag_act(mob/user, obj/item/card/emag/emag_card)
 	if(obj_flags & EMAGGED)

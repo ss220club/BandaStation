@@ -16,7 +16,7 @@
 
 	var/mob/player = occupant
 	player.playsound_local(src, 'sound/effects/splash.ogg', 60, TRUE)
-	to_chat(player, span_notice("The machine disconnects itself and begins to drain."))
+	to_chat(player, span_notice("Машина отключается и начинает сливать воду."))
 	open_machine()
 
 
@@ -49,7 +49,7 @@
 	mob_occupant.flash_act(override_blindness_check = TRUE, visual = TRUE)
 	mob_occupant.adjust_organ_loss(ORGAN_SLOT_BRAIN, disconnect_damage)
 	INVOKE_ASYNC(mob_occupant, TYPE_PROC_REF(/mob/living, emote), "scream")
-	to_chat(mob_occupant, span_danger("You've been forcefully disconnected from your avatar! Your thoughts feel scrambled!"))
+	to_chat(mob_occupant, span_danger("Вы были насильно отключены от своего аватара! Ваши мысли в смятении!"))
 
 
 /**
@@ -76,7 +76,7 @@
 		balloon_alert(neo, "ничего не загружено!!")
 		return
 
-	balloon_alert(neo, "establishing connection...")
+	balloon_alert(neo, "установка соединения...")
 
 	// Prevent hand interactions during loading to stop smuggling exploits into virtual domain
 	ADD_TRAIT(neo, TRAIT_HANDS_BLOCKED, TRAIT_GENERIC)
@@ -91,7 +91,7 @@
 		return
 
 	var/mob/living/carbon/current_avatar = avatar_ref?.resolve()
-	if(isnull(current_avatar) || current_avatar.stat != CONSCIOUS) // We need a viable avatar
+	if(isnull(current_avatar) || IS_UNCONSCIOUS_OR_CRIT(current_avatar)) // We need a viable avatar
 		current_avatar = server.start_new_connection(neo, netsuit)
 		if(isnull(current_avatar))
 			balloon_alert(neo, "кончилась пропускная способность!")
@@ -150,7 +150,7 @@
 		return FALSE
 
 	// Invalid
-	if(occupant != neo || isnull(neo.mind) || neo.stat > SOFT_CRIT || avatar.stat == DEAD)
+	if(occupant != neo || isnull(neo.mind) || IS_UNCONSCIOUS(neo) || avatar.stat == DEAD)
 		return FALSE
 
 	return TRUE

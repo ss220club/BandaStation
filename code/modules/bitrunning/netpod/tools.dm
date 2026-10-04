@@ -3,20 +3,15 @@
 		attack_hand(user)
 		return ITEM_INTERACT_SUCCESS
 
-	if(default_pry_open(tool, user) || default_deconstruction_crowbar(tool))
-		return ITEM_INTERACT_SUCCESS
-
+	return default_pry_open(user, tool, deconstruct_on_fail = TRUE)
 
 /obj/machinery/netpod/screwdriver_act(mob/living/user, obj/item/tool)
 	if(occupant)
-		balloon_alert(user, "in use!")
+		balloon_alert(user, "уже используется!")
 		return ITEM_INTERACT_SUCCESS
 
 	if(state_open)
-		balloon_alert(user, "close first.")
+		balloon_alert(user, "сначала закройте!")
 		return ITEM_INTERACT_SUCCESS
 
-	if(default_deconstruction_screwdriver(user, "[base_icon_state]_panel", "[base_icon_state]_closed", tool))
-		update_appearance() // sometimes icon doesnt properly update during flick()
-		ui_close(user)
-		return ITEM_INTERACT_SUCCESS
+	return default_deconstruction_screwdriver(user, tool)

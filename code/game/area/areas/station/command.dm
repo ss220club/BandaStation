@@ -6,33 +6,34 @@
 		)
 	airlock_wires = /datum/wires/airlock/command
 	sound_environment = SOUND_AREA_STANDARD_STATION
+	tacmap_color = TACMAP_AREA_COMMAND
 
 /area/station/command/bridge
-	name = "\improper Bridge"
+	name = "Bridge"
 	icon_state = "bridge"
 
 /area/station/command/meeting_room
-	name = "\improper Heads of Staff Meeting Room"
+	name = "Heads of Staff Meeting Room"
 	icon_state = "meeting"
 	sound_environment = SOUND_AREA_MEDIUM_SOFTFLOOR
 
 /area/station/command/meeting_room/council
-	name = "\improper Council Chamber"
+	name = "Council Chamber"
 	icon_state = "meeting"
 	sound_environment = SOUND_AREA_MEDIUM_SOFTFLOOR
 
 /area/station/command/corporate_showroom
-	name = "\improper Corporate Showroom"
+	name = "Corporate Showroom"
 	icon_state = "showroom"
 	sound_environment = SOUND_AREA_MEDIUM_SOFTFLOOR
 
 /area/station/command/corporate_suite
-	name = "\improper Corporate Guest Suite"
+	name = "Corporate Guest Suite"
 	icon_state = "command"
 	sound_environment = SOUND_AREA_WOODFLOOR
 
 /area/station/command/emergency_closet
-	name = "\improper Corporate Emergency Closet"
+	name = "Corporate Emergency Closet"
 	icon_state = "command"
 	sound_environment = SOUND_AREA_SMALL_ENCLOSED
 
@@ -48,7 +49,7 @@
 	name = "Upper EVA Storage"
 
 /area/station/command/vault
-	name = "\improper Vault"
+	name = "Vault"
 	icon_state = "nuke_storage" // someone should change this, not me though
 	motion_monitored = TRUE
 
@@ -60,37 +61,37 @@
 	icon_state = "heads_quarters"
 
 /area/station/command/heads_quarters/captain
-	name = "\improper Captain's Office"
+	name = "Captain's Office"
 	icon_state = "captain"
 	sound_environment = SOUND_AREA_WOODFLOOR
 
 /area/station/command/heads_quarters/captain/private
-	name = "\improper Captain's Quarters"
+	name = "Captain's Quarters"
 	icon_state = "captain_private"
 	sound_environment = SOUND_AREA_WOODFLOOR
 
 /area/station/command/heads_quarters/ce
-	name = "\improper Chief Engineer's Office"
+	name = "Chief Engineer's Office"
 	icon_state = "ce_office"
 
 /area/station/command/heads_quarters/cmo
-	name = "\improper Chief Medical Officer's Office"
+	name = "Chief Medical Officer's Office"
 	icon_state = "cmo_office"
 
 /area/station/command/heads_quarters/hop
-	name = "\improper Head of Personnel's Office"
+	name = "Head of Personnel's Office"
 	icon_state = "hop_office"
 
 /area/station/command/heads_quarters/hos
-	name = "\improper Head of Security's Office"
+	name = "Head of Security's Office"
 	icon_state = "hos_office"
 
 /area/station/command/heads_quarters/rd
-	name = "\improper Research Director's Office"
+	name = "Research Director's Office"
 	icon_state = "rd_office"
 
 /area/station/command/heads_quarters/qm
-	name = "\improper Quartermaster's Office"
+	name = "Quartermaster's Office"
 	icon_state = "qm_office"
 
 /*
@@ -98,12 +99,12 @@
 */
 
 /area/station/command/teleporter
-	name = "\improper Teleporter Room"
+	name = "Teleporter Room"
 	icon_state = "teleporter"
 	ambience_index = AMBIENCE_ENGI
 
 /area/station/command/gateway
-	name = "\improper Gateway"
+	name = "Gateway"
 	icon_state = "gateway"
 	ambience_index = AMBIENCE_ENGI
 
@@ -112,6 +113,6 @@
 */
 
 /area/station/command/corporate_dock
-	name = "\improper Corporate Private Dock"
+	name = "Corporate Private Dock"
 	icon_state = "command"
 	sound_environment = SOUND_AREA_SMALL_SOFTFLOOR

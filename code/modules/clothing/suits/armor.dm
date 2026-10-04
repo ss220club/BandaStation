@@ -51,6 +51,7 @@
 	inhand_icon_state = "armor"
 	blood_overlay_type = "armor"
 	dog_fashion = /datum/dog_fashion/back/armorvest
+	item_flags = CAN_BE_OVERSLOT
 
 /obj/item/clothing/suit/armor/vest/alt
 	desc = "A Type I armored vest that provides decent protection against most types of damage."
@@ -65,7 +66,7 @@
 	desc = "A blue armor vest used to distinguish <i>non-combatant</i> \"PRESS\" members, like if anyone cares."
 	icon_state = "armor_press"
 
-/obj/item/clothing/suit/armor/vest/press/worn_overlays(mutable_appearance/standing, isinhands, icon_file)
+/obj/item/clothing/suit/armor/vest/press/worn_overlays(mutable_appearance/standing, isinhands, icon_file, bodyshape = NONE)
 	. = ..()
 	if(!isinhands)
 		. += emissive_appearance(icon_file, "[icon_state]-emissive", src, alpha = src.alpha, effect_type = EMISSIVE_SPECULAR)
@@ -207,6 +208,7 @@
 	strip_delay = 7 SECONDS
 	resistance_flags = FLAMMABLE
 	dog_fashion = null
+	item_flags = NONE
 
 /obj/item/clothing/suit/armor/vest/warden/alt
 	name = "warden's armored jacket"
@@ -224,8 +226,9 @@
 	heat_protection = CHEST|GROIN|ARMS|HANDS
 	resistance_flags = FLAMMABLE
 	dog_fashion = null
+	item_flags = NONE
 
-/obj/item/clothing/suit/armor/vest/secjacket/worn_overlays(mutable_appearance/standing, isinhands, icon_file)
+/obj/item/clothing/suit/armor/vest/secjacket/worn_overlays(mutable_appearance/standing, isinhands, icon_file, bodyshape = NONE)
 	. = ..()
 	if(!isinhands)
 		. += emissive_appearance(icon_file, "[icon_state]-emissive", src, alpha = src.alpha, effect_type = EMISSIVE_SPECULAR)
@@ -259,6 +262,7 @@
 	armor_type = /datum/armor/vest_capcarapace
 	dog_fashion = null
 	resistance_flags = FIRE_PROOF
+	item_flags = NONE
 
 /datum/armor/vest_capcarapace
 	melee = 50
@@ -298,10 +302,13 @@
 	strip_delay = 8 SECONDS
 	equip_delay_other = 6 SECONDS
 	clothing_traits = list(TRAIT_BRAWLING_KNOCKDOWN_BLOCKED)
+	/// Type of texture applied by this
+	var/texture_type = /datum/bodypart_texture/mesh/heretic
 
 /obj/item/clothing/suit/armor/riot/Initialize(mapload)
 	. = ..()
 	AddElement(/datum/element/adjust_fishing_difficulty, 5)
+	AddElement(/datum/element/equipment_bodypart_texture, BODY_ZONE_CHEST, texture_type)
 	init_rustle_component()
 
 /obj/item/clothing/suit/armor/riot/proc/init_rustle_component()
@@ -326,6 +333,7 @@
 	siemens_coefficient = 0
 	strip_delay = 7 SECONDS
 	equip_delay_other = 5 SECONDS
+	custom_materials = list(/datum/material/plastic = SHEET_MATERIAL_AMOUNT * 10.8)
 
 /datum/armor/balloon_vest
 	melee = 10
@@ -381,6 +389,7 @@
 	heat_protection = CHEST|GROIN|ARMS
 	armor_type = /datum/armor/armor_laserproof
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | ACID_PROOF
+	item_flags = CAN_BE_OVERSLOT
 	var/hit_reflect_chance = 50
 
 /datum/armor/armor_laserproof
@@ -459,6 +468,12 @@
 	slowdown = 3
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
 	armor_type = /datum/armor/armor_heavy
+	/// Type of texture applied by this
+	var/texture_type = /datum/bodypart_texture/mesh/black
+
+/obj/item/clothing/suit/armor/heavy/Initialize(mapload)
+	. = ..()
+	AddElement(/datum/element/equipment_bodypart_texture, BODY_ZONE_CHEST, texture_type)
 
 /datum/armor/armor_heavy
 	melee = 80
@@ -525,13 +540,15 @@
 	desc = "A classic suit of plate armour, highly effective at stopping melee attacks."
 	icon_state = "knight_green"
 	inhand_icon_state = null
+	texture_type = /datum/bodypart_texture/mesh/biosuit_dark
 	allowed = list(
 		/obj/item/banner,
 		/obj/item/claymore,
 		/obj/item/nullrod,
 		/obj/item/tank/internals/emergency_oxygen,
 		/obj/item/tank/internals/plasmaman,
-		)
+	)
+
 /obj/item/clothing/suit/armor/riot/knight/init_rustle_component()
 	AddComponent(/datum/component/item_equipped_movement_rustle, SFX_PLATE_ARMOR_RUSTLE, 8)
 
@@ -597,6 +614,7 @@
 	inhand_icon_state = null
 	armor_type = /datum/armor/vest_russian
 	dog_fashion = null
+	item_flags = NONE
 
 /datum/armor/vest_russian
 	melee = 25
@@ -617,6 +635,7 @@
 	min_cold_protection_temperature = SPACE_SUIT_MIN_TEMP_PROTECT
 	armor_type = /datum/armor/vest_russian_coat
 	dog_fashion = null
+	item_flags = NONE
 
 /datum/armor/vest_russian_coat
 	melee = 25
@@ -634,7 +653,7 @@
 	desc = "A superb armor made with the toughest and rarest materials available to man."
 	icon_state = "h2armor"
 	inhand_icon_state = null
-	material_flags = MATERIAL_EFFECTS | MATERIAL_COLOR | MATERIAL_AFFECT_STATISTICS //Can change color and add prefix
+	material_flags = MATERIAL_EFFECTS
 	armor_type = /datum/armor/armor_elder_atmosian
 	body_parts_covered = CHEST|GROIN|LEGS|FEET|ARMS|HANDS
 	cold_protection = CHEST|GROIN|LEGS|FEET|ARMS|HANDS
@@ -644,6 +663,7 @@
 	. = ..()
 	allowed += list(
 		/obj/item/fireaxe/metal_h2_axe,
+		/obj/item/gun/ballistic/rifle/rebarxbow,
 	)
 
 /datum/armor/armor_elder_atmosian
@@ -708,7 +728,7 @@
 	wound = 30
 
 /obj/item/clothing/suit/armor/vest/military
-	name = "Crude chestplate"
+	name = "crude chestplate"
 	desc = "It may look rough, rusty and battered, but it's also made out of junk and uncomfortable to wear."
 	icon_state = "military"
 	inhand_icon_state = "armor"

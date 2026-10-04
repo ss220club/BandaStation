@@ -30,21 +30,18 @@
 	recoil = 0.5
 	spread = 2.5
 
-/obj/item/gun/ballistic/automatic/lanca/examine(mob/user)
-	. = ..()
-	. += span_notice("Вы можете [EXAMINE_HINT("изучить подробнее")], чтобы узнать немного больше об этом оружии.")
-
-/obj/item/gun/ballistic/automatic/lanca/examine_more(mob/user)
-	. = ..()
-	. += "Разработка боевой винтовки \"Ланка\" началась как попытка заменить устаревшую \"Сахно\", на новую полуавтоматическую винтовку для армии СССП. <br>\
+/obj/item/gun/ballistic/automatic/lanca/add_deep_lore()
+	AddElement(/datum/element/examine_lore, \
+		lore = "Разработка боевой винтовки \"Ланка\" началась как попытка заменить устаревшую \"Сахно\", на новую полуавтоматическую винтовку для армии СССП. <br>\
 		Первоначальная разработка на основе модернизированной \"Сахно\" с добавлением возможности вести полуавтоматический огонь не удовлетворило комиссию. \
 		Поэтому была взяты за основу модификации \"Сахно\" под именованием \"Ворон\" и немного измененны под запросы комиссии. \
-		Для этого приклад был скелетонизирован, а ствольная нарезка заменена на минималистичный дизайн."
+		Для этого приклад был скелетонизирован, а ствольная нарезка заменена на минималистичный дизайн.")
 
 /obj/item/gun/ballistic/automatic/lanca/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/scope, range_modifier = 1.5)
 	AddElement(/datum/element/update_icon_updates_onmob)
+	ADD_TRAIT(src, TRAIT_CONTRABAND, INNATE_TRAIT)
 
 /obj/item/gun/ballistic/automatic/lanca/update_icon_state()
 	. = ..()
@@ -71,11 +68,11 @@
 	var/obj/item/suppressor/S = new(src)
 	install_suppressor(S)
 
-/obj/item/gun/ballistic/automatic/lanca/army/examine_more(mob/user)
-	. = ..()
-	. = "Образец боевой винтовки \"Ланка\" номер 30, это последняя вариация винтовки этого вида, созданная для специальных сил СССП.<br>\
+/obj/item/gun/ballistic/automatic/lanca/army/add_deep_lore()
+	AddElement(/datum/element/examine_lore, \
+		lore = "Образец боевой винтовки \"Ланка\" номер 30, это последняя вариация винтовки этого вида, созданная для специальных сил СССП.<br>\
 		Новый вариант был основан на базе автомата АМК-462, изменение калибра потребовало обновления верхнего ресивера и установки мощной возвратной пружины, \
-		что привело к увеличению веса винтовки, но это было компенсировано изпользованием новой компоновки и полимеров."
+		что привело к увеличению веса винтовки, но это было компенсировано изпользованием новой компоновки и полимеров.")
 
 /obj/item/gun/ballistic/automatic/lanca/army/no_mag
 	spawnwithmagazine = FALSE

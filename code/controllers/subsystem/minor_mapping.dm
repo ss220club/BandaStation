@@ -6,12 +6,13 @@ SUBSYSTEM_DEF(minor_mapping)
 		/datum/controller/subsystem/mapping,
 		/datum/controller/subsystem/atoms,
 	)
-	flags = SS_NO_FIRE
+	ss_flags = SS_NO_FIRE
 	///a list of vermin we pick from to spawn.
 	var/list/vermin_chances = list(
 		/mob/living/basic/mouse = 72,
 		/mob/living/basic/snail = 16,
-		/mob/living/basic/stoat = 10,
+		/mob/living/basic/stoat = 7,
+		/mob/living/basic/stoat/kit = 3,
 		/mob/living/basic/regal_rat/controlled = 2,
 	)
 
@@ -23,9 +24,9 @@ SUBSYSTEM_DEF(minor_mapping)
 #else
 	trigger_migration(CONFIG_GET(number/mice_roundstart))
 	place_satchels(satchel_amount = 2)
-	var/weakpoint_spawns = 3
+	var/weakpoint_spawns = 5
 	if(HAS_TRAIT(SSstation, STATION_TRAIT_SPAWN_WEAKPOINTS))
-		weakpoint_spawns = rand(4,8)
+		weakpoint_spawns = rand(6,12)
 
 	weakpoint_spawns += SSmapping.current_map.bonus_weakpoints //This will add 0 by default, or additional on large maps where it's included in the config.
 	place_weakpoints(weakpoint_spawns)

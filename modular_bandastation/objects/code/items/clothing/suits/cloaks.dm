@@ -27,15 +27,22 @@
 	icon = 'modular_bandastation/aesthetics/clothing/centcom/icons/obj/clothing/cloaks/cloaks.dmi'
 	worn_icon = 'modular_bandastation/aesthetics/clothing/centcom/icons/mob/clothing/cloaks/cloaks.dmi'
 	icon_state = "centcom"
-	armor_type = /datum/armor/armor_centcom_cloak
+	armor_type = /datum/armor/centcom_cloak
 	resistance_flags = INDESTRUCTIBLE | FIRE_PROOF | FREEZE_PROOF | UNACIDABLE | ACID_PROOF
 
 /datum/armor/armor_centcom_cloak
-	melee = 80
-	bullet = 80
-	laser = 80
+	melee = 50
+	bullet = 50
+	laser = 50
 	energy = 60
 	wound = 30
+
+/datum/armor/centcom_cloak
+	melee = 10
+	bullet = 10
+	laser = 10
+	energy = 10
+	wound = 10
 
 /obj/item/clothing/neck/cloak/centcom/officer
 	name = "fleet officer's official cloak"
@@ -54,6 +61,13 @@
 	desc = "Свободная накидка из дюраткани, укрепленной пластитановой нитью. Сочетает в себе два основных качества \
 	офицерского убранства - пафос и защиту. Линейка этих дорогих плащей встречается у крайне состоятельных членов старшего офицерского состава."
 	icon_state = "centcom_admiral"
+
+/obj/item/clothing/neck/cloak/centcom/gr_cape
+	name = "field officer's reinforced cape"
+	desc = "Свободная накидка из дюраткани, укрепленной пластитановой нитью, выполненная на заказ. Сочетает в себе два основных качества \
+	офицерского убранства - пафос и защиту. Линейка этих дорогих плащей встречается у крайне состоятельных членов старшего офицерского состава."
+	icon_state = "gr_cape"
+	armor_type = /datum/armor/armor_centcom_cloak
 
 // Blueshield
 /obj/item/clothing/neck/cloak/blueshield
@@ -225,8 +239,7 @@
 /datum/action/item_action/stealth_mode/cloak
 	name = "Замаскироваться"
 	desc = "Производится подача напряжения на фотодинамические пластины и, спустя непродолжительную калибровку, маскировка выходит на максимальную эффективность."
-	charge = 500 SECONDS
-	max_charge = 500 SECONDS
+	charge_rate = 0.75 SECONDS
 
 /datum/action/item_action/stealth_mode/cloak/stealth_on()
 	var/obj/item/clothing/suit/hooded/stealth_cloak/cloak = target

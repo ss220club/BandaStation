@@ -1,13 +1,12 @@
 /// Adds a newline to the examine list if the above entry is not empty and it is not the first element in the list
 #define ADD_NEWLINE_IF_NECESSARY(list) if(length(list) > 0 && list[length(list)]) { list += "" }
-#define CARBON_EXAMINE_EMBEDDING_MAX_DIST 4
 
 /mob/living/carbon/human/get_examine_icon(mob/user)
 	return null
 
 /mob/living/carbon/examine(mob/user)
 	if(HAS_TRAIT(src, TRAIT_UNKNOWN_APPEARANCE) && !isobserver(user))
-		return list(span_warning("Вам сложно разглядеть какие либо детали..."))
+		return list(span_warning("Вам сложно разглядеть какие-либо детали..."))
 
 	var/t_He = ru_p_they(TRUE)
 	var/t_His = ru_p_them(TRUE)
@@ -24,7 +23,7 @@
 	var/appears_dead = FALSE
 	var/just_sleeping = FALSE
 
-	if(!appears_alive())
+	if(IS_DEAD_OR_FAKING(src))
 		appears_dead = TRUE
 
 		var/obj/item/clothing/glasses/shades = get_item_by_slot(ITEM_SLOT_EYES)
@@ -42,7 +41,7 @@
 			. += generate_death_examine_text()
 
 	//Status effects
-	var/list/status_examines = get_status_effect_examinations()
+	var/list/status_examines = get_status_effect_examinations(user)
 	if (length(status_examines))
 		. += status_examines
 
@@ -50,7 +49,7 @@
 		. += span_deadsay("Кажется, [t_his] мозг отсутствует...")
 
 	var/list/disabled = list()
-	for(var/obj/item/bodypart/body_part as anything in bodyparts)
+	for(var/obj/item/bodypart/body_part as anything in get_bodyparts())
 		if(body_part.bodypart_disabled)
 			disabled += body_part
 
@@ -81,6 +80,8 @@
 				. += span_notice(tourniquet_msg)
 
 		for(var/datum/wound/iter_wound as anything in body_part.wounds)
+			if(isnull(iter_wound.examine_desc))
+				continue
 			. += span_danger(iter_wound.get_examine_description(user))
 
 		var/surgery_examine = body_part.get_surgery_examine()
@@ -96,7 +97,7 @@
 			damage_text = "обмякла и безжизненна"
 		else
 			damage_text = (body_part.brute_dam >= body_part.burn_dam) ? body_part.heavy_brute_msg : body_part.heavy_burn_msg
-		. += span_boldwarning("[body_part.ru_plaintext_zone[NOMINATIVE] || body_part.plaintext_zone] [capitalize(t_His)] выглядит [damage_text]!")
+		. += span_boldwarning("[capitalize(t_His)] [body_part.ru_plaintext_zone[NOMINATIVE] || body_part.plaintext_zone] выглядит [damage_text]!")
 
 	//stores missing limbs
 	var/l_limbs_missing = 0
@@ -178,7 +179,7 @@
 		var/list/obj/item/bodypart/bleeding_limbs = list()
 		var/list/obj/item/bodypart/grasped_limbs = list()
 
-		for(var/obj/item/bodypart/body_part as anything in bodyparts)
+		for(var/obj/item/bodypart/body_part as anything in get_bodyparts())
 			if(body_part.cached_bleed_rate)
 				bleeding_limbs += body_part.ru_plaintext_zone[GENITIVE] || body_part.plaintext_zone
 			if(body_part.grasped_by)
@@ -226,18 +227,17 @@
 				. += "Вокруг [ru_p_theirs()] видно святую ауру."
 				living_user.add_mood_event("religious_comfort", /datum/mood_event/religiously_comforted)
 
-		switch(stat)
-			if(UNCONSCIOUS, HARD_CRIT)
-				. += span_notice("[t_He] не реагирует на [t_him] окружение и, кажется, спит.")
-			if(SOFT_CRIT)
-				. += span_notice("[t_He] едва находится в сознании.")
-			if(CONSCIOUS)
-				if(HAS_TRAIT(src, TRAIT_DUMB))
-					. += "У [ru_p_theirs()] глупое выражение лица."
+		if(IS_UNCONSCIOUS(src))
+			. += span_notice("[t_He] не реагирует на [t_him] окружение и, кажется, спит.")
+		else if(stat == SOFT_CRIT)
+			. += span_notice("[t_He] едва находится в сознании.")
+		else if(HAS_TRAIT(src, TRAIT_DUMB))
+			. += "У [ru_p_theirs()] глупое выражение лица."
+
 		var/obj/item/organ/brain/brain = get_organ_by_type(/obj/item/organ/brain)
 		if(brain && isnull(ai_controller))
 			var/npc_message = ""
-			if(HAS_TRAIT(brain, TRAIT_GHOSTROLE_ON_REVIVE))
+			if(HAS_TRAIT(brain, TRAIT_GHOSTROLE_ON_REVIVE) || HAS_TRAIT(src, TRAIT_GHOSTROLE_ON_REVIVE))
 				npc_message = "Душа всё ещё тут..."
 			else if(!key)
 				npc_message = "[t_He] в полной кататонии. Стресс, связанный с жизнью в глубоком космосе, видимо, переселил [t_him]. Восстановление маловероятно."
@@ -267,7 +267,10 @@
 				. += span_notice("<b><i>[t_He] выглядит абсолютно ужасно; вы можете осмотреть подробнее, чтобы разглядеть шрамы...</i></b>")
 
 	if(HAS_TRAIT(src, TRAIT_HUSK))
-		. += span_warning("Это тело превратилось в гротескную шелуху.")
+		if(HAS_TRAIT_FROM(src, TRAIT_HUSK, /datum/status_effect/zombie::id))
+			. += span_warning("[t_His] skin has rotted into a sickly green color.") // future todo: lizards don't have skin, they have scales
+		else
+			. += span_warning("Это тело превратилось в гротескную шелуху.")
 	if(HAS_MIND_TRAIT(user, TRAIT_MORBID))
 		if(HAS_TRAIT(src, TRAIT_DISSECTED))
 			. += span_notice("[t_He] appear[p_s()] to have been dissected. Useless for examination... <b><i>for now.</i></b>")
@@ -301,11 +304,11 @@
 /**
  * Shows any and all examine text related to any status effects the user has.
  */
-/mob/living/proc/get_status_effect_examinations()
+/mob/living/proc/get_status_effect_examinations(mob/examiner)
 	var/list/examine_list = list()
 
 	for(var/datum/status_effect/effect as anything in status_effects)
-		var/effect_text = effect.get_examine_text()
+		var/effect_text = effect.get_examine_text(examiner)
 		if(!effect_text)
 			continue
 
@@ -324,7 +327,7 @@
 	// var/t_is = p_are()
 	//This checks to see if the body is revivable
 	var/obj/item/organ/brain = get_organ_by_type(/obj/item/organ/brain)
-	if(brain && HAS_TRAIT(brain, TRAIT_GHOSTROLE_ON_REVIVE))
+	if((brain && HAS_TRAIT(brain, TRAIT_GHOSTROLE_ON_REVIVE)) || HAS_TRAIT(src, TRAIT_GHOSTROLE_ON_REVIVE))
 		return span_deadsay("[t_He] выглядит обмякло и не реагирует; но [t_his] душа ещё может вернуться...")
 	var/client_like = client || HAS_TRAIT(src, TRAIT_MIND_TEMPORARILY_GONE)
 	var/valid_ghost = ghost?.can_reenter_corpse && ghost?.client
@@ -338,7 +341,7 @@
 	var/list/seen_damage = list() // This looks like: ({Damage type} = list({Damage description for that damage type} = {number of times it has appeared}, ...), ...)
 	var/list/most_seen_damage = list() // This looks like: ({Damage type} = {Frequency of the most common description}, ...)
 	var/list/final_descriptions = list() // This looks like: ({Damage type} = {Most common damage description for that type}, ...)
-	for(var/obj/item/bodypart/part as anything in bodyparts)
+	for(var/obj/item/bodypart/part as anything in get_bodyparts())
 		for(var/damage_type in part.damage_examines)
 			var/damage_desc = part.damage_examines[damage_type]
 			if(!seen_damage[damage_type])
@@ -359,58 +362,26 @@
 	. = list()
 	var/t_He = ru_p_they(TRUE)
 	var/t_His = ru_p_them(TRUE)
-	// var/t_his = p_their()
-	// var/t_has = p_have()
-	// var/t_is = p_are()
-	//head
-	if(head && !(obscured_slots & HIDEHEADGEAR) && !HAS_TRAIT(head, TRAIT_EXAMINE_SKIP))
-		. += "[t_He] носит [head.examine_title(user, declent = ACCUSATIVE)] на голове."
-	//back
-	if(back && !HAS_TRAIT(back, TRAIT_EXAMINE_SKIP))
-		. += "[t_He] носит [back.examine_title(user, declent = ACCUSATIVE)] на спине."
 	//Hands
 	for(var/obj/item/held_thing in held_items)
 		if((held_thing.item_flags & (ABSTRACT|HAND_ITEM)) || HAS_TRAIT(held_thing, TRAIT_EXAMINE_SKIP))
 			continue
 		. += "[t_He] держит [held_thing.examine_title(user, declent = ACCUSATIVE)] в [get_held_index_name(get_held_index_of_item(held_thing))]."
-	for(var/obj/item/bodypart/arm/part in bodyparts)
+	for(var/obj/item/bodypart/arm/part in get_bodyparts())
 		if(!(part.bodypart_flags & BODYPART_PSEUDOPART))
 			continue
 		var/obj/item/corresponding_item = get_item_for_held_index(part.held_index) || part
-		. += "[t_He] a [corresponding_item.examine_title(user)] in place of [initial(part.plaintext_zone)]."
-	//gloves
-	if(gloves && !(obscured_slots & HIDEGLOVES) && !HAS_TRAIT(gloves, TRAIT_EXAMINE_SKIP))
-		. += "[t_He] носит [gloves.examine_title(user, declent = ACCUSATIVE)] на руках."
-	else if(GET_ATOM_BLOOD_DECAL_LENGTH(src) && num_hands)
-		var/list/blood_stains = GET_ATOM_BLOOD_DECALS(src)
-		var/datum/blood_type/blood_type = blood_stains[blood_stains[length(blood_stains)]]
-		var/blood_descriptior = "кровью"
-		if(istype(blood_type))
-			blood_descriptior = LOWER_TEXT(blood_type.get_blood_name())
-		. += span_warning("[t_His] рук[num_hands > 1 ? "а" : "и"] запятнан[num_hands > 1 ? "а" : "ы"] [blood_descriptior]!")
+		. += "[t_He] имеет [corresponding_item.examine_title(user, declent = ACCUSATIVE)] вместо [initial(part.plaintext_zone)]."
 	//handcuffed?
 	if(handcuffed)
 		var/cables_or_cuffs = istype(handcuffed, /obj/item/restraints/handcuffs/cable) ? "в связках" : "в наручниках"
 		. += span_warning("[t_He] [icon2html(handcuffed, user)] [cables_or_cuffs]!")
-	//shoes
-	if(shoes && !(obscured_slots & HIDESHOES)  && !HAS_TRAIT(shoes, TRAIT_EXAMINE_SKIP))
-		. += "[t_He] носит [shoes.examine_title(user, declent = ACCUSATIVE)] на ногах."
-	//mask
-	if(wear_mask && !(obscured_slots & HIDEMASK)  && !HAS_TRAIT(wear_mask, TRAIT_EXAMINE_SKIP))
-		. += "[t_He] носит [wear_mask.examine_title(user, declent = ACCUSATIVE)] на лице."
-	if(wear_neck && !(obscured_slots & HIDENECK)  && !HAS_TRAIT(wear_neck, TRAIT_EXAMINE_SKIP))
-		. += "[t_He] носит [wear_neck.examine_title(user, declent = ACCUSATIVE)] вокруг шеи."
 	//eyes
 	if(!(obscured_slots & HIDEEYES))
-		if(glasses  && !HAS_TRAIT(glasses, TRAIT_EXAMINE_SKIP))
-			. += "[t_He] носит [glasses.examine_title(user, declent = ACCUSATIVE)] на глазах."
-		else if(HAS_TRAIT(src, TRAIT_UNNATURAL_RED_GLOWY_EYES))
+		if(HAS_TRAIT(src, TRAIT_UNNATURAL_RED_GLOWY_EYES))
 			. += span_warning("<B>[t_His] глаза светятся неестественной красной аурой!</B>")
 		else if(HAS_TRAIT(src, TRAIT_BLOODSHOT_EYES))
 			. += span_warning("<B>[t_His] глаза налиты кровью!</B>")
-	//ears
-	if(ears && !(obscured_slots & HIDEEARS) && !HAS_TRAIT(ears, TRAIT_EXAMINE_SKIP))
-		. += "[t_He] носит [ears.examine_title(user, declent = ACCUSATIVE)] на ушах."
 
 // Yes there's a lot of copypasta here, we can improve this later when carbons are less dumb in general
 /mob/living/carbon/human/get_clothing_examine_info(mob/living/user)
@@ -475,7 +446,7 @@
 		if((held_thing.item_flags & (ABSTRACT|HAND_ITEM)) || HAS_TRAIT(held_thing, TRAIT_EXAMINE_SKIP))
 			continue
 		. += "[t_He] держит [held_thing.examine_title(user, declent = ACCUSATIVE)] в [get_held_index_name(get_held_index_of_item(held_thing))]."
-	for(var/obj/item/bodypart/arm/part in bodyparts)
+	for(var/obj/item/bodypart/arm/part in get_bodyparts())
 		if(!(part.bodypart_flags & BODYPART_PSEUDOPART))
 			continue
 		var/obj/item/corresponding_item = get_item_for_held_index(part.held_index) || part
@@ -483,9 +454,15 @@
 	//gloves
 	if(gloves && !(obscured_slots & HIDEGLOVES) && !HAS_TRAIT(gloves, TRAIT_EXAMINE_SKIP))
 		. += "[t_He] носит [gloves.examine_title(user, declent = ACCUSATIVE)] на руках."
-	else if(GET_ATOM_BLOOD_DECAL_LENGTH(src) || blood_in_hands)
-		if(num_hands)
-			. += span_warning("У [ru_p_theirs()] окровавленн[num_hands > 1 ? "ые" : "ую"] рук[num_hands > 1 ? "и" : "у"]!")
+	else if(GET_ATOM_BLOOD_DECAL_LENGTH(src) && num_hands)
+		var/list/blood_stains = GET_ATOM_BLOOD_DECALS(src)
+		var/datum/blood_type/blood_type = blood_stains[blood_stains[length(blood_stains)]]
+		var/blood_descriptior = "кровью"
+		if(istype(blood_type))
+			blood_descriptior = LOWER_TEXT(blood_type.get_blood_name())
+		. += span_warning("[t_His] рук[num_hands > 1 ? "и" : "а"] запятнан[num_hands > 1 ? "ы" : "а"] [blood_descriptior]!")
+	else if (blood_in_hands && num_hands)
+		. += span_warning("[t_His] рук[num_hands > 1 ? "и" : "а"] запятнан[num_hands > 1 ? "ы" : "а"] кровью!")
 	//handcuffed?
 	if(handcuffed)
 		var/cables_or_cuffs = istype(handcuffed, /obj/item/restraints/handcuffs/cable) ? "в связках" : "в наручниках"
@@ -506,7 +483,7 @@
 
 	var/perpname = get_face_name(get_id_name(""))
 	var/title = ""
-	if(perpname && (HAS_TRAIT(user, TRAIT_SECURITY_HUD) || HAS_TRAIT(user, TRAIT_MEDICAL_HUD)) && (user.stat == CONSCIOUS || isobserver(user)) && user != src)
+	if(perpname && (HAS_TRAIT(user, TRAIT_SECURITY_HUD) || HAS_TRAIT(user, TRAIT_MEDICAL_HUD)) && (!IS_UNCONSCIOUS_OR_CRIT(user) || isobserver(user)) && user != src)
 		var/datum/record/crew/target_record = find_record(perpname)
 		if(target_record)
 			. += "Должность: [target_record.rank]"
@@ -594,7 +571,7 @@
 /mob/living/carbon/human/proc/get_mismatched_limb_text()
 	var/list/covered = get_covered_body_zones()
 	var/list/texts = list()
-	for(var/obj/item/bodypart/part as anything in bodyparts)
+	for(var/obj/item/bodypart/part as anything in get_bodyparts())
 		var/part_id = part.limb_id
 		var/obj/item/bodypart/expected_part = dna?.species?.bodypart_overrides[part.body_zone]
 		var/expected_id = initial(expected_part?.limb_id)
@@ -633,4 +610,3 @@
 	return span_notice("[ru_p_they(TRUE)] выглядит [age_text].")
 
 #undef ADD_NEWLINE_IF_NECESSARY
-#undef CARBON_EXAMINE_EMBEDDING_MAX_DIST

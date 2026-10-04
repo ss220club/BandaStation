@@ -43,6 +43,8 @@
 /obj/machinery/atmospherics/components/unary/thermomachine/Initialize(mapload)
 	. = ..()
 	update_appearance(UPDATE_ICON)
+	if(interactive)
+		AddComponent(/datum/component/usb_port, typecacheof(list(/obj/item/circuit_component/thermomachine), only_root_path = TRUE))
 	register_context()
 
 /obj/machinery/atmospherics/components/unary/thermomachine/add_context(atom/source, list/context, obj/item/held_item, mob/user)
@@ -78,7 +80,6 @@
 	if(check_pipe_on_turf())
 		set_anchored(FALSE)
 		set_panel_open(TRUE)
-		icon_state = "thermo-open"
 		balloon_alert(user, "the port is already in use!")
 
 /obj/machinery/atmospherics/components/unary/thermomachine/RefreshParts()
@@ -126,9 +127,16 @@
 
 /obj/machinery/atmospherics/components/unary/thermomachine/update_overlays()
 	. = ..()
-	var/image/pipe = get_pipe_image('icons/obj/machines/atmospherics/thermomachine.dmi', "pipe", dir, pipe_color, piping_layer)
+	var/image/pipe = get_pipe_image('icons/obj/machines/atmospherics/thermomachine.dmi', "pipe", dir, SELECT_ATMOS_NODE_COLOR(src, nodes[1]), piping_layer)
 	pipe.appearance_flags |= RESET_COLOR | KEEP_APART
 	. += pipe
+
+	if(on && is_operational)
+		// this is cursed but both these emissive_appearance() are needed
+		// one gives emissives to mapload machinery that are already on
+		// the other gives emissives when updates happen (on/off/pressure change/etc.)
+		. += emissive_appearance('icons/obj/machines/atmospherics/thermomachine.dmi', "thermo-emissive", src, alpha = src.alpha)
+		add_overlay(emissive_appearance('icons/obj/machines/atmospherics/thermomachine.dmi', "thermo-emissive", src, alpha = src.alpha))
 
 /obj/machinery/atmospherics/components/unary/thermomachine/examine(mob/user)
 	. = ..()
@@ -203,9 +211,8 @@
 	if(!anchored)
 		balloon_alert(user, "anchor!")
 		return ITEM_INTERACT_SUCCESS
-	if(default_deconstruction_screwdriver(user, "thermo-open", "thermo-0", tool))
-		update_appearance(UPDATE_ICON)
-		return ITEM_INTERACT_SUCCESS
+
+	return default_deconstruction_screwdriver(user, tool)
 
 /obj/machinery/atmospherics/components/unary/thermomachine/wrench_act(mob/living/user, obj/item/tool)
 	return default_change_direction_wrench(user, tool)

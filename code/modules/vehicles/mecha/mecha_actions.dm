@@ -24,7 +24,8 @@
 	button_icon_state = "mech_eject"
 
 /datum/action/vehicle/sealed/mecha/mech_eject/Trigger(mob/clicker, trigger_flags)
-	if(!..())
+	. = ..()
+	if(!.)
 		return
 	if(!chassis || !(owner in chassis.occupants))
 		return
@@ -36,7 +37,8 @@
 	desc = "Airtight cabin preserves internal air and can be pressurized with a mounted air tank."
 
 /datum/action/vehicle/sealed/mecha/mech_toggle_cabin_seal/Trigger(mob/clicker, trigger_flags)
-	if(!..())
+	. = ..()
+	if(!.)
 		return
 	if(!chassis || !(owner in chassis.occupants))
 		return
@@ -47,7 +49,8 @@
 	button_icon_state = "mech_lights_off"
 
 /datum/action/vehicle/sealed/mecha/mech_toggle_lights/Trigger(mob/clicker, trigger_flags)
-	if(!..())
+	. = ..()
+	if(!.)
 		return
 	if(!chassis || !(owner in chassis.occupants))
 		return
@@ -58,7 +61,8 @@
 	button_icon_state = "mech_view_stats"
 
 /datum/action/vehicle/sealed/mecha/mech_view_stats/Trigger(mob/clicker, trigger_flags)
-	if(!..())
+	. = ..()
+	if(!.)
 		return
 	if(!chassis || !(owner in chassis.occupants))
 		return
@@ -74,7 +78,8 @@
 	RegisterSignal(chassis, COMSIG_MECH_SAFETIES_TOGGLE, PROC_REF(update_action_icon))
 
 /datum/action/vehicle/sealed/mecha/mech_toggle_safeties/Trigger(mob/clicker, trigger_flags)
-	if(!..())
+	. = ..()
+	if(!.)
 		return
 	if(!chassis || !(owner in chassis.occupants))
 		return
@@ -94,13 +99,13 @@
 	button_icon_state = "strafe"
 
 /datum/action/vehicle/sealed/mecha/strafe/Trigger(mob/clicker, trigger_flags)
-	if(!..())
+	. = ..()
+	if(!.)
 		return
 	if(!chassis || !(owner in chassis.occupants))
 		return
 
 	chassis.toggle_strafe()
-
 
 /obj/vehicle/sealed/mecha/proc/toggle_strafe()
 	if(!(mecha_flags & CAN_STRAFE))
@@ -118,13 +123,14 @@
 		var/datum/action/action = LAZYACCESSASSOC(occupant_actions, occupant, /datum/action/vehicle/sealed/mecha/strafe)
 		action?.build_all_button_icons()
 
-///swap seats, for two person mecha
+/// Swap seats, for two person mecha
 /datum/action/vehicle/sealed/mecha/swap_seat
 	name = "Switch Seats"
 	button_icon_state = "mech_seat_swap"
 
 /datum/action/vehicle/sealed/mecha/swap_seat/Trigger(mob/clicker, trigger_flags)
-	if(!..())
+	. = ..()
+	if(!.)
 		return
 	if(!chassis || !(owner in chassis.occupants))
 		return
@@ -162,7 +168,8 @@
 	build_all_button_icons()
 
 /datum/action/vehicle/sealed/mecha/mech_overclock/Trigger(mob/clicker, trigger_flags, forced_state = null)
-	if(!..())
+	. = ..()
+	if(!.)
 		return
 	if(!chassis || !(owner in chassis.occupants))
 		return
@@ -187,7 +194,8 @@
 	return ..()
 
 /datum/action/vehicle/sealed/mecha/equipment/Trigger(mob/clicker, trigger_flags)
-	if(!..())
+	. = ..()
+	if(!.)
 		return
 	if(!chassis || !(owner in chassis.occupants) || !equipment)
 		return
@@ -214,6 +222,7 @@
 	name = "[equipment.name]"
 
 /datum/action/vehicle/sealed/mecha/equipment/cargo_module/Trigger(mob/clicker, trigger_flags)
+	SHOULD_CALL_PARENT(FALSE) //We are snowflaked from parent
 	if(!chassis || !(owner in chassis.occupants) || !equipment)
 		return
 	if(!istype(equipment, /obj/item/mecha_parts/mecha_equipment/ejector))
@@ -263,6 +272,7 @@
 	name = "[equipment.name]"
 
 /datum/action/vehicle/sealed/mecha/equipment/extinguisher_action/Trigger(mob/clicker, trigger_flags)
+	SHOULD_CALL_PARENT(FALSE) //We are snowflaked from parent
 	if(!chassis || !(owner in chassis.occupants) || !equipment)
 		return
 	if(!istype(equipment, /obj/item/mecha_parts/mecha_equipment/extinguisher))

@@ -13,58 +13,58 @@
 	default_gravity = ZERO_GRAVITY
 
 /area/station/solars/fore
-	name = "\improper Fore Solar Array"
+	name = "Fore Solar Array"
 	icon_state = "panelsF"
 	sound_environment = SOUND_AREA_STANDARD_STATION
 
 /area/station/solars/aft
-	name = "\improper Aft Solar Array"
+	name = "Aft Solar Array"
 	icon_state = "panelsAF"
 
 /area/station/solars/aux/port
-	name = "\improper Port Bow Auxiliary Solar Array"
+	name = "Port Bow Auxiliary Solar Array"
 	icon_state = "panelsA"
 
 /area/station/solars/aux/starboard
-	name = "\improper Starboard Bow Auxiliary Solar Array"
+	name = "Starboard Bow Auxiliary Solar Array"
 	icon_state = "panelsA"
 
 /area/station/solars/starboard
-	name = "\improper Starboard Solar Array"
+	name = "Starboard Solar Array"
 	icon_state = "panelsS"
 
 /area/station/solars/starboard/aft
-	name = "\improper Starboard Quarter Solar Array"
+	name = "Starboard Quarter Solar Array"
 	icon_state = "panelsAS"
 
 /area/station/solars/starboard/fore
-	name = "\improper Starboard Bow Solar Array"
+	name = "Starboard Bow Solar Array"
 	icon_state = "panelsFS"
 
 /area/station/solars/starboard/fore/asteriod
-	name = "\improper Starboard Bow Asteriod Solar Array"
+	name = "Starboard Bow Asteriod Solar Array"
 	icon_state = "panelsFS"
 	area_flags = NONE // solar areas directly on asteriod have gravity
 
 /area/station/solars/port
-	name = "\improper Port Solar Array"
+	name = "Port Solar Array"
 	icon_state = "panelsP"
 
 /area/station/solars/port/asteriod
-	name = "\improper Port Asteriod Solar Array"
+	name = "Port Asteriod Solar Array"
 	icon_state = "panelsP"
 	area_flags = NONE // solar areas directly on asteriod have gravity
 
 /area/station/solars/port/aft
-	name = "\improper Port Quarter Solar Array"
+	name = "Port Quarter Solar Array"
 	icon_state = "panelsAP"
 
 /area/station/solars/port/fore
-	name = "\improper Port Bow Solar Array"
+	name = "Port Bow Solar Array"
 	icon_state = "panelsFP"
 
 /area/station/solars/aisat
-	name = "\improper AI Satellite Solars"
+	name = "AI Satellite Solars"
 	icon_state = "panelsAI"
 
 
@@ -77,6 +77,7 @@
 /area/station/maintenance/solars
 	name = "Solar Maintenance"
 	icon_state = "yellow"
+	tacmap_color = TACMAP_AREA_ENGINEERING
 
 /area/station/maintenance/solars/port
 	name = "Port Solar Maintenance"

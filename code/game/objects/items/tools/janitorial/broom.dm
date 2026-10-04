@@ -6,6 +6,7 @@
 	desc = "This is my BROOMSTICK! It can be used manually or braced with two hands to sweep items as you move. It has a telescopic handle for compact storage."
 	icon = 'icons/obj/service/janitor.dmi'
 	icon_state = "broom0"
+	inhand_icon_state = "broom0"
 	base_icon_state = "broom"
 	icon_angle = 135
 	lefthand_file = 'icons/mob/inhands/equipment/custodial_lefthand.dmi'
@@ -18,6 +19,7 @@
 	attack_verb_continuous = list("sweeps", "brushes off", "bludgeons", "whacks")
 	attack_verb_simple = list("sweep", "brush off", "bludgeon", "whack")
 	resistance_flags = FLAMMABLE
+	custom_materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT)
 
 /obj/item/pushbroom/Initialize(mapload)
 	. = ..()
@@ -29,6 +31,7 @@
 		wield_callback = CALLBACK(src, PROC_REF(on_wield)), \
 		unwield_callback = CALLBACK(src, PROC_REF(on_unwield)), \
 	)
+	AddComponent(/datum/component/walking_aid)
 
 /obj/item/pushbroom/update_icon_state()
 	icon_state = "[base_icon_state]0"

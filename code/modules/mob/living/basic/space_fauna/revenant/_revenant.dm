@@ -32,7 +32,7 @@
 	response_harm_continuous = "пробивает насквозь"
 	response_harm_simple = "пробивает сквозь"
 	unsuitable_atmos_damage = 0
-	damage_coeff = list(BRUTE = 1, BURN = 1, TOX = 0, STAMINA = 0, OXY = 0) //I don't know how you'd apply those, but revenants no-sell them anyway.
+	physiology = list(TOX = 0, OXY = 0, STAMINA = 0) //I don't know how you'd apply those, but revenants no-sell them anyway.
 	habitable_atmos = null
 	minimum_survivable_temperature = 0
 	maximum_survivable_temperature = INFINITY
@@ -62,6 +62,8 @@
 	var/draining = FALSE
 	/// Have we already given this revenant abilities?
 	var/generated_objectives_and_spells = FALSE
+	/// ckey of the player who controlled this mob when it was killed
+	var/old_ckey = ""
 
 	/// Lazylist of drained mobs to ensure that we don't steal a soul from someone twice
 	var/list/drained_mobs = null
@@ -72,6 +74,8 @@
 		/datum/action/cooldown/spell/aoe/revenant/haunt_object,
 		/datum/action/cooldown/spell/aoe/revenant/malfunction,
 		/datum/action/cooldown/spell/aoe/revenant/overload,
+		/datum/action/cooldown/spell/aoe/revenant/vortex,
+		/datum/action/cooldown/spell/aoe/revenant/vortex/scatter,
 		/datum/action/cooldown/spell/list_target/telepathy/revenant,
 	)
 
@@ -91,17 +95,37 @@
 	var/unreveal_time = 0
 	/// How many perfect, regen-cap increasing souls the revenant has. //TODO, add objective for getting a perfect soul(s?)
 	var/perfectsouls = 0
+	/// Are our abilities blocked from being inside a wall? Separate, as we set this back to null after running update in update_ability_status()
+	/// Used to avoid running turf checks more than once
+	var/ability_density_locked = null
 
 /mob/living/basic/revenant/Initialize(mapload)
 	. = ..()
 	AddElement(/datum/element/simple_flying)
-	add_traits(list(TRAIT_SPACEWALK, TRAIT_SIXTHSENSE, TRAIT_FREE_HYPERSPACE_MOVEMENT, TRAIT_SEE_BLESSED_TILES), INNATE_TRAIT)
+	add_traits(list(
+		TRAIT_COMBAT_MODE_LOCK,
+		TRAIT_SPACEWALK,
+		TRAIT_SIXTHSENSE,
+		TRAIT_FREE_HYPERSPACE_MOVEMENT,
+		TRAIT_SEE_BLESSED_TILES,
+		TRAIT_IGNORE_ELEVATION,
+		TRAIT_GHOSTLY_MOB,
+	), INNATE_TRAIT)
 
 	grant_actions_by_list(abilities)
 
 	RegisterSignal(src, COMSIG_LIVING_BANED, PROC_REF(on_baned))
 	RegisterSignal(src, COMSIG_MOVABLE_PRE_MOVE, PROC_REF(on_move))
 	RegisterSignal(src, COMSIG_LIVING_LIFE, PROC_REF(on_life))
+	RegisterSignal(src, COMSIG_REFLECTION_UPDATED, PROC_REF(on_reflect))
+	RegisterSignals(src, list(
+		SIGNAL_ADDTRAIT(TRAIT_REVENANT_REVEALED),
+		SIGNAL_REMOVETRAIT(TRAIT_REVENANT_REVEALED),
+		SIGNAL_ADDTRAIT(TRAIT_REVENANT_INHIBITED),
+		SIGNAL_REMOVETRAIT(TRAIT_REVENANT_INHIBITED),
+		SIGNAL_ADDTRAIT(TRAIT_NO_TRANSFORM),
+		SIGNAL_REMOVETRAIT(TRAIT_NO_TRANSFORM),
+	), PROC_REF(update_revenant_appearance))
 	name = generate_random_mob_name()
 
 	GLOB.revenant_relay_mobs |= src
@@ -144,10 +168,14 @@
 	if(essence_regenerating && !HAS_TRAIT(src, TRAIT_REVENANT_INHIBITED) && essence < max_essence) //While inhibited, essence will not regenerate
 		var/change_in_time = DELTA_WORLD_TIME(SSmobs)
 		essence = min(essence + (essence_regen_amount * change_in_time), max_essence)
-		update_mob_action_buttons() //because we update something required by our spells in life, we need to update our buttons
+		update_ability_status() //because we update something required by our spells in life, we need to update our buttons
 
-	update_appearance(UPDATE_ICON)
 	update_health_hud()
+
+/mob/living/basic/revenant/proc/update_revenant_appearance()
+	SIGNAL_HANDLER
+	update_appearance(UPDATE_ICON)
+	update_ability_status()
 
 /mob/living/basic/revenant/AltClickOn(atom/target)
 	if(CAN_I_SEE(target))
@@ -160,7 +188,7 @@
 	. += "Неиспользованная эссенция: [essence_excess] УЭ"
 	. += "Идеальных душ похищено: [perfectsouls]"
 
-/mob/living/basic/revenant/update_health_hud()
+/mob/living/basic/revenant/update_health_hud(healthpercent)
 	if(isnull(hud_used))
 		return
 
@@ -169,7 +197,7 @@
 		essencecolor = "#9A5ACB" //oh boy you've got a lot of essence
 	else if(essence <= 0)
 		essencecolor = "#1D2953" //oh jeez you're dying
-	hud_used.healths.maptext = MAPTEXT("<div align='center' valign='middle' style='position:relative; top:0px; left:6px'><font color='[essencecolor]'>[essence]Э</font></div>")
+	hud_used.screen_objects[HUD_MOB_HEALTH]?.maptext = MAPTEXT("<div align='center' valign='middle' style='position:relative; top:0px; left:6px'><font color='[essencecolor]'>[essence]E</font></div>")
 
 /mob/living/basic/revenant/say(
 	message,
@@ -237,19 +265,34 @@
 	orbitsize -= (orbitsize / ICON_SIZE_ALL) * (ICON_SIZE_ALL * 0.25)
 	orbit(target, orbitsize)
 
-/mob/living/basic/revenant/adjust_health(amount, updating_health = TRUE, forced = FALSE)
-	if(!forced && !HAS_TRAIT(src, TRAIT_REVENANT_REVEALED))
-		return 0
+// Prevents damage from adjust_x_loss while in a host, because that damage would be nullified by the next [proc/sync_health] call. Adjust host blood volume instead.
+/mob/living/basic/revenant/can_adjust_brute_loss(amount, forced, required_bodytype)
+	if(!forced && amount > 0 && !HAS_TRAIT(src, TRAIT_REVENANT_REVEALED))
+		return FALSE
+	return ..()
 
-	. = amount
+/mob/living/basic/revenant/can_adjust_fire_loss(amount, forced, required_bodytype)
+	if(!forced && amount > 0 && !HAS_TRAIT(src, TRAIT_REVENANT_REVEALED))
+		return FALSE
+	return ..()
 
-	essence = max(0, essence - amount)
-	if(updating_health)
-		update_health_hud()
+/mob/living/basic/revenant/can_adjust_tox_loss(amount, forced, required_bodytype)
+	if(!forced && amount > 0 && !HAS_TRAIT(src, TRAIT_REVENANT_REVEALED))
+		return FALSE
+	return ..()
+
+/mob/living/basic/revenant/can_adjust_oxy_loss(amount, forced, required_bodytype)
+	if(!forced && amount > 0 && !HAS_TRAIT(src, TRAIT_REVENANT_REVEALED))
+		return FALSE
+	return ..()
+
+/mob/living/basic/revenant/on_damage_loss_changed(amount, updating_health, forced, damage_type)
+	bruteloss = 0 //reset brute loss, detract amount of damage from essence instead..
+	//negative amount means that damage has been healed, positive means damage has been received
+	essence = clamp(essence - amount, 0, max_essence)
+	. = ..()
 	if(essence == 0)
 		death()
-
-	return .
 
 /mob/living/basic/revenant/orbit(atom/target)
 	setDir(SOUTH) // reset dir so the right directional sprites show up
@@ -309,6 +352,7 @@
 		return
 	ADD_TRAIT(src, TRAIT_NO_TRANSFORM, REVENANT_STUNNED_TRAIT)
 	dormant = TRUE
+	update_ability_status()
 
 	visible_message(
 		span_warning("[src] издаёт затихающий визг, пока фиолетовый туман клубится вокруг его растворяющегося тела!"),
@@ -329,10 +373,7 @@
 
 	visible_message(span_danger("[src] рассыпается в мелкую голубую пыль."))
 
-	var/obj/item/ectoplasm/revenant/goop = new(get_turf(src)) // the ectoplasm will handle moving us out of dormancy
-	goop.old_ckey = client.ckey
-	goop.revenant = src
-	forceMove(goop)
+	new /obj/item/ectoplasm/revenant(get_turf(src), src) // the ectoplasm will handle moving us out of dormancy
 
 /mob/living/basic/revenant/proc/on_move(datum/source, atom/entering_loc)
 	SIGNAL_HANDLER
@@ -392,43 +433,69 @@
 		apply_status_effect(/datum/status_effect/incapacitating/paralyzed/revenant, 2 SECONDS)
 		return FALSE
 
-	if(locate(/obj/effect/blessing) in step_turf)
+	if(HAS_TRAIT(step_turf, TRAIT_TURF_BLESSED))
 		to_chat(src, span_warning("Святая энергия преграждают вам путь!"))
 		return FALSE
 
 	return TRUE
 
-/mob/living/basic/revenant/proc/cast_check(essence_cost)
+/mob/living/basic/revenant/proc/update_ability_status()
+	// Perform a shared check for all of our abilities
+	ability_density_locked = turf_density_check(silent = TRUE)
+	update_mob_action_buttons(UPDATE_BUTTON_STATUS)
+	ability_density_locked = null
+
+/mob/living/basic/revenant/proc/cast_check(essence_cost, deduct_essence = TRUE, silent = FALSE)
 	if(QDELETED(src))
-		return
-
-	var/turf/current = get_turf(src)
-
-	if(isclosedturf(current))
-		to_chat(src, span_revenwarning("Вы не можете использовать способности, находясь внутри стены."))
 		return FALSE
+
+	essence_cost = abs(essence_cost) * -1
+	if(-essence_cost > essence)
+		if(!silent)
+			to_chat(src, span_revenwarning("Вам не хватает эссенции, чтобы использовать эту способность!"))
+		return FALSE
+
+	if(dormant)
+		if(!silent)
+			to_chat(src, span_revenwarning("Ваши силы сейчас дремлют!"))
+		return SPELL_CANCEL_CAST
+
+	if(HAS_TRAIT(src, TRAIT_REVENANT_INHIBITED))
+		if(!silent)
+			to_chat(src, span_revenwarning("Ваши силы были подавлены нуллифицирующей энергией!"))
+		return FALSE
+
+	if(ability_density_locked)
+		return FALSE
+
+	// Don't run turf checks more than once if checking from a forced update
+	if(isnull(ability_density_locked) && turf_density_check(silent))
+		return FALSE
+
+	if(deduct_essence)
+		change_essence_amount(essence_cost, silent = TRUE)
+	return TRUE
+
+/mob/living/basic/revenant/proc/turf_density_check(silent = FALSE)
+	var/turf/current = get_turf(src)
+	if(isclosedturf(current))
+		if(!silent)
+			to_chat(src, span_revenwarning("Вы не можете использовать способности, находясь внутри стены."))
+		return TRUE
 
 	for(var/obj/thing in current)
 		if(!thing.density || thing.CanPass(src, get_dir(current, src)))
 			continue
-		to_chat(src, span_revenwarning("Вы не можете использовать способности внутри плотного объекта."))
-		return FALSE
-
-	if(HAS_TRAIT(src, TRAIT_REVENANT_INHIBITED))
-		to_chat(src, span_revenwarning("Ваши силы были подавлены нуллифицирующей энергией!"))
-		return FALSE
-
-	if(!change_essence_amount(essence_cost, TRUE))
-		to_chat(src, span_revenwarning("Вам не хватает эссенции, чтобы использовать эту способность."))
-		return FALSE
-
-	return TRUE
+		if(!silent)
+			to_chat(src, span_revenwarning("Вы не можете использовать способности внутри плотного объекта."))
+		return TRUE
+	return FALSE
 
 /mob/living/basic/revenant/proc/unlock(essence_cost)
 	if(essence_excess < essence_cost)
 		return FALSE
 	essence_excess -= essence_cost
-	update_mob_action_buttons()
+	update_ability_status()
 	return TRUE
 
 /mob/living/basic/revenant/proc/death_reset()
@@ -443,6 +510,7 @@
 	incorporeal_move = INCORPOREAL_MOVE_JAUNT
 	RemoveInvisibility(type)
 	alpha = 255
+	update_ability_status()
 
 /mob/living/basic/revenant/proc/change_essence_amount(essence_to_change_by, silent = FALSE, source = null)
 	if(QDELETED(src))
@@ -458,7 +526,7 @@
 		essence_accumulated = max(0, essence_accumulated + essence_to_change_by)
 		essence_excess = max(0, essence_excess + essence_to_change_by)
 
-	update_mob_action_buttons()
+	update_ability_status()
 	if(!silent)
 		if(essence_to_change_by > 0)
 			to_chat(src, span_revennotice("Получено [essence_to_change_by]Э [source ? "из [source]":""]."))
@@ -466,4 +534,57 @@
 			to_chat(src, span_revenminor("Потеряно [essence_to_change_by]Э [source ? "из [source]":""]."))
 	return TRUE
 
+/mob/living/basic/revenant/mob_negates_gravity()
+	return TRUE // i don't gotta explain shit
+
+/mob/living/basic/revenant/vv_edit_var(vname, vval)
+	. = ..()
+	if(vname == NAMEOF(src, essence) || vname == NAMEOF(src, max_essence) || vname == NAMEOF(src, essence_excess))
+		update_health_hud()
+		update_ability_status()
+
+/mob/living/basic/revenant/Moved(atom/old_loc, movement_dir, forced, list/old_locs, momentum_change)
+	. = ..()
+	update_ability_status()
+
+/mob/living/basic/revenant/proc/on_reflect(datum/source, atom/movable/reflecting_in, obj/effect/abstract/reflection)
+	SIGNAL_HANDLER
+	// powers are inhibited and we're not revealed so we can't project a reflect
+	if(HAS_TRAIT(src, TRAIT_REVENANT_INHIBITED) && !HAS_TRAIT(src, TRAIT_REVENANT_REVEALED))
+		return
+
+	// otherwise revenants are always visible in reflections even if otherwise invisible
+	reflection.clear_filters()
+	reflection.SetInvisibility(0)
+
+	// but if we're (actually) invisible we look all wibbly and ghostly (unless the mirror is magic)
+	if(!HAS_TRAIT(src, TRAIT_REVENANT_REVEALED) && !istype(reflecting_in, /obj/structure/mirror/magic))
+		apply_wibbly_filters(reflection)
+
+/mob/living/basic/revenant/proc/get_new_user()
+	message_admins("A poll for the reforming revenant was created.")
+	var/mob/chosen_one = SSpolling.poll_ghosts_for_target("Do you want to be [span_notice(name)] (reforming)?", check_jobban = ROLE_REVENANT, role = ROLE_REVENANT, poll_time = 5 SECONDS, checked_target = src, alert_pic = src, role_name_text = "reforming revenant", chat_text_border_icon = src)
+	if(!chosen_one)
+		message_admins("No candidates were found for the new revenant.")
+		visible_message(span_revenwarning("A blue dust appears from thin air and settles down."))
+		new /obj/item/ectoplasm/revenant(get_turf(src)) // inert
+		qdel(src)
+		return
+
+	PossessByPlayer(chosen_one.key)
+	message_admins("[chosen_one.key] has been made into the reformed revenant via poll.")
+	qdel(chosen_one)
+
+/mob/living/basic/revenant/proc/reform(cause)
+	if(QDELETED(src))
+		return FALSE
+
+	death_reset()
+	if(isnull(client))
+		INVOKE_ASYNC(src, PROC_REF(get_new_user))
+		return TRUE
+
+	message_admins("[client.ckey] has been remade into a revenant.")
+	log_message("was remade as a revenant.", LOG_GAME)
+	return TRUE
 #undef REVENANT_STUNNED_TRAIT

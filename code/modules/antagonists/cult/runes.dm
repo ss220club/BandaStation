@@ -158,7 +158,7 @@ structure_check() searches for nearby cultist structures required for the invoca
 				continue
 			if(!cultist.can_speak(allow_mimes = TRUE))
 				continue
-			if(cultist.stat != CONSCIOUS)
+			if(IS_UNCONSCIOUS_OR_CRIT(cultist))
 				continue
 			invokers += cultist
 
@@ -320,7 +320,7 @@ structure_check() searches for nearby cultist structures required for the invoca
 		convertee.Unconscious(10 SECONDS)
 
 	new /obj/item/melee/cultblade/dagger(get_turf(src))
-	convertee.mind.add_antag_datum(/datum/antagonist/cult, cult_team)
+	convertee.mind.add_antag_datum(/datum/antagonist/cult/converted, cult_team) // BANDASTATION EDIT - Use special datum to track converted cultists
 
 	to_chat(convertee, span_cult_bold_italic("Your blood pulses. Your head throbs. The world goes red. \
 		All at once you are aware of a horrible, horrible, truth. The veil of reality has been ripped away \
@@ -799,7 +799,9 @@ GLOBAL_VAR_INIT(narsie_summon_count, 0)
 
 /obj/effect/rune/wall/Destroy()
 	if(barrier)
-		QDEL_NULL(barrier)
+		if(!QDELING(barrier))
+			qdel(barrier)
+		barrier = null
 	return ..()
 
 /obj/effect/rune/wall/invoke(list/invokers)
@@ -1021,7 +1023,7 @@ GLOBAL_VAR_INIT(narsie_summon_count, 0)
 		to_chat(new_human, span_cult_italic("<b>You are a servant of the Geometer. You have been made semi-corporeal by the cult of Nar'Sie, and you are to serve them at all costs.</b>"))
 
 		while(!QDELETED(src) && !QDELETED(user) && !QDELETED(new_human) && (user in T))
-			if(user.stat != CONSCIOUS || HAS_TRAIT(new_human, TRAIT_CRITICAL_CONDITION))
+			if(IS_UNCONSCIOUS_OR_CRIT(user))
 				break
 			user.apply_damage(0.1, BRUTE)
 			sleep(0.1 SECONDS)

@@ -22,6 +22,26 @@
 		"Zeng-Hu",
 	)
 
+	var/static/list/manufacturer_suffixes = list(
+		"General" = null,
+		"Bishop" = "bishop",
+		"Bishop MK2" = "bishop_mk2",
+		"Bishop Nano" = "bishop_nano",
+		"Etamin Industry" = "etamin_industry",
+		"Etamin Industry Lumineux" = "etamin_industry_lumineux",
+		"Gromtech" = "gromtech",
+		"Hephaestus" = "hephaestus",
+		"Hephaestus Titan" = "hephaestus_titan",
+		"Interdyne" = "interdyne",
+		"Morpheus" = "morpheus",
+		"Shellguard" = "shellguard",
+		"Wardtakahashi" = "wardtakahashi",
+		"Wardtakahashi Pro" = "wardtakahashi_pro",
+		"Xion" = "xion",
+		"Xion Light" = "xion_light",
+		"Zeng-Hu" = "zenghu",
+	)
+
 /datum/body_modification/bodypart_prosthesis/apply_to_human(mob/living/carbon/target, additional_params)
 	. = ..()
 	if(!.)
@@ -30,14 +50,23 @@
 	var/manufacturer = additional_params["selected_manufacturer"] || get_default_manufacturer()
 	var/type_to_spawn = get_replacement_type(manufacturer)
 	if(!ispath(type_to_spawn))
-		return
+		stack_trace("Failed to resolve prosthesis type for [type], manufacturer '[manufacturer]' and replacement type '[replacement_bodypart_type]'.")
+		return FALSE
+
+	var/body_zone = get_body_zone()
+	if(!body_zone)
+		stack_trace("[type] has no valid body zone for replacement type [replacement_bodypart_type].")
+		return FALSE
+
+	var/obj/item/bodypart/current_bodypart = target.get_bodypart(body_zone)
+	if(current_bodypart?.type == type_to_spawn)
+		return TRUE
 
 	var/obj/item/bodypart/replacement_bodypart = new type_to_spawn()
-	var/obj/item/bodypart/limb_to_remove = target.get_bodypart(replacement_bodypart.body_zone)
-
 	replacement_bodypart.replace_limb(target, TRUE)
-	if(limb_to_remove)
-		qdel(limb_to_remove)
+
+	if(current_bodypart)
+		qdel(current_bodypart)
 
 	return TRUE
 
@@ -62,20 +91,25 @@
 
 /datum/body_modification/bodypart_prosthesis/proc/get_replacement_type(manufacturer)
 	var/base_type_str = "[replacement_bodypart_type]"
-	if(!manufacturer || manufacturer == get_default_manufacturer())
-		return text2path(base_type_str)
-
-	var/brand = LOWER_TEXT(manufacturer)
-	brand = replacetext(brand, " ", "_")
-	brand = replacetext(brand, "-", "")
-
 	if(!findtext(base_type_str, "/"))
 		base_type_str = "/[base_type_str]"
 
-	return text2path("[base_type_str]/[brand]")
+	if(isnull(manufacturer) || manufacturer == get_default_manufacturer())
+		return text2path(base_type_str)
+
+	var/suffix = manufacturer_suffixes[manufacturer]
+	if(isnull(suffix) || !length(suffix))
+		return text2path(base_type_str)
+
+	return text2path("[base_type_str]/[suffix]")
 
 /datum/body_modification/bodypart_prosthesis/proc/get_default_manufacturer()
 	return length(manufacturers) ? manufacturers[1] : ""
+
+/datum/body_modification/bodypart_prosthesis/proc/get_body_zone()
+	var/obj/item/bodypart/probe = new replacement_bodypart_type()
+	. = probe.body_zone
+	qdel(probe)
 
 /datum/body_modification/bodypart_prosthesis/arm
 	abstract_type = /datum/body_modification/bodypart_prosthesis/arm

@@ -20,9 +20,9 @@
 	trait = TRAIT_SHOCKIMMUNE
 
 /atom/movable/screen/alert/status_effect/shockimmune
-	name = "Заземлённый"
+	name = "Grounded"
 	desc = "Эта еда заставляет меня чувствовать себя как сверхпроводник..."
-	use_user_hud_icon = TRUE
+	use_user_hud_icon = USER_HUD_STYLE_INHERIT
 	overlay_state = "shock_immune"
 
 /datum/status_effect/food/trait/mute
@@ -32,7 +32,7 @@
 /atom/movable/screen/alert/status_effect/mute
 	name = "..."
 	desc = "..."
-	use_user_hud_icon = TRUE
+	use_user_hud_icon = USER_HUD_STYLE_INHERIT
 	overlay_state = "mute"
 
 /datum/status_effect/food/trait/ashstorm_immune
@@ -40,9 +40,9 @@
 	trait = TRAIT_ASHSTORM_IMMUNE
 
 /atom/movable/screen/alert/status_effect/ashstorm_immune
-	name = "Защищённый от пепельной бури"
+	name = "Ashstorm-proof"
 	desc = "После этой еды кажется, что я родился на Лаваленде."
-	use_user_hud_icon = TRUE
+	use_user_hud_icon = USER_HUD_STYLE_INHERIT
 	overlay_state = "ashstorm_immune"
 
 /datum/status_effect/food/trait/waddle
@@ -54,8 +54,8 @@
 	return ..()
 
 /atom/movable/screen/alert/status_effect/waddle
-	name = "Ковыляющий"
+	name = "Waddling"
 	desc = "Это блюдо вызывает у меня желание пошутить."
-	use_user_hud_icon = TRUE
+	use_user_hud_icon = USER_HUD_STYLE_INHERIT
 	overlay_icon = /obj/item/clothing/mask/gas/clown_hat::icon
 	overlay_state = /obj/item/clothing/mask/gas/clown_hat::icon_state

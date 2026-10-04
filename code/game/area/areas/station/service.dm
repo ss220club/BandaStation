@@ -1,37 +1,38 @@
 /area/station/service
 	airlock_wires = /datum/wires/airlock/service
+	tacmap_color = TACMAP_AREA_SERVICE
 
 /*
 * Bar/Kitchen Areas
 */
 
 /area/station/service/cafeteria
-	name = "\improper Cafeteria"
+	name = "Cafeteria"
 	icon_state = "cafeteria"
 
 /area/station/service/minibar
-	name = "\improper Mini Bar"
+	name = "Mini Bar"
 	icon_state = "minibar"
 
 /area/station/service/kitchen
-	name = "\improper Kitchen"
+	name = "Kitchen"
 	icon_state = "kitchen"
 
 /area/station/service/kitchen/coldroom
-	name = "\improper Kitchen Cold Room"
+	name = "Kitchen Cold Room"
 	icon_state = "kitchen_cold"
 	sound_environment = SOUND_AREA_SMALL_ENCLOSED
 
 /area/station/service/kitchen/diner
-	name = "\improper Diner"
+	name = "Diner"
 	icon_state = "diner"
 
 /area/station/service/kitchen/kitchen_backroom
-	name = "\improper Kitchen Backroom"
+	name = "Kitchen Backroom"
 	icon_state = "kitchen_backroom"
 
 /area/station/service/bar
-	name = "\improper Bar"
+	name = "Bar"
 	icon_state = "bar"
 	mood_bonus = 5
 	mood_message = "I love being in the bar!"
@@ -44,12 +45,12 @@
 	GLOB.bar_areas += src
 
 /area/station/service/bar/atrium
-	name = "\improper Atrium"
+	name = "Atrium"
 	icon_state = "bar"
 	sound_environment = SOUND_AREA_WOODFLOOR
 
 /area/station/service/bar/backroom
-	name = "\improper Bar Backroom"
+	name = "Bar Backroom"
 	icon_state = "bar_backroom"
 
 /*
@@ -57,22 +58,22 @@
 */
 
 /area/station/service/theater
-	name = "\improper Theater"
+	name = "Theater"
 	icon_state = "theatre"
 	sound_environment = SOUND_AREA_WOODFLOOR
 
 /area/station/service/theater_dressing
-	name = "\improper Theater Dressing Room"
+	name = "Theater Dressing Room"
 	icon_state = "theatre_dressing"
 	sound_environment = SOUND_AREA_SMALL_SOFTFLOOR
 
 /area/station/service/greenroom
-	name = "\improper Greenroom"
+	name = "Greenroom"
 	icon_state = "theatre_green"
 	sound_environment = SOUND_AREA_SMALL_SOFTFLOOR
 
 /area/station/service/library
-	name = "\improper Library"
+	name = "Library"
 	icon_state = "library"
 	mood_bonus = 5
 	mood_message = "I love being in the library!"
@@ -81,28 +82,28 @@
 	sound_environment = SOUND_AREA_LARGE_SOFTFLOOR
 
 /area/station/service/library/garden
-	name = "\improper Library Garden"
+	name = "Library Garden"
 	icon_state = "library_garden"
 
 /area/station/service/library/lounge
-	name = "\improper Library Lounge"
+	name = "Library Lounge"
 	icon_state = "library_lounge"
 	sound_environment = SOUND_AREA_SMALL_SOFTFLOOR
 
 /area/station/service/library/artgallery
-	name = "\improper  Art Gallery"
+	name = "Art Gallery"
 	icon_state = "library_gallery"
 
 /area/station/service/library/private
-	name = "\improper Library Private Study"
+	name = "Library Private Study"
 	icon_state = "library_gallery_private"
 
 /area/station/service/library/upper
-	name = "\improper Library Upper Floor"
+	name = "Library Upper Floor"
 	icon_state = "library"
 
 /area/station/service/library/printer
-	name = "\improper Library Printer Room"
+	name = "Library Printer Room"
 	icon_state = "library"
 
 /*
@@ -110,7 +111,7 @@
 */
 
 /area/station/service/chapel
-	name = "\improper Chapel"
+	name = "Chapel"
 	icon_state = "chapel"
 	mood_bonus = 4
 	mood_message = "Being in the chapel brings me peace."
@@ -120,34 +121,34 @@
 	sound_environment = SOUND_AREA_LARGE_ENCLOSED
 
 /area/station/service/chapel/monastery
-	name = "\improper Monastery"
+	name = "Monastery"
 
 /area/station/service/chapel/office
-	name = "\improper Chapel Office"
+	name = "Chapel Office"
 	icon_state = "chapeloffice"
 
 /area/station/service/chapel/asteroid
-	name = "\improper Chapel Asteroid"
+	name = "Chapel Asteroid"
 	icon_state = "explored"
 	sound_environment = SOUND_AREA_ASTEROID
 
 /area/station/service/chapel/asteroid/monastery
-	name = "\improper Monastery Asteroid"
+	name = "Monastery Asteroid"
 
 /area/station/service/chapel/dock
-	name = "\improper Chapel Dock"
+	name = "Chapel Dock"
 	icon_state = "construction"
 
 /area/station/service/chapel/storage
-	name = "\improper Chapel Storage"
+	name = "Chapel Storage"
 	icon_state = "chapelstorage"
 
 /area/station/service/chapel/funeral
-	name = "\improper Chapel Funeral Room"
+	name = "Chapel Funeral Room"
 	icon_state = "chapelfuneral"
 
 /area/station/service/hydroponics/garden/monastery
-	name = "\improper Monastery Garden"
+	name = "Monastery Garden"
 	icon_state = "hydro"
 
 /*
@@ -173,22 +174,22 @@
 */
 
 /area/station/service/lawoffice
-	name = "\improper Law Office"
+	name = "Law Office"
 	icon_state = "law"
 	sound_environment = SOUND_AREA_SMALL_SOFTFLOOR
 
 /area/station/service/janitor
-	name = "\improper Custodial Closet"
+	name = "Custodial Closet"
 	icon_state = "janitor"
 	area_flags = CULT_PERMITTED | BLOBS_ALLOWED
 	sound_environment = SOUND_AREA_SMALL_ENCLOSED
 
 /area/station/service/barber
-	name = "\improper Barber"
+	name = "Barber"
 	icon_state = "barber"
 
 /area/station/service/boutique
-	name = "\improper Boutique"
+	name = "Boutique"
 	icon_state = "boutique"
 
 /*
@@ -196,30 +197,37 @@
 */
 
 /area/station/service/hydroponics/garden/abandoned
-	name = "\improper Abandoned Garden"
+	name = "Abandoned Garden"
 	icon_state = "abandoned_garden"
 	sound_environment = SOUND_AREA_SMALL_ENCLOSED
+	tacmap_color = TACMAP_AREA_MAINTENANCE
 
 /area/station/service/kitchen/abandoned
-	name = "\improper Abandoned Kitchen"
+	name = "Abandoned Kitchen"
 	icon_state = "abandoned_kitchen"
+	tacmap_color = TACMAP_AREA_MAINTENANCE
 
 /area/station/service/electronic_marketing_den
-	name = "\improper Electronic Marketing Den"
+	name = "Electronic Marketing Den"
 	icon_state = "abandoned_marketing_den"
+	tacmap_color = TACMAP_AREA_MAINTENANCE
 
 /area/station/service/abandoned_gambling_den
-	name = "\improper Abandoned Gambling Den"
+	name = "Abandoned Gambling Den"
 	icon_state = "abandoned_gambling_den"
+	tacmap_color = TACMAP_AREA_MAINTENANCE
 
 /area/station/service/abandoned_gambling_den/gaming
-	name = "\improper Abandoned Gaming Den"
+	name = "Abandoned Gaming Den"
 	icon_state = "abandoned_gaming_den"
+	tacmap_color = TACMAP_AREA_MAINTENANCE
 
 /area/station/service/theater/abandoned
-	name = "\improper Abandoned Theater"
+	name = "Abandoned Theater"
 	icon_state = "abandoned_theatre"
+	tacmap_color = TACMAP_AREA_MAINTENANCE
 
 /area/station/service/library/abandoned
-	name = "\improper Abandoned Library"
+	name = "Abandoned Library"
 	icon_state = "abandoned_library"
+	tacmap_color = TACMAP_AREA_MAINTENANCE

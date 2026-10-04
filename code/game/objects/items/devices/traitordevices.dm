@@ -213,8 +213,12 @@ effective or pretty fucking useless.
 	var/charge = 30 SECONDS
 	/// The maximum amount of time the stealth mode can be active for
 	var/max_charge = 30 SECONDS
+	// BANDASTATION EDIT START: stealth mode refactor
+	/// The amount of charge used per second
+	var/charge_rate = 1.5 SECONDS
 	/// The minimum alpha value for the stealth mode
-	var/min_alpha = 0
+	var/min_alpha = 1
+	// BANDASTATION EDIT END: stealth mode refactor
 	/// Whether the stealth mode recharges while active
 	/// if TRUE standing in darkness will recharge even while active
 	/// if FALSE it will not uncharge, but not recharge while in darkness
@@ -256,12 +260,12 @@ effective or pretty fucking useless.
 	owner.balloon_alert(owner, "stealth mode disengaged")
 
 /datum/action/item_action/stealth_mode/proc/get_alpha()
-	return clamp(255 - (255 * charge / max_charge), min_alpha, 255)
+	return clamp(255 - (305 * charge / max_charge), min_alpha, 255) // BANDASTATION EDIT: 255 to 305, more time undetected
 
 /datum/action/item_action/stealth_mode/process(seconds_per_tick)
 	if(!stealth_engaged)
 		// Recharge over time
-		charge = min(max_charge, charge + (max_charge * 0.04) * seconds_per_tick)
+		charge = min(max_charge, charge + (charge_rate * 2) * seconds_per_tick) // BANDASTATION EDIT: stealth mode refactor
 		build_all_button_icons(UPDATE_BUTTON_STATUS)
 		return
 
@@ -270,15 +274,14 @@ effective or pretty fucking useless.
 		return
 
 	var/turf/our_turf = get_turf(owner)
-	var/lumcount = our_turf?.get_lumcount() || 0
-	if(lumcount > 0.3)
+	if(our_turf?.check_lumcount_above(0.3))
 		// Decay charge while invisible+ in the light
-		charge = max(0, charge - (max_charge * 0.05) * seconds_per_tick)
+		charge = max(0, charge - charge_rate * seconds_per_tick) // BANDASTATION EDIT: stealth mode refactor
 		build_all_button_icons(UPDATE_BUTTON_STATUS)
 
 	else if(recharge_while_active)
 		// Return charage while invisible + in the darkness + recharge_while_active
-		charge = min(max_charge, charge + (max_charge * 0.1) * seconds_per_tick)
+		charge = min(max_charge, charge + (charge_rate * 1.5) * seconds_per_tick) // BANDASTATION EDIT: stealth mode refactor
 		build_all_button_icons(UPDATE_BUTTON_STATUS)
 
 	animate(owner, alpha = get_alpha(), time = 1 SECONDS, flags = ANIMATION_PARALLEL)
@@ -291,6 +294,7 @@ effective or pretty fucking useless.
 /datum/action/item_action/stealth_mode/weaker
 	charge = 15 SECONDS
 	max_charge = 15 SECONDS
+	charge_rate = 0.75 SECONDS // BANDASTATION EDIT: stealth mode refactor
 	min_alpha = 20
 	recharge_while_active = FALSE
 
@@ -402,7 +406,7 @@ effective or pretty fucking useless.
 	for (var/obj/item/radio/radio in target.get_all_contents() + target)
 		if(ignore_syndie && (radio.special_channels & RADIO_SPECIAL_SYNDIE))
 			continue
-		radio.set_broadcasting(FALSE)
+		radio.set_broadcasting(FALSE, actual_setting = FALSE)
 
 /obj/item/jammer/Destroy()
 	GLOB.active_jammers -= src
@@ -413,7 +417,7 @@ effective or pretty fucking useless.
 	desc = "A jury-rigged device that disrupts nearby radio communication. Its crude construction provides a significantly smaller area of effect compared to its Syndicate counterpart."
 	range = 5
 	disruptor_range = 3
-	custom_materials = list(/datum/material/iron = SMALL_MATERIAL_AMOUNT * 0.5, /datum/material/glass = SMALL_MATERIAL_AMOUNT * 0.5)
+	custom_materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 0.8, /datum/material/glass = SHEET_MATERIAL_AMOUNT * 0.55)
 
 /obj/item/jammer/makeshift/Initialize(mapload)
 	. = ..()
@@ -451,35 +455,39 @@ effective or pretty fucking useless.
 
 	return TRUE
 
-/obj/machinery/porta_turret/syndicate/toolbox/attackby(obj/item/attacking_item, mob/living/user, list/modifiers, list/attack_modifiers)
-	if(!istype(attacking_item, /obj/item/wrench/combat))
+/obj/machinery/porta_turret/syndicate/toolbox/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(!istype(tool, /obj/item/wrench/combat))
 		return ..()
 
-	if(!attacking_item.toolspeed)
-		return
+	if(!tool.toolspeed) // This is a check for the laser wrench being off, I think
+		return ITEM_INTERACT_BLOCKING
 
 	if(user.combat_mode)
 		balloon_alert(user, "deconstructing...")
-		if(!attacking_item.use_tool(src, user, 5 SECONDS, volume = 20))
-			return
+		if(!tool.use_tool(src, user, 5 SECONDS, volume = 20))
+			return ITEM_INTERACT_BLOCKING
 
 		deconstruct(TRUE)
-		attacking_item.play_tool_sound(src, 50)
+		tool.play_tool_sound(src, 50)
 		balloon_alert(user, "deconstructed!")
+		return ITEM_INTERACT_SUCCESS
 
-	else
-		if(atom_integrity == max_integrity)
-			balloon_alert(user, "already repaired!")
-			return
 
-		balloon_alert(user, "repairing...")
-		while(atom_integrity != max_integrity)
-			if(!attacking_item.use_tool(src, user, 2 SECONDS, volume = 20))
-				return
+	if(atom_integrity == max_integrity)
+		balloon_alert(user, "already repaired!")
+		return ITEM_INTERACT_BLOCKING
 
-			repair_damage(10)
+	balloon_alert(user, "repairing...")
+	. = ITEM_INTERACT_BLOCKING // I'm doing this such that at least one successful repair considers the interaction a success
+	while(atom_integrity != max_integrity)
+		if(!tool.use_tool(src, user, 2 SECONDS, volume = 20))
+			return .
 
-		balloon_alert(user, "repaired!")
+		repair_damage(10)
+		. = ITEM_INTERACT_SUCCESS
+
+	balloon_alert(user, "repaired!")
+	return ITEM_INTERACT_SUCCESS
 
 /obj/machinery/porta_turret/syndicate/toolbox/on_deconstruction(disassembled)
 	if(disassembled)
@@ -564,14 +572,16 @@ effective or pretty fucking useless.
 
 /obj/item/clothing/shoes/jackboots/dagger/equipped(mob/living/user, slot)
 	. = ..()
+
 	if(!(slot & ITEM_SLOT_FEET) || !istype(user))
-		modified_bodyparts += user.get_bodypart(BODY_ZONE_L_LEG)
-		modified_bodyparts += user.get_bodypart(BODY_ZONE_R_LEG)
-		for(var/obj/item/bodypart/bodypart in modified_bodyparts)
-			bodypart.unarmed_sharpness |= SHARP_EDGED
-			bodypart.unarmed_attack_effect = ATTACK_EFFECT_SLASH
-			RegisterSignals(bodypart, list(COMSIG_BODYPART_REMOVED, COMSIG_QDELETING), PROC_REF(clear_modification))
-		RegisterSignal(user, COMSIG_CARBON_POST_ATTACH_LIMB, PROC_REF(modify_legs))
+		return
+	modified_bodyparts += user.get_bodypart(BODY_ZONE_L_LEG)
+	modified_bodyparts += user.get_bodypart(BODY_ZONE_R_LEG)
+	for(var/obj/item/bodypart/bodypart in modified_bodyparts)
+		bodypart.unarmed_sharpness |= SHARP_EDGED
+		bodypart.unarmed_attack_effect = ATTACK_EFFECT_SLASH
+		RegisterSignals(bodypart, list(COMSIG_BODYPART_REMOVED, COMSIG_QDELETING), PROC_REF(clear_modification))
+	RegisterSignal(user, COMSIG_CARBON_POST_ATTACH_LIMB, PROC_REF(modify_legs))
 
 /obj/item/clothing/shoes/jackboots/dagger/dropped(mob/user)
 	. = ..()
@@ -605,4 +615,5 @@ effective or pretty fucking useless.
 
 /obj/item/clothing/shoes/jackboots/dagger/examine_more(mob/user)
 	. = ..()
-	. += span_notice("Upon closer inspection, you notice a dagger embedded into the sole.")
+	if(user.is_holding(src))
+		. += span_notice("Upon closer inspection, you notice a dagger embedded into the sole.")

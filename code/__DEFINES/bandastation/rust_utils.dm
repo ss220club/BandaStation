@@ -29,5 +29,6 @@
 #define rustg_http_request_blocking(method, url, body, headers, options) RUSTG_CALL(RUST_UTILS, "http_request_blocking")(method, url, body, headers, options)
 #define rustg_http_request_async(method, url, body, headers, options) RUSTG_CALL(RUST_UTILS, "http_request_async")(method, url, body, headers, options)
 #define rustg_http_check_request(req_id) RUSTG_CALL(RUST_UTILS, "http_check_request")(req_id)
+#define rustg_http_request_fire_and_forget(method, url, body, headers, options) RUSTG_CALL(RUST_UTILS, "http_request_fire_and_forget")(method, url, body, headers, options)
 /proc/rustg_create_async_http_client() return RUSTG_CALL(RUST_UTILS, "start_http_client")()
 /proc/rustg_close_async_http_client() return RUSTG_CALL(RUST_UTILS, "shutdown_http_client")()

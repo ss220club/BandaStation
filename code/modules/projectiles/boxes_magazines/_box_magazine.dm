@@ -160,7 +160,7 @@
 ///puts a round into the magazine
 /obj/item/ammo_box/proc/give_round(obj/item/ammo_casing/new_round, replace_spent = 0)
 	// Boxes don't have a caliber type, magazines do. Not sure if it's intended or not, but if we fail to find a caliber, then we fall back to ammo_type.
-	if(!new_round || !(caliber ? (caliber == new_round.caliber) : (ammo_type == new_round.type)))
+	if(!is_compatible_round(new_round))
 		return FALSE
 
 	if (stored_ammo.len < max_ammo)
@@ -188,6 +188,11 @@
 		new_round.forceMove(src)
 		return TRUE
 	return FALSE
+
+/obj/item/ammo_box/proc/is_compatible_round(obj/item/ammo_casing/new_round)
+	if(!new_round || !(caliber ? (caliber == new_round.caliber) : (ammo_type == new_round.type)))
+		return FALSE
+	return TRUE
 
 ///Whether or not the box can be loaded, used in overrides
 /obj/item/ammo_box/proc/can_load(mob/user)
@@ -244,7 +249,7 @@
 
 	if(num_loaded)
 		if(!silent)
-			to_chat(user, span_notice("You load [num_loaded > 1 ? "[num_loaded] [casing_phrasing]s" : "a [casing_phrasing]"] into \the [src]!"))
+			to_chat(user, span_notice("Вы заряжаете [num_loaded] патрон[declension_ru(num_loaded, "", "а", "ов")] в [declent_ru(ACCUSATIVE)]!"))
 			playsound(src, 'sound/items/weapons/gun/general/mag_bullet_insert.ogg', 60, TRUE)
 		update_appearance()
 
@@ -259,7 +264,7 @@
 	if(!user.is_holding(src) || !user.put_in_hands(A)) //incase they're using TK
 		A.bounce_away(FALSE, NONE)
 	playsound(src, 'sound/items/weapons/gun/general/mag_bullet_insert.ogg', 60, TRUE)
-	to_chat(user, span_notice("You remove a [casing_phrasing] from [src]!"))
+	to_chat(user, span_notice("Вы извлекаете патрон из [declent_ru(GENITIVE)]!"))
 	update_appearance()
 
 /obj/item/ammo_box/examine(mob/user)
@@ -268,10 +273,10 @@
 	var/obj/item/ammo_casing/top_round = get_round()
 	if(!top_round)
 		return
-	. += "It has <b>[shells_left]</b> [casing_phrasing]\s remaining."
+	. += "Внутри остал[declension_ru(shells_left, "ся", "ось", "ись")] <b>[shells_left]</b> патрон[declension_ru(shells_left, "", "а", "ов")]."
 	// this is kind of awkward phrasing, but it's the top/ready ammo in the box
 	// intended for people who have like three mislabeled magazines
-	. += span_notice("\A <b>[top_round]</b> is ready.")
+	. += span_notice("<b>[top_round]</b> готов[genderize_ru(top_round, "", "а", "о", "ы")] к стрельбе.")
 
 /obj/item/ammo_box/update_icon_state()
 	. = ..()

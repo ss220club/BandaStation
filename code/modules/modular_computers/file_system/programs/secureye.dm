@@ -174,7 +174,7 @@
 		CRASH("[src] was able to track [target] through /datum/trackable, but was not on a visible turf to cameras.")
 	for(var/obj/machinery/camera/cameras as anything in target_camerachunk.cameras["[target.z]"])
 		// We need to find a particular camera that can see this turf
-		if(length(cameras.can_see() & list(target_turf)))
+		if(!(length(cameras.can_see() & list(target_turf))))
 			continue
 		var/new_camera = WEAKREF(cameras)
 		if(camera_ref == new_camera)
@@ -203,6 +203,19 @@
 		last_camera_turf = null
 		if(!spying)
 			playsound(computer, 'sound/machines/terminal/terminal_off.ogg', 25, FALSE)
+
+// BANDASTATION ADDITION: Bodycam
+/datum/computer_file/program/secureye/proc/on_camera_disabled(obj/machinery/camera/camera)
+	var/obj/machinery/camera/active_camera = camera_ref?.resolve()
+	if(active_camera != camera)
+		return
+	if(!spying && active_camera)
+		active_camera.on_stop_watching(src)
+	camera_ref = null
+	last_camera_turf = null
+	update_active_camera_screen()
+	SStgui.update_uis(src)
+// BANDASTATION ADDITION END: Bodycam
 
 /datum/computer_file/program/secureye/proc/update_active_camera_screen()
 	var/obj/machinery/camera/active_camera = camera_ref?.resolve()
@@ -237,5 +250,6 @@
 	var/size_y = bbox[4] - bbox[2] + 1
 
 	cam_screen.show_camera(visible_turfs, size_x, size_y)
+	cam_screen.set_display(active_camera)
 
 #undef DEFAULT_MAP_SIZE

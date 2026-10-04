@@ -1,10 +1,10 @@
 #define DEFAULT_WHO_CELLS_PER_ROW 4
 #define NO_ADMINS_ONLINE_MESSAGE "Adminhelps are also sent through TGS to services like IRC and Discord. If no admins are available in game, sending an adminhelp might still be noticed and responded to."
 
-/client/verb/who()
-	set name = "Who"
-	set category = "OOC"
+GAME_VERB(/client, who, "Who", "OOC")
 
+	// BANDASTATION EDIT START: TGUI Who
+	/*
 	var/msg = ""
 
 	var/list/Lines = list()
@@ -25,7 +25,7 @@
 				else
 					entry += " - Playing as [client.mob.real_name]"
 					switch(client.mob.stat)
-						if(UNCONSCIOUS, HARD_CRIT)
+						if(HARD_CRIT)
 							entry += " - <font color='darkgray'><b>Unconscious</b></font>"
 						if(DEAD)
 							if(isobserver(client.mob))
@@ -68,10 +68,11 @@
 
 	msg += "<b>Total Players: [length(Lines)]</b>"
 	to_chat(src, fieldset_block(span_bold("Current Players"), span_infoplain(msg), "boxed_message"), type = MESSAGE_TYPE_INFO)
+	*/
+	open_tgui_who()
+	// BANDASTATION EDIT END: TGUI Who
 
-/client/verb/adminwho()
-	set category = "Admin"
-	set name = "Adminwho"
+GAME_VERB(/client, adminwho, "Adminwho", "Admin")
 
 	var/list/lines = list()
 	var/payload_string = generate_adminwho_string()

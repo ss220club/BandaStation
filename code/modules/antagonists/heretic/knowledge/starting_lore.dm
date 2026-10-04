@@ -24,12 +24,24 @@ GLOBAL_LIST_INIT(heretic_start_knowledge, initialize_starting_knowledge())
 	action_to_add = /datum/action/cooldown/spell/touch/mansus_grasp
 	cost = 0
 	is_starting_knowledge = TRUE
+	max_charges = 8
+	focus_recharge_amount = 0.25
+	holywater_drain_amount = 0.125
+	transmute_text = "Поглощение влияний и завершение жертвоприношений перезаряжает заклинание."
 
 // Heretics can enhance their fishing rods to fish better - fishing content.
 // Lasts until successfully fishing something up.
 /datum/heretic_knowledge/spell/basic/on_gain(mob/user, datum/antagonist/heretic/our_heretic)
-	..()
+	. = ..()
 	RegisterSignal(user, COMSIG_TOUCH_HANDLESS_CAST, PROC_REF(on_grasp_cast))
+	RegisterSignal(our_heretic, COMSIG_HERETIC_INFLUENCE_DRAINED, PROC_REF(on_influence_tap))
+	RegisterSignal(our_heretic, COMSIG_HERETIC_SACRIFICE, PROC_REF(on_sacrifice))
+
+/datum/heretic_knowledge/spell/basic/on_lose(mob/user, datum/antagonist/heretic/our_heretic)
+	. = ..()
+	UnregisterSignal(user, COMSIG_TOUCH_HANDLESS_CAST)
+	UnregisterSignal(our_heretic, COMSIG_HERETIC_INFLUENCE_DRAINED)
+	UnregisterSignal(our_heretic, COMSIG_HERETIC_SACRIFICE)
 
 /datum/heretic_knowledge/spell/basic/proc/on_grasp_cast(mob/living/carbon/cast_on, datum/action/cooldown/spell/touch/touch_spell)
 	SIGNAL_HANDLER
@@ -58,6 +70,14 @@ GLOBAL_LIST_INIT(heretic_start_knowledge, initialize_starting_knowledge())
 		REMOVE_TRAIT(item, TRAIT_ROD_MANSUS_INFUSED, REF(item))
 		item.difficulty_modifier += 20
 
+/datum/heretic_knowledge/spell/basic/proc/on_influence_tap(...)
+	SIGNAL_HANDLER
+	add_charges(max_charges)
+
+/datum/heretic_knowledge/spell/basic/proc/on_sacrifice(...)
+	SIGNAL_HANDLER
+	add_charges(max_charges)
+
 /**
  * The Living Heart heretic knowledge.
  *
@@ -66,13 +86,12 @@ GLOBAL_LIST_INIT(heretic_start_knowledge, initialize_starting_knowledge())
  */
 /datum/heretic_knowledge/living_heart
 	name = "Живое сердце"
-	desc = "Дарует вам «Живое сердце», позволяющее отслеживать жертвенные цели. \
-		Если вы потеряете сердце, вы можете трансмутировать мак и лужу крови, \
-		чтобы пробудить свое сердце в Живое сердце. Если ваше сердце кибернетическое, \
-		вы не сможете возродить его."
+	desc = "Дарует вам «Живое сердце», позволяющее отслеживать жертвенные цели."
+	transmute_text = "Если вы потеряете сердце, трансмутируйте мак и лужу крови, \
+		чтобы пробудить свое сердце в Живое сердце."
 	required_atoms = list(
 		/obj/effect/decal/cleanable/blood = 1,
-		/obj/item/food/grown/poppy = 1,
+		/obj/item/food/grown/flower/poppy = 1,
 	)
 	cost = 0
 	priority = MAX_KNOWLEDGE_PRIORITY - 1 // Knowing how to remake your heart is important
@@ -80,6 +99,7 @@ GLOBAL_LIST_INIT(heretic_start_knowledge, initialize_starting_knowledge())
 	research_tree_icon_path = 'icons/obj/antags/eldritch.dmi'
 	research_tree_icon_state = "living_heart"
 	research_tree_icon_frame = 1
+	notice = "Если ваше сердце кибернетическое, вы не сможете пробудить его."
 
 /datum/heretic_knowledge/living_heart/on_research(mob/user, datum/antagonist/heretic/our_heretic)
 	. = ..()
@@ -111,10 +131,11 @@ GLOBAL_LIST_INIT(heretic_start_knowledge, initialize_starting_knowledge())
 
 	if(where_to_put_our_heart)
 		where_to_put_our_heart.AddComponent(/datum/component/living_heart)
-		desc = "Дарует вам «Живое сердце», привязанное к вашему [where_to_put_our_heart.name], позволяя отслеживать жертвенные цели. \
-			Если вы потеряете [where_to_put_our_heart.ru_p_own(ACCUSATIVE)] [where_to_put_our_heart.declent_ru(ACCUSATIVE)], вы можете трансмутировать мак и лужу крови, \
+		desc = "Дарует вам «Живое сердце», привязанное к вашему [where_to_put_our_heart.name], позволяя отслеживать жертвенные цели."
+		transmute_text = "Если вы потеряете [where_to_put_our_heart.ru_p_own(ACCUSATIVE)] [where_to_put_our_heart.declent_ru(ACCUSATIVE)], трансмутируйте мак и лужу крови, \
 			чтобы пробудить [where_to_put_our_heart.ru_p_own(ACCUSATIVE)] [where_to_put_our_heart.declent_ru(ACCUSATIVE)] в Живое сердце. \
 			Если [where_to_put_our_heart.ru_p_yours()] [where_to_put_our_heart.declent_ru(NOMINATIVE)] кибернетическое, ритуал будет невозможен!"
+
 
 	else
 		to_chat(user, span_boldnotice("У вас нет сердца или каких-либо органов грудной клетки, если на то пошло. Вы не получили Живое сердце из-за этого."))
@@ -173,119 +194,15 @@ GLOBAL_LIST_INIT(heretic_start_knowledge, initialize_starting_knowledge())
 
 	return TRUE
 
-/**
- * Allows the heretic to craft a spell focus.
- * They require a focus to cast advanced spells.
- */
-/datum/heretic_knowledge/amber_focus
-	name = "Янтарный фокусировщик"
-	desc = "Позволяет трансмутировать лист стекла и пару глаз, чтобы создать Янтарную фокусировку. \
-		Для того чтобы произносить более сложные заклинания, необходимо носить фокусировку."
-	required_atoms = list(
-		/obj/item/organ/eyes = 1,
-		/obj/item/stack/sheet/glass = 1,
-	)
-	result_atoms = list(/obj/item/clothing/neck/heretic_focus)
-	cost = 0
-	priority = MAX_KNOWLEDGE_PRIORITY - 2 // Not as important as making a heart or sacrificing, but important enough.
-	is_starting_knowledge = TRUE
-	research_tree_icon_path = 'icons/obj/clothing/neck.dmi'
-	research_tree_icon_state = "eldritch_necklace"
-
-/datum/heretic_knowledge/spell/cloak_of_shadows
-	name = "Покров Тени"
-	desc = "Дарует вам заклинание «Покров Тени». Это заклинание полностью скрывает вашу личность в фиолетовой дымке \
-		на три минуты, помогая вам сохранять секретность. Для наложения заклинания требуется фокусировка."
-	action_to_add = /datum/action/cooldown/spell/shadow_cloak
-	cost = 0
-	is_starting_knowledge = TRUE
-
-/**
- * Codex Cicatrixi is available at the start:
- * This allows heretics to choose if they want to rush all the influences and take them stealthily, or
- * Construct a codex and take what's left with more points.
- * Another downside to having the book is strip searches, which means that it's not just a free nab, at least until you get exposed - and when you do, you'll probably need the faster drawing speed.
- * Overall, it's a tradeoff between speed and stealth or power.
- */
-/datum/heretic_knowledge/codex_cicatrix
-	name = "Кодекс Цикатрикс"
-	desc = "Позволяет трансмутировать книгу, любую ручку, любое тело (животного или человека) и шкуру или кожу, чтобы создать кодекс Цикатрикс. \
-		Кодекс Цикатрикс можно использовать при извлечении влияний для получения дополнительных знаний, но при этом возрастает риск быть замеченным. \
-		Его также можно использовать для того, чтобы легче рисовать и удалять руны трансмутации, и использоваться в качестве фокусировки"
-	gain_text = "Оккультизм оставляет фрагменты знаний и силы везде и всюду. Кодекс Цикатрикс - один из таких примеров. \
-		В кожаном переплете и на старых страницах открывается путь к Мансусу."
-	required_atoms = list(
-		list(/obj/item/toy/eldritch_book, /obj/item/book) = 1,
-		/obj/item/pen = 1,
-		list(/mob/living, /obj/item/stack/sheet/leather, /obj/item/stack/sheet/animalhide, /obj/item/food/deadmouse) = 1,
-	)
-	result_atoms = list(/obj/item/codex_cicatrix)
-	cost = 1
-	is_starting_knowledge = TRUE
-	priority = MAX_KNOWLEDGE_PRIORITY - 4 // Least priority out of the starting knowledges, as it's an optional boon.
-	var/static/list/non_mob_bindings = typecacheof(list(/obj/item/stack/sheet/leather, /obj/item/stack/sheet/animalhide, /obj/item/food/deadmouse))
-	research_tree_icon_path = 'icons/obj/antags/eldritch.dmi'
-	research_tree_icon_state = "book"
-
-/datum/heretic_knowledge/codex_cicatrix/recipe_snowflake_check(mob/living/user, list/atoms, list/selected_atoms, turf/loc)
-	. = ..()
-	if(!.)
-		return FALSE
-
-	for(var/thingy in atoms)
-		if(is_type_in_typecache(thingy, non_mob_bindings))
-			selected_atoms += thingy
-			return TRUE
-		else if(isliving(thingy))
-			var/mob/living/body = thingy
-			if(body.stat != DEAD)
-				continue
-			selected_atoms += body
-			return TRUE
-	return FALSE
-
-/datum/heretic_knowledge/codex_cicatrix/cleanup_atoms(list/selected_atoms)
-	var/mob/living/body = locate() in selected_atoms
-	if(!body)
-		return ..()
-	// A golem or an android doesn't have skin!
-	var/exterior_text = "skin"
-	// If carbon, it's the limb. If not, it's the body.
-	var/atom/movable/ripped_thing = body
-
-	// We will check if it's a carbon's body.
-	// If it is, we will damage a random bodypart, and check that bodypart for its body type, to select between 'skin' or 'exterior'.
-	if(iscarbon(body))
-		var/mob/living/carbon/carbody = body
-		var/obj/item/bodypart/bodypart = pick(carbody.bodyparts)
-		ripped_thing = bodypart
-
-		carbody.apply_damage(25, BRUTE, bodypart, sharpness = SHARP_EDGED)
-		if(!(bodypart.bodytype & BODYTYPE_ORGANIC))
-			exterior_text = "exterior"
-	else
-		body.apply_damage(25, BRUTE, sharpness = SHARP_EDGED)
-		// If it is not a carbon mob, we will just check biotypes and damage it directly.
-		if(body.mob_biotypes & (MOB_MINERAL|MOB_ROBOTIC))
-			exterior_text = "exterior"
-
-	// Procure book for flavor text. This is why we call parent at the end.
-	var/obj/item/book/le_book = locate() in selected_atoms
-	if(!le_book)
-		stack_trace("Somehow, no book in codex cicatrix selected atoms! [english_list(selected_atoms)]")
-	playsound(body, 'sound/items/poster/poster_ripped.ogg', 100, TRUE)
-	body.do_jitter_animation()
-	body.visible_message(span_danger("Ужасный рвущийся звук раздается, когда [ripped_thing.declent_ru(ACCUSATIVE)] [exterior_text] вырывается наружу, обволакивая всё вокруг [le_book || "книги"], приобретая жуткий, потусторонний оттенок!"))
-	return ..()
-
 /datum/heretic_knowledge/feast_of_owls
 	name = "Пир для Сов"
-	desc = "Позволяет вам пройти ритуал, который дает вам 5 очков знаний, но не даёт возможности совершить вознесение. Это можно сделать только один раз и эффект нельзя отменить."
+	desc = "Позволяет пройти ритуал, который даёт 5 очков знаний, но лишает возможности совершить вознесение."
 	gain_text = "Под мягким сиянием безрассудства скрывается Зверь, крадущийся в ночи. Я выведу его на свет и позволю ему предстать предо мной. Он насытится моими амбициями и оставит после себя знания."
 	is_starting_knowledge = TRUE
 	required_atoms = list()
 	research_tree_icon_path = 'icons/mob/actions/actions_animal.dmi'
 	research_tree_icon_state = "god_transmit"
+	notice = "Это можно сделать только один раз, и эффект нельзя отменить."
 	/// amount of research points granted
 	var/reward = 5
 
@@ -322,42 +239,3 @@ GLOBAL_LIST_INIT(heretic_start_knowledge, initialize_starting_knowledge())
 	var/drain_message = pick_list(HERETIC_INFLUENCE_FILE, "drain_message")
 	to_chat(user, span_hypnophrase(span_big("[drain_message]")))
 	return .
-
-/**
- * Warren King's Welcome
- * Ritual available at the start. So that heretics can easily gain access to maintenance airlocks without having to rely on a HoP or having to off some poor assistant.
- * Gives access to solars since those doors are especially useful to get in or out of space.
- */
-/datum/heretic_knowledge/bookworm
-	name = "Приветствие Уоррена Кинга"
-	desc = "Позволяет трансмутировать 5 обрезков провода и лист бумаги, чтобы наделить любую ID-карту доступом в технические туннели и к внешним шлюзам"
-	gain_text = "Впившееся в осквернённые жестокостью кости пальцев, моё мрачное приглашение рывком обращает мой мутный, подташнивающий разум к массивной двери. \
-	Свет медленно пляшет в ползущей тьме, укрывая зловонный променад бесконечными кознями. \
-	Но Король скоро получит свой фунт плоти. Даже здесь налоговик требует свою долю. Ибо есть тысяча ртов, ждущих пищи."
-	required_atoms = list(
-		/obj/item/stack/cable_coil = 5,
-		/obj/item/paper = 1,
-	)
-	cost = 1
-	is_starting_knowledge = TRUE
-	priority = MAX_KNOWLEDGE_PRIORITY - 3
-	research_tree_icon_path = 'icons/obj/card.dmi'
-	research_tree_icon_state = "eldritch"
-
-/datum/heretic_knowledge/bookworm/recipe_snowflake_check(mob/living/user, list/atoms, list/selected_atoms, turf/loc)
-	. = ..()
-	for(var/obj/item/card/id/used_id in atoms)
-		if((ACCESS_MAINT_TUNNELS in used_id.access) && (ACCESS_EXTERNAL_AIRLOCKS in used_id.access)) // If we can't give any access we aren't elligible
-			continue
-		selected_atoms += used_id
-		return TRUE
-
-	user.balloon_alert(user, "Ритуал провален, ID не имеет доступа!")
-	return FALSE
-
-/datum/heretic_knowledge/bookworm/on_finished_recipe(mob/living/user, list/selected_atoms, turf/loc)
-	. = ..()
-	var/obj/item/card/id/improved_id = locate() in selected_atoms
-	improved_id.add_access(list(ACCESS_MAINT_TUNNELS, ACCESS_EXTERNAL_AIRLOCKS), mode = FORCE_ADD_ALL)
-	selected_atoms -= improved_id
-	return TRUE

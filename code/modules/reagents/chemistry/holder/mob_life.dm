@@ -102,16 +102,17 @@
 	if(!owner || !reagent || (dead && !(reagent.chemical_flags & REAGENT_DEAD_PROCESS)))
 		return FALSE
 
-	var/tick_return = owner.reagent_tick(reagent, seconds_per_tick)
+	var/metabolized_volume = reagent.compute_metabolization(owner, seconds_per_tick)
+	var/metabolization_ratio = REM * metabolized_volume
+
+	var/tick_return = owner.reagent_tick(reagent, seconds_per_tick, metabolization_ratio)
 	if(tick_return & COMSIG_MOB_STOP_REAGENT_TICK)
 		return FALSE
 
-	if(liverless && !reagent.self_consuming) //need to be metabolized
+	if(liverless && !reagent.self_consuming) //need to be6 metabolized
 		return FALSE
 
 	var/need_mob_update = FALSE
-	var/metabolized_volume = reagent.compute_metabolization(owner, seconds_per_tick)
-	var/metabolization_ratio = REM * metabolized_volume
 	if(reagents_metabolized)
 		reagents_metabolized[reagent.type] = metabolization_ratio
 	if(can_overdose && !HAS_TRAIT(owner, TRAIT_OVERDOSEIMMUNE))
@@ -127,7 +128,17 @@
 
 		if(reagent.overdosed)
 			need_mob_update += reagent.overdose_process(owner, seconds_per_tick, metabolization_ratio)
-
+// BANDASTATION EDIT START: NEW CHEMS
+		if(reagent.overdose_crit_threshold)
+			if(reagent.volume >= reagent.overdose_crit_threshold)
+				if(!reagent.overdosed_crit)
+					reagent.overdosed_crit = TRUE
+					need_mob_update += reagent.on_overdose_crit_start(owner, metabolization_ratio)
+					owner.log_message("has started critical overdosing on [reagent.name] at [reagent.volume] units.", LOG_GAME)
+				need_mob_update += reagent.overdose_crit_process(owner, seconds_per_tick, metabolization_ratio)
+			if(reagent.volume < reagent.overdose_crit_threshold && reagent.overdosed_crit && reagent.overdose_crit_threshold)
+				reagent.overdosed_crit = FALSE
+// BANDASTATION EDIT END: NEW CHEMS
 	reagent.current_cycle++
 	need_mob_update += reagent.on_mob_life(owner, seconds_per_tick, metabolization_ratio)
 

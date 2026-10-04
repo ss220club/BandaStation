@@ -34,7 +34,7 @@
 
 /obj/machinery/rnd/experimentor/Initialize(mapload)
 	. = ..()
-	set_wires(new /datum/wires/rnd/experimentor(src))
+	set_wires(new /datum/wires/experimentor(src))
 
 	load_handlers()
 
@@ -53,7 +53,8 @@
 	if(!banned_typecache)
 		banned_typecache = typecacheof(list(
 			/obj/item/stock_parts/power_store/cell/infinite,
-			/obj/item/grenade/chem_grenade/tuberculosis
+			/obj/item/stock_parts/power_store/cell/ethereal,
+			/obj/item/grenade/chem_grenade/tuberculosis,
 		))
 
 	if(!length(valid_items))
@@ -127,7 +128,7 @@
 	if(is_type_in_typecache(some_item.type, banned_typecache) || item_reactions["[some_item.type]"])
 		return
 
-	if(istype(some_item, /obj/item/relic))
+	if(istype(some_item, /obj/item/assembly/relic))
 		item_reactions["[some_item.type]"] = SCANTYPE_DISCOVER
 	else
 		item_reactions["[some_item.type]"] = pick(get_available_reactions())
@@ -150,9 +151,9 @@
 		. += span_notice("Malfunction probability reduced by [span_bold("[malfunction_probability_coeff]")].")
 		. += span_notice("Cooldown interval between experiments at [span_bold("[cooldown]")] seconds.")
 
-/obj/machinery/rnd/experimentor/default_deconstruction_crowbar(obj/item/crowbar)
+/obj/machinery/rnd/experimentor/on_deconstruction(disassembled)
+	. = ..()
 	item_eject()
-	return ..()
 
 /obj/machinery/rnd/experimentor/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
@@ -178,7 +179,7 @@
 		var/is_discover = (scantype == SCANTYPE_DISCOVER)
 
 		if(loaded_item)
-			if(istype(loaded_item, /obj/item/relic))
+			if(istype(loaded_item, /obj/item/assembly/relic))
 				is_available = is_discover
 			else
 				is_available = !is_discover
@@ -197,16 +198,16 @@
 
 		item_data["name"] = loaded_item.name
 		item_data["icon"] = icon2base64(getFlatIcon(loaded_item, no_anim = TRUE))
-		item_data["isRelic"] = istype(loaded_item, /obj/item/relic)
+		item_data["isRelic"] = istype(loaded_item, /obj/item/assembly/relic)
 
 		item_data["associatedNodes"] = list()
-		var/list/unlockable_nodes = techweb_item_unlock_check(loaded_item)
-		for(var/node_id in unlockable_nodes)
-			var/datum/techweb_node/node = SSresearch.techweb_node_by_id(node_id)
+		var/list/unlockable_nodes = SSresearch.techweb_unlock_items[loaded_item.type]
+		for(var/node_path in unlockable_nodes)
+			var/datum/techweb_node/node = SSresearch.techweb_nodes[node_path]
 
 			item_data["associatedNodes"] += list(list(
 				"name" = node.display_name,
-				"isUnlocked" = !(node_id in stored_research.hidden_nodes),
+				"isUnlocked" = !stored_research.hidden_nodes[node_path],
 			))
 
 		data["loadedItem"] = item_data
@@ -246,7 +247,7 @@
 
 /obj/machinery/rnd/experimentor/proc/match_reaction(obj/item/matching, target_reaction)
 	PRIVATE_PROC(TRUE)
-	if(isnull(matching) || isnull(target_reaction))
+	if(isnull(matching) || isnull(target_reaction) || target_reaction == SCANTYPE_DISCOVER)
 		return FAIL
 
 	if(item_reactions["[matching.type]"] == target_reaction)
@@ -254,18 +255,19 @@
 	return FAIL
 
 /obj/machinery/rnd/experimentor/proc/try_perform_experiment(reaction)
-	PRIVATE_PROC(TRUE)
 	if(!stored_research || !loaded_item || !COOLDOWN_FINISHED(src, run_experiment))
 		return FALSE
 
-	if(istype(loaded_item, /obj/item/relic))
+	if(istype(loaded_item, /obj/item/assembly/relic))
 		reaction = SCANTYPE_DISCOVER
-	else if(reaction != SCANTYPE_DISCOVER)
+	else
 		reaction = match_reaction(loaded_item, reaction)
 
 	if(reaction != FAIL)
-		var/picked_node_id = pick(techweb_item_unlock_check(loaded_item))
-		stored_research.unhide_node(SSresearch.techweb_node_by_id(picked_node_id))
+		var/list/boostable_nodes = SSresearch.techweb_unlock_items[loaded_item.type]
+		if(length(boostable_nodes))
+			var/picked_node_path = pick(boostable_nodes)
+			stored_research.unhide_node(SSresearch.techweb_nodes[picked_node_path])
 
 	run_experiment(reaction)
 	use_energy(750 JOULES)
@@ -362,10 +364,7 @@
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 /obj/machinery/rnd/experimentor/screwdriver_act_secondary(mob/living/user, obj/item/tool)
-	if(default_deconstruction_screwdriver(user, icon_state, icon_state, tool))
-		update_appearance()
-		return ITEM_INTERACT_SUCCESS
-	return NONE
+	return default_deconstruction_screwdriver(user, tool)
 
 /obj/machinery/rnd/experimentor/multitool_act(mob/living/user, obj/item/tool)
 	if(panel_open)

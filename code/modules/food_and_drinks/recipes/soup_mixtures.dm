@@ -31,7 +31,6 @@
 	thermic_constant = 10
 	required_reagents = null
 	mob_react = FALSE
-	required_other = TRUE
 	required_container_accepts_subtypes = TRUE
 	required_container = /obj/item/reagent_containers/cup/soup_pot
 	mix_message = "You smell something good coming from the steaming pot of soup."
@@ -67,7 +66,7 @@
 	//number of ingredients who's requested amounts has been satisfied
 	var/completed_ingredients = 0
 	for(var/obj/item/ingredient as anything in pot.added_ingredients)
-		var/ingredient_type = ingredient.type
+		var/datum/ingredient_type = ingredient.type
 		do
 		{
 			var/ingredient_count = reqs_copy[ingredient_type]
@@ -92,7 +91,7 @@
 
 			//means we have to look for subtypes
 			else if(isnull(ingredient_count))
-				ingredient_type = type2parent(ingredient_type)
+				ingredient_type = ingredient_type::parent_type
 
 			//means we have no more remaining ingredients so bail, can happen if multiple ingredients of the same type/subtype are in the pot
 			else
@@ -303,7 +302,7 @@
 /obj/item/soup_test_kit/Initialize(mapload)
 	..()
 	new /obj/item/food/meatball(loc)
-	new /obj/item/food/grown/carrot(loc)
+	new /obj/item/food/grown/carrotlike/carrot(loc)
 	new /obj/item/food/grown/potato(loc)
 	new /obj/item/reagent_containers/cup/soup_pot(loc)
 	return INITIALIZE_HINT_QDEL
@@ -395,7 +394,7 @@
 	required_reagents = list(/datum/reagent/water = 50)
 	required_ingredients = list(
 		/obj/item/food/meatball = 1,
-		/obj/item/food/grown/carrot = 1,
+		/obj/item/food/grown/carrotlike/carrot = 1,
 		/obj/item/food/grown/potato = 1,
 	)
 	results = list(
@@ -419,7 +418,7 @@
 /datum/chemical_reaction/food/soup/vegetable_soup
 	required_reagents = list(/datum/reagent/water = 50)
 	required_ingredients = list(
-		/obj/item/food/grown/carrot = 1,
+		/obj/item/food/grown/carrotlike/carrot = 1,
 		/obj/item/food/grown/corn = 1,
 		/obj/item/food/grown/eggplant = 1,
 		/obj/item/food/grown/potato = 1,
@@ -487,8 +486,8 @@
 
 // Chili (Hot, not cold)
 /datum/reagent/consumable/nutriment/soup/hotchili
-	name = "Hot Chili"
-	description = "A five alarm Texan Chili!"
+	name = "Chili Con Carne"
+	description = "An extra spicy five alarm Texan Chili."
 	data = list("hot peppers" = 1)
 	glass_price = FOOD_PRICE_NORMAL
 	color = "#E23D12"
@@ -521,9 +520,30 @@
 	ingredient_reagent_multiplier = 0.33 // Chilis have a TON of capsaicin naturally
 	percentage_of_nutriment_converted = 0
 
+// Chili but hotter
+/datum/reagent/consumable/nutriment/soup/hotchili/ghost
+	name = "Ghost Chili Con Carne"
+	description = "An extra-extra <i>seven</i> alarm Texan Chili. Apparently, it goes that high."
+	data = list("extremely hot peppers" = 2)
+	glass_price = FOOD_PRICE_NORMAL
+	color = "#ff9479"
+
+/datum/glass_style/has_foodtype/soup/hotchili/ghost
+	required_drink_type = /datum/reagent/consumable/nutriment/soup/hotchili/ghost
+
+/datum/chemical_reaction/food/soup/hotchili/ghost
+
+/datum/chemical_reaction/food/soup/hotchili/ghost/New()
+	. = ..()
+	required_ingredients[/obj/item/food/grown/ghost_chili] = required_ingredients[/obj/item/food/grown/chili]
+	required_ingredients -= /obj/item/food/grown/chili
+	results.Insert(1, /datum/reagent/consumable/nutriment/soup/hotchili/ghost)
+	results[/datum/reagent/consumable/nutriment/soup/hotchili/ghost] = results[/datum/reagent/consumable/nutriment/soup/hotchili]
+	results -= /datum/reagent/consumable/nutriment/soup/hotchili
+
 // Chili (Cold)
 /datum/reagent/consumable/nutriment/soup/coldchili
-	name = "Cold Chili"
+	name = "Chili Frio"
 	description = "This slush is barely a liquid!"
 	data = list("tomato" = 1, "mint" = 1)
 	glass_price = FOOD_PRICE_NORMAL
@@ -609,6 +629,26 @@
 		/datum/reagent/consumable/nutriment/soup/chili_sin_carne = 30,
 		/datum/reagent/consumable/tomatojuice = 10,
 	)
+
+// Vegan Chili but hotter
+/datum/reagent/consumable/nutriment/soup/chili_sin_carne/ghost
+	name = "Ghost Chili Sin Carne"
+	description = "For the hombres who don't want carne, but do want to feel like their mouth is on fire."
+	data = list("extremely hot peppers" = 2)
+	color = "#ff9479"
+
+/datum/glass_style/has_foodtype/soup/chili_sin_carne/ghost
+	required_drink_type = /datum/reagent/consumable/nutriment/soup/chili_sin_carne/ghost
+
+/datum/chemical_reaction/food/soup/chili_sin_carne/ghost
+
+/datum/chemical_reaction/food/soup/chili_sin_carne/ghost/New()
+	. = ..()
+	required_ingredients[/obj/item/food/grown/ghost_chili] = required_ingredients[/obj/item/food/grown/chili]
+	required_ingredients -= /obj/item/food/grown/chili
+	results.Insert(1, /datum/reagent/consumable/nutriment/soup/chili_sin_carne/ghost)
+	results[/datum/reagent/consumable/nutriment/soup/chili_sin_carne/ghost] = results[/datum/reagent/consumable/nutriment/soup/chili_sin_carne]
+	results -= /datum/reagent/consumable/nutriment/soup/chili_sin_carne
 
 // Tomato soup
 /datum/reagent/consumable/nutriment/soup/tomato
@@ -757,12 +797,14 @@
 	// Pretty much just a normal chemical reaction.
 	// This also creates nutrients out of thin air.
 
-	required_other = FALSE
 	required_reagents = list(
 		/datum/reagent/water = 40,
 		/datum/reagent/toxin/slimejelly = 20,
 	)
 	required_ingredients = null
+
+/datum/chemical_reaction/food/soup/slimesoup/alt/pre_reaction_other_checks(datum/reagents/holder)
+	return TRUE
 
 // Clown Tear soup
 /datum/reagent/consumable/nutriment/soup/clown_tears
@@ -977,7 +1019,7 @@
 		/obj/item/food/grown/tomato = 1,
 		/obj/item/food/meat/cutlet = 3,
 		/obj/item/food/grown/potato = 1,
-		/obj/item/food/grown/carrot = 1,
+		/obj/item/food/grown/carrotlike/carrot = 1,
 		/obj/item/food/grown/eggplant = 1,
 		/obj/item/food/grown/mushroom = 1,
 	)
@@ -1039,6 +1081,30 @@
 	)
 	percentage_of_nutriment_converted = 0.1
 
+// Red beet soup
+/datum/reagent/consumable/nutriment/soup/drake_beet
+	name = "Drake Beet Soup"
+	description = "A soup made out of drake beets and sinew clinging to drake hide."
+	data = list("drake beet" = 4, "spice" = 1)
+	color = "#851127"
+
+/datum/glass_style/has_foodtype/soup/drake_beet
+	required_drink_type = /datum/reagent/consumable/nutriment/soup/drake_beet
+	icon_state = "drakebeetsoup"
+	drink_type = VEGETABLES | MEAT
+
+/datum/chemical_reaction/food/soup/drake_beet
+	required_reagents = list(/datum/reagent/water = 50)
+	required_ingredients = list(
+		/obj/item/food/grown/drake_beet = 2,
+		/obj/item/stack/sheet/animalhide/ashdrake = 1,
+	)
+	results = list(
+		/datum/reagent/consumable/nutriment/soup/drake_beet = 30,
+		/datum/reagent/water = 10,
+	)
+	percentage_of_nutriment_converted = 0.2
+
 // French Onion soup
 /datum/reagent/consumable/nutriment/soup/french_onion
 	name = "French Onion Soup"
@@ -1089,6 +1155,32 @@
 		/datum/reagent/consumable/nutriment/protein = 6,
 		/datum/reagent/consumable/nutriment/vitamin = 4,
 		/datum/reagent/water = 5,
+	)
+
+// Iceberg soup
+/datum/reagent/consumable/nutriment/soup/iceberg
+	name = "Iceberg Soup"
+	description = "A slight upgrade upon the wish soup, this one has some nutrient content."
+	data = list("cold" = 4, "tundra wilds" = 1)
+	color = "#26AEB9"
+
+/datum/glass_style/has_foodtype/soup/iceberg
+	required_drink_type = /datum/reagent/consumable/nutriment/soup/iceberg
+	icon_state = "icebergbowl"
+	drink_type = VEGETABLES
+
+/datum/chemical_reaction/food/soup/iceberg
+	required_reagents = list(
+		/datum/reagent/water = 40,
+		/datum/reagent/consumable/frostoil = 10,
+	)
+	required_ingredients = list(
+		/obj/item/food/grown/ash_flora/fonarstolbe = 1,
+		/obj/item/food/grown/ash_flora/podsneyzka = 1,
+		/obj/item/food/grown/peas = 1,
+	)
+	results = list(
+		/datum/reagent/consumable/nutriment/soup/iceberg = 40,
 	)
 
 // Bungo Tree Curry
@@ -1145,7 +1237,7 @@
 		/datum/reagent/consumable/nutriment/soup/electrons = 30,
 		// Jupiter cups obviously contain a fair amount of LE naturally,
 		// but to make it "worthwhile" for Ethereals to eat we add a bit extra
-		/datum/reagent/consumable/liquidelectricity/enriched = 10,
+		/datum/reagent/consumable/liquidelectricity = 10,
 	)
 	percentage_of_nutriment_converted = 0.10
 
@@ -1165,8 +1257,8 @@
 	required_reagents = list(/datum/reagent/water = 50)
 	required_ingredients = list(
 		/obj/item/food/grown/peas = 2,
-		/obj/item/food/grown/parsnip = 1,
-		/obj/item/food/grown/carrot = 1,
+		/obj/item/food/grown/carrotlike/parsnip = 1,
+		/obj/item/food/grown/carrotlike/carrot = 1,
 	)
 	results = list(
 		/datum/reagent/consumable/nutriment/soup/pea = 30,
@@ -1229,6 +1321,38 @@
 	)
 	percentage_of_nutriment_converted = 0 // Oats have barely any nutrients
 
+// Wolf Goulash
+/datum/reagent/consumable/nutriment/soup/goulash
+	name = "Wolf Goulash"
+	description = "A thick soup with heavy focus on the meat. In this rendition, the meat from wolf sinew."
+	data = list("meat" = 4, "vegetables" = 1, "spice" = 1)
+	color = "#CA3518"
+
+/datum/glass_style/has_foodtype/soup/goulash
+	required_drink_type = /datum/reagent/consumable/nutriment/soup/goulash
+	icon_state = "goulash"
+	drink_type = VEGETABLES | MEAT
+
+/datum/chemical_reaction/food/soup/goulash
+	required_reagents = list(
+		/datum/reagent/water = 40,
+		/datum/reagent/consumable/flour = 10,
+	)
+	required_ingredients = list(
+		/obj/item/stack/sheet/sinew/wolf = 1,
+		/obj/item/food/grown/drake_beet = 1,
+		/obj/item/food/grown/bell_pepper = 1,
+		/obj/item/food/grown/onion = 1,
+	)
+	results = list(
+		/datum/reagent/consumable/nutriment/soup/goulash = 30,
+		/datum/reagent/consumable/nutriment = 4,
+		/datum/reagent/consumable/nutriment/protein = 3,
+		/datum/reagent/consumable/nutriment/vitamin = 3,
+	)
+	ingredient_reagent_multiplier = 0.5
+	percentage_of_nutriment_converted = 0.1
+
 // Zurek, a Polish soup
 /datum/reagent/consumable/nutriment/soup/zurek
 	name = "Zurek"
@@ -1249,7 +1373,7 @@
 	required_ingredients = list(
 		/obj/item/food/boiledegg = 1,
 		/obj/item/food/meat/cutlet = 1,
-		/obj/item/food/grown/carrot = 1,
+		/obj/item/food/grown/carrotlike/carrot = 1,
 		/obj/item/food/grown/onion = 1,
 	)
 	results = list(
@@ -1306,7 +1430,7 @@
 /datum/chemical_reaction/food/soup/chicken_noodle_soup
 	required_reagents = list(/datum/reagent/water = 30)
 	required_ingredients = list(
-		/obj/item/food/grown/carrot = 1,
+		/obj/item/food/grown/carrotlike/carrot = 1,
 		/obj/item/food/meat/slab/chicken = 1,
 		/obj/item/food/spaghetti/boiledspaghetti = 1,
 	)
@@ -1337,7 +1461,7 @@
 	required_ingredients = list(
 		/obj/item/food/grown/corn = 1,
 		/obj/item/food/grown/potato = 1,
-		/obj/item/food/grown/carrot = 1,
+		/obj/item/food/grown/carrotlike/carrot = 1,
 		/obj/item/food/meat/bacon = 1,
 	)
 	results = list(
@@ -1421,11 +1545,11 @@
 	drink_type = MEAT | VEGETABLES | GORE
 
 /datum/chemical_reaction/food/soup/black_broth
+	required_temp = 325
 	required_reagents = list(
 		/datum/reagent/water = 40,
 		/datum/reagent/consumable/vinegar = 8,
 		/datum/reagent/blood = 8,
-		/datum/reagent/consumable/ice = 4,
 	)
 	required_ingredients = list(
 		/obj/item/food/tiziran_sausage = 1,
@@ -1531,7 +1655,7 @@
 	required_ingredients = list(
 		/obj/item/grown/cotton = 1, // Why are you buying clothes at the soup store?!
 		/obj/item/food/grown/onion = 1,
-		/obj/item/food/grown/carrot = 1,
+		/obj/item/food/grown/carrotlike/carrot = 1,
 		/obj/item/food/grown/eggplant = 1,
 		/obj/item/food/oven_baked_corn = 1,
 	)
@@ -1657,8 +1781,8 @@
 	required_ingredients = list(
 		/obj/item/food/grown/oat = 1,
 		/obj/item/food/grown/potato/sweet = 1,
-		/obj/item/food/grown/parsnip = 1,
-		/obj/item/food/grown/carrot = 1,
+		/obj/item/food/grown/carrotlike/parsnip = 1,
+		/obj/item/food/grown/carrotlike/carrot = 1,
 	)
 	results = list(
 		/datum/reagent/consumable/nutriment/soup/moth_oats = 30,
@@ -1743,7 +1867,6 @@
 	drink_type = GRAIN
 
 /datum/chemical_reaction/food/soup/cornmeal_porridge
-	required_other = FALSE
 	required_reagents = list(
 		/datum/reagent/consumable/cornmeal = 20,
 		/datum/reagent/water = 20,
@@ -1751,6 +1874,9 @@
 	results = list(
 		/datum/reagent/consumable/nutriment/soup/cornmeal_porridge = 20,
 	)
+
+/datum/chemical_reaction/food/soup/cornmeal_porridge/pre_reaction_other_checks(datum/reagents/holder)
+	return TRUE
 
 // Cheese Porridge (Soup-ish)
 /datum/reagent/consumable/nutriment/soup/cheese_porridge
@@ -1860,6 +1986,17 @@
 		/datum/reagent/water/salt = 10,
 	)
 	resulting_food_path = /obj/item/food/spaghetti/boilednoodles
+	ingredient_reagent_multiplier = 0
+
+// Space Ramen
+/datum/chemical_reaction/food/soup/beef_ramen
+	required_reagents = list(
+		/datum/reagent/consumable/beef_flavour = 5
+	)
+	required_ingredients = list(
+		/obj/item/food/spaghetti/ramen_dry = 1
+	)
+	resulting_food_path = /obj/item/food/spaghetti/ramen_beef
 	ingredient_reagent_multiplier = 0
 
 // Dashi Broth
@@ -2111,7 +2248,7 @@
 		/obj/item/food/grown/tomato = 1,
 		/obj/item/food/grown/cabbage = 1,
 		/obj/item/food/grown/onion = 1,
-		/obj/item/food/grown/carrot = 1,
+		/obj/item/food/grown/carrotlike/carrot = 1,
 		/obj/item/food/meat/cutlet = 1,
 	)
 	results = list(

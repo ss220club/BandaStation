@@ -2,15 +2,17 @@
 	name = "quantum console"
 
 	circuit = /obj/item/circuitboard/computer/quantum_console
+	icon_state = MAP_SWITCH("computer", "/obj/machinery/computer/quantum_console")
 	icon_keyboard = "mining"
 	icon_screen = "bitrunning"
 	req_access = list(ACCESS_MINING)
 	/// The server this console is connected to.
 	var/datum/weakref/server_ref
+	keyboard_change_icon = FALSE
 
 /obj/machinery/computer/quantum_console/Initialize(mapload, obj/item/circuitboard/circuit)
 	. = ..()
-	desc = "Even in the distant year [CURRENT_STATION_YEAR], Nanotrasen is still using REST APIs. How grim."
+	desc = "Даже в далёком [CURRENT_STATION_YEAR], Нанотрейзен всё ещё использует REST API. Какой мрак."
 
 /obj/machinery/computer/quantum_console/post_machine_initialize()
 	. = ..()
@@ -19,7 +21,7 @@
 /obj/machinery/computer/quantum_console/examine(mob/user)
 	. = ..()
 	if(!server_ref)
-		. += span_warning("Please install an quantum server in any tile next to this console.")
+		. += span_warning("Пожалуйста, установите квантовый сервер рядом с этой консолью.")
 
 /obj/machinery/computer/quantum_console/ui_interact(mob/user, datum/tgui/ui)
 	. = ..()

@@ -78,7 +78,8 @@
 	// This can mean nothing happened, this can mean the target took damage, etc.
 
 	if(user.client && isitem(target))
-		if(isnull(user.get_inactive_held_item()))
+		var/mob/living/living_user = astype(user)
+		if(isnull(user.get_inactive_held_item() && living_user?.num_hands > 1))
 			SStutorials.suggest_tutorial(user, /datum/tutorial/switch_hands, modifiers)
 		else
 			SStutorials.suggest_tutorial(user, /datum/tutorial/drop, modifiers)
@@ -323,7 +324,7 @@
 		if(body_position == LYING_DOWN)
 			zone_hit_chance += 10
 		targeting = get_random_valid_zone(targeting, zone_hit_chance)
-	var/targeting_human_readable = parse_zone_with_bodypart(targeting, declent = ACCUSATIVE)
+	var/targeting_human_readable = parse_zone_with_bodypart(targeting, declent = ACCUSATIVE, declent = ACCUSATIVE)
 
 	if(!LAZYACCESS(attack_modifiers, SILENCE_DEFAULT_MESSAGES))
 		send_item_attack_message(attacking_item, user, targeting_human_readable, targeting)
@@ -332,7 +333,7 @@
 			def_zone = targeting,
 			attack_flag = MELEE,
 			absorb_text = span_notice("Ваша броня защитила вашу [targeting_human_readable]!"),
-			soften_text = span_warning("Ваша броня смягчила удар, нанесенный в вашу [targeting_human_readable]!"),
+			soften_text = span_warning("Ваша броня смягчила удар, нанесённый в вашу [targeting_human_readable]!"),
 			armour_penetration = attacking_item.armour_penetration,
 			weak_against_armour = attacking_item.weak_against_armour,
 		), ARMOR_MAX_BLOCK)
@@ -348,11 +349,13 @@
 	if(user != src)
 		// This doesn't factor in armor, or most damage modifiers (physiology). Your mileage may vary
 		if(check_block(attacking_item, final_force, "[attacking_item.declent_ru(ACCUSATIVE)]", MELEE_ATTACK, attacking_item.armour_penetration, attacking_item.damtype))
+			LAZYSET(attack_modifiers, DAMAGE_DONE, 0)
 			return ATTACK_FAILED
 
 	SEND_SIGNAL(attacking_item, COMSIG_ITEM_ATTACK_ZONE, src, user, targeting)
 
 	if(final_force <= 0)
+		LAZYSET(attack_modifiers, DAMAGE_DONE, 0)
 		return 0
 
 	if(ishuman(src) || client) // istype(src) is kinda bad, but it's to avoid spamming the blackbox
@@ -371,6 +374,7 @@
 		attacking_item = attacking_item,
 	)
 
+	LAZYSET(attack_modifiers, DAMAGE_DONE, damage_done)
 	attack_effects(damage_done, targeting, armor_block, attacking_item, user)
 
 	return damage_done
@@ -408,7 +412,7 @@
 	return TRUE
 
 /mob/living/carbon/attack_effects(damage_done, hit_zone, armor_block, obj/item/attacking_item, mob/living/attacker)
-	var/obj/item/bodypart/hit_bodypart = get_bodypart(hit_zone) || bodyparts[1]
+	var/obj/item/bodypart/hit_bodypart = get_bodypart(hit_zone) || get_bodypart()
 	if(!hit_bodypart.can_bleed())
 		return FALSE
 
@@ -427,7 +431,7 @@
 			if(!attacking_item.get_sharpness() && !HAS_TRAIT(src, TRAIT_HEAD_INJURY_BLOCKED) && attacking_item.damtype == BRUTE)
 				if(prob(damage_done))
 					adjust_organ_loss(ORGAN_SLOT_BRAIN, 20)
-					if(stat == CONSCIOUS)
+					if(!IS_UNCONSCIOUS_OR_CRIT(src))
 						visible_message(
 							span_danger("[capitalize(declent_ru(NOMINATIVE))] лишается чувств!"),
 							span_userdanger("Вы лишаетесь чувств!"),
@@ -441,7 +445,7 @@
 
 				// rev deconversion through blunt trauma.
 				// this can be signalized to the rev datum
-				if(mind && stat == CONSCIOUS && src != attacker && prob(damage_done + ((100 - health) * 0.5)))
+				if(mind && !IS_UNCONSCIOUS_OR_CRIT(src) && src != attacker && prob(damage_done + ((100 - health) * 0.5)))
 					var/datum/antagonist/rev/rev = mind.has_antag_datum(/datum/antagonist/rev)
 					rev?.remove_revolutionary(attacker)
 
@@ -449,7 +453,7 @@
 			if(.)
 				add_blood_DNA_to_items(get_blood_dna_list(), ITEM_SLOT_ICLOTHING|ITEM_SLOT_OCLOTHING)
 
-			if(stat == CONSCIOUS && !attacking_item.get_sharpness() && !HAS_TRAIT(src, TRAIT_BRAWLING_KNOCKDOWN_BLOCKED) && attacking_item.damtype == BRUTE)
+			if(!IS_UNCONSCIOUS_OR_CRIT(src) && !attacking_item.get_sharpness() && !HAS_TRAIT(src, TRAIT_BRAWLING_KNOCKDOWN_BLOCKED) && attacking_item.damtype == BRUTE)
 				if(prob(damage_done))
 					visible_message(
 						span_danger("[capitalize(declent_ru(NOMINATIVE))] сбивается с ног!"),

@@ -428,7 +428,7 @@
 /area/centcom/central_command_areas/maintance)
 "abT" = (
 /obj/effect/decal/cleanable/dirt,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium/pod,
 /area/centcom/central_command_areas/supply)
 "abU" = (
 /obj/structure/sign/flag/nanotrasen/directional/west,
@@ -472,15 +472,6 @@
 /obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
 /turf/open/floor/catwalk_floor/iron_dark,
 /area/centcom/central_command_areas/supplypod/loading/ert)
-"acf" = (
-/obj/machinery/button/door/indestructible{
-	id = "CC_Eng_2";
-	name = "First Engine";
-	req_access = list("cent_captain");
-	pixel_y = -6
-	},
-/turf/closed/indestructible/riveted,
-/area/centcom/central_command_areas/engine)
 "aci" = (
 /obj/effect/turf_decal/tile/neutral/full,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden{
@@ -548,7 +539,7 @@
 /obj/structure/railing{
 	dir = 8
 	},
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium/pod,
 /area/centcom/central_command_areas/supply)
 "acy" = (
 /obj/effect/turf_decal/stripes/line{
@@ -586,7 +577,7 @@
 /turf/open/floor/plating,
 /area/centcom/central_command_areas/supply)
 "acH" = (
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium/pod,
 /area/centcom/central_command_areas/supply)
 "acJ" = (
 /obj/docking_port/stationary{
@@ -616,15 +607,6 @@
 	},
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/supplypod/loading/two)
-"acN" = (
-/obj/machinery/button/door/indestructible{
-	name = "ERT Assault Pod";
-	id = "CC_ERT_Assault_Pod";
-	req_access = list("cent_general");
-	pixel_x = -6
-	},
-/turf/closed/indestructible/riveted,
-/area/centcom/central_command_areas/supplypod/loading/ert)
 "acP" = (
 /obj/structure/window/reinforced/survival_pod/spawner/directional/north,
 /turf/open/floor/plating,
@@ -1098,15 +1080,6 @@
 "aeL" = (
 /turf/open/floor/iron/white/corner,
 /area/centcom/central_command_areas/bar)
-"aeO" = (
-/obj/machinery/button/door/indestructible{
-	id = "CC_Brief_2";
-	name = "ERT Briefing Room";
-	req_access = list("cent_captain");
-	pixel_y = -6
-	},
-/turf/closed/indestructible/riveted,
-/area/centcom/central_command_areas/briefing)
 "aeQ" = (
 /obj/machinery/vending/wallmed,
 /turf/closed/indestructible/riveted,
@@ -1184,6 +1157,12 @@
 /area/centcom/central_command_areas/planetary_port)
 "afn" = (
 /obj/effect/turf_decal/line/dark_blue,
+/obj/machinery/button/door/indestructible{
+	pixel_x = -24;
+	id = "CC_Mech_1";
+	name = "Combat Exosuit Storage";
+	req_access = list("cent_captain")
+	},
 /turf/open/floor/iron/smooth_half{
 	dir = 1
 	},
@@ -1221,15 +1200,6 @@
 	dir = 1
 	},
 /area/centcom/central_command_areas/ferry)
-"afs" = (
-/obj/machinery/button/door/indestructible{
-	pixel_x = -6;
-	name = "Civil Exosuit Storage";
-	id = "CC_Mech_2";
-	req_access = list("cent_captain")
-	},
-/turf/closed/indestructible/riveted,
-/area/centcom/central_command_areas/armory)
 "aft" = (
 /obj/effect/turf_decal/bot_white,
 /obj/structure/closet/crate/secure/weapon,
@@ -1365,7 +1335,7 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 9
 	},
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium/pod,
 /area/centcom/central_command_areas/supply)
 "afY" = (
 /obj/structure/chair{
@@ -1445,14 +1415,6 @@
 /obj/machinery/door/airlock/maintenance_hatch,
 /turf/open/floor/catwalk_floor,
 /area/centcom/central_command_areas/evacuation/ship)
-"agg" = (
-/obj/machinery/button/door/indestructible{
-	id = "CC_Prison_1";
-	name = "CentCom Brig";
-	pixel_x = -6
-	},
-/turf/closed/indestructible/riveted,
-/area/centcom/central_command_areas/prison)
 "agh" = (
 /obj/machinery/door/airlock/centcom{
 	name = "ERT Cabin"
@@ -1729,15 +1691,6 @@
 	dir = 1
 	},
 /area/centcom/central_command_areas/ferry)
-"ahp" = (
-/obj/machinery/button/door/indestructible{
-	name = "Light ERT Gear";
-	id = "CC_Light_1";
-	req_access = list("cent_captain");
-	pixel_y = -6
-	},
-/turf/closed/indestructible/riveted,
-/area/centcom/central_command_areas/armory)
 "ahq" = (
 /obj/effect/turf_decal/line/dark_red/line{
 	dir = 8
@@ -1848,6 +1801,7 @@
 /area/centcom/central_command_areas/engine)
 "ahO" = (
 /obj/structure/light_fake/small/directional/east,
+/obj/structure/statue/dummy/srt,
 /turf/open/floor/iron/dark/textured_edge{
 	dir = 8
 	},
@@ -1865,6 +1819,12 @@
 /obj/effect/mapping_helpers/airlock/access/all/admin/general,
 /obj/effect/mapping_helpers/airlock/autoname,
 /obj/effect/mapping_helpers/airlock/cutaiwire,
+/obj/machinery/button/door/indestructible{
+	id = "CC_Cargo_1";
+	req_access = list("cent_captain");
+	pixel_y = 24;
+	name = "Cargo Hangar"
+	},
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/supply)
 "ahR" = (
@@ -2105,14 +2065,6 @@
 /obj/structure/fans/tiny/invisible,
 /turf/open/floor/holofloor/hyperspace,
 /area/space)
-"ajB" = (
-/obj/machinery/button/door/indestructible{
-	name = "Third Cell";
-	id = "CC_Cell_3";
-	pixel_x = -8
-	},
-/turf/closed/indestructible/riveted,
-/area/centcom/central_command_areas/prison/cells)
 "ajC" = (
 /obj/structure/chair/comfy/shuttle/tactical{
 	dir = 1
@@ -2260,14 +2212,6 @@
 /obj/machinery/light/directional/west,
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/planetary_port)
-"akt" = (
-/obj/machinery/button/door/indestructible{
-	id = "CC_Cargo_1";
-	req_access = list("cent_captain");
-	pixel_y = -6
-	},
-/turf/closed/indestructible/riveted,
-/area/centcom/central_command_areas/supply)
 "akw" = (
 /obj/effect/turf_decal/tile/brown,
 /obj/effect/turf_decal/stripes/line{
@@ -2298,13 +2242,6 @@
 /obj/machinery/power/shuttle_engine/large,
 /turf/open/floor/plating/airless,
 /area/space/nearstation)
-"akK" = (
-/obj/structure/sign/poster/official/tactical_game_cards/directional/south,
-/obj/effect/turf_decal/line/dark_blue/line,
-/obj/machinery/duct,
-/obj/structure/light_fake/spot/directional/south,
-/turf/open/floor/iron/dark/textured_half,
-/area/centcom/central_command_areas/hallway)
 "akL" = (
 /obj/effect/turf_decal/siding/wood/corner{
 	dir = 1
@@ -2481,6 +2418,12 @@
 /obj/effect/turf_decal/tile/neutral/full,
 /obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
 /obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
+/obj/machinery/button/door/indestructible{
+	name = "ERT Assault Pod";
+	id = "CC_ERT_Assault_Pod";
+	req_access = list("cent_general");
+	pixel_x = -24
+	},
 /turf/open/floor/iron/dark/textured_large,
 /area/centcom/central_command_areas/supplypod/loading/ert)
 "alI" = (
@@ -2652,6 +2595,11 @@
 /obj/structure/sign/departments/engineering/directional/east,
 /obj/effect/turf_decal/line/dark_blue/anticorner/contrasted{
 	dir = 4
+	},
+/obj/structure/statue/dummy/srt{
+	dir = 8;
+	pixel_x = 11;
+	pixel_y = 0
 	},
 /turf/open/floor/iron/dark,
 /area/centcom/central_command_areas/hallway)
@@ -2854,7 +2802,7 @@
 /obj/effect/mapping_helpers/requests_console/announcement,
 /obj/effect/mapping_helpers/requests_console/information,
 /obj/machinery/photocopier/gratis/prebuilt,
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium/pod/dark,
 /area/centcom/central_command_areas/cabin/soo)
 "anx" = (
 /obj/effect/turf_decal/tile/brown/fourcorners,
@@ -2877,14 +2825,17 @@
 /turf/open/floor/iron/dark/textured_half,
 /area/centcom/central_command_areas/hallway)
 "anE" = (
+/obj/effect/turf_decal/tile/neutral/full,
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
 /obj/machinery/button/door/indestructible{
-	id = "CC_First_Port";
-	name = "First Port";
+	name = "ERT Assault Pod";
+	id = "CC_ERT_Assault_Pod";
 	req_access = list("cent_general");
-	pixel_y = -6
+	pixel_x = 24
 	},
-/turf/closed/indestructible/riveted,
-/area/centcom/central_command_areas/supply)
+/turf/open/floor/iron/dark/textured_large,
+/area/centcom/central_command_areas/supplypod/loading/ert)
 "anH" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 4
@@ -3465,15 +3416,6 @@
 /obj/machinery/door/airlock/maintenance_hatch,
 /turf/open/floor/catwalk_floor,
 /area/centcom/central_command_areas/evacuation/ship)
-"aqv" = (
-/obj/machinery/button/door/indestructible{
-	name = "ERT Drop Pod Hangars";
-	id = "CC_ERT_Drop_Pods_Hangar";
-	req_access = list("cent_captain");
-	pixel_x = -6
-	},
-/turf/closed/indestructible/riveted,
-/area/centcom/central_command_areas/supplypod)
 "aqx" = (
 /obj/structure/table/reinforced,
 /obj/structure/sign/departments/engineering/directional/north,
@@ -3535,7 +3477,7 @@
 "aqN" = (
 /obj/machinery/door/poddoor/shutters/indestructible/preopen,
 /obj/effect/turf_decal/loading_area,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium/pod,
 /area/centcom/central_command_areas/supply)
 "aqP" = (
 /obj/vehicle/ridden/janicart,
@@ -3790,19 +3732,30 @@
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/supply)
 "asi" = (
-/obj/machinery/button/door/indestructible{
-	name = "ERT Drop Pod";
-	id = "CC_ERT_Pod_2";
-	req_access = list("cent_general");
-	pixel_x = -6
+/obj/machinery/door/airlock/centcom{
+	name = "Prison"
 	},
-/turf/closed/indestructible/riveted,
-/area/centcom/central_command_areas/supplypod/loading/ert)
+/obj/machinery/door/poddoor/ert{
+	name = "CentCom Prison";
+	id = "CC_Prison_1"
+	},
+/obj/effect/mapping_helpers/airlock/access/all/admin/general,
+/obj/effect/mapping_helpers/airlock/autoname,
+/obj/effect/mapping_helpers/airlock/cutaiwire,
+/obj/machinery/button/door/indestructible{
+	id = "CC_Prison_1";
+	name = "CentCom Brig";
+	pixel_x = 24
+	},
+/turf/open/floor/iron/smooth_half{
+	dir = 1
+	},
+/area/centcom/central_command_areas/prison)
 "asj" = (
 /obj/effect/turf_decal/loading_area{
 	dir = 4
 	},
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium/pod,
 /area/centcom/central_command_areas/supply)
 "asl" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/hidden,
@@ -3899,6 +3852,12 @@
 /obj/effect/turf_decal/tile/dark/half/contrasted,
 /obj/effect/turf_decal/tile/brown/half/contrasted{
 	dir = 1
+	},
+/obj/machinery/button/door/indestructible{
+	id = "CC_First_Port";
+	name = "First Port";
+	req_access = list("cent_general");
+	pixel_y = 24
 	},
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/supply)
@@ -4038,17 +3997,8 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 5
 	},
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium/pod,
 /area/centcom/central_command_areas/supply)
-"atz" = (
-/obj/machinery/button/door/indestructible{
-	name = "ERT Assault Pod";
-	id = "CC_ERT_Assault_Pod";
-	req_access = list("cent_general");
-	pixel_y = -6
-	},
-/turf/closed/indestructible/riveted,
-/area/centcom/central_command_areas/supplypod/loading/ert)
 "atB" = (
 /obj/effect/turf_decal/stripes/corner{
 	dir = 1
@@ -4784,6 +4734,12 @@
 /obj/effect/turf_decal/stripes/end{
 	dir = 1
 	},
+/obj/machinery/button/door/indestructible{
+	name = "Heavy ERT Gear";
+	id = "CC_Heavy_1";
+	req_access = list("cent_captain");
+	pixel_y = 24
+	},
 /turf/open/floor/iron/smooth_edge{
 	dir = 8
 	},
@@ -4930,6 +4886,12 @@
 /obj/effect/turf_decal/stripes/end{
 	dir = 1
 	},
+/obj/machinery/button/door/indestructible{
+	name = "Light ERT Gear";
+	id = "CC_Light_1";
+	req_access = list("cent_captain");
+	pixel_y = 24
+	},
 /turf/open/floor/iron/smooth_edge{
 	dir = 4
 	},
@@ -4963,23 +4925,6 @@
 /obj/effect/turf_decal/tile/dark_blue/full,
 /turf/open/floor/iron/dark/smooth_large,
 /area/centcom/central_command_areas/hallway)
-"ays" = (
-/obj/machinery/button/door/indestructible{
-	pixel_y = 8;
-	id = "CC_Assault_1";
-	name = "Assault Gear";
-	req_access = list("cent_captain");
-	pixel_x = 8
-	},
-/obj/machinery/button/door/indestructible{
-	pixel_y = -8;
-	id = "CC_Energy_1";
-	name = "Energy Counter-Combat Gear";
-	req_access = list("cent_captain");
-	pixel_x = 8
-	},
-/turf/closed/indestructible/riveted,
-/area/centcom/central_command_areas/armory)
 "ayt" = (
 /obj/machinery/door/poddoor/ert{
 	name = "ERT Drop Pod";
@@ -5003,6 +4948,12 @@
 "ayw" = (
 /obj/effect/turf_decal/trimline/dark_red/filled/corner{
 	dir = 1
+	},
+/obj/machinery/button/door/indestructible{
+	name = "ERT Drop Pod";
+	id = "CC_ERT_Pod_4";
+	req_access = list("cent_general");
+	pixel_x = -24
 	},
 /turf/open/floor/iron/dark,
 /area/centcom/central_command_areas/supplypod/loading/ert)
@@ -5503,11 +5454,21 @@
 /obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
 /obj/structure/cable/layer3,
+/obj/machinery/button/door/indestructible{
+	id = "CC_Port2_1";
+	name = "Armory & Second Port";
+	req_access = list("cent_captain");
+	pixel_y = -24
+	},
 /turf/open/floor/iron/smooth_half,
 /area/centcom/central_command_areas/armory)
 "aAN" = (
 /obj/effect/turf_decal/stripes/corner{
 	dir = 8
+	},
+/obj/structure/statue/dummy/srt{
+	dir = 1;
+	pixel_y = 0
 	},
 /turf/open/floor/iron/smooth_edge,
 /area/centcom/central_command_areas/briefing)
@@ -5762,6 +5723,12 @@
 /obj/machinery/door/airlock/centcom,
 /obj/effect/mapping_helpers/airlock/access/all/admin/general,
 /obj/effect/mapping_helpers/airlock/cutaiwire,
+/obj/machinery/button/door/indestructible{
+	name = "Second Port";
+	id = "CC_Port2_2";
+	req_access = list("cent_general");
+	pixel_y = -24
+	},
 /turf/open/floor/iron/smooth_half,
 /area/centcom/central_command_areas/ferry)
 "aCe" = (
@@ -6271,7 +6238,7 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 6
 	},
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium/pod,
 /area/centcom/central_command_areas/supply)
 "aDQ" = (
 /obj/effect/turf_decal/tile/neutral/fourcorners,
@@ -6611,7 +6578,7 @@
 "aFa" = (
 /obj/structure/table/reinforced/plastitaniumglass,
 /obj/machinery/fax/admin,
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium/pod/dark,
 /area/centcom/central_command_areas/cabin/soo)
 "aFb" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/green/visible,
@@ -7055,15 +7022,6 @@
 /obj/item/flashlight/lamp/green,
 /turf/open/floor/bronze/flat,
 /area/centcom/central_command_areas/planetary_port/library)
-"aGK" = (
-/obj/machinery/button/door/indestructible{
-	name = "ERT Drop Pod";
-	id = "CC_ERT_Pod_1";
-	req_access = list("cent_general");
-	pixel_x = -6
-	},
-/turf/closed/indestructible/riveted,
-/area/centcom/central_command_areas/supplypod/loading/ert)
 "aGM" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/visible,
 /obj/effect/turf_decal/tile/yellow/opposingcorners{
@@ -7231,6 +7189,12 @@
 /obj/effect/turf_decal/trimline/dark_red/filled/corner{
 	dir = 8
 	},
+/obj/machinery/button/door/indestructible{
+	name = "ERT Drop Pod";
+	id = "CC_ERT_Pod_3";
+	req_access = list("cent_general");
+	pixel_x = -24
+	},
 /turf/open/floor/iron/dark,
 /area/centcom/central_command_areas/supplypod/loading/ert)
 "aHt" = (
@@ -7268,7 +7232,7 @@
 	pixel_y = -4
 	},
 /obj/structure/sign/flag/nanotrasen/directional/south,
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium/pod/dark,
 /area/centcom/central_command_areas/cabin/soo)
 "aHu" = (
 /obj/effect/turf_decal/caution/stand_clear/red{
@@ -7538,15 +7502,6 @@
 /obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
 /turf/open/floor/iron/dark/textured_large,
 /area/centcom/central_command_areas/supplypod/loading/ert)
-"aIu" = (
-/obj/machinery/button/door/indestructible{
-	pixel_x = 6;
-	id = "CC_Mech_1";
-	name = "Combat Exosuit Storage";
-	req_access = list("cent_captain")
-	},
-/turf/closed/indestructible/riveted,
-/area/centcom/central_command_areas/armory)
 "aIv" = (
 /obj/effect/turf_decal/siding/wood{
 	dir = 8
@@ -7668,6 +7623,11 @@
 /obj/structure/sign/warning/secure_area/directional/east,
 /obj/structure/sign/poster/official/nanotrasen_logo/directional/south,
 /obj/effect/turf_decal/line/dark_blue/anticorner/contrasted,
+/obj/structure/statue/dummy/srt{
+	dir = 8;
+	pixel_x = 11;
+	pixel_y = 0
+	},
 /turf/open/floor/iron/dark,
 /area/centcom/central_command_areas/hallway)
 "aIQ" = (
@@ -7682,7 +7642,7 @@
 /obj/effect/turf_decal/caution/stand_clear{
 	dir = 4
 	},
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium/pod,
 /area/centcom/central_command_areas/supply)
 "aIT" = (
 /obj/structure/sign/warning/directional/east,
@@ -7693,21 +7653,6 @@
 	dir = 1
 	},
 /area/centcom/central_command_areas/armory)
-"aIU" = (
-/obj/machinery/button/door/indestructible{
-	name = "First Cell";
-	id = "CC_Cell_1";
-	pixel_y = 8;
-	pixel_x = 8
-	},
-/obj/machinery/button/door/indestructible{
-	pixel_y = -8;
-	name = "Second Cell";
-	id = "CC_Cell_2";
-	pixel_x = 8
-	},
-/turf/closed/indestructible/riveted,
-/area/centcom/central_command_areas/prison/cells)
 "aIV" = (
 /obj/machinery/griddle,
 /turf/open/floor/iron,
@@ -7743,6 +7688,12 @@
 /obj/effect/mapping_helpers/airlock/access/all/admin/general,
 /obj/effect/mapping_helpers/airlock/autoname,
 /obj/effect/mapping_helpers/airlock/cutaiwire,
+/obj/machinery/button/door/indestructible{
+	id = "CC_Brief_2";
+	name = "ERT Briefing Room";
+	req_access = list("cent_captain");
+	pixel_y = 24
+	},
 /turf/open/floor/iron/smooth_large,
 /area/centcom/central_command_areas/briefing)
 "aJb" = (
@@ -7824,7 +7775,7 @@
 /obj/item/clothing/accessory/medal/bronze_heart,
 /obj/item/gun/ballistic/revolver/golden,
 /obj/machinery/status_display/ai/directional/north,
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium/pod/dark,
 /area/centcom/central_command_areas/cabin/soo)
 "aJo" = (
 /obj/structure/table/wood,
@@ -7903,7 +7854,7 @@
 "aJA" = (
 /obj/structure/table/reinforced/plastitaniumglass,
 /obj/machinery/computer/security/wooden_tv,
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium/pod/dark,
 /area/centcom/central_command_areas/cabin/soo)
 "aJB" = (
 /obj/structure/railing/corner{
@@ -7936,22 +7887,13 @@
 /obj/effect/turf_decal/tile/neutral/full,
 /turf/open/floor/iron/dark/textured_large,
 /area/centcom/central_command_areas/evacuation/ship)
-"aJF" = (
-/obj/machinery/button/door/indestructible{
-	name = "ERT Drop Pod";
-	id = "CC_ERT_Pod_3";
-	req_access = list("cent_general");
-	pixel_x = 6
-	},
-/turf/closed/indestructible/riveted,
-/area/centcom/central_command_areas/supplypod/loading/ert)
 "aJG" = (
 /obj/machinery/computer/communications{
 	dir = 1
 	},
 /obj/structure/light_fake/spot/directional/south,
 /obj/machinery/newscaster/directional/south,
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium/pod/dark,
 /area/centcom/central_command_areas/cabin/soo)
 "aJH" = (
 /obj/machinery/vending/nta/light,
@@ -8055,6 +7997,12 @@
 /obj/effect/turf_decal/trimline/dark_red/filled/corner{
 	dir = 4
 	},
+/obj/machinery/button/door/indestructible{
+	name = "ERT Drop Pod";
+	id = "CC_ERT_Pod_2";
+	req_access = list("cent_general");
+	pixel_x = 24
+	},
 /turf/open/floor/iron/dark,
 /area/centcom/central_command_areas/supplypod/loading/ert)
 "aKb" = (
@@ -8069,7 +8017,7 @@
 /obj/effect/turf_decal/caution/stand_clear{
 	dir = 4
 	},
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium/pod,
 /area/centcom/central_command_areas/supply)
 "aKe" = (
 /obj/structure/chair/sofa/bench/right{
@@ -8755,6 +8703,12 @@
 /area/centcom/central_command_areas/evacuation/ship)
 "aLS" = (
 /obj/effect/turf_decal/trimline/dark_red/filled/corner,
+/obj/machinery/button/door/indestructible{
+	name = "ERT Drop Pod";
+	id = "CC_ERT_Pod_1";
+	req_access = list("cent_general");
+	pixel_x = 24
+	},
 /turf/open/floor/iron/dark,
 /area/centcom/central_command_areas/supplypod/loading/ert)
 "aLT" = (
@@ -9044,7 +8998,7 @@
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
 	},
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium/pod,
 /area/centcom/central_command_areas/supply)
 "aNc" = (
 /obj/effect/turf_decal/siding/yellow/corner{
@@ -9355,15 +9309,6 @@
 /obj/effect/turf_decal/bot,
 /turf/open/floor/iron/dark,
 /area/centcom/central_command_areas/engine)
-"aOp" = (
-/obj/machinery/button/door/indestructible{
-	name = "ERT Drop Pod";
-	id = "CC_ERT_Pod_4";
-	req_access = list("cent_general");
-	pixel_x = 6
-	},
-/turf/closed/indestructible/riveted,
-/area/centcom/central_command_areas/supplypod/loading/ert)
 "aOs" = (
 /obj/effect/turf_decal/trimline/blue/filled/line{
 	dir = 4
@@ -9373,13 +9318,23 @@
 /area/centcom/central_command_areas/planetary_port)
 "aOv" = (
 /obj/machinery/button/door/indestructible{
-	name = "ERT Assault Pod";
-	id = "CC_ERT_Assault_Pod";
-	req_access = list("cent_general");
-	pixel_x = 6
+	pixel_y = 8;
+	id = "CC_Assault_1";
+	name = "Assault Gear";
+	req_access = list("cent_captain");
+	pixel_x = -24
 	},
-/turf/closed/indestructible/riveted,
-/area/centcom/central_command_areas/supplypod/loading/ert)
+/obj/machinery/button/door/indestructible{
+	pixel_y = -8;
+	id = "CC_Energy_1";
+	name = "Energy Counter-Combat Gear";
+	req_access = list("cent_captain");
+	pixel_x = -24
+	},
+/turf/open/floor/iron/smooth_half{
+	dir = 1
+	},
+/area/centcom/central_command_areas/armory)
 "aOy" = (
 /obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
@@ -9522,14 +9477,17 @@
 /turf/open/floor/catwalk_floor,
 /area/centcom/central_command_areas/engine)
 "aPj" = (
+/obj/effect/turf_decal/tile/neutral/full,
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
 /obj/machinery/button/door/indestructible{
-	name = "Heavy ERT Gear";
-	id = "CC_Heavy_1";
-	req_access = list("cent_captain");
-	pixel_y = -6
+	name = "ERT Assault Pod";
+	id = "CC_ERT_Assault_Pod";
+	req_access = list("cent_general");
+	pixel_y = -24
 	},
-/turf/closed/indestructible/riveted,
-/area/centcom/central_command_areas/armory)
+/turf/open/floor/iron/dark/textured_large,
+/area/centcom/central_command_areas/supplypod/loading/ert)
 "aPm" = (
 /obj/effect/turf_decal/delivery,
 /turf/open/floor/iron,
@@ -9731,6 +9689,11 @@
 /area/centcom/central_command_areas/supply)
 "aQq" = (
 /obj/structure/sign/poster/official/nanotrasen_logo/directional/west,
+/obj/structure/statue/dummy/srt{
+	dir = 4;
+	pixel_x = -11;
+	pixel_y = 0
+	},
 /turf/open/floor/iron/smooth_half{
 	dir = 1
 	},
@@ -10116,15 +10079,6 @@
 	},
 /turf/open/floor/iron/dark/diagonal,
 /area/centcom/central_command_areas/bar)
-"aSr" = (
-/obj/machinery/button/door/indestructible{
-	id = "CC_Eng_1";
-	name = "Engine Room";
-	req_access = list("cent_captain");
-	pixel_y = 6
-	},
-/turf/closed/indestructible/riveted,
-/area/centcom/central_command_areas/engine)
 "aSs" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 1
@@ -10183,15 +10137,6 @@
 	},
 /turf/open/floor/iron/smooth_corner,
 /area/centcom/central_command_areas/briefing)
-"aSF" = (
-/obj/machinery/button/door/indestructible{
-	id = "CC_Eng_3";
-	name = "Second Engine";
-	req_access = list("cent_captain");
-	pixel_y = -6
-	},
-/turf/closed/indestructible/riveted,
-/area/centcom/central_command_areas/engine)
 "aSK" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/dark,
 /obj/structure/table/reinforced,
@@ -10270,14 +10215,22 @@
 /turf/open/floor/plating,
 /area/centcom/central_command_areas/hospital)
 "aSZ" = (
-/obj/machinery/button/door/indestructible{
-	id = "CC_Port2_1";
-	name = "Armory & Second Port";
-	req_access = list("cent_captain");
-	pixel_y = 6
+/obj/machinery/door/airlock/centcom,
+/obj/effect/mapping_helpers/airlock/access/all/admin/captain,
+/obj/machinery/door/poddoor/ert{
+	name = "First Port";
+	id = "CC_Argos_1"
 	},
-/turf/closed/indestructible/riveted,
-/area/centcom/central_command_areas/armory)
+/obj/effect/mapping_helpers/airlock/autoname,
+/obj/effect/mapping_helpers/airlock/cutaiwire,
+/obj/machinery/button/door/indestructible{
+	id = "CC_Argos_1";
+	name = "First Port";
+	req_access = list("cent_captain");
+	pixel_y = 24
+	},
+/turf/open/floor/iron/dark/smooth_large,
+/area/centcom/central_command_areas/fore)
 "aTa" = (
 /obj/machinery/atmospherics/pipe/layer_manifold/green/visible{
 	dir = 4
@@ -10546,6 +10499,10 @@
 /area/centcom/central_command_areas/armory)
 "aUj" = (
 /obj/effect/turf_decal/stripes/corner,
+/obj/structure/statue/dummy/srt{
+	dir = 1;
+	pixel_y = 0
+	},
 /turf/open/floor/iron/smooth_edge,
 /area/centcom/central_command_areas/briefing)
 "aUk" = (
@@ -10673,7 +10630,7 @@
 /obj/machinery/modular_computer/preset/id/centcom{
 	dir = 1
 	},
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium/pod/dark,
 /area/centcom/central_command_areas/cabin/soo)
 "aUP" = (
 /obj/machinery/duct,
@@ -10904,15 +10861,6 @@
 /obj/structure/cable/layer1,
 /turf/open/floor/plating/airless,
 /area/space/nearstation)
-"aVN" = (
-/obj/machinery/button/door/indestructible{
-	name = "Second Port";
-	id = "CC_Port2_2";
-	req_access = list("cent_general");
-	pixel_y = 6
-	},
-/turf/closed/indestructible/riveted,
-/area/centcom/central_command_areas/armory)
 "aVQ" = (
 /obj/structure/bed/double,
 /obj/item/bedsheet/nanotrasen/double,
@@ -11017,6 +10965,12 @@
 	},
 /obj/effect/mapping_helpers/airlock/autoname,
 /obj/effect/mapping_helpers/airlock/cutaiwire,
+/obj/machinery/button/door/indestructible{
+	id = "CC_Eng_1";
+	name = "Engine Room";
+	req_access = list("cent_captain");
+	pixel_y = -24
+	},
 /turf/open/floor/iron/dark/smooth_large,
 /area/centcom/central_command_areas/engine)
 "aWi" = (
@@ -11057,6 +11011,11 @@
 	dir = 1
 	},
 /obj/structure/sign/departments/custodian/directional/west,
+/obj/structure/statue/dummy/srt{
+	dir = 4;
+	pixel_x = -11;
+	pixel_y = 0
+	},
 /turf/open/floor/iron/dark/textured_half,
 /area/centcom/central_command_areas/hallway)
 "aWq" = (
@@ -11233,15 +11192,6 @@
 /obj/machinery/light/small/directional/west,
 /turf/open/floor/stone,
 /area/centcom/central_command_areas/planetary_port/restroom)
-"aWZ" = (
-/obj/machinery/button/door/indestructible{
-	name = "ERT Assault Pod";
-	id = "CC_ERT_Assault_Pod";
-	req_access = list("cent_general");
-	pixel_y = 6
-	},
-/turf/closed/indestructible/riveted,
-/area/centcom/central_command_areas/supplypod/loading/ert)
 "aXe" = (
 /turf/closed/indestructible/riveted,
 /area/centcom/central_command_areas/supplypod/pod_storage)
@@ -11257,6 +11207,12 @@
 	},
 /obj/effect/mapping_helpers/airlock/autoname,
 /obj/effect/mapping_helpers/airlock/cutaiwire,
+/obj/machinery/button/door/indestructible{
+	id = "CC_Eng_3";
+	name = "Second Engine";
+	req_access = list("cent_captain");
+	pixel_y = 24
+	},
 /turf/open/floor/engine,
 /area/centcom/central_command_areas/engine)
 "aXh" = (
@@ -11421,6 +11377,12 @@
 	},
 /obj/effect/mapping_helpers/airlock/autoname,
 /obj/effect/mapping_helpers/airlock/cutaiwire,
+/obj/machinery/button/door/indestructible{
+	id = "CC_Eng_2";
+	name = "First Engine";
+	req_access = list("cent_captain");
+	pixel_y = 24
+	},
 /turf/open/floor/engine,
 /area/centcom/central_command_areas/engine)
 "aXV" = (
@@ -11563,7 +11525,7 @@
 /area/centcom/central_command_areas/engine)
 "aYB" = (
 /obj/effect/turf_decal/stripes/line,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium/pod,
 /area/centcom/central_command_areas/supply)
 "aYC" = (
 /obj/vehicle/sealed/mecha/ripley/cargo,
@@ -11592,6 +11554,12 @@
 /obj/machinery/door/poddoor/ert{
 	name = "ERT Drop Pods Hangar";
 	id = "CC_ERT_Drop_Pods_Hangar"
+	},
+/obj/machinery/button/door/indestructible{
+	name = "ERT Drop Pod Hangars";
+	id = "CC_ERT_Drop_Pods_Hangar";
+	req_access = list("cent_captain");
+	pixel_x = 24
 	},
 /turf/open/floor/iron/smooth,
 /area/centcom/central_command_areas/supplypod)
@@ -11736,7 +11704,7 @@
 	dir = 10
 	},
 /obj/effect/spawner/random/structure/shipping_container/station_appropriate,
-/turf/open/floor/pod,
+/turf/open/floor/mineral/plastitanium/pod,
 /area/centcom/central_command_areas/supply)
 "aZh" = (
 /obj/structure/tank_dispenser/oxygen,
@@ -11771,6 +11739,12 @@
 "aZr" = (
 /obj/effect/turf_decal/line/dark_blue{
 	dir = 8
+	},
+/obj/machinery/button/door/indestructible{
+	pixel_x = 24;
+	name = "Civil Exosuit Storage";
+	id = "CC_Mech_2";
+	req_access = list("cent_captain")
 	},
 /turf/open/floor/iron/smooth_half{
 	dir = 1
@@ -12046,6 +12020,11 @@
 /area/centcom/central_command_areas/arboretum)
 "bhU" = (
 /obj/structure/light_fake/spot/directional/west,
+/obj/structure/statue/dummy/srt{
+	dir = 4;
+	pixel_x = -11;
+	pixel_y = 0
+	},
 /turf/open/floor/iron/dark,
 /area/centcom/central_command_areas/courtroom)
 "bhV" = (
@@ -12070,14 +12049,12 @@
 	},
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/planetary_port)
-"bpf" = (
-/obj/machinery/button/door/indestructible{
-	id = "CC_Registry_1";
-	name = "Registry Emergency Shutters";
-	req_access = list("cent_general");
-	pixel_y = -6
+"bmm" = (
+/obj/structure/statue/dummy/srt{
+	dir = 1;
+	pixel_y = 0
 	},
-/turf/closed/indestructible/riveted,
+/turf/open/floor/iron/dark/smooth_edge,
 /area/centcom/central_command_areas/hallway)
 "bpC" = (
 /obj/structure/chair/comfy/corp{
@@ -12554,6 +12531,12 @@
 	},
 /obj/effect/mapping_helpers/airlock/autoname,
 /obj/effect/mapping_helpers/airlock/cutaiwire,
+/obj/machinery/button/door/indestructible{
+	id = "CC_Conf_1";
+	name = "Conference Room Blast Door";
+	req_access = list("cent_captain");
+	pixel_x = -24
+	},
 /turf/open/floor/wood,
 /area/centcom/central_command_areas/conference_room)
 "csT" = (
@@ -12906,7 +12889,7 @@
 /area/centcom/central_command_areas/courtroom)
 "cVD" = (
 /obj/machinery/computer/communications,
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium/pod/dark,
 /area/centcom/central_command_areas/cabin)
 "cVY" = (
 /obj/effect/turf_decal/siding/wideplating/dark/corner{
@@ -13575,10 +13558,6 @@
 "erV" = (
 /turf/open/floor/carpet/green,
 /area/centcom/central_command_areas/srt/brief_srt)
-"esM" = (
-/obj/effect/turf_decal/line/dark_blue/anticorner,
-/turf/open/floor/iron/dark/smooth_large,
-/area/centcom/central_command_areas/hallway)
 "eta" = (
 /obj/effect/turf_decal/siding/wood{
 	dir = 9
@@ -13633,6 +13612,12 @@
 	},
 /obj/effect/mapping_helpers/airlock/autoname,
 /obj/effect/mapping_helpers/airlock/cutaiwire,
+/obj/machinery/button/door/indestructible{
+	id = "CC_SRT_1";
+	name = "SRT";
+	req_access = list("cent_general");
+	pixel_y = 24
+	},
 /turf/open/floor/iron/dark/smooth_large,
 /area/centcom/central_command_areas/srt)
 "evz" = (
@@ -13682,17 +13667,21 @@
 /obj/effect/turf_decal/line/dark_blue/line{
 	dir = 1
 	},
+/obj/structure/statue/dummy/srt,
 /turf/open/floor/iron/dark/textured_half,
 /area/centcom/central_command_areas/hallway)
 "eBO" = (
+/obj/effect/turf_decal/tile/neutral/full,
+/obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
+/obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
 /obj/machinery/button/door/indestructible{
-	id = "CC_Office_1";
-	name = "Office";
-	req_access = list("cent_captain");
-	pixel_y = -6
+	name = "ERT Assault Pod";
+	id = "CC_ERT_Assault_Pod";
+	req_access = list("cent_general");
+	pixel_y = 24
 	},
-/turf/closed/indestructible/riveted,
-/area/centcom/central_command_areas/admin)
+/turf/open/floor/iron/dark/textured_large,
+/area/centcom/central_command_areas/supplypod/loading/ert)
 "eCo" = (
 /obj/structure/filingcabinet/security,
 /turf/open/floor/carpet,
@@ -14016,7 +14005,7 @@
 	pixel_x = 10;
 	pixel_y = -4
 	},
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium/pod/dark,
 /area/centcom/central_command_areas/cabin)
 "fcN" = (
 /obj/structure/light_fake/spot/directional/east,
@@ -14336,15 +14325,6 @@
 	},
 /turf/open/floor/carpet/neon/simple/blue,
 /area/centcom/central_command_areas/planetary_port/club)
-"fNl" = (
-/obj/machinery/button/door/indestructible{
-	id = "CC_Bridge_1";
-	name = "Bridge";
-	req_access = list("cent_captain");
-	pixel_x = -6
-	},
-/turf/closed/indestructible/riveted,
-/area/centcom/central_command_areas/cabin/captain)
 "fOe" = (
 /obj/item/kirbyplants/random,
 /turf/open/floor/stone,
@@ -14594,15 +14574,6 @@
 	},
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/planetary_port)
-"gqI" = (
-/obj/machinery/button/door/indestructible{
-	id = "CC_SRT_1";
-	name = "SRT";
-	req_access = list("cent_general");
-	pixel_y = -6
-	},
-/turf/closed/indestructible/riveted,
-/area/centcom/central_command_areas/srt)
 "grZ" = (
 /obj/effect/turf_decal/siding/wood{
 	dir = 8
@@ -14842,6 +14813,17 @@
 	},
 /turf/open/floor/wood,
 /area/centcom/central_command_areas/srt/brief_srt)
+"gRp" = (
+/obj/effect/turf_decal/tile/brown/anticorner/contrasted{
+	dir = 4
+	},
+/obj/structure/statue/dummy/srt{
+	dir = 8;
+	pixel_x = 11;
+	pixel_y = 0
+	},
+/turf/open/floor/iron,
+/area/centcom/central_command_areas/supply)
 "gSn" = (
 /obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
 /obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
@@ -14937,6 +14919,14 @@
 	},
 /turf/open/floor/stone,
 /area/centcom/central_command_areas/planetary_port/plaza)
+"hcq" = (
+/obj/effect/turf_decal/tile/dark_blue/full,
+/obj/structure/statue/dummy/srt{
+	dir = 1;
+	pixel_y = 0
+	},
+/turf/open/floor/iron/dark/smooth_large,
+/area/centcom/central_command_areas/courtroom)
 "heo" = (
 /obj/structure/railing{
 	dir = 1
@@ -15021,6 +15011,12 @@
 /obj/structure/flora/bush/jungle/b/style_random,
 /turf/open/floor/grass,
 /area/centcom/central_command_areas/planetary_port/plaza)
+"hql" = (
+/obj/structure/statue/dummy/srt,
+/turf/open/floor/iron/smooth_edge{
+	dir = 1
+	},
+/area/centcom/central_command_areas/armory)
 "hrk" = (
 /obj/structure/table/wood/fancy/royalblack,
 /obj/item/flashlight/lamp,
@@ -15733,6 +15729,10 @@
 /obj/effect/spawner/random/food_or_drink/cake_ingredients,
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/planetary_port)
+"iWM" = (
+/obj/structure/statue/dummy/srt,
+/turf/open/floor/iron/dark/textured_half,
+/area/centcom/central_command_areas/hallway)
 "iZa" = (
 /obj/machinery/door/airlock/highsecurity,
 /obj/effect/mapping_helpers/airlock/autoname,
@@ -15842,15 +15842,6 @@
 	},
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/planetary_port)
-"jmp" = (
-/obj/machinery/button/door/indestructible{
-	id = "CC_Argos_1";
-	name = "First Port";
-	req_access = list("cent_captain");
-	pixel_y = -6
-	},
-/turf/closed/indestructible/riveted,
-/area/centcom/central_command_areas/fore)
 "joK" = (
 /obj/effect/turf_decal/siding/wideplating/dark/corner{
 	dir = 8
@@ -15893,6 +15884,7 @@
 /obj/effect/turf_decal/line/dark_blue/line{
 	dir = 1
 	},
+/obj/structure/statue/dummy/srt,
 /turf/open/floor/iron/dark/smooth_large,
 /area/centcom/central_command_areas/hallway)
 "jqP" = (
@@ -16050,6 +16042,14 @@
 	dir = 1
 	},
 /area/centcom/central_command_areas/cabin)
+"jLj" = (
+/obj/effect/turf_decal/tile/dark_blue/full,
+/obj/structure/statue/dummy/srt{
+	dir = 1;
+	pixel_y = 0
+	},
+/turf/open/floor/iron/dark/smooth_large,
+/area/centcom/central_command_areas/hallway)
 "jMF" = (
 /obj/effect/turf_decal/trimline/yellow/line{
 	dir = 10
@@ -16106,6 +16106,19 @@
 /obj/effect/light_emitter/podbay,
 /turf/open/floor/grass,
 /area/centcom/central_command_areas/planetary_port/plaza)
+"jSA" = (
+/obj/effect/turf_decal/siding/yellow{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/brown/fourcorners,
+/obj/structure/light_fake/floor,
+/obj/structure/statue/dummy/srt{
+	dir = 4;
+	pixel_x = -11;
+	pixel_y = 0
+	},
+/turf/open/floor/iron,
+/area/centcom/central_command_areas/supply)
 "jTU" = (
 /obj/structure/table,
 /obj/effect/turf_decal/line/dark_blue{
@@ -16149,6 +16162,10 @@
 /obj/effect/spawner/structure/window/reinforced,
 /turf/open/floor/plating,
 /area/centcom/central_command_areas/planetary_port/library)
+"jYL" = (
+/obj/effect/turf_decal/line/dark_blue/anticorner,
+/turf/open/floor/iron/dark/smooth_large,
+/area/centcom/central_command_areas/hallway)
 "jYQ" = (
 /obj/effect/turf_decal/siding/wideplating/dark/corner,
 /obj/structure/flora/bush/jungle/b/style_random,
@@ -16276,6 +16293,14 @@
 	},
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/planetary_port)
+"kuk" = (
+/obj/effect/turf_decal/line/dark_blue/anticorner{
+	dir = 8
+	},
+/turf/open/floor/iron/dark/smooth_edge{
+	dir = 8
+	},
+/area/centcom/central_command_areas/hallway)
 "kuq" = (
 /obj/machinery/computer/accounting{
 	dir = 8
@@ -16625,7 +16650,7 @@
 "lfr" = (
 /obj/structure/table/reinforced/plastitaniumglass,
 /obj/item/storage/fancy/donut_box,
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium/pod/dark,
 /area/centcom/central_command_areas/cabin)
 "lgT" = (
 /obj/effect/turf_decal/tile/dark/fourcorners{
@@ -16719,6 +16744,12 @@
 /obj/effect/mapping_helpers/airlock/autoname,
 /obj/effect/mapping_helpers/airlock/cutaiwire,
 /obj/machinery/duct,
+/obj/machinery/button/door/indestructible{
+	id = "CC_FRO_1";
+	name = "Fleet Representative Office";
+	req_access = list("cent_captain");
+	pixel_y = 24
+	},
 /turf/open/floor/iron/dark/smooth_large,
 /area/centcom/central_command_areas/cabin)
 "lsu" = (
@@ -17212,6 +17243,12 @@
 	},
 /obj/effect/mapping_helpers/airlock/autoname,
 /obj/effect/mapping_helpers/airlock/cutaiwire,
+/obj/machinery/button/door/indestructible{
+	id = "CC_Office_1";
+	name = "Office";
+	req_access = list("cent_captain");
+	pixel_y = 24
+	},
 /turf/open/floor/wood,
 /area/centcom/central_command_areas/admin)
 "mSS" = (
@@ -17353,6 +17390,7 @@
 /obj/effect/turf_decal/line/dark_blue{
 	dir = 8
 	},
+/obj/structure/statue/dummy/srt,
 /turf/open/floor/iron/dark/textured_half,
 /area/centcom/central_command_areas/hallway)
 "njG" = (
@@ -17365,6 +17403,19 @@
 	},
 /turf/open/floor/iron/dark,
 /area/centcom/central_command_areas/hallway)
+"nlB" = (
+/obj/effect/turf_decal/line/dark_blue/line{
+	dir = 8
+	},
+/obj/structure/statue/dummy/srt{
+	dir = 8;
+	pixel_x = 11;
+	pixel_y = 0
+	},
+/turf/open/floor/iron/smooth_half{
+	dir = 1
+	},
+/area/centcom/central_command_areas/armory)
 "noS" = (
 /obj/effect/turf_decal/siding/wood{
 	dir = 4
@@ -17695,6 +17746,13 @@
 	},
 /turf/open/floor/iron/dark,
 /area/centcom/central_command_areas/control)
+"nRm" = (
+/obj/structure/sign/poster/official/tactical_game_cards/directional/south,
+/obj/effect/turf_decal/line/dark_blue/line,
+/obj/machinery/duct,
+/obj/structure/light_fake/spot/directional/south,
+/turf/open/floor/iron/dark/textured_half,
+/area/centcom/central_command_areas/hallway)
 "nRQ" = (
 /obj/machinery/scanner_gate/preset_guns,
 /obj/machinery/door/poddoor/shutters/indestructible/preopen,
@@ -17752,7 +17810,7 @@
 "nYw" = (
 /obj/structure/table/reinforced/plastitaniumglass,
 /obj/machinery/fax/admin,
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium/pod/dark,
 /area/centcom/central_command_areas/cabin)
 "nZI" = (
 /obj/machinery/door/airlock/multi_tile/public/glass{
@@ -17861,6 +17919,17 @@
 /obj/effect/spawner/structure/window/reinforced/indestructible,
 /turf/open/floor/plating,
 /area/centcom/central_command_areas/courtroom)
+"ohp" = (
+/obj/structure/light_fake/spot/directional/east,
+/obj/structure/statue/dummy/srt{
+	dir = 8;
+	pixel_x = 11;
+	pixel_y = 0
+	},
+/turf/open/floor/iron/dark/textured_half{
+	dir = 1
+	},
+/area/centcom/central_command_areas/hallway)
 "ohJ" = (
 /obj/structure/flora/bush/fullgrass/style_random,
 /obj/effect/light_emitter/podbay,
@@ -18045,16 +18114,6 @@
 	},
 /turf/open/floor/iron/dark,
 /area/centcom/central_command_areas/control)
-"ozQ" = (
-/obj/structure/closet/cabinet,
-/obj/item/clothing/suit/space/officer/browntrench,
-/obj/item/clothing/suit/space/officer/browntrench,
-/obj/item/clothing/head/helmet/space/beret/soo,
-/obj/item/clothing/head/helmet/space/beret/soo,
-/obj/item/clothing/suit/space/officer,
-/obj/item/clothing/suit/space/officer,
-/turf/open/floor/iron/dark/small,
-/area/centcom/central_command_areas/cabin/soo)
 "oAB" = (
 /obj/machinery/door/airlock/centcom,
 /obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden/layer1,
@@ -18078,14 +18137,25 @@
 /turf/open/floor/iron/dark/small,
 /area/centcom/central_command_areas/cabin/soo)
 "oCu" = (
-/obj/machinery/button/door/indestructible{
-	id = "CC_Conf_1";
-	name = "Conference Room Blast Door";
-	req_access = list("cent_captain");
-	pixel_x = 6
+/obj/effect/turf_decal/line/dark_blue/line{
+	dir = 4
 	},
-/turf/closed/indestructible/riveted,
-/area/centcom/central_command_areas/conference_room)
+/obj/machinery/button/door/indestructible{
+	name = "First Cell";
+	id = "CC_Cell_1";
+	pixel_y = 8;
+	pixel_x = -24
+	},
+/obj/machinery/button/door/indestructible{
+	pixel_y = -8;
+	name = "Second Cell";
+	id = "CC_Cell_2";
+	pixel_x = -24
+	},
+/turf/open/floor/iron/dark/textured_half{
+	dir = 1
+	},
+/area/centcom/central_command_areas/prison)
 "oDQ" = (
 /obj/effect/turf_decal/siding,
 /obj/machinery/shower/directional/east,
@@ -18116,6 +18186,17 @@
 	},
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/planetary_port)
+"oHJ" = (
+/obj/effect/turf_decal/line/dark_blue/anticorner/contrasted{
+	dir = 4
+	},
+/obj/structure/statue/dummy/srt{
+	dir = 8;
+	pixel_x = 11;
+	pixel_y = 0
+	},
+/turf/open/floor/iron/dark,
+/area/centcom/central_command_areas/hallway)
 "oIZ" = (
 /obj/structure/table/reinforced/plastitaniumglass,
 /obj/item/kirbyplants/random{
@@ -18391,6 +18472,12 @@
 /obj/effect/mapping_helpers/airlock/access/all/admin/captain,
 /obj/effect/mapping_helpers/airlock/autoname,
 /obj/effect/mapping_helpers/airlock/cutaiwire,
+/obj/machinery/button/door/indestructible{
+	id = "CC_Brief_1";
+	name = "ERT Briefing Room";
+	req_access = list("cent_captain");
+	pixel_x = -26
+	},
 /turf/open/floor/iron/smooth_large,
 /area/centcom/central_command_areas/briefing)
 "pbK" = (
@@ -18647,6 +18734,7 @@
 "pCy" = (
 /obj/effect/turf_decal/line/dark_blue,
 /obj/structure/sign/poster/official/nanotrasen_logo/directional/north,
+/obj/structure/statue/dummy/srt,
 /turf/open/floor/iron/dark/textured_half,
 /area/centcom/central_command_areas/hallway)
 "pDv" = (
@@ -18656,6 +18744,12 @@
 /obj/machinery/door/poddoor/ert{
 	name = "Bridge";
 	id = "CC_Bridge_1"
+	},
+/obj/machinery/button/door/indestructible{
+	id = "CC_Bridge_1";
+	name = "Bridge";
+	req_access = list("cent_captain");
+	pixel_x = 24
 	},
 /turf/open/floor/iron/dark/textured_half{
 	dir = 1
@@ -18763,14 +18857,6 @@
 	},
 /turf/open/floor/iron/dark,
 /area/centcom/central_command_areas/courtroom)
-"pKk" = (
-/obj/effect/turf_decal/line/dark_blue/anticorner{
-	dir = 8
-	},
-/turf/open/floor/iron/dark/smooth_edge{
-	dir = 8
-	},
-/area/centcom/central_command_areas/hallway)
 "pKq" = (
 /obj/effect/spawner/structure/window/reinforced/indestructible,
 /obj/machinery/door/poddoor/preopen{
@@ -19554,6 +19640,12 @@
 	},
 /obj/effect/mapping_helpers/airlock/autoname,
 /obj/effect/mapping_helpers/airlock/cutaiwire,
+/obj/machinery/button/door/indestructible{
+	id = "CC_Office_2";
+	name = "Office";
+	req_access = list("cent_captain");
+	pixel_x = -24
+	},
 /turf/open/floor/wood,
 /area/centcom/central_command_areas/admin)
 "rvF" = (
@@ -19571,6 +19663,17 @@
 /obj/machinery/atmospherics/pipe/smart/manifold/scrubbers/hidden/layer2,
 /obj/structure/cable/layer3,
 /turf/open/floor/iron/dark,
+/area/centcom/central_command_areas/hallway)
+"rxG" = (
+/obj/effect/turf_decal/line/dark_blue/line{
+	dir = 1
+	},
+/obj/structure/statue/dummy/srt{
+	dir = 8;
+	pixel_x = 11;
+	pixel_y = 0
+	},
+/turf/open/floor/iron/dark/smooth_large,
 /area/centcom/central_command_areas/hallway)
 "ryw" = (
 /obj/effect/turf_decal/tile/dark/fourcorners{
@@ -20379,6 +20482,16 @@
 	},
 /turf/open/water/beach,
 /area/centcom/central_command_areas/arboretum)
+"sYn" = (
+/obj/structure/closet/cabinet,
+/obj/item/clothing/suit/space/officer/browntrench,
+/obj/item/clothing/suit/space/officer/browntrench,
+/obj/item/clothing/head/beret/centcom/soo,
+/obj/item/clothing/head/beret/centcom/soo,
+/obj/item/clothing/suit/space/officer,
+/obj/item/clothing/suit/space/officer,
+/turf/open/floor/iron/dark/small,
+/area/centcom/central_command_areas/cabin/soo)
 "sYG" = (
 /obj/structure/chair/sofa/corp,
 /turf/open/floor/carpet/blue,
@@ -20502,6 +20615,17 @@
 	dir = 1
 	},
 /turf/open/floor/iron/dark,
+/area/centcom/central_command_areas/hallway)
+"tpR" = (
+/obj/structure/light_fake/spot/directional/west,
+/obj/structure/statue/dummy/srt{
+	dir = 4;
+	pixel_x = -11;
+	pixel_y = 0
+	},
+/turf/open/floor/iron/dark/textured_half{
+	dir = 1
+	},
 /area/centcom/central_command_areas/hallway)
 "tsm" = (
 /obj/structure/chair/comfy/shuttle/tactical{
@@ -20633,15 +20757,6 @@
 	},
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/planetary_port)
-"tBD" = (
-/obj/machinery/button/door/indestructible{
-	id = "CC_FRO_1";
-	name = "Fleet Representative Office";
-	req_access = list("cent_captain");
-	pixel_y = -6
-	},
-/turf/closed/indestructible/riveted,
-/area/centcom/central_command_areas/cabin)
 "tBI" = (
 /obj/effect/turf_decal/siding/wood{
 	dir = 10
@@ -20843,7 +20958,7 @@
 /obj/effect/mapping_helpers/requests_console/announcement,
 /obj/effect/mapping_helpers/requests_console/information,
 /obj/machinery/photocopier/gratis/prebuilt,
-/turf/open/floor/pod/dark,
+/turf/open/floor/mineral/plastitanium/pod/dark,
 /area/centcom/central_command_areas/cabin)
 "tVr" = (
 /obj/structure/table/reinforced/titaniumglass,
@@ -20891,15 +21006,6 @@
 	dir = 8
 	},
 /area/centcom/central_command_areas/control)
-"uaX" = (
-/obj/machinery/button/door/indestructible{
-	id = "CC_Brief_1";
-	name = "ERT Briefing Room";
-	req_access = list("cent_captain");
-	pixel_x = 6
-	},
-/turf/closed/indestructible/riveted,
-/area/centcom/central_command_areas/briefing)
 "ubz" = (
 /obj/machinery/computer/cargo/request{
 	dir = 4
@@ -20957,6 +21063,7 @@
 	dir = 8
 	},
 /obj/structure/sign/poster/official/nanotrasen_logo/directional/north,
+/obj/structure/statue/dummy/srt,
 /turf/open/floor/iron/dark/textured_half,
 /area/centcom/central_command_areas/hallway)
 "ugL" = (
@@ -21019,19 +21126,18 @@
 /obj/machinery/computer/records/security{
 	dir = 4
 	},
+/obj/machinery/button/door/indestructible{
+	id = "CC_Registry_1";
+	name = "Registry Emergency Shutters";
+	req_access = list("cent_general");
+	pixel_y = 24
+	},
 /turf/open/floor/iron/dark/smooth_large,
 /area/centcom/central_command_areas/hallway)
 "umS" = (
 /obj/machinery/vending/cigarette,
 /turf/open/floor/carpet/royalblack,
 /area/centcom/central_command_areas/planetary_port/club)
-"unc" = (
-/obj/machinery/button/door/indestructible{
-	id = "CC_Bar_1";
-	pixel_x = 6
-	},
-/turf/closed/indestructible/riveted,
-/area/centcom/central_command_areas/bar)
 "uny" = (
 /obj/effect/turf_decal/siding/wood{
 	dir = 5
@@ -21136,6 +21242,17 @@
 /obj/structure/sign/clock/directional/north,
 /turf/open/floor/carpet/green,
 /area/centcom/central_command_areas/courtroom)
+"urU" = (
+/obj/effect/turf_decal/line/dark_blue/line{
+	dir = 1
+	},
+/obj/structure/statue/dummy/srt{
+	dir = 4;
+	pixel_x = -11;
+	pixel_y = 0
+	},
+/turf/open/floor/iron/dark/smooth_large,
+/area/centcom/central_command_areas/hallway)
 "usS" = (
 /obj/structure/railing{
 	dir = 4
@@ -21427,6 +21544,10 @@
 	pixel_y = 28
 	},
 /obj/structure/light_fake/small/directional/west,
+/obj/machinery/button/door/indestructible{
+	id = "CC_Bar_1";
+	pixel_x = -24
+	},
 /turf/open/floor/wood/large,
 /area/centcom/central_command_areas/bar)
 "uMe" = (
@@ -21752,28 +21873,6 @@
 /obj/machinery/holopad/secure,
 /turf/open/floor/iron/dark/diagonal,
 /area/centcom/central_command_areas/conference_room)
-"vrx" = (
-/obj/structure/closet/secure_closet/personal/cabinet,
-/obj/item/clothing/under/rank/civilian/curator/treasure_hunter,
-/obj/item/clothing/under/dress/skirt,
-/obj/item/clothing/under/shorts/black,
-/obj/item/clothing/under/pants/track,
-/obj/item/clothing/accessory/armband/deputy,
-/obj/item/clothing/accessory/waistcoat,
-/obj/item/clothing/shoes/jackboots,
-/obj/item/clothing/shoes/laceup,
-/obj/item/clothing/neck/large_scarf/red,
-/obj/item/clothing/neck/tie/red,
-/obj/item/clothing/head/helmet/space/beret,
-/obj/item/clothing/suit/jacket/curator,
-/obj/item/clothing/suit/space/officer,
-/obj/item/clothing/gloves/fingerless,
-/obj/item/clothing/gloves/color/black,
-/obj/item/clothing/glasses/eyepatch,
-/obj/structure/window/reinforced/spawner/directional/west,
-/obj/structure/sign/clock/directional/north,
-/turf/open/floor/carpet/green,
-/area/centcom/central_command_areas/cabin/soo)
 "vrG" = (
 /obj/structure/chair/comfy/black{
 	dir = 4
@@ -22163,6 +22262,16 @@
 "wiA" = (
 /turf/open/floor/glass/reinforced,
 /area/centcom/central_command_areas/cabin/soo)
+"wjx" = (
+/obj/structure/statue/dummy/srt{
+	dir = 4;
+	pixel_x = -11;
+	pixel_y = 0
+	},
+/turf/open/floor/iron/smooth_half{
+	dir = 1
+	},
+/area/centcom/central_command_areas/ferry)
 "wkr" = (
 /obj/structure/closet/secure_closet/tac,
 /obj/structure/sign/poster/official/obey/directional/north,
@@ -22387,14 +22496,18 @@
 /turf/open/floor/stone,
 /area/centcom/central_command_areas/planetary_port)
 "wDg" = (
-/obj/machinery/button/door/indestructible{
-	id = "CC_Office_2";
-	name = "Office";
-	req_access = list("cent_captain");
-	pixel_x = 6
+/obj/effect/turf_decal/line/dark_blue/line{
+	dir = 8
 	},
-/turf/closed/indestructible/riveted,
-/area/centcom/central_command_areas/admin)
+/obj/machinery/button/door/indestructible{
+	name = "Third Cell";
+	id = "CC_Cell_3";
+	pixel_x = 24
+	},
+/turf/open/floor/iron/dark/textured_half{
+	dir = 1
+	},
+/area/centcom/central_command_areas/prison)
 "wDP" = (
 /obj/effect/turf_decal/tile/dark/fourcorners{
 	alpha = 50
@@ -22490,6 +22603,11 @@
 /area/centcom/central_command_areas/planetary_port/club)
 "wNp" = (
 /obj/structure/light_fake/spot/directional/east,
+/obj/structure/statue/dummy/srt{
+	dir = 8;
+	pixel_x = 11;
+	pixel_y = 0
+	},
 /turf/open/floor/iron/dark,
 /area/centcom/central_command_areas/courtroom)
 "wOF" = (
@@ -22918,10 +23036,10 @@
 "xLN" = (
 /obj/structure/closet/cabinet,
 /obj/item/gun/ballistic/revolver/mateba,
-/obj/item/storage/belt/holster,
 /obj/item/ammo_box/speedloader/c357,
 /obj/item/ammo_box/speedloader/c357,
 /obj/item/ammo_box/speedloader/c357,
+/obj/item/clothing/accessory/holster/tacticool,
 /turf/open/floor/iron/dark/small,
 /area/centcom/central_command_areas/cabin/soo)
 "xNA" = (
@@ -22955,6 +23073,28 @@
 /obj/effect/light_emitter/podbay,
 /turf/open/floor/grass,
 /area/centcom/central_command_areas/planetary_port/plaza)
+"xTG" = (
+/obj/structure/closet/secure_closet/personal/cabinet,
+/obj/item/clothing/under/rank/civilian/curator/treasure_hunter,
+/obj/item/clothing/under/dress/skirt,
+/obj/item/clothing/under/shorts/black,
+/obj/item/clothing/under/pants/track,
+/obj/item/clothing/accessory/armband/deputy,
+/obj/item/clothing/accessory/waistcoat,
+/obj/item/clothing/shoes/jackboots,
+/obj/item/clothing/shoes/laceup,
+/obj/item/clothing/neck/large_scarf/red,
+/obj/item/clothing/neck/tie/red,
+/obj/item/clothing/head/beret/centcom,
+/obj/item/clothing/suit/jacket/curator,
+/obj/item/clothing/suit/space/officer,
+/obj/item/clothing/gloves/fingerless,
+/obj/item/clothing/gloves/color/black,
+/obj/item/clothing/glasses/eyepatch,
+/obj/structure/window/reinforced/spawner/directional/west,
+/obj/structure/sign/clock/directional/north,
+/turf/open/floor/carpet/green,
+/area/centcom/central_command_areas/cabin/soo)
 "xUd" = (
 /obj/structure/reagent_dispensers/water_cooler,
 /turf/open/floor/wood/large,
@@ -53959,9 +54099,9 @@ aZJ
 apk
 avK
 aae
-aOp
 aZJ
-aJF
+aZJ
+aZJ
 aDX
 aTQ
 aZc
@@ -54732,7 +54872,7 @@ aaN
 ayD
 aaf
 aHu
-alH
+anE
 ayD
 aaN
 aaN
@@ -54989,7 +55129,7 @@ aqQ
 aZJ
 aZJ
 aWA
-acN
+aZJ
 aZJ
 aqQ
 aqQ
@@ -55754,8 +55894,8 @@ aaa
 aZJ
 ahj
 agF
-alH
-aWZ
+aPj
+aZJ
 adQ
 adQ
 adQ
@@ -56277,8 +56417,8 @@ adQ
 adQ
 adQ
 adQ
-atz
-alH
+aZJ
+eBO
 agF
 agF
 agF
@@ -57043,7 +57183,7 @@ aaN
 aqQ
 aqQ
 aZJ
-aOv
+aZJ
 adN
 aZJ
 aZJ
@@ -58071,9 +58211,9 @@ aZJ
 aUB
 aJM
 aUT
-asi
 aZJ
-aGK
+aZJ
+aZJ
 ayt
 aIb
 aKh
@@ -70101,7 +70241,7 @@ hMx
 hMx
 hMx
 cAR
-unc
+aVX
 adt
 adt
 adt
@@ -71114,7 +71254,7 @@ uOh
 wqA
 hPD
 ykG
-wDg
+aOn
 aOn
 bQl
 sgp
@@ -71873,7 +72013,7 @@ brN
 brN
 brN
 eDK
-oCu
+pSL
 kwj
 olV
 chd
@@ -71920,7 +72060,7 @@ alq
 acG
 amh
 auH
-aoN
+gRp
 aFt
 ajS
 aEP
@@ -72177,7 +72317,7 @@ aIQ
 aiF
 aiF
 aHS
-anE
+aiF
 asM
 ajz
 aiF
@@ -72434,7 +72574,7 @@ aQn
 agP
 agP
 aGp
-aBf
+jSA
 aNc
 aqn
 aBf
@@ -72924,7 +73064,7 @@ jfg
 hMx
 hMx
 aOn
-eBO
+aOn
 mRU
 aOn
 aOn
@@ -73183,7 +73323,7 @@ tUQ
 tVK
 irU
 hjk
-pKk
+kuk
 aVX
 qsp
 aDT
@@ -73682,7 +73822,7 @@ aTC
 aQl
 aQl
 aoE
-fcN
+ohp
 tUQ
 tVK
 eVY
@@ -73693,7 +73833,7 @@ oRV
 aDx
 aoE
 fcN
-tUQ
+bmm
 tVK
 aKp
 pEb
@@ -73946,7 +74086,7 @@ oOG
 eem
 nvs
 nim
-eJw
+rxG
 aDx
 xLf
 tVK
@@ -74484,7 +74624,7 @@ aZT
 aIz
 aWS
 ayJ
-akK
+nRm
 aiF
 aeb
 aiF
@@ -74700,7 +74840,7 @@ vWG
 gBT
 ujE
 pSL
-kCT
+iWM
 lkw
 nJA
 aQl
@@ -75030,7 +75170,7 @@ aEd
 aPB
 arD
 arD
-aSF
+arD
 aXg
 arD
 arD
@@ -75235,7 +75375,7 @@ bRF
 uCq
 vht
 tVK
-bpf
+tVK
 ulL
 bsM
 hPA
@@ -75261,7 +75401,7 @@ aiF
 aiF
 aiF
 anc
-akt
+aiF
 ahQ
 aag
 aiF
@@ -75489,7 +75629,7 @@ uWU
 ivk
 ogZ
 qeW
-uCq
+hcq
 aHv
 tVK
 bbF
@@ -75798,7 +75938,7 @@ aEU
 aEU
 aEU
 aEU
-aDx
+jLj
 aQQ
 ajW
 arD
@@ -76003,7 +76143,7 @@ iBY
 uSu
 ogZ
 qeW
-uCq
+hcq
 aHv
 tVK
 jAQ
@@ -76231,7 +76371,7 @@ ydj
 ciT
 ciT
 aio
-kCT
+iWM
 aDx
 wlM
 byn
@@ -76241,7 +76381,7 @@ feG
 feG
 feG
 feG
-fNl
+feG
 kCT
 lkw
 aHv
@@ -76278,7 +76418,7 @@ aXM
 aJh
 aHW
 aoc
-aSf
+oHJ
 aGA
 aIP
 aYa
@@ -76499,7 +76639,7 @@ vpM
 uXX
 vpM
 feG
-kCT
+gff
 lkw
 snY
 aHv
@@ -76535,7 +76675,7 @@ agO
 agO
 agO
 agO
-aeO
+agO
 aJa
 agO
 aYa
@@ -76549,7 +76689,7 @@ aZR
 aYa
 aFp
 aAM
-aSZ
+aYa
 aJH
 aOL
 aOL
@@ -76572,7 +76712,7 @@ aXO
 afB
 arD
 arD
-acf
+arD
 aXU
 arD
 arD
@@ -76756,7 +76896,7 @@ ctF
 vxV
 rjJ
 feG
-gff
+iWM
 lkw
 ccA
 aXX
@@ -76799,7 +76939,7 @@ aYa
 aHD
 aHD
 aHD
-ays
+aYa
 aMi
 aMi
 aMi
@@ -77053,10 +77193,10 @@ apq
 atj
 aUj
 akW
-aJZ
+hql
 ahS
 aFD
-aFD
+aOv
 aFD
 ahS
 aLs
@@ -77083,7 +77223,7 @@ aCk
 aJb
 arD
 aWh
-aSr
+arD
 arD
 apv
 aTA
@@ -77321,20 +77461,20 @@ aji
 aPx
 aDB
 aYa
-ahp
+aYa
 aye
 aUo
 aYa
 aYa
 aYa
 aKx
-aIu
+aYa
 aKx
 aYa
 aJb
 akQ
 aOb
-aIU
+aJb
 ayZ
 aic
 amw
@@ -77544,7 +77684,7 @@ qqj
 eem
 dMQ
 nim
-eJw
+urU
 aDx
 jut
 tVK
@@ -77591,7 +77731,7 @@ aMD
 asy
 aEk
 atY
-atY
+oCu
 atY
 aDe
 ail
@@ -77794,7 +77934,7 @@ asX
 aXX
 aXX
 aIY
-tTd
+tpR
 tUQ
 tVK
 xzO
@@ -77805,12 +77945,12 @@ vbM
 jxK
 aIY
 tTd
-tUQ
+bmm
 tVK
 eJw
 haR
 tUu
-uaX
+agO
 aQa
 sFK
 ajZ
@@ -78081,7 +78221,7 @@ aUu
 aCs
 aAN
 akW
-aJZ
+hql
 aFD
 aFD
 aFD
@@ -78096,16 +78236,16 @@ aGe
 aJL
 apS
 aGe
-aGe
+nlB
 aIT
 aJz
 aZr
 aGe
 aJz
-asy
+asi
 anh
 alf
-alf
+wDg
 alf
 aws
 ail
@@ -78323,7 +78463,7 @@ tUQ
 tVK
 oLP
 wGt
-esM
+jYL
 agO
 aQa
 sFK
@@ -78349,20 +78489,20 @@ aYa
 aDB
 aPx
 aYa
-aPj
+aYa
 axq
 aDZ
 aYa
 aYa
 aYa
 aAk
-afs
+aYa
 aAk
 aYa
-agg
+ail
 ahO
 aui
-ajB
+aJb
 apu
 aMR
 aJb
@@ -78564,11 +78704,11 @@ aVx
 aVx
 aVx
 aVx
-jmp
-dYh
+aVx
+aSZ
 dYh
 xiG
-tBD
+xiG
 lrh
 xiG
 xiG
@@ -78578,7 +78718,7 @@ lHy
 lHy
 lHy
 lHy
-gqI
+lHy
 eve
 hzI
 aDl
@@ -78605,7 +78745,7 @@ ant
 aYa
 aFE
 aCc
-aVN
+aYa
 avN
 aOL
 aOL
@@ -79610,7 +79750,7 @@ ugL
 mRo
 jOB
 aDl
-ozQ
+sYn
 wbH
 aMa
 aDl
@@ -79634,7 +79774,7 @@ afU
 avj
 aLe
 aWQ
-aMb
+wjx
 aMb
 aQq
 aMb
@@ -80153,7 +80293,7 @@ aun
 aKR
 aKR
 aON
-aqv
+aYn
 ahu
 ahu
 ahu
@@ -80895,7 +81035,7 @@ gXs
 gXs
 erV
 aDl
-vrx
+xTG
 aWz
 wvT
 aDl
