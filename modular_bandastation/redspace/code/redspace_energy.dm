@@ -16,7 +16,7 @@
 	/// Percentage of maximum energy consumed by each granted action.
 	var/action_cost_percent = 5
 	/// Percentage of maximum health healed per second in a recharge zone.
-	var/healing_percent = 3
+	var/healing_percent = 2.5
 	/// Negative values speed the mob up; positive values slow it down.
 	var/recharge_speed_modifier = -0.2
 	var/drain_speed_modifier = 0.5
@@ -36,7 +36,7 @@
 	drain_percent = 10,
 	zero_energy_damage_percent = 5,
 	action_cost_percent = 5,
-	healing_percent = 3,
+	healing_percent = 2.5,
 	recharge_speed_modifier = -0.2,
 	drain_speed_modifier = 0.5,
 	recharge_threshold = REDSPACE_DISTURBANCE_ENTER_VALUE,
