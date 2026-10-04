@@ -10,7 +10,7 @@
 	icon_greyscale = 'icons/bandastation/mob/species/kidan/bodyparts.dmi'
 	limb_id = SPECIES_KIDAN
 	is_dimorphic = FALSE
-	brute_modifier = 0.75
+	brute_modifier = 0.70
 
 /obj/item/bodypart/arm/left/kidan
 	icon_greyscale = 'icons/bandastation/mob/species/kidan/bodyparts.dmi'
