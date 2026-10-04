@@ -94,6 +94,8 @@
 #define REDSPACE_RIFT_SEALER_PLACEMENT_RADIUS 5
 #define REDSPACE_RIFT_SEALING_MIN_DURATION (2 MINUTES)
 #define REDSPACE_RIFT_SEALING_MAX_DURATION (3 MINUTES)
+/// Sealing a hotspot at or below this strength raises it only to this value.
+#define REDSPACE_RIFT_SEALING_LOW_TARGET_STRENGTH 7
 #define REDSPACE_RIFT_SEALING_TARGET_STRENGTH REDSPACE_MAX_NORMAL_VALUE
 /// Multiplier for automatic event cadence while a rift is being sealed.
 #define REDSPACE_RIFT_SEALING_EVENT_FREQUENCY_MULTIPLIER 1.2

@@ -42,10 +42,10 @@
 		qdel(sealer)
 		return Fail("A nearby rift sealer must join a registered hotspot")
 
-	if(!registered_hotspot.sealing_active || registered_hotspot.strength != REDSPACE_RIFT_SEALING_TARGET_STRENGTH)
+	if(!registered_hotspot.sealing_active || registered_hotspot.strength != REDSPACE_RIFT_SEALING_LOW_TARGET_STRENGTH)
 		SSredspace.remove_source(registered_hotspot.source_id, "unit test cleanup")
 		qdel(sealer)
-		return Fail("Starting a seal must raise the hotspot to the sealing strength")
+		return Fail("Sealing a hotspot below seven must raise its strength to seven")
 	if(!(sealer.sealing_shield_overlay in sealer.update_overlays()))
 		SSredspace.remove_source(registered_hotspot.source_id, "unit test cleanup")
 		qdel(sealer)
@@ -68,13 +68,13 @@
 		return Fail("A depleted sealing shield must remove its overlay")
 
 	var/datum/redspace_field_source/stabilizer/test_stabilizer = SSredspace.register_stabilizer_source(supported_turf, -8, REDSPACE_HEX_RADIUS, "unit test")
-	if(!test_stabilizer || SSredspace.calculate_value(supported_turf, SSredspace.get_cell(supported_turf)) != REDSPACE_MAX_NORMAL_VALUE)
+	if(!test_stabilizer || SSredspace.calculate_value(supported_turf, SSredspace.get_cell(supported_turf)) != REDSPACE_RIFT_SEALING_LOW_TARGET_STRENGTH)
 		if(test_stabilizer)
 			SSredspace.remove_source(test_stabilizer.source_id, "unit test cleanup")
 		sealer.stop_sealing("unit test cleanup")
 		SSredspace.remove_source(registered_hotspot.source_id, "unit test cleanup")
 		qdel(sealer)
-		return Fail("An active seal must force the hotspot to ten despite stabilizer sources")
+		return Fail("A low-strength active seal must hold the field at seven despite stabilizer sources")
 	SSredspace.remove_source(test_stabilizer.source_id, "unit test cleanup")
 
 	var/datum/redspace_event_profile/test_profile = new(REDSPACE_STATE_STORM, 100, 100, 100, list())
@@ -125,6 +125,22 @@
 
 	SSredspace.remove_source(registered_hotspot.source_id, "unit test cleanup")
 	qdel(sealer)
+
+	for(var/initial_strength in list(7, 8))
+		var/datum/redspace_field_source/hotspot/scenario_hotspot = SSredspace.register_hotspot(supported_turf, initial_strength, 3)
+		var/obj/machinery/redspace_rift_sealer/scenario_sealer = allocate(/obj/machinery/redspace_rift_sealer, supported_turf)
+		var/expected_strength = initial_strength == 7 ? REDSPACE_RIFT_SEALING_LOW_TARGET_STRENGTH : REDSPACE_RIFT_SEALING_TARGET_STRENGTH
+		var/scenario_passed = scenario_hotspot && scenario_sealer && scenario_hotspot.start_sealing(scenario_sealer)
+		if(scenario_passed)
+			scenario_passed = scenario_hotspot.strength == expected_strength && SSredspace.calculate_value(supported_turf, SSredspace.get_cell(supported_turf)) == expected_strength
+		if(scenario_hotspot)
+			scenario_hotspot.stop_sealing("unit test cleanup")
+			scenario_passed = scenario_passed && scenario_hotspot.strength == initial_strength
+			SSredspace.remove_source(scenario_hotspot.source_id, "unit test cleanup")
+		if(scenario_sealer)
+			qdel(scenario_sealer)
+		if(!scenario_passed)
+			return Fail("Sealing strength [initial_strength] must become [expected_strength] and restore on interruption")
 
 	var/obj/machinery/redspace_rift_sealer/destroyed_sealer = allocate(/obj/machinery/redspace_rift_sealer, supported_turf)
 	var/turf/destroyed_sealer_turf = get_turf(destroyed_sealer)

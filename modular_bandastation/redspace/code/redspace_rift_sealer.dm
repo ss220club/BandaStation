@@ -70,6 +70,9 @@ GLOBAL_LIST_EMPTY(redspace_active_rift_sealers)
 			changed = TRUE
 	return changed
 
+/datum/redspace_field_source/hotspot/proc/get_sealing_target_strength()
+	return sealing_original_strength > REDSPACE_RIFT_SEALING_LOW_TARGET_STRENGTH ? REDSPACE_RIFT_SEALING_TARGET_STRENGTH : REDSPACE_RIFT_SEALING_LOW_TARGET_STRENGTH
+
 /// Adds a machine to the shared sealing operation for this hotspot.
 /datum/redspace_field_source/hotspot/proc/start_sealing(obj/machinery/redspace_rift_sealer/sealer)
 	if(!sealer || QDELETED(sealer) || !SSredspace || SSredspace.field_sources["[source_id]"] != src || strength <= 0)
@@ -87,9 +90,10 @@ GLOBAL_LIST_EMPTY(redspace_active_rift_sealers)
 	growth_last_update_at = world.time
 	sealing_finishes_at = world.time + rand(REDSPACE_RIFT_SEALING_MIN_DURATION, REDSPACE_RIFT_SEALING_MAX_DURATION)
 	sealing_timer_id = addtimer(CALLBACK(src, PROC_REF(complete_sealing)), sealing_finishes_at - world.time, TIMER_STOPPABLE | TIMER_DELETE_ME)
+	var/target_strength = get_sealing_target_strength()
 	var/strength_changed = FALSE
-	if(strength != REDSPACE_RIFT_SEALING_TARGET_STRENGTH)
-		strength_changed = SSredspace.update_source_strength(source_id, REDSPACE_RIFT_SEALING_TARGET_STRENGTH, "начата процедура закрытия разлома")
+	if(strength != target_strength)
+		strength_changed = SSredspace.update_source_strength(source_id, target_strength, "начата процедура закрытия разлома")
 	if(!strength_changed)
 		SSredspace.refresh_cells("начата процедура закрытия разлома", get_coverage_refresh_keys(include_in_progress = TRUE))
 	return TRUE

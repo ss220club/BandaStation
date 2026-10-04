@@ -71,8 +71,9 @@
 	if(cell && !isnull(cell.event_override_value))
 		return cell.event_override_value
 	// Sealing pressure is deliberately not reducible by the background or stabilizers.
-	if(is_sealing_active_at(target, excluded_source))
-		return REDSPACE_MAX_NORMAL_VALUE
+	var/sealing_strength = get_sealing_strength_at(target, excluded_source)
+	if(sealing_strength)
+		return sealing_strength
 	// Ordinary test values ignore zone susceptibility by design.
 	if(cell && !isnull(cell.forced_value))
 		return cell.forced_value
@@ -102,21 +103,22 @@
 	// Ordinary sources cannot create an event-only invasion state.
 	return min(value, REDSPACE_MAX_NORMAL_VALUE)
 
-/datum/controller/subsystem/redspace/proc/is_sealing_active_at(turf/target, datum/redspace_field_source/excluded_source = null)
+/datum/controller/subsystem/redspace/proc/get_sealing_strength_at(turf/target, datum/redspace_field_source/excluded_source = null)
 	if(!target)
-		return FALSE
+		return 0
+	var/sealing_strength = 0
 	for(var/source_key in field_sources)
 		var/datum/redspace_field_source/hotspot/hotspot = field_sources[source_key]
 		if(!istype(hotspot) || hotspot == excluded_source || !hotspot.sealing_active)
 			continue
 		if(hotspot.can_affect(target))
-			return TRUE
-	return FALSE
+			sealing_strength = max(sealing_strength, hotspot.get_sealing_target_strength())
+	return sealing_strength
 
 /datum/controller/subsystem/redspace/proc/is_sealing_active_in_cell(datum/redspace_field_cell/cell)
 	if(!cell)
 		return FALSE
-	if(is_sealing_active_at(cell.get_sample_turf()))
+	if(get_sealing_strength_at(cell.get_sample_turf()))
 		return TRUE
 
 	// Coverage includes the neighboring cells that may contain an affected tile even
