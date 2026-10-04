@@ -1,0 +1,4 @@
+author: "PetyaFX"
+delete-after: True
+changes:
+  - admin: "Уведомление в лобби теперь можно сохранять между раундами."

@@ -215,13 +215,56 @@
 	. = ..()
 	allowed = GLOB.security_vest_allowed
 
-/obj/item/clothing/suit/armor/vest/ntci_chestplate
-	name = "chestplate armor"
+/obj/item/clothing/suit/armor/vest/specops
+	name = "tactical chestplate armor"
 	desc = "Бронежилет сочетающий в себе удобство, лёгкость и хорошую бронезащиту груди и спины. Модульность позволяет собрать его под себя и упрощает замену бронеплит."
-	icon_state = "ntci_chestplate_armor"
+	icon_state = "specops_armor"
 	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/armor.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/armor.dmi'
 	armor_type = /datum/armor/vest_marine
 	clothing_flags = THICKMATERIAL
 	body_parts_covered = CHEST|GROIN
 	resistance_flags = FIRE_PROOF | ACID_PROOF
+
+/obj/item/clothing/suit/armor/swat/specops
+	name = "heavy tactical chestplate armor"
+	desc = "Модульный тактический комплект, включающий усиленный баллистический бронежилет со встроенными налокотниками и соответствующие сверхпрочные наколенники для обеспечения мобильности и защиты суставов."
+	icon_state = "specops_heavy_armor"
+	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/armor.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/armor.dmi'
+	armor_type = /datum/armor/vest_marine_heavy
+	slowdown = 0
+
+/datum/armor/vest_marine_heavy
+	melee = 50
+	bullet = 50
+	laser = 60
+	energy = 50
+	bomb = 70
+	bio = 90
+	fire = 100
+	acid = 100
+	wound = 20
+
+/obj/item/clothing/suit/armor/vest/specops/parka
+	name = "silver-coated armored jacket"
+	desc = "Стильный и теплый пуховик с серебряными вставками, надетый поверх модульного бронежилета. Скрывает наличие бронежилета от лишних глаз и обеспечивает отличную терморегуляцию."
+	icon_state = "specops_parka"
+	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/armor.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/armor.dmi'
+	body_parts_covered = CHEST|GROIN|ARMS
+
+/obj/item/clothing/suit/armor/vest/parka/brown
+	name = "brown armored military jacket"
+	desc = "Теплый пуховик светло-коричневого цвета с вшитыми армированными вкладками. Хорошо греет и защищает владельца."
+	icon_state = "gard_parka"
+	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/armor.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/armor.dmi'
+	body_parts_covered = CHEST|GROIN|ARMS
+	armor_type = /datum/armor/vest_marine
+
+/obj/item/clothing/suit/armor/vest/parka/brown/long
+	name = "brown armored longcoat"
+	desc = "Теплое пальто светло-коричневого цвета с вшитыми армированными вкладками. Хорошо греет и защищает владельца."
+	icon_state = "gard_long"
+	body_parts_covered = CHEST|GROIN|ARMS|LEGS
