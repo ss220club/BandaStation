@@ -1,8 +1,10 @@
 GLOBAL_LIST_EMPTY(redspace_active_rift_sealers)
 
-/// Hotspots grow in discrete one-minute steps so their field cache is not rebuilt every machinery tick.
+/// Growing hotspots advance in discrete one-minute steps so their field cache is not rebuilt every machinery tick.
 /datum/redspace_field_source/hotspot
 	var/growth_last_update_at
+	/// Whether elapsed time can increase this hotspot's strength and radius.
+	var/grows_over_time = TRUE
 	var/sealing_active = FALSE
 	var/sealing_original_strength
 	var/sealing_timer_id = TIMER_ID_NULL
@@ -14,7 +16,7 @@ GLOBAL_LIST_EMPTY(redspace_active_rift_sealers)
 	growth_last_update_at = world.time
 
 /datum/redspace_field_source/hotspot/requires_processing()
-	return ..() || (!sealing_active && strength > 0 && (strength < REDSPACE_MAX_NORMAL_VALUE || radius < REDSPACE_MAX_SOURCE_RADIUS))
+	return ..() || (grows_over_time && !sealing_active && strength > 0 && (strength < REDSPACE_MAX_NORMAL_VALUE || radius < REDSPACE_MAX_SOURCE_RADIUS))
 
 /datum/redspace_field_source/hotspot/set_strength(new_strength, reason = null)
 	var/changed = ..()
@@ -38,7 +40,7 @@ GLOBAL_LIST_EMPTY(redspace_active_rift_sealers)
 	return changed
 
 /datum/redspace_field_source/hotspot/proc/get_growth_update() as /list
-	if(sealing_active || isnull(growth_last_update_at))
+	if(!grows_over_time || sealing_active || isnull(growth_last_update_at))
 		return
 	if(strength <= 0)
 		growth_last_update_at = world.time

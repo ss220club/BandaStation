@@ -727,6 +727,7 @@
 		"установлен демонический маяк",
 		"маяк опустошителя",
 		FALSE,
+		FALSE,
 	)
 	if(!field_source)
 		return INITIALIZE_HINT_QDEL

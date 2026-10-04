@@ -36,6 +36,11 @@
 	var/source_id = first_beacon.field_source.source_id
 	if(first_beacon.field_source.strength != 7 || first_beacon.field_source.radius != REDSPACE_HEX_RADIUS || SSredspace.field_sources["[source_id]"] != first_beacon.field_source)
 		return Fail("The demonic beacon must register a seven-point one-hex hotspot")
+	if(first_beacon.field_source.grows_over_time || first_beacon.field_source.requires_processing())
+		return Fail("The demonic beacon hotspot must remain static and need no growth processing")
+	first_beacon.field_source.growth_last_update_at = world.time - (2 MINUTES)
+	if(first_beacon.field_source.process_growth() || first_beacon.field_source.strength != 7 || first_beacon.field_source.radius != REDSPACE_HEX_RADIUS)
+		return Fail("Elapsed time must not increase the demonic beacon hotspot's strength or radius")
 	if(first_beacon.icon_state != "demonic_beacon")
 		return Fail("The demonic beacon must use the beacon sprite")
 	beacon_action.next_use_time = 0
