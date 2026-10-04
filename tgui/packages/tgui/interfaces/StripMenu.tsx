@@ -135,6 +135,12 @@ const SLOTS: Record<
     image: 'inventory-head.png',
   },
 
+  headpocket: {
+    displayName: 'headpocket',
+    gridSpot: getGridSpotKey([0, 3]),
+    image: 'inventory-pocket.png',
+  },
+
   neck: {
     displayName: 'neckwear',
     gridSpot: getGridSpotKey([1, 1]),

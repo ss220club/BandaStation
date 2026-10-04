@@ -27,7 +27,8 @@
 
 /obj/item/organ/head_tentacle/on_bodypart_remove(obj/item/bodypart/limb, movement_flags)
 	. = ..()
-	atom_storage.remove_all()
+	if(QDELING(src))
+		atom_storage.remove_all(limb.owner?.drop_location())
 
 	var/mob/living/carbon/human/H = limb.owner
 	if(!istype(H))
