@@ -207,6 +207,7 @@
 
 	// BANDASTATION EDIT START: TTS radio playback
 	if(should_do_modular_radio_tts && length(receive_radios))
+		var/list/seen_hearers = list() // A mob in range of multiple radios should hear the message only once
 		for(var/radio_ref in receive_radios)
 			if(!length(receive_radios[radio_ref]))
 				continue
@@ -222,6 +223,10 @@
 				var/mob/radio_listener = hearer_weakref.resolve()
 				if(!radio_listener)
 					continue
+				if(radio_listener in seen_hearers)
+					SStts220?.log_tts_event("RADIO_DEDUP", list("mob" = "[radio_listener](\ref[radio_listener])", "radio" = "[radio_source]"))
+					continue
+				seen_hearers += radio_listener
 				var/message_to_tts = isobserver(radio_listener) ? message : radio_listener.translate_language(virt, language, message, spans, message_mods)
 				if(message_to_tts == message)
 					message_to_tts = LAZYACCESS(message_mods, MODE_TTS_MESSAGE_OVERRIDE) || message_to_tts
