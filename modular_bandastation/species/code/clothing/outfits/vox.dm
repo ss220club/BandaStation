@@ -1,6 +1,6 @@
 /obj/item/clothing/mask/breath/vox
 	name = "vox breath mask"
-	desc = "A weirdly-shaped breath mask, this one seems to designed for a vox beak."
+	desc = "Странно выглядящая дыхательная маска, по всей видимости, специально предназначенная для клюва вокса."
 	icon = 'modular_bandastation/objects/icons/obj/clothing/mask/voxmask.dmi'
 	worn_icon = 'icons/bandastation/mob/species/vox/clothing/mask.dmi'
 	icon_state = "voxmask"
@@ -11,7 +11,7 @@
 
 /obj/item/tank/internals/nitrogen
 	name = "nitrogen internals tank"
-	desc = "A tank of nitrogen gas designed specifically for use as internals, tuned for the respiratory needs of a Vox. If you're not a Vox, you probably shouldn't use this."
+	desc = "Баллон с азотом, специально предназначенный для использования в качестве системы внутреннего дыхания и настроенный под дыхательную систему вокса. Если вы не вокс, вам, вероятно, не стоит этим пользоваться."
 	icon = 'modular_bandastation/species/icons/tanks/tank.dmi'
 	icon_state = "nitrogen"
 	lefthand_file = 'modular_bandastation/species/icons/tanks/tanks_lefthand.dmi'

@@ -24,7 +24,6 @@
 	name = "vox quills"
 	bodypart_overlay = /datum/bodypart_overlay/mutant/quills/vox
 	dna_block = /datum/dna_block/feature/accessory/vox_quills
-	icon_state = "quills"
 
 	zone = BODY_ZONE_HEAD
 	slot = ORGAN_SLOT_EXTERNAL_VOX_QUILLS
@@ -48,7 +47,6 @@
 	name = "vox facial quills"
 	bodypart_overlay = /datum/bodypart_overlay/mutant/facial_quills/vox
 	dna_block = /datum/dna_block/feature/accessory/vox_facial_quills
-	icon_state = "facial_quills"
 
 	zone = BODY_ZONE_HEAD
 	slot = ORGAN_SLOT_EXTERNAL_VOX_FACIAL_QUILLS

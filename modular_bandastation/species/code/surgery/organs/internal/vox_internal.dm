@@ -1,6 +1,6 @@
 /obj/item/organ/brain/cybernetic/vox
 	name = "Vox cortical stack"
-	desc = "A brain which has been in some part mechanized. The components are seamlessly integrated into the flesh."
+	desc = "Мозг, частично подвергшийся механизации. Компоненты бесшовно интегрированы в плоть."
 	icon = 'icons/bandastation/mob/species/vox/organs.dmi'
 	icon_state = "cortical-stack"
 
