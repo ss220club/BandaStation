@@ -14,7 +14,7 @@
 	name = "electrostaff"
 	result = /obj/item/melee/baton/security/electrostaff/loaded
 	reqs = list(
-		/obj/item/melee/baton/security = 2,
+		/obj/item/melee/baton/security/loaded = 2,
 		/obj/item/assembly/signaler/anomaly/flux = 1,
 		/obj/item/weaponcrafting/gunkit/electrostaff = 1,
 	)
