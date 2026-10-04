@@ -82,7 +82,6 @@
 // MARK: Kidan designs
 /datum/design/kidan_tongue
 	name = "Kidan Tongue"
-	id = "kidantongue"
 	build_type = LIMBGROWER
 	reagents_list = list(/datum/reagent/medicine/c2/synthflesh = 10)
 	build_path = /obj/item/organ/tongue/kidan

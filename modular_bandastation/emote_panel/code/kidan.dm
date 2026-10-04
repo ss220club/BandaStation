@@ -1,36 +1,54 @@
-/datum/species/kidan/get_scream_sound(mob/living/carbon/human/kidan)
-		return 'modular_bandastation/emote_panel/audio/kidan/scream_kidan.ogg'
-
-/datum/species/kidan/get_sigh_sound(mob/living/carbon/human/kidan)
-		return pick(
-			'modular_bandastation/emote_panel/audio/kidan/sigh_kidan_1.ogg',
-			'modular_bandastation/emote_panel/audio/kidan/sigh_kidan_2.ogg',
-		)
-/datum/species/kidan/get_cough_sound(mob/living/carbon/human/kidan)
-		return pick(
-			'modular_bandastation/emote_panel/audio/kidan/cough_kidan.ogg',
-		)
-
-/datum/species/kidan/get_cry_sound(mob/living/carbon/human/kidan)
-		return pick(
-			'modular_bandastation/emote_panel/audio/kidan/cry_kidan_1.ogg',
-			'modular_bandastation/emote_panel/audio/kidan/cry_kidan_2.ogg',
-		)
-
-/datum/species/kidan/get_sneeze_sound(mob/living/carbon/human/kidan)
-		return pick(
-			'modular_bandastation/emote_panel/audio/kidan/sneeze_kidan_1.ogg',
-			'modular_bandastation/emote_panel/audio/kidan/sneeze_kidan_2.ogg',
-			'modular_bandastation/emote_panel/audio/kidan/sneeze_kidan_3.ogg',
-		)
-
-/datum/species/kidan/get_laugh_sound(mob/living/carbon/human/kidan)
-		return pick(
-			'modular_bandastation/emote_panel/audio/kidan/laugh_kidan_1.ogg',
-			'modular_bandastation/emote_panel/audio/kidan/laugh_kidan_2.ogg',
-			'modular_bandastation/emote_panel/audio/kidan/laugh_kidan_3.ogg',
-			'modular_bandastation/emote_panel/audio/kidan/laugh_kidan_4.ogg',
-		)
+/obj/item/organ/tongue/kidan
+	emote_sounds = list(
+		/datum/emote/living/scream::key = 'modular_bandastation/emote_panel/audio/kidan/scream_kidan.ogg'
+		/datum/emote/living/carbon/cry::key = list(
+			FEMALE = list(
+				'modular_bandastation/emote_panel/audio/kidan/cry_kidan_1.ogg',
+				'modular_bandastation/emote_panel/audio/kidan/cry_kidan_2.ogg',
+			),
+			MALE = list(
+				'modular_bandastation/emote_panel/audio/kidan/cry_kidan_1.ogg',
+				'modular_bandastation/emote_panel/audio/kidan/cry_kidan_2.ogg',
+			),
+		),
+		/datum/emote/living/sigh::key = list(
+			FEMALE = list(
+				'modular_bandastation/emote_panel/audio/kidan/sigh_kidan_1.ogg',
+				'modular_bandastation/emote_panel/audio/kidan/sigh_kidan_2.ogg',
+			),
+			MALE = list(
+				'modular_bandastation/emote_panel/audio/kidan/sigh_kidan_1.ogg',
+				'modular_bandastation/emote_panel/audio/kidan/sigh_kidan_2.ogg',
+			),
+		),
+		/datum/emote/living/cough::key = 'modular_bandastation/emote_panel/audio/kidan/cough_kidan.ogg'
+		/datum/emote/living/sneeze::key = list(
+			FEMALE = list(
+				'modular_bandastation/emote_panel/audio/kidan/sneeze_kidan_1.ogg',
+				'modular_bandastation/emote_panel/audio/kidan/sneeze_kidan_2.ogg',
+				'modular_bandastation/emote_panel/audio/kidan/sneeze_kidan_3.ogg',
+			),
+			MALE = list(
+				'modular_bandastation/emote_panel/audio/kidan/sneeze_kidan_1.ogg',
+				'modular_bandastation/emote_panel/audio/kidan/sneeze_kidan_2.ogg',
+				'modular_bandastation/emote_panel/audio/kidan/sneeze_kidan_3.ogg',
+			),
+		),
+		/datum/emote/living/laugh::key = list(
+			FEMALE = list(
+				'modular_bandastation/emote_panel/audio/kidan/laugh_kidan_1.ogg',
+				'modular_bandastation/emote_panel/audio/kidan/laugh_kidan_2.ogg',
+				'modular_bandastation/emote_panel/audio/kidan/laugh_kidan_3.ogg',
+				'modular_bandastation/emote_panel/audio/kidan/laugh_kidan_4.ogg',
+			),
+			MALE = list(
+				'modular_bandastation/emote_panel/audio/kidan/laugh_kidan_1.ogg',
+				'modular_bandastation/emote_panel/audio/kidan/laugh_kidan_2.ogg',
+				'modular_bandastation/emote_panel/audio/kidan/laugh_kidan_3.ogg',
+				'modular_bandastation/emote_panel/audio/kidan/laugh_kidan_4.ogg',
+			),
+		),
+	)
 
 // MARK: Emotes
 /datum/emote/living/carbon/human/kidan

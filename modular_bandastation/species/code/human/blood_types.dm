@@ -9,15 +9,14 @@
 	blood_type = /datum/blood_type/skrell
 
 /datum/blood_type/kidan
-	name = BLOOD_TYPE_KIDAN
+	name = "K"
 	color = BLOOD_COLOR_KIDAN
 	compatible_types = list(
 		/datum/blood_type/kidan,
 	)
 
 /obj/item/reagent_containers/blood/kidan
-	blood_type = BLOOD_TYPE_KIDAN
-
+	blood_type = /datum/blood_type/kidan
 /datum/blood_type/moth
 	name = "M"
 	color = BLOOD_COLOR_MOTH
