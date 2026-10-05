@@ -44,6 +44,7 @@
 /datum/atom_skin/gp9
 	abstract_type = /datum/atom_skin/gp9
 	change_base_icon_state = TRUE
+	change_worn_icon_state = FALSE
 
 /datum/atom_skin/gp9/default
 	preview_name = "Default"

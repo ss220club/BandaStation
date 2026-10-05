@@ -109,7 +109,7 @@
 
 	///Price of an item in a vending machine, overriding the base vending machine price. Define in terms of paycheck defines as opposed to raw numbers.
 	var/custom_price
-	///Price of an item in a vending machine, overriding the premium vending machine price. Define in terms of paycheck defines as opposed to raw numbers.
+	///Price of a premium and contraband item in a vending machine, overriding the premium vending machine price. Define in terms of paycheck defines as opposed to raw numbers.
 	var/custom_premium_price
 	///Whether spessmen with an ID with an age below AGE_MINOR (20 by default) can buy this item
 	var/age_restricted = FALSE
@@ -429,6 +429,8 @@ GAME_VERB_SRC(/obj/item, move_to_top, oview(1), "Move To Top", null)
 		.["изолирующий"] = "Предмет изготовлен из прочного изолятора и блокирует проходящее через него электричество!"
 	else if (siemens_coefficient <= 0.5)
 		.["частично изолирующий"] = "Предмет изготовлен из плохого изолятора, который гасит (но не полностью блокирует) проходящее через него электричество."
+	if(item_flags & CAN_BE_OVERSLOT)
+		.["облегающий"] = "При ношении он не препятствует развертыванию MODsuits."
 
 /obj/item/examine_descriptor(mob/user)
 	return "предмет"

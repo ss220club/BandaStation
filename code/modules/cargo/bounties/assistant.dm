@@ -2,7 +2,7 @@
 	name = "Странный объект"
 	description = "Нанотрейзен интересуется странными объектами. Найдите один в технических туннелях и отправьте сразу же на ЦК."
 	reward = CARGO_CRATE_VALUE * 2.4
-	wanted_types = list(/obj/item/relic = TRUE)
+	wanted_types = list(/obj/item/assembly/relic = TRUE)
 
 /datum/bounty/item/assistant/scooter
 	name = "Scooter"
