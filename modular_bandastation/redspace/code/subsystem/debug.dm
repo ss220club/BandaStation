@@ -10,6 +10,8 @@
 	metric_sample_count = 0
 	metric_value_calculation_count = 0
 	metric_source_check_count = 0
+	metric_full_prune_count = 0
+	metric_prune_cell_check_count = 0
 	metric_dirty_cells_enqueued = 0
 	metric_dirty_cells_processed = 0
 	metric_events_started = 0
@@ -59,6 +61,7 @@
 	refresh_reason = null
 	pending_refresh_reason = null
 	prune_requested = FALSE
+	pending_prune_keys.Cut()
 	transition_log.Cut()
 	event_cooldowns.Cut()
 	automatic_event_attempts_remaining = null
@@ -95,6 +98,8 @@
 		if(listener && !QDELETED(listener))
 			register_event_listener(listener)
 	can_fire = FALSE
+	if(length(pending_prune_keys) || length(dirty_cells) || length(processing_sources) || refresh_in_progress || refresh_requested || prune_requested)
+		wake()
 	var/datum/station_trait/redspace_activity/round_trait = get_round_trait()
 	if(round_trait)
 		round_trait.on_redspace_reset()

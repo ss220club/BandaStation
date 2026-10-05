@@ -93,7 +93,7 @@
 
 	if(!energy.consume_energy(25) || energy.current_energy != 75)
 		return Fail("Redspace energy must be consumed as a percentage of maximum energy")
-	energy.listener_turf = get_turf(test_mob)
+	energy.field_observer.listener_turf = get_turf(test_mob)
 	energy.update_environment(REDSPACE_DISTURBANCE_ENTER_VALUE, FALSE)
 	energy.current_energy = 0
 	energy.on_life(test_mob, 1)

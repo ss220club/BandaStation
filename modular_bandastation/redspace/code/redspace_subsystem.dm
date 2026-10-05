@@ -40,6 +40,8 @@ SUBSYSTEM_DEF(redspace)
 	/// Pruning is deferred until the normal subsystem pass so source updates
 	/// cannot trigger several full sparse-table scans in one tick.
 	var/prune_requested = FALSE
+	/// Deduplicated cell keys abandoned by moving or deleted observers.
+	var/list/pending_prune_keys = list()
 	/// Wake timer for the next profile-based event attempt.
 	var/event_wake_timer_id = TIMER_ID_NULL
 	var/event_wake_at = 0
@@ -77,6 +79,8 @@ SUBSYSTEM_DEF(redspace)
 	var/metric_sample_count = 0
 	var/metric_value_calculation_count = 0
 	var/metric_source_check_count = 0
+	var/metric_full_prune_count = 0
+	var/metric_prune_cell_check_count = 0
 	var/metric_dirty_cells_enqueued = 0
 	var/metric_dirty_cells_processed = 0
 	var/metric_events_started = 0
@@ -107,6 +111,7 @@ SUBSYSTEM_DEF(redspace)
 	refresh_reason = null
 	pending_refresh_reason = null
 	prune_requested = FALSE
+	pending_prune_keys = list()
 	event_wake_timer_id = TIMER_ID_NULL
 	event_wake_at = 0
 	transition_log = list()
@@ -169,6 +174,7 @@ SUBSYSTEM_DEF(redspace)
 	currentrun.Cut()
 	refresh_currentrun.Cut()
 	pending_refresh_keys.Cut()
+	pending_prune_keys.Cut()
 	transition_log.Cut()
 	event_cooldowns.Cut()
 	event_budgets.Cut()
@@ -209,9 +215,11 @@ SUBSYSTEM_DEF(redspace)
 	if(prune_requested)
 		prune_requested = FALSE
 		prune_unused_cells(FALSE)
+	if(!process_pending_cell_prunes())
+		return
 	if(!process_scheduled_events())
 		return
-	if(!length(dirty_cells) && !length(processing_sources) && !refresh_in_progress && !refresh_requested && !prune_requested)
+	if(!length(dirty_cells) && !length(processing_sources) && !refresh_in_progress && !refresh_requested && !prune_requested && !length(pending_prune_keys))
 		can_fire = FALSE
 		schedule_event_wake()
 	automatic_event_attempts_remaining = null

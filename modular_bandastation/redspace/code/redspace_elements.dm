@@ -3,60 +3,31 @@
 /datum/redspace_threshold_listener
 	var/datum/element/redspace_threshold/owner
 	var/atom/target
-	var/turf/listener_turf
-	var/waiting_for_redspace = FALSE
+	var/datum/redspace_field_observer/field_observer
 
 /datum/redspace_threshold_listener/New(datum/element/redspace_threshold/new_owner, atom/new_target)
 	. = ..()
 	owner = new_owner
 	target = new_target
+	field_observer = new(src, CALLBACK(src, PROC_REF(update_registration)))
 	RegisterSignal(src, COMSIG_REDSPACE_FIELD_CHANGED, PROC_REF(on_redspace_changed))
 	if(ismovable(target))
 		RegisterSignal(target, COMSIG_MOVABLE_MOVED, PROC_REF(on_target_moved))
 	else if(isturf(target))
 		RegisterSignal(target, COMSIG_QDELETING, PROC_REF(on_target_deleting))
 
-/datum/redspace_threshold_listener/proc/update_registration()
+/datum/redspace_threshold_listener/proc/update_registration(turf/replacement_turf = null)
+	// ChangeTurf keeps turf references and signal hooks alive on the replacement.
+	if(replacement_turf && isturf(target))
+		target = replacement_turf
 	if(QDELETED(src) || !owner || !target || QDELETED(target))
 		return
-
-	if(listener_turf)
-		if(SSredspace?.initialized)
-			SSredspace.unregister_field_listener(src)
-		UnregisterSignal(listener_turf, COMSIG_TURF_CHANGE)
-		listener_turf = null
-
-	if(!SSredspace)
-		return
-	if(!SSredspace.initialized)
-		if(!waiting_for_redspace)
-			RegisterSignal(SSredspace, COMSIG_SUBSYSTEM_POST_INITIALIZE, PROC_REF(on_redspace_initialized))
-			waiting_for_redspace = TRUE
-		return
-	if(waiting_for_redspace)
-		UnregisterSignal(SSredspace, COMSIG_SUBSYSTEM_POST_INITIALIZE)
-		waiting_for_redspace = FALSE
-
-	var/turf/new_turf = get_turf(target)
-	if(!new_turf || !SSredspace.is_supported_z(new_turf.z))
+	if(!field_observer.update_registration(get_turf(target)))
 		return
 
-	listener_turf = new_turf
-	RegisterSignal(listener_turf, COMSIG_TURF_CHANGE, PROC_REF(on_turf_change))
-	if(!SSredspace.register_field_listener(src, listener_turf))
-		UnregisterSignal(listener_turf, COMSIG_TURF_CHANGE)
-		listener_turf = null
-		return
-
-	var/current_value = SSredspace.get_value(listener_turf)
+	var/current_value = SSredspace.field_listener_values[src]
 	if(!isnull(current_value) && current_value < owner.threshold)
 		owner.on_threshold_reached(target, src)
-
-/datum/redspace_threshold_listener/proc/on_redspace_initialized(datum/source)
-	SIGNAL_HANDLER
-	if(source != SSredspace)
-		return
-	update_registration()
 
 /datum/redspace_threshold_listener/proc/on_redspace_changed(datum/source, datum/redspace_field_cell/cell, old_value, new_value, old_state, new_state, reason)
 	SIGNAL_HANDLER
@@ -77,35 +48,15 @@
 		return
 	owner.Detach(source)
 
-/datum/redspace_threshold_listener/proc/on_turf_change(turf/changed, path, list/new_baseturfs, flags, list/post_change_callbacks)
-	SIGNAL_HANDLER
-	if(changed != listener_turf)
-		return
-	post_change_callbacks += CALLBACK(src, PROC_REF(on_turf_replaced))
-
-/datum/redspace_threshold_listener/proc/on_turf_replaced(turf/new_turf)
-	if(QDELETED(src) || !new_turf)
-		return
-	if(isturf(target))
-		target = new_turf
-	update_registration()
-
 /datum/redspace_threshold_listener/Destroy()
-	if(SSredspace?.initialized)
-		SSredspace.unregister_field_listener(src)
-	if(listener_turf)
-		UnregisterSignal(listener_turf, COMSIG_TURF_CHANGE)
+	QDEL_NULL(field_observer)
 	if(ismovable(target))
 		UnregisterSignal(target, COMSIG_MOVABLE_MOVED)
 	else if(isturf(target))
 		UnregisterSignal(target, COMSIG_QDELETING)
 	UnregisterSignal(src, COMSIG_REDSPACE_FIELD_CHANGED)
-	if(waiting_for_redspace && SSredspace)
-		UnregisterSignal(SSredspace, COMSIG_SUBSYSTEM_POST_INITIALIZE)
-	waiting_for_redspace = FALSE
 	owner = null
 	target = null
-	listener_turf = null
 	return ..()
 
 /// Shared redspace threshold logic. One DCS element can serve many hosts through per-host listeners.

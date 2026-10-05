@@ -18,10 +18,7 @@
 	var/sensor_id
 	/// Console currently receiving this sensor's measurements.
 	var/obj/machinery/computer/redspace_console/connected_console
-	/// Whether the sensor has a registered SSredspace field listener.
-	var/field_listener_registered = FALSE
-	/// Turf used for the current field listener registration.
-	var/turf/registered_turf
+	var/datum/redspace_field_observer/field_observer
 	/// Most recent exact sample. Null means that no supported sample was available.
 	var/last_sample_value
 	/// World time of the most recent sample, including unavailable samples.
@@ -40,6 +37,7 @@
 	AddElement(/datum/element/floor_placeable)
 	RegisterSignal(src, COMSIG_REDSPACE_FIELD_CHANGED, PROC_REF(on_redspace_field_changed))
 	RegisterSignal(src, COMSIG_MOVABLE_MOVED, PROC_REF(on_moved))
+	field_observer = new(src, CALLBACK(src, PROC_REF(on_observer_resample)))
 	next_sample_at = world.time
 	take_sample("датчик инициализирован")
 	START_PROCESSING(SSobj, src)
@@ -51,8 +49,7 @@
 		connected_console = null
 		if(!QDELETED(old_console))
 			old_console.unlink_sensor(src, null, FALSE)
-	if(SSredspace)
-		SSredspace.unregister_field_listener(src)
+	QDEL_NULL(field_observer)
 	UnregisterSignal(src, list(COMSIG_REDSPACE_FIELD_CHANGED, COMSIG_MOVABLE_MOVED))
 	return ..()
 
@@ -69,31 +66,11 @@
 
 /// Ensures that this sensor listens to the canonical turf where it currently stands.
 /obj/item/redspace_sensor/proc/ensure_field_listener()
-	if(!SSredspace || !SSredspace.initialized)
-		return FALSE
-
 	var/turf/current_turf = isturf(loc) ? loc : null
-	if(!current_turf || !SSredspace.is_supported_z(current_turf.z))
-		if(field_listener_registered || !isnull(SSredspace.field_listeners[src]))
-			SSredspace.unregister_field_listener(src)
-		field_listener_registered = FALSE
-		registered_turf = null
-		return FALSE
+	return field_observer.update_registration(current_turf)
 
-	var/list/hex_coordinates = redspace_hex_coordinates(current_turf)
-	var/expected_cell_key
-	if(hex_coordinates)
-		expected_cell_key = redspace_hex_key(current_turf.z, hex_coordinates[1], hex_coordinates[2])
-
-	if(field_listener_registered && registered_turf == current_turf && SSredspace.field_listeners[src] == expected_cell_key)
-		return TRUE
-
-	if(field_listener_registered || !isnull(SSredspace.field_listeners[src]))
-		SSredspace.unregister_field_listener(src)
-
-	registered_turf = current_turf
-	field_listener_registered = SSredspace.register_field_listener(src, current_turf)
-	return field_listener_registered
+/obj/item/redspace_sensor/proc/on_observer_resample(turf/new_turf)
+	take_sample("подписка датчика обновлена")
 
 /// Records an exact value and forwards it to the linked console.
 /obj/item/redspace_sensor/proc/receive_sample(new_value, sample_time = world.time, reason = null)

@@ -25,8 +25,7 @@
 
 	var/environment_state = REDSPACE_ENERGY_ENVIRONMENT_NONE
 	var/current_redspace_value
-	var/turf/listener_turf
-	var/waiting_for_redspace = FALSE
+	var/datum/redspace_field_observer/field_observer
 	var/list/tracked_actions = list()
 
 /datum/component/redspace_energy/Initialize(
@@ -67,6 +66,7 @@
 	RegisterSignal(living_parent, COMSIG_MOB_REMOVED_ACTION, PROC_REF(on_action_removed))
 	RegisterSignal(living_parent, COMSIG_MOB_ABILITY_STARTED, PROC_REF(on_ability_started))
 	RegisterSignal(src, COMSIG_REDSPACE_FIELD_CHANGED, PROC_REF(on_redspace_changed))
+	field_observer = new(src, CALLBACK(src, PROC_REF(on_observer_resample)))
 
 	for(var/datum/action/action as anything in living_parent.actions)
 		track_action(action)
@@ -83,14 +83,7 @@
 
 /datum/component/redspace_energy/proc/cleanup_runtime()
 	var/mob/living/living_parent = parent
-	if(SSredspace)
-		SSredspace.unregister_field_listener(src)
-	if(listener_turf)
-		UnregisterSignal(listener_turf, COMSIG_TURF_CHANGE)
-		listener_turf = null
-	if(waiting_for_redspace && SSredspace)
-		UnregisterSignal(SSredspace, COMSIG_SUBSYSTEM_POST_INITIALIZE)
-	waiting_for_redspace = FALSE
+	QDEL_NULL(field_observer)
 	UnregisterSignal(src, COMSIG_REDSPACE_FIELD_CHANGED)
 
 	for(var/datum/action/action as anything in tracked_actions.Copy())
@@ -117,7 +110,7 @@
 		return
 
 	var/turf/current_turf = get_turf(source)
-	if(current_turf != listener_turf)
+	if(current_turf != field_observer?.listener_turf)
 		update_field_registration()
 
 	var/delta_time = max(seconds_per_tick, 0)
@@ -141,45 +134,11 @@
 /datum/component/redspace_energy/proc/update_field_registration(play_transition_sound = TRUE)
 	if(!parent || QDELETED(parent))
 		return
+	var/registered = field_observer.update_registration(get_turf(parent))
+	update_environment(registered ? SSredspace.field_listener_values[src] : null, play_transition_sound)
 
-	if(listener_turf)
-		if(SSredspace)
-			SSredspace.unregister_field_listener(src)
-		UnregisterSignal(listener_turf, COMSIG_TURF_CHANGE)
-		listener_turf = null
-
-	if(!SSredspace)
-		update_environment(null, play_transition_sound)
-		return
-	if(!SSredspace.initialized)
-		if(!waiting_for_redspace)
-			RegisterSignal(SSredspace, COMSIG_SUBSYSTEM_POST_INITIALIZE, PROC_REF(on_redspace_initialized))
-			waiting_for_redspace = TRUE
-		update_environment(null, play_transition_sound)
-		return
-	if(waiting_for_redspace)
-		UnregisterSignal(SSredspace, COMSIG_SUBSYSTEM_POST_INITIALIZE)
-		waiting_for_redspace = FALSE
-
-	var/turf/current_turf = get_turf(parent)
-	if(!current_turf || !SSredspace.is_supported_z(current_turf.z))
-		update_environment(null, play_transition_sound)
-		return
-
-	listener_turf = current_turf
-	RegisterSignal(listener_turf, COMSIG_TURF_CHANGE, PROC_REF(on_turf_change))
-	if(!SSredspace.register_field_listener(src, listener_turf))
-		UnregisterSignal(listener_turf, COMSIG_TURF_CHANGE)
-		listener_turf = null
-		update_environment(null, play_transition_sound)
-		return
-
-	update_environment(SSredspace.get_value(listener_turf), play_transition_sound)
-
-/datum/component/redspace_energy/proc/on_redspace_initialized(datum/source)
-	SIGNAL_HANDLER
-	if(source == SSredspace)
-		update_field_registration()
+/datum/component/redspace_energy/proc/on_observer_resample(turf/new_turf)
+	update_field_registration()
 
 /datum/component/redspace_energy/proc/on_redspace_changed(
 	datum/source,
@@ -193,17 +152,6 @@
 	SIGNAL_HANDLER
 	if(source == src)
 		update_environment(new_value)
-
-/datum/component/redspace_energy/proc/on_turf_change(turf/changed, path, list/new_baseturfs, flags, list/post_change_callbacks)
-	SIGNAL_HANDLER
-	if(changed != listener_turf)
-		return
-	post_change_callbacks += CALLBACK(src, PROC_REF(on_turf_replaced))
-
-/datum/component/redspace_energy/proc/on_turf_replaced(turf/new_turf)
-	if(QDELETED(src) || !new_turf)
-		return
-	update_field_registration()
 
 /datum/component/redspace_energy/proc/update_environment(new_value, play_transition_sound = TRUE)
 	var/new_environment = REDSPACE_ENERGY_ENVIRONMENT_NONE

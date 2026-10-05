@@ -3,14 +3,31 @@
 
 /// Registers a datum for changes at the canonical tile containing target.
 /datum/controller/subsystem/redspace/proc/register_field_listener(datum/listener, turf/target)
-	if(!listener || !target || !is_supported_z(target.z))
-		return FALSE
-	if(field_listeners[listener])
-		unregister_field_listener(listener)
+	return move_field_listener(listener, target)
 
-	var/datum/redspace_field_cell/cell = get_cell(target, TRUE)
+/// Rebinds an observer to an exact point without tearing down its cleanup hook.
+/// Movement within one hex only updates the point sample; crossing a hex queues
+/// cleanup of the old cell. Callers consume the new value from field_listener_values.
+/datum/controller/subsystem/redspace/proc/move_field_listener(datum/listener, turf/target)
+	if(!listener || QDELETED(listener))
+		return FALSE
+	if(!target || QDELETED(target) || !is_supported_z(target.z))
+		unregister_field_listener(listener)
+		return FALSE
+
+	var/old_cell_key = field_listeners[listener]
+	var/datum/redspace_field_cell/cell = get_cell(target)
+	if(!cell)
+		cell = get_cell(target, TRUE)
+	else if(old_cell_key != cell.key)
+		schedule_event_attempt(cell)
 	if(!cell)
 		return FALSE
+	if(!isnull(old_cell_key) && old_cell_key != cell.key)
+		var/datum/redspace_field_cell/old_cell = field_cells[old_cell_key]
+		if(old_cell)
+			old_cell.listeners -= listener
+		request_cell_prune(old_cell_key)
 	field_listeners[listener] = cell.key
 	field_listener_targets[listener] = target
 	var/initial_value = calculate_value(target, cell)
@@ -35,7 +52,7 @@
 		field_listener_states -= listener
 		remove_listener_cleanup(listener)
 		if(prune)
-			prune_unused_cells()
+			request_cell_prune(cell_key)
 		return TRUE
 	return FALSE
 
@@ -129,18 +146,11 @@
 /datum/controller/subsystem/redspace/proc/on_registered_listener_deleted(datum/listener)
 	SIGNAL_HANDLER
 	var/cell_key = field_listeners[listener]
-	if(!isnull(cell_key))
-		var/datum/redspace_field_cell/cell = field_cells[cell_key]
-		if(cell)
-			cell.listeners -= listener
-	field_listeners -= listener
-	field_listener_targets -= listener
-	field_listener_values -= listener
-	field_listener_states -= listener
+	unregister_field_listener(listener, FALSE)
 	event_listeners -= listener
 	UnregisterSignal(listener, COMSIG_QDELETING)
 	listener_cleanup -= listener
-	prune_unused_cells()
+	request_cell_prune(cell_key)
 
 /// Unregisters every field and event listener during round/reset cleanup.
 /datum/controller/subsystem/redspace/proc/clear_listener_registrations()

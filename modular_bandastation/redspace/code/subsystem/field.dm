@@ -360,6 +360,7 @@
 	for(var/datum/listener as anything in cell.listeners.Copy())
 		unregister_field_listener(listener, FALSE)
 	field_cells -= cell.key
+	pending_prune_keys -= cell.key
 	dirty_cells -= cell
 	currentrun -= cell
 	cell.dirty_queued = FALSE
@@ -374,36 +375,47 @@
 
 /// Removes observer-free cells that no longer have a meaningful source or override.
 /datum/controller/subsystem/redspace/proc/prune_unused_cells(schedule_wake = TRUE)
+	metric_full_prune_count++
 	for(var/cell_key in field_cells.Copy())
-		var/datum/redspace_field_cell/cell = field_cells[cell_key]
-		if(!cell || length(cell.listeners) || !isnull(cell.forced_value) || !isnull(cell.event_override_value) || cell.local_delta)
-			continue
-		if(cell.dirty_queued || cell.dirty_processing)
-			continue
-		var/source_present = cell_has_active_source(cell)
-		var/datum/redspace_event_budget/budget = event_budgets[cell.key]
-		if(budget && !source_present && !budget.active_event_count && !budget.active_spawn_event_count && !budget.next_attempt_at && !budget.next_turf_attempt_at)
-			budget.next_attempt_at = 0
-			budget.next_turf_attempt_at = 0
-			event_budgets -= cell.key
-			qdel(budget)
-			budget = null
-		if(budget && (budget.active_event_count || budget.active_spawn_event_count || budget.next_attempt_at || budget.next_turf_attempt_at))
-			continue
-		if(!source_present)
-			remove_field_cell(cell)
+		prune_event_cell(cell_key)
 	if(schedule_wake)
 		schedule_event_wake()
 
+/// Defers cleanup of one cell until dirty notifications have been delivered.
+/datum/controller/subsystem/redspace/proc/request_cell_prune(cell_key)
+	if(isnull(cell_key) || !field_cells[cell_key])
+		return
+	pending_prune_keys |= cell_key
+	wake()
+
+/// A new request (including a still-dirty cell) waits for the next pass.
+/// Preserve unvisited keys when the MC tick budget is exhausted.
+/datum/controller/subsystem/redspace/proc/process_pending_cell_prunes()
+	var/list/prune_run = pending_prune_keys
+	pending_prune_keys = list()
+	while(length(prune_run))
+		var/cell_key = prune_run[length(prune_run)]
+		prune_run.len--
+		prune_event_cell(cell_key)
+		if(MC_TICK_CHECK)
+			pending_prune_keys |= prune_run
+			return FALSE
+	return TRUE
+
+/// Shared eligibility check for full, observer and event lifecycle cleanup.
 /datum/controller/subsystem/redspace/proc/prune_event_cell(zone_key)
 	if(!zone_key)
 		return
 	var/datum/redspace_field_cell/cell = field_cells[zone_key]
-	if(!cell || length(cell.listeners) || !isnull(cell.forced_value) || !isnull(cell.event_override_value) || cell.local_delta)
+	if(!cell)
+		return
+	metric_prune_cell_check_count++
+	if(length(cell.listeners) || !isnull(cell.forced_value) || !isnull(cell.event_override_value) || cell.local_delta)
 		return
 	// A lifecycle callback can run while this cell is still waiting for its
-	// dirty pass. Let the normal prune path remove it after processing.
+	// dirty pass. Retry this exact cell after processing.
 	if(cell.dirty_queued || cell.dirty_processing)
+		request_cell_prune(zone_key)
 		return
 	var/source_present = cell_has_active_source(cell)
 	var/datum/redspace_event_budget/budget = event_budgets[cell.key]
