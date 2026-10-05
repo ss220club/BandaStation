@@ -32,6 +32,7 @@
 	var/turf/original_turf = run_loc_floor_bottom_left
 	restore_type = original_turf.type
 	restore_baseturfs = islist(original_turf.baseturfs) ? original_turf.baseturfs.Copy() : original_turf.baseturfs ? list(original_turf.baseturfs) : list()
+	restore_baseturfs = string_list(restore_baseturfs)
 	test_x = original_turf.x
 	test_y = original_turf.y
 	test_z = original_turf.z

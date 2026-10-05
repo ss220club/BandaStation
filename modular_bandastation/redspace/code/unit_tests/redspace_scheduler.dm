@@ -39,6 +39,7 @@
 	parent_type = /datum/unit_test/redspace_observers
 	abstract_type = /datum/unit_test/redspace_scheduler
 	var/list/datum/redspace_field_cell/test_cells = list()
+	var/list/list/fixture_turf_states = list()
 	var/list/started_keys = list()
 	var/normal_started = 0
 	var/turf_started = 0
@@ -57,25 +58,20 @@
 	SSredspace.context.active_profile_id = profile.profile_id
 	SSredspace.register_event_type(/datum/redspace_event/unit_test_scheduler)
 	SSredspace.register_event_type(/datum/redspace_event/spawn/turf/unit_test_scheduler)
-	var/list/station_levels = SSmapping.levels_by_trait(ZTRAIT_STATION)
-	if(!length(station_levels))
-		return
-	SSredspace.station_z_levels |= station_levels[1]
-	var/list/seen_keys = list()
-	var/turf/station_center = locate(128, 128, station_levels[1])
-	for(var/turf/open/floor/candidate as anything in RANGE_TURFS(40, station_center))
-		if(!SSredspace.is_event_target_turf_valid(candidate))
-			continue
+	// The minimal CI map has no usable station floors. Prepare five distinct
+	// hex centers on the isolated unit-test z-level and restore them in Destroy().
+	var/list/start_coordinates = redspace_hex_coordinates(start_turf)
+	for(var/index in 1 to 5)
+		var/turf/candidate = redspace_hex_representative_turf(start_turf.z, start_coordinates[1] + index * 2, start_coordinates[2] + 2)
+		if(!candidate)
+			return Fail("Scheduler tests require five isolated test hexes")
+		fixture_turf_states[candidate] = list(candidate.type, islist(candidate.baseturfs) ? candidate.baseturfs.Copy() : candidate.baseturfs)
+		candidate = candidate.ChangeTurf(/turf/open/floor, flags = CHANGETURF_FORCEOP)
 		var/datum/redspace_field_cell/cell = SSredspace.get_cell(candidate, TRUE)
-		if(seen_keys[cell.key])
-			continue
-		seen_keys[cell.key] = TRUE
 		cell.forced_value = 10
 		SSredspace.schedule_event_attempt(cell)
 		test_cells += cell
 		SSredspace.event_candidate_cache[cell.key] = list(candidate)
-		if(length(test_cells) == 5)
-			break
 	SSredspace.event_candidate_cache_time = world.time
 	SSredspace.register_event_listener(src)
 	RegisterSignal(src, COMSIG_REDSPACE_EVENT_STARTED, PROC_REF(on_started))
@@ -83,6 +79,10 @@
 /datum/unit_test/redspace_scheduler/Destroy()
 	UnregisterSignal(src, COMSIG_REDSPACE_EVENT_STARTED)
 	SSredspace.unregister_event_listener(src)
+	for(var/turf/fixture_turf as anything in fixture_turf_states)
+		var/list/original_state = fixture_turf_states[fixture_turf]
+		fixture_turf.ChangeTurf(original_state[1], original_state[2], CHANGETURF_FORCEOP)
+	fixture_turf_states.Cut()
 	Master.current_ticklimit = saved_tick_limit
 	return ..()
 
@@ -114,7 +114,7 @@
 
 /datum/unit_test/redspace_scheduler/selection_resume/Run()
 	if(length(test_cells) != 5)
-		return Fail("Scheduler tests require five usable station hexes")
+		return Fail("Scheduler tests require five isolated test hexes")
 	var/datum/redspace_field_cell/cell = test_cells[1]
 	var/datum/redspace_event_budget/budget = SSredspace.event_budgets[cell.key]
 	budget.next_attempt_at = world.time

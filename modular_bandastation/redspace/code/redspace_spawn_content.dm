@@ -1704,6 +1704,7 @@
 
 	var/restore_turf_type = target.type
 	var/list/restore_baseturfs = islist(target.baseturfs) ? target.baseturfs.Copy() : target.baseturfs ? list(target.baseturfs) : list()
+	restore_baseturfs = string_list(restore_baseturfs)
 	var/turf/necropolis_turf = target.ChangeTurf(/turf/open/indestructible/necropolis, null, CHANGETURF_FORCEOP)
 	if(!necropolis_turf || QDELETED(necropolis_turf))
 		return FALSE
