@@ -163,6 +163,7 @@
 		return
 	event_budgets -= zone_key
 	qdel(budget)
+	event_wake_dirty = TRUE
 
 /// Finalizes an active event exactly once, including cancellation and external qdel().
 /// Failed starts refund their reservation and stay silent unless start was already notified.

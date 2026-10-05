@@ -14,14 +14,19 @@
 
 /datum/unit_test/redspace_observers/New()
 	. = ..()
-	for(var/variable in list("field_cells", "field_sources", "processing_sources", "dirty_cells", "currentrun", "refresh_currentrun", "pending_refresh_keys", "pending_prune_keys", "transition_log", "field_listeners", "field_listener_targets", "field_listener_values", "field_listener_states", "event_listeners", "event_registry", "event_cooldowns", "event_budgets", "active_events", "event_candidate_cache", "listener_cleanup"))
+	for(var/variable in list("source_currentrun", "source_refresh_keys", "event_schedule_currentrun", "event_attempt_queue", "event_attempt_lookup", "field_cells", "field_sources", "processing_sources", "dirty_cells", "currentrun", "refresh_currentrun", "pending_refresh_keys", "pending_prune_keys", "transition_log", "field_listeners", "field_listener_targets", "field_listener_values", "field_listener_states", "event_listeners", "event_registry", "event_cooldowns", "event_budgets", "active_events", "event_candidate_cache", "listener_cleanup"))
 		saved_state[variable] = SSredspace.vars[variable]
 		SSredspace.vars[variable] = list()
-	for(var/variable in list("context", "initialized", "can_fire", "state", "station_z_levels", "refresh_in_progress", "refresh_requested", "refresh_requested_full", "refresh_reason", "pending_refresh_reason", "prune_requested", "event_wake_timer_id", "event_wake_at", "automatic_event_attempts_remaining", "event_value_cache", "event_candidate_cache_time"))
+	for(var/variable in list("source_cursor", "source_pass_in_progress", "source_step_started", "source_refresh_needed", "dirty_pass_started", "event_wake_dirty", "event_schedule_cursor", "event_pass_in_progress", "unit_test_work_remaining", "context", "initialized", "can_fire", "state", "station_z_levels", "refresh_in_progress", "refresh_requested", "refresh_requested_full", "refresh_reason", "pending_refresh_reason", "prune_requested", "event_wake_timer_id", "event_wake_at", "automatic_event_attempts_remaining", "event_value_cache", "event_candidate_cache_time"))
 		saved_state[variable] = SSredspace.vars[variable]
 	for(var/variable in SSredspace.vars)
 		if(findtext(variable, "metric_") == 1)
 			saved_state[variable] = SSredspace.vars[variable]
+	SSredspace.clear_source_processing()
+	SSredspace.clear_automatic_event_work()
+	SSredspace.dirty_pass_started = FALSE
+	SSredspace.event_wake_dirty = FALSE
+	SSredspace.unit_test_work_remaining = null
 	SSredspace.reset_metrics()
 	SSredspace.context = new /datum/redspace_context(list())
 	SSredspace.context.background_value = 0
@@ -62,6 +67,8 @@
 		start_turf.RemoveElement(/datum/element/redspace_threshold/revert_turf_below, -100000, restore_type, restore_baseturfs)
 	QDEL_LIST(allocated)
 	SSredspace.clear_event_wake_timer()
+	SSredspace.clear_automatic_event_work()
+	SSredspace.clear_source_processing()
 	SSredspace.clear_listener_registrations()
 	QDEL_LIST_ASSOC_VAL(SSredspace.event_budgets)
 	QDEL_LIST_ASSOC_VAL(SSredspace.field_cells)

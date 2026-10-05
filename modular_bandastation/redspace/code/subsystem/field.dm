@@ -371,6 +371,7 @@
 		budget.next_turf_attempt_at = 0
 		event_budgets -= cell.key
 		qdel(budget)
+		event_wake_dirty = TRUE
 	qdel(cell)
 
 /// Removes observer-free cells that no longer have a meaningful source or override.
@@ -425,6 +426,7 @@
 		event_budgets -= cell.key
 		qdel(budget)
 		budget = null
+		event_wake_dirty = TRUE
 	if(budget && (budget.active_event_count || budget.active_spawn_event_count || budget.next_attempt_at || budget.next_turf_attempt_at))
 		return
 	if(!source_present)
@@ -491,9 +493,9 @@
 		if(cell_has_event_anchor(cell) && redspace_state_is_escalation(old_state, cell.state))
 			var/datum/redspace_event_profile/event_profile = get_event_profile(cell.state)
 			if(event_profile_has_automatic_event(event_profile) && event_profile.should_attempt())
-				try_start_automatic_event(cell)
+				queue_automatic_event_attempt(cell)
 			if(event_profile_has_automatic_event(event_profile, REDSPACE_EVENT_CATEGORY_TURF_SPAWN) && event_profile.should_attempt())
-				try_start_automatic_event(cell, REDSPACE_EVENT_CATEGORY_TURF_SPAWN)
+				queue_automatic_event_attempt(cell, REDSPACE_EVENT_CATEGORY_TURF_SPAWN)
 		if(cell_has_event_anchor(cell))
 			schedule_event_attempt(cell)
 		else

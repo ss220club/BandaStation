@@ -19,6 +19,7 @@
 		"Метрики: источники [length(SSredspace.field_sources)], ячейки [length(SSredspace.field_cells)], dirty-ячеек [length(SSredspace.dirty_cells)]/[length(SSredspace.currentrun)], выборок [SSredspace.metric_sample_count], расчётов [SSredspace.metric_value_calculation_count], проверок источников [SSredspace.metric_source_check_count], dirty поставлено/обработано [SSredspace.metric_dirty_cells_enqueued]/[SSredspace.metric_dirty_cells_processed], событий запущено/завершено [SSredspace.metric_events_started]/[SSredspace.metric_events_finished]",
 		"Пики: ячейки [SSredspace.metric_peak_field_cells], dirty-ячеек [SSredspace.metric_peak_dirty_cells], источников в обработке [SSredspace.metric_peak_processing_sources]",
 		"Очистка: полных обходов [SSredspace.metric_full_prune_count], проверено ячеек [SSredspace.metric_prune_cell_check_count], адресных запросов в очереди [length(SSredspace.pending_prune_keys)]",
+		"Планировщик: автоматических попыток [SSredspace.metric_automatic_attempts], пересчётов таймера [SSredspace.metric_event_wake_scans], ожидающих попыток [length(SSredspace.event_attempt_queue)]",
 	)
 
 	if(cell)

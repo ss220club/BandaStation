@@ -63,6 +63,12 @@
 /// Prevents a wave front from starting an event-target scan for every cell in one fire.
 #define REDSPACE_MAX_AUTOMATIC_EVENT_ATTEMPTS_PER_FIRE 8
 
+/// Automatic selection distinguishes completed attempts from resumable work.
+#define REDSPACE_ATTEMPT_REJECTED 0
+#define REDSPACE_ATTEMPT_STARTED 1
+#define REDSPACE_ATTEMPT_DEFERRED 2
+#define REDSPACE_ATTEMPT_LIMIT_REACHED 3
+
 /// Independent limits for events that leave turfs, objects or mobs in the world.
 #define REDSPACE_SPAWN_BUDGET_WINDOW (60 SECONDS)
 #define REDSPACE_SPAWN_BUDGET_COOLDOWN (10 SECONDS)

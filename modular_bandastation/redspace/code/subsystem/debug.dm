@@ -16,6 +16,8 @@
 	metric_dirty_cells_processed = 0
 	metric_events_started = 0
 	metric_events_finished = 0
+	metric_automatic_attempts = 0
+	metric_event_wake_scans = 0
 	metric_peak_field_cells = 0
 	metric_peak_dirty_cells = 0
 	metric_peak_processing_sources = 0
@@ -23,6 +25,9 @@
 /// Removes all field state created during the current round.
 /datum/controller/subsystem/redspace/proc/reset_debug_state()
 	clear_event_wake_timer()
+	clear_automatic_event_work()
+	clear_source_processing()
+	dirty_pass_started = FALSE
 	cancel_active_events("событие отменено при сбросе поля")
 	var/list/field_listeners_to_restore = list()
 	for(var/datum/listener as anything in field_listeners)
@@ -74,6 +79,7 @@
 			qdel(budget)
 	event_budgets.Cut()
 	clear_event_wake_timer()
+	event_wake_dirty = FALSE
 	reset_metrics()
 
 	QDEL_NULL(context)
@@ -98,7 +104,7 @@
 		if(listener && !QDELETED(listener))
 			register_event_listener(listener)
 	can_fire = FALSE
-	if(length(pending_prune_keys) || length(dirty_cells) || length(processing_sources) || refresh_in_progress || refresh_requested || prune_requested)
+	if(length(pending_prune_keys) || length(dirty_cells) || length(processing_sources) || refresh_in_progress || refresh_requested || prune_requested || length(event_attempt_queue))
 		wake()
 	var/datum/station_trait/redspace_activity/round_trait = get_round_trait()
 	if(round_trait)

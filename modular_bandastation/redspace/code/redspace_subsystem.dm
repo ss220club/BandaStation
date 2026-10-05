@@ -21,6 +21,13 @@ SUBSYSTEM_DEF(redspace)
 	var/list/field_sources = list()
 	/// Sources that need expiry checks or cell refreshes while they exist.
 	var/list/processing_sources = list()
+	var/list/source_currentrun = list()
+	var/source_cursor = 1
+	var/source_pass_in_progress = FALSE
+	var/source_step_started = FALSE
+	var/source_refresh_needed = FALSE
+	var/list/source_refresh_keys = list()
+	var/dirty_pass_started = FALSE
 	var/next_source_id = 1
 	/// Maximum combined negative contribution from overlapping stabilizers at one point.
 	/// A single stabilizer remains limited by its own -5 contribution cap.
@@ -45,6 +52,17 @@ SUBSYSTEM_DEF(redspace)
 	/// Wake timer for the next profile-based event attempt.
 	var/event_wake_timer_id = TIMER_ID_NULL
 	var/event_wake_at = 0
+	var/event_wake_dirty = FALSE
+	var/list/event_schedule_currentrun = list()
+	var/event_schedule_cursor = 1
+	var/event_pass_in_progress = FALSE
+	/// FIFO selection jobs, shared by scheduled attempts and range escalation.
+	var/list/event_attempt_queue = list()
+	var/list/event_attempt_lookup = list()
+#if defined(UNIT_TESTS) || defined(SPACEMAN_DMM)
+	/// Deterministic small work budget for focused continuation tests.
+	var/unit_test_work_remaining
+#endif
 	/// Recent gameplay-range transitions, newest entry last.
 	var/list/transition_log = list()
 	/// Listener -> canonical cell key for point observers such as sensors.
@@ -85,6 +103,8 @@ SUBSYSTEM_DEF(redspace)
 	var/metric_dirty_cells_processed = 0
 	var/metric_events_started = 0
 	var/metric_events_finished = 0
+	var/metric_automatic_attempts = 0
+	var/metric_event_wake_scans = 0
 	var/metric_peak_field_cells = 0
 	var/metric_peak_dirty_cells = 0
 	var/metric_peak_processing_sources = 0
@@ -100,6 +120,8 @@ SUBSYSTEM_DEF(redspace)
 
 	field_sources = list()
 	processing_sources = list()
+	clear_source_processing()
+	dirty_pass_started = FALSE
 	field_cells = list()
 	dirty_cells = list()
 	currentrun = list()
@@ -114,6 +136,8 @@ SUBSYSTEM_DEF(redspace)
 	pending_prune_keys = list()
 	event_wake_timer_id = TIMER_ID_NULL
 	event_wake_at = 0
+	event_wake_dirty = FALSE
+	clear_automatic_event_work()
 	transition_log = list()
 	field_listeners = list()
 	field_listener_targets = list()
@@ -149,6 +173,8 @@ SUBSYSTEM_DEF(redspace)
 
 /datum/controller/subsystem/redspace/Destroy()
 	clear_event_wake_timer()
+	clear_automatic_event_work()
+	clear_source_processing()
 	cancel_active_events("подсистема уничтожена")
 	clear_listener_registrations()
 	for(var/zone_key in event_budgets)
@@ -188,13 +214,17 @@ SUBSYSTEM_DEF(redspace)
 /datum/controller/subsystem/redspace/fire(resumed = FALSE)
 	if(!resumed)
 		automatic_event_attempts_remaining = REDSPACE_MAX_AUTOMATIC_EVENT_ATTEMPTS_PER_FIRE
-		process_sources()
+		dirty_pass_started = FALSE
+	if(!dirty_pass_started)
+		if(!process_sources())
+			return
 		currentrun = dirty_cells.Copy()
 		for(var/datum/redspace_field_cell/dirty_cell as anything in currentrun)
 			if(dirty_cell)
 				dirty_cell.dirty_queued = FALSE
 				dirty_cell.dirty_processing = TRUE
 		dirty_cells.Cut()
+		dirty_pass_started = TRUE
 
 	if(!process_refresh_cells())
 		return
@@ -219,9 +249,10 @@ SUBSYSTEM_DEF(redspace)
 		return
 	if(!process_scheduled_events())
 		return
-	if(!length(dirty_cells) && !length(processing_sources) && !refresh_in_progress && !refresh_requested && !prune_requested && !length(pending_prune_keys))
-		can_fire = FALSE
+	if(event_wake_dirty)
 		schedule_event_wake()
+	if(!length(dirty_cells) && !length(processing_sources) && !refresh_in_progress && !refresh_requested && !prune_requested && !length(pending_prune_keys) && !length(event_attempt_queue) && !event_pass_in_progress)
+		can_fire = FALSE
 	automatic_event_attempts_remaining = null
 
 /// Enables the subsystem after a new cell update or registered listener needs processing.

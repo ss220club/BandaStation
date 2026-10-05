@@ -1,44 +1,73 @@
 // Source registration, coverage discovery, updates and expiry.
 // These procs extend SSredspace; shared state and lifecycle live in ../redspace_subsystem.dm.
 
-/// Expires timed sources and refreshes cached cells while moving waves exist.
-/datum/controller/subsystem/redspace/proc/process_sources()
-	if(!length(processing_sources))
-		return
+/// Clears the outer source pass, including refreshes accumulated before a yield.
+/datum/controller/subsystem/redspace/proc/clear_source_processing()
+	source_currentrun.Cut()
+	source_cursor = 1
+	source_pass_in_progress = FALSE
+	source_step_started = FALSE
+	source_refresh_needed = FALSE
+	source_refresh_keys.Cut()
 
-	var/refresh_needed = FALSE
-	var/list/refresh_cell_keys = list()
-	for(var/source_key in processing_sources.Copy())
+/// Expires and grows each source once per pass; coverage and the outer cursor
+/// both survive a yield. Newly registered sources join the following pass.
+/datum/controller/subsystem/redspace/proc/process_sources()
+	if(!source_pass_in_progress)
+		source_currentrun = processing_sources.Copy()
+		source_cursor = 1
+		source_pass_in_progress = TRUE
+	while(source_cursor <= length(source_currentrun))
+		if(redspace_work_should_yield())
+			return FALSE
+		var/source_key = source_currentrun[source_cursor]
 		var/datum/redspace_field_source/source = processing_sources[source_key]
 		if(QDELETED(source))
 			processing_sources -= source_key
+			source_cursor++
+			source_step_started = FALSE
 			continue
 		if(source.is_expired())
 			source.change_reason = "истёк срок жизни источника"
 			remove_source(source.source_id)
+			source_cursor++
+			source_step_started = FALSE
 			continue
-		if(istype(source, /datum/redspace_field_source/hotspot))
-			var/datum/redspace_field_source/hotspot/hotspot = source
-			hotspot.process_growth()
+		if(!source_step_started)
+			source_step_started = TRUE
+			if(istype(source, /datum/redspace_field_source/hotspot))
+				var/datum/redspace_field_source/hotspot/hotspot = source
+				hotspot.process_growth()
+			if(QDELETED(source) || processing_sources[source_key] != source)
+				source_cursor++
+				source_step_started = FALSE
+				continue
+			if((istype(source, /datum/redspace_field_source/wave) || length(source.coverage_turfs)) && source.coverage_needs_refresh())
+				prune_requested = TRUE
+		// Growth can start a new, partially discovered coverage pass or delete
+		// the source through its change callbacks. Inspect the post-growth state.
 		var/coverage_pending = length(source.coverage_turfs)
-		var/coverage_rebuild_needed = source.coverage_needs_refresh()
 		var/coverage_complete = TRUE
 		if(istype(source, /datum/redspace_field_source/wave) || coverage_pending)
 			coverage_complete = ensure_source_cells(source)
-			refresh_needed ||= coverage_pending || !coverage_complete
-			refresh_cell_keys |= source.get_coverage_refresh_keys()
-			if(coverage_rebuild_needed)
-				prune_requested = TRUE
+			source_refresh_needed ||= coverage_pending || !coverage_complete
+			source_refresh_keys |= source.get_coverage_refresh_keys()
 		if(istype(source, /datum/redspace_field_source/wave))
-			refresh_needed = TRUE
+			source_refresh_needed = TRUE
+		if(!coverage_complete)
+			return FALSE
 		if(!source.requires_processing() && coverage_complete)
 			processing_sources -= source_key
+		source_cursor++
+		source_step_started = FALSE
 
-	if(refresh_needed)
-		if(length(refresh_cell_keys))
-			refresh_cells("обновляются пространственные источники", refresh_cell_keys)
+	if(source_refresh_needed)
+		if(length(source_refresh_keys))
+			refresh_cells("обновляются пространственные источники", source_refresh_keys)
 		else
 			refresh_cells("обновляются пространственные источники")
+	clear_source_processing()
+	return TRUE
 
 /datum/controller/subsystem/redspace/proc/ensure_source_cells(datum/redspace_field_source/source)
 	if(!source || !source.z_level || !is_supported_z(source.z_level))
@@ -96,7 +125,7 @@
 		source.coverage_seen_cells[cell_key] = TRUE
 		source.coverage_refresh_cell_keys |= cell_key
 		get_cell_by_coordinates(candidate.z, coordinates[1], coordinates[2], TRUE, candidate)
-		if(MC_TICK_CHECK)
+		if(redspace_work_should_yield())
 			return FALSE
 
 	var/list/current_coverage_keys = list()

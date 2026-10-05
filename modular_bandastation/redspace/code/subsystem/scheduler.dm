@@ -12,7 +12,9 @@
 		budget.scheduled_state = null
 		budget.turf_scheduled_state = null
 		cleanup_event_budget(zone_key)
+	clear_automatic_event_work()
 	clear_event_wake_timer()
+	event_wake_dirty = FALSE
 
 /datum/controller/subsystem/redspace/proc/clear_event_wake_timer()
 	if(event_wake_timer_id != TIMER_ID_NULL)
@@ -23,18 +25,22 @@
 /datum/controller/subsystem/redspace/proc/wake_scheduled_events()
 	event_wake_timer_id = TIMER_ID_NULL
 	event_wake_at = 0
+	// A timer may wake before a moved deadline; still re-arm the next wake.
+	event_wake_dirty = TRUE
 	wake()
 
 /datum/controller/subsystem/redspace/proc/schedule_event_wake_at(attempt_at)
 	if(!attempt_at)
 		return
-	if(event_wake_timer_id != TIMER_ID_NULL && event_wake_at <= attempt_at)
+	if(event_wake_timer_id != TIMER_ID_NULL && event_wake_at == attempt_at)
 		return
 	clear_event_wake_timer()
 	event_wake_at = attempt_at
 	event_wake_timer_id = addtimer(CALLBACK(src, PROC_REF(wake_scheduled_events)), max(1, attempt_at - world.time), TIMER_STOPPABLE | TIMER_DELETE_ME)
 
 /datum/controller/subsystem/redspace/proc/schedule_event_wake()
+	event_wake_dirty = FALSE
+	metric_event_wake_scans++
 	var/earliest_attempt
 	for(var/zone_key in event_budgets)
 		var/datum/redspace_event_budget/budget = event_budgets[zone_key]
@@ -159,7 +165,7 @@
 		budget.next_turf_attempt_at = 0
 		budget.turf_scheduled_state = null
 
-	schedule_event_wake()
+	event_wake_dirty = TRUE
 	wake()
 	return TRUE
 
@@ -179,6 +185,8 @@
 	var/datum/redspace_event_budget/budget = event_budgets[cell.key]
 	if(!budget)
 		return
+	event_wake_dirty = TRUE
+	wake()
 	budget.next_attempt_at = 0
 	budget.next_turf_attempt_at = 0
 	budget.scheduled_state = null
@@ -193,61 +201,128 @@
 		return FALSE
 	return cell_has_active_source(cell) || !isnull(cell.forced_value) || !isnull(cell.event_override_value) || cell.local_delta
 
-/// Makes one bounded attempt for each due profile queue in every active zone.
+/// MC continuation point shared by source processing and automatic selection.
+/datum/controller/subsystem/redspace/proc/redspace_work_should_yield()
+#if defined(UNIT_TESTS) || defined(SPACEMAN_DMM)
+	if(!isnull(unit_test_work_remaining))
+		if(unit_test_work_remaining <= 0)
+			return pause()
+		unit_test_work_remaining--
+#endif
+	return MC_TICK_CHECK
+
+/datum/controller/subsystem/redspace/proc/clear_automatic_event_work()
+	QDEL_LIST(event_attempt_queue)
+	event_attempt_lookup.Cut()
+	event_schedule_currentrun.Cut()
+	event_schedule_cursor = 1
+	event_pass_in_progress = FALSE
+	event_value_cache = null
+
+/// A scheduled job remembers its due timestamp so a later field update cannot
+/// accidentally be overwritten when an old selection finishes.
+/datum/controller/subsystem/redspace/proc/queue_automatic_event_attempt(datum/redspace_field_cell/cell, target_category = null, datum/redspace_event_budget/budget = null) as /datum/redspace_event_attempt
+	if(!cell || QDELETED(cell))
+		return
+	var/queue_key = "[cell.key]:[isnull(target_category) ? "normal" : target_category]:[budget ? "scheduled" : "escalation"]"
+	var/datum/redspace_event_attempt/existing = event_attempt_lookup[queue_key]
+	if(existing)
+		var/due_at = budget ? (target_category == REDSPACE_EVENT_CATEGORY_TURF_SPAWN ? budget.next_turf_attempt_at : budget.next_attempt_at) : null
+		if(existing.cell == cell && existing.cell_state == cell.state && existing.event_profile == get_event_profile(cell.state) && existing.scheduled_budget == budget && existing.scheduled_at == due_at)
+			return existing
+		event_attempt_queue -= existing
+		qdel(existing)
+	var/datum/redspace_event_attempt/attempt = new(cell, target_category, budget)
+	attempt.queue_key = queue_key
+	event_attempt_lookup[queue_key] = attempt
+	event_attempt_queue += attempt
+	wake()
+	return attempt
+
+/// Only a completed scheduled attempt consumes its cadence. Probability misses,
+/// cooldown/budget rejections and missing targets are completed attempts; MC or
+/// global-limit deferrals retain the original deadline.
+/datum/controller/subsystem/redspace/proc/finish_automatic_event_attempt(datum/redspace_event_attempt/attempt)
+	var/datum/redspace_field_cell/cell = attempt.cell
+	var/datum/redspace_event_budget/budget = attempt.scheduled_budget
+	if(!QDELETED(cell) && !QDELETED(budget) && event_budgets[cell.key] == budget)
+		var/current_at = attempt.target_category == REDSPACE_EVENT_CATEGORY_TURF_SPAWN ? budget.next_turf_attempt_at : budget.next_attempt_at
+		if(current_at == attempt.scheduled_at)
+			if(cell.state != attempt.cell_state || get_event_profile(cell.state) != attempt.event_profile || !cell_has_event_anchor(cell))
+				schedule_event_attempt(cell)
+			else if(attempt.target_category == REDSPACE_EVENT_CATEGORY_TURF_SPAWN)
+				budget.next_turf_attempt_at = world.time + get_event_attempt_delay(cell, attempt.event_profile)
+			else
+				budget.next_attempt_at = world.time + get_event_attempt_delay(cell, attempt.event_profile)
+			event_wake_dirty = TRUE
+	event_attempt_queue -= attempt
+	if(event_attempt_lookup[attempt.queue_key] == attempt)
+		event_attempt_lookup -= attempt.queue_key
+	qdel(attempt)
+
+/// Discover due zones once, preserving the scan cursor and FIFO jobs across
+/// yields. When the global attempt quota is used up, the next normal fire
+/// replenishes it and continues the existing queue before discovering new zones.
 /datum/controller/subsystem/redspace/proc/process_scheduled_events()
 	if(!automatic_events_enabled())
 		clear_scheduled_event_attempts()
 		return TRUE
-	if(!length(event_budgets) || (event_wake_at && world.time < event_wake_at))
-		return TRUE
+	if(!event_pass_in_progress)
+		if(!length(event_attempt_queue) && (!length(event_budgets) || (event_wake_at && world.time < event_wake_at && !event_wake_dirty)))
+			if(event_wake_dirty)
+				schedule_event_wake()
+			return TRUE
+		event_pass_in_progress = TRUE
+		event_schedule_currentrun = event_budgets.Copy()
+		event_schedule_cursor = 1
 
-	for(var/zone_key in event_budgets.Copy())
-		if(MC_TICK_CHECK)
+	while(event_schedule_cursor <= length(event_schedule_currentrun))
+		if(redspace_work_should_yield())
 			return FALSE
+		var/zone_key = event_schedule_currentrun[event_schedule_cursor++]
 		var/datum/redspace_event_budget/budget = event_budgets[zone_key]
 		if(!budget)
 			continue
-		var/normal_attempt_due = budget.next_attempt_at && world.time >= budget.next_attempt_at
-		var/turf_attempt_due = budget.next_turf_attempt_at && world.time >= budget.next_turf_attempt_at
-		if(!normal_attempt_due && !turf_attempt_due)
+		var/normal_due = budget.next_attempt_at && world.time >= budget.next_attempt_at
+		var/turf_due = budget.next_turf_attempt_at && world.time >= budget.next_turf_attempt_at
+		if(!normal_due && !turf_due)
 			continue
-
 		var/datum/redspace_field_cell/cell = field_cells[zone_key]
 		if(!cell)
 			budget.next_attempt_at = 0
 			budget.next_turf_attempt_at = 0
 			cleanup_event_budget(zone_key)
+			event_wake_dirty = TRUE
 			continue
-		if(!cell_has_event_anchor(cell))
-			clear_event_schedule(cell)
-			continue
-
 		var/datum/redspace_event_profile/event_profile = get_event_profile(cell.state)
-		if(!event_profile || !event_profile.has_events())
+		if(!cell_has_event_anchor(cell) || !event_profile?.has_events())
 			clear_event_schedule(cell)
 			continue
-
-		if((normal_attempt_due && budget.scheduled_state != cell.state) || (turf_attempt_due && budget.turf_scheduled_state != cell.state))
+		if((normal_due && budget.scheduled_state != cell.state) || (turf_due && budget.turf_scheduled_state != cell.state))
 			schedule_event_attempt(cell)
 			continue
+		if(normal_due)
+			queue_automatic_event_attempt(cell, null, budget)
+		if(turf_due)
+			queue_automatic_event_attempt(cell, REDSPACE_EVENT_CATEGORY_TURF_SPAWN, budget)
 
-		// The next attempt is scheduled even when the profile rolls no event or
-		// the zone budget rejects the candidate. This prevents a hot zone from
-		// turning into a per-tick random-event loop.
-		if(normal_attempt_due)
-			budget.next_attempt_at = world.time + get_event_attempt_delay(cell, event_profile)
-			if(event_profile.should_attempt())
-				try_start_automatic_event(cell)
-				if(MC_TICK_CHECK)
-					return FALSE
-		if(turf_attempt_due)
-			budget.next_turf_attempt_at = world.time + get_event_attempt_delay(cell, event_profile)
-			if(event_profile.should_attempt())
-				try_start_automatic_event(cell, REDSPACE_EVENT_CATEGORY_TURF_SPAWN)
-		if(MC_TICK_CHECK)
+	while(length(event_attempt_queue))
+		var/datum/redspace_event_attempt/attempt = event_attempt_queue[1]
+		var/result = try_start_automatic_event(attempt)
+		if(result == REDSPACE_ATTEMPT_DEFERRED)
+			return FALSE
+		if(result == REDSPACE_ATTEMPT_LIMIT_REACHED)
+			return TRUE
+		// An event's start signal can reset the entire field and delete this job.
+		if(!QDELETED(attempt))
+			finish_automatic_event_attempt(attempt)
+		if(redspace_work_should_yield())
 			return FALSE
 
-	schedule_event_wake()
+	event_pass_in_progress = FALSE
+	event_schedule_currentrun.Cut()
+	if(event_wake_dirty)
+		schedule_event_wake()
 	return TRUE
 
 /// Builds the common set of usable local targets for one sparse cell.
@@ -270,8 +345,6 @@
 	if(is_turf_in_cell(anchor, cell) && is_event_target_turf_valid(anchor))
 		possible_targets += anchor
 	for(var/turf/candidate as anything in RANGE_TURFS(REDSPACE_HEX_RADIUS, anchor))
-		if(MC_TICK_CHECK)
-			return possible_targets
 		if(candidate == anchor)
 			continue
 		if(is_turf_in_cell(candidate, cell) && is_event_target_turf_valid(candidate))
@@ -297,8 +370,6 @@
 	var/turf/anchor = candidate_turfs[1]
 	var/list/possible_targets = list()
 	for(var/turf/candidate as anything in candidate_turfs)
-		if(MC_TICK_CHECK)
-			return
 		if(!target_event.can_start(candidate))
 			continue
 		if(candidate == anchor)
@@ -350,78 +421,9 @@
 		if(event)
 			qdel(event)
 
-/// Selects one eligible registered event for the cell's current state profile.
-/// The default queue excludes turf spawns; a category selects a dedicated queue.
-/datum/controller/subsystem/redspace/proc/try_start_automatic_event(datum/redspace_field_cell/cell, target_category = null)
-	if(!automatic_events_enabled())
-		return FALSE
-	if(!cell || !length(event_registry))
-		return FALSE
-	if(!isnull(automatic_event_attempts_remaining))
-		if(automatic_event_attempts_remaining <= 0)
-			return FALSE
-		automatic_event_attempts_remaining--
-
-	var/datum/redspace_event_profile/event_profile = get_event_profile(cell.state)
-	if(!event_profile || !event_profile.has_events())
-		return FALSE
-
-	var/list/candidates = list()
-	var/list/candidate_targets = list()
-	var/list/candidate_events = list()
-	for(var/event_id in event_profile.event_weights)
-		if(MC_TICK_CHECK)
-			clear_automatic_event_candidates(candidate_events)
-			return FALSE
-		var/profile_weight = event_profile.get_event_weight(event_id)
-		if(!isnum(profile_weight) || profile_weight <= 0)
-			continue
-		var/datum/redspace_event/event = create_registered_event(event_id)
-		if(!event || !event.automatic)
-			qdel(event)
-			continue
-		var/event_category = event.get_spawn_category()
-		if(isnull(target_category) ? event_category == REDSPACE_EVENT_CATEGORY_TURF_SPAWN : event_category != target_category)
-			qdel(event)
-			continue
-		if(!can_attempt_event_in_cell(event, cell))
-			qdel(event)
-			continue
-		candidate_events[event_id] = event
-		candidates[event_id] = profile_weight
-
-	if(!length(candidates))
-		return FALSE
-
-	// Do not build candidate turf lists when every event was already blocked by
-	// its cooldown or cell budget. This is common during a wave front.
-	var/list/possible_targets = get_event_candidate_turfs(cell)
-	if(!length(possible_targets))
-		clear_automatic_event_candidates(candidate_events)
-		return FALSE
-
-	// Several event definitions inspect the same turfs. Reuse their exact field
-	// values for this attempt, but discard the cache before starting an event.
-	event_value_cache = list()
-	for(var/event_id in candidate_events)
-		if(MC_TICK_CHECK)
-			event_value_cache = null
-			clear_automatic_event_candidates(candidate_events)
-			return FALSE
-		var/datum/redspace_event/event = candidate_events[event_id]
-		var/turf/target = get_event_target_turf(cell, event, possible_targets)
-		if(!target || !can_start_event_instance(event, target))
-			continue
-		candidate_targets[event_id] = target
-
-	event_value_cache = null
-	clear_automatic_event_candidates(candidate_events)
-	if(!length(candidate_targets))
-		return FALSE
-	var/chosen_event_id = pick_weight(candidates)
-	while(!candidate_targets[chosen_event_id])
-		candidates -= chosen_event_id
-		if(!length(candidates))
-			return FALSE
-		chosen_event_id = pick_weight(candidates)
-	return start_registered_event(chosen_event_id, null, candidate_targets[chosen_event_id], null, TRUE)
+/// Returns an explicit selection result; a job is charged to the global quota
+/// only once, even when its definition/target scan spans several MC ticks.
+/datum/controller/subsystem/redspace/proc/try_start_automatic_event(datum/redspace_event_attempt/attempt)
+	if(!attempt || QDELETED(attempt) || !automatic_events_enabled())
+		return REDSPACE_ATTEMPT_REJECTED
+	return attempt.advance()
