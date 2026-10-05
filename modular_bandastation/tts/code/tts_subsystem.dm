@@ -510,23 +510,13 @@ SUBSYSTEM_DEF(tts220)
 			self_listener = speaking_mob
 			threed_listeners = valid_listeners.Copy()
 			threed_listeners -= self_listener
-		if(speaking_mob.client)
-			output.channel = get_local_channel_by_owner(speaker)
-			output.wait = TRUE
-	if(!output.channel && channel_override)
-		// Channels like CHANNEL_TTS_RADIO are persistent per-listener queues - sequential messages line up on them instead of overlapping
-		output.channel = channel_override
-		output.wait = TRUE
-	var/reserved_channel
-	/// The per-owner channel is persistent and reused by sequential messages of the same speaker - it must not be stopped when this sound ends
-	var/shared_channel = FALSE
-	if(output.channel)
-		shared_channel = TRUE
-	else
-		reserved_channel = SSsounds.reserve_sound_channel()
-		output.channel = reserved_channel || SSsounds.random_available_channel()
+
+	// Channels are persistent per listener: a queue override (radio) or one channel per speaker owner,
+	// so sequential messages line up client-side instead of overlapping
+	output.channel = channel_override || get_local_channel_by_owner(speaker) || SSsounds.random_available_channel()
+	output.wait = TRUE
 	var/sound_length = SSsounds.get_sound_length(filename2play) || FILE_CLEANUP_DELAY
-	var/ch_kind = shared_channel ? (channel_override ? "ovr" : "owner") : (reserved_channel ? "rsv" : "rnd")
+	var/ch_kind = channel_override ? "ovr" : "own"
 	log_tts_event("OUT", list("fid" = filename2play, "spk" = "[speaker](\ref[speaker])", "ch" = output.channel, "kind" = ch_kind, "wait" = output.wait, "len" = sound_length, "ls" = length(valid_listeners)))
 
 	if(self_listener)
@@ -545,7 +535,25 @@ SUBSYSTEM_DEF(tts220)
 			volume_preference = channel_volume_preference_path
 		)
 
-	if(length(threed_listeners)) // Empty 3d sounds do not pick up listeners anyways
+	if(channel_override)
+		// A shared queue channel can't carry per-message positional updates - an update sent while an older
+		// message is still playing would rewrite or mute that sound. Spatial params are applied once at send time instead.
+		for(var/mob/listener as anything in threed_listeners)
+			listener.playsound_local(
+				turf_source,
+				vol = 100,
+				falloff_exponent = SOUND_FALLOFF_EXPONENT,
+				channel = output.channel,
+				pressure_affected = TRUE,
+				sound_to_use = output,
+				max_distance = SOUND_RANGE,
+				falloff_distance = SOUND_DEFAULT_FALLOFF_DISTANCE,
+				distance_multiplier = 1,
+				use_reverb = TRUE,
+				wait = output.wait,
+				volume_preference = channel_volume_preference_path
+			)
+	else if(length(threed_listeners)) // Empty 3d sounds do not pick up listeners anyways
 		var/datum/threed_sound/sound_3d = new /datum/threed_sound(
 			speaker,
 			output,
@@ -555,16 +563,15 @@ SUBSYSTEM_DEF(tts220)
 			sound_length = sound_length,
 			channel = output.channel,
 			preference_volume = channel_volume_preference_path,
-			preference_signal = channel_override == CHANNEL_TTS_RADIO ? COMSIG_MOB_TTS_RADIO_VOLUME_PREFERENCE_APPLIED : COMSIG_MOB_TTS_VOLUME_PREFERENCE_APPLIED,
+			preference_signal = COMSIG_MOB_TTS_VOLUME_PREFERENCE_APPLIED,
 			falloff_exponent = SOUND_FALLOFF_EXPONENT,
 			falloff_distance = SOUND_DEFAULT_FALLOFF_DISTANCE,
 			pressure_affected = TRUE
 		)
-		sound_3d.shared_channel = shared_channel
+		// All TTS channels are persistent per owner - a dying datum must never stop them, the clip is finite and ends by itself
+		sound_3d.shared_channel = TRUE
 		sound_3d.log_tag = filename2play
-		log_tts_event("3D_NEW", list("ref" = "\ref[sound_3d]", "fid" = filename2play, "ch" = output.channel, "len" = sound_length, "shared" = shared_channel, "ls" = length(threed_listeners)))
-	if(reserved_channel)
-		addtimer(CALLBACK(src, PROC_REF(free_tts_channel), reserved_channel, filename2play), sound_length, TIMER_DELETE_ME)
+		log_tts_event("3D_NEW", list("ref" = "\ref[sound_3d]", "fid" = filename2play, "ch" = output.channel, "len" = sound_length, "ls" = length(threed_listeners)))
 
 	if(postSFX)
 		for(var/mob/listener as anything in valid_listeners)
@@ -583,14 +590,10 @@ SUBSYSTEM_DEF(tts220)
 	output.channel = channel
 	SEND_SOUND(listener, output)
 
-/datum/controller/subsystem/tts220/proc/free_tts_channel(channel, fid)
-	log_tts_event("CH_FREE", list("ch" = channel, "fid" = fid))
-	SSsounds.free_sound_channel(channel)
-
 /datum/controller/subsystem/tts220/proc/get_local_channel_by_owner(owner)
 	var/channel = tts_local_channels_by_owner[owner]
 	if(isnull(channel))
-		channel = SSsounds.reserve_sound_channel(owner)
+		channel = SSsounds.reserve_sound_channel()
 		tts_local_channels_by_owner[owner] = channel
 		RegisterSignal(owner, COMSIG_QDELETING, PROC_REF(clear_channel))
 		log_tts_event("CH_OWN_NEW", list("ch" = channel, "owner" = "[owner](\ref[owner])"))
