@@ -224,7 +224,6 @@
 				if(!radio_listener)
 					continue
 				if(radio_listener in seen_hearers)
-					SStts220?.log_tts_event("RADIO_DEDUP", list("mob" = "[radio_listener](\ref[radio_listener])", "radio" = "[radio_source]"))
 					continue
 				seen_hearers += radio_listener
 				var/message_to_tts = isobserver(radio_listener) ? message : radio_listener.translate_language(virt, language, message, spans, message_mods)

@@ -25,9 +25,6 @@
 	var/pressure_affected = TRUE
 	// BANDASTATION EDIT: when true the channel is owned outside this datum and shared between sequential sounds - it must not be stopped on deregister
 	var/shared_channel = FALSE
-	// BANDASTATION ADD: TTS debug - when set, lifecycle events are logged to tts.log
-	var/log_tag
-	var/created_time
 
 /datum/threed_sound/New(atom/new_parent, sound/new_sound, list/current_listeners, can_add_new_listeners = FALSE, volume = 50, sound_range = SOUND_RANGE, sound_length = 5 SECONDS, channel, preference_volume, preference_signal, falloff_exponent = SOUND_FALLOFF_EXPONENT, falloff_distance = SOUND_DEFAULT_FALLOFF_DISTANCE, pressure_affected = TRUE)
 	if(!ismovable(new_parent) && !isturf(new_parent))
@@ -63,13 +60,9 @@
 	RegisterSignal(parent, COMSIG_ENTER_AREA, PROC_REF(on_enter_area))
 	RegisterSignal(parent, COMSIG_MOVABLE_MOVED, PROC_REF(on_moved))
 	RegisterSignal(parent, COMSIG_QDELETING, PROC_REF(parent_delete))
-	created_time = world.time // BANDASTATION ADD: TTS debug
 	deletion_timer = addtimer(CALLBACK(src, PROC_REF(selfdelete)), sound_length, TIMER_STOPPABLE | TIMER_DELETE_ME)
 
 /datum/threed_sound/Destroy()
-	// BANDASTATION ADD: TTS debug
-	if(log_tag)
-		SStts220?.log_tts_event("3D_END", list("tag" = log_tag, "ref" = "\ref[src]", "ch" = our_channel, "age" = world.time - created_time, "len" = sound_length, "shared" = shared_channel, "ls" = length(listeners), "parent" = "[parent]"))
 	unlisten_all()
 	deltimer(deletion_timer)
 	parent = null
@@ -205,13 +198,8 @@
 	PROTECTED_PROC(TRUE)
 
 	listeners -= no_longer_listening
-	// BANDASTATION EDIT START: a queued message may be playing next on a shared channel - don't kill it
-	var/stop_channel = !shared_channel
-	if(log_tag)
-		SStts220?.log_tts_event("3D_DEREG", list("tag" = log_tag, "ref" = "\ref[src]", "ch" = our_channel, "mob" = "[no_longer_listening]", "stop" = stop_channel))
-	if(stop_channel)
+	if(!shared_channel) // BANDASTATION EDIT: a queued message may be playing next on a shared channel - don't kill it
 		no_longer_listening.stop_sound_channel(our_channel)
-	// BANDASTATION EDIT END
 	var/list/unregister_signals = list(
 		COMSIG_MOB_LOGIN,
 		SIGNAL_ADDTRAIT(TRAIT_DEAF),

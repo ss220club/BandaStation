@@ -157,9 +157,7 @@ SUBSYSTEM_DEF(tts220)
 	var/free_rps = clamp(tts_rps_limit - tts_rps, 0, tts_rps_limit)
 	var/requests = LAZYCOPY_RANGE(tts_requests_queue, 1, clamp(LAZYLEN(tts_requests_queue), 0, free_rps) + 1)
 	for(var/request in requests)
-		var/req_age = world.time - request[4]
-		if(req_age > message_timeout)
-			log_tts_event("DISP_STALE", list("age" = req_age))
+		if(world.time - request[4] > message_timeout)
 			continue
 		var/text = request[1]
 		var/datum/tts_seed/seed = request[2]
@@ -167,16 +165,14 @@ SUBSYSTEM_DEF(tts220)
 		var/datum/tts_provider/provider = seed.provider
 		provider.request(text, seed, proc_callback)
 		tts_rps_counter++
-		log_tts_event("DISP", list("seed" = seed.name, "age" = req_age, "q" = LAZYLEN(tts_requests_queue)))
 	LAZYCUT(tts_requests_queue, 1, clamp(LAZYLEN(tts_requests_queue), 0, free_rps) + 1)
 
 	var/list/expired_requests = list()
 	for(var/filename in tts_queue)
 		if(world.time - tts_queue_timestamps[filename] > message_timeout)
 			expired_requests += filename
-	for(var/filename in expired_requests)
-		log_tts_event("SWEEP", list("fid" = filename, "age" = world.time - tts_queue_timestamps[filename]))
-		drop_pending_tts(filename, "expired")
+	tts_queue -= expired_requests
+	tts_queue_timestamps -= expired_requests
 
 	if(sanitized_messages_caching)
 		sanitized_messages_cache.Cut()
@@ -230,13 +226,6 @@ SUBSYSTEM_DEF(tts220)
 	var/list/replacements = json_decode(tts_replacements_json)
 	tts_acronym_replacements = replacements[TTS_ACRONYM_REPLACEMENTS]
 	tts_job_replacements = replacements[TTS_JOB_REPLACEMENTS]
-
-/// TEMPORARY DEBUG: writes pipeline events to data/logs/<round>/tts.log for diagnosing playback issues.
-/datum/controller/subsystem/tts220/proc/log_tts_event(event, list/fields)
-	var/list/parts = list(event)
-	for(var/key in fields)
-		parts += "[key]=[fields[key]]"
-	text2file("[world.time]|[parts.Join("|")]", "[GLOB.log_directory]/tts.log")
 
 /datum/controller/subsystem/tts220/proc/queue_request(text, datum/tts_seed/seed, datum/callback/proc_callback)
 	if(LAZYLEN(tts_requests_queue) > tts_requests_queue_limit)
@@ -316,12 +305,9 @@ SUBSYSTEM_DEF(tts220)
 	for(var/effect_type in effect_types)
 		effect_singletons += GET_SINGLETON_TYPE_LIST(effect_type)
 
-	log_tts_event("CAST", list("fid" = filename, "spk" = "[speaker](\ref[speaker])", "ls" = length(valid_listeners), "loc" = is_local, "ovr" = channel_override || "none", "txt" = copytext(text, 1, 41)))
-
 	if(fexists("[filename].ogg"))
 		tts_reused++
 		tts_rrps_counter++
-		log_tts_event("CACHE", list("fid" = filename))
 		play_tts(speaker, valid_listeners, filename, is_local, effect_singletons, preSFX, postSFX, channel_override)
 		return
 
@@ -332,36 +318,31 @@ SUBSYSTEM_DEF(tts220)
 	if(LAZYLEN(tts_queue[filename]))
 		// The pending request already expired - drop it and issue a fresh one.
 		if(world.time - tts_queue_timestamps[filename] > message_timeout)
-			drop_pending_tts(filename, "stale_join")
+			drop_pending_tts(filename)
 		else
 			tts_reused++
 			tts_rrps_counter++
 			LAZYADD(tts_queue[filename], play_tts_cb)
-			log_tts_event("JOIN", list("fid" = filename))
 			return
 
 	queue_request(text, tts_seed, CALLBACK(src, PROC_REF(get_tts_callback), filename, tts_seed))
 
 	tts_queue_timestamps[filename] = world.time
 	LAZYADD(tts_queue[filename], play_tts_cb)
-	log_tts_event("REQ", list("fid" = filename))
 
 /datum/controller/subsystem/tts220/proc/get_tts_callback(filename, datum/tts_seed/seed, datum/http_response/response)
 	var/datum/tts_provider/provider = seed.provider
 
-	var/queued_at = tts_queue_timestamps[filename]
-	if(isnull(queued_at))
-		log_tts_event("RESP_ORPHAN", list("fid" = filename, "code" = response.errored ? "ERR" : response.status_code))
+	// The request was already swept as expired - a late response must not crash on null arithmetic
+	if(isnull(tts_queue_timestamps[filename]))
 		return
-	var/resp_age = world.time - queued_at
-	log_tts_event("RESP", list("fid" = filename, "dt" = resp_age, "code" = response.errored ? "ERR" : response.status_code))
 
 	// Bail if it errored
 	if(response.errored)
 		provider.timed_out_requests++
 		log_game(span_warning("Error connecting to [provider.name] TTS API. Please inform a maintainer or server host."))
 		message_admins(span_warning("Error connecting to [provider.name] TTS API. Please inform a maintainer or server host."))
-		drop_pending_tts(filename, "http_error")
+		drop_pending_tts(filename)
 		return
 
 	if(response.status_code != 200)
@@ -376,14 +357,14 @@ SUBSYSTEM_DEF(tts220)
 				tts_errors += "[response.status_code]"
 				tts_errors["[response.status_code]"] = 1
 		tts_error_raw = response.error
-		drop_pending_tts(filename, "http_[response.status_code]")
+		drop_pending_tts(filename)
 		return
 
 	tts_request_succeeded++
 
 	var/voice = provider.process_response(response)
 	if(!voice)
-		drop_pending_tts(filename, "empty_voice")
+		drop_pending_tts(filename)
 		return
 
 	rustutils_file_write_b64decode(voice, "[filename].ogg")
@@ -392,11 +373,10 @@ SUBSYSTEM_DEF(tts220)
 		addtimer(CALLBACK(src, PROC_REF(cleanup_tts_file), "[filename].ogg"), FILE_CLEANUP_DELAY)
 
 	// The request took too long - the message is stale and should not be played.
-	if(resp_age > message_timeout)
-		drop_pending_tts(filename, "stale_response")
+	if(world.time - tts_queue_timestamps[filename] > message_timeout)
+		drop_pending_tts(filename)
 		return
 
-	log_tts_event("SERVE", list("fid" = filename, "cb" = length(tts_queue[filename])))
 	for(var/datum/callback/cb in tts_queue[filename])
 		cb.InvokeAsync()
 		tts_queue[filename] -= cb
@@ -405,8 +385,7 @@ SUBSYSTEM_DEF(tts220)
 	tts_queue_timestamps -= filename
 
 /// Drops all pending playback callbacks for a filename - the request failed or timed out.
-/datum/controller/subsystem/tts220/proc/drop_pending_tts(filename, reason = "unknown")
-	log_tts_event("DROP", list("fid" = filename, "why" = reason))
+/datum/controller/subsystem/tts220/proc/drop_pending_tts(filename)
 	tts_queue -= filename
 	tts_queue_timestamps -= filename
 
@@ -446,7 +425,6 @@ SUBSYSTEM_DEF(tts220)
 		output_tts(speaker, listeners, filename2play, is_local, preSFX, postSFX, channel_override)
 		return
 
-	log_tts_event("FX_WAIT", list("fid" = filename2play, "src" = pure_filename))
 	var/datum/callback/output_tts_cb = CALLBACK(src, PROC_REF(output_tts), speaker, listeners, filename2play, is_local, preSFX, postSFX, channel_override)
 	queue_sound_effect_processing(pure_filename, effects, filename2play, output_tts_cb)
 
@@ -475,7 +453,6 @@ SUBSYSTEM_DEF(tts220)
 			continue
 		valid_listeners += listener
 	if(!length(valid_listeners))
-		log_tts_event("OUT_SKIP", list("fid" = filename2play, "why" = "no_valid_listeners"))
 		return
 
 	var/turf/turf_source = get_turf(speaker)
@@ -494,7 +471,6 @@ SUBSYSTEM_DEF(tts220)
 		return
 
 	if(!turf_source) // 3D sounds need a turf source to calculate position
-		log_tts_event("OUT_SKIP", list("fid" = filename2play, "why" = "no_turf", "spk" = "[speaker]"))
 		return
 
 	for(var/mob/listener as anything in valid_listeners)
@@ -516,8 +492,6 @@ SUBSYSTEM_DEF(tts220)
 	output.channel = channel_override || get_local_channel_by_owner(speaker) || SSsounds.random_available_channel()
 	output.wait = TRUE
 	var/sound_length = SSsounds.get_sound_length(filename2play) || FILE_CLEANUP_DELAY
-	var/ch_kind = channel_override ? "ovr" : "own"
-	log_tts_event("OUT", list("fid" = filename2play, "spk" = "[speaker](\ref[speaker])", "ch" = output.channel, "kind" = ch_kind, "wait" = output.wait, "len" = sound_length, "ls" = length(valid_listeners)))
 
 	if(self_listener)
 		self_listener.playsound_local(
@@ -570,8 +544,6 @@ SUBSYSTEM_DEF(tts220)
 		)
 		// All TTS channels are persistent per owner - a dying datum must never stop them, the clip is finite and ends by itself
 		sound_3d.shared_channel = TRUE
-		sound_3d.log_tag = filename2play
-		log_tts_event("3D_NEW", list("ref" = "\ref[sound_3d]", "fid" = filename2play, "ch" = output.channel, "len" = sound_length, "ls" = length(threed_listeners)))
 
 	if(postSFX)
 		for(var/mob/listener as anything in valid_listeners)
@@ -596,7 +568,6 @@ SUBSYSTEM_DEF(tts220)
 		channel = SSsounds.reserve_sound_channel()
 		tts_local_channels_by_owner[owner] = channel
 		RegisterSignal(owner, COMSIG_QDELETING, PROC_REF(clear_channel))
-		log_tts_event("CH_OWN_NEW", list("ch" = channel, "owner" = "[owner](\ref[owner])"))
 	return channel
 
 /datum/controller/subsystem/tts220/proc/clear_channel(owner)
@@ -604,7 +575,6 @@ SUBSYSTEM_DEF(tts220)
 
 	var/channel = tts_local_channels_by_owner[owner]
 	if(channel)
-		log_tts_event("CH_OWN_DEL", list("ch" = channel, "owner" = "[owner](\ref[owner])"))
 		SSsounds.free_sound_channel(channel)
 	tts_local_channels_by_owner -= owner
 
