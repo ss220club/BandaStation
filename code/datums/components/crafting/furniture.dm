@@ -140,3 +140,4 @@
 	)
 	time = 10 SECONDS
 	category = CAT_FURNITURE
+

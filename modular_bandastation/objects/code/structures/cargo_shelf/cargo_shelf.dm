@@ -57,6 +57,14 @@
 	return 3
 
 /obj/structure/cargo_shelf/proc/can_load(obj/structure/closet/crate/crate, mob/user, y_offset)
+	if(!anchored)
+		balloon_alert(user, "сначала закрепите полку!")
+		return FALSE
+
+	if(crate.anchored)
+		balloon_alert(user, "сначала открепите ящик!")
+		return FALSE
+
 	if(crate_count() >= capacity)
 		balloon_alert(user, "полка забита под завязку!")
 		return FALSE
@@ -82,6 +90,10 @@
 	if(crate.opened)
 		if(!crate.close())
 			return FALSE
+
+	var/obj/structure/cargo_shelf/old_shelf = crate.loc
+	if(istype(old_shelf))
+		old_shelf.remove_crate(crate)
 
 	var/slot = get_shelf_slot(y_offset)
 
@@ -165,6 +177,10 @@
 	if(!isturf(over))
 		return
 
+	if(!over.IsReachableBy(user))
+		return
+
+	shelf.remove_crate(src)
 	forceMove(over)
 
 /obj/structure/cargo_shelf/examine(mob/user)
@@ -177,6 +193,14 @@
 		. += span_notice("Вы можете снять ящик с полки.")
 
 /obj/structure/cargo_shelf/wrench_act(mob/living/user, obj/item/tool)
+	if(anchored && crate_count())
+		balloon_alert(user, "сначала уберите ящики с полки!")
+		return ITEM_INTERACT_BLOCKING
+
+	if(!anchored && isinspace())
+		balloon_alert(user, "не к чему прикрепить!")
+		return ITEM_INTERACT_BLOCKING
+
 	set_anchored(!anchored)
 
 	user.visible_message(
