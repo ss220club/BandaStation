@@ -84,7 +84,7 @@
 	for (var/datum/component/overlay_lighting/light as anything in collect_dynamic_lightsources())
 		. += light.lum_power
 
-/// You've heard of oranges_ear, prepare for oranges_eye
+// You've heard of oranges_ear, prepare for oranges_eye
 /// Uses the same optimization via viewers() that get_hearers_in_view does by allocating oranges ears to overlay lights
 /// And collecting viewers rather than checking view() for each one of them
 /turf/proc/collect_dynamic_lightsources()
@@ -95,16 +95,16 @@
 		return
 	var/list/light_sources = list()
 	var/furthest_range = 0
+	// BANDASTATION EDIT START: Improve radial light spread
 	for(var/datum/component/overlay_lighting/light as anything in grid_cell.dynamic_light_sources)
 		if(!light || !light.current_holder)
 			continue
 
-		// BANDASTATION EDIT BEGIN:
 		// Directional lights are registered in a rough spatial-grid bounding area.
 		// Filter them again against the exact turf being checked.
 		if(light.directional && !light.is_turf_in_directional_light(src))
 			continue
-		// BANDASTATION EDIT END
+		// BANDASTATION EDIT END: Improve radial light spread
 
 		furthest_range = max(furthest_range, light.lumcount_range)
 		if (isnull(light_sources[light.current_holder]))
@@ -118,6 +118,7 @@
 	for(var/mob/oranges_ear/ear in hearers(furthest_range, src))
 		for (var/atom/glowie as anything in ear.references)
 			. += light_sources[glowie]
+
 	for(var/mob/oranges_ear/remaining_ear as anything in assigned_oranges_ears)
 		remaining_ear.unassign()
 
