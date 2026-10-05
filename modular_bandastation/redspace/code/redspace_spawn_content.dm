@@ -1529,11 +1529,8 @@
 	new /obj/effect/temp_visual/circle_wave(transform_turf, "#ff3b20")
 	playsound(transform_turf, 'sound/effects/magic/teleport_app.ogg', 75, TRUE)
 
-	if(SSredspace)
-		for(var/datum/redspace_event/spawn/event as anything in SSredspace.active_events)
-			if(src in event.spawned_atoms)
-				event.replace_spawned_atom(src, transformed)
-				break
+	var/datum/redspace_event/spawn/event = SSredspace?.get_spawn_event_for_atom(src)
+	event?.replace_spawned_atom(src, transformed)
 
 	// The victim's body is desecrated and possessed, not digested: it stays inside the new demon.
 	if(victim && !QDELETED(victim) && victim.loc == src && !transformed.contain_victim(victim))
@@ -1570,11 +1567,8 @@
 	new /obj/effect/temp_visual/circle_wave(transform_turf, "#ff3b20")
 	playsound(transform_turf, 'sound/effects/magic/teleport_app.ogg', 75, TRUE)
 
-	if(SSredspace)
-		for(var/datum/redspace_event/spawn/event as anything in SSredspace.active_events)
-			if(src in event.spawned_atoms)
-				event.replace_spawned_atom(src, transformed)
-				break
+	var/datum/redspace_event/spawn/event = SSredspace?.get_spawn_event_for_atom(src)
+	event?.replace_spawned_atom(src, transformed)
 
 	// The victim's body is desecrated and possessed, not digested: it stays inside the new demon.
 	if(victim && !QDELETED(victim) && victim.loc == src && !transformed.contain_victim(victim))
@@ -1641,14 +1635,6 @@
 	if(hottest_source)
 		return hottest_source_turf
 	return fallback_turf
-
-/// Keeps a replacement mob attached to a persistent spawn event during transformation.
-/datum/redspace_event/spawn/proc/replace_spawned_atom(atom/old_atom, atom/new_atom)
-	if(!old_atom || !new_atom || QDELETED(new_atom) || !(old_atom in spawned_atoms))
-		return FALSE
-	UnregisterSignal(old_atom, COMSIG_QDELETING, PROC_REF(on_spawned_atom_deleted))
-	spawned_atoms -= old_atom
-	return register_spawned_atom(new_atom)
 
 /// A persistent redspace manifestation used to verify object spawn events.
 /obj/structure/redspace/demonic_crystal

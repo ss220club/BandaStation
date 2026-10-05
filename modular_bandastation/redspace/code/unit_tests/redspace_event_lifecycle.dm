@@ -239,6 +239,92 @@
 	if(length(SSredspace.event_budgets) != 0)
 		return Fail("Lifecycle check failed: length(SSredspace.event_budgets) != 0")
 
+/// Replacement must keep the spawn reservation until the replacement itself is removed.
+/datum/unit_test/redspace_event_lifecycle/spawn_replacement
+
+/datum/unit_test/redspace_event_lifecycle/spawn_replacement/Run()
+	var/datum/redspace_event/storm_pulse/pulse = allocate(/datum/redspace_event/storm_pulse)
+	if(!track_event(pulse))
+		return
+	var/datum/redspace_event/spawn/object/event = allocate(/datum/redspace_event/spawn/object)
+	var/datum/redspace_event_budget/budget = track_event(event)
+	if(!budget)
+		return
+	var/obj/item/original = allocate(/obj/item)
+	var/obj/item/replacement = allocate(/obj/item)
+	if(!event.register_spawned_atom(original) || SSredspace.get_spawn_event_for_atom(original) != event)
+		return Fail("Owner lookup must skip the ordinary event preceding the spawn event")
+	if(SSredspace.get_spawn_event_for_atom(null) || SSredspace.get_spawn_event_for_atom(replacement))
+		return Fail("Missing or untracked atoms must not have a spawn event owner")
+	if(event.replace_spawned_atom(original, null) || !(original in event.spawned_atoms))
+		return Fail("A failed replacement must retain the original atom")
+	if(!event.replace_spawned_atom(original, original) || length(event.spawned_atoms) != 1)
+		return Fail("Replacing an atom with itself must keep its registration")
+	if(!event.replace_spawned_atom(original, replacement))
+		return Fail("A tracked atom must be replaceable")
+	if(SSredspace.get_spawn_event_for_atom(original) || SSredspace.get_spawn_event_for_atom(replacement) != event)
+		return Fail("Replacement must transfer the spawn event owner")
+	qdel(original)
+	if(QDELETED(event) || finished_count || budget.active_spawn_object_count != 1 || length(budget.reserved_spawn_events) != 1)
+		return Fail("Deleting the original atom must not finish the event or release its reservation")
+	qdel(replacement)
+	if(!QDELETED(event) || finished_count != 1 || budget.active_spawn_event_count || budget.active_spawn_object_count || length(budget.reserved_spawn_events))
+		return Fail("Deleting the replacement must finish the spawn event and release its reservation exactly once")
+	if(SSredspace.finish_registered_event(event, event.event_target) || finished_count != 1 || QDELETED(pulse))
+		return Fail("Repeated completion must leave the ordinary event and finish count unchanged")
+
+/// Both Devourer outcomes must transfer their spawn owner through a mixed event registry.
+/datum/unit_test/redspace_event_lifecycle/devourer_spawn_transfer
+	abstract_type = /datum/unit_test/redspace_event_lifecycle/devourer_spawn_transfer
+	var/player_controlled = FALSE
+
+/datum/unit_test/redspace_event_lifecycle/devourer_spawn_transfer/Run()
+	var/datum/redspace_event/storm_pulse/pulse = allocate(/datum/redspace_event/storm_pulse)
+	var/datum/redspace_event_budget/budget = track_event(pulse)
+	if(!budget)
+		return
+	// An ordinary event stays first in the registry for owned and unowned transformations.
+	for(var/has_spawn_owner in list(TRUE, FALSE))
+		var/mob/living/basic/demon/redspace/devourer/devourer = allocate(/mob/living/basic/demon/redspace/devourer)
+		var/mob/living/carbon/human/victim = allocate(/mob/living/carbon/human)
+		victim.stat = HARD_CRIT
+		if(!devourer.capture_victim(victim))
+			return Fail("The transfer test must capture a transformation victim")
+		var/datum/redspace_event/spawn/mob/demonic_lesser_demon/devourer/event
+		if(has_spawn_owner)
+			event = allocate(/datum/redspace_event/spawn/mob/demonic_lesser_demon/devourer)
+			if(!track_event(event) || !event.register_spawned_atom(devourer))
+				return Fail("The transfer test must reserve and track its Devourer spawn")
+		var/finished_before = finished_count
+		var/mob/living/basic/demon/redspace/moderate/transformed
+		if(player_controlled)
+			transformed = devourer.transform_with_victim("redspace_spawn_transfer_test")
+		else
+			transformed = devourer.transform_with_minotaur()
+		if(!transformed || QDELETED(transformed))
+			return Fail("Transformation must succeed with or without a spawn owner")
+		allocated += transformed
+		transformed.ckey = null
+		var/expected_type = player_controlled ? /mob/living/basic/demon/redspace/moderate/ravager : /mob/living/basic/demon/redspace/moderate/minotaur
+		if(!istype(transformed, expected_type) || !QDELETED(devourer))
+			return Fail("Transformation must replace the Devourer with the expected demon")
+		if(victim.loc != transformed || transformed.stored_victim != victim || !HAS_TRAIT(victim, TRAIT_STASIS))
+			return Fail("Spawn owner transfer must preserve the captured body and its stasis")
+		if(SSredspace.get_spawn_event_for_atom(transformed) != event || finished_count != finished_before)
+			return Fail("Transformation must preserve the spawn owner without finishing an event")
+		if(has_spawn_owner && (QDELETED(event) || length(event.spawned_atoms) != 1 || !(transformed in event.spawned_atoms) || budget.active_spawn_mob_count != 1 || length(budget.reserved_spawn_events) != 1 || budget.mob_spawn_spent_points != event.spawn_budget_cost))
+			return Fail("Transformation must preserve the original spawn reservation")
+		qdel(transformed)
+		if(finished_count != finished_before + has_spawn_owner || budget.active_spawn_event_count || budget.active_spawn_mob_count || length(budget.reserved_spawn_events))
+			return Fail("Removing the transformed demon must release only its own spawn reservation once")
+		if(QDELETED(pulse) || budget.active_event_count != 1 || budget.active_dangerous_count != 1 || SSredspace.active_events[1] != pulse)
+			return Fail("Transformation and cleanup must leave the ordinary storm event active")
+
+/datum/unit_test/redspace_event_lifecycle/devourer_spawn_transfer/ravager
+	player_controlled = TRUE
+
+/datum/unit_test/redspace_event_lifecycle/devourer_spawn_transfer/minotaur
+
 /// Deterministic event definitions exercise the public start API without gameplay effects.
 /datum/redspace_event/lifecycle_test
 	event_id = "lifecycle_test"

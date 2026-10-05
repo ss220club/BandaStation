@@ -48,6 +48,16 @@
 		return new event_type(arglist(event_args))
 	return new event_type
 
+/// Returns the first active spawn event tracking this atom. The registry also contains ordinary events.
+/datum/controller/subsystem/redspace/proc/get_spawn_event_for_atom(atom/spawned_atom) as /datum/redspace_event/spawn
+	if(QDELETED(spawned_atom))
+		return
+	for(var/datum/redspace_event/spawn/event as anything in active_events)
+		if(!istype(event) || QDELETED(event))
+			continue
+		if(spawned_atom in event.spawned_atoms)
+			return event
+
 /datum/controller/subsystem/redspace/proc/get_event_zone_key(turf/target)
 	if(!target || !is_supported_z(target.z))
 		return

@@ -107,6 +107,16 @@
 	RegisterSignal(spawned_atom, COMSIG_QDELETING, PROC_REF(on_spawned_atom_deleted))
 	return TRUE
 
+/// Transfers tracked content without finishing the event or releasing its reservation between atoms.
+/datum/redspace_event/spawn/proc/replace_spawned_atom(atom/old_atom, atom/new_atom)
+	if(!old_atom || !(old_atom in spawned_atoms) || !register_spawned_atom(new_atom))
+		return FALSE
+	if(old_atom == new_atom)
+		return TRUE
+	UnregisterSignal(old_atom, COMSIG_QDELETING, PROC_REF(on_spawned_atom_deleted))
+	spawned_atoms -= old_atom
+	return TRUE
+
 /datum/redspace_event/spawn/proc/on_spawned_atom_deleted(atom/deleted_atom)
 	SIGNAL_HANDLER
 	UnregisterSignal(deleted_atom, COMSIG_QDELETING, PROC_REF(on_spawned_atom_deleted))
