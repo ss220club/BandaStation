@@ -470,7 +470,7 @@
 				set_interaction_efficiency_penalty(initial(interaction_efficiency_penalty))
 
 		if(initial(disabling))
-			set_disabling(splint_factor < 1)
+			set_disabling(!limb.is_splinted())
 
 		limb.update_wounds(replaced_or_replacing)
 
@@ -728,11 +728,15 @@
 	for(var/i in 1 to severity)
 		severity_text_formatted += "!"
 
-	return "Рана обнаружена: [name]!<br>\
+	var/scanner_text = "Рана обнаружена: [name]!<br>\
 		Тяжесть: [severity_text_formatted]<br>\
-		Описание: [simple_desc || desc]<br>\
-		<i>Руководство по лечению: [simple_treat_text]</i><br>\
-		<i>Домашнее средство: [homemade_treat_text]</i>"
+		Описание: [simple_desc || desc]<br>"
+	if(simple_treat_text)
+		scanner_text += "<i>Руководство по лечению: [simple_treat_text]</i><br>"
+	if(homemade_treat_text)
+		scanner_text += "<i>Домашнее средство: [homemade_treat_text]</i>"
+
+	return scanner_text
 
 /**
  * Returns what text describes this wound
