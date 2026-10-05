@@ -128,12 +128,12 @@
 		for(var/obj/vehicle/sealed/mecha/M in T)
 			if(QDELETED(M))
 				continue
-			M.take_damage(150, BRUTE)
+			M.take_damage(100, BRUTE)
 		for(var/mob/living/silicon/S in T)
 			if(QDELETED(S))
 				continue
-			S.adjust_brute_loss(150)
+			S.adjust_brute_loss(100)
 		for(var/mob/living/basic/bot/B in T)
 			if(QDELETED(B))
 				continue
-			B.adjust_brute_loss(150)
+			B.adjust_brute_loss(100)

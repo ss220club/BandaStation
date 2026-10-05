@@ -46,6 +46,8 @@
 		required_bodytype = BODYTYPE_SHADOW
 	)
 
+	regenerate_organs(heal_per * coef)
+
 	if(is_dead)
 		if(owner.get_brute_loss() <= 0 && owner.get_fire_loss() <= 0)
 			try_revive()
@@ -76,6 +78,16 @@
 	to_chat(owner, span_notice("Тьма полностью восстановила твоё тело. Ты возвращаешься к жизни."))
 
 	return TRUE
+
+/datum/status_effect/grouped/bodypart_effect/nyxosynthesis/shadowling/proc/regenerate_organs(heal_amount)
+	if(!owner || heal_amount <= 0)
+		return
+	for(var/obj/item/organ/O as anything in owner)
+		if(QDELETED(O))
+			continue
+		if(O.damage <= 0)
+			continue
+		O.set_organ_damage(max(0, O.damage - heal_amount))
 
 /datum/status_effect/grouped/bodypart_effect/nyxosynthesis/shadowling/on_remove()
 	. = ..()
