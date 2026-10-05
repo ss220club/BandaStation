@@ -399,12 +399,6 @@
 		return initial(controller.ai_movement)
 	return approach_movement
 
-/// A failed route never aborts the attack branch: the demon switches to a direct approach
-/// and keeps trying to close the distance.
-/datum/bt_node/ai_behavior/move_to_target/redspace_demon/on_movement_failed(atom/source)
-	SIGNAL_HANDLER
-	movement_failed = TRUE
-
 /datum/bt_node/ai_behavior/move_to_target/redspace_demon/finish_action(datum/ai_controller/controller, succeeded)
 	direct_approach = FALSE
 	approach_target = null

@@ -38,7 +38,7 @@
 /datum/unit_test/redspace_scheduler
 	parent_type = /datum/unit_test/redspace_observers
 	abstract_type = /datum/unit_test/redspace_scheduler
-	var/list/test_cells = list()
+	var/list/datum/redspace_field_cell/test_cells = list()
 	var/list/started_keys = list()
 	var/normal_started = 0
 	var/turf_started = 0
@@ -62,7 +62,8 @@
 		return
 	SSredspace.station_z_levels |= station_levels[1]
 	var/list/seen_keys = list()
-	for(var/turf/open/floor/candidate as anything in RANGE_TURFS(40, locate(128, 128, station_levels[1])))
+	var/turf/station_center = locate(128, 128, station_levels[1])
+	for(var/turf/open/floor/candidate as anything in RANGE_TURFS(40, station_center))
 		if(!SSredspace.is_event_target_turf_valid(candidate))
 			continue
 		var/datum/redspace_field_cell/cell = SSredspace.get_cell(candidate, TRUE)

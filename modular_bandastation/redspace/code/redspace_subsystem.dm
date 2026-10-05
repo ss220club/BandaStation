@@ -88,7 +88,7 @@ SUBSYSTEM_DEF(redspace)
 	/// Temporary values shared by all event definitions scanning one cell.
 	var/list/event_value_cache
 	/// Candidate turf lists shared by normal and turf queues during one tick.
-	var/list/event_candidate_cache = list()
+	var/list/list/turf/event_candidate_cache = list()
 	var/event_candidate_cache_time = -1
 	/// Listener datums that currently have a QDELETING cleanup hook.
 	var/list/listener_cleanup = list()

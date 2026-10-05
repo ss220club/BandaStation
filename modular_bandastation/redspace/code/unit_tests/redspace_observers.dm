@@ -53,7 +53,7 @@
 	restore_baseturfs = islist(start_turf.baseturfs) ? start_turf.baseturfs.Copy() : start_turf.baseturfs ? list(start_turf.baseturfs) : list()
 	var/list/start_coordinates = redspace_hex_coordinates(start_turf)
 	var/start_key = redspace_hex_key(start_turf.z, start_coordinates[1], start_coordinates[2])
-	for(var/turf/candidate as anything in range(2, start_turf))
+	for(var/turf/candidate in range(2, start_turf))
 		if(candidate == start_turf || !isopenturf(candidate))
 			continue
 		var/list/coordinates = redspace_hex_coordinates(candidate)
