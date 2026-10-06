@@ -116,6 +116,7 @@ GLOBAL_LIST_EMPTY(lobby_station_traits)
 
 /// Remove all of our active lobby buttons
 /datum/station_trait/proc/destroy_lobby_buttons()
+/* BANDASTATION REMOVAL - HTML Title Screen
 	for (var/atom/movable/screen/button as anything in lobby_buttons)
 		var/mob/dead/new_player/hud_owner = button.get_mob()
 		if (QDELETED(hud_owner))
@@ -126,6 +127,7 @@ GLOBAL_LIST_EMPTY(lobby_station_traits)
 			qdel(button)
 			continue
 		using_hud.remove_station_trait_button(src)
+*/
 
 /// Called when overriding a pulsar star command report message.
 /datum/station_trait/proc/get_pulsar_message()
