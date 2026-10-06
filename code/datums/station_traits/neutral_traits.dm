@@ -433,8 +433,6 @@
 	lobby_button.desc = "Are you pro-skub or anti-skub? Click to cycle through pro-skub, anti-skub, random and neutral."
 	return ..()
 */
-/datum/station_trait/skub/get_lobby_description()
-	return "Are you pro-skub or anti-skub? Click to cycle through pro-skub, anti-skub, random and neutral."
 
 /// Let late-joiners jump on this gimmick too.
 /datum/station_trait/skub/can_display_lobby_button(client/player)
@@ -569,11 +567,6 @@
 	RegisterSignal(lobby_button, COMSIG_ATOM_UPDATE_OVERLAYS, PROC_REF(on_lobby_button_update_overlays))
 	return ..()
 */
-/datum/station_trait/pet_day/get_lobby_description()
-	return "Want to bring your innocent pet to a giant metal deathtrap? Click here to customize it!"
-
-/datum/station_trait/pet_day/get_lobby_overlay_states(mob/dead/new_player/player)
-	return list("select_pet")
 
 /datum/station_trait/pet_day/can_display_lobby_button(client/player)
 	return sign_up_button

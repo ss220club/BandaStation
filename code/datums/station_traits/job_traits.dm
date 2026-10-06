@@ -48,13 +48,12 @@
 	SIGNAL_HANDLER
 	overlays += LAZYFIND(lobby_candidates, lobby_button.get_mob()) ? "tick" : "cross"
 */
-/datum/station_trait/job/get_lobby_overlay_states(mob/dead/new_player/player)
-	return list(LAZYFIND(lobby_candidates, player) ? "tick" : "cross")
 
 /// Called before we start assigning roles, assign ours first
 /datum/station_trait/job/proc/pre_jobs_assigned()
 	SIGNAL_HANDLER
 	sign_up_button = FALSE
+	destroy_lobby_buttons()
 	for (var/mob/dead/new_player/signee as anything in lobby_candidates)
 		if (isnull(signee) || !signee.client || !signee.mind || signee.ready != PLAYER_READY_TO_PLAY)
 			LAZYREMOVE(lobby_candidates, signee)
@@ -91,8 +90,6 @@
 	. = ..()
 	overlays += LAZYFIND(lobby_candidates, lobby_button.get_mob()) ? "gorilla_on" : "gorilla_off"
 */
-/datum/station_trait/job/cargorilla/get_lobby_overlay_states(mob/dead/new_player/player)
-	return list(LAZYFIND(lobby_candidates, player) ? "gorilla_on" : "gorilla_off")
 
 /// Remove the cargo equipment and personnel that are being replaced by a gorilla.
 /datum/station_trait/job/cargorilla/proc/replace_cargo(datum/source)
@@ -100,6 +97,7 @@
 	var/mob/living/basic/sloth/cargo_sloth = GLOB.cargo_sloth
 	if(isnull(cargo_sloth))
 		lobby_candidates = list()
+		destroy_lobby_buttons() // Sorry folks
 		sign_up_button = FALSE
 		return
 
@@ -116,9 +114,6 @@
 	report_message = "We have installed a Bridge Assistant on your station."
 	show_in_report = TRUE
 	job_to_add = /datum/job/bridge_assistant
-
-/datum/station_trait/job/bridge_assistant/get_lobby_overlay_states(mob/dead/new_player/player)
-	return list("bridge_assistant")
 
 /datum/station_trait/job/bridge_assistant/New()
 	. = ..()
@@ -180,8 +175,6 @@
 	. = ..()
 	overlays += "veteran_advisor"
 */
-/datum/station_trait/job/veteran_advisor/get_lobby_overlay_states(mob/dead/new_player/player)
-	return list("veteran_advisor")
 
 /datum/station_trait/job/human_ai
 	name = "Human AI"
@@ -197,9 +190,6 @@
 	. = ..()
 	RegisterSignal(SSjob, COMSIG_OCCUPATIONS_SETUP, PROC_REF(remove_ai_job))
 	RegisterSignal(SSatoms, COMSIG_SUBSYSTEM_POST_INITIALIZE, PROC_REF(give_fax_machine))
-
-/datum/station_trait/job/human_ai/get_lobby_overlay_states(mob/dead/new_player/player)
-	return list(LAZYFIND(lobby_candidates, player) ? "human_ai_on" : "human_ai_off")
 
 /datum/station_trait/job/human_ai/revert()
 	UnregisterSignal(SSjob, COMSIG_OCCUPATIONS_SETUP)
@@ -261,9 +251,6 @@
 	report_message = "We've evaluated the bartender's monkey to have the mental capacity of the average crewmember. As such, we made them one."
 	show_in_report = TRUE
 	job_to_add = /datum/job/pun_pun
-
-/datum/station_trait/job/pun_pun/get_lobby_overlay_states(mob/dead/new_player/player)
-	return list(LAZYFIND(lobby_candidates, player) ? "pun_pun_on" : "pun_pun_off")
 
 /datum/station_trait/job/pun_pun/New()
 	. = ..()

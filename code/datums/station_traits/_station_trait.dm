@@ -31,6 +31,8 @@ GLOBAL_LIST_EMPTY(lobby_station_traits)
 	var/can_revert = TRUE
 	/// If set to true we'll show a button on the lobby to notify people about this trait
 	var/sign_up_button = FALSE
+	/// Lobby buttons controlled by this trait
+	var/list/lobby_buttons = list()
 	/// The ID that we look for in dynamic.json. Not synced with 'name' because I can already see this go wrong
 	var/dynamic_threat_id
 	// BANDASTATION ADDITION: Public traits in titles screen
@@ -47,18 +49,15 @@ GLOBAL_LIST_EMPTY(lobby_station_traits)
 		if(SSstation.initialized)
 			SSstation.display_lobby_traits()
 		*/
-		SEND_SIGNAL(SSdcs, COMSIG_GLOB_LOBBY_TRAIT_ADDED)
 	if(trait_processes)
 		START_PROCESSING(SSstation, src)
 	if(trait_to_give)
 		ADD_TRAIT(SSstation, trait_to_give, STATION_TRAIT)
 
 /datum/station_trait/Destroy()
-	var/had_button = sign_up_button
+	destroy_lobby_buttons()
 	SSstation.station_traits -= src
 	GLOB.lobby_station_traits -= src
-	if(had_button)
-		SEND_SIGNAL(SSdcs, COMSIG_GLOB_LOBBY_TRAIT_REMOVED)
 	REMOVE_TRAIT(SSstation, trait_to_give, STATION_TRAIT)
 	return ..()
 
@@ -109,17 +108,24 @@ GLOBAL_LIST_EMPTY(lobby_station_traits)
 	SIGNAL_HANDLER
 	lobby_buttons -= lobby_button
 */
-/// Returns the icon state for this trait's lobby button for a given player
-/datum/station_trait/proc/get_lobby_icon_state(mob/dead/new_player/player)
-	return "signup"
 
-/// Returns a list of overlay icon states to layer on top of the lobby button
-/datum/station_trait/proc/get_lobby_overlay_states(mob/dead/new_player/player)
-	return list()
-
-/// Proc ran when round starts. Use this for roundstart effects.
+/// Proc ran when round starts. Use this for roundstart effects. By default we clean up our buttons here.
 /datum/station_trait/proc/on_round_start()
 	SIGNAL_HANDLER
+	destroy_lobby_buttons()
+
+/// Remove all of our active lobby buttons
+/datum/station_trait/proc/destroy_lobby_buttons()
+	for (var/atom/movable/screen/button as anything in lobby_buttons)
+		var/mob/dead/new_player/hud_owner = button.get_mob()
+		if (QDELETED(hud_owner))
+			qdel(button)
+			continue
+		var/datum/hud/new_player/using_hud = hud_owner.hud_used
+		if(!using_hud)
+			qdel(button)
+			continue
+		using_hud.remove_station_trait_button(src)
 
 /// Called when overriding a pulsar star command report message.
 /datum/station_trait/proc/get_pulsar_message()

@@ -31,7 +31,6 @@ export default defineConfig({
     'tgui-say': './packages/tgui-say',
     'tgui-chat-dark': './packages/tgui-chat-dark',
     'tgui-escape-menu': './packages/tgui-escape-menu',
-    'tgui-lobby': './packages/tgui-lobby',
   },
   mode: 'production',
   module: {
@@ -136,7 +135,6 @@ export default defineConfig({
       'tgui-panel': path.resolve(dirname, './packages/tgui-panel'),
       'tgui-say': path.resolve(dirname, './packages/tgui-say'),
       'tgui-escape-menu': path.resolve(dirname, './packages/tgui-escape-menu'),
-      'tgui-lobby': path.resolve(dirname, './packages/tgui-lobby'),
       'tgui-dev-server': path.resolve(dirname, './packages/tgui-dev-server'),
     },
   },
