@@ -1,4 +1,5 @@
 @use '../base.scss';
+@use '../colors.scss' as colors;
 
 .ColorInput {
   &__Text {
@@ -158,7 +159,6 @@
       white-space: nowrap;
       width: 19px;
     }
-  }
 
   &__Preference {
     user-select: none;
@@ -857,4 +857,5 @@
   .Dropdown {
     margin: 0;
   }
+}
 }
