@@ -17945,16 +17945,6 @@
 /obj/structure/light_fake/spot/directional/north,
 /turf/open/floor/iron/smooth_half,
 /area/centcom/central_command_areas/briefing)
-"nJY" = (
-/obj/item/toy/figure/hos{
-	pixel_x = 6;
-	pixel_y = 8;
-	name = "Джеймс";
-	desc = "Он любит пить пиво, курить сигары и собирать пушки.";
-	toysay = "Принеси мне еще одну бутылку, будь другом."
-	},
-/turf/closed/indestructible/riveted,
-/area/centcom/central_command_areas/cabin/soo)
 "nKj" = (
 /obj/structure/table/wood/fancy/black,
 /obj/effect/turf_decal/siding/dark,
@@ -79672,7 +79662,7 @@ aDl
 aDl
 aDl
 aDl
-nJY
+aDl
 aDl
 aBi
 aBi
