@@ -24,6 +24,7 @@
 	RegisterSignal(lobby_button, COMSIG_ATOM_UPDATE_OVERLAYS, PROC_REF(on_lobby_button_update_overlays))
 	lobby_button.desc = button_desc
 	return ..()
+
 /datum/station_trait/job/get_lobby_description()
 	return button_desc
 

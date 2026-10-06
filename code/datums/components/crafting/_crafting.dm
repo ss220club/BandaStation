@@ -570,7 +570,7 @@
 			atom_name = reagent_path::name
 
 		data["atom_data"] += list(list(
-			"name" = declent_ru_initial(atom_path::name, NOMINATIVE, atom_path::name),
+			"name" = declent_ru_initial(atom_name, NOMINATIVE, atom_name),
 			"is_reagent" = ispath(atom, /datum/reagent/),
 		))
 
