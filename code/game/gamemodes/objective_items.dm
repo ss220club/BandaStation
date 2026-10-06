@@ -360,7 +360,7 @@ GLOBAL_DATUM_INIT(steal_item_handler, /datum/objective_item_handler, new())
 
 /obj/item/gun/energy/laser/captain/add_stealing_item_objective()
 	return add_item_to_steal(src, /obj/item/gun/energy/laser/captain)
-
+/*
 /datum/objective_item/steal/hoslaser
 	name = "персональное лазерное оружие главы службы безопасности"
 	targetitem = /obj/item/gun/energy/e_gun/hos
@@ -373,7 +373,7 @@ GLOBAL_DATUM_INIT(steal_item_handler, /datum/objective_item_handler, new())
 
 /obj/item/gun/energy/e_gun/hos/add_stealing_item_objective()
 	return add_item_to_steal(src, /obj/item/gun/energy/e_gun/hos)
-
+*/
 /datum/objective_item/steal/compactshotty
 	name = "персональный компактный дробовик смотрителя"
 	targetitem = /obj/item/gun/ballistic/shotgun/automatic/combat/compact

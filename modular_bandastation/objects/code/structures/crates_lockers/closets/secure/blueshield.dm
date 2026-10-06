@@ -8,7 +8,8 @@
 	var/static/list/items_inside = list(
 		/obj/item/storage/briefcase/secure = 1,
 		/obj/item/storage/medkit/advanced = 1,
-		/obj/item/storage/belt/security/full = 1,
+		/obj/item/storage/belt/medical/paramedic = 1,
+		/obj/item/clothing/accessory/holster = 1,
 		/obj/item/storage/bag/garment/blueshield = 1,
 		/obj/item/radio/headset/blueshield = 1,
 		/obj/item/radio/headset/blueshield/alt = 1,
