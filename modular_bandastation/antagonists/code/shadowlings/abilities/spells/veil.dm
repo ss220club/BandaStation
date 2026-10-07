@@ -68,6 +68,10 @@
 	if(istype(A, /obj/item/flashlight/glowstick))
 		var/obj/item/flashlight/glowstick/G = A
 		G.turn_off()
+	// laternfruit
+	if(istype(A, /obj/item/food/grown/lanternfruit))
+		var/obj/item/food/grown/lanternfruit/G = A
+		qdel(G)
 	A.extinguish()
 	A.on_saboteur(src, 30 SECONDS)
 
