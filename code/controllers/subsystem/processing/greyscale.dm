@@ -43,14 +43,14 @@ PROCESSING_SUBSYSTEM_DEF(greyscale)
 
 #ifdef USE_RUSTG_ICONFORGE_GAGS
 /datum/controller/subsystem/processing/greyscale/proc/jobs_completed(list/job_ids)
-    for(var/job in job_ids)
-        var/result = rustg_iconforge_check(job)
-        if(result == RUSTG_JOB_NO_RESULTS_YET)
-            return FALSE
-        if(result != "OK")
-            CRASH("IconForge GAGS config load failed: job=[job], result=[result]")
-        job_ids -= job
-    return TRUE
+	for(var/job in job_ids)
+		var/result = rustg_iconforge_check(job)
+		if(result == RUSTG_JOB_NO_RESULTS_YET)
+			return FALSE
+		if(result != "OK")
+			CRASH("IconForge GAGS config load failed: job=[job], result=[result]")
+		job_ids -= job
+	return TRUE
 
 /datum/controller/subsystem/processing/greyscale/proc/RefreshConfigsFromFile()
 	for(var/i in configurations)
