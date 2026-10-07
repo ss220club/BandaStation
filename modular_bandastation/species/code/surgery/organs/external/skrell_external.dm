@@ -29,15 +29,7 @@
 	. = ..()
 	atom_storage.remove_all(limb.drop_location())
 
-	var/list/organs = limb.owner?.organs || limb.contents
-	for(var/obj/item/organ/O in organs)
-		if(istype(O, /obj/item/organ/tentacle_ornament) || istype(O, /obj/item/organ/cloth_wrap))
-			qdel(O)
-
-	var/mob/living/carbon/human/H = limb.owner
-	if(!istype(H))
-		return
-	for(var/obj/item/organ/O in H.organs)
+	for(var/obj/item/organ/O in limb.owner?.organs || limb.contents)
 		if(istype(O, /obj/item/organ/tentacle_ornament) || istype(O, /obj/item/organ/cloth_wrap))
 			qdel(O)
 
