@@ -5541,7 +5541,7 @@
 	pixel_x = 14;
 	pixel_y = 11;
 	desc = "Она точно не уничтожит этот корабль. Доверьтесь ей.";
-	name = "Молька."
+	name = "Молька"
 	},
 /turf/open/floor/iron/dark/smooth_large,
 /area/centcom/central_command_areas/engine)
@@ -11511,7 +11511,9 @@
 	},
 /obj/item/toy/figure/cmo{
 	pixel_x = 9;
-	pixel_y = 15
+	pixel_y = 15;
+	name = "Акио";
+	toysay = "Ты умер мужик!"
 	},
 /turf/open/floor/iron/white,
 /area/centcom/central_command_areas/hospital)
