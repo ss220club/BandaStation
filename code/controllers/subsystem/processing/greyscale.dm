@@ -49,7 +49,7 @@ PROCESSING_SUBSYSTEM_DEF(greyscale)
 		if(result == RUSTG_JOB_NO_RESULTS_YET)
 			return FALSE
 		if(result != "OK")
-			CRASH("IconForge GAGS config load failed: job=[job], result=[result]")
+			stack_trace("Error during rustg_iconforge_load_gags_config job: [result]")
 		job_ids -= job
 	return TRUE
 #endif
