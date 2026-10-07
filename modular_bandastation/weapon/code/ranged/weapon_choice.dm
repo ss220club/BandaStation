@@ -33,5 +33,5 @@
 	exists_on_map = TRUE
 
 /obj/item/choice_beacon/hos/add_stealing_item_objective()
-	return add_item_to_steal(src, /obj/item/choice_beacon/hos)
+	return add_item_to_steal(src, /obj/item/choice_beacon/weapon/hos)
 
