@@ -69,6 +69,14 @@
     }
   }
 
+  &__Content {
+    border: var(--border-thickness-small) solid var(--color-primary);
+    border-bottom: none;
+    border-right: none;
+    box-shadow: inset 0.25rem 0.25rem 0.5rem -0.25rem var(--color-primary);
+  }
+
+  /* BANDASTATION: Character Preferences
   &__Jobs {
     > * {
       flex: 1;
@@ -159,6 +167,7 @@
       white-space: nowrap;
       width: 19px;
     }
+    */
 
   &__Preference {
     user-select: none;
@@ -857,5 +866,4 @@
   .Dropdown {
     margin: 0;
   }
-}
 }
