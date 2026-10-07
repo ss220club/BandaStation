@@ -1718,11 +1718,11 @@
 	},
 /area/centcom/central_command_areas/ferry)
 "ahq" = (
-/obj/effect/turf_decal/line/dark_red/line{
+/obj/effect/turf_decal/line/brown/line{
 	dir = 8
 	},
-/turf/open/floor/iron/smooth_edge{
-	dir = 8
+/turf/open/floor/iron/smooth_half{
+	dir = 1
 	},
 /area/centcom/central_command_areas/briefing)
 "ahr" = (
@@ -2473,12 +2473,8 @@
 /turf/open/floor/plating,
 /area/centcom/central_command_areas/prison)
 "alZ" = (
-/obj/effect/turf_decal/line/dark_blue/line{
-	dir = 1
-	},
-/obj/effect/turf_decal/line/brown/line,
 /obj/structure/sign/flag/nanotrasen/directional/east,
-/turf/open/floor/iron/smooth_half,
+/turf/open/floor/iron/smooth,
 /area/centcom/central_command_areas/briefing)
 "ama" = (
 /obj/effect/turf_decal/stripes/corner,
@@ -2549,12 +2545,8 @@
 /turf/open/floor/wood,
 /area/centcom/central_command_areas/cabin/soo)
 "amu" = (
-/obj/effect/turf_decal/line/dark_red/line{
-	dir = 1
-	},
-/obj/effect/turf_decal/line/dark_green/line,
 /obj/structure/sign/flag/nanotrasen/directional/west,
-/turf/open/floor/iron/smooth_half,
+/turf/open/floor/iron/smooth,
 /area/centcom/central_command_areas/briefing)
 "amv" = (
 /obj/effect/turf_decal/delivery,
@@ -3904,9 +3896,6 @@
 /turf/open/floor/iron/smooth_large,
 /area/centcom/central_command_areas/briefing)
 "atc" = (
-/obj/effect/turf_decal/line/brown/line{
-	dir = 1
-	},
 /turf/open/floor/iron/smooth_corner{
 	dir = 8
 	},
@@ -4425,6 +4414,7 @@
 /obj/structure/railing/platform{
 	dir = 1
 	},
+/obj/effect/turf_decal/line/dark_red/line,
 /turf/open/floor/iron/smooth_half,
 /area/centcom/central_command_areas/briefing)
 "avT" = (
@@ -4432,11 +4422,11 @@
 /turf/open/floor/wood/tile,
 /area/centcom/central_command_areas/planetary_port/hotel)
 "avV" = (
-/obj/effect/turf_decal/line/dark_green/line{
-	dir = 8
+/obj/effect/turf_decal/line/dark_red/line{
+	dir = 4
 	},
-/turf/open/floor/iron/smooth_edge{
-	dir = 8
+/turf/open/floor/iron/smooth_half{
+	dir = 1
 	},
 /area/centcom/central_command_areas/briefing)
 "awc" = (
@@ -4748,11 +4738,11 @@
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/planetary_port)
 "axA" = (
-/obj/effect/turf_decal/line/brown/line{
+/obj/effect/turf_decal/line/dark_green/line{
 	dir = 4
 	},
-/turf/open/floor/iron/smooth_edge{
-	dir = 4
+/turf/open/floor/iron/smooth_half{
+	dir = 1
 	},
 /area/centcom/central_command_areas/briefing)
 "axB" = (
@@ -5895,6 +5885,12 @@
 /turf/open/floor/iron/smooth_large,
 /area/centcom/central_command_areas/evacuation/ship)
 "aCG" = (
+/obj/effect/turf_decal/line/brown/line{
+	dir = 4
+	},
+/obj/effect/turf_decal/line/dark_green/line{
+	dir = 8
+	},
 /turf/open/floor/iron/smooth_half{
 	dir = 1
 	},
@@ -10132,9 +10128,6 @@
 /turf/open/floor/iron/smooth_large,
 /area/centcom/central_command_areas/evacuation/ship)
 "aSD" = (
-/obj/effect/turf_decal/line/dark_green/line{
-	dir = 1
-	},
 /turf/open/floor/iron/smooth_corner,
 /area/centcom/central_command_areas/briefing)
 "aSK" = (
@@ -10325,12 +10318,11 @@
 /turf/open/floor/carpet/red,
 /area/centcom/central_command_areas/evacuation/ship)
 "aTn" = (
-/obj/effect/turf_decal/line/dark_red/line,
 /obj/structure/light_fake/spot/directional/west,
 /obj/structure/railing/platform{
 	dir = 1
 	},
-/turf/open/floor/iron/smooth_half,
+/turf/open/floor/iron/smooth,
 /area/centcom/central_command_areas/briefing)
 "aTq" = (
 /obj/machinery/conveyor_switch/oneway{
@@ -13383,8 +13375,11 @@
 /obj/effect/turf_decal/line/dark_blue/line{
 	dir = 4
 	},
-/turf/open/floor/iron/smooth_edge{
-	dir = 4
+/obj/effect/turf_decal/line/dark_red/line{
+	dir = 8
+	},
+/turf/open/floor/iron/smooth_half{
+	dir = 1
 	},
 /area/centcom/central_command_areas/briefing)
 "dNI" = (
@@ -13478,6 +13473,13 @@
 /obj/effect/light_emitter/podbay,
 /turf/open/water/beach,
 /area/centcom/central_command_areas/planetary_port/plaza)
+"dVc" = (
+/obj/structure/railing/platform{
+	dir = 1
+	},
+/obj/effect/turf_decal/line/dark_blue/line,
+/turf/open/floor/iron/smooth_half,
+/area/centcom/central_command_areas/briefing)
 "dWV" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 4
@@ -15967,6 +15969,14 @@
 	},
 /turf/open/floor/carpet/royalblack,
 /area/centcom/central_command_areas/planetary_port/club)
+"iQz" = (
+/obj/effect/turf_decal/line/dark_blue/line{
+	dir = 8
+	},
+/turf/open/floor/iron/smooth_half{
+	dir = 1
+	},
+/area/centcom/central_command_areas/briefing)
 "iQZ" = (
 /obj/structure/table/reinforced/titaniumglass,
 /obj/effect/spawner/random/food_or_drink/cake_ingredients,
@@ -20282,12 +20292,11 @@
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/planetary_port)
 "rKv" = (
-/obj/effect/turf_decal/line/dark_blue/line,
 /obj/structure/light_fake/spot/directional/east,
 /obj/structure/railing/platform/corner{
 	dir = 4
 	},
-/turf/open/floor/iron/smooth_half,
+/turf/open/floor/iron/smooth,
 /area/centcom/central_command_areas/briefing)
 "rLi" = (
 /obj/effect/baseturf_helper{
@@ -77350,11 +77359,11 @@ wDT
 aac
 aHT
 aTn
-abr
-aAR
+avV
+avV
 amu
-aDV
-aqJ
+axA
+axA
 aSD
 awc
 aYa
@@ -77607,11 +77616,11 @@ sFK
 aQa
 aHT
 aza
-aJD
-ang
+abr
+aAR
 aiB
-ata
-apq
+aDV
+aqJ
 atj
 acv
 aYa
@@ -77864,11 +77873,11 @@ nJK
 aYb
 aHT
 aza
-aqU
-aDY
+aJD
+ang
 aiB
-axP
-aWr
+ata
+apq
 atj
 aUj
 akW
@@ -78121,12 +78130,12 @@ sFK
 aLT
 agb
 avQ
-ahq
-ahq
-sFK
-avV
-avV
-aBD
+aqU
+aDY
+aiB
+axP
+aWr
+atj
 agG
 aFP
 aQs
@@ -78378,8 +78387,8 @@ sFK
 ari
 ade
 aSM
-aCG
-aCG
+dMS
+dMS
 aei
 aCG
 aCG
@@ -78634,13 +78643,13 @@ aQa
 sFK
 ajZ
 aGR
-avQ
-dMS
-dMS
-sFK
-axA
-axA
-aBD
+dVc
+aVC
+aKt
+aqZ
+aUQ
+agp
+aCs
 agG
 aFP
 aQs
@@ -78892,11 +78901,11 @@ sFK
 atw
 axO
 aKM
-aVC
-aKt
+azq
+aHX
 aqZ
-aUQ
-agp
+azp
+aUu
 aCs
 aAN
 akW
@@ -79149,11 +79158,11 @@ sFK
 agO
 agO
 aKM
-azq
-aHX
+aJd
+arR
 aqZ
-azp
-aUu
+aCv
+agc
 aCs
 acv
 aYa
@@ -79406,11 +79415,11 @@ sFK
 aEp
 aJt
 rKv
-aJd
-arR
+iQz
+iQz
 alZ
-aCv
-agc
+ahq
+ahq
 atc
 aYE
 aYa
