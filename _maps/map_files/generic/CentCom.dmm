@@ -1718,8 +1718,8 @@
 	},
 /area/centcom/central_command_areas/ferry)
 "ahq" = (
-/obj/effect/turf_decal/line/brown/line{
-	dir = 8
+/obj/effect/turf_decal/line/dark_red/line{
+	dir = 4
 	},
 /turf/open/floor/iron/smooth_half{
 	dir = 1
@@ -4422,8 +4422,8 @@
 /turf/open/floor/wood/tile,
 /area/centcom/central_command_areas/planetary_port/hotel)
 "avV" = (
-/obj/effect/turf_decal/line/dark_red/line{
-	dir = 4
+/obj/effect/turf_decal/line/dark_blue/line{
+	dir = 8
 	},
 /turf/open/floor/iron/smooth_half{
 	dir = 1
@@ -4738,8 +4738,8 @@
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/planetary_port)
 "axA" = (
-/obj/effect/turf_decal/line/dark_green/line{
-	dir = 4
+/obj/effect/turf_decal/line/brown/line{
+	dir = 8
 	},
 /turf/open/floor/iron/smooth_half{
 	dir = 1
@@ -12175,6 +12175,17 @@
 	},
 /turf/open/floor/carpet/black,
 /area/centcom/central_command_areas/cabin/captain)
+"bpN" = (
+/obj/effect/turf_decal/line/dark_blue/line{
+	dir = 4
+	},
+/obj/effect/turf_decal/line/dark_red/line{
+	dir = 8
+	},
+/turf/open/floor/iron/smooth_half{
+	dir = 1
+	},
+/area/centcom/central_command_areas/briefing)
 "bqL" = (
 /obj/effect/turf_decal/stripes/white/line{
 	dir = 8;
@@ -13372,15 +13383,11 @@
 /turf/open/floor/iron/dark/smooth_large,
 /area/centcom/central_command_areas/hallway)
 "dMS" = (
-/obj/effect/turf_decal/line/dark_blue/line{
-	dir = 4
-	},
-/obj/effect/turf_decal/line/dark_red/line{
-	dir = 8
-	},
-/turf/open/floor/iron/smooth_half{
+/obj/structure/railing/platform{
 	dir = 1
 	},
+/obj/effect/turf_decal/line/dark_blue/line,
+/turf/open/floor/iron/smooth_half,
 /area/centcom/central_command_areas/briefing)
 "dNI" = (
 /turf/open/floor/plating,
@@ -13473,13 +13480,6 @@
 /obj/effect/light_emitter/podbay,
 /turf/open/water/beach,
 /area/centcom/central_command_areas/planetary_port/plaza)
-"dVc" = (
-/obj/structure/railing/platform{
-	dir = 1
-	},
-/obj/effect/turf_decal/line/dark_blue/line,
-/turf/open/floor/iron/smooth_half,
-/area/centcom/central_command_areas/briefing)
 "dWV" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 4
@@ -15116,7 +15116,7 @@
 /turf/closed/indestructible/riveted,
 /area/centcom/central_command_areas/srt/brief_srt)
 "gXs" = (
-/obj/structure/chair{
+/obj/structure/chair/comfy/black{
 	dir = 8
 	},
 /turf/open/floor/carpet/green,
@@ -15969,14 +15969,6 @@
 	},
 /turf/open/floor/carpet/royalblack,
 /area/centcom/central_command_areas/planetary_port/club)
-"iQz" = (
-/obj/effect/turf_decal/line/dark_blue/line{
-	dir = 8
-	},
-/turf/open/floor/iron/smooth_half{
-	dir = 1
-	},
-/area/centcom/central_command_areas/briefing)
 "iQZ" = (
 /obj/structure/table/reinforced/titaniumglass,
 /obj/effect/spawner/random/food_or_drink/cake_ingredients,
@@ -17125,6 +17117,14 @@
 /obj/structure/curtain/cloth/fancy,
 /turf/open/floor/carpet/red,
 /area/centcom/central_command_areas/planetary_port/club)
+"lFf" = (
+/obj/effect/turf_decal/line/dark_green/line{
+	dir = 4
+	},
+/turf/open/floor/iron/smooth_half{
+	dir = 1
+	},
+/area/centcom/central_command_areas/briefing)
 "lGS" = (
 /obj/effect/turf_decal/tile/red/anticorner{
 	dir = 8
@@ -17183,7 +17183,7 @@
 /turf/open/floor/carpet/neon/simple/blue,
 /area/centcom/central_command_areas/planetary_port/club)
 "lNz" = (
-/obj/structure/chair{
+/obj/structure/chair/comfy/black{
 	dir = 4
 	},
 /turf/open/floor/carpet/green,
@@ -77359,11 +77359,11 @@ wDT
 aac
 aHT
 aTn
-avV
-avV
+ahq
+ahq
 amu
-axA
-axA
+lFf
+lFf
 aSD
 awc
 aYa
@@ -78387,8 +78387,8 @@ sFK
 ari
 ade
 aSM
-dMS
-dMS
+bpN
+bpN
 aei
 aCG
 aCG
@@ -78643,7 +78643,7 @@ aQa
 sFK
 ajZ
 aGR
-dVc
+dMS
 aVC
 aKt
 aqZ
@@ -79415,11 +79415,11 @@ sFK
 aEp
 aJt
 rKv
-iQz
-iQz
+avV
+avV
 alZ
-ahq
-ahq
+axA
+axA
 atc
 aYE
 aYa
