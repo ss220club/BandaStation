@@ -49,6 +49,7 @@ GLOBAL_LIST_INIT(shadowling_base_abilities, list(
 	/datum/action/cooldown/shadowling/shadow_phase,
 	/datum/action/cooldown/shadowling/veil,
 	/datum/action/cooldown/shadowling/shreek,
+	/datum/action/cooldown/shadowling/shadow_barrier,
 	/datum/action/cooldown/shadowling/shadow_smoke,
 	/datum/action/cooldown/shadowling/labyrinth,
 	/datum/action/cooldown/shadowling/recuperation,
