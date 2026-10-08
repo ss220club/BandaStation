@@ -375,6 +375,11 @@
 /obj/effect/temp_visual/elite_tumor_wall/gargantua
 	duration = 35 SECONDS
 
+/obj/effect/temp_visual/elite_tumor_wall/gargantua/Initialize(mapload, new_caster)
+	. = ..()
+	activator_ref = WEAKREF(src)
+	ourelite_ref = WEAKREF(src)
+
 /obj/effect/temp_visual/elite_tumor_wall/gargantua/CanAllowThrough(atom/movable/mover, border_dir)
 	. = ..()
 	return FALSE
