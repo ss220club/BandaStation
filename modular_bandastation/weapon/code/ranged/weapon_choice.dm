@@ -11,7 +11,6 @@
 
 /obj/item/choice_beacon/weapon/blueshield/generate_display_names()
 	var/static/list/selectable_gun_types = list(
-	//	"GP-93R 9x25mm Autopistol" = /obj/item/storage/toolbox/guncase/ntspecial/pistol/gp93r,
 		"EG-14 Energy Pistol" = /obj/item/gun/energy/eg_14,
 		"GP-38 .38 cal Pistol" = /obj/item/storage/toolbox/guncase/ntspecial/pistol/gp38,
 	)
@@ -20,6 +19,7 @@
 /obj/item/choice_beacon/weapon/hos/generate_display_names()
 	var/static/list/selectable_gun_types = list(
 		"X-01 MultiPhase Energy Gun" = /obj/item/gun/energy/e_gun/hos,
+		"X-02 Laser Pistol" = /obj/item/storage/toolbox/guncase/ntspecial/pistol/hos,
 		"GP-45 .45 cal Pistol" = /obj/item/storage/toolbox/guncase/ntspecial/pistol/gp45,
 	)
 	return selectable_gun_types
@@ -28,7 +28,7 @@
 	name = "the head of security's personal weapon"
 	targetitem = /obj/item/choice_beacon/weapon/hos
 	excludefromjob = list(JOB_HEAD_OF_SECURITY)
-	altitems = list(/obj/item/gun/ballistic/automatic/pistol/cm70/hos, /obj/item/gun/energy/e_gun/hos)
+	altitems = list(/obj/item/gun/ballistic/automatic/pistol/cm70/hos, /obj/item/gun/ballistic/automatic/laser/pistol, /obj/item/gun/energy/e_gun/hos)
 	item_owner = list(JOB_HEAD_OF_SECURITY)
 	exists_on_map = TRUE
 

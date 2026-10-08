@@ -355,6 +355,10 @@
 	weapon_to_spawn = /obj/item/gun/ballistic/automatic/pistol/cm23
 	extra_to_spawn = /obj/item/ammo_box/magazine/c38/rubber
 
+/obj/item/storage/toolbox/guncase/ntspecial/pistol/hos
+	weapon_to_spawn = /obj/item/gun/ballistic/automatic/laser/pistol
+	extra_to_spawn = /obj/item/ammo_box/magazine/recharge/small
+
 /obj/item/storage/toolbox/guncase/ntcase/pistol/gp9/no_ammo
 	weapon_to_spawn = /obj/item/gun/ballistic/automatic/pistol/gp9/no_mag
 	extra_to_spawn = /obj/item/ammo_box/magazine/c9x25mm_pistol/starts_empty
