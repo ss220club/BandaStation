@@ -85,6 +85,7 @@ GLOBAL_LIST_INIT(shadowling_ascended_abilities, list(
 	/datum/action/cooldown/shadowling/shadow_phase,
 	/datum/action/cooldown/shadowling/veil,
 	/datum/action/cooldown/shadowling/shreek,
+	/datum/action/cooldown/shadowling/shadow_barrier,
 	/datum/action/cooldown/shadowling/shadow_grab,
 	/datum/action/cooldown/shadowling/shadow_strike,
 	/datum/action/cooldown/shadowling/shadow_smoke,
