@@ -38,7 +38,7 @@
 	icon = 'modular_bandastation/vampire/icons/effects/vampire_effects.dmi'
 	icon_state = "vamp_claws"
 	w_class = WEIGHT_CLASS_BULKY
-	obj_flags = ABSTRACT | DROPDEL
+	item_flags = ABSTRACT | DROPDEL
 	force = 10
 	armour_penetration = 20
 	sharpness = SHARP_EDGED
@@ -235,9 +235,6 @@
 
 /datum/action/cooldown/spell/jaunt/ethereal_jaunt/vampire_blood_pool/begin_jaunt_exit(mob/living/cast_on, obj/effect/dummy/phased_mob/spell_jaunt/holder, turf/found_exit)
 	do_jaunt_in(cast_on, holder, found_exit)
-
-/datum/action/cooldown/spell/jaunt/ethereal_jaunt/do_steam_effects(turf/loc)
-	return // No steam effects
 
 /obj/effect/dummy/phased_mob/spell_jaunt/vampire_blood_pool
 	phased_mob_icon_state = "red_1"
