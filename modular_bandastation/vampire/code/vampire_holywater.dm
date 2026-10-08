@@ -44,10 +44,10 @@
 		vampire.subtract_usable_blood(3)
 		if(!vampire.bloodusable)
 			chem.holder?.remove_reagent(chem.type, chem.volume)
-			affected_mob.vomit(VOMIT_CATEGORY_DEFAULT, lost_nutrition = 0, distance = 0)
+			affected_mob.vomit(VOMIT_CATEGORY_BLOOD, lost_nutrition = 0, distance = 0)
 			return COMSIG_MOB_STOP_REAGENT_TICK
 
-		affected_mob.vomit(VOMIT_CATEGORY_DEFAULT, lost_nutrition = 0)
+		affected_mob.vomit(VOMIT_CATEGORY_BLOOD, lost_nutrition = 0)
 		affected_mob.adjust_brute_loss(3)
 		return
 
