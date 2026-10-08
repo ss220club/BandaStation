@@ -603,9 +603,7 @@ GLOBAL_LIST_EMPTY(antagonists)
 	if (retain_existing)
 		objectives.Insert(1, custom_objective)
 	else if (!retain_escape)
-		// BANDASTATION EDIT: preserve references held by the uplink and other consumers.
-		objectives.Cut()
-		objectives += custom_objective
+		objectives = list(custom_objective)
 	else
 		var/static/list/escape_objectives = list(
 			/datum/objective/escape,

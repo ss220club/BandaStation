@@ -335,6 +335,7 @@
 				new_objective.admin_edit(usr)
 				target_antag.objectives -= old_objective
 				target_antag.objectives.Insert(objective_pos, new_objective)
+			// BANDASTATION EDIT: notify operations when an administrator replaces an objective.
 			SEND_SIGNAL(target_antag, COMSIG_ANTAGONIST_OBJECTIVES_CHANGED)
 			message_admins("[key_name_admin(usr)] edited [current]'s objective to [new_objective.explanation_text]")
 			log_admin("[key_name(usr)] edited [current]'s objective to [new_objective.explanation_text]")
@@ -345,6 +346,7 @@
 			objective = locate(href_list["obj_delete"]) in A.objectives
 			if(istype(objective))
 				A.objectives -= objective
+				// BANDASTATION EDIT: notify operations when an administrator removes an objective.
 				SEND_SIGNAL(A, COMSIG_ANTAGONIST_OBJECTIVES_CHANGED)
 				break
 		if(!objective)

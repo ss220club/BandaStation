@@ -82,24 +82,24 @@ GLOBAL_LIST_EMPTY(antag_operations)
 
 /datum/antag_operation/proc/on_participant_deleted(datum/source)
 	SIGNAL_HANDLER
-	cancel("участник больше недоступен.")
+	cancel("участник сценария пропал из этого мира.")
 
 /datum/antag_operation/proc/on_participant_cryo(datum/source)
 	SIGNAL_HANDLER
-	cancel("участник ушёл в криогенный стазис.")
+	cancel("участник сценария ушёл в криогенный стазис.")
 
 /datum/antag_operation/proc/on_antagonist_removed(datum/mind/source, datum/antagonist/antag)
 	SIGNAL_HANDLER
 	if(antag in participant_antagonists)
-		cancel("участник больше не участвует в операции.")
+		cancel("участник сценария покончил с криминальной карьерой.")
 
 /datum/antag_operation/proc/on_objective_deleted(datum/source)
 	SIGNAL_HANDLER
-	cancel("одно из связанных заданий удалено.")
+	cancel("Боги решили, что учатник не подходит для этого задания.")
 
 /datum/antag_operation/proc/on_objectives_changed(datum/antagonist/source)
 	SIGNAL_HANDLER
 	for(var/datum/objective/objective as anything in operation_objectives)
 		if(operation_objectives[objective] == source && !(objective in source.objectives))
-			cancel("участник отказался от связанного задания.")
+			cancel("участник сценария отказался от задания.")
 			return

@@ -85,36 +85,23 @@
 	log_game("Document exchange started between [key_name(red_agent.owner)] and [key_name(blue_agent.owner)].")
 	return activate()
 
-/// Hide the cargo on the receiver's station level, where a paired pinpointer can guide them.
+/// Hide the cargo on the receiver's station level, where a pinpointer can guide them.
 /// Maps without a suitable maintenance spawn fall back to direct delivery.
 /datum/antag_operation/document_exchange/proc/deliver_documents(mob/living/carbon/human/agent, obj/item/documents/documents, datum/objective/document_exchange/objective, stash = null, turf/excluded_turf = null)
 	// Each agent independently rolls whether their own documents are hidden.
 	var/use_stash = isnull(stash) ? prob(DOCUMENT_EXCHANGE_STASH_CHANCE) : stash
 	if(use_stash && is_station_level(agent.z))
-		for(var/attempt in 1 to 10)
-			var/turf/stash_turf = find_maintenance_spawn(atmos_sensitive = TRUE)
-			if(!stash_turf)
-				break
-			if(stash_turf.z != agent.z || stash_turf == excluded_turf || stash_turf.density)
-				continue
-			var/blocked = FALSE
-			for(var/obj/obstacle in stash_turf)
-				if(obstacle.density)
-					blocked = TRUE
-					break
-			if(blocked)
-				continue
+		var/turf/stash_turf = find_maintenance_spawn(atmos_sensitive = TRUE)
+		if(stash_turf)
 			var/obj/item/storage/briefcase/secure/document_exchange/briefcase = new(stash_turf)
 			documents.forceMove(briefcase)
-			var/obj/item/pinpointer/pair/beacon = new(briefcase)
-			var/obj/item/pinpointer/pair/receiver = new(agent.loc)
-			// One-way tracking: the device inside the case must not reveal the agent.
-			receiver.other_pair = beacon
+			var/obj/item/pinpointer/document_exchange/receiver = new(agent.loc)
+			receiver.briefcase_ref = WEAKREF(briefcase)
 			if(!agent.equip_to_storage(receiver, ITEM_SLOT_BACK, indirect_action = TRUE))
 				agent.put_in_hands(receiver)
 			objective.briefcase_stashed = TRUE
 			objective.briefcase_code = briefcase.stored_lock_code
-			to_chat(agent, span_notice("Ваш чемодан с документами спрятан в технических тоннелях. Вам выдан парный пинпоинтер для его поиска. Код замка указан в описании цели."))
+			to_chat(agent, span_notice("Ваш чемодан с документами спрятан в технических тоннелях. Вам выдан пинпоинтер для его поиска. Код замка указан в описании цели."))
 			return stash_turf
 	if(!agent.equip_to_storage(documents, ITEM_SLOT_BACK, indirect_action = TRUE))
 		agent.put_in_hands(documents)
@@ -153,7 +140,7 @@
 	var/datum/weakref/target_document_ref
 	/// Initial code of the briefcase hiding this objective owner's documents.
 	var/briefcase_code
-	/// Whether the owner must retrieve their cargo using the issued paired pinpointer.
+	/// Whether the owner must retrieve their cargo using the issued pinpointer.
 	var/briefcase_stashed = FALSE
 	var/betrayal = FALSE
 
@@ -172,12 +159,11 @@
 /datum/objective/document_exchange/update_explanation_text()
 	var/obj/item/documents/document = target_document_ref?.resolve()
 	if(betrayal)
-		explanation_text = "[partner?.name] ожидает обмена документами. Завладейте оригиналом «[document?.name]» этого агента и сохраните собственный оригинал до конца смены. Фотокопии и документы других операций не засчитываются."
+		explanation_text = "[partner?.name] ожидает обмена документами. Завладейте оригиналом «[document?.name]» этого агента и сохраните собственный оригинал до конца смены."
 	else
-		explanation_text = "Договоритесь об обмене с агентом [partner?.name]. Получите его оригинал «[document?.name]» и сохраните до конца смены. Фотокопии и документы других операций не засчитываются."
-	if(briefcase_code)
-		if(briefcase_stashed)
-			explanation_text += " Сначала заберите свои документы: чемодан спрятан в технических тоннелях станции. Найдите его с помощью выданного парного пинпоинтера."
+		explanation_text = "Договоритесь об обмене с агентом [partner?.name]. Получите его оригинал «[document?.name]» и сохраните до конца смены."
+	if(briefcase_stashed)
+		explanation_text += " Сначала заберите свои документы: чемодан спрятан в технических тоннелях станции. Найдите его с помощью выданного пинпоинтера."
 		explanation_text += " Ваши документы находятся в запертом чемодане. Код вашего чемодана: [briefcase_code]."
 
 /datum/objective/document_exchange/check_completion()

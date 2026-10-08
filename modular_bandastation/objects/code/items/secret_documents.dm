@@ -11,6 +11,8 @@
 	icon_state = "docs_blue"
 
 
+/obj/item/storage/briefcase/secure/document_exchange
+
 /obj/item/storage/briefcase/secure/document_exchange/Initialize(mapload)
 	. = ..()
 	// Set the code after the component registers its appearance handler.
@@ -19,3 +21,14 @@
 
 /obj/item/storage/briefcase/secure/document_exchange/PopulateContents()
 	return
+
+/// Keeps the assigned case across power toggles without a second tracking device.
+/obj/item/pinpointer/document_exchange
+	var/datum/weakref/briefcase_ref
+
+/obj/item/pinpointer/document_exchange/scan_for_target()
+	target = briefcase_ref?.resolve()
+
+/obj/item/pinpointer/document_exchange/Destroy()
+	briefcase_ref = null
+	return ..()

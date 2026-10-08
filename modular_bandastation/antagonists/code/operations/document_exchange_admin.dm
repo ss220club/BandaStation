@@ -22,7 +22,7 @@ ADMIN_VERB(create_document_exchange, R_FUN, "Create Document Exchange", "Выд�
 		return FALSE
 	var/datum/antagonist/traitor/blue_agent = candidates[blue_choice]
 
-	var/list/modes = list(
+	var/static/list/modes = list(
 		"Обычный обмен" = list(FALSE, FALSE),
 		"Предательство агента с красными документами" = list(TRUE, FALSE),
 		"Предательство агента с синими документами" = list(FALSE, TRUE),
@@ -33,7 +33,7 @@ ADMIN_VERB(create_document_exchange, R_FUN, "Create Document Exchange", "Выд�
 	if(isnull(mode))
 		return FALSE
 	var/list/betrayal_flags = modes[mode]
-	var/list/delivery_modes = list(
+	var/static/list/delivery_modes = list(
 		"Выдать документы без чемодана" = FALSE,
 		"Спрятать в чемодане в технических тоннелях" = TRUE,
 		"Случайный способ выдачи" = null,
