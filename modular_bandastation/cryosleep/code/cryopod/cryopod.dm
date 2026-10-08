@@ -189,6 +189,8 @@ GLOBAL_LIST_EMPTY(objectives)
 
 	var/mob/living/mob_occupant = occupant
 	// Update any existing objectives involving this mob.
+	if(mob_occupant.mind)
+		SEND_SIGNAL(mob_occupant.mind, COMSIG_MIND_ENTERED_CRYO)
 	for(var/datum/objective/objective as anything in GLOB.objectives)
 		// We don't want revs to get objectives that aren't for heads of staff. Letting
 		// them win or lose based on cryo is silly so we remove the objective.
