@@ -42,7 +42,6 @@ PROCESSING_SUBSYSTEM_DEF(greyscale)
 	return SS_INIT_SUCCESS
 
 #ifdef USE_RUSTG_ICONFORGE_GAGS
-
 /datum/controller/subsystem/processing/greyscale/proc/jobs_completed(list/job_ids)
 	for(var/job in job_ids)
 		var/result = rustg_iconforge_check(job)
