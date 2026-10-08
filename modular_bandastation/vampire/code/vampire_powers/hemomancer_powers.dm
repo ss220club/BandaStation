@@ -38,7 +38,7 @@
 	icon = 'modular_bandastation/vampire/icons/effects/vampire_effects.dmi'
 	icon_state = "vamp_claws"
 	w_class = WEIGHT_CLASS_BULKY
-	obj_flags = ABSTRACT | DROPDEL
+	item_flags = ABSTRACT | DROPDEL
 	force = 10
 	armour_penetration = 20
 	sharpness = SHARP_EDGED
