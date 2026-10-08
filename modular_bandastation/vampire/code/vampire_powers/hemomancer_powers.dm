@@ -236,6 +236,9 @@
 /datum/action/cooldown/spell/jaunt/ethereal_jaunt/vampire_blood_pool/begin_jaunt_exit(mob/living/cast_on, obj/effect/dummy/phased_mob/spell_jaunt/holder, turf/found_exit)
 	do_jaunt_in(cast_on, holder, found_exit)
 
+/datum/action/cooldown/spell/jaunt/ethereal_jaunt/vampire_blood_pool/do_steam_effects(turf/loc)
+	return // No steam effects
+
 /obj/effect/dummy/phased_mob/spell_jaunt/vampire_blood_pool
 	phased_mob_icon_state = "red_1"
 
