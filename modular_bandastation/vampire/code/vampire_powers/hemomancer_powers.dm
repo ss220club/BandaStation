@@ -285,7 +285,7 @@
 	if(QDELETED(user) || QDELETED(target) || target.z != user.z)
 		to_chat(user, span_warning("Запах крови этой цели угас."))
 		return
-	var/message = "[target_name] находится в [get_area(target)], [dir2text(get_dir(user, target))] от вас."
+	var/message = "[target_name] находится в [get_area_name(target)], [dir2text(get_dir(user, target))] от вас."
 	if((target.maxHealth - target.health >= 40) || target.get_bleed_rate())
 		message += " Цель ранена."
 	to_chat(user, span_notice(message))
