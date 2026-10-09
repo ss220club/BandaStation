@@ -598,7 +598,7 @@
 /obj/item/stack/medical/wrap/gauze/add_context(atom/source, list/context, obj/item/held_item, mob/living/user)
 	. = ..()
 	if(held_item?.tool_behaviour == TOOL_WIRECUTTER || held_item?.get_sharpness())
-		context[SCREENTIP_CONTEXT_LMB] = "Shred into cloth"
+		context[SCREENTIP_CONTEXT_LMB] = "Порвать на ткань"
 		. = CONTEXTUAL_SCREENTIP_SET
 
 /obj/item/stack/medical/wrap/gauze/update_name(updates)
@@ -651,7 +651,7 @@
 				span_notice("Вы разрезаете [src.declent_ru(ACCUSATIVE)] в куски ткани с помощью [tool.declent_ru(GENITIVE)]."), \
 				span_hear("Вы слышите, как кто-то режет."))
 		else //telekinesis
-			visible_message(span_notice("[tool] cuts [src] into pieces of cloth."), \
+			visible_message(span_notice("[capitalize(tool.declent_ru(NOMINATIVE))] разрезает [src.declent_ru(ACCUSATIVE)] в куски ткани."), \
 				blind_message = span_hear("Вы слышите, как кто-то режет."))
 		use(absorption_capacity <= initial(absorption_capacity) * 0.5 ? 1 : 2)
 		return ITEM_INTERACT_SUCCESS
