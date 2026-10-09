@@ -101,7 +101,7 @@
 				agent.put_in_hands(receiver)
 			objective.briefcase_stashed = TRUE
 			objective.briefcase_code = briefcase.stored_lock_code
-			to_chat(agent, span_notice("Ваш чемодан с документами спрятан в технических тоннелях. Вам выдан пинпоинтер для его поиска. Код замка указан в описании цели."))
+			to_chat(agent, span_notice("Ваш чемодан с документами спрятан в технических тоннелях. Вам выдан целеуказатель для его поиска. Код замка указан в описании цели."))
 			return stash_turf
 	if(!agent.equip_to_storage(documents, ITEM_SLOT_BACK, indirect_action = TRUE))
 		agent.put_in_hands(documents)
@@ -163,7 +163,7 @@
 	else
 		explanation_text = "Договоритесь об обмене с агентом [partner?.name]. Получите его оригинал «[document?.name]» и сохраните до конца смены."
 	if(briefcase_stashed)
-		explanation_text += " Сначала заберите свои документы: чемодан спрятан в технических тоннелях станции. Найдите его с помощью выданного пинпоинтера."
+		explanation_text += " Сначала заберите свои документы: чемодан спрятан в технических тоннелях станции. Найдите его с помощью выданного целеуказателя."
 		explanation_text += " Ваши документы находятся в запертом чемодане. Код вашего чемодана: [briefcase_code]."
 
 /datum/objective/document_exchange/check_completion()
