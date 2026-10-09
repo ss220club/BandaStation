@@ -1,6 +1,10 @@
 ///from mind/transfer_to. Sent after the mind has been transferred: (mob/previous_body)
 #define COMSIG_MIND_TRANSFERRED "mind_transferred"
 
+// BANDASTATION EDIT added new signal type
+/// Sent before cryogenic storage or AI unloading permanently removes a character.
+#define COMSIG_MIND_ENTERED_CRYO "mind_entered_cryo"
+
 /// Called on the mind when an antagonist is being gained, after the antagonist list has updated (datum/antagonist/antagonist)
 #define COMSIG_ANTAGONIST_GAINED "antagonist_gained"
 

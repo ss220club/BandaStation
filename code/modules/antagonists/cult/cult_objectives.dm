@@ -27,6 +27,7 @@
 		for(var/mob/living/carbon/human/player in GLOB.player_list)
 			if(player.mind && !IS_CULTIST(player) && player.stat != DEAD && is_station_level(player.loc.z))
 				target_candidates += player.mind
+	target_candidates -= blacklist // BANDASTATION ADDITION: also filter fallback candidates.
 	list_clear_nulls(target_candidates)
 	if(LAZYLEN(target_candidates))
 		target = pick(target_candidates)
