@@ -20,6 +20,7 @@
 #define STRIPPABLE_ITEM_LEGCUFFS "legcuffs"
 #define STRIPPABLE_ITEM_PET_COLLAR "pet_collar"
 #define STRIPPABLE_ITEM_PARROT_HEADSET "parrot_headset"
+// BANDASTATION ADD: Skrell Headpocket
 #define STRIPPABLE_ITEM_HEADPOCKET "headpocket"
 
 /// This slot is not obscured.
