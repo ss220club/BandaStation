@@ -92,7 +92,7 @@
 		return
 	var/list/soft_filter_result = CAN_BYPASS_FILTER(user) ? null : is_soft_ic_filtered(message)
 	if(soft_filter_result)
-		if(tgui_alert(user, "Ваше сообщение содержит «[soft_filter_result[CHAT_FILTER_INDEX_WORD]]». [soft_filter_result[CHAT_FILTER_INDEX_REASON]] Продолжить?", "Слово с предупреждением", list("Да", "Нет")) != "Да")
+		if(tgui_alert(user, "Ваше сообщение содержит «[soft_filter_result[CHAT_FILTER_INDEX_WORD]]». [soft_filter_result[CHAT_FILTER_INDEX_REASON]] Продолжить?", "Слабо-допустимое слово", list("Да", "Нет")) != "Да")
 			return
 		message_admins("[ADMIN_LOOKUPFLW(user)] has passed the soft filter for \"[soft_filter_result[CHAT_FILTER_INDEX_WORD]]\". Message: \"[html_encode(message)]\"")
 		log_admin_private("[key_name(user)] has passed the soft filter for \"[soft_filter_result[CHAT_FILTER_INDEX_WORD]]\". Message: \"[message]\"")
