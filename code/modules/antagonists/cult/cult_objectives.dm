@@ -22,6 +22,7 @@
 	for(var/mob/living/carbon/human/player in GLOB.player_list)
 		if(player.mind && !IS_CULTIST(player) && !is_convertable_to_cult(player) && player.stat != DEAD && is_station_level(player.loc.z))
 			target_candidates += player.mind
+	target_candidates -= blacklist // BANDASTATION ADDITION: filter before checking the fallback pool.
 	if(target_candidates.len == 0)
 		message_admins("Cult Sacrifice: Could not find unconvertible target, checking for convertible target.")
 		for(var/mob/living/carbon/human/player in GLOB.player_list)
