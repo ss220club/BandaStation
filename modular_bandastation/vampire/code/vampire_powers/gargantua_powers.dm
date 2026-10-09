@@ -1,6 +1,6 @@
 /datum/action/cooldown/spell/vampire_blood_swell
 	name = "Кровавое усиление"
-	desc = "Наполните тело кровью, чтобы сильно сопротивляться оглушению и физическому урону. Пока способность активна, вы не можете стрелять из дальнобойного оружия."
+	desc = "Наполните тело кровью, чтобы значительно повысить сопротивление к оглушению и физическому урону. Пока способность активна, вы не можете стрелять из дальнобойного оружия."
 	button_icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	button_icon_state = "blood_swell"
 	cooldown_time = 40 SECONDS
@@ -33,7 +33,7 @@
 	var/mob/living/carbon/user = owner
 	if(user.legcuffed)
 		if(feedback)
-			user.balloon_alert(user, "ноги связаны")
+			user.balloon_alert(user, "ноги связаны!")
 		return FALSE
 	return TRUE
 

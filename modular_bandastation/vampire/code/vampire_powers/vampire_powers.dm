@@ -160,7 +160,7 @@
 		if(istype(H.glasses, /obj/item/clothing/glasses/blindfold))
 			var/obj/item/clothing/glasses/blindfold/B = H.glasses
 			if(B.tint)
-				to_chat(user, span_warning("На вас повязка на глазах!"))
+				to_chat(user, span_warning("На ваших глазах повязка!"))
 				return
 	user.mob_light(range = 3, power = 1, color = LIGHT_COLOR_BLOOD_MAGIC, duration = 2 SECONDS)
 	user.visible_message(span_warning("Глаза [user.declent_ru(GENITIVE)] испускают ослепительную вспышку!"))

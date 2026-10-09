@@ -98,7 +98,7 @@
 
 /datum/vampire_passive/grant_spell/blood_swell
 	spell_type = /datum/action/cooldown/spell/vampire_blood_swell
-	gain_desc = "Вы обрели способность временно сопротивляться сильному оглушению и физическому урону."
+	gain_desc = "Вы обрели способность временно повышать сопротивление к оглушению и физическому урону."
 
 /datum/vampire_passive/grant_spell/stomp
 	spell_type = /datum/action/cooldown/spell/vampire_stomp

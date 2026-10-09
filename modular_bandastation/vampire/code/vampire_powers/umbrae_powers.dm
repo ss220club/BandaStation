@@ -78,7 +78,7 @@
 	if(snare_turf.get_lumcount() * 10 > 2)
 		remaining_integrity -= 25 * seconds_per_tick
 	if(remaining_integrity <= 0)
-		visible_message(span_notice("[src.declent_ru(NOMINATIVE)] увядает."))
+		visible_message(span_notice("[capitalize(src.declent_ru(NOMINATIVE))] увядает."))
 		qdel(src)
 
 /obj/item/restraints/legcuffs/beartrap/vampire_shadow_snare/Initialize(mapload)

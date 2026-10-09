@@ -96,7 +96,7 @@
 
 /atom/movable/screen/alert/status_effect/vampire_blood_swell
 	name = "Кровавое усиление"
-	desc = "Вы сильно сопротивляетесь физическому урону и оглушению, но не можете использовать огнестрельное оружие."
+	desc = "Вы значительно увеличиваете сопротивление к физическому урону и оглушению, но не можете использовать дальнобойное оружие."
 	icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	icon_state = "blood_swell"
 
@@ -505,7 +505,7 @@
 
 /atom/movable/screen/alert/status_effect/vampire_blood_pool
 	name = "Кровавая лужа"
-	desc = "Вы приняли форму лужи крови."
+	desc = "Вы принимаете форму лужи крови."
 	icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	icon_state = "blood_pool"
 

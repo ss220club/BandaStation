@@ -29,7 +29,7 @@
 		explanation_text = "Накопите не менее 150 единиц крови и выберите специализацию, чтобы получить дальнейшие инструкции."
 		return
 	if(!specialization_objective)
-		var/static/list/departments = list("службу безопасности", "сервисный отдел", "научный отдел", "медицинский отдел", "инженерный отдел", "отдел снабжения")
+		var/static/list/departments = list("службу безопасности", "отдел обслуживания", "научный отдел", "медицинский отдел", "инженерный отдел", "отдел снабжения")
 		specialization_objective = replacetext(pick(vampire.subclass.unique_objectives), "%DEPARTMENT", pick(departments))
 	explanation_text = specialization_objective
 
