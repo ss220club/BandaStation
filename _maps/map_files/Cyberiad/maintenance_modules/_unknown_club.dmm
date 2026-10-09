@@ -1,8 +1,4 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
-"ab" = (
-/obj/structure/lattice,
-/turf/closed/wall,
-/area/station/maintenance/starboard/aft)
 "ac" = (
 /turf/closed/wall,
 /area/station/maintenance/starboard/aft)
@@ -47,27 +43,6 @@
 	dir = 4
 	},
 /turf/open/floor/wood/large/ebonite,
-/area/station/maintenance/starboard/aft)
-"am" = (
-/turf/open/floor/wood/large/ebonite{
-	initial_gas_mix = "o2=21.92;n2=82;co2=0.08;TEMP=293.17"
-	},
-/area/station/maintenance/starboard/aft)
-"an" = (
-/obj/structure/chair/sofa/left{
-	dir = 4
-	},
-/turf/open/floor/wood/large/ebonite{
-	initial_gas_mix = "o2=21.93;n2=82;co2=0.07;TEMP=293.17"
-	},
-/area/station/maintenance/starboard/aft)
-"ao" = (
-/obj/structure/chair/sofa/right{
-	dir = 4
-	},
-/turf/open/floor/wood/large/ebonite{
-	initial_gas_mix = "o2=21.98;n2=82;co2=0.02;TEMP=293.16"
-	},
 /area/station/maintenance/starboard/aft)
 "ap" = (
 /obj/machinery/light{
@@ -122,40 +97,14 @@
 /obj/structure/table/reinforced/rglass{
 	atom_integrity = 100
 	},
-/turf/open/floor/wood/large/darkwood{
-	initial_gas_mix = "o2=21.92;n2=82;co2=0.08;TEMP=293.17"
-	},
-/area/station/maintenance/starboard/aft)
-"aA" = (
-/turf/open/floor/wood/large/darkwood{
-	initial_gas_mix = "o2=21.89;n2=82;co2=0.11;TEMP=293.18"
-	},
+/turf/open/floor/wood/large/darkwood,
 /area/station/maintenance/starboard/aft)
 "aB" = (
 /obj/machinery/light/floor{
 	color = "#ff00de"
 	},
 /obj/structure/table/reinforced/rglass,
-/turf/open/floor/wood/large/darkwood{
-	initial_gas_mix = "o2=21.93;n2=82;co2=0.07;TEMP=293.17"
-	},
-/area/station/maintenance/starboard/aft)
-"aC" = (
-/obj/structure/table/reinforced/rglass,
-/turf/open/floor/wood/large/darkwood{
-	initial_gas_mix = "o2=21.93;n2=82;co2=0.07;TEMP=293.17"
-	},
-/area/station/maintenance/starboard/aft)
-"aD" = (
-/turf/open/floor/wood/large/darkwood{
-	initial_gas_mix = "o2=21.96;n2=82;co2=0.04;TEMP=293.16"
-	},
-/area/station/maintenance/starboard/aft)
-"aE" = (
-/obj/structure/table/reinforced/rglass,
-/turf/open/floor/wood/large/darkwood{
-	initial_gas_mix = "o2=21.9;n2=82;co2=0.1;TEMP=293.19"
-	},
+/turf/open/floor/wood/large/darkwood,
 /area/station/maintenance/starboard/aft)
 "aF" = (
 /obj/machinery/light/floor{
@@ -196,66 +145,31 @@
 	},
 /turf/open/floor/carpet/neon/simple/purple/nodots,
 /area/station/maintenance/starboard/aft)
-"aN" = (
-/turf/open/floor/carpet/neon/simple/purple/nodots{
-	initial_gas_mix = "o2=21.98;n2=82;co2=0.02;TEMP=293.15"
-	},
-/area/station/maintenance/starboard/aft)
-"aO" = (
-/turf/open/floor/wood/large/ebonite{
-	initial_gas_mix = "o2=21.98;n2=82;co2=0.02;TEMP=293.16"
-	},
-/area/station/maintenance/starboard/aft)
-"aP" = (
-/turf/open/floor/wood/large/darkwood{
-	initial_gas_mix = "o2=21.95;n2=82;co2=0.05;TEMP=293.17"
-	},
-/area/station/maintenance/starboard/aft)
 "aQ" = (
 /obj/structure/chair/sofa/left,
-/turf/open/floor/wood/large/darkwood{
-	initial_gas_mix = "o2=21.92;n2=82;co2=0.08;TEMP=293.17"
-	},
+/turf/open/floor/wood/large/darkwood,
 /area/station/maintenance/starboard/aft)
 "aR" = (
 /obj/structure/table/reinforced/rglass,
-/turf/open/floor/wood/large/darkwood{
-	initial_gas_mix = "o2=21.89;n2=82;co2=0.11;TEMP=293.18"
-	},
-/area/station/maintenance/starboard/aft)
-"aS" = (
-/turf/open/floor/wood/large/darkwood{
-	initial_gas_mix = "o2=21.87;n2=82;co2=0.13;TEMP=293.18"
-	},
+/turf/open/floor/wood/large/darkwood,
 /area/station/maintenance/starboard/aft)
 "aT" = (
 /obj/structure/chair/sofa/right{
 	dir = 8
 	},
-/turf/open/floor/wood/large/darkwood{
-	initial_gas_mix = "o2=21.88;n2=82;co2=0.12;TEMP=293.2"
-	},
+/turf/open/floor/wood/large/darkwood,
 /area/station/maintenance/starboard/aft)
 "aU" = (
 /obj/structure/chair/sofa/left{
 	dir = 8
 	},
-/turf/open/floor/wood/large/darkwood{
-	initial_gas_mix = "o2=21.88;n2=82;co2=0.12;TEMP=293.18"
-	},
-/area/station/maintenance/starboard/aft)
-"aV" = (
-/turf/open/floor/wood/large/darkwood{
-	initial_gas_mix = "o2=21.87;n2=82;co2=0.13;TEMP=293.19"
-	},
+/turf/open/floor/wood/large/darkwood,
 /area/station/maintenance/starboard/aft)
 "aW" = (
 /obj/structure/chair/sofa/right{
 	dir = 1
 	},
-/turf/open/floor/wood/large/darkwood{
-	initial_gas_mix = "o2=21.9;n2=82;co2=0.1;TEMP=293.19"
-	},
+/turf/open/floor/wood/large/darkwood,
 /area/station/maintenance/starboard/aft)
 "aX" = (
 /turf/open/floor/carpet/black{
@@ -275,31 +189,6 @@
 	dir = 4
 	},
 /turf/open/floor/wood/large/ebonite,
-/area/station/maintenance/starboard/aft)
-"bb" = (
-/turf/open/floor/wood/large/darkwood{
-	initial_gas_mix = "o2=21.93;n2=82;co2=0.07;TEMP=293.17"
-	},
-/area/station/maintenance/starboard/aft)
-"bc" = (
-/turf/open/floor/wood/large/darkwood{
-	initial_gas_mix = "o2=21.86;n2=82;co2=0.14;TEMP=293.21"
-	},
-/area/station/maintenance/starboard/aft)
-"bd" = (
-/turf/open/floor/wood/large/darkwood{
-	initial_gas_mix = "o2=21.81;n2=82;co2=0.19;TEMP=293.23"
-	},
-/area/station/maintenance/starboard/aft)
-"be" = (
-/turf/open/floor/wood/large/darkwood{
-	initial_gas_mix = "o2=21.85;n2=82;co2=0.15;TEMP=293.21"
-	},
-/area/station/maintenance/starboard/aft)
-"bf" = (
-/turf/open/floor/wood/large/ebonite{
-	initial_gas_mix = "o2=21.93;n2=82;co2=0.07;TEMP=293.17"
-	},
 /area/station/maintenance/starboard/aft)
 "bg" = (
 /obj/structure/marker_beacon/purple,
@@ -322,82 +211,18 @@
 	},
 /area/station/maintenance/starboard/aft)
 "bj" = (
-/obj/structure/platform/plastitanium{
-	max_integrity = 76
-	},
-/turf/open/floor/wood/large/ebonite{
-	initial_gas_mix = "o2=21.98;n2=82;co2=0.02;TEMP=293.16"
-	},
+/obj/structure/platform/plastitanium,
+/turf/open/floor/wood/large/ebonite,
 /area/station/maintenance/starboard/aft)
 "bk" = (
-/obj/structure/platform/plastitanium{
-	max_integrity = 76
-	},
-/turf/open/floor/wood/large/darkwood{
-	initial_gas_mix = "o2=21.93;n2=82;co2=0.07;TEMP=293.17"
-	},
-/area/station/maintenance/starboard/aft)
-"bl" = (
-/turf/open/floor/wood/large/darkwood{
-	initial_gas_mix = "o2=21.85;n2=82;co2=0.15;TEMP=293.19"
-	},
-/area/station/maintenance/starboard/aft)
-"bm" = (
-/obj/structure/chair/comfy/beige{
-	dir = 4
-	},
-/turf/open/floor/wood/large/darkwood{
-	initial_gas_mix = "o2=21.85;n2=82;co2=0.15;TEMP=293.19"
-	},
-/area/station/maintenance/starboard/aft)
-"bn" = (
-/turf/open/floor/wood/large/darkwood{
-	initial_gas_mix = "o2=21.84;n2=82;co2=0.16;TEMP=293.2"
-	},
-/area/station/maintenance/starboard/aft)
-"bo" = (
-/obj/structure/chair/comfy/beige{
-	dir = 4
-	},
-/turf/open/floor/wood/large/darkwood{
-	initial_gas_mix = "o2=21.82;n2=82;co2=0.18;TEMP=293.2"
-	},
+/obj/structure/platform/plastitanium,
+/turf/open/floor/wood/large/darkwood,
 /area/station/maintenance/starboard/aft)
 "bp" = (
 /obj/structure/chair/comfy/beige{
 	dir = 4
 	},
-/turf/open/floor/wood/large/darkwood{
-	initial_gas_mix = "o2=21.84;n2=82;co2=0.16;TEMP=293.19"
-	},
-/area/station/maintenance/starboard/aft)
-"bq" = (
-/turf/open/floor/wood/large/darkwood{
-	initial_gas_mix = "o2=21.81;n2=82;co2=0.19;TEMP=293.21"
-	},
-/area/station/maintenance/starboard/aft)
-"br" = (
-/obj/structure/chair/comfy/beige{
-	dir = 4
-	},
-/turf/open/floor/wood/large/darkwood{
-	initial_gas_mix = "o2=21.81;n2=82;co2=0.19;TEMP=293.21"
-	},
-/area/station/maintenance/starboard/aft)
-"bs" = (
-/turf/open/floor/wood/large/darkwood{
-	initial_gas_mix = "o2=21.86;n2=82;co2=0.14;TEMP=293.19"
-	},
-/area/station/maintenance/starboard/aft)
-"bt" = (
-/turf/open/floor/wood/large/ebonite{
-	initial_gas_mix = "o2=21.9;n2=82;co2=0.1;TEMP=293.17"
-	},
-/area/station/maintenance/starboard/aft)
-"bu" = (
-/turf/open/floor/wood/large/ebonite{
-	initial_gas_mix = "o2=21.94;n2=82;co2=0.06;TEMP=293.16"
-	},
+/turf/open/floor/wood/large/darkwood,
 /area/station/maintenance/starboard/aft)
 "bv" = (
 /turf/open/floor/carpet/black{
@@ -417,77 +242,26 @@
 	initial_gas_mix = "o2=21.87;n2=82;co2=0.13;TEMP=293.19"
 	},
 /area/station/maintenance/starboard/aft)
-"by" = (
-/obj/structure/platform/plastitanium{
-	max_integrity = 76
-	},
-/turf/open/floor/wood/large/ebonite{
-	initial_gas_mix = "o2=21.91;n2=82;co2=0.09;TEMP=293.17"
-	},
-/area/station/maintenance/starboard/aft)
 "bz" = (
 /obj/machinery/light/floor,
-/obj/structure/platform/plastitanium{
-	max_integrity = 76
-	},
-/turf/open/floor/wood/large/darkwood{
-	initial_gas_mix = "o2=21.93;n2=82;co2=0.07;TEMP=293.17"
-	},
+/obj/structure/platform/plastitanium,
+/turf/open/floor/wood/large/darkwood,
 /area/station/maintenance/starboard/aft)
 "bA" = (
 /obj/structure/table/reinforced/plasmarglass{
 	dir = 1
 	},
-/turf/open/floor/wood/large/darkwood{
-	initial_gas_mix = "o2=21.85;n2=82;co2=0.15;TEMP=293.19"
-	},
-/area/station/maintenance/starboard/aft)
-"bB" = (
-/turf/open/floor/wood/large/darkwood{
-	initial_gas_mix = "o2=21.86;n2=82;co2=0.14;TEMP=293.18"
-	},
-/area/station/maintenance/starboard/aft)
-"bC" = (
-/obj/structure/table/reinforced/plasmarglass{
-	dir = 1
-	},
-/turf/open/floor/wood/large/darkwood{
-	initial_gas_mix = "o2=21.89;n2=82;co2=0.11;TEMP=293.18"
-	},
+/turf/open/floor/wood/large/darkwood,
 /area/station/maintenance/starboard/aft)
 "bD" = (
 /obj/structure/table/reinforced/plasmarglass{
 	dir = 1
 	},
-/turf/open/floor/light{
-	icon_state = "light_on-7";
-	initial_gas_mix = "o2=21.84;n2=82;co2=0.16;TEMP=293.19"
-	},
-/area/station/maintenance/starboard/aft)
-"bE" = (
-/turf/open/floor/wood/large/darkwood{
-	initial_gas_mix = "o2=21.76;n2=82;co2=0.24;TEMP=293.22"
-	},
-/area/station/maintenance/starboard/aft)
-"bF" = (
-/obj/structure/table/reinforced/plasmarglass{
-	dir = 1
-	},
-/turf/open/floor/wood/large/darkwood{
-	initial_gas_mix = "o2=21.77;n2=82;co2=0.23;TEMP=293.22"
-	},
-/area/station/maintenance/starboard/aft)
-"bG" = (
-/obj/machinery/light/floor,
-/turf/open/floor/wood/large/darkwood{
-	initial_gas_mix = "o2=21.77;n2=82;co2=0.22;TEMP=293.22"
-	},
+/turf/open/floor/light,
 /area/station/maintenance/starboard/aft)
 "bH" = (
 /obj/machinery/light,
-/turf/open/floor/wood/large/ebonite{
-	initial_gas_mix = "o2=21.81;n2=82;co2=0.19;TEMP=293.21"
-	},
+/turf/open/floor/wood/large/ebonite,
 /area/station/maintenance/starboard/aft)
 "bI" = (
 /obj/structure/marker_beacon/purple,
@@ -501,65 +275,11 @@
 	initial_gas_mix = "o2=21.95;n2=82;co2=0.05;TEMP=293.16"
 	},
 /area/station/maintenance/starboard/aft)
-"bK" = (
-/obj/structure/platform/plastitanium{
-	max_integrity = 76
-	},
-/turf/open/floor/wood/large/ebonite{
-	initial_gas_mix = "o2=21.89;n2=82;co2=0.11;TEMP=293.19"
-	},
-/area/station/maintenance/starboard/aft)
-"bL" = (
-/turf/open/floor/wood/large/darkwood{
-	initial_gas_mix = "o2=21.89;n2=82;co2=0.11;TEMP=293.17"
-	},
-/area/station/maintenance/starboard/aft)
-"bM" = (
-/obj/structure/chair/comfy/black{
-	dir = 8
-	},
-/turf/open/floor/wood/large/darkwood{
-	initial_gas_mix = "o2=21.83;n2=82;co2=0.17;TEMP=293.19"
-	},
-/area/station/maintenance/starboard/aft)
-"bN" = (
-/obj/structure/chair/comfy/black{
-	dir = 8
-	},
-/turf/open/floor/wood/large/darkwood{
-	initial_gas_mix = "o2=21.8;n2=82;co2=0.2;TEMP=293.2"
-	},
-/area/station/maintenance/starboard/aft)
-"bO" = (
-/obj/structure/chair/comfy/black{
-	dir = 8
-	},
-/turf/open/floor/wood/large/darkwood{
-	initial_gas_mix = "o2=21.76;n2=82;co2=0.24;TEMP=293.21"
-	},
-/area/station/maintenance/starboard/aft)
-"bP" = (
-/turf/open/floor/wood/large/darkwood{
-	initial_gas_mix = "o2=21.77;n2=82;co2=0.23;TEMP=293.22"
-	},
-/area/station/maintenance/starboard/aft)
 "bQ" = (
 /obj/structure/chair/comfy/black{
 	dir = 8
 	},
-/turf/open/floor/wood/large/darkwood{
-	initial_gas_mix = "o2=21.77;n2=82;co2=0.23;TEMP=293.22"
-	},
-/area/station/maintenance/starboard/aft)
-"bR" = (
-/turf/open/floor/wood/large/darkwood{
-	initial_gas_mix = "o2=21.77;n2=82;co2=0.23;TEMP=293.21"
-	},
-/area/station/maintenance/starboard/aft)
-"bS" = (
-/turf/open/floor/wood/large/ebonite{
-	initial_gas_mix = "o2=21.86;n2=82;co2=0.14;TEMP=293.19"
-	},
+/turf/open/floor/wood/large/darkwood,
 /area/station/maintenance/starboard/aft)
 "bT" = (
 /obj/structure/marker_beacon/purple,
@@ -579,7 +299,6 @@
 /obj/structure/disposalpipe/segment{
 	dir = 9
 	},
-/obj/item/cigbutt,
 /turf/open/floor/carpet/black{
 	initial_gas_mix = "o2=21.85;n2=82;co2=0.15;TEMP=293.19"
 	},
@@ -595,51 +314,20 @@
 	initial_gas_mix = "o2=21.95;n2=82;co2=0.05;TEMP=293.17"
 	},
 /area/station/maintenance/starboard/aft)
-"bY" = (
-/turf/open/floor/carpet/neon/simple/purple/nodots{
-	initial_gas_mix = "o2=21.93;n2=82;co2=0.07;TEMP=293.17"
-	},
-/area/station/maintenance/starboard/aft)
 "bZ" = (
 /obj/structure/steps{
 	dir = 8
 	},
-/turf/open/floor/wood/large/ebonite{
-	initial_gas_mix = "o2=21.89;n2=82;co2=0.11;TEMP=293.18"
-	},
-/area/station/maintenance/starboard/aft)
-"ca" = (
-/turf/open/floor/wood/large/darkwood{
-	initial_gas_mix = "o2=21.95;n2=82;co2=0.05;TEMP=293.16"
-	},
-/area/station/maintenance/starboard/aft)
-"cb" = (
-/turf/open/floor/wood/large/darkwood{
-	initial_gas_mix = "o2=21.91;n2=82;co2=0.09;TEMP=293.17"
-	},
+/turf/open/floor/wood/large/ebonite,
 /area/station/maintenance/starboard/aft)
 "cc" = (
-/turf/open/floor/wood/large/darkwood{
-	initial_gas_mix = "o2=21.84;n2=82;co2=0.16;TEMP=293.19"
-	},
-/area/station/maintenance/starboard/aft)
-"cd" = (
-/turf/open/floor/wood/large/darkwood{
-	initial_gas_mix = "o2=21.82;n2=82;co2=0.18;TEMP=293.21"
-	},
-/area/station/maintenance/starboard/aft)
-"ce" = (
-/turf/open/floor/wood/large/darkwood{
-	initial_gas_mix = "o2=21.88;n2=82;co2=0.12;TEMP=293.18"
-	},
+/turf/open/floor/wood/large/darkwood,
 /area/station/maintenance/starboard/aft)
 "cf" = (
 /obj/structure/disposalpipe/segment{
 	dir = 6
 	},
-/turf/open/floor/wood/large/ebonite{
-	initial_gas_mix = "o2=21.86;n2=82;co2=0.14;TEMP=293.21"
-	},
+/turf/open/floor/wood/large/ebonite,
 /area/station/maintenance/starboard/aft)
 "cg" = (
 /obj/machinery/door/airlock/maintenance{
@@ -675,9 +363,6 @@
 	},
 /area/station/maintenance/starboard/aft)
 "ck" = (
-/obj/effect/decal/cleanable/vomit/toxic{
-	icon_state = "vomittox_4"
-	},
 /turf/open/floor/carpet/black{
 	initial_gas_mix = "o2=21.89;n2=82;co2=0.11;TEMP=293.17"
 	},
@@ -687,64 +372,33 @@
 	initial_gas_mix = "o2=21.96;n2=82;co2=0.04;TEMP=293.16"
 	},
 /area/station/maintenance/starboard/aft)
-"cn" = (
-/turf/open/floor/carpet/neon/simple/purple/nodots{
-	initial_gas_mix = "o2=21.95;n2=82;co2=0.05;TEMP=293.16"
-	},
-/area/station/maintenance/starboard/aft)
-"co" = (
-/turf/open/floor/wood/large/ebonite{
-	initial_gas_mix = "o2=21.93;n2=82;co2=0.07;TEMP=293.18"
-	},
-/area/station/maintenance/starboard/aft)
 "cp" = (
 /obj/structure/chair/sofa/corp/right,
-/turf/open/floor/wood/large/darkwood{
-	initial_gas_mix = "o2=21.86;n2=82;co2=0.14;TEMP=293.19"
-	},
-/area/station/maintenance/starboard/aft)
-"cq" = (
-/obj/structure/table/reinforced/plastitaniumglass,
-/turf/open/floor/wood/large/darkwood{
-	initial_gas_mix = "o2=21.89;n2=82;co2=0.11;TEMP=293.18"
-	},
+/turf/open/floor/wood/large/darkwood,
 /area/station/maintenance/starboard/aft)
 "cr" = (
 /obj/structure/chair/sofa/corp/left{
 	dir = 4
 	},
-/turf/open/floor/wood/large/darkwood{
-	initial_gas_mix = "o2=21.89;n2=82;co2=0.11;TEMP=293.18"
-	},
+/turf/open/floor/wood/large/darkwood,
 /area/station/maintenance/starboard/aft)
 "cs" = (
 /obj/structure/chair/sofa/corp/right{
 	dir = 4
 	},
-/turf/open/floor/wood/large/darkwood{
-	initial_gas_mix = "o2=21.83;n2=82;co2=0.17;TEMP=293.2"
-	},
-/area/station/maintenance/starboard/aft)
-"ct" = (
-/turf/open/floor/wood/large/darkwood{
-	initial_gas_mix = "o2=21.83;n2=82;co2=0.17;TEMP=293.2"
-	},
+/turf/open/floor/wood/large/darkwood,
 /area/station/maintenance/starboard/aft)
 "cu" = (
 /obj/structure/chair/sofa/corp/left{
 	dir = 1
 	},
-/turf/open/floor/wood/large/darkwood{
-	initial_gas_mix = "o2=21.92;n2=82;co2=0.08;TEMP=293.17"
-	},
+/turf/open/floor/wood/large/darkwood,
 /area/station/maintenance/starboard/aft)
 "cv" = (
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
-/turf/open/floor/wood/large/ebonite{
-	initial_gas_mix = "o2=21.89;n2=82;co2=0.11;TEMP=293.18"
-	},
+/turf/open/floor/wood/large/ebonite,
 /area/station/maintenance/starboard/aft)
 "cw" = (
 /obj/structure/table/wood/fancy/purple,
@@ -771,72 +425,37 @@
 	},
 /turf/open/floor/carpet/black,
 /area/station/maintenance/starboard/aft)
-"cz" = (
-/obj/machinery/light/floor,
-/turf/open/floor/wood/large/darkwood{
-	initial_gas_mix = "o2=21.95;n2=82;co2=0.05;TEMP=293.16"
-	},
-/area/station/maintenance/starboard/aft)
 "cA" = (
 /obj/structure/chair/sofa/corp,
-/obj/item/cigbutt/roach{
-	pixel_x = 1;
-	pixel_y = -1
-	},
-/turf/open/floor/wood/large/darkwood{
-	initial_gas_mix = "o2=21.93;n2=82;co2=0.07;TEMP=293.16"
-	},
-/area/station/maintenance/starboard/aft)
-"cB" = (
-/obj/structure/table/reinforced/plastitaniumglass,
-/turf/open/floor/wood/large/darkwood{
-	initial_gas_mix = "o2=21.95;n2=82;co2=0.05;TEMP=293.16"
-	},
+/turf/open/floor/wood/large/darkwood,
 /area/station/maintenance/starboard/aft)
 "cC" = (
 /obj/machinery/light/floor,
 /obj/structure/table/reinforced/plastitaniumglass,
-/turf/open/floor/wood/large/darkwood{
-	initial_gas_mix = "o2=21.89;n2=82;co2=0.11;TEMP=293.18"
-	},
-/area/station/maintenance/starboard/aft)
-"cD" = (
-/turf/open/floor/wood/large/darkwood{
-	initial_gas_mix = "o2=21.92;n2=82;co2=0.08;TEMP=293.17"
-	},
+/turf/open/floor/wood/large/darkwood,
 /area/station/maintenance/starboard/aft)
 "cE" = (
 /obj/structure/table/reinforced/plastitaniumglass,
-/turf/open/floor/wood/large/darkwood{
-	initial_gas_mix = "o2=21.92;n2=82;co2=0.08;TEMP=293.17"
-	},
+/turf/open/floor/wood/large/darkwood,
 /area/station/maintenance/starboard/aft)
 "cF" = (
 /obj/machinery/light/floor,
 /obj/structure/chair/sofa/corp{
 	dir = 1
 	},
-/turf/open/floor/wood/large/darkwood{
-	initial_gas_mix = "o2=21.89;n2=82;co2=0.11;TEMP=293.18"
-	},
+/turf/open/floor/wood/large/darkwood,
 /area/station/maintenance/starboard/aft)
 "cG" = (
 /obj/machinery/light,
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
-/turf/open/floor/wood/large/ebonite{
-	initial_gas_mix = "o2=21.89;n2=82;co2=0.11;TEMP=293.18"
-	},
+/turf/open/floor/wood/large/ebonite,
 /area/station/maintenance/starboard/aft)
 "cH" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/marker_beacon/purple,
 /obj/structure/table/wood/fancy/purple,
-/obj/structure/checkoutmachine{
-	dir = 1;
-	pixel_y = 10
-	},
 /turf/open/floor/carpet/black,
 /area/station/maintenance/starboard/aft)
 "cI" = (
@@ -853,60 +472,36 @@
 /obj/structure/chair/sofa/corp/left{
 	dir = 8
 	},
-/turf/open/floor/wood/large/ebonite{
-	initial_gas_mix = "o2=21.98;n2=82;co2=0.02;TEMP=293.15"
-	},
-/area/station/maintenance/starboard/aft)
-"cL" = (
-/turf/open/floor/wood/large/ebonite{
-	initial_gas_mix = "o2=21.96;n2=82;co2=0.04;TEMP=293.16"
-	},
+/turf/open/floor/wood/large/ebonite,
 /area/station/maintenance/starboard/aft)
 "cM" = (
 /obj/structure/chair/sofa/corp/right{
 	dir = 8
 	},
-/turf/open/floor/wood/large/ebonite{
-	initial_gas_mix = "o2=21.89;n2=82;co2=0.11;TEMP=293.18"
-	},
+/turf/open/floor/wood/large/ebonite,
 /area/station/maintenance/starboard/aft)
 "cN" = (
-/obj/structure/chair/sofa/corp/left{
-	dir = 8
-	},
-/turf/open/floor/wood/large/ebonite{
-	initial_gas_mix = "o2=21.89;n2=82;co2=0.11;TEMP=293.18"
-	},
-/area/station/maintenance/starboard/aft)
-"cO" = (
-/turf/open/floor/wood/large/ebonite{
-	initial_gas_mix = "o2=21.89;n2=82;co2=0.11;TEMP=293.18"
-	},
+/obj/structure/lattice,
+/turf/closed/wall,
 /area/station/maintenance/starboard/aft)
 "cP" = (
 /obj/structure/chair/sofa/corp/corner{
 	dir = 8
 	},
-/turf/open/floor/wood/large/ebonite{
-	initial_gas_mix = "o2=21.89;n2=82;co2=0.11;TEMP=293.18"
-	},
+/turf/open/floor/wood/large/ebonite,
 /area/station/maintenance/starboard/aft)
 "cQ" = (
 /obj/structure/disposalpipe/segment{
 	dir = 10
 	},
-/turf/open/floor/wood/large/ebonite{
-	initial_gas_mix = "o2=21.89;n2=82;co2=0.11;TEMP=293.18"
-	},
+/turf/open/floor/wood/large/ebonite,
 /area/station/maintenance/starboard/aft)
 "cR" = (
 /obj/structure/disposalpipe/trunk/multiz{
 	dir = 1
 	},
 /obj/machinery/disposal/bin,
-/turf/open/floor/wood/large/ebonite{
-	initial_gas_mix = "o2=21.89;n2=82;co2=0.11;TEMP=293.18"
-	},
+/turf/open/floor/wood/large/ebonite,
 /area/station/maintenance/starboard/aft)
 "cS" = (
 /obj/structure/lattice,
@@ -990,9 +585,9 @@ ai
 aj
 ak
 al
-am
-an
-ao
+aG
+aq
+al
 ap
 aq
 ar
@@ -1018,11 +613,11 @@ aw
 ax
 ay
 az
-aA
+cc
 aB
-aC
-aD
-aE
+aR
+cc
+aR
 aF
 aG
 aH
@@ -1040,17 +635,17 @@ aL
 ah
 ah
 ah
-aN
-aN
-aO
-aP
+ah
+ah
+aG
+cc
 aQ
 aR
-aS
+cc
 aT
 aU
-aV
-aE
+cc
+aR
 aW
 aG
 aG
@@ -1071,16 +666,16 @@ ah
 ah
 ac
 ba
-bb
-bc
-bc
-bd
-aA
-aV
-bc
-be
-aA
-bf
+cc
+cc
+cc
+cc
+cc
+cc
+cc
+cc
+cc
+aG
 aG
 ac
 bg
@@ -1100,16 +695,16 @@ ah
 ac
 bj
 bk
-bl
-bm
-bn
-bo
+cc
 bp
-bq
-br
-bs
-bt
-bu
+cc
+bp
+bp
+cc
+bp
+cc
+aG
+aG
 ac
 bv
 bw
@@ -1126,16 +721,16 @@ ac
 ac
 ac
 ac
-by
+bj
 bz
-bn
+cc
 bA
-bB
-bC
+cc
+bA
 bD
-bE
-bF
-bG
+cc
+bA
+ax
 bH
 ac
 ac
@@ -1154,17 +749,17 @@ ah
 ah
 ah
 ac
-bK
+bj
 bk
-bL
-bM
-bs
-bN
-bO
-bP
+cc
 bQ
-bR
-bS
+cc
+bQ
+bQ
+cc
+bQ
+cc
+aG
 ac
 bT
 bU
@@ -1179,19 +774,19 @@ ac
 ah
 ah
 ah
-bY
-aN
+ah
+ah
 ac
 bZ
-ca
-cb
 cc
 cc
-cd
-cd
-bP
-bn
-ce
+cc
+cc
+cc
+cc
+cc
+cc
+cc
 cf
 cg
 ch
@@ -1207,18 +802,18 @@ ac
 aL
 ah
 ah
-cn
-cn
-bY
-co
-ca
+ah
+ah
+ah
+aG
+cc
 cp
-cq
-aA
+cE
+cc
 cr
 cs
-ct
-cq
+cc
+cE
 cu
 cv
 ac
@@ -1235,17 +830,17 @@ ac
 ah
 ah
 ah
-aN
+ah
 ah
 ac
 aw
-cz
+ax
 cA
-cB
-aA
+cE
+cc
 cC
-cq
-cD
+cE
+cc
 cE
 cF
 cG
@@ -1270,10 +865,10 @@ ai
 ai
 cJ
 cK
-cL
+aG
 cM
-cN
-cO
+cK
+aG
 cM
 cP
 cQ
@@ -1287,9 +882,9 @@ aK
 aK
 "}
 (13,1,1) = {"
-ab
-ab
-ab
+cN
+cN
+cN
 ac
 ac
 ac
