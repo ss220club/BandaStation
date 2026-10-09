@@ -1,12 +1,12 @@
 /// Original documents for a paired agent exchange. Ordinary documents and photocopies are separate types.
 /// Exchange objectives must retain a reference to the issued instance so another pair's originals cannot substitute for it.
 /obj/item/documents/syndicate/exchange_red
-	name = "красные документы для обмена"
+	name = "red documents for exchange"
 	desc = "Секретные документы Синдиката для обмена между агентами, заверенные красной сургучной печатью."
 	icon_state = "docs_red"
 
 /obj/item/documents/syndicate/exchange_blue
-	name = "синие документы для обмена"
+	name = "blue documents for exchange"
 	desc = "Секретные документы Синдиката для обмена между агентами, заверенные синей сургучной печатью."
 	icon_state = "docs_blue"
 
