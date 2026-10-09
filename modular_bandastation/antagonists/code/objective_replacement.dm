@@ -35,9 +35,11 @@ GLOBAL_LIST_EMPTY(objectives)
 /// Remove the task from personal and team lists before scheduling its deletion.
 /datum/objective/proc/cancel_unavailable_target(reason = "Новую цель назначить не удалось.")
 	for(var/datum/mind/owner as anything in get_owners())
+		if(QDELETED(owner))
+			continue
 		for(var/datum/antagonist/antag as anything in owner.antag_datums)
 			antag.objectives -= src
-		if(!QDELETED(owner) && owner.current)
+		if(owner.current)
 			to_chat(owner.current, span_userdanger("Ваша цель ушла в крио. [reason] Задание отменено: [explanation_text]"))
 	if(team)
 		team.objectives -= src
