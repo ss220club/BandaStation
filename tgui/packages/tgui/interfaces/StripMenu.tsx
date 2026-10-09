@@ -134,12 +134,13 @@ const SLOTS: Record<
     gridSpot: getGridSpotKey([0, 2]),
     image: 'inventory-head.png',
   },
-
+// BANDASTATION ADD BEGIN: Skrell Headpocket
   headpocket: {
     displayName: 'headpocket',
     gridSpot: getGridSpotKey([0, 3]),
     image: 'inventory-pocket.png',
   },
+// BANDASTATION ADD END: Skrell Headpocket
 
   neck: {
     displayName: 'neckwear',
