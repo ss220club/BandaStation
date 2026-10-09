@@ -227,10 +227,9 @@ GLOBAL_LIST_INIT(strippable_human_items, create_strippable_list(list(
 		return
 	if(action_key in get_strippable_alternate_action_internals(item, source))
 		strippable_alternate_action_internals(item, source, user)
-
+// BANDASTATION ADD BEGIN: Skrell Headpocket
 /datum/strippable_item/headpocket
 	key = STRIPPABLE_ITEM_HEADPOCKET
-
 /datum/strippable_item/headpocket/proc/get_storage(atom/source)
 	RETURN_TYPE(/datum/storage)
 	if(!ishuman(source))
