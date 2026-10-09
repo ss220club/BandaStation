@@ -290,7 +290,7 @@ GLOBAL_LIST_INIT(strippable_human_items, create_strippable_list(list(
 
 /datum/strippable_item/headpocket/finish_unequip(atom/source, mob/user)
 	return get_item(source)?.forceMove(source.drop_location())
-
+// BANDASTATION ADD END: Skrell Headpocket
 /datum/strippable_item/mob_item_slot/pocket
 	/// Which pocket we're referencing. Used for visible text.
 	var/pocket_side
