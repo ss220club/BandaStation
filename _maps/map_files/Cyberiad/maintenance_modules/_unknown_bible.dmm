@@ -1,0 +1,603 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"aa" = (
+/turf/closed/wall,
+/area/centcom/central_command_areas/cabin)
+"ab" = (
+/obj/structure/bookcase{
+	dir = 1;
+	icon_state = "book-0";
+	anchored = 1
+	},
+/turf/open/floor/wood/large/darkwood{
+	initial_gas_mix = "o2=20.58;n2=76.69;co2=0.01;TEMP=290.76"
+	},
+/area/centcom/central_command_areas/cabin)
+"ac" = (
+/turf/open/floor/wood/large/darkwood{
+	initial_gas_mix = "o2=20.58;n2=76.69;co2=0.01;TEMP=290.76"
+	},
+/area/centcom/central_command_areas/cabin)
+"ad" = (
+/obj/structure/bookcase{
+	dir = 8;
+	icon_state = "book-0";
+	anchored = 1
+	},
+/turf/open/floor/wood/large/darkwood{
+	initial_gas_mix = "o2=20.58;n2=76.69;co2=0.01;TEMP=290.76"
+	},
+/area/centcom/central_command_areas/cabin)
+"ae" = (
+/obj/structure/chair/sofa/corp/corner{
+	dir = 4
+	},
+/turf/open/floor/wood/large/darkwood{
+	initial_gas_mix = "o2=20.58;n2=76.69;co2=0.02;TEMP=290.76"
+	},
+/area/centcom/central_command_areas/cabin)
+"af" = (
+/obj/structure/chair/sofa/corp{
+	dir = 4
+	},
+/turf/open/floor/wood/large/darkwood{
+	initial_gas_mix = "o2=20.58;n2=76.69;co2=0.01;TEMP=290.76"
+	},
+/area/centcom/central_command_areas/cabin)
+"ag" = (
+/obj/structure/chair/sofa/corp/corner{
+	dir = 1
+	},
+/turf/open/floor/wood/large/darkwood{
+	initial_gas_mix = "o2=20.58;n2=76.69;co2=0.02;TEMP=290.76"
+	},
+/area/centcom/central_command_areas/cabin)
+"ah" = (
+/obj/structure/bookcase{
+	dir = 4;
+	icon_state = "book-0";
+	anchored = 1
+	},
+/turf/open/floor/wood/large/darkwood{
+	initial_gas_mix = "o2=20.58;n2=76.69;co2=0.01;TEMP=290.76"
+	},
+/area/centcom/central_command_areas/cabin)
+"ai" = (
+/turf/open/floor/wood/large/darkwood{
+	initial_gas_mix = "o2=20.58;n2=76.69;co2=0.02;TEMP=290.76"
+	},
+/area/centcom/central_command_areas/cabin)
+"aj" = (
+/obj/structure/chair/sofa/corp/left,
+/turf/open/floor/wood/large/darkwood{
+	initial_gas_mix = "o2=20.58;n2=76.69;co2=0.02;TEMP=290.76"
+	},
+/area/centcom/central_command_areas/cabin)
+"ak" = (
+/obj/structure/table/reinforced/rglass,
+/turf/open/floor/wood/large/darkwood{
+	initial_gas_mix = "o2=20.58;n2=76.69;co2=0.01;TEMP=290.76"
+	},
+/area/centcom/central_command_areas/cabin)
+"al" = (
+/obj/structure/chair/sofa/corp/right{
+	dir = 1
+	},
+/turf/open/floor/wood/large/darkwood{
+	initial_gas_mix = "o2=20.58;n2=76.69;co2=0.02;TEMP=290.76"
+	},
+/area/centcom/central_command_areas/cabin)
+"am" = (
+/obj/structure/bookcase{
+	dir = 8;
+	icon_state = "book-0";
+	anchored = 1
+	},
+/turf/open/floor/wood/large/darkwood{
+	initial_gas_mix = "o2=20.57;n2=76.68;co2=0.09;TEMP=290.76"
+	},
+/area/centcom/central_command_areas/cabin)
+"an" = (
+/turf/open/floor/wood/large/darkwood{
+	initial_gas_mix = "o2=20.58;n2=76.69;co2=0.03;TEMP=290.76"
+	},
+/area/centcom/central_command_areas/cabin)
+"ao" = (
+/obj/structure/bookcase{
+	dir = 4;
+	icon_state = "book-0";
+	anchored = 1
+	},
+/turf/open/floor/wood/large/darkwood{
+	initial_gas_mix = "o2=20.56;n2=76.68;co2=0.11;TEMP=290.76"
+	},
+/area/centcom/central_command_areas/cabin)
+"ap" = (
+/obj/machinery/light{
+	color = "#a6f9a4";
+	dir = 1
+	},
+/obj/structure/bookcase{
+	dir = 8;
+	icon_state = "book-0";
+	anchored = 1
+	},
+/turf/open/floor/wood/large/darkwood{
+	initial_gas_mix = "o2=20.58;n2=76.69;co2=0.01;TEMP=290.76"
+	},
+/area/centcom/central_command_areas/cabin)
+"aq" = (
+/turf/open/floor/wood/large/darkwood{
+	initial_gas_mix = "o2=20.58;n2=76.69;co2=0.1;TEMP=290.76"
+	},
+/area/centcom/central_command_areas/cabin)
+"ar" = (
+/obj/machinery/light/floor{
+	color = "#a6f9a4"
+	},
+/turf/open/floor/wood/large/darkwood{
+	initial_gas_mix = "o2=20.58;n2=76.69;co2=0.05;TEMP=290.76"
+	},
+/area/centcom/central_command_areas/cabin)
+"as" = (
+/turf/open/floor/wood/large/darkwood{
+	initial_gas_mix = "o2=20.57;n2=76.68;co2=0.09;TEMP=290.76"
+	},
+/area/centcom/central_command_areas/cabin)
+"at" = (
+/obj/structure/bookcase{
+	dir = 1;
+	icon_state = "book-0";
+	anchored = 1
+	},
+/turf/open/floor/wood/large/darkwood{
+	initial_gas_mix = "o2=20.57;n2=76.68;co2=0.09;TEMP=290.76"
+	},
+/area/centcom/central_command_areas/cabin)
+"au" = (
+/obj/machinery/light{
+	color = "#a6f9a4"
+	},
+/obj/structure/bookcase{
+	dir = 4;
+	icon_state = "book-0";
+	anchored = 1
+	},
+/turf/open/floor/wood/large/darkwood{
+	initial_gas_mix = "o2=20.56;n2=76.68;co2=0.11;TEMP=290.76"
+	},
+/area/centcom/central_command_areas/cabin)
+"av" = (
+/obj/structure/table/wood,
+/turf/open/floor/wood/large/darkwood{
+	initial_gas_mix = "o2=20.58;n2=76.69;co2=0.02;TEMP=290.76"
+	},
+/area/centcom/central_command_areas/cabin)
+"aw" = (
+/turf/open/floor/wood/large/darkwood{
+	initial_gas_mix = "o2=20.55;n2=76.68;co2=0.08;TEMP=290.75"
+	},
+/area/centcom/central_command_areas/cabin)
+"ax" = (
+/turf/open/floor/wood/large/darkwood{
+	initial_gas_mix = "o2=20.54;n2=76.7;co2=0.1;TEMP=290.78"
+	},
+/area/centcom/central_command_areas/cabin)
+"ay" = (
+/turf/open/floor/wood/large/darkwood{
+	initial_gas_mix = "o2=20.57;n2=76.69;co2=0.1;TEMP=290.75"
+	},
+/area/centcom/central_command_areas/cabin)
+"az" = (
+/turf/open/floor/wood/large/darkwood{
+	initial_gas_mix = "o2=20.56;n2=76.68;co2=0.11;TEMP=290.76"
+	},
+/area/centcom/central_command_areas/cabin)
+"aA" = (
+/turf/open/floor/carpet{
+	initial_gas_mix = "o2=20.58;n2=76.69;co2=0.03;TEMP=290.76"
+	},
+/area/centcom/central_command_areas/cabin)
+"aB" = (
+/turf/open/floor/carpet{
+	initial_gas_mix = "o2=20.58;n2=76.69;co2=0.05;TEMP=290.76"
+	},
+/area/centcom/central_command_areas/cabin)
+"aC" = (
+/turf/open/floor/carpet{
+	initial_gas_mix = "o2=20.52;n2=76.68;co2=0.11;TEMP=290.76"
+	},
+/area/centcom/central_command_areas/cabin)
+"aD" = (
+/turf/open/floor/carpet{
+	initial_gas_mix = "o2=20.51;n2=76.7;co2=0.13;TEMP=290.79"
+	},
+/area/centcom/central_command_areas/cabin)
+"aE" = (
+/turf/open/floor/carpet{
+	initial_gas_mix = "o2=20.53;n2=76.69;co2=0.16;TEMP=290.76"
+	},
+/area/centcom/central_command_areas/cabin)
+"aF" = (
+/turf/open/floor/carpet{
+	initial_gas_mix = "o2=20.57;n2=76.68;co2=0.09;TEMP=290.76"
+	},
+/area/centcom/central_command_areas/cabin)
+"aG" = (
+/obj/modular_map_connector,
+/obj/structure/mineral_door/wood,
+/turf/open/floor/wood/large/darkwood{
+	initial_gas_mix = "o2=20.58;n2=76.69;co2=0.01;TEMP=290.76"
+	},
+/area/centcom/central_command_areas/cabin)
+"aH" = (
+/turf/open/floor/carpet{
+	initial_gas_mix = "o2=20.58;n2=76.69;co2=0.06;TEMP=290.76"
+	},
+/area/centcom/central_command_areas/cabin)
+"aI" = (
+/turf/open/floor/carpet{
+	initial_gas_mix = "o2=20.52;n2=76.69;co2=0.15;TEMP=290.77"
+	},
+/area/centcom/central_command_areas/cabin)
+"aJ" = (
+/turf/open/floor/carpet{
+	initial_gas_mix = "o2=20.48;n2=76.69;co2=0.18;TEMP=290.78"
+	},
+/area/centcom/central_command_areas/cabin)
+"aK" = (
+/turf/open/floor/carpet{
+	initial_gas_mix = "o2=20.56;n2=76.68;co2=0.18;TEMP=290.76"
+	},
+/area/centcom/central_command_areas/cabin)
+"aL" = (
+/turf/open/floor/wood/large/darkwood{
+	initial_gas_mix = "o2=20.56;n2=76.68;co2=0.18;TEMP=290.76"
+	},
+/area/centcom/central_command_areas/cabin)
+"aM" = (
+/turf/open/floor/wood/large/darkwood{
+	initial_gas_mix = "o2=20.56;n2=76.69;co2=0.09;TEMP=290.76"
+	},
+/area/centcom/central_command_areas/cabin)
+"aN" = (
+/obj/effect/spawner/structure/window/reinforced,
+/turf/open/floor/plating,
+/area/centcom/central_command_areas/cabin)
+"aO" = (
+/turf/open/floor/carpet{
+	initial_gas_mix = "o2=20.58;n2=76.69;co2=0.01;TEMP=290.76"
+	},
+/area/centcom/central_command_areas/cabin)
+"aP" = (
+/turf/open/floor/carpet{
+	initial_gas_mix = "o2=20.56;n2=76.69;co2=0.1;TEMP=290.77"
+	},
+/area/centcom/central_command_areas/cabin)
+"aQ" = (
+/turf/open/floor/carpet{
+	initial_gas_mix = "o2=20.56;n2=76.69;co2=0.12;TEMP=290.77"
+	},
+/area/centcom/central_command_areas/cabin)
+"aR" = (
+/turf/open/floor/carpet{
+	initial_gas_mix = "o2=20.56;n2=76.68;co2=0.11;TEMP=290.76"
+	},
+/area/centcom/central_command_areas/cabin)
+"aS" = (
+/turf/open/floor/wood/large/darkwood{
+	initial_gas_mix = "o2=20.56;n2=76.69;co2=0.12;TEMP=290.77"
+	},
+/area/centcom/central_command_areas/cabin)
+"aT" = (
+/obj/machinery/door/window{
+	dir = 8;
+	req_access = list()
+	},
+/turf/open/floor/wood/large/darkwood{
+	initial_gas_mix = "o2=20.58;n2=76.69;co2=0.01;TEMP=290.76"
+	},
+/area/centcom/central_command_areas/cabin)
+"aU" = (
+/obj/structure/table/wood,
+/turf/open/floor/wood/large/darkwood{
+	initial_gas_mix = "o2=20.58;n2=76.69;co2=0.01;TEMP=290.76"
+	},
+/area/centcom/central_command_areas/cabin)
+"aV" = (
+/turf/open/floor/wood/large/darkwood{
+	initial_gas_mix = "o2=20.58;n2=76.69;co2=0.07;TEMP=290.76"
+	},
+/area/centcom/central_command_areas/cabin)
+"aW" = (
+/obj/structure/chair/comfy/black,
+/turf/open/floor/carpet{
+	initial_gas_mix = "o2=20.58;n2=76.69;co2=0.08;TEMP=290.76"
+	},
+/area/centcom/central_command_areas/cabin)
+"aX" = (
+/obj/structure/table/wood,
+/turf/open/floor/carpet{
+	initial_gas_mix = "o2=20.56;n2=76.69;co2=0.12;TEMP=290.77"
+	},
+/area/centcom/central_command_areas/cabin)
+"aY" = (
+/obj/structure/chair/comfy/black{
+	dir = 1
+	},
+/turf/open/floor/carpet{
+	initial_gas_mix = "o2=20.56;n2=76.69;co2=0.12;TEMP=290.77"
+	},
+/area/centcom/central_command_areas/cabin)
+"aZ" = (
+/turf/open/floor/wood/large/darkwood{
+	initial_gas_mix = "o2=20.53;n2=76.69;co2=0.07;TEMP=290.77"
+	},
+/area/centcom/central_command_areas/cabin)
+"ba" = (
+/turf/open/floor/wood/large/darkwood{
+	initial_gas_mix = "o2=20.54;n2=76.69;co2=0.06;TEMP=290.77"
+	},
+/area/centcom/central_command_areas/cabin)
+"bb" = (
+/obj/machinery/light{
+	color = "#a6f9a4";
+	dir = 1
+	},
+/turf/open/floor/wood/large/darkwood{
+	initial_gas_mix = "o2=20.58;n2=76.69;co2=0.01;TEMP=290.76"
+	},
+/area/centcom/central_command_areas/cabin)
+"bc" = (
+/obj/machinery/light/floor{
+	color = "#a6f9a4"
+	},
+/turf/open/floor/carpet{
+	initial_gas_mix = "o2=20.58;n2=76.69;co2=0.05;TEMP=290.76"
+	},
+/area/centcom/central_command_areas/cabin)
+"bd" = (
+/turf/open/floor/carpet{
+	initial_gas_mix = "o2=20.55;n2=76.69;co2=0.15;TEMP=290.77"
+	},
+/area/centcom/central_command_areas/cabin)
+"be" = (
+/turf/open/floor/wood/large/darkwood{
+	initial_gas_mix = "o2=20.51;n2=76.69;co2=0.09;TEMP=290.78"
+	},
+/area/centcom/central_command_areas/cabin)
+"bf" = (
+/obj/machinery/light{
+	color = "#a6f9a4"
+	},
+/obj/machinery/vending/cola/starkist,
+/turf/open/floor/wood/large/darkwood{
+	initial_gas_mix = "o2=20.58;n2=76.69;co2=0.01;TEMP=290.76"
+	},
+/area/centcom/central_command_areas/cabin)
+"bg" = (
+/obj/structure/chair/wood,
+/turf/open/floor/wood/large/darkwood{
+	initial_gas_mix = "o2=20.58;n2=76.71;co2=0.01;TEMP=290.81"
+	},
+/area/centcom/central_command_areas/cabin)
+"bh" = (
+/obj/structure/chair/comfy/black,
+/turf/open/floor/carpet{
+	initial_gas_mix = "o2=20.58;n2=76.69;co2=0.02;TEMP=290.76"
+	},
+/area/centcom/central_command_areas/cabin)
+"bi" = (
+/obj/structure/table/wood,
+/turf/open/floor/carpet{
+	initial_gas_mix = "o2=20.58;n2=76.69;co2=0.05;TEMP=290.76"
+	},
+/area/centcom/central_command_areas/cabin)
+"bj" = (
+/obj/structure/chair/comfy/black{
+	dir = 1
+	},
+/turf/open/floor/carpet{
+	initial_gas_mix = "o2=20.58;n2=76.69;co2=0.03;TEMP=290.76"
+	},
+/area/centcom/central_command_areas/cabin)
+"bk" = (
+/turf/open/floor/wood/large/darkwood{
+	initial_gas_mix = "o2=20.56;n2=76.69;co2=0.05;TEMP=290.76"
+	},
+/area/centcom/central_command_areas/cabin)
+"bl" = (
+/obj/machinery/vending/snack/orange{
+	req_access = list("kitchen")
+	},
+/turf/open/floor/wood/large/darkwood{
+	initial_gas_mix = "o2=20.58;n2=76.69;co2=0.01;TEMP=290.76"
+	},
+/area/centcom/central_command_areas/cabin)
+"bm" = (
+/obj/structure/frame/computer/rcd/west{
+	icon = 'icons/obj/devices/stock_parts.dmi';
+	icon_state = "0";
+	name = "computer frame"
+	},
+/turf/open/floor/wood/large/darkwood{
+	initial_gas_mix = "o2=20.58;n2=76.69;co2=0.01;TEMP=290.76"
+	},
+/area/centcom/central_command_areas/cabin)
+"bn" = (
+/obj/machinery/vending/snack/teal{
+	req_access = list("kitchen")
+	},
+/turf/open/floor/wood/large/darkwood{
+	initial_gas_mix = "o2=20.51;n2=76.69;co2=0.07;TEMP=290.77"
+	},
+/area/centcom/central_command_areas/cabin)
+
+(1,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(2,1,1) = {"
+aa
+ab
+ac
+ad
+ae
+af
+ag
+ad
+ac
+ad
+aa
+"}
+(3,1,1) = {"
+aa
+ah
+ai
+ad
+aj
+ak
+al
+am
+an
+ao
+aa
+"}
+(4,1,1) = {"
+aa
+ap
+ai
+ab
+aq
+ar
+as
+at
+as
+au
+aa
+"}
+(5,1,1) = {"
+aa
+av
+an
+ai
+aw
+ax
+ay
+as
+aq
+az
+aa
+"}
+(6,1,1) = {"
+aa
+ac
+aA
+aB
+aC
+aD
+aE
+aF
+az
+az
+aa
+"}
+(7,1,1) = {"
+aG
+ac
+aA
+aH
+aI
+aJ
+aK
+aF
+aL
+aM
+aa
+"}
+(8,1,1) = {"
+aa
+ac
+aO
+aP
+aP
+aQ
+aR
+aF
+aS
+aS
+aa
+"}
+(9,1,1) = {"
+aa
+aT
+aU
+aU
+aV
+aW
+aX
+aY
+aZ
+ba
+aa
+"}
+(10,1,1) = {"
+aa
+bb
+ac
+aU
+ac
+bc
+bd
+aH
+be
+bf
+aa
+"}
+(11,1,1) = {"
+aa
+ac
+bg
+aU
+ai
+bh
+bi
+bj
+bk
+bl
+aa
+"}
+(12,1,1) = {"
+aa
+aU
+bm
+aU
+ac
+ai
+ac
+ac
+ac
+bn
+aa
+"}
+(13,1,1) = {"
+aa
+aa
+aa
+aa
+aN
+aN
+aN
+aN
+aN
+aa
+aa
+"}
