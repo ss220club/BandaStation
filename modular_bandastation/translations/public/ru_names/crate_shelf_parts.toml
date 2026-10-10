@@ -1,0 +1,8 @@
+["crate shelf parts"]
+nominative = "детали полки для ящиков"
+genitive = "деталей полки для ящиков"
+dative = "деталям полки для ящиков"
+accusative = "детали полки для ящиков"
+instrumental = "деталями полки для ящиков"
+prepositional = "деталях полки для ящиков"
+gender = "plural"
