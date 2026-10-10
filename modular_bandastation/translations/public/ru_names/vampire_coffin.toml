@@ -1,0 +1,8 @@
+["vampire coffin"]
+nominative = "вампирский гроб"
+genitive = "вампирского гроба"
+dative = "вампирскому гробу"
+accusative = "вампирский гроб"
+instrumental = "вампирским гробом"
+prepositional = "вампирском гробе"
+gender = "male"
