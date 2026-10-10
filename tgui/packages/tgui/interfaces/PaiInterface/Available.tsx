@@ -55,11 +55,11 @@ function MemoryDisplay(props) {
           <Table.Cell>
             <ProgressBar
               minValue={0}
-              maxValue={100}
+              maxValue={250}
               ranges={{
-                good: [67, 100],
-                average: [34, 66],
-                bad: [0, 33],
+	                good: [150, 250],
+	                average: [50, 149],
+	                bad: [0, 49],
               }}
               value={ram}
               width={5}
