@@ -1,0 +1,4 @@
+author: "vinylspiders"
+delete-after: True
+changes:
+  - bugfix: "cyborgs disconnect cleanly from deleted AIs, keeping RoboTact usable with their own camera photos."

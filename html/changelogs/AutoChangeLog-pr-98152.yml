@@ -1,0 +1,4 @@
+author: "vinylspiders"
+delete-after: True
+changes:
+  - admin: "forcing a resonance cascade no longer breaks supermatter integrity calculations or turns into a normal explosion if the crystal heals"
