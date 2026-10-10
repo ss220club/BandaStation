@@ -58,6 +58,7 @@
 
 /datum/storage/toolbox/guncase/pistol
 	max_specific_storage = WEIGHT_CLASS_NORMAL
+	max_total_storage = 5
 
 /obj/item/storage/toolbox/guncase/green
 	icon_state = "greencase"
@@ -342,6 +343,26 @@
 /obj/item/storage/toolbox/guncase/ntcase/pistol/gp9/sec
 	weapon_to_spawn = /obj/item/gun/ballistic/automatic/pistol/gp9/sec
 	extra_to_spawn = /obj/item/ammo_box/magazine/c9x25mm_pistol/rubber
+
+/obj/item/storage/toolbox/guncase/ntspecial/pistol/gp93r
+	weapon_to_spawn = /obj/item/gun/ballistic/automatic/pistol/gp9/spec
+	extra_to_spawn = /obj/item/ammo_box/magazine/c9x25mm_pistol/stendo/rubber
+
+/obj/item/storage/toolbox/guncase/ntspecial/pistol/gp45
+	weapon_to_spawn = /obj/item/gun/ballistic/automatic/pistol/cm70/hos
+	extra_to_spawn = /obj/item/ammo_box/magazine/c45/rubber
+
+/obj/item/storage/toolbox/guncase/ntspecial/pistol/gp38
+	weapon_to_spawn = /obj/item/gun/ballistic/automatic/pistol/cm23
+	extra_to_spawn = /obj/item/ammo_box/magazine/c38/rubber
+
+/obj/item/storage/toolbox/guncase/ntspecial/pistol/hos
+	weapon_to_spawn = /obj/item/gun/ballistic/automatic/laser/pistol
+	extra_to_spawn = /obj/item/ammo_box/magazine/recharge/small
+
+/obj/item/storage/toolbox/guncase/ntspecial/pistol/pdh
+	weapon_to_spawn = /obj/item/gun/ballistic/automatic/pistol/pdh/hos
+	extra_to_spawn = /obj/item/ammo_box/magazine/c357
 
 /obj/item/storage/toolbox/guncase/ntcase/pistol/gp9/no_ammo
 	weapon_to_spawn = /obj/item/gun/ballistic/automatic/pistol/gp9/no_mag
