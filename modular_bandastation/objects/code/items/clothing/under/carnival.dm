@@ -38,6 +38,9 @@
 	greyscale_config_worn = /datum/greyscale_config/carnival_dress_fancy/worn
 	greyscale_colors = COLORS_3(_COLOR_BLACK, _COLOR_BLACK, _COLOR_WHITE)
 	flags_1 = IS_PLAYER_COLORABLE_1
+	female_sprite_flags = FEMALE_UNIFORM_TOP_ONLY
+	supports_variations_flags = CLOTHING_DIGITIGRADE_VARIATION_NO_NEW_ICON
+	bodyshapes_with_variations = NONE
 
 /obj/item/clothing/under/carnival/dress_corset
 	name = "corset dress"
@@ -48,6 +51,9 @@
 	greyscale_config_worn = /datum/greyscale_config/carnival_dress_corset/worn
 	greyscale_colors = COLORS_2(_COLOR_BLACK, _COLOR_WHITE)
 	flags_1 = IS_PLAYER_COLORABLE_1
+	female_sprite_flags = FEMALE_UNIFORM_TOP_ONLY
+	supports_variations_flags = CLOTHING_DIGITIGRADE_VARIATION_NO_NEW_ICON
+	bodyshapes_with_variations = NONE
 
 /obj/item/clothing/under/carnival/dress_mel
 	name = "Wolf's dress"
@@ -55,6 +61,9 @@
 		Скорее всего такой наряд могут позволить себе единицы ввиду ограниченного тиража."
 	icon = 'modular_bandastation/objects/icons/obj/clothing/under/carnival.dmi'
 	icon_state = "dress_mel"
+	female_sprite_flags = FEMALE_UNIFORM_TOP_ONLY
+	supports_variations_flags = CLOTHING_DIGITIGRADE_VARIATION_NO_NEW_ICON
+	bodyshapes_with_variations = NONE
 
 /obj/item/clothing/under/carnival/silco
 	name = "Industrialist's suit"
