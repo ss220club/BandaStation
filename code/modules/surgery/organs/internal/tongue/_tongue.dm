@@ -48,6 +48,14 @@
 	var/modifies_speech = FALSE
 	/// List of emote keys and sounds for overriding sounds from emotes
 	VAR_PROTECTED/emote_sounds
+	///BANDASTATION ADD BEGIN: Accent Tongue
+	/// Characters that should be repeated when this tongue modifies speech.
+	var/list/accent_characters = list()
+	/// Minimum number of copies for an accented character.
+	var/accent_repeat_min = 2
+	/// Maximum number of copies for an accented character.
+	var/accent_repeat_max = 4
+	///BANDASTATION ADD END: Accent Tongue
 
 /obj/item/organ/tongue/Initialize(mapload)
 	. = ..()
@@ -116,8 +124,22 @@
 		return FALSE // Don't modify speech
 	return TRUE
 
+// BANDASTATION ADD BEGIN: Accent Tongue
 /obj/item/organ/tongue/proc/modify_speech(datum/source, list/speech_args)
-	return speech_args[SPEECH_MESSAGE]
+	var/message = speech_args[SPEECH_MESSAGE]
+	if(!length(accent_characters))
+		return
+	var/new_message = ""
+	for(var/i in 1 to length(message))
+		var/character = message[i]
+		if(character in accent_characters)
+			var/repeat_count = rand(accent_repeat_min, accent_repeat_max)
+			for(var/j in 1 to repeat_count)
+				new_message += character
+		else
+			new_message += character
+	speech_args[SPEECH_MESSAGE] = new_message
+// BANDASTATION ADD END: Accent Tongue
 
 /**
  * Gets the food reaction a tongue would have from the food item,
