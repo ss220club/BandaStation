@@ -1,0 +1,967 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"ac" = (
+/turf/closed/wall,
+/area/station/maintenance/starboard/aft)
+"ae" = (
+/obj/machinery/door/airlock/maintenance{
+	max_integrity = 250
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/obj/modular_map_connector,
+/turf/open/floor/carpet/black{
+	initial_gas_mix = "o2=21.98;n2=82;co2=0.02;TEMP=293.15"
+	},
+/area/station/maintenance/starboard/aft)
+"af" = (
+/turf/template_noop,
+/area/template_noop)
+"ah" = (
+/turf/open/floor/carpet/neon/simple/purple/nodots,
+/area/station/maintenance/starboard/aft)
+"ai" = (
+/obj/structure/hedge/opaque,
+/turf/open/floor/wood/large/ebonite,
+/area/station/maintenance/starboard/aft)
+"aj" = (
+/obj/structure/hedge/opaque,
+/obj/structure/hedge/opaque,
+/turf/open/floor/wood/large/ebonite,
+/area/station/maintenance/starboard/aft)
+"ak" = (
+/obj/machinery/light{
+	dir = 8
+	},
+/obj/structure/chair/sofa/corner{
+	dir = 4
+	},
+/turf/open/floor/wood/large/ebonite,
+/area/station/maintenance/starboard/aft)
+"al" = (
+/obj/structure/chair/sofa/right{
+	dir = 4
+	},
+/turf/open/floor/wood/large/ebonite,
+/area/station/maintenance/starboard/aft)
+"ap" = (
+/obj/machinery/light{
+	dir = 8
+	},
+/turf/open/floor/wood/large/ebonite,
+/area/station/maintenance/starboard/aft)
+"aq" = (
+/obj/structure/chair/sofa/left{
+	dir = 4
+	},
+/turf/open/floor/wood/large/ebonite,
+/area/station/maintenance/starboard/aft)
+"ar" = (
+/obj/structure/chair/sofa/corner{
+	dir = 1
+	},
+/turf/open/floor/wood/large/ebonite,
+/area/station/maintenance/starboard/aft)
+"as" = (
+/turf/open/floor/carpet/black,
+/area/station/maintenance/starboard/aft)
+"at" = (
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/turf/open/floor/carpet/black{
+	initial_gas_mix = "o2=21.97;n2=82;co2=0.04;TEMP=293.16"
+	},
+/area/station/maintenance/starboard/aft)
+"au" = (
+/turf/open/floor/carpet/black{
+	initial_gas_mix = "o2=21.98;n2=82;co2=0.02;TEMP=293.15"
+	},
+/area/station/maintenance/starboard/aft)
+"aw" = (
+/obj/machinery/light{
+	dir = 1
+	},
+/obj/structure/hedge/opaque,
+/turf/open/floor/wood/large/ebonite,
+/area/station/maintenance/starboard/aft)
+"ax" = (
+/obj/machinery/light/floor,
+/turf/open/floor/wood/large/darkwood,
+/area/station/maintenance/starboard/aft)
+"ay" = (
+/obj/structure/chair/sofa/middle,
+/turf/open/floor/wood/large/darkwood,
+/area/station/maintenance/starboard/aft)
+"az" = (
+/obj/structure/table/reinforced/rglass{
+	atom_integrity = 100
+	},
+/turf/open/floor/wood/large/darkwood,
+/area/station/maintenance/starboard/aft)
+"aB" = (
+/obj/machinery/light/floor{
+	color = "#ff00de"
+	},
+/obj/structure/table/reinforced/rglass,
+/turf/open/floor/wood/large/darkwood,
+/area/station/maintenance/starboard/aft)
+"aF" = (
+/obj/machinery/light/floor{
+	color = "#ff00de"
+	},
+/obj/structure/chair/sofa/middle{
+	dir = 1
+	},
+/turf/open/floor/wood/large/darkwood,
+/area/station/maintenance/starboard/aft)
+"aG" = (
+/turf/open/floor/wood/large/ebonite,
+/area/station/maintenance/starboard/aft)
+"aH" = (
+/obj/machinery/light,
+/obj/structure/hedge/opaque,
+/turf/open/floor/wood/large/ebonite,
+/area/station/maintenance/starboard/aft)
+"aI" = (
+/obj/structure/marker_beacon/purple,
+/turf/open/floor/carpet/black,
+/area/station/maintenance/starboard/aft)
+"aJ" = (
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/turf/open/floor/carpet/black{
+	initial_gas_mix = "o2=21.95;n2=82;co2=0.05;TEMP=293.17"
+	},
+/area/station/maintenance/starboard/aft)
+"aK" = (
+/obj/structure/lattice,
+/turf/open/space/openspace,
+/area/space/nearstation)
+"aL" = (
+/obj/machinery/light{
+	dir = 1
+	},
+/turf/open/floor/carpet/neon/simple/purple/nodots,
+/area/station/maintenance/starboard/aft)
+"aQ" = (
+/obj/structure/chair/sofa/left,
+/turf/open/floor/wood/large/darkwood,
+/area/station/maintenance/starboard/aft)
+"aR" = (
+/obj/structure/table/reinforced/rglass,
+/turf/open/floor/wood/large/darkwood,
+/area/station/maintenance/starboard/aft)
+"aT" = (
+/obj/structure/chair/sofa/right{
+	dir = 8
+	},
+/turf/open/floor/wood/large/darkwood,
+/area/station/maintenance/starboard/aft)
+"aU" = (
+/obj/structure/chair/sofa/left{
+	dir = 8
+	},
+/turf/open/floor/wood/large/darkwood,
+/area/station/maintenance/starboard/aft)
+"aW" = (
+/obj/structure/chair/sofa/right{
+	dir = 1
+	},
+/turf/open/floor/wood/large/darkwood,
+/area/station/maintenance/starboard/aft)
+"aX" = (
+/turf/open/floor/carpet/black{
+	initial_gas_mix = "o2=21.98;n2=82;co2=0.02;TEMP=293.16"
+	},
+/area/station/maintenance/starboard/aft)
+"aY" = (
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/turf/open/floor/carpet/black{
+	initial_gas_mix = "o2=21.93;n2=82;co2=0.07;TEMP=293.17"
+	},
+/area/station/maintenance/starboard/aft)
+"ba" = (
+/obj/structure/steps{
+	dir = 4
+	},
+/turf/open/floor/wood/large/ebonite,
+/area/station/maintenance/starboard/aft)
+"bg" = (
+/obj/structure/marker_beacon/purple,
+/turf/open/floor/carpet/black{
+	initial_gas_mix = "o2=21.89;n2=82;co2=0.11;TEMP=293.18"
+	},
+/area/station/maintenance/starboard/aft)
+"bh" = (
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/turf/open/floor/carpet/black{
+	initial_gas_mix = "o2=21.84;n2=82;co2=0.16;TEMP=293.21"
+	},
+/area/station/maintenance/starboard/aft)
+"bi" = (
+/obj/structure/marker_beacon/purple,
+/turf/open/floor/carpet/black{
+	initial_gas_mix = "o2=21.93;n2=82;co2=0.07;TEMP=293.17"
+	},
+/area/station/maintenance/starboard/aft)
+"bj" = (
+/obj/structure/platform/plastitanium,
+/turf/open/floor/wood/large/ebonite,
+/area/station/maintenance/starboard/aft)
+"bk" = (
+/obj/structure/platform/plastitanium,
+/turf/open/floor/wood/large/darkwood,
+/area/station/maintenance/starboard/aft)
+"bp" = (
+/obj/structure/chair/comfy/beige{
+	dir = 4
+	},
+/turf/open/floor/wood/large/darkwood,
+/area/station/maintenance/starboard/aft)
+"bv" = (
+/turf/open/floor/carpet/black{
+	initial_gas_mix = "o2=21.89;n2=82;co2=0.11;TEMP=293.18"
+	},
+/area/station/maintenance/starboard/aft)
+"bw" = (
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/turf/open/floor/carpet/black{
+	initial_gas_mix = "o2=21.87;n2=82;co2=0.13;TEMP=293.19"
+	},
+/area/station/maintenance/starboard/aft)
+"bx" = (
+/turf/open/floor/carpet/black{
+	initial_gas_mix = "o2=21.87;n2=82;co2=0.13;TEMP=293.19"
+	},
+/area/station/maintenance/starboard/aft)
+"bz" = (
+/obj/machinery/light/floor,
+/obj/structure/platform/plastitanium,
+/turf/open/floor/wood/large/darkwood,
+/area/station/maintenance/starboard/aft)
+"bA" = (
+/obj/structure/table/reinforced/plasmarglass{
+	dir = 1
+	},
+/turf/open/floor/wood/large/darkwood,
+/area/station/maintenance/starboard/aft)
+"bD" = (
+/obj/structure/table/reinforced/plasmarglass{
+	dir = 1
+	},
+/turf/open/floor/light,
+/area/station/maintenance/starboard/aft)
+"bH" = (
+/obj/machinery/light,
+/turf/open/floor/wood/large/ebonite,
+/area/station/maintenance/starboard/aft)
+"bI" = (
+/obj/structure/marker_beacon/purple,
+/turf/open/floor/carpet/black{
+	initial_gas_mix = "o2=21.87;n2=82;co2=0.13;TEMP=293.18"
+	},
+/area/station/maintenance/starboard/aft)
+"bJ" = (
+/obj/structure/marker_beacon/purple,
+/turf/open/floor/carpet/black{
+	initial_gas_mix = "o2=21.95;n2=82;co2=0.05;TEMP=293.16"
+	},
+/area/station/maintenance/starboard/aft)
+"bQ" = (
+/obj/structure/chair/comfy/black{
+	dir = 8
+	},
+/turf/open/floor/wood/large/darkwood,
+/area/station/maintenance/starboard/aft)
+"bT" = (
+/obj/structure/marker_beacon/purple,
+/turf/open/floor/carpet/black{
+	initial_gas_mix = "o2=21.97;n2=82;co2=0.03;TEMP=293.16"
+	},
+/area/station/maintenance/starboard/aft)
+"bU" = (
+/obj/structure/disposalpipe/segment{
+	dir = 6
+	},
+/turf/open/floor/carpet/black{
+	initial_gas_mix = "o2=21.89;n2=82;co2=0.11;TEMP=293.18"
+	},
+/area/station/maintenance/starboard/aft)
+"bV" = (
+/obj/structure/disposalpipe/segment{
+	dir = 9
+	},
+/turf/open/floor/carpet/black{
+	initial_gas_mix = "o2=21.85;n2=82;co2=0.15;TEMP=293.19"
+	},
+/area/station/maintenance/starboard/aft)
+"bW" = (
+/turf/open/floor/carpet/black{
+	initial_gas_mix = "o2=21.91;n2=82;co2=0.09;TEMP=293.18"
+	},
+/area/station/maintenance/starboard/aft)
+"bX" = (
+/obj/structure/marker_beacon/purple,
+/turf/open/floor/carpet/black{
+	initial_gas_mix = "o2=21.95;n2=82;co2=0.05;TEMP=293.17"
+	},
+/area/station/maintenance/starboard/aft)
+"bZ" = (
+/obj/structure/steps{
+	dir = 8
+	},
+/turf/open/floor/wood/large/ebonite,
+/area/station/maintenance/starboard/aft)
+"cc" = (
+/turf/open/floor/wood/large/darkwood,
+/area/station/maintenance/starboard/aft)
+"cf" = (
+/obj/structure/disposalpipe/segment{
+	dir = 6
+	},
+/turf/open/floor/wood/large/ebonite,
+/area/station/maintenance/starboard/aft)
+"cg" = (
+/obj/machinery/door/airlock/maintenance{
+	max_integrity = 250
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 1
+	},
+/turf/open/floor/carpet/black{
+	initial_gas_mix = "o2=21.95;n2=82;co2=0.05;TEMP=293.17"
+	},
+/area/station/maintenance/starboard/aft)
+"ch" = (
+/obj/structure/disposalpipe/segment{
+	dir = 1
+	},
+/turf/open/floor/carpet/black{
+	initial_gas_mix = "o2=21.93;n2=82;co2=0.07;TEMP=293.17"
+	},
+/area/station/maintenance/starboard/aft)
+"ci" = (
+/obj/structure/disposalpipe/segment{
+	dir = 9
+	},
+/turf/open/floor/carpet/black{
+	initial_gas_mix = "o2=21.93;n2=82;co2=0.07;TEMP=293.17"
+	},
+/area/station/maintenance/starboard/aft)
+"cj" = (
+/obj/structure/marker_beacon/purple,
+/turf/open/floor/carpet/black{
+	initial_gas_mix = "o2=21.9;n2=82;co2=0.1;TEMP=293.17"
+	},
+/area/station/maintenance/starboard/aft)
+"ck" = (
+/turf/open/floor/carpet/black{
+	initial_gas_mix = "o2=21.89;n2=82;co2=0.11;TEMP=293.17"
+	},
+/area/station/maintenance/starboard/aft)
+"cl" = (
+/turf/open/floor/carpet/black{
+	initial_gas_mix = "o2=21.96;n2=82;co2=0.04;TEMP=293.16"
+	},
+/area/station/maintenance/starboard/aft)
+"cp" = (
+/obj/structure/chair/sofa/corp/right,
+/turf/open/floor/wood/large/darkwood,
+/area/station/maintenance/starboard/aft)
+"cr" = (
+/obj/structure/chair/sofa/corp/left{
+	dir = 4
+	},
+/turf/open/floor/wood/large/darkwood,
+/area/station/maintenance/starboard/aft)
+"cs" = (
+/obj/structure/chair/sofa/corp/right{
+	dir = 4
+	},
+/turf/open/floor/wood/large/darkwood,
+/area/station/maintenance/starboard/aft)
+"cu" = (
+/obj/structure/chair/sofa/corp/left{
+	dir = 1
+	},
+/turf/open/floor/wood/large/darkwood,
+/area/station/maintenance/starboard/aft)
+"cv" = (
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/turf/open/floor/wood/large/ebonite,
+/area/station/maintenance/starboard/aft)
+"cw" = (
+/obj/structure/table/wood/fancy/purple,
+/obj/structure/desk_bell{
+	dir = 4
+	},
+/turf/open/floor/carpet/black{
+	initial_gas_mix = "o2=21.94;n2=82;co2=0.06;TEMP=293.16"
+	},
+/area/station/maintenance/starboard/aft)
+"cx" = (
+/obj/structure/table/wood/fancy/purple,
+/obj/machinery/computer/records/security/laptop{
+	dir = 4
+	},
+/turf/open/floor/carpet/black{
+	initial_gas_mix = "o2=21.97;n2=82;co2=0.03;TEMP=293.16"
+	},
+/area/station/maintenance/starboard/aft)
+"cy" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/marker_beacon/purple{
+	atom_integrity = 44.4
+	},
+/turf/open/floor/carpet/black,
+/area/station/maintenance/starboard/aft)
+"cA" = (
+/obj/structure/chair/sofa/corp,
+/turf/open/floor/wood/large/darkwood,
+/area/station/maintenance/starboard/aft)
+"cC" = (
+/obj/machinery/light/floor,
+/obj/structure/table/reinforced/plastitaniumglass,
+/turf/open/floor/wood/large/darkwood,
+/area/station/maintenance/starboard/aft)
+"cE" = (
+/obj/structure/table/reinforced/plastitaniumglass,
+/turf/open/floor/wood/large/darkwood,
+/area/station/maintenance/starboard/aft)
+"cF" = (
+/obj/machinery/light/floor,
+/obj/structure/chair/sofa/corp{
+	dir = 1
+	},
+/turf/open/floor/wood/large/darkwood,
+/area/station/maintenance/starboard/aft)
+"cG" = (
+/obj/machinery/light,
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/turf/open/floor/wood/large/ebonite,
+/area/station/maintenance/starboard/aft)
+"cH" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/marker_beacon/purple,
+/obj/structure/table/wood/fancy/purple,
+/turf/open/floor/carpet/black,
+/area/station/maintenance/starboard/aft)
+"cI" = (
+/obj/structure/marker_beacon/purple{
+	atom_integrity = 44.4
+	},
+/turf/open/floor/carpet/black,
+/area/station/maintenance/starboard/aft)
+"cJ" = (
+/obj/structure/chair/sofa/corp/corner,
+/turf/open/floor/wood/large/ebonite,
+/area/station/maintenance/starboard/aft)
+"cK" = (
+/obj/structure/chair/sofa/corp/left{
+	dir = 8
+	},
+/turf/open/floor/wood/large/ebonite,
+/area/station/maintenance/starboard/aft)
+"cM" = (
+/obj/structure/chair/sofa/corp/right{
+	dir = 8
+	},
+/turf/open/floor/wood/large/ebonite,
+/area/station/maintenance/starboard/aft)
+"cN" = (
+/obj/structure/lattice,
+/turf/closed/wall,
+/area/station/maintenance/starboard/aft)
+"cP" = (
+/obj/structure/chair/sofa/corp/corner{
+	dir = 8
+	},
+/turf/open/floor/wood/large/ebonite,
+/area/station/maintenance/starboard/aft)
+"cQ" = (
+/obj/structure/disposalpipe/segment{
+	dir = 10
+	},
+/turf/open/floor/wood/large/ebonite,
+/area/station/maintenance/starboard/aft)
+"cR" = (
+/obj/structure/disposalpipe/trunk/multiz{
+	dir = 1
+	},
+/obj/machinery/disposal/bin,
+/turf/open/floor/wood/large/ebonite,
+/area/station/maintenance/starboard/aft)
+"cS" = (
+/obj/structure/lattice,
+/turf/closed/wall,
+/area/space/nearstation)
+"cT" = (
+/obj/structure/window/reinforced/plasma/fulltile{
+	color = "#c800ff"
+	},
+/turf/open/floor/iron/dark/textured_large,
+/area/station/maintenance/starboard/aft)
+"cU" = (
+/obj/structure/lattice{
+	atom_integrity = 13
+	},
+/turf/open/space/openspace,
+/area/space/nearstation)
+"cV" = (
+/obj/structure/lattice{
+	atom_integrity = 28
+	},
+/turf/open/space/openspace,
+/area/space/nearstation)
+"cW" = (
+/obj/structure/lattice{
+	atom_integrity = 6
+	},
+/turf/open/space/openspace,
+/area/space/nearstation)
+"cX" = (
+/obj/structure/lattice{
+	atom_integrity = 39
+	},
+/turf/open/space/openspace,
+/area/space/nearstation)
+"cZ" = (
+/obj/structure/lattice,
+/turf/open/openspace,
+/area/space/nearstation)
+"db" = (
+/turf/open/openspace,
+/area/space/nearstation)
+
+(1,1,1) = {"
+ac
+ac
+ac
+ac
+ac
+ac
+ac
+ac
+ac
+ac
+ac
+ac
+ac
+ac
+ac
+ac
+ac
+ac
+ac
+ac
+ac
+ae
+ac
+ac
+af
+af
+"}
+(2,1,1) = {"
+ac
+ah
+ah
+ah
+ah
+ah
+ac
+ai
+aj
+ak
+al
+aG
+aq
+al
+ap
+aq
+ar
+ai
+ai
+ac
+as
+at
+au
+ac
+af
+af
+"}
+(3,1,1) = {"
+ac
+ah
+ah
+ah
+ah
+ah
+ac
+aw
+ax
+ay
+az
+cc
+aB
+aR
+cc
+aR
+aF
+aG
+aH
+ac
+aI
+aJ
+aI
+ac
+aK
+aK
+"}
+(4,1,1) = {"
+ac
+aL
+ah
+ah
+ah
+ah
+ah
+aG
+cc
+aQ
+aR
+cc
+aT
+aU
+cc
+aR
+aW
+aG
+aG
+ac
+aX
+aY
+as
+ac
+af
+aK
+"}
+(5,1,1) = {"
+ac
+ah
+ah
+ah
+ah
+ah
+ac
+ba
+cc
+cc
+cc
+cc
+cc
+cc
+cc
+cc
+cc
+aG
+aG
+ac
+bg
+bh
+bi
+ac
+af
+aK
+"}
+(6,1,1) = {"
+ac
+ah
+ah
+ah
+ah
+ah
+ac
+bj
+bk
+cc
+bp
+cc
+bp
+bp
+cc
+bp
+cc
+aG
+aG
+ac
+bv
+bw
+bx
+ac
+aK
+aK
+"}
+(7,1,1) = {"
+ac
+ac
+ac
+ac
+ac
+ac
+ac
+bj
+bz
+cc
+bA
+cc
+bA
+bD
+cc
+bA
+ax
+bH
+ac
+ac
+bI
+bw
+bJ
+ac
+ac
+aK
+"}
+(8,1,1) = {"
+ac
+ah
+ah
+ah
+ah
+ah
+ac
+bj
+bk
+cc
+bQ
+cc
+bQ
+bQ
+cc
+bQ
+cc
+aG
+ac
+bT
+bU
+bV
+bW
+bX
+ac
+aK
+"}
+(9,1,1) = {"
+ac
+ah
+ah
+ah
+ah
+ah
+ac
+bZ
+cc
+cc
+cc
+cc
+cc
+cc
+cc
+cc
+cc
+cf
+cg
+ch
+ci
+cj
+ck
+cl
+ac
+aK
+"}
+(10,1,1) = {"
+ac
+aL
+ah
+ah
+ah
+ah
+ah
+aG
+cc
+cp
+cE
+cc
+cr
+cs
+cc
+cE
+cu
+cv
+ac
+bT
+cw
+cx
+cl
+cy
+ac
+aK
+"}
+(11,1,1) = {"
+ac
+ah
+ah
+ah
+ah
+ah
+ac
+aw
+ax
+cA
+cE
+cc
+cC
+cE
+cc
+cE
+cF
+cG
+ac
+ac
+cH
+as
+cI
+ac
+ac
+aK
+"}
+(12,1,1) = {"
+ac
+ah
+ah
+ah
+ah
+ah
+ac
+ai
+ai
+cJ
+cK
+aG
+cM
+cK
+aG
+cM
+cP
+cQ
+cR
+ac
+ac
+ac
+ac
+ac
+aK
+aK
+"}
+(13,1,1) = {"
+cN
+cN
+cN
+ac
+ac
+ac
+ac
+cT
+cT
+cT
+cT
+cT
+cT
+cT
+cT
+cT
+cT
+cT
+ac
+cS
+cU
+aK
+cV
+cW
+cX
+af
+"}
+(14,1,1) = {"
+af
+af
+af
+af
+aK
+aK
+aK
+aK
+aK
+aK
+aK
+aK
+cZ
+cZ
+aK
+aK
+aK
+aK
+aK
+aK
+af
+af
+af
+af
+af
+af
+"}
+(15,1,1) = {"
+af
+af
+af
+af
+af
+af
+af
+db
+af
+af
+af
+af
+af
+af
+af
+af
+af
+af
+af
+af
+af
+af
+af
+af
+af
+af
+"}

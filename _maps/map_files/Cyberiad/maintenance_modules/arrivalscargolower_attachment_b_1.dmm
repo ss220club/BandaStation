@@ -1,0 +1,535 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/template_noop,
+/area/template_noop)
+"b" = (
+/obj/effect/turf_decal/tile/neutral{
+	dir = 1
+	},
+/obj/effect/mapping_helpers/broken_floor,
+/turf/open/floor/iron,
+/area/station/maintenance/ghetto/port/greater)
+"d" = (
+/obj/machinery/door/airlock/external,
+/obj/effect/mapping_helpers/airlock/autoname,
+/obj/effect/mapping_helpers/airlock/access/any/engineering/external,
+/obj/effect/mapping_helpers/airlock/cyclelink_helper,
+/turf/open/floor/plating,
+/area/station/maintenance/ghetto/port/greater)
+"e" = (
+/obj/effect/spawner/random/trash/ghetto_containers,
+/obj/effect/turf_decal/tile/neutral{
+	dir = 8
+	},
+/turf/open/floor/iron,
+/area/station/maintenance/ghetto/port/greater)
+"g" = (
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/plating,
+/area/station/maintenance/ghetto/port/greater)
+"h" = (
+/obj/effect/spawner/random/structure/table,
+/obj/effect/spawner/random/trash/ghetto_containers,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/tile/neutral{
+	dir = 1
+	},
+/obj/effect/spawner/random/food_or_drink/booze,
+/turf/open/floor/iron,
+/area/station/maintenance/ghetto/port/greater)
+"i" = (
+/obj/effect/spawner/random/trash/mess,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/tile/neutral{
+	dir = 8
+	},
+/obj/effect/spawner/random/food_or_drink/booze,
+/turf/open/floor/iron,
+/area/station/maintenance/ghetto/port/greater)
+"j" = (
+/obj/machinery/power/port_gen/pacman/pre_loaded,
+/turf/open/floor/plating,
+/area/station/maintenance/ghetto/port/greater)
+"l" = (
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron,
+/area/station/maintenance/ghetto/port/greater)
+"o" = (
+/turf/closed/wall,
+/area/station/construction/mining/aux_base)
+"p" = (
+/turf/open/floor/iron,
+/area/station/maintenance/ghetto/port/greater)
+"q" = (
+/obj/effect/turf_decal/tile/neutral{
+	dir = 4
+	},
+/obj/structure/sign/poster/random/directional/north,
+/obj/effect/mapping_helpers/broken_floor,
+/turf/open/floor/iron,
+/area/station/maintenance/ghetto/port/greater)
+"s" = (
+/obj/machinery/light/small/directional/north,
+/obj/effect/spawner/random/engineering/canister,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/tile/neutral{
+	dir = 4
+	},
+/turf/open/floor/iron,
+/area/station/maintenance/ghetto/port/greater)
+"v" = (
+/obj/effect/spawner/random/structure/tank_holder,
+/obj/machinery/light/small/directional/north,
+/obj/effect/turf_decal/tile/neutral{
+	dir = 4
+	},
+/turf/open/floor/iron,
+/area/station/maintenance/ghetto/port/greater)
+"w" = (
+/obj/machinery/light/small/directional/east,
+/turf/open/floor/plating,
+/area/station/maintenance/ghetto/port/greater)
+"y" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/tile/neutral{
+	dir = 8
+	},
+/turf/open/floor/iron,
+/area/station/maintenance/ghetto/port/greater)
+"z" = (
+/turf/closed/wall,
+/area/station/maintenance/ghetto/port/greater)
+"A" = (
+/obj/structure/lattice,
+/turf/open/space/basic,
+/area/space/nearstation)
+"B" = (
+/obj/structure/sign/warning/vacuum/directional/north,
+/obj/effect/spawner/random/structure/chair_maintenance{
+	dir = 8
+	},
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/tile/neutral{
+	dir = 1
+	},
+/turf/open/floor/iron,
+/area/station/maintenance/ghetto/port/greater)
+"C" = (
+/obj/effect/turf_decal/tile/neutral,
+/turf/open/floor/iron,
+/area/station/maintenance/ghetto/port/greater)
+"E" = (
+/turf/open/space/basic,
+/area/space)
+"F" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/spawner/random/trash,
+/turf/open/floor/plating,
+/area/station/maintenance/ghetto/port/greater)
+"H" = (
+/obj/effect/turf_decal/tile/neutral,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron,
+/area/station/maintenance/ghetto/port/greater)
+"J" = (
+/turf/open/floor/plating,
+/area/station/maintenance/ghetto/port/greater)
+"K" = (
+/obj/effect/spawner/random/structure/chair_maintenance{
+	dir = 4
+	},
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/tile/neutral{
+	dir = 1
+	},
+/obj/machinery/light/small/directional/north,
+/turf/open/floor/iron,
+/area/station/maintenance/ghetto/port/greater)
+"L" = (
+/obj/structure/closet/emcloset,
+/obj/effect/turf_decal/tile/neutral{
+	dir = 1
+	},
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron,
+/area/station/maintenance/ghetto/port/greater)
+"M" = (
+/obj/effect/spawner/random/trash,
+/obj/effect/turf_decal/tile/neutral{
+	dir = 8
+	},
+/turf/open/floor/iron,
+/area/station/maintenance/ghetto/port/greater)
+"N" = (
+/obj/machinery/door/airlock/external,
+/obj/effect/mapping_helpers/airlock/autoname,
+/obj/effect/mapping_helpers/airlock/access/any/engineering/external,
+/obj/effect/mapping_helpers/airlock/cyclelink_helper{
+	dir = 1
+	},
+/turf/open/floor/plating,
+/area/station/maintenance/ghetto/port/greater)
+"O" = (
+/obj/effect/spawner/random/structure/girder,
+/turf/open/floor/iron,
+/area/station/maintenance/ghetto/port/greater)
+"P" = (
+/obj/effect/spawner/structure/window/reinforced,
+/turf/open/floor/plating,
+/area/station/maintenance/ghetto/port/greater)
+"R" = (
+/obj/effect/spawner/random/engineering/atmospherics_portable,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/tile/neutral{
+	dir = 4
+	},
+/turf/open/floor/iron,
+/area/station/maintenance/ghetto/port/greater)
+"U" = (
+/obj/machinery/door/airlock/maintenance,
+/obj/effect/mapping_helpers/airlock/autoname,
+/obj/effect/mapping_helpers/airlock/access/all/engineering/maintenance,
+/obj/effect/mapping_helpers/airlock/unres{
+	dir = 1
+	},
+/obj/modular_map_connector,
+/turf/open/floor/iron,
+/area/station/maintenance/ghetto/port/greater)
+"W" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/tile/neutral{
+	dir = 8
+	},
+/obj/effect/mapping_helpers/broken_floor,
+/turf/open/floor/iron,
+/area/station/maintenance/ghetto/port/greater)
+"Y" = (
+/obj/effect/spawner/random/trash/graffiti,
+/obj/effect/turf_decal/tile/neutral{
+	dir = 4
+	},
+/turf/open/floor/iron,
+/area/station/maintenance/ghetto/port/greater)
+
+(1,1,1) = {"
+E
+E
+E
+E
+E
+E
+z
+z
+z
+o
+a
+a
+"}
+(2,1,1) = {"
+E
+E
+E
+E
+E
+E
+z
+F
+W
+o
+a
+a
+"}
+(3,1,1) = {"
+E
+E
+E
+E
+E
+E
+z
+K
+i
+o
+a
+a
+"}
+(4,1,1) = {"
+E
+E
+E
+E
+E
+E
+z
+h
+y
+o
+a
+a
+"}
+(5,1,1) = {"
+E
+E
+E
+E
+E
+z
+z
+B
+e
+o
+a
+a
+"}
+(6,1,1) = {"
+E
+E
+E
+P
+P
+P
+L
+b
+M
+o
+a
+a
+"}
+(7,1,1) = {"
+E
+E
+E
+d
+J
+N
+p
+l
+l
+o
+a
+a
+"}
+(8,1,1) = {"
+E
+E
+E
+P
+P
+P
+v
+Y
+H
+o
+a
+a
+"}
+(9,1,1) = {"
+E
+E
+E
+E
+E
+z
+z
+O
+J
+o
+a
+a
+"}
+(10,1,1) = {"
+E
+E
+E
+E
+E
+E
+z
+s
+g
+o
+a
+a
+"}
+(11,1,1) = {"
+E
+E
+E
+E
+E
+E
+z
+R
+J
+o
+o
+o
+"}
+(12,1,1) = {"
+E
+E
+E
+E
+E
+E
+z
+q
+C
+J
+J
+U
+"}
+(13,1,1) = {"
+E
+E
+E
+E
+E
+E
+z
+j
+l
+l
+w
+a
+"}
+(14,1,1) = {"
+E
+E
+E
+E
+E
+E
+z
+z
+z
+z
+z
+a
+"}
+(15,1,1) = {"
+E
+E
+E
+E
+E
+E
+A
+E
+E
+E
+E
+E
+"}
+(16,1,1) = {"
+E
+E
+E
+E
+E
+E
+A
+E
+E
+E
+E
+E
+"}
+(17,1,1) = {"
+E
+E
+E
+E
+E
+E
+A
+E
+E
+E
+E
+E
+"}
+(18,1,1) = {"
+E
+E
+E
+E
+E
+E
+A
+E
+E
+E
+E
+E
+"}
+(19,1,1) = {"
+E
+E
+E
+E
+E
+E
+A
+A
+A
+A
+A
+A
+"}
+(20,1,1) = {"
+E
+E
+E
+E
+E
+A
+A
+E
+E
+E
+E
+E
+"}
+(21,1,1) = {"
+E
+E
+E
+E
+E
+A
+E
+E
+E
+E
+E
+E
+"}
+(22,1,1) = {"
+E
+E
+E
+E
+A
+A
+E
+E
+E
+E
+E
+E
+"}
+(23,1,1) = {"
+E
+E
+E
+E
+A
+E
+E
+E
+E
+E
+E
+E
+"}
