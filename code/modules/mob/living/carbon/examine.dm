@@ -374,7 +374,7 @@
 		var/obj/item/held_thing = get_item_for_held_index(held_index)
 		if((held_thing.item_flags & (ABSTRACT|HAND_ITEM)) || HAS_TRAIT(held_thing, TRAIT_EXAMINE_SKIP))
 			continue
-		. += "[t_He] [t_is] держит [held_thing.examine_title(user, declent = ACCUSATIVE)] в [t_his] [get_held_index_name(held_index)]."
+		. += "[t_He] держит [held_thing.examine_title(user, declent = ACCUSATIVE)] в [t_His] [get_held_index_name(held_index)]."
 	for(var/obj/item/bodypart/arm/part in get_bodyparts())
 		if(!(part.bodypart_flags & BODYPART_PSEUDOPART))
 			continue
@@ -454,7 +454,7 @@
 		var/obj/item/held_thing = get_item_for_held_index(held_index)
 		if((held_thing.item_flags & (ABSTRACT|HAND_ITEM)) || HAS_TRAIT(held_thing, TRAIT_EXAMINE_SKIP))
 			continue
-		. += "[t_He] [t_is] держит [held_thing.examine_title(user, declent = ACCUSATIVE)] в [t_his] [get_held_index_name(held_index)]."
+		. += "[t_He] держит [held_thing.examine_title(user, declent = ACCUSATIVE)] в [t_His] [get_held_index_name(held_index)]."
 	for(var/obj/item/bodypart/arm/part in get_bodyparts())
 		if(!(part.bodypart_flags & BODYPART_PSEUDOPART))
 			continue
