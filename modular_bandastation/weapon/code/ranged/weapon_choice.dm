@@ -25,14 +25,15 @@
 	)
 	return selectable_gun_types
 
-/datum/objective_item/steal/hosgun
-	name = "the head of security's personal weapon"
+/datum/outfit/job/security
+	suit_store = null
+	backpack_contents = list(
+		/obj/item/choice_beacon/weapon/security_pistol = 1,
+	)
+
+/datum/objective_item/steal/hoslaser
 	targetitem = /obj/item/choice_beacon/weapon/hos
-	excludefromjob = list(JOB_HEAD_OF_SECURITY)
 	altitems = list(/obj/item/gun/ballistic/automatic/pistol/pdh/hos, /obj/item/gun/ballistic/automatic/pistol/cm70/hos, /obj/item/gun/ballistic/automatic/laser/pistol, /obj/item/gun/energy/e_gun/hos)
-	item_owner = list(JOB_HEAD_OF_SECURITY)
-	exists_on_map = TRUE
 
 /obj/item/choice_beacon/hos/add_stealing_item_objective()
 	return add_item_to_steal(src, /obj/item/choice_beacon/weapon/hos)
-
