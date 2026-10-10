@@ -131,13 +131,6 @@ GLOBAL_LIST_EMPTY(loot_spawners)
 	. = ..()
 	loot_table = GLOB.clothing_loot_table.Copy()
 
-/obj/effect/landmark/loot_spawn/fashion_jacket
-	name = "Fashion Jacket Spawn"
-	icon_state = "city_of_cogs"
-	loot_table = list(/obj/item/clothing/suit/jacket/leather_trenchcoat = 100)
-	max_items = 1
-	spawn_chance = 100
-
 /obj/effect/landmark/loot_spawn/information
 	name = "info loot spawn"
 	icon_state = "random_loot"
@@ -158,26 +151,26 @@ GLOBAL_LIST_EMPTY(loot_spawners)
 	. = ..()
 	loot_table = GLOB.technical_loot_table.Copy()
 
-/obj/effect/landmark/loot_spawn/magma_artifact
-	name = "magma wing spawn"
-	icon_state = "clockwork_orange"
-	loot_table = list(/obj/item/artifact/fire_wing = 100)
-	max_items = 1
-	spawn_chance = 50
+// /obj/effect/landmark/loot_spawn/magma_artifact
+// 	name = "magma wing spawn"
+// 	icon_state = "clockwork_orange"
+// 	loot_table = list(/obj/item/artifact/fire_wing = 100)
+// 	max_items = 1
+// 	spawn_chance = 50
 
-/obj/effect/landmark/loot_spawn/ice_artifact
-	name = "ice crystal spawn"
-	icon_state = "clockwork_orange"
-	loot_table = list(/obj/item/artifact/ice_crystal = 100)
-	max_items = 1
-	spawn_chance = 50
+// /obj/effect/landmark/loot_spawn/ice_artifact
+// 	name = "ice crystal spawn"
+// 	icon_state = "clockwork_orange"
+// 	loot_table = list(/obj/item/artifact/ice_crystal = 100)
+// 	max_items = 1
+// 	spawn_chance = 50
 
-/obj/effect/landmark/loot_spawn/stone_artifact
-	name = "stone eye spawn"
-	icon_state = "clockwork_orange"
-	loot_table = list(/obj/item/artifact/stone_eye = 100)
-	max_items = 1
-	spawn_chance = 50
+// /obj/effect/landmark/loot_spawn/stone_artifact
+// 	name = "stone eye spawn"
+// 	icon_state = "clockwork_orange"
+// 	loot_table = list(/obj/item/artifact/stone_eye = 100)
+// 	max_items = 1
+// 	spawn_chance = 50
 
 
 /obj/structure/loot

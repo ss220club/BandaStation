@@ -424,28 +424,164 @@
 	name = "Shitfuck Shuttle"
 
 
-
-
-/mob/living/basic/trooper/syndicate/ranged/test
-	casingtype = /obj/item/ammo_casing/c45
+/mob/living/basic/trooper/syndicate/ranged/full_auto/smg9mm
+	casingtype = /obj/item/ammo_casing/c9mm
 	projectilesound = 'sound/items/weapons/gun/smg/shot.ogg'
 	ai_controller = /datum/ai_controller/basic_controller/trooper/ranged
 	burst_shots = 3
 	ranged_cooldown = 0 SECONDS
-	r_hand = /obj/item/gun/ballistic/automatic/fn18
-
+	r_hand = /obj/item/gun/ballistic/automatic/c20r
 
 
 /mob/living/basic/trooper/assistant
-	name = "Syndicate Operative"
-	desc = "Death to Nanotrasen."
-	faction = list(ROLE_SYNDICATE)
-	corpse = /obj/effect/mob_spawn/corpse/human/syndicatesoldier
-	mob_spawner = /obj/effect/mob_spawn/corpse/human/syndicatesoldier
+	name = "Tider Assistant"
+	desc = "У него явно не все хорошо с головой... А еще он хочет вас убить своим копьем, удивительно, не правда ли?"
+	faction = list(FACTION_HOSTILE)
+	melee_damage_lower = 15
+	melee_damage_upper = 15
+	mob_spawner = /obj/effect/mob_spawn/corpse/human/assistant/tider
+	corpse = /obj/effect/mob_spawn/corpse/human/assistant/tider
+	attack_verb_continuous = "slashes"
+	attack_verb_simple = "slash"
+	attack_sound = 'sound/items/weapons/bladeslice.ogg'
+	attack_vis_effect = ATTACK_EFFECT_SLASH
+	r_hand = /obj/item/spear
+	maxHealth = 100
+	health = 100
+	speed = 1.2
+	melee_attack_cooldown = 1.1 SECONDS
+	combat_mode = TRUE
+	ai_controller = /datum/ai_controller/basic_controller/revolutionary
+	obj_damage = 20
+	loot = list(/obj/item/spear)
 
+	var/static/list/phrases = list(
+		"ТЕБЕ КОНЕЦ!",
+		"ВИВА!",
+		"УБЬЕМ!",
+		"А НУ ИДИ СЮДА!",
+		"ААААААААА!",
+		"Я НАСАЖУ ТВОЮ ГОЛОВУ НА СВОЕ КОПЬЕ!",
+		"ЗА БЕЗУДЕЛЬНЫХ!",
+	)
 
+	/// Male screams
+	var/static/list/male_screams = list(
+		'sound/mobs/humanoids/human/scream/malescream_1.ogg',
+		'sound/mobs/humanoids/human/scream/malescream_2.ogg',
+		'sound/mobs/humanoids/human/scream/malescream_3.ogg',
+		'sound/mobs/humanoids/human/scream/malescream_4.ogg',
+		'sound/mobs/humanoids/human/scream/malescream_5.ogg',
+	)
+	/// Female screams
+	var/static/list/female_screams = list(
+		'sound/mobs/humanoids/human/scream/femalescream_1.ogg',
+		'sound/mobs/humanoids/human/scream/femalescream_2.ogg',
+		'sound/mobs/humanoids/human/scream/femalescream_3.ogg',
+		'sound/mobs/humanoids/human/scream/femalescream_4.ogg',
+		'sound/mobs/humanoids/human/scream/femalescream_5.ogg',
+	)
 
+/mob/living/basic/trooper/assistant/Initialize(mapload)
+	. = ..()
+	shuffle_inplace(phrases)
+	var/static/list/display_emote = list(
+		BB_EMOTE_SAY = phrases,
+		BB_SPEAK_CHANCE = 15,
+	)
+	ai_controller.set_blackboard_key(BB_BASIC_MOB_SPEAK_LINES, display_emote)
 
+	gender = pick(MALE, FEMALE, PLURAL)
+	var/first_name
+	switch(gender)
+		if(MALE)
+			first_name = pick(GLOB.first_names_male)
+			death_sound = pick(male_screams)
+		if(FEMALE)
+			first_name = pick(GLOB.first_names_female)
+			death_sound = pick(female_screams)
+		if(PLURAL)
+			first_name = pick(GLOB.first_names)
+			death_sound = pick(male_screams + female_screams)
+
+/mob/living/basic/trooper/assistant/ranged
+	ai_controller = /datum/ai_controller/basic_controller/trooper/ranged
+	r_hand = /obj/item/gun/ballistic/automatic/pistol
+	/// Type of bullet we use
+	var/casingtype = /obj/item/ammo_casing/c9mm
+	/// Sound to play when firing weapon
+	var/projectilesound = 'sound/items/weapons/gun/pistol/shot.ogg'
+	/// number of burst shots
+	var/burst_shots
+	/// Time between taking shots
+	var/ranged_cooldown = 1 SECONDS
+
+/mob/living/basic/trooper/syndicate/ranged/Initialize(mapload)
+	. = ..()
+	AddComponent(\
+		/datum/component/ranged_attacks,\
+		casing_type = casingtype,\
+		projectile_sound = projectilesound,\
+		cooldown_time = ranged_cooldown,\
+		burst_shots = burst_shots,\
+	)
+	if (ranged_cooldown <= 1 SECONDS)
+		AddComponent(/datum/component/ranged_mob_full_auto)
+
+/mob/living/basic/trooper/assistant/ranged/laser
+	r_hand = /obj/item/gun/energy/laser/soul
+	burst_shots = 1
+	ranged_cooldown = 0 SECONDS
+	projectilesound = 'sound/items/weapons/laser.ogg'
+	loot = list(/obj/item/gun/energy/laser/soul)
+
+/obj/effect/mob_spawn/corpse/human/assistant/tider
+	outfit = /datum/outfit/job/assistant/tider
+
+/datum/outfit/job/assistant/tider
+	belt = null
+	mask = /obj/item/clothing/mask/gas
+
+/mob/living/basic/alien/sentinel
+	health = 200
+	maxHealth = 200
+	melee_damage_lower = 25
+	melee_damage_upper = 25
+
+/mob/living/basic/alien/queen/large
+	health = 500
+	maxHealth = 500
+	melee_damage_lower = 30
+	melee_damage_upper = 30
+	projectiletype = /obj/projectile/neurotoxin
+
+/mob/living/basic/creature
+	health = 75
+	maxHealth = 75
+
+/mob/living/basic/creature/hatchling
+	health = 50
+	maxHealth = 50
+
+/mob/living/basic/living_limb_flesh
+	melee_damage_lower = 15
+	melee_damage_upper = 15
+
+/mob/living/basic/zombie/rotten
+	ai_controller = /datum/ai_controller/basic_controller/zombie
+	melee_damage_lower = 15
+	melee_damage_upper = 15
+
+/mob/living/basic/zombie/syndie
+	name = "Shambling Syndicate Corpse"
+	melee_damage_lower = 20
+	melee_damage_upper = 20
+	maxHealth = 125
+	health = 125
+	speed = 3
+	outfit = /datum/outfit/syndicatecommandocorpse/lessenedgear
+
+/*
 /mob/living/basic/trader/junker
 	name = "Junker"
 	desc = "Come buy some shit!"
@@ -670,3 +806,5 @@
 			"Its simple, go north, get artifacts, sell them to me, go to the station, get contraband, sell it to me.",
 		),
 	)
+
+*/
