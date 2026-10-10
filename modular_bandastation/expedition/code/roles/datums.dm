@@ -21,7 +21,7 @@
 	uniform = /obj/item/clothing/under/hoodie_black
 	shoes = /obj/item/clothing/shoes/jackboots
 	id = /obj/item/card/id/advanced/black
-	id_trim = /datum/id_trim/job/merc
+	id_trim = /datum/id_trim/ert/merc
 	belt = /obj/item/storage/belt/military/army/tsf/full_pistol
 	suit = null
 	gloves = /obj/item/clothing/gloves/color/black
@@ -34,7 +34,7 @@
 /obj/item/holochip/sotnya
 	credits = 100
 
-/datum/id_trim/job/merc
+/datum/id_trim/ert/merc
 	assignment = "Наёмник"
 	trim_state = "trim_deathcommando"
 	job = /datum/job/assistant
@@ -48,22 +48,21 @@
 /datum/outfit/job/merc/leader
 	name = "Mercenary Leader"
 	id = /obj/item/card/id/advanced/black
-	id_trim = /datum/id_trim/job/merc/leader
+	id_trim = /datum/id_trim/ert/commander/merc_leader
 	backpack_contents = list(
 		/obj/item/holochip/sotnya = 2
 	)
 	head = /obj/item/clothing/head/beret/militia
 
-/datum/id_trim/job/merc/leader
+/datum/id_trim/ert/commander/merc_leader
 	assignment = "Лидер Наёмников"
 	job = /datum/job/merc_leader
 	honorifics = list("Лидер-Оперативник")
-	access = list(ACCESS_CENT_GENERAL, ACCESS_CENT_LIVING, ACCESS_WEAPONS)
 	big_pointer = TRUE
 
-/datum/id_trim/job/merc/leader/New()
+/datum/id_trim/ert/commander/merc_leader/New()
 	. = ..()
-	access = access = list(ACCESS_CENT_GENERAL) | (SSid_access.get_region_access_list(list(REGION_ALL_STATION)) - ACCESS_CHANGE_IDS)
+	access = list(ACCESS_CENT_GENERAL, ACCESS_CENT_SPECOPS, ACCESS_CENT_LIVING) | (SSid_access.get_region_access_list(list(REGION_ALL_STATION)) - ACCESS_CHANGE_IDS)
 
 /datum/job/merc_leader
 	title = JOB_MERCENARY_LEADER

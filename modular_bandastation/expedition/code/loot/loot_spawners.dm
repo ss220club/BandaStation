@@ -1,43 +1,12 @@
-/obj/effect/landmark/loot_spawn
+/obj/effect/spawner/random/loot_spawn
 	name = "loot spawn"
 	icon = 'icons/effects/landmarks_static.dmi'
 	icon_state = "x2"
-	var/list/loot_table = list()
-	var/max_items = 2
-	var/spawn_chance = 100
 
-/obj/effect/landmark/loot_spawn/proc/spawn_loot()
-
-	if(prob(100 - spawn_chance))
-		return
-	var/turf/T = get_turf(src)
-
-	if(!T)
-		return
-	var/current_items = 0
-	for(var/obj/item/I in T)
-		current_items++
-	if(current_items >= max_items)
-		return
-
-	var/path = pick_weight(loot_table)
-	if(path)
-		new path(T)
-
-GLOBAL_LIST_EMPTY(loot_spawners)
-
-/obj/effect/landmark/loot_spawn/Initialize(mapload)
-	. = ..()
-	GLOB.loot_spawners += src
-
-/obj/effect/landmark/loot_spawn/Destroy()
-	GLOB.loot_spawners -= src
-	return ..()
-
-/obj/effect/landmark/loot_spawn/medical
+/obj/effect/spawner/random/loot_spawn/medical
 	name = "medical loot spawn"
 	icon_state = "x3"
-	loot_table = list(
+	loot = list(
 		/obj/item/healthanalyzer = 60,
 		/obj/item/defibrillator/compact = 70,
 		/obj/item/healthanalyzer/simple = 50,
@@ -78,99 +47,99 @@ GLOBAL_LIST_EMPTY(loot_spawners)
 		/obj/item/storage/medkit/tactical = 10,
 		/obj/item/reagent_containers/hypospray/combat = 5
 	)
-	max_items = 2
-	spawn_chance = 80
+	spawn_loot_count = 2
+	spawn_loot_chance = 80
 
-/obj/effect/landmark/loot_spawn/weapon
+/obj/effect/spawner/random/loot_spawn/weapon
 	name = "weapon loot spawn"
 	icon_state = "x"
-	max_items = 1
-	spawn_chance = 70
+	spawn_loot_count = 1
+	spawn_loot_chance = 70
 
-/obj/effect/landmark/loot_spawn/weapon/Initialize(mapload)
+/obj/effect/spawner/random/loot_spawn/weapon/Initialize(mapload)
 	. = ..()
-	loot_table = GLOB.weapon_loot_table.Copy()
+	loot = GLOB.weapon_loot_table
 
-/obj/effect/landmark/loot_spawn/ammo
+/obj/effect/spawner/random/loot_spawn/ammo
 	name = "ammo loot spawn"
 	icon_state = "x"
-	max_items = 2
-	spawn_chance = 90
+	spawn_loot_count = 2
+	spawn_loot_chance = 90
 
-/obj/effect/landmark/loot_spawn/ammo/Initialize(mapload)
+/obj/effect/spawner/random/loot_spawn/ammo/Initialize(mapload)
 	. = ..()
-	loot_table = GLOB.ammo_loot_table.Copy()
+	loot = GLOB.ammo_loot_table
 
-/obj/effect/landmark/loot_spawn/food
+/obj/effect/spawner/random/loot_spawn/food
 	name = "food loot spawn"
 	icon_state = "x3"
-	max_items = 3
-	spawn_chance = 90
+	spawn_loot_count = 3
+	spawn_loot_chance = 90
 
-/obj/effect/landmark/loot_spawn/food/Initialize(mapload)
+/obj/effect/spawner/random/loot_spawn/food/Initialize(mapload)
 	. = ..()
-	loot_table = GLOB.food_loot_table.Copy()
+	loot = GLOB.food_loot_table
 
-/obj/effect/landmark/loot_spawn/treasure
+/obj/effect/spawner/random/loot_spawn/treasure
 	name = "treasure loot spawn"
 	icon_state = "x4"
-	max_items = 1
-	spawn_chance = 90
+	spawn_loot_count = 1
+	spawn_loot_chance = 90
 
-/obj/effect/landmark/loot_spawn/treasure/Initialize(mapload)
+/obj/effect/spawner/random/loot_spawn/treasure/Initialize(mapload)
 	. = ..()
-	loot_table = GLOB.treasure_loot_table.Copy()
+	loot = GLOB.treasure_loot_table
 
-/obj/effect/landmark/loot_spawn/clothing
+/obj/effect/spawner/random/loot_spawn/clothing
 	name = "clothing loot spawn"
 	icon_state = "city_of_cogs"
-	max_items = 1
-	spawn_chance = 70
+	spawn_loot_count = 1
+	spawn_loot_chance = 70
 
-/obj/effect/landmark/loot_spawn/clothing/Initialize(mapload)
+/obj/effect/spawner/random/loot_spawn/clothing/Initialize(mapload)
 	. = ..()
-	loot_table = GLOB.clothing_loot_table.Copy()
+	loot = GLOB.clothing_loot_table
 
-/obj/effect/landmark/loot_spawn/information
+/obj/effect/spawner/random/loot_spawn/information
 	name = "info loot spawn"
 	icon_state = "random_loot"
-	max_items = 1
-	spawn_chance = 50
+	spawn_loot_count = 1
+	spawn_loot_chance = 50
 
-/obj/effect/landmark/loot_spawn/information/Initialize(mapload)
+/obj/effect/spawner/random/loot_spawn/information/Initialize(mapload)
 	. = ..()
-	loot_table = GLOB.info_loot_table.Copy()
+	loot = GLOB.info_loot_table
 
-/obj/effect/landmark/loot_spawn/technical
+/obj/effect/spawner/random/loot_spawn/technical
 	name = "technical loot spawn"
 	icon_state = "clockwork_orange"
-	max_items = 2
-	spawn_chance = 80
+	spawn_loot_count = 2
+	spawn_loot_chance = 80
 
-/obj/effect/landmark/loot_spawn/technical/Initialize(mapload)
+/obj/effect/spawner/random/loot_spawn/technical/Initialize(mapload)
 	. = ..()
-	loot_table = GLOB.technical_loot_table.Copy()
+	loot = GLOB.technical_loot_table
 
 // /obj/effect/landmark/loot_spawn/magma_artifact
 // 	name = "magma wing spawn"
 // 	icon_state = "clockwork_orange"
-// 	loot_table = list(/obj/item/artifact/fire_wing = 100)
-// 	max_items = 1
-// 	spawn_chance = 50
+// 	loot = list(/obj/item/artifact/fire_wing = 100)
+// 	spawn_loot_count = 1
+// 	spawn_loot_chance = 50
 
 // /obj/effect/landmark/loot_spawn/ice_artifact
 // 	name = "ice crystal spawn"
 // 	icon_state = "clockwork_orange"
-// 	loot_table = list(/obj/item/artifact/ice_crystal = 100)
-// 	max_items = 1
-// 	spawn_chance = 50
+// 	loot = list(/obj/item/artifact/ice_crystal = 100)
+// 	spawn_loot_count = 1
+// 	spawn_loot_chance = 50
 
 // /obj/effect/landmark/loot_spawn/stone_artifact
 // 	name = "stone eye spawn"
 // 	icon_state = "clockwork_orange"
-// 	loot_table = list(/obj/item/artifact/stone_eye = 100)
-// 	max_items = 1
-// 	spawn_chance = 50
+// 	loot = list(/obj/item/artifact/stone_eye = 100)
+// 	spawn_loot_count = 1
+// 	spawn_loot_chance = 50
 
 
 /obj/structure/loot

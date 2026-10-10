@@ -388,6 +388,8 @@
 	port_direction = NORTH
 	preferred_direction = NORTH
 	can_move_docking_ports = 1
+	rechargeTime = 5 MINUTES
+	callTime = 5 MINUTES
 
 /obj/machinery/computer/camera_advanced/shuttle_docker/shittle
 	name = "Shitfuck navigation computer"
@@ -411,7 +413,7 @@
 	circuit = /obj/item/circuitboard/computer/shittle
 	shuttleId = "shittle"
 	possible_destinations = "shittle;shittle_home;shittle_custom;shittle_dock;shittle_cargo"
-	req_access = list(ACCESS_CENT_GENERAL)
+	req_access = list(ACCESS_CENT_SPECOPS)
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | ACID_PROOF
 	may_be_remote_controlled = TRUE
 
@@ -503,6 +505,10 @@
 		if(PLURAL)
 			first_name = pick(GLOB.first_names)
 			death_sound = pick(male_screams + female_screams)
+	fully_replace_character_name(name, "[first_name] [pick(GLOB.last_names)]")
+
+/mob/living/basic/revolutionary/get_unconscious_appearance()
+	return get_generic_humanoid_static_appearance()
 
 /mob/living/basic/trooper/assistant/ranged
 	ai_controller = /datum/ai_controller/basic_controller/trooper/ranged
