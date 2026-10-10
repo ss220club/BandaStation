@@ -371,8 +371,8 @@ GLOBAL_DATUM_INIT(steal_item_handler, /datum/objective_item_handler, new())
 	steal_hint = "Уникальное оружие главы службы безопасности. \
 		Всегда находится при нём, если он жив, но в противном случае может быть найден в его шкафчике."
 
-/obj/item/gun/energy/e_gun/hos/add_stealing_item_objective()
-	return add_item_to_steal(src, /obj/item/gun/energy/e_gun/hos)
+///obj/item/gun/energy/e_gun/hos/add_stealing_item_objective() SS220 BANDASTATION EDIT
+//	return add_item_to_steal(src, /obj/item/gun/energy/e_gun/hos) SS220 BANDASTATION EDIT
 
 /datum/objective_item/steal/compactshotty
 	name = "персональный компактный дробовик смотрителя"
