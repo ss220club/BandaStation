@@ -88,13 +88,22 @@ export function PersonalCrafting(props: any) {
     }, [])
     .sort((a, b) => (a > b ? 1 : -1));
 
+  const allFoodtypes = data.recipes
+    .reduce((acc: string[], recipe) => {
+      recipe.foodtypes?.forEach((foodtype) => {
+        if (!acc.includes(foodtype)) {
+          acc.push(foodtype);
+        }
+      });
+      return acc;
+    }, [])
+    .sort((a, b) => (a > b ? 1 : -1));
+
   const [activeFoodCuisine, setFoodCuisine] = useState<string[]>();
   const [activeDishCategory, setDishCategory] = useState<string[]>();
   const [activeMealCategory, setMealCategory] = useState<string[]>();
+  const [activeFoodType, setFoodType] = useState<string[]>();
 
-  const [activeType, setFoodType] = useState(
-    Object.keys(craftability).length ? 'Can Make' : data.foodtypes[0],
-  );
   const material_occurences = sortBy(data.material_occurences, [
     (material) => -material.occurences,
   ]);
@@ -146,16 +155,17 @@ export function PersonalCrafting(props: any) {
         ) {
           return false;
         }
+        // only shows recipes with all the selected food types,
+        // rather than any recipe with any selected food type
+        if (
+          activeFoodType?.length &&
+          recipe.foodtypes?.filter((ft) => activeFoodType.includes(ft))
+            .length !== activeFoodType.length
+        ) {
+          return false;
+        }
       }
       return recipe.category === activeCategory;
-    } else if (tabMode === TABS.foodtype && mode === MODE.cooking) {
-      if (activeType === 'Can Make') {
-        return Boolean(craftability[recipe.ref]);
-      }
-      if (recipe.foodtypes) {
-        return recipe.foodtypes.includes(activeType);
-      }
-      return false;
     }
     return true;
   }
@@ -184,7 +194,6 @@ export function PersonalCrafting(props: any) {
   const categories = canMake
     .concat(data.categories.sort())
     .filter((i) => (i === 'Weaponry' ? true : i));
-  const foodtypes = canMake.concat(data.foodtypes.sort());
 
   const pageSize =
     searchText.length > 0
@@ -240,25 +249,6 @@ export function PersonalCrafting(props: any) {
                     >
                       Категория
                     </Tabs.Tab>
-                    {mode === MODE.cooking && (
-                      <Tabs.Tab
-                        selected={tabMode === TABS.foodtype}
-                        onClick={() => {
-                          if (tabMode === TABS.foodtype) {
-                            return;
-                          }
-                          setTabMode(TABS.foodtype);
-                          setPages(1);
-                          setFoodType(
-                            Object.keys(craftability).length
-                              ? 'Can Make'
-                              : data.foodtypes[0],
-                          );
-                        }}
-                      >
-                        Тип
-                      </Tabs.Tab>
-                    )}
                     <Tabs.Tab
                       selected={tabMode === TABS.material}
                       onClick={() => {
@@ -277,32 +267,6 @@ export function PersonalCrafting(props: any) {
                 <Stack.Item grow m={-1} style={{ overflowY: 'auto' }}>
                   <Box height={'100%'} p={1}>
                     <Tabs vertical>
-                      {tabMode === TABS.foodtype &&
-                        mode === MODE.cooking &&
-                        foodtypes.map((foodtype) => (
-                          <Tabs.Tab
-                            key={foodtype}
-                            selected={
-                              activeType === foodtype && searchText.length === 0
-                            }
-                            onClick={(e) => {
-                              setFoodType(foodtype);
-                              setPages(1);
-                              if (content) {
-                                content.scrollTop = 0;
-                              }
-                              if (searchText.length > 0) {
-                                setSearchText('');
-                              }
-                            }}
-                          >
-                            <FoodtypeContent
-                              type={foodtype}
-                              diet={diet}
-                              craftableCount={Object.keys(craftability).length}
-                            />
-                          </Tabs.Tab>
-                        ))}
                       {tabMode === TABS.material &&
                         filteredMaterials.map((material) => (
                           <Tabs.Tab
@@ -480,6 +444,40 @@ export function PersonalCrafting(props: any) {
                                           </Button.Checkbox>
                                         </Stack.Item>
                                       ))}
+
+                                      <Stack.Item>
+                                        <SubGroupTitle title="Type" />
+                                      </Stack.Item>
+                                      {allFoodtypes.map((foodType) => (
+                                        <Stack.Item key={foodType}>
+                                          <Button.Checkbox
+                                            fluid
+                                            checked={activeFoodType?.includes(
+                                              foodType,
+                                            )}
+                                            onClick={() => {
+                                              setFoodType(
+                                                toggleArrayItem(
+                                                  activeFoodType,
+                                                  foodType,
+                                                ),
+                                              );
+                                              setPages(1);
+                                            }}
+                                          >
+                                            <Box inline>
+                                              <FoodtypeContent
+                                                type={foodType}
+                                                diet={diet}
+                                                craftableCount={
+                                                  Object.keys(craftability)
+                                                    .length
+                                                }
+                                              />
+                                            </Box>
+                                          </Button.Checkbox>
+                                        </Stack.Item>
+                                      ))}
                                     </Stack>
                                   </Stack.Item>
                                 )}
@@ -577,28 +575,9 @@ export function PersonalCrafting(props: any) {
                     .slice(0, displayLimit)
                     .map((item) =>
                       display_compact ? (
-                        <RecipeContentCompact
-                          key={item.ref}
-                          item={item}
-                          craftable={
-                            !item.non_craftable &&
-                            Boolean(craftability[item.ref])
-                          }
-                          busy={busy}
-                          mode={mode}
-                        />
+                        <RecipeContentCompact key={item.ref} item={item} />
                       ) : (
-                        <RecipeContent
-                          key={item.ref}
-                          item={item}
-                          craftable={
-                            !item.non_craftable &&
-                            Boolean(craftability[item.ref])
-                          }
-                          busy={busy}
-                          mode={mode}
-                          diet={diet}
-                        />
+                        <RecipeContent key={item.ref} item={item} />
                       ),
                     )}
                 </VirtualList>

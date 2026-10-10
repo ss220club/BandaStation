@@ -1,4 +1,5 @@
 @use '../base.scss';
+@use '../colors.scss' as colors;
 
 .ColorInput {
   &__Text {
@@ -74,6 +75,99 @@
     border-right: none;
     box-shadow: inset 0.25rem 0.25rem 0.5rem -0.25rem var(--color-primary);
   }
+
+  /* BANDASTATION: Character Preferences
+  &__Jobs {
+    > * {
+      flex: 1;
+    }
+
+    &__characterMenu {
+      box-shadow: var(--dropdown-menu-blur);
+      background-color: var(--dropdown-menu-background);
+      border: var(--dropdown-menu-border);
+      border-radius: var(--dropdown-menu-border-radius);
+      transition: opacity 0.35s ease-out;
+
+      &--hidden {
+        opacity: 0;
+        pointer-events: none;
+
+        @at-root .Floating:has(> #{&}) {
+          pointer-events: none;
+        }
+      }
+    }
+
+    &__departments {
+      &.head {
+        background: colors.bg(var(--department-color));
+
+        .job-name {
+          font-weight: bold;
+          &.hovered {
+            background: colors.hover(colors.bg(var(--department-color)));
+          }
+        }
+      }
+
+      background: colors.fg(var(--department-color));
+      border: var(--border-thickness-small) outset
+        colors.fg(var(--department-color));
+      color: black;
+
+      .options {
+        padding-right: var(--space-xxs);
+        padding-bottom: 0.2em;
+        background: hsla(0, 0%, 0%, 0.2);
+      }
+      .job-name {
+        &.hovered {
+          background: colors.hover(colors.fg(var(--department-color)));
+        }
+      }
+
+      &--Captain {
+        border: var(--border-thickness-medium) outset hsla(60, 100%, 39.2%, 1);
+
+        &:first-child {
+          border-top: var(--border-thickness-medium) outset
+            hsla(60, 100%, 39.2%, 1);
+        }
+
+        .job-name {
+          font-size: 17px;
+          &.hovered {
+            background: colors.hover(colors.fg(var(--department-color)));
+          }
+        }
+      }
+
+      &__priority {
+        border: var(--border-thickness-tiny) solid hsla(0, 0%, 0%, 0.3);
+
+        &--off::after {
+          content: '';
+
+          background: hsla(0, 0%, 0%, 0.2);
+          display: block;
+          height: 80%;
+          left: 50%;
+          position: relative;
+          top: 50%;
+          transform: translateX(-50%) translateY(-50%) rotate(40deg);
+          width: 2px;
+        }
+      }
+    }
+
+    &__PriorityHeader {
+      font-weight: bold;
+      transform: translateX(-8px) translateY(-8px) rotate(315deg);
+      white-space: nowrap;
+      width: 19px;
+    }
+    */
 
   &__Preference {
     user-select: none;

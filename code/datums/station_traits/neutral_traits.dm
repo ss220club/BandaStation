@@ -448,25 +448,35 @@
 	var/skub_stance = skubbers[player.ckey]
 	switch(skub_stance)
 		if(PRO_SKUB)
-			lobby_button.base_icon_state = "signup_on"
+			return "signup_on"
 		if(ANTI_SKUB)
-			lobby_button.base_icon_state = "signup"
-		else
-			lobby_button.base_icon_state = "signup_neutral"
+			return "signup"
+	return "signup_neutral"
 
-/datum/station_trait/skub/on_lobby_button_click(atom/movable/screen/lobby/button/sign_up/lobby_button, updates)
-	var/mob/player = lobby_button.get_mob()
+/datum/station_trait/skub/get_lobby_overlay_states(mob/dead/new_player/player)
+	switch(skubbers[player.ckey])
+		if(PRO_SKUB)
+			return list("pro_skub")
+		if(ANTI_SKUB)
+			return list("anti_skub")
+		if(SKUB_IDFC)
+			return list("neutral_skub")
+		if(RANDOM_SKUB)
+			return list("random_skub")
+	return list()
+
+/datum/station_trait/skub/on_lobby_button_click(mob/dead/new_player/player)
 	var/skub_stance = skubbers[player.ckey]
 	switch(skub_stance)
 		if(PRO_SKUB)
 			skubbers[player.ckey] = ANTI_SKUB
-			lobby_button.balloon_alert(player, "anti-skub")
+			return "anti-skub"
 		if(ANTI_SKUB)
 			skubbers[player.ckey] = SKUB_IDFC
-			lobby_button.balloon_alert(player, "don't care")
+			return "don't care"
 		if(SKUB_IDFC)
 			skubbers[player.ckey] = RANDOM_SKUB
-			lobby_button.balloon_alert(player, "on the best side")
+			return "on the best side"
 		if(RANDOM_SKUB)
 			skubbers[player.ckey] = PRO_SKUB
 			lobby_button.balloon_alert(player, "pro-skub")
