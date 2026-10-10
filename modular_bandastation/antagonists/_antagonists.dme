@@ -1,7 +1,3 @@
 #include "_antagonists.dm"
 
 #include "code/ert.dm"
-#include "code/operations/antag_operation.dm"
-#include "code/operations/document_exchange.dm"
-#include "code/operations/document_exchange_assignment.dm"
-#include "code/operations/document_exchange_admin.dm"
