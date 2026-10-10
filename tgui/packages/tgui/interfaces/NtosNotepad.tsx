@@ -404,7 +404,7 @@ export const NtosNotepad = (props) => {
   const handleCloseDialog = () => setActiveDialog(Dialogs.NONE);
   const handleSave = () => {
     logger.log(`Документ сохранен как ${documentName}`);
-    act('save', { note: text });
+    act('Save', { note: text });
     setActiveDialog(Dialogs.NONE);
     if (retryAction) {
       setRetryAction(null);

@@ -370,10 +370,11 @@
 	var/t_He = ru_p_they(TRUE)
 	var/t_His = ru_p_them(TRUE)
 	//Hands
-	for(var/obj/item/held_thing in held_items)
+	for(var/held_index in get_active_held_indexes())
+		var/obj/item/held_thing = get_item_for_held_index(held_index)
 		if((held_thing.item_flags & (ABSTRACT|HAND_ITEM)) || HAS_TRAIT(held_thing, TRAIT_EXAMINE_SKIP))
 			continue
-		. += "[t_He] держит [held_thing.examine_title(user, declent = ACCUSATIVE)] в [get_held_index_name(get_held_index_of_item(held_thing))]."
+		. += "[t_He] держит [held_thing.examine_title(user, declent = ACCUSATIVE)] в [t_His] [get_held_index_name(held_index)]."
 	for(var/obj/item/bodypart/arm/part in get_bodyparts())
 		if(!(part.bodypart_flags & BODYPART_PSEUDOPART))
 			continue
@@ -384,7 +385,7 @@
 		var/cables_or_cuffs = istype(handcuffed, /obj/item/restraints/handcuffs/cable) ? "в связках" : "в наручниках"
 		. += span_warning("[t_He] [icon2html(handcuffed, user)] [cables_or_cuffs]!")
 	//eyes
-	if(!(obscured_slots & HIDEEYES))
+	if(is_eyes_visible(requires_eyes = TRUE))
 		if(HAS_TRAIT(src, TRAIT_UNNATURAL_RED_GLOWY_EYES))
 			. += span_warning("<B>[t_His] глаза светятся неестественной красной аурой!</B>")
 		else if(HAS_TRAIT(src, TRAIT_BLOODSHOT_EYES))
@@ -449,10 +450,11 @@
 		else
 			. += "[t_He] носит [wear_id.examine_title(user, declent = ACCUSATIVE)]."
 	//Hands
-	for(var/obj/item/held_thing in held_items)
+	for(var/held_index in get_active_held_indexes())
+		var/obj/item/held_thing = get_item_for_held_index(held_index)
 		if((held_thing.item_flags & (ABSTRACT|HAND_ITEM)) || HAS_TRAIT(held_thing, TRAIT_EXAMINE_SKIP))
 			continue
-		. += "[t_He] держит [held_thing.examine_title(user, declent = ACCUSATIVE)] в [get_held_index_name(get_held_index_of_item(held_thing))]."
+		. += "[t_He] держит [held_thing.examine_title(user, declent = ACCUSATIVE)] в [t_His] [get_held_index_name(held_index)]."
 	for(var/obj/item/bodypart/arm/part in get_bodyparts())
 		if(!(part.bodypart_flags & BODYPART_PSEUDOPART))
 			continue
