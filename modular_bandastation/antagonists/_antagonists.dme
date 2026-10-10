@@ -1,3 +1,5 @@
 #include "_antagonists.dm"
 
 #include "code/ert.dm"
+#include "code/objective_observer.dm"
+#include "code/objective_replacement.dm"
