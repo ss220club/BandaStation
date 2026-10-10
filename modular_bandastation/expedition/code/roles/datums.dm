@@ -25,9 +25,8 @@
 	back = /obj/item/storage/backpack/satchel
 	backpack_contents = list(
 		/obj/item/holochip/sotnya = 1,
-		/obj/item/modular_computer/pda/clear = 1,
 	)
-	pda_slot = ITEM_SLOT_BACK
+	pda_slot = null
 
 /obj/item/holochip/sotnya
 	credits = 100
@@ -75,6 +74,8 @@
 	spawn_positions = 1
 	paycheck = PAYCHECK_ZERO
 	display_order = JOB_DISPLAY_ORDER_CAPTAIN
+	req_admin_notify = 1
+	tgui_icon = FA_ICON_CROWN
 
 /obj/effect/landmark/start/mercenary/leader
 	name = JOB_OPERATIVE_LEADER

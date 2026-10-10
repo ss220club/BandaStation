@@ -5,7 +5,6 @@
 #include "code/loot/loot_tables.dm"
 #include "code/props/barricades/wires.dm"
 #include "code/props/barricades/barricades.dm"
-#include "code/props/flora/pines.dm"
 #include "code/roles/datums.dm"
 #include "code/roles/jobs_fixes.dm"
 #include "code/roles/vanilla_jobs_disabler.dm"

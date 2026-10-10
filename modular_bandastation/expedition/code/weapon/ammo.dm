@@ -563,7 +563,7 @@
 /obj/item/ammo_box/a50ae
 	name = "ammo box (.50 AE)"
 	desc = "Коробка с винтовочными патронами калибра .50 AE, вмещает 20 патронов."
-	icon = 'modular_bandastation/expedition/icons/weapon/ammo.dmi'
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "a50aebox"
 	w_class = WEIGHT_CLASS_NORMAL
 	caliber = CALIBER_50AE

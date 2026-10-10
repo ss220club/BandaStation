@@ -329,7 +329,7 @@
 	name = "long metal shelf"
 	desc = "A sturdy metal shelf to store a variety of items on."
 	icon = 'modular_bandastation/expedition/icons/supermart.dmi'
-	icon_state = "longrack_1"
+	icon_state = "longrack1"
 	density = TRUE
 	anchored = TRUE
 	loot_chance = 60

@@ -507,7 +507,7 @@
 	ai_controller = /datum/ai_controller/basic_controller/trooper/ranged
 	r_hand = /obj/item/gun/ballistic/automatic/pistol
 	/// Type of bullet we use
-	var/casingtype = /obj/item/ammo_casing/c9mm
+	var/projectiletype = /obj/projectile/bullet/c9mm
 	/// Sound to play when firing weapon
 	var/projectilesound = 'sound/items/weapons/gun/pistol/shot.ogg'
 	/// number of burst shots
@@ -515,15 +515,12 @@
 	/// Time between taking shots
 	var/ranged_cooldown = 1 SECONDS
 
-	var/projectiletype = /obj/projectile/bullet/c9mm
-
 /mob/living/basic/trooper/assistant/ranged/Initialize(mapload)
 	. = ..()
 	AddComponent(\
 		/datum/component/ranged_attacks,\
-		casing_type = casingtype,\
-		projectile_sound = projectilesound,\
 		projectile_type = projectiletype,\
+		projectile_sound = projectilesound,\
 		cooldown_time = ranged_cooldown,\
 		burst_shots = burst_shots,\
 	)
@@ -545,6 +542,7 @@
 /datum/outfit/job/assistant/tider
 	belt = null
 	mask = /obj/item/clothing/mask/gas
+	pda_slot = null
 
 /mob/living/basic/alien
 	melee_attack_cooldown = 1 SECONDS
