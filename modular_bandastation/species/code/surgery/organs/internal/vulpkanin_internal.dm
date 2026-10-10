@@ -3,7 +3,10 @@
 	desc = "Длинный и более чувствительный язык, может различить больше вкусов."
 	icon_state = "tongue"
 	taste_sensitivity = 10
-	modifies_speech = FALSE
+	modifies_speech = TRUE
+	accent_characters = list("r", "R", "р", "Р")
+	accent_repeat_min = 2
+	accent_repeat_max = 4
 	languages_native = list(/datum/language/canilunzt)
 	liked_foodtypes = RAW | MEAT | SEAFOOD
 	disliked_foodtypes =  FRUIT | NUTS | GROSS | GRAIN
