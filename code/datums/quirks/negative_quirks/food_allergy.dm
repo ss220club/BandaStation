@@ -20,7 +20,6 @@ GLOBAL_LIST_INIT(possible_food_allergies, list(
 	lose_text = span_notice("Вы чувствуете, как ваша иммунная система возвращается к норме.")
 	medical_record_text = "Иммунная система пациента бурно реагирует на определенные продукты питания."
 	hardcore_value = 1
-	quirk_flags = QUIRK_HUMAN_ONLY
 	mail_goodies = list(/obj/item/reagent_containers/hypospray/medipen)
 	/// Footype flags that will trigger the allergy
 	var/target_foodtypes = NONE

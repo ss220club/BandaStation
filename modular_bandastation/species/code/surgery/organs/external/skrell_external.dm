@@ -17,22 +17,22 @@
 
 	actions_types = list(/datum/action/item_action/organ_action/headpocket)
 
-/obj/item/organ/head_tentacle/Initialize(mapload)
-	. = ..()
-	create_storage(storage_type = /datum/storage/headpocket)
-
 /obj/item/organ/head_tentacle/ui_action_click(mob/user, actiontype)
 	. = ..()
-	atom_storage.open_storage(user)
+	bodypart_owner.atom_storage.open_storage(user)
+
+/obj/item/organ/head_tentacle/on_bodypart_insert(obj/item/bodypart/limb, movement_flags)
+	. = ..()
+	limb.create_storage(storage_type = /datum/storage/headpocket)
+	limb.atom_storage.set_real_location(src)
 
 /obj/item/organ/head_tentacle/on_bodypart_remove(obj/item/bodypart/limb, movement_flags)
 	. = ..()
-	atom_storage.remove_all()
+	if (limb.atom_storage)
+		limb.atom_storage.remove_all(limb.drop_location())
+		QDEL_NULL(limb.atom_storage)
 
-	var/mob/living/carbon/human/H = limb.owner
-	if(!istype(H))
-		return
-	for(var/obj/item/organ/O in H.organs)
+	for(var/obj/item/organ/O in limb.owner?.organs || limb.contents)
 		if(istype(O, /obj/item/organ/tentacle_ornament) || istype(O, /obj/item/organ/cloth_wrap))
 			qdel(O)
 

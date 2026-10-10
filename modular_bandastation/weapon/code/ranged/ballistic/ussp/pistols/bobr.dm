@@ -4,7 +4,6 @@
 		Очевидно, результатом этих усилий стал барабан на четыре патрона, изготовленный для патронов 12-го калибра."
 	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/cylinder/rev12ga
 	recoil = 2
-	weapon_weight = WEAPON_LIGHT
 	icon = 'modular_bandastation/weapon/icons/ranged/ballistic.dmi'
 	icon_state = "bobr"
 	fire_sound = 'modular_bandastation/weapon/sound/ranged/revolver_fire.ogg'
@@ -27,6 +26,5 @@
 	desc = parent_type::desc + "<br>Укороченная версия, помещающаяся в карманы. Большой дамский угодник."
 	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/cylinder/rev12ga
 	recoil = 3
-	weapon_weight = WEAPON_LIGHT
 	w_class = WEIGHT_CLASS_SMALL
 	icon_state = "bobr_short"
