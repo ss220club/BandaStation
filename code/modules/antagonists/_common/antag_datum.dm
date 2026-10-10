@@ -618,6 +618,7 @@ GLOBAL_LIST_EMPTY(antagonists)
 		objectives.Insert(1, custom_objective)
 
 	can_assign_self_objectives = FALSE
+	// BANDASTATION EDIT: notify operations when an agent changes their objectives.
 	SEND_SIGNAL(src, COMSIG_ANTAGONIST_OBJECTIVES_CHANGED)
 	owner.announce_objectives()
 
