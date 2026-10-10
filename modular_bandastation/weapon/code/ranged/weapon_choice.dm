@@ -1,4 +1,4 @@
-/obj/item/choice_beacon/weapon/security_pistol
+/obj/item/choice_beacon/weapon
 	name = "sidearm weapon beacon"
 	desc = "Одноразовый маяк для доставки оружия по вашему выбору. Пожалуйста, используйте его только в своем офисе."
 
@@ -21,6 +21,7 @@
 		"X-01 MultiPhase Energy Gun" = /obj/item/gun/energy/e_gun/hos,
 		"X-02 Laser Pistol" = /obj/item/storage/toolbox/guncase/ntspecial/pistol/hos,
 		"GP-45 .45 cal Pistol" = /obj/item/storage/toolbox/guncase/ntspecial/pistol/gp45,
+		"PDH-A2 'Osprey'" = /obj/item/storage/toolbox/guncase/ntspecial/pistol/pdh,
 	)
 	return selectable_gun_types
 
@@ -28,7 +29,7 @@
 	name = "the head of security's personal weapon"
 	targetitem = /obj/item/choice_beacon/weapon/hos
 	excludefromjob = list(JOB_HEAD_OF_SECURITY)
-	altitems = list(/obj/item/gun/ballistic/automatic/pistol/cm70/hos, /obj/item/gun/ballistic/automatic/laser/pistol, /obj/item/gun/energy/e_gun/hos)
+	altitems = list(/obj/item/gun/ballistic/automatic/pistol/pdh/hos, /obj/item/gun/ballistic/automatic/pistol/cm70/hos, /obj/item/gun/ballistic/automatic/laser/pistol, /obj/item/gun/energy/e_gun/hos)
 	item_owner = list(JOB_HEAD_OF_SECURITY)
 	exists_on_map = TRUE
 
