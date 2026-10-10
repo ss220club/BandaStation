@@ -57,9 +57,30 @@
 
 /datum/antagonist/vampire/can_be_owned(datum/mind/new_owner)
 	var/datum/mind/tested = new_owner || owner
-	if(is_species(tested.current, /datum/species/human/vampire))
+	if(!ishuman(tested.current))
+		return FALSE
+
+	var/mob/living/carbon/human/H = tested.current
+	var/datum/species/species = H.dna?.species
+	stack_trace("[species] [species.type]")
+	if(!species.is_vampire_compatible())
 		return FALSE
 	return ..()
+
+/datum/species/proc/is_vampire_compatible()
+	var/static/list/banned_traits = list(
+		TRAIT_NOHUNGER,
+		TRAIT_NOBLOOD,
+		TRAIT_NOFIRE
+	)
+	for(var/trait in banned_traits)
+		if(trait in inherent_traits)
+			return FALSE
+
+	if(exotic_bloodtype && (exotic_bloodtype::reagent_type != /datum/reagent/blood))
+		return FALSE
+
+	return TRUE
 
 /datum/antagonist/vampire/Destroy(force, ...)
 	draining = null

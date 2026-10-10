@@ -61,8 +61,11 @@
 
 	name = initial(name)
 
-	// Special check for if you're trapped in a body you can't control because it's owned by a ling.
-	if(IS_CHANGELING(brain_owner) && !(movement_flags & NO_ID_TRANSFER))
+	// BANDASTATION EDIT: dont transfer vamps to incompatible bodies
+	// Special check for if you're trapped in a body you can't control because it's owned by a ling or is incompatible with you.
+	if((IS_CHANGELING(brain_owner) && !(movement_flags & NO_ID_TRANSFER)) \
+		|| (brainmob?.mind.has_antag_datum(/datum/antagonist/vampire) && (isnull(brain_owner.dna?.species) || !brain_owner.dna?.species?.is_vampire_compatible())))
+	// BANDASTATION EDIT END
 		if(brainmob && !IS_DEAD_OR_FAKING(brain_owner))
 			to_chat(brainmob, span_danger("You can't feel your body! You're still just a brain!"))
 		forceMove(brain_owner)

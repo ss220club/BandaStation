@@ -16,10 +16,7 @@
 	var/species_type = candidate_client.prefs.read_preference(/datum/preference/choiced/species)
 	var/datum/species/species = GLOB.species_prototypes[species_type]
 
-	if(TRAIT_NOBLOOD in species.inherent_traits)
-		return FALSE
-
-	if(species.exotic_bloodtype && (species.exotic_bloodtype::reagent_type != /datum/reagent/blood))
+	if(!species.is_vampire_compatible())
 		return FALSE
 
 /datum/dynamic_ruleset/roundstart/vampire/assign_role(datum/mind/candidate)
