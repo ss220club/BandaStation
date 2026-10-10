@@ -25,15 +25,17 @@
 	lobby_button.desc = button_desc
 	return ..()
 
-/datum/station_trait/job/on_lobby_button_click(atom/movable/screen/lobby/button/sign_up/lobby_button, location, control, params, mob/dead/new_player/user)
-	if (LAZYFIND(lobby_candidates, user))
-		LAZYREMOVE(lobby_candidates, user)
-	else
-		LAZYADD(lobby_candidates, user)
+/datum/station_trait/job/get_lobby_description()
+	return button_desc
 
-/datum/station_trait/job/on_lobby_button_destroyed(atom/movable/screen/lobby/button/sign_up/lobby_button)
-	. = ..()
-	LAZYREMOVE(lobby_candidates, lobby_button.get_mob())
+/datum/station_trait/job/on_lobby_button_click(mob/dead/new_player/player)
+	if(LAZYFIND(lobby_candidates, player))
+		LAZYREMOVE(lobby_candidates, player)
+	else
+		LAZYADD(lobby_candidates, player)
+
+/datum/station_trait/job/get_lobby_icon_state(mob/dead/new_player/player)
+	return LAZYFIND(lobby_candidates, player) ? "signup_on" : "signup"
 
 /datum/station_trait/job/on_lobby_button_update_icon(atom/movable/screen/lobby/button/sign_up/lobby_button, updates)
 	if (LAZYFIND(lobby_candidates, lobby_button.get_mob()))
