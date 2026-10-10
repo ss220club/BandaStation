@@ -369,16 +369,6 @@
 	name = "Shitfuck"
 	description = "Что-то что может летать и отдаленно похоже на под."
 
-// /datum/lazy_template/hub
-// 	map_dir = "_maps/map_files/expedition"
-// 	map_name = "hub"
-// 	key = LAZY_TEMPLATE_KEY_HUB
-
-// /datum/lazy_template/inka
-// 	map_dir = "_maps/templates/lazy_templates/ss220"
-// 	map_name = "inka"
-// 	key = LAZY_TEMPLATE_KEY_INKA
-
 /obj/docking_port/mobile/shittle
 	name = "shitfuck shuttle"
 	shuttle_id = "shittle"
@@ -388,7 +378,7 @@
 	port_direction = NORTH
 	preferred_direction = NORTH
 	can_move_docking_ports = 1
-	rechargeTime = 5 MINUTES
+	rechargeTime = 1 MINUTES
 	callTime = 5 MINUTES
 
 /obj/machinery/computer/camera_advanced/shuttle_docker/shittle
@@ -456,15 +446,18 @@
 	ai_controller = /datum/ai_controller/basic_controller/revolutionary
 	obj_damage = 20
 	loot = list(/obj/item/spear)
+	sharpness = SHARP_POINTY
 
 	var/static/list/phrases = list(
 		"ТЕБЕ КОНЕЦ!",
 		"ВИВА!",
+		"ТАЙД!",
 		"УБЬЕМ!",
 		"А НУ ИДИ СЮДА!",
 		"ААААААААА!",
 		"Я НАСАЖУ ТВОЮ ГОЛОВУ НА СВОЕ КОПЬЕ!",
 		"ЗА БЕЗУДЕЛЬНЫХ!",
+		"Я НЕ БУДУ РАБОТАТЬ!",
 	)
 
 	/// Male screams
@@ -522,12 +515,15 @@
 	/// Time between taking shots
 	var/ranged_cooldown = 1 SECONDS
 
-/mob/living/basic/trooper/syndicate/ranged/Initialize(mapload)
+	var/projectiletype = /obj/projectile/bullet/c9mm
+
+/mob/living/basic/trooper/assistant/ranged/Initialize(mapload)
 	. = ..()
 	AddComponent(\
 		/datum/component/ranged_attacks,\
 		casing_type = casingtype,\
 		projectile_sound = projectilesound,\
+		projectile_type = projectiletype,\
 		cooldown_time = ranged_cooldown,\
 		burst_shots = burst_shots,\
 	)
@@ -536,10 +532,12 @@
 
 /mob/living/basic/trooper/assistant/ranged/laser
 	r_hand = /obj/item/gun/energy/laser/soul
+	l_hand = /obj/item/spear
 	burst_shots = 1
 	ranged_cooldown = 0 SECONDS
 	projectilesound = 'sound/items/weapons/laser.ogg'
-	loot = list(/obj/item/gun/energy/laser/soul)
+	loot = list(/obj/item/gun/energy/laser/soul, /obj/item/spear)
+	projectiletype = /obj/projectile/beam/laser
 
 /obj/effect/mob_spawn/corpse/human/assistant/tider
 	outfit = /datum/outfit/job/assistant/tider
@@ -547,6 +545,9 @@
 /datum/outfit/job/assistant/tider
 	belt = null
 	mask = /obj/item/clothing/mask/gas
+
+/mob/living/basic/alien
+	melee_attack_cooldown = 1 SECONDS
 
 /mob/living/basic/alien/sentinel
 	health = 200

@@ -10188,7 +10188,6 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/showcase/machinery/oldpod,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/effect/mapping_helpers/broken_machine,
 /turf/open/floor/iron,
 /area/ruin/space/ancientstation/charlie/dorms)
 "fPB" = (
@@ -11699,19 +11698,6 @@
 /obj/effect/mapping_helpers/broken_machine,
 /turf/open/floor/catwalk_floor/iron_smooth,
 /area/ruin/space/has_grav/hideout/corridor)
-"gIZ" = (
-/obj/effect/turf_decal/stripes/line{
-	dir = 9
-	},
-/obj/effect/turf_decal/stripes/line{
-	dir = 6
-	},
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
-/obj/structure/showcase/machinery/oldpod,
-/obj/effect/mapping_helpers/broken_machine,
-/turf/open/floor/iron,
-/area/ruin/space/ancientstation/charlie/dorms)
 "gJz" = (
 /turf/open/floor/plating,
 /area/ruin/space/has_grav/powered/biooutpost)
@@ -13957,7 +13943,6 @@
 "hWM" = (
 /obj/structure/closet/crate/bin,
 /obj/effect/spawner/random/trash/food_packaging,
-/obj/structure/cable,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/structure/sign/departments/custodian/directional/west,
 /obj/machinery/firealarm/directional/south,
@@ -14844,19 +14829,6 @@
 /obj/effect/turf_decal/tile/purple/opposingcorners,
 /turf/open/indestructible/white,
 /area/ruin/space/has_grav/powered/biooutpost)
-"iye" = (
-/obj/effect/turf_decal/stripes/line{
-	dir = 9
-	},
-/obj/effect/turf_decal/stripes/line{
-	dir = 6
-	},
-/obj/effect/decal/cleanable/dirt,
-/obj/structure/showcase/machinery/oldpod,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/mapping_helpers/broken_machine,
-/turf/open/floor/iron,
-/area/ruin/space/ancientstation/charlie/dorms)
 "iyl" = (
 /obj/effect/turf_decal/stripes/asteroid{
 	dir = 4
@@ -15560,7 +15532,6 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/effect/mapping_helpers/broken_machine,
 /turf/open/floor/iron,
 /area/ruin/space/ancientstation/charlie/dorms)
 "iRC" = (
@@ -17988,7 +17959,6 @@
 /area/ruin/space/has_grav/derelictsulaco)
 "knR" = (
 /obj/machinery/door/airlock/maintenance_hatch,
-/obj/structure/cable,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/effect/mapping_helpers/airlock/access/any,
@@ -30442,10 +30412,6 @@
 	},
 /turf/open/floor/plating,
 /area/ruin/space/has_grav/derelictsulaco)
-"rpN" = (
-/obj/structure/lattice,
-/turf/closed/indestructible/reinforced,
-/area/ruin/space/has_grav/hideout/bar_maint)
 "rpO" = (
 /obj/effect/decal/cleanable/dirt{
 	icon_state = "dirt-9"
@@ -36266,6 +36232,7 @@
 /turf/closed/wall/r_wall/rust,
 /area/ruin/space/has_grav/the_outlet/employeesection)
 "uqO" = (
+/mob/living/basic/trooper/assistant/ranged,
 /turf/open/floor/iron/dark,
 /area/ruin/space/has_grav/turretedoutpost)
 "ura" = (
@@ -69021,7 +68988,7 @@ eZD
 eZD
 kvv
 kvv
-rpN
+qay
 bZL
 rYW
 rYW
@@ -94531,7 +94498,7 @@ puO
 lBQ
 idi
 lBQ
-gIZ
+idi
 lBQ
 idi
 lHp
@@ -95561,7 +95528,7 @@ idi
 lBQ
 idi
 lBQ
-iye
+iSj
 cqD
 fLE
 fkj

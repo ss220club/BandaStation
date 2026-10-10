@@ -414,7 +414,7 @@
 	var/obj/item/gun/ballistic/automatic/kiboko/firing_launcher = fired_from
 	if(istype(firing_launcher))
 		loaded_projectile.range = firing_launcher.target_range
-	. = ..()
+	return ..()
 
 /obj/item/ammo_casing/c980grenade/smoke
 	name = ".980 Tydhouer smoke grenade"

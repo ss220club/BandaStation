@@ -341,7 +341,7 @@ GLOBAL_LIST_INIT(technical_loot_table, list(
 //	/obj/item/crafting_items/gunpowder = 70,
 //	/obj/item/crafting_items/gunpowder/medium = 50,
 //	/obj/item/crafting_items/gunpowder/high = 30,
-	/obj/item/reagent_containers/cup/fuel_can = 60,
+//	/obj/item/reagent_containers/cup/fuel_can = 60,
 	/obj/item/stack/sheet/plastic = 80,
 	/obj/item/stack/sheet/plastic/five = 60,
 	/obj/item/screwdriver = 70,

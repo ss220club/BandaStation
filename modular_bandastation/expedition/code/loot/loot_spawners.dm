@@ -1,7 +1,34 @@
+#define WEAPON_LOOT "weapon_loot"
+#define AMMO_LOOT "ammo_loot"
+#define FOOD_LOOT "food_loot"
+#define TREASURE_LOOT "treasure_loot"
+#define CLOTHING_LOOT "clothing_loot"
+#define INFO_LOOT "info_loot"
+#define TECHNICAL_LOOT "technical_loot"
+
 /obj/effect/spawner/random/loot_spawn
 	name = "loot spawn"
 	icon = 'icons/effects/landmarks_static.dmi'
 	icon_state = "x2"
+	var/loot_table = WEAPON_LOOT
+
+/obj/effect/spawner/random/loot_spawn/Initialize(mapload)
+	switch(loot_table)
+		if(WEAPON_LOOT)
+			loot = GLOB.weapon_loot_table
+		if(AMMO_LOOT)
+			loot = GLOB.ammo_loot_table
+		if(FOOD_LOOT)
+			loot = GLOB.food_loot_table
+		if(TREASURE_LOOT)
+			loot = GLOB.treasure_loot_table
+		if(CLOTHING_LOOT)
+			loot = GLOB.clothing_loot_table
+		if(INFO_LOOT)
+			loot = GLOB.info_loot_table
+		if(TECHNICAL_LOOT)
+			loot = GLOB.technical_loot_table
+	return ..()
 
 /obj/effect/spawner/random/loot_spawn/medical
 	name = "medical loot spawn"
@@ -55,70 +82,49 @@
 	icon_state = "x"
 	spawn_loot_count = 1
 	spawn_loot_chance = 70
-
-/obj/effect/spawner/random/loot_spawn/weapon/Initialize(mapload)
-	. = ..()
-	loot = GLOB.weapon_loot_table
+	loot_table = WEAPON_LOOT
 
 /obj/effect/spawner/random/loot_spawn/ammo
 	name = "ammo loot spawn"
 	icon_state = "x"
 	spawn_loot_count = 2
 	spawn_loot_chance = 90
-
-/obj/effect/spawner/random/loot_spawn/ammo/Initialize(mapload)
-	. = ..()
-	loot = GLOB.ammo_loot_table
+	loot_table = AMMO_LOOT
 
 /obj/effect/spawner/random/loot_spawn/food
 	name = "food loot spawn"
 	icon_state = "x3"
 	spawn_loot_count = 3
 	spawn_loot_chance = 90
-
-/obj/effect/spawner/random/loot_spawn/food/Initialize(mapload)
-	. = ..()
-	loot = GLOB.food_loot_table
+	loot_table = FOOD_LOOT
 
 /obj/effect/spawner/random/loot_spawn/treasure
 	name = "treasure loot spawn"
 	icon_state = "x4"
 	spawn_loot_count = 1
 	spawn_loot_chance = 90
-
-/obj/effect/spawner/random/loot_spawn/treasure/Initialize(mapload)
-	. = ..()
-	loot = GLOB.treasure_loot_table
+	loot_table = TREASURE_LOOT
 
 /obj/effect/spawner/random/loot_spawn/clothing
 	name = "clothing loot spawn"
 	icon_state = "city_of_cogs"
 	spawn_loot_count = 1
 	spawn_loot_chance = 70
-
-/obj/effect/spawner/random/loot_spawn/clothing/Initialize(mapload)
-	. = ..()
-	loot = GLOB.clothing_loot_table
+	loot_table = CLOTHING_LOOT
 
 /obj/effect/spawner/random/loot_spawn/information
 	name = "info loot spawn"
 	icon_state = "random_loot"
 	spawn_loot_count = 1
 	spawn_loot_chance = 50
-
-/obj/effect/spawner/random/loot_spawn/information/Initialize(mapload)
-	. = ..()
-	loot = GLOB.info_loot_table
+	loot_table = INFO_LOOT
 
 /obj/effect/spawner/random/loot_spawn/technical
 	name = "technical loot spawn"
 	icon_state = "clockwork_orange"
 	spawn_loot_count = 2
 	spawn_loot_chance = 80
-
-/obj/effect/spawner/random/loot_spawn/technical/Initialize(mapload)
-	. = ..()
-	loot = GLOB.technical_loot_table
+	loot_table = TECHNICAL_LOOT
 
 // /obj/effect/landmark/loot_spawn/magma_artifact
 // 	name = "magma wing spawn"
@@ -141,6 +147,13 @@
 // 	spawn_loot_count = 1
 // 	spawn_loot_chance = 50
 
+#undef WEAPON_LOOT
+#undef AMMO_LOOT
+#undef FOOD_LOOT
+#undef TREASURE_LOOT
+#undef CLOTHING_LOOT
+#undef INFO_LOOT
+#undef TECHNICAL_LOOT
 
 /obj/structure/loot
 	name = "trash bags"
@@ -160,6 +173,10 @@
 
 /obj/structure/loot/proc/reset_loot()
 	searched = FALSE
+
+/obj/structure/loot/examine(mob/user)
+	. = ..()
+	. += "<b>ПКМ</b> чтобы обыскать."
 
 /obj/structure/loot/trash/garbage
 	name = "trash bags"

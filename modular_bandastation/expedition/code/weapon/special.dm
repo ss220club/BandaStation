@@ -125,10 +125,6 @@
 
 /obj/item/gun/ballistic/minigun/dropped(mob/user)
 	. = ..()
-	if(ammo_pack)
-		ammo_pack.attach_gun(user)
-	else
-		QDEL_NULL(src)
 	if(ammo_pack && isatom(ammo_pack) && ammo_pack.loc == user)
 		// put it back into the pack owned by this user
 		ammo_pack.attach_gun(user)
@@ -136,25 +132,25 @@
 		QDEL_NULL(src)
 
 /obj/item/gun/ballistic/minigun/process_fire(atom/target, mob/living/user, message = TRUE, params = null, zone_override = "", bonus_spread = 0)
-	if(ammo_pack)
-		if(ammo_pack.overheat > ammo_pack.overheat_max * (1 / 3) && ammo_pack.heat_stage < 1)
-			to_chat(user, span_notice("Вы чувствуете тепло от рукоятки оружия."))
-			ammo_pack.heat_stage += 1
-			..()
-			playsound(user, 'sound/effects/wounds/sizzle2.ogg', 70, TRUE)
+	if(!ammo_pack)
+		return
+	if(ammo_pack.overheat >= ammo_pack.overheat_max)
+		to_chat(user, span_notice("Датчик температуры оружия заблокировал спусковой крючок, чтобы предотвратить повреждение от перегрева."))
+		playsound(user, 'sound/effects/wounds/sizzle1.ogg', 100, TRUE)
+		return
 
-		if(ammo_pack.overheat > ammo_pack.overheat_max * (2 / 3) && ammo_pack.heat_stage < 2)
-			to_chat(user, span_notice("Датчик температуры оружия быстро пищит, как только достигает предела!"))
-			ammo_pack.heat_stage += 1
-			..()
-			playsound(user, 'sound/items/weapons/gun/general/empty_alarm.ogg', 50, TRUE)
+	if(ammo_pack.overheat > ammo_pack.overheat_max * (1 / 3) && ammo_pack.heat_stage < 1)
+		to_chat(user, span_notice("Вы чувствуете тепло от рукоятки оружия."))
+		ammo_pack.heat_stage = 1
+		playsound(user, 'sound/effects/wounds/sizzle2.ogg', 70, TRUE)
 
-		if(ammo_pack.overheat < ammo_pack.overheat_max)
-			ammo_pack.overheat += burst_size
-			..()
-		else
-			to_chat(user, span_notice("Датчик температуры оружия заблокировал спусковой крючок, чтобы предотвратить повреждение от перегрева."))
-			playsound(user, 'sound/effects/wounds/sizzle1.ogg', 100, TRUE)
+	else if(ammo_pack.overheat > ammo_pack.overheat_max * (2 / 3) && ammo_pack.heat_stage < 2)
+		to_chat(user, span_notice("Датчик температуры оружия быстро пищит, как только достигает предела!"))
+		ammo_pack.heat_stage = 2
+		playsound(user, 'sound/items/weapons/gun/general/empty_alarm.ogg', 50, TRUE)
+
+	ammo_pack.overheat += burst_size
+	return ..()
 
 /obj/item/gun/ballistic/minigun/afterattack(atom/target, mob/living/user, flag, params)
 	if(!ammo_pack || ammo_pack.loc != user)

@@ -5187,7 +5187,8 @@
 	height = 7;
 	name = "NT/E.I. Trade Post: Dock 6";
 	shuttle_id = "shittle_home";
-	width = 5
+	width = 5;
+	roundstart_template = /datum/map_template/shuttle/expedition/shittle
 	},
 /turf/open/space/basic,
 /area/space)

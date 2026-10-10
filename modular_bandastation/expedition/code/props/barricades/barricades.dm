@@ -198,7 +198,7 @@
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
 	if(anchored)
-		to_chat(usr, span_warning("Она закреплена к полу, вы не можете её повернуть!"))
+		to_chat(user, span_warning("Она закреплена к полу, вы не можете её повернуть!"))
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 	setDir(turn(dir, 270))
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
@@ -428,6 +428,8 @@
 
 	var/static/list/cade_types = list(BARRICADE_TYPE_BOMB = image(icon = 'modular_bandastation/expedition/icons/barricade.dmi', icon_state = "explosive_obj"), BARRICADE_TYPE_MELEE = image(icon = 'modular_bandastation/expedition/icons/barricade.dmi', icon_state = "brute_obj"), BARRICADE_TYPE_ACID = image(icon = 'modular_bandastation/expedition/icons/barricade.dmi', icon_state = "burn_obj"))
 	var/choice = show_radial_menu(user, src, cade_types, require_near = TRUE, tooltips = TRUE)
+	if(!choice)
+		return FALSE
 
 	user.visible_message(span_notice("[user] начинает прикреплять [choice] к [src]."),
 		span_notice("Вы начинаете прикреплять [choice] к [src]."))
@@ -742,7 +744,7 @@
 /obj/item/quickdeploy/attack_self(mob/user)
 	to_chat(user, span_notice("You start deploying [src] in front of you."))
 	playsound(src, 'sound/items/tools/ratchet.ogg', 25, 1)
-	if(!do_after(usr, delay, src))
+	if(!do_after(user, delay, src))
 		return
 	if(can_place(user)) //can_place() handles sending the error and success messages to the user
 		var/obj/O = new thing_to_deploy(get_turf(user))
