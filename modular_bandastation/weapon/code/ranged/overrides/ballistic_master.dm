@@ -142,6 +142,11 @@
 	icon = 'icons/obj/weapons/guns/ballistic.dmi'
 	recoil = 0.2
 
+/obj/item/gun/ballistic/revolver/mateba/old
+	icon = 'modular_bandastation/weapon/icons/ranged/ballistic.dmi'
+	desc = "Полуавтоматический револьвер серии Mateba Model 6 Unica сборки старого образца. Такие уже давно не делают..."
+	icon_state = "mateba_old"
+
 /obj/item/gun/ballistic/revolver/golden
 	icon = 'icons/obj/weapons/guns/ballistic.dmi'
 
@@ -264,6 +269,15 @@
 /obj/item/gun/ballistic/automatic/battle_rifle
 	recoil = 0.3
 
+/obj/item/gun/ballistic/automatic/battle_rifle/auto
+	name = "NT BR-38/A battle rifle"
+	shots_before_degradation = 30
+	max_shots_before_degradation = 30
+
+/obj/item/gun/ballistic/automatic/battle_rifle/auto/Initialize(mapload)
+	. = ..()
+	AddComponent(/datum/component/automatic_fire, 0.3 SECONDS)
+
 /obj/item/gun/ballistic/automatic/wt550
 	icon = 'modular_bandastation/weapon/icons/ranged/ballistic.dmi'
 	recoil = 0.3
@@ -302,7 +316,13 @@
 
 /obj/item/gun/grenadelauncher
 	icon = 'modular_bandastation/weapon/icons/ranged/ballistic48x32.dmi'
+	worn_icon = 'icons/mob/clothing/back.dmi'
+	worn_icon_state = "cshotgun"
 	SET_BASE_PIXEL(-8, 0)
+
+/obj/item/gun/grenadelauncher/tactical
+	name = "tactical pneumatic grenade launcher"
+	slot_flags = ITEM_SLOT_BACK | ITEM_SLOT_BELT | ITEM_SLOT_SUITSTORE
 
 /obj/item/gun/ballistic/rifle/sniper_rifle
 	icon = 'modular_bandastation/weapon/icons/ranged/ballistic64x32.dmi'
@@ -335,6 +355,18 @@
 
 /obj/item/gun/ballistic/automatic/l6_saw/toy
 	recoil = 0
+
+/obj/item/gun/energy/lasercannon
+	pin = /obj/item/firing_pin
+
+/obj/item/gun/energy/laser/scatter/shotty
+	inhand_icon_state = "shotgun_combat"
+	lefthand_file = 'icons/mob/inhands/weapons/64x_guns_left.dmi'
+	righthand_file = 'icons/mob/inhands/weapons/64x_guns_right.dmi'
+	inhand_x_dimension = 64
+	inhand_y_dimension = 64
+	worn_icon = 'icons/mob/clothing/back.dmi'
+	worn_icon_state = "cshotgun"
 
 // Prevents gun sizes from changing due to suppressors
 /obj/item/gun/ballistic/install_suppressor(obj/item/suppressor/new_suppressor)

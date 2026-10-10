@@ -155,7 +155,7 @@
 // ERT & Marine Commander ID Access
 /datum/id_trim/centcom/ert/commander/New()
 	. = ..()
-	access = access = list(ACCESS_CENT_GENERAL, ACCESS_CENT_SPECOPS, ACCESS_CENT_LIVING) | (SSid_access.get_region_access_list(list(REGION_ALL_STATION)) - ACCESS_CHANGE_IDS)
+	access = list(ACCESS_CENT_GENERAL, ACCESS_CENT_SPECOPS, ACCESS_CENT_LIVING) | (SSid_access.get_region_access_list(list(REGION_ALL_STATION)) - ACCESS_CHANGE_IDS)
 
 // DeathSquad outifit
 /datum/outfit/centcom/death_commando
@@ -211,7 +211,7 @@
 	mask = /obj/item/clothing/mask/gas/sechailer/specops
 	shoes = /obj/item/clothing/shoes/combat/swat
 	r_pocket = /obj/item/knife/combat
-	l_pocket = /obj/item/reagent_containers/hypospray/combat/nanites/less
+	l_pocket = /obj/item/reagent_containers/hypospray/combat/medical
 	implants = list(/obj/item/implant/weapons_auth, /obj/item/implant/empprotection)
 
 /datum/id_trim/centcom/specops/New()
@@ -231,8 +231,11 @@
 	new /obj/item/flashlight/seclite(src)
 	new /obj/item/food/rationpack(src)
 
-/obj/item/reagent_containers/hypospray/combat/nanites/less
+/obj/item/reagent_containers/hypospray/combat/medical
+	name = "medical nanites combat injector"
+	desc = "A modified air-needle autoinjector for use in combat situations. Prefilled with medical nanites and a stimulant for rapid healing and a combat boost."
 	list_reagents = list(/datum/reagent/medicine/oculine = 10, /datum/reagent/medicine/inacusiate = 10, /datum/reagent/medicine/synaptizine = 20, /datum/reagent/medicine/atropine = 20, /datum/reagent/medicine/syndicate_nanites = 40)
+	volume = 100
 
 /datum/outfit/centcom/specops/equipped
 	name = "NT SpecOps - Operative (Rifleman)"
