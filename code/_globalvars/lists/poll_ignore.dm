@@ -27,6 +27,9 @@
 #define POLL_IGNORE_POSSESSED_BLADE "possessed_blade"
 #define POLL_IGNORE_PYROSLIME "slime"
 #define POLL_IGNORE_RAW_PROPHET "raw_prophet"
+// BANDASTATION ADDITION - START
+#define POLL_IGNORE_REDSPACE_RAVAGER "redspace_ravager"
+// BANDASTATION ADDITION - END
 #define POLL_IGNORE_REGAL_RAT "regal_rat"
 #define POLL_IGNORE_RUST_SPIRIT "rust_spirit"
 #define POLL_IGNORE_SENTIENCE_POTION "sentience_potion"
@@ -70,6 +73,9 @@ GLOBAL_LIST_INIT(poll_ignore_desc, list(
 	POLL_IGNORE_POSSESSED_BLADE = "Possessed blade",
 	POLL_IGNORE_PYROSLIME = "Slime",
 	POLL_IGNORE_RAW_PROPHET = "Raw Prophet",
+	// BANDASTATION ADDITION - START
+	POLL_IGNORE_REDSPACE_RAVAGER = "Redspace Ravager",
+	// BANDASTATION ADDITION - END
 	POLL_IGNORE_REGAL_RAT = "Regal rat",
 	POLL_IGNORE_RUST_SPIRIT = "Rust Walker",
 	POLL_IGNORE_SENTIENCE_POTION = "Sentience potion",
