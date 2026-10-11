@@ -84,12 +84,18 @@
 	spawn_loot_chance = 70
 	loot_table = WEAPON_LOOT
 
+/obj/effect/spawner/random/loot_spawn/weapon/full_chance
+	spawn_loot_chance = 100
+
 /obj/effect/spawner/random/loot_spawn/ammo
 	name = "ammo loot spawn"
 	icon_state = "x"
 	spawn_loot_count = 2
 	spawn_loot_chance = 90
 	loot_table = AMMO_LOOT
+
+/obj/effect/spawner/random/loot_spawn/ammo/full_chance
+	spawn_loot_chance = 100
 
 /obj/effect/spawner/random/loot_spawn/food
 	name = "food loot spawn"
@@ -98,12 +104,18 @@
 	spawn_loot_chance = 90
 	loot_table = FOOD_LOOT
 
+/obj/effect/spawner/random/loot_spawn/food/full_chance
+	spawn_loot_chance = 100
+
 /obj/effect/spawner/random/loot_spawn/treasure
 	name = "treasure loot spawn"
 	icon_state = "x4"
 	spawn_loot_count = 1
 	spawn_loot_chance = 90
 	loot_table = TREASURE_LOOT
+
+/obj/effect/spawner/random/loot_spawn/treasure/full_chance
+	spawn_loot_chance = 100
 
 /obj/effect/spawner/random/loot_spawn/clothing
 	name = "clothing loot spawn"
@@ -112,6 +124,9 @@
 	spawn_loot_chance = 70
 	loot_table = CLOTHING_LOOT
 
+/obj/effect/spawner/random/loot_spawn/clothing/full_chance
+	spawn_loot_chance = 100
+
 /obj/effect/spawner/random/loot_spawn/information
 	name = "info loot spawn"
 	icon_state = "random_loot"
@@ -119,12 +134,17 @@
 	spawn_loot_chance = 50
 	loot_table = INFO_LOOT
 
+/obj/effect/spawner/random/loot_spawn/information/full_chance
+	spawn_loot_chance = 100
+
 /obj/effect/spawner/random/loot_spawn/technical
 	name = "technical loot spawn"
 	icon_state = "clockwork_orange"
 	spawn_loot_count = 2
 	spawn_loot_chance = 80
 	loot_table = TECHNICAL_LOOT
+
+/obj/effect/spawner/random/loot_spawn/technical/full_chance
 
 // /obj/effect/landmark/loot_spawn/magma_artifact
 // 	name = "magma wing spawn"
