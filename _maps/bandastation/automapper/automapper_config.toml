@@ -891,7 +891,7 @@ trait_name = "Station"
 map_files = ["kilostation_cryo.dmm"]
 directory = "_maps/bandastation/automapper/templates/kilostation/"
 required_map = "KiloStation.dmm"
-coordinates = [73, 113, 1]
+coordinates = [72, 111, 1]
 trait_name = "Station"
 
 [templates.kilostation_med_stasis]

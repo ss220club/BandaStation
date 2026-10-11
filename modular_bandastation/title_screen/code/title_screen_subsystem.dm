@@ -28,12 +28,14 @@
 
 	fill_title_images_pool()
 	current_title_screen = new(screen_image_file = pick_title_image())
+	load_notice()
 	show_title_screen_to_all_new_players()
 	return SS_INIT_SUCCESS
 
 /datum/controller/subsystem/title/Recover()
 	current_title_screen = SStitle.current_title_screen
 	title_images_pool = SStitle.title_images_pool
+	notice = SStitle.notice
 
 /datum/controller/subsystem/title/fire(resumed = FALSE)
 	update_info()
@@ -185,10 +187,24 @@
 
 /**
  * Adds a notice to the main title screen in the form of big red text!
+ * If persist is TRUE, the notice is saved to TITLE_NOTICE_FILE and restored next rounds.
  */
-/datum/controller/subsystem/title/proc/set_notice(new_notice)
+/datum/controller/subsystem/title/proc/set_notice(new_notice, persist = FALSE)
 	notice = emoji_parse(sanitize_text(new_notice)) || null
 	title_output_to_all(notice, "updateNotice")
+	if(persist)
+		rustg_file_write(new_notice, TITLE_NOTICE_FILE)
+
+/**
+ * Loads the notice saved by a previous round from TITLE_NOTICE_FILE.
+ */
+/datum/controller/subsystem/title/proc/load_notice()
+	if(!fexists(TITLE_NOTICE_FILE))
+		return
+
+	var/persisted_notice = trim(file2text(TITLE_NOTICE_FILE))
+	if(persisted_notice)
+		set_notice(persisted_notice)
 
 /**
  * Change or reset title screen css
@@ -306,3 +322,4 @@
 	return length(title_images_pool) ? pick(title_images_pool) : DEFAULT_TITLE_SCREEN_IMAGE_PATH
 
 #undef TITLE_SCREENS_LOCATION
+#undef TITLE_NOTICE_FILE
