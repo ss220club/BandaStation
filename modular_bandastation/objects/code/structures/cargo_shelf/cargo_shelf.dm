@@ -161,6 +161,10 @@
 
 	return FALSE
 
+/obj/structure/cargo_shelf/proc/unload_crate(obj/structure/closet/crate/crate, atom/target)
+	remove_crate(crate)
+	crate.forceMove(target)
+
 /obj/structure/cargo_shelf/Exited(atom/movable/gone, direction)
 	if(istype(gone, /obj/structure/closet/crate))
 		remove_crate(gone)
@@ -168,20 +172,21 @@
 	return ..()
 
 /obj/structure/closet/crate/mouse_drop_dragged(atom/over, mob/user, src_location, over_location, params)
-	. = ..()
-
 	var/obj/structure/cargo_shelf/shelf = loc
-	if(!istype(shelf))
+	if(istype(shelf))
+		if(!isturf(over))
+			return
+
+		if(!shelf.IsReachableBy(user))
+			return
+
+		if(get_dist(shelf, over) > 1)
+			return
+
+		shelf.unload_crate(src, over)
 		return
 
-	if(!isturf(over))
-		return
-
-	if(!over.IsReachableBy(user))
-		return
-
-	shelf.remove_crate(src)
-	forceMove(over)
+	return ..()
 
 /obj/structure/cargo_shelf/examine(mob/user)
 	. = ..()
