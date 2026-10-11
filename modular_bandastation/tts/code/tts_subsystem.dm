@@ -52,6 +52,8 @@ SUBSYSTEM_DEF(tts220)
 	VAR_PRIVATE/list/tts_queue = list()
 	/// Ffmpeg queue. Is an assoc list. Each entry is a filename mapped to the list of sound processing requests which require it.
 	VAR_PRIVATE/list/tts_effects_queue = list()
+	/// Ffmpeg runs in progress, same format as `tts_effects_queue`. Their output file exists but is incomplete until the run ends.
+	VAR_PRIVATE/list/tts_effects_in_progress = list()
 	/// Lazy list of request that need to performed to TTS provider API
 	VAR_PRIVATE/list/tts_requests_queue
 
@@ -169,7 +171,7 @@ SUBSYSTEM_DEF(tts220)
 
 	var/list/expired_requests = list()
 	for(var/filename in tts_queue)
-		if(world.time - tts_queue_timestamps[filename] > message_timeout)
+		if(is_pending_tts_expired(filename))
 			expired_requests += filename
 	tts_queue -= expired_requests
 	tts_queue_timestamps -= expired_requests
@@ -185,6 +187,7 @@ SUBSYSTEM_DEF(tts220)
 	var/queue_position = 1
 	while(LAZYLEN(tts_effects_queue) >= queue_position)
 		var/filename = tts_effects_queue[queue_position++]
+		tts_effects_in_progress[filename] = tts_effects_queue[filename]
 		INVOKE_ASYNC(src, PROC_REF(process_filename_sound_effect_requests), filename)
 
 		if(MC_TICK_CHECK)
@@ -193,10 +196,13 @@ SUBSYSTEM_DEF(tts220)
 	LAZYCUT(tts_effects_queue, 1, queue_position)
 
 /datum/controller/subsystem/tts220/proc/process_filename_sound_effect_requests(filename)
-	var/list/filename_requests = tts_effects_queue[filename]
+	// Requests arriving while ffmpeg runs are appended to this same list
+	var/list/filename_requests = tts_effects_in_progress[filename]
 	var/datum/sound_effects_request/request = filename_requests[1]
 
-	if(!apply_sound_effects(request.effects, request.original_filename, request.output_filename))
+	var/processed = apply_sound_effects(request.effects, request.original_filename, request.output_filename)
+	tts_effects_in_progress -= filename
+	if(!processed)
 		return
 	if(!CONFIG_GET(flag/tts_cache_enabled))
 		addtimer(CALLBACK(src, PROC_REF(cleanup_tts_file), request.output_filename), FILE_CLEANUP_DELAY)
@@ -317,7 +323,7 @@ SUBSYSTEM_DEF(tts220)
 
 	if(LAZYLEN(tts_queue[filename]))
 		// The pending request already expired - drop it and issue a fresh one.
-		if(world.time - tts_queue_timestamps[filename] > message_timeout)
+		if(is_pending_tts_expired(filename))
 			drop_pending_tts(filename)
 		else
 			tts_reused++
@@ -373,18 +379,20 @@ SUBSYSTEM_DEF(tts220)
 		addtimer(CALLBACK(src, PROC_REF(cleanup_tts_file), "[filename].ogg"), FILE_CLEANUP_DELAY)
 
 	// The request took too long - the message is stale and should not be played.
-	if(world.time - tts_queue_timestamps[filename] > message_timeout)
+	if(is_pending_tts_expired(filename))
 		drop_pending_tts(filename)
 		return
 
-	for(var/datum/callback/cb in tts_queue[filename])
-		cb.InvokeAsync()
-		tts_queue[filename] -= cb
+	var/list/playback_callbacks = tts_queue[filename]
+	drop_pending_tts(filename)
+	for(var/datum/callback/playback_callback as anything in playback_callbacks)
+		playback_callback.InvokeAsync()
 
-	tts_queue -= filename
-	tts_queue_timestamps -= filename
+/// Whether the pending playback request of a filename has outlived the message timeout
+/datum/controller/subsystem/tts220/proc/is_pending_tts_expired(filename)
+	return world.time - tts_queue_timestamps[filename] > message_timeout
 
-/// Drops all pending playback callbacks for a filename - the request failed or timed out.
+/// Removes the pending playback request of a filename, together with all its playback callbacks
 /datum/controller/subsystem/tts220/proc/drop_pending_tts(filename)
 	tts_queue -= filename
 	tts_queue_timestamps -= filename
@@ -394,6 +402,10 @@ SUBSYSTEM_DEF(tts220)
 )
 
 	var/datum/sound_effects_request/request = new("[pure_filename].ogg", processed_filename, output_tts_cb, effects)
+	var/list/running_requests = tts_effects_in_progress[processed_filename]
+	if(running_requests)
+		running_requests += request
+		return
 	LAZYADD(tts_effects_queue[processed_filename], request)
 
 /datum/controller/subsystem/tts220/proc/play_tts(
@@ -421,7 +433,8 @@ SUBSYSTEM_DEF(tts220)
 
 	var/filename2play = "[pure_filename][filename_suffixes.Join()].ogg"
 
-	if(!length(effects) || fexists(filename2play))
+	// A file still being written by ffmpeg exists but is truncated - such requests wait for the run to finish
+	if(!length(effects) || (!tts_effects_in_progress[filename2play] && fexists(filename2play)))
 		output_tts(speaker, listeners, filename2play, is_local, preSFX, postSFX, channel_override)
 		return
 
@@ -445,74 +458,44 @@ SUBSYSTEM_DEF(tts220)
 	postSFX = null,
 	channel_override = null,
 )
-	var/channel_volume_preference_path = get_volume_preference_for_channel(channel_override)
+	var/volume_preference = get_volume_preference_for_channel(channel_override)
 	var/list/valid_listeners = list()
 	for(var/mob/listener as anything in listeners)
-		var/client/listener_client = listener?.client
-		if(!listener_client?.prefs?.read_preference(channel_volume_preference_path))
-			continue
-		valid_listeners += listener
+		if(listener?.client?.prefs?.read_preference(volume_preference))
+			valid_listeners += listener
 	if(!length(valid_listeners))
 		return
 
-	var/turf/turf_source = get_turf(speaker)
-
 	var/sound/output = sound(filename2play)
 	output.status = SOUND_STREAM
+	// Every TTS channel is a persistent queue: sequential messages line up client-side instead of interrupting each other
+	output.wait = TRUE
 	if(!is_local || isnull(speaker))
-		output.wait = TRUE
 		output.environment = SOUND_ENVIRONMENT_NONE
 		output.channel = channel_override
 		for(var/mob/listener as anything in valid_listeners)
-			output.volume = listener.client.prefs.read_preference(channel_volume_preference_path)
-			play_sfx_if_exists(listener, preSFX, output)
+			output.volume = listener.client.prefs.read_preference(volume_preference)
+			play_sfx(listener, preSFX, output.volume, output)
 			SEND_SOUND(listener, output)
-			play_sfx_if_exists(listener, postSFX, output)
+			play_sfx(listener, postSFX, output.volume, output)
 		return
 
+	var/turf/turf_source = get_turf(speaker)
 	if(!turf_source) // 3D sounds need a turf source to calculate position
 		return
 
+	// Assigned before any SFX is sent, so the SFX queue on the same channel as the message
+	output.channel = channel_override || get_local_channel_by_owner(speaker)
+	if(preSFX)
+		for(var/mob/listener as anything in valid_listeners)
+			play_sfx(listener, preSFX, listener.client.prefs.read_preference(volume_preference), output)
+
+	var/list/threed_listeners = list()
 	for(var/mob/listener as anything in valid_listeners)
-		output.volume = listener.client.prefs.read_preference(channel_volume_preference_path)
-		play_sfx_if_exists(listener, preSFX, output)
-
-	output.volume = 100
-	var/list/threed_listeners = valid_listeners
-	var/mob/self_listener
-	if(ismob(speaker))
-		var/mob/speaking_mob = speaker
-		if(speaking_mob in valid_listeners)
-			self_listener = speaking_mob
-			threed_listeners = valid_listeners.Copy()
-			threed_listeners -= self_listener
-
-	// Channels are persistent per listener: a queue override (radio) or one channel per speaker owner,
-	// so sequential messages line up client-side instead of overlapping
-	output.channel = channel_override || get_local_channel_by_owner(speaker) || SSsounds.random_available_channel()
-	output.wait = TRUE
-	var/sound_length = SSsounds.get_sound_length(filename2play) || FILE_CLEANUP_DELAY
-
-	if(self_listener)
-		self_listener.playsound_local(
-			turf_source,
-			vol = 100,
-			falloff_exponent = SOUND_FALLOFF_EXPONENT,
-			channel = output.channel,
-			pressure_affected = TRUE,
-			sound_to_use = output,
-			max_distance = SOUND_RANGE,
-			falloff_distance = SOUND_DEFAULT_FALLOFF_DISTANCE,
-			distance_multiplier = 1,
-			use_reverb = TRUE,
-			wait = output.wait,
-			volume_preference = channel_volume_preference_path
-		)
-
-	if(channel_override)
-		// A shared queue channel can't carry per-message positional updates - an update sent while an older
-		// message is still playing would rewrite or mute that sound. Spatial params are applied once at send time instead.
-		for(var/mob/listener as anything in threed_listeners)
+		// A queue channel shared between speakers (radio) can't carry per-message positional updates - an update sent
+		// while an older message is still playing would rewrite or mute that sound. The speaker's own voice is at distance 0.
+		// Both are positioned once at send time instead.
+		if(channel_override || listener == speaker)
 			listener.playsound_local(
 				turf_source,
 				vol = 100,
@@ -525,49 +508,55 @@ SUBSYSTEM_DEF(tts220)
 				distance_multiplier = 1,
 				use_reverb = TRUE,
 				wait = output.wait,
-				volume_preference = channel_volume_preference_path
+				volume_preference = volume_preference
 			)
-	else if(length(threed_listeners)) // Empty 3d sounds do not pick up listeners anyways
+		else
+			threed_listeners += listener
+
+	if(length(threed_listeners))
 		var/datum/threed_sound/sound_3d = new /datum/threed_sound(
 			speaker,
 			output,
 			threed_listeners,
 			volume = 100,
 			sound_range = SOUND_RANGE,
-			sound_length = sound_length,
+			sound_length = SSsounds.get_sound_length(filename2play) || FILE_CLEANUP_DELAY,
 			channel = output.channel,
-			preference_volume = channel_volume_preference_path,
+			preference_volume = volume_preference,
 			preference_signal = COMSIG_MOB_TTS_VOLUME_PREFERENCE_APPLIED,
 			falloff_exponent = SOUND_FALLOFF_EXPONENT,
 			falloff_distance = SOUND_DEFAULT_FALLOFF_DISTANCE,
 			pressure_affected = TRUE
 		)
-		// All TTS channels are persistent per owner - a dying datum must never stop them, the clip is finite and ends by itself
+		// The speaker's channel outlives this sound and may already hold their next message - a dying datum must never stop it
 		sound_3d.shared_channel = TRUE
 
 	if(postSFX)
 		for(var/mob/listener as anything in valid_listeners)
-			play_sfx(listener, postSFX, listener.client.prefs.read_preference(channel_volume_preference_path), output.environment, output.channel)
+			play_sfx(listener, postSFX, listener.client.prefs.read_preference(volume_preference), output)
 
-/datum/controller/subsystem/tts220/proc/play_sfx_if_exists(mob/listener, sfx, sound/output)
-	if(sfx)
-		play_sfx(listener, sfx, output.volume, output.environment, output.channel)
-
-/datum/controller/subsystem/tts220/proc/play_sfx(mob/listener, sfx, volume, environment, channel)
+/// Queues a sound effect on the channel of the TTS message it accompanies
+/datum/controller/subsystem/tts220/proc/play_sfx(mob/listener, sfx, volume, sound/tts_sound)
+	if(!sfx)
+		return
 	var/sound/output = sound(sfx)
 	output.status = SOUND_STREAM
 	output.wait = TRUE
 	output.volume = volume
-	output.environment = environment
-	output.channel = channel
+	output.environment = tts_sound.environment
+	output.channel = tts_sound.channel
 	SEND_SOUND(listener, output)
 
-/datum/controller/subsystem/tts220/proc/get_local_channel_by_owner(owner)
+/// Returns the persistent channel the owner's TTS messages queue on, reserving it on first use
+/datum/controller/subsystem/tts220/proc/get_local_channel_by_owner(atom/owner)
 	var/channel = tts_local_channels_by_owner[owner]
-	if(isnull(channel))
-		channel = SSsounds.reserve_sound_channel()
-		tts_local_channels_by_owner[owner] = channel
-		RegisterSignal(owner, COMSIG_QDELETING, PROC_REF(clear_channel))
+	if(channel)
+		return channel
+	channel = SSsounds.reserve_sound_channel()
+	if(!channel) // Out of reservable channels - not cached, so a later message retries the reservation
+		return SSsounds.random_available_channel()
+	tts_local_channels_by_owner[owner] = channel
+	RegisterSignal(owner, COMSIG_QDELETING, PROC_REF(clear_channel))
 	return channel
 
 /datum/controller/subsystem/tts220/proc/clear_channel(owner)

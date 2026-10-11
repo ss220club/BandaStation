@@ -223,9 +223,9 @@
 				var/mob/radio_listener = hearer_weakref.resolve()
 				if(!radio_listener)
 					continue
-				if(radio_listener in seen_hearers)
+				if(seen_hearers[radio_listener])
 					continue
-				seen_hearers += radio_listener
+				seen_hearers[radio_listener] = TRUE
 				var/message_to_tts = isobserver(radio_listener) ? message : radio_listener.translate_language(virt, language, message, spans, message_mods)
 				if(message_to_tts == message)
 					message_to_tts = LAZYACCESS(message_mods, MODE_TTS_MESSAGE_OVERRIDE) || message_to_tts
