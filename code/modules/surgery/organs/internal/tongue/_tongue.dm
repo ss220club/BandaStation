@@ -129,16 +129,24 @@
 	var/message = speech_args[SPEECH_MESSAGE]
 	if(!length(accent_characters))
 		return
-	var/new_message = ""
-	for(var/i in 1 to length(message))
-		var/character = message[i]
-		if(character in accent_characters)
+	for(var/character in accent_characters)
+		var/regex/accent_regex = regex(character, "g")
+		var/search_position = 1
+		var/new_message = ""
+		var/last_position = 1
+		while(accent_regex.Find(message, search_position))
+			var/match_start = accent_regex.index
+			var/match_end = accent_regex.next
+			new_message += copytext(message, last_position, match_start)
 			var/repeat_count = rand(accent_repeat_min, accent_repeat_max)
-			for(var/j in 1 to repeat_count)
+			for(var/i in 1 to repeat_count)
 				new_message += character
-		else
-			new_message += character
-	speech_args[SPEECH_MESSAGE] = new_message
+			last_position = match_end
+			search_position = match_end
+		if(last_position > 1)
+			new_message += copytext(message, last_position)
+			message = new_message
+	speech_args[SPEECH_MESSAGE] = message
 // BANDASTATION ADD END: Accent Tongue
 
 /**
