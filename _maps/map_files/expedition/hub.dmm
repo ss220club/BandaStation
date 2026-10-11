@@ -766,6 +766,7 @@
 "axT" = (
 /obj/structure/table,
 /obj/item/storage/medkit/brute,
+/obj/effect/spawner/random/loot_spawn/medical,
 /turf/open/floor/iron/dark,
 /area/ruin/space/has_grav/deepstorage/armory)
 "axW" = (
@@ -931,6 +932,7 @@
 /area/space/nearstation)
 "aCm" = (
 /obj/structure/table/wood,
+/obj/effect/spawner/random/loot_spawn/ammo,
 /turf/open/floor/carpet/royalblack/airless,
 /area/ruin/space)
 "aCn" = (
@@ -1267,8 +1269,15 @@
 /obj/item/ammo_casing/shotgun/dragonsbreath,
 /obj/item/ammo_casing/shotgun/stunslug,
 /obj/item/ammo_casing/shotgun/stunslug,
+/obj/effect/spawner/random/loot_spawn/ammo,
+/obj/effect/spawner/random/loot_spawn/ammo,
 /turf/open/floor/iron/dark/airless,
 /area/shuttle/ruin/caravan/freighter2)
+"aMl" = (
+/obj/structure/table/wood,
+/obj/effect/spawner/random/loot_spawn/weapon,
+/turf/open/floor/carpet/royalblack/airless,
+/area/ruin/space)
 "aME" = (
 /obj/structure/table/reinforced,
 /turf/open/floor/mineral/plastitanium,
@@ -1818,6 +1827,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/closet/crate/secure/weapon,
 /obj/item/gun/energy/laser/retro,
+/obj/effect/spawner/random/loot_spawn/weapon,
 /turf/open/floor/iron/dark/airless,
 /area/shuttle/ruin/caravan/freighter2)
 "bfZ" = (
@@ -3193,6 +3203,7 @@
 	empty = 1;
 	name = "First-Aid (empty)"
 	},
+/obj/effect/spawner/random/loot_spawn/medical,
 /turf/open/floor/iron,
 /area/ruin/space/has_grav/derelictoutpost/cargostorage)
 "bNB" = (
@@ -3247,6 +3258,10 @@
 /obj/effect/mapping_helpers/broken_floor,
 /turf/open/floor/iron/white,
 /area/ruin/space/ancientstation/delta/rnd)
+"bPp" = (
+/obj/effect/spawner/random/loot_spawn/ammo,
+/turf/open/misc/asteroid/airless,
+/area/ruin/space)
 "bPA" = (
 /obj/effect/turf_decal/stripes/red/line{
 	dir = 8
@@ -3688,6 +3703,11 @@
 "ccQ" = (
 /turf/closed/wall/rust,
 /area/ruin/space/ancientstation/delta/biolab)
+"cdf" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/spawner/random/loot_spawn/weapon,
+/turf/open/floor/iron/dark/textured/airless,
+/area/ruin/space)
 "cdn" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4{
 	dir = 4
@@ -4416,6 +4436,13 @@
 /mob/living/basic/trooper/assistant,
 /turf/open/floor/iron/cafeteria,
 /area/ruin/space/has_grav/deepstorage/kitchen)
+"czD" = (
+/obj/effect/mapping_helpers/broken_floor,
+/mob/living/basic/trooper/pirate/ranged/space{
+	environment_smash = 0
+	},
+/turf/open/floor/plating/airless,
+/area/ruin/space/has_grav/crashedship/aft)
 "czR" = (
 /obj/effect/decal/cleanable/dirt{
 	icon_state = "dirt-23"
@@ -5166,10 +5193,6 @@
 /obj/structure/cable,
 /turf/open/floor/iron/freezer,
 /area/ruin/space/has_grav/the_outlet/researchrooms)
-"cWB" = (
-/mob/living/basic/zombie/rotten/assistant,
-/turf/open/floor/mineral/plastitanium/red,
-/area/ruin/space/has_grav/interdyne)
 "cXf" = (
 /obj/effect/turf_decal/siding/thinplating_new/dark/corner{
 	dir = 1
@@ -5264,6 +5287,7 @@
 	amount = 1
 	},
 /obj/effect/mapping_helpers/broken_floor,
+/obj/effect/spawner/random/loot_spawn/weapon,
 /turf/open/floor/plating/airless,
 /area/ruin/space/has_grav)
 "daq" = (
@@ -5806,6 +5830,7 @@
 /obj/effect/decal/cleanable/blood/old,
 /obj/effect/decal/cleanable/blood/gibs,
 /obj/structure/toilet,
+/mob/living/basic/construct/proteon/hostile,
 /turf/open/floor/iron/small,
 /area/ruin/space/has_grav/the_outlet/storefront)
 "dqM" = (
@@ -6561,6 +6586,7 @@
 /area/ruin/space/has_grav/hideout/bar)
 "dLT" = (
 /obj/structure/closet/emcloset,
+/obj/effect/spawner/random/loot_spawn/information,
 /turf/open/floor/plating,
 /area/ruin/space/space_ghost_restaurant)
 "dLX" = (
@@ -6687,6 +6713,13 @@
 /obj/structure/alien/resin,
 /turf/open/floor/plating,
 /area/ruin/space/has_grav/infested_frigate)
+"dPQ" = (
+/obj/effect/turf_decal/siding/blue{
+	dir = 1
+	},
+/mob/living/basic/zombie,
+/turf/open/indestructible/white,
+/area/ruin/space/has_grav/powered/biooutpost)
 "dPY" = (
 /obj/effect/turf_decal/trimline/brown/filled/warning{
 	dir = 10
@@ -6708,6 +6741,13 @@
 /obj/effect/turf_decal/tile/neutral/opposingcorners,
 /turf/open/floor/iron/dark,
 /area/ruin/space/has_grav/hideout/science)
+"dQM" = (
+/obj/item/stack/tile/wood,
+/mob/living/basic/trooper/pirate/ranged/space{
+	environment_smash = 0
+	},
+/turf/template_noop,
+/area/space/nearstation)
 "dQV" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/frame/machine/secured,
@@ -6871,6 +6911,7 @@
 /obj/item/pickaxe/drill,
 /obj/effect/turf_decal/delivery,
 /obj/effect/decal/cleanable/dirt,
+/obj/effect/spawner/random/loot_spawn/technical,
 /turf/open/floor/iron,
 /area/ruin/space/has_grav/deepstorage/storage)
 "dXa" = (
@@ -6930,6 +6971,7 @@
 /area/ruin/space/has_grav/powered/biooutpost)
 "dYn" = (
 /obj/structure/table,
+/obj/effect/spawner/random/loot_spawn/weapon,
 /turf/open/floor/mineral/titanium/blue,
 /area/ruin/space/has_grav/derelictoutpost/dockedship)
 "dYp" = (
@@ -7089,6 +7131,7 @@
 /obj/effect/spawner/random/engineering/vending_restock,
 /obj/effect/spawner/random/engineering/vending_restock,
 /obj/item/bedsheet/syndie/double,
+/obj/effect/spawner/random/loot_spawn/weapon,
 /turf/open/floor/plating,
 /area/ruin/space/has_grav/infested_frigate)
 "ecp" = (
@@ -7417,6 +7460,7 @@
 /obj/item/tank/internals/emergency_oxygen/engi,
 /obj/item/storage/medkit/toxin,
 /obj/effect/turf_decal/delivery,
+/obj/effect/spawner/random/loot_spawn/medical,
 /turf/open/floor/iron,
 /area/ruin/space/has_grav/derelictoutpost/cargostorage)
 "eki" = (
@@ -7521,6 +7565,7 @@
 /obj/effect/turf_decal/tile/neutral{
 	dir = 4
 	},
+/mob/living/basic/trooper/pirate/melee/space,
 /turf/open/floor/iron/dark/side/airless{
 	dir = 10
 	},
@@ -8152,11 +8197,6 @@
 /area/ruin/space/has_grav/powered/biooutpost)
 "eEG" = (
 /turf/closed/indestructible/rock,
-/area/ruin/space/has_grav/interdyne)
-"eFj" = (
-/obj/structure/table/reinforced/plastitaniumglass,
-/obj/effect/spawner/random/loot_spawn/treasure,
-/turf/open/floor/mineral/plastitanium/red,
 /area/ruin/space/has_grav/interdyne)
 "eFo" = (
 /obj/effect/mapping_helpers/burnt_floor,
@@ -9245,6 +9285,9 @@
 /area/ruin/space/has_grav/hideout/cargobay)
 "flY" = (
 /obj/effect/turf_decal/tile/neutral/opposingcorners,
+/mob/living/basic/trooper/pirate/ranged/space{
+	environment_smash = 0
+	},
 /turf/open/floor/iron/dark/airless,
 /area/ruin/space/has_grav/crashedship/aft)
 "flZ" = (
@@ -9711,6 +9754,7 @@
 /obj/structure/alien/weeds,
 /obj/effect/decal/cleanable/glass,
 /obj/machinery/power/rtg,
+/obj/effect/spawner/random/loot_spawn/technical,
 /turf/open/floor/plating,
 /area/ruin/space/has_grav/infested_frigate)
 "fzH" = (
@@ -10297,6 +10341,7 @@
 "fRY" = (
 /obj/structure/table/reinforced,
 /obj/machinery/door/window/right,
+/obj/effect/spawner/random/loot_spawn/weapon,
 /turf/open/floor/iron/dark,
 /area/ruin/space/has_grav/crashedship/aft)
 "fSg" = (
@@ -10557,6 +10602,7 @@
 /obj/item/storage/medkit/fire,
 /obj/effect/turf_decal/delivery,
 /obj/structure/alien/weeds/creature,
+/obj/effect/spawner/random/loot_spawn/medical,
 /turf/open/floor/iron,
 /area/ruin/space/has_grav/derelictoutpost/cargostorage)
 "fZy" = (
@@ -11882,6 +11928,10 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /turf/open/floor/iron,
 /area/ruin/space/ancientstation/delta/rnd)
+"gOs" = (
+/mob/living/basic/construct/proteon/hostile,
+/turf/open/misc/asteroid/airless,
+/area/ruin/space)
 "gOv" = (
 /obj/machinery/door/firedoor,
 /obj/effect/spawner/structure/window/reinforced,
@@ -14688,6 +14738,13 @@
 /obj/structure/bed/medical/emergency,
 /turf/open/floor/iron/white,
 /area/ruin/space/has_grav/hideout/science)
+"itD" = (
+/obj/effect/decal/cleanable/dirt{
+	icon_state = "dirt-55"
+	},
+/mob/living/basic/construct/proteon/hostile,
+/turf/open/floor/iron,
+/area/ruin/space/has_grav/the_outlet/employeesection)
 "iug" = (
 /obj/structure/alien/weeds,
 /obj/structure/bed/nest,
@@ -14852,11 +14909,9 @@
 /turf/open/indestructible/white,
 /area/ruin/space/has_grav/powered/biooutpost)
 "iye" = (
-/obj/effect/turf_decal/siding/blue{
-	dir = 1
-	},
-/mob/living/basic/zombie,
-/turf/open/indestructible/white,
+/obj/effect/turf_decal/tile/red/diagonal_centre,
+/mob/living/basic/zombie/syndie,
+/turf/open/indestructible,
 /area/ruin/space/has_grav/powered/biooutpost)
 "iyl" = (
 /obj/effect/turf_decal/stripes/asteroid{
@@ -15224,6 +15279,11 @@
 /obj/item/reagent_containers/condiment/enzyme,
 /turf/open/floor/iron/cafeteria,
 /area/ruin/space/ancientstation/charlie/kitchen)
+"iIl" = (
+/obj/item/kirbyplants/random,
+/mob/living/basic/construct/proteon/hostile,
+/turf/open/floor/plating/rust,
+/area/ruin/space/has_grav/the_outlet/researchrooms)
 "iIr" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/portable_atmospherics/scrubber,
@@ -15697,6 +15757,7 @@
 /obj/effect/turf_decal/trimline/neutral/filled/shrink_ccw,
 /obj/structure/cable,
 /obj/machinery/light/broken/directional/south,
+/mob/living/basic/trooper/pirate/melee/space,
 /turf/open/floor/iron/airless,
 /area/ruin/space/has_grav/crashedship/midship)
 "iVX" = (
@@ -15808,6 +15869,10 @@
 /obj/effect/decal/cleanable/food/egg_smudge,
 /turf/open/floor/iron/cafeteria,
 /area/ruin/space/ancientstation/charlie/kitchen)
+"iYG" = (
+/mob/living/basic/construct/proteon/hostile,
+/turf/open/floor/plating/rust,
+/area/ruin/space/has_grav/the_outlet/cultinfluence)
 "iZe" = (
 /obj/machinery/door/airlock/public/glass{
 	name = "Glass Airlock"
@@ -16181,6 +16246,10 @@
 "jnP" = (
 /obj/structure/safe,
 /obj/item/clothing/head/collectable/petehat,
+/obj/effect/spawner/random/loot_spawn/information,
+/obj/effect/spawner/random/loot_spawn/technical,
+/obj/effect/spawner/random/loot_spawn/ammo,
+/obj/effect/spawner/random/loot_spawn/weapon,
 /turf/open/floor/mineral/plastitanium/pod/light,
 /area/ruin/space/has_grav)
 "jnV" = (
@@ -16615,6 +16684,7 @@
 /area/ruin/space/has_grav/hideout/securestorage)
 "jAd" = (
 /obj/item/kirbyplants/random,
+/mob/living/basic/construct/proteon/hostile,
 /turf/open/floor/iron/grimy,
 /area/ruin/space/has_grav/the_outlet/employeesection)
 "jAf" = (
@@ -17170,6 +17240,7 @@
 /obj/item/storage/box/cups,
 /obj/item/reagent_containers/cup/beaker,
 /obj/effect/decal/cleanable/dirt,
+/obj/effect/spawner/random/loot_spawn/food,
 /turf/open/floor/iron/cafeteria,
 /area/ruin/space/has_grav/deepstorage/kitchen)
 "jRW" = (
@@ -17275,6 +17346,7 @@
 	icon_state = "dirt-143"
 	},
 /obj/item/kirbyplants/random,
+/mob/living/basic/construct/proteon/hostile,
 /turf/open/floor/iron,
 /area/ruin/space/has_grav/the_outlet/employeesection)
 "jUL" = (
@@ -18001,6 +18073,7 @@
 /obj/machinery/meter,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden,
 /obj/effect/mapping_helpers/broken_floor,
+/mob/living/basic/trooper/syndicate/ranged/smg/space/stormtrooper,
 /turf/open/floor/plating/airless,
 /area/shuttle/ruin/caravan/freighter3)
 "koi" = (
@@ -18848,6 +18921,10 @@
 "kQC" = (
 /turf/closed/indestructible/riveted,
 /area/ruin/space/has_grav/hideout/corridor2)
+"kQP" = (
+/mob/living/basic/construct/proteon/hostile,
+/turf/open/floor/cult,
+/area/ruin/space/has_grav/the_outlet/cultinfluence)
 "kQQ" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/light/warm/directional/south,
@@ -19827,6 +19904,10 @@
 /obj/structure/window/reinforced/spawner/directional/north,
 /turf/open/indestructible/dark,
 /area/ruin/space/has_grav/powered/biooutpost)
+"lvg" = (
+/obj/effect/spawner/random/loot_spawn/weapon,
+/turf/open/misc/asteroid/airless,
+/area/ruin/space)
 "lvh" = (
 /turf/closed/mineral/random,
 /area/ruin/space/has_grav)
@@ -20089,6 +20170,12 @@
 	open = 1
 	},
 /obj/item/toy/plush/rouny,
+/obj/effect/spawner/random/loot_spawn/weapon,
+/obj/effect/spawner/random/loot_spawn/treasure,
+/obj/effect/spawner/random/loot_spawn/ammo,
+/obj/effect/spawner/random/loot_spawn/weapon/full_chance,
+/obj/effect/spawner/random/loot_spawn/clothing/full_chance,
+/obj/effect/spawner/random/loot_spawn/information,
 /turf/open/floor/wood,
 /area/ruin/space/has_grav/derelictsulaco)
 "lCC" = (
@@ -20422,6 +20509,7 @@
 "lKq" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/turf_decal/stripes/full,
+/obj/effect/spawner/random/loot_spawn/technical,
 /turf/open/misc/asteroid/basalt/airless,
 /area/ruin/space)
 "lKC" = (
@@ -20549,6 +20637,8 @@
 	dir = 1
 	},
 /obj/item/storage/pod/directional/west,
+/obj/effect/spawner/random/loot_spawn/weapon,
+/obj/effect/spawner/random/loot_spawn/treasure,
 /turf/open/floor/mineral/titanium/blue,
 /area/ruin/space/has_grav)
 "lPn" = (
@@ -20863,6 +20953,7 @@
 /obj/structure/closet/cabinet,
 /obj/item/card/id/away/deep_storage,
 /obj/effect/decal/cleanable/dirt,
+/obj/effect/spawner/random/loot_spawn/clothing,
 /turf/open/floor/wood,
 /area/ruin/space/has_grav/deepstorage/dorm)
 "lXw" = (
@@ -21144,6 +21235,7 @@
 	pixel_y = -1
 	},
 /obj/effect/decal/cleanable/dirt,
+/obj/effect/spawner/random/loot_spawn/medical,
 /turf/open/floor/engine,
 /area/ruin/space/has_grav/deepstorage/pharmacy)
 "miP" = (
@@ -21318,6 +21410,7 @@
 /obj/item/clothing/suit/costume/xenos,
 /obj/effect/spawner/random/exotic/antag_gear_weak,
 /obj/effect/spawner/random/exotic/antag_gear_weak,
+/obj/effect/spawner/random/loot_spawn/weapon,
 /turf/open/floor/plating,
 /area/ruin/space/has_grav/infested_frigate)
 "mnA" = (
@@ -22595,6 +22688,7 @@
 /obj/structure/table/wood,
 /obj/machinery/light/small/broken/directional/east,
 /obj/item/paper/ruins/derelict_sulaco/birthday,
+/obj/effect/spawner/random/loot_spawn/medical,
 /turf/open/floor/wood,
 /area/ruin/space/has_grav/derelictsulaco)
 "nan" = (
@@ -23358,6 +23452,7 @@
 	pixel_y = 4
 	},
 /obj/item/storage/pill_bottle/multiver,
+/obj/effect/spawner/random/loot_spawn/medical,
 /turf/open/floor/iron/dark,
 /area/ruin/space/has_grav/deepstorage/armory)
 "nxi" = (
@@ -23574,6 +23669,9 @@
 /turf/open/floor/iron/dark,
 /area/ruin/space/has_grav/deepstorage/armory)
 "nES" = (
+/mob/living/basic/trooper/pirate/ranged/space{
+	environment_smash = 0
+	},
 /turf/open/floor/plating/airless,
 /area/ruin/space/has_grav/crashedship/aft)
 "nEW" = (
@@ -23859,6 +23957,8 @@
 /obj/structure/closet/crate/secure/engineering,
 /obj/effect/spawner/random/exotic/technology,
 /obj/effect/spawner/random/exotic/technology,
+/obj/effect/spawner/random/loot_spawn/treasure,
+/obj/effect/spawner/random/loot_spawn/information,
 /turf/open/floor/iron/dark/airless,
 /area/shuttle/ruin/caravan/freighter3)
 "nNO" = (
@@ -24935,6 +25035,7 @@
 	},
 /obj/structure/closet/crate/secure/weapon,
 /obj/item/gun/energy/disabler,
+/obj/effect/spawner/random/loot_spawn/weapon,
 /turf/open/floor/iron/dark/airless,
 /area/shuttle/ruin/caravan/freighter2)
 "osC" = (
@@ -25325,6 +25426,8 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/closet/crate/secure/gear,
 /obj/item/storage/box/rubbershot,
+/obj/effect/spawner/random/loot_spawn/ammo,
+/obj/effect/spawner/random/loot_spawn/ammo,
 /turf/open/floor/iron/dark/airless,
 /area/shuttle/ruin/caravan/freighter2)
 "oFf" = (
@@ -27934,6 +28037,7 @@
 	pixel_x = -6;
 	pixel_y = -21
 	},
+/obj/effect/spawner/random/loot_spawn/weapon,
 /turf/open/floor/mineral/plastitanium/airless,
 /area/ruin/space/has_grav/infested_frigate)
 "pYV" = (
@@ -28994,6 +29098,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/recharger,
 /obj/effect/decal/cleanable/dirt,
+/obj/effect/spawner/random/loot_spawn/medical,
 /turf/open/floor/iron,
 /area/ruin/space/ancientstation/delta/rnd)
 "qES" = (
@@ -29607,6 +29712,7 @@
 	},
 /obj/effect/turf_decal/trimline/blue/line,
 /obj/structure/closet/firecloset,
+/obj/effect/spawner/random/loot_spawn/technical,
 /turf/open/floor/mineral/plastitanium/pod/light,
 /area/ruin/space/has_grav/crashedship/aft)
 "qTw" = (
@@ -29851,6 +29957,7 @@
 	},
 /obj/structure/table,
 /obj/item/door_seal,
+/obj/effect/spawner/random/loot_spawn/ammo,
 /turf/open/floor/mineral/plastitanium/pod/light,
 /area/ruin/space/has_grav/crashedship/aft)
 "qZC" = (
@@ -29877,6 +29984,10 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron,
 /area/ruin/space/has_grav/hideout/cargooffice)
+"qZM" = (
+/mob/living/basic/trooper/syndicate/ranged/smg/space/stormtrooper,
+/turf/open/misc/asteroid/airless,
+/area/ruin/space/has_grav)
 "qZS" = (
 /turf/open/floor/mineral/plastitanium,
 /area/ruin/space/has_grav/hideout/tcomms)
@@ -30335,6 +30446,7 @@
 /obj/machinery/firealarm/directional/north,
 /obj/effect/mapping_helpers/broken_floor,
 /obj/effect/decal/cleanable/dirt,
+/obj/effect/spawner/random/loot_spawn/food,
 /turf/open/floor/iron/cafeteria,
 /area/ruin/space/has_grav/deepstorage/kitchen)
 "rmK" = (
@@ -30448,8 +30560,8 @@
 /turf/open/floor/plating,
 /area/ruin/space/has_grav/derelictsulaco)
 "rpN" = (
-/obj/structure/cable,
-/mob/living/basic/zombie/syndie,
+/obj/structure/table/reinforced/plastitaniumglass,
+/obj/effect/spawner/random/loot_spawn/treasure,
 /turf/open/floor/mineral/plastitanium/red,
 /area/ruin/space/has_grav/interdyne)
 "rpO" = (
@@ -31663,6 +31775,11 @@
 /obj/structure/table/wood,
 /turf/open/floor/iron,
 /area/ruin/space/has_grav/hideout/engi)
+"rVP" = (
+/obj/structure/lattice,
+/mob/living/basic/trooper/pirate/melee/space,
+/turf/template_noop,
+/area/space/nearstation)
 "rVQ" = (
 /obj/effect/decal/cleanable/blood/tracks,
 /obj/effect/decal/cleanable/dirt,
@@ -33060,6 +33177,9 @@
 /obj/item/ammo_box/a40mm/tear_gas,
 /obj/item/ammo_box/a40mm/tear_gas,
 /obj/item/disk/design_disk/tear_gas_40mm,
+/obj/effect/spawner/random/loot_spawn/weapon/full_chance,
+/obj/effect/spawner/random/loot_spawn/weapon,
+/obj/effect/spawner/random/loot_spawn/ammo,
 /turf/open/floor/iron/dark/airless,
 /area/shuttle/ruin/caravan/freighter3)
 "sKx" = (
@@ -33224,6 +33344,8 @@
 /obj/structure/closet/crate/secure/engineering,
 /obj/effect/spawner/random/exotic/technology,
 /obj/effect/spawner/random/exotic/technology,
+/obj/effect/spawner/random/loot_spawn/treasure,
+/obj/effect/spawner/random/loot_spawn/information,
 /turf/open/floor/plating/airless,
 /area/shuttle/ruin/caravan/freighter3)
 "sPa" = (
@@ -34152,6 +34274,7 @@
 	empty = 1;
 	name = "First-Aid (empty)"
 	},
+/obj/effect/spawner/random/loot_spawn/medical,
 /turf/open/floor/iron,
 /area/ruin/space/has_grav/derelictoutpost/cargostorage)
 "tpO" = (
@@ -34384,6 +34507,7 @@
 /obj/structure/window/reinforced/spawner/directional/north,
 /obj/structure/window/reinforced/spawner/directional/west,
 /obj/structure/alien/weeds,
+/obj/effect/spawner/random/loot_spawn/information,
 /turf/open/floor/iron/dark,
 /area/ruin/space/ancientstation/delta/ai)
 "ttV" = (
@@ -35165,6 +35289,7 @@
 	},
 /obj/item/storage/medkit/o2,
 /obj/effect/turf_decal/delivery,
+/obj/effect/spawner/random/loot_spawn/medical,
 /turf/open/floor/iron,
 /area/ruin/space/has_grav/derelictoutpost/cargostorage)
 "tLM" = (
@@ -35553,6 +35678,7 @@
 /obj/structure/curtain,
 /obj/item/soap/deluxe,
 /obj/machinery/shower/directional/north,
+/obj/effect/spawner/random/loot_spawn/treasure,
 /turf/open/floor/iron/showroomfloor,
 /area/ruin/space/has_grav/derelictsulaco)
 "tWw" = (
@@ -35605,6 +35731,7 @@
 "tYl" = (
 /obj/structure/closet/mini_fridge/grimy,
 /obj/effect/mapping_helpers/broken_floor,
+/obj/effect/spawner/random/loot_spawn/food,
 /turf/open/floor/plating,
 /area/ruin/space/has_grav/crashedship/fore)
 "tYs" = (
@@ -35904,6 +36031,7 @@
 /obj/effect/turf_decal/box/white/corners,
 /obj/structure/closet/crate/secure/weapon,
 /obj/item/knife/combat,
+/obj/effect/spawner/random/loot_spawn/weapon,
 /turf/open/floor/iron/dark/airless,
 /area/shuttle/ruin/caravan/freighter2)
 "uhF" = (
@@ -36041,7 +36169,7 @@
 "ulU" = (
 /obj/effect/decal/cleanable/blood/splatter/xeno,
 /obj/effect/turf_decal/tile/red/half,
-/obj/effect/spawner/random/loot_spawn/weapon,
+/obj/effect/spawner/random/loot_spawn/weapon/full_chance,
 /turf/open/floor/iron/smooth_edge,
 /area/ruin/space/has_grav/derelictsulaco)
 "uma" = (
@@ -36241,6 +36369,7 @@
 	pixel_x = 4;
 	pixel_y = 4
 	},
+/obj/effect/spawner/random/loot_spawn/medical,
 /turf/open/floor/iron/dark,
 /area/ruin/space/has_grav/deepstorage/armory)
 "upN" = (
@@ -38923,6 +39052,11 @@
 /obj/structure/cable,
 /turf/open/floor/mineral/plastitanium/pod/light,
 /area/ruin/space/has_grav/derelictsulaco)
+"vLZ" = (
+/obj/structure/cable,
+/mob/living/basic/zombie/syndie,
+/turf/open/floor/mineral/plastitanium/red,
+/area/ruin/space/has_grav/interdyne)
 "vMb" = (
 /obj/structure/alien/weeds/creature,
 /turf/open/floor/plating,
@@ -39352,6 +39486,7 @@
 	dir = 8
 	},
 /obj/structure/cable,
+/mob/living/basic/trooper/pirate/melee/space,
 /turf/open/floor/iron,
 /area/ruin/space/has_grav/crashedship/aft)
 "waq" = (
@@ -40450,10 +40585,9 @@
 /turf/open/floor/plating,
 /area/ruin/space/has_grav/deepstorage/power)
 "wLw" = (
-/obj/effect/turf_decal/tile/red/diagonal_centre,
-/mob/living/basic/zombie/syndie,
-/turf/open/indestructible,
-/area/ruin/space/has_grav/powered/biooutpost)
+/mob/living/basic/zombie/rotten/assistant,
+/turf/open/floor/mineral/plastitanium/red,
+/area/ruin/space/has_grav/interdyne)
 "wLB" = (
 /obj/structure/frame/machine/secured,
 /obj/effect/decal/cleanable/dirt,
@@ -40842,7 +40976,7 @@
 	pixel_y = -1
 	},
 /obj/structure/table/glass/plasmaglass,
-/obj/effect/spawner/random/loot_spawn/weapon,
+/obj/effect/spawner/random/loot_spawn/weapon/full_chance,
 /turf/open/floor/mineral/plastitanium/pod/dark,
 /area/ruin/space/has_grav/infested_frigate)
 "wUT" = (
@@ -41135,6 +41269,7 @@
 /area/ruin/space/ancientstation/delta/proto)
 "xfg" = (
 /obj/effect/mapping_helpers/broken_floor,
+/obj/effect/spawner/random/loot_spawn/weapon,
 /turf/open/floor/iron/airless,
 /area/shuttle/ruin/caravan/freighter3)
 "xfm" = (
@@ -42014,6 +42149,7 @@
 /obj/item/clothing/glasses/night,
 /obj/effect/turf_decal/delivery,
 /obj/effect/decal/cleanable/dirt,
+/obj/effect/spawner/random/loot_spawn/weapon,
 /turf/open/floor/iron,
 /area/ruin/space/has_grav/deepstorage/storage)
 "xES" = (
@@ -48238,7 +48374,7 @@ rGn
 rGn
 rGn
 fkj
-fFQ
+gOs
 bhb
 fFQ
 fFQ
@@ -48425,7 +48561,7 @@ lQQ
 scn
 cvP
 bfI
-jNU
+czD
 jNU
 fkj
 fkj
@@ -49015,12 +49151,12 @@ eNJ
 hmN
 pnO
 fnr
-dnM
+tDu
 pnO
 fnr
 tDu
 pnO
-dnM
+tDu
 vav
 tix
 pnO
@@ -49276,7 +49412,7 @@ pMa
 qZH
 rWP
 ohK
-aCm
+aMl
 rWP
 ohK
 qJg
@@ -50039,7 +50175,7 @@ rGn
 fkj
 bhb
 tix
-dnM
+tDu
 ohK
 byl
 eZk
@@ -50222,7 +50358,7 @@ fLK
 fRY
 ufA
 rYW
-rYW
+rVP
 qBo
 cjl
 hop
@@ -50294,7 +50430,7 @@ rGn
 rGn
 rGn
 fkj
-fFQ
+gOs
 pnO
 eNJ
 kLB
@@ -52280,7 +52416,7 @@ ilh
 rYW
 rYW
 rYW
-phP
+dQM
 fBP
 ftb
 aHU
@@ -53893,7 +54029,7 @@ rGn
 rGn
 bhb
 bhb
-fFQ
+bPp
 kGP
 fFQ
 hud
@@ -54929,7 +55065,7 @@ hGt
 tIr
 tIr
 igh
-fFQ
+lvg
 fFQ
 gfs
 bhb
@@ -64174,7 +64310,7 @@ uCk
 esO
 kWD
 ofT
-sDt
+cdf
 kYp
 tjf
 ofT
@@ -66367,7 +66503,7 @@ fkj
 fkj
 fkj
 fkj
-fkj
+eKX
 fkj
 fkj
 fkj
@@ -69716,7 +69852,7 @@ mru
 mru
 mru
 mru
-fkj
+eKX
 fkj
 fkj
 fkj
@@ -69963,7 +70099,7 @@ lvh
 lvh
 lvh
 fKk
-fKk
+qZM
 fkj
 fkj
 fkj
@@ -76507,7 +76643,7 @@ oWR
 sXq
 exS
 tNS
-cWB
+wLw
 bak
 uZu
 uZu
@@ -76761,7 +76897,7 @@ xyk
 eEG
 uZu
 qHT
-eFj
+rpN
 xTT
 aFi
 uPi
@@ -76906,7 +77042,7 @@ rXM
 ptI
 hhb
 jiI
-aGO
+iIl
 vWE
 jUI
 wCj
@@ -77689,7 +77825,7 @@ jqL
 dJq
 moJ
 wUT
-ajg
+itD
 upZ
 fFQ
 fFQ
@@ -78186,7 +78322,7 @@ eTn
 hFy
 rsn
 aRN
-dMS
+iYG
 gVl
 dMS
 aRN
@@ -78704,7 +78840,7 @@ aRN
 ppf
 aRN
 hFy
-aRN
+kQP
 ajQ
 wFm
 uem
@@ -81915,7 +82051,7 @@ vCO
 ybq
 uZu
 iQr
-rpN
+vLZ
 rJd
 fqp
 iQW
@@ -89767,7 +89903,7 @@ rtR
 nYb
 jva
 bkm
-wLw
+iye
 oPn
 fOw
 wfh
@@ -91565,7 +91701,7 @@ nYb
 fOw
 cSh
 fOw
-iye
+dPQ
 gEI
 gEI
 aka
