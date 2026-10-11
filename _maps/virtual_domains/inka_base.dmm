@@ -877,8 +877,8 @@
 /turf/open/misc/dirt/station,
 /area/virtual_domain)
 "gd" = (
-/obj/machinery/rnd/production/techfab/department/science,
 /obj/effect/turf_decal/stripes/line,
+/obj/structure/closet/secure_closet/engineering_personal,
 /turf/open/floor/iron/dark/textured_large,
 /area/virtual_domain)
 "gg" = (
@@ -1754,8 +1754,8 @@
 /turf/open/floor/catwalk_floor/iron_dark,
 /area/virtual_domain)
 "md" = (
-/obj/machinery/rnd/production/techfab/department/cargo,
 /obj/effect/turf_decal/stripes/line,
+/obj/effect/spawner/random/structure/tank_holder,
 /turf/open/floor/iron/dark/textured_large,
 /area/virtual_domain)
 "mf" = (
@@ -3931,11 +3931,11 @@
 	},
 /area/virtual_domain)
 "BW" = (
-/obj/machinery/rnd/production/techfab/department/engineering,
 /obj/effect/turf_decal/stripes/line{
 	dir = 6
 	},
 /obj/machinery/light/directional/north,
+/obj/structure/closet/firecloset/full,
 /turf/open/floor/iron/dark/textured_large,
 /area/virtual_domain)
 "Cg" = (
@@ -6076,11 +6076,6 @@
 /area/virtual_domain/protected_space/fullbright)
 "PA" = (
 /obj/structure/table,
-/obj/item/flatpack{
-	board = /obj/item/circuitboard/machine/flatpacker;
-	pixel_x = -6;
-	pixel_y = 5
-	},
 /obj/item/multitool{
 	pixel_x = 8
 	},
