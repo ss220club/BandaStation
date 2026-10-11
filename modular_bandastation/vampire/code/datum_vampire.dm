@@ -62,7 +62,6 @@
 
 	var/mob/living/carbon/human/H = tested.current
 	var/datum/species/species = H.dna?.species
-	stack_trace("[species] [species.type]")
 	if(!species.is_vampire_compatible())
 		return FALSE
 	return ..()
