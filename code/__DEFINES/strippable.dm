@@ -20,6 +20,8 @@
 #define STRIPPABLE_ITEM_LEGCUFFS "legcuffs"
 #define STRIPPABLE_ITEM_PET_COLLAR "pet_collar"
 #define STRIPPABLE_ITEM_PARROT_HEADSET "parrot_headset"
+// BANDASTATION ADD: Skrell Headpocket
+#define STRIPPABLE_ITEM_HEADPOCKET "headpocket"
 
 /// Alternate action on a hand slot that removes the handcuffs binding an item to that arm. Must be matched in StripMenu.tsx.
 #define STRIPPABLE_ALT_ACTION_REMOVE_ITEM_CUFFS "remove_item_cuffs"
