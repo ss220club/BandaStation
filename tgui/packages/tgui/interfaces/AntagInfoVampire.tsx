@@ -43,7 +43,7 @@ const IntroductionSection = ({
   objectives,
   specialization_blood_required,
 }: Pick<Data, 'objectives' | 'specialization_blood_required'>) => (
-  <Section title="Вы Вампир!" fill scrollable fontSize="14px">
+  <Section title="Вы - вампир!" fill scrollable fontSize="14px">
     <Stack vertical>
       <Stack.Item textAlign="center" italic>
         Пейте кровь живых, чтобы усиливать свои вампирские способности.
