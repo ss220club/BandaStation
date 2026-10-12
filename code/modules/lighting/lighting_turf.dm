@@ -91,8 +91,6 @@
 	. = list()
 
 	var/datum/spatial_grid_cell/grid_cell = SSspatial_grid.get_cell_of(src)
-	if(!grid_cell)
-		return
 	var/list/light_sources = list()
 	var/furthest_range = 0
 	// BANDASTATION EDIT START: Improve radial light spread
