@@ -4,12 +4,23 @@
 	icon_state = "tongue"
 	taste_sensitivity = 10
 	modifies_speech = TRUE
-	accent_characters = list("r", "R", "р", "Р")
-	accent_repeat_min = 2
-	accent_repeat_max = 4
 	languages_native = list(/datum/language/canilunzt)
 	liked_foodtypes = RAW | MEAT | SEAFOOD
 	disliked_foodtypes =  FRUIT | NUTS | GROSS | GRAIN
+	var/static/list/speech_replacements = list(
+		"r" = "rr",
+		"R" = "RR",
+		"р" = "рр",
+		"Р" = "РР",
+	)
+
+/obj/item/organ/tongue/vulpkanin/Initialize(mapload)
+	. = ..()
+	AddComponent(\
+		/datum/component/speechmod,\
+		replacements = speech_replacements,\
+		should_modify_speech = CALLBACK(src, PROC_REF(should_modify_speech))\
+	)
 
 /obj/item/organ/tongue/get_possible_languages()
 	return ..() + /datum/language/canilunzt

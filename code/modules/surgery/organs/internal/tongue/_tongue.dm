@@ -48,14 +48,6 @@
 	var/modifies_speech = FALSE
 	/// List of emote keys and sounds for overriding sounds from emotes
 	VAR_PROTECTED/emote_sounds
-	///BANDASTATION ADD BEGIN: Accent Tongue
-	/// Characters that should be repeated when this tongue modifies speech.
-	var/list/accent_characters = list()
-	/// Minimum number of copies for an accented character.
-	var/accent_repeat_min = 2
-	/// Maximum number of copies for an accented character.
-	var/accent_repeat_max = 4
-	///BANDASTATION ADD END: Accent Tongue
 
 /obj/item/organ/tongue/Initialize(mapload)
 	. = ..()
@@ -124,30 +116,8 @@
 		return FALSE // Don't modify speech
 	return TRUE
 
-// BANDASTATION ADD BEGIN: Accent Tongue
 /obj/item/organ/tongue/proc/modify_speech(datum/source, list/speech_args)
-	var/message = speech_args[SPEECH_MESSAGE]
-	if(!length(accent_characters))
-		return
-	for(var/character in accent_characters)
-		var/regex/accent_regex = regex(character, "g")
-		var/search_position = 1
-		var/new_message = ""
-		var/last_position = 1
-		while(accent_regex.Find(message, search_position))
-			var/match_start = accent_regex.index
-			var/match_end = accent_regex.next
-			new_message += copytext(message, last_position, match_start)
-			var/repeat_count = rand(accent_repeat_min, accent_repeat_max)
-			for(var/i in 1 to repeat_count)
-				new_message += character
-			last_position = match_end
-			search_position = match_end
-		if(last_position > 1)
-			new_message += copytext(message, last_position)
-			message = new_message
-	speech_args[SPEECH_MESSAGE] = message
-// BANDASTATION ADD END: Accent Tongue
+	return speech_args[SPEECH_MESSAGE]
 
 /**
  * Gets the food reaction a tongue would have from the food item,
