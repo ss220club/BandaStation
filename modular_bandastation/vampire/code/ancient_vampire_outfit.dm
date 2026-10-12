@@ -23,7 +23,6 @@
 	var/obj/item/card/id/id_card = human.wear_id
 	if(id_card)
 		id_card.registered_name = "Ancient One"
-		id_card.assignment = "data"
 		id_card.update_label()
 
 	if(!human.mind || human.mind.has_antag_datum(/datum/antagonist/vampire))
