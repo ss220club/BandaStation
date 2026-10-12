@@ -105,19 +105,19 @@
 	if(!hacking_cable)
 		return FALSE
 	if(!hacking_cable.hacking_machine)
-		balloon_alert(src, "nothing connected")
+		balloon_alert(src, "ничего не подключено")
 		return FALSE
 	playsound(src, 'sound/machines/airlock/airlock_alien_prying.ogg', 50, TRUE)
-	balloon_alert(src, "overriding...")
+	balloon_alert(src, "переопределение...")
 	// Now begin hacking
 	if(!do_after(src, 15 SECONDS, hacking_cable.hacking_machine, timed_action_flags = NONE))
-		balloon_alert(src, "failed! retracting...")
+		balloon_alert(src, "неудача...")
 		QDEL_NULL(hacking_cable)
 		return FALSE
 	if(!hacking_cable?.hacking_machine)
 		return FALSE
 	var/obj/machinery/door/door = hacking_cable.hacking_machine
-	balloon_alert(src, "success")
+	balloon_alert(src, "успех")
 	door.open()
 	QDEL_NULL(hacking_cable)
 	return TRUE

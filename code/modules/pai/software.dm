@@ -58,7 +58,7 @@
 			door_jack(params["mode"])
 			return TRUE
 		if("Слот для ключа шифрования")
-			balloon_alert(usr, "radio frequencies [!encrypt_mod ? "enabled" : "disabled"]")
+			balloon_alert(usr, "радиочастоты [!encrypt_mod ? "enabled" : "disabled"]")
 			encrypt_mod = !encrypt_mod
 			radio.subspace_transmission = !radio.subspace_transmission
 			return TRUE
@@ -161,22 +161,22 @@
  */
 /mob/living/silicon/pai/proc/check_dna()
 	if(emagged) // Their master DNA signature is scrambled anyway
-		to_chat(src, span_syndradio("You are not at liberty to do this! All agents are clandestine."))
+		to_chat(src, span_syndradio("Вы не имеете права этого делать! Все агенты работают под прикрытием."))
 		return FALSE
 	var/mob/living/carbon/holder = get_holder()
 	if(!isnull(holder))
-		balloon_alert(src, "not being carried")
+		balloon_alert(src, "не переносится")
 		return FALSE
-	balloon_alert(src, "requesting dna sample")
-	if(tgui_alert(holder, "[src] is requesting a DNA sample from you. Will you allow it to confirm your identity?", "Checking DNA", list("Yes", "No")) != "Yes")
-		balloon_alert(src, "dna sample refused!")
+	balloon_alert(src, "запрос образца ДНК")
+	if(tgui_alert(holder, "[src.declent_ru(NOMINATIVE)] запрашивает у вас образец ДНК. Вы позволите ему подтвердить вашу личность?", "Проверка ДНК", list("Да", "Нет")) != "Да")
+		balloon_alert(src, "образец ДНК не предоставлен!")
 		return FALSE
-	holder.visible_message(span_notice("[holder] presses [holder.p_their()] thumb against [src]."), span_notice("You press your thumb against [src]."), span_notice("[src] makes a sharp clicking sound as it extracts DNA material from [holder]."))
+	holder.visible_message(span_notice("[holder] прижимает [holder.ru_p_theirs()] большой палец к [src.declent_ru(DATIVE)]."), span_notice("Вы прижимаете большой палец к [src.declent_ru(DATIVE)]."), span_notice("[src.declent_ru(NOMINATIVE)] издает резкий щёлкающий звук при извлечении ДНК-материала из [holder]."))
 	if(!holder.has_dna())
-		balloon_alert(src, "no dna detected!")
+		balloon_alert(src, "ДНК не обнаружено!")
 		return FALSE
-	to_chat(src, span_bolddanger(("[holder]'s UE string: [holder.dna.unique_enzymes]")))
-	to_chat(src, span_notice("DNA [holder.dna.unique_enzymes == master_dna ? "matches" : "does not match"] our stored Master's DNA."))
+	to_chat(src, span_bolddanger(("UE-строка [holder]: [holder.dna.unique_enzymes]")))
+	to_chat(src, span_notice("ДНК [holder.dna.unique_enzymes == master_dna ? "совпадение" : "не соответствует"] сохраненной ДНК мастера."))
 	return TRUE
 
 /**
@@ -204,7 +204,7 @@
 		if(PAI_SCAN_TARGET)
 			var/mob/living/carbon/target = get_holder()
 			if(isnull(target))
-				balloon_alert(src, "not being carried!")
+				balloon_alert(src, "не переносится!")
 				return FALSE
 			healthscan(src, target)
 			return TRUE
