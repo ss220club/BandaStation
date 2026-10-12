@@ -318,11 +318,11 @@
 	for(var/item_position in 1 to length(held))
 		var/obj/item/held_item = held[item_position]
 		if(!length(holding))
-			holding += "[ru_p_they(TRUE)] [p_are()] держит \a [held_item.declent_ru(ACCUSATIVE)]"
+			holding += "[ru_p_they(TRUE)] держит [held_item.declent_ru(ACCUSATIVE)]"
 		else if(item_position != length(held))
-			holding += ", \a [held_item.declent_ru(ACCUSATIVE)]"
+			holding += ", и [held_item.declent_ru(ACCUSATIVE)]"
 		else
-			holding += ", и \a [held_item.declent_ru(ACCUSATIVE)]"
+			holding += ", и [held_item.declent_ru(ACCUSATIVE)]"
 	return "На фотографии также имеется [src] [declent_ru(NOMINATIVE)][health < (maxHealth * 0.75) ? ", и выглядит немного ранено":""][holding.len ? ". [holding.Join("")].":"."]"
 
 //Called when we bump onto an obj
