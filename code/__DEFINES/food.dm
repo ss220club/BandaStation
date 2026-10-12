@@ -20,6 +20,7 @@
 #define GORE (1<<19)
 #define STONE (1<<20)
 #define EGG (1<<21)
+#define TECH (1<<22)
 
 DEFINE_BITFIELD(foodtypes, list(
 	"MEAT" = MEAT,
@@ -44,6 +45,7 @@ DEFINE_BITFIELD(foodtypes, list(
 	"GORE" = GORE,
 	"STONE" = STONE,
 	"EGG" = EGG,
+	"TECH" = TECH,
 ))
 
 /// A list of food type names, in order of their flags
@@ -70,6 +72,7 @@ DEFINE_BITFIELD(foodtypes, list(
 	"GORE", \
 	"STONE", \
 	"EGG", \
+	"TECH", \
 )
 
 /// IC meaning (more or less) for food flags // BANDASTATION EDIT - сверяйте с tgui\packages\tgui\interfaces\PersonalCrafting.tsx
@@ -96,6 +99,7 @@ DEFINE_BITFIELD(foodtypes, list(
 	"Месиво", \
 	"Каменное", \
 	"Из яиц", \
+	"Технологическое", \
 )
 
 /// Food types assigned to all podperson organs

@@ -1,0 +1,53 @@
+["vox cortical stack"]
+nominative = "мозговой стек вокса"
+genitive = "мозгового стека вокса"
+dative = "мозговому стеку вокса"
+accusative = "мозговой стек вокса"
+instrumental = "мозговым стеком вокса"
+prepositional = "мозговом стеке вокса"
+gender = "male"
+
+["vox eyeballs"]
+nominative = "глаза воксa"
+genitive = "глаз вокса"
+dative = "глазам вокса"
+accusative = "глаза вокса"
+instrumental = "глазами вокса"
+prepositional = "глазах вокса"
+gender = "plural"
+
+["vox heart"]
+nominative = "сердце вокса"
+genitive = "сердца вокса"
+dative = "сердцу вокса"
+accusative = "сердце вокса"
+instrumental = "сердцем вокса"
+prepositional = "сердце вокса"
+gender = "neuter"
+
+["vox stomach"]
+nominative = "желудок вокса"
+genitive = "желудка вокса"
+dative = "желудку вокса"
+accusative = "желудок вокса"
+instrumental = "желудком вокса"
+prepositional = "желудке вокса"
+gender = "male"
+
+["vox liver"]
+nominative = "печень вокса"
+genitive = "печени вокса"
+dative = "печени вокса"
+accusative = "печень вокса"
+instrumental = "печенью вокса"
+prepositional = "печени вокса"
+gender = "female"
+
+["vox lungs"]
+nominative = "лёгкие вокса"
+genitive = "лёгких вокса"
+dative = "лёгким вокса"
+accusative = "лёгкие вокса"
+instrumental = "лёгкими вокса"
+prepositional = "лёгких вокса"
+gender = "plural"
