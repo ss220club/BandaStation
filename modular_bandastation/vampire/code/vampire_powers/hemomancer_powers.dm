@@ -16,9 +16,13 @@
 	var/mob/living/carbon/user = owner
 	if(!user)
 		return FALSE
-	for(var/obj/item/held_item as anything in user.held_items)
-		if(held_item && HAS_TRAIT(held_item, TRAIT_NODROP))
-			return FALSE
+	// Why is there no API for this maaaaan
+	var/obj/item/held_item = owner.get_active_held_item()
+	if(held_item && !(HAS_TRAIT(held_item, TRAIT_NODROP)))
+		return FALSE
+	held_item = owner.get_inactive_held_item()
+	if(held_item && !(HAS_TRAIT(held_item, TRAIT_NODROP)))
+		return FALSE
 	return TRUE
 
 /datum/action/cooldown/spell/vampire_vamp_claws/cast(atom/cast_on)
