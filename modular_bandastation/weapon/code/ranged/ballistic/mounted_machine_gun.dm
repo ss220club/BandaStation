@@ -105,3 +105,16 @@
 	number_of_shots = 4
 	cooldown_duration = 1 SECONDS
 	rate_of_fire = 2
+
+/obj/item/deployable_turret_folded
+	name = "folded CM90 heavy laser machine gun"
+
+/obj/machinery/deployable_turret/hmg/full_auto
+	number_of_shots = 1
+	cooldown_duration = 1 SECONDS
+	rate_of_fire = 1
+	spawned_on_undeploy = /obj/machinery/deployable_turret/hmg/full_auto
+
+/obj/item/deployable_turret_folded/full_auto/Initialize(mapload)
+	. = ..()
+	AddComponent(/datum/component/deployable, 5 SECONDS, /obj/machinery/deployable_turret/hmg/full_auto)

@@ -9,3 +9,5 @@
 	desc = "Длинное черное тренч-пальто. Ты чувствуешь себя избранным, но ты - не он."
 	icon_state = "leather_trenchcoat"
 	flags_inv = HIDEBELT
+	supports_variations_flags = CLOTHING_CERULEAN_MASK_INBETWEEN
+	bodyshapes_with_variations = BODYSHAPE_CERULEAN

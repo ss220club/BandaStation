@@ -354,7 +354,7 @@
 
 /atom/movable/screen/alert/status_effect/vampire_gladiator
 	name = "Гладиатор"
-	desc = "Вы сопротивляетесь ранам и восстанавливаете здоровье и выносливость."
+	desc = "Вы получаете сопротивление к ранам и восстанавливаете здоровье и выносливость."
 	icon = 'modular_bandastation/vampire/icons/mob/actions/actions.dmi'
 	icon_state = "duel"
 
