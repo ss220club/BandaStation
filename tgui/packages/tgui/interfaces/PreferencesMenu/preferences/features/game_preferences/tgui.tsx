@@ -36,10 +36,10 @@ export const tgui_lock: FeatureToggle = {
 };
 
 export const tgui_unlimited_windows: FeatureToggle = {
-  name: 'Uncap TGUI window limit',
+  name: 'TGUI - Снять ограничение на количество окон',
   category: 'Интерфейс',
   description:
-    'Disables the window limit for TGUI windows. Having more than 5 windows open can tank performance on lower end computers.',
+    'Отключает ограничение на количество окон TGUI. Открытие более 5 окон может значительно снизить производительность на компьютерах с низкой производительностью.',
   component: CheckboxInput,
 };
 

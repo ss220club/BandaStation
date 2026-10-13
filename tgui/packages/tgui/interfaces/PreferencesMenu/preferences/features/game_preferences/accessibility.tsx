@@ -30,31 +30,30 @@ export const remove_double_click: FeatureToggle = {
 };
 
 export const min_recoil_multiplier: Feature<number> = {
-  name: 'Cosmetic Recoil Strength',
+  name: 'Сила визуального эффекта отдачи',
   category: 'Доступность',
   description: `
-      Modifies the strength of cosmetic recoil's effect on your camera.
-      0 will disable cosmetic recoil entirely, though mechanical recoil will be unaffected.
+      Регулирует интенсивность эффекта визуальной отдачи на вашей камере.
+      Значение 0 полностью отключает визуальную отдачу, однако механическая отдача при этом не изменится.
     `,
   component: FeatureSliderInput,
 };
 
 export const stair_indicator: FeatureToggle = {
-  name: 'Enable stair indicator',
+  name: 'Включить индикатор лестницы',
   category: 'Доступность',
   description: `
-      When toggled, staircases will have a visual indicator showing which
-      direction to walk to transition floors.
+      При включении этой функции на лестницах будет отображаться визуальный индикатор, указывающий, в каком
+      направлении следует идти, чтобы перейти на другие этажи.
     `,
   component: CheckboxInput,
 };
 
 export const twelve_hour: FeatureToggle = {
-  name: 'Twelve-Hour Clock',
+  name: '12-часовой формат времени',
   category: 'Доступность',
   description: `
-      When toggled, will replace many instances of real-world time with AM/PM instead.
+      Если включить эту опцию, многие упоминания реального времени будут заменены на обозначения AM/PM.
     `,
   component: CheckboxInput,
 };
-

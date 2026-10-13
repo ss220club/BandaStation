@@ -4,7 +4,8 @@ import {
 } from '../dropdowns';
 
 export const preferred_ai_hologram_display: FeatureWithIcons<string> = {
-  name: 'AI hologram display',
-  description: 'The holographic form you will take when you use a holopad.',
+  name: 'Образ голограммы ИИ',
+  description:
+    'Голографический образ, который вы примите при использовании голопада.',
   component: FeatureIconnedDropdownInput,
 };

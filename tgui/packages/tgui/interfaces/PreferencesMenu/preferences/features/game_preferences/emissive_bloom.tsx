@@ -1,8 +1,8 @@
 import { type Feature, FeatureSliderInput } from '../base';
 
 export const emissive_bloom: Feature<number> = {
-  name: 'Emissive Bloom Strength',
+  name: 'Интенсивность эффекта свечения',
   category: 'Геймплей',
-  description: `How strong the bloom on emissive objects, such as computer screens, is. This has negligible performance impact.`,
+  description: `Регулирует силу свечения излучающих свет объектов, таких как экраны компьютеров. Это оказывает незначительное влияние на производительность.`,
   component: FeatureSliderInput,
 };

@@ -1,11 +1,11 @@
 import { CheckboxInput, type FeatureToggle } from '../base';
 
 export const status_bar: FeatureToggle = {
-  name: 'Enable status bar',
+  name: 'Влючить статус-бар',
   category: 'Интерфейс',
   description: `
-      When toggled, a bar at the bottom left of the screen will display
-      the name of what your mouse cursor is hovering over.
+      При включении этой функции в левом нижнем углу экрана будет
+      указано название объекта, над которым находится курсор мыши.
     `,
   component: CheckboxInput,
 };
