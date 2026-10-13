@@ -31,7 +31,7 @@ export const remove_double_click: FeatureToggle = {
 
 export const min_recoil_multiplier: Feature<number> = {
   name: 'Cosmetic Recoil Strength',
-  category: 'ACCESSIBILITY',
+  category: 'Доступность',
   description: `
       Modifies the strength of cosmetic recoil's effect on your camera.
       0 will disable cosmetic recoil entirely, though mechanical recoil will be unaffected.
@@ -41,7 +41,7 @@ export const min_recoil_multiplier: Feature<number> = {
 
 export const stair_indicator: FeatureToggle = {
   name: 'Enable stair indicator',
-  category: 'ACCESSIBILITY',
+  category: 'Доступность',
   description: `
       When toggled, staircases will have a visual indicator showing which
       direction to walk to transition floors.
@@ -51,7 +51,7 @@ export const stair_indicator: FeatureToggle = {
 
 export const twelve_hour: FeatureToggle = {
   name: 'Twelve-Hour Clock',
-  category: 'ACCESSIBILITY',
+  category: 'Доступность',
   description: `
       When toggled, will replace many instances of real-world time with AM/PM instead.
     `,
