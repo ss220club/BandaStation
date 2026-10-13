@@ -55,7 +55,7 @@
 /proc/redspace_debug_set_cell_value(client/user, turf/target, event_only = FALSE)
 	if(!user || !target || !SSredspace.is_supported_z(target.z))
 		if(user)
-			to_chat(user, span_warning("Этот тайл не находится на активном станционном z-уровне редспейса."), confidential = TRUE)
+			to_chat(user, span_warning("Редспейс отключён на этом Z-уровне. Используйте пункт «Включить текущий Z-уровень»."), confidential = TRUE)
 		return
 
 	var/current_value = SSredspace.get_value(target)
@@ -104,6 +104,7 @@
 ADMIN_VERB(redspace_debug_panel, R_DEBUG, "Redspace: Debug Panel", "Change the live Redspace field and run explicit test events.", ADMIN_CATEGORY_DEBUG)
 	var/action = tgui_input_list(user, "Выберите операцию", "Redspace Debug", list(
 		"Показать текущее состояние",
+		"Включить текущий Z-уровень",
 		"Установить фон раунда",
 		"Изменить интенсивность особенности",
 		"Установить значение ячейки",
@@ -126,6 +127,19 @@ ADMIN_VERB(redspace_debug_panel, R_DEBUG, "Redspace: Debug Panel", "Change the l
 	switch(action)
 		if("Показать текущее состояние")
 			redspace_debug_report(user, current_turf)
+
+		if("Включить текущий Z-уровень")
+			if(!current_turf)
+				return
+			if(SSredspace.is_supported_z(current_turf.z))
+				to_chat(user, span_notice("Редспейс уже работает на Z-уровне [current_turf.z]."), confidential = TRUE)
+				return
+			if(!SSredspace.enable_z_level(current_turf.z))
+				to_chat(user, span_warning("Не удалось включить редспейс на текущем Z-уровне."), confidential = TRUE)
+				return
+			to_chat(user, span_notice("Редспейс включён на Z-уровне [current_turf.z]. Теперь здесь можно создавать горячие зоны и другие источники."), confidential = TRUE)
+			log_admin("[key_name(user)] enabled redspace on z-level [current_turf.z].")
+			message_admins("[key_name_admin(user)] включил редспейс на Z-уровне [current_turf.z].")
 
 		if("Установить фон раунда")
 			var/new_background = tgui_input_number(user, "Новое значение фона (-100..10)", "Redspace Background", SSredspace.context.background_value, REDSPACE_MAX_NORMAL_VALUE, -100)
@@ -168,7 +182,7 @@ ADMIN_VERB(redspace_debug_panel, R_DEBUG, "Redspace: Debug Panel", "Change the l
 
 		if("Добавить тестовый источник")
 			if(!current_turf || !SSredspace.is_supported_z(current_turf.z))
-				to_chat(user, span_warning("Текущий тайл не находится на активном станционном z-уровне."), confidential = TRUE)
+				to_chat(user, span_warning("Редспейс отключён на этом Z-уровне. Используйте пункт «Включить текущий Z-уровень»."), confidential = TRUE)
 				return
 			var/source_profile = tgui_input_list(user, "Профиль источника", "Redspace Source", list(REDSPACE_PROFILE_DEBUG, REDSPACE_PROFILE_DEMONIC))
 			if(!source_profile)
@@ -187,7 +201,7 @@ ADMIN_VERB(redspace_debug_panel, R_DEBUG, "Redspace: Debug Panel", "Change the l
 
 		if("Добавить горячую зону")
 			if(!current_turf || !SSredspace.is_supported_z(current_turf.z))
-				to_chat(user, span_warning("Текущий тайл не находится на активном станционном z-уровне."), confidential = TRUE)
+				to_chat(user, span_warning("Редспейс отключён на этом Z-уровне. Используйте пункт «Включить текущий Z-уровень»."), confidential = TRUE)
 				return
 			var/hotspot_profile = tgui_input_list(user, "Профиль горячей зоны", "Redspace Hotspot", list(REDSPACE_PROFILE_DEMONIC, REDSPACE_PROFILE_DEBUG))
 			if(!hotspot_profile)
@@ -207,7 +221,7 @@ ADMIN_VERB(redspace_debug_panel, R_DEBUG, "Redspace: Debug Panel", "Change the l
 
 		if("Добавить тестовую волну")
 			if(!current_turf || !SSredspace.is_supported_z(current_turf.z))
-				to_chat(user, span_warning("Текущий тайл не находится на активном станционном z-уровне."), confidential = TRUE)
+				to_chat(user, span_warning("Редспейс отключён на этом Z-уровне. Используйте пункт «Включить текущий Z-уровень»."), confidential = TRUE)
 				return
 			var/wave_profile = tgui_input_list(user, "Профиль волны", "Redspace Wave", list(REDSPACE_PROFILE_DEMONIC, REDSPACE_PROFILE_DEBUG))
 			if(!wave_profile)
@@ -275,7 +289,7 @@ ADMIN_VERB(redspace_debug_panel, R_DEBUG, "Redspace: Debug Panel", "Change the l
 						to_chat(user, span_warning("Не удалось изменить силу источника."), confidential = TRUE)
 				if("Позицию (текущий тайл)")
 					if(!current_turf || !SSredspace.is_supported_z(current_turf.z))
-						to_chat(user, span_warning("Текущий тайл не находится на активном станционном z-уровне."), confidential = TRUE)
+						to_chat(user, span_warning("Редспейс отключён на этом Z-уровне. Используйте пункт «Включить текущий Z-уровень»."), confidential = TRUE)
 						return
 					if(SSredspace.update_source_position(source_id, current_turf, "перемещён из debug-панели"))
 						log_admin("[key_name(user)] moved redspace source #[source_id] to ([current_turf.x], [current_turf.y], [current_turf.z]).")
@@ -293,7 +307,7 @@ ADMIN_VERB(redspace_debug_panel, R_DEBUG, "Redspace: Debug Panel", "Change the l
 
 		if("Локальное искажение 4-6")
 			if(!current_turf || !SSredspace.is_supported_z(current_turf.z))
-				to_chat(user, span_warning("Текущий тайл не находится на активном станционном z-уровне."), confidential = TRUE)
+				to_chat(user, span_warning("Редспейс отключён на этом Z-уровне. Используйте пункт «Включить текущий Z-уровень»."), confidential = TRUE)
 				return
 			if(SSredspace.start_registered_event("local_distortion", user, current_turf))
 				to_chat(user, span_notice("Локальное искажение запущено."), confidential = TRUE)
@@ -302,7 +316,7 @@ ADMIN_VERB(redspace_debug_panel, R_DEBUG, "Redspace: Debug Panel", "Change the l
 
 		if("Штормовой импульс 7-10")
 			if(!current_turf || !SSredspace.is_supported_z(current_turf.z))
-				to_chat(user, span_warning("Текущий тайл не находится на активном станционном z-уровне."), confidential = TRUE)
+				to_chat(user, span_warning("Редспейс отключён на этом Z-уровне. Используйте пункт «Включить текущий Z-уровень»."), confidential = TRUE)
 				return
 			if(SSredspace.start_registered_event("storm_pulse", user, current_turf))
 				to_chat(user, span_notice("Штормовой импульс телеграфирован: покиньте отмеченный тайл."), confidential = TRUE)

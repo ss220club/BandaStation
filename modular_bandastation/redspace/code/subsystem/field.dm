@@ -1,6 +1,17 @@
 // Sparse field sampling, overrides, refresh queues and cell pruning.
 // These procs extend SSredspace; shared state and lifecycle live in ../redspace_subsystem.dm.
 
+/// Opts an existing z-level into the field without creating cells or changing the background.
+/datum/controller/subsystem/redspace/proc/enable_z_level(z_level)
+	if(!initialized || !context || !isnum(z_level) || z_level != round(z_level) || z_level < 1 || z_level > world.maxz)
+		return FALSE
+	if(is_supported_z(z_level))
+		return TRUE
+	context.additional_z_levels |= z_level
+	context.active_z_levels |= z_level
+	station_z_levels |= z_level
+	return TRUE
+
 /datum/controller/subsystem/redspace/proc/is_supported_z(z_level)
 	if(!z_level)
 		return FALSE

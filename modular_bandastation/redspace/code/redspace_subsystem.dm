@@ -13,7 +13,7 @@ SUBSYSTEM_DEF(redspace)
 
 	/// Round context: background, active z-levels, profile and zone coefficients.
 	var/datum/redspace_context/context
-	/// Station z-levels currently covered by the MVP field.
+	/// Z-levels currently covered by the field, including explicitly enabled levels.
 	var/list/station_z_levels = list()
 	/// Sparse associative table: "z:q:r" -> /datum/redspace_field_cell.
 	var/list/field_cells = list()

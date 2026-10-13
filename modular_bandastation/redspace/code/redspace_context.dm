@@ -8,6 +8,8 @@
 	var/background_value = REDSPACE_DEFAULT_VALUE
 	/// Z-levels covered by the field.
 	var/list/active_z_levels = list()
+	/// Extra z-levels explicitly enabled during this round, retained on refresh.
+	var/list/additional_z_levels = list()
 	/// Identifier of the influence profile selected for the round.
 	var/active_profile_id
 	/// Profile data selected for the round. The id remains available for compact payloads.
@@ -51,7 +53,7 @@
 /// unioned, and any explicit FALSE disables the system.
 /datum/redspace_context/proc/refresh()
 	var/resolved_background
-	var/list/resolved_z_levels = list()
+	var/list/resolved_z_levels = additional_z_levels.Copy()
 	var/resolved_profile
 	var/resolved_enabled = TRUE
 

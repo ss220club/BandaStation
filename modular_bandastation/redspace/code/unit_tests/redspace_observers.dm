@@ -284,6 +284,41 @@
 	if(SSredspace.metric_full_prune_count || SSredspace.metric_prune_cell_check_count != 1 || SSredspace.field_cells[old_key])
 		return Fail("Cross-hex movement must inspect only the abandoned cell, irrespective of field size")
 
+/datum/unit_test/redspace_observers/additional_z_level
+
+/datum/unit_test/redspace_observers/additional_z_level/Run()
+	if(SSmapping.level_trait(start_turf.z, ZTRAIT_STATION))
+		return Fail("Additional-level test requires the isolated non-station test z-level")
+	SSredspace.station_z_levels = list()
+	if(!isnull(SSredspace.get_value(start_turf)) || SSredspace.register_hotspot(start_turf, 7, 4))
+		return Fail("An unsupported z-level must reject field samples and hotspots")
+	for(var/invalid_z in list(null, 0, -1, world.maxz + 1, start_turf.z + 0.5, "1"))
+		if(SSredspace.enable_z_level(invalid_z))
+			return Fail("Enabling a z-level must reject invalid or nonexistent levels")
+	if(!SSredspace.enable_z_level(start_turf.z) || !SSredspace.enable_z_level(start_turf.z))
+		return Fail("Enabling a real non-station z-level must succeed and be repeatable")
+	if(length(SSredspace.station_z_levels) != 1 || length(SSredspace.context.additional_z_levels) != 1 || !(start_turf.z in SSredspace.context.active_z_levels))
+		return Fail("Enabled levels must stay synchronized without duplicates")
+	if(length(SSredspace.field_cells) || SSredspace.context.background_value != 0 || SSredspace.get_value(start_turf) != 0)
+		return Fail("Enabling a z-level must not create cells or change the background")
+	SSredspace.context.refresh()
+	if(!(start_turf.z in SSredspace.context.active_z_levels))
+		return Fail("Context refresh must preserve explicitly enabled levels")
+	var/datum/redspace_field_source/hotspot/hotspot = SSredspace.register_hotspot(start_turf, 7, 4, grows_over_time = FALSE)
+	if(!hotspot)
+		return Fail("An enabled non-station level must accept a hotspot")
+	allocated += hotspot
+	var/obj/item/redspace_sensor/sensor = allocate(/obj/item/redspace_sensor, start_turf)
+	if(SSredspace.get_value(start_turf) != 7 || sensor.last_sample_value != 7 || !SSredspace.field_listeners[sensor])
+		return Fail("The hotspot must affect the field and sensors on the added level")
+	if(SSredspace.get_nearest_hotspot(start_turf) != hotspot || !SSredspace.is_event_target_turf_valid(start_turf))
+		return Fail("Hotspot discovery and event targets must work on the added level")
+	SSredspace.reset_debug_state()
+	if(!SSredspace.is_supported_z(start_turf.z) || !(start_turf.z in SSredspace.context.active_z_levels) || length(SSredspace.field_sources))
+		return Fail("Field reset must retain enabled levels while clearing their sources")
+	if(!SSredspace.field_listeners[sensor] || sensor.last_sample_value != SSredspace.get_value(start_turf))
+		return Fail("Field reset must restore sensor subscriptions on additional levels")
+
 /datum/unit_test/redspace_observers/reset
 
 /datum/unit_test/redspace_observers/reset/Run()

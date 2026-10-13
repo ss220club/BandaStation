@@ -82,8 +82,10 @@
 	event_wake_dirty = FALSE
 	reset_metrics()
 
+	var/list/additional_z_levels = context.additional_z_levels.Copy()
 	QDEL_NULL(context)
 	context = new /datum/redspace_context(list(new /datum/redspace_context_provider/default()))
+	context.additional_z_levels = additional_z_levels
 	context.refresh()
 	station_z_levels = context.active_z_levels.Copy()
 	for(var/datum/listener as anything in field_listeners_to_restore)
