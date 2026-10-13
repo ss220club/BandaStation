@@ -12,6 +12,6 @@ export const smoker: FeatureChoiced = {
 };
 
 export const alcoholic: FeatureChoiced = {
-  name: 'Любимый алькоголь',
+  name: 'Любимый алкоголь',
   component: FeatureDropdownInput,
 };

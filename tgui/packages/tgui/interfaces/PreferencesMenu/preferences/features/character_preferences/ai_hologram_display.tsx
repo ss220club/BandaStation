@@ -6,6 +6,6 @@ import {
 export const preferred_ai_hologram_display: FeatureWithIcons<string> = {
   name: 'Образ голограммы ИИ',
   description:
-    'Голографический образ, который вы примите при использовании голопада.',
+    'Голографический образ, который вы примете при использовании голопада.',
   component: FeatureIconnedDropdownInput,
 };

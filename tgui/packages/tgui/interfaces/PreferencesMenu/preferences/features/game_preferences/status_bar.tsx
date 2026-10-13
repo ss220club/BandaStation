@@ -1,7 +1,7 @@
 import { CheckboxInput, type FeatureToggle } from '../base';
 
 export const status_bar: FeatureToggle = {
-  name: 'Влючить статус-бар',
+  name: 'Влкючить статус-бар',
   category: 'Интерфейс',
   description: `
       При включении этой функции в левом нижнем углу экрана будет
