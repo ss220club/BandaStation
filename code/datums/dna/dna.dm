@@ -402,6 +402,11 @@ GLOBAL_LIST_INIT(total_uf_len_by_block, populate_total_uf_len_by_block())
 	else
 		CRASH("set_species called with an invalid mrace [mrace]")
 
+	// BANDASTATION ADDITION START - Vampire antagonist and species are mutually exclusive.
+	if(HAS_TRAIT(src, TRAIT_VAMPIRE) && !new_race.is_vampire_compatible())
+		return
+	// BANDASTATION ADDITION END
+
 	var/datum/species/old_species = dna.species
 	dna.species = new_race
 
