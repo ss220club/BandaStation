@@ -126,3 +126,36 @@
 	contains = list(
 		/obj/item/clothing/accessory/holster = 2
 	)
+
+/datum/supply_pack/security/armory/pdh_mags
+	name = "PDH 'Osprey' .357 Magazines"
+	crate_name = "PDH magazines crate"
+	desc = "В этом ящике находится три магазина калибра .357 для пистолетов PDH 'Osprey'."
+	cost = CARGO_CRATE_VALUE * 10
+	access_view = ACCESS_WEAPONS
+	contains = list(
+		/obj/item/ammo_box/magazine/c357 = 3,
+	)
+
+/datum/supply_pack/security/armory/ladon_mags
+	name = "PDH 'Ladon' .50 AE Magazines"
+	crate_name = "PDH 'Ladon' magazines crate"
+	desc = "В этом ящике находится три магазина калибра .50 для пистолетов PDH 'Ladon'."
+	cost = CARGO_CRATE_VALUE * 12
+	access_view = ACCESS_WEAPONS
+	contains = list(
+		/obj/item/ammo_box/magazine/m50 = 3,
+	)
+
+/datum/supply_pack/security/armory/ladon_mags
+	name = "GP-45M Special Ammo Magazines"
+	crate_name = "GP-45M special ammo crate"
+	desc = "В этом ящике находятся два бронебойных магазина и два экспансивных магазина калибра .45, и соответствующие коробки с боеприпасами."
+	cost = CARGO_CRATE_VALUE * 20
+	access_view = ACCESS_WEAPONS
+	contains = list(
+		/obj/item/ammo_box/magazine/c45/ap = 2,
+		/obj/item/ammo_box/magazine/c45/hp = 2,
+		/obj/item/ammo_box/c45/ap = 1,
+		/obj/item/ammo_box/c45/hp = 1,
+	)

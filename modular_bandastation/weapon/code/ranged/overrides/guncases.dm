@@ -344,9 +344,18 @@
 	weapon_to_spawn = /obj/item/gun/ballistic/automatic/pistol/gp9/sec
 	extra_to_spawn = /obj/item/ammo_box/magazine/c9x25mm_pistol/rubber
 
-/obj/item/storage/toolbox/guncase/ntspecial/pistol/gp93r
-	weapon_to_spawn = /obj/item/gun/ballistic/automatic/pistol/gp9/spec
-	extra_to_spawn = /obj/item/ammo_box/magazine/c9x25mm_pistol/stendo/rubber
+/obj/item/storage/toolbox/guncase/ntspecial/pistol/ladon
+	weapon_to_spawn = /obj/item/gun/ballistic/automatic/pistol/pdh/ladon/blueshield
+	extra_to_spawn = /obj/item/ammo_box/magazine/m50
+
+/obj/item/storage/toolbox/guncase/ntspecial/pistol/tng_3
+	weapon_to_spawn = /obj/item/gun/energy/laser/thermal/tng3
+
+/obj/item/storage/toolbox/guncase/ntspecial/pistol/eg_14
+	weapon_to_spawn = /obj/item/gun/energy/eg_14
+
+/obj/item/storage/toolbox/guncase/ntspecial/pistol/hos_laser
+	weapon_to_spawn = /obj/item/gun/energy/e_gun/hos
 
 /obj/item/storage/toolbox/guncase/ntspecial/pistol/gp45
 	weapon_to_spawn = /obj/item/gun/ballistic/automatic/pistol/cm70/hos
@@ -356,7 +365,7 @@
 	weapon_to_spawn = /obj/item/gun/ballistic/automatic/pistol/cm23
 	extra_to_spawn = /obj/item/ammo_box/magazine/c38/rubber
 
-/obj/item/storage/toolbox/guncase/ntspecial/pistol/hos
+/obj/item/storage/toolbox/guncase/ntspecial/pistol/hos_pdh
 	weapon_to_spawn = /obj/item/gun/ballistic/automatic/laser/pistol
 	extra_to_spawn = /obj/item/ammo_box/magazine/recharge/small
 

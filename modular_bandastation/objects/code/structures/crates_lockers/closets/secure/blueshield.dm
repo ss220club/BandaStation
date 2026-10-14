@@ -13,7 +13,6 @@
 		/obj/item/storage/bag/garment/blueshield = 1,
 		/obj/item/radio/headset/blueshield = 1,
 		/obj/item/radio/headset/blueshield/alt = 1,
-		/obj/item/sensor_device = 1,
 		/obj/item/pinpointer/crew = 1,
 	)
 	generate_items_inside(items_inside, src)
