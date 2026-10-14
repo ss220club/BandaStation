@@ -68,6 +68,8 @@ ADMIN_VERB(centcom_podlauncher, R_ADMIN, "Config/Launch Supplypod", "Configure a
 	var/static/list/pod_style_info
 	var/static/list/pod_style_lookup
 
+	var/aircraft_mode = FALSE
+
 /datum/centcom_podlauncher/New(user) //user can either be a client or a mob
 	if (user) //Prevents runtimes on datums being made without clients
 		setup(user)
@@ -186,6 +188,7 @@ ADMIN_VERB(centcom_podlauncher, R_ADMIN, "Config/Launch Supplypod", "Configure a
 	data["openingSound"] = temp_pod.openingSound //Admin sound to play when the pod opens
 	data["leavingSound"] = temp_pod.leavingSound //Admin sound to play when the pod leaves
 	data["soundVolume"] = temp_pod.soundVolume //Admin sound to play when the pod leaves
+	data["aircraftMode"] = aircraft_mode
 	return data
 
 /datum/centcom_podlauncher/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
@@ -541,6 +544,19 @@ ADMIN_VERB(centcom_podlauncher, R_ADMIN, "Config/Launch Supplypod", "Configure a
 				clearBay()
 				refreshBay()
 			. = TRUE
+		if("toggleAircraftMode")
+			aircraft_mode = !aircraft_mode
+			if(aircraft_mode)
+				aircraft_mode = FALSE
+				launcherActivated = FALSE
+				picking_dropoff_turf = FALSE
+				updateCursor()
+				launcherActivated = TRUE
+				updateCursor()
+			else
+				launcherActivated = FALSE
+				updateCursor()
+			. = TRUE
 
 /datum/centcom_podlauncher/ui_close(mob/user) //Uses the destroy() proc. When the user closes the UI, we clean up the temp_pod and supplypod_selector variables.
 	QDEL_NULL(temp_pod)
@@ -615,7 +631,9 @@ ADMIN_VERB(centcom_podlauncher, R_ADMIN, "Config/Launch Supplypod", "Configure a
 				bouttaDie.Add(target_mob)
 			if (holder.holder)
 				supplypod_punish_log(bouttaDie)
-			if (!effectBurst) //If we're not using burst mode, just launch normally.
+			if (aircraft_mode)
+				launch_aircraft(target)
+			else if (!effectBurst) //If we're not using burst mode, just launch normally.
 				launch(target)
 			else
 				for (var/i in 1 to 5) //If we're using burst mode, launch 5 pods
@@ -861,6 +879,15 @@ GLOBAL_DATUM_INIT(podlauncher, /datum/centcom_podlauncher, new)
 		CRASH("Improper type passed to setDropoff! Should be /turf or /area")
 	temp_pod.reverse_dropoff_coords = list(target_turf.x, target_turf.y, target_turf.z)
 	indicator.forceMove(target_turf)
+
+/datum/centcom_podlauncher/proc/launch_aircraft(turf/target)
+	if (!target)
+		return
+	var/turf/start_turf = locate(target.x, world.maxy, target.z)
+	if (!start_turf)
+		return
+	var/obj/effect/supply_aircraft/aircraft = new(start_turf, target)
+	aircraft.begin_flight()
 
 /obj/effect/client_image_holder/supplypod_selector // Shows which item will be taken next
 	name = "Supply Selector (Only you can see this)"
