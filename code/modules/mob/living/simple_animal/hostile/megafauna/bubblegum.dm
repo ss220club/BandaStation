@@ -30,8 +30,8 @@ Difficulty: Hard
 /mob/living/simple_animal/hostile/megafauna/bubblegum
 	name = "bubblegum"
 	desc = "In what passes for a hierarchy among slaughter demons, this one is king."
-	health = 2500
-	maxHealth = 2500
+	health = 3500
+	maxHealth = 3500
 	attack_verb_continuous = "rends"
 	attack_verb_simple = "rend"
 	attack_sound = 'sound/effects/magic/demon_attack1.ogg'
@@ -46,8 +46,8 @@ Difficulty: Hard
 	armour_penetration = 40
 	melee_damage_lower = 40
 	melee_damage_upper = 40
-	speed = 5
-	move_to_delay = 5
+	speed = 3
+	move_to_delay = 3
 	retreat_distance = 5
 	minimum_distance = 5
 	rapid_melee = 8 // every 1/4 second

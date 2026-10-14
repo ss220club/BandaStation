@@ -13,6 +13,7 @@
 	// slaughter demons are specifically intended to have low melee damage, but as they hit and build up their killstreak
 	// their wound bonuses grow and grow higher. this is how they're able to efficiently kill and slaughter their victims.
 	// consider this before you balance them.
+	maxHealth = 350
 	obj_damage = 50
 	melee_damage_lower = 15
 	melee_damage_upper = 15

@@ -49,8 +49,8 @@
 	armour_penetration = 40
 	melee_damage_lower = 40
 	melee_damage_upper = 40
-	speed = 5
-	move_to_delay = 5
+	speed = 2
+	move_to_delay = 2
 	ranged = TRUE
 	pixel_x = -32
 	base_pixel_x = -32

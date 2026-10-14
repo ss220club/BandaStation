@@ -23,8 +23,8 @@
 /mob/living/simple_animal/hostile/megafauna/colossus
 	name = "colossus"
 	desc = "A monstrous creature protected by heavy shielding."
-	health = 2500
-	maxHealth = 2500
+	health = 3000
+	maxHealth = 3000
 	attack_verb_continuous = "judges"
 	attack_verb_simple = "judge"
 	attack_sound = 'sound/effects/magic/clockwork/ratvar_attack.ogg'
@@ -39,7 +39,7 @@
 	armour_penetration = 40
 	melee_damage_lower = 40
 	melee_damage_upper = 40
-	speed = 10
+	speed = 5
 	move_to_delay = 10
 	ranged = TRUE
 	pixel_x = -32
