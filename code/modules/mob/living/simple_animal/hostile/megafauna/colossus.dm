@@ -57,6 +57,7 @@
 	death_message = "disintegrates, leaving a glowing core in its wake."
 	death_sound = 'sound/effects/magic/demon_dies.ogg'
 	summon_line = "Your trial begins now."
+	faction = list(FACTION_MINING, FACTION_BOSS, FACTION_HELL)
 	/// Spiral shots ability
 	var/datum/action/cooldown/mob_cooldown/projectile_attack/spiral_shots/colossus/spiral_shots
 	/// Random shots ablity
@@ -86,6 +87,7 @@
 	RegisterSignal(src, COMSIG_MOB_ABILITY_STARTED, PROC_REF(start_attack))
 	RegisterSignal(src, COMSIG_MOB_ABILITY_FINISHED, PROC_REF(finished_attack))
 	AddElement(/datum/element/projectile_shield)
+	AddComponent(/datum/action/innate/cult/comm)
 
 /mob/living/simple_animal/hostile/megafauna/colossus/Destroy()
 	RemoveElement(/datum/element/projectile_shield)

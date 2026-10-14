@@ -23,7 +23,7 @@
 		return
 	if (get_turf(src) == target_turf && !has_dropped)
 		has_dropped = TRUE
-		drop_payload()
+		//drop_payload()
 	if (get_turf(src) <= world.maxy)
 		qdel(src)
 		return
@@ -41,7 +41,7 @@
 	forceMove(next_turf)
 	if (next_turf == target_turf && !has_dropped)
 		has_dropped = TRUE
-		drop_payload()
+		//drop_payload()
 	if (next_turf.y <= world.maxy)
 		qdel(src)
 		return

@@ -72,6 +72,7 @@
 	death_sound = 'sound/effects/magic/demon_dies.ogg'
 	footstep_type = FOOTSTEP_MOB_HEAVY
 	summon_line = "ROOOOOOOOAAAAAAAAAAAR!"
+	faction = list(FACTION_MINING, FACTION_BOSS, FACTION_HELL)
 	/// Fire cone ability
 	var/datum/action/cooldown/mob_cooldown/fire_breath/cone/fire_cone
 	/// Meteors ability
@@ -96,6 +97,7 @@
 	RegisterSignal(src, COMSIG_SWOOP_INVULNERABILITY_STARTED, PROC_REF(swoop_invulnerability_started))
 	RegisterSignal(src, COMSIG_LAVA_ARENA_FAILED, PROC_REF(on_arena_fail))
 	AddElement(/datum/element/change_force_on_death, move_force = MOVE_FORCE_DEFAULT)
+	AddComponent(/datum/action/innate/cult/comm)
 
 /mob/living/simple_animal/hostile/megafauna/dragon/Destroy()
 	fire_cone = null

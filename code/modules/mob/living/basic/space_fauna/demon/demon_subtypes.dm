@@ -4,6 +4,7 @@
 	real_name = "slaughter demon"
 	unique_name = FALSE
 	speak_emote = list("gurgles","wails","screeches")
+	faction = list(FACTION_MINING, FACTION_HELL)
 
 	icon_state = "slaughter_demon"
 	icon_living = "slaughter_demon"
@@ -41,6 +42,7 @@
 	GRANT_ACTION(crawl_type)
 	RegisterSignal(src, COMSIG_LIVING_UNARMED_ATTACK, PROC_REF(on_attack))
 	RegisterSignals(src, list(COMSIG_MOB_ENTER_JAUNT, COMSIG_MOB_AFTER_EXIT_JAUNT), PROC_REF(on_crawl))
+	AddComponent(/datum/action/innate/cult/comm)
 
 /mob/living/basic/demon/slaughter/grant_loot()
 	var/static/list/droppable_loot = list(
