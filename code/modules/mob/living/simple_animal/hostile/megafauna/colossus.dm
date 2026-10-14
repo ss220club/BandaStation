@@ -57,7 +57,7 @@
 	death_message = "disintegrates, leaving a glowing core in its wake."
 	death_sound = 'sound/effects/magic/demon_dies.ogg'
 	summon_line = "Your trial begins now."
-	faction = list(FACTION_MINING, FACTION_BOSS, FACTION_HELL)
+	faction = list(FACTION_MINING, FACTION_BOSS, FACTION_HELL, FACTION_CULT)
 	/// Spiral shots ability
 	var/datum/action/cooldown/mob_cooldown/projectile_attack/spiral_shots/colossus/spiral_shots
 	/// Random shots ablity
@@ -67,7 +67,8 @@
 	/// Directional shots ability
 	var/datum/action/cooldown/mob_cooldown/projectile_attack/dir_shots/alternating/colossus/dir_shots
 	/// Final attack ability
-	var/datum/action/cooldown/mob_cooldown/projectile_attack/colossus_final/colossus_final
+	// var/datum/action/cooldown/mob_cooldown/projectile_attack/colossus_final/colossus_final
+	var/datum/action/innate/cult/comm/colossus_comm
 	/// Have we used DIE yet?
 	var/final_available = TRUE
 
@@ -78,12 +79,14 @@
 	random_shots = new(src)
 	shotgun_blast = new(src)
 	dir_shots = new(src)
-	colossus_final = new(src)
+	// colossus_final = new(src)
+	colossus_comm = new(src)
 	spiral_shots.Grant(src)
 	random_shots.Grant(src)
 	shotgun_blast.Grant(src)
 	dir_shots.Grant(src)
-	colossus_final.Grant(src)
+	// colossus_final.Grant(src)
+	colossus_comm.Grant(src)
 	RegisterSignal(src, COMSIG_MOB_ABILITY_STARTED, PROC_REF(start_attack))
 	RegisterSignal(src, COMSIG_MOB_ABILITY_FINISHED, PROC_REF(finished_attack))
 	AddElement(/datum/element/projectile_shield)
@@ -95,7 +98,8 @@
 	random_shots = null
 	shotgun_blast = null
 	dir_shots = null
-	colossus_final = null
+	// colossus_final = null
+	colossus_comm = null
 	return ..()
 
 /mob/living/simple_animal/hostile/megafauna/colossus/OpenFire()
@@ -117,7 +121,7 @@
 
 	if(health <= maxHealth / 10 && final_available)
 		final_available = FALSE
-		colossus_final.Trigger(target = target)
+		// colossus_final.Trigger(target = target)
 	else if(prob(20 + anger_modifier)) //Major attack
 		spiral_shots.Trigger(target = target)
 	else if(prob(20))

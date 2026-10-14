@@ -8,8 +8,8 @@
 	icon_state = "shade_cult"
 	icon_living = "shade_cult"
 	mob_biotypes = MOB_SPIRIT | MOB_UNDEAD
-	maxHealth = 40
-	health = 40
+	maxHealth = 200
+	health = 200
 	status_flags = CANPUSH
 	speak_emote = list("hisses")
 	response_help_continuous = "puts their hand through"
@@ -26,7 +26,7 @@
 	unsuitable_heat_damage = 0
 	unsuitable_atmos_damage = 0
 	speed = -1
-	faction = list(FACTION_CULT)
+	faction = list(FACTION_CULT, FACTION_HELL, FACTION_MINING)
 	basic_mob_flags = DEL_ON_DEATH
 	initial_language_holder = /datum/language_holder/construct
 	physiology = list(STAMINA = 0)
@@ -40,10 +40,14 @@
 		THEME_HERETIC = /obj/item/ectoplasm/construct,
 	)
 
+	var/datum/action/innate/cult/shade_comm
+
 /mob/living/basic/shade/Initialize(mapload)
 	. = ..()
 	AddElement(/datum/element/simple_flying)
 	add_traits(list(TRAIT_HEALS_FROM_CULT_PYLONS, TRAIT_SPACEWALK, TRAIT_VENTCRAWLER_ALWAYS), INNATE_TRAIT)
+	shade_comm = new(src)
+	shade_comm.Grant(src)
 	if(isnull(theme))
 		return
 	icon_state = "shade_[theme]"
