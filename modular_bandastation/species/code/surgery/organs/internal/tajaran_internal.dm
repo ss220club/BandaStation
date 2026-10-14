@@ -12,7 +12,7 @@
 	organ_traits = list(TRAIT_WOUND_LICKER)
 	var/static/list/speech_replacements = list(
 		"r" = list("rr", "rrr", "rrrr"),
-		"R" = list("RR", "RRR",  "RRRR"),
+		"R" = list("RR", "RRR", "RRRR"),
 		"р" = list("рр", "ррр", "рррр"),
 		"Р" = list("РР", "РРР", "РРРР"),
 	)
