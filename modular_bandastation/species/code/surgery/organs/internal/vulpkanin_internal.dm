@@ -8,10 +8,10 @@
 	liked_foodtypes = RAW | MEAT | SEAFOOD
 	disliked_foodtypes =  FRUIT | NUTS | GROSS | GRAIN
 	var/static/list/speech_replacements = list(
-		"r" = "rr",
-		"R" = "RR",
-		"р" = "рр",
-		"Р" = "РР",
+		"r" = list("r", "rr", "rrr"),
+		"R" = list("R", "RR",  "RRR"),
+		"р" = list("р", "рр", "ррр"),
+		"Р" = list("Р", "РР", "РРР"),
 	)
 
 /obj/item/organ/tongue/vulpkanin/Initialize(mapload)

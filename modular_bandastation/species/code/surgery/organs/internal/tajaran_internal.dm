@@ -11,10 +11,10 @@
 	toxic_foodtypes = SUGAR
 	organ_traits = list(TRAIT_WOUND_LICKER)
 	var/static/list/speech_replacements = list(
-		"r" = "rr",
-		"R" = "RR",
-		"р" = "рр",
-		"Р" = "РР",
+		"r" = list("r", "rr", "rrr"),
+		"R" = list("R", "RR",  "RRR"),
+		"р" = list("р", "рр", "ррр"),
+		"Р" = list("Р", "РР", "РРР"),
 	)
 
 /obj/item/organ/tongue/tajaran/Initialize(mapload)
