@@ -89,6 +89,9 @@
 	materials = list(
 		/datum/material/iron = SHEET_MATERIAL_AMOUNT * 10
 	)
+	transfered_materials = list(
+		/obj/item/ammo_box/magazine/c45 = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 5),
+	)
 	build_path = /obj/item/ammo_box/magazine/c45
 	category = list(
 		RND_CATEGORY_INITIAL,
@@ -109,6 +112,9 @@
 	build_type = AUTOLATHE
 	materials = list(
 		/datum/material/iron = HALF_SHEET_MATERIAL_AMOUNT * 10
+	)
+	transfered_materials = list(
+		/obj/item/ammo_box/magazine/c45/rubber = list(/datum/material/iron = HALF_SHEET_MATERIAL_AMOUNT * 5),
 	)
 	build_path = /obj/item/ammo_box/magazine/c45/rubber
 	category = list(
