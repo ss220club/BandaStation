@@ -37,15 +37,12 @@
 	var/wound_bonus_hitstreak_max = 12
 	/// Cooldown tracker for the slam
 	COOLDOWN_DECLARE(slam_cooldown)
-	var/datum/action/innate/cult/slaughter_comm
 
 /mob/living/basic/demon/slaughter/Initialize(mapload)
 	. = ..()
 	GRANT_ACTION(crawl_type)
 	RegisterSignal(src, COMSIG_LIVING_UNARMED_ATTACK, PROC_REF(on_attack))
 	RegisterSignals(src, list(COMSIG_MOB_ENTER_JAUNT, COMSIG_MOB_AFTER_EXIT_JAUNT), PROC_REF(on_crawl))
-	slaughter_comm = new(src)
-	slaughter_comm.Grant(src)
 
 /mob/living/basic/demon/slaughter/grant_loot()
 	var/static/list/droppable_loot = list(

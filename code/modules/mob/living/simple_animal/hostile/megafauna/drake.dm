@@ -81,7 +81,6 @@
 	var/datum/action/cooldown/mob_cooldown/fire_breath/mass_fire/mass_fire
 	/// Lava swoop ability
 	var/datum/action/cooldown/mob_cooldown/lava_swoop/lava_swoop
-	var/datum/action/innate/cult/comm/drake_comm
 
 /mob/living/simple_animal/hostile/megafauna/dragon/Initialize(mapload)
 	. = ..()
@@ -89,12 +88,10 @@
 	meteors = new(src)
 	mass_fire = new(src)
 	lava_swoop = new(src)
-	drake_comm = new(src)
 	fire_cone.Grant(src)
 	meteors.Grant(src)
 	mass_fire.Grant(src)
 	lava_swoop.Grant(src)
-	drake_comm.Grant(src)
 	RegisterSignal(src, COMSIG_MOB_ABILITY_STARTED, PROC_REF(start_attack))
 	RegisterSignal(src, COMSIG_MOB_ABILITY_FINISHED, PROC_REF(finished_attack))
 	RegisterSignal(src, COMSIG_SWOOP_INVULNERABILITY_STARTED, PROC_REF(swoop_invulnerability_started))

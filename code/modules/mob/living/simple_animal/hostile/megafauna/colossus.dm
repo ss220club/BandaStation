@@ -68,7 +68,6 @@
 	var/datum/action/cooldown/mob_cooldown/projectile_attack/dir_shots/alternating/colossus/dir_shots
 	/// Final attack ability
 	// var/datum/action/cooldown/mob_cooldown/projectile_attack/colossus_final/colossus_final
-	var/datum/action/innate/cult/comm/colossus_comm
 	/// Have we used DIE yet?
 	var/final_available = TRUE
 
@@ -80,13 +79,11 @@
 	shotgun_blast = new(src)
 	dir_shots = new(src)
 	// colossus_final = new(src)
-	colossus_comm = new(src)
 	spiral_shots.Grant(src)
 	random_shots.Grant(src)
 	shotgun_blast.Grant(src)
 	dir_shots.Grant(src)
 	// colossus_final.Grant(src)
-	colossus_comm.Grant(src)
 	RegisterSignal(src, COMSIG_MOB_ABILITY_STARTED, PROC_REF(start_attack))
 	RegisterSignal(src, COMSIG_MOB_ABILITY_FINISHED, PROC_REF(finished_attack))
 	AddElement(/datum/element/projectile_shield)

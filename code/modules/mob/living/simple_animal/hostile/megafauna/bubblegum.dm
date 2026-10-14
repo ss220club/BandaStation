@@ -84,7 +84,6 @@ Difficulty: Hard
 	var/datum/action/cooldown/mob_cooldown/charge/hallucination_charge/hallucination_surround/hallucination_charge_surround
 	/// Blood warp ability
 	var/datum/action/cooldown/mob_cooldown/blood_warp/blood_warp
-	var/datum/action/innate/cult/bubblegum_comm
 
 /mob/living/simple_animal/hostile/megafauna/bubblegum/Initialize(mapload)
 	. = ..()
@@ -93,12 +92,10 @@ Difficulty: Hard
 	hallucination_charge = new(src)
 	hallucination_charge_surround = new(src)
 	blood_warp = new(src)
-	bubblegum_comm = new(src)
 	triple_charge.Grant(src)
 	hallucination_charge.Grant(src)
 	hallucination_charge_surround.Grant(src)
 	blood_warp.Grant(src)
-	bubblegum_comm.Grant(src)
 	hallucination_charge.spawn_blood = TRUE
 	hallucination_charge_surround.spawn_blood = TRUE
 	RegisterSignal(src, COMSIG_BLOOD_WARP, PROC_REF(blood_enrage))

@@ -40,14 +40,10 @@
 		THEME_HERETIC = /obj/item/ectoplasm/construct,
 	)
 
-	var/datum/action/innate/cult/shade_comm
-
 /mob/living/basic/shade/Initialize(mapload)
 	. = ..()
 	AddElement(/datum/element/simple_flying)
 	add_traits(list(TRAIT_HEALS_FROM_CULT_PYLONS, TRAIT_SPACEWALK, TRAIT_VENTCRAWLER_ALWAYS), INNATE_TRAIT)
-	shade_comm = new(src)
-	shade_comm.Grant(src)
 	if(isnull(theme))
 		return
 	icon_state = "shade_[theme]"
