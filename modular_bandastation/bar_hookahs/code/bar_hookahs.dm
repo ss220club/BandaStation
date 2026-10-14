@@ -239,7 +239,7 @@
 				return CLICK_ACTION_BLOCKING
 
 			var/mob/living/living_user = user
-			if(!(hookah_mouthpiece in living_user.held_items))
+			if(!living_user.is_holding(hookah_mouthpiece))
 				return CLICK_ACTION_BLOCKING
 
 			user.visible_message(span_notice("[user] глубоко затягивается..."), span_notice("Вы делаете глубокую затяжку..."))
