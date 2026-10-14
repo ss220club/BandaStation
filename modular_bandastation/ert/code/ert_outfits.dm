@@ -73,7 +73,7 @@
 // MARK: COMMANDER
 /datum/outfit/centcom/ert/commander
 	name = "ERT Commander - Base"
-	id = /obj/item/card/id/advanced/centcom/ert
+	id = /obj/item/card/id/advanced/centcom/ert/commander
 	back = /obj/item/storage/backpack/ert
 	l_hand = null
 	box = /obj/item/storage/box/survival/centcom
