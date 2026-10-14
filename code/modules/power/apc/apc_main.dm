@@ -264,19 +264,15 @@
 		if(NORTH)
 			offset_old = pixel_y
 			pixel_y = APC_PIXEL_OFFSET
-			pixel_x = 0
 		if(SOUTH)
 			offset_old = pixel_y
 			pixel_y = -APC_PIXEL_OFFSET
-			pixel_x = 0
 		if(EAST)
 			offset_old = pixel_x
 			pixel_x = APC_PIXEL_OFFSET
-			pixel_y = 0
 		if(WEST)
 			offset_old = pixel_x
 			pixel_x = -APC_PIXEL_OFFSET
-			pixel_y = 0
 
 	var/image/hud_image = image(icon = DEFAULT_HUDS_DMI, icon_state = "apc_hacked")
 	hud_image.pixel_w = pixel_x
@@ -475,31 +471,13 @@
 	. = ..()
 	if(!QDELETED(remote_control_user) && user == remote_control_user)
 		. = UI_INTERACTIVE
-	//BANDASTATION EDIT START SYNDICATE PAI
-	if(istype(user, /mob/living/silicon/pai/syndicate))
-		var/mob/living/silicon/pai/syndicate/pai_user = user
-		if(pai_user.active_remote_apc == src && ("Remote Machinery" in pai_user.installed_software) && pai_user.client)
-			. = UI_INTERACTIVE
 
 /obj/machinery/power/apc/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
-	var/mob/living/silicon/pai/syndicate/pai_user
-	if(istype(ui?.user, /mob/living/silicon/pai/syndicate))
-		pai_user = ui.user
-		if(pai_user.active_remote_apc != src || !("Remote Machinery" in pai_user.installed_software))
-			return FALSE
-		if(!COOLDOWN_FINISHED(pai_user, remote_apc_action))
-			balloon_alert(pai_user, "управление АПЦ перезаряжается")
-			return FALSE
-	//BANDASTATION EDIT END SYNDICATE PAI
 	. = ..()
 	var/mob/user = ui.user
 
 	if(. || !can_use(user, 1) || (locked && !HAS_SILICON_ACCESS(user) && !failure_timer && action != "toggle_nightshift"))
 		return
-	//BANDASTATION EDIT START SYNDICATE PAI
-	if(pai_user)
-		COOLDOWN_START(pai_user, remote_apc_action, 30 SECONDS)
-	//BANDASTATION EDIT END SYNDICATE PAI
 	switch(action)
 		if("lock")
 			if(HAS_SILICON_ACCESS(user))
@@ -564,12 +542,6 @@
 
 /obj/machinery/power/apc/ui_close(mob/user)
 	. = ..()
-	//BANDASTATION EDIT START SYNDICATE PAI
-	if(istype(user, /mob/living/silicon/pai/syndicate))
-		var/mob/living/silicon/pai/syndicate/pai_user = user
-		if(pai_user.active_remote_apc == src)
-			pai_user.active_remote_apc = null
-	//BANDASTATION EDIT END SYNDICATE PAI
 	if(user == remote_control_user)
 		disconnect_remote_access()
 

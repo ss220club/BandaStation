@@ -43,7 +43,7 @@ export function AvailableDisplay(props) {
 /** Displays the remaining RAM left as a progressbar. */
 function MemoryDisplay(props) {
   const { data } = useBackend<PaiData>();
-  const { ram } = data;
+  const { ram, max_ram } = data;
 
   return (
     <Tooltip content={`Available System Memory: ${ram}`}>
@@ -55,11 +55,11 @@ function MemoryDisplay(props) {
           <Table.Cell>
             <ProgressBar
               minValue={0}
-              maxValue={250}
+              maxValue={max_ram}
               ranges={{
-	                good: [150, 250],
-	                average: [50, 149],
-	                bad: [0, 49],
+                good: [max_ram * 0.6, max_ram],
+                average: [max_ram * 0.2, max_ram * 0.6],
+                bad: [0, max_ram * 0.2],
               }}
               value={ram}
               width={5}
@@ -86,6 +86,9 @@ function ListItem(props: ListItemProps) {
 
   const purchased = installed.includes(name);
   const tooExpensive = ram < cost;
+  const visionConflict =
+    (name === 'Night Vision' && installed.includes('Thermal Vision')) ||
+    (name === 'Thermal Vision' && installed.includes('Night Vision'));
 
   return (
     <Tooltip content={SOFTWARE_DESC[name]} position="bottom-start">
@@ -106,7 +109,8 @@ function ListItem(props: ListItemProps) {
           <Button
             icon="download"
             mb={0.5}
-            disabled={tooExpensive || purchased}
+            disabled={tooExpensive || purchased || visionConflict}
+            tooltip={visionConflict ? 'ПНВ и термалы несовместимы' : undefined}
             onClick={() => act('buy', { selection: name })}
           />
         </Table.Cell>

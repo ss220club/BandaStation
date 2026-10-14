@@ -24,15 +24,6 @@
 	var/mob/living/silicon/pai/pai
 	/// Prevents a crew member from hitting "request pAI" repeatedly
 	var/request_spam = FALSE
-	//BANDASTATION EDIT START
-	/// Mob created when a candidate inhabits this card.
-	var/pai_mob_type = /mob/living/silicon/pai
-
-/obj/item/pai_card/syndicate
-	name = "syndicate personal AI device"
-	desc = "A modified personal AI device with expanded memory and clandestine software."
-	pai_mob_type = /mob/living/silicon/pai/syndicate
-	//BANDASTATION EDIT END
 
 /obj/item/pai_card/Initialize(mapload)
 	. = ..()
@@ -50,13 +41,6 @@
 		return ITEM_INTERACT_BLOCKING
 
 	return pai.radio.install_key(user, tool)
-
-//BANDASTATION EDIT START
-/obj/item/pai_card/screwdriver_act(mob/living/user, obj/item/tool)
-	if(!pai?.radio)
-		return ..()
-	return pai.radio.screwdriver_act(user, tool)
-//BANDASTATION EDIT END
 
 /obj/item/pai_card/attack_self(mob/user)
 	if(!in_range(src, user))

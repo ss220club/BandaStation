@@ -11,5 +11,6 @@ export type PaiData = {
   master_dna: string | null;
   master_name: string | null;
   ram: number;
+  max_ram: number;
   chemical_reserve: number;
 };

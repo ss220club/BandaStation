@@ -1,6 +1,12 @@
 import { useState } from 'react';
 import { useBackend } from 'tgui/backend';
-import { Button, NoticeBox, ProgressBar, Section, Stack } from 'tgui-core/components';
+import {
+  Button,
+  NoticeBox,
+  ProgressBar,
+  Section,
+  Stack,
+} from 'tgui-core/components';
 
 import { DOOR_JACK, HOST_SCAN, PHOTO_MODE, SOFTWARE_DESC } from './constants';
 import type { PaiData } from './types';
@@ -87,11 +93,11 @@ function SoftwareButtons(props: SoftwareButtonsProps) {
       return (
         <>
           АПЦ: ЛКМ — открыть окно управления, ПКМ — блокировка интерфейса,
-          Ctrl+ЛКМ — главный выключатель, Shift+ЛКМ — освещение,
-          Ctrl+Shift+ЛКМ — питание окружения, Alt+ЛКМ — оборудование.
-          Общий КД действий с АПЦ — 30 секунд. Двери: Shift+ЛКМ — открыть
-          или закрыть, Ctrl+ЛКМ — болты, Ctrl+Shift+ЛКМ — аварийный доступ,
-          Alt+ЛКМ — электрификация. Общий КД дверей — 7 секунд.
+          Ctrl+ЛКМ — главный выключатель, Shift+ЛКМ — освещение, Ctrl+Shift+ЛКМ
+          — питание окружения, Alt+ЛКМ — оборудование. Двери: Shift+ЛКМ —
+          открыть или закрыть, Ctrl+ЛКМ — болты, Ctrl+Shift+ЛКМ — аварийный
+          доступ, Alt+ЛКМ — электрификация. Все удалённые действия имеют общий
+          КД: 7 секунд после действия со шлюзом, 30 секунд после действия с АПЦ.
         </>
       );
     case 'Medical Injector':
@@ -110,7 +116,10 @@ function SoftwareButtons(props: SoftwareButtonsProps) {
               ['Pentetic Acid', 'ДТПА'],
               ['Saline Glucose', 'Физраствор'],
             ].map(([reagent, label]) => (
-              <Button key={reagent} onClick={() => act(currentSelection, { reagent })}>
+              <Button
+                key={reagent}
+                onClick={() => act(currentSelection, { reagent })}
+              >
                 Ввести {label} (5 ед.)
               </Button>
             ))}
