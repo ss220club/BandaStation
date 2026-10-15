@@ -1,6 +1,26 @@
 #if defined(UNIT_TESTS) || defined(SPACEMAN_DMM)
 
 /datum/unit_test/redspace_devourer
+	var/list/saved_station_z_levels
+	var/list/list/fixture_turfs = list()
+
+/datum/unit_test/redspace_devourer/New()
+	. = ..()
+	// The unit-test z exists on both MetaStation and runtimestation_minimal.
+	saved_station_z_levels = SSredspace.station_z_levels
+	SSredspace.station_z_levels = saved_station_z_levels.Copy()
+	SSredspace.station_z_levels |= run_loc_floor_bottom_left.z
+	for(var/turf/tile in block(run_loc_floor_bottom_left, run_loc_floor_top_right))
+		fixture_turfs += list(list("turf" = tile, "type" = tile.type, "baseturfs" = islist(tile.baseturfs) ? tile.baseturfs.Copy() : tile.baseturfs))
+		tile.ChangeTurf(/turf/open/floor/plating)
+
+/datum/unit_test/redspace_devourer/Destroy()
+	QDEL_LIST(allocated)
+	for(var/list/snapshot as anything in fixture_turfs)
+		var/turf/tile = snapshot["turf"]
+		tile.ChangeTurf(snapshot["type"], snapshot["baseturfs"])
+	SSredspace.station_z_levels = saved_station_z_levels
+	return ..()
 
 /datum/unit_test/redspace_devourer/Run()
 	var/mob/living/basic/demon/redspace/devourer/devourer = allocate(/mob/living/basic/demon/redspace/devourer)
@@ -17,9 +37,7 @@
 	if(devourer.ai_controller.blackboard[BB_TARGETING_STRATEGY] != /datum/targeting_strategy/basic/redspace_demon/devourer || devourer.ai_controller.blackboard[BB_TARGET_PRIORITY_STRATEGY] != /datum/target_priority_strategy/nearest/redspace_demon || devourer.ai_controller.blackboard[BB_TARGET_MINIMUM_STAT] != HARD_CRIT)
 		return Fail("The Devourer AI must search for nearby targets with its restricted targeting strategy and keep living crit victims valid so it can consume them")
 
-	var/turf/ravager_turf = get_safe_random_station_turf_equal_weight()
-	if(!ravager_turf && SSredspace && length(SSredspace.station_z_levels))
-		ravager_turf = locate(1, 1, SSredspace.station_z_levels[1])
+	var/turf/ravager_turf = run_loc_floor_bottom_left
 	if(!ravager_turf || !SSredspace?.is_supported_z(ravager_turf.z))
 		return Fail("The Ravager test requires an available station turf")
 	var/mob/living/basic/demon/redspace/moderate/ravager/ravager = allocate(/mob/living/basic/demon/redspace/moderate/ravager, ravager_turf)
@@ -86,21 +104,8 @@
 	if(redspace_devourer_can_consume(dead))
 		return Fail("The Devourer must not target dead humans")
 
-	var/turf/source_turf = get_safe_random_station_turf_equal_weight() || run_loc_floor_bottom_left
-	var/turf/outside_turf
-	for(var/attempt in 1 to 20)
-		var/turf/candidate_turf = get_safe_random_station_turf_equal_weight()
-		if(candidate_turf && candidate_turf.z == source_turf?.z && get_dist(candidate_turf, source_turf) > 5)
-			outside_turf = candidate_turf
-			break
-	if(!outside_turf && source_turf)
-		outside_turf = locate(source_turf.x + 6, source_turf.y, source_turf.z)
-		if(!outside_turf)
-			outside_turf = locate(source_turf.x - 6, source_turf.y, source_turf.z)
-		if(!outside_turf && source_turf == run_loc_floor_bottom_left)
-			outside_turf = run_loc_floor_top_right
-		if(!outside_turf)
-			outside_turf = get_step(source_turf, NORTH)
+	var/turf/source_turf = run_loc_floor_bottom_left
+	var/turf/outside_turf = run_loc_floor_top_right
 	if(!source_turf || !outside_turf)
 		return Fail("The Devourer epicenter fallback test requires two distant station turfs")
 	var/list/saved_field_sources = SSredspace.field_sources
@@ -124,7 +129,7 @@
 	capture_victim.mind_initialize()
 	capture_victim.stat = HARD_CRIT
 	ADD_TRAIT(capture_victim, TRAIT_INCAPACITATED, REF(src))
-	if(!capture_devourer.capture_victim(capture_victim) || !capture_devourer.transformation_committed || capture_victim.loc != capture_devourer || capture_devourer.stored_victim != capture_victim || !HAS_TRAIT(capture_victim, TRAIT_STASIS))
+	if(!capture_devourer.capture_victim(capture_victim) || !capture_devourer.can_transform() || capture_victim.loc != capture_devourer || capture_devourer.stored_victim != capture_victim || !HAS_TRAIT(capture_victim, TRAIT_STASIS))
 		return Fail("A successful capture must move the victim into stasis inside the Devourer")
 	var/datum/component/redspace_energy/capture_energy = capture_devourer.GetComponent(/datum/component/redspace_energy)
 	if(!capture_energy || capture_energy.zero_energy_damage_percent)
@@ -145,7 +150,7 @@
 	if(!redspace_demon_has_obstruction(capture_devourer, door_target_turf) || !redspace_demon_attack_obstruction(capture_devourer, door_target_turf) || (!QDELETED(test_door) && test_door.get_integrity() >= door_integrity))
 		return Fail("A Devourer carrying a victim must be able to break a closed airlock blocking its path")
 	capture_devourer.release_victim()
-	if(capture_devourer.stored_victim || capture_devourer.transformation_committed || capture_victim.loc == capture_devourer || HAS_TRAIT(capture_victim, TRAIT_STASIS) || capture_energy.zero_energy_damage_percent != capture_devourer.redspace_zero_energy_damage_percent)
+	if(capture_devourer.stored_victim || capture_devourer.can_transform() || capture_victim.loc == capture_devourer || HAS_TRAIT(capture_victim, TRAIT_STASIS) || capture_energy.zero_energy_damage_percent != capture_devourer.redspace_zero_energy_damage_percent)
 		return Fail("Releasing a captured victim must clear containment and stasis")
 
 	var/mob/living/basic/demon/redspace/devourer/retreat_devourer = allocate(/mob/living/basic/demon/redspace/devourer, get_step(run_loc_floor_bottom_left, NORTH))
@@ -377,8 +382,8 @@
 	player_devourer.ckey = "redspace_test_player"
 	var/turf/player_transform_turf = get_turf(player_devourer)
 	player_devourer.begin_transformation()
-	var/mob/living/basic/demon/redspace/moderate/ravager/player_ravager = locate(/mob/living/basic/demon/redspace/moderate/ravager) in player_transform_turf
-	if(!player_ravager || QDELETED(player_ravager) || player_ravager.ckey != ckey("redspace_test_player") || player_ravager.stored_victim != player_victim)
+	var/mob/living/basic/demon/redspace/moderate/ravager/player_ravager = player_victim.loc
+	if(!istype(player_ravager) || QDELETED(player_ravager) || get_turf(player_ravager) != player_transform_turf || player_ravager.ckey != ckey("redspace_test_player") || player_ravager.stored_victim != player_victim)
 		if(player_ravager && !QDELETED(player_ravager))
 			player_ravager.ckey = null
 			qdel(player_ravager)
