@@ -1,9 +1,9 @@
 /datum/quirk/death_mimicry
 	name = "Death Mimicry"
-	desc = "You've mastered the art of faking your demise. Performing a death gasp knocks you unconscious and tricks anyone examining you into believing you've succumbed to your injuries for a short time."
+	desc = "Вы в совершенстве овладели искусством имитации смерти. Исполнение предсмертного вздоха погружает вас в бессознательное состояние и обманывает тех, кто вас осматривает: они на короткое время верят, что вы умерли."
 	icon = FA_ICON_GHOST
 	value = 16
-	gain_text = span_notice("You know how to put on a convincing death scene.")
-	lose_text = span_danger("You've lost your flair for dramatic deaths.")
-	medical_record_text = "Patient routinely fakes cardiac arrest to get out of fights."
+	gain_text = span_notice("Вы знаетеь, как убедительно изобразить смерть.")
+	lose_text = span_danger("Вы утратили навык имитации смерти.")
+	medical_record_text = "Пациент регулярно симулирует остановку сердца, чтобы уклоняться от участия в драках."
 	mail_goodies = list(/obj/item/bodybag)

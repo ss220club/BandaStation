@@ -1,9 +1,9 @@
 /datum/quirk/monophobia
 	name = "Monophobia"
-	desc = "You have an extreme fear of loneliness, and have always tried to stick to large groups."
+	desc = "Вы до ужаса боитесь одиночества и всегда стараетесь держаться в больших группах."
 	icon = FA_ICON_PEOPLE_GROUP
 	value = -3
-	medical_record_text = "Patient has a severe fear of being left alone."
+	medical_record_text = "У пациента выраженный страх остаться в одиночестве."
 	hardcore_value = 5
 	mail_goodies = list(/obj/effect/spawner/random/entertainment/plushie)
 

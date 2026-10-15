@@ -1,24 +1,24 @@
 /datum/quirk/death_dnr_poll
 	name = "Thanatorenasia"
-	desc = "Whenever you die and elect to \"Do Not Resuscitate\", your body may be taken over by another ghost upon revival - \
-		giving it an entirely new personality and fresh set of memories."
+	desc = "Если вы умираете и выбираете опцию \"Не реанимировать\", при возрождении ваше тело может быть занято другим призраком - \
+		у него будет новая личность и новые воспоминания."
 	icon = FA_ICON_ZAP
 	value = 0
-	medical_record_text = "Patient has Thanatorenasia - in the event of their death and resuscitation, \
-		they may experience memory loss or a change in personality."
-	medical_symptom_text = "In the event of the patient's death and resuscitation, \
-		they may experience memory loss or a change in personality."
+	medical_record_text = "У пациента диагностирована танатореназия. В случае смерти и последующей реанимации \
+		возможна потеря памяти или изменение личности."
+	medical_symptom_text = "В случае смерти пациента и последующей реанимации \
+		возможна потеря памяти или изменение личности."
 	quirk_flags = QUIRK_NO_TRANSFER
 
 	// Used the the spawners menu to describe the quirk
-	var/you_are_text = "You are a deceased crewmember, afflicted with Thanatorenasia - \
-		a condition which alters personality and causes memory loss upon death and revival."
-	var/flavor_text = "Something feels... different. \
-		You're not entirely sure who you are or what happened - All you remember is your name and that you work here. \
-		Oh well, better get back to work - the last thing you want is to be both unemployed AND an amnesiac."
-	var/important_text = "Resume your assigned duty. \
-		If you choose to \"Do Not Resuscitate\" upon death, another ghost will be allowed to take over the body. \
-		You still roll for midround antagonists."
+	var/you_are_text = "Вы - умерший член экипажа, страдающий танатореназией - \
+		состоянием, которое меняет личность и вызывает потерю памяти при смерти и последующем возрождении."
+	var/flavor_text = "Что-то... не так. \
+		Вы не до конца понимаете, кто вы и что произошло. Вы помните только своё имя и то, что работаете здесь. \
+		Что ж, пора браться за дело - меньше всего хочется остаться и без работы, и без памяти."
+	var/important_text = "Продолжайте выполнять свои обязанности. \
+		Если вы умираете и выбираете опцию \"Не реанимировать\", при возрождении ваше тело может быть занято другим призраком. \
+		Вы всё ещё можете становится антагонистом в середине раунда."
 
 /datum/quirk/death_dnr_poll/add_unique(client/client_source)
 	. = ..()
