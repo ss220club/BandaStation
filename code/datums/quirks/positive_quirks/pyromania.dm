@@ -46,7 +46,7 @@
 		for(var/obj/item/lighter/lighter as anything in quirk_holder.get_held_items_of_type(/obj/item/lighter))
 			if(lighter.lit)
 				continue
-			to_chat(quirk_holder, span_warning("Вы импульсивно щёлкаете [declent_ru(lighter, INSTRUMENTAL)], пытаясь высечь пламя..."))
+			to_chat(quirk_holder, span_warning("Вы импульсивно щёлкаете [lighter.declent_ru(INSTRUMENTAL)], пытаясь высечь пламя..."))
 			lighter.attack_self(quirk_holder)
 			COOLDOWN_START(src, start_fire_cd, 4 SECONDS)
 			break
