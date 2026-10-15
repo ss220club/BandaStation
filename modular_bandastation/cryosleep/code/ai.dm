@@ -7,6 +7,7 @@ GAME_VERB_DESC(/mob/living/silicon/ai, ai_cryo, "AI Unload", "Перемещае
 
 	if(mind)
 		SEND_SIGNAL(mind, COMSIG_MIND_ENTERED_CRYO)
+		SEND_GLOBAL_SIGNAL(COMSIG_GLOB_MIND_ENTERED_CRYO, mind)
 	ghostize(FALSE)
 	minor_announce("Станционный ИИ был отключён от внутренних систем и был перемещён на хранение. Производится подготовка для загрузки нового ИИ.", "Станционный ИИ")
 	new /obj/structure/ai_core/latejoin_inactive(loc)
