@@ -100,7 +100,7 @@ GLOBAL_DATUM_INIT(objective_replacement_handler, /datum/objective_replacement_ha
 	return FALSE
 
 /// Revolution tasks are tied to the original heads and cannot receive random replacements.
-/datum/objective/mutiny/replace_unavailable_target(datum/mind/old_target)
+/datum/objective/mutiny/replace_unavailable_target(datum/mind/old_target, list/blacklist)
 	if(!team)
 		return FALSE
 	cancel_unavailable_target("Это задание не предусматривает замену цели.")
