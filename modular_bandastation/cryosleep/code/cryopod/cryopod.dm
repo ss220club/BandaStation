@@ -179,7 +179,6 @@
 	var/mob/living/mob_occupant = occupant
 	// Update any existing objectives involving this mob.
 	if(mob_occupant.mind)
-		SEND_SIGNAL(mob_occupant.mind, COMSIG_MIND_ENTERED_CRYO)
 		SEND_GLOBAL_SIGNAL(COMSIG_GLOB_MIND_ENTERED_CRYO, mob_occupant.mind)
 
 /// This function can not be undone; do not call this unless you are sure.
