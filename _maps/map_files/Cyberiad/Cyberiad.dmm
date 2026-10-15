@@ -2078,9 +2078,7 @@
 /obj/structure/table/reinforced,
 /obj/machinery/door/firedoor,
 /turf/open/floor/light{
-	icon_state = "light_on-7";
-	state = 7;
-	light_color = "#a659ff"
+	currentcolor = "#9B51FF"
 	},
 /area/station/service/bar)
 "aAk" = (
@@ -16216,9 +16214,7 @@
 	pixel_y = 6
 	},
 /turf/open/floor/light{
-	icon_state = "light_on-7";
-	state = 7;
-	light_color = "#a659ff"
+	currentcolor = "#9B51FF"
 	},
 /area/station/service/bar)
 "dTM" = (
@@ -21767,9 +21763,7 @@
 	},
 /obj/structure/table/reinforced/rglass,
 /turf/open/floor/light{
-	icon_state = "light_on-7";
-	state = 7;
-	light_color = "#a659ff"
+	currentcolor = "#9B51FF"
 	},
 /area/station/commons/lounge)
 "fob" = (
@@ -29415,9 +29409,7 @@
 "hfy" = (
 /obj/structure/table/reinforced/rglass,
 /turf/open/floor/light{
-	icon_state = "light_on-7";
-	state = 7;
-	light_color = "#a659ff"
+	currentcolor = "#9B51FF"
 	},
 /area/station/commons/lounge)
 "hfD" = (
@@ -37548,9 +37540,7 @@
 	pixel_y = 8
 	},
 /turf/open/floor/light{
-	icon_state = "light_on-7";
-	state = 7;
-	light_color = "#a659ff"
+	currentcolor = "#9B51FF"
 	},
 /area/station/service/bar)
 "jdO" = (
@@ -47330,9 +47320,7 @@
 /obj/structure/table/reinforced/rglass,
 /obj/item/clothing/head/utility/hardhat/cakehat,
 /turf/open/floor/light{
-	icon_state = "light_on-7";
-	state = 7;
-	light_color = "#a659ff"
+	currentcolor = "#9B51FF"
 	},
 /area/station/commons/lounge)
 "lvF" = (
