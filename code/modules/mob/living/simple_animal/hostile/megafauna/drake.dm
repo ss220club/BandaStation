@@ -97,14 +97,12 @@
 	RegisterSignal(src, COMSIG_SWOOP_INVULNERABILITY_STARTED, PROC_REF(swoop_invulnerability_started))
 	RegisterSignal(src, COMSIG_LAVA_ARENA_FAILED, PROC_REF(on_arena_fail))
 	AddElement(/datum/element/change_force_on_death, move_force = MOVE_FORCE_DEFAULT)
-	AddComponent(/datum/action/innate/cult/comm)
 
 /mob/living/simple_animal/hostile/megafauna/dragon/Destroy()
 	fire_cone = null
 	meteors = null
 	mass_fire = null
 	lava_swoop = null
-	drake_comm = null
 	return ..()
 
 /mob/living/simple_animal/hostile/megafauna/dragon/OpenFire()

@@ -100,7 +100,6 @@ Difficulty: Hard
 	hallucination_charge_surround.spawn_blood = TRUE
 	RegisterSignal(src, COMSIG_BLOOD_WARP, PROC_REF(blood_enrage))
 	RegisterSignal(src, COMSIG_FINISHED_CHARGE, PROC_REF(after_charge))
-	AddComponent(/datum/action/innate/cult/comm)
 	if(spawn_blood)
 		AddComponent(/datum/component/blood_walk, \
 			blood_type = /obj/effect/decal/cleanable/blood/bubblegum, \

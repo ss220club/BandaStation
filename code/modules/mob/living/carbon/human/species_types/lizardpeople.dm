@@ -119,7 +119,7 @@ Lizard subspecies: ASHWALKERS
 		/obj/item/organ/tail/lizard = "Smooth",
 		/obj/item/organ/fangs/lizard/ash,
 	)
-	inherent_factions = list(FACTION_ASHWALKER)
+	inherent_factions = list(FACTION_ASHWALKER, FACTION_CULT, FACTION_HELL, FACTION_MINING)
 	species_language_holder = /datum/language_holder/lizard/ash
 	digitigrade_customization = DIGITIGRADE_FORCED
 	examine_limb_id = SPECIES_LIZARD

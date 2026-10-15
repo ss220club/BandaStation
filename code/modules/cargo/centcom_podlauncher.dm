@@ -547,15 +547,11 @@ ADMIN_VERB(centcom_podlauncher, R_ADMIN, "Config/Launch Supplypod", "Configure a
 		if("toggleAircraftMode")
 			aircraft_mode = !aircraft_mode
 			if(aircraft_mode)
-				aircraft_mode = FALSE
-				launcherActivated = FALSE
-				picking_dropoff_turf = FALSE
-				updateCursor()
 				launcherActivated = TRUE
-				updateCursor()
+				picking_dropoff_turf = FALSE
 			else
 				launcherActivated = FALSE
-				updateCursor()
+			updateCursor()
 			. = TRUE
 
 /datum/centcom_podlauncher/ui_close(mob/user) //Uses the destroy() proc. When the user closes the UI, we clean up the temp_pod and supplypod_selector variables.
@@ -633,7 +629,7 @@ ADMIN_VERB(centcom_podlauncher, R_ADMIN, "Config/Launch Supplypod", "Configure a
 				supplypod_punish_log(bouttaDie)
 			if (aircraft_mode)
 				launch_aircraft(target)
-			else if (!effectBurst) //If we're not using burst mode, just launch normally.
+			else if (!effectBurst)
 				launch(target)
 			else
 				for (var/i in 1 to 5) //If we're using burst mode, launch 5 pods
@@ -880,14 +876,13 @@ GLOBAL_DATUM_INIT(podlauncher, /datum/centcom_podlauncher, new)
 	temp_pod.reverse_dropoff_coords = list(target_turf.x, target_turf.y, target_turf.z)
 	indicator.forceMove(target_turf)
 
-/datum/centcom_podlauncher/proc/launch_aircraft(turf/target)
-	if (!target)
+/datum/centcom_podlauncher/proc/launch_aircraft(turf/target_turf)
+	if (!target_turf)
 		return
-	var/turf/start_turf = locate(target.x, world.maxy, target.z)
+	var/turf/start_turf = locate(target_turf.x, world.maxy, target_turf.z)
 	if (!start_turf)
 		return
-	var/obj/effect/supply_aircraft/aircraft = new(start_turf, target)
-	aircraft.begin_flight()
+	new /obj/effect/supply_aircraft(start_turf, target_turf, src)
 
 /obj/effect/client_image_holder/supplypod_selector // Shows which item will be taken next
 	name = "Supply Selector (Only you can see this)"
