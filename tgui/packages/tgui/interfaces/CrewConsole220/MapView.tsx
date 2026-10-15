@@ -52,7 +52,7 @@ export function MapView(props) {
 
                 event.preventDefault();
                 act('select_person', {
-                  name: sensor.name,
+                  ref: sensor.ref,
                 });
               }}
             />

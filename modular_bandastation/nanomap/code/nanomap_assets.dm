@@ -1,7 +1,7 @@
 /datum/asset/simple/nanomaps
 	// It REALLY doesnt matter too much if these arent up to date
 	// They are relatively big
-	// Asset keys must match map_name from _maps/*.json
+	// Asset keys must match map_name from _maps/map_jsons/*.json
 	assets = list(
 		"Cyberiad_nanomap_z1.png" = 'icons/_nanomaps/Cyberiad_nanomap_z1.png',
 		"Cyberiad_nanomap_z2.png" = 'icons/_nanomaps/Cyberiad_nanomap_z2.png',
