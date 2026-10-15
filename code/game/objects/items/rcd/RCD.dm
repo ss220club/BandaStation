@@ -4,7 +4,7 @@
 //RAPID CONSTRUCTION DEVICE
 
 /obj/item/construction/rcd
-	name = "rapid-construction-device (RCD)"
+	name = "rapid construction device (RCD)"
 	icon = 'icons/obj/tools.dmi'
 	icon_state = "rcd"
 	inhand_icon_state = "rcd"
@@ -570,7 +570,7 @@
 
 // Ranged RCD
 /obj/item/construction/rcd/arcd
-	name = "advanced rapid-construction-device (ARCD)"
+	name = "advanced rapid construction device (ARCD)"
 	desc = "A prototype RCD with ranged capability and infinite capacity."
 	max_matter = INFINITY
 	matter = INFINITY
