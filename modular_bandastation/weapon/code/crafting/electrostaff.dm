@@ -10,12 +10,11 @@
 	)
 
 
-// Assemble the Electrostaff from two stun batons, an Electrostaff parts kit, and a flux anomaly.
 /datum/crafting_recipe/electrostaff
 	name = "electrostaff"
 	result = /obj/item/melee/baton/security/electrostaff/loaded
 	reqs = list(
-		/obj/item/melee/baton/security = 2,
+		/obj/item/melee/baton/security/loaded = 2,
 		/obj/item/assembly/signaler/anomaly/flux = 1,
 		/obj/item/weaponcrafting/gunkit/electrostaff = 1,
 	)

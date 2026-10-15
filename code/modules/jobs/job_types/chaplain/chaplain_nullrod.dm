@@ -49,6 +49,9 @@ GLOBAL_LIST_INIT(nullrod_variants, init_nullrod_variants())
 	var/menu_description = "A standard chaplain's weapon. Fits in pockets. Can be worn on the belt."
 	/// Affects GLOB.holy_weapon_type. Disable to allow null rods to change at will and without affecting the station's type.
 	var/station_holy_item = TRUE
+	// BANDASTATION ADDITION: vampires
+	/// Extra holy damage for specific rods
+	var/sanctify_force = 0
 
 /obj/item/nullrod/Initialize(mapload)
 	. = ..()
@@ -527,6 +530,7 @@ GLOBAL_LIST_INIT(nullrod_variants, init_nullrod_variants())
 	material_flags = MATERIAL_EFFECTS
 	custom_materials = list(/datum/material/silver = SHEET_MATERIAL_AMOUNT * 3, /datum/material/iron = SHEET_MATERIAL_AMOUNT)
 	material_slots = list(/datum/material_slot/weapon_head = /datum/material/silver, /datum/material_slot/handle = /datum/material/iron)
+	sanctify_force = 7 // BANDASTATION ADDITION: vampires
 
 // Atheist's Fedora - Wear it on your head. No melee damage, massive throw force.
 

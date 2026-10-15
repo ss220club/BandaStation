@@ -493,6 +493,16 @@ repeatable_weight_decrease = 2
 repeatable = 1
 minimum_required_age = 0
 
+["Roundstart Vampire"]
+weight = 10
+min_pop = 3
+blacklisted_roles = ["Chaplain", "Head of Personnel"]
+min_antag_cap = 1
+max_antag_cap.denominator = 24
+repeatable_weight_decrease = 2
+repeatable = 1
+minimum_required_age = 0
+
 ["Roundstart Malfunctioning AI"]
 weight.1 = 0
 weight.2 = 1

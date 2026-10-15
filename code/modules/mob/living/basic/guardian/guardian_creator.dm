@@ -74,7 +74,7 @@ GLOBAL_LIST_INIT(guardian_radial_images, setup_guardian_radial())
 	if(length(guardians) && !allow_multiple)
 		balloon_alert(user, "already have one!")
 		return
-	if(IS_CHANGELING(user) && !allow_changeling)
+	if((IS_CHANGELING(user) && !allow_changeling) || HAS_TRAIT(user, TRAIT_VAMPIRE)) // BANDASTATION EDIT - Vampire
 		to_chat(user, ling_failure)
 		return
 	if(used)
@@ -108,6 +108,13 @@ GLOBAL_LIST_INIT(guardian_radial_images, setup_guardian_radial())
 
 	if(was_refunded)
 		return
+
+	// BANDASTATION ADDITION START - Vampire
+	if((IS_CHANGELING(user) && !allow_changeling) || HAS_TRAIT(user, TRAIT_VAMPIRE))
+		to_chat(user, ling_failure)
+		used = FALSE
+		return
+	// BANDASTATION ADDITION END
 
 	if(chosen_one)
 		spawn_guardian(user, chosen_one, guardian_path)
