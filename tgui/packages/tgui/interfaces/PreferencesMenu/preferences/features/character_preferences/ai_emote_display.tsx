@@ -6,6 +6,6 @@ import {
 export const preferred_ai_emote_display: FeatureWithIcons<string> = {
   name: 'Изображение на дисплеях ИИ',
   description:
-    'Изображение по умолчанию, отображаемое на всех дисплеях ИИ на станции, если вы являетесь ИИ.',
+    'Если вы играете за ИИ - это изображение будет отображаться по умолчанию на всех дисплеях ИИ на станции.',
   component: FeatureIconnedDropdownInput,
 };
