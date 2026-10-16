@@ -83,7 +83,7 @@ ADMIN_VERB(roundstart_roster, R_ADMIN, "Admin Roundstart Job Assignment", "На�
 	if(assignments[player_ckey] == job.type)
 		return TRUE
 	var/reserved = count_reserved_slots(job, player_ckey)
-	if((job.spawn_positions >= 0 && job.current_positions + reserved >= job.spawn_positions) || (job.total_positions >= 0 && job.current_positions + reserved >= job.total_positions))
+	if(job.spawn_positions >= 0 && job.current_positions + reserved >= job.spawn_positions)
 		to_chat(admin, span_warning("Все места на эту должность уже заняты или зарезервированы."))
 		return FALSE
 	assignments[player_ckey] = job.type
