@@ -191,6 +191,7 @@ export type PreferencesMenuData = {
     }
   >;
   job_preferences: JobPreference[];
+  roundstart_roster_restrictions?: Record<string, string>; // SS220 ADDITION - Per-job roster restriction messages.
 
   keybindings: Record<string, string[]>;
   overflow_role: string;

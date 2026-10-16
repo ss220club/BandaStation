@@ -8,6 +8,9 @@
 /datum/dynamic_ruleset/roundstart/is_valid_candidate(mob/candidate, client/candidate_client)
 	if(isnull(candidate.mind))
 		return FALSE
+	// SS220 ADDITION - Block antagonist selection that conflicts with a player's admin-selected job.
+	if(SEND_SIGNAL(SSjob, COMSIG_ROUNDSTART_ROSTER_VALIDATE_ANTAG, src, candidate) & ROUNDSTART_ROSTER_BLOCK_ANTAG)
+		return FALSE
 	// Checks that any other roundstart ruleset hasn't already picked this guy
 	for(var/datum/dynamic_ruleset/roundstart/ruleset as anything in SSdynamic.queued_rulesets)
 		if(candidate.mind in ruleset.selected_minds)
@@ -16,6 +19,9 @@
 
 /// Helpful proc - to use if your ruleset forces a job - which ensures a candidate can play the passed job typepath
 /datum/dynamic_ruleset/roundstart/proc/ruleset_forced_job_check(mob/candidate, client/candidate_client, datum/job/job_typepath)
+	// SS220 ADDITION - Block forced antagonist jobs that differ from the player's admin-selected job.
+	if(SEND_SIGNAL(SSjob, COMSIG_ROUNDSTART_ROSTER_VALIDATE_ASSIGNMENT, candidate, SSjob.get_job_type(job_typepath), FALSE) & ROUNDSTART_ROSTER_BLOCK_ASSIGNMENT)
+		return FALSE
 	// Malf AI can only go to people who want to be AI
 	if(!candidate_client.prefs.job_preferences[job_typepath::title])
 		return FALSE
