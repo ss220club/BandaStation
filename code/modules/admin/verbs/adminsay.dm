@@ -36,7 +36,7 @@ ADMIN_VERB(cmd_mentor_say, R_MENTOR, "MSay", "Send a message to other mentors", 
 	target_permissions
 )
 
-	message = emoji_parse(copytext_char(sanitize(message), 1, MAX_MESSAGE_LEN))
+	message = emoji_parse(copytext_char(message, 1, MAX_MESSAGE_LEN))
 	if(!message)
 		return FALSE
 

@@ -161,7 +161,10 @@
 /mob/dead/new_player/proc/AttemptLateSpawn(rank)
 	// Check that they're picking someone new for new character respawning
 	if(CONFIG_GET(flag/allow_respawn) == RESPAWN_FLAG_NEW_CHARACTER)
-		if("[client.prefs.default_slot]" in persistent_client.joined_as_slots)
+		if(client?.is_localhost())
+			to_chat(client.mob, span_notice("Этот персонаж уже участвовал в данном раунде, однако это ограничение обходится при использовании localhost."))
+			log_admin("[key_name_and_tag(client)] пропускает повторное присоединение к раунду тем же персонажем.")
+		else if("[client.prefs.default_slot]" in persistent_client.joined_as_slots)
 			tgui_alert(usr, "Вы уже играли на данном персонаже в этом раунде!")
 			return FALSE
 
@@ -376,6 +379,7 @@
 	ASSIGN_GAME_VERB(src, /mob/dead/new_player, open_interview)
 	add_verb(client, /client/verb/fix_tgui_panel)
 
+	///Resets the Lobby Menu HUD, recreating and reassigning it to the new player
 ///Resets the Lobby Menu HUD, recreating and reassigning it to the new player
 GAME_VERB_PROC(/mob/dead/new_player, reset_menu_hud, "Reset Lobby Menu HUD", null) // BANDASTATION EDIT: Empty category
 	var/mob/dead/new_player/new_player = usr

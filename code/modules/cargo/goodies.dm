@@ -148,6 +148,13 @@
 	access_view = ACCESS_WEAPONS
 	contains = list(/obj/item/clothing/accessory/holster/energy/thermal) //BANDASTATION EDIT: Accessory holsters
 
+/datum/supply_pack/goody/syringegun_single
+	name = "Syringe Gun Single-Pack"
+	desc = "Contains a single syringe gun."
+	cost = PAYCHECK_CREW * 10
+	access_view = ACCESS_MEDICAL
+	contains = list(/obj/item/gun/syringe)
+
 /datum/supply_pack/goody/sologamermitts
 	name = "Insulated Gloves Single-Pack"
 	desc = "The backbone of modern society. Barely ever ordered for actual engineering."
