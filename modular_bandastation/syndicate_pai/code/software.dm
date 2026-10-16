@@ -338,3 +338,17 @@
 /mob/living/silicon/pai/ui_data(mob/user)
 	. = ..()
 	.["max_ram"] = initial(ram)
+	
+/atom/movable/screen/pai/camera_network
+	name = "Camera Network"
+	icon = 'icons/hud/screen_ai.dmi'
+	icon_state = "camera"
+	screen_loc = ui_pai_camera_network
+	required_software = "Camera Network"
+
+/atom/movable/screen/pai/camera_network/Click()
+	if(!..())
+		return
+	var/mob/living/silicon/pai/syndicate/pAI = usr
+	if(istype(pAI))
+		pAI.use_camera_network()
