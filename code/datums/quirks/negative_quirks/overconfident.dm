@@ -1,6 +1,6 @@
 // /datum/quirk/in_over_your_head
 // 	name = "Overconfident"
-// 	desc = "You've done this so many times before. What could possibly go wrong? You know you'll always come out \
+// 	desc = "You've done this so many times before. What could possibly go wrong? You know you'll always come out
 // 		head and shoulders over the competition!"
 // 	icon = FA_ICON_PERSON_BURST
 // 	value = -8
