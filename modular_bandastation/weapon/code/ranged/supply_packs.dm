@@ -147,7 +147,7 @@
 		/obj/item/ammo_box/magazine/m50 = 3,
 	)
 
-/datum/supply_pack/security/armory/ladon_mags
+/datum/supply_pack/security/armory/gp45m_special_mags
 	name = "GP-45M Special Ammo Magazines"
 	crate_name = "GP-45M special ammo crate"
 	desc = "В этом ящике находятся два бронебойных магазина и два экспансивных магазина калибра .45, и соответствующие коробки с боеприпасами."
