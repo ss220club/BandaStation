@@ -29,8 +29,11 @@
 
 /// The Syndicate's built-in key stays in the internal radio when a carrier removes their chip.
 /obj/item/radio/headset/silicon/pai/remove_keys(mob/living/user)
-	. = list()
-	if(!keyslot)
+	if(istype(keyslot2, /obj/item/encryptionkey/syndicate))
+		. = list()
+		if(!keyslot)
+			return
+		. += keyslot
+		user.put_in_hands(keyslot)
 		return
-	. += keyslot
-	user.put_in_hands(keyslot)
+	return ..()
