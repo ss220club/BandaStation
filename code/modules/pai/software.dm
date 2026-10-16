@@ -222,7 +222,7 @@
 	switch(mode)
 		if(PAI_SCAN_TARGET)
 			var/mob/living/carbon/target = get_holder()
-			if(!target)
+			if(!target) // BANDASTATION EDIT
 				balloon_alert(src, "not being carried!")
 				return FALSE
 			healthscan(src, target)
@@ -230,7 +230,7 @@
 
 		if(PAI_SCAN_MASTER)
 			var/mob/living/resolved_master = find_master()
-			if(!resolved_master)
+			if(!resolved_master) // BANDASTATION EDIT
 				balloon_alert(src, "no master detected!")
 				return FALSE
 			if(!is_valid_z_level(get_turf(src), get_turf(resolved_master)))

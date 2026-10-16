@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useBackend } from 'tgui/backend';
 import {
+  Box,
   Button,
   NoticeBox,
   ProgressBar,
@@ -91,14 +92,63 @@ function SoftwareButtons(props: SoftwareButtonsProps) {
       return <>Канал активен. Для передачи используйте :t перед сообщением.</>;
     case 'Remote Machinery':
       return (
-        <>
-          АПЦ: ЛКМ — открыть окно управления, ПКМ — блокировка интерфейса,
-          Ctrl+ЛКМ — главный выключатель, Shift+ЛКМ — освещение, Ctrl+Shift+ЛКМ
-          — питание окружения, Alt+ЛКМ — оборудование. Двери: Shift+ЛКМ —
-          открыть или закрыть, Ctrl+ЛКМ — болты, Ctrl+Shift+ЛКМ — аварийный
-          доступ, Alt+ЛКМ — электрификация. Все удалённые действия имеют общий
-          КД: 7 секунд после действия со шлюзом, 30 секунд после действия с АПЦ.
-        </>
+        <Stack vertical>
+          <Stack.Item>
+            <Box bold mb={0.5}>
+              АПЦ
+            </Box>
+            <Box>
+              <b>ЛКМ</b> — открыть окно управления.
+            </Box>
+            <Box>
+              <b>ПКМ</b> — переключить блокировку интерфейса.
+            </Box>
+            <Box>
+              <b>Ctrl+ЛКМ</b> — главный выключатель.
+            </Box>
+            <Box>
+              <b>Shift+ЛКМ</b> — питание освещения.
+            </Box>
+            <Box>
+              <b>Ctrl+Shift+ЛКМ</b> — питание окружения.
+            </Box>
+            <Box>
+              <b>Alt+ЛКМ</b> — питание оборудования.
+            </Box>
+          </Stack.Item>
+          <Stack.Item>
+            <Box bold mb={0.5}>
+              Шлюзы
+            </Box>
+            <Box>
+              <b>Shift+ЛКМ</b> — открыть или закрыть.
+            </Box>
+            <Box>
+              <b>Ctrl+ЛКМ</b> — поднять или опустить болты.
+            </Box>
+            <Box>
+              <b>Ctrl+Shift+ЛКМ</b> — переключить аварийный доступ.
+            </Box>
+            <Box>
+              <b>Alt+ЛКМ</b> — переключить электрификацию.
+            </Box>
+          </Stack.Item>
+          <Stack.Item>
+            <Box bold mb={0.5}>
+              Общая перезарядка
+            </Box>
+            <Box>
+              После действия со шлюзом — <b>7 секунд</b>.
+            </Box>
+            <Box>
+              После действия с АПЦ — <b>30 секунд</b>.
+            </Box>
+            <Box color="label">
+              На время перезарядки блокируются все удалённые действия со шлюзами
+              и АПЦ.
+            </Box>
+          </Stack.Item>
+        </Stack>
       );
     case 'Medical Injector':
       return (

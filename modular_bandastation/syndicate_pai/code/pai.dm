@@ -19,8 +19,8 @@
 	)
 
 /mob/living/silicon/pai/syndicate/Initialize(mapload)
+	. = ..()
 	available_software += syndicate_software
-	return ..()
 
 /mob/living/silicon/pai/syndicate/Destroy()
 	QDEL_NULL(camera_console)

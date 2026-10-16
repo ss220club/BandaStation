@@ -18,7 +18,7 @@
 /mob/living/silicon/pai/syndicate/ui_act(action, list/params, datum/tgui/ui)
 	if(action in syndicate_software)
 		if(!installed_software.Find(action))
-			balloon_alert(ui.user, "software unavailable!")
+			balloon_alert(ui.user, "программа недоступна!")
 			return FALSE
 		switch(action)
 			if("Thermal Vision")
@@ -46,7 +46,7 @@
 
 /mob/living/silicon/pai/syndicate/buy_software(selection)
 	if((selection == "Night Vision" && ("Thermal Vision" in installed_software)) || (selection == "Thermal Vision" && ("Night Vision" in installed_software)))
-		balloon_alert(src, "ПНВ и термалы несовместимы")
+		balloon_alert(src, "ночное видение и термальное зрение несовместимы")
 		return FALSE
 	if(!..())
 		return FALSE

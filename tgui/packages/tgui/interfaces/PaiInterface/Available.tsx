@@ -110,7 +110,11 @@ function ListItem(props: ListItemProps) {
             icon="download"
             mb={0.5}
             disabled={tooExpensive || purchased || visionConflict}
-            tooltip={visionConflict ? 'ПНВ и термалы несовместимы' : undefined}
+            tooltip={
+              visionConflict
+                ? 'Ночное видение и термальное зрение несовместимы'
+                : undefined
+            }
             onClick={() => act('buy', { selection: name })}
           />
         </Table.Cell>

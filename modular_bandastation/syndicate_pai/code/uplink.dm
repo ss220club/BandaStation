@@ -1,6 +1,6 @@
 /datum/uplink_item/device_tools/syndicate_pai
-	name = "Syndicate Personal AI Device"
-	desc = "A modified personal AI device with 150 RAM for optional thermal vision, medical injections, camera access and remote machinery control. Requires a volunteer personality."
+	name = "Синдикатовский персональный ИИ"
+	desc = "Модифицированный персональный ИИ с увеличенным объёмом оперативной памяти нового поколения. Помимо стандартных программ, имеет возможность устанавливать продвинутые, такие как: тепловое зрение, медицинский инъектор, доступ к сети камер и удалённое управление оборудованием. Для функционирования требуется загрузить и выбрать из базы данных доступный ИИ"
 	item = /obj/item/pai_card/syndicate
 	cost = 8
 	surplus = 0
