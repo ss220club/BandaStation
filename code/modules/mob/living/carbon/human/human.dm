@@ -152,7 +152,7 @@
 	if(href_list["hud"])
 		//BANDASTATION EDIT START
 		var/mob/living/silicon/pai/pai_viewer = usr
-		if(!istype(pai_viewer) || !("Security HUD" in pai_viewer.installed_software))
+		if(!istype(pai_viewer, /mob/living/silicon/pai/syndicate) || !("Security Records" in pai_viewer.installed_software))
 			pai_viewer = null
 		if(!ishuman(usr) && !isobserver(usr) && !pai_viewer)
 		//BANDASTATION EDIT END
