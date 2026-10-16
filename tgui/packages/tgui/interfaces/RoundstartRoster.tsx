@@ -2,7 +2,7 @@ import {
   Box,
   Button,
   Dropdown,
-  NoticeBox,
+  Icon,
   Section,
   Stack,
 } from 'tgui-core/components';
@@ -25,9 +25,9 @@ type Data = {
 };
 
 const statusColors = {
-  offline: '#45474b',
-  not_ready: '#756122',
-  ready: '#285c3a',
+  offline: '#a0a6ad',
+  not_ready: '#e5b94b',
+  ready: '#65c77a',
 };
 
 const statusLabels = {
@@ -39,47 +39,70 @@ const statusLabels = {
 export function RoundstartRoster() {
   const { act, data } = useBackend<Data>();
   const { rows, jobs, editable } = data;
+  const readyCount = rows.filter((row) => row.status === 'ready').length;
 
   return (
-    <Window width={440} height={720}>
+    <Window width={460} height={500}>
       <Window.Content>
         <Stack vertical fill>
-          <Stack.Item>
-            <NoticeBox>
-              Должность получат только готовые игроки. Для остальных назначение
-              отменяется при старте раунда.
-            </NoticeBox>
-            {!editable && (
-              <NoticeBox info>Идёт распределение должностей.</NoticeBox>
-            )}
+          <Stack.Item p={1}>
+            <Box color="label" mb={1}>
+              Должности получат только готовые игроки.
+            </Box>
+            <Box color={readyCount > 0 ? statusColors.ready : 'label'}>
+              Готовы {readyCount}/{rows.length}
+            </Box>
+            {!editable && <Box mt={1}>Идёт распределение должностей.</Box>}
           </Stack.Item>
           <Stack.Item grow>
-            <Section fill scrollable>
+            <Section fill scrollable backgroundColor="#1b1b1b">
               <Stack vertical>
-                <Stack.Item>
-                  <Stack bold>
-                    <Stack.Item grow>ckey</Stack.Item>
-                    <Stack.Item width="16rem">Должность</Stack.Item>
+                <Stack.Item px={1} color="label">
+                  <Stack align="center">
+                    <Stack.Item width="8rem" minWidth={0}>
+                      ckey
+                    </Stack.Item>
+                    <Stack.Item grow>Статус</Stack.Item>
+                    <Stack.Item width="12rem">Должность</Stack.Item>
+                    <Stack.Item width="2rem" />
                   </Stack>
                 </Stack.Item>
+                {rows.length === 0 && (
+                  <Stack.Item p={1} color="label">
+                    Добавьте участников кнопкой ниже.
+                  </Stack.Item>
+                )}
                 {rows.map((row) => (
                   <Stack.Item key={row.ckey}>
-                    <Box p={1} backgroundColor={statusColors[row.status]}>
+                    <Box
+                      p={1}
+                      backgroundColor="#242424"
+                      style={{
+                        border: '1px solid #414141',
+                        borderRadius: '4px',
+                      }}
+                    >
                       <Stack align="center">
                         <Stack.Item
-                          grow
+                          width="8rem"
                           minWidth={0}
                           style={{ overflowWrap: 'anywhere' }}
                         >
                           <Box bold>{row.ckey}</Box>
-                          <Box fontSize="0.8em">{statusLabels[row.status]}</Box>
                         </Stack.Item>
-                        <Stack.Item width="13rem">
+                        <Stack.Item grow color={statusColors[row.status]}>
+                          <Icon name="circle" mr={0.5} size={0.7} />
+                          {statusLabels[row.status]}
+                        </Stack.Item>
+                        <Stack.Item width="12rem">
                           <Dropdown
                             fluid
                             disabled={!editable}
                             placeholder="Выберите должность"
                             selected={row.job || undefined}
+                            displayText={
+                              row.job ? JOBS_RU[row.job] || row.job : undefined
+                            }
                             options={jobs.map((job) => ({
                               displayText: JOBS_RU[job] || job,
                               value: job,
@@ -89,7 +112,7 @@ export function RoundstartRoster() {
                             }
                           />
                         </Stack.Item>
-                        <Stack.Item>
+                        <Stack.Item width="2rem">
                           <Button
                             icon="trash"
                             color="transparent"
@@ -105,7 +128,7 @@ export function RoundstartRoster() {
               </Stack>
             </Section>
           </Stack.Item>
-          <Stack.Item>
+          <Stack.Item mx={1} mb={1}>
             <Button
               fluid
               icon="plus"
