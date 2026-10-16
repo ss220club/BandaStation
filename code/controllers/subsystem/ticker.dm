@@ -292,6 +292,8 @@ SUBSYSTEM_DEF(ticker)
 		ruleset.execute()
 		SSdynamic.unqueue_ruleset(ruleset)
 		SSdynamic.executed_rulesets += ruleset
+	// BANDASTATION EDIT: consider shared operations once, after all roundstart assignments.
+	SEND_SIGNAL(src, COMSIG_TICKER_ROUNDSTART_ROLES_ASSIGNED, GLOB.antagonists.Copy())
 	// Queue roundstart intercept report
 	if(!CONFIG_GET(flag/no_intercept_report))
 		GLOB.communications_controller.queue_roundstart_report()
