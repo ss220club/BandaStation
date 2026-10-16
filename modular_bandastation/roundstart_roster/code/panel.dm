@@ -65,12 +65,16 @@ ADMIN_VERB(roundstart_roster, R_ADMIN, "Admin Roundstart Job Assignment", "На�
 			if(candidate.client && candidate.mind && is_unassigned_job(candidate.mind.assigned_role) && !(candidate.ckey in assignments))
 				players += candidate.ckey
 		player_ckey = tgui_input_list(admin, "Выберите игрока", "Назначение должностей", sort_list(players))
+		if(!player_ckey)
+			return FALSE
 		// Recheck admin rights and round state after the player selection dialog returns.
 		if(!check_rights_for(admin?.client, R_ADMIN) || SSticker.current_state >= GAME_STATE_SETTING_UP)
 			return FALSE
 		var/client/player_client = GLOB.directory[player_ckey]
 		var/mob/dead/new_player/player = player_client?.mob
-		if(!player_ckey || player_ckey in assignments || !istype(player) || !player.mind || !is_unassigned_job(player.mind.assigned_role))
+		if(player_ckey in assignments)
+			return FALSE
+		if(!istype(player) || !player.mind || !is_unassigned_job(player.mind.assigned_role))
 			return FALSE
 		assignments[player_ckey] = null
 		log_admin("[key_name(admin)] added [player_ckey] to the roundstart job panel.")
