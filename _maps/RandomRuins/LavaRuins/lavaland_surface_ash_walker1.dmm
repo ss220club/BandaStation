@@ -455,6 +455,7 @@
 	},
 /obj/structure/table/wood,
 /obj/item/spear,
+/obj/item/sharpener/cult,
 /turf/open/indestructible/boss,
 /area/ruin/unpowered/ash_walkers)
 "cN" = (
@@ -471,6 +472,7 @@
 /obj/structure/table/wood,
 /obj/item/spear,
 /obj/item/clothing/head/helmet/roman/legionnaire,
+/obj/item/sharpener/cult,
 /turf/open/indestructible/boss,
 /area/ruin/unpowered/ash_walkers)
 "dj" = (
@@ -769,8 +771,19 @@
 /area/lavaland/surface/outdoors)
 "qv" = (
 /obj/structure/stone_tile/surrounding_tile/cracked,
-/obj/structure/ore_box,
 /obj/effect/mapping_helpers/no_lava,
+/obj/structure/closet/crate/necropolis,
+/obj/item/clothing/suit/hooded/cultrobes/alt/ghost,
+/obj/item/clothing/suit/hooded/cultrobes/alt/ghost,
+/obj/item/clothing/suit/hooded/cultrobes/alt/ghost,
+/obj/item/melee/cultblade/halberd,
+/obj/item/melee/cultblade/halberd,
+/obj/item/melee/cultblade/halberd,
+/obj/item/restraints/legcuffs/bola/cult,
+/obj/item/restraints/legcuffs/bola/cult,
+/obj/item/restraints/legcuffs/bola/cult,
+/obj/item/restraints/legcuffs/bola/cult,
+/obj/item/restraints/legcuffs/bola/cult,
 /turf/open/misc/asteroid/basalt/lava_land_surface/biome_replace,
 /area/lavaland/surface/outdoors)
 "qW" = (
@@ -856,6 +869,12 @@
 	dir = 4
 	},
 /obj/effect/mapping_helpers/no_lava,
+/obj/structure/closet/crate/necropolis,
+/obj/item/stack/sheet/runed_metal/ten,
+/obj/item/stack/sheet/runed_metal/ten,
+/obj/item/stack/sheet/runed_metal/ten,
+/obj/item/stack/sheet/runed_metal/ten,
+/obj/item/stack/sheet/runed_metal/ten,
 /turf/open/misc/asteroid/basalt/lava_land_surface/biome_replace,
 /area/lavaland/surface/outdoors)
 "vm" = (
@@ -1120,6 +1139,12 @@
 	dir = 1
 	},
 /obj/effect/mapping_helpers/no_lava,
+/obj/structure/closet/crate/necropolis,
+/obj/item/stack/sheet/runed_metal/ten,
+/obj/item/stack/sheet/runed_metal/ten,
+/obj/item/stack/sheet/runed_metal/ten,
+/obj/item/stack/sheet/runed_metal/ten,
+/obj/item/stack/sheet/runed_metal/ten,
 /turf/open/misc/asteroid/basalt/lava_land_surface/biome_replace,
 /area/lavaland/surface/outdoors)
 "Kt" = (
@@ -1150,6 +1175,14 @@
 	dir = 4
 	},
 /obj/effect/mapping_helpers/no_lava,
+/turf/open/misc/asteroid/basalt/lava_land_surface/biome_replace,
+/area/lavaland/surface/outdoors)
+"LW" = (
+/obj/effect/mapping_helpers/no_lava,
+/obj/structure/stone_tile{
+	dir = 8
+	},
+/obj/structure/ore_box,
 /turf/open/misc/asteroid/basalt/lava_land_surface/biome_replace,
 /area/lavaland/surface/outdoors)
 "ME" = (
@@ -1405,8 +1438,19 @@
 /area/ruin/unpowered/ash_walkers)
 "ZO" = (
 /obj/structure/stone_tile/block,
-/obj/item/spear,
 /obj/effect/mapping_helpers/no_lava,
+/obj/structure/closet/crate/necropolis,
+/obj/item/clothing/suit/hooded/cultrobes/cult_shield,
+/obj/item/clothing/suit/hooded/cultrobes/cult_shield,
+/obj/item/clothing/suit/hooded/cultrobes/cult_shield,
+/obj/item/melee/cultblade,
+/obj/item/melee/cultblade,
+/obj/item/melee/cultblade,
+/turf/open/misc/asteroid/basalt/lava_land_surface/biome_replace,
+/area/lavaland/surface/outdoors)
+"ZU" = (
+/obj/effect/mapping_helpers/no_lava,
+/obj/item/spear,
 /turf/open/misc/asteroid/basalt/lava_land_surface/biome_replace,
 /area/lavaland/surface/outdoors)
 "ZW" = (
@@ -1676,7 +1720,7 @@ ak
 ak
 ak
 ZO
-dj
+ZU
 iS
 Ob
 Kt
@@ -1829,7 +1873,7 @@ ak
 ak
 ak
 bI
-lU
+LW
 dj
 nk
 dj

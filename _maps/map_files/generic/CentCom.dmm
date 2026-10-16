@@ -1229,6 +1229,10 @@
 /obj/structure/closet/crate/secure/weapon,
 /obj/item/gun/ballistic/rocketlauncher/unrestricted/nanotrasen,
 /obj/item/gun/ballistic/rocketlauncher/unrestricted/nanotrasen,
+/obj/item/ammo_box/rocket,
+/obj/item/ammo_box/rocket,
+/obj/item/ammo_box/rocket,
+/obj/item/ammo_box/rocket,
 /turf/open/floor/iron/dark/smooth_large,
 /area/centcom/central_command_areas/supply)
 "afv" = (
@@ -2770,8 +2774,11 @@
 /turf/open/floor/iron/dark,
 /area/centcom/central_command_areas/engine)
 "ans" = (
-/obj/effect/turf_decal/bot_white,
-/turf/open/floor/iron/dark/smooth_large,
+/obj/effect/turf_decal/tile/dark/half/contrasted,
+/obj/effect/turf_decal/tile/brown/half/contrasted{
+	dir = 1
+	},
+/turf/open/floor/iron,
 /area/centcom/central_command_areas/supply)
 "ant" = (
 /obj/effect/turf_decal/stripes/red/end,
@@ -5193,6 +5200,39 @@
 /area/centcom/central_command_areas/ferry)
 "azL" = (
 /obj/effect/turf_decal/delivery/white,
+/obj/structure/closet/crate/secure/weapon,
+/obj/item/ammo_box/magazine/cm5,
+/obj/item/ammo_box/magazine/cm5,
+/obj/item/ammo_box/magazine/cm5,
+/obj/item/ammo_box/magazine/cm5,
+/obj/item/ammo_box/magazine/cm5,
+/obj/item/ammo_box/magazine/cm5,
+/obj/item/ammo_box/magazine/cm5,
+/obj/item/ammo_box/magazine/cm5,
+/obj/item/ammo_box/magazine/cm5,
+/obj/item/ammo_box/magazine/cm5,
+/obj/item/ammo_box/magazine/cm5,
+/obj/item/ammo_box/magazine/cm5,
+/obj/item/ammo_box/magazine/cm5,
+/obj/item/ammo_box/magazine/cm5,
+/obj/item/ammo_box/magazine/cm5,
+/obj/item/ammo_box/magazine/cm5,
+/obj/item/ammo_box/magazine/cm5,
+/obj/item/storage/box/lethalshot,
+/obj/item/storage/box/lethalshot,
+/obj/item/storage/box/lethalshot,
+/obj/item/storage/box/lethalshot,
+/obj/item/storage/box/lethalshot,
+/obj/item/storage/box/lethalshot,
+/obj/item/storage/box/lethalshot,
+/obj/item/storage/box/lethalshot,
+/obj/item/storage/box/lethalshot,
+/obj/item/storage/box/lethalshot,
+/obj/item/storage/box/lethalshot,
+/obj/item/storage/box/lethalshot,
+/obj/item/storage/box/lethalshot,
+/obj/item/storage/box/lethalshot,
+/obj/item/storage/box/lethalshot,
 /turf/open/floor/iron/dark/smooth_large,
 /area/centcom/central_command_areas/supply)
 "azN" = (
@@ -5364,14 +5404,93 @@
 /turf/open/floor/iron/white,
 /area/centcom/central_command_areas/evacuation/ship)
 "aAB" = (
-/obj/effect/turf_decal/delivery/white,
+/obj/effect/turf_decal/delivery,
 /obj/structure/closet/crate/secure/weapon,
-/obj/item/gun/energy/pulse,
-/obj/item/gun/energy/pulse,
-/obj/item/gun/energy/pulse,
-/obj/item/gun/energy/pulse,
-/obj/item/gun/energy/pulse,
-/obj/item/gun/energy/pulse,
+/obj/item/clothing/suit/armor/riot,
+/obj/item/clothing/suit/armor/riot,
+/obj/item/clothing/suit/armor/riot,
+/obj/item/clothing/suit/armor/riot,
+/obj/item/clothing/suit/armor/riot,
+/obj/item/clothing/suit/armor/riot,
+/obj/item/clothing/suit/armor/riot,
+/obj/item/clothing/suit/armor/riot,
+/obj/item/clothing/suit/armor/riot,
+/obj/item/clothing/suit/armor/riot,
+/obj/item/clothing/suit/armor/riot,
+/obj/item/shield/riot/tele,
+/obj/item/shield/riot/tele,
+/obj/item/shield/riot/tele,
+/obj/item/shield/riot/tele,
+/obj/item/shield/riot/tele,
+/obj/item/shield/riot/tele,
+/obj/item/shield/riot/tele,
+/obj/item/shield/riot/tele,
+/obj/item/clothing/head/helmet/toggleable/riot,
+/obj/item/clothing/head/helmet/toggleable/riot,
+/obj/item/clothing/head/helmet/toggleable/riot,
+/obj/item/clothing/head/helmet/toggleable/riot,
+/obj/item/clothing/head/helmet/toggleable/riot,
+/obj/item/clothing/head/helmet/toggleable/riot,
+/obj/item/clothing/head/helmet/toggleable/riot,
+/obj/item/clothing/head/helmet/toggleable/riot,
+/obj/item/clothing/head/helmet/toggleable/riot,
+/obj/item/clothing/head/helmet/toggleable/riot,
+/obj/item/clothing/head/helmet/toggleable/riot,
+/obj/item/clothing/head/helmet/toggleable/riot,
+/obj/item/clothing/head/helmet/toggleable/riot,
+/obj/item/clothing/head/helmet/toggleable/riot,
+/obj/item/clothing/gloves/combat,
+/obj/item/clothing/gloves/combat,
+/obj/item/clothing/gloves/combat,
+/obj/item/clothing/gloves/combat,
+/obj/item/clothing/gloves/combat,
+/obj/item/clothing/gloves/combat,
+/obj/item/clothing/gloves/combat,
+/obj/item/clothing/gloves/combat,
+/obj/item/clothing/gloves/combat,
+/obj/item/clothing/gloves/combat,
+/obj/item/clothing/gloves/combat,
+/obj/item/clothing/gloves/combat,
+/obj/item/clothing/suit/armor/riot,
+/obj/item/clothing/suit/armor/riot,
+/obj/item/clothing/suit/armor/riot,
+/obj/item/clothing/gloves/combat,
+/obj/item/tank/internals/emergency_oxygen/double{
+	pixel_x = -1;
+	pixel_y = 0
+	},
+/obj/item/tank/internals/emergency_oxygen/double{
+	pixel_x = -1;
+	pixel_y = 0
+	},
+/obj/item/tank/internals/emergency_oxygen/double{
+	pixel_x = -1;
+	pixel_y = 0
+	},
+/obj/item/tank/internals/emergency_oxygen/double{
+	pixel_x = -1;
+	pixel_y = 0
+	},
+/obj/item/tank/internals/emergency_oxygen/double{
+	pixel_x = -1;
+	pixel_y = 0
+	},
+/obj/item/tank/internals/emergency_oxygen/double{
+	pixel_x = -1;
+	pixel_y = 0
+	},
+/obj/item/tank/internals/emergency_oxygen/double{
+	pixel_x = -1;
+	pixel_y = 0
+	},
+/obj/item/tank/internals/emergency_oxygen/double{
+	pixel_x = -1;
+	pixel_y = 0
+	},
+/obj/item/tank/internals/emergency_oxygen/double{
+	pixel_x = -1;
+	pixel_y = 0
+	},
 /turf/open/floor/iron/dark/smooth_large,
 /area/centcom/central_command_areas/supply)
 "aAD" = (
@@ -9174,14 +9293,109 @@
 /turf/open/floor/iron/white,
 /area/centcom/central_command_areas/hospital)
 "aNL" = (
-/obj/effect/turf_decal/bot_white,
+/obj/effect/turf_decal/bot,
 /obj/structure/closet/crate/secure/weapon,
-/obj/item/gun/energy/e_gun/lethal,
-/obj/item/gun/energy/e_gun/lethal,
-/obj/item/gun/energy/e_gun/lethal,
-/obj/item/gun/energy/e_gun/lethal,
-/obj/item/gun/energy/e_gun/lethal,
-/obj/item/gun/energy/e_gun/lethal,
+/obj/item/clothing/mask/gas/explorer,
+/obj/item/clothing/mask/gas/explorer,
+/obj/item/clothing/mask/gas/explorer,
+/obj/item/clothing/mask/gas/explorer,
+/obj/item/clothing/mask/gas/explorer,
+/obj/item/clothing/mask/gas/explorer,
+/obj/item/clothing/mask/gas/explorer,
+/obj/item/clothing/mask/gas/explorer,
+/obj/item/clothing/mask/gas/explorer,
+/obj/item/clothing/mask/gas/explorer,
+/obj/item/clothing/mask/gas/explorer,
+/obj/item/clothing/mask/gas/explorer,
+/obj/item/clothing/mask/gas/explorer,
+/obj/item/clothing/suit/hooded/explorer,
+/obj/item/clothing/suit/hooded/explorer,
+/obj/item/clothing/suit/hooded/explorer,
+/obj/item/clothing/suit/hooded/explorer,
+/obj/item/clothing/suit/hooded/explorer,
+/obj/item/clothing/suit/hooded/explorer,
+/obj/item/clothing/suit/hooded/explorer,
+/obj/item/clothing/suit/hooded/explorer,
+/obj/item/clothing/suit/hooded/explorer,
+/obj/item/clothing/suit/hooded/explorer,
+/obj/item/clothing/suit/hooded/explorer,
+/obj/item/clothing/suit/hooded/explorer,
+/obj/item/clothing/suit/hooded/explorer,
+/obj/item/clothing/suit/hooded/explorer,
+/obj/item/clothing/suit/hooded/explorer,
+/obj/item/clothing/suit/hooded/explorer,
+/obj/item/clothing/suit/hooded/explorer,
+/obj/item/clothing/suit/hooded/explorer,
+/obj/item/clothing/suit/hooded/explorer,
+/obj/item/clothing/suit/hooded/explorer,
+/obj/item/tank/internals/emergency_oxygen/double{
+	pixel_x = -1;
+	pixel_y = 0
+	},
+/obj/item/tank/internals/emergency_oxygen/double{
+	pixel_x = -1;
+	pixel_y = 0
+	},
+/obj/item/tank/internals/emergency_oxygen/double{
+	pixel_x = -1;
+	pixel_y = 0
+	},
+/obj/item/tank/internals/emergency_oxygen/double{
+	pixel_x = -1;
+	pixel_y = 0
+	},
+/obj/item/tank/internals/emergency_oxygen/double{
+	pixel_x = -1;
+	pixel_y = 0
+	},
+/obj/item/tank/internals/emergency_oxygen/double{
+	pixel_x = -1;
+	pixel_y = 0
+	},
+/obj/item/tank/internals/emergency_oxygen/double{
+	pixel_x = -1;
+	pixel_y = 0
+	},
+/obj/item/tank/internals/emergency_oxygen/double{
+	pixel_x = -1;
+	pixel_y = 0
+	},
+/obj/item/tank/internals/emergency_oxygen/double{
+	pixel_x = -1;
+	pixel_y = 0
+	},
+/obj/item/tank/internals/emergency_oxygen/double{
+	pixel_x = -1;
+	pixel_y = 0
+	},
+/obj/item/tank/internals/emergency_oxygen/double{
+	pixel_x = -1;
+	pixel_y = 0
+	},
+/obj/item/tank/internals/emergency_oxygen/double{
+	pixel_x = -1;
+	pixel_y = 0
+	},
+/obj/item/tank/internals/emergency_oxygen/double{
+	pixel_x = -1;
+	pixel_y = 0
+	},
+/obj/item/tank/internals/emergency_oxygen/double{
+	pixel_x = -1;
+	pixel_y = 0
+	},
+/obj/item/tank/internals/emergency_oxygen/double{
+	pixel_x = -1;
+	pixel_y = 0
+	},
+/obj/item/tank/internals/emergency_oxygen/double{
+	pixel_x = -1;
+	pixel_y = 0
+	},
+/obj/item/tank/internals/emergency_oxygen/double{
+	pixel_x = -1;
+	pixel_y = 0
+	},
 /turf/open/floor/iron/dark/smooth_large,
 /area/centcom/central_command_areas/supply)
 "aNQ" = (
@@ -9475,12 +9689,12 @@
 "aPh" = (
 /obj/effect/turf_decal/bot_white,
 /obj/structure/closet/crate/secure/weapon,
-/obj/item/gun/ballistic/automatic/ar,
-/obj/item/gun/ballistic/automatic/ar,
-/obj/item/gun/ballistic/automatic/ar,
-/obj/item/gun/ballistic/automatic/ar,
-/obj/item/gun/ballistic/automatic/ar,
-/obj/item/gun/ballistic/automatic/ar,
+/obj/item/clothing/accessory/holster/energy/thermal,
+/obj/item/clothing/accessory/holster/energy/thermal,
+/obj/item/clothing/accessory/holster/energy/thermal,
+/obj/item/clothing/accessory/holster/energy/thermal,
+/obj/item/clothing/accessory/holster/energy/thermal,
+/obj/item/clothing/accessory/holster/energy/thermal,
 /turf/open/floor/iron/dark/smooth_large,
 /area/centcom/central_command_areas/supply)
 "aPi" = (
@@ -11276,14 +11490,12 @@
 /turf/open/floor/iron/dark,
 /area/centcom/central_command_areas/evacuation/ship)
 "aXm" = (
-/obj/effect/turf_decal/bot_white,
-/obj/structure/closet/crate/secure/weapon,
-/obj/item/gun/energy/e_gun/stun,
-/obj/item/gun/energy/e_gun/stun,
-/obj/item/gun/energy/e_gun/stun,
-/obj/item/gun/energy/e_gun/stun,
-/obj/item/gun/energy/e_gun/stun,
-/obj/item/gun/energy/e_gun/stun,
+/obj/effect/turf_decal/bot,
+/obj/structure/closet/crate/secure/cargo,
+/obj/item/stack/sheet/mineral/gold/fifty,
+/obj/item/stack/sheet/mineral/uranium/fifty,
+/obj/item/stack/sheet/plasteel/fifty,
+/obj/item/stack/sheet/mineral/silver/fifty,
 /turf/open/floor/iron/dark/smooth_large,
 /area/centcom/central_command_areas/supply)
 "aXp" = (
@@ -15691,11 +15903,140 @@
 /area/centcom/central_command_areas/planetary_port)
 "ihf" = (
 /obj/effect/turf_decal/bot,
-/obj/structure/closet/crate/centcom,
-/obj/item/target/clown,
-/obj/item/target/clown,
-/obj/item/target/syndicate,
-/obj/item/target/syndicate,
+/obj/structure/closet/crate/secure/weapon,
+/obj/item/clothing/mask/gas/explorer,
+/obj/item/clothing/mask/gas/explorer,
+/obj/item/clothing/mask/gas/explorer,
+/obj/item/clothing/mask/gas/explorer,
+/obj/item/clothing/mask/gas/explorer,
+/obj/item/clothing/mask/gas/explorer,
+/obj/item/clothing/mask/gas/explorer,
+/obj/item/clothing/mask/gas/explorer,
+/obj/item/clothing/mask/gas/explorer,
+/obj/item/clothing/mask/gas/explorer,
+/obj/item/clothing/mask/gas/explorer,
+/obj/item/clothing/mask/gas/explorer,
+/obj/item/clothing/mask/gas/explorer,
+/obj/item/clothing/suit/hooded/explorer,
+/obj/item/clothing/suit/hooded/explorer,
+/obj/item/clothing/suit/hooded/explorer,
+/obj/item/clothing/suit/hooded/explorer,
+/obj/item/clothing/suit/hooded/explorer,
+/obj/item/clothing/suit/hooded/explorer,
+/obj/item/clothing/suit/hooded/explorer,
+/obj/item/clothing/suit/hooded/explorer,
+/obj/item/clothing/suit/hooded/explorer,
+/obj/item/clothing/suit/hooded/explorer,
+/obj/item/clothing/suit/hooded/explorer,
+/obj/item/clothing/suit/hooded/explorer,
+/obj/item/clothing/suit/hooded/explorer,
+/obj/item/clothing/suit/hooded/explorer,
+/obj/item/clothing/suit/hooded/explorer,
+/obj/item/clothing/suit/hooded/explorer,
+/obj/item/clothing/suit/hooded/explorer,
+/obj/item/clothing/suit/hooded/explorer,
+/obj/item/clothing/suit/hooded/explorer,
+/obj/item/clothing/suit/hooded/explorer,
+/obj/item/tank/internals/emergency_oxygen/double{
+	pixel_x = -1;
+	pixel_y = 0
+	},
+/obj/item/tank/internals/emergency_oxygen/double{
+	pixel_x = -1;
+	pixel_y = 0
+	},
+/obj/item/tank/internals/emergency_oxygen/double{
+	pixel_x = -1;
+	pixel_y = 0
+	},
+/obj/item/tank/internals/emergency_oxygen/double{
+	pixel_x = -1;
+	pixel_y = 0
+	},
+/obj/item/tank/internals/emergency_oxygen/double{
+	pixel_x = -1;
+	pixel_y = 0
+	},
+/obj/item/tank/internals/emergency_oxygen/double{
+	pixel_x = -1;
+	pixel_y = 0
+	},
+/obj/item/tank/internals/emergency_oxygen/double{
+	pixel_x = -1;
+	pixel_y = 0
+	},
+/obj/item/tank/internals/emergency_oxygen/double{
+	pixel_x = -1;
+	pixel_y = 0
+	},
+/obj/item/tank/internals/emergency_oxygen/double{
+	pixel_x = -1;
+	pixel_y = 0
+	},
+/obj/item/tank/internals/emergency_oxygen/double{
+	pixel_x = -1;
+	pixel_y = 0
+	},
+/obj/item/tank/internals/emergency_oxygen/double{
+	pixel_x = -1;
+	pixel_y = 0
+	},
+/obj/item/tank/internals/emergency_oxygen/double{
+	pixel_x = -1;
+	pixel_y = 0
+	},
+/obj/item/tank/internals/emergency_oxygen/double{
+	pixel_x = -1;
+	pixel_y = 0
+	},
+/obj/item/tank/internals/emergency_oxygen/double{
+	pixel_x = -1;
+	pixel_y = 0
+	},
+/obj/item/tank/internals/emergency_oxygen/double{
+	pixel_x = -1;
+	pixel_y = 0
+	},
+/obj/item/tank/internals/emergency_oxygen/double{
+	pixel_x = -1;
+	pixel_y = 0
+	},
+/obj/item/tank/internals/emergency_oxygen/double{
+	pixel_x = -1;
+	pixel_y = 0
+	},
+/obj/item/tank/internals/emergency_oxygen/double{
+	pixel_x = -1;
+	pixel_y = 0
+	},
+/obj/item/tank/internals/emergency_oxygen/double{
+	pixel_x = -1;
+	pixel_y = 0
+	},
+/obj/item/tank/internals/emergency_oxygen/double{
+	pixel_x = -1;
+	pixel_y = 0
+	},
+/obj/item/tank/internals/emergency_oxygen/double{
+	pixel_x = -1;
+	pixel_y = 0
+	},
+/obj/item/tank/internals/emergency_oxygen/double{
+	pixel_x = -1;
+	pixel_y = 0
+	},
+/obj/item/tank/internals/emergency_oxygen/double{
+	pixel_x = -1;
+	pixel_y = 0
+	},
+/obj/item/tank/internals/emergency_oxygen/double{
+	pixel_x = -1;
+	pixel_y = 0
+	},
+/obj/item/tank/internals/emergency_oxygen/double{
+	pixel_x = -1;
+	pixel_y = 0
+	},
 /turf/open/floor/iron/dark/smooth_large,
 /area/centcom/central_command_areas/supply)
 "iho" = (
@@ -19200,6 +19541,13 @@
 	dir = 8
 	},
 /area/centcom/central_command_areas/hallway)
+"pLU" = (
+/obj/effect/turf_decal/bot,
+/obj/structure/closet/crate/secure/cargo,
+/obj/item/stack/sheet/mineral/diamond/fifty,
+/obj/item/stack/sheet/bluespace_crystal/fifty,
+/turf/open/floor/iron/dark/smooth_large,
+/area/centcom/central_command_areas/supply)
 "pMs" = (
 /obj/structure/table/wood/fancy/royalblack,
 /obj/item/flashlight/lamp/green{
@@ -19262,10 +19610,112 @@
 /turf/open/floor/carpet,
 /area/centcom/central_command_areas/planetary_port/club)
 "pSa" = (
-/obj/effect/turf_decal/bot,
-/obj/structure/closet/crate/engineering,
-/obj/effect/spawner/random/engineering/toolbox,
-/obj/effect/spawner/random/engineering/toolbox,
+/obj/effect/turf_decal/delivery,
+/obj/structure/closet/crate/secure/weapon,
+/obj/item/clothing/suit/armor/riot,
+/obj/item/clothing/suit/armor/riot,
+/obj/item/clothing/suit/armor/riot,
+/obj/item/clothing/suit/armor/riot,
+/obj/item/clothing/suit/armor/riot,
+/obj/item/clothing/suit/armor/riot,
+/obj/item/clothing/suit/armor/riot,
+/obj/item/clothing/suit/armor/riot,
+/obj/item/clothing/suit/armor/riot,
+/obj/item/clothing/suit/armor/riot,
+/obj/item/clothing/suit/armor/riot,
+/obj/item/shield/riot/tele,
+/obj/item/shield/riot/tele,
+/obj/item/shield/riot/tele,
+/obj/item/shield/riot/tele,
+/obj/item/shield/riot/tele,
+/obj/item/shield/riot/tele,
+/obj/item/shield/riot/tele,
+/obj/item/shield/riot/tele,
+/obj/item/clothing/head/helmet/toggleable/riot,
+/obj/item/clothing/head/helmet/toggleable/riot,
+/obj/item/clothing/head/helmet/toggleable/riot,
+/obj/item/clothing/head/helmet/toggleable/riot,
+/obj/item/clothing/head/helmet/toggleable/riot,
+/obj/item/clothing/head/helmet/toggleable/riot,
+/obj/item/clothing/head/helmet/toggleable/riot,
+/obj/item/clothing/head/helmet/toggleable/riot,
+/obj/item/clothing/head/helmet/toggleable/riot,
+/obj/item/clothing/head/helmet/toggleable/riot,
+/obj/item/clothing/head/helmet/toggleable/riot,
+/obj/item/clothing/head/helmet/toggleable/riot,
+/obj/item/clothing/head/helmet/toggleable/riot,
+/obj/item/clothing/head/helmet/toggleable/riot,
+/obj/item/clothing/gloves/combat,
+/obj/item/clothing/gloves/combat,
+/obj/item/clothing/gloves/combat,
+/obj/item/clothing/gloves/combat,
+/obj/item/clothing/gloves/combat,
+/obj/item/clothing/gloves/combat,
+/obj/item/clothing/gloves/combat,
+/obj/item/clothing/gloves/combat,
+/obj/item/clothing/gloves/combat,
+/obj/item/clothing/gloves/combat,
+/obj/item/clothing/gloves/combat,
+/obj/item/clothing/gloves/combat,
+/obj/item/clothing/suit/armor/riot,
+/obj/item/clothing/suit/armor/riot,
+/obj/item/clothing/gloves/combat,
+/obj/item/tank/internals/emergency_oxygen/double{
+	pixel_x = -1;
+	pixel_y = 0
+	},
+/obj/item/tank/internals/emergency_oxygen/double{
+	pixel_x = -1;
+	pixel_y = 0
+	},
+/obj/item/tank/internals/emergency_oxygen/double{
+	pixel_x = -1;
+	pixel_y = 0
+	},
+/obj/item/tank/internals/emergency_oxygen/double{
+	pixel_x = -1;
+	pixel_y = 0
+	},
+/obj/item/tank/internals/emergency_oxygen/double{
+	pixel_x = -1;
+	pixel_y = 0
+	},
+/obj/item/tank/internals/emergency_oxygen/double{
+	pixel_x = -1;
+	pixel_y = 0
+	},
+/obj/item/tank/internals/emergency_oxygen/double{
+	pixel_x = -1;
+	pixel_y = 0
+	},
+/obj/item/tank/internals/emergency_oxygen/double{
+	pixel_x = -1;
+	pixel_y = 0
+	},
+/obj/item/tank/internals/emergency_oxygen/double{
+	pixel_x = -1;
+	pixel_y = 0
+	},
+/obj/item/tank/internals/emergency_oxygen/double{
+	pixel_x = -1;
+	pixel_y = 0
+	},
+/obj/item/tank/internals/emergency_oxygen/double{
+	pixel_x = -1;
+	pixel_y = 0
+	},
+/obj/item/tank/internals/emergency_oxygen/double{
+	pixel_x = -1;
+	pixel_y = 0
+	},
+/obj/item/tank/internals/emergency_oxygen/double{
+	pixel_x = -1;
+	pixel_y = 0
+	},
+/obj/item/tank/internals/emergency_oxygen/double{
+	pixel_x = -1;
+	pixel_y = 0
+	},
 /turf/open/floor/iron/dark/smooth_large,
 /area/centcom/central_command_areas/supply)
 "pSB" = (
@@ -22506,6 +22956,14 @@
 	},
 /turf/open/floor/iron/dark/smooth_edge,
 /area/centcom/central_command_areas/control)
+"vVO" = (
+/obj/effect/turf_decal/bot,
+/obj/structure/closet/crate/secure/cargo,
+/obj/item/stack/sheet/iron/fifty,
+/obj/item/stack/sheet/glass/fifty,
+/obj/item/stack/sheet/plastic/fifty,
+/turf/open/floor/iron/dark/smooth_large,
+/area/centcom/central_command_areas/supply)
 "vWG" = (
 /obj/structure/table,
 /obj/item/paper_bin{
@@ -73265,7 +73723,7 @@ aGp
 aLa
 aRE
 aYp
-arh
+aAB
 aDR
 wEW
 kUp
@@ -73520,12 +73978,12 @@ qJP
 aPQ
 aGp
 aKJ
-aRE
+ans
 aYp
 pSa
 aDR
-aKJ
-aKJ
+aXm
+pLU
 aMc
 aYn
 aEG
@@ -73781,7 +74239,7 @@ aRE
 aYp
 ihf
 aDR
-aKJ
+vVO
 kCj
 aMc
 aYn
@@ -74030,13 +74488,13 @@ alD
 aHU
 aiF
 aOG
-aKJ
+qJP
 aKJ
 aGp
 aPQ
 aRE
 aYp
-aPQ
+aNL
 aDR
 mkt
 qIJ
@@ -74552,7 +75010,7 @@ azv
 awd
 azL
 aDR
-aAB
+afz
 afz
 aMc
 ajg
@@ -74809,8 +75267,8 @@ aRE
 aYp
 asf
 aDR
-ans
-aXm
+aQK
+akk
 aMc
 aYn
 aiI
@@ -75067,7 +75525,7 @@ aYp
 aft
 aDR
 aQK
-aNL
+akk
 aMc
 aYn
 aiI
@@ -75323,7 +75781,7 @@ aRE
 aYp
 aPh
 aDR
-ans
+aQK
 akk
 aXi
 aYn
