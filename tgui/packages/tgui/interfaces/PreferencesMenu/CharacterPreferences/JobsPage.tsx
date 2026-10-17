@@ -206,6 +206,16 @@ function JobRow(props: JobRowProps) {
     );
   }
 
+  // SS220 ADDITION START - Show roster restrictions instead of job preference controls.
+  if (data.roundstart_roster_restrictions?.[name]) {
+    rightSide = (
+      <Stack.Item className="restricted">
+        {data.roundstart_roster_restrictions[name]}
+      </Stack.Item>
+    );
+  }
+  // SS220 ADDITION END
+
   return (
     <Stack.Item className={className}>
       <Stack fill align="center">
