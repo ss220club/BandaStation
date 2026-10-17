@@ -22,9 +22,9 @@
 /obj/item/choice_beacon/weapon/hos/generate_display_names()
 	selectable_gun_types = list(
 		"X-01 MultiPhase Energy Gun" = /obj/item/storage/toolbox/guncase/ntspecial/pistol/hos_laser,
-		"X-02 Laser Pistol" = /obj/item/storage/toolbox/guncase/ntspecial/pistol/hos_pdh,
-		"GP-45 .45 cal Pistol" = /obj/item/storage/toolbox/guncase/ntspecial/pistol/gp45,
-		"PDH-A2 'Osprey'" = /obj/item/storage/toolbox/guncase/ntspecial/pistol/pdh,
+		"X-02 Laser Pistol" = /obj/item/storage/toolbox/guncase/ntspecial/pistol/hos_laser2,
+		"GP-45 .45 cal Pistol" = /obj/item/storage/toolbox/guncase/ntspecial/pistol/hos_gp45,
+		"PDH-A2 'Osprey'" = /obj/item/storage/toolbox/guncase/ntspecial/pistol/hos_pdh,
 	)
 	return selectable_gun_types
 
