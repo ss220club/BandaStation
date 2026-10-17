@@ -16,7 +16,7 @@ export function InstalledDisplay(props) {
 
   const [currentSelection, setCurrentSelection] = useState('');
 
-  const title = !currentSelection ? 'Select a Program' : currentSelection;
+  const title = !currentSelection ? 'Выбрать программу' : currentSelection;
 
   return (
     <Stack fill vertical>
@@ -33,9 +33,9 @@ export function InstalledDisplay(props) {
         </Section>
       </Stack.Item>
       <Stack.Item grow={2}>
-        <Section fill scrollable title="Installed Software">
+        <Section fill scrollable title="Установленное ПО">
           {!installed.length ? (
-            <NoticeBox>Nothing installed!</NoticeBox>
+            <NoticeBox>Ничего не установлено!</NoticeBox>
           ) : (
             installed.map((software, index) => {
               return (
@@ -69,25 +69,25 @@ function SoftwareButtons(props: SoftwareButtonsProps) {
   const { door_jack, languages, master_name } = data;
 
   switch (currentSelection) {
-    case 'Door Jack':
+    case 'Дверной взломщик':
       return (
         <>
           <Button
             disabled={!!door_jack}
             icon="plug"
             onClick={() => act(currentSelection, { mode: DOOR_JACK.Cable })}
-            tooltip="Drops a cable. Insert into a compatible airlock."
+            tooltip="Отсоедините кабель. Вставьте в совместимый шлюз."
           >
-            Extend Cable
+            Вытянуть провод
           </Button>
           <Button
             color="bad"
             disabled={!door_jack}
             icon="door-open"
             onClick={() => act(currentSelection, { mode: DOOR_JACK.Hack })}
-            tooltip="Begins overriding the airlock security protocols."
+            tooltip="Начинает переопределять протоколы безопасности шлюза."
           >
-            Hack Door
+            Взлом двери
           </Button>
           <Button
             disabled={!door_jack}
@@ -98,60 +98,60 @@ function SoftwareButtons(props: SoftwareButtonsProps) {
           </Button>
         </>
       );
-    case 'Host Scan':
+    case 'Сканирование хоста':
       return (
         <>
           <Button
             icon="hand-holding-heart"
             onClick={() => act(currentSelection, { mode: HOST_SCAN.Target })}
-            tooltip="Must be held or scooped up to scan."
+            tooltip="Необходимо держать или взять для сканирования."
           >
-            Scan Holder
+            Сканирование
           </Button>
           <Button
             disabled={!master_name}
             icon="user-cog"
             onClick={() => act(currentSelection, { mode: HOST_SCAN.Master })}
-            tooltip="Scans any bound masters."
+            tooltip="Сканирует привязанного мастера."
           >
-            Scan Master
+            Сканирование мастера
           </Button>
         </>
       );
-    case 'Photography Module':
+    case 'Модуль фотографии':
       return (
         <>
           <Button
             icon="camera-retro"
             onClick={() => act(currentSelection, { mode: PHOTO_MODE.Camera })}
-            tooltip="Toggles the camera. Click an area to take a photo."
+            tooltip="Включает камеру. Кликните по области, чтобы сделать снимок."
           >
-            Camera
+            Камера
           </Button>
           <Button
             icon="print"
             onClick={() => act(currentSelection, { mode: PHOTO_MODE.Printer })}
-            tooltip="Gives a list of stored photos."
+            tooltip="Выводит список сохранённых фотографий."
           >
-            Printer
+            Принтер
           </Button>
           <Button
             icon="search-plus"
             onClick={() => act(currentSelection, { mode: PHOTO_MODE.Zoom })}
-            tooltip="Adjusts zoom level on future photographs."
+            tooltip="Настраивает уровень масштабирования будущих фотографий."
           >
-            Zoom
+            Масштабирование
           </Button>
         </>
       );
-    case 'Universal Translator':
+    case 'Универсальный переводчик':
       return (
         <Button
           icon="download"
           onClick={() => act(currentSelection)}
           disabled={!!languages}
         >
-          {!languages ? 'Install' : 'Installed'}
+          {!languages ? 'Установить' : 'Установлено'}
         </Button>
       );
     default:
@@ -159,9 +159,9 @@ function SoftwareButtons(props: SoftwareButtonsProps) {
         <Button
           icon="power-off"
           onClick={() => act(currentSelection)}
-          tooltip="Attempts to enable the module."
+          tooltip="Попытка включения модуля."
         >
-          Toggle
+          Переключить
         </Button>
       );
   }

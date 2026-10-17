@@ -12,14 +12,14 @@
 
 /datum/pai_candidate/proc/savefile_save(mob/user)
 	if(is_guest_key(user.key))
-		to_chat(usr, span_warning("You cannot save pAI information as a guest."))
+		to_chat(usr, span_warning("Вы не можете сохранять информацию о ПИИ в качестве гостя."))
 		return FALSE
 	var/savefile/F = new /savefile(src.savefile_path(user))
 	WRITE_FILE(F["name"], name)
 	WRITE_FILE(F["description"], description)
 	WRITE_FILE(F["comments"], comments)
 	WRITE_FILE(F["version"], 1)
-	to_chat(usr, span_boldnotice("You have saved pAI information locally."))
+	to_chat(usr, span_boldnotice("Вы сохранили информацию о ПИИ локально."))
 	return TRUE
 
 // loads the savefile corresponding to the mob's ckey
@@ -47,7 +47,7 @@
 	if (isnull(version) || version != 1)
 		fdel(path)
 		if (!silent)
-			tgui_alert(user, "Your savefile was incompatible with this version and was deleted.")
+			tgui_alert(user, "Ваш файл сохранения был несовместим с этой версией и был удалён.")
 		return FALSE
 
 	F["name"] >> src.name
