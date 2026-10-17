@@ -19,6 +19,7 @@ GLOBAL_LIST_INIT(tendrils, list())
 	maxHealth = 800
 	health = 800
 
+	faction = list(FACTION_MINING, FACTION_HELL)
 	friendly_verb_continuous = "flails at"
 	friendly_verb_simple = "flail at"
 	speak_emote = list("resonates")

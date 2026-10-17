@@ -17,6 +17,7 @@
 	melee_damage_upper = 15
 	attack_sound = 'sound/items/weapons/bladeslice.ogg'
 	attack_verb_continuous = "buffets"
+	faction = list(FACTION_MINING, FACTION_HELL)
 	attack_verb_simple = "buffet"
 	ai_controller = /datum/ai_controller/basic_controller/watcher
 	butcher_results = list(
