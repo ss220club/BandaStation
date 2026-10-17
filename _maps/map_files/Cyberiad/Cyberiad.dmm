@@ -37536,9 +37536,7 @@
 "jdL" = (
 /obj/structure/table/reinforced,
 /obj/machinery/door/firedoor,
-/obj/structure/displaycase/forsale/kitchen{
-	pixel_y = 8
-	},
+/obj/structure/tipjar/prefilled,
 /turf/open/floor/light{
 	currentcolor = "#9B51FF"
 	},
@@ -62224,7 +62222,7 @@
 /turf/open/floor/iron/freezer,
 /area/station/science/robotics/lab)
 "pdp" = (
-/obj/structure/displaycase/forsale,
+/obj/structure/tipjar,
 /obj/effect/turf_decal/tile/neutral/full,
 /turf/open/floor/iron/dark/small,
 /area/station/commons/vacant_room/commissary)
@@ -79745,7 +79743,7 @@
 	req_access = list("kitchen")
 	},
 /obj/machinery/door/firedoor,
-/obj/structure/displaycase/forsale/kitchen,
+/obj/structure/tipjar/prefilled,
 /turf/open/floor/iron/cafeteria,
 /area/station/service/kitchen)
 "tvi" = (
