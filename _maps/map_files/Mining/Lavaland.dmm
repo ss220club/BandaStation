@@ -469,6 +469,17 @@
 	dir = 1
 	},
 /area/mine/laborcamp/quarters)
+"cT" = (
+/obj/structure/stone_tile/cracked{
+	dir = 8
+	},
+/obj/structure/stone_tile,
+/obj/structure/stone_tile/block{
+	dir = 1
+	},
+/obj/item/stack/cannonball/shellball/seven,
+/turf/open/misc/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
 "cU" = (
 /obj/structure/lattice/catwalk/mining,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
@@ -1148,7 +1159,6 @@
 /turf/open/misc/asteroid/basalt/lava_land_surface,
 /area/lavaland/surface/outdoors)
 "gC" = (
-/obj/structure/stone_tile,
 /obj/structure/stone_tile{
 	dir = 4
 	},
@@ -1158,7 +1168,7 @@
 /obj/structure/stone_tile{
 	dir = 8
 	},
-/turf/open/indestructible/boss,
+/turf/open/floor/carpet/goliath,
 /area/lavaland/surface/outdoors)
 "gD" = (
 /obj/item/kirbyplants/random,
@@ -1272,8 +1282,11 @@
 "hg" = (
 /obj/structure/stone_tile/surrounding,
 /obj/structure/stone_tile/center/cracked,
-/mob/living/simple_animal/hostile/megafauna/legion,
-/turf/open/indestructible/boss,
+/obj/structure/ethereal_crystal{
+	color = #8B0000;
+	greyscale_colors = #8B0000
+	},
+/turf/open/floor/carpet/goliath,
 /area/lavaland/surface/outdoors)
 "hi" = (
 /obj/machinery/atmospherics/components/unary/vent_pump/on/layer4{
@@ -2406,7 +2419,7 @@
 	dir = 1
 	},
 /obj/structure/stone_tile,
-/turf/open/indestructible/boss,
+/turf/open/floor/carpet/goliath,
 /area/lavaland/surface/outdoors)
 "ms" = (
 /obj/structure/stone_tile/block{
@@ -2608,20 +2621,13 @@
 /obj/structure/stone_tile/block{
 	dir = 8
 	},
-/turf/open/indestructible/boss,
+/turf/open/floor/carpet/goliath,
 /area/lavaland/surface/outdoors)
 "mX" = (
-/obj/structure/stone_tile/cracked,
 /obj/structure/stone_tile{
 	dir = 1
 	},
-/obj/structure/stone_tile{
-	dir = 8
-	},
-/obj/structure/stone_tile/cracked{
-	dir = 4
-	},
-/turf/open/indestructible/boss,
+/turf/open/floor/carpet/goliath,
 /area/lavaland/surface/outdoors)
 "mY" = (
 /obj/structure/stone_tile/block/cracked{
@@ -2644,20 +2650,17 @@
 /obj/structure/stone_tile{
 	dir = 8
 	},
-/turf/open/indestructible/boss,
+/turf/open/floor/carpet/goliath,
 /area/lavaland/surface/outdoors)
 "nb" = (
 /obj/structure/stone_tile/cracked{
 	dir = 8
 	},
 /obj/structure/stone_tile{
-	dir = 1
-	},
-/obj/structure/stone_tile{
 	dir = 4
 	},
 /obj/structure/stone_tile,
-/turf/open/indestructible/boss,
+/turf/open/floor/carpet/goliath,
 /area/lavaland/surface/outdoors)
 "nc" = (
 /obj/structure/stone_tile/cracked{
@@ -4460,6 +4463,11 @@
 	},
 /turf/open/floor/plating,
 /area/mine/laborcamp)
+"xR" = (
+/obj/structure/stone_tile/slab,
+/obj/item/stack/cannonball/shellball/seven,
+/turf/open/misc/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
 "xU" = (
 /obj/effect/turf_decal/trimline/brown/filled/line,
 /obj/structure/table,
@@ -4636,6 +4644,12 @@
 /obj/effect/spawner/structure/window,
 /turf/open/floor/plating,
 /area/mine/hydroponics)
+"yZ" = (
+/obj/structure/stone_tile{
+	dir = 8
+	},
+/turf/open/floor/carpet/goliath,
+/area/lavaland/surface/outdoors)
 "zc" = (
 /obj/machinery/door/airlock/maintenance{
 	name = "Mining Station Maintenance"
@@ -5909,6 +5923,11 @@
 /obj/machinery/power/apc/auto_name/directional/south,
 /turf/open/floor/iron/dark,
 /area/mine/maintenance/service/comms)
+"HM" = (
+/obj/structure/stone_tile/slab,
+/obj/structure/barricade/wooden,
+/turf/open/misc/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
 "HN" = (
 /obj/structure/stone_tile/cracked{
 	dir = 8
@@ -6087,6 +6106,11 @@
 /obj/structure/stone_tile/cracked{
 	dir = 4
 	},
+/turf/open/misc/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
+"IR" = (
+/obj/structure/cannon,
+/obj/structure/stone_tile/slab,
 /turf/open/misc/asteroid/basalt/lava_land_surface,
 /area/lavaland/surface/outdoors)
 "IS" = (
@@ -6875,6 +6899,11 @@
 /obj/effect/turf_decal/sand/plating/volcanic,
 /turf/open/floor/plating/lavaland_atmos,
 /area/mine/maintenance/service/disposals)
+"MJ" = (
+/obj/structure/stone_tile,
+/obj/structure/barricade/wooden,
+/turf/open/misc/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
 "ML" = (
 /obj/machinery/disposal/bin,
 /obj/structure/disposalpipe/trunk{
@@ -7475,6 +7504,13 @@
 	},
 /turf/open/floor/iron/dark,
 /area/mine/mechbay)
+"Qs" = (
+/obj/structure/stone_tile/slab,
+/obj/item/flashlight/flare/torch,
+/obj/item/flashlight/flare/torch,
+/obj/item/flashlight/flare/torch,
+/turf/open/misc/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
 "Qw" = (
 /obj/structure/stone_tile/cracked,
 /obj/structure/stone_tile{
@@ -7824,6 +7860,19 @@
 	dir = 1
 	},
 /area/mine/laborcamp/security)
+"Su" = (
+/obj/structure/stone_tile/cracked{
+	dir = 4
+	},
+/obj/structure/stone_tile{
+	dir = 1
+	},
+/obj/structure/stone_tile,
+/obj/structure/stone_tile{
+	dir = 8
+	},
+/turf/open/floor/carpet/goliath,
+/area/lavaland/surface/outdoors)
 "Sw" = (
 /obj/structure/flora/rock/pile/style_random,
 /turf/open/water/lavaland_atmos/basalt,
@@ -8651,6 +8700,10 @@
 	dir = 4
 	},
 /area/mine/production)
+"Xm" = (
+/obj/item/stack/cannonball/shellball/seven,
+/turf/open/misc/asteroid/basalt/lava_land_surface,
+/area/lavaland/surface/outdoors)
 "Xp" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
@@ -39477,7 +39530,7 @@ pU
 ad
 ai
 ai
-yy
+MJ
 aj
 aj
 aj
@@ -39734,7 +39787,7 @@ pU
 pU
 pU
 pU
-pU
+YM
 aj
 aj
 aj
@@ -39990,8 +40043,8 @@ pZ
 QJ
 pU
 pU
-pU
-pU
+xR
+HM
 aj
 aj
 BC
@@ -40246,9 +40299,9 @@ HN
 pa
 pa
 Kj
-pU
-pU
-pU
+Xm
+IR
+Op
 pU
 aj
 aj
@@ -40503,9 +40556,9 @@ jF
 gM
 kB
 Qw
-hu
-pU
-wv
+Ma
+Qs
+HM
 aj
 aj
 aj
@@ -40762,7 +40815,7 @@ hs
 pa
 rO
 pU
-pU
+YM
 aj
 ly
 aj
@@ -41520,7 +41573,7 @@ fW
 mQ
 mW
 hg
-ac
+yZ
 nf
 ac
 ac
@@ -41777,7 +41830,7 @@ fV
 gk
 mX
 mZ
-nc
+Su
 ng
 aa
 aa
@@ -42304,7 +42357,7 @@ hs
 HF
 Ui
 pU
-pU
+YM
 aj
 aj
 mv
@@ -42559,9 +42612,9 @@ jN
 gO
 kJ
 pa
-ok
-pU
-pU
+tj
+Qs
+HM
 aj
 aj
 aj
@@ -42816,9 +42869,9 @@ pa
 pa
 Qw
 Op
-pU
-pU
-pU
+cT
+IR
+Op
 aj
 aj
 aj
@@ -43074,8 +43127,8 @@ Uc
 Dy
 pU
 pU
-pU
-pU
+xR
+HM
 aj
 aj
 aj
@@ -43332,7 +43385,7 @@ pU
 pU
 pU
 pU
-pU
+YM
 Si
 aj
 aj
@@ -43589,7 +43642,7 @@ pU
 pU
 zg
 FW
-pU
+YM
 aj
 aj
 aj

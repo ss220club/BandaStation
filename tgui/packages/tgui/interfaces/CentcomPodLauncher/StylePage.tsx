@@ -60,6 +60,16 @@ export function StylePage(props) {
           />
         </Button>
       ))}
+      <Button
+        height="45px"
+        width="45px"
+        color="transparent"
+        icon="plane"
+        tooltip="Пролёт самолёта"
+        tooltipPosition="bottom-start"
+        selected={data.aircraftMode}
+        onClick={() => act('toggleAircraftMode')}
+      />
     </Section>
   );
 }

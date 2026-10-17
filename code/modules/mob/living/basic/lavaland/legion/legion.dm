@@ -24,6 +24,7 @@
 	attack_sound = 'sound/items/weapons/pierce.ogg'
 	throw_blocked_message = "bounces harmlessly off of"
 	death_message = "wails in chorus and dissolves into quivering flesh."
+	faction = list(FACTION_MINING, FACTION_HELL)
 	ai_controller = /datum/ai_controller/basic_controller/legion
 	/// What kind of mob do we spawn?
 	var/brood_type = /mob/living/basic/mining/legion_brood

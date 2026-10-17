@@ -317,51 +317,51 @@
 	owner.face_atom(target_atom)
 	new /obj/effect/temp_visual/dir_setting/firing_effect(owner.loc, owner.dir)
 
-/datum/action/cooldown/mob_cooldown/projectile_attack/colossus_final
-	name = "Titan's Finale"
-	desc = "A single-use ability that shoots a large amount of projectiles around you."
-	cooldown_time = 2.5 SECONDS
-	projectile_type = /obj/projectile/colossus
+// /datum/action/cooldown/mob_cooldown/projectile_attack/colossus_final
+// 	name = "Titan's Finale"
+// 	desc = "A single-use ability that shoots a large amount of projectiles around you."
+// 	cooldown_time = 2.5 SECONDS
+// 	projectile_type = /obj/projectile/colossus
 
-/datum/action/cooldown/mob_cooldown/projectile_attack/colossus_final/Activate(atom/target_atom)
-	. = ..()
-	Remove(owner)
+// /datum/action/cooldown/mob_cooldown/projectile_attack/colossus_final/Activate(atom/target_atom)
+// 	. = ..()
+// 	Remove(owner)
 
-/datum/action/cooldown/mob_cooldown/projectile_attack/colossus_final/attack_sequence(mob/living/firer, atom/target)
-	var/mob/living/simple_animal/hostile/megafauna/colossus/colossus
-	if(istype(firer, /mob/living/simple_animal/hostile/megafauna/colossus))
-		colossus = firer
-		colossus.say("Perish.", spans = list(SPAN_COLOSSUS, SPAN_YELL))
+// /datum/action/cooldown/mob_cooldown/projectile_attack/colossus_final/attack_sequence(mob/living/firer, atom/target)
+// 	var/mob/living/simple_animal/hostile/megafauna/colossus/colossus
+// 	if(istype(firer, /mob/living/simple_animal/hostile/megafauna/colossus))
+// 		colossus = firer
+// 		colossus.say("Perish.", spans = list(SPAN_COLOSSUS, SPAN_YELL))
 
-	SLEEP_CHECK_DEATH(1.5 SECONDS, firer) //gives dumbasses in melee range a slim chance to retreat
-	var/finale_counter = 10
-	for(var/i in 1 to 20)
-		if(finale_counter > 4 && colossus)
-			colossus.telegraph()
-			colossus.shotgun_blast.attack_sequence(firer, target)
+// 	SLEEP_CHECK_DEATH(1.5 SECONDS, firer) //gives dumbasses in melee range a slim chance to retreat
+// 	var/finale_counter = 10
+// 	for(var/i in 1 to 20)
+// 		if(finale_counter > 4 && colossus)
+// 			colossus.telegraph()
+// 			colossus.shotgun_blast.attack_sequence(firer, target)
 
-		if(finale_counter > 1)
-			finale_counter -= 1
+// 		if(finale_counter > 1)
+// 			finale_counter -= 1
 
-		var/turf/start_turf = get_turf(firer)
-		for(var/turf/target_turf in RANGE_TURFS(12, start_turf))
-			if(prob(min(finale_counter, 2)) && target_turf != get_turf(firer))
-				shoot_projectile(firer, target_turf, null, firer, null, null)
+// 		var/turf/start_turf = get_turf(firer)
+// 		for(var/turf/target_turf in RANGE_TURFS(12, start_turf))
+// 			if(prob(min(finale_counter, 2)) && target_turf != get_turf(firer))
+// 				shoot_projectile(firer, target_turf, null, firer, null, null)
 
-		SLEEP_CHECK_DEATH(finale_counter + 1, firer)
+// 		SLEEP_CHECK_DEATH(finale_counter + 1, firer)
 
-	for(var/i in 1 to 3)
-		if(colossus)
-			colossus.telegraph()
-			colossus.random_shots.attack_sequence(firer, target)
-		finale_counter += 6
-		SLEEP_CHECK_DEATH(finale_counter, firer)
+// 	for(var/i in 1 to 3)
+// 		if(colossus)
+// 			colossus.telegraph()
+// 			colossus.random_shots.attack_sequence(firer, target)
+// 		finale_counter += 6
+// 		SLEEP_CHECK_DEATH(finale_counter, firer)
 
-	for(var/i in 1 to 3)
-		if(colossus)
-			colossus.telegraph()
-			colossus.dir_shots.attack_sequence(firer, target)
-		SLEEP_CHECK_DEATH(1 SECONDS, firer)
+// 	for(var/i in 1 to 3)
+// 		if(colossus)
+// 			colossus.telegraph()
+// 			colossus.dir_shots.attack_sequence(firer, target)
+// 		SLEEP_CHECK_DEATH(1 SECONDS, firer)
 
 /datum/action/cooldown/mob_cooldown/projectile_attack/alternating_circle
 	name = "Alternating Shots"

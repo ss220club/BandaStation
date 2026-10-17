@@ -9,6 +9,7 @@
 	speed = 3
 	maxHealth = 250
 	health = 250
+	faction = list(FACTION_MINING, FACTION_HELL)
 	friendly_verb_continuous = "scratches at"
 	friendly_verb_simple = "scratch at"
 	speak_emote = list("cackles")

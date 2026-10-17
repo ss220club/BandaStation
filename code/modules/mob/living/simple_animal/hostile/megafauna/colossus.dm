@@ -23,8 +23,8 @@
 /mob/living/simple_animal/hostile/megafauna/colossus
 	name = "colossus"
 	desc = "A monstrous creature protected by heavy shielding."
-	health = 2500
-	maxHealth = 2500
+	health = 3000
+	maxHealth = 3000
 	attack_verb_continuous = "judges"
 	attack_verb_simple = "judge"
 	attack_sound = 'sound/effects/magic/clockwork/ratvar_attack.ogg'
@@ -39,7 +39,7 @@
 	armour_penetration = 40
 	melee_damage_lower = 40
 	melee_damage_upper = 40
-	speed = 10
+	speed = 5
 	move_to_delay = 10
 	ranged = TRUE
 	pixel_x = -32
@@ -57,6 +57,7 @@
 	death_message = "disintegrates, leaving a glowing core in its wake."
 	death_sound = 'sound/effects/magic/demon_dies.ogg'
 	summon_line = "Your trial begins now."
+	faction = list(FACTION_MINING, FACTION_BOSS, FACTION_HELL, FACTION_CULT)
 	/// Spiral shots ability
 	var/datum/action/cooldown/mob_cooldown/projectile_attack/spiral_shots/colossus/spiral_shots
 	/// Random shots ablity
@@ -66,7 +67,7 @@
 	/// Directional shots ability
 	var/datum/action/cooldown/mob_cooldown/projectile_attack/dir_shots/alternating/colossus/dir_shots
 	/// Final attack ability
-	var/datum/action/cooldown/mob_cooldown/projectile_attack/colossus_final/colossus_final
+	// var/datum/action/cooldown/mob_cooldown/projectile_attack/colossus_final/colossus_final
 	/// Have we used DIE yet?
 	var/final_available = TRUE
 
@@ -77,15 +78,16 @@
 	random_shots = new(src)
 	shotgun_blast = new(src)
 	dir_shots = new(src)
-	colossus_final = new(src)
+	// colossus_final = new(src)
 	spiral_shots.Grant(src)
 	random_shots.Grant(src)
 	shotgun_blast.Grant(src)
 	dir_shots.Grant(src)
-	colossus_final.Grant(src)
+	// colossus_final.Grant(src)
 	RegisterSignal(src, COMSIG_MOB_ABILITY_STARTED, PROC_REF(start_attack))
 	RegisterSignal(src, COMSIG_MOB_ABILITY_FINISHED, PROC_REF(finished_attack))
 	AddElement(/datum/element/projectile_shield)
+	AddComponent(/datum/action/innate/cult/comm)
 
 /mob/living/simple_animal/hostile/megafauna/colossus/Destroy()
 	RemoveElement(/datum/element/projectile_shield)
@@ -93,7 +95,7 @@
 	random_shots = null
 	shotgun_blast = null
 	dir_shots = null
-	colossus_final = null
+	// colossus_final = null
 	return ..()
 
 /mob/living/simple_animal/hostile/megafauna/colossus/OpenFire()
@@ -115,7 +117,7 @@
 
 	if(health <= maxHealth / 10 && final_available)
 		final_available = FALSE
-		colossus_final.Trigger(target = target)
+		// colossus_final.Trigger(target = target)
 	else if(prob(20 + anger_modifier)) //Major attack
 		spiral_shots.Trigger(target = target)
 	else if(prob(20))

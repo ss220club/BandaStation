@@ -4,6 +4,7 @@
 	real_name = "slaughter demon"
 	unique_name = FALSE
 	speak_emote = list("gurgles","wails","screeches")
+	faction = list(FACTION_MINING, FACTION_HELL, FACTION_CULT)
 
 	icon_state = "slaughter_demon"
 	icon_living = "slaughter_demon"
@@ -13,6 +14,8 @@
 	// slaughter demons are specifically intended to have low melee damage, but as they hit and build up their killstreak
 	// their wound bonuses grow and grow higher. this is how they're able to efficiently kill and slaughter their victims.
 	// consider this before you balance them.
+	health = 350
+	maxHealth = 350
 	obj_damage = 50
 	melee_damage_lower = 15
 	melee_damage_upper = 15
