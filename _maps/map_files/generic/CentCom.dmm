@@ -3561,6 +3561,20 @@
 /area/centcom/central_command_areas/engine)
 "arh" = (
 /obj/effect/turf_decal/delivery,
+/obj/structure/closet/crate/medical,
+/obj/item/storage/lockbox/loyalty,
+/obj/item/storage/lockbox/loyalty,
+/obj/item/storage/lockbox/loyalty,
+/obj/item/storage/lockbox/loyalty,
+/obj/item/storage/lockbox/loyalty,
+/obj/item/storage/lockbox/loyalty,
+/obj/item/storage/lockbox/loyalty,
+/obj/item/storage/lockbox/loyalty,
+/obj/item/storage/lockbox/loyalty,
+/obj/item/storage/lockbox/loyalty,
+/obj/item/storage/lockbox/loyalty,
+/obj/item/storage/lockbox/loyalty,
+/obj/item/storage/lockbox/loyalty,
 /turf/open/floor/iron/dark/smooth_large,
 /area/centcom/central_command_areas/supply)
 "ari" = (
