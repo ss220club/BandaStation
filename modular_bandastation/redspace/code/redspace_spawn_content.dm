@@ -938,6 +938,7 @@
 
 /mob/living/basic/demon/redspace/Initialize(mapload)
 	. = ..()
+	add_traits(list(TRAIT_LAVA_IMMUNE, TRAIT_ASHSTORM_IMMUNE), INNATE_TRAIT)
 	AddComponent(\
 		/datum/component/redspace_energy,\
 		max_energy = redspace_max_energy,\
