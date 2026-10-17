@@ -16,7 +16,7 @@
 #define JOB_BLUESHIELD_RU "Офицер «Синий щит»"
 //Justice
 #define JOB_MAGISTRATE_RU "Магистрат"
-#define JOB_LAWYER_RU "Юрист"
+#define JOB_LAWYER_RU "Агент внутренних дел"
 //Silicon
 #define JOB_AI_RU "ИИ"
 #define JOB_CYBORG_RU "Киборг"
