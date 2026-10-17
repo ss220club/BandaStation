@@ -1,0 +1,343 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"aa" = (
+/turf/closed/wall,
+/area/centcom/central_command_areas/cabin)
+"ab" = (
+/obj/structure/bookcase{
+	dir = 1;
+	icon_state = "book-0";
+	anchored = 1
+	},
+/turf/open/floor/wood/large/darkwood,
+/area/centcom/central_command_areas/cabin)
+"ae" = (
+/obj/structure/chair/sofa/corp/corner{
+	dir = 4
+	},
+/turf/open/floor/wood/large/darkwood,
+/area/centcom/central_command_areas/cabin)
+"af" = (
+/obj/structure/chair/sofa/corp{
+	dir = 4
+	},
+/turf/open/floor/wood/large/darkwood,
+/area/centcom/central_command_areas/cabin)
+"ag" = (
+/obj/structure/chair/sofa/corp/corner{
+	dir = 1
+	},
+/turf/open/floor/wood/large/darkwood,
+/area/centcom/central_command_areas/cabin)
+"aj" = (
+/obj/structure/chair/sofa/corp/left,
+/turf/open/floor/wood/large/darkwood,
+/area/centcom/central_command_areas/cabin)
+"ak" = (
+/obj/structure/table/reinforced/rglass,
+/turf/open/floor/wood/large/darkwood,
+/area/centcom/central_command_areas/cabin)
+"al" = (
+/obj/structure/chair/sofa/corp/right{
+	dir = 1
+	},
+/turf/open/floor/wood/large/darkwood,
+/area/centcom/central_command_areas/cabin)
+"am" = (
+/obj/structure/bookcase{
+	dir = 8;
+	icon_state = "book-0";
+	anchored = 1
+	},
+/turf/open/floor/wood/large/darkwood,
+/area/centcom/central_command_areas/cabin)
+"ao" = (
+/obj/structure/bookcase{
+	dir = 4;
+	icon_state = "book-0";
+	anchored = 1
+	},
+/turf/open/floor/wood/large/darkwood,
+/area/centcom/central_command_areas/cabin)
+"ap" = (
+/obj/machinery/light{
+	color = "#a6f9a4";
+	dir = 1
+	},
+/obj/structure/bookcase{
+	dir = 8;
+	icon_state = "book-0";
+	anchored = 1
+	},
+/turf/open/floor/wood/large/darkwood,
+/area/centcom/central_command_areas/cabin)
+"ar" = (
+/obj/machinery/light/floor{
+	color = "#a6f9a4"
+	},
+/turf/open/floor/wood/large/darkwood,
+/area/centcom/central_command_areas/cabin)
+"au" = (
+/obj/machinery/light{
+	color = "#a6f9a4"
+	},
+/obj/structure/bookcase{
+	dir = 4;
+	icon_state = "book-0";
+	anchored = 1
+	},
+/turf/open/floor/wood/large/darkwood,
+/area/centcom/central_command_areas/cabin)
+"av" = (
+/obj/structure/table/wood,
+/turf/open/floor/wood/large/darkwood,
+/area/centcom/central_command_areas/cabin)
+"aw" = (
+/turf/open/floor/wood/large/darkwood,
+/area/centcom/central_command_areas/cabin)
+"aC" = (
+/turf/open/floor/carpet,
+/area/centcom/central_command_areas/cabin)
+"aG" = (
+/obj/modular_map_connector,
+/obj/structure/mineral_door/wood,
+/turf/open/floor/wood/large/darkwood,
+/area/centcom/central_command_areas/cabin)
+"aT" = (
+/obj/machinery/door/window{
+	dir = 8;
+	req_access = list()
+	},
+/turf/open/floor/wood/large/darkwood,
+/area/centcom/central_command_areas/cabin)
+"aW" = (
+/obj/structure/chair/comfy/black,
+/turf/open/floor/carpet,
+/area/centcom/central_command_areas/cabin)
+"aX" = (
+/obj/structure/table/wood,
+/turf/open/floor/carpet,
+/area/centcom/central_command_areas/cabin)
+"aY" = (
+/obj/effect/spawner/structure/window/reinforced,
+/turf/open/floor/plating,
+/area/centcom/central_command_areas/cabin)
+"bb" = (
+/obj/machinery/light{
+	color = "#a6f9a4";
+	dir = 1
+	},
+/turf/open/floor/wood/large/darkwood,
+/area/centcom/central_command_areas/cabin)
+"bc" = (
+/obj/machinery/light/floor{
+	color = "#a6f9a4"
+	},
+/turf/open/floor/carpet,
+/area/centcom/central_command_areas/cabin)
+"bf" = (
+/obj/machinery/light{
+	color = "#a6f9a4"
+	},
+/obj/machinery/vending/cola/starkist,
+/turf/open/floor/wood/large/darkwood,
+/area/centcom/central_command_areas/cabin)
+"bg" = (
+/obj/structure/chair/wood,
+/turf/open/floor/wood/large/darkwood,
+/area/centcom/central_command_areas/cabin)
+"bj" = (
+/obj/structure/chair/comfy/black{
+	dir = 1
+	},
+/turf/open/floor/carpet,
+/area/centcom/central_command_areas/cabin)
+"bl" = (
+/obj/machinery/vending/snack/orange{
+	req_access = list("kitchen")
+	},
+/turf/open/floor/wood/large/darkwood,
+/area/centcom/central_command_areas/cabin)
+"bm" = (
+/obj/structure/frame/computer/rcd/west{
+	icon = 'icons/obj/devices/stock_parts.dmi';
+	icon_state = "0";
+	name = "computer frame"
+	},
+/turf/open/floor/wood/large/darkwood,
+/area/centcom/central_command_areas/cabin)
+"bn" = (
+/obj/machinery/vending/snack/teal{
+	req_access = list("kitchen")
+	},
+/turf/open/floor/wood/large/darkwood,
+/area/centcom/central_command_areas/cabin)
+
+(1,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(2,1,1) = {"
+aa
+ab
+aw
+am
+ae
+af
+ag
+am
+aw
+am
+aa
+"}
+(3,1,1) = {"
+aa
+ao
+aw
+am
+aj
+ak
+al
+am
+aw
+ao
+aa
+"}
+(4,1,1) = {"
+aa
+ap
+aw
+ab
+aw
+ar
+aw
+ab
+aw
+au
+aa
+"}
+(5,1,1) = {"
+aa
+av
+aw
+aw
+aw
+aw
+aw
+aw
+aw
+aw
+aa
+"}
+(6,1,1) = {"
+aa
+aw
+aC
+aC
+aC
+aC
+aC
+aC
+aw
+aw
+aa
+"}
+(7,1,1) = {"
+aG
+aw
+aC
+aC
+aC
+aC
+aC
+aC
+aw
+aw
+aa
+"}
+(8,1,1) = {"
+aa
+aw
+aC
+aC
+aC
+aC
+aC
+aC
+aw
+aw
+aa
+"}
+(9,1,1) = {"
+aa
+aT
+av
+av
+aw
+aW
+aX
+bj
+aw
+aw
+aa
+"}
+(10,1,1) = {"
+aa
+bb
+aw
+av
+aw
+bc
+aC
+aC
+aw
+bf
+aa
+"}
+(11,1,1) = {"
+aa
+aw
+bg
+av
+aw
+aW
+aX
+bj
+aw
+bl
+aa
+"}
+(12,1,1) = {"
+aa
+av
+bm
+av
+aw
+aw
+aw
+aw
+aw
+bn
+aa
+"}
+(13,1,1) = {"
+aa
+aa
+aa
+aa
+aY
+aY
+aY
+aY
+aY
+aa
+aa
+"}

@@ -1,0 +1,571 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"aB" = (
+/obj/effect/turf_decal/tile/dark_blue/diagonal_edge,
+/obj/effect/turf_decal/siding/thinplating_new/light,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/machinery/duct,
+/turf/open/floor/iron/white/diagonal,
+/area/station/maintenance/ghetto/starboard)
+"bs" = (
+/obj/effect/turf_decal/tile/dark_blue/diagonal_edge,
+/obj/effect/turf_decal/siding/thinplating_new/light,
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/duct,
+/turf/open/floor/iron/white/diagonal,
+/area/station/maintenance/ghetto/starboard)
+"ce" = (
+/obj/effect/turf_decal/tile/dark_blue/diagonal_edge,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron/white/diagonal,
+/area/station/maintenance/ghetto/starboard)
+"dy" = (
+/obj/effect/turf_decal/tile/dark_blue/diagonal_edge,
+/obj/effect/spawner/random/trash/caution_sign,
+/obj/effect/turf_decal/siding/thinplating_new/light/corner,
+/obj/effect/turf_decal/siding/thinplating_new/light/corner{
+	dir = 4
+	},
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/duct,
+/turf/open/floor/iron/white/diagonal,
+/area/station/maintenance/ghetto/starboard)
+"fk" = (
+/obj/effect/spawner/random/engineering/material,
+/obj/machinery/duct,
+/turf/open/floor/iron/cafeteria,
+/area/station/maintenance/ghetto/starboard)
+"gF" = (
+/obj/effect/turf_decal/tile/dark_blue/diagonal_edge,
+/obj/effect/turf_decal/siding/thinplating_new/light,
+/obj/effect/spawner/random/trash/bucket,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/machinery/duct,
+/turf/open/floor/iron/white/diagonal,
+/area/station/maintenance/ghetto/starboard)
+"hc" = (
+/obj/machinery/door/airlock/bathroom,
+/obj/effect/mapping_helpers/airlock/autoname,
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/machinery/door/firedoor,
+/obj/modular_map_connector,
+/turf/open/floor/iron/white/diagonal,
+/area/station/maintenance/ghetto/starboard)
+"hk" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/effect/mapping_helpers/airlock/access/all/engineering/maintenance,
+/obj/machinery/door/airlock/maintenance,
+/obj/effect/mapping_helpers/airlock/autoname,
+/obj/machinery/door/firedoor,
+/obj/machinery/duct,
+/turf/open/floor/plating,
+/area/station/maintenance/ghetto/starboard)
+"iv" = (
+/obj/structure/lattice,
+/turf/open/space/basic,
+/area/space/nearstation)
+"iy" = (
+/obj/machinery/washing_machine,
+/obj/effect/turf_decal/siding/dark_blue{
+	dir = 10
+	},
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron/white/textured_large,
+/area/station/maintenance/ghetto/starboard)
+"iS" = (
+/obj/effect/turf_decal/tile/dark_blue/diagonal_edge,
+/obj/effect/turf_decal/siding/thinplating_new/light{
+	dir = 1
+	},
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/spawner/random/trash/bin,
+/turf/open/floor/iron/white/diagonal,
+/area/station/maintenance/ghetto/starboard)
+"mL" = (
+/obj/machinery/door/airlock,
+/obj/effect/mapping_helpers/airlock/autoname,
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/machinery/duct,
+/turf/open/floor/iron/white/textured_large,
+/area/station/maintenance/ghetto/starboard)
+"nW" = (
+/turf/closed/wall/rust,
+/area/station/maintenance/ghetto/starboard)
+"ou" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/spawner/random/trash/garbage,
+/turf/open/floor/iron/cafeteria,
+/area/station/maintenance/ghetto/starboard)
+"ox" = (
+/turf/open/floor/iron/cafeteria,
+/area/station/maintenance/ghetto/starboard)
+"pk" = (
+/obj/effect/turf_decal/tile/dark_blue/diagonal_edge,
+/obj/machinery/light/broken/directional/north,
+/obj/effect/turf_decal/siding/thinplating_new/light{
+	dir = 1
+	},
+/obj/effect/spawner/random/structure/table,
+/obj/effect/spawner/random/glass_shards,
+/turf/open/floor/iron/white/diagonal,
+/area/station/maintenance/ghetto/starboard)
+"pX" = (
+/obj/effect/mapping_helpers/broken_floor,
+/obj/machinery/duct,
+/turf/open/floor/iron/cafeteria,
+/area/station/maintenance/ghetto/starboard)
+"qn" = (
+/obj/effect/turf_decal/tile/dark_blue/diagonal_edge,
+/obj/effect/mapping_helpers/broken_floor,
+/obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer2,
+/turf/open/floor/iron/white/diagonal,
+/area/station/maintenance/ghetto/starboard)
+"sq" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/item/kirbyplants/random/dead,
+/turf/open/floor/plating,
+/area/station/maintenance/ghetto/starboard)
+"sD" = (
+/obj/structure/toilet{
+	dir = 8
+	},
+/obj/machinery/light/small/red/dim/directional/west,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron/white/diagonal,
+/area/station/maintenance/ghetto/starboard)
+"sG" = (
+/obj/machinery/washing_machine,
+/obj/effect/turf_decal/siding/dark_blue{
+	dir = 9
+	},
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron/white/textured_large,
+/area/station/maintenance/ghetto/starboard)
+"te" = (
+/obj/machinery/shower/directional/south,
+/obj/effect/turf_decal/trimline/blue/end,
+/obj/structure/fluff/shower_drain,
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/item/stack/medical/wrap/gauze/improvised,
+/obj/effect/decal/cleanable/blood/old,
+/turf/open/floor/iron/white/textured_large,
+/area/station/maintenance/ghetto/starboard)
+"tZ" = (
+/obj/effect/turf_decal/tile/dark_blue/diagonal_edge,
+/obj/effect/turf_decal/siding/thinplating_new/light{
+	dir = 8
+	},
+/obj/structure/sink/directional/east,
+/obj/effect/spawner/random/glass_shards,
+/turf/open/floor/iron/white/diagonal,
+/area/station/maintenance/ghetto/starboard)
+"uw" = (
+/obj/effect/spawner/random/structure/closet_maintenance,
+/obj/effect/turf_decal/bot,
+/turf/open/floor/iron/dark/textured_large,
+/area/station/maintenance/ghetto/starboard)
+"uP" = (
+/obj/effect/spawner/random/structure/closet_maintenance,
+/obj/effect/turf_decal/bot,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron/dark/textured_large,
+/area/station/maintenance/ghetto/starboard)
+"vf" = (
+/obj/effect/turf_decal/tile/dark_blue/diagonal_edge,
+/obj/effect/turf_decal/siding/thinplating_new/light,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/duct,
+/turf/open/floor/iron/white/diagonal,
+/area/station/maintenance/ghetto/starboard)
+"wa" = (
+/obj/effect/spawner/structure/window/reinforced,
+/turf/open/floor/plating,
+/area/station/maintenance/ghetto/starboard)
+"xd" = (
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron/cafeteria,
+/area/station/maintenance/ghetto/starboard)
+"xl" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/mapping_helpers/broken_floor,
+/obj/machinery/duct,
+/turf/open/floor/iron/cafeteria,
+/area/station/maintenance/ghetto/starboard)
+"xu" = (
+/obj/machinery/door/airlock,
+/obj/effect/mapping_helpers/airlock/autoname,
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/mapping_helpers/broken_machine,
+/obj/machinery/duct,
+/turf/open/floor/iron/white/textured_large,
+/area/station/maintenance/ghetto/starboard)
+"yo" = (
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/plating,
+/area/station/maintenance/ghetto/starboard)
+"zz" = (
+/obj/machinery/washing_machine,
+/obj/effect/turf_decal/siding/dark_blue{
+	dir = 8
+	},
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/mapping_helpers/burnt_floor,
+/turf/open/floor/iron/white/textured_large,
+/area/station/maintenance/ghetto/starboard)
+"Af" = (
+/obj/machinery/shower/directional/south,
+/obj/effect/turf_decal/trimline/blue/end,
+/obj/structure/fluff/shower_drain,
+/obj/structure/curtain,
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/iron/white/textured_large,
+/area/station/maintenance/ghetto/starboard)
+"As" = (
+/obj/machinery/door/airlock/bathroom,
+/obj/effect/mapping_helpers/airlock/autoname,
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron/white/diagonal,
+/area/station/maintenance/ghetto/starboard)
+"Cl" = (
+/obj/structure/toilet{
+	dir = 8
+	},
+/obj/machinery/light/small/broken/directional/west,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/spawner/random/glass_shards/mini,
+/obj/item/restraints/handcuffs/cable/zipties,
+/obj/effect/spawner/random/trash/mess,
+/obj/effect/spawner/random/maintenance,
+/turf/open/floor/iron/white/diagonal,
+/area/station/maintenance/ghetto/starboard)
+"Dl" = (
+/obj/effect/turf_decal/tile/dark_blue/diagonal_edge,
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/duct,
+/turf/open/floor/iron/white/diagonal,
+/area/station/maintenance/ghetto/starboard)
+"Fu" = (
+/obj/effect/spawner/random/trash/garbage,
+/turf/open/floor/iron/cafeteria,
+/area/station/maintenance/ghetto/starboard)
+"Fx" = (
+/turf/open/space/basic,
+/area/space)
+"FC" = (
+/obj/effect/turf_decal/tile/dark_blue/diagonal_edge,
+/obj/effect/spawner/random/trash/grime,
+/obj/effect/turf_decal/siding/thinplating_new/light{
+	dir = 1
+	},
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/firealarm/directional/north,
+/turf/open/floor/iron/white/diagonal,
+/area/station/maintenance/ghetto/starboard)
+"Gg" = (
+/obj/effect/turf_decal/tile/dark_blue/diagonal_edge,
+/obj/effect/turf_decal/siding/thinplating_new/light/corner{
+	dir = 1
+	},
+/obj/effect/turf_decal/siding/thinplating_new/light/corner{
+	dir = 4
+	},
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron/white/diagonal,
+/area/station/maintenance/ghetto/starboard)
+"He" = (
+/obj/effect/turf_decal/tile/dark_blue/diagonal_edge,
+/obj/machinery/light/cold/dim/directional/north,
+/obj/effect/turf_decal/siding/thinplating_new/light{
+	dir = 1
+	},
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron/white/diagonal,
+/area/station/maintenance/ghetto/starboard)
+"Jz" = (
+/obj/effect/turf_decal/tile/dark_blue/diagonal_edge,
+/obj/effect/turf_decal/siding/thinplating_new/light{
+	dir = 9
+	},
+/obj/effect/spawner/random/trash/grime,
+/obj/structure/sink/directional/east,
+/obj/structure/mirror/directional/west,
+/turf/open/floor/iron/white/diagonal,
+/area/station/maintenance/ghetto/starboard)
+"Ll" = (
+/turf/template_noop,
+/area/template_noop)
+"NB" = (
+/obj/effect/turf_decal/tile/dark_blue/diagonal_edge,
+/obj/machinery/atmospherics/components/unary/vent_pump/on/layer4,
+/turf/open/floor/iron/white/diagonal,
+/area/station/maintenance/ghetto/starboard)
+"Oc" = (
+/obj/effect/turf_decal/tile/dark_blue/diagonal_edge,
+/obj/effect/turf_decal/siding/thinplating_new/light,
+/obj/effect/spawner/random/trash/mess,
+/obj/machinery/duct,
+/turf/open/floor/iron/white/diagonal,
+/area/station/maintenance/ghetto/starboard)
+"OI" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/duct,
+/turf/open/floor/iron/cafeteria,
+/area/station/maintenance/ghetto/starboard)
+"Qf" = (
+/obj/structure/rack,
+/obj/effect/spawner/random/maintenance,
+/obj/effect/turf_decal/bot_white,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron/dark/textured_large,
+/area/station/maintenance/ghetto/starboard)
+"Qh" = (
+/obj/machinery/door/airlock/bathroom,
+/obj/effect/mapping_helpers/airlock/autoname,
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/mapping_helpers/airlock/abandoned,
+/obj/effect/mapping_helpers/broken_floor,
+/turf/open/floor/iron/white/diagonal,
+/area/station/maintenance/ghetto/starboard)
+"QG" = (
+/obj/machinery/light/cold/dim/directional/north,
+/obj/structure/table,
+/obj/effect/spawner/random/engineering/tool,
+/obj/effect/spawner/random/clothing/bowler_or_that,
+/turf/open/floor/iron/cafeteria,
+/area/station/maintenance/ghetto/starboard)
+"QT" = (
+/obj/item/kirbyplants/random/dead,
+/turf/open/floor/iron/cafeteria,
+/area/station/maintenance/ghetto/starboard)
+"Rf" = (
+/turf/closed/wall,
+/area/station/maintenance/ghetto/starboard)
+"Sc" = (
+/obj/effect/turf_decal/tile/dark_blue/diagonal_edge,
+/obj/effect/turf_decal/siding/thinplating_new/light{
+	dir = 1
+	},
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/closet/secure_closet/personal{
+	anchored = 1
+	},
+/obj/effect/spawner/random/maintenance,
+/turf/open/floor/iron/white/diagonal,
+/area/station/maintenance/ghetto/starboard)
+"SE" = (
+/obj/structure/table,
+/obj/structure/bedsheetbin,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron/cafeteria,
+/area/station/maintenance/ghetto/starboard)
+"SP" = (
+/obj/effect/turf_decal/tile/dark_blue/diagonal_edge,
+/obj/effect/turf_decal/siding/thinplating_new/light{
+	dir = 5
+	},
+/obj/structure/closet/secure_closet/personal{
+	anchored = 1
+	},
+/obj/effect/spawner/random/maintenance,
+/turf/open/floor/iron/white/diagonal,
+/area/station/maintenance/ghetto/starboard)
+"Tq" = (
+/obj/effect/turf_decal/tile/dark_blue/diagonal_edge,
+/obj/effect/turf_decal/siding/thinplating_new/light{
+	dir = 1
+	},
+/obj/machinery/duct,
+/turf/open/floor/iron/white/diagonal,
+/area/station/maintenance/ghetto/starboard)
+"UA" = (
+/obj/structure/chair/stool/directional/west,
+/turf/open/floor/iron/cafeteria,
+/area/station/maintenance/ghetto/starboard)
+"Wl" = (
+/obj/structure/sink/directional/east,
+/obj/effect/turf_decal/tile/dark_blue/diagonal_edge,
+/obj/effect/turf_decal/siding/thinplating_new/light{
+	dir = 10
+	},
+/obj/structure/mirror/broken/directional/west,
+/turf/open/floor/iron/white/diagonal,
+/area/station/maintenance/ghetto/starboard)
+"Xc" = (
+/obj/structure/chair/stool/directional/south,
+/turf/open/floor/iron/cafeteria,
+/area/station/maintenance/ghetto/starboard)
+"Zk" = (
+/obj/machinery/duct,
+/turf/open/floor/iron/cafeteria,
+/area/station/maintenance/ghetto/starboard)
+"ZS" = (
+/obj/effect/turf_decal/tile/dark_blue/diagonal_edge,
+/obj/effect/turf_decal/siding/thinplating_new/light{
+	dir = 6
+	},
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/machinery/duct,
+/turf/open/floor/iron/white/diagonal,
+/area/station/maintenance/ghetto/starboard)
+
+(1,1,1) = {"
+Ll
+Rf
+Rf
+Rf
+nW
+nW
+Rf
+Rf
+Rf
+Rf
+Rf
+iv
+"}
+(2,1,1) = {"
+Ll
+Jz
+tZ
+Wl
+Rf
+Af
+nW
+Af
+nW
+te
+Rf
+Fx
+"}
+(3,1,1) = {"
+Ll
+Tq
+Dl
+Oc
+Rf
+xu
+nW
+mL
+Rf
+mL
+Rf
+Rf
+"}
+(4,1,1) = {"
+Ll
+He
+NB
+bs
+pX
+Zk
+fk
+xl
+OI
+OI
+QT
+Rf
+"}
+(5,1,1) = {"
+Ll
+iS
+ce
+bs
+ox
+xd
+xd
+ox
+ox
+xd
+uw
+wa
+"}
+(6,1,1) = {"
+hc
+Gg
+ce
+bs
+UA
+UA
+ox
+ox
+xd
+xd
+Qf
+wa
+"}
+(7,1,1) = {"
+Ll
+FC
+ce
+vf
+Rf
+Rf
+Rf
+QG
+xd
+ox
+uP
+wa
+"}
+(8,1,1) = {"
+Ll
+pk
+qn
+aB
+Qh
+Cl
+Rf
+SE
+Fu
+yo
+sq
+Rf
+"}
+(9,1,1) = {"
+Ll
+Sc
+ce
+gF
+Rf
+Rf
+Rf
+Xc
+ou
+xd
+Rf
+Fx
+"}
+(10,1,1) = {"
+Ll
+SP
+dy
+ZS
+As
+sD
+Rf
+sG
+zz
+iy
+Rf
+iv
+"}
+(11,1,1) = {"
+Ll
+Rf
+hk
+Rf
+Rf
+Rf
+Rf
+Rf
+Rf
+Rf
+Rf
+Fx
+"}

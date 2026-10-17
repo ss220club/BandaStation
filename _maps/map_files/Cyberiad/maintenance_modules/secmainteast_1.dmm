@@ -1,0 +1,646 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"at" = (
+/obj/effect/spawner/random/structure/crate,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron/smooth,
+/area/station/maintenance/fore)
+"er" = (
+/obj/structure/disposalpipe/segment,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron,
+/area/station/maintenance/fore)
+"eM" = (
+/obj/structure/table,
+/obj/item/toy/talking/griffin{
+	pixel_y = 12
+	},
+/turf/open/floor/plating,
+/area/station/maintenance/fore)
+"gB" = (
+/obj/machinery/door/airlock/external,
+/obj/effect/mapping_helpers/airlock/autoname,
+/obj/effect/mapping_helpers/airlock/access/all/engineering/external,
+/obj/effect/mapping_helpers/airlock/cyclelink_helper{
+	dir = 8
+	},
+/turf/open/floor/plating,
+/area/station/maintenance/fore)
+"gH" = (
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/catwalk_floor/iron_smooth,
+/area/station/maintenance/fore)
+"hg" = (
+/obj/structure/secure_safe/directional/north,
+/obj/effect/mapping_helpers/broken_floor,
+/turf/open/floor/wood/tile,
+/area/station/maintenance/fore)
+"iw" = (
+/obj/structure/lattice,
+/turf/open/space/openspace,
+/area/space/nearstation)
+"iF" = (
+/obj/effect/spawner/random/maintenance,
+/turf/open/floor/plating,
+/area/station/maintenance/fore)
+"jM" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/turf/open/floor/iron,
+/area/station/maintenance/fore)
+"kU" = (
+/obj/structure/bed,
+/obj/item/toy/plush/hampter/security,
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/wood/tile,
+/area/station/maintenance/fore)
+"nw" = (
+/obj/machinery/light/small/directional/north,
+/obj/effect/mapping_helpers/broken_floor,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/turf/open/floor/iron,
+/area/station/maintenance/fore)
+"nV" = (
+/obj/machinery/atmospherics/components/unary/vent_pump/on/layer4{
+	dir = 8
+	},
+/turf/open/floor/iron,
+/area/station/maintenance/fore)
+"oJ" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/item/banner/security/mundane,
+/turf/open/floor/iron/smooth,
+/area/station/maintenance/fore)
+"oM" = (
+/turf/closed/wall/r_wall,
+/area/station/maintenance/fore)
+"pF" = (
+/obj/effect/spawner/random/structure/crate,
+/turf/open/floor/plating,
+/area/station/maintenance/fore)
+"pV" = (
+/obj/structure/disposalpipe/segment{
+	dir = 10
+	},
+/obj/effect/mapping_helpers/broken_floor,
+/turf/open/floor/plating,
+/area/station/maintenance/fore)
+"qW" = (
+/obj/structure/chair/comfy/black,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/turf/open/floor/plating,
+/area/station/maintenance/fore)
+"re" = (
+/obj/machinery/power/port_gen/pacman/pre_loaded,
+/turf/open/floor/plating,
+/area/station/maintenance/fore)
+"rt" = (
+/obj/effect/turf_decal/delivery/white{
+	color = "#52B4E9"
+	},
+/obj/structure/reagent_dispensers/plumbed{
+	dir = 8
+	},
+/turf/open/floor/plating,
+/area/station/maintenance/fore)
+"rU" = (
+/obj/structure/chair/stool{
+	dir = 4
+	},
+/turf/open/floor/plating,
+/area/station/maintenance/fore)
+"sa" = (
+/obj/structure/disposalpipe/segment,
+/obj/machinery/light/small/directional/west,
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/duct,
+/turf/open/floor/iron,
+/area/station/maintenance/fore)
+"ts" = (
+/obj/structure/disposalpipe/segment{
+	dir = 5
+	},
+/turf/open/floor/plating,
+/area/station/maintenance/fore)
+"ua" = (
+/obj/structure/disposalpipe/segment,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/duct,
+/turf/open/floor/plating,
+/area/station/maintenance/fore)
+"uC" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/plating,
+/area/station/maintenance/fore)
+"vt" = (
+/obj/structure/chair/stool{
+	dir = 8
+	},
+/turf/open/floor/plating,
+/area/station/maintenance/fore)
+"vP" = (
+/obj/item/soap,
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/iron/white,
+/area/station/maintenance/fore)
+"wG" = (
+/turf/template_noop,
+/area/template_noop)
+"xH" = (
+/obj/effect/spawner/random/trash/garbage,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron/smooth,
+/area/station/maintenance/fore)
+"xR" = (
+/obj/structure/closet,
+/obj/effect/spawner/random/maintenance,
+/turf/open/floor/plating,
+/area/station/maintenance/fore)
+"yq" = (
+/obj/machinery/airalarm/directional/south,
+/turf/template_noop,
+/area/template_noop)
+"zu" = (
+/obj/structure/closet,
+/obj/effect/spawner/random/maintenance/two,
+/turf/open/floor/plating,
+/area/station/maintenance/fore)
+"Bs" = (
+/obj/effect/mapping_helpers/airlock/abandoned,
+/obj/machinery/door/airlock,
+/obj/effect/mapping_helpers/airlock/autoname,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/plating,
+/area/station/maintenance/fore)
+"Bv" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/sign/poster/random/directional/north,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/turf/open/floor/iron,
+/area/station/maintenance/fore)
+"DQ" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/spawner/random/maintenance,
+/turf/open/floor/plating,
+/area/station/maintenance/fore)
+"Ee" = (
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/turf/open/floor/iron,
+/area/station/maintenance/fore)
+"EF" = (
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron,
+/area/station/maintenance/fore)
+"FE" = (
+/obj/effect/mapping_helpers/broken_floor,
+/obj/effect/decal/remains/mouse,
+/turf/open/floor/plating,
+/area/station/maintenance/fore)
+"FH" = (
+/turf/open/space/openspace,
+/area/template_noop)
+"FL" = (
+/obj/structure/disposalpipe/segment,
+/turf/open/floor/plating,
+/area/station/maintenance/fore)
+"GV" = (
+/obj/machinery/button/door/directional/east{
+	name = "Door Bolt Control";
+	id = "secmaintdorm2";
+	normaldoorcontrol = 1;
+	specialfunctions = 4
+	},
+/obj/item/toy/plush/slimeplushie,
+/obj/machinery/light/small/directional/south,
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/plating,
+/area/station/maintenance/fore)
+"Hx" = (
+/obj/modular_map_connector,
+/turf/template_noop,
+/area/template_noop)
+"HJ" = (
+/obj/structure/secure_safe/directional/north,
+/obj/effect/spawner/random/maintenance,
+/obj/effect/mapping_helpers/broken_floor,
+/turf/open/floor/wood/tile,
+/area/station/maintenance/fore)
+"Ii" = (
+/obj/structure/sink/kitchen/directional/south,
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/decal/cleanable/cobweb,
+/obj/effect/mapping_helpers/broken_floor,
+/turf/open/floor/iron/white,
+/area/station/maintenance/fore)
+"Iz" = (
+/obj/structure/table,
+/obj/item/toy/talking/owl{
+	pixel_y = 12
+	},
+/turf/open/floor/plating,
+/area/station/maintenance/fore)
+"Jo" = (
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/obj/machinery/door/airlock/maintenance,
+/obj/effect/mapping_helpers/airlock/autoname,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/turf/open/floor/plating,
+/area/station/maintenance/fore)
+"Li" = (
+/turf/open/floor/plating,
+/area/station/maintenance/fore)
+"Lv" = (
+/obj/effect/mapping_helpers/broken_floor,
+/turf/open/floor/plating,
+/area/station/maintenance/fore)
+"Md" = (
+/obj/machinery/button/door/directional/east{
+	name = "Door Bolt Control";
+	id = "secmaintdorm1";
+	normaldoorcontrol = 1;
+	specialfunctions = 4
+	},
+/obj/machinery/light/small/directional/south,
+/obj/effect/mapping_helpers/broken_floor,
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/wood/tile,
+/area/station/maintenance/fore)
+"NA" = (
+/obj/machinery/door/airlock{
+	id_tag = "secmaintdorm2"
+	},
+/obj/effect/mapping_helpers/airlock/autoname,
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/plating,
+/area/station/maintenance/fore)
+"OE" = (
+/turf/open/floor/catwalk_floor/iron_smooth,
+/area/station/maintenance/fore)
+"Pc" = (
+/obj/structure/disposalpipe/junction/yjunction{
+	dir = 4
+	},
+/obj/effect/mapping_helpers/broken_floor,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/duct,
+/turf/open/floor/plating,
+/area/station/maintenance/fore)
+"PT" = (
+/obj/effect/spawner/random/structure/table_fancy,
+/obj/effect/spawner/random/bureaucracy/folder,
+/obj/effect/spawner/random/bureaucracy/paper,
+/obj/effect/spawner/random/bureaucracy/pen,
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/sign/poster/official/random/directional/north,
+/turf/open/floor/iron/smooth,
+/area/station/maintenance/fore)
+"PW" = (
+/obj/structure/table,
+/obj/item/dice/d20,
+/turf/open/floor/plating,
+/area/station/maintenance/fore)
+"Qu" = (
+/obj/structure/bed,
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/spawner/random/bedsheet/any,
+/turf/open/floor/wood/tile,
+/area/station/maintenance/fore)
+"Qz" = (
+/obj/effect/mapping_helpers/airlock/abandoned,
+/obj/machinery/door/airlock,
+/obj/effect/mapping_helpers/airlock/autoname,
+/turf/open/floor/iron/smooth,
+/area/station/maintenance/fore)
+"QB" = (
+/obj/structure/table,
+/turf/open/floor/plating,
+/area/station/maintenance/fore)
+"QZ" = (
+/obj/structure/toilet{
+	dir = 8
+	},
+/obj/machinery/light/small/directional/east,
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/iron/white,
+/area/station/maintenance/fore)
+"RI" = (
+/obj/structure/sign/warning/vacuum/directional/east,
+/turf/open/floor/catwalk_floor/iron_smooth,
+/area/station/maintenance/fore)
+"St" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/spawner/random/maintenance,
+/obj/structure/mirror/broken/directional/north,
+/turf/open/floor/plating,
+/area/station/maintenance/fore)
+"Ta" = (
+/obj/machinery/door/airlock/external,
+/obj/effect/mapping_helpers/airlock/autoname,
+/obj/effect/mapping_helpers/airlock/access/all/engineering/external,
+/obj/effect/mapping_helpers/airlock/cyclelink_helper{
+	dir = 4
+	},
+/turf/open/floor/plating,
+/area/station/maintenance/fore)
+"Tm" = (
+/obj/structure/curtain,
+/obj/machinery/shower/directional/south,
+/obj/structure/fluff/shower_drain,
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/iron/white,
+/area/station/maintenance/fore)
+"Vv" = (
+/obj/structure/disposalpipe/segment{
+	dir = 10
+	},
+/obj/machinery/light/small/directional/north,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/turf/open/floor/plating,
+/area/station/maintenance/fore)
+"VM" = (
+/turf/closed/wall,
+/area/station/maintenance/fore)
+"Xq" = (
+/obj/structure/disposalpipe/segment{
+	dir = 9
+	},
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/turf/open/floor/plating,
+/area/station/maintenance/fore)
+"Zp" = (
+/obj/machinery/door/airlock{
+	id_tag = "secmaintdorm1"
+	},
+/obj/effect/mapping_helpers/airlock/autoname,
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/plating,
+/area/station/maintenance/fore)
+"ZB" = (
+/obj/structure/disposalpipe/segment,
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/duct,
+/turf/open/floor/iron,
+/area/station/maintenance/fore)
+
+(1,1,1) = {"
+wG
+wG
+wG
+wG
+wG
+wG
+wG
+Hx
+ua
+ua
+sa
+Pc
+ZB
+ua
+Xq
+"}
+(2,1,1) = {"
+wG
+wG
+wG
+wG
+wG
+wG
+wG
+wG
+Lv
+EF
+EF
+Ee
+Lv
+rt
+re
+"}
+(3,1,1) = {"
+wG
+wG
+wG
+wG
+wG
+wG
+wG
+oM
+VM
+VM
+VM
+Jo
+VM
+VM
+VM
+"}
+(4,1,1) = {"
+wG
+wG
+wG
+wG
+wG
+wG
+wG
+oM
+HJ
+uC
+Zp
+Ee
+FE
+xR
+zu
+"}
+(5,1,1) = {"
+wG
+wG
+wG
+wG
+wG
+wG
+wG
+oM
+kU
+Md
+VM
+Vv
+FL
+er
+ts
+"}
+(6,1,1) = {"
+wG
+wG
+wG
+wG
+wG
+wG
+wG
+oM
+VM
+VM
+VM
+Bv
+rU
+rU
+pV
+"}
+(7,1,1) = {"
+wG
+wG
+wG
+wG
+wG
+wG
+yq
+oM
+hg
+iF
+NA
+jM
+eM
+QB
+Li
+"}
+(8,1,1) = {"
+wG
+wG
+wG
+wG
+wG
+wG
+wG
+oM
+Qu
+GV
+VM
+qW
+PW
+Iz
+Li
+"}
+(9,1,1) = {"
+iw
+wG
+iw
+iw
+iw
+iw
+iw
+oM
+VM
+VM
+VM
+nw
+vt
+vt
+Li
+"}
+(10,1,1) = {"
+iw
+iw
+iw
+iw
+iw
+iw
+iw
+VM
+oJ
+OE
+Qz
+nV
+Li
+Li
+pF
+"}
+(11,1,1) = {"
+wG
+iw
+VM
+VM
+VM
+VM
+VM
+VM
+PT
+gH
+wG
+wG
+wG
+wG
+wG
+"}
+(12,1,1) = {"
+wG
+wG
+VM
+Ii
+DQ
+Bs
+gH
+gH
+RI
+gH
+wG
+wG
+wG
+wG
+wG
+"}
+(13,1,1) = {"
+wG
+wG
+VM
+St
+vP
+VM
+at
+xH
+oM
+Ta
+wG
+wG
+wG
+wG
+wG
+"}
+(14,1,1) = {"
+wG
+wG
+VM
+Tm
+QZ
+VM
+VM
+oM
+oM
+Li
+wG
+wG
+wG
+wG
+wG
+"}
+(15,1,1) = {"
+wG
+wG
+VM
+VM
+VM
+VM
+FH
+FH
+VM
+gB
+VM
+wG
+wG
+wG
+wG
+"}

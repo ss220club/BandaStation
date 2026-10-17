@@ -7224,3 +7224,4 @@
 
 // BANDASTATION
 #include "modular_bandastation\modular_bandastation.dme"
+#include "code\modules\mapping\map_specific_code\Cyberiad.dm" // later

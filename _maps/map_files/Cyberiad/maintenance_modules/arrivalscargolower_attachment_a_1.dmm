@@ -1,0 +1,312 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/obj/effect/spawner/random/structure/grille,
+/turf/open/floor/plating,
+/area/station/maintenance/ghetto/port)
+"d" = (
+/obj/effect/turf_decal/tile/dark/opposingcorners,
+/obj/item/food/grown/tomato{
+	pixel_x = -6;
+	pixel_y = -2
+	},
+/turf/open/floor/iron,
+/area/station/maintenance/ghetto/port)
+"e" = (
+/obj/item/chair,
+/obj/effect/turf_decal/tile/dark/opposingcorners,
+/turf/open/floor/iron,
+/area/station/maintenance/ghetto/port)
+"g" = (
+/turf/closed/wall/rust,
+/area/station/maintenance/ghetto/port)
+"h" = (
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/plating,
+/area/station/maintenance/ghetto/port)
+"i" = (
+/obj/structure/chair{
+	dir = 4
+	},
+/obj/effect/decal/cleanable/dirt,
+/obj/item/food/grown/tomato,
+/turf/open/floor/plating,
+/area/station/maintenance/ghetto/port)
+"j" = (
+/obj/item/chair{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/dark/opposingcorners,
+/turf/open/floor/iron,
+/area/station/maintenance/ghetto/port)
+"m" = (
+/turf/open/floor/wood/large,
+/area/station/maintenance/ghetto/port)
+"n" = (
+/obj/effect/turf_decal/tile/dark/opposingcorners,
+/obj/item/food/grown/tomato{
+	pixel_x = 6;
+	pixel_y = -1
+	},
+/obj/item/food/grown/tomato{
+	pixel_x = -2;
+	pixel_y = 5
+	},
+/turf/open/floor/iron,
+/area/station/maintenance/ghetto/port)
+"p" = (
+/turf/open/floor/iron/stairs/left{
+	dir = 1
+	},
+/area/station/maintenance/ghetto/port)
+"q" = (
+/turf/closed/wall,
+/area/station/maintenance/ghetto/port)
+"r" = (
+/obj/structure/window/reinforced/spawner/directional/north,
+/obj/structure/window/reinforced/spawner/directional/east,
+/obj/structure/flora/bush/grassy/style_random,
+/obj/structure/flora/grass/jungle/b/style_random,
+/obj/structure/flora/bush/flowers_br/style_random,
+/obj/structure/window/reinforced/spawner/directional/west,
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/port)
+"s" = (
+/obj/structure/window/reinforced/spawner/directional/south,
+/obj/structure/flora/bush/sparsegrass/style_3,
+/obj/structure/flora/bush/grassy/style_random,
+/obj/structure/flora/grass/jungle/b/style_random,
+/obj/structure/marker_beacon/lime,
+/obj/structure/window/reinforced/spawner/directional/east,
+/obj/structure/flora/bush/flowers_pp/style_random,
+/obj/structure/window/reinforced/spawner/directional/west,
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/port)
+"v" = (
+/obj/structure/rack,
+/obj/effect/spawner/random/clothing/costume,
+/obj/effect/turf_decal/tile/dark/opposingcorners,
+/turf/open/floor/iron,
+/area/station/maintenance/ghetto/port)
+"x" = (
+/obj/structure/railing{
+	dir = 8
+	},
+/turf/open/floor/wood/large,
+/area/station/maintenance/ghetto/port)
+"y" = (
+/obj/structure/chair{
+	dir = 4
+	},
+/turf/open/floor/plating,
+/area/station/maintenance/ghetto/port)
+"z" = (
+/turf/template_noop,
+/area/template_noop)
+"A" = (
+/turf/open/floor/plating,
+/area/station/maintenance/ghetto/port)
+"E" = (
+/obj/machinery/light/small/directional/east,
+/turf/open/floor/wood/large,
+/area/station/maintenance/ghetto/port)
+"F" = (
+/obj/effect/turf_decal/tile/dark/opposingcorners,
+/turf/open/floor/iron,
+/area/station/maintenance/ghetto/port)
+"H" = (
+/obj/effect/spawner/random/maintenance,
+/turf/open/floor/plating,
+/area/station/maintenance/ghetto/port)
+"I" = (
+/obj/structure/sign/poster/contraband/random/directional/north,
+/obj/machinery/light/small/broken/directional/north,
+/obj/effect/turf_decal/tile/dark/opposingcorners,
+/turf/open/floor/iron,
+/area/station/maintenance/ghetto/port)
+"L" = (
+/obj/structure/chair{
+	dir = 4
+	},
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/plating,
+/area/station/maintenance/ghetto/port)
+"M" = (
+/obj/machinery/light/small/directional/west,
+/obj/structure/window/reinforced/spawner/directional/east,
+/obj/structure/flora/bush/grassy/style_random,
+/obj/structure/flora/grass/jungle/b/style_random,
+/obj/structure/window/reinforced/spawner/directional/west,
+/turf/open/floor/grass,
+/area/station/maintenance/ghetto/port)
+"N" = (
+/turf/open/floor/iron/stairs/right{
+	dir = 1
+	},
+/area/station/maintenance/ghetto/port)
+"Q" = (
+/obj/effect/decal/cleanable/food/tomato_smudge,
+/turf/open/floor/wood/large,
+/area/station/maintenance/ghetto/port)
+"R" = (
+/obj/effect/spawner/structure/window,
+/obj/structure/curtain/cloth/fancy/mechanical{
+	id = "ghetto_theatre";
+	name = "Curtains"
+	},
+/turf/open/floor/plating,
+/area/station/maintenance/ghetto/port)
+"S" = (
+/obj/machinery/light/small/directional/south,
+/obj/effect/turf_decal/tile/dark/opposingcorners,
+/obj/machinery/button/curtain{
+	name = "Privacy Curtains";
+	id = "ghetto_theatre";
+	pixel_y = -26
+	},
+/turf/open/floor/iron,
+/area/station/maintenance/ghetto/port)
+"V" = (
+/obj/effect/spawner/random/maintenance,
+/obj/effect/turf_decal/tile/dark/opposingcorners,
+/turf/open/floor/iron,
+/area/station/maintenance/ghetto/port)
+"W" = (
+/obj/structure/sign/poster/contraband/random/directional/north,
+/turf/open/floor/plating,
+/area/station/maintenance/ghetto/port)
+"Y" = (
+/obj/machinery/door/airlock/maintenance,
+/obj/effect/mapping_helpers/airlock/autoname,
+/obj/effect/mapping_helpers/airlock/access/all/engineering/maintenance,
+/obj/modular_map_connector,
+/turf/open/floor/plating,
+/area/station/maintenance/ghetto/port)
+"Z" = (
+/obj/effect/decal/cleanable/food/tomato_smudge,
+/obj/structure/railing{
+	dir = 8
+	},
+/obj/machinery/light/floor,
+/turf/open/floor/wood/large,
+/area/station/maintenance/ghetto/port)
+
+(1,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+a
+"}
+(2,1,1) = {"
+a
+a
+q
+g
+g
+q
+q
+a
+"}
+(3,1,1) = {"
+a
+q
+q
+r
+M
+s
+q
+q
+"}
+(4,1,1) = {"
+a
+q
+v
+F
+h
+A
+v
+q
+"}
+(5,1,1) = {"
+a
+g
+W
+A
+F
+F
+F
+q
+"}
+(6,1,1) = {"
+a
+g
+H
+j
+y
+i
+h
+Y
+"}
+(7,1,1) = {"
+a
+g
+I
+n
+H
+F
+S
+q
+"}
+(8,1,1) = {"
+a
+q
+h
+L
+e
+y
+F
+R
+"}
+(9,1,1) = {"
+a
+q
+V
+A
+A
+d
+H
+R
+"}
+(10,1,1) = {"
+a
+q
+N
+Z
+x
+x
+Z
+q
+"}
+(11,1,1) = {"
+a
+q
+p
+E
+Q
+m
+E
+q
+"}
+(12,1,1) = {"
+a
+z
+z
+z
+z
+z
+z
+z
+"}
