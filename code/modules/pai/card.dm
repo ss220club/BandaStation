@@ -217,7 +217,7 @@
 	if(!candidate?.check_ready())
 		balloon_alert(user, "download interrupted")
 		return FALSE
-	var/mob/living/silicon/pai/new_pai = new(src)
+	var/mob/living/silicon/pai/new_pai = new pai_mob_type(src) //BANDASTATION EDIT PAI
 	new_pai.name = candidate.name || pick(GLOB.ninja_names)
 	new_pai.real_name = new_pai.name
 	new_pai.PossessByPlayer(candidate.ckey)

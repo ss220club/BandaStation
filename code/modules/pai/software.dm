@@ -60,7 +60,10 @@
 		if("Encryption Slot")
 			balloon_alert(usr, "radio frequencies [!encrypt_mod ? "enabled" : "disabled"]")
 			encrypt_mod = !encrypt_mod
-			radio.subspace_transmission = !radio.subspace_transmission
+			//BANDASTATION EDIT START PAI
+			radio.subspace_transmission = encrypt_mod || has_integrated_radio()
+			radio.recalculateChannels()
+			//BANDASTATION EDIT END PAI
 			return TRUE
 		if("Host Scan")
 			host_scan(params["mode"])
@@ -84,13 +87,29 @@
 		if("Remote Signaler")
 			signaler.ui_interact(src)
 			return TRUE
+		//BANDASTATION EDIT START PAI
 		if("Security HUD")
+			if(!("Security HUD" in installed_software))
+				return FALSE
+		//BANDASTATION EDIT END PAI
 			toggle_hud(PAI_TOGGLE_SECURITY_HUD)
 			return TRUE
 		if("Universal Translator")
 			grant_languages()
 			ui.send_full_update()
 			return TRUE
+		//BANDASTATION EDIT START PAI
+		if("Night Vision")
+			if(!("Night Vision" in installed_software))
+				return FALSE
+			night_vision_active = !night_vision_active
+			if(night_vision_active)
+				ADD_TRAIT(src, TRAIT_TRUE_NIGHT_VISION, "pai_night_vision")
+			else
+				REMOVE_TRAIT(src, TRAIT_TRUE_NIGHT_VISION, "pai_night_vision")
+			update_sight()
+			return TRUE
+		//BANDASTATION EDIT END PAI
 	return FALSE
 
 /**
@@ -203,7 +222,7 @@
 	switch(mode)
 		if(PAI_SCAN_TARGET)
 			var/mob/living/carbon/target = get_holder()
-			if(isnull(target))
+			if(!target) // BANDASTATION EDIT
 				balloon_alert(src, "not being carried!")
 				return FALSE
 			healthscan(src, target)
@@ -211,7 +230,7 @@
 
 		if(PAI_SCAN_MASTER)
 			var/mob/living/resolved_master = find_master()
-			if(isnull(resolved_master))
+			if(!resolved_master) // BANDASTATION EDIT
 				balloon_alert(src, "no master detected!")
 				return FALSE
 			if(!is_valid_z_level(get_turf(src), get_turf(resolved_master)))
