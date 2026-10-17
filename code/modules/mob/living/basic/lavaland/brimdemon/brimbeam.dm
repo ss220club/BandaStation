@@ -6,7 +6,6 @@
 	button_icon_state = "brimdemon_firing"
 	background_icon_state = "bg_demon"
 	overlay_icon_state = "bg_demon_border"
-	faction = list(FACTION_MINING, FACTION_HELL)
 	click_to_activate = TRUE
 	cooldown_time = 3 SECONDS
 	melee_cooldown_time = 0
