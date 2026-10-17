@@ -93,7 +93,17 @@
 	var/datum/spatial_grid_cell/grid_cell = SSspatial_grid.get_cell_of(src)
 	var/list/light_sources = list()
 	var/furthest_range = 0
-	for (var/datum/component/overlay_lighting/light as anything in grid_cell.dynamic_light_sources)
+	// BANDASTATION EDIT START: Improve radial light spread
+	for(var/datum/component/overlay_lighting/light as anything in grid_cell.dynamic_light_sources)
+		if(!light || !light.current_holder)
+			continue
+
+		// Directional lights are registered in a rough spatial-grid bounding area.
+		// Filter them again against the exact turf being checked.
+		if(light.directional && !light.is_turf_in_directional_light(src))
+			continue
+		// BANDASTATION EDIT END: Improve radial light spread
+
 		furthest_range = max(furthest_range, light.lumcount_range)
 		var/atom/current_holder = light.light.current_holder
 		if (isnull(light_sources[current_holder]))
