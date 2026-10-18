@@ -136,7 +136,7 @@
 		/datum/reagent/consumable/nutriment/vitamin = 1,
 	)
 	tastes = list("mushroom" = 1)
-	foodtypes = VEGETABLES
+	foodtypes = VEGETABLES | MUSHROOM // BANDASTATION ADDITION
 	w_class = WEIGHT_CLASS_SMALL
 
 /obj/item/food/hugemushroomslice/Initialize(mapload)

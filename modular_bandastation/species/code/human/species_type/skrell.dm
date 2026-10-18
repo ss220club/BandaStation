@@ -145,3 +145,41 @@
 			но в истории были и случаи открытых карательных экспедиций, собранных с ОСС по всей Империи для \
 			недопущения образования центров объединения и, как следствие, общественного прогресса."
 	)
+
+/datum/species/skrell/on_species_gain(mob/living/carbon/human/human, datum/species/old_species, pref_load, regenerate_icons)
+	. = ..()
+	RegisterSignal(human, COMSIG_MOVABLE_MOVED, PROC_REF(on_moved), override = TRUE)
+	update_water_speed(human, human.loc)
+
+/datum/species/skrell/on_species_loss(mob/living/carbon/human/human, datum/species/lost_species)
+	UnregisterSignal(human, COMSIG_MOVABLE_MOVED)
+	human.remove_movespeed_modifier(/datum/movespeed_modifier/skrell_water_shallow)
+	human.remove_movespeed_modifier(/datum/movespeed_modifier/skrell_water_deep)
+	return ..()
+
+/datum/species/skrell/proc/on_moved(mob/living/carbon/human/source, atom/old_loc, dir, forced)
+	SIGNAL_HANDLER
+	update_water_speed(source, source.loc)
+
+/datum/species/skrell/proc/update_water_speed(mob/living/carbon/human/skrell, turf/current_turf)
+	if(!istype(current_turf, /turf/open/water))
+		skrell.remove_movespeed_modifier(/datum/movespeed_modifier/skrell_water_shallow)
+		skrell.remove_movespeed_modifier(/datum/movespeed_modifier/skrell_water_deep)
+		return
+
+	var/turf/open/water/water_turf = current_turf
+
+	if(water_turf.is_swimming_tile)
+		skrell.remove_movespeed_modifier(/datum/movespeed_modifier/skrell_water_shallow)
+		skrell.add_movespeed_modifier(/datum/movespeed_modifier/skrell_water_deep)
+	else
+		skrell.remove_movespeed_modifier(/datum/movespeed_modifier/skrell_water_deep)
+		skrell.add_movespeed_modifier(/datum/movespeed_modifier/skrell_water_shallow)
+
+/// Модификатор скорости для скреллов на обычной воде
+/datum/movespeed_modifier/skrell_water_shallow
+	multiplicative_slowdown = -0.5
+
+/// Модификатор скорости для скреллов на глубокой воде
+/datum/movespeed_modifier/skrell_water_deep
+	multiplicative_slowdown = -0.8

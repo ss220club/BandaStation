@@ -227,8 +227,8 @@
 		)
 	result = /obj/item/food/breadslice/moldy
 	removed_foodtypes = VEGETABLES|GRAIN
-	added_foodtypes = GROSS
-	dish_category = DISH_BREAD
+	added_foodtypes = GROSS|MUSHROOM // BANDASTATION ADDITION
+	dish_category = DISH_MUSHROOM // BANDASTATION ADDITION
 
 /datum/crafting_recipe/food/breadcat
 	name = "Bread cat/bread hybrid"

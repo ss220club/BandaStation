@@ -50,7 +50,7 @@
 	trash_type = /obj/item/reagent_containers/cup/bowl
 
 	tastes = list("jelly" = 1, "mushroom" = 1)
-	foodtypes = VEGETABLES
+	foodtypes = VEGETABLES | MUSHROOM // BANDASTATION ADDITION
 	crafting_complexity = FOOD_COMPLEXITY_2
 
 /obj/item/food/bowled/amanitajelly
@@ -68,5 +68,5 @@
 
 
 	tastes = list("jelly" = 1, "mushroom" = 1)
-	foodtypes = VEGETABLES | TOXIC
+	foodtypes = VEGETABLES | TOXIC | MUSHROOM // BANDASTATION ADDITION
 	crafting_complexity = FOOD_COMPLEXITY_2

@@ -114,6 +114,7 @@
 		/obj/item/food/grown/garlic = 1,
 	)
 	result = /obj/item/food/spaghetti/kitakata_ramen
+	added_foodtypes = MUSHROOM // BANDASTATION ADDITION
 	dish_category = DISH_NOODLES
 	cuisine_category = CUISINE_JAPANESE
 
