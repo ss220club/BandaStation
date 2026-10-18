@@ -163,12 +163,15 @@
 #define BODYSHAPE_SNOUTED (1<<3)
 /// Golem's wacky rocky limbs
 #define BODYSHAPE_GOLEM (1<<4)
+///The limb has a Cerulean (large fish) tail
+#define BODYSHAPE_CERULEAN (1<<5)
 
 /// Check to see if a bodypart limb can be bioscrambled
 #define BODYPART_CAN_BE_BIOSCRAMBLED(bodypart) ( \
 	!(bodypart.bodytype & (BODYTYPE_ROBOTIC | BODYTYPE_LARVA_PLACEHOLDER | BODYTYPE_GOLEM | BODYTYPE_PEG)) \
 	&& !(bodypart.flags_1 & HOLOGRAM_1) \
 	&& !(bodypart.bodypart_flags & BODYPART_STUMP) \
+	&& !(bodypart.bodypart_flags & BODYPART_ABSTRACT) \
 )
 
 // Defines for Species IDs. Used to refer to the name of a species, for things like bodypart names or species preferences.
@@ -191,6 +194,7 @@
 #define SPECIES_LIZARD_ASH "ashwalker"
 #define SPECIES_LIZARD_SILVER "silverscale"
 #define SPECIES_NIGHTMARE "nightmare"
+#define SPECIES_CERULEAN "cerulean"
 #define SPECIES_MONKEY "monkey"
 #define SPECIES_MOTH "moth"
 #define SPECIES_MUSHROOM "mush"
@@ -363,6 +367,10 @@
 
 ///Max growth for a xeno larva to evolve into a regular xeno. This is used as % based.
 #define XENOMORPH_MAX_GROWTH 100
+
+// Strings used by modsuit mob sprite generation for Ceruleans/mobs with a big fish tail
+#define FLIPPERS "flippers"
+#define NO_FLIPPERS "no_flippers"
 
 //Slime evolution threshold. Controls how fast slimes can split/grow
 #define SLIME_EVOLUTION_THRESHOLD 10

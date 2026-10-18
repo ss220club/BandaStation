@@ -123,7 +123,7 @@
 	desc = "Кто-то опять решил проветрить шаттл? Мы вас прикроем. \
 		Содержит два портативных насоса для воздуха."
 	cost = CARGO_CRATE_VALUE * 4.5
-	access_view = ACCESS_ATMOSPHERICS
+	access_view = ACCESS_ATMOS_EQUIP
 	contains = list(/obj/machinery/portable_atmospherics/pump = 2)
 	crate_name = "ящик с портативными воздушными насосами"
 	crate_type = /obj/structure/closet/crate/secure/engineering/atmos
@@ -132,7 +132,7 @@
 	name = "Ящик с портативными очистителями воздуха"
 	desc = "Устраните досадную утечку плазмы с помощью вашего собственного набора из двух портативных скрубберов."
 	cost = CARGO_CRATE_VALUE * 4.5
-	access_view = ACCESS_ATMOSPHERICS
+	access_view = ACCESS_ATMOS_EQUIP
 	contains = list(/obj/machinery/portable_atmospherics/scrubber = 2)
 	crate_name = "ящик с портативными очистителями воздуха"
 	crate_type = /obj/structure/closet/crate/secure/engineering/atmos
@@ -141,7 +141,7 @@
 	name = "Ящик с крупным портативным очистителем воздуха"
 	desc = "Большой переносной очиститель, для больших атмосферных проблем."
 	cost = CARGO_CRATE_VALUE * 7.5
-	access_view = ACCESS_ATMOSPHERICS
+	access_view = ACCESS_ATMOS_EQUIP
 	contains = list(/obj/machinery/portable_atmospherics/scrubber/huge/movable/cargo)
 	crate_name = "ящик с крупным портативным очистителем воздуха"
 	crate_type = /obj/structure/closet/crate/large
