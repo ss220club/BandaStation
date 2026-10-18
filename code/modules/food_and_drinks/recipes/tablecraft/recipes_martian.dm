@@ -201,6 +201,7 @@
 		/obj/item/reagent_containers/cup/bowl = 1,
 	)
 	result = /obj/item/food/salad/bibimbap
+	added_foodtypes = MUSHROOM // BANDASTATION ADDITION
 	removed_foodtypes = RAW|BREAKFAST
 	cuisine_category = CUISINE_MARTIAN
 	dish_category = DISH_RICE

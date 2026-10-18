@@ -171,8 +171,9 @@
 		/datum/reagent/consumable/nutriment/fat/oil/olive = 5
 	)
 	result = /obj/item/food/mushroomy_stirfry
+	added_foodtypes = MUSHROOM // BANDASTATION ADDITION
 	cuisine_category = CUISINE_LIZARD
-	dish_category = DISH_SALAD
+	dish_category = DISH_MUSHROOM // BANDASTATION ADDITION
 
 /datum/crafting_recipe/food/moonfish_demiglace
 	name = "Moonfish demiglace"
@@ -289,8 +290,9 @@
 		/datum/reagent/consumable/nutriment/fat/oil/olive = 5
 	)
 	result = /obj/item/food/spaghetti/mushroom_nizaya
+	added_foodtypes = MUSHROOM // BANDASTATION ADDITION
 	cuisine_category = CUISINE_LIZARD
-	dish_category = DISH_NOODLES
+	dish_category = DISH_MUSHROOM // BANDASTATION ADDITION
 
 /datum/crafting_recipe/food/rustic_flatbread
 	name = "Rustic flatbread"
@@ -383,8 +385,9 @@
 		/datum/reagent/consumable/nutriment/fat/oil/olive = 3
 	)
 	result = /obj/item/food/pizza/flatbread/mushroom
+	added_foodtypes	= MUSHROOM // BANDASTATION ADDITION
 	cuisine_category = CUISINE_LIZARD
-	dish_category = DISH_BREAD
+	dish_category = DISH_MUSHROOM // BANDASTATION ADDITION
 	unit_test_spawn_extras = list(/obj/item/food/grown/mushroom/chanterelle = 3) //generic mushrooms
 
 /datum/crafting_recipe/food/nutty_flatbread
@@ -486,9 +489,9 @@
 		/datum/reagent/consumable/salt = 1
 	)
 	result = /obj/item/food/kebab/candied_mushrooms
-	added_foodtypes = SUGAR
+	added_foodtypes = SUGAR|MUSHROOM // BANDASTATION ADDITION
 	cuisine_category = CUISINE_LIZARD
-	dish_category = DISH_CANDY
+	dish_category = DISH_MUSHROOM // BANDASTATION ADDITION
 	meal_category = MEAL_DESSERT
 
 /datum/crafting_recipe/food/sauerkraut
@@ -520,8 +523,10 @@
 		/datum/reagent/lye = 5
 	)
 	result = /obj/item/food/steeped_mushrooms
+	added_foodtypes = MUSHROOM // BANDASTATION ADDITION
 	cuisine_category = CUISINE_LIZARD
 	meal_category = MEAL_COMPONENT
+	dish_category = DISH_MUSHROOM // BANDASTATION ADDITION
 
 /datum/crafting_recipe/food/rootbreadpbj
 	name = "Peanut butter and jelly rootwich"
