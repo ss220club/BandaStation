@@ -1282,9 +1282,9 @@
 "hg" = (
 /obj/structure/stone_tile/surrounding,
 /obj/structure/stone_tile/center/cracked,
-/obj/structure/ethereal_crystal{
-	color = #8B0000;
-	greyscale_colors = #8B0000
+/obj/structure/destructible/cult/pylon{
+	name = "Демонический Обелиск";
+	pixel_x = -10
 	},
 /turf/open/floor/carpet/goliath,
 /area/lavaland/surface/outdoors)
@@ -2649,6 +2649,9 @@
 /obj/structure/stone_tile,
 /obj/structure/stone_tile{
 	dir = 8
+	},
+/obj/item/paper/crumpled/bloody{
+	default_raw_text = "Нар`Си дал нам свой Зов..... Кровь забурлила в наших жилах, сила пробудались внутри Нас.... Послания, что были в обители Астерии заложены, Доме Принца - помогли нам кристалл возвести во всём его величии.... Настал наш час"
 	},
 /turf/open/floor/carpet/goliath,
 /area/lavaland/surface/outdoors)
