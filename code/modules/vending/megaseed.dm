@@ -75,6 +75,8 @@
 				/obj/item/seeds/coffee = 3,
 				/obj/item/seeds/cotton = 3,
 				/obj/item/seeds/grass = 3,
+				/obj/item/seeds/ximikoa = 3,  // BANDASTATION ADDITION
+				/obj/item/seeds/mushroom/gomoa = 3,  // BANDASTATION ADDITION
 				/obj/item/seeds/korta_nut = 3,
 				/obj/item/seeds/wheat/rice = 3,
 				/obj/item/seeds/tea = 3,

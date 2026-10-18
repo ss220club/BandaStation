@@ -279,7 +279,7 @@
 		/obj/item/reagent_containers/cup/bowl = 1,
 	)
 	result = /obj/item/food/beef_stroganoff
-	added_foodtypes = DAIRY
+	added_foodtypes = DAIRY|MUSHROOM // BANDASTATION ADDITION
 	dish_category = DISH_MEAT
 	unit_test_spawn_extras = list(/obj/item/food/grown/mushroom/chanterelle = 2) //generic mushrooms
 
@@ -297,6 +297,7 @@
 	)
 	result = /obj/item/food/beef_wellington
 	removed_foodtypes = BREAKFAST
+	added_foodtypes = MUSHROOM // BANDASTATION ADDITION
 	dish_category = DISH_MEAT
 	unit_test_spawn_extras = list(/obj/item/food/grown/mushroom/chanterelle = 1) //generic mushrooms
 
@@ -314,6 +315,7 @@
 	)
 	result = /obj/item/food/korta_wellington
 	removed_foodtypes = BREAKFAST
+	added_foodtypes = MUSHROOM // BANDASTATION ADDITION
 	dish_category = DISH_MEAT
 	unit_test_spawn_extras = list(/obj/item/food/grown/mushroom/chanterelle = 1) //generic mushrooms
 
@@ -387,6 +389,7 @@
 		/obj/item/food/butteredtoast = 1
 	)
 	result = /obj/item/food/full_english
+	added_foodtypes = MUSHROOM // BANDASTATION ADDITION
 	dish_category = DISH_MEAT
 	unit_test_spawn_extras = list(/obj/item/food/grown/mushroom/chanterelle = 1) //generic mushrooms
 

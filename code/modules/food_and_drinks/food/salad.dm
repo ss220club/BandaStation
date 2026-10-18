@@ -133,7 +133,7 @@
 		/datum/reagent/consumable/nutriment/vitamin = 6,
 	)
 	tastes = list("rice" = 1, "cheese" = 1)
-	foodtypes = GRAIN|DAIRY|VEGETABLES
+	foodtypes = GRAIN|DAIRY|VEGETABLES|MUSHROOM // BANDASTATION ADDITION
 	venue_value = FOOD_PRICE_EXOTIC
 	crafting_complexity = FOOD_COMPLEXITY_3
 

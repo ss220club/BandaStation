@@ -255,7 +255,7 @@
 		/datum/reagent/consumable/nutriment/vitamin = 5,
 	)
 	tastes = list("crust" = 1, "tomato" = 1, "cheese" = 1, "mushroom" = 1)
-	foodtypes = GRAIN | VEGETABLES | DAIRY
+	foodtypes = GRAIN | VEGETABLES | DAIRY | MUSHROOM // BANDASTATION ADDITION
 	slice_type = /obj/item/food/pizzaslice/mushroom
 	boxtag = "Mushroom Special"
 	crafting_complexity = FOOD_COMPLEXITY_2
@@ -263,7 +263,7 @@
 /obj/item/food/pizza/mushroom/raw
 	name = "raw mushroom pizza"
 	icon_state = "mushroompizza_raw"
-	foodtypes = GRAIN | VEGETABLES | DAIRY | RAW
+	foodtypes = GRAIN | VEGETABLES | DAIRY | RAW | MUSHROOM // BANDASTATION ADDITION
 	slice_type = null
 
 /obj/item/food/pizza/mushroom/raw/make_bakeable()
@@ -274,7 +274,7 @@
 	desc = "Maybe it is the last slice of pizza in your life."
 	icon_state = "mushroompizzaslice"
 	tastes = list("crust" = 1, "tomato" = 1, "cheese" = 1, "mushroom" = 1)
-	foodtypes = GRAIN | VEGETABLES | DAIRY
+	foodtypes = GRAIN | VEGETABLES | DAIRY | MUSHROOM // BANDASTATION ADDITION
 	crafting_complexity = FOOD_COMPLEXITY_2
 
 
@@ -461,7 +461,7 @@
 		/datum/reagent/toxin/amatoxin = 2,
 	)
 	tastes = list("stale crust" = 1, "rancid cheese" = 2, "mushroom" = 1)
-	foodtypes = GRAIN | VEGETABLES | DAIRY | GROSS
+	foodtypes = GRAIN | VEGETABLES | DAIRY | GROSS | MUSHROOM // BANDASTATION ADDITION
 	preserved_food = TRUE
 
 /obj/item/food/pizzaslice/moldy/bacteria

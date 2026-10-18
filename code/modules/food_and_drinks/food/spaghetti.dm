@@ -197,7 +197,7 @@
 		/datum/reagent/consumable/nutriment/protein = 8,
 	)
 	tastes = list("noodles" = 5, "meat" = 4, "mushrooms" = 3, "onion" = 2)
-	foodtypes = GRAIN | MEAT | VEGETABLES
+	foodtypes = GRAIN | MEAT | VEGETABLES | MUSHROOM // BANDASTATION ADDITION
 	crafting_complexity = FOOD_COMPLEXITY_4
 	custom_materials = list(/datum/material/meat = MEATDISH_MATERIAL_AMOUNT * 2)
 

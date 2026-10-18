@@ -76,5 +76,6 @@
 		/obj/item/food/grown/mushroom/chanterelle = 1
 	)
 	result = /obj/item/food/chawanmushi
+	added_foodtypes = MUSHROOM // BANDASTATION ADDITION
 	removed_foodtypes = BREAKFAST
 	cuisine_category = CUISINE_JAPANESE

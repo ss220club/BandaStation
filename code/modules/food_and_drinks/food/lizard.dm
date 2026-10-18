@@ -307,7 +307,7 @@
 		/datum/reagent/consumable/nutriment/vitamin = 4,
 	)
 	tastes = list("marvelous mushrooms" = 1, "sublime shrooms" = 1)
-	foodtypes = VEGETABLES
+	foodtypes = VEGETABLES | MUSHROOM  // BANDASTATION ADDITION
 	w_class = WEIGHT_CLASS_SMALL
 	crafting_complexity = FOOD_COMPLEXITY_3
 
@@ -426,7 +426,7 @@
 		/datum/reagent/consumable/nutriment/vitamin = 10,
 	)
 	tastes = list("savouriness" = 1, "nuttiness" = 1, "gnocchi" = 1)
-	foodtypes = VEGETABLES|NUTS
+	foodtypes = VEGETABLES|NUTS|MUSHROOM  // BANDASTATION ADDITION
 	crafting_complexity = FOOD_COMPLEXITY_4
 
 //Dough Dishes
@@ -683,7 +683,7 @@
 		/datum/reagent/consumable/nutriment/vitamin = 5,
 	)
 	tastes =  list("bread" = 1, "mushroom" = 1, "tomatoes" = 1)
-	foodtypes = VEGETABLES | NUTS
+	foodtypes = VEGETABLES | NUTS | MUSHROOM  // BANDASTATION ADDITION
 	crafting_complexity = FOOD_COMPLEXITY_4
 
 /obj/item/food/pizza/flatbread/nutty
@@ -814,7 +814,7 @@
 		/datum/reagent/consumable/caramel = 4,
 	)
 	tastes = list("savouriness" = 1, "sweetness" = 1)
-	foodtypes = SUGAR | VEGETABLES
+	foodtypes = SUGAR | VEGETABLES | MUSHROOM  // BANDASTATION ADDITION
 	crafting_complexity = FOOD_COMPLEXITY_2
 
 //Misc Dishes
@@ -853,7 +853,7 @@
 		/datum/reagent/consumable/nutriment/vitamin = 2,
 	)
 	tastes = list("savouriness" = 1, "nuttiness" = 1)
-	foodtypes = VEGETABLES
+	foodtypes = VEGETABLES | MUSHROOM  // BANDASTATION ADDITION
 	w_class = WEIGHT_CLASS_SMALL
 	crafting_complexity = FOOD_COMPLEXITY_1
 

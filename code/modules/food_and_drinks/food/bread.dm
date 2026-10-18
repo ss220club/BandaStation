@@ -82,7 +82,7 @@
 		/datum/reagent/consumable/mold = 10,
 	)
 	tastes = list("decaying fungus" = 1)
-	foodtypes = GROSS
+	foodtypes = GROSS | MUSHROOM // BANDASTATION ADDITION
 	preserved_food = TRUE
 	crafting_complexity = FOOD_COMPLEXITY_2
 

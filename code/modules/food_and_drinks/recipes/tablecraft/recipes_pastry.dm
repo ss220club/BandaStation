@@ -324,8 +324,8 @@
 		/obj/item/food/pastrybase = 2
 	)
 	result = /obj/item/food/rofflewaffles
-	added_foodtypes = VEGETABLES|BREAKFAST
-	dish_category = DISH_BREAD
+	added_foodtypes = VEGETABLES|BREAKFAST|MUSHROOM // BANDASTATION ADDITION
+	dish_category = DISH_MUSHROOM // BANDASTATION ADDITION
 
 ////////////////////////////////////////////////DONKPOCCKETS////////////////////////////////////////////////
 
@@ -577,7 +577,8 @@
 		/obj/item/food/grown/mushroom/plumphelmet = 1
 	)
 	result = /obj/item/food/plumphelmetbiscuit
-	dish_category = DISH_PASTRY
+	added_foodtypes = MUSHROOM // BANDASTATION ADDITION
+	dish_category = DISH_MUSHROOM // BANDASTATION ADDITION
 
 /datum/crafting_recipe/food/cracker
 	time = 1.5 SECONDS
@@ -647,7 +648,7 @@
 		/datum/reagent/consumable/caramel = 3,
 	)
 	result = /obj/item/food/jupitercupcake
-	added_foodtypes = SUGAR
+	added_foodtypes = SUGAR|MUSHROOM // BANDASTATION ADDITION
 	dish_category = DISH_PASTRY
 
 /datum/crafting_recipe/food/honeybun
