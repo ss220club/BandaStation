@@ -1767,6 +1767,14 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 /// Objects with this trait may become a new prison for a revenant, in the event of its ectoplasm dispersing
 #define TRAIT_COZY_REVENANT_HOME "cozy_revenant_home"
 
+// BANDASTATION EDIT START: Vampire identity traits
+/// Given to vampires.
+#define TRAIT_VAMPIRE "vampire"
+
+/// Given to vampires and thralls
+#define TRAIT_VAMPIRE_LIKE "vampire_like"
+// BANDASTATION EDIT END: Vampire collision and identity traits
+
 /// Objects that do not let overlay light holders shine through themselves
 #define TRAIT_BLOCKS_OVERLAY_LIGHT "blocks_overlay_light"
 

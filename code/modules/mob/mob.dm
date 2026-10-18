@@ -451,7 +451,7 @@ GAME_VERB_PROC(/mob, Cell, "Cell", "Admin")
 /mob/proc/get_items_by_slots(slot_ids)
 	. = list()
 	for (var/slot_id in bitfield_to_list(slot_ids))
-		. += get_item_by_slot(slot_id)
+		. |= get_item_by_slot(slot_id)
 
 /// Gets what slot the item on the mob is held in.
 /// Returns null if the item isn't in any slots on our mob.
@@ -899,7 +899,7 @@ GAME_VERB_NATIVE(/mob, DisDblClick, ".dblclick", null, argu = null as anything, 
  * - cycle_dir: A cardinal (NORTH, SOUTH, EAST, WEST) direction. Defaults to WEST, which is forwards.
  * - climb: If TRUE, wrapping will also shift rows/columns.
  * - silent: If applicable and TRUE, will output messages to the mob.
- * - intial_index: The starting point for the iteration loop. Note that this hand is considered *last*.
+ * - initial_index: The starting point for the iteration loop. Note that this hand is considered *last*.
  */
 /mob/proc/cycle_hand(cycle_dir = WEST, climb = TRUE, silent = FALSE, initial_index = active_hand_index)
 	if(!(cycle_dir in GLOB.cardinals))
@@ -978,8 +978,13 @@ GAME_VERB_NATIVE(/mob, DisDblClick, ".dblclick", null, argu = null as anything, 
 
 	var/previous_index = active_hand_index
 	active_hand_index = held_index
+
+	// update the previous handset
 	hud_used?.update_inventory_slot(ITEM_SLOT_HANDS, previous_index)
+	hud_used?.update_inventory_slot(ITEM_SLOT_HANDS, get_offhand_index(previous_index))
+	// update the current handset
 	hud_used?.update_inventory_slot(ITEM_SLOT_HANDS, held_index)
+	hud_used?.update_inventory_slot(ITEM_SLOT_HANDS, get_offhand_index(held_index))
 	return TRUE
 
 /mob/proc/activate_hand(selected_hand)
@@ -1495,6 +1500,10 @@ GAME_VERB_NATIVE(/mob, DisDblClick, ".dblclick", null, argu = null as anything, 
 /mob/proc/adjust_nutrition(change, forced = FALSE) //Honestly FUCK the oldcoders for putting nutrition on /mob someone else can move it up because holy hell I'd have to fix SO many typechecks
 	if(HAS_TRAIT(src, TRAIT_NOHUNGER) && !forced)
 		return
+	// BANDASTATION ADDITION START - Vampire: reject ordinary gains; blood feeding uses forced.
+	if(change > 0 && HAS_TRAIT(src, TRAIT_VAMPIRE) && !forced)
+		return
+	// BANDASTATION ADDITION END
 
 	nutrition = max(0, nutrition + change)
 
@@ -1510,6 +1519,10 @@ GAME_VERB_NATIVE(/mob, DisDblClick, ".dblclick", null, argu = null as anything, 
 /mob/proc/set_nutrition(set_to, forced = FALSE) //Seriously fuck you oldcoders.
 	if(HAS_TRAIT(src, TRAIT_NOHUNGER) && !forced)
 		return
+	// BANDASTATION ADDITION START - Vampire: also cover feeding sources that set nutrition directly.
+	if(set_to > nutrition && HAS_TRAIT(src, TRAIT_VAMPIRE) && !forced)
+		return
+	// BANDASTATION ADDITION END
 
 	nutrition = max(0, set_to)
 
