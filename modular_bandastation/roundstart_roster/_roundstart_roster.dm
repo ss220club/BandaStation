@@ -21,7 +21,7 @@ GLOBAL_DATUM(roundstart_roster, /datum/modpack/roundstart_roster)
 
 /datum/modpack/roundstart_roster/initialize()
 	GLOB.roundstart_roster = src
-	RegisterSignal(SSjob, COMSIG_ROUNDSTART_ROSTER_APPLY, PROC_REF(apply_assignments))
+	RegisterSignal(SSjob, COMSIG_ROUNDSTART_ROSTER_APPLY, PROC_REF(queue_assignments))
 	RegisterSignal(SSjob, COMSIG_ROUNDSTART_ROSTER_VALIDATE_ASSIGNMENT, PROC_REF(validate_assignment))
 	RegisterSignal(SSjob, COMSIG_ROUNDSTART_ROSTER_BYPASS_PREFS, PROC_REF(bypass_preferences))
 	RegisterSignal(SSjob, COMSIG_ROUNDSTART_ROSTER_VALIDATE_ANTAG, PROC_REF(validate_antag_candidate))

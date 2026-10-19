@@ -38,11 +38,15 @@
 	if(candidate_job.title in ruleset.get_blacklisted_roles())
 		return ROUNDSTART_ROSTER_BLOCK_ANTAG
 
+/// since apply_assignments may sleep in some branches, we must process it outside SIGNAL_HANDLER
+/datum/modpack/roundstart_roster/proc/queue_assignments(datum/source, list/assignment_callbacks)
+	SIGNAL_HANDLER
+	assignment_callbacks += CALLBACK(src, PROC_REF(apply_assignments))
+
 /// Assign jobs selected by admins to ready players before standard job distribution.
 /// Only connected players in SSjob.unassigned receive their jobs.
 /// Runs independently in Dynamic's dry run and each real setup attempt.
-/datum/modpack/roundstart_roster/proc/apply_assignments(datum/source)
-	SIGNAL_HANDLER
+/datum/modpack/roundstart_roster/proc/apply_assignments()
 	for(var/player_ckey in assignments)
 		var/job_type = assignments[player_ckey]
 		if(!job_type)

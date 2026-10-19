@@ -445,8 +445,12 @@ SUBSYSTEM_DEF(job)
 
 	handle_feedback_gathering()
 
-	// SS220 ADDITION - Assign jobs selected by admins to ready players before standard job distribution.
-	SEND_SIGNAL(src, COMSIG_ROUNDSTART_ROSTER_APPLY)
+	// SS220 ADDITION START - Assign jobs selected by admins before standard job distribution.
+	var/list/roundstart_roster_callbacks = list()
+	SEND_SIGNAL(src, COMSIG_ROUNDSTART_ROSTER_APPLY, roundstart_roster_callbacks)
+	for(var/datum/callback/assignment_callback as anything in roundstart_roster_callbacks)
+		assignment_callback.Invoke()
+	// SS220 ADDITION END
 
 	// Assign any priority positions before all other standard job selections.
 	job_debug("DO: Assigning priority positions")
