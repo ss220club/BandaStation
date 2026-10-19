@@ -62,10 +62,9 @@ GLOBAL_DATUM_INIT(objective_replacement_handler, /datum/objective_replacement_ha
 		return FALSE
 	var/old_explanation = explanation_text
 	prepare_target_replacement()
-	var/datum/mind/replacement = find_target(blacklist = blacklist)
-	// Target pickers can return a mind or only assign the target field.
-	if(istype(replacement))
-		target = replacement
+	var/replacement = find_target(blacklist = blacklist)
+	target = replacement
+
 	if(!target || target == old_target)
 		explanation_text = old_explanation
 		cancel_unavailable_target()
