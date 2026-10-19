@@ -80,7 +80,7 @@
 
 /obj/item/organ/brain/tajaran
 	icon = 'icons/bandastation/mob/species/tajaran/organs.dmi'
-	brain_size = 0.75
+	brain_size = 0.20
 /obj/item/organ/lungs/tajaran
 	name = "tajaran lungs"
 	icon = 'icons/bandastation/mob/species/tajaran/organs.dmi'
