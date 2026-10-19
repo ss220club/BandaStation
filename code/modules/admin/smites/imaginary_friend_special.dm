@@ -1,5 +1,7 @@
-#define CHOICE_RANDOM_APPEARANCE "Random"
-#define CHOICE_PREFS_APPEARANCE "Look-a-like"
+// BANDASTATION EDIT START
+// #define CHOICE_RANDOM_APPEARANCE "Random"
+// #define CHOICE_PREFS_APPEARANCE "Look-a-like"
+// BANDASTATION EDIT END
 #define CHOICE_PICK_PLAYER "Pick player"
 #define CHOICE_POLL_GHOSTS "Offer to ghosts"
 #define CHOICE_END_THEM "Do it!"
@@ -17,14 +19,15 @@
  **/
 /datum/smite/custom_imaginary_friend
 	name = "Imaginary Friend (Special)"
-	/// Do we randomise friend appearances or not?
-	var/random_appearance
+	// var/random_appearance // BANDASTATION EDIT: Imaginary friend selection
 	/// Are we polling for ghosts
 	var/ghost_polling
 	/// How many imaginary friends should be added when polling
 	var/polled_friend_count
 
 /datum/smite/custom_imaginary_friend/configure(client/user)
+	// BANDASTATION EDIT START: Imaginary friend selection
+	/**
 	var/appearance_choice = tgui_alert(user,
 		"Do you want the imaginary friend(s) to share name and appearance with their currently selected character preferences?",
 		"Imaginary Friend Appearance?",
@@ -32,7 +35,8 @@
 	if (isnull(appearance_choice) || appearance_choice == CHOICE_CANCEL)
 		return FALSE
 	random_appearance = appearance_choice == CHOICE_RANDOM_APPEARANCE
-
+	**/
+	// BANDASTATION EDIT END: Imaginary friend selection
 	var/client_selection_choice = tgui_alert(user,
 		"Do you want to pick a specific player, or poll for ghosts?",
 		"Imaginary Friend Selection?",
@@ -48,8 +52,14 @@
 			return FALSE
 		polled_friend_count = how_many
 
-	return TRUE
+	// BANDASTATION EDIT START: Imaginary friend selection
+		// return TRUE
+		var/confirm_ghosts = tgui_alert(user, "Вы уверены, что хотите предложить роль призракам?", "Подтверждение", list("Да", "Отмена"))
+		if(confirm_ghosts != "Да")
+			return FALSE
 
+	return TRUE
+	// BANDASTATION EDIT END: Imaginary friend selection
 
 /// Try to offer the role to ghosts
 /datum/smite/custom_imaginary_friend/proc/poll_ghosts(client/user, mob/living/target)
@@ -85,6 +95,12 @@
 	if(QDELETED(friend_candidate_client))
 		to_chat(user, span_warning("Selected player no longer has a client, aborting."))
 		return
+
+	// BANDASTATION EDIT START: Imaginary friend selection
+	var/confirm_player = tgui_alert(user, "Вы уверены, что хотите выбрать [friend_candidate_client.ckey]?", "Подтверждение", list("Да", "Отмена"))
+	if(confirm_player != "Да")
+		return
+	// BANDASTATION EDIT END: Imaginary friend selection
 
 	if(isliving(friend_candidate_client.mob))
 		var/end_them_choice = tgui_alert(user,
@@ -134,7 +150,72 @@
 		return
 
 	for(var/client/friend_candidate_client as anything in final_clients)
-		var/mob/client_mob = friend_candidate_client.mob
+
+// BANDASTATION EDIT START: Imaginary friend selection
+		INVOKE_ASYNC(src, PROC_REF(setup_friend_async), friend_candidate_client, target)
+
+/datum/smite/custom_imaginary_friend/proc/setup_friend_async(client/friend_candidate_client, mob/living/target)
+	if(!friend_candidate_client || QDELETED(target))
+		return
+
+	var/list/choices = list("Свой персонаж", "Случайный человек", "Выбрать из окружающих")
+	var/choice = tgui_alert(friend_candidate_client, "Кем вы хотите выглядеть?", "Внешний вид", choices)
+
+	if(!friend_candidate_client || QDELETED(target))
+		return
+
+	var/mob/living/carbon/copied_target = null
+
+	if(choice == "Выбрать из окружающих")
+		var/list/possible_targets = list()
+		for(var/mob/living/carbon/C in GLOB.carbon_list)
+			if(!C.real_name) continue
+			possible_targets[C.real_name] = C
+
+		if(!length(possible_targets))
+			to_chat(friend_candidate_client, span_warning("Не найдено подходящих существ. Выбран случайный внешний вид."))
+			choice = "Случайный человек"
+		else
+			var/target_name = tgui_input_list(friend_candidate_client, "Выберите существо для копирования:", "Внешний вид", possible_targets)
+			if(target_name)
+				copied_target = possible_targets[target_name]
+			else
+				choice = "Случайный человек"
+
+	if(!friend_candidate_client || QDELETED(target))
+		return
+
+	var/mob/client_mob = friend_candidate_client.mob
+	if(isliving(client_mob))
+		client_mob.ghostize()
+
+	var/mob/eye/imaginary_friend/friend_mob = client_mob.change_mob_type(
+		new_type = /mob/eye/imaginary_friend,
+		location = get_turf(client_mob),
+		delete_old_mob = TRUE,
+	)
+	friend_mob.attach_to_owner(target)
+
+	if(choice == "Свой персонаж")
+		friend_mob.setup_friend_from_prefs(friend_candidate_client.prefs)
+	else if(choice == "Выбрать из окружающих" && copied_target)
+		friend_mob.real_name = copied_target.real_name
+		friend_mob.name = friend_mob.real_name
+		var/icon/final_icon = icon()
+		var/old_dir = copied_target.dir
+		for(var/d in list(NORTH, SOUTH, EAST, WEST))
+			copied_target.setDir(d)
+			var/icon/temp_icon = getFlatIcon(copied_target)
+			final_icon.Insert(temp_icon, dir = d)
+		copied_target.setDir(old_dir)
+		friend_mob.human_icon = final_icon
+		friend_mob.Show()
+		friend_mob.copy_tts_from(copied_target)
+	else
+		friend_mob.setup_friend()
+
+/**
+	var/mob/client_mob = friend_candidate_client.mob
 		if(isliving(client_mob))
 			client_mob.ghostize()
 
@@ -148,6 +229,8 @@
 
 #undef CHOICE_RANDOM_APPEARANCE
 #undef CHOICE_PREFS_APPEARANCE
+**/
+//BANDASTATION EDIT END: Imaginary friend selection
 #undef CHOICE_PICK_PLAYER
 #undef CHOICE_POLL_GHOSTS
 #undef CHOICE_END_THEM

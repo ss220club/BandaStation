@@ -75,7 +75,7 @@
 	/// Remote signaler
 	var/obj/item/assembly/signaler/internal/signaler
 	/// Crew Monitor - BANDASTATION ADDITION
-	var/obj/item/sensor_device/crew_monitor
+	var/obj/item/sensor_device/pai/crew_monitor
 
 	///The messeenger ability that pAIs get when they are put in a PDA.
 	var/datum/action/innate/pai/messenger/messenger_ability

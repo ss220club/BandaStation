@@ -7,7 +7,7 @@
 	lose_text = span_notice("Вы больше не испытываете депрессию.") //if only it were that easy!
 	medical_record_text = "У пациента легкое расстройство настроения, вызывающее острые приступы депрессии."
 	medical_symptom_text = "Experiences persistent feelings of sadness, hopelessness, and a lack of motivation."
-	quirk_flags = QUIRK_HUMAN_ONLY|QUIRK_MOODLET_BASED|QUIRK_PROCESSES|QUIRK_TRAUMALIKE
+	quirk_flags = QUIRK_HUMAN_ONLY|QUIRK_PROCESSES|QUIRK_TRAUMALIKE
 	hardcore_value = 2
 	mail_goodies = list(/obj/item/storage/pill_bottle/happinesspsych)
 
