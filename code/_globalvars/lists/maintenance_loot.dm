@@ -416,6 +416,9 @@ GLOBAL_LIST_INIT(oddity_loot, list(//oddity: strange or crazy items
 
 //Loot pool used by default maintenance loot spawners
 GLOBAL_LIST_INIT(maintenance_loot, list(
+	// BANDASTATION ADD START - Перенос ИИ: архивы исследований в добыче техтоннелей.
+	/obj/item/disk/ai_research_archive = 50,
+	// BANDASTATION ADD END - Перенос ИИ
 	GLOB.trash_loot = maint_trash_weight,
 	GLOB.common_loot = maint_common_weight,
 	GLOB.uncommon_loot = maint_uncommon_weight,

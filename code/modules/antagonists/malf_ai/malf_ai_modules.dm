@@ -182,6 +182,9 @@ GLOBAL_LIST_INIT(malf_modules, subtypesof(/datum/ai_module/malf))
 	button_icon_state = "nuclearbomb_timing"
 	auto_use_uses = FALSE
 
+// BANDASTATION ADD START - Перенос ИИ: документация изменённого API.
+/** Запускает способность malf AI с учётом физического размещения ядра. */
+// BANDASTATION ADD END - Перенос ИИ
 /datum/action/innate/ai/nuke_station/Activate()
 	var/turf/T = get_turf(owner)
 	if(!istype(T) || !is_station_level(T.z))
@@ -189,13 +192,17 @@ GLOBAL_LIST_INIT(malf_modules, subtypesof(/datum/ai_module/malf))
 		return
 	if(tgui_alert(owner, "Отправить сигнал активации? (true = активировтаь, false = отмена)", "purge_all_life()", list("confirm = TRUE;", "confirm = FALSE;")) != "confirm = TRUE;")
 		return
+	// BANDASTATION ADD START - Перенос ИИ: работа malf-способностей из физического ядра.
 	if (active || owner_AI.stat == DEAD)
-		return //prevent the AI from activating an already active doomsday or while they are dead
-	if (!isturf(owner_AI.loc))
-		return //prevent AI from activating doomsday while shunted or carded, fucking abusers
+		return
+	if (!owner_AI.in_network_core())
+		return
+	// BANDASTATION ADD END - Перенос ИИ
 	active = TRUE
 	set_up_us_the_bomb(owner)
 
+// BANDASTATION ADD START - Перенос ИИ: работа malf-способностей из физического ядра.
+/** Подготавливает штатное уничтожение станции, привязывая эффект к физическому ядру ИИ. */
 /datum/action/innate/ai/nuke_station/proc/set_up_us_the_bomb(mob/living/owner)
 	//oh my GOD.
 	set waitfor = FALSE
@@ -203,12 +210,12 @@ GLOBAL_LIST_INIT(malf_modules, subtypesof(/datum/ai_module/malf))
 	var/pass = prob(10) ? "******" : "hunter2"
 	to_chat(owner, "<span class='small bolddanger'>run -o -a 'selfdestruct'</span>")
 	sleep(0.5 SECONDS)
-	if(QDELETED(owner) || !isturf(owner_AI.loc))
+	if(QDELETED(owner) || !owner_AI.in_network_core())
 		active = FALSE
 		return
 	to_chat(owner, "<span class='small bolddanger'>Running executable 'selfdestruct'...</span>")
 	sleep(rand(10, 30))
-	if(QDELETED(owner) || !isturf(owner_AI.loc))
+	if(QDELETED(owner) || !owner_AI.in_network_core())
 		active = FALSE
 		return
 	owner.playsound_local(owner, 'sound/announcer/alarm/bloblarm.ogg', 50, 0, use_reverb = FALSE)
@@ -216,63 +223,63 @@ GLOBAL_LIST_INIT(malf_modules, subtypesof(/datum/ai_module/malf))
 	to_chat(owner, span_bolddanger("Это нарушение безопасности 3-го класса. Об данном инциденте будет сообщено на Центральное Командование."))
 	for(var/i in 1 to 3)
 		sleep(2 SECONDS)
-		if(QDELETED(owner) || !isturf(owner_AI.loc))
+		if(QDELETED(owner) || !owner_AI.in_network_core())
 			active = FALSE
 			return
 		to_chat(owner, span_bolddanger("Отправка отчёта безопасности Центральному Командованию.....[rand(0, 9) + (rand(20, 30) * i)]%"))
 	sleep(0.3 SECONDS)
-	if(QDELETED(owner) || !isturf(owner_AI.loc))
+	if(QDELETED(owner) || !owner_AI.in_network_core())
 		active = FALSE
 		return
 	to_chat(owner, "<span class='small bolddanger'>auth 'akjv9c88asdf12nb' [pass]</span>")
 	owner.playsound_local(owner, 'sound/items/timer.ogg', 50, 0, use_reverb = FALSE)
 	sleep(3 SECONDS)
-	if(QDELETED(owner) || !isturf(owner_AI.loc))
+	if(QDELETED(owner) || !owner_AI.in_network_core())
 		active = FALSE
 		return
 	to_chat(owner, span_boldnotice("Аутентификация успешна. Добро пожаловать, akjv9c88asdf12nb."))
 	owner.playsound_local(owner, 'sound/misc/server-ready.ogg', 50, 0, use_reverb = FALSE)
 	sleep(0.5 SECONDS)
-	if(QDELETED(owner) || !isturf(owner_AI.loc))
+	if(QDELETED(owner) || !owner_AI.in_network_core())
 		active = FALSE
 		return
 	to_chat(owner, span_boldnotice("Активировать устройство самоуничтожения? (Д/Н)"))
 	owner.playsound_local(owner, 'sound/machines/compiler/compiler-stage1.ogg', 50, 0, use_reverb = FALSE)
 	sleep(2 SECONDS)
-	if(QDELETED(owner) || !isturf(owner_AI.loc))
+	if(QDELETED(owner) || !owner_AI.in_network_core())
 		active = FALSE
 		return
 	to_chat(owner, "<span class='small bolddanger'>Д</span>")
 	sleep(1.5 SECONDS)
-	if(QDELETED(owner) || !isturf(owner_AI.loc))
+	if(QDELETED(owner) || !owner_AI.in_network_core())
 		active = FALSE
 		return
 	to_chat(owner, span_boldnotice("Подтвердите активацию устройства самоуничтожения? (Д/Н)"))
 	owner.playsound_local(owner, 'sound/machines/compiler/compiler-stage2.ogg', 50, 0, use_reverb = FALSE)
 	sleep(1 SECONDS)
-	if(QDELETED(owner) || !isturf(owner_AI.loc))
+	if(QDELETED(owner) || !owner_AI.in_network_core())
 		active = FALSE
 		return
 	to_chat(owner, "<span class='small bolddanger'>Д</span>")
 	sleep(rand(15, 25))
-	if(QDELETED(owner) || !isturf(owner_AI.loc))
+	if(QDELETED(owner) || !owner_AI.in_network_core())
 		active = FALSE
 		return
 	to_chat(owner, span_boldnotice("Пожалуйста, введите пароль для подтверждения."))
 	owner.playsound_local(owner, 'sound/machines/compiler/compiler-stage2.ogg', 50, 0, use_reverb = FALSE)
 	sleep(1.4 SECONDS)
-	if(QDELETED(owner) || !isturf(owner_AI.loc))
+	if(QDELETED(owner) || !owner_AI.in_network_core())
 		active = FALSE
 		return
 	to_chat(owner, "<span class='small bolddanger'>[pass]</span>")
 	sleep(4 SECONDS)
-	if(QDELETED(owner) || !isturf(owner_AI.loc))
+	if(QDELETED(owner) || !owner_AI.in_network_core())
 		active = FALSE
 		return
 	to_chat(owner, span_boldnotice("Аутентификация пройдена. Передача сигнала активации..."))
 	owner.playsound_local(owner, 'sound/misc/server-ready.ogg', 50, 0, use_reverb = FALSE)
 	sleep(3 SECONDS)
-	if(QDELETED(owner) || !isturf(owner_AI.loc))
+	if(QDELETED(owner) || !owner_AI.in_network_core())
 		active = FALSE
 		return
 	if (owner_AI.stat != DEAD)
@@ -292,6 +299,7 @@ GLOBAL_LIST_INIT(malf_modules, subtypesof(/datum/ai_module/malf))
 		)
 
 		qdel(src)
+// BANDASTATION ADD END - Перенос ИИ
 
 /obj/machinery/doomsday_device
 	icon = 'icons/obj/machines/nuke_terminal.dmi'
@@ -695,9 +703,14 @@ GLOBAL_LIST_INIT(malf_modules, subtypesof(/datum/ai_module/malf))
 	if(C && I.loc == T)
 		C.images -= I
 
+// BANDASTATION ADD START - Перенос ИИ: документация изменённого API.
+/** Проверяет возможность размещения трансформера от физического положения ИИ. */
+// BANDASTATION ADD END - Перенос ИИ
 /mob/living/silicon/ai/proc/can_place_transformer(datum/action/innate/ai/place_transformer/action)
-	if(!eyeobj || !isturf(loc) || incapacitated || !action)
+	// BANDASTATION ADD START - Перенос ИИ: работа malf-способностей из физического ядра.
+	if(!eyeobj || !in_network_core() || incapacitated || !action)
 		return
+	// BANDASTATION ADD END - Перенос ИИ
 	var/turf/middle = get_turf(eyeobj)
 	var/list/turfs = list(middle, locate(middle.x - 1, middle.y, middle.z), locate(middle.x + 1, middle.y, middle.z))
 	var/alert_msg = "Недостаточно места! Убедитесь, что вы размещаете машину в свободном пространстве и на полу."
@@ -1199,6 +1212,9 @@ GLOBAL_LIST_INIT(malf_modules, subtypesof(/datum/ai_module/malf))
 	. = ..()
 	desc = "[desc] It has [uses] use\s remaining."
 
+// BANDASTATION ADD START - Перенос ИИ: документация изменённого API.
+/** Проверяет и запускает наклон физического ядра в выбранном направлении. */
+// BANDASTATION ADD END - Перенос ИИ
 /datum/action/innate/ai/ranged/core_tilt/do_ability(mob/living/clicker, atom/clicked_on)
 
 	if (!COOLDOWN_FINISHED(src, time_til_next_tilt))
@@ -1208,18 +1224,18 @@ GLOBAL_LIST_INIT(malf_modules, subtypesof(/datum/ai_module/malf))
 	if (!isAI(clicker))
 		return FALSE
 	var/mob/living/silicon/ai/ai_clicker = clicker
-
-	if (ai_clicker.incapacitated || !isturf(ai_clicker.loc))
+	// BANDASTATION ADD START - Перенос ИИ: работа malf-способностей из физического ядра.
+	if (ai_clicker.incapacitated || !ai_clicker.in_network_core())
 		return FALSE
-
+	// BANDASTATION ADD END - Перенос ИИ
 	var/turf/target = get_turf(clicked_on)
 	if (isnull(target))
 		return FALSE
-
-	if (target == ai_clicker.loc)
+	// BANDASTATION ADD START - Перенос ИИ: работа malf-способностей из физического ядра.
+	if (target == get_turf(ai_clicker))
 		target.balloon_alert(ai_clicker, "can't roll on yourself!")
 		return FALSE
-
+	// BANDASTATION ADD END - Перенос ИИ
 	var/picked_dir = get_dir(ai_clicker, target)
 	if (!picked_dir)
 		return FALSE
@@ -1236,18 +1252,24 @@ GLOBAL_LIST_INIT(malf_modules, subtypesof(/datum/ai_module/malf))
 
 	COOLDOWN_START(src, time_til_next_tilt, roll_over_cooldown)
 
+// BANDASTATION ADD START - Перенос ИИ: документация изменённого API.
+/** Перемещает физическое ядро при успешном применении способности наклона. */
+// BANDASTATION ADD END - Перенос ИИ
 /datum/action/innate/ai/ranged/core_tilt/proc/do_roll_over(mob/living/silicon/ai/ai_clicker, picked_dir)
-	if (ai_clicker.incapacitated || !isturf(ai_clicker.loc)) // prevents bugs where the ai is carded and rolls
+	// BANDASTATION ADD START - Перенос ИИ: работа malf-способностей из физического ядра.
+	if (ai_clicker.incapacitated || !ai_clicker.in_network_core())
 		return
-
+	// BANDASTATION ADD END - Перенос ИИ
 	var/turf/target = get_step(ai_clicker, picked_dir) // in case we moved we pass the dir not the target turf
 
 	if (isnull(target))
 		return
 
 	var/paralyze_time = clamp(6 SECONDS, 0 SECONDS, (roll_over_cooldown * 0.9)) //the clamp prevents stunlocking as the max is always a little less than the cooldown between rolls
-
-	return ai_clicker.fall_and_crush(target, MALF_AI_ROLL_DAMAGE, MALF_AI_ROLL_CRIT_CHANCE, null, paralyze_time, picked_dir, rotation = get_rotation_from_dir(picked_dir))
+	// BANDASTATION ADD START - Перенос ИИ: работа malf-способностей из физического ядра.
+	var/atom/movable/physical_core = istype(ai_clicker.loc, /obj/machinery/ai/data_core) ? ai_clicker.loc : ai_clicker
+	return physical_core.fall_and_crush(target, MALF_AI_ROLL_DAMAGE, MALF_AI_ROLL_CRIT_CHANCE, null, paralyze_time, picked_dir, rotation = get_rotation_from_dir(picked_dir))
+	// BANDASTATION ADD END - Перенос ИИ
 
 /// Used in our radial menu, state-checking proc after the radial menu sleeps
 /datum/action/innate/ai/ranged/core_tilt/proc/radial_check(mob/living/silicon/ai/clicker)

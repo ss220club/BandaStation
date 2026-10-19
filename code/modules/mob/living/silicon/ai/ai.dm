@@ -82,14 +82,14 @@
 	aicamera = new/obj/item/camera/siliconcam/ai_camera(src)
 
 	deploy_action.Grant(src)
-
-	if(isturf(loc))
+	// BANDASTATION ADD START - Перенос ИИ: подключение физического ядра к штатному ИИ.
+	if(in_network_core())
 		ASSIGN_GAME_VERB(src, /mob/living/silicon/ai, ai_network_change)
 		ASSIGN_GAME_VERB(src, /mob/living/silicon/ai, ai_hologram_change)
 		ASSIGN_GAME_VERB(src, /mob/living/silicon/ai, botcall)
 		ASSIGN_GAME_VERB(src, /mob/living/silicon/ai, control_integrated_radio)
 		ASSIGN_GAME_VERB(src, /mob/living/silicon/ai, set_automatic_say_channel)
-
+	// BANDASTATION ADD END - Перенос ИИ
 	GLOB.ai_list += src
 	GLOB.shuttle_caller_list += src
 
@@ -124,6 +124,9 @@
 			to_chat(McMobby,span_binarysay("<span class=[SPAN_COMMAND]>\[ SYSTEM \] NEW REMOTE HOST HAS CONNECTED TO THIS CHANNEL -- ID: [src]</span>"), type = MESSAGE_TYPE_RADIO)
 
 	RegisterSignal(src, COMSIG_SILICON_MODULE_RACK_LAWSET_UPDATE, PROC_REF(lawset_updated_sync_borgs))
+	// BANDASTATION ADD START - Перенос ИИ: подключение физического ядра к штатному ИИ.
+	initialize_decentralized_ai()
+	// BANDASTATION ADD END - Перенос ИИ
 
 /mob/living/silicon/ai/mind_initialize()
 	. = ..()
@@ -158,7 +161,13 @@
 				return
 	return ..()
 
+// BANDASTATION ADD START - Перенос ИИ: документация изменённого API.
+/** Удаляет служебные объекты ИИ и освобождает назначения ресурсов перед штатной очисткой. */
+// BANDASTATION ADD END - Перенос ИИ
 /mob/living/silicon/ai/Destroy()
+	// BANDASTATION ADD START - Перенос ИИ: подключение физического ядра к штатному ИИ.
+	destroy_decentralized_ai()
+	// BANDASTATION ADD END - Перенос ИИ
 	GLOB.ai_list -= src
 	GLOB.shuttle_caller_list -= src
 	SSshuttle.autoEvac()
@@ -269,14 +278,19 @@ GAME_VERB_DESC(/mob/living/silicon/ai, pick_status_display, "Set AI Status Displ
 		status_display_picker = new(src)
 	status_display_picker.ui_interact(src)
 
+// BANDASTATION ADD START - Перенос ИИ: документация изменённого API.
+/** Добавляет в штатную панель состояния показатели ИИ и его подключённых устройств. */
+// BANDASTATION ADD END - Перенос ИИ
 /mob/living/silicon/ai/get_status_tab_items()
 	. = ..()
 	if(IS_UNCONSCIOUS_OR_CRIT(src))
 		. += "Systems nonfunctional"
 		return
 	. += "System integrity: [(health + 100) * 0.5]%"
-	if(isturf(loc)) //only show if we're "in" a core
+	// BANDASTATION ADD START - Перенос ИИ: подключение физического ядра к штатному ИИ.
+	if(in_network_core())
 		. += "Backup Power: [battery * 0.5]%"
+	// BANDASTATION ADD END - Перенос ИИ
 	. += "Connected cyborgs: [length(connected_robots)]"
 	for(var/r in connected_robots)
 		var/mob/living/silicon/robot/connected_robot = r
@@ -439,6 +453,9 @@ GAME_VERB(/mob/living/silicon/ai, toggle_anchor, "Toggle Floor Bolts", "AI Comma
 	qdel(src)
 	return ai_core
 
+// BANDASTATION ADD START - Перенос ИИ: документация изменённого API.
+/** Обрабатывает штатные ссылки ИИ с учётом его размещения в физическом ядре. */
+// BANDASTATION ADD END - Перенос ИИ
 /mob/living/silicon/ai/Topic(href, href_list)
 	..()
 
@@ -517,9 +534,11 @@ GAME_VERB(/mob/living/silicon/ai, toggle_anchor, "Toggle Floor Bolts", "AI Comma
 		if(!SScameras.is_visible_by_cameras(M))
 			to_chat(src, span_warning("Exosuit is no longer near active cameras."))
 			return
-		if(!isturf(loc))
+		// BANDASTATION ADD START - Перенос ИИ: подключение физического ядра к штатному ИИ.
+		if(!in_network_core())
 			to_chat(src, span_warning("You aren't in your core!"))
 			return
+		// BANDASTATION ADD END - Перенос ИИ
 		if(M)
 			M.transfer_ai(AI_MECH_HACK, src, usr) //Called om the mech itself.
 	if(href_list["show_paper_note"])
@@ -811,26 +830,38 @@ GAME_VERB_PROC_DESC(/mob/living/silicon/ai, set_automatic_say_channel, "Set Auto
 		return
 	set_autosay()
 
+// BANDASTATION ADD START - Перенос ИИ: документация изменённого API.
+/** Обрабатывает штатный перенос через intelliCard с проверкой направления и действительного содержимого носителя. */
+// BANDASTATION ADD END - Перенос ИИ
 /mob/living/silicon/ai/transfer_ai(interaction, mob/user, mob/living/silicon/ai/AI, obj/item/aicard/card)
 	if(!..())
 		return
 	if(interaction != AI_TRANS_TO_CARD)//The only possible interaction. Upload AI mob to a card.
 		return
-	if(!can_be_carded)
+	// BANDASTATION ADD START - Перенос ИИ: подключение физического ядра к штатному ИИ.
+	if(!can_be_carded || card.AI || (decentralized && !can_download))
 		balloon_alert(user, "transfer failed!")
 		return
+	// BANDASTATION ADD END - Перенос ИИ
 	disconnect_shell() //If the AI is controlling a borg, force the player back to core!
 	if(!mind)
 		balloon_alert(user, "no intelligence detected!") // average tg coder am i right
 		return
 	ShutOffDoomsdayDevice()
-	var/obj/structure/ai_core/new_core = new /obj/structure/ai_core(loc, CORE_STATE_FINISHED, make_mmi())
-	new_core.circuit.battery = battery
+	// BANDASTATION ADD START - Перенос ИИ: подключение физического ядра к штатному ИИ.
+	if(!decentralized)
+		var/obj/structure/ai_core/new_core = new /obj/structure/ai_core(loc, CORE_STATE_FINISHED, make_mmi())
+		new_core.circuit.battery = battery
+	// BANDASTATION ADD END - Перенос ИИ
 	ai_restore_power()//So the AI initially has power.
 	set_control_disabled(TRUE) //Can't control things remotely if you're stuck in a card!
 	radio_enabled = FALSE //No talking on the built-in radio for you either!
 	forceMove(card)
 	card.AI = src
+	// BANDASTATION ADD START - Перенос ИИ: освобождение ресурсов при выгрузке на карту.
+	if(decentralized)
+		release_neural_resources()
+	// BANDASTATION ADD END - Перенос ИИ
 	to_chat(src, "You have been downloaded to a mobile storage device. Remote device connection severed.")
 	to_chat(user, "[span_boldnotice("Transfer successful")]: [name] ([rand(1000,9999)].exe) removed from host terminal and stored within local memory.")
 
@@ -840,11 +871,16 @@ GAME_VERB_PROC_DESC(/mob/living/silicon/ai, set_automatic_say_channel, "Set Auto
 		return FALSE
 	return can_see(target) && ..() //stop AIs from leaving windows open and using then after they lose vision
 
+// BANDASTATION ADD START - Перенос ИИ: документация изменённого API.
+/** Проверяет доступность цели камерам для ИИ в ядре и местную видимость для переносимого ИИ. */
+// BANDASTATION ADD END - Перенос ИИ
 /mob/living/silicon/ai/proc/can_see(atom/A)
-	if(isturf(loc)) //AI in core, check if on cameras
+	// BANDASTATION ADD START - Перенос ИИ: подключение физического ядра к штатному ИИ.
+	if(in_network_core())
 		//get_turf_pixel() is because APCs in maint aren't actually in view of the inner camera
 		//apc_override is needed here because AIs use their own APC when depowered
 		return (SScameras.is_visible_by_cameras(get_turf_pixel(A)) || (A == apc_override))
+	// BANDASTATION ADD END - Перенос ИИ
 	//AI is carded/shunted
 	//view(src) returns nothing for carded/shunted AIs and they have X-ray vision so just use get_dist
 	var/list/viewscale = getviewsize(client.view)
@@ -921,8 +957,15 @@ GAME_VERB_PROC_DESC(/mob/living/silicon/ai, set_automatic_say_channel, "Set Auto
 	modules_action = new(malf_picker)
 	modules_action.Grant(src)
 
+// BANDASTATION ADD START - Перенос ИИ: документация изменённого API.
+/** Восстанавливает наблюдение через камеру ИИ, корректно обрабатывая физическое ядро. */
+// BANDASTATION ADD END - Перенос ИИ
 /mob/living/silicon/ai/reset_perspective(atom/new_eye)
+	// BANDASTATION ADD START - Перенос ИИ: подключение физического ядра к штатному ИИ.
 	SHOULD_CALL_PARENT(FALSE) // I hate you all
+	if(istype(loc, /obj/machinery/ai/data_core) && (!new_eye || new_eye == loc))
+		new_eye = eyeobj
+	// BANDASTATION ADD END - Перенос ИИ
 	if(camera_light_on)
 		light_cameras()
 	if(istype(new_eye, /obj/machinery/camera))
@@ -937,13 +980,15 @@ GAME_VERB_PROC_DESC(/mob/living/silicon/ai, set_automatic_say_channel, "Set Auto
 		client.set_eye(new_eye)
 	else
 		end_multicam()
-		if(isturf(loc))
+		// BANDASTATION ADD START - Перенос ИИ: подключение физического ядра к штатному ИИ.
+		if(in_network_core())
 			if(eyeobj)
 				client.set_eye(eyeobj)
 				client.perspective = EYE_PERSPECTIVE
 			else
 				client.set_eye(client.mob)
 				client.perspective = MOB_PERSPECTIVE
+		// BANDASTATION ADD END - Перенос ИИ
 		else
 			client.perspective = EYE_PERSPECTIVE
 			client.set_eye(loc)

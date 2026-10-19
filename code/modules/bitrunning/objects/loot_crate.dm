@@ -43,6 +43,9 @@
 		return
 
 	PopulateContents(completed_domain.reward_points, completed_domain.completion_loot, rewards_multiplier)
+	// BANDASTATION ADD START - Перенос ИИ: архивы ИИ в наградах битранов.
+	add_ai_research_archive(completed_domain)
+	// BANDASTATION ADD END - Перенос ИИ
 
 /obj/structure/closet/crate/secure/bitrunning/decrypted/PopulateContents(reward_points, list/completion_loot, rewards_multiplier)
 	. = ..()
