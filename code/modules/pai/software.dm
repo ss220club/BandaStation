@@ -122,6 +122,10 @@
 			instrument = new(src)
 		if("Newscaster")
 			newscaster = new(src)
+		// BANDASTATION EDIT START
+		if("Crew Monitor")
+			crew_monitor = new(src)
+		// BANDASTATION EDIT END
 		if("Photography Module")
 			aicamera = new /obj/item/camera/siliconcam/pai_camera(src)
 		if("Remote Signaler")

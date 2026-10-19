@@ -911,12 +911,12 @@ GLOBAL_DATUM_INIT(steal_item_handler, /datum/objective_item_handler, new())
 	return add_item_to_steal(src, /obj/item/mod/control/pre_equipped/rescue)
 
 /datum/objective_item/steal/spy/cmo_defib
-	name = "компактный дефибриллятор главного врача"
+	name = "экспериментальный компактный дефибриллятор главного врача"
 	targetitem = /obj/item/defibrillator/compact/loaded/cmo
 	excludefromjob = list(JOB_CHIEF_MEDICAL_OFFICER)
 	exists_on_map = TRUE
 	difficulty = 2
-	steal_hint = "Компактный дефибриллятор, который главный врач носит при себе или который лежит в его шкафчике."
+	steal_hint = "Экспериментальный компактный дефибриллятор, который обычно находится где-то рядом с главным врачом, когда начинают скапливаться трупы.."
 
 /obj/item/defibrillator/compact/loaded/cmo/add_stealing_item_objective()
 	return add_item_to_steal(src, /obj/item/defibrillator/compact/loaded/cmo)

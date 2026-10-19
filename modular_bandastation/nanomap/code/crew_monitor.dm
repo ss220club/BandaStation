@@ -44,3 +44,9 @@
 
 /obj/item/sensor_device/ui_assets(user)
 	return GLOB.crewmonitor.ui_assets(user)
+
+/obj/item/sensor_device/pai
+	name = "internal handheld crew monitor"
+
+/obj/item/sensor_device/pai/ui_state(mob/user)
+	return GLOB.always_state

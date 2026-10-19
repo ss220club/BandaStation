@@ -62,7 +62,8 @@ GLOBAL_LIST_EMPTY(objects_by_id_tag)
 /obj/Initialize(mapload)
 	. = ..()
 
-	check_on_table()
+	if(anchored_tabletop_offset)
+		check_on_table()
 
 	if (id_tag)
 		GLOB.objects_by_id_tag[id_tag] = src
@@ -111,8 +112,8 @@ GLOBAL_LIST_EMPTY(objects_by_id_tag)
 			message_verb_continuous = "слабо " + ru_attack_verb(message_verb_continuous)
 
 		user.visible_message(
-			span_danger("[capitalize(user.declent_ru(NOMINATIVE))] [message_verb_continuous] [declent_ru(ACCUSATIVE)] с помощью [attacking_item.declent_ru(GENITIVE)][damage ? "." : ", [no_damage_feedback]!"]"),
-			span_danger("Вы [message_verb_simple] [declent_ru(ACCUSATIVE)] с помощью [attacking_item.declent_ru(GENITIVE)][damage ? "." : ", [no_damage_feedback]!"]"),
+			span_danger("[capitalize(user.declent_ru(NOMINATIVE))] [ru_attack_verb(message_verb_continuous)] [declent_ru(ACCUSATIVE)] с помощью [attacking_item.declent_ru(GENITIVE)][damage ? "." : ", [no_damage_feedback]!"]"),
+			span_danger("Вы [ru_attack_verb(message_verb_simple)] [declent_ru(ACCUSATIVE)] с помощью [attacking_item.declent_ru(GENITIVE)][damage ? "." : ", [no_damage_feedback]!"]"),
 			null,
 			COMBAT_MESSAGE_RANGE,
 		)
@@ -307,7 +308,6 @@ GLOBAL_LIST_EMPTY(objects_by_id_tag)
 		return CANT_UNFASTEN
 	to_chat(user, span_notice("Вы [anchored ? "от" : "при"]кручиваете [declent_ru(ACCUSATIVE)]."))
 	set_anchored(!anchored)
-	check_on_table()
 	playsound(src, 'sound/items/deconstruct.ogg', 50, TRUE)
 	return SUCCESSFUL_UNFASTEN
 
@@ -321,15 +321,19 @@ GLOBAL_LIST_EMPTY(objects_by_id_tag)
 
 /// Adjusts the vertical pixel_z offset when the object is anchored on a tile with table
 /obj/proc/check_on_table()
-	if(anchored_tabletop_offset == 0)
-		return
-	if(istype(src, /obj/structure/table))
-		return
-
 	if(anchored && locate(/obj/structure/table) in loc)
 		pixel_z = anchored_tabletop_offset
 	else
 		pixel_z = initial(pixel_z)
+
+/obj/structure/table/check_on_table()
+	return
+
+/obj/set_anchored(anchorvalue)
+	. = ..()
+	if(isnull(.) || !anchored_tabletop_offset)
+		return
+	check_on_table()
 
 /obj/apply_single_mat_effect(datum/material/material, mat_amount, multiplier)
 	. = ..()

@@ -40,6 +40,7 @@
 "s" = (
 /obj/machinery/door/airlock/external,
 /obj/structure/fans/tiny,
+/obj/effect/mapping_helpers/airlock/access/any/admin/general,
 /turf/open/floor/plating,
 /area/shuttle/specops)
 "F" = (
@@ -71,6 +72,7 @@
 /obj/machinery/door/airlock/external,
 /obj/structure/fans/tiny,
 /obj/docking_port/mobile/specops,
+/obj/effect/mapping_helpers/airlock/access/any/admin/general,
 /turf/open/floor/plating,
 /area/shuttle/specops)
 "Z" = (

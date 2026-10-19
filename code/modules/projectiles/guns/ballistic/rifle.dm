@@ -38,9 +38,7 @@
 	return ..()
 
 /obj/item/gun/ballistic/rifle/can_shoot()
-	if (bolt_locked)
-		return FALSE
-	return ..()
+	return ..() && !bolt_locked
 
 /obj/item/gun/ballistic/rifle/examine(mob/user)
 	. = ..()
@@ -292,9 +290,7 @@
 	rack()
 
 /obj/item/gun/ballistic/rifle/rebarxbow/can_shoot()
-	if (bolt_locked)
-		return FALSE
-	return ..()
+	return ..() && !bolt_locked
 
 /obj/item/gun/ballistic/rifle/rebarxbow/shoot_with_empty_chamber(mob/living/user)
 	if(chambered || !magazine || !length(magazine.contents))
@@ -479,7 +475,7 @@
 		var/obj/item/gun/ballistic/rifle/enchanted/gun = new type
 		gun.guns_left = guns_left - 1
 		discard_gun(user)
-		user.swap_hand()
+		user.cycle_hand()
 		user.put_in_hands(gun)
 	else
 		user.dropItemToGround(src, TRUE)

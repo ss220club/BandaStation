@@ -95,6 +95,7 @@
 	desc = "Ценные научные данные. Используйте их на древнем исследовательском сервере, чтобы получить доступ к ним."
 	icon = 'icons/obj/service/bureaucracy.dmi'
 	icon_state = "paper"
+	inhand_icon_state = "paper"
 	w_class = WEIGHT_CLASS_SMALL
 	///research points it holds
 	var/value = 100

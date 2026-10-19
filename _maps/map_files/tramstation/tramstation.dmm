@@ -24677,7 +24677,7 @@
 	pixel_x = 8;
 	pixel_y = 9
 	},
-/obj/item/mmi{
+/obj/item/brain_processor/organic{
 	pixel_x = -1;
 	pixel_y = 5
 	},
@@ -25661,9 +25661,7 @@
 	name = "Kitchen Counter Shutters";
 	id = "playerscantreadthis"
 	},
-/obj/structure/displaycase/forsale/kitchen{
-	pixel_y = 8
-	},
+/obj/structure/tipjar/prefilled,
 /turf/open/floor/iron/checker,
 /area/station/service/kitchen)
 "ibs" = (
@@ -28658,9 +28656,7 @@
 /area/station/science/xenobiology)
 "jgn" = (
 /obj/structure/table/reinforced,
-/obj/structure/displaycase/forsale/kitchen{
-	pixel_y = 8
-	},
+/obj/structure/tipjar/prefilled,
 /obj/machinery/light/warm/directional/east,
 /turf/open/floor/iron/dark,
 /area/station/service/bar)
@@ -31132,9 +31128,9 @@
 "jXr" = (
 /obj/structure/table/reinforced,
 /obj/effect/turf_decal/stripes/line,
-/obj/item/mmi,
-/obj/item/mmi,
-/obj/item/mmi,
+/obj/item/brain_processor/organic,
+/obj/item/brain_processor/organic,
+/obj/item/brain_processor/organic,
 /obj/effect/turf_decal/tile/neutral/fourcorners,
 /turf/open/floor/iron/dark,
 /area/station/science/robotics/lab)
@@ -54574,9 +54570,7 @@
 "sct" = (
 /obj/structure/table/reinforced,
 /obj/structure/window/spawner/directional/north,
-/obj/structure/displaycase/forsale/kitchen{
-	pixel_y = 8
-	},
+/obj/structure/tipjar/prefilled,
 /obj/machinery/light/warm/directional/west,
 /turf/open/floor/iron/dark,
 /area/station/service/bar)

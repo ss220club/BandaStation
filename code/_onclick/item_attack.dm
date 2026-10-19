@@ -324,7 +324,7 @@
 		if(body_position == LYING_DOWN)
 			zone_hit_chance += 10
 		targeting = get_random_valid_zone(targeting, zone_hit_chance)
-	var/targeting_human_readable = parse_zone_with_bodypart(targeting, declent = ACCUSATIVE)
+	var/targeting_human_readable = parse_zone_with_bodypart(targeting, declent = ACCUSATIVE, declent = ACCUSATIVE)
 
 	if(!LAZYACCESS(attack_modifiers, SILENCE_DEFAULT_MESSAGES))
 		send_item_attack_message(attacking_item, user, targeting_human_readable, targeting)
@@ -333,7 +333,7 @@
 			def_zone = targeting,
 			attack_flag = MELEE,
 			absorb_text = span_notice("Ваша броня защитила вашу [targeting_human_readable]!"),
-			soften_text = span_warning("Ваша броня смягчила удар, нанесенный в вашу [targeting_human_readable]!"),
+			soften_text = span_warning("Ваша броня смягчила удар, нанесённый в вашу [targeting_human_readable]!"),
 			armour_penetration = attacking_item.armour_penetration,
 			weak_against_armour = attacking_item.weak_against_armour,
 		), ARMOR_MAX_BLOCK)
@@ -349,11 +349,13 @@
 	if(user != src)
 		// This doesn't factor in armor, or most damage modifiers (physiology). Your mileage may vary
 		if(check_block(attacking_item, final_force, "[attacking_item.declent_ru(ACCUSATIVE)]", MELEE_ATTACK, attacking_item.armour_penetration, attacking_item.damtype))
+			LAZYSET(attack_modifiers, DAMAGE_DONE, 0)
 			return ATTACK_FAILED
 
 	SEND_SIGNAL(attacking_item, COMSIG_ITEM_ATTACK_ZONE, src, user, targeting)
 
 	if(final_force <= 0)
+		LAZYSET(attack_modifiers, DAMAGE_DONE, 0)
 		return 0
 
 	if(ishuman(src) || client) // istype(src) is kinda bad, but it's to avoid spamming the blackbox
@@ -372,6 +374,7 @@
 		attacking_item = attacking_item,
 	)
 
+	LAZYSET(attack_modifiers, DAMAGE_DONE, damage_done)
 	attack_effects(damage_done, targeting, armor_block, attacking_item, user)
 
 	return damage_done
