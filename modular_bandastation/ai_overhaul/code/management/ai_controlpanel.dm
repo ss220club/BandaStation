@@ -1,4 +1,4 @@
-GLOBAL_VAR_INIT(ai_control_code, random_nukecode(6))
+GLOBAL_VAR_INIT(ai_control_code, num2text(rand(100000, 999999), 6, 10))
 
 /** Обслуживает перенос ИИ через intelliCard с физической и аварийной авторизацией. */
 /obj/machinery/computer/ai_control_console
@@ -39,7 +39,7 @@ GLOBAL_VAR_INIT(ai_control_code, random_nukecode(6))
 			return ITEM_INTERACT_SUCCESS
 		return ITEM_INTERACT_BLOCKING
 
-	if(istype(tool, /obj/item/mmi))
+	if(istype(tool, /obj/item/brain_processor))
 		if(!can_create_ai(user))
 			balloon_alert(user, "доступ запрещён!")
 			return ITEM_INTERACT_BLOCKING
@@ -224,7 +224,7 @@ GLOBAL_VAR_INIT(ai_control_code, random_nukecode(6))
 
 	switch(action)
 		if("log_out")
-			if(one_time_password_used)
+			if(one_time_password_used || downloading)
 				return
 			playsound(src, SFX_TERMINAL_TYPE, 50, FALSE)
 			authenticated = FALSE

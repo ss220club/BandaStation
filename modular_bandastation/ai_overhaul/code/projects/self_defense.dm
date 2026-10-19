@@ -25,7 +25,7 @@
 
 /datum/action/innate/ai/shock_defense/Activate()
 	for(var/obj/machinery/ai/data_core/core as anything in owner_AI.controllable_data_cores())
-		tesla_zap(core, 2, (8 KILO JOULES), (ZAP_MOB_STUN|ZAP_MOB_DAMAGE))
+		tesla_zap(core, 2, 8 KILO JOULES, cutoff = 1 KILO JOULES, zap_flags = ZAP_MOB_STUN | ZAP_MOB_DAMAGE)
 		core.use_energy(core.idle_power_usage)
 
 /datum/action/innate/ai/shock_defense/adjust_uses(amt, silent)

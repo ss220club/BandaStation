@@ -155,11 +155,28 @@
 /datum/ai_network/proc/mining_income_per_second()
 	return ai_mining_income_share(mining_source(), mining_cpu())
 
-/** Выполняет согласованный план фоновых задач за seconds_per_tick секунд без повторного расходования CPU. */
-/datum/ai_network/proc/process_background_jobs(seconds_per_tick)
+/** Суммирует научный CPU всех сетей отдельно для каждой базы исследований. */
+/proc/ai_science_cpu_totals(list/plans)
+	var/list/totals = list()
+	for(var/datum/ai_network/network as anything in GLOB.ai_networks)
+		var/list/plan = islist(plans) ? plans[network] : network.background_cpu_plan()
+		if(!islist(plan))
+			plan = network.background_cpu_plan()
+		var/list/science = plan["science"]
+		for(var/obj/machinery/ai/server_cabinet/cabinet as anything in science)
+			var/datum/techweb/research = ai_station_techweb(cabinet)
+			if(research)
+				totals[research] += science[cabinet]
+	return totals
+
+/** Выполняет общий снимок плана за seconds_per_tick секунд с лимитом науки на базу исследований. */
+/datum/ai_network/proc/process_background_jobs(seconds_per_tick, list/plan, list/science_totals)
 	if(!isnum(seconds_per_tick) || seconds_per_tick <= 0)
 		return
-	var/list/plan = background_cpu_plan()
+	if(!islist(plan))
+		plan = background_cpu_plan()
+	if(!islist(science_totals))
+		science_totals = ai_science_cpu_totals()
 	var/list/recoveries = plan["recovery"]
 	var/list/research = plan["research"]
 	var/list/decryptions = plan["archive"]
@@ -167,10 +184,6 @@
 	var/list/mining = plan["mining"]
 	var/total_mining_cpu = ai_total_mining_cpu(mining_source())
 	var/mining_rate = total_mining_cpu > 0 ? ai_mining_income(total_mining_cpu) / total_mining_cpu : 0
-	var/total_science = 0
-	for(var/obj/machinery/ai/server_cabinet/cabinet as anything in science)
-		total_science += science[cabinet] * AI_RESEARCH_PER_CPU * AI_STATION_RESEARCH_MULTIPLIER
-	var/science_scale = total_science > AI_STATION_RESEARCH_MAX_PER_SECOND ? AI_STATION_RESEARCH_MAX_PER_SECOND / total_science : 1
 	for(var/obj/item/ai_neural_backup/backup as anything in recoveries)
 		if(recoveries[backup] <= 0)
 			continue
@@ -183,6 +196,8 @@
 		if(decryptions[cabinet] > 0)
 			cabinet.process_decryption(decryptions[cabinet] * seconds_per_tick)
 	for(var/obj/machinery/ai/server_cabinet/cabinet as anything in science)
+		var/total_science = science_totals[ai_station_techweb(cabinet)] * AI_RESEARCH_PER_CPU * AI_STATION_RESEARCH_MULTIPLIER
+		var/science_scale = total_science > AI_STATION_RESEARCH_MAX_PER_SECOND ? AI_STATION_RESEARCH_MAX_PER_SECOND / total_science : 1
 		cabinet.contribute_station_research(science[cabinet] * seconds_per_tick * AI_RESEARCH_PER_CPU * AI_STATION_RESEARCH_MULTIPLIER * science_scale)
 	for(var/obj/machinery/ai/server_cabinet/cabinet as anything in mining)
 		cabinet.mining_balance += mining[cabinet] * seconds_per_tick * mining_rate

@@ -279,7 +279,7 @@
 	return default_deconstruction_screwdriver(user, icon_state, icon_state, tool) ? ITEM_INTERACT_SUCCESS : ITEM_INTERACT_BLOCKING
 
 /obj/machinery/ai_floor_cooler/crowbar_act(mob/living/user, obj/item/tool)
-	return default_deconstruction_crowbar(tool) ? ITEM_INTERACT_SUCCESS : ITEM_INTERACT_BLOCKING
+	return default_deconstruction_crowbar(user, tool) ? ITEM_INTERACT_SUCCESS : ITEM_INTERACT_BLOCKING
 
 /** Плата для сборки охладителя отсека ИИ штатными инструментами. */
 /obj/item/circuitboard/machine/ai_floor_cooler

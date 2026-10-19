@@ -166,7 +166,7 @@ GLOBAL_VAR_INIT(primary_data_core, null)
 	balloon_alert_to_viewers("разборка...")
 	if(!tool.use_tool(src, user, 4 SECONDS))
 		return .
-	default_deconstruction_crowbar(tool)
+	default_deconstruction_crowbar(user, tool)
 	return ITEM_INTERACT_SUCCESS
 
 /obj/machinery/ai/data_core/wrench_act(mob/living/user, obj/item/tool)
@@ -217,18 +217,22 @@ GLOBAL_VAR_INIT(primary_data_core, null)
 	return FALSE
 
 /obj/machinery/ai/data_core/process(seconds_per_tick)
+	var/was_online = valid_ticks > 0 && has_power()
 	valid_ticks = clamp(valid_ticks, 0, MAX_AI_DATA_CORE_TICKS)
-
-	if(valid_holder())
+	var/working = valid_holder()
+	if(working)
 		valid_ticks = min(MAX_AI_DATA_CORE_TICKS, valid_ticks + seconds_per_tick / 2)
-		use_power = ACTIVE_POWER_USE
+		update_use_power(ACTIVE_POWER_USE)
 		if(machine_stat & NOPOWER)
-			integrated_battery.use(active_power_usage * CELL_POWERUSE_MULTIPLIER * seconds_per_tick)
+			integrated_battery.use(active_power_usage * CELL_POWERUSE_MULTIPLIER * seconds_per_tick, force = TRUE)
+	else
+		valid_ticks = max(0, valid_ticks - seconds_per_tick / 2)
+		if(valid_ticks <= 0)
+			update_use_power(IDLE_POWER_USE)
+	if(was_online != (valid_ticks > 0 && has_power()))
+		update_appearance()
+	if(working)
 		return
-
-	valid_ticks = max(0, valid_ticks - seconds_per_tick / 2)
-	if(valid_ticks <= 0)
-		use_power = IDLE_POWER_USE
 
 	if(valid_ticks > MAX_AI_DATA_CORE_TICKS - 3 || !COOLDOWN_FINISHED(src, warning_cooldown))
 		return
@@ -253,7 +257,7 @@ GLOBAL_VAR_INIT(primary_data_core, null)
 		return FALSE
 	return has_power() && !(machine_stat & (BROKEN | EMPED))
 
-/obj/machinery/ai/data_core/process_atmos()
+/obj/machinery/ai/data_core/process_atmos(seconds_per_tick)
 	. = ..()
 	if(!.)
 		return FALSE
@@ -267,7 +271,7 @@ GLOBAL_VAR_INIT(primary_data_core, null)
 		return FALSE
 
 	var/temp_active_usage = (machine_stat & NOPOWER) ? idle_power_usage * CELL_POWERUSE_MULTIPLIER : active_power_usage * CELL_POWERUSE_MULTIPLIER
-	var/temperature_increase = (temp_active_usage / AI_HEATSINK_CAPACITY) * heat_modifier
+	var/temperature_increase = (temp_active_usage / AI_HEATSINK_CAPACITY) * heat_modifier * seconds_per_tick
 	core_temp += temperature_increase * AI_TEMPERATURE_MULTIPLIER
 	return TRUE
 
@@ -297,6 +301,7 @@ GLOBAL_VAR_INIT(primary_data_core, null)
 	if(AI.ai_network != ai_network)
 		AI.release_neural_resources()
 		AI.ai_network = ai_network
+	AI.setup_decentralized_ai()
 	AI.last_used_data_core = src
 	AI.is_dying = FALSE
 	AI.ai_restore_power()

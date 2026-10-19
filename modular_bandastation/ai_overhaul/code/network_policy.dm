@@ -18,7 +18,7 @@
 
 /** Проверяет право пользователя работать с консолью при текущей политике сети. */
 /obj/machinery/computer/ai_resource_distribution/proc/can_operate_resources(mob/user)
-	if(QDELETED(user) || user.incapacitated || (machine_stat & (NOPOWER | BROKEN | EMPED)) || (!allowed(user) && !(obj_flags & EMAGGED)))
+	if(QDELETED(user) || user.incapacitated || !can_interact(user) || (machine_stat & (NOPOWER | BROKEN | EMPED)) || (!allowed(user) && !(obj_flags & EMAGGED)))
 		return FALSE
 	if(ishuman(user))
 		return user.Adjacent(src)

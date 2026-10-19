@@ -52,7 +52,7 @@
 	return default_deconstruction_screwdriver(user, "hub_o", "hub", tool) ? ITEM_INTERACT_SUCCESS : ITEM_INTERACT_BLOCKING
 
 /obj/machinery/ai/master_subcontroller/crowbar_act(mob/living/user, obj/item/tool)
-	return default_deconstruction_crowbar(tool) ? ITEM_INTERACT_SUCCESS : ITEM_INTERACT_BLOCKING
+	return default_deconstruction_crowbar(user, tool) ? ITEM_INTERACT_SUCCESS : ITEM_INTERACT_BLOCKING
 
 /obj/machinery/ai/master_subcontroller/examine(mob/user)
 	. = ..()

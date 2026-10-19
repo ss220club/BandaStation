@@ -48,6 +48,11 @@
 
 /obj/machinery/computer/ai_resource_distribution/ui_data(mob/user)
 	var/list/data = list()
+	data["authenticated"] = authenticated && can_operate_resources(user)
+	data["username"] = user?.name
+	data["has_access"] = can_operate_resources(user)
+	if(!authenticated || !can_operate_resources(user))
+		return data
 	var/datum/ai_network/network = current_network(user)
 	var/datum/ai_os/pool = network?.resources || GLOB.ai_os
 	data["selected_network"] = network ? REF(network) : null
@@ -56,13 +61,6 @@
 		if(!option.accessible_from(src) || (isAI(user) && option != network))
 			continue
 		data["networks"] += list(list("ref" = REF(option), "name" = option.name))
-	data["authenticated"] = authenticated
-	data["username"] = user.name
-	data["has_access"] = allowed(user) || (obj_flags & EMAGGED)
-	if(!authenticated)
-		return data
-
-
 	data["total_cpu"] = pool.total_cpu
 	data["nominal_cpu"] = pool.nominal_cpu
 	data["total_ram"] = pool.total_ram
@@ -74,8 +72,9 @@
 	data["research_rate"] = AI_RESEARCH_PER_CPU
 	data["mining_rate"] = network ? network.mining_income_per_second() : 0
 	data["can_withdraw"] = ishuman(user) && user.Adjacent(src) && (allowed(user) || (obj_flags & EMAGGED))
-	var/list/job_plan = network ? network.background_cpu_plan() : list()
-	data["subnets"] = network ? network.subnet_ui_data(job_plan) : list()
+	var/list/subnet_budgets = list()
+	var/list/job_plan = network ? network.background_cpu_plan(subnet_budgets) : list()
+	data["subnets"] = network ? network.subnet_ui_data(job_plan, subnet_budgets) : list()
 	data["research_hosts"] = list()
 	if(network)
 		for(var/obj/machinery/ai/server_cabinet/cabinet in network.nodes)

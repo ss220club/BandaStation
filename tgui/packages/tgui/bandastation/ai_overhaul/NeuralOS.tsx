@@ -84,6 +84,7 @@ export function NeuralShell({
   const bootKey = `aiOS-application-v3:${config.client.ckey}:${config.interface.name}:${config.window.key}`;
   const [effects, setEffects] = useState<Effects>('soft');
   const [loaded, setLoaded] = useState(false);
+  const preferenceEdited = useRef(false);
   const [reduced, setReduced] = useState(false);
   const [phase, setPhase] = useState(() => (applicationSeen(bootKey) ? 3 : 0));
   const [replay, setReplay] = useState(0);
@@ -94,11 +95,10 @@ export function NeuralShell({
   const previousFocus = useRef<HTMLElement | null>(null);
   useEffect(() => {
     let alive = true;
-    let settled = false;
+    preferenceEdited.current = false;
     setLoaded(false);
     const apply = (mode: Effects) => {
-      if (alive && !settled) {
-        settled = true;
+      if (alive && !preferenceEdited.current) {
         setEffects(mode);
         setLoaded(true);
       }
@@ -191,7 +191,9 @@ export function NeuralShell({
     setPhase(3);
   };
   const chooseEffects = (mode: Effects) => {
+    preferenceEdited.current = true;
     setEffects(mode);
+    setLoaded(true);
     storage.set(preferenceKey, mode).catch(() => {});
   };
   return (

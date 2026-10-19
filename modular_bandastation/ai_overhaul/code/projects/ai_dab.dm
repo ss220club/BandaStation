@@ -5,10 +5,10 @@
 	if(control_disabled || stat == DEAD || !istype(loc, /obj/machinery/ai/data_core))
 		return cores
 	var/obj/machinery/ai/data_core/host = loc
-	if(!host.ai_network || !host.has_power() || (host.machine_stat & (BROKEN | EMPED)))
+	if(!host.ai_network || (host.valid_ticks <= 0 || !host.valid_holder()) || (host.machine_stat & (BROKEN | EMPED)))
 		return cores
 	for(var/obj/machinery/ai/data_core/core in host.ai_network.nodes)
-		if(core.has_power() && !(core.machine_stat & (BROKEN | EMPED)))
+		if(core.valid_ticks > 0 && core.valid_holder())
 			cores += core
 	return cores
 

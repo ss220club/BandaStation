@@ -16,6 +16,7 @@
 
 /datum/ai_project/camera_tracker/stop()
 	ai.can_track_camera_target = FALSE
+	ai.clear_camera_memory_track()
 	UNASSIGN_GAME_VERB(ai, /mob/living/silicon/ai, choose_camera_target)
 	return ..()
 
@@ -26,6 +27,8 @@
 	var/camera_memory_target
 	/// Секунды с предыдущего поиска цели в поле зрения камер.
 	var/camera_memory_elapsed_seconds = 0
+	/// Цель, которую выбрала программа памяти камер, без захвата ручного отслеживания.
+	var/datum/weakref/camera_memory_tracked_ref
 
 GAME_VERB_DESC(/mob/living/silicon/ai, choose_camera_target, "Цель наблюдения камер", "Отслеживать появление человека в поле зрения камер.", "AI Commands")
 	if(incapacitated || !can_track_camera_target)
@@ -33,7 +36,20 @@ GAME_VERB_DESC(/mob/living/silicon/ai, choose_camera_target, "Цель набл�
 	var/target_name = tgui_input_text(src, "Полное имя; оставьте пустым, чтобы снять отслеживание:", "Память камер", camera_memory_target, MAX_NAME_LEN)
 	if(incapacitated || !can_track_camera_target || isnull(target_name))
 		return
+	set_camera_memory_target(target_name)
+
+/** Меняет цель программы и снимает её прежнее отслеживание. */
+/mob/living/silicon/ai/proc/set_camera_memory_target(target_name)
+	clear_camera_memory_track()
 	camera_memory_target = trim(target_name)
+	camera_memory_elapsed_seconds = 0
+
+/** Снимает только отслеживание, начатое программой памяти камер. */
+/mob/living/silicon/ai/proc/clear_camera_memory_track()
+	var/mob/living/previous_target = camera_memory_tracked_ref?.resolve()
+	if(previous_target && ai_tracking_tool?.tracked_mob == previous_target)
+		ai_tracking_tool.reset_tracking()
+	camera_memory_tracked_ref = null
 
 /** Раз в три секунды ищет видимую камерам цель по имени, не раскрывая недоступных персонажей. */
 /mob/living/silicon/ai/proc/process_camera_memory(seconds_per_tick)
@@ -48,4 +64,6 @@ GAME_VERB_DESC(/mob/living/silicon/ai, choose_camera_target, "Цель набл�
 	for(var/mob/living/target as anything in GLOB.alive_mob_list)
 		if(target.name == camera_memory_target && target.can_track(src))
 			ai_tracking_tool.track_mob(src, target)
+			if(ai_tracking_tool.tracked_mob == target)
+				camera_memory_tracked_ref = WEAKREF(target)
 			return

@@ -7,6 +7,9 @@
 #include "code/resource_commands.dm"
 #include "code/network.dm"
 #include "code/cable_graph.dm"
+#include "code/subnets.dm"
+#include "code/benchmark_history.dm"
+#include "code/debug_lab.dm"
 #include "code/network_bridge.dm"
 #include "code/telemetry_log.dm"
 #include "code/neural_recovery.dm"
@@ -56,7 +59,4 @@
 #include "code/systech/overclocking.dm"
 #include "code/systech/rack.dm"
 #include "code/systech/ram.dm"
-
-#include "code/benchmark_history.dm"
-#include "code/subnets.dm"
-#include "code/debug_lab.dm"
+#include "code/tests_review.dm"

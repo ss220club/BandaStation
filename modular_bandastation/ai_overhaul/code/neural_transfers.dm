@@ -135,19 +135,19 @@
 	return ..()
 
 /** Повторно проверяет человека, ММИ, ядро и исходную сеть перед созданием ИИ. */
-/datum/computer_file/program/neural_service/proc/mmi_upload_valid(mob/user, obj/item/mmi/brain, obj/machinery/ai/data_core/core, datum/ai_network/network)
+/datum/computer_file/program/neural_service/proc/mmi_upload_valid(mob/user, obj/item/brain_processor/brain, obj/machinery/ai/data_core/core, datum/ai_network/network)
 	return istype(brain) && !QDELETED(brain) && istype(core) && !QDELETED(core) && !QDELETED(network) && can_transfer(user) && !downloading && user.is_holding(brain) && brain.loc == user && local_network() == network && core.ai_network == network && (core in network.nodes) && core.can_transfer_ai()
 
 /** Подтверждает создание ИИ из ММИ и повторно проверяет участников после диалога. */
 /datum/computer_file/program/neural_service/proc/upload_mmi(list/params, mob/user, datum/ai_network/network)
-	var/obj/item/mmi/brain = user.is_holding_item_of_type(/obj/item/mmi)
+	var/obj/item/brain_processor/brain = user.is_holding_item_of_type(/obj/item/brain_processor)
 	var/obj/machinery/ai/data_core/core = locate(params["core"]) in network.nodes
 	if(!brain || params["mmi"] != REF(brain) || !mmi_upload_valid(user, brain, core, network))
 		return FALSE
 	return !!core.create_ai_from_mmi(user, brain, CALLBACK(src, PROC_REF(mmi_upload_valid), user, brain, core, network))
 
 /** Создаёт ИИ в готовом ядре после проверки ММИ, физического доступа и callback разрешения. */
-/obj/machinery/ai/data_core/proc/create_ai_from_mmi(mob/living/user, obj/item/mmi/brain, datum/callback/authorize)
+/obj/machinery/ai/data_core/proc/create_ai_from_mmi(mob/living/user, obj/item/brain_processor/brain, datum/callback/authorize)
 	RETURN_TYPE(/mob/living/silicon/ai)
 	if(QDELETED(user) || QDELETED(brain) || !CONFIG_GET(flag/allow_ai) || !brain.brain_check(user))
 		return null
@@ -164,7 +164,7 @@
 	if(!occupant.mind.has_ever_been_ai)
 		SSblackbox.record_feedback("amount", "ais_created", 1)
 	var/mob/living/silicon/ai/ai = new(src, occupant, brain.laws)
-	if(brain.force_replace_ai_name)
+	if(brain.replacement_ai_name())
 		ai.fully_replace_character_name(ai.name, brain.replacement_ai_name())
 	ai.posibrain_inside = brain.braintype == "Android"
 	log_silicon("[key_name(user)] commissioned [key_name(ai)] from an MMI in [src].", list(src, ai))

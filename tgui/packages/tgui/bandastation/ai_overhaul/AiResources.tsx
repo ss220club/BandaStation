@@ -35,7 +35,13 @@ type Ai = {
 };
 type Data = {
   can_withdraw: BooleanLike;
-  subnets?: { ref: string; name: string; quota: number; cpu: number }[];
+  subnets?: {
+    ref: string;
+    name: string;
+    quota: number;
+    cpu: number;
+    budget?: number;
+  }[];
   job_weights: Record<string, number>;
   job_weight_total: number;
   background_job_count: number;

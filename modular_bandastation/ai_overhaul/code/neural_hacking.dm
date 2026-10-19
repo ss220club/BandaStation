@@ -64,8 +64,8 @@
 		return FALSE
 	if(!user.transferItemToLoc(src, rack))
 		return FALSE
-	neural_intrusion = new(src, rack, slot, signature, law_signature, user)
-	to_chat(user, span_notice("Загрузка закона началась. Оставьте модуль подключённым на четыре минуты; затронутые синтетики получат предупреждение безопасности."))
+	neural_intrusion = new(src, rack, slot, signature, law_signature, user, authorize)
+	to_chat(user, span_notice("Загрузка закона началась. Оставьте модуль подключённым на четыре минуты; затронутые ИИ получат предупреждение безопасности."))
 	log_silicon("[key_name(user)] started a hacked-law upload at [rack] ([rack.log_status()]).", list(rack))
 	message_admins("[ADMIN_LOOKUPFLW(user)] started a hacked-law upload at [ADMIN_VERBOSEJMP(rack)].")
 	return TRUE
@@ -80,6 +80,8 @@
 	var/obj/machinery/ai_law_rack/base/root
 	/// Слабая ссылка на начавшего взлом оператора для повторной проверки доступа.
 	var/datum/weakref/operator_ref
+	/// Повторная проверка доступа через служебную программу, если загрузка начата с терминала.
+	var/datum/callback/authorization
 	/// Выбранный слот стойки для подключения модуля.
 	var/slot
 	/// Подпись исходного подключения стойки для обнаружения подмены.
@@ -99,7 +101,7 @@
 	/// Порты, через которые подключён модуль и можно прервать взлом.
 	var/list/physical_endpoints
 
-/datum/ai_law_intrusion/New(obj/item/ai_module/law/syndicate/new_module, obj/machinery/ai_law_rack/new_rack, new_slot, new_signature, new_law_signature, mob/living/user)
+/datum/ai_law_intrusion/New(obj/item/ai_module/law/syndicate/new_module, obj/machinery/ai_law_rack/new_rack, new_slot, new_signature, new_law_signature, mob/living/user, datum/callback/authorize)
 	module = new_module
 	rack = new_rack
 	root = rack.get_parent_rack()
@@ -107,6 +109,7 @@
 	signature = new_signature
 	law_signature = new_law_signature
 	operator_ref = WEAKREF(user)
+	authorization = authorize
 	started_at = world.time
 	next_warning = world.time + 1 MINUTES
 	module.neural_intrusion = src
@@ -141,6 +144,10 @@
 
 /** Проверяет сохранность исходных участников, подключения и прав во время загрузки закона. */
 /datum/ai_law_intrusion/proc/connection_valid()
+	if(authorization)
+		var/mob/living/user = operator_ref?.resolve()
+		if(QDELETED(user) || user.incapacitated || !user.Adjacent(rack) || !authorization.Invoke())
+			return FALSE
 	if(finished || QDELETED(module) || module.loc != rack || module.neural_intrusion != src || module.ioned || json_encode(module.laws) != law_signature || QDELETED(rack) || QDELETED(root) || !rack.is_operational || !root.is_operational || rack.get_parent_rack() != root || rack.ai_modules[slot] || ai_law_intrusion_recipients(root) != signature)
 		return FALSE
 	for(var/mob/living/silicon/ai/ai as anything in affected_ais)
@@ -237,6 +244,7 @@
 	original_hosts = null
 	physical_endpoints = null
 	operator_ref = null
+	authorization = null
 	return ..()
 
 /** Возвращает прогресс и сроки текущей попытки взлома без дополнительных сведений о раунде. */

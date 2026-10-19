@@ -4,7 +4,7 @@
 
 /// Formats a module name for display
 // BANDASTATION ADD START - Перенос ИИ: стойка законов и русские подсказки.
-#define MODULE_NAME(all_modules, named_module) (all_modules[named_module] == MODULE_WELDED ? "неизвестный приваренный модуль" : (named_module?.declent_ru() || "Пусто"))
+#define MODULE_NAME(all_modules, named_module) (all_modules[named_module] == MODULE_WELDED ? "неизвестный приваренный модуль" : (named_module?.declent_ru(NOMINATIVE) || "Пусто"))
 // BANDASTATION ADD END - Перенос ИИ
 
 /datum/armor/obj_machinery/law_rack
@@ -502,7 +502,7 @@
 
 /** Формирует подпись известного стойке участника для физической панели соединений. */
 /obj/machinery/ai_law_rack/proc/format_linkable(atom/linkable)
-	return list("name" = istype(linkable, /mob/living/silicon) ? linkable.name : linkable.declent_ru(), "ref" = REF(linkable))
+	return list("name" = istype(linkable, /mob/living/silicon) ? linkable.name : linkable.declent_ru(NOMINATIVE), "ref" = REF(linkable))
 // BANDASTATION ADD END - Перенос ИИ
 
 /// Handles updating the lists of things the rack can link to

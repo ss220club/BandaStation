@@ -132,7 +132,7 @@ GLOBAL_DATUM(ai_debug_lab, /datum/ai_debug_lab)
 	var/obj/item/stack/ai_ethernet_coil/coil = place(/obj/item/stack/ai_ethernet_coil, -5, -1)
 	coil.add(49)
 	place(/obj/item/aicard, -3, -1)
-	place(/obj/item/mmi/posibrain, -2, -1)
+	place(/obj/item/brain_processor/positronic, -2, -1)
 	place(/obj/item/ai_module/law/syndicate, 1, -1)
 	place(/obj/item/ai_module/law/core/full/damaged, 2, -1)
 	place(/obj/item/disk/ai_research_archive, 4, -1)
@@ -151,7 +151,7 @@ GLOBAL_DATUM(ai_debug_lab, /datum/ai_debug_lab)
 	place(/obj/machinery/camera/ai_debug_lab, 6, 5)
 	SSai_networks.rebuild()
 	var/mob/living/brain/brain = new
-	test_ai = new(primary_core, brain, /datum/ai_laws/default/asimov)
+	test_ai = new /mob/living/silicon/ai/debug_lab(primary_core, brain, /datum/ai_laws/default/asimov)
 	qdel(brain)
 	equipment += test_ai
 	test_ai.fully_replace_character_name(null, "NT / Тестовый ИИ")
@@ -306,6 +306,10 @@ ADMIN_VERB(ai_debug_lab, R_DEBUG, "AI - Тестовая лаборатория"
 /obj/machinery/rnd/production/protolathe/ai_debug_lab/post_machine_initialize()
 	stored_research = ai_station_techweb(src)
 	return ..()
+
+/** Тестовый ИИ без оповещения станционного бинарного канала. */
+/mob/living/silicon/ai/debug_lab
+	announce_init_to_others = FALSE
 
 /** Камера стенда для проверки наблюдения тестового ИИ. */
 /obj/machinery/camera/ai_debug_lab

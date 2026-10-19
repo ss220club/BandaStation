@@ -18,6 +18,29 @@ GLOBAL_LIST_EMPTY(ai_subnets)
 	GLOB.ai_subnets -= src
 	return ..()
 
+/** Объединяет имена и резервы сегментов; доли задач учитывают их прежний бюджет CPU. */
+/datum/ai_subnet/proc/merge_settings(list/settings)
+	var/list/names = list()
+	var/automatic = TRUE
+	var/combined_quota = 0
+	var/total_weight = 0
+	for(var/list/config as anything in settings)
+		names |= config["name"]
+		automatic = automatic && config["quota"] < 0
+		combined_quota += config["share"]
+		total_weight += config["weight"]
+	name = copytext_char(jointext(names, " + "), 1, 65)
+	cpu_quota = automatic ? -1 : min(1, combined_quota)
+	for(var/category in activity_cpu_quotas)
+		var/category_automatic = TRUE
+		var/combined = 0
+		for(var/list/config as anything in settings)
+			var/list/quotas = config["activities"]
+			var/list/shares = config["activity_shares"]
+			category_automatic = category_automatic && quotas[category] < 0
+			combined += (quotas[category] < 0 ? (shares[category] || 0) : quotas[category]) * config["weight"]
+		activity_cpu_quotas[category] = category_automatic ? -1 : combined / total_weight
+
 /obj/machinery/ai
 	/// Физическая кабельная подсеть объекта, не объединяемая мостами.
 	var/datum/ai_subnet/ai_subnet
@@ -30,9 +53,36 @@ GLOBAL_LIST_EMPTY(ai_subnets)
 /datum/controller/subsystem/ai_networks/proc/rebuild_subnets(list/edges)
 	var/list/used = list()
 	var/list/old = GLOB.ai_subnets.Copy()
+	var/list/settings = list()
+	for(var/datum/ai_network/network as anything in GLOB.ai_networks)
+		var/list/budgets = list()
+		var/list/plan = network.background_cpu_plan(budgets)
+		var/spare = network.spare_cpu()
+		for(var/datum/ai_subnet/subnet as anything in network.local_subnets())
+			var/budget = budgets[subnet] || 0
+			var/list/shares = list()
+			for(var/category in plan)
+				var/list/rates = plan[category]
+				var/allocated = 0
+				for(var/datum/job as anything in rates)
+					var/obj/machinery/ai/host = job
+					if(istype(job, /obj/item/ai_neural_backup))
+						var/obj/item/ai_neural_backup/backup = job
+						host = backup.recovery_host()
+					if(host?.ai_subnet == subnet)
+						allocated += rates[job]
+				shares[category] = budget > 0 ? allocated / budget : 0
+			settings[subnet] = list("name" = subnet.name, "quota" = subnet.cpu_quota, "share" = subnet.cpu_quota >= 0 ? subnet.cpu_quota : (spare > 0 ? budget / spare : 0), "weight" = max(0.00001, budget), "activities" = subnet.activity_cpu_quotas.Copy(), "activity_shares" = shares)
 	for(var/list/component as anything in cable_components(edges))
 		var/list/component_nodes = component["nodes"]
 		var/list/component_cables = component["cables"]
+		var/list/source_subnets = list()
+		for(var/obj/machinery/ai/node as anything in component_nodes)
+			if(node.ai_subnet)
+				source_subnets |= node.ai_subnet
+		for(var/obj/structure/ai_ethernet/cable as anything in component_cables)
+			if(cable.ai_subnet)
+				source_subnets |= cable.ai_subnet
 		var/datum/ai_subnet/subnet
 		for(var/obj/machinery/ai/node as anything in component_nodes)
 			if(node.ai_subnet && !(node.ai_subnet in used))
@@ -45,6 +95,14 @@ GLOBAL_LIST_EMPTY(ai_subnets)
 					break
 		if(!subnet)
 			subnet = new
+		if(length(source_subnets) > 1)
+			var/list/combined_settings = list()
+			for(var/datum/ai_subnet/previous_subnet as anything in source_subnets)
+				var/list/config = settings[previous_subnet]
+				if(config)
+					combined_settings += list(config)
+			if(length(combined_settings) > 1)
+				subnet.merge_settings(combined_settings)
 		used += subnet
 		for(var/obj/machinery/ai/node as anything in component_nodes)
 			node.ai_subnet = subnet
@@ -107,7 +165,7 @@ GLOBAL_LIST_EMPTY(ai_subnets)
 				subnet.cpu_quota /= assigned
 
 /** Строит единый план расходования свободного CPU с учётом квот, весов и готовности задач. */
-/datum/ai_network/proc/background_cpu_plan()
+/datum/ai_network/proc/background_cpu_plan(list/subnet_budgets)
 	var/list/groups = list("recovery" = recovery_jobs(), "research" = research_jobs(), "archive" = decryption_jobs(), "science" = science_jobs(), "mining" = mining_jobs())
 	var/list/weights = list()
 	var/list/job_subnets = list()
@@ -140,6 +198,9 @@ GLOBAL_LIST_EMPTY(ai_subnets)
 	var/spare = spare_cpu()
 	for(var/datum/ai_subnet/subnet as anything in weights)
 		budgets[subnet] = subnet.cpu_quota >= 0 ? spare * subnet.cpu_quota : (automatic_weight ? spare * max(0, 1 - reserved) * weights[subnet] / automatic_weight : 0)
+	if(islist(subnet_budgets))
+		for(var/datum/ai_subnet/subnet as anything in local_subnets())
+			subnet_budgets[subnet] = budgets[subnet] || (subnet.cpu_quota >= 0 ? spare * subnet.cpu_quota : 0)
 	var/list/category_budgets = list()
 	for(var/datum/ai_subnet/subnet as anything in category_counts)
 		var/list/counts = category_counts[subnet]
@@ -170,9 +231,13 @@ GLOBAL_LIST_EMPTY(ai_subnets)
 	return result
 
 /** Возвращает подсети, их квоты и фактические назначения из переданного плана задач. */
-/datum/ai_network/proc/subnet_ui_data(list/job_plan)
+/datum/ai_network/proc/subnet_ui_data(list/job_plan, list/subnet_budgets)
 	if(!islist(job_plan))
-		job_plan = background_cpu_plan()
+		subnet_budgets = list()
+		job_plan = background_cpu_plan(subnet_budgets)
+	else if(!islist(subnet_budgets))
+		subnet_budgets = list()
+		background_cpu_plan(subnet_budgets)
 	var/list/result = list()
 	for(var/datum/ai_subnet/subnet as anything in local_subnets())
 		var/allocated = 0
@@ -191,5 +256,5 @@ GLOBAL_LIST_EMPTY(ai_subnets)
 					activity_cpu += rates[job]
 					job_count++
 			activities += list(list("category" = category, "quota" = subnet.activity_cpu_quotas[category], "cpu" = activity_cpu, "jobs" = job_count))
-		result += list(list("ref" = REF(subnet), "name" = subnet.name, "quota" = subnet.cpu_quota, "cpu" = allocated, "activities" = activities))
+		result += list(list("ref" = REF(subnet), "name" = subnet.name, "quota" = subnet.cpu_quota, "cpu" = allocated, "budget" = subnet_budgets[subnet] || 0, "activities" = activities))
 	return result

@@ -21,8 +21,9 @@
 /obj/machinery/computer/ai_overclocking/process()
 	if(machine_stat & (BROKEN|NOPOWER|EMPED))
 		if(inserted_cpu)
+			if(overclocking)
+				inserted_cpu.record_overclock_result(FALSE)
 			overclocking = FALSE
-			inserted_cpu.record_overclock_result(FALSE)
 			inserted_cpu.speed = initial(inserted_cpu.speed)
 			inserted_cpu.power_multiplier = initial(inserted_cpu.power_multiplier)
 			inserted_cpu.forceMove(drop_location())

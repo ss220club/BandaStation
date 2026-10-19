@@ -17,6 +17,7 @@ export type Subnet = {
   name: string;
   quota: number;
   cpu: number;
+  budget?: number;
   activities?: Activity[];
 };
 type Props = {
@@ -83,7 +84,7 @@ function SubnetCard(props: Props & { subnet: Subnet; reserved: number }) {
   const maximum = Math.max(0, 1 - props.reserved + Math.max(0, subnet.quota));
   const initialQuota = Math.min(
     maximum,
-    safeRatio(subnet.cpu, props.available),
+    safeRatio(subnet.budget ?? 0, props.available),
   );
   return (
     <Section

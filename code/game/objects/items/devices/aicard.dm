@@ -202,7 +202,7 @@
 					return FALSE
 				var/mob/user = ui.user
 				var/confirm = tgui_alert(user, "Очистка повредит нейроструктуру и приведёт к гибели [target.name]. Остановка не восстановит нанесённый ущерб. Начать?", name, list("Да", "Нет"))
-				if(confirm != "Да" || QDELETED(ui) || ui.user != user || !can_start_wipe(user, target) || ..())
+				if(confirm != "Да" || QDELETED(ui) || ui.user != user || !can_start_wipe(user, target) || ui.status != UI_INTERACTIVE || ui_status(user, ui.state) != UI_INTERACTIVE)
 					return FALSE
 				flush = TRUE
 				wipe_generation++

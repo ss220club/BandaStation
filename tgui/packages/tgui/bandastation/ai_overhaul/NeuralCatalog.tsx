@@ -124,6 +124,7 @@ export function NeuralCatalog({
       {focusedName ? (
         <div
           className="AiOS__projectDetail"
+          role="region"
           ref={detail}
           tabIndex={-1}
           aria-label="Досье выбранного проекта"

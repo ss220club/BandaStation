@@ -172,6 +172,7 @@ const LawSlot = (props: { slot: SlotData; index: number }) => {
                 fluid
                 icon="plug"
                 disabled={
+                  data.law_intrusion_signature == null ||
                   !!data.law_intrusion_pending ||
                   !!(has_core_slot && index === 0)
                 }

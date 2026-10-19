@@ -95,7 +95,11 @@ export function AiControlPanel() {
                 title="Перенос ИИ"
                 buttons={
                   !!data.can_log_out && (
-                    <Button icon="sign-out-alt" onClick={() => act('log_out')}>
+                    <Button
+                      icon="sign-out-alt"
+                      disabled={!!data.downloading}
+                      onClick={() => act('log_out')}
+                    >
                       {' '}
                       Выйти{' '}
                     </Button>

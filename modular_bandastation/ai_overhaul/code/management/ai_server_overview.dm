@@ -58,11 +58,12 @@
 		if(!ai_same_debug_environment(src, bridge))
 			continue
 		var/responding = !bridge.endpoint_status()
+		var/local = bridge.Adjacent(src)
 		bridges += list(list(
 			"ref" = REF(bridge),
-			"area" = responding ? "[ai_localized_area(bridge)]" : "Местоположение неизвестно: нет ответа",
+			"area" = responding || local ? "[ai_localized_area(bridge)]" : "Местоположение неизвестно: нет ответа",
 			"network" = bridge.ai_network?.name || "Отключено",
-			"status" = responding ? (bridge.link_status() || "Связь установлена") : "Нет ответа; причина неизвестна",
+			"status" = responding || local ? (bridge.link_status() || "Связь установлена") : "Нет ответа; причина неизвестна",
 			"working" = bridge.link_available(),
 			"remote_area" = responding ? bridge.remote_area() : "Нет ответа",
 		))

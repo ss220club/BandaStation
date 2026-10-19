@@ -3,7 +3,7 @@
 	name = "Standard Memory"
 	desc = "Планка оперативной памяти для серверного модуля ИИ. Изготавливается на протолате; устанавливается в открытый корпус модуля."
 	icon = 'modular_bandastation/ai_overhaul/icons/module.dmi'
-	icon_state = "std_mod"
+	icon_state = "ram"
 	w_class = WEIGHT_CLASS_SMALL
 	/// Объём оперативной памяти этой планки в ТБ.
 	var/capacity = 1

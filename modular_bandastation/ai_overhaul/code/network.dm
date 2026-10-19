@@ -56,8 +56,12 @@ SUBSYSTEM_DEF(ai_networks)
 /datum/controller/subsystem/ai_networks/fire(resumed)
 	rebuild()
 	sample_benchmark_history()
+	var/list/plans = list()
 	for(var/datum/ai_network/network as anything in GLOB.ai_networks)
-		network.process_background_jobs(wait / (1 SECONDS))
+		plans[network] = network.background_cpu_plan()
+	var/list/science_totals = ai_science_cpu_totals(plans)
+	for(var/datum/ai_network/network as anything in GLOB.ai_networks)
+		network.process_background_jobs(wait / (1 SECONDS), plans[network], science_totals)
 
 /** Перестраивает изменившуюся топологию с переносом назначений, политики доступа и физических подсетей. */
 /datum/controller/subsystem/ai_networks/proc/rebuild()
@@ -105,6 +109,14 @@ SUBSYSTEM_DEF(ai_networks)
 			tile_nodes[home] = list()
 		tile_nodes[home] += node
 	var/list/edges = cable_graph(tile_cables, tile_nodes)
+	var/list/previous_subnets = list()
+	for(var/atom/member as anything in GLOB.ai_network_nodes + GLOB.ai_ethernet_cables)
+		if(istype(member, /obj/machinery/ai))
+			var/obj/machinery/ai/node = member
+			previous_subnets[member] = node.ai_subnet
+		else
+			var/obj/structure/ai_ethernet/cable = member
+			previous_subnets[member] = cable.ai_subnet
 	rebuild_subnets(edges)
 	var/list/used_networks = list()
 	for(var/list/component as anything in cable_components(edges, TRUE))
@@ -125,7 +137,17 @@ SUBSYSTEM_DEF(ai_networks)
 		used_networks += network
 		var/list/old_members = network.nodes + network.cables
 		var/list/new_members = component_nodes + component_cables
-		if(length(old_members) != length(new_members) || length(new_members - old_members))
+		var/subnets_changed = FALSE
+		for(var/obj/machinery/ai/node as anything in component_nodes)
+			if(previous_subnets[node] != node.ai_subnet)
+				subnets_changed = TRUE
+				break
+		if(!subnets_changed)
+			for(var/obj/structure/ai_ethernet/cable as anything in component_cables)
+				if(previous_subnets[cable] != cable.ai_subnet)
+					subnets_changed = TRUE
+					break
+		if(subnets_changed || length(old_members) != length(new_members) || length(new_members - old_members))
 			network.resource_policy_revision++
 		network.resources.human_lock = FALSE
 		for(var/atom/member as anything in (component_nodes + component_cables))

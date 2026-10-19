@@ -62,6 +62,11 @@ GLOBAL_LIST_EMPTY(ai_core_displays)
 	if(new_icon_state)
 		icon_state = new_icon_state
 
+/obj/machinery/status_display/ai_core/welder_act(mob/living/user, obj/item/tool)
+	. = ..()
+	if(. && !(machine_stat & BROKEN))
+		update()
+
 /obj/machinery/status_display/ai_core/process()
 	if(machine_stat & (NOPOWER|BROKEN))
 		cut_overlays()
@@ -81,4 +86,4 @@ GLOBAL_LIST_EMPTY(ai_core_displays)
 		return
 	icon = displayed_ai.icon
 	icon_state = displayed_ai.icon_state
-	copy_overlays(displayed_ai)
+	copy_overlays(displayed_ai, cut_old = TRUE)

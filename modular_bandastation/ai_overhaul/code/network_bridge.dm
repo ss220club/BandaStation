@@ -176,7 +176,7 @@ GLOBAL_LIST_EMPTY(ai_network_bridges)
 	return default_deconstruction_screwdriver(user, icon_state, icon_state, tool) ? ITEM_INTERACT_SUCCESS : ITEM_INTERACT_BLOCKING
 
 /obj/machinery/ai/network_bridge/crowbar_act(mob/living/user, obj/item/tool)
-	return default_deconstruction_crowbar(tool) ? ITEM_INTERACT_SUCCESS : ITEM_INTERACT_BLOCKING
+	return default_deconstruction_crowbar(user, tool) ? ITEM_INTERACT_SUCCESS : ITEM_INTERACT_BLOCKING
 
 /obj/machinery/ai/network_bridge/examine(mob/user)
 	. = ..()

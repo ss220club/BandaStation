@@ -35,7 +35,6 @@
 			core = new /obj/machinery/ai/data_core/primary(home)
 	else
 		return
-	setup_decentralized_ai()
 	if(!core.transfer_AI(src))
 		return
 	var/datum/ai_os/pool = resource_pool()

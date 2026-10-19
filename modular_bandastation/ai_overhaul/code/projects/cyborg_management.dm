@@ -73,7 +73,7 @@
 	desc = "Снять блокировку подключённого киборга."
 
 /datum/action/innate/ai/ranged/ai_borg_maintenance/unlock/perform_maintenance(mob/living/silicon/robot/borg)
-	if(!borg.lockcharge)
+	if(!borg.lockcharge || borg.wires?.is_cut(WIRE_LOCKDOWN))
 		return FALSE
 	borg.SetLockdown(FALSE)
 	return TRUE

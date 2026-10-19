@@ -32,7 +32,7 @@
 		return
 	if(ai.has_language(language, UNDERSTOOD_LANGUAGE))
 		return
-	if(!(language in list(/datum/language/common, /datum/language/draconic, /datum/language/moffic, /datum/language/nekomimetic, /datum/language/uncommon, /datum/language/slime, /datum/language/terrum, /datum/language/spinwarder)))
+	if(!(language in list(/datum/language/common, /datum/language/calcic, /datum/language/draconic, /datum/language/moffic, /datum/language/nekomimetic, /datum/language/uncommon, /datum/language/slime, /datum/language/terrum, /datum/language/spinwarder)))
 		return
 	var/list/samples = heard_languages[language]
 	if(!samples)

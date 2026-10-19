@@ -79,7 +79,7 @@ describe('local display feedback', () => {
 
   it('responds to the hottest observed core without hiding a more severe fault', () => {
     const result = displayFeedback({
-      cpuReserved: 1,
+      cpuReserved: 0.9,
       cpuScope: 'projects',
       temperatures: [
         { value: 273, limit: 288 },

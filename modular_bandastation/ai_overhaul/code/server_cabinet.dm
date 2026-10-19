@@ -53,7 +53,11 @@ GLOBAL_LIST_EMPTY(server_cabinets)
 
 /obj/machinery/ai/server_cabinet/Destroy(force)
 	eject_decryption_disk()
+	var/list/racks = installed_racks
 	installed_racks = list()
+	for(var/obj/item/server_rack/rack as anything in racks)
+		if(!QDELETED(rack) && rack.loc == src)
+			rack.forceMove(drop_location())
 	GLOB.server_cabinets -= src
 	GLOB.ai_os.update_hardware()
 	return ..()
@@ -134,15 +138,15 @@ GLOBAL_LIST_EMPTY(server_cabinets)
 	var/cpu_power = max(0, cached_power_usage - ram_power)
 	return (ram_power + cpu_power * (0.2 + 0.8 * thermal_factor)) * power_modifier
 
-/obj/machinery/ai/server_cabinet/process_atmos()
+/obj/machinery/ai/server_cabinet/process_atmos(seconds_per_tick)
 	. = ..()
 	if(!.)
 		return FALSE
 	if(valid_ticks <= 0 || !valid_holder(ignore_temperature = TRUE))
 		return FALSE
 	var/total_usage = current_module_power()
-	use_energy(total_usage)
-	var/temperature_increase = (total_usage / AI_HEATSINK_CAPACITY)* heat_modifier
+	use_energy(total_usage * seconds_per_tick)
+	var/temperature_increase = (total_usage / AI_HEATSINK_CAPACITY) * heat_modifier * seconds_per_tick
 	core_temp += temperature_increase * AI_TEMPERATURE_MULTIPLIER
 	return TRUE
 
@@ -183,7 +187,7 @@ GLOBAL_LIST_EMPTY(server_cabinets)
 	if(remove_racks(user))
 		tool.play_tool_sound(src, 50)
 		return ITEM_INTERACT_SUCCESS
-	if(default_deconstruction_crowbar(tool))
+	if(default_deconstruction_crowbar(user, tool))
 		return ITEM_INTERACT_SUCCESS
 
 /obj/machinery/ai/server_cabinet/add_context(atom/source, list/context, obj/item/held_item, mob/user)
@@ -231,7 +235,7 @@ GLOBAL_LIST_EMPTY(server_cabinets)
 		total_ram += rack.contained_ram
 		cached_power_usage += rack.get_power_usage()
 	GLOB.ai_os.update_hardware()
-	use_power = length(installed_racks) ? ACTIVE_POWER_USE : IDLE_POWER_USE
+	update_use_power(length(installed_racks) ? ACTIVE_POWER_USE : IDLE_POWER_USE)
 	update_appearance()
 
 /** Извлекает установленные модули с пересчётом CPU, RAM и потребления. */

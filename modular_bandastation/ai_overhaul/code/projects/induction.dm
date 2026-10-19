@@ -74,6 +74,8 @@
 	var/works_on_apcs = FALSE
 
 /datum/action/innate/ai/ranged/charge_borg_or_apc/do_ability(mob/living/user, atom/clicked_on)
+	if(user != owner_AI || QDELETED(owner_AI) || owner_AI.control_disabled || owner_AI.incapacitated || !owner_AI.in_network_core() || !IsAvailable() || QDELETED(clicked_on) || !owner_AI.can_see(clicked_on))
+		return FALSE
 	if(!iscyborg(clicked_on) && !isapc(clicked_on))
 		to_chat(owner, span_warning("Можно заряжать только киборгов или ЛКП!"))
 		return FALSE
@@ -84,13 +86,14 @@
 		to_chat(owner, span_warning("Можно заряжать только киборгов!"))
 		return FALSE
 
+	if(!charge_borg_or_apc(clicked_on))
+		return FALSE
 	owner.playsound_local(owner, SFX_SPARKS, 50, FALSE)
-	if(charge_borg_or_apc(clicked_on))
-		unset_ranged_ability(owner)
-		adjust_uses(-1)
-		do_sparks(3, FALSE, clicked_on)
-		to_chat(owner, span_notice("Вы заряжаете [clicked_on.declent_ru(ACCUSATIVE)]."))
-		clicked_on.audible_message(span_userdanger("От [clicked_on.declent_ru(GENITIVE)] доносится тихое электрическое жужжание!"))
+	unset_ranged_ability(owner)
+	adjust_uses(-1)
+	do_sparks(3, FALSE, clicked_on)
+	to_chat(owner, span_notice("Вы заряжаете [clicked_on.declent_ru(ACCUSATIVE)]."))
+	clicked_on.audible_message(span_userdanger("От [clicked_on.declent_ru(GENITIVE)] доносится тихое электрическое жужжание!"))
 	return TRUE
 
 /** Заряжает подходящую неполную батарею на треть и сообщает об успешном результате. */
@@ -99,26 +102,28 @@
 		return
 	if(iscyborg(target))
 		var/mob/living/silicon/robot/robot = target
-		log_game("[key_name(usr)] charged [robot.name].")
 		if(!robot.cell)
 			to_chat(owner, span_warning("У [robot.declent_ru(GENITIVE)] нет батареи для зарядки!"))
 			return FALSE
 		if(robot.cell.charge >= robot.cell.maxcharge)
 			to_chat(owner, span_warning("Батарея [robot.declent_ru(GENITIVE)] уже полностью заряжена!"))
 			return FALSE
-		robot.charge(null, robot.cell.maxcharge * 0.33)
+		if(robot.cell.give(robot.cell.maxcharge * 0.33) <= 0)
+			return FALSE
+		log_game("[key_name(owner_AI)] charged [robot.name].")
 		return TRUE
 	if(isapc(target))
 		var/obj/machinery/power/apc/apc = target
 		var/turf/target_turf = get_turf(apc)
-		log_game("[key_name(usr)] charged [apc.name] at [AREACOORD(target_turf)].")
 		if(!apc.cell)
 			to_chat(owner, span_warning("В ЛКП нет батареи для зарядки!"))
 			return FALSE
 		if(apc.cell.charge >= apc.cell.maxcharge)
 			to_chat(owner, span_warning("ЛКП уже полностью заряжен!"))
 			return FALSE
-		apc.cell.give(apc.cell.maxcharge * 0.33)
+		if(apc.cell.give(apc.cell.maxcharge * 0.33) <= 0)
+			return FALSE
+		log_game("[key_name(owner_AI)] charged [apc.name] at [AREACOORD(target_turf)].")
 		return TRUE
 
 /datum/action/innate/ai/ranged/charge_borg_or_apc/adjust_uses(amt, silent)

@@ -110,7 +110,7 @@
 		data["can_eject"] = ishuman(user) && !user.incapacitated && user.Adjacent(computer)
 		data["downloading"] = downloading?.name
 		data["download_progress"] = download_progress
-		var/obj/item/mmi/brain = user.is_holding_item_of_type(/obj/item/mmi) || null
+		var/obj/item/brain_processor/brain = user.is_holding_item_of_type(/obj/item/brain_processor) || null
 		data["mmi_ref"] = brain ? REF(brain) : null
 		data["mmi_name"] = brain?.brainmob?.name || brain?.name
 		data["mmi_ready"] = !!brain && CONFIG_GET(flag/allow_ai) && brain.brain_check()
@@ -141,8 +141,9 @@
 	data["can_install_upgrade"] = can_install_upgrade(user)
 	if(module)
 		data["upgrade_targets"] = upgrade_ui_data(user, network)
-	var/list/job_plan = network.background_cpu_plan()
-	data["subnets"] = network.subnet_ui_data(job_plan)
+	var/list/subnet_budgets = list()
+	var/list/job_plan = network.background_cpu_plan(subnet_budgets)
+	data["subnets"] = network.subnet_ui_data(job_plan, subnet_budgets)
 	data["bridges"] = list()
 	for(var/obj/machinery/ai/network_bridge/bridge in network.nodes)
 		var/responding = !(bridge.machine_stat & (NOPOWER | BROKEN | EMPED))

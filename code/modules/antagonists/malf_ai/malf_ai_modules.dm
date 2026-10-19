@@ -193,7 +193,7 @@ GLOBAL_LIST_INIT(malf_modules, subtypesof(/datum/ai_module/malf))
 	if(tgui_alert(owner, "Отправить сигнал активации? (true = активировтаь, false = отмена)", "purge_all_life()", list("confirm = TRUE;", "confirm = FALSE;")) != "confirm = TRUE;")
 		return
 	// BANDASTATION ADD START - Перенос ИИ: работа malf-способностей из физического ядра.
-	if (active || owner_AI.stat == DEAD)
+	if (active || QDELETED(owner_AI) || owner_AI.stat == DEAD)
 		return
 	if (!owner_AI.in_network_core())
 		return
@@ -210,12 +210,12 @@ GLOBAL_LIST_INIT(malf_modules, subtypesof(/datum/ai_module/malf))
 	var/pass = prob(10) ? "******" : "hunter2"
 	to_chat(owner, "<span class='small bolddanger'>run -o -a 'selfdestruct'</span>")
 	sleep(0.5 SECONDS)
-	if(QDELETED(owner) || !owner_AI.in_network_core())
+	if(QDELETED(owner) || QDELETED(owner_AI) || !owner_AI.in_network_core())
 		active = FALSE
 		return
 	to_chat(owner, "<span class='small bolddanger'>Running executable 'selfdestruct'...</span>")
 	sleep(rand(10, 30))
-	if(QDELETED(owner) || !owner_AI.in_network_core())
+	if(QDELETED(owner) || QDELETED(owner_AI) || !owner_AI.in_network_core())
 		active = FALSE
 		return
 	owner.playsound_local(owner, 'sound/announcer/alarm/bloblarm.ogg', 50, 0, use_reverb = FALSE)
@@ -223,63 +223,63 @@ GLOBAL_LIST_INIT(malf_modules, subtypesof(/datum/ai_module/malf))
 	to_chat(owner, span_bolddanger("Это нарушение безопасности 3-го класса. Об данном инциденте будет сообщено на Центральное Командование."))
 	for(var/i in 1 to 3)
 		sleep(2 SECONDS)
-		if(QDELETED(owner) || !owner_AI.in_network_core())
+		if(QDELETED(owner) || QDELETED(owner_AI) || !owner_AI.in_network_core())
 			active = FALSE
 			return
 		to_chat(owner, span_bolddanger("Отправка отчёта безопасности Центральному Командованию.....[rand(0, 9) + (rand(20, 30) * i)]%"))
 	sleep(0.3 SECONDS)
-	if(QDELETED(owner) || !owner_AI.in_network_core())
+	if(QDELETED(owner) || QDELETED(owner_AI) || !owner_AI.in_network_core())
 		active = FALSE
 		return
 	to_chat(owner, "<span class='small bolddanger'>auth 'akjv9c88asdf12nb' [pass]</span>")
 	owner.playsound_local(owner, 'sound/items/timer.ogg', 50, 0, use_reverb = FALSE)
 	sleep(3 SECONDS)
-	if(QDELETED(owner) || !owner_AI.in_network_core())
+	if(QDELETED(owner) || QDELETED(owner_AI) || !owner_AI.in_network_core())
 		active = FALSE
 		return
 	to_chat(owner, span_boldnotice("Аутентификация успешна. Добро пожаловать, akjv9c88asdf12nb."))
 	owner.playsound_local(owner, 'sound/misc/server-ready.ogg', 50, 0, use_reverb = FALSE)
 	sleep(0.5 SECONDS)
-	if(QDELETED(owner) || !owner_AI.in_network_core())
+	if(QDELETED(owner) || QDELETED(owner_AI) || !owner_AI.in_network_core())
 		active = FALSE
 		return
 	to_chat(owner, span_boldnotice("Активировать устройство самоуничтожения? (Д/Н)"))
 	owner.playsound_local(owner, 'sound/machines/compiler/compiler-stage1.ogg', 50, 0, use_reverb = FALSE)
 	sleep(2 SECONDS)
-	if(QDELETED(owner) || !owner_AI.in_network_core())
+	if(QDELETED(owner) || QDELETED(owner_AI) || !owner_AI.in_network_core())
 		active = FALSE
 		return
 	to_chat(owner, "<span class='small bolddanger'>Д</span>")
 	sleep(1.5 SECONDS)
-	if(QDELETED(owner) || !owner_AI.in_network_core())
+	if(QDELETED(owner) || QDELETED(owner_AI) || !owner_AI.in_network_core())
 		active = FALSE
 		return
 	to_chat(owner, span_boldnotice("Подтвердите активацию устройства самоуничтожения? (Д/Н)"))
 	owner.playsound_local(owner, 'sound/machines/compiler/compiler-stage2.ogg', 50, 0, use_reverb = FALSE)
 	sleep(1 SECONDS)
-	if(QDELETED(owner) || !owner_AI.in_network_core())
+	if(QDELETED(owner) || QDELETED(owner_AI) || !owner_AI.in_network_core())
 		active = FALSE
 		return
 	to_chat(owner, "<span class='small bolddanger'>Д</span>")
 	sleep(rand(15, 25))
-	if(QDELETED(owner) || !owner_AI.in_network_core())
+	if(QDELETED(owner) || QDELETED(owner_AI) || !owner_AI.in_network_core())
 		active = FALSE
 		return
 	to_chat(owner, span_boldnotice("Пожалуйста, введите пароль для подтверждения."))
 	owner.playsound_local(owner, 'sound/machines/compiler/compiler-stage2.ogg', 50, 0, use_reverb = FALSE)
 	sleep(1.4 SECONDS)
-	if(QDELETED(owner) || !owner_AI.in_network_core())
+	if(QDELETED(owner) || QDELETED(owner_AI) || !owner_AI.in_network_core())
 		active = FALSE
 		return
 	to_chat(owner, "<span class='small bolddanger'>[pass]</span>")
 	sleep(4 SECONDS)
-	if(QDELETED(owner) || !owner_AI.in_network_core())
+	if(QDELETED(owner) || QDELETED(owner_AI) || !owner_AI.in_network_core())
 		active = FALSE
 		return
 	to_chat(owner, span_boldnotice("Аутентификация пройдена. Передача сигнала активации..."))
 	owner.playsound_local(owner, 'sound/misc/server-ready.ogg', 50, 0, use_reverb = FALSE)
 	sleep(3 SECONDS)
-	if(QDELETED(owner) || !owner_AI.in_network_core())
+	if(QDELETED(owner) || QDELETED(owner_AI) || !owner_AI.in_network_core())
 		active = FALSE
 		return
 	if (owner_AI.stat != DEAD)
