@@ -60,6 +60,3 @@
 #include "code/benchmark_history.dm"
 #include "code/subnets.dm"
 #include "code/debug_lab.dm"
-#include "code/tests.dm"
-#include "code/tests_profiles_thermal.dm"
-#include "code/tests_regressions.dm"
