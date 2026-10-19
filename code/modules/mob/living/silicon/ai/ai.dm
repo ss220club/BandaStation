@@ -161,20 +161,22 @@
 				return
 	return ..()
 
-// BANDASTATION ADD START - Перенос ИИ: документация изменённого API.
-/** Удаляет служебные объекты ИИ и освобождает назначения ресурсов перед штатной очисткой. */
-// BANDASTATION ADD END - Перенос ИИ
-/mob/living/silicon/ai/Destroy()
-	// BANDASTATION ADD START - Перенос ИИ: подключение физического ядра к штатному ИИ.
-	destroy_decentralized_ai()
-	// BANDASTATION ADD END - Перенос ИИ
+/mob/living/silicon/ai/Destroy(force)
 	GLOB.ai_list -= src
 	GLOB.shuttle_caller_list -= src
+	// Release linked cyborgs before deleting the resources they access through us.
+	for(var/mob/living/silicon/robot/cyborg in connected_robots)
+		if(cyborg.connected_ai == src)
+			cyborg.set_connected_ai(null)
+	connected_robots.Cut()
 	SSshuttle.autoEvac()
 	QDEL_NULL(eyeobj) // No AI, no Eye
 	QDEL_NULL(spark_system)
 	QDEL_NULL(malf_picker)
 	QDEL_NULL(doomsday_device)
+	// BANDASTATION ADD START - Перенос ИИ: очистка после отключения киборгов.
+	destroy_decentralized_ai()
+	// BANDASTATION ADD END - Перенос ИИ
 	QDEL_NULL(robot_control)
 	QDEL_NULL(status_display_picker)
 	QDEL_NULL(aiMulti)
