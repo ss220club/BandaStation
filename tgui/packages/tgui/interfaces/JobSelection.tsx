@@ -15,9 +15,8 @@ import { useBackend } from '../backend';
 // SS220 EDIT - START
 import { retainAvailableLatejoinJobs } from '../bandastation/job_slots_preferences/latejoin';
 import {
+  extendLatejoinDisplay,
   LatejoinJobIcon,
-  LatejoinJobTooltip,
-  latejoinJobTitle,
 } from '../bandastation/jobs/LatejoinJob';
 // SS220 EDIT - END
 import {
@@ -52,7 +51,6 @@ type Data = {
   disable_jobs_for_non_observers: BooleanLike;
   priority: BooleanLike;
   round_duration: string;
-  edit_slot: number; // SS220 EDIT: server profile context.
 };
 
 type JobEntryProps = {
@@ -64,6 +62,7 @@ type JobEntryProps = {
 };
 
 function JobEntry(props: JobEntryProps) {
+  props = extendLatejoinDisplay(props); // SS220 EDIT: display inputs only; action keys remain canonical.
   const { jobName, job, department, onClick } = props;
 
   const jobIcon = JOB2ICON[ReverseJobsRu(jobName)] || null;
@@ -85,21 +84,17 @@ function JobEntry(props: JobEntryProps) {
         cursor: job.unavailable_reason ? 'initial' : 'pointer',
       }}
       tooltip={
-        // SS220 EDIT - START
-        <LatejoinJobTooltip job={job}>
-          {job.unavailable_reason ||
-            (job.prioritized ? (
-              <>
-                <p style={{ marginTop: '0px' }}>
-                  <b>The HoP wants more people in this job!</b>
-                </p>
-                {job.description}
-              </>
-            ) : (
-              job.description
-            ))}
-        </LatejoinJobTooltip>
-        // SS220 EDIT - END
+        job.unavailable_reason ||
+        (job.prioritized ? (
+          <>
+            <p style={{ marginTop: '0px' }}>
+              <b>The HoP wants more people in this job!</b>
+            </p>
+            {job.description}
+          </>
+        ) : (
+          job.description
+        ))
       }
       tooltipPosition="top"
       onClick={() => {
@@ -108,19 +103,18 @@ function JobEntry(props: JobEntryProps) {
     >
       <Stack fill>
         {/* SS220 EDIT - START */}
-        <LatejoinJobIcon job={job}>
-          {jobIcon && (
-            <Stack.Item>
-              <Icon style={{ marginRight: '0.1em' }} name={jobIcon} />
-            </Stack.Item>
-          )}
-        </LatejoinJobIcon>
+        <LatejoinJobIcon job={job} />
         {/* SS220 EDIT - END */}
+        {jobIcon && (
+          <Stack.Item>
+            <Icon style={{ marginRight: '0.1em' }} name={jobIcon} />
+          </Stack.Item>
+        )}
         <Stack.Item grow>
           {job.command ? (
-            <b>{latejoinJobTitle(job, JOBS_RU[jobName] || jobName)}</b>
+            <b>{JOBS_RU[jobName] || jobName}</b>
           ) : (
-            latejoinJobTitle(job, JOBS_RU[jobName] || jobName)
+            JOBS_RU[jobName] || jobName
           )}
         </Stack.Item>
         <Stack.Item>
@@ -144,7 +138,7 @@ type DepartmentEntryProps = {
 
 function DepartmentEntry(props: DepartmentEntryProps) {
   const { name, department } = props;
-  const { act, data } = useBackend<Data>(); // SS220 EDIT: capture the rendered slot.
+  const { act } = useBackend<Data>();
 
   return (
     <Box minWidth="30%">
@@ -189,7 +183,7 @@ function DepartmentEntry(props: DepartmentEntryProps) {
                 jobIcon={job.jobIcon}
                 department={department}
                 onClick={() => {
-                  act('select_job', { job: name, edit_slot: data.edit_slot }); // SS220 EDIT
+                  act('select_job', { job: name });
                 }}
               />
             </Stack.Item>
@@ -211,7 +205,7 @@ export function JobSelection(props) {
     data.departments_static,
   );
 
-  retainAvailableLatejoinJobs(departments, data.departments); // SS220 EDIT: prune hidden entries after the native merge.
+  retainAvailableLatejoinJobs(departments, data.departments); // SS220 EDIT: hidden dynamic rows stay hidden after the native merge.
 
   const { shuttle_status, round_duration } = data;
 
@@ -221,11 +215,7 @@ export function JobSelection(props) {
         <Section
           buttons={
             <Button
-              // SS220 EDIT - START
-              onClick={() =>
-                act('select_job', { job: 'Random', edit_slot: data.edit_slot })
-              }
-              // SS220 EDIT - END
+              onClick={() => act('select_job', { job: 'Random' })}
               tooltip="Случайно выбрать профессию. Вы можете повторно выбирать случайную профессию или отказаться от этого."
             >
               Случайная профессия!

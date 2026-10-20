@@ -1,5 +1,6 @@
 .Section:not(.Section--fitted) .PreferencesMenu__JobTabs {
   margin: 0;
+  margin-bottom: var(--space-s);
   padding: 0;
 
   .Tab {
@@ -8,17 +9,18 @@
   }
 }
 
-.Section__title:has(.PreferencesMenu__JobTabs) > .Section__buttons {
-  top: 50%;
-  margin-top: 0;
-  transform: translateY(-50%);
-}
-
 .PreferencesMenu__JobTiers {
   display: flex;
   flex-direction: column;
   min-width: 0;
   gap: var(--space-m);
+  height: 100%;
+  overflow-y: auto;
+}
+
+// The added tier view occupies the same section only while its tab is selected.
+.Section__content:has(> .PreferencesMenu__JobTiers) > .PreferencesMenu__Jobs {
+  display: none;
 }
 
 .PreferencesMenu__JobTierJobs {

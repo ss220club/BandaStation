@@ -1,41 +1,24 @@
 import '../../styles/bandastation/donor_jobs.scss';
 
-import type {
-  ComponentProps,
-  ComponentType,
-  CSSProperties,
-  ReactNode,
-} from 'react';
+import type { ComponentType, CSSProperties } from 'react';
 import { useBackend } from 'tgui/backend';
 import { Color } from 'tgui-core/color';
-import { Box, Icon, Section, Stack } from 'tgui-core/components';
+import { Box, Icon, Section } from 'tgui-core/components';
 import { classes } from 'tgui-core/react';
 
 import type { Job } from '../../interfaces/PreferencesMenu/types';
 import { useServerPrefs } from '../../interfaces/PreferencesMenu/useServerPrefs';
 import type { JobPreferencesData } from '../jobs/types';
-import { JobTabsProvider, useSubscriptionJobs } from './JobTabs';
+import { useSubscriptionJobs } from './JobTabs';
 
-export function JobsLayout(props: ComponentProps<typeof Stack>) {
-  return (
-    <JobTabsProvider>
-      <Stack {...props} />
-    </JobTabsProvider>
-  );
-}
-
-export function JobsSection(props: {
-  children: ReactNode;
+/** Tier view uses native rows; ordinary department rendering stays in its native interface. */
+export function SubscriptionJobs(props: {
   jobRow: ComponentType<{ name: string; job: Job; className?: string }>;
 }) {
   const subscriptionJobs = useSubscriptionJobs();
   const { data } = useBackend<JobPreferencesData>();
   const serverPrefs = useServerPrefs();
-  let content: ReactNode = null;
-
-  if (!subscriptionJobs) {
-    content = props.children;
-  } else if (serverPrefs) {
+  if (subscriptionJobs && serverPrefs) {
     const { jobs, jobs_sorted, departments } = serverPrefs.jobs;
     const donorJobs = data.job_variants ?? {};
     const names = jobs_sorted.filter(
@@ -99,14 +82,9 @@ export function JobsSection(props: {
       );
     }
 
-    content = (
+    return (
       <div className="PreferencesMenu__JobTiers">{tiers.map(renderTier)}</div>
     );
   }
-
-  return (
-    <Section fill scrollable>
-      {content}
-    </Section>
-  );
+  return null;
 }

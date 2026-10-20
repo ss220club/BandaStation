@@ -3,9 +3,16 @@ import '../../styles/bandastation/job_variants.scss';
 import type { ReactNode } from 'react';
 import { useBackend } from 'tgui/backend';
 import { Box, Dropdown } from 'tgui-core/components';
-
+import { JOBS_RU } from '../ru_jobs';
 import { JobHudIcon } from './JobHudIcon';
 import type { JobPreferencesData } from './types';
+
+/** A row-local label map; the native JSX keeps its translation/fallback expression. */
+export function useJobLabel(name: string) {
+  return {
+    [name]: <JobLabel jobName={name}>{JOBS_RU[name] || name}</JobLabel>,
+  };
+}
 
 export function JobLabel(props: { jobName: string; children: ReactNode }) {
   const { act, data } = useBackend<JobPreferencesData>();

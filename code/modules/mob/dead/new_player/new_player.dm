@@ -135,7 +135,7 @@
 			return "Ваш персонаж недостаточно стар для игры за [job_title_ru(jobtitle)]."
 
 	// SS220 EDIT - START
-	// SS220 EDIT: Additional availability reasons are supplied by modules.
+	// Additional availability reasons are supplied by modules.
 	var/additional_message = get_additional_job_unavailable_message(retval)
 	if(additional_message)
 		return additional_message
@@ -151,12 +151,20 @@
 			if(isnum(client.player_age) && client.player_age <= 14) //Newbies can always be assistants
 				return JOB_AVAILABLE
 			for(var/datum/job/other_job as anything in SSjob.joinable_occupations)
-				if(other_job.current_positions < other_job.total_positions && other_job != job && !other_job.get_join_lock_reason(GET_CLIENT(src))) // SS220 EDIT: Closed roles are not alternative vacancies.
+				// SS220 EDIT - START
+				if(other_job.get_join_lock_reason(GET_CLIENT(src)))
+					continue
+				// SS220 EDIT - END
+				if(other_job.current_positions < other_job.total_positions && other_job != job)
 					return JOB_UNAVAILABLE_SLOTFULL
 		else
 			return JOB_UNAVAILABLE_SLOTFULL
 
-	var/eligibility_check = SSjob.check_job_eligibility(src, job, "Mob IsJobUnavailable", latejoin = latejoin) // SS220 EDIT: Inspect the selected latejoin profile.
+	// SS220 EDIT - START
+	if(job_capacity_check_only)
+		return JOB_AVAILABLE
+	// SS220 EDIT - END
+	var/eligibility_check = SSjob.check_job_eligibility(src, job, "Mob IsJobUnavailable")
 	if(eligibility_check != JOB_AVAILABLE)
 		return eligibility_check
 
@@ -170,7 +178,12 @@
 		if(client?.is_localhost())
 			to_chat(client.mob, span_notice("Этот персонаж уже участвовал в данном раунде, однако это ограничение обходится при использовании localhost."))
 			log_admin("[key_name_and_tag(client)] пропускает повторное присоединение к раунду тем же персонажем.")
-		else if("[get_latejoin_character_slot(rank)]" in persistent_client.joined_as_slots) // SS220 EDIT: Respawn history belongs to the selected profile.
+		// SS220 EDIT - START
+		else if(get_latejoin_character_slot(rank) != client.prefs.default_slot)
+			if(!check_assigned_latejoin_history(rank))
+				return FALSE
+		// SS220 EDIT - END
+		else if("[client.prefs.default_slot]" in persistent_client.joined_as_slots)
 			tgui_alert(usr, "Вы уже играли на данном персонаже в этом раунде!")
 			return FALSE
 
@@ -188,7 +201,7 @@
 			SSshuttle.arrivals.RequireUndocked(src)
 
 	// SS220 EDIT - START
-	if(!validate_latejoin_request(rank)) // SS220 EDIT: Arrivals and eligibility can yield.
+	if(!validate_latejoin_request(rank)) // Arrivals and eligibility can yield.
 		return FALSE
 	// SS220 EDIT - END
 
@@ -209,17 +222,18 @@
 	if(!destination)
 		handle_latejoin_creation_failure() // SS220 EDIT: Release only this attempt before the native failure.
 		CRASH("Failed to find a latejoin spawn point.")
-	var/mob/living/character = create_character(destination, forced_slot = get_latejoin_character_slot(rank)) // SS220 EDIT: Pass the committed profile.
+	var/mob/living/character = create_character(destination, forced_slot = client.prefs.default_slot)
 	if(!character)
 		// SS220 EDIT - START
-		if(handle_latejoin_creation_failure()) // SS220 EDIT: Expected admission failure is not a constructor crash.
+		if(handle_latejoin_creation_failure()) // Expected admission failure is not a constructor crash.
 			return FALSE
 		// SS220 EDIT - END
 		CRASH("Failed to create a character for latejoin.")
 	// SS220 EDIT - START
-	if(!transfer_character()) // SS220 EDIT: Never equip an unowned or cancelled body.
+	if(!can_transfer_job_character())
 		return FALSE
 	// SS220 EDIT - END
+	transfer_character()
 
 	SSjob.equip_rank(character, job, character.client)
 	job.after_latejoin_spawn(character)
@@ -244,7 +258,7 @@
 	#undef IS_FULL_CAPTAIN
 
 	SSticker.minds += character.mind
-	character.client?.init_verbs() // SS220 EDIT: A callback may disconnect after handover. // init verbs for the late join
+	character.client.init_verbs() // init verbs for the late join
 	var/mob/living/carbon/human/humanc
 	if(ishuman(character))
 		humanc = character //Let's retypecast the var to be human,
@@ -275,7 +289,8 @@
 			humanc.clear_personalities()
 
 	if(humanc) // Quirks may change manifest datapoints, so inject only after assigning quirks
-		GLOB.manifest.inject(humanc, initial_job_record = TRUE) // SS220 EDIT: Initial record callback.
+		humanc.prepare_initial_crew_record() // SS220 EDIT: mark only the initial native record.
+		GLOB.manifest.inject(humanc)
 		SEND_SIGNAL(humanc, COMSIG_HUMAN_CHARACTER_SETUP_FINISHED)
 	var/area/station/arrivals = GLOB.areas_by_type[/area/station/hallway/secondary/entry]
 	if(humanc && arrivals && !arrivals.power_environ) //arrivals depowered
@@ -296,7 +311,7 @@
  * * destination - where to spawn the character
  * * forced_slot - if provided, will load whatever character is in that slot instead of their active slot
  */
-/mob/dead/new_player/proc/create_character(atom/destination, forced_slot, datum/job_character_creation/creation) // SS220 EDIT: Per-call ownership supplied by the module.
+/mob/dead/new_player/proc/create_character(atom/destination, forced_slot)
 	spawning = TRUE
 
 	var/spawned_slot = isnum(forced_slot) ? forced_slot : LAZYACCESS(client.prefs.job_assigned_profiles, mind.assigned_role.title)
@@ -304,9 +319,9 @@
 		client.prefs.load_character(spawned_slot) // if this fails, we will simply load their current slot anyways
 
 	mind.active = FALSE //we wish to transfer the key manually
+	var/mob/living/spawning_mob = mind.assigned_role.get_spawn_mob(client, destination)
 	// SS220 EDIT - START
-	var/mob/living/spawning_mob = creation.create_body(client, destination, src) // SS220 EDIT: Keep construction cleanup alive if the lobby is deleted.
-	if(!spawning_mob) // SS220 EDIT: The module rejected the constructed body.
+	if(!spawning_mob)
 		return
 	// SS220 EDIT - END
 	if(QDELETED(src))

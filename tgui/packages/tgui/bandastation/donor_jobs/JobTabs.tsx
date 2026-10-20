@@ -1,40 +1,40 @@
-import { createContext, type ReactNode, useContext, useState } from 'react';
+import { atom, useAtom } from 'jotai';
 import { useBackend } from 'tgui/backend';
 import { Tabs } from 'tgui-core/components';
+import { sharedAtom, store } from '../../events/store';
 
 import { useServerPrefs } from '../../interfaces/PreferencesMenu/useServerPrefs';
 import type { JobPreferencesData } from '../jobs/types';
 
-const JobTabsContext = createContext({
-  hasSubscriptionJobs: false,
-  subscriptionJobs: false,
-  selectSubscriptionJobs: (_selected: boolean) => {},
-});
+// Window-local state uses the native store and resets with it; no replacement layout/provider.
+const subscriptionTab = atom(
+  (get) => !!get(sharedAtom)['bandastation.jobs.subscription'],
+  (get, set, selected: boolean) =>
+    set(sharedAtom, {
+      ...get(sharedAtom),
+      'bandastation.jobs.subscription': selected,
+    }),
+);
 
-export function JobTabsProvider(props: { children: ReactNode }) {
+function useJobTabs() {
   const { data } = useBackend<JobPreferencesData>();
   const serverPrefs = useServerPrefs();
-  const [selected, selectSubscriptionJobs] = useState(false);
+  const [selected, selectSubscriptionJobs] = useAtom(subscriptionTab, {
+    store,
+  });
   const hasSubscriptionJobs = !!serverPrefs?.jobs.jobs_sorted.some(
     (name) => (data.job_variants?.[name]?.required_tier ?? 0) > 0,
   );
-
-  return (
-    <JobTabsContext.Provider
-      value={{
-        hasSubscriptionJobs,
-        subscriptionJobs: hasSubscriptionJobs && selected,
-        selectSubscriptionJobs,
-      }}
-    >
-      {props.children}
-    </JobTabsContext.Provider>
-  );
+  return {
+    hasSubscriptionJobs,
+    subscriptionJobs: hasSubscriptionJobs && selected,
+    selectSubscriptionJobs,
+  };
 }
 
 export function JobTabButtons() {
   const { hasSubscriptionJobs, subscriptionJobs, selectSubscriptionJobs } =
-    useContext(JobTabsContext);
+    useJobTabs();
   if (!hasSubscriptionJobs) {
     return null;
   }
@@ -60,14 +60,13 @@ export function JobTabButtons() {
 
 export function useJobTabFilter() {
   const { data } = useBackend<JobPreferencesData>();
-  const { subscriptionJobs } = useContext(JobTabsContext);
+  const { subscriptionJobs } = useJobTabs();
   return (jobs: (readonly [string, unknown])[]) => {
+    if (subscriptionJobs) {
+      return false;
+    }
     for (let index = jobs.length - 1; index >= 0; index--) {
-      const [name] = jobs[index];
-      if (
-        (data.job_variants?.[name]?.required_tier ?? 0) > 0 !==
-        subscriptionJobs
-      ) {
+      if ((data.job_variants?.[jobs[index][0]]?.required_tier ?? 0) > 0) {
         jobs.splice(index, 1);
       }
     }
@@ -76,5 +75,5 @@ export function useJobTabFilter() {
 }
 
 export function useSubscriptionJobs() {
-  return useContext(JobTabsContext).subscriptionJobs;
+  return useJobTabs().subscriptionJobs;
 }

@@ -1,5 +1,7 @@
 /mob/dead/new_player
 	var/datum/latejoin_profile_snapshot/latejoin_request
+	/// Synchronous native capacity phase; reset on every normal entry before any yielding checks.
+	var/job_capacity_check_only = FALSE
 
 /datum/latejoin_profile_snapshot
 	var/client/requester
@@ -25,7 +27,13 @@
 	return requester && GET_CLIENT(src) == requester && requester.mob == src && mind == context.character_mind && requester.prefs.is_latejoin_profile_current(context.job_title, context)
 
 /// Keep native capacity, including its early newbie Assistant return, without bypassing admission.
-/mob/dead/new_player/IsJobUnavailable(rank, latejoin = FALSE)
+/mob/dead/new_player/IsJobUnavailable(rank, latejoin = FALSE, capacity_only = FALSE)
+	job_capacity_check_only = capacity_only
+	if(capacity_only)
+		// The native injection ends this phase before eligibility/SQL; there is no wait here.
+		. = ..(rank, latejoin)
+		job_capacity_check_only = FALSE
+		return
 	var/datum/job/job = istext(rank) ? SSjob.get_job(rank) : null
 	var/datum/latejoin_profile_snapshot/context = capture_latejoin_request(rank)
 	if(!job || job.title != rank || !context)
@@ -71,7 +79,7 @@
 	if(handed_over)
 		return TRUE
 
-/// Used by native respawn history and its forced-slot argument, before any profile is loaded.
+/// Inspect the requested profile without changing the active preferences.
 /mob/dead/new_player/proc/get_latejoin_character_slot(rank)
 	var/datum/job/job = SSjob.get_job(rank)
 	if(job && assigned_character?.job_type == job.type)
@@ -121,3 +129,10 @@
 	if(!requester && !QDELETED(src))
 		qdel(src)
 	return FALSE
+
+/// Only the additional assigned-profile branch uses this policy; the native current-slot branch remains active.
+/mob/dead/new_player/proc/check_assigned_latejoin_history(rank)
+	if("[get_latejoin_character_slot(rank)]" in persistent_client.joined_as_slots)
+		tgui_alert(usr, "Вы уже играли на данном персонаже в этом раунде!")
+		return FALSE
+	return TRUE

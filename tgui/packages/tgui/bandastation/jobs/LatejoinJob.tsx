@@ -1,44 +1,41 @@
-import type { ReactNode } from 'react';
-import { Box, Stack } from 'tgui-core/components';
+import '../../styles/bandastation/job_variants.scss';
 
+import { Stack } from 'tgui-core/components';
 import { JobHudIcon } from './JobHudIcon';
 
 type JobDisplay = {
   description: string;
+  unavailable_reason?: string | null;
   public_title?: string;
   character_profile?: string;
   job_icon?: string;
 };
 
-export function LatejoinJobTooltip(props: {
-  job: JobDisplay;
-  children: ReactNode;
-}) {
-  return (
-    <>
-      {props.children}
-      {props.job.character_profile && (
-        <Box mt={0.5} italic>
-          {props.job.character_profile}
-        </Box>
-      )}
-    </>
-  );
+/** Display-only inputs: native availability/HoP markup and canonical action closures stay intact. */
+export function extendLatejoinDisplay<
+  T extends { jobName: string; job: JobDisplay },
+>(props: T): T {
+  const { job } = props;
+  const profile = job.character_profile;
+  return {
+    ...props,
+    jobName: job.public_title || props.jobName,
+    job: profile
+      ? {
+          ...job,
+          description: `${job.description} — ${profile}`,
+          unavailable_reason: job.unavailable_reason
+            ? `${job.unavailable_reason} — ${profile}`
+            : job.unavailable_reason,
+        }
+      : job,
+  };
 }
 
-export function LatejoinJobIcon(props: {
-  job: JobDisplay;
-  children: ReactNode;
-}) {
+export function LatejoinJobIcon(props: { job: JobDisplay }) {
   return props.job.job_icon ? (
-    <Stack.Item>
+    <Stack.Item className="LatejoinJobIcon">
       <JobHudIcon icon={props.job.job_icon} />
     </Stack.Item>
-  ) : (
-    props.children
-  );
-}
-
-export function latejoinJobTitle(job: JobDisplay, fallback: string): string {
-  return job.public_title || fallback;
+  ) : null;
 }

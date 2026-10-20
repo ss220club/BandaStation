@@ -1,17 +1,3 @@
-/// Repeat native capacity conditions without SQL at final admission; keep them aligned with IsJobUnavailable.
-/mob/dead/new_player/proc/IsJobSlotUnavailable(datum/job/job)
-	if(job.total_positions == -1 || job.current_positions < job.total_positions)
-		return FALSE
-	if(!is_assistant_job(job))
-		return TRUE
-	var/client/requester = GET_CLIENT(src)
-	if(isnum(requester?.player_age) && requester.player_age <= 14) //Newbies can always be assistants
-		return FALSE
-	for(var/datum/job/other_job as anything in SSjob.joinable_occupations)
-		if(other_job != job && !other_job.get_join_lock_reason(requester) && other_job.current_positions < other_job.total_positions)
-			return TRUE
-	return FALSE
-
 /// Final admission fixes the selected profile before native role assignment occupies the vacancy.
 /datum/controller/subsystem/job/proc/prepare_job_assignment(mob/dead/new_player/player, datum/job/job, latejoin)
 	if(QDELETED(player) || !player.mind || !job)
@@ -22,7 +8,7 @@
 	if(latejoin && player.latejoin_request && !player.validate_latejoin_request(job.title, check_queue = FALSE))
 		return FALSE
 	var/datum/job_character_selection/selection = requester.prefs.select_job_character(job, latejoin)
-	if(selection.character_error(job, requester, latejoin) || (latejoin && (player.IsJobSlotUnavailable(job) || (!(ckey(player.key) in GLOB.admin_datums) && is_latejoin_population_full()))))
+	if(selection.character_error(job, requester, latejoin) || (latejoin && (player.IsJobUnavailable(job.title, latejoin = TRUE, capacity_only = TRUE) != JOB_AVAILABLE || (!(ckey(player.key) in GLOB.admin_datums) && is_latejoin_population_full()))))
 		qdel(selection)
 		return FALSE
 	QDEL_NULL(player.assigned_character)
@@ -31,25 +17,21 @@
 		player.latejoin_request.assignment = selection
 	return TRUE
 
-/// Native account/ban/age checks run once; this wrapper only adds profile policy and identity checks.
-/datum/controller/subsystem/job/check_job_eligibility(mob/dead/new_player/player, datum/job/job, debug_prefix = "", add_job_to_log = FALSE, latejoin = FALSE)
+/// Preserve every native account/ban check; only the final age result belongs to the selected profile.
+/datum/controller/subsystem/job/check_job_eligibility(mob/dead/new_player/player, datum/job/job, debug_prefix = "", add_job_to_log = FALSE, latejoin)
 	var/client/requester = player ? GET_CLIENT(player) : null
 	var/datum/mind/candidate_mind = player?.mind
 	if(QDELETED(player) || !requester || !candidate_mind || !job)
 		return JOB_UNAVAILABLE_GENERIC
+	// All native occupation distribution happens before PLAYING; the live lobby menu is latejoin.
+	if(isnull(latejoin))
+		latejoin = !!player.latejoin_request || SSticker.IsRoundInProgress()
 	. = ..()
-	if(. != JOB_AVAILABLE)
+	if(. != JOB_AVAILABLE && . != JOB_UNAVAILABLE_AGE)
 		return
 	if(QDELETED(player) || !requester || GET_CLIENT(player) != requester || requester.mob != player || player.mind != candidate_mind)
 		return JOB_UNAVAILABLE_GENERIC
 	return check_character_eligibility(player, job, latejoin)
-
-/// Supplying the selected age leaves the native age branch and its error unchanged.
-/datum/controller/subsystem/job/proc/get_job_character_age(mob/dead/new_player/player, datum/job/job, latejoin)
-	var/client/requester = GET_CLIENT(player)
-	var/datum/job_character_selection/selection = requester.prefs.select_job_character(job, latejoin)
-	. = selection.age
-	qdel(selection)
 
 /datum/controller/subsystem/job/proc/check_character_eligibility(mob/dead/new_player/player, datum/job/job, latejoin = FALSE)
 	var/client/requester = GET_CLIENT(player)

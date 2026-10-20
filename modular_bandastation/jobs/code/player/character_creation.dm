@@ -14,12 +14,13 @@
 	job = character_mind?.assigned_role
 	assignment = player.assigned_character
 
-/// A deleted lobby's proc stops immediately; this independent frame still owns cleanup.
-/datum/job_character_creation/proc/create_body(client/player_client, atom/destination, mob/dead/new_player/player)
-	var/mob/living/body = job.get_spawn_mob(player_client, destination)
-	if(!validate_character(body, player))
+/// The job frame survives lobby deletion; the native constructor still runs exactly once.
+/datum/job/get_spawn_mob(client/player_client, atom/destination)
+	var/mob/dead/new_player/player = isnewplayer(player_client?.mob) ? player_client.mob : null
+	var/datum/job_character_creation/creation = player?.character_creation_in_progress ? new(player) : null
+	. = ..()
+	if(creation && !creation.validate_character(., player))
 		return null
-	return body
 
 /// Before native mind/history changes, reject a stale request and dispose only of its own body.
 /datum/job_character_creation/proc/validate_character(mob/living/body, mob/dead/new_player/player)
@@ -70,6 +71,9 @@
 /mob/dead/new_player/create_character(atom/destination, forced_slot)
 	if(character_creation_in_progress || new_character)
 		return null
+	// Native latejoin supplies the editing slot; the committed assignment owns the actual slot.
+	if(mind?.late_joiner && assigned_character)
+		forced_slot = assigned_character.slot
 	var/datum/job_character_selection/selection = prepare_character_profile(destination, forced_slot)
 	if(!selection)
 		return null
@@ -77,8 +81,7 @@
 	var/previous_history_length = length(connection?.joined_as_slots)
 	selection.created_mind = mind
 	character_creation_in_progress = TRUE
-	var/datum/job_character_creation/creation = new(src)
-	. = ..(destination, selection.slot, creation)
+	. = ..(destination, selection.slot)
 	if(QDELETED(src))
 		return null
 	character_creation_in_progress = FALSE
@@ -108,11 +111,15 @@
 		return null
 	return selection
 
-/mob/dead/new_player/transfer_character()
+/mob/dead/new_player/proc/can_transfer_job_character()
 	var/datum/job_character_selection/selection = assigned_character
 	var/mob/living/body = new_character
-	if(selection && (body != selection.created_body || body?.mind != selection.created_mind || body?.mind?.current != body || body?.mind?.assigned_role?.type != selection.job_type))
+	return body && (!selection || (body == selection.created_body && body.mind == selection.created_mind && body.mind?.current == body && body.mind?.assigned_role?.type == selection.job_type))
+
+/mob/dead/new_player/transfer_character()
+	if(!can_transfer_job_character())
 		return null
+	var/datum/job_character_selection/selection = assigned_character
 	. = ..()
 	if(. && selection)
 		selection.spawn_handed_over = TRUE

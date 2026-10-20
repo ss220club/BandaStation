@@ -10,16 +10,13 @@ import {
   JobRowControls,
   useJobPriorityButtonProps,
 } from '../../../bandastation/donor_jobs/JobRestriction';
-import {
-  JobsLayout,
-  JobsSection,
-} from '../../../bandastation/donor_jobs/JobsLayout';
+import { SubscriptionJobs } from '../../../bandastation/donor_jobs/SubscriptionJobs';
 import {
   JobTabButtons,
   useJobTabFilter,
 } from '../../../bandastation/donor_jobs/JobTabs';
 import { prepareJobPriorityCache } from '../../../bandastation/job_slots_preferences/priority';
-import { JobLabel } from '../../../bandastation/jobs/JobLabel';
+import { useJobLabel } from '../../../bandastation/jobs/JobLabel';
 // SS220 EDIT - END
 import { JOBS_RU } from '../../../bandastation/ru_jobs'; // BANDASTATION EDIT
 import {
@@ -61,7 +58,7 @@ function PriorityButton(props: PriorityButtonProps) {
         props.selected && 'selected',
       ])}
       style={positionVariable}
-      {...useJobPriorityButtonProps(props.modifier)} // SS220 EDIT: module restrictions; clearing remains available.
+      {...useJobPriorityButtonProps(props.modifier)} // SS220 EDIT: retain opt-out while opt-in is restricted.
       onClick={props.onClick}
     >
       {props.name}
@@ -74,7 +71,7 @@ type CreateSetPriority = (priority: JobPriority | null) => () => void;
 const createSetPriorityCache: Record<string, CreateSetPriority> = {};
 
 function createCreateSetPriorityFromName(jobName: string): CreateSetPriority {
-  const editSlot = prepareJobPriorityCache(createSetPriorityCache); // SS220 EDIT: capture the rendered slot, preserving the native cache.
+  const editSlot = prepareJobPriorityCache(createSetPriorityCache); // SS220 EDIT: invalidate callbacks captured for another slot.
   if (createSetPriorityCache[jobName] !== undefined) {
     return createSetPriorityCache[jobName];
   }
@@ -93,7 +90,7 @@ function createCreateSetPriorityFromName(jobName: string): CreateSetPriority {
       act('set_job_preference', {
         job: jobName,
         level: priority,
-        edit_slot: editSlot, // SS220 EDIT: bind the action to its rendered slot.
+        edit_slot: editSlot, // SS220 EDIT: the native callback retains its rendered slot.
       });
     }
 
@@ -180,6 +177,7 @@ type JobRowProps = {
 };
 
 function JobRow(props: JobRowProps) {
+  const JOBS_RU = useJobLabel(props.name); // SS220 EDIT: local display data for the unchanged native label expression.
   const { data } = useBackend<PreferencesMenuData>();
   const { className, job, name } = props;
 
@@ -225,21 +223,19 @@ function JobRow(props: JobRowProps) {
     );
   }
 
+  // SS220 EDIT - START
+  rightSide = <JobRowControls name={name}>{rightSide}</JobRowControls>;
+  // SS220 EDIT - END
+
   return (
     <Stack.Item className={className}>
       <Stack fill align="center">
         <Tooltip content={job.description} position="bottom-start">
-          {/* SS220 EDIT - START */}
-          <Stack.Item grow minWidth={0} className="job-name">
-            <JobLabel jobName={name}>{JOBS_RU[name] || name}</JobLabel>
+          <Stack.Item grow className="job-name">
+            {JOBS_RU[name] || name}
           </Stack.Item>
-          {/* SS220 EDIT - END */}
         </Tooltip>
-        {/* SS220 EDIT - START */}
-        <Stack.Item className="options">
-          <JobRowControls name={name}>{rightSide}</JobRowControls>
-        </Stack.Item>
-        {/* SS220 EDIT - END */}
+        <Stack.Item className="options">{rightSide}</Stack.Item>
       </Stack>
     </Stack.Item>
   );
@@ -253,7 +249,7 @@ function Department(props: DepartmentProps) {
   const { department: name } = props;
   const className = `PreferencesMenu__Department`;
 
-  const applyJobTabFilter = useJobTabFilter(); // SS220 EDIT: module-owned tab state.
+  const applyJobTabFilter = useJobTabFilter(); // SS220 EDIT: filter only the local department list.
   const data = useServerPrefs();
   if (!data) {
     return;
@@ -326,12 +322,10 @@ function JoblessRoleDropdown() {
 
   const setPreference = createSetPreference(act, 'joblessrole');
   return (
-    <Section
-      // SS220 EDIT - START
-      buttons={<JobTabButtons />}
-      // SS220 EDIT - END
-      title="Что делать если не удалось войти?"
-    >
+    <Section title="Что делать если не удалось войти?">
+      {/* SS220 EDIT - START */}
+      <JobTabButtons />
+      {/* SS220 EDIT - END */}
       <Stack fill textAlign="center">
         {options.map((option) => (
           <Stack.Item grow key={option.value}>
@@ -352,15 +346,16 @@ function JoblessRoleDropdown() {
 
 export function JobsPage() {
   return (
-    <JobsLayout fill vertical g={0}>
-      {/* SS220 EDIT - START: native layout with module tab state. */}
+    <Stack fill vertical g={0}>
       <Stack.Item>
         <JoblessRoleDropdown />
       </Stack.Item>
       <Stack.Divider />
       <Stack.Item grow>
-        <JobsSection jobRow={JobRow}>
-          {/* SS220 EDIT - START: additional subscription layout. */}
+        <Section fill>
+          {/* SS220 EDIT - START */}
+          <SubscriptionJobs jobRow={JobRow} />
+          {/* SS220 EDIT - END */}
           <Stack fill g={1} align="center" className="PreferencesMenu__Jobs">
             <Stack.Item grow minWidth={0}>
               <Stack vertical>
@@ -386,10 +381,8 @@ export function JobsPage() {
               </Stack>
             </Stack.Item>
           </Stack>
-        </JobsSection>
-        {/* SS220 EDIT - END */}
+        </Section>
       </Stack.Item>
-      {/* SS220 EDIT - END */}
-    </JobsLayout>
+    </Stack>
   );
 }

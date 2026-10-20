@@ -231,7 +231,7 @@
 
 /mob/living/carbon/human/dress_up_as_job(datum/job/equipping, visual_only = FALSE, client/player_client, consistent = FALSE)
 	dna.species.pre_equip_species_outfit(equipping, src, visual_only)
-	equip_outfit_and_loadout(equipping.get_spawn_outfit(src, player_client?.prefs, visual_only, consistent), player_client?.prefs, visual_only) // SS220 EDIT: choose the character outfit before native equipment/loadout.
+	equip_outfit_and_loadout(equipping.get_outfit(consistent), player_client?.prefs, visual_only)
 
 /datum/job/proc/announce_head(mob/living/carbon/human/human, channels) //tells the given channel that the given mob is the new department head. See communications.dm for valid channels.
 	if(human)
@@ -609,7 +609,7 @@
 		return
 	apply_pref_name(/datum/preference/name/ai, player_client) // This proc already checks if the player is appearance banned.
 	// SS220 EDIT - START
-	if(!player_client) // SS220 EDIT: the name/appearance lookup may yield and disconnect the player.
+	if(!player_client) // the name/appearance lookup may yield and disconnect the player.
 		return
 	// SS220 EDIT - END
 	set_core_display_icon(null, player_client)
@@ -657,7 +657,11 @@
 /datum/job/proc/after_latejoin_spawn(mob/living/spawning)
 	SHOULD_CALL_PARENT(TRUE)
 	SEND_GLOBAL_SIGNAL(COMSIG_GLOB_JOB_AFTER_LATEJOIN_SPAWN, src, spawning)
-	spawning.client?.show_spawn_text_overlay() // SS220 EDIT: a signal listener may disconnect the client.
+	// SS220 EDIT - START
+	if(!spawning.client)
+		return
+	// SS220 EDIT - END
+	spawning.client.show_spawn_text_overlay()
 
 /// Called when a mob that has this job is admin respawned
 /datum/job/proc/on_respawn(mob/new_character)

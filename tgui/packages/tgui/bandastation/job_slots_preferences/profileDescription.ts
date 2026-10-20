@@ -21,10 +21,14 @@ export function getJobProfileDescription(
       : 'Профиль для входа недоступен';
 }
 
-export function getJobProfileTooltip(
+export function jobProfileTooltipProps(
   data: ProfileData,
   jobName: string,
-  currentSlotName: string,
-): string {
-  return `${currentSlotName}. ${getJobProfileDescription(data, jobName)}`;
+  currentSlotName: string | null | undefined,
+) {
+  return data.job_character_profiles?.[jobName]
+    ? {
+        content: `${currentSlotName ?? 'Активный персонаж'}. ${getJobProfileDescription(data, jobName)}`,
+      }
+    : {};
 }

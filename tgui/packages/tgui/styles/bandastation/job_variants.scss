@@ -1,3 +1,12 @@
+.PreferencesMenu__Department .job-name {
+  min-width: 0;
+}
+
+// Use the supplied HUD glyph when present; unextended jobs retain the native icon.
+.LatejoinJobIcon + .Stack__item:has(> .Icon) {
+  display: none;
+}
+
 .PreferencesMenu__Department .job-name:has(.PreferencesMenu__JobVariant) {
   padding: 2px;
 

@@ -6,7 +6,7 @@ import {
   extendJobSlotOptions,
   jobSlotIconProps,
 } from '../../../bandastation/job_slots_preferences/JobSlotExtensions';
-import { getJobProfileTooltip } from '../../../bandastation/job_slots_preferences/profileDescription';
+import { jobProfileTooltipProps } from '../../../bandastation/job_slots_preferences/profileDescription';
 // SS220 EDIT - END
 import type { PreferencesMenuData } from '../types';
 
@@ -32,9 +32,10 @@ export const JobSlotDropdown = (props: JobSlotDropdownProps) => {
   const { name } = props;
 
   const currentProfileName = data.character_profiles[data.active_slot - 1];
+  // biome-ignore format: Preserve the upstream expression. (SS220 EDIT)
   const assignedProfileSlot =
-    data.job_preferences.find((pref) => pref.job === name)
-      ?.assigned_profile_slot ?? null;
+    data.job_preferences.find((pref) => pref.job === name)?.assigned_profile_slot ??
+    null;
   const currentSlotNumber = assignedProfileSlot ?? 0;
   const currentSlotName =
     currentSlotNumber > 0
@@ -59,20 +60,15 @@ export const JobSlotDropdown = (props: JobSlotDropdownProps) => {
         : [],
     ),
   ];
-  extendJobSlotOptions(slotOptions); // SS220 EDIT: add the module random appearance option.
+  extendJobSlotOptions(slotOptions); // SS220 EDIT: add the random appearance option.
   const selectedOption = slotOptions.find(
     (option) => option.value === currentSlotNumber,
   );
 
   return (
     <Tooltip
-      // SS220 EDIT - START
-      content={getJobProfileTooltip(
-        data,
-        name,
-        currentSlotName ?? 'Активный персонаж',
-      )}
-      // SS220 EDIT - END
+      content={currentSlotName ?? 'Активный персонаж'}
+      {...jobProfileTooltipProps(data, name, currentSlotName)} // SS220 EDIT: enrich only assigned-profile tooltips.
       position="top-end"
     >
       <div>
@@ -80,15 +76,14 @@ export const JobSlotDropdown = (props: JobSlotDropdownProps) => {
           noChevron
           iconOnly
           icon={SLOT_ICONS[currentSlotNumber] ?? 'user'}
-          {...jobSlotIconProps(currentSlotNumber)} // SS220 EDIT: icon for the added random option.
+          {...jobSlotIconProps(currentSlotNumber)} // SS220 EDIT: icon for the additional option.
           width="auto"
           menuWidth="auto"
           selected={selectedOption?.displayText}
           options={slotOptions}
           onSelected={(value: number | string) => {
             const slot = Number(value);
-            act('set_job_slot', {
-              // SS220 EDIT: connect the canonical module action.
+            act('set_job_to_profile', {
               job: name,
               profile: slot > 0 ? slot : -1,
               // SS220 EDIT - START

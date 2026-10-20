@@ -283,7 +283,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				return FALSE
 
 			// SS220 EDIT - START
-			if (!is_color_preference_context_current(requested_preference, color_editing_slot, ui)) // SS220 EDIT: Reject a stale modal result.
+			if (!is_color_preference_context_current(requested_preference, color_editing_slot, ui)) // Reject a stale modal result.
 				return FALSE
 			// SS220 EDIT - END
 

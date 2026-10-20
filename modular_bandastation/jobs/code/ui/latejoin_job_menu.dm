@@ -5,15 +5,6 @@
 	var/client/requester = owner?.client
 	return job && requester && !requester.interviewee && (!job.requires_explicit_preference() || requester.prefs.job_preferences[job.title])
 
-/// Recheck explicit opt-in after the native confirmation, before its caller uses the chosen job.
-/datum/latejoin_menu/get_random_job(mob/dead/new_player/owner)
-	. = ..()
-	if(. && !is_latejoin_random_job_allowed(owner, SSjob.get_job(.)))
-		return null
-
-/datum/latejoin_menu/proc/get_latejoin_job_label(mob/dead/new_player/owner, job_title)
-	var/list/character_data = get_job_character_data(SSjob.get_job(job_title), owner)
-	return character_data["public_title"]
 
 /// Adapt the original species helper's input; its config and station-trait checks still run.
 /datum/latejoin_menu/proc/get_job_character_species(job_title, mob/dead/new_player/owner)

@@ -44,15 +44,20 @@
 /datum/job_variant_context/proc/belongs_to(datum/job/job)
 	return job && job.type == job_type
 
-/// Select this body's outfit before native equipment; ordinary jobs retain get_outfit().
-/datum/job/proc/get_spawn_outfit(mob/living/carbon/human/body, datum/preferences/preferences, visual_only, consistent)
-	if(!visual_only)
-		return body.job_variant_context?.belongs_to(src) ? body.job_variant_context.outfit_type : get_outfit(consistent)
-	if(!preferences)
-		return get_outfit(consistent)
-	var/list/selections = preferences.read_preference(/datum/preference/job_outfit_variants)
-	var/datum/job_variant/variant = resolve_job_variant(selections?[title])
-	return variant?.outfit_type || get_outfit(consistent)
+/// Adapt the native outfit argument before the single native outfit/loadout operation.
+/// Its jobtype identifies the actual requested job, including previews without a mind.
+/mob/living/carbon/human/equip_outfit_and_loadout(datum/outfit/outfit = /datum/outfit, datum/preferences/preference_source, visuals_only = FALSE)
+	if(ispath(outfit, /datum/outfit/job))
+		var/datum/outfit/job/job_outfit = outfit
+		var/datum/job/job = SSjob.get_job_type(initial(job_outfit.jobtype))
+		if(job && length(job.job_variant_specs))
+			if(!visuals_only && job_variant_context?.belongs_to(job))
+				outfit = job_variant_context.outfit_type
+			else if(visuals_only && preference_source)
+				var/list/selections = preference_source.read_preference(/datum/preference/job_outfit_variants)
+				var/datum/job_variant/variant = job.resolve_job_variant(selections?[job.title])
+				outfit = variant?.outfit_type || outfit
+	return ..(outfit, preference_source, visuals_only)
 
 /datum/job_variant_context/proc/apply_identity(mob/living/carbon/human/body)
 	if(identity_applied)

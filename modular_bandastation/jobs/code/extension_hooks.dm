@@ -33,3 +33,10 @@
 /datum/id_trim/job
 	/// Expose a registered job template only through native CentCom authentication.
 	var/centcom_template = FALSE
+
+/// Blank cards have no paycheck account. Access is already applied; finish native RETA grants only.
+/datum/controller/subsystem/id_access/proc/finish_unbanked_trim_access(obj/item/card/id/id_card)
+	if(id_card.registered_account)
+		return FALSE
+	apply_active_reta_grants_to_card(id_card)
+	return TRUE
