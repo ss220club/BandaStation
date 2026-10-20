@@ -193,7 +193,9 @@
 	cooldown = 2 SECONDS
 
 /datum/emote/living/cane_tap/can_run_emote(mob/living/user, status_check = TRUE, intentional, params)
-	return ..() && istype(user.get_active_held_item(), /obj/item/cane)
+	var/obj/item/active_item = user.get_active_held_item()
+	var/turf/user_turf = get_turf(user)
+	return ..() && (istype(active_item, /obj/item/cane) || istype(active_item, /obj/item/melee/baton/nt_cane)) && user_turf && !istype(user_turf, /turf/open/space) && !istype(user_turf, /turf/open/openspace)
 
 /datum/emote/living/cane_tap/get_sound(mob/living/user)
 	return null
@@ -201,6 +203,7 @@
 /datum/emote/living/cane_tap/run_emote(mob/living/user, params, type_override, intentional)
 	. = ..()
 	INVOKE_ASYNC(src, PROC_REF(play_cane_tap_sounds), user)
+
 
 /datum/emote/living/cane_tap/proc/play_cane_tap_sounds(mob/living/user)
 	for(var/i in 1 to 3)
