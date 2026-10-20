@@ -1,9 +1,7 @@
-import { toMerged } from 'es-toolkit';
 import { Color } from 'tgui-core/color';
 import {
   Box,
   Button,
-  Icon,
   NoticeBox,
   Section,
   Stack,
@@ -12,6 +10,17 @@ import {
 import type { BooleanLike } from 'tgui-core/react';
 
 import { useBackend } from '../backend';
+// BANDASTATION ADDITION START: selected-character data and server-authoritative merge.
+import { mergeLatejoinDepartments } from '../bandastation/job_slots_preferences/latejoin';
+import type {
+  LatejoinCharacterData,
+  LatejoinDepartment,
+  LatejoinDepartmentAvailability,
+  LatejoinDepartmentMetadata,
+  LatejoinJob,
+} from '../bandastation/job_slots_preferences/types';
+import { JobHudIcon } from '../bandastation/jobs/JobHudIcon'; // BANDASTATION ADDITION
+// BANDASTATION ADDITION END
 import {
   DEPARTMENTS_RU,
   JOBS_RU,
@@ -20,36 +29,20 @@ import {
 import { Window } from '../layouts';
 import { JOB2ICON } from './common/JobToIcon';
 
-type Job = {
-  unavailable_reason: string | null;
-  command: BooleanLike;
-  open_slots: number;
-  used_slots: number;
-  prioritized: BooleanLike;
-  description: string;
-  jobIcon: string;
-};
-
-type Department = {
-  color: string;
-  jobs: Record<string, Job>;
-  open_slots: number;
-};
-
 type Data = {
-  departments_static: Record<string, Department>;
-  departments: Record<string, Department>;
+  departments_static: Record<string, LatejoinDepartmentMetadata>;
+  departments: Record<string, LatejoinDepartmentAvailability>;
   alert_state: string;
   shuttle_status: string;
   disable_jobs_for_non_observers: BooleanLike;
   priority: BooleanLike;
   round_duration: string;
-};
+} & LatejoinCharacterData; // BANDASTATION ADDITION
 
 type JobEntryProps = {
   jobName: string;
-  job: Job;
-  department: Department;
+  job: LatejoinJob;
+  department: LatejoinDepartment;
   jobIcon: string;
   onClick: () => void;
 };
@@ -76,17 +69,15 @@ function JobEntry(props: JobEntryProps) {
         cursor: job.unavailable_reason ? 'initial' : 'pointer',
       }}
       tooltip={
-        job.unavailable_reason ||
-        (job.prioritized ? (
-          <>
-            <p style={{ marginTop: '0px' }}>
-              <b>The HoP wants more people in this job!</b>
-            </p>
-            {job.description}
-          </>
-        ) : (
-          job.description
-        ))
+        <>
+          {job.prioritized && !job.unavailable_reason && (
+            <Box bold>The HoP wants more people in this job!</Box>
+          )}
+          <Box>{job.unavailable_reason || job.description}</Box>
+          <Box mt={0.5} italic>
+            {job.character_profile}
+          </Box>
+        </>
       }
       tooltipPosition="top"
       onClick={() => {
@@ -94,16 +85,16 @@ function JobEntry(props: JobEntryProps) {
       }}
     >
       <Stack fill>
-        {jobIcon && (
+        {(job.job_icon || jobIcon) && ( // BANDASTATION EDIT: shared modular icon renderer.
           <Stack.Item>
-            <Icon style={{ marginRight: '0.1em' }} name={jobIcon} />
+            <JobHudIcon icon={job.job_icon} fallback={jobIcon} />
           </Stack.Item>
         )}
         <Stack.Item grow>
           {job.command ? (
-            <b>{JOBS_RU[jobName] || jobName}</b>
+            <b>{job.public_title || JOBS_RU[jobName] || jobName}</b>
           ) : (
-            JOBS_RU[jobName] || jobName
+            job.public_title || JOBS_RU[jobName] || jobName
           )}
         </Stack.Item>
         <Stack.Item>
@@ -122,12 +113,12 @@ function JobEntry(props: JobEntryProps) {
 
 type DepartmentEntryProps = {
   name: string;
-  department: Department;
+  department: LatejoinDepartment;
 };
 
 function DepartmentEntry(props: DepartmentEntryProps) {
   const { name, department } = props;
-  const { act } = useBackend<Data>();
+  const { act, data } = useBackend<Data>();
 
   return (
     <Box minWidth="30%">
@@ -172,7 +163,7 @@ function DepartmentEntry(props: DepartmentEntryProps) {
                 jobIcon={job.jobIcon}
                 department={department}
                 onClick={() => {
-                  act('select_job', { job: name });
+                  act('select_job', { job: name, edit_slot: data.edit_slot });
                 }}
               />
             </Stack.Item>
@@ -189,7 +180,8 @@ export function JobSelection(props) {
     return null; // Stop TGUI whitescreens with TGUI-dev!
   }
 
-  const departments: Record<string, Department> = toMerged(
+  // BANDASTATION EDIT: enrich only the current server list with static metadata.
+  const departments = mergeLatejoinDepartments(
     data.departments,
     data.departments_static,
   );
@@ -202,7 +194,9 @@ export function JobSelection(props) {
         <Section
           buttons={
             <Button
-              onClick={() => act('select_job', { job: 'Random' })}
+              onClick={() =>
+                act('select_job', { job: 'Random', edit_slot: data.edit_slot })
+              }
               tooltip="Случайно выбрать профессию. Вы можете повторно выбирать случайную профессию или отказаться от этого."
             >
               Случайная профессия!

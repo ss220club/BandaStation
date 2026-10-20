@@ -247,7 +247,11 @@ SUBSYSTEM_DEF(job)
 		job_debug("AR: Failed, player has no mind or job is null. Player: [player], Rank: [isnull(job) ? "null" : job.type]")
 		return FALSE
 
-	if(do_eligibility_checks && (check_job_eligibility(player, job, "AR", add_job_to_log = TRUE) != JOB_AVAILABLE))
+	if(do_eligibility_checks && (check_job_eligibility(player, job, "AR", add_job_to_log = TRUE, latejoin = latejoin) != JOB_AVAILABLE))
+		return FALSE
+
+	// BANDASTATION EDIT - Commit selected-character admission before occupying the vacancy.
+	if(!prepare_job_assignment(player, job, latejoin))
 		return FALSE
 
 	job_debug("AR: Role now set and assigned - [player] is [job.title], JCP:[job.current_positions], JPL:[latejoin ? job.total_positions : job.spawn_positions]")
@@ -310,6 +314,9 @@ SUBSYSTEM_DEF(job)
 
 		// This check handles its own output to job_debug.
 		if(check_job_eligibility(player, job, "GRJ", add_job_to_log = TRUE) != JOB_AVAILABLE)
+			continue
+
+		if(!is_random_job_preference_allowed(player, job)) // BANDASTATION ADD - Explicit roles require a current opt-in after eligibility waits.
 			continue
 
 		if(assign_role(player, job, do_eligibility_checks = FALSE))
@@ -946,7 +953,7 @@ SUBSYSTEM_DEF(job)
  * * debug_prefix - Logging prefix for the job_debug log entries. For example, GRJ during give_random_job or DO during divide_occupations.
  * * add_job_to_log - If TRUE, appends the job type to the log entry. If FALSE, does not. Set to FALSE when check is part of iterating over players for a specific job, set to TRUE when check is part of iterating over jobs for a specific player and you don't want extra log entry spam.
  */
-/datum/controller/subsystem/job/proc/check_job_eligibility(mob/dead/new_player/player, datum/job/possible_job, debug_prefix = "", add_job_to_log = FALSE)
+/datum/controller/subsystem/job/proc/check_job_eligibility(mob/dead/new_player/player, datum/job/possible_job, debug_prefix = "", add_job_to_log = FALSE, latejoin = FALSE) // BANDASTATION EDIT - Selected profile context.
 	if(!player.mind)
 		job_debug("[debug_prefix]: Player has no mind, Player: [player][add_job_to_log ? ", Job: [possible_job]" : ""]")
 		return JOB_UNAVAILABLE_GENERIC
@@ -970,8 +977,13 @@ SUBSYSTEM_DEF(job)
 		return JOB_UNAVAILABLE_BANNED
 
 	// Check for character age
+	if(QDELETED(player)) // BANDASTATION EDIT - Ban lookup can yield before the native client read.
+		return JOB_UNAVAILABLE_GENERIC
 	var/client/player_client = GET_CLIENT(player)
-	if(isnum(possible_job.required_character_age) && possible_job.required_character_age > player_client.prefs.read_preference(/datum/preference/numeric/age))
+	if(!player_client) // BANDASTATION EDIT - The preceding database query may have lost its client.
+		return JOB_UNAVAILABLE_GENERIC
+	var/character_age = get_job_character_age(player, possible_job, latejoin) // BANDASTATION EDIT - Only the age input is adapted.
+	if(isnum(possible_job.required_character_age) && possible_job.required_character_age > character_age)
 		job_debug("[debug_prefix] Error: [get_job_unavailable_error_message(JOB_UNAVAILABLE_AGE)], Player: [player][add_job_to_log ? ", Job: [possible_job]" : ""]")
 		return JOB_UNAVAILABLE_AGE
 

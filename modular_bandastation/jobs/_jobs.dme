@@ -1,6 +1,14 @@
 #include "_jobs.dm"
 
+#include "code/extension_hooks.dm"
 #include "code/controller/subsystem/job.dm"
+#include "code/controller/admission.dm"
+#include "code/controller/assignment.dm"
+#include "code/controller/roundstart_character_admission.dm"
+#include "code/player/character_creation.dm"
+#include "code/player/latejoin_attempt.dm"
+#include "code/ui/latejoin_job_menu.dm"
+#include "code/initial_crew_records.dm"
 
 // NT Representation department
 #include "code/departments/nt_representation.dm"
@@ -46,6 +54,9 @@
 #include "code/job_types/nanotrasen_representative/pda.dm"
 #include "code/job_types/nanotrasen_representative/trim.dm"
 
+// Prisoner
+#include "code/job_types/prisoner/spawn.dm"
+
 // Research Scientist
 #include "code/job_types/research_director/trim.dm"
 
@@ -59,3 +70,15 @@
 #include "code/job_types/explorer/trim.dm"
 
 #include "code/job_types/job_staffing_priority.dm"
+
+#include "code/variants/legacy_variant_ids.dm"
+#include "code/variants/job_variants.dm"
+#include "code/preferences/job_outfit_variants.dm"
+#include "code/preferences/job_variants_middleware.dm"
+#include "code/variants/character_variant_context.dm"
+#include "code/job_types/cargo_technician/cargo_technician_variants.dm"
+#include "code/job_types/cargo_technician/deliverer_outfit.dm"
+#include "code/variants/job_variant_icons.dm"
+#include "code/variants/outfit_supplies.dm"
+#include "code/job_types/cargo_technician/deliverer_trim.dm"
+#include "code/ui/job_availability_messages.dm"

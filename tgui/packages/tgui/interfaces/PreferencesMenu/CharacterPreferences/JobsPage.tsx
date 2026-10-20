@@ -1,11 +1,22 @@
-import { sortBy } from 'es-toolkit';
 import type { CSSProperties, ReactNode } from 'react';
 import { useBackend } from 'tgui/backend';
 import { Color } from 'tgui-core/color';
 import { Box, Button, Section, Stack, Tooltip } from 'tgui-core/components';
 import { classes } from 'tgui-core/react';
-
+// BANDASTATION ADDITION START: donor job UI extension points
+import { useJobRestriction } from '../../../bandastation/donor_jobs/JobRestriction';
+import {
+  JobsLayout,
+  JobsSection,
+} from '../../../bandastation/donor_jobs/JobsLayout';
+import {
+  JobTabButtons,
+  useJobTabFilter,
+} from '../../../bandastation/donor_jobs/JobTabs';
+import { useJobPriorityAction } from '../../../bandastation/job_slots_preferences/priority';
+import { JobLabel } from '../../../bandastation/jobs/JobLabel';
 import { JOBS_RU } from '../../../bandastation/ru_jobs'; // BANDASTATION EDIT
+// BANDASTATION ADDITION END
 import {
   createSetPreference,
   type Job,
@@ -16,18 +27,12 @@ import {
 import { useServerPrefs } from '../useServerPrefs';
 import { JobSlotDropdown } from './JobSlotDropdown';
 
-function sortJobs(entries: [string, Job][], head?: string) {
-  return sortBy(entries, [
-    ([key, _]) => (key === head ? -1 : 1),
-    ([key, _]) => key,
-  ]);
-}
-
 type PriorityButtonProps = {
   name: string;
   position: number;
   modifier?: string;
   selected: boolean;
+  disabled?: boolean;
   onClick: () => void;
 };
 
@@ -45,6 +50,7 @@ function PriorityButton(props: PriorityButtonProps) {
         props.selected && 'selected',
       ])}
       style={positionVariable}
+      disabled={props.disabled}
       onClick={props.onClick}
     >
       {props.name}
@@ -54,46 +60,15 @@ function PriorityButton(props: PriorityButtonProps) {
 
 type CreateSetPriority = (priority: JobPriority | null) => () => void;
 
-const createSetPriorityCache: Record<string, CreateSetPriority> = {};
-
-function createCreateSetPriorityFromName(jobName: string): CreateSetPriority {
-  if (createSetPriorityCache[jobName] !== undefined) {
-    return createSetPriorityCache[jobName];
-  }
-
-  const perPriorityCache: Map<JobPriority | null, () => void> = new Map();
-
-  function createSetPriority(priority: JobPriority | null) {
-    const existingCallback = perPriorityCache.get(priority);
-    if (existingCallback !== undefined) {
-      return existingCallback;
-    }
-
-    function setPriority() {
-      const { act } = useBackend<PreferencesMenuData>();
-
-      act('set_job_preference', {
-        job: jobName,
-        level: priority,
-      });
-    }
-
-    perPriorityCache.set(priority, setPriority);
-    return setPriority;
-  }
-
-  createSetPriorityCache[jobName] = createSetPriority;
-  return createSetPriority;
-}
-
 type PriorityButtonsProps = {
   createSetPriority: CreateSetPriority;
   isOverflow: boolean;
   priority: JobPriority | null;
+  restricted: boolean;
 };
 
 function PriorityButtons(props: PriorityButtonsProps) {
-  const { createSetPriority, isOverflow, priority } = props;
+  const { createSetPriority, isOverflow, priority, restricted } = props;
 
   return (
     <Stack className="PreferencesMenu__Priority">
@@ -112,6 +87,7 @@ function PriorityButtons(props: PriorityButtonsProps) {
             modifier="high"
             position={0}
             selected={!!priority}
+            disabled={restricted}
             onClick={createSetPriority(JobPriority.High)}
           />
         </>
@@ -130,6 +106,7 @@ function PriorityButtons(props: PriorityButtonsProps) {
             modifier="low"
             position={2}
             selected={priority === JobPriority.Low}
+            disabled={restricted}
             onClick={createSetPriority(JobPriority.Low)}
           />
 
@@ -138,6 +115,7 @@ function PriorityButtons(props: PriorityButtonsProps) {
             modifier="mid"
             position={1}
             selected={priority === JobPriority.Medium}
+            disabled={restricted}
             onClick={createSetPriority(JobPriority.Medium)}
           />
 
@@ -146,6 +124,7 @@ function PriorityButtons(props: PriorityButtonsProps) {
             modifier="high"
             position={0}
             selected={priority === JobPriority.High}
+            disabled={restricted}
             onClick={createSetPriority(JobPriority.High)}
           />
         </>
@@ -167,7 +146,8 @@ function JobRow(props: JobRowProps) {
   const jobPreference = data.job_preferences.find((pref) => pref.job === name);
   const priority = jobPreference?.priority ?? null;
   const isOverflow = data.overflow_role === name;
-  const createSetPriority = createCreateSetPriorityFromName(name);
+  // BANDASTATION EDIT: bind this action to the character rendered by the row.
+  const createSetPriority = useJobPriorityAction(name, data.active_slot);
 
   let rightSide: ReactNode;
   const experienceNeeded = data.job_required_experience?.[name];
@@ -193,28 +173,28 @@ function JobRow(props: JobRowProps) {
     );
   } else if (data.job_bans && data.job_bans.indexOf(name) !== -1) {
     rightSide = <Stack.Item className="restricted ban">Забанен</Stack.Item>;
-  } else {
-    rightSide = (
-      <>
-        <PriorityButtons
-          createSetPriority={createSetPriority}
-          isOverflow={isOverflow}
-          priority={priority}
-        />
-        <JobSlotDropdown name={name} />
-      </>
-    );
   }
+
+  const restriction = useJobRestriction(name); // BANDASTATION ADDITION
 
   return (
     <Stack.Item className={className}>
       <Stack fill align="center">
-        <Tooltip content={job.description} position="bottom-start">
-          <Stack.Item grow className="job-name">
-            {JOBS_RU[name] || name}
-          </Stack.Item>
-        </Tooltip>
-        <Stack.Item className="options">{rightSide}</Stack.Item>
+        <Stack.Item grow minWidth={0} className="job-name">
+          <JobLabel jobName={name} description={job.description} />
+          {/* BANDASTATION EDIT */}
+        </Stack.Item>
+        <Stack.Item className="options">
+          {rightSide}
+          {restriction.notice}
+          <PriorityButtons
+            createSetPriority={createSetPriority}
+            isOverflow={isOverflow}
+            priority={priority}
+            restricted={!!rightSide || restriction.restricted}
+          />
+          <JobSlotDropdown name={name} />
+        </Stack.Item>
       </Stack>
     </Stack.Item>
   );
@@ -228,6 +208,7 @@ function Department(props: DepartmentProps) {
   const { department: name } = props;
   const className = `PreferencesMenu__Department`;
 
+  const matchesJobTab = useJobTabFilter(); // BANDASTATION ADDITION
   const data = useServerPrefs();
   if (!data) {
     return;
@@ -242,7 +223,13 @@ function Department(props: DepartmentProps) {
 
   const jobsForDepartment = jobs_sorted
     .map((jobName) => [jobName, jobs[jobName]] as const)
-    .filter(([, job]) => job.department === name);
+    .filter(
+      ([jobName, job]) => job.department === name && matchesJobTab(jobName), // BANDASTATION EDIT
+    );
+
+  if (!jobsForDepartment.length) {
+    return null;
+  }
 
   return (
     <Box
@@ -294,7 +281,10 @@ function JoblessRoleDropdown() {
 
   const setPreference = createSetPreference(act, 'joblessrole');
   return (
-    <Section title="Что делать если не удалось войти?">
+    <Section
+      title="Что делать если не удалось войти?"
+      buttons={<JobTabButtons />} // BANDASTATION ADDITION: existing title extension point
+    >
       <Stack fill textAlign="center">
         {options.map((option) => (
           <Stack.Item grow key={option.value}>
@@ -315,13 +305,13 @@ function JoblessRoleDropdown() {
 
 export function JobsPage() {
   return (
-    <Stack fill vertical g={0}>
+    <JobsLayout fill vertical g={0}>
       <Stack.Item>
         <JoblessRoleDropdown />
       </Stack.Item>
       <Stack.Divider />
       <Stack.Item grow>
-        <Section fill>
+        <JobsSection jobRow={JobRow}>
           <Stack fill g={1} align="center" className="PreferencesMenu__Jobs">
             <Stack.Item grow minWidth={0}>
               <Stack vertical>
@@ -347,8 +337,8 @@ export function JobsPage() {
               </Stack>
             </Stack.Item>
           </Stack>
-        </Section>
+        </JobsSection>
       </Stack.Item>
-    </Stack>
+    </JobsLayout>
   );
 }

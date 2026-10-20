@@ -13,6 +13,10 @@
 		return FALSE
 
 	for(var/datum/job/job as anything in shuffle_and_sort_jobs_by_staffing_priority(joinable_occupations))
+		// Eligibility can yield; recheck the lobby before the next iteration.
+		if(QDELETED(player))
+			job_debug("GRJ: Player is deleted, aborting")
+			break
 		if((job.current_positions >= job.spawn_positions) && job.spawn_positions != -1)
 			job_debug("GRJ: Job lacks spawn positions to be eligible, Player: [player], Job: [job]")
 			continue
@@ -25,8 +29,14 @@
 			job_debug("GRJ: Skipping command role, Player: [player], Job: [job]")
 			continue
 
+		if(!is_random_job_preference_allowed(player, job))
+			continue
+
 		// This check handles its own output to job_debug.
 		if(check_job_eligibility(player, job, "GRJ", add_job_to_log = TRUE) != JOB_AVAILABLE)
+			continue
+		// Eligibility may yield; require the preference to still be enabled.
+		if(!is_random_job_preference_allowed(player, job))
 			continue
 
 		if(assign_role(player, job, do_eligibility_checks = FALSE))

@@ -1,0 +1,40 @@
+.Section:not(.Section--fitted) .PreferencesMenu__JobTabs {
+  margin: 0;
+  padding: 0;
+
+  .Tab {
+    min-height: var(--button-height);
+    min-width: auto;
+  }
+}
+
+.Section__title:has(.PreferencesMenu__JobTabs) > .Section__buttons {
+  top: 50%;
+  margin-top: 0;
+  transform: translateY(-50%);
+}
+
+.PreferencesMenu__JobTiers {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  gap: var(--space-m);
+}
+
+.PreferencesMenu__JobTierJobs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+  align-items: start;
+  gap: var(--space-s) var(--space-m);
+}
+
+.PreferencesMenu__JobTiers > .PreferencesMenu__JobTier {
+  &,
+  &:first-child {
+    margin: 0;
+  }
+
+  &--locked .PreferencesMenu__Department {
+    filter: saturate(0.65);
+  }
+}

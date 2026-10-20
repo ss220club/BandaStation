@@ -1,5 +1,9 @@
 import type { BooleanLike } from 'tgui-core/react';
 
+// BANDASTATION ADDITION START: module-owned job preference payloads.
+import type { JobSlotsPreferencesData } from '../../bandastation/job_slots_preferences/types';
+import type { JobVariantsData } from '../../bandastation/jobs/types';
+// BANDASTATION ADDITION END
 import type { sendAct } from '../../events/act';
 import type {
   LoadoutCategory,
@@ -42,7 +46,6 @@ export enum JobPriority {
 type JobPreference = {
   job: string;
   priority: JobPriority | null;
-  assigned_profile_slot: number | null;
 };
 
 export type Name = {
@@ -218,7 +221,8 @@ export type PreferencesMenuData = {
   manufacturers: Record<string, string[]>;
   selected_manufacturer: Record<string, string>;
   // BANDASTATION ADDITION END
-};
+} & JobVariantsData &
+  JobSlotsPreferencesData; // BANDASTATION ADDITION
 
 // BANDASTATION ADDITION START
 export type Seed = {

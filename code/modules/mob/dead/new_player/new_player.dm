@@ -134,6 +134,10 @@
 		if(JOB_UNAVAILABLE_AGE)
 			return "Ваш персонаж недостаточно стар для игры за [job_title_ru(jobtitle)]."
 
+	// BANDASTATION EDIT - Additional availability reasons are supplied by modules.
+	var/additional_message = get_additional_job_unavailable_message(retval)
+	if(additional_message)
+		return additional_message
 	return GENERIC_JOB_UNAVAILABLE_ERROR
 
 /mob/dead/new_player/proc/IsJobUnavailable(rank, latejoin = FALSE)
@@ -145,12 +149,12 @@
 			if(isnum(client.player_age) && client.player_age <= 14) //Newbies can always be assistants
 				return JOB_AVAILABLE
 			for(var/datum/job/other_job as anything in SSjob.joinable_occupations)
-				if(other_job.current_positions < other_job.total_positions && other_job != job)
+				if(other_job.current_positions < other_job.total_positions && other_job != job && !other_job.get_join_lock_reason(GET_CLIENT(src))) // BANDASTATION EDIT - Closed roles are not alternative vacancies.
 					return JOB_UNAVAILABLE_SLOTFULL
 		else
 			return JOB_UNAVAILABLE_SLOTFULL
 
-	var/eligibility_check = SSjob.check_job_eligibility(src, job, "Mob IsJobUnavailable")
+	var/eligibility_check = SSjob.check_job_eligibility(src, job, "Mob IsJobUnavailable", latejoin = latejoin) // BANDASTATION EDIT - Inspect the selected latejoin profile.
 	if(eligibility_check != JOB_AVAILABLE)
 		return eligibility_check
 
@@ -164,7 +168,7 @@
 		if(client?.is_localhost())
 			to_chat(client.mob, span_notice("Этот персонаж уже участвовал в данном раунде, однако это ограничение обходится при использовании localhost."))
 			log_admin("[key_name_and_tag(client)] пропускает повторное присоединение к раунду тем же персонажем.")
-		else if("[client.prefs.default_slot]" in persistent_client.joined_as_slots)
+		else if("[get_latejoin_character_slot(rank)]" in persistent_client.joined_as_slots) // BANDASTATION EDIT - Respawn history belongs to the selected profile.
 			tgui_alert(usr, "Вы уже играли на данном персонаже в этом раунде!")
 			return FALSE
 
@@ -181,6 +185,9 @@
 		if(CONFIG_GET(flag/arrivals_shuttle_require_undocked))
 			SSshuttle.arrivals.RequireUndocked(src)
 
+	if(!validate_latejoin_request(rank)) // BANDASTATION EDIT - Arrivals and eligibility can yield.
+		return FALSE
+
 	//Remove the player from the join queue if he was in one and reset the timer
 	SSticker.queued_players -= src
 	SSticker.queue_delay = 4
@@ -196,11 +203,15 @@
 	mind.late_joiner = TRUE
 	var/atom/destination = mind.assigned_role.get_latejoin_spawn_point()
 	if(!destination)
+		handle_latejoin_creation_failure() // BANDASTATION EDIT - Release only this attempt before the native failure.
 		CRASH("Failed to find a latejoin spawn point.")
-	var/mob/living/character = create_character(destination, forced_slot = client.prefs.default_slot)
+	var/mob/living/character = create_character(destination, forced_slot = get_latejoin_character_slot(rank)) // BANDASTATION EDIT - Pass the committed profile.
 	if(!character)
+		if(handle_latejoin_creation_failure()) // BANDASTATION EDIT - Expected admission failure is not a constructor crash.
+			return FALSE
 		CRASH("Failed to create a character for latejoin.")
-	transfer_character()
+	if(!transfer_character()) // BANDASTATION EDIT - Never equip an unowned or cancelled body.
+		return FALSE
 
 	SSjob.equip_rank(character, job, character.client)
 	job.after_latejoin_spawn(character)
@@ -225,7 +236,7 @@
 	#undef IS_FULL_CAPTAIN
 
 	SSticker.minds += character.mind
-	character.client.init_verbs() // init verbs for the late join
+	character.client?.init_verbs() // BANDASTATION EDIT - A callback may disconnect after handover. // init verbs for the late join
 	var/mob/living/carbon/human/humanc
 	if(ishuman(character))
 		humanc = character //Let's retypecast the var to be human,
@@ -256,7 +267,7 @@
 			humanc.clear_personalities()
 
 	if(humanc) // Quirks may change manifest datapoints, so inject only after assigning quirks
-		GLOB.manifest.inject(humanc)
+		GLOB.manifest.inject(humanc, initial_job_record = TRUE) // BANDASTATION EDIT - Initial record callback.
 		SEND_SIGNAL(humanc, COMSIG_HUMAN_CHARACTER_SETUP_FINISHED)
 	var/area/station/arrivals = GLOB.areas_by_type[/area/station/hallway/secondary/entry]
 	if(humanc && arrivals && !arrivals.power_environ) //arrivals depowered
@@ -277,7 +288,7 @@
  * * destination - where to spawn the character
  * * forced_slot - if provided, will load whatever character is in that slot instead of their active slot
  */
-/mob/dead/new_player/proc/create_character(atom/destination, forced_slot)
+/mob/dead/new_player/proc/create_character(atom/destination, forced_slot, datum/job_character_creation/creation) // BANDASTATION EDIT - Per-call ownership supplied by the module.
 	spawning = TRUE
 
 	var/spawned_slot = isnum(forced_slot) ? forced_slot : LAZYACCESS(client.prefs.job_assigned_profiles, mind.assigned_role.title)
@@ -285,7 +296,9 @@
 		client.prefs.load_character(spawned_slot) // if this fails, we will simply load their current slot anyways
 
 	mind.active = FALSE //we wish to transfer the key manually
-	var/mob/living/spawning_mob = mind.assigned_role.get_spawn_mob(client, destination)
+	var/mob/living/spawning_mob = creation.create_body(client, destination, src) // BANDASTATION EDIT - Keep construction cleanup alive if the lobby is deleted.
+	if(!spawning_mob) // BANDASTATION ADD - The module rejected the constructed body.
+		return
 	if(QDELETED(src))
 		return
 
