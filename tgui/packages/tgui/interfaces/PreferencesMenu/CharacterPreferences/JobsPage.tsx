@@ -1,10 +1,15 @@
+import { sortBy } from 'es-toolkit';
 import type { CSSProperties, ReactNode } from 'react';
 import { useBackend } from 'tgui/backend';
 import { Color } from 'tgui-core/color';
 import { Box, Button, Section, Stack, Tooltip } from 'tgui-core/components';
 import { classes } from 'tgui-core/react';
-// BANDASTATION ADDITION START: donor job UI extension points
-import { useJobRestriction } from '../../../bandastation/donor_jobs/JobRestriction';
+
+// SS220 EDIT - START
+import {
+  JobRowControls,
+  useJobPriorityButtonProps,
+} from '../../../bandastation/donor_jobs/JobRestriction';
 import {
   JobsLayout,
   JobsSection,
@@ -13,10 +18,10 @@ import {
   JobTabButtons,
   useJobTabFilter,
 } from '../../../bandastation/donor_jobs/JobTabs';
-import { useJobPriorityAction } from '../../../bandastation/job_slots_preferences/priority';
+import { prepareJobPriorityCache } from '../../../bandastation/job_slots_preferences/priority';
 import { JobLabel } from '../../../bandastation/jobs/JobLabel';
+// SS220 EDIT - END
 import { JOBS_RU } from '../../../bandastation/ru_jobs'; // BANDASTATION EDIT
-// BANDASTATION ADDITION END
 import {
   createSetPreference,
   type Job,
@@ -27,12 +32,18 @@ import {
 import { useServerPrefs } from '../useServerPrefs';
 import { JobSlotDropdown } from './JobSlotDropdown';
 
+function sortJobs(entries: [string, Job][], head?: string) {
+  return sortBy(entries, [
+    ([key, _]) => (key === head ? -1 : 1),
+    ([key, _]) => key,
+  ]);
+}
+
 type PriorityButtonProps = {
   name: string;
   position: number;
   modifier?: string;
   selected: boolean;
-  disabled?: boolean;
   onClick: () => void;
 };
 
@@ -50,7 +61,7 @@ function PriorityButton(props: PriorityButtonProps) {
         props.selected && 'selected',
       ])}
       style={positionVariable}
-      disabled={props.disabled}
+      {...useJobPriorityButtonProps(props.modifier)} // SS220 EDIT: module restrictions; clearing remains available.
       onClick={props.onClick}
     >
       {props.name}
@@ -60,15 +71,48 @@ function PriorityButton(props: PriorityButtonProps) {
 
 type CreateSetPriority = (priority: JobPriority | null) => () => void;
 
+const createSetPriorityCache: Record<string, CreateSetPriority> = {};
+
+function createCreateSetPriorityFromName(jobName: string): CreateSetPriority {
+  const editSlot = prepareJobPriorityCache(createSetPriorityCache); // SS220 EDIT: capture the rendered slot, preserving the native cache.
+  if (createSetPriorityCache[jobName] !== undefined) {
+    return createSetPriorityCache[jobName];
+  }
+
+  const perPriorityCache: Map<JobPriority | null, () => void> = new Map();
+
+  function createSetPriority(priority: JobPriority | null) {
+    const existingCallback = perPriorityCache.get(priority);
+    if (existingCallback !== undefined) {
+      return existingCallback;
+    }
+
+    function setPriority() {
+      const { act } = useBackend<PreferencesMenuData>();
+
+      act('set_job_preference', {
+        job: jobName,
+        level: priority,
+        edit_slot: editSlot, // SS220 EDIT: bind the action to its rendered slot.
+      });
+    }
+
+    perPriorityCache.set(priority, setPriority);
+    return setPriority;
+  }
+
+  createSetPriorityCache[jobName] = createSetPriority;
+  return createSetPriority;
+}
+
 type PriorityButtonsProps = {
   createSetPriority: CreateSetPriority;
   isOverflow: boolean;
   priority: JobPriority | null;
-  restricted: boolean;
 };
 
 function PriorityButtons(props: PriorityButtonsProps) {
-  const { createSetPriority, isOverflow, priority, restricted } = props;
+  const { createSetPriority, isOverflow, priority } = props;
 
   return (
     <Stack className="PreferencesMenu__Priority">
@@ -87,7 +131,6 @@ function PriorityButtons(props: PriorityButtonsProps) {
             modifier="high"
             position={0}
             selected={!!priority}
-            disabled={restricted}
             onClick={createSetPriority(JobPriority.High)}
           />
         </>
@@ -106,7 +149,6 @@ function PriorityButtons(props: PriorityButtonsProps) {
             modifier="low"
             position={2}
             selected={priority === JobPriority.Low}
-            disabled={restricted}
             onClick={createSetPriority(JobPriority.Low)}
           />
 
@@ -115,7 +157,6 @@ function PriorityButtons(props: PriorityButtonsProps) {
             modifier="mid"
             position={1}
             selected={priority === JobPriority.Medium}
-            disabled={restricted}
             onClick={createSetPriority(JobPriority.Medium)}
           />
 
@@ -124,7 +165,6 @@ function PriorityButtons(props: PriorityButtonsProps) {
             modifier="high"
             position={0}
             selected={priority === JobPriority.High}
-            disabled={restricted}
             onClick={createSetPriority(JobPriority.High)}
           />
         </>
@@ -146,8 +186,7 @@ function JobRow(props: JobRowProps) {
   const jobPreference = data.job_preferences.find((pref) => pref.job === name);
   const priority = jobPreference?.priority ?? null;
   const isOverflow = data.overflow_role === name;
-  // BANDASTATION EDIT: bind this action to the character rendered by the row.
-  const createSetPriority = useJobPriorityAction(name, data.active_slot);
+  const createSetPriority = createCreateSetPriorityFromName(name);
 
   let rightSide: ReactNode;
   const experienceNeeded = data.job_required_experience?.[name];
@@ -173,28 +212,34 @@ function JobRow(props: JobRowProps) {
     );
   } else if (data.job_bans && data.job_bans.indexOf(name) !== -1) {
     rightSide = <Stack.Item className="restricted ban">Забанен</Stack.Item>;
+  } else {
+    rightSide = (
+      <>
+        <PriorityButtons
+          createSetPriority={createSetPriority}
+          isOverflow={isOverflow}
+          priority={priority}
+        />
+        <JobSlotDropdown name={name} />
+      </>
+    );
   }
-
-  const restriction = useJobRestriction(name); // BANDASTATION ADDITION
 
   return (
     <Stack.Item className={className}>
       <Stack fill align="center">
-        <Stack.Item grow minWidth={0} className="job-name">
-          <JobLabel jobName={name} description={job.description} />
-          {/* BANDASTATION EDIT */}
-        </Stack.Item>
+        <Tooltip content={job.description} position="bottom-start">
+          {/* SS220 EDIT - START */}
+          <Stack.Item grow minWidth={0} className="job-name">
+            <JobLabel jobName={name}>{JOBS_RU[name] || name}</JobLabel>
+          </Stack.Item>
+          {/* SS220 EDIT - END */}
+        </Tooltip>
+        {/* SS220 EDIT - START */}
         <Stack.Item className="options">
-          {rightSide}
-          {restriction.notice}
-          <PriorityButtons
-            createSetPriority={createSetPriority}
-            isOverflow={isOverflow}
-            priority={priority}
-            restricted={!!rightSide || restriction.restricted}
-          />
-          <JobSlotDropdown name={name} />
+          <JobRowControls name={name}>{rightSide}</JobRowControls>
         </Stack.Item>
+        {/* SS220 EDIT - END */}
       </Stack>
     </Stack.Item>
   );
@@ -208,7 +253,7 @@ function Department(props: DepartmentProps) {
   const { department: name } = props;
   const className = `PreferencesMenu__Department`;
 
-  const matchesJobTab = useJobTabFilter(); // BANDASTATION ADDITION
+  const applyJobTabFilter = useJobTabFilter(); // SS220 EDIT: module-owned tab state.
   const data = useServerPrefs();
   if (!data) {
     return;
@@ -223,13 +268,13 @@ function Department(props: DepartmentProps) {
 
   const jobsForDepartment = jobs_sorted
     .map((jobName) => [jobName, jobs[jobName]] as const)
-    .filter(
-      ([jobName, job]) => job.department === name && matchesJobTab(jobName), // BANDASTATION EDIT
-    );
+    .filter(([, job]) => job.department === name);
 
-  if (!jobsForDepartment.length) {
+  // SS220 EDIT - START
+  if (!applyJobTabFilter(jobsForDepartment)) {
     return null;
   }
+  // SS220 EDIT - END
 
   return (
     <Box
@@ -282,8 +327,10 @@ function JoblessRoleDropdown() {
   const setPreference = createSetPreference(act, 'joblessrole');
   return (
     <Section
+      // SS220 EDIT - START
+      buttons={<JobTabButtons />}
+      // SS220 EDIT - END
       title="Что делать если не удалось войти?"
-      buttons={<JobTabButtons />} // BANDASTATION ADDITION: existing title extension point
     >
       <Stack fill textAlign="center">
         {options.map((option) => (
@@ -306,12 +353,14 @@ function JoblessRoleDropdown() {
 export function JobsPage() {
   return (
     <JobsLayout fill vertical g={0}>
+      {/* SS220 EDIT - START: native layout with module tab state. */}
       <Stack.Item>
         <JoblessRoleDropdown />
       </Stack.Item>
       <Stack.Divider />
       <Stack.Item grow>
         <JobsSection jobRow={JobRow}>
+          {/* SS220 EDIT - START: additional subscription layout. */}
           <Stack fill g={1} align="center" className="PreferencesMenu__Jobs">
             <Stack.Item grow minWidth={0}>
               <Stack vertical>
@@ -338,7 +387,9 @@ export function JobsPage() {
             </Stack.Item>
           </Stack>
         </JobsSection>
+        {/* SS220 EDIT - END */}
       </Stack.Item>
+      {/* SS220 EDIT - END */}
     </JobsLayout>
   );
 }

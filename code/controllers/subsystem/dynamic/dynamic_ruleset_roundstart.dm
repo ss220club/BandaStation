@@ -116,9 +116,11 @@
 		return FALSE
 
 	var/species_type = candidate_client.prefs.read_preference(/datum/preference/choiced/species)
-	species_type = get_host_profile_species(candidate, candidate_client, species_type) // BANDASTATION EDIT - Selected job profile, without changing the native trait check.
-	if(!species_type) // BANDASTATION EDIT - No eligible host profile.
+	// SS220 EDIT - START
+	species_type = get_host_profile_species(candidate, candidate_client, species_type) // SS220 EDIT: Selected job profile, without changing the native trait check.
+	if(!species_type) // SS220 EDIT: No eligible host profile.
 		return FALSE
+	// SS220 EDIT - END
 	var/datum/species/species = GLOB.species_prototypes[species_type]
 
 	return !(TRAIT_NOBLOOD in species.inherent_traits)

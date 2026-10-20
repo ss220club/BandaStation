@@ -71,7 +71,6 @@
 
 #include "code/job_types/job_staffing_priority.dm"
 
-#include "code/variants/legacy_variant_ids.dm"
 #include "code/variants/job_variants.dm"
 #include "code/preferences/job_outfit_variants.dm"
 #include "code/preferences/job_variants_middleware.dm"

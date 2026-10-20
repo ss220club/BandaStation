@@ -269,7 +269,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				return FALSE
 
 			var/default_value = read_preference(requested_preference.type)
-			var/color_editing_slot = default_slot // BANDASTATION ADD - Capture character color context before the modal.
+			var/color_editing_slot = default_slot // SS220 EDIT: Capture character color context before the modal.
 
 			// Yielding
 			var/new_color = tgui_color_picker(
@@ -282,8 +282,10 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			if (!new_color)
 				return FALSE
 
-			if (!is_color_preference_context_current(requested_preference, color_editing_slot, ui)) // BANDASTATION ADD - Reject a stale modal result.
+			// SS220 EDIT - START
+			if (!is_color_preference_context_current(requested_preference, color_editing_slot, ui)) // SS220 EDIT: Reject a stale modal result.
 				return FALSE
+			// SS220 EDIT - END
 
 			if (!update_preference(requested_preference, new_color))
 				return FALSE

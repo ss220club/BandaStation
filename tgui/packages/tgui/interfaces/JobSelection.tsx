@@ -1,7 +1,9 @@
+import { toMerged } from 'es-toolkit';
 import { Color } from 'tgui-core/color';
 import {
   Box,
   Button,
+  Icon,
   NoticeBox,
   Section,
   Stack,
@@ -10,17 +12,14 @@ import {
 import type { BooleanLike } from 'tgui-core/react';
 
 import { useBackend } from '../backend';
-// BANDASTATION ADDITION START: selected-character data and server-authoritative merge.
-import { mergeLatejoinDepartments } from '../bandastation/job_slots_preferences/latejoin';
-import type {
-  LatejoinCharacterData,
-  LatejoinDepartment,
-  LatejoinDepartmentAvailability,
-  LatejoinDepartmentMetadata,
-  LatejoinJob,
-} from '../bandastation/job_slots_preferences/types';
-import { JobHudIcon } from '../bandastation/jobs/JobHudIcon'; // BANDASTATION ADDITION
-// BANDASTATION ADDITION END
+// SS220 EDIT - START
+import { retainAvailableLatejoinJobs } from '../bandastation/job_slots_preferences/latejoin';
+import {
+  LatejoinJobIcon,
+  LatejoinJobTooltip,
+  latejoinJobTitle,
+} from '../bandastation/jobs/LatejoinJob';
+// SS220 EDIT - END
 import {
   DEPARTMENTS_RU,
   JOBS_RU,
@@ -29,20 +28,37 @@ import {
 import { Window } from '../layouts';
 import { JOB2ICON } from './common/JobToIcon';
 
+type Job = {
+  unavailable_reason: string | null;
+  command: BooleanLike;
+  open_slots: number;
+  used_slots: number;
+  prioritized: BooleanLike;
+  description: string;
+  jobIcon: string;
+};
+
+type Department = {
+  color: string;
+  jobs: Record<string, Job>;
+  open_slots: number;
+};
+
 type Data = {
-  departments_static: Record<string, LatejoinDepartmentMetadata>;
-  departments: Record<string, LatejoinDepartmentAvailability>;
+  departments_static: Record<string, Department>;
+  departments: Record<string, Department>;
   alert_state: string;
   shuttle_status: string;
   disable_jobs_for_non_observers: BooleanLike;
   priority: BooleanLike;
   round_duration: string;
-} & LatejoinCharacterData; // BANDASTATION ADDITION
+  edit_slot: number; // SS220 EDIT: server profile context.
+};
 
 type JobEntryProps = {
   jobName: string;
-  job: LatejoinJob;
-  department: LatejoinDepartment;
+  job: Job;
+  department: Department;
   jobIcon: string;
   onClick: () => void;
 };
@@ -69,15 +85,21 @@ function JobEntry(props: JobEntryProps) {
         cursor: job.unavailable_reason ? 'initial' : 'pointer',
       }}
       tooltip={
-        <>
-          {job.prioritized && !job.unavailable_reason && (
-            <Box bold>The HoP wants more people in this job!</Box>
-          )}
-          <Box>{job.unavailable_reason || job.description}</Box>
-          <Box mt={0.5} italic>
-            {job.character_profile}
-          </Box>
-        </>
+        // SS220 EDIT - START
+        <LatejoinJobTooltip job={job}>
+          {job.unavailable_reason ||
+            (job.prioritized ? (
+              <>
+                <p style={{ marginTop: '0px' }}>
+                  <b>The HoP wants more people in this job!</b>
+                </p>
+                {job.description}
+              </>
+            ) : (
+              job.description
+            ))}
+        </LatejoinJobTooltip>
+        // SS220 EDIT - END
       }
       tooltipPosition="top"
       onClick={() => {
@@ -85,16 +107,20 @@ function JobEntry(props: JobEntryProps) {
       }}
     >
       <Stack fill>
-        {(job.job_icon || jobIcon) && ( // BANDASTATION EDIT: shared modular icon renderer.
-          <Stack.Item>
-            <JobHudIcon icon={job.job_icon} fallback={jobIcon} />
-          </Stack.Item>
-        )}
+        {/* SS220 EDIT - START */}
+        <LatejoinJobIcon job={job}>
+          {jobIcon && (
+            <Stack.Item>
+              <Icon style={{ marginRight: '0.1em' }} name={jobIcon} />
+            </Stack.Item>
+          )}
+        </LatejoinJobIcon>
+        {/* SS220 EDIT - END */}
         <Stack.Item grow>
           {job.command ? (
-            <b>{job.public_title || JOBS_RU[jobName] || jobName}</b>
+            <b>{latejoinJobTitle(job, JOBS_RU[jobName] || jobName)}</b>
           ) : (
-            job.public_title || JOBS_RU[jobName] || jobName
+            latejoinJobTitle(job, JOBS_RU[jobName] || jobName)
           )}
         </Stack.Item>
         <Stack.Item>
@@ -113,12 +139,12 @@ function JobEntry(props: JobEntryProps) {
 
 type DepartmentEntryProps = {
   name: string;
-  department: LatejoinDepartment;
+  department: Department;
 };
 
 function DepartmentEntry(props: DepartmentEntryProps) {
   const { name, department } = props;
-  const { act, data } = useBackend<Data>();
+  const { act, data } = useBackend<Data>(); // SS220 EDIT: capture the rendered slot.
 
   return (
     <Box minWidth="30%">
@@ -163,7 +189,7 @@ function DepartmentEntry(props: DepartmentEntryProps) {
                 jobIcon={job.jobIcon}
                 department={department}
                 onClick={() => {
-                  act('select_job', { job: name, edit_slot: data.edit_slot });
+                  act('select_job', { job: name, edit_slot: data.edit_slot }); // SS220 EDIT
                 }}
               />
             </Stack.Item>
@@ -180,11 +206,12 @@ export function JobSelection(props) {
     return null; // Stop TGUI whitescreens with TGUI-dev!
   }
 
-  // BANDASTATION EDIT: enrich only the current server list with static metadata.
-  const departments = mergeLatejoinDepartments(
+  const departments: Record<string, Department> = toMerged(
     data.departments,
     data.departments_static,
   );
+
+  retainAvailableLatejoinJobs(departments, data.departments); // SS220 EDIT: prune hidden entries after the native merge.
 
   const { shuttle_status, round_duration } = data;
 
@@ -194,9 +221,11 @@ export function JobSelection(props) {
         <Section
           buttons={
             <Button
+              // SS220 EDIT - START
               onClick={() =>
                 act('select_job', { job: 'Random', edit_slot: data.edit_slot })
               }
+              // SS220 EDIT - END
               tooltip="Случайно выбрать профессию. Вы можете повторно выбирать случайную профессию или отказаться от этого."
             >
               Случайная профессия!

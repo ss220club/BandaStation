@@ -11,11 +11,9 @@ import { Color } from 'tgui-core/color';
 import { Box, Icon, Section, Stack } from 'tgui-core/components';
 import { classes } from 'tgui-core/react';
 
-import type {
-  Job,
-  PreferencesMenuData,
-} from '../../interfaces/PreferencesMenu/types';
+import type { Job } from '../../interfaces/PreferencesMenu/types';
 import { useServerPrefs } from '../../interfaces/PreferencesMenu/useServerPrefs';
+import type { JobPreferencesData } from '../jobs/types';
 import { JobTabsProvider, useSubscriptionJobs } from './JobTabs';
 
 export function JobsLayout(props: ComponentProps<typeof Stack>) {
@@ -31,7 +29,7 @@ export function JobsSection(props: {
   jobRow: ComponentType<{ name: string; job: Job; className?: string }>;
 }) {
   const subscriptionJobs = useSubscriptionJobs();
-  const { data } = useBackend<PreferencesMenuData>();
+  const { data } = useBackend<JobPreferencesData>();
   const serverPrefs = useServerPrefs();
   let content: ReactNode = null;
 

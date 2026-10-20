@@ -1,7 +1,13 @@
 import { useBackend } from 'tgui/backend';
 import { Dropdown, Tooltip } from 'tgui-core/components';
 
-import { getJobProfileDescription } from '../../../bandastation/job_slots_preferences/profileDescription'; // BANDASTATION ADDITION
+// SS220 EDIT - START
+import {
+  extendJobSlotOptions,
+  jobSlotIconProps,
+} from '../../../bandastation/job_slots_preferences/JobSlotExtensions';
+import { getJobProfileTooltip } from '../../../bandastation/job_slots_preferences/profileDescription';
+// SS220 EDIT - END
 import type { PreferencesMenuData } from '../types';
 
 const SLOT_ICONS = {
@@ -26,7 +32,10 @@ export const JobSlotDropdown = (props: JobSlotDropdownProps) => {
   const { name } = props;
 
   const currentProfileName = data.character_profiles[data.active_slot - 1];
-  const currentSlotNumber = data.pref_job_slots[name] ?? 0;
+  const assignedProfileSlot =
+    data.job_preferences.find((pref) => pref.job === name)
+      ?.assigned_profile_slot ?? null;
+  const currentSlotNumber = assignedProfileSlot ?? 0;
   const currentSlotName =
     currentSlotNumber > 0
       ? data.character_profiles[currentSlotNumber - 1]
@@ -49,30 +58,29 @@ export const JobSlotDropdown = (props: JobSlotDropdownProps) => {
           ]
         : [],
     ),
-    {
-      value: -1,
-      displayText: 'Случайное имя и внешность активного персонажа',
-    },
   ];
+  extendJobSlotOptions(slotOptions); // SS220 EDIT: add the module random appearance option.
   const selectedOption = slotOptions.find(
     (option) => option.value === currentSlotNumber,
   );
-  const entryDescription = getJobProfileDescription(data, name); // BANDASTATION ADDITION
 
   return (
     <Tooltip
-      content={`${selectedOption?.displayText ?? currentSlotName ?? 'Активный персонаж'}. ${entryDescription}`}
+      // SS220 EDIT - START
+      content={getJobProfileTooltip(
+        data,
+        name,
+        currentSlotName ?? 'Активный персонаж',
+      )}
+      // SS220 EDIT - END
       position="top-end"
     >
       <div>
         <Dropdown
           noChevron
           iconOnly
-          icon={
-            currentSlotNumber === -1
-              ? 'dice'
-              : (SLOT_ICONS[currentSlotNumber] ?? 'user')
-          }
+          icon={SLOT_ICONS[currentSlotNumber] ?? 'user'}
+          {...jobSlotIconProps(currentSlotNumber)} // SS220 EDIT: icon for the added random option.
           width="auto"
           menuWidth="auto"
           selected={selectedOption?.displayText}
@@ -80,9 +88,13 @@ export const JobSlotDropdown = (props: JobSlotDropdownProps) => {
           onSelected={(value: number | string) => {
             const slot = Number(value);
             act('set_job_slot', {
+              // SS220 EDIT: connect the canonical module action.
               job: name,
+              profile: slot > 0 ? slot : -1,
+              // SS220 EDIT - START
               slot,
               edit_slot: data.active_slot,
+              // SS220 EDIT - END
             });
           }}
         />

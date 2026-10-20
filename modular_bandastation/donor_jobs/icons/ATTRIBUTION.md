@@ -20,7 +20,7 @@ ID badges retain the 60 visible pixels within the source `(4,12)-(12,20)` crop, 
 
 ## TSF and USSP clothing
 
-The same pinned source and CC BY-SA 3.0 attribution apply to the faction clothing below. Five existing BS TSF uniforms are reused with their inventory/worn artwork, native female mask and carry renderer; near-identical imported states and their duplicate types are removed. The USSP sidecap reuses BS's exact `ussp_pilotka` inventory state while retaining its distinct source worn state. Original worn cap spelling `solgovcselitesoft` is normalized to `solgovcelitesoft`; retained source pixels and frame metadata are unchanged. Only states consumed by native clothing types are included. See [the item mapping](../FACTION_CLOTHING.md).
+The same pinned source and CC BY-SA 3.0 attribution apply to the faction clothing below. Five existing BS TSF uniforms are reused with their inventory/worn artwork, native female mask and carry renderer; near-identical imported states and their duplicate types are removed. The USSP sidecap reuses BS's exact `ussp_pilotka` inventory state while retaining its distinct source worn state. Original worn cap spelling `solgovcselitesoft` is normalized to `solgovcelitesoft`; retained source pixels and frame metadata are unchanged. Only states consumed by native clothing types are included.
 
 | Local file | Original path | Local states (source names where different) |
 | --- | --- | --- |

@@ -19,8 +19,7 @@
 		var/variant_id = input[job_title]
 		if(!istext(variant_id) || !length(variant_id) || length(variant_id) > 128)
 			continue
-		var/list/legacy_ids = GLOB.legacy_job_variant_ids[job_title]
-		variants[job_title] = legacy_ids?[variant_id] || variant_id
+		variants[job_title] = variant_id
 	return variants
 
 /datum/preference/job_outfit_variants/is_valid(value, datum/preferences/preferences)

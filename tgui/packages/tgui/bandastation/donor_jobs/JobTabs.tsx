@@ -2,8 +2,8 @@ import { createContext, type ReactNode, useContext, useState } from 'react';
 import { useBackend } from 'tgui/backend';
 import { Tabs } from 'tgui-core/components';
 
-import type { PreferencesMenuData } from '../../interfaces/PreferencesMenu/types';
 import { useServerPrefs } from '../../interfaces/PreferencesMenu/useServerPrefs';
+import type { JobPreferencesData } from '../jobs/types';
 
 const JobTabsContext = createContext({
   hasSubscriptionJobs: false,
@@ -12,7 +12,7 @@ const JobTabsContext = createContext({
 });
 
 export function JobTabsProvider(props: { children: ReactNode }) {
-  const { data } = useBackend<PreferencesMenuData>();
+  const { data } = useBackend<JobPreferencesData>();
   const serverPrefs = useServerPrefs();
   const [selected, selectSubscriptionJobs] = useState(false);
   const hasSubscriptionJobs = !!serverPrefs?.jobs.jobs_sorted.some(
@@ -59,10 +59,20 @@ export function JobTabButtons() {
 }
 
 export function useJobTabFilter() {
-  const { data } = useBackend<PreferencesMenuData>();
+  const { data } = useBackend<JobPreferencesData>();
   const { subscriptionJobs } = useContext(JobTabsContext);
-  return (name: string) =>
-    (data.job_variants?.[name]?.required_tier ?? 0) > 0 === subscriptionJobs;
+  return (jobs: (readonly [string, unknown])[]) => {
+    for (let index = jobs.length - 1; index >= 0; index--) {
+      const [name] = jobs[index];
+      if (
+        (data.job_variants?.[name]?.required_tier ?? 0) > 0 !==
+        subscriptionJobs
+      ) {
+        jobs.splice(index, 1);
+      }
+    }
+    return jobs.length > 0;
+  };
 }
 
 export function useSubscriptionJobs() {

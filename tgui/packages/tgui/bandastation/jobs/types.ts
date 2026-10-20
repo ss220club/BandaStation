@@ -1,3 +1,10 @@
+import type { PreferencesMenuData } from '../../interfaces/PreferencesMenu/types';
+import type { JobSlotsPreferencesData } from '../job_slots_preferences/types';
+
+export type JobPreferencesData = PreferencesMenuData &
+  JobVariantsData &
+  JobSlotsPreferencesData;
+
 export type JobVariantsData = {
   job_variants?: Record<
     string,

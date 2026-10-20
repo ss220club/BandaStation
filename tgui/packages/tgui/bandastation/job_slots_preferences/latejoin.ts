@@ -1,30 +1,19 @@
-import type {
-  LatejoinDepartment,
-  LatejoinDepartmentAvailability,
-  LatejoinDepartmentMetadata,
-} from './types';
+type Departments = Record<string, { jobs: Record<string, unknown> }>;
 
-// Static metadata may enrich the current server list, never restore hidden jobs.
-export function mergeLatejoinDepartments(
-  departments: Record<string, LatejoinDepartmentAvailability>,
-  metadata: Record<string, LatejoinDepartmentMetadata>,
-): Record<string, LatejoinDepartment> {
-  return Object.fromEntries(
-    Object.entries(departments).map(([name, department]) => [
-      name,
-      {
-        ...metadata[name],
-        ...department,
-        jobs: Object.fromEntries(
-          Object.entries(department.jobs).map(([jobName, job]) => [
-            jobName,
-            {
-              ...metadata[name]?.jobs[jobName],
-              ...job,
-            },
-          ]),
-        ),
-      },
-    ]),
-  );
+// Apply visibility to the result of the native merge; metadata cannot restore a hidden job.
+export function retainAvailableLatejoinJobs(
+  departments: Departments,
+  available: Departments,
+) {
+  for (const name of Object.keys(departments)) {
+    if (!available[name]) {
+      delete departments[name];
+      continue;
+    }
+    for (const job of Object.keys(departments[name].jobs)) {
+      if (!Object.hasOwn(available[name].jobs, job)) {
+        delete departments[name].jobs[job];
+      }
+    }
+  }
 }

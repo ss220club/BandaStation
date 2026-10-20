@@ -18,7 +18,7 @@ GLOBAL_DATUM_INIT(manifest, /datum/manifest, new)
 			log_manifest(readied_player.ckey, readied_player.new_character.mind, readied_player.new_character)
 			players_to_log[readied_player.ckey] = readied_player.new_character
 		if(ishuman(readied_player.new_character))
-			inject(readied_player.new_character, initial_job_record = TRUE) // BANDASTATION EDIT - Initial job record callback
+			inject(readied_player.new_character, initial_job_record = TRUE) // SS220 EDIT: Initial job record callback
 		CHECK_TICK
 	if(length(players_to_log))
 		SSblackbox.ReportRoundstartManifest(players_to_log)
@@ -103,7 +103,7 @@ GLOBAL_DATUM_INIT(manifest, /datum/manifest, new)
 
 
 /// Injects a record into the manifest.
-/datum/manifest/proc/inject(mob/living/carbon/human/person, atom/appearance_proxy, initial_job_record = FALSE) // BANDASTATION EDIT - Initial job record callback
+/datum/manifest/proc/inject(mob/living/carbon/human/person, atom/appearance_proxy, initial_job_record = FALSE) // SS220 EDIT: Initial job record callback
 	set waitfor = FALSE
 	if(!(person.mind?.assigned_role.job_flags & JOB_CREW_MANIFEST))
 		return
@@ -138,7 +138,7 @@ GLOBAL_DATUM_INIT(manifest, /datum/manifest, new)
 		mind_ref = person.mind,
 	)
 
-	var/datum/record/crew/new_record = new( // BANDASTATION EDIT - Pass this exact record to the job
+	var/datum/record/crew/new_record = new( // SS220 EDIT: Pass this exact record to the job
 		age = person.age,
 		blood_type = person.get_bloodtype()?.name || "UNKNOWN",
 		character_appearance = character_appearance,
@@ -158,8 +158,10 @@ GLOBAL_DATUM_INIT(manifest, /datum/manifest, new)
 		minor_disabilities_desc = person.get_quirk_string(TRUE, CAT_QUIRK_MINOR_DISABILITY),
 		quirk_notes = person.get_quirk_string(TRUE, CAT_QUIRK_NOTES),
 	)
-	if(initial_job_record) // BANDASTATION EDIT - Initial record callbacks do not run for identity changes.
+	// SS220 EDIT - START
+	if(initial_job_record) // SS220 EDIT: Initial record callbacks do not run for identity changes.
 		person.mind.assigned_role.on_initial_crew_record(person, new_record)
+	// SS220 EDIT - END
 
 /// Edits the rank and trim of the found record.
 /datum/manifest/proc/modify(name, assignment, trim)

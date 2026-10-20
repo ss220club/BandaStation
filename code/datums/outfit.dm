@@ -257,8 +257,10 @@
 				if(!isnum(number))//Default to 1
 					number = 1
 				for(var/i in 1 to number)
-					if(equip_backpack_item(user, path)) // BANDASTATION EDIT - Optional module supplies; otherwise use the original operation.
+					// SS220 EDIT - START
+					if(equip_backpack_item(user, path)) // SS220 EDIT: Optional module supplies; otherwise use the original operation.
 						continue
+					// SS220 EDIT - END
 					user.equip_to_storage(SSwardrobe.provide_type(path, user), ITEM_SLOT_BACK, indirect_action = TRUE, del_on_fail = TRUE)
 
 		if(belt_contents)

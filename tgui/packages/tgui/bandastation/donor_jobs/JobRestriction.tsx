@@ -1,25 +1,34 @@
+import { createContext, type ReactNode, useContext } from 'react';
 import { useBackend } from 'tgui/backend';
 import { Stack, Tooltip } from 'tgui-core/components';
 
-import type { JobSlotsPreferencesData } from '../job_slots_preferences/types';
-import type { JobVariantsData } from '../jobs/types';
+import type { JobPreferencesData } from '../jobs/types';
 
-export function useJobRestriction(jobName: string) {
-  const { data } = useBackend<JobVariantsData & JobSlotsPreferencesData>();
-  const donorJob = data.job_variants?.[jobName];
+const JobRestrictionContext = createContext(false);
+
+export function JobRowControls(props: { name: string; children: ReactNode }) {
+  const { data } = useBackend<JobPreferencesData>();
+  const job = data.job_variants?.[props.name];
   const reason =
-    donorJob?.lock_reason || data.job_character_profiles?.[jobName]?.error;
+    job?.lock_reason || data.job_character_profiles?.[props.name]?.error;
 
-  return {
-    restricted: !!reason,
-    notice: reason ? (
-      <Tooltip content={reason}>
-        <Stack.Item className="restricted">
-          {donorJob?.lock_reason
-            ? `Тир ${donorJob.required_tier}`
-            : 'Профиль недоступен'}
-        </Stack.Item>
-      </Tooltip>
-    ) : null,
-  };
+  return (
+    <JobRestrictionContext.Provider value={!!reason}>
+      {reason && (
+        <Tooltip content={reason}>
+          <Stack.Item className="restricted">
+            {job?.lock_reason
+              ? `Тир ${job.required_tier}`
+              : 'Профиль недоступен'}
+          </Stack.Item>
+        </Tooltip>
+      )}
+      {props.children}
+    </JobRestrictionContext.Provider>
+  );
+}
+
+export function useJobPriorityButtonProps(modifier?: string) {
+  const restricted = useContext(JobRestrictionContext);
+  return { disabled: restricted && modifier !== 'off' };
 }

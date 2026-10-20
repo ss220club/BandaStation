@@ -1,7 +1,12 @@
-import type { PreferencesMenuData } from '../../interfaces/PreferencesMenu/types';
+import type { JobSlotsPreferencesData } from './types';
+
+type ProfileData = { character_profiles: (string | null)[] } & Pick<
+  JobSlotsPreferencesData,
+  'job_character_profiles'
+>;
 
 export function getJobProfileDescription(
-  data: PreferencesMenuData,
+  data: ProfileData,
   jobName: string,
 ): string {
   const entryProfile = data.job_character_profiles?.[jobName];
@@ -14,4 +19,12 @@ export function getJobProfileDescription(
     : entryName
       ? `В начале раунда: ${entryProfile?.slot}. ${entryName}${entryProfile?.randomized ? ', случайная внешность' : ''}${profileTitle ? `, ${profileTitle}` : ''}`
       : 'Профиль для входа недоступен';
+}
+
+export function getJobProfileTooltip(
+  data: ProfileData,
+  jobName: string,
+  currentSlotName: string,
+): string {
+  return `${currentSlotName}. ${getJobProfileDescription(data, jobName)}`;
 }

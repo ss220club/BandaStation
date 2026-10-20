@@ -6,7 +6,7 @@ GLOBAL_DATUM_INIT(latejoin_menu, /datum/latejoin_menu, new)
 
 // BANDASTATION ADDITION: Job restrictions
 /datum/latejoin_menu/proc/is_job_allowed_for_species_with_string(job_title, mob/dead/new_player/owner)
-	var/species = get_job_character_species(job_title, owner) // BANDASTATION EDIT - Inspect the selected profile without loading it.
+	var/species = get_job_character_species(job_title, owner) // SS220 EDIT: Inspect the selected profile without loading it.
 	if(!species)
 		return TRUE
 
@@ -63,7 +63,7 @@ GLOBAL_DATUM_INIT(latejoin_menu, /datum/latejoin_menu, new)
 
 /datum/latejoin_menu/ui_data(mob/user)
 	var/mob/dead/new_player/owner = user
-	var/client/requester = owner.client // BANDASTATION EDIT - Preserve the requester across eligibility waits.
+	var/client/requester = owner.client // SS220 EDIT: Preserve the requester across eligibility waits.
 	var/list/departments = list()
 	var/list/data = list(
 		"disable_jobs_for_non_observers" = SSlag_switch.measures[DISABLE_NON_OBSJOBS],
@@ -95,11 +95,13 @@ GLOBAL_DATUM_INIT(latejoin_menu, /datum/latejoin_menu, new)
 				continue
 
 			var/job_availability = owner.IsJobUnavailable(job_datum.title, latejoin = TRUE)
-			if(QDELETED(owner) || owner.client != requester) // BANDASTATION EDIT - Eligibility may yield.
+			// SS220 EDIT - START
+			if(QDELETED(owner) || owner.client != requester) // SS220 EDIT: Eligibility may yield.
 				return list()
+			// SS220 EDIT - END
 
 			var/list/job_data = list(
-				"availability" = job_availability, // BANDASTATION EDIT - Reuse the computed result in module presentation.
+				"availability" = job_availability, // SS220 EDIT: Reuse the computed result in module presentation.
 				"prioritized" = (job_datum in SSjob.prioritized_jobs),
 				"used_slots" = job_datum.current_positions,
 				"open_slots" = job_datum.total_positions < 0 ? "∞" : job_datum.total_positions,
@@ -138,8 +140,10 @@ GLOBAL_DATUM_INIT(latejoin_menu, /datum/latejoin_menu, new)
 			//Jobs under multiple departments should only be displayed if this is their first department or the command department
 			if(LAZYLEN(job_datum.departments_list) > 1 && job_datum.departments_list[1] != department.type && !(job_datum.departments_bitflags & DEPARTMENT_BITFLAG_COMMAND))
 				continue
-			if(QDELETED(owner)) // BANDASTATION EDIT - A previous eligibility check may have deleted the lobby.
+			// SS220 EDIT - START
+			if(QDELETED(owner)) // SS220 EDIT: A previous eligibility check may have deleted the lobby.
 				return list("departments_static" = departments)
+			// SS220 EDIT - END
 			if((job_datum.job_flags & JOB_HIDE_WHEN_EMPTY) && owner.IsJobUnavailable(job_datum.title, latejoin = TRUE) != JOB_AVAILABLE)
 				continue
 
@@ -157,8 +161,10 @@ GLOBAL_DATUM_INIT(latejoin_menu, /datum/latejoin_menu, new)
 
 /datum/latejoin_menu/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
 	. = ..()
-	if(.) // BANDASTATION EDIT - Respect the native parent authorization result.
+	// SS220 EDIT - START
+	if(.) // SS220 EDIT: Respect the native parent authorization result.
 		return
+	// SS220 EDIT - END
 
 	if(!ui.user.client || ui.user.client.interviewee || !isnewplayer(ui.user))
 		return TRUE
@@ -169,9 +175,11 @@ GLOBAL_DATUM_INIT(latejoin_menu, /datum/latejoin_menu, new)
 		if("ui_mounted_with_no_bluescreen")
 			owner.jobs_menu_mounted = TRUE
 		if("select_job")
-			var/datum/selection_context = owner.capture_latejoin_request() // BANDASTATION EDIT - Keep modal replies tied to this profile.
+			// SS220 EDIT - START
+			var/datum/selection_context = owner.capture_latejoin_request() // SS220 EDIT: Keep modal replies tied to this profile.
 			if(!is_latejoin_selection_current(owner, params, selection_context))
 				return TRUE
+			// SS220 EDIT - END
 			if(params["job"] == "Random")
 				var/job = get_random_job(owner)
 				if(!job)
@@ -179,8 +187,10 @@ GLOBAL_DATUM_INIT(latejoin_menu, /datum/latejoin_menu, new)
 
 				params["job"] = job
 
-			if(!is_latejoin_selection_current(owner, params, selection_context)) // BANDASTATION EDIT - Random selection may yield.
+			// SS220 EDIT - START
+			if(!is_latejoin_selection_current(owner, params, selection_context)) // SS220 EDIT: Random selection may yield.
 				return TRUE
+			// SS220 EDIT - END
 
 			if(!SSticker?.IsRoundInProgress())
 				tgui_alert(owner, "The round is either not ready, or has already finished...", "Oh No!")
@@ -231,25 +241,33 @@ GLOBAL_DATUM_INIT(latejoin_menu, /datum/latejoin_menu, new)
 /// Gives the user a random job that they can join as, and prompts them if they'd actually like to keep it, rerolling if not. Cancellable by the user.
 /// WARNING: BLOCKS THREAD!
 /datum/latejoin_menu/proc/get_random_job(mob/dead/new_player/owner)
-	var/datum/choice_context = owner.capture_latejoin_request() // BANDASTATION EDIT - SQL and confirmation may yield.
+	// SS220 EDIT - START
+	var/datum/choice_context = owner.capture_latejoin_request() // SS220 EDIT: SQL and confirmation may yield.
 	if(!owner?.is_latejoin_request_current(choice_context))
 		return
+	// SS220 EDIT - END
 	var/list/dept_data = list()
 
 	for(var/datum/job_department/department as anything in SSjob.joinable_departments)
 		for(var/datum/job/job_datum as anything in department.department_jobs)
-			if(!is_latejoin_random_job_allowed(owner, job_datum)) // BANDASTATION EDIT - Explicit roles are opt-in.
+			// SS220 EDIT - START
+			if(!is_latejoin_random_job_allowed(owner, job_datum)) // SS220 EDIT: Explicit roles are opt-in.
 				continue
+			// SS220 EDIT - END
 			if(owner.IsJobUnavailable(job_datum.title, latejoin = TRUE) != JOB_AVAILABLE)
 				continue
-			if(!owner?.is_latejoin_request_current(choice_context)) // BANDASTATION EDIT - Eligibility may yield.
+			// SS220 EDIT - START
+			if(!owner?.is_latejoin_request_current(choice_context)) // SS220 EDIT: Eligibility may yield.
 				return
 			if(!is_latejoin_random_job_allowed(owner, job_datum))
 				continue
+			// SS220 EDIT - END
 			dept_data += job_datum.title
 
-	if(!owner?.is_latejoin_request_current(choice_context)) // BANDASTATION EDIT - Also cover a rejected final SQL result.
+	// SS220 EDIT - START
+	if(!owner?.is_latejoin_request_current(choice_context)) // SS220 EDIT: Also cover a rejected final SQL result.
 		return
+	// SS220 EDIT - END
 	if(dept_data.len <= 0) //Congratufuckinglations
 		tgui_alert(owner, "В данный момент для вас нет случайной профессии. Обратитесь в ahelp за помощью.", "О нет!")
 		return
@@ -262,14 +280,18 @@ GLOBAL_DATUM_INIT(latejoin_menu, /datum/latejoin_menu, new)
 			return
 
 		var/random = pick_n_take(dept_data)
-		if(!is_latejoin_random_job_allowed(owner, SSjob.get_job(random))) // BANDASTATION EDIT - Preferences may change between rerolls.
+		// SS220 EDIT - START
+		if(!is_latejoin_random_job_allowed(owner, SSjob.get_job(random))) // SS220 EDIT: Preferences may change between rerolls.
 			continue
+		// SS220 EDIT - END
 		var/list/random_job_options = list(JOB_CHOICE_YES, JOB_CHOICE_REROLL, JOB_CHOICE_CANCEL)
 
-		random_job = tgui_alert(owner, "[get_latejoin_job_label(owner, random)]?", "Случайная должность", random_job_options)
+		random_job = tgui_alert(owner, "[get_latejoin_job_label(owner, random)]?", "Случайная должность", random_job_options) // SS220 EDIT: Selected variant label.
 
-		if(!owner?.is_latejoin_request_current(choice_context)) // BANDASTATION EDIT - Reject a stale modal reply.
+		// SS220 EDIT - START
+		if(!owner?.is_latejoin_request_current(choice_context)) // SS220 EDIT: Reject a stale modal reply.
 			return
+		// SS220 EDIT - END
 		if(random_job == JOB_CHOICE_CANCEL)
 			return
 		if(random_job == JOB_CHOICE_YES)

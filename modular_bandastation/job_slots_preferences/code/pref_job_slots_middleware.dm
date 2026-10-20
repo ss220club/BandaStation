@@ -11,7 +11,16 @@
 /datum/preference_middleware/jobs/get_ui_data(mob/user)
 	. = ..()
 	for(var/list/job_data as anything in .["job_preferences"])
-		job_data -= "assigned_profile_slot"
+		job_data["assigned_profile_slot"] = preferences.pref_job_slots[job_data["job"]]
+	// Project canonical assignments into the native UI contract, including roles without a priority.
+	for(var/job_title in preferences.pref_job_slots)
+		if(job_title in preferences.job_preferences)
+			continue
+		.["job_preferences"] += list(list(
+			"job" = job_title,
+			"priority" = null,
+			"assigned_profile_slot" = preferences.pref_job_slots[job_title],
+		))
 
 /datum/preference_middleware/jobs/set_job_preference(list/params, mob/user)
 	if(user.client?.prefs != preferences || params["edit_slot"] != preferences.default_slot)
