@@ -183,3 +183,30 @@
 	if(!istype(user))
 		return
 	return user.dna.species.get_evil_laugh_sound(user)
+
+/datum/emote/living/cane_tap
+	key = "cane_tap"
+	key_third_person = "стучит тростью"
+	name = "Стучать тростью"
+	message = "стучит тростью по полу."
+	emote_type = EMOTE_VISIBLE | EMOTE_AUDIBLE
+	cooldown = 2 SECONDS
+
+/datum/emote/living/cane_tap/can_run_emote(mob/living/user, status_check = TRUE, intentional, params)
+	return ..() && istype(user.get_active_held_item(), /obj/item/cane)
+
+/datum/emote/living/cane_tap/get_sound(mob/living/user)
+	return null
+
+/datum/emote/living/cane_tap/run_emote(mob/living/user, params, type_override, intentional)
+	. = ..()
+	INVOKE_ASYNC(src, PROC_REF(play_cane_tap_sounds), user)
+
+/datum/emote/living/cane_tap/proc/play_cane_tap_sounds(mob/living/user)
+	for(var/i in 1 to 3)
+		if(QDELETED(user))
+			return
+
+		sleep(0.25 SECONDS)
+		playsound(user, 'sound/items/modsuit/atrocinator_step.ogg', 50, TRUE)
+		sleep(0.25 SECONDS)
