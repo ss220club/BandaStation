@@ -54,11 +54,17 @@
 			"primary" = core == GLOB.primary_data_core,
 		))
 	var/list/bridges = list()
+	var/area/local_area = get_area(src)
+	var/list/local_cables = ai_cables_on_tile(get_turf(src))
+	var/obj/structure/ai_ethernet/local_cable = length(local_cables) == 1 ? local_cables[1] : null
+	var/datum/ai_subnet/local_subnet = local_cable?.ai_subnet
 	for(var/obj/machinery/ai/network_bridge/bridge as anything in GLOB.ai_network_bridges)
 		if(!ai_same_debug_environment(src, bridge))
 			continue
 		var/responding = !bridge.endpoint_status()
-		var/local = bridge.Adjacent(src)
+		var/local = bridge.Adjacent(src) || (!QDELETED(local_subnet) && bridge.ai_subnet == local_subnet)
+		if(local_area && !istype(local_area, /area/space) && bridge.z == z && get_area(bridge) == local_area)
+			local = TRUE
 		bridges += list(list(
 			"ref" = REF(bridge),
 			"area" = responding || local ? "[ai_localized_area(bridge)]" : "Местоположение неизвестно: нет ответа",
