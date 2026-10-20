@@ -14,6 +14,10 @@
 	icon_state = "cpuboard"
 
 	w_class = WEIGHT_CLASS_SMALL
+	custom_materials = list(
+		/datum/material/glass = SHEET_MATERIAL_AMOUNT * 2,
+		/datum/material/iron = SHEET_MATERIAL_AMOUNT * 2,
+	)
 
 	/// Текущая частота процессора в ТГц.
 	var/speed = 1
@@ -84,6 +88,11 @@
 	name = "advanced neural processing unit"
 	desc = "Процессор для нейронных вычислений ИИ. Используется в серверных модулях. Улучшенное предсказание ветвлений и оптимизированный доступ к памяти."
 	icon_state = "cpuboard_adv"
+	custom_materials = list(
+		/datum/material/glass = SHEET_MATERIAL_AMOUNT * 4,
+		/datum/material/iron = SHEET_MATERIAL_AMOUNT * 4,
+		/datum/material/gold = SHEET_MATERIAL_AMOUNT * 2,
+	)
 
 	speed = 2
 	power_multiplier = /obj/item/ai_cpu::power_multiplier * 1.75
@@ -93,6 +102,11 @@
 	name = "experimental neural processing unit"
 	desc = "Процессор для нейронных вычислений ИИ. Используется в серверных модулях. Из-за ослабленного контроля качества параметры разгона сильнее различаются между экземплярами."
 	icon_state = "cpuboard_adv"
+	custom_materials = list(
+		/datum/material/glass = SHEET_MATERIAL_AMOUNT * 6,
+		/datum/material/iron = SHEET_MATERIAL_AMOUNT * 4,
+		/datum/material/gold = SHEET_MATERIAL_AMOUNT * 6,
+	)
 
 	speed = 2
 	base_power_usage = /obj/item/ai_cpu::base_power_usage * 2
@@ -108,6 +122,12 @@
 	name = "bluespace neural processing unit"
 	desc = "Процессор для нейронных вычислений ИИ. Используется в серверных модулях. Блюспейс-технологии позволили ещё сильнее уменьшить компоненты."
 	icon_state = "cpuboard_super"
+	custom_materials = list(
+		/datum/material/glass = SHEET_MATERIAL_AMOUNT * 8,
+		/datum/material/iron = SHEET_MATERIAL_AMOUNT * 4,
+		/datum/material/gold = SHEET_MATERIAL_AMOUNT * 4,
+		/datum/material/bluespace = SHEET_MATERIAL_AMOUNT * 2,
+	)
 
 	speed = 3
 	base_power_usage = /obj/item/ai_cpu::base_power_usage * 2.5

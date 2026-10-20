@@ -21,6 +21,7 @@
 /obj/machinery/ai/Destroy(force)
 	GLOB.ai_network_nodes -= src
 	ai_network = null
+	ai_subnet = null
 	SSai_networks.dirty = TRUE
 	SSair.stop_processing_machine(src)
 	ai_refresh_cable_tile(get_turf(src))
