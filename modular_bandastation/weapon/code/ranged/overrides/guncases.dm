@@ -362,7 +362,7 @@
 	extra_to_spawn = /obj/item/ammo_box/magazine/c45/rubber
 
 /obj/item/storage/toolbox/guncase/ntspecial/pistol/gp38
-	weapon_to_spawn = /obj/item/gun/ballistic/automatic/pistol/cm23
+	weapon_to_spawn = /obj/item/gun/ballistic/automatic/pistol/cm23/sec
 	extra_to_spawn = /obj/item/ammo_box/magazine/c38/rubber
 
 /obj/item/storage/toolbox/guncase/ntspecial/pistol/hos_laser2

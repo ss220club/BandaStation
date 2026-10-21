@@ -150,12 +150,13 @@
 /datum/supply_pack/security/armory/gp45m_special_mags
 	name = "GP-45M Special Ammo Magazines"
 	crate_name = "GP-45M special ammo crate"
-	desc = "В этом ящике находятся два бронебойных магазина и два экспансивных магазина калибра .45, и соответствующие коробки с боеприпасами."
+	desc = "В этом ящике находятся два бронебойных магазина, два экспансивных магазина и один зажигательный магазин калибра .45, и соответствующие коробки с боеприпасами."
 	cost = CARGO_CRATE_VALUE * 20
 	access_view = ACCESS_WEAPONS
 	contains = list(
 		/obj/item/ammo_box/magazine/c45/ap = 2,
 		/obj/item/ammo_box/magazine/c45/hp = 2,
+		/obj/item/ammo_box/magazine/c45/incendiary = 1,
 		/obj/item/ammo_box/c45/ap = 1,
 		/obj/item/ammo_box/c45/hp = 1,
 	)
