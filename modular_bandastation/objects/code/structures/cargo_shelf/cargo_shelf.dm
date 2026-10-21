@@ -31,11 +31,8 @@
 	crates_stored = new /list(capacity)
 
 /obj/structure/cargo_shelf/Destroy()
-	for(var/slot in 1 to length(crates_stored))
-		var/obj/structure/closet/crate/crate = crates_stored[slot]
-		if(crate)
-			crate.forceMove(drop_location())
-
+	for(var/obj/structure/closet/crate/crate in crates_stored)
+		crate.forceMove(drop_location())
 	return ..()
 
 /obj/structure/cargo_shelf/proc/crate_count()
