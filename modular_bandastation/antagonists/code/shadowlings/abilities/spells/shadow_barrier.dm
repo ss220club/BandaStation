@@ -78,4 +78,3 @@
 	if(proj.dir != REVERSE_DIR(H.dir))
 		return
 	proj.reflect(H)
-
