@@ -4,10 +4,6 @@
 	action_delegations = action_delegations.Copy()
 	action_delegations -= "set_job_to_profile"
 
-/// Direct callers cannot revive the disabled protocol or write a second assignment map.
-/datum/preference_middleware/jobs/set_job_to_profile(list/params, mob/user)
-	return FALSE
-
 /datum/preference_middleware/jobs/get_ui_data(mob/user)
 	. = ..()
 	for(var/list/job_data as anything in .["job_preferences"])
@@ -45,7 +41,6 @@
 /datum/preference_middleware/pref_job_slots/get_ui_data(mob/user)
 	var/list/data = list()
 
-	data["pref_job_slots"] = preferences.pref_job_slots
 	var/list/job_profiles = list()
 	for(var/datum/job/job as anything in SSjob.joinable_occupations)
 		if(job.job_flags & JOB_LATEJOIN_ONLY)

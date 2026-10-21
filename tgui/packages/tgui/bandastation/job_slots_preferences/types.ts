@@ -10,5 +10,4 @@ export type JobSlotsPreferencesData = {
       public_title: string | null;
     }
   >;
-  pref_job_slots: Record<string, number>;
 };
