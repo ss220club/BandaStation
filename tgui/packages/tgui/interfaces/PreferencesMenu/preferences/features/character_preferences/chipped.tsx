@@ -4,6 +4,6 @@ import {
 } from '../dropdowns';
 
 export const chipped: FeatureWithIcons<string> = {
-  name: 'Chipped',
+  name: 'Выбрать скиллчип',
   component: FeatureIconnedDropdownInput,
 };

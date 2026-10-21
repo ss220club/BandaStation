@@ -89,9 +89,7 @@
 /turf/open/space/openspace,
 /area/space/nearstation)
 "jV" = (
-/turf/open/misc/asteroid/airless{
-	icon_state = "asteroid12"
-	},
+/turf/open/misc/asteroid/airless/variant_12,
 /area/space/nearstation)
 "ks" = (
 /obj/effect/turf_decal/stripes/line{
@@ -112,9 +110,7 @@
 "kQ" = (
 /obj/structure/flora/grass/jungle/b/style_random,
 /obj/effect/decal/cleanable/dirt,
-/turf/open/misc/asteroid/airless{
-	icon_state = "asteroid10"
-	},
+/turf/open/misc/asteroid/airless/variant_10,
 /area/space/nearstation)
 "ls" = (
 /obj/effect/turf_decal/stripes/line{
@@ -371,9 +367,7 @@
 /turf/open/misc/asteroid/airless,
 /area/space/nearstation)
 "zq" = (
-/turf/open/misc/asteroid/airless{
-	icon_state = "asteroid5"
-	},
+/turf/open/misc/asteroid/airless/variant_5,
 /area/space/nearstation)
 "zt" = (
 /obj/effect/decal/cleanable/dirt,
@@ -759,9 +753,7 @@
 /turf/open/floor/engine/hull/reinforced,
 /area/space/nearstation)
 "WX" = (
-/turf/open/misc/asteroid/airless{
-	icon_state = "asteroid1"
-	},
+/turf/open/misc/asteroid/airless/variant_1,
 /area/space/nearstation)
 "Ya" = (
 /obj/effect/spawner/structure/window/reinforced,
@@ -780,9 +772,7 @@
 "YR" = (
 /obj/structure/flora/bush/lavendergrass/style_random,
 /obj/effect/decal/cleanable/dirt,
-/turf/open/misc/asteroid/airless{
-	icon_state = "asteroid7"
-	},
+/turf/open/misc/asteroid/airless/variant_7,
 /area/space/nearstation)
 "Zr" = (
 /turf/closed/wall/r_wall,
