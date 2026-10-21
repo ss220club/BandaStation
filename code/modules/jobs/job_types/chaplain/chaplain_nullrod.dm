@@ -49,6 +49,9 @@ GLOBAL_LIST_INIT(nullrod_variants, init_nullrod_variants())
 	var/menu_description = "A standard chaplain's weapon. Fits in pockets. Can be worn on the belt."
 	/// Affects GLOB.holy_weapon_type. Disable to allow null rods to change at will and without affecting the station's type.
 	var/station_holy_item = TRUE
+	// BANDASTATION ADDITION: vampires
+	/// Extra holy damage for specific rods
+	var/sanctify_force = 0
 
 /obj/item/nullrod/Initialize(mapload)
 	. = ..()
@@ -279,6 +282,7 @@ GLOBAL_LIST_INIT(nullrod_variants, init_nullrod_variants())
 	AddComponent(/datum/component/two_handed, \
 		force_unwielded = 10, \
 		force_wielded = 18, \
+		update_icon_state = TRUE, \
 	)
 	AddComponent(
 		/datum/component/butchering, \
@@ -291,10 +295,6 @@ GLOBAL_LIST_INIT(nullrod_variants, init_nullrod_variants())
 		owner.visible_message(span_danger("[owner] parries [attack_text] with [src]!"))
 		return TRUE
 	return FALSE
-
-/obj/item/nullrod/vibro/update_icon_state()
-	icon_state = inhand_icon_state = "[base_icon_state][HAS_TRAIT(src, TRAIT_WIELDED)]"
-	return ..()
 
 // God Hand - Cannot be dropped. Does burn damage.
 
@@ -527,6 +527,7 @@ GLOBAL_LIST_INIT(nullrod_variants, init_nullrod_variants())
 	material_flags = MATERIAL_EFFECTS
 	custom_materials = list(/datum/material/silver = SHEET_MATERIAL_AMOUNT * 3, /datum/material/iron = SHEET_MATERIAL_AMOUNT)
 	material_slots = list(/datum/material_slot/weapon_head = /datum/material/silver, /datum/material_slot/handle = /datum/material/iron)
+	sanctify_force = 7 // BANDASTATION ADDITION: vampires
 
 // Atheist's Fedora - Wear it on your head. No melee damage, massive throw force.
 
@@ -635,12 +636,9 @@ GLOBAL_LIST_INIT(nullrod_variants, init_nullrod_variants())
 	AddComponent(/datum/component/two_handed, \
 		force_unwielded = 14, \
 		force_wielded = 18, \
+		update_icon_state = TRUE, \
 	)
 	AddComponent(/datum/component/walking_aid)
-
-/obj/item/nullrod/bostaff/update_icon_state()
-	icon_state = inhand_icon_state = "[base_icon_state][HAS_TRAIT(src, TRAIT_WIELDED)]"
-	return ..()
 
 /obj/item/nullrod/bostaff/hit_reaction(mob/living/carbon/human/owner, atom/movable/hitby, attack_text = "the attack", final_block_chance = 0, damage = 0, attack_type = MELEE_ATTACK, damage_type = BRUTE)
 	if(attack_type == PROJECTILE_ATTACK || attack_type == LEAP_ATTACK || attack_type == OVERWHELMING_ATTACK)

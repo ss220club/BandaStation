@@ -3,6 +3,9 @@
 // All signals send the source datum of the signal as the first argument
 
 // /datum signals
+// BANDASTATION EDIT added new signal type
+/// Sent by antagonist objective-list writers after changing the list.
+#define COMSIG_ANTAGONIST_OBJECTIVES_CHANGED "antagonist_objectives_changed"
 /// when a component is added to a datum: (/datum/component)
 #define COMSIG_COMPONENT_ADDED "component_added"
 /// before a component is removed from a datum because of ClearFromParent: (/datum/component)

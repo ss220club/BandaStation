@@ -850,10 +850,11 @@ GAME_VERB_SRC(/obj/item, verb_pickup, oview(1), "Pick up", null)
 
 /obj/item/singularity_pull(atom/singularity, current_size)
 	..()
+	if(QDELETED(src))
+		return
+
 	if(current_size >= STAGE_FOUR)
 		throw_at(singularity, 14, 3, spin=0)
-	else
-		return
 
 /obj/item/on_exit_storage(datum/storage/master_storage)
 	. = ..()
@@ -896,7 +897,6 @@ GAME_VERB_SRC(/obj/item, verb_pickup, oview(1), "Pick up", null)
 /obj/item/proc/after_throw(datum/callback/callback)
 	if (callback) //call the original callback
 		. = callback.Invoke()
-	item_flags &= ~IN_INVENTORY
 	if(!pixel_y && !pixel_x && !(item_flags & NO_PIXEL_RANDOM_DROP))
 		pixel_x = rand(-8,8)
 		pixel_y = rand(-8,8)
