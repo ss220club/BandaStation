@@ -4,7 +4,7 @@
 	preview_antag_datum = /datum/antagonist/shadowling
 
 	repeatable = FALSE
-	weight = list(
+	weight = alist(
 		DYNAMIC_TIER_LOW = 0,
 		DYNAMIC_TIER_LOWMEDIUM = 1,
 		DYNAMIC_TIER_MEDIUMHIGH = 3,
