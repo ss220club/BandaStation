@@ -2,14 +2,6 @@
 #define CARGO_SHELF_VERTICAL_OFFSET 10
 #define CARGO_SHELF_USE_DELAY (1 SECONDS)
 
-/datum/armor/structure_cargo_shelf
-	melee = 20
-	bullet = 10
-	laser = 10
-	bomb = 10
-	fire = 70
-	acid = 60
-
 /obj/structure/cargo_shelf
 	name = "crate shelf"
 	desc = "Полка для хранения ящиков."
@@ -18,8 +10,8 @@
 	density = TRUE
 	anchored = TRUE
 	gender = FEMALE
-	armor_type = /datum/armor/structure_cargo_shelf
 	custom_materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 6)
+	color = "#D0D0D0"
 
 	VAR_FINAL/capacity = CARGO_SHELF_CAPACITY
 	var/use_delay = CARGO_SHELF_USE_DELAY
