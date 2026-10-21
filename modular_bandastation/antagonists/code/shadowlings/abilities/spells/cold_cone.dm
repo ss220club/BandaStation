@@ -80,7 +80,7 @@
 	var/list/targets = collect_cone_targets(H)
 	if(!length(targets))
 		play_cold_fx(H)
-		H.balloon_alert(H, "промах")
+		H.balloon_alert(H, "промах!")
 		return TRUE
 
 	play_cold_fx(H)

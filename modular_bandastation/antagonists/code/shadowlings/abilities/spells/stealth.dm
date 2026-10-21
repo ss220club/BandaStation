@@ -85,5 +85,5 @@
 		to_chat(H, span_notice("Вы растворяетесь в тенях."))
 		return TRUE
 
-	H.balloon_alert(H, "слишком светло")
+	H.balloon_alert(H, "слишком светло!")
 	return FALSE

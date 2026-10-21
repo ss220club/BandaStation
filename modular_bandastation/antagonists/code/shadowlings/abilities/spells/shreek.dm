@@ -16,7 +16,7 @@
 // MARK: Ability
 /datum/action/cooldown/shadowling/shreek
 	name = "Крик"
-	desc = "Ударная волна тьмы вокруг: рядом швыряет и оглушает, до 5 тайлов дезориентирует. Бьёт стёкла и лампы."
+	desc = "Ударная волна тьмы вокруг: рядом швыряет и оглушает, до 5 тайлов дезориентирует. Бьёт стёкла и лампы, наносит серьёзные повреждения мехам, киборгам и роботам."
 	button_icon_state = "shadow_screech"
 	check_flags = AB_CHECK_CONSCIOUS
 	cooldown_time = 40 SECONDS

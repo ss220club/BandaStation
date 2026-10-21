@@ -39,7 +39,7 @@
 	var/success = hive.apply_evac_delay(10 MINUTES)
 	hive.is_shadowling_engine_sabotage_used = TRUE
 	if(success)
-		to_chat(H, span_boldnotice("Вы ломаете силовые контуры — эвакуация задержана на 10 минут."))
+		to_chat(H, span_boldnotice("Вы ломаете силовые контуры - эвакуация задержана на 10 минут."))
 	else
 		return FALSE
 	cleanup_from_all_hive(hive)

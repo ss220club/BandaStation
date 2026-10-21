@@ -130,14 +130,14 @@
 
 		var/turf/cur = get_turf(H)
 		if(!cur || cur != anchor_turf || get_area(H) != anchor_area)
-			to_chat(H, span_warning("Вы вырвались из кокона — вылупление прервано."))
+			to_chat(H, span_warning("Вы вырвались из кокона - вылупление прервано."))
 			detach_cover()
 			cleanup(walls)
 			H.alpha = prev_alpha
 			return FALSE
 
 		if(cur.get_lumcount() >= SHADOWLING_DIM_THRESHOLD)
-			to_chat(H, span_warning("Свет разгоняет тьму — вылупление сорвано."))
+			to_chat(H, span_warning("Свет разгоняет тьму - вылупление сорвано."))
 			detach_cover()
 			cleanup(walls)
 			H.alpha = prev_alpha
@@ -151,7 +151,7 @@
 			to_chat(H, span_notice("Тьма сгущается, приближая превращение..."))
 
 		if(!do_after(H, step_time, H))
-			to_chat(H, span_warning("Вы вырвались из кокона — вылупление прервано."))
+			to_chat(H, span_warning("Вы вырвались из кокона - вылупление прервано."))
 			detach_cover()
 			cleanup(walls)
 			H.alpha = prev_alpha

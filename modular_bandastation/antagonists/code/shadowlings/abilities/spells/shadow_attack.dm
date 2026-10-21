@@ -19,7 +19,7 @@
 		return TRUE
 	if(owner.has_status_effect(/datum/status_effect/shadow/phase))
 		return TRUE
-	owner.balloon_alert(owner, "вы должны быть нематериальны")
+	owner.balloon_alert(owner, "вы должны быть нематериальны!")
 	return FALSE
 
 /datum/action/cooldown/shadowling/shadow_strike/Trigger(mob/clicker, trigger_flags, atom/target)

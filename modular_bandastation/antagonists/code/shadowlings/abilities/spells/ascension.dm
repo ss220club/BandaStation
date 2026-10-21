@@ -97,7 +97,7 @@
 		return FALSE
 
 	if(start_turf.get_lumcount() >= SHADOWLING_DIM_THRESHOLD)
-		to_chat(H, span_warning("Свет мешает Возвышению."))
+		to_chat(H, span_warning("Свет мешает возвышению."))
 		return FALSE
 
 	StartCooldown()
@@ -120,7 +120,7 @@
 			return FALSE
 
 		if(current_turf.get_lumcount() >= SHADOWLING_DIM_THRESHOLD)
-			to_chat(H, span_warning("Яркий свет рассеивает тьму — Возвышение сорвано."))
+			to_chat(H, span_warning("Яркий свет рассеивает тьму — возвышение сорвано!"))
 			_end_levitate(H)
 			if(circle)
 				circle.stop_and_fade()

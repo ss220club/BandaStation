@@ -1,6 +1,6 @@
 /datum/action/cooldown/shadowling
-	name = "Shadowling Ability"
-	desc = "Innate power of the brood."
+	name = "Способность Тенеморфа"
+	desc = "Врождённая сила улья."
 	button_icon = 'modular_bandastation/antagonists/icons/shadowling/shadowling_actions.dmi'
 	button_icon_state = ""
 	background_icon = 'modular_bandastation/antagonists/icons/shadowling/shadowling_actions.dmi'
@@ -31,13 +31,13 @@
 /datum/action/cooldown/shadowling/proc/can_use(mob/living/carbon/human/H)
 	var/datum/team/shadow_hive/hive = get_shadow_hive()
 	if(!hive)
-		owner.balloon_alert(owner, "нарушена связь с роем")
+		owner.balloon_alert(owner, "нарушена связь с роем!")
 		return FALSE
 	if(requires_dark_user && !is_dark(H))
-		owner.balloon_alert(owner, "слишком светло")
+		owner.balloon_alert(owner, "слишком светло!")
 		return FALSE
 	if(!IsAvailable(TRUE))
-		owner.balloon_alert(owner, "способность недоступна")
+		owner.balloon_alert(owner, "способность недоступна!")
 		return FALSE
 	return TRUE
 
@@ -78,7 +78,7 @@
 	var/list/targets = CollectTargets(owner, target)
 	if(!ValidateTargets(owner, targets))
 		enable()
-		owner.balloon_alert(owner, "нет доступных целей")
+		owner.balloon_alert(owner, "нет доступных целей!")
 		return
 	if(channel_time > 0)
 		if(!PerformChannel(owner, null))

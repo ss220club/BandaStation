@@ -15,7 +15,7 @@
 		return FALSE
 
 	if(!(H in hive.lings))
-		to_chat(H, span_warning("Только тенелинги могут начать голосование."))
+		to_chat(H, span_warning("Только тенеморфы могут начать голосование."))
 		return FALSE
 
 	if(hive.is_shadowling_vote_finished)

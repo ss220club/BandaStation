@@ -137,8 +137,7 @@
 // MARK: Ability
 /datum/action/cooldown/shadowling/hook
 	parent_type = /datum/action/cooldown/shadowling
-
-	name = "Хук"
+	name = "Крюк"
 	desc = "Выпускает теневую руку. При попадании тянет задетую цель к вам."
 	button_icon_state = "shadow_hook"
 

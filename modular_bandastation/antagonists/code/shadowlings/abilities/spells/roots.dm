@@ -75,7 +75,7 @@
 	if(isturf(loc))
 		visible_message(
 			span_danger("Тени хватают [victim]!"),
-			span_userdanger("Тени сковывают ваши ноги — вы не можете двигаться!")
+			span_userdanger("Тени сковывают ваши ноги - вы не можете двигаться!")
 		)
 
 	playsound(victim, 'sound/effects/magic/enter_blood.ogg', 75, TRUE)
@@ -144,13 +144,13 @@
 
 	var/turf/tturf = get_turf(T)
 	if(!tturf || tturf.get_lumcount() >= SHADOWLING_DIM_THRESHOLD)
-		owner.balloon_alert(owner, "цель не в тени")
+		owner.balloon_alert(owner, "цель не в тени!")
 		return FALSE
 
 	var/obj/effect/shadow_bind_anchor/A = new /obj/effect/shadow_bind_anchor(tturf, H)
 	if(!A.apply_to(T))
 		qdel(A)
-		owner.balloon_alert(owner, "тени не смогли опутать")
+		owner.balloon_alert(owner, "тени не смогли опутать!")
 		return FALSE
 
 	StartCooldown()

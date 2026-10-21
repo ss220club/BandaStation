@@ -24,7 +24,7 @@
 // MARK: Ability
 /datum/action/cooldown/shadowling/glare
 	name = "Взгляд"
-	desc = "Сокрующий взгляд в сторону куда вы смотрите, позволяющий оглушать и обессиливать ваших врагов."
+	desc = "Сокрующий взгляд в сторону куда вы смотрите, позволяющий оглушать и ослеплять ваших врагов."
 	button_icon_state = "shadow_glare"
 	cooldown_time = 15 SECONDS
 	required_thralls = 0
@@ -70,7 +70,7 @@
 		return FALSE
 	play_glare_fx(H)
 	if(!length(targets))
-		H.balloon_alert(H, "промах")
+		H.balloon_alert(H, "промах!")
 		return TRUE
 	for(var/mob/living/carbon/human/T in targets)
 		if(QDELETED(T) || T.stat == DEAD)

@@ -20,7 +20,7 @@
 		return TRUE
 	if(H.has_status_effect(/datum/status_effect/shadow/phase))
 		return TRUE
-	owner.balloon_alert(owner, "вы должны быть нематериальны")
+	owner.balloon_alert(owner, "вы должны быть нематериальны!")
 	return FALSE
 
 /datum/action/cooldown/shadowling/shadow_grab/DoEffect(mob/living/carbon/human/H, atom/_)

@@ -30,12 +30,12 @@
 
 	var/mob/living/carbon/human/T = target
 	if(!istype(T))
-		clicker.balloon_alert(clicker, "нужна гуманоидная цель")
+		clicker.balloon_alert(clicker, "нужна гуманоидная цель!")
 		unset_click_ability(clicker, TRUE)
 		return FALSE
 
 	if(get_dist(clicker, T) > 1)
-		clicker.balloon_alert(clicker, "слишком далеко")
+		clicker.balloon_alert(clicker, "слишком далеко!")
 		unset_click_ability(clicker, TRUE)
 		return FALSE
 
@@ -45,12 +45,12 @@
 		return FALSE
 
 	if(!(T in hive.thralls) || !T.get_organ_slot(ORGAN_SLOT_BRAIN_THRALL))
-		clicker.balloon_alert(clicker, "требуется слуга")
+		clicker.balloon_alert(clicker, "требуется слуга!")
 		unset_click_ability(clicker, TRUE)
 		return FALSE
 
 	if(T in hive.lings)
-		clicker.balloon_alert(clicker, "уже линг")
+		clicker.balloon_alert(clicker, "уже тенеморф!")
 		unset_click_ability(clicker, TRUE)
 		return FALSE
 
@@ -87,7 +87,7 @@
 	// Make our thrall a lesser Shadowling
 	hive.join_member(T, SHADOWLING_ROLE_LESSER)
 
-	to_chat(clicker, span_notice("Вы переплавляете сущность [T.real_name] во тьму — он восстаёт младшим тенеморфом."))
+	to_chat(clicker, span_notice("Вы переплавляете сущность [T.real_name] во тьму - он восстаёт младшим тенеморфом."))
 	to_chat(T, span_danger("Тьма переписывает вашу плоть и волю... Вы становитесь младшим тенеморфом!"))
 	playsound(get_turf(T), sfx_end, 65, TRUE)
 

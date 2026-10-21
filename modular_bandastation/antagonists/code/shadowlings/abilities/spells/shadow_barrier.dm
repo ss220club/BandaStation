@@ -1,6 +1,6 @@
 /datum/action/cooldown/shadowling/shadow_barrier
 	name = "Теневой барьер"
-	desc = "Создать теневой барьер, отражающий энергетические снаряды спереди."
+	desc = "Создать окутывающий себя теневой барьер, отражающий энергетические снаряды спереди."
 	button_icon_state = "shadow_barrier"
 	cooldown_time = 40 SECONDS
 	requires_dark_user = FALSE

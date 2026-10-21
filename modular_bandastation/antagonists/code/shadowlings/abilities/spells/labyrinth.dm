@@ -45,7 +45,7 @@
 			return FALSE
 		stored_target = T
 		clicker.balloon_alert(clicker, "цель зафиксирована")
-		to_chat(clicker, span_notice("Укажи тёмную точку в пределах видимости. ПКМ — отмена."))
+		to_chat(clicker, span_notice("Укажи тёмную точку в пределах видимости. ПКМ для отмены."))
 		set_click_ability(clicker)
 		_start_timeout(clicker)
 		return TRUE
@@ -86,13 +86,13 @@
 		return TRUE
 	var/turf/T = get_turf(target)
 	if(!istype(T))
-		owner.balloon_alert(owner, "нужен тайл")
+		owner.balloon_alert(owner, "нужен тайл!")
 		return FALSE
 	if(!is_dark(T))
-		owner.balloon_alert(owner, "слишком светло")
+		owner.balloon_alert(owner, "слишком светло!")
 		return FALSE
 	if(!(T in view(selection_range, clicker)))
-		owner.balloon_alert(owner, "слишком далеко")
+		owner.balloon_alert(owner, "слишком далеко!")
 		return FALSE
 	var/mob/living/carbon/human/V = stored_target
 	if(QDELETED(V))

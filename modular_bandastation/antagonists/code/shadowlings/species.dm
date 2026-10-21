@@ -189,8 +189,8 @@
 	exposed_wound_bonus = 10
 	armour_penetration = 25
 	sharpness = SHARP_EDGED
-	attack_verb_continuous = list("разрывает", "режет", "раздирает")
-	attack_verb_simple = list("разрывать", "резать", "раздирать")
+	attack_verb_continuous = list("lacerates", "slashes", "scratches")
+	attack_verb_simple = list("scratch", "slash", "lacerate")
 	hitsound = 'sound/items/weapons/slash.ogg'
 	item_flags = DROPDEL
 
@@ -203,8 +203,8 @@
 	desc = "Пронзающие когти тени."
 	icon_state = "claw_left"
 	sharpness = SHARP_POINTY
-	attack_verb_continuous = list("пронзает", "протыкает", "разрывает")
-	attack_verb_simple = list("пронзать", "протыкать", "разрывать")
+	attack_verb_continuous = list("slashes", "scratches", "laceratee")
+	attack_verb_simple = list("slash", "scratch",  "lacerate")
 
 // MARK: Bodyparts
 /obj/item/bodypart/head/shadow/shadowling
@@ -320,7 +320,7 @@
 
 /obj/item/organ/eyes/shadow/shadowling
 	name = "freezing blue eyes"
-	desc = "Even without their shadowy owner, looking at these eyes gives you a sense of dread."
+	desc = "Даже без своего таинственного владельца - один лишь взгляд в эти глаза внушает ужас."
 	icon = 'icons/obj/medical/organs/shadow_organs.dmi'
 	iris_overlay = "eyes_cyber_glow_iris"
 	eye_icon_state = "eyes_glow_gs"

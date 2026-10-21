@@ -99,8 +99,8 @@
 
 /datum/antagonist/shadow_thrall
 	parent_type = /datum/antagonist/shadowling
-	name = "Shadow Thrall"
-	antagpanel_category = "Shadowlings"
+	name = "Слуга Тени"
+	antagpanel_category = "Слуги Тенеморфов"
 	antag_hud_name = "shadowling_thrall"
 
 	is_thrall = TRUE
@@ -225,7 +225,7 @@
 
 /datum/objective/shadow_thrall/assist_ascension
 	name = "Assist Ascension"
-	explanation_text = "Помочь тенеморфам вознестись: к концу раунда должен быть хотя бы один Возвышенный Тенеморф."
+	explanation_text = "Помочь тенеморфам вознестись: к концу раунда должен быть хотя бы один возвышенный Тенеморф."
 
 /datum/objective/shadow_thrall/assist_ascension/check_completion()
 	var/datum/team/shadow_hive/hive = get_shadow_hive()
