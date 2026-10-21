@@ -141,7 +141,7 @@
 
 /obj/structure/closet/crate/mouse_drop_receive(atom/dropped, mob/user, params)
 	var/obj/structure/cargo_shelf/shelf = loc
-	if(!istype(shelf))
+	if(!istype(shelf) || dropped.loc == shelf)
 		return ..()
 
 	shelf.mouse_drop_receive(dropped, user, params)
