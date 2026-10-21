@@ -57,6 +57,14 @@
 	return 3
 
 /obj/structure/cargo_shelf/proc/can_load(obj/structure/closet/crate/crate, mob/user, y_offset)
+	if(!IsReachableBy(user))
+		balloon_alert(user, "слишком далеко!")
+		return FALSE
+
+	if(!get_turf(crate).IsReachableBy(user))
+		balloon_alert(user, "не достать до ящика!")
+		return FALSE
+
 	if(!anchored)
 		balloon_alert(user, "сначала закрепите полку!")
 		return FALSE
