@@ -14,6 +14,7 @@ GLOBAL_LIST_EMPTY(antag_operations)
 /datum/antag_operation/New()
 	. = ..()
 	GLOB.antag_operations += src
+	subscribe(SSdcs, COMSIG_GLOB_MIND_ENTERED_CRYO, PROC_REF(on_participant_cryo))
 
 /datum/antag_operation/Destroy()
 	for(var/datum/source as anything in subscriptions)
@@ -53,7 +54,6 @@ GLOBAL_LIST_EMPTY(antag_operations)
 	subscribe(antag, COMSIG_ANTAGONIST_OBJECTIVES_CHANGED, PROC_REF(on_objectives_changed))
 	subscribe(antag.owner, COMSIG_QDELETING, PROC_REF(on_participant_deleted))
 	subscribe(antag.owner, COMSIG_ANTAGONIST_REMOVED, PROC_REF(on_antagonist_removed))
-	subscribe(antag.owner, COMSIG_MIND_ENTERED_CRYO, PROC_REF(on_participant_cryo))
 	return TRUE
 
 /datum/antag_operation/proc/add_objective(datum/antagonist/antag, datum/objective/objective)
@@ -84,9 +84,12 @@ GLOBAL_LIST_EMPTY(antag_operations)
 	SIGNAL_HANDLER
 	cancel("участник сценария пропал из этого мира.")
 
-/datum/antag_operation/proc/on_participant_cryo(datum/source)
+/datum/antag_operation/proc/on_participant_cryo(datum/source, datum/mind/departing_mind)
 	SIGNAL_HANDLER
-	cancel("участник сценария ушёл в криогенный стазис.")
+	for(var/datum/antagonist/participant as anything in participant_antagonists)
+		if(participant_antagonists[participant] == departing_mind)
+			cancel("участник сценария покинул раунд.")
+			return
 
 /datum/antag_operation/proc/on_antagonist_removed(datum/mind/source, datum/antagonist/antag)
 	SIGNAL_HANDLER
