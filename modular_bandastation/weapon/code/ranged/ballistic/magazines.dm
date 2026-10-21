@@ -766,7 +766,7 @@
 // MARK: CM357 - .357 cal pistol
 /obj/item/ammo_box/magazine/c357
 	name = "pistol magazine (.357)"
-	desc = "Пистолетный магазин калибра .357, вмещающий 8 патронов. Подходит для пистолетов GP-357."
+	desc = "Пистолетный магазин калибра .357, вмещающий 8 патронов. Подходит для пистолетов GP-357 и PDH-A2-NR 'Osprey'."
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "c357_mag"
 	base_icon_state = "c357_mag"

@@ -82,7 +82,7 @@
 	)
 	departmental_flags = DEPARTMENT_BITFLAG_SECURITY
 
-/datum/design/c45
+/datum/design/c45_mag
 	name = "pistol magazine (.45) (Lethal)"
 	desc = "Designed to quickly reload GP-45M pistols."
 	build_type = AUTOLATHE
@@ -99,14 +99,14 @@
 	)
 	departmental_flags = DEPARTMENT_BITFLAG_SECURITY
 
-/datum/design/c45/sec
+/datum/design/c45_mag/sec
 	build_type = PROTOLATHE | AWAY_LATHE
 	category = list(
 		RND_CATEGORY_WEAPONS + RND_SUBCATEGORY_WEAPONS_AMMO
 	)
 	departmental_flags = DEPARTMENT_BITFLAG_SECURITY
 
-/datum/design/c45_rubber
+/datum/design/c45_mag_rubber
 	name = "pistol magazine (.45 Rubber) (Less Lethal)"
 	desc = "Designed to quickly reload GP-45M pistols. Rubber bullets are bouncy and less-than-lethal."
 	build_type = AUTOLATHE
@@ -123,7 +123,7 @@
 	)
 	departmental_flags = DEPARTMENT_BITFLAG_SECURITY
 
-/datum/design/c45_rubber/sec
+/datum/design/c45_mag_rubber/sec
 	build_type = PROTOLATHE | AWAY_LATHE
 	category = list(
 		RND_CATEGORY_WEAPONS + RND_SUBCATEGORY_WEAPONS_AMMO
@@ -134,7 +134,7 @@
 	. = ..()
 	unlocked_designs += list(
 		/datum/design/c9x25mm_rubber/sec,
-		/datum/design/c45_rubber/sec,
+		/datum/design/c45_mag_rubber/sec,
 		/datum/design/breaching_slug,
 	)
 
@@ -142,7 +142,7 @@
 	. = ..()
 	unlocked_designs += list(
 		/datum/design/c9x25mm/sec,
-		/datum/design/c45/sec,
+		/datum/design/c45_mag/sec,
 	)
 
 /datum/techweb_node/exotic_ammo/New()
