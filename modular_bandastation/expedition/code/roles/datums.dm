@@ -15,18 +15,17 @@
 /datum/outfit/job/merc
 	name = "Operative"
 	jobtype = /datum/job/assistant
-	uniform = /obj/item/clothing/under/hoodie_black
+	uniform = /obj/item/clothing/under/rank/etamin_ind/suit
 	shoes = /obj/item/clothing/shoes/jackboots
 	id = /obj/item/card/id/advanced/black
 	id_trim = /datum/id_trim/ert/merc
-	belt = /obj/item/storage/belt/military/army/tsf/full_pistol
+	belt = null
 	suit = null
 	gloves = /obj/item/clothing/gloves/color/black
 	back = /obj/item/storage/backpack/satchel
-	backpack_contents = list(
-		/obj/item/holochip/sotnya = 1,
-	)
+	backpack_contents = list()
 	pda_slot = null
+	box = null
 
 /obj/item/holochip/sotnya
 	credits = 100
@@ -44,10 +43,10 @@
 	jobtype = /datum/job/merc_leader
 	id_trim = /datum/id_trim/ert/merc/merc_leader
 	backpack_contents = list(
-		/obj/item/holochip/sotnya = 2,
 		/obj/item/modular_computer/pda/crew/heads/captain = 1,
 	)
 	head = /obj/item/clothing/head/beret/militia
+	box = null
 
 /datum/id_trim/ert/merc/merc_leader
 	assignment = "Лидер Оперативник"
