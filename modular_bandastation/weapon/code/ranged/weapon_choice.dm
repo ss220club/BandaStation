@@ -6,7 +6,6 @@
 	var/static/list/selectable_gun_types = list(
 		"GP-9 9x25mm Pistol" = /obj/item/storage/toolbox/guncase/ntcase/pistol/gp9/sec,
 		"Disabler Energy Pistol" = /obj/item/gun/energy/disabler,
-		"Energy Gun" = /obj/item/gun/energy/e_gun,
 	)
 	return selectable_gun_types
 
