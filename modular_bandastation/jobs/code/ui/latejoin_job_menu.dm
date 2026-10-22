@@ -11,10 +11,7 @@
 	var/datum/job/job = SSjob.get_job(job_title)
 	if(!job || !owner.client)
 		return null
-	var/datum/job_character_selection/selection = owner.client.prefs.select_job_character(job, TRUE)
-	var/species = selection.species
-	qdel(selection)
-	return species
+	return owner.client.prefs.get_job_character_species(job, TRUE)
 
 /// Display the same selected profile and variant that admission will use.
 /datum/latejoin_menu/proc/get_job_character_data(datum/job/job, mob/dead/new_player/user)

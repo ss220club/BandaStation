@@ -85,22 +85,29 @@ GAME_VERB_DESC(/client, fix_title_screen, "Fix Lobby Screen", "Lobbyscreen broke
 	if(locate(/datum/station_trait/xenobureaucracy_error) in GLOB.lobby_station_traits)
 		return
 
+	var/prefs_species = src.prefs.read_preference(/datum/preference/choiced/species)
 	var/list/prefs_jobs = src.prefs.job_preferences
+	var/list/job_restrictions = CONFIG_GET(str_list/job_restrictions)
+	var/list/allowed_species = CONFIG_GET(str_list/allowed_species)
+
+	prefs_jobs = prefs.get_species_restricted_job_preferences() // SS220 EDIT: inspect assigned profiles without switching the active character.
+
+	if(!prefs_species)
+		return
+
+	if(allowed_species && length(allowed_species))
+		if("[prefs_species]" in allowed_species && !length(prefs_jobs)) // SS220 EDIT: the current species cannot exempt an incompatible assigned profile.
+			return
 
 	for(var/job_id in prefs_jobs)
-		// BANDASTATION EDIT - Read the assigned profile without changing the active character.
-		var/datum/job/job = SSjob.get_job(job_id)
-		if(!job)
-			continue
-		var/datum/job_character_selection/selection = prefs.select_job_character(job)
-		var/species_error = !selection.error && job.character_species_error(selection.species)
-		qdel(selection)
-		if(species_error)
-			to_chat(src, span_alertwarning("Вид назначенного профиля несовместим с одной или более выбранных профессий."))
+		if(job_id in job_restrictions)
+			to_chat(src, span_alertwarning("Выбранная раса несовместима с одной или более выбранных профессий."))
 			SStitle.title_output(src, FALSE, "toggleReady")
+			// SS220 EDIT - START
 			if(!isnewplayer(mob))
 				return
 			var/mob/dead/new_player/player = mob
+			// SS220 EDIT - END
 			player.ready = PLAYER_NOT_READY
 			return
 

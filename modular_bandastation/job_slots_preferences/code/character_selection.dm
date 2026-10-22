@@ -46,6 +46,24 @@
 	result.species = result.read_preference(/datum/preference/choiced/species)
 	return result
 
+/// Read the selected profile without loading it or retaining a temporary selection.
+/datum/preferences/proc/get_job_character_species(datum/job/job, latejoin = FALSE)
+	var/datum/job_character_selection/selection = select_job_character(job, latejoin)
+	. = selection.species
+	qdel(selection)
+
+/// Supply the existing lobby checks with only preferences whose selected species is restricted.
+/datum/preferences/proc/get_species_restricted_job_preferences()
+	var/list/restricted_jobs = list()
+	for(var/job_title in job_preferences)
+		var/datum/job/job = SSjob.get_job(job_title)
+		if(!job)
+			continue
+		var/species = get_job_character_species(job)
+		if(species && job.character_species_error(species))
+			restricted_jobs += job_title
+	return restricted_jobs
+
 /datum/job_character_selection/proc/read_preference(preference_type)
 	if(error)
 		return null

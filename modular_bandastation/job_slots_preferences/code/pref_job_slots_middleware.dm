@@ -1,37 +1,3 @@
-/// Keep native declarations while this instance exposes only the canonical slot action.
-/datum/preference_middleware/jobs/New(datum/preferences)
-	. = ..()
-	action_delegations = action_delegations.Copy()
-	action_delegations -= "set_job_to_profile"
-
-/datum/preference_middleware/jobs/get_ui_data(mob/user)
-	. = ..()
-	for(var/list/job_data as anything in .["job_preferences"])
-		job_data["assigned_profile_slot"] = preferences.pref_job_slots[job_data["job"]]
-	// Project canonical assignments into the native UI contract, including roles without a priority.
-	for(var/job_title in preferences.pref_job_slots)
-		if(job_title in preferences.job_preferences)
-			continue
-		.["job_preferences"] += list(list(
-			"job" = job_title,
-			"priority" = null,
-			"assigned_profile_slot" = preferences.pref_job_slots[job_title],
-		))
-
-/datum/preference_middleware/jobs/set_job_preference(list/params, mob/user)
-	if(user.client?.prefs != preferences || params["edit_slot"] != preferences.default_slot)
-		return FALSE
-	var/job_title = params["job"]
-	if(!istext(job_title))
-		return FALSE
-	var/datum/job/job = SSjob.get_job(job_title)
-	if(!job || job.title != job_title)
-		return FALSE
-	// Clearing remains available when a role or its selected profile becomes unavailable.
-	if(!isnull(params["level"]) && job.get_join_lock_reason(user.client))
-		return FALSE
-	return ..()
-
 /datum/preference_middleware/pref_job_slots
 	action_delegations = list(
 			"set_job_slot" = PROC_REF(set_job_slot),
@@ -39,8 +5,6 @@
 		)
 
 /datum/preference_middleware/pref_job_slots/get_ui_data(mob/user)
-	var/list/data = list()
-
 	var/list/job_profiles = list()
 	for(var/datum/job/job as anything in SSjob.joinable_occupations)
 		if(job.job_flags & JOB_LATEJOIN_ONLY)
@@ -53,9 +17,7 @@
 			"public_title" = length(job.get_job_variants()) ? job.get_character_job_title(character) : null,
 		)
 		qdel(character)
-	data["job_character_profiles"] = job_profiles
-
-	return data
+	return list("job_character_profiles" = job_profiles)
 
 /datum/preference_middleware/pref_job_slots/proc/set_job_slot(list/params, mob/user)
 	var/client/player = GET_CLIENT(user)
@@ -78,7 +40,13 @@
 		if(!islist(saved_profile) || !saved_profile["real_name"])
 			return FALSE
 
-	return preferences.set_job_character_slot(job_title, slot_index)
+	if(slot_index == JOB_SLOT_CURRENT_SLOT)
+		preferences.pref_job_slots.Remove(job_title)
+	else
+		preferences.pref_job_slots[job_title] = slot_index
+
+	preferences.save_preferences()
+	return TRUE
 
 /datum/preference_middleware/pref_job_slots/proc/reset_job_slots(list/params, mob/user)
 	var/client/player = GET_CLIENT(user)

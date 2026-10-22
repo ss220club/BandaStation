@@ -4,4 +4,5 @@
 #include "code/job_slots_savefile.dm"
 #include "code/character_selection.dm"
 #include "code/latejoin_context.dm"
+#include "code/job_priority_middleware.dm"
 #include "code/pref_job_slots_middleware.dm"
