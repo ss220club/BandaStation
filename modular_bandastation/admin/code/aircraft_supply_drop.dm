@@ -74,7 +74,7 @@
 	playsound(src, 'modular_bandastation/admin/sound/fly.ogg', 40, FALSE, extrarange = SHORT_RANGE_SOUND_EXTRARANGE)
 
 /obj/effect/supply_aircraft/proc/drop_payload()
-	if (has_dropped || | QDELETED(launcher) || !target_turf)
+	if (has_dropped || QDELETED(launcher) || !target_turf)
 		return
 	has_dropped = TRUE
 	launcher.launch(target_turf)
