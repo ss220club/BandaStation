@@ -19,7 +19,8 @@
 		return list("public_title" = job_title_ru(job.title), "command" = !!(job.departments_bitflags & DEPARTMENT_BITFLAG_COMMAND), "description" = job.description)
 	var/datum/preferences/preferences = user.client.prefs
 	var/datum/job_character_selection/character = preferences.select_job_character(job, TRUE)
-	var/public_title = job.get_character_job_title(character)
+	var/list/variant_choices = character.read_preference(/datum/preference/job_outfit_variants)
+	var/datum/job_variant/variant = job.resolve_job_variant(variant_choices?[job.title])
 	var/profile_name = character.read_preference(/datum/preference/name/real_name)
 	var/profile_description = character.error ? "Недоступный профиль" : "Профиль [character.slot]: [profile_name]"
 	if(character.randomized)
@@ -27,9 +28,9 @@
 	var/list/data = list(
 		"command" = !!(job.departments_bitflags & DEPARTMENT_BITFLAG_COMMAND),
 		"description" = job.description,
-		"public_title" = public_title,
+		"public_title" = variant?.public_title || job_title_ru(job.title),
 		"character_profile" = profile_description,
-		"job_icon" = icon2base64(job.get_character_job_icon(character)),
+		"job_icon" = icon2base64(job.get_job_variant_icon(variant?.id)),
 	)
 	qdel(character)
 	return data

@@ -63,10 +63,6 @@
 			occupants++
 	return occupants >= popcap
 
-/// Dynamic and normal occupation selection share native eligibility and canonical preferences.
-/mob/dead/new_player/proc/has_eligible_crew_preference(list/blacklisted_roles)
-	return !!get_eligible_crew_job(blacklisted_roles)
-
 /// Return the actual eligible job so host-profile consumers need not repeat admission policy.
 /mob/dead/new_player/proc/get_eligible_crew_job(list/blacklisted_roles)
 	var/client/requester = GET_CLIENT(src)
@@ -137,7 +133,7 @@
 		if(forced_job)
 			. = SSjob.check_job_eligibility(src, forced_job, "Forced admission") == JOB_AVAILABLE
 		else if(client.prefs.read_preference(/datum/preference/choiced/jobless_role) == RETURNTOLOBBY)
-			. = has_eligible_crew_preference(null)
+			. = !!get_eligible_crew_job(null)
 	if(!admission.is_current(check_ready = native_allowed))
 		. = FALSE
 	else if(!.)

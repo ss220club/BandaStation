@@ -20,7 +20,7 @@
 	if(!. || !isnewplayer(candidate) || (ruleset_flags & RULESET_INVADER))
 		return
 	var/mob/dead/new_player/player = candidate
-	. = player.has_eligible_crew_preference(get_blacklisted_roles())
+	. = !!player.get_eligible_crew_job(get_blacklisted_roles())
 	if(QDELETED(candidate) || !candidate_client || GET_CLIENT(candidate) != candidate_client)
 		return FALSE
 

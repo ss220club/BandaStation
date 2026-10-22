@@ -15,17 +15,6 @@
 		return
 	spawning_mind.transfer_to(spawning_player)
 
-/// Display metadata only; never replace a canonical job title, trim or ban key.
-/datum/job/proc/get_character_job_title(datum/job_character_selection/character)
-	var/list/variants = character.read_preference(/datum/preference/job_outfit_variants)
-	var/datum/job_variant/variant = resolve_job_variant(variants?[title])
-	return variant?.public_title || job_title_ru(title)
-
-/// Isolated HUD glyph for the selected character; display metadata only.
-/datum/job/proc/get_character_job_icon(datum/job_character_selection/character)
-	var/list/variants = character.read_preference(/datum/preference/job_outfit_variants)
-	return get_job_variant_icon(variants?[title])
-
 /// TRUE means a module handled this item; FALSE leaves the native storage operation intact.
 /datum/outfit/proc/equip_backpack_item(mob/living/carbon/human/user, item_path)
 	return FALSE

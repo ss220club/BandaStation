@@ -10,11 +10,13 @@
 		if(job.job_flags & JOB_LATEJOIN_ONLY)
 			continue
 		var/datum/job_character_selection/character = preferences.select_job_character(job)
+		var/list/variant_choices = character.read_preference(/datum/preference/job_outfit_variants)
+		var/datum/job_variant/variant = job.resolve_job_variant(variant_choices?[job.title])
 		job_profiles[job.title] = list(
 			"slot" = isnum(character.slot) ? character.slot : null,
 			"randomized" = character.randomized,
 			"error" = character.character_error(job, user.client, FALSE),
-			"public_title" = length(job.get_job_variants()) ? job.get_character_job_title(character) : null,
+			"public_title" = variant?.public_title,
 		)
 		qdel(character)
 	return list("job_character_profiles" = job_profiles)
