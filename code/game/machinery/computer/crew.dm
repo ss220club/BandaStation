@@ -146,6 +146,10 @@ GLOBAL_DATUM_INIT(crewmonitor, /datum/crewmonitor, new)
 		JOB_JANITOR = 69,
 		JOB_LAWYER = 71,
 		JOB_PSYCHOLOGIST = 72,
+		// BANDASTATION MOD START: NT representative moved to 0 to be sorted with other civilians
+		JOB_NANOTRASEN_REPRESENTATIVE = 0,
+		JOB_BLUESHIELD = 0,
+		JOB_MAGISTRATE = 0,
 		// 200-229: Centcom
 		JOB_CENTCOM_ADMIRAL = 200,
 		JOB_CENTCOM = 201,
