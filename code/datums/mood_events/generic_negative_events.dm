@@ -252,12 +252,6 @@
 	mood_change = -15
 	event_flags = MOOD_EVENT_PAIN
 
-/datum/mood_event/sacrifice_bad
-	description = "Эти чертовы дикари!"
-	mood_change = -5
-	timeout = 2 MINUTES
-	event_flags = MOOD_EVENT_SPIRITUAL
-
 /datum/mood_event/artbad
 	description = "У меня из задницы выходят произведения получше, чем это."
 	mood_change = -2
