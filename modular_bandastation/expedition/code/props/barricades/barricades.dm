@@ -203,13 +203,8 @@
 	setDir(turn(dir, 270))
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
-
-/*----------------------*/
-// СНЕГ (SNOW)
-/*----------------------*/
-
 /obj/structure/deployable_barricade/snow
-	name = "снежная баррикада" // snow barricade
+	name = "snow barricade"
 	desc = "Сугроб, тщательно утрамбованный ладонями до относительно твердого состояния. Архитектор в вашей голове считает, что это лучше, чем ничего. В принципе, вы с ним согласны." // A snowdrift, carefully rammed with palms up to a relatively solid state...
 	icon_state = "snow_0"
 	barricade_type = "snow"
@@ -220,12 +215,8 @@
 	destroyed_stack_amount = 0
 	can_wire = FALSE
 
-/*----------------------*/
-// ЗАГРАЖДЕНИЕ (GUARD RAIL)
-/*----------------------*/
-
 /obj/structure/deployable_barricade/guardrail
-	name = "заграждение" // fencing
+	name = "fencing"
 	desc = "Небольшая баррикада из металлических столбов, предназначенная остановить вас от прохода в места, куда не следует." // A small barricade made from metal posting...
 	icon_state = "railing_0"
 	max_integrity = 150
@@ -251,13 +242,9 @@
 	if(dir == NORTH)
 		pixel_y = 11
 
-/*----------------------*/
-// ДЕРЕВО (WOOD)
-/*----------------------*/
-
 /obj/structure/deployable_barricade/wooden
-	name = "деревянная баррикада" // wooden barricade
-	desc = "Стена из деревянных досок может выглядеть не очень прочной, но она всё ещё обеспечивает некоторую защиту." // A wall hammered out of wooden planks...
+	name = "wooden barricade"
+	desc = "Стена из деревянных досок может выглядеть не очень прочной, но она всё ещё обеспечивает некоторую защиту."
 	icon = 'modular_bandastation/expedition/icons/barricade.dmi'
 	icon_state = "wooden"
 	max_integrity = 100
@@ -292,23 +279,18 @@
 		repair_damage(max_integrity)
 		visible_message(span_notice("[user] чинит [src]."))
 
-
-/*----------------------*/
-// METAL
-/*----------------------*/
-
 #define BARRICADE_METAL_LOOSE 0
 #define BARRICADE_METAL_ANCHORED 1
 #define BARRICADE_METAL_FIRM 2
 
-#define BARRICADE_TYPE_BOMB "взрывобезопасная броня" // explosion-proof armor
-#define BARRICADE_TYPE_MELEE "баллистическая броня" // ballistic armor
-#define BARRICADE_TYPE_ACID "кислотостойкая броня" // anti-acid armor
+#define BARRICADE_TYPE_BOMB "explosion-proof armor"
+#define BARRICADE_TYPE_MELEE "ballistic armor"
+#define BARRICADE_TYPE_ACID "anti-acid armor"
 
 #define BARRICADE_UPGRADE_REQUIRED_SHEETS 2
 
 /obj/structure/deployable_barricade/metal
-	name = "металлическая баррикада" // metal barricade
+	name = "metal barricade"
 	desc = "Прочная и легко устанавливаемая баррикада из металлических листов, часто используемая для быстрого укрепления. Для ремонта требуется сварочный аппарат." // A durable and easily mounted barricade made from metal plates...
 	icon_state = "metal_0"
 	max_integrity = 200
@@ -319,15 +301,10 @@
 	destroyed_stack_amount = 1
 	barricade_type = "metal"
 	can_wire = TRUE
-	/// Тип быстрого развертывания, который выпадает при складывании.
 	var/portable_type = /obj/item/quickdeploy/barricade
-	/// Состояние сборки баррикады
 	var/build_state = BARRICADE_METAL_FIRM
-	/// Тип прикрепленного улучшения и соответствующее изображение
 	var/barricade_upgrade_type
-	/// Сколько нам нужно stack_type для ремонта?
 	var/repair_amount = 2
-	/// Можно ли улучшить?
 	var/can_upgrade = TRUE
 
 /datum/armor/deployable_barricade_metal
@@ -348,7 +325,7 @@
 			return CLICK_ACTION_BLOCKING
 		user.visible_message(span_notice("[user] начинает складывать [src]!"), span_notice("Вы начинаете складывать [src]!"))
 		if(do_after(user, 50, src))
-			if(QDELETED(src)) //Скопировано на случай изменения состояний.
+			if(QDELETED(src))
 				return
 			if(anchored)
 				to_chat(user, span_warning("[src] нельзя сложить, пока она закреплена к земле!"))
@@ -509,7 +486,7 @@
 
 /obj/structure/deployable_barricade/metal/screwdriver_act(mob/living/user, obj/item/I)
 	switch(build_state)
-		if(BARRICADE_METAL_ANCHORED) //Панель защиты снята. Отвёртка для установки панели обратно, гаечный ключ для откручивания болтов
+		if(BARRICADE_METAL_ANCHORED)
 			playsound(src, 'sound/items/tools/screwdriver.ogg', 25, TRUE)
 			if(!do_after(user, 10, src))
 				return TRUE
@@ -518,7 +495,7 @@
 			build_state = BARRICADE_METAL_FIRM
 			return TRUE
 
-		if(BARRICADE_METAL_FIRM) //Полностью собранный этап. Используйте отвёртку для снятия защитных панелей, чтобы открыть болты
+		if(BARRICADE_METAL_FIRM)
 			playsound(src, 'sound/items/tools/screwdriver.ogg', 25, TRUE)
 
 			if(!do_after(user, 10, src))
@@ -532,7 +509,7 @@
 
 /obj/structure/deployable_barricade/metal/wrench_act(mob/living/user, obj/item/I)
 	switch(build_state)
-		if(BARRICADE_METAL_ANCHORED) //Панель защиты снята. Отвёртка для установки панели обратно, гаечный ключ для откручивания болтов
+		if(BARRICADE_METAL_ANCHORED)
 			playsound(src, 'sound/items/tools/ratchet.ogg', 25, TRUE)
 			if(!do_after(user, 10, src))
 				return TRUE
@@ -544,7 +521,7 @@
 			update_icon() //unanchored changes layer
 			return TRUE
 
-		if(BARRICADE_METAL_LOOSE) //Болты ослаблены. Используйте монтировку для снятия панели и разборки всей конструкции. Используйте гаечный ключ для повторного закрепления болтов
+		if(BARRICADE_METAL_LOOSE)
 			var/turf/mystery_turf = get_turf(src)
 			if(!isopenturf(mystery_turf))
 				to_chat(user, span_warning("Вы не можете установить [src] здесь!"))
@@ -570,7 +547,7 @@
 
 /obj/structure/deployable_barricade/metal/crowbar_act(mob/living/user, obj/item/I)
 	switch(build_state)
-		if(BARRICADE_METAL_LOOSE) //Болты ослаблены. Примените монтировку для снятия панели и разборки всей конструкции
+		if(BARRICADE_METAL_LOOSE)
 			user.visible_message(span_notice("[user] начинает разбирать [src]."),
 			span_notice("Вы начинаете разбирать [src]."))
 
@@ -585,7 +562,7 @@
 			return TRUE
 
 		if(BARRICADE_METAL_FIRM)
-			if(!barricade_upgrade_type) //Проверяем, есть ли улучшения для удаления.
+			if(!barricade_upgrade_type)
 				to_chat(user, span_warning("У этой баррикады нет установленных улучшений для удаления!"))
 				return TRUE
 
@@ -629,11 +606,6 @@
 #undef BARRICADE_TYPE_ACID
 #undef BARRICADE_UPGRADE_REQUIRED_SHEETS
 
-
-/*----------------------*/
-// PLASTEEL
-/*----------------------*/
-
 /obj/structure/deployable_barricade/metal/plasteel
 	name = "plasteel barricade"
 	desc = "A strong plasteel barricade, it can be lowered if necessary. Use a welder to repair it."
@@ -646,14 +618,12 @@
 	closed = TRUE
 	can_upgrade = FALSE
 	portable_type = /obj/item/quickdeploy/barricade/plasteel
-	///Either we react with other cades next to us ie when opening or so
 	var/linked = FALSE
-	///Open/close delay, for customisation. And because I was asked to - won't customise anything myself.
 	var/toggle_delay = 0
 
 /obj/structure/deployable_barricade/metal/plasteel/crowbar_act(mob/living/user, obj/item/I)
 	switch(build_state)
-		if(BARRICADE_METAL_LOOSE) //Anchor bolts loosened step. Apply crowbar to unseat the panel and take apart the whole thing. Apply wrench to resecure anchor bolts
+		if(BARRICADE_METAL_LOOSE)
 			user.visible_message(span_notice("[user] begins to disassemble [src]."),
 			span_notice("You start to disassemble [src]."))
 

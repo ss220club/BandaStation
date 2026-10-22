@@ -15,3 +15,26 @@
 #include "code/weapon/special.dm"
 #include "code/weapon/shotgun.dm"
 #include "code/weapon/smg.dm"
+#include "code/stash.dm"
+#include "code/inka.dm"
+#include "code/mobs.dm"
+
+// #include "code/turfs.dm"
+// #include "code/props/cars/trucks.dm"
+// #include "code/props/cars/vehicles_military.dm"
+// #include "code/props/cars/vehicles.dm"
+// #include "code/props/cars/tank.dm"
+// #include "code/props/cars/apc.dm"
+// #include "code/props/city_props.dm"
+// #include "code/props/tents.dm"
+// #include "code/props/shelfs.dm"
+// #include "code/props/power_tower.dm"
+// BEGIN_INTERNALS
+// END_INTERNALS
+// BEGIN_FILE_DIR
+#define FILE_DIR .
+// END_FILE_DIR
+// BEGIN_PREFERENCES
+// END_PREFERENCES
+// BEGIN_INCLUDE
+// END_INCLUDE
