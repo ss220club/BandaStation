@@ -23,12 +23,12 @@
 	. = ..()
 	target_turf = drop_target
 	launcher = launch_controller
-	if (!target_turf || !launcher)
+	if (!target_turf ||  QDELETED(launcher))
 		return INITIALIZE_HINT_QDEL
 	begin_flight()
 
 /obj/effect/supply_aircraft/proc/begin_flight()
-	if (!target_turf || !launcher)
+	if (!target_turf || QDELETED(launcher))
 		qdel(src)
 		return
 	if (get_turf(src) == target_turf)
@@ -57,6 +57,8 @@
 	addtimer(CALLBACK(src, PROC_REF(fly_step)), step_delay)
 
 /obj/effect/supply_aircraft/proc/spawn_trail(turf/center)
+	if (!center)
+		return
 	for (var/offset_x in -1 to 1)
 		var/turf/trail_turf = locate(center.x + offset_x, center.y, center.z)
 		if (!trail_turf)
@@ -72,7 +74,7 @@
 	playsound(src, 'modular_bandastation/admin/sound/fly.ogg', 40, FALSE, extrarange = SHORT_RANGE_SOUND_EXTRARANGE)
 
 /obj/effect/supply_aircraft/proc/drop_payload()
-	if (has_dropped || !launcher || !target_turf)
+	if (has_dropped || | QDELETED(launcher) || !target_turf)
 		return
 	has_dropped = TRUE
 	launcher.launch(target_turf)
