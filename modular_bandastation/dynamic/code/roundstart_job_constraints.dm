@@ -4,6 +4,7 @@
 	var/list/added_blocked_jobs
 	var/forced_job
 	var/previous_forced_job
+	var/invader = FALSE
 
 /datum/dynamic_ruleset/roundstart
 	/// Occupation changes owned by each unexecuted assignment, excluding pre-existing restrictions.
@@ -46,7 +47,11 @@
 	changes.added_blocked_jobs = (current_blocks || list()) - changes.previous_blocked_jobs
 	changes.previous_blocked_jobs = null
 	changes.forced_job = LAZYACCESS(SSjob.forced_occupations, candidate)
+	changes.invader = !!(ruleset_flags & RULESET_INVADER)
 	LAZYSET(prepared_job_changes, candidate, changes)
+
+/datum/dynamic_ruleset/roundstart/proc/get_prepared_job_changes(datum/mind/candidate)
+	return LAZYACCESS(prepared_job_changes, candidate)
 
 /datum/dynamic_ruleset/roundstart/execute()
 	. = ..()
@@ -79,10 +84,20 @@
 	selected_minds -= candidate
 	return TRUE
 
-/// Cancel only queued roundstart selections; active antagonists and other minds are untouched.
-/datum/controller/subsystem/dynamic/proc/cancel_roundstart_assignment(datum/mind/candidate)
+/// Return the current queued receipt, so a check that waits cannot cancel a later assignment.
+/datum/controller/subsystem/dynamic/proc/get_roundstart_job_changes(datum/mind/candidate)
+	for(var/datum/dynamic_ruleset/roundstart/ruleset in queued_rulesets)
+		if((ruleset in executed_rulesets) || !(candidate in ruleset.selected_minds))
+			continue
+		return ruleset.get_prepared_job_changes(candidate)
+	return null
+
+/// Cancel only queued roundstart selections; an optional receipt restricts cancellation to its owner.
+/datum/controller/subsystem/dynamic/proc/cancel_roundstart_assignment(datum/mind/candidate, datum/roundstart_job_changes/expected_assignment)
 	var/cancelled = FALSE
 	for(var/datum/dynamic_ruleset/roundstart/ruleset in queued_rulesets.Copy())
+		if(expected_assignment && ruleset.get_prepared_job_changes(candidate) != expected_assignment)
+			continue
 		if((ruleset in executed_rulesets) || !ruleset.cancel_assignment(candidate))
 			continue
 		cancelled = TRUE

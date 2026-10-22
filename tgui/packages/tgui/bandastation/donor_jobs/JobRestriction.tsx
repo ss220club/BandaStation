@@ -2,6 +2,7 @@ import { createContext, type ReactNode, useContext } from 'react';
 import { useBackend } from 'tgui/backend';
 import { Stack, Tooltip } from 'tgui-core/components';
 
+import { JobVariantSelector } from '../jobs/JobVariantSelector';
 import type { JobPreferencesData } from '../jobs/types';
 
 const JobRestrictionContext = createContext(false);
@@ -23,6 +24,7 @@ export function JobRowControls(props: { name: string; children: ReactNode }) {
           </Stack.Item>
         </Tooltip>
       )}
+      <JobVariantSelector name={props.name} />
       {props.children}
     </JobRestrictionContext.Provider>
   );

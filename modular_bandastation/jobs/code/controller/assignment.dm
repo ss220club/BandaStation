@@ -6,6 +6,19 @@
 		CRASH("set_overflow_role failed | new_overflow_role: [isnull(new_overflow_role) ? "null" : new_overflow_role]")
 	. = ..()
 
+/// Native priority assignment may reject a forced role after the earlier preferences check.
+/datum/controller/subsystem/job/assign_priority_positions()
+	var/list/admissions = list()
+	for(var/datum/mind/mind as anything in forced_occupations)
+		if(!isnewplayer(mind.current) || !SSdynamic.get_roundstart_job_changes(mind))
+			continue
+		admissions += new /datum/roundstart_job_admission(mind.current)
+	. = ..()
+	// Wait until native iteration has finished before removing any forced-occupation entries.
+	for(var/datum/roundstart_job_admission/admission as anything in admissions)
+		admission.reject()
+		qdel(admission)
+
 /// Release cancelled selections before native role changes, including lobbies without a mind.
 /datum/controller/subsystem/job/reset_occupations()
 	for(var/mob/dead/new_player/player as anything in GLOB.new_player_list)

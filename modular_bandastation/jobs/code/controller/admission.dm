@@ -40,7 +40,7 @@
 	if(job.get_join_lock_reason(requester))
 		return JOB_UNAVAILABLE_JOB_LOCK
 	var/datum/job_character_selection/selection = requester.prefs.select_job_character(job, latejoin)
-	var/too_young = isnum(job.required_character_age) && selection.age < job.required_character_age
+	var/too_young = selection.is_too_young_for_job(job)
 	var/profile_error = selection.character_error(job, requester, latejoin)
 	qdel(selection)
 	if(too_young)
@@ -89,23 +89,58 @@
 		return job
 	return null
 
-/// Expired subscription/profile restrictions do not imply native antag rolling.
-/mob/dead/new_player/check_job_preferences(warn = TRUE)
-	if(client)
-		var/datum/job/forced_job = SSjob.get_job_type(LAZYACCESS(SSjob.forced_occupations, mind))
-		if(forced_job)
-			return SSjob.check_job_eligibility(src, forced_job, "Forced admission") == JOB_AVAILABLE
-	. = ..()
-	if(!. || client.prefs.read_preference(/datum/preference/choiced/jobless_role) != RETURNTOLOBBY)
-		return
-	return check_eligible_roundstart_preferences(warn)
+/// Admission can wait for bans; cancellation must still belong to the original lobby and ruleset.
+/datum/roundstart_job_admission
+	var/mob/dead/new_player/player
+	var/client/requester
+	var/datum/mind/mind
+	var/datum/job_character_selection/selection
+	var/datum/roundstart_job_changes/pending_assignment
+	var/forced_job
+	var/ready
 
-/// Reject only the failed assignment, without changing saved job preferences.
-/mob/dead/new_player/proc/check_eligible_roundstart_preferences(warn = TRUE)
-	if(has_eligible_crew_preference(null))
-		return TRUE
+/datum/roundstart_job_admission/New(mob/dead/new_player/player)
+	. = ..()
+	src.player = player
+	requester = GET_CLIENT(player)
+	mind = player.mind
+	selection = player.assigned_character
+	pending_assignment = SSdynamic.get_roundstart_job_changes(mind)
+	forced_job = LAZYACCESS(SSjob.forced_occupations, mind)
+	ready = player.ready
+
+/datum/roundstart_job_admission/proc/is_current(check_ready = TRUE)
+	return !QDELETED(player) && requester && GET_CLIENT(player) == requester && requester.mob == player \
+		&& !QDELETED(mind) && player.mind == mind && is_unassigned_job(mind.assigned_role) \
+		&& player.assigned_character == selection && (!check_ready || player.ready == ready) \
+		&& LAZYACCESS(SSjob.forced_occupations, mind) == forced_job \
+		&& SSdynamic.get_roundstart_job_changes(mind) == pending_assignment
+
+/datum/roundstart_job_admission/proc/reject(warn = TRUE, check_ready = TRUE)
+	if(!is_current(check_ready))
+		return
 	if(warn)
-		to_chat(src, span_warning("Ни одна выбранная профессия сейчас недоступна. Проверьте профиль и подписку."))
-	SSdynamic.cancel_roundstart_assignment(mind)
-	ready = PLAYER_NOT_READY
-	return FALSE
+		to_chat(player, span_warning("Ни одна выбранная профессия сейчас недоступна. Проверьте профиль и подписку."))
+	if(pending_assignment)
+		SSdynamic.cancel_roundstart_assignment(mind, pending_assignment)
+	SSjob.unassigned -= player
+	player.ready = PLAYER_NOT_READY
+
+/// Only a queued invader may join without crew preferences; all crew keep the native checks.
+/mob/dead/new_player/check_job_preferences(warn = TRUE)
+	var/datum/roundstart_job_admission/admission = new(src)
+	var/queued_invader = admission.pending_assignment?.invader && admission.forced_job && admission.forced_job == admission.pending_assignment.forced_job
+	var/native_allowed = queued_invader ? TRUE : ..()
+	. = native_allowed
+	if(.)
+		var/datum/job/forced_job = SSjob.get_job_type(admission.forced_job)
+		if(forced_job)
+			. = SSjob.check_job_eligibility(src, forced_job, "Forced admission") == JOB_AVAILABLE
+		else if(client.prefs.read_preference(/datum/preference/choiced/jobless_role) == RETURNTOLOBBY)
+			. = has_eligible_crew_preference(null)
+	if(!admission.is_current(check_ready = native_allowed))
+		. = FALSE
+	else if(!.)
+		admission.reject(warn && native_allowed, check_ready = native_allowed)
+	qdel(admission)
+	return .

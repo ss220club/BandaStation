@@ -1,6 +1,7 @@
 import '../../styles/bandastation/job_variants.scss';
 
 import { Stack } from 'tgui-core/components';
+import { JOBS_RU } from '../ru_jobs';
 import { JobHudIcon } from './JobHudIcon';
 
 type JobDisplay = {
@@ -16,16 +17,21 @@ export function extendLatejoinDisplay<
   T extends { jobName: string; job: JobDisplay },
 >(props: T): T {
   const { job } = props;
-  const profile = job.character_profile;
+  const title = job.public_title;
+  const details = [
+    title && title !== (JOBS_RU[props.jobName] || props.jobName) && title,
+    job.character_profile,
+  ]
+    .filter(Boolean)
+    .join(' — ');
   return {
     ...props,
-    jobName: job.public_title || props.jobName,
-    job: profile
+    job: details
       ? {
           ...job,
-          description: `${job.description} — ${profile}`,
+          description: `${job.description} — ${details}`,
           unavailable_reason: job.unavailable_reason
-            ? `${job.unavailable_reason} — ${profile}`
+            ? `${job.unavailable_reason} — ${details}`
             : job.unavailable_reason,
         }
       : job,

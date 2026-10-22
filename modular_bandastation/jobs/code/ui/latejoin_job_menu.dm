@@ -64,8 +64,8 @@
 		if(availability == JOB_UNAVAILABLE_JOB_LOCK)
 			job_data["unavailable_reason"] = job.get_join_lock_reason(user.client) || job_data["unavailable_reason"]
 		return
-	if(job.total_positions < 0)
+	var/open_slots = job_data["open_slots"]
+	if(open_slots == "∞")
 		department_data["open_slots"] = "∞"
-	if(department_data["open_slots"] != "∞")
-		if(job.total_positions - job.current_positions > 0)
-			department_data["open_slots"] += job.total_positions - job.current_positions
+	else if(department_data["open_slots"] != "∞")
+		department_data["open_slots"] += max(0, open_slots - job_data["used_slots"])

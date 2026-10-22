@@ -16,7 +16,6 @@ import {
   useJobTabFilter,
 } from '../../../bandastation/donor_jobs/JobTabs';
 import { prepareJobPriorityCache } from '../../../bandastation/job_slots_preferences/priority';
-import { useJobLabel } from '../../../bandastation/jobs/JobLabel';
 // SS220 EDIT - END
 import { JOBS_RU } from '../../../bandastation/ru_jobs'; // BANDASTATION EDIT
 import {
@@ -177,7 +176,6 @@ type JobRowProps = {
 };
 
 function JobRow(props: JobRowProps) {
-  const JOBS_RU = useJobLabel(props.name); // SS220 EDIT: local display data for the unchanged native label expression.
   const { data } = useBackend<PreferencesMenuData>();
   const { className, job, name } = props;
 

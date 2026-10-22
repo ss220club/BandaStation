@@ -469,7 +469,7 @@ SUBSYSTEM_DEF(ticker)
 			GLOB.joined_player_list += player.ckey
 			var/atom/destination = player.mind.assigned_role.get_roundstart_spawn_point()
 			if(!destination) // Failed to fetch a proper roundstart location, won't be going anywhere.
-				qdel(attempt) // SS220 EDIT: Release the roundstart snapshot when no spawn point exists.
+				validate_roundstart_character(player, null, attempt) // SS220 EDIT: Cancel this assignment when no spawn point exists.
 				continue
 			player.create_character(destination)
 			validate_roundstart_character(player, player?.new_character, attempt) // SS220 EDIT: Reject before equipment; compensate this append only.

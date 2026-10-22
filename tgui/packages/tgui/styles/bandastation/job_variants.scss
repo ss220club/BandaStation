@@ -7,8 +7,19 @@
   display: none;
 }
 
-.PreferencesMenu__Department .job-name:has(.PreferencesMenu__JobVariant) {
-  padding: 2px;
+.PreferencesMenu__Department .options:has(.PreferencesMenu__JobVariant) {
+  max-width: 70%;
+}
+
+.PreferencesMenu__JobVariant {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  width: 12rem;
+
+  > .Dropdown {
+    min-width: 0;
+  }
 
   .Dropdown__control {
     color: inherit;
@@ -17,14 +28,5 @@
     &.Button--disabled {
       --button-color: var(--color-text);
     }
-  }
-}
-
-.PreferencesMenu__JobVariant {
-  display: flex;
-  align-items: center;
-
-  > .Dropdown {
-    min-width: 0;
   }
 }

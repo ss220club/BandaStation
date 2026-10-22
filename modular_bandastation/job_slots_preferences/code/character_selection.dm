@@ -58,10 +58,13 @@
 	values[preference_type] = value
 	return value
 
+/datum/job_character_selection/proc/is_too_young_for_job(datum/job/job)
+	return !error && isnum(job.required_character_age) && (!isnum(age) || age < job.required_character_age)
+
 /datum/job_character_selection/proc/character_error(datum/job/job, client/player, latejoin)
 	if(error)
 		return error
-	if(isnum(job.required_character_age) && (!isnum(age) || age < job.required_character_age))
+	if(is_too_young_for_job(job))
 		return "Персонаж назначенного профиля слишком молод."
 	if(ispath(job.spawn_type, /mob/living/carbon/human))
 		var/species_error = job.character_species_error(species)
