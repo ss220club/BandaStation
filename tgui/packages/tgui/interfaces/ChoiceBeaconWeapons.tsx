@@ -13,18 +13,22 @@ import { capitalizeAll } from 'tgui-core/string';
 import { useBackend } from '../backend';
 import { Window } from '../layouts';
 
-type Weapon = {
-  name: string;
-  desc: string;
-  image: string;
-  weapon_type: 'ballistic' | 'energy' | 'other';
+type Mode = {
   ammo_name?: string;
-  magazine_size?: number;
   energy_cost_percent?: number;
   shots_per_charge?: number;
   weak_against_armour?: boolean;
   hits_to_neutralize?: number;
   hits_to_exhaust?: number;
+};
+
+type Weapon = {
+  name: string;
+  desc: string;
+  image: string;
+  weapon_type: 'ballistic' | 'energy' | 'other';
+  magazine_size?: number;
+  modes: Mode[];
 };
 
 type Data = {
@@ -103,6 +107,7 @@ export const ChoiceBeaconWeapons = () => {
 const WeaponInfo = (props: { weapon: Weapon }) => {
   const { weapon } = props;
   const isEnergy = weapon.weapon_type === 'energy';
+  const { modes = [] } = weapon;
 
   return (
     <Stack vertical>
@@ -116,36 +121,61 @@ const WeaponInfo = (props: { weapon: Weapon }) => {
           <LabeledList.Item label="Тип">
             {WEAPON_TYPE_LABELS[weapon.weapon_type]}
           </LabeledList.Item>
-          <LabeledList.Item label="Боеприпас">
-            {weapon.ammo_name ? capitalizeAll(weapon.ammo_name) : '—'}
-          </LabeledList.Item>
           <LabeledList.Item label="Патронов в магазине">
             {isEnergy ? '—' : (weapon.magazine_size ?? '—')}
           </LabeledList.Item>
-          <LabeledList.Item label="Заряд за выстрел">
-            {isEnergy && weapon.energy_cost_percent !== undefined
-              ? `${weapon.energy_cost_percent}% батареи (${weapon.shots_per_charge} выстр.)`
-              : '—'}
-          </LabeledList.Item>
-          <LabeledList.Item label="Бронепробитие">
-            {weapon.weak_against_armour === undefined
-              ? '—'
-              : weapon.weak_against_armour
-                ? 'Слабое'
-                : 'Присутствует'}
-           </LabeledList.Item>
-            {weapon.hits_to_neutralize !== undefined && (
-            <LabeledList.Item label="Выстрелов до нейтрализации">
-              {weapon.hits_to_neutralize}
-            </LabeledList.Item>
-            )}
-            {weapon.hits_to_exhaust !== undefined && (
-            <LabeledList.Item label="Выстрелов до падения от истощения">
-              {weapon.hits_to_exhaust}
-            </LabeledList.Item>
-            )}
         </LabeledList>
       </Stack.Item>
+      {modes.map((mode, index) => (
+        <Stack.Item key={index}>
+          <ModeInfo
+            mode={mode}
+            title={index === 0 ? 'Основной режим' : 'Дополнительный режим'}
+            showTitle={modes.length > 1}
+          />
+        </Stack.Item>
+      ))}
     </Stack>
+  );
+};
+
+const ModeInfo = (props: { mode: Mode; title: string; showTitle: boolean }) => {
+  const { mode, title, showTitle } = props;
+
+  return (
+    <Box>
+      {showTitle && (
+        <Box bold color="label" mb={0.5}>
+          {title}
+        </Box>
+      )}
+      <LabeledList>
+        <LabeledList.Item label="Боеприпас">
+          {mode.ammo_name ? capitalizeAll(mode.ammo_name) : '—'}
+        </LabeledList.Item>
+        <LabeledList.Item label="Заряд за выстрел">
+          {mode.energy_cost_percent !== undefined
+            ? `${mode.energy_cost_percent}% батареи (${mode.shots_per_charge} выстр.)`
+            : '—'}
+        </LabeledList.Item>
+        <LabeledList.Item label="Бронепробитие">
+          {mode.weak_against_armour === undefined
+            ? '—'
+            : mode.weak_against_armour
+              ? 'Слабое'
+              : 'Присутствует'}
+        </LabeledList.Item>
+        {mode.hits_to_neutralize !== undefined && (
+          <LabeledList.Item label="Выстрелов до нейтрализации">
+            {mode.hits_to_neutralize}
+          </LabeledList.Item>
+        )}
+        {mode.hits_to_exhaust !== undefined && (
+          <LabeledList.Item label="Выстрелов до падения от истощения">
+            {mode.hits_to_exhaust}
+          </LabeledList.Item>
+        )}
+      </LabeledList>
+    </Box>
   );
 };
