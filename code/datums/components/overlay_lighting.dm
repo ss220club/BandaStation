@@ -91,11 +91,10 @@
 		GRID_CELL_REMOVE(grid_cell.dynamic_light_sources, src)
 
 // BANDASTATION EDIT START: Correct determination of the lighting direction
-
 /datum/component/overlay_lighting/proc/is_turf_in_directional_light(turf/T)
-	if(!directional)
+	if(!light?.directional)
 		return TRUE
-	var/turf/holder_turf = get_turf(current_holder)
+	var/turf/holder_turf = get_turf(light.current_holder)
 	if(!holder_turf || !T)
 		return FALSE
 	if(holder_turf.z != T.z)
@@ -107,7 +106,7 @@
 		return TRUE
 	var/forward
 	var/left
-	switch(current_direction)
+	switch(light.current_direction)
 		if(NORTH)
 			forward = dy
 			left = -dx
@@ -128,8 +127,7 @@
 	// Do not affect turfs outside the light's range.
 	if(forward > lumcount_range)
 		return FALSE
-	// The close-range cone extends one tile to either side
-	// of the source.
+	// The close-range cone extends one tile to either side of the source.
 	if(forward == 0)
 		return abs(left) <= 1
 	// Approximation of the main directional light mask.
