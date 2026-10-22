@@ -24,6 +24,7 @@ type Weapon = {
   shots_per_charge?: number;
   weak_against_armour?: boolean;
   hits_to_neutralize?: number;
+  hits_to_exhaust?: number;
 };
 
 type Data = {
@@ -132,10 +133,17 @@ const WeaponInfo = (props: { weapon: Weapon }) => {
               : weapon.weak_against_armour
                 ? 'Слабое'
                 : 'Присутствует'}
-          </LabeledList.Item>
-          <LabeledList.Item label="Выстрелов для нейтрализации">
-            {weapon.hits_to_neutralize ?? '—'}
-          </LabeledList.Item>
+           </LabeledList.Item>
+            {weapon.hits_to_neutralize !== undefined && (
+            <LabeledList.Item label="Выстрелов до нейтрализации">
+              {weapon.hits_to_neutralize}
+            </LabeledList.Item>
+            )}
+            {weapon.hits_to_exhaust !== undefined && (
+            <LabeledList.Item label="Выстрелов до падения от истощения">
+              {weapon.hits_to_exhaust}
+            </LabeledList.Item>
+            )}
         </LabeledList>
       </Stack.Item>
     </Stack>

@@ -92,9 +92,16 @@
 			info["ammo_name"] = initial(casing.name)
 		info["weak_against_armour"] = !!initial(proj.weak_against_armour)
 		var/pellets = max(initial(casing.pellets), 1)
-		var/total_damage = initial(proj.damage) * weapon.projectile_damage_multiplier * pellets
+		var/multiplier = weapon.projectile_damage_multiplier
+		var/total_damage = initial(proj.damage) * multiplier * pellets
+		var/total_stamina = initial(proj.stamina) * multiplier * pellets
+		if(initial(proj.damage_type) == STAMINA)
+			total_stamina += total_damage
+			total_damage = 0
 		if(total_damage > 0)
 			info["hits_to_neutralize"] = HITS_TO_CRIT(total_damage)
+		if(total_stamina > 0)
+			info["hits_to_exhaust"] = HITS_TO_CRIT(total_stamina)
 
 	qdel(container)
 	return info
