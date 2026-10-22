@@ -1,6 +1,6 @@
 /datum/design/c9x25mm
 	name = "pistol magazine (9x25mm) (Lethal)"
-	desc = "Designed to quickly reload GP-9 pistols."
+	desc = "Предназначен для быстрой перезарядки пистолетов GP-9."
 	build_type = AUTOLATHE
 	materials = list(
 		/datum/material/iron = SHEET_MATERIAL_AMOUNT * 10
@@ -21,7 +21,7 @@
 
 /datum/design/c9x25mm_rubber
 	name = "pistol magazine (9x25mm Rubber) (Less Lethal)"
-	desc = "Designed to quickly reload GP-9 pistols. Rubber bullets are bouncy and less-than-lethal."
+	desc = "Предназначен для быстрой перезарядки пистолетов GP-9. Резиновые пули обладают отскоком и являются менее смертоносными."
 	build_type = AUTOLATHE
 	materials = list(
 		/datum/material/iron = HALF_SHEET_MATERIAL_AMOUNT * 10
@@ -42,7 +42,7 @@
 
 /datum/design/c9x25mm/hp
 	name = "pistol magazine (9x25mm) (Hollow-point)"
-	desc = "Designed to quickly reload GP-9 pistols. Hollow-point bullets are great against unarmored targets, but useless against armored ones."
+	desc = parent_type::desc + " Экспансивные пули отлично подходят для поражения небронированных целей, но бесполезны против бронированных."
 	build_type = PROTOLATHE | AWAY_LATHE
 	materials = list(
 		/datum/material/iron = SHEET_MATERIAL_AMOUNT * 10,
@@ -56,7 +56,7 @@
 
 /datum/design/c9x25mm/ap
 	name = "pistol magazine (9x25mm) (Armor-piercing)"
-	desc = "Designed to quickly reload GP-9 pistols. Armor-piercing bullets are great against armored targets, but strikes with less damage."
+	desc = parent_type::desc + " Бронебойные пули отлично подходят для поражения бронированных целей, но наносят меньший урон."
 	build_type = PROTOLATHE | AWAY_LATHE
 	materials = list(
 		/datum/material/iron = SHEET_MATERIAL_AMOUNT * 10,
@@ -70,7 +70,7 @@
 
 /datum/design/breaching_slug
 	name = "Breaching Slug (Non-Lethal/Highly Destructive)"
-	desc = "Designed for breaching airlocks and windows, quickly and efficiently."
+	desc = "Предназначен для быстрого и эффективного пробивания шлюзов и окон."
 	build_type = PROTOLATHE | AWAY_LATHE
 	materials = list(
 		/datum/material/iron = SMALL_MATERIAL_AMOUNT * 3,
@@ -84,7 +84,7 @@
 
 /datum/design/c45_mag
 	name = "pistol magazine (.45) (Lethal)"
-	desc = "Designed to quickly reload GP-45M pistols."
+	desc = "Предназначен для быстрой перезарядки пистолетов GP-45."
 	build_type = AUTOLATHE
 	materials = list(
 		/datum/material/iron = SHEET_MATERIAL_AMOUNT * 10
@@ -108,7 +108,7 @@
 
 /datum/design/c45_mag_rubber
 	name = "pistol magazine (.45 Rubber) (Less Lethal)"
-	desc = "Designed to quickly reload GP-45M pistols. Rubber bullets are bouncy and less-than-lethal."
+	desc = "Предназначен для быстрой перезарядки пистолетов GP-45. Резиновые пули обладают отскоком и являются менее смертоносными."
 	build_type = AUTOLATHE
 	materials = list(
 		/datum/material/iron = HALF_SHEET_MATERIAL_AMOUNT * 10
