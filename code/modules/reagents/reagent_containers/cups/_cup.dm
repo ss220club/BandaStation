@@ -125,8 +125,10 @@
 		)
 		if(!do_after(user, 3 SECONDS, target_mob))
 			return ITEM_INTERACT_BLOCKING
-		if(!reagents || !reagents.total_volume)
-			return ITEM_INTERACT_BLOCKING // The drink might be empty after the delay, such as by spam-feeding
+		// BANDASTATION EDIT START - Recheck the receiver and contents after delayed forcefeeding.
+		if(!canconsume(target_mob, user))
+			return ITEM_INTERACT_BLOCKING
+		// BANDASTATION EDIT END
 		target_mob.visible_message(
 			span_danger("[user] feeds [target_mob] something from [src]."),
 			span_userdanger("[user] feeds you something from [src]."),
@@ -146,8 +148,10 @@
 			to_chat(user, span_notice("You attempt to drink from [src]."))
 			if(!do_after(user, 1.25 SECONDS, user))
 				return ITEM_INTERACT_BLOCKING
-			if(!reagents || !reagents.total_volume)
+			// BANDASTATION EDIT START - A species change during a gulp must stop drinking before its side effects.
+			if(!canconsume(target_mob, user))
 				return ITEM_INTERACT_BLOCKING
+			// BANDASTATION EDIT END
 			user.visible_message(
 				span_notice("[user] drinks from [src]."),
 				ignored_mobs = list(user),

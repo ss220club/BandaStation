@@ -182,6 +182,11 @@
 /obj/item/reagent_containers/proc/canconsume(mob/eater, mob/user)
 	if(!iscarbon(eater))
 		return FALSE
+	// BANDASTATION ADDITION START - Reject oral consumption before drink messages, sounds or side effects.
+	if(HAS_TRAIT(eater, TRAIT_REAGENT_IMMUNE))
+		eater.balloon_alert(user, "невозможно проглотить!")
+		return FALSE
+	// BANDASTATION ADDITION END
 	if(!reagents || !reagents.total_volume)
 		to_chat(user, span_warning("[src] is empty!"))
 		return FALSE
