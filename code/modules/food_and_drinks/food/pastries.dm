@@ -335,7 +335,7 @@
 		/datum/reagent/consumable/liquidelectricity = 3,
 	)
 	tastes = list("cake" = 3, "caramel" = 2, "zap" = 1)
-	foodtypes = GRAIN|DAIRY|VEGETABLES|SUGAR
+	foodtypes = GRAIN|DAIRY|VEGETABLES|SUGAR|MUSHROOM // BANDASTATION ADDITION
 	food_flags = FOOD_FINGER_FOOD
 	w_class = WEIGHT_CLASS_SMALL
 	crafting_complexity = FOOD_COMPLEXITY_3

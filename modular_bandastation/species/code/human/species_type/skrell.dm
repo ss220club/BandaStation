@@ -148,7 +148,7 @@
 
 /datum/species/skrell/on_species_gain(mob/living/carbon/human/human, datum/species/old_species, pref_load, regenerate_icons)
 	. = ..()
-	RegisterSignal(human, COMSIG_MOVABLE_MOVED, PROC_REF(on_moved), override = TRUE)
+	RegisterSignal(human, COMSIG_MOVABLE_MOVED, PROC_REF(on_moved))
 	update_water_speed(human, human.loc)
 
 /datum/species/skrell/on_species_loss(mob/living/carbon/human/human, datum/species/lost_species)
@@ -179,7 +179,9 @@
 /// Модификатор скорости для скреллов на обычной воде
 /datum/movespeed_modifier/skrell_water_shallow
 	multiplicative_slowdown = -0.5
+	blacklisted_movetypes = MOVETYPES_NOT_TOUCHING_GROUND
 
 /// Модификатор скорости для скреллов на глубокой воде
 /datum/movespeed_modifier/skrell_water_deep
 	multiplicative_slowdown = -0.8
+	blacklisted_movetypes = MOVETYPES_NOT_TOUCHING_GROUND

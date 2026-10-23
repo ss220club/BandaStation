@@ -29,20 +29,20 @@
 		if(liver)
 			liver.apply_organ_damage(-2 * metabolization_ratio * seconds_per_tick)
 
-		var/purged_amount = 0
-		var/max_purge = 5 * metabolization_ratio * seconds_per_tick
+		if(drinker.reagents)
+			var/purged_amount = 0
+			var/max_purge = 5 * metabolization_ratio * seconds_per_tick
 
-		for(var/datum/reagent/reagent_to_remove in drinker.reagents.reagent_list.Copy())
-			if(reagent_to_remove == src)
-				continue
+			for(var/datum/reagent/reagent_to_remove in drinker.reagents.reagent_list.Copy())
+				if(reagent_to_remove == src)
+					continue
 
-			var/remove_val = min(reagent_to_remove.volume, max_purge - purged_amount)
-			drinker.reagents.remove_reagent(reagent_to_remove.type, remove_val)
-			purged_amount += remove_val
+				var/remove_val = min(reagent_to_remove.volume, max_purge - purged_amount)
+				drinker.reagents.remove_reagent(reagent_to_remove.type, remove_val)
+				purged_amount += remove_val
 
-			if(purged_amount >= max_purge)
-				break
-
+				if(purged_amount >= max_purge)
+					break
 	else
 		drinker.adjust_disgust(5 * metabolization_ratio * seconds_per_tick)
 		if(drinker.adjust_tox_loss(0.75 * metabolization_ratio * seconds_per_tick, updating_health = FALSE, required_biotype = affected_biotype))
@@ -305,7 +305,8 @@
 	. = ..()
 	REMOVE_TRAIT(drinker, TRAIT_ANALGESIA, type)
 	REMOVE_TRAIT(drinker, TRAIT_FEARLESS, type)
-	drinker.sound_environment_override = NONE
+	if(drinker.sound_environment_override == SOUND_ENVIRONMENT_PSYCHOTIC)
+		drinker.sound_environment_override = NONE
 	drinker.clear_mood_event("heart_of_qerrbalak")
 
 	if(drinker.hud_used)
