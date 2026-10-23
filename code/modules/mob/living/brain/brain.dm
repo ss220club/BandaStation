@@ -18,7 +18,7 @@
 
 /mob/living/brain/on_changed_z_level(turf/old_turf, turf/new_turf, same_z_layer, notify_contents)
 	var/obj/item/organ/brain/brain_loc = loc
-	if(brain_loc && isnull(new_turf) && brain_loc.owner) //we're actively being put inside a new body.
+	if(istype(brain_loc) && isnull(new_turf) && brain_loc.owner) // BANDASTATION EDIT - A brain can also be inside an MMI or IPC processor.
 		return ..(old_turf, get_turf(brain_loc.owner), same_z_layer, notify_contents)
 	return ..()
 

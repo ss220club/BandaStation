@@ -6,6 +6,7 @@
 
 #include "code/human/species/skills.dm"
 #include "code/human/species_type/moth.dm"
+#include "code/human/species_type/ipc.dm"
 #include "code/human/species_type/skrell.dm"
 #include "code/human/species_type/tajaran.dm"
 #include "code/human/species_type/vulpkanin.dm"
@@ -30,6 +31,8 @@
 #include "code/human/sprite_accessories/tajaran/tajaran_tails.dm"
 
 #include "code/human/sprite_accessories/hair.dm"
+#include "code/human/sprite_accessories/ipc/ipc_appearance.dm"
+#include "code/human/ipc_display.dm"
 #include "code/human/blood_types.dm"
 #include "code/human/carbon.dm"
 
@@ -43,6 +46,7 @@
 #include "code/preferences/species_features/skrell/skrell_cloth_wrap.dm"
 #include "code/preferences/species_features/skrell/skrell_cloth_wrap_toggle.dm"
 #include "code/preferences/species_features/skrell/skrell_cloth_wrap_color.dm"
+#include "code/preferences/species_features/ipc.dm"
 
 #include "code/preferences/species_features/tajaran/body_markings/tajaran_chest_markings.dm"
 #include "code/preferences/species_features/tajaran/body_markings/tajaran_limb_markings.dm"
@@ -69,6 +73,7 @@
 #include "code/reagents/mutation.dm"
 
 #include "code/surgery/bodyparts/skrell_bodyparts.dm"
+#include "code/surgery/bodyparts/ipc_bodyparts.dm"
 #include "code/surgery/bodyparts/tajaran_bodyparts.dm"
 #include "code/surgery/bodyparts/vulpkanin_bodyparts.dm"
 
@@ -78,6 +83,8 @@
 #include "code/surgery/organs/external/tajaran_external.dm"
 #include "code/surgery/organs/internal/tajaran_internal.dm"
 #include "code/surgery/organs/internal/skrell_internal.dm"
+#include "code/surgery/organs/internal/ipc_internal.dm"
+#include "code/items/ipc_power_cord.dm"
 #include "code/surgery/organs/limbgrower_designs.dm"
 
 #include "code/human/sprite_accessories/vulpkanin/hair_masks.dm"

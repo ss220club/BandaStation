@@ -57,8 +57,10 @@
 		)
 		if(!do_after(user, 3 SECONDS, target))
 			return ITEM_INTERACT_BLOCKING
-		if(!reagents || !reagents.total_volume)
-			return ITEM_INTERACT_BLOCKING // The condiment might be empty after the delay.
+		// BANDASTATION EDIT START - Recheck oral consumption after a species change during forcefeeding.
+		if(!canconsume(target, user))
+			return ITEM_INTERACT_BLOCKING
+		// BANDASTATION EDIT END
 		target.visible_message(
 			span_warning("[capitalize(user.declent_ru(NOMINATIVE))] кормит [target.declent_ru(ACCUSATIVE)] с помощью [declent_ru(GENITIVE)]."),
 			span_warning("[capitalize(user.declent_ru(NOMINATIVE))] кормит вас [declent_ru(INSTRUMENTAL)]"),

@@ -378,6 +378,15 @@
 #include "washing.dm"
 #include "weird_food.dm"
 #include "wizard_loadout.dm"
+// BANDASTATION ADDITION START - IPC port regression tests
+#include "../../../modular_bandastation/species/code/tests/ipc_tests.dm"
+#include "../../../modular_bandastation/species/code/tests/ipc_power_tests.dm"
+#include "../../../modular_bandastation/species/code/tests/ipc_appearance_tests.dm"
+#include "../../../modular_bandastation/species/code/tests/ipc_reagent_tests.dm"
+#include "../../../modular_bandastation/species/code/tests/ipc_reagent_effect_tests.dm"
+#include "../../../modular_bandastation/species/code/tests/ipc_drink_tests.dm"
+#include "../../../modular_bandastation/species/code/tests/ipc_extinguisher_tests.dm"
+// BANDASTATION ADDITION END - IPC port regression tests
 // END_INCLUDE
 #ifdef REFERENCE_TRACKING_DEBUG //Don't try and parse this file if ref tracking isn't turned on. IE: don't parse ref tracking please mr linter
 #include "find_reference_sanity.dm"

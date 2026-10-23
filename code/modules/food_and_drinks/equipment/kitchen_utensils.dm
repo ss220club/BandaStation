@@ -62,6 +62,10 @@
 		return ..()
 
 	if(forkload)
+		// BANDASTATION ADDITION START - utensils must respect the same food restrictions as edible items
+		if(SEND_SIGNAL(M, COMSIG_CARBON_ATTEMPT_EAT, src) & BLOCK_EAT_ATTEMPT)
+			return TRUE
+		// BANDASTATION ADDITION END
 		if(M == user)
 			M.visible_message(span_notice("[user] eats a delicious forkful of omelette!"))
 			M.reagents.add_reagent(forkload.type, 1)
@@ -260,6 +264,11 @@
 	if(!target_mob.reagents || reagents.total_volume <= 0)
 		return  ..()
 
+	// BANDASTATION ADDITION START - utensils must respect the same food restrictions as edible items
+	if(SEND_SIGNAL(target_mob, COMSIG_CARBON_ATTEMPT_EAT, src) & BLOCK_EAT_ATTEMPT)
+		return TRUE
+	// BANDASTATION ADDITION END
+
 	if(target_mob.is_mouth_covered(ITEM_SLOT_HEAD) || target_mob.is_mouth_covered(ITEM_SLOT_MASK))
 		if(target_mob == user)
 			target_mob.balloon_alert(user, "can't eat with mouth covered!")
@@ -279,6 +288,11 @@
 		if(!do_after(user, 3 SECONDS, target_mob))
 			target_mob.balloon_alert(user, "interrupted!")
 			return TRUE
+
+		// BANDASTATION ADDITION START - the patient's species may change while being fed
+		if(SEND_SIGNAL(target_mob, COMSIG_CARBON_ATTEMPT_EAT, src) & BLOCK_EAT_ATTEMPT)
+			return TRUE
+		// BANDASTATION ADDITION END
 
 		to_chat(target_mob, span_userdanger("[target_mob.is_blind() ? "You are forced to" : "[user] forces you to"] swallow a spoonful of something!"))
 		user.visible_message(

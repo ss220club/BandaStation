@@ -6,6 +6,10 @@
 #define SURGERY_RING_FAIL_MOD 10
 
 /datum/surgery_operation/proc/get_modified_failure_chance(operation_time, mob/living/patient, mob/living/surgeon, tool, list/operation_args)
+	// IPC maintenance has no random surgical mistakes, regardless of working conditions.
+	if(is_species(patient, /datum/species/ipc))
+		return 0
+
 	var/fail_chance = clamp(GET_FAILURE_CHANCE(operation_time, operation_args[OPERATION_SPEED]), 0, 99)
 
 	// Боль
