@@ -366,7 +366,7 @@
 		/datum/reagent/consumable/capsaicin = 2,
 	)
 	tastes = list("rice" = 1, "spicy cabbage" = 1, "chilli heat" = 1, "egg" = 1, "meat" = 1)
-	foodtypes = MEAT | VEGETABLES | GRAIN | EGG
+	foodtypes = MEAT | VEGETABLES | GRAIN | EGG | MUSHROOM
 	w_class = WEIGHT_CLASS_SMALL
 	crafting_complexity = FOOD_COMPLEXITY_3
 	custom_materials = list(/datum/material/meat = MEATDISH_MATERIAL_AMOUNT)
