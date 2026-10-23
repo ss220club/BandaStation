@@ -31,7 +31,7 @@
 	tastes = list("sweet grass" = 1)
 
 // Gomoa //
-/obj/item/seeds/mushroom/gomoa
+/obj/item/seeds/gomoa
 	name = "gomoa mycelium pack"
 	desc = "The Gomoa is a small orange mushroom that grows in the fields of the Ksi'Corisal plains."
 	icon_state = "mycelium-gomoa"
@@ -57,7 +57,7 @@
 	rarity = 30
 
 /obj/item/food/grown/mushroom/gomoa
-	seed = /obj/item/seeds/mushroom/gomoa
+	seed = /obj/item/seeds/gomoa
 	bite_consumption_mod = 1
 	name = "gomoa cluster"
 	desc = "Not only is it one of the main ingredients in the Skrells’ staple food, but the bioluminescent properties of its spores are also used in the intricate weavings of the Koe'm, the Skrells’ currency."
