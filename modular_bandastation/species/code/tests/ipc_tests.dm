@@ -135,3 +135,58 @@
 		total_burn += limb.burn_dam
 		TEST_ASSERT(!HAS_TRAIT(limb, TRAIT_PARALYSIS), "EMP applied ordinary augmented-limb paralysis to an IPC.")
 	TEST_ASSERT(abs(total_burn - 64.9) <= DAMAGE_PRECISION * 6, "Heavy EMP chassis damage differed from the source's 64.9 total beyond per-limb rounding: [total_burn].")
+
+/// Guaranteed maintenance follows the patient's species, never the surgeon's.
+/datum/unit_test/ipc_surgery_failure_chance/Run()
+	var/mob/living/carbon/human/patient = allocate(/mob/living/carbon/human/consistent)
+	var/mob/living/carbon/human/surgeon = allocate(/mob/living/carbon/human/consistent)
+	var/obj/item/screwdriver/tool = allocate(/obj/item/screwdriver)
+	var/datum/surgery_operation/limb/mechanical_incision/incision = GLOB.operations.operations_by_typepath[__IMPLIED_TYPE__]
+	var/list/operation_args = list(OPERATION_SPEED = 10)
+	var/original_chance = incision.get_modified_failure_chance(incision.time, patient, surgeon, tool, operation_args)
+	TEST_ASSERT(original_chance > 0, "Control patient has no surgical failure risk under adverse conditions.")
+
+	patient.set_species(/datum/species/ipc)
+	TEST_ASSERT_EQUAL(patient.stat, STABLE, "IPC patient must be awake for the maintenance check.")
+	TEST_ASSERT(!HAS_TRAIT(patient, TRAIT_ANALGESIA), "IPC patient must not be anesthetized for the maintenance check.")
+	TEST_ASSERT_EQUAL(incision.get_modified_failure_chance(incision.time, patient, surgeon, tool, operation_args), 0, "Awake IPC maintenance can randomly fail under adverse conditions.")
+	var/datum/surgery_operation/limb/mechanical_open/open_hatch = GLOB.operations.operations_by_typepath[__IMPLIED_TYPE__]
+	TEST_ASSERT_EQUAL(open_hatch.get_modified_failure_chance(open_hatch.time, patient, surgeon, IMPLEMENT_HAND, operation_args), 0, "Opening an IPC hatch by hand can randomly fail.")
+	var/datum/surgery_operation/organ/repair/brain/mechanic/brain_repair = GLOB.operations.operations_by_typepath[__IMPLIED_TYPE__]
+	TEST_ASSERT_EQUAL(brain_repair.get_modified_failure_chance(brain_repair.time, patient, surgeon, tool, operation_args), 0, "IPC internal maintenance can randomly fail.")
+
+	patient.set_species(/datum/species/human)
+	TEST_ASSERT_EQUAL(incision.get_modified_failure_chance(incision.time, patient, surgeon, tool, operation_args), original_chance, "Guaranteed maintenance leaked after changing away from IPC.")
+	surgeon.set_species(/datum/species/ipc)
+	TEST_ASSERT_EQUAL(incision.get_modified_failure_chance(incision.time, patient, surgeon, tool, operation_args), original_chance, "An IPC surgeon changed an organic patient's surgical failure risk.")
+
+/// Real operations still require a suitable tool and an uninterrupted action.
+/datum/unit_test/ipc_surgery_steps/Run()
+	var/mob/living/carbon/human/patient = allocate(/mob/living/carbon/human/consistent)
+	patient.set_species(/datum/species/ipc)
+	patient.set_resting(TRUE)
+	var/obj/item/bodypart/chest/chest = patient.get_bodypart(BODY_ZONE_CHEST)
+	ADD_TRAIT(patient, TRAIT_READY_TO_OPERATE, TRAIT_SOURCE_UNIT_TESTS)
+	ADD_TRAIT(chest, TRAIT_READY_TO_OPERATE, TRAIT_SOURCE_UNIT_TESTS)
+	var/mob/living/carbon/human/surgeon = allocate(/mob/living/carbon/human/consistent/slow)
+	var/obj/item/screwdriver/tool = allocate(/obj/item/screwdriver)
+	var/obj/item/crowbar/wrong_tool = allocate(/obj/item/crowbar)
+	var/datum/surgery_operation/limb/mechanical_incision/incision = GLOB.operations.operations_by_typepath[__IMPLIED_TYPE__]
+	var/list/operation_args = list(OPERATION_TARGET_ZONE = BODY_ZONE_CHEST)
+
+	surgeon.put_in_active_hand(wrong_tool)
+	TEST_ASSERT_EQUAL(incision.try_perform(chest, surgeon, wrong_tool, operation_args), ITEM_INTERACT_BLOCKING, "IPC surgery accepted an unsuitable tool.")
+	TEST_ASSERT(!LIMB_HAS_SURGERY_STATE(chest, SURGERY_SKIN_CUT), "An invalid tool opened the IPC chassis.")
+	surgeon.dropItemToGround(wrong_tool)
+	surgeon.put_in_active_hand(tool)
+	addtimer(CALLBACK(surgeon, TYPE_PROC_REF(/mob, dropItemToGround), tool), 1)
+	TEST_ASSERT_EQUAL(incision.try_perform(chest, surgeon, tool, operation_args), ITEM_INTERACT_BLOCKING, "Dropping the tool did not interrupt IPC surgery.")
+	TEST_ASSERT(!LIMB_HAS_SURGERY_STATE(chest, SURGERY_SKIN_CUT), "Interrupted maintenance opened the IPC chassis.")
+
+	surgeon.put_in_active_hand(tool)
+	TEST_ASSERT_EQUAL(incision.try_perform(chest, surgeon, tool, operation_args), ITEM_INTERACT_SUCCESS, "Valid IPC incision did not succeed.")
+	TEST_ASSERT(LIMB_HAS_SURGERY_STATE(chest, SURGERY_SKIN_CUT), "Successful maintenance did not unscrew the IPC chassis.")
+	surgeon.dropItemToGround(tool)
+	var/datum/surgery_operation/limb/mechanical_open/open_hatch = GLOB.operations.operations_by_typepath[__IMPLIED_TYPE__]
+	TEST_ASSERT_EQUAL(open_hatch.try_perform(chest, surgeon, IMPLEMENT_HAND, operation_args), ITEM_INTERACT_SUCCESS, "Opening an IPC hatch by hand did not succeed.")
+	TEST_ASSERT(LIMB_HAS_SURGERY_STATE(chest, SURGERY_SKIN_OPEN), "Successful maintenance did not open the IPC hatch.")
