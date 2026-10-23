@@ -337,6 +337,9 @@
 /mob/dead/new_player/proc/check_job_preferences(warn = TRUE)
 	if(!client)
 		return FALSE //Not sure how this would get run without the mob having a client, but let's just be safe.
+	// SS220 ADDITION - Allow players with admin-selected jobs to enter distribution with empty job preferences.
+	if(SEND_SIGNAL(SSjob, COMSIG_ROUNDSTART_ROSTER_BYPASS_PREFS, src) & ROUNDSTART_ROSTER_BYPASS_PREFS)
+		return TRUE
 	if(client.prefs.read_preference(/datum/preference/choiced/jobless_role) != RETURNTOLOBBY)
 		return TRUE
 	// If they have antags enabled, they're potentially doing this on purpose instead of by accident. Notify admins if so.
