@@ -47,3 +47,46 @@
 		if(limb_image.icon == display.icon && limb_image.icon_state == display.icon_state)
 			return TRUE
 	return FALSE
+
+/// Security job icons must remain readable when diagnostic glasses show an IPC's bars.
+/datum/unit_test/ipc_diagnostic_hud_layout/Run()
+	var/mob/living/carbon/human/dummy/consistent/ipc = allocate(/mob/living/carbon/human/dummy/consistent)
+	ipc.set_species(/datum/species/ipc)
+	ipc.dna.species.prepare_human_for_preview(ipc)
+	ipc.equipOutfit(/datum/outfit/job/assistant/consistent, visuals_only = TRUE)
+	ipc.set_hud_image_state(ID_HUD, hud_state = SECHUD_ASSISTANT)
+	var/image/job_hud = ipc.hud_list[ID_HUD]
+	var/icon/job_icon = icon(job_hud.icon, job_hud.icon_state)
+	var/icon/combined_huds = render_huds(ipc, include_body = FALSE)
+	var/icon/old_huds = render_huds(ipc, include_body = FALSE, old_layout = TRUE)
+	var/old_layout_obscures_job = FALSE
+	for(var/x in 1 to job_icon.Width())
+		for(var/y in 1 to job_icon.Height())
+			var/job_pixel = job_icon.GetPixel(x, y)
+			if(job_pixel)
+				TEST_ASSERT_EQUAL(combined_huds.GetPixel(x, y), job_pixel, "Diagnostic HUD obscured the security job icon at [x],[y].")
+				if(old_huds.GetPixel(x, y) != job_pixel)
+					old_layout_obscures_job = TRUE
+	TEST_ASSERT(old_layout_obscures_job, "HUD regression fixture did not reproduce the original overlap.")
+
+	for(var/hud_type in list(DIAG_HUD, DIAG_BATT_HUD))
+		var/image/diagnostic_bar = ipc.hud_list[hud_type]
+		var/original_x = diagnostic_bar.pixel_x
+		ipc.readjust_atom_huds()
+		TEST_ASSERT_EQUAL(diagnostic_bar.pixel_x, original_x, "Mob transform adjustment reset the diagnostic bar's position.")
+		TEST_ASSERT_EQUAL(diagnostic_bar.pixel_w, job_hud.pixel_w, "Diagnostic bar lost the common HUD anchor.")
+
+	// Keep a local comparison of the former layout without accepting it as a reference.
+	fcopy(render_huds(ipc, old_layout = TRUE), "data/ipc-diagnostic-hud-before.png")
+	fcopy(render_huds(ipc), "data/ipc-diagnostic-hud-after.png")
+	ipc.death()
+	fcopy(render_huds(ipc), "data/ipc-diagnostic-hud-dead.png")
+
+/datum/unit_test/ipc_diagnostic_hud_layout/proc/render_huds(mob/living/carbon/human/ipc, include_body = TRUE, old_layout = FALSE)
+	var/image/preview = include_body ? image(ipc) : image('icons/blanks/32x32.dmi', icon_state = "nothing")
+	for(var/hud_type in list(ID_HUD, DIAG_STAT_HUD, DIAG_HUD, DIAG_BATT_HUD))
+		var/image/hud_image = image(ipc.hud_list[hud_type])
+		if(old_layout && (hud_type == DIAG_HUD || hud_type == DIAG_BATT_HUD))
+			hud_image.pixel_x = 0
+		preview.overlays += hud_image
+	return getFlatIcon(preview, no_anim = TRUE)

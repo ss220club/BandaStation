@@ -79,6 +79,11 @@
 			var/image/holder = image(DEFAULT_HUDS_DMI, human, "")
 			holder.appearance_flags = RESET_COLOR | PIXEL_SCALE | KEEP_APART
 			human.hud_list[hud_type] = holder
+		if(hud_type == DIAG_HUD || hud_type == DIAG_BATT_HUD)
+			var/image/diagnostic_bar = human.hud_list[hud_type]
+			// The two 3px bars belong on the right, clear of the security HUD's job icon.
+			// pixel_x survives the shared height and lying-position HUD adjustments.
+			diagnostic_bar.pixel_x = ICON_SIZE_X - 6
 		human.set_hud_image_active(hud_type)
 	update_diagnostics(human)
 
