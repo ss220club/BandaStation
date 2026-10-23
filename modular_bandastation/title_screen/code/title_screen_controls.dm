@@ -96,7 +96,7 @@ GAME_VERB_DESC(/client, fix_title_screen, "Fix Lobby Screen", "Lobbyscreen broke
 		return
 
 	if(allowed_species && length(allowed_species))
-		if("[prefs_species]" in allowed_species && !length(prefs_jobs)) // SS220 EDIT: the current species cannot exempt an incompatible assigned profile.
+		if(("[prefs_species]" in allowed_species) && !length(prefs_jobs)) // SS220 EDIT: the current species cannot exempt an incompatible assigned profile.
 			return
 
 	for(var/job_id in prefs_jobs)

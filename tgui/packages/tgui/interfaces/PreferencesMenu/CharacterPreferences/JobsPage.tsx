@@ -320,10 +320,10 @@ function JoblessRoleDropdown() {
 
   const setPreference = createSetPreference(act, 'joblessrole');
   return (
-    <Section title="Что делать если не удалось войти?">
-      {/* SS220 EDIT - START */}
-      <JobTabButtons />
-      {/* SS220 EDIT - END */}
+    <Section
+      title="Что делать если не удалось войти?"
+      buttons={<JobTabButtons />} // SS220 EDIT: modular job tabs in the native header.
+    >
       <Stack fill textAlign="center">
         {options.map((option) => (
           <Stack.Item grow key={option.value}>

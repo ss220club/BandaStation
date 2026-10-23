@@ -26,8 +26,10 @@
 	// SS220 EDIT - START
 	// A committed lobby profile is already loaded; reuse its appearance mode without selecting or switching again.
 	var/mob/dead/new_player/requester = isnewplayer(parent?.mob) ? parent.mob : null
-	if(requester?.assigned_character && requester.assigned_character.job_type == SSjob.get_job(job_title)?.type)
-		return requester.assigned_character.randomized
+	if(requester?.assigned_character)
+		var/datum/job/assigned_job = SSjob.get_job(job_title)
+		if(requester.assigned_character.job_type == assigned_job?.type)
+			return requester.assigned_character.randomized
 	// SS220 EDIT - END
 	if(is_late_join ? read_preference(/datum/preference/toggle/late_join_always_current_slot) : read_preference(/datum/preference/toggle/round_start_always_join_current_slot))
 		return
