@@ -1,6 +1,13 @@
 import { useState } from 'react';
 import { useBackend } from 'tgui/backend';
-import { Button, NoticeBox, Section, Stack } from 'tgui-core/components';
+import {
+  Box,
+  Button,
+  NoticeBox,
+  ProgressBar,
+  Section,
+  Stack,
+} from 'tgui-core/components';
 
 import { DOOR_JACK, HOST_SCAN, PHOTO_MODE, SOFTWARE_DESC } from './constants';
 import type { PaiData } from './types';
@@ -66,9 +73,109 @@ function SoftwareButtons(props: SoftwareButtonsProps) {
   const { currentSelection } = props;
 
   const { act, data } = useBackend<PaiData>();
-  const { door_jack, languages, master_name } = data;
+  const { chemical_reserve, door_jack, languages, master_name } = data;
 
   switch (currentSelection) {
+    case 'Camera Network':
+      return (
+        <Button icon="video" onClick={() => act(currentSelection)}>
+          Подключить / отключить камеры
+        </Button>
+      );
+    case 'Security Records':
+      return (
+        <Button icon="id-card" onClick={() => act(currentSelection)}>
+          Открыть записи СБ
+        </Button>
+      );
+    case 'Syndicate Radio':
+      return <>Канал активен. Для передачи используйте :t перед сообщением.</>;
+    case 'Remote Machinery':
+      return (
+        <Stack vertical>
+          <Stack.Item>
+            <Box bold mb={0.5}>
+              АПЦ
+            </Box>
+            <Box>
+              <b>ЛКМ</b> — открыть окно управления.
+            </Box>
+            <Box>
+              <b>ПКМ</b> — переключить блокировку интерфейса.
+            </Box>
+            <Box>
+              <b>Ctrl+ЛКМ</b> — главный выключатель.
+            </Box>
+            <Box>
+              <b>Shift+ЛКМ</b> — питание освещения.
+            </Box>
+            <Box>
+              <b>Ctrl+Shift+ЛКМ</b> — питание окружения.
+            </Box>
+            <Box>
+              <b>Alt+ЛКМ</b> — питание оборудования.
+            </Box>
+          </Stack.Item>
+          <Stack.Item>
+            <Box bold mb={0.5}>
+              Шлюзы
+            </Box>
+            <Box>
+              <b>Shift+ЛКМ</b> — открыть или закрыть.
+            </Box>
+            <Box>
+              <b>Ctrl+ЛКМ</b> — поднять или опустить болты.
+            </Box>
+            <Box>
+              <b>Ctrl+Shift+ЛКМ</b> — переключить аварийный доступ.
+            </Box>
+            <Box>
+              <b>Alt+ЛКМ</b> — переключить электрификацию.
+            </Box>
+          </Stack.Item>
+          <Stack.Item>
+            <Box bold mb={0.5}>
+              Общая перезарядка
+            </Box>
+            <Box>
+              После действия со шлюзом — <b>7 секунд</b>.
+            </Box>
+            <Box>
+              После действия с АПЦ — <b>30 секунд</b>.
+            </Box>
+            <Box color="label">
+              На время перезарядки блокируются все удалённые действия со шлюзами
+              и АПЦ.
+            </Box>
+          </Stack.Item>
+        </Stack>
+      );
+    case 'Medical Injector':
+      return (
+        <Stack vertical>
+          <Stack.Item>
+            <ProgressBar minValue={0} maxValue={30} value={chemical_reserve}>
+              Запас инъектора: {chemical_reserve} / 30
+            </ProgressBar>
+          </Stack.Item>
+          <Stack.Item>
+            {[
+              ['Epinephrine', 'Эпинефрин'],
+              ['Salbutamol', 'Сальбутамол'],
+              ['Mannitol', 'Маннитол'],
+              ['Pentetic Acid', 'ДТПА'],
+              ['Saline Glucose', 'Физраствор'],
+            ].map(([reagent, label]) => (
+              <Button
+                key={reagent}
+                onClick={() => act(currentSelection, { reagent })}
+              >
+                Ввести {label} (5 ед.)
+              </Button>
+            ))}
+          </Stack.Item>
+        </Stack>
+      );
     case 'Door Jack':
       return (
         <>
