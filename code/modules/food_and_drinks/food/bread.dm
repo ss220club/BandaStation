@@ -60,7 +60,7 @@
 	name = "bread slice"
 	desc = "A slice of home."
 	icon_state = "breadslice"
-	foodtypes = GRAIN | MUSHROOM // BANDASTATION ADDITION
+	foodtypes = GRAIN
 	food_reagents = list(/datum/reagent/consumable/nutriment = 2)
 	venue_value = FOOD_PRICE_TRASH
 	decomp_type = /obj/item/food/breadslice/moldy
@@ -82,7 +82,7 @@
 		/datum/reagent/consumable/mold = 10,
 	)
 	tastes = list("decaying fungus" = 1)
-	foodtypes = GROSS | MUSHROOM // BANDASTATION ADDITION
+	foodtypes = GROSS
 	preserved_food = TRUE
 	crafting_complexity = FOOD_COMPLEXITY_2
 

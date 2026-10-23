@@ -525,6 +525,7 @@
 	cuisine_category = CUISINE_SKRELL
 	dish_category = DISH_TACO
 	meal_category = MEAL_MAIN_COURSE
+	crafting_flags = CRAFT_SKIP_MATERIALS_PARITY
 
 /datum/crafting_recipe/food/destroying_angel_slider
 	name = "Destroying angel slider"
@@ -552,6 +553,7 @@
 	cuisine_category = CUISINE_SKRELL
 	dish_category = DISH_SANDWICH
 	meal_category = MEAL_MAIN_COURSE
+	crafting_flags = CRAFT_SKIP_MATERIALS_PARITY
 
 /datum/crafting_recipe/food/fairy_glow_roll
 	name = "Fairy glow roll"
