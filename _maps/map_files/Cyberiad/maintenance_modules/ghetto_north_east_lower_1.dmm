@@ -1,0 +1,1284 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"aC" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/light/small/burned/directional/south,
+/turf/open/floor/iron/dark,
+/area/space)
+"aF" = (
+/obj/structure/spider/stickyweb,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/plating,
+/area/space)
+"aZ" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/plating,
+/area/space)
+"bt" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/turf/open/floor/plating,
+/area/space)
+"bu" = (
+/obj/effect/spawner/random/maintenance/three,
+/obj/effect/mapping_helpers/broken_floor,
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/turf_decal/siding/wood/oak{
+	dir = 8
+	},
+/turf/open/floor/wood/parquet/oak,
+/area/space)
+"bJ" = (
+/obj/structure/chair/sofa/corp/right,
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/wood/parquet/oak,
+/area/space)
+"bS" = (
+/obj/effect/decal/cleanable/generic,
+/obj/machinery/light/dim/directional/east,
+/turf/open/floor/iron/dark,
+/area/space)
+"ci" = (
+/obj/effect/turf_decal/tile/bar/opposingcorners,
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron/white,
+/area/space)
+"co" = (
+/obj/machinery/door/airlock/maintenance,
+/turf/open/floor/plating,
+/area/space)
+"cp" = (
+/obj/machinery/atmospherics/components/unary/vent_pump/on/layer4{
+	dir = 1
+	},
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/mapping_helpers/broken_floor,
+/turf/open/floor/wood/parquet/birch,
+/area/space)
+"cr" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/item/clothing/under/color/grey,
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/closet/crate/trashcart/laundry,
+/obj/effect/mapping_helpers/broken_floor,
+/turf/open/floor/wood/parquet/birch,
+/area/space)
+"dr" = (
+/obj/effect/turf_decal/tile/bar/opposingcorners,
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/decal/cleanable/food/flour,
+/turf/open/floor/iron/white,
+/area/space)
+"dz" = (
+/obj/effect/decal/cleanable/blood/drip{
+	pixel_x = 12;
+	pixel_y = 12
+	},
+/turf/open/floor/plating,
+/area/space)
+"dG" = (
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/plating,
+/area/space)
+"dT" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/plating,
+/area/space)
+"dY" = (
+/obj/effect/decal/cleanable/blood/drip{
+	pixel_x = 13;
+	pixel_y = -3
+	},
+/turf/open/floor/plating,
+/area/space)
+"eG" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/item/stack/cable_coil{
+	amount = 1
+	},
+/obj/structure/spider/stickyweb,
+/turf/open/floor/plating,
+/area/space)
+"fB" = (
+/obj/structure/table/wood/fancy/royalblack,
+/obj/effect/spawner/random/trash/food_packaging,
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/wood/parquet/oak,
+/area/space)
+"fH" = (
+/obj/effect/decal/cleanable/blood/gibs/old,
+/obj/item/ammo_casing/c45/spent{
+	pixel_x = 6;
+	pixel_y = 5;
+	dir = 9
+	},
+/turf/open/floor/plating,
+/area/space)
+"gQ" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/structure/cable,
+/turf/open/floor/plating,
+/area/space)
+"hd" = (
+/obj/machinery/griddle,
+/obj/effect/turf_decal/tile/bar/opposingcorners,
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron/white,
+/area/space)
+"hl" = (
+/obj/effect/turf_decal/tile/bar/opposingcorners,
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/item/kitchen/rollingpin,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron/white,
+/area/space)
+"hY" = (
+/obj/structure/chair/wood{
+	dir = 4
+	},
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/turf_decal/siding/wood/oak{
+	dir = 8
+	},
+/turf/open/floor/wood/parquet/oak,
+/area/space)
+"ib" = (
+/obj/effect/turf_decal/tile/bar/opposingcorners,
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/spawner/random/food_or_drink/donkpockets,
+/obj/effect/decal/cleanable/food/flour,
+/turf/open/floor/iron/white,
+/area/space)
+"jl" = (
+/obj/structure/barricade/security,
+/turf/open/floor/plating,
+/area/space)
+"jW" = (
+/obj/structure/chair/sofa/corp/corner,
+/turf/open/floor/plating,
+/area/space)
+"kf" = (
+/obj/effect/mapping_helpers/broken_floor,
+/turf/open/floor/glass/reinforced,
+/area/space)
+"ko" = (
+/obj/structure/table/reinforced,
+/obj/effect/turf_decal/tile/bar/opposingcorners,
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/item/reagent_containers/cup/beaker/large,
+/obj/effect/decal/cleanable/dirt,
+/obj/item/sharpener,
+/turf/open/floor/iron/white,
+/area/space)
+"lo" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/structure/cable,
+/obj/effect/decal/cleanable/blood/tracks,
+/turf/open/floor/plating,
+/area/space)
+"lV" = (
+/obj/item/kirbyplants/random/dead,
+/turf/open/floor/plating,
+/area/space)
+"mm" = (
+/obj/item/trash/flare,
+/turf/open/floor/glass/reinforced,
+/area/space)
+"mA" = (
+/obj/effect/turf_decal/tile/bar/opposingcorners,
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/structure/closet,
+/obj/effect/spawner/random/maintenance/three,
+/obj/item/clothing/suit/apron/chef,
+/obj/item/clothing/head/utility/chefhat,
+/obj/machinery/light/small/dim/directional/east,
+/turf/open/floor/iron/white,
+/area/space)
+"mF" = (
+/obj/effect/turf_decal/tile/bar/opposingcorners,
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron/white,
+/area/space)
+"nj" = (
+/obj/effect/decal/cleanable/blood/old,
+/turf/open/floor/iron/dark,
+/area/space)
+"nC" = (
+/obj/effect/decal/cleanable/dirt,
+/mob/living/basic/mouse/rat/gray,
+/turf/open/floor/iron/dark,
+/area/space)
+"nQ" = (
+/obj/machinery/door/airlock/highsecurity,
+/turf/open/floor/plating,
+/area/space)
+"nT" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/structure/cable,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron/dark,
+/area/space)
+"oc" = (
+/obj/structure/chair/sofa/right/brown{
+	dir = 8
+	},
+/turf/open/floor/iron/dark,
+/area/space)
+"ol" = (
+/obj/structure/broken_flooring/singular/directional/east,
+/turf/open/floor/plating,
+/area/space)
+"oJ" = (
+/turf/open/space/basic,
+/area/space)
+"oO" = (
+/obj/effect/decal/cleanable/generic,
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/turf_decal/siding/wood/oak{
+	dir = 8
+	},
+/obj/effect/turf_decal/siding/wood/oak,
+/turf/open/floor/wood/parquet/oak,
+/area/space)
+"pu" = (
+/obj/structure/table/wood,
+/obj/item/flashlight/flare/candle,
+/turf/open/floor/plating,
+/area/space)
+"pv" = (
+/obj/machinery/washing_machine,
+/obj/effect/decal/cleanable/cobweb,
+/turf/open/floor/plating,
+/area/space)
+"pL" = (
+/obj/effect/spawner/random/trash/bin,
+/obj/structure/spider/stickyweb,
+/turf/open/floor/plating,
+/area/space)
+"qH" = (
+/obj/item/extinguisher,
+/turf/open/floor/plating,
+/area/space)
+"rH" = (
+/obj/machinery/door/airlock,
+/turf/open/floor/plating,
+/area/space)
+"rI" = (
+/obj/machinery/door/airlock/multi_tile/public/glass{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/structure/cable,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/turf/open/floor/plating,
+/area/space)
+"rS" = (
+/obj/effect/spawner/structure/window/reinforced,
+/turf/open/floor/plating,
+/area/space)
+"rX" = (
+/obj/structure/barricade/security,
+/turf/open/floor/iron/dark,
+/area/space)
+"sz" = (
+/obj/structure/table/wood/fancy/royalblack,
+/obj/item/toy/cards/deck/syndicate,
+/obj/effect/mapping_helpers/broken_floor,
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/wood/parquet/oak,
+/area/space)
+"sV" = (
+/obj/structure/table,
+/turf/open/floor/plating,
+/area/space)
+"tC" = (
+/obj/effect/turf_decal/tile/bar/opposingcorners,
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/decal/cleanable/ants,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron/white,
+/area/space)
+"tD" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/structure/cable,
+/obj/effect/decal/cleanable/blood/footprints,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/plating,
+/area/space)
+"tJ" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/structure/cable,
+/mob/living/basic/mouse/brown,
+/turf/open/floor/glass/reinforced,
+/area/space)
+"uF" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/plating,
+/area/space)
+"va" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/structure/cable,
+/turf/open/floor/iron/dark,
+/area/space)
+"wp" = (
+/obj/effect/decal/cleanable/generic,
+/turf/open/floor/iron/dark,
+/area/space)
+"wu" = (
+/obj/item/ammo_casing/shotgun/buckshot/spent{
+	pixel_x = 4;
+	pixel_y = -7
+	},
+/turf/open/floor/glass/reinforced,
+/area/space)
+"xa" = (
+/turf/closed/wall,
+/area/space)
+"xg" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/turf_decal/siding/wood/oak/corner{
+	dir = 1
+	},
+/turf/open/floor/wood/parquet/oak,
+/area/space)
+"xA" = (
+/turf/open/floor/plating,
+/area/space)
+"xE" = (
+/obj/item/stack/sheet/iron,
+/obj/effect/decal/cleanable/cobweb/cobweb2,
+/turf/open/floor/plating,
+/area/space)
+"yf" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/effect/decal/cleanable/blood/old,
+/turf/open/floor/plating,
+/area/space)
+"yJ" = (
+/obj/item/ammo_casing/c45/spent{
+	pixel_x = 6;
+	pixel_y = 5;
+	dir = 9
+	},
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/plating,
+/area/space)
+"zo" = (
+/obj/item/ammo_casing/c45/spent{
+	pixel_x = 6;
+	pixel_y = -6
+	},
+/turf/open/floor/plating,
+/area/space)
+"Af" = (
+/obj/structure/spider/stickyweb,
+/turf/open/floor/plating,
+/area/space)
+"Aj" = (
+/obj/item/newspaper,
+/turf/open/floor/plating,
+/area/space)
+"Am" = (
+/obj/structure/table/reinforced,
+/obj/effect/turf_decal/tile/bar/opposingcorners,
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/item/reagent_containers/condiment/enzyme,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron/white,
+/area/space)
+"Ay" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/generic,
+/turf/open/floor/iron/dark,
+/area/space)
+"AN" = (
+/obj/effect/mapping_helpers/broken_floor,
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/wood/parquet/oak,
+/area/space)
+"AV" = (
+/obj/effect/spawner/random/maintenance/four,
+/obj/structure/closet/crate/trashcart{
+	desc = "A heavy, metal laundrycart with wheels.";
+	name = "laundry cart"
+	},
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/light/small/broken/directional/south,
+/turf/open/floor/plating,
+/area/space)
+"Bc" = (
+/obj/effect/turf_decal/tile/bar/opposingcorners,
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/iron/white,
+/area/space)
+"Bn" = (
+/obj/machinery/oven/range,
+/obj/effect/turf_decal/tile/bar/opposingcorners,
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron/white,
+/area/space)
+"Ca" = (
+/obj/item/ammo_casing/shotgun/buckshot/spent{
+	pixel_x = -10;
+	pixel_y = 0
+	},
+/turf/open/floor/glass/reinforced,
+/area/space)
+"Ck" = (
+/obj/item/vending_refill/cigarette,
+/turf/open/floor/plating,
+/area/space)
+"CJ" = (
+/obj/effect/spawner/random/maintenance/three,
+/turf/open/floor/plating,
+/area/space)
+"Dh" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/structure/cable,
+/obj/item/ammo_casing/c45/spent{
+	pixel_x = -7;
+	pixel_y = -2;
+	dir = 9
+	},
+/obj/effect/mapping_helpers/broken_floor,
+/turf/open/floor/glass/reinforced,
+/area/space)
+"DK" = (
+/obj/effect/spawner/structure/window/reinforced,
+/obj/effect/spawner/structure/window/reinforced,
+/turf/open/floor/plating,
+/area/space)
+"EH" = (
+/obj/structure/dresser,
+/obj/item/lipstick/random,
+/turf/open/floor/plating,
+/area/space)
+"ER" = (
+/obj/structure/broken_flooring/singular/directional/east,
+/obj/effect/mapping_helpers/broken_floor,
+/turf/open/floor/glass/reinforced,
+/area/space)
+"FD" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/mapping_helpers/broken_floor,
+/turf/open/floor/wood/parquet/birch,
+/area/space)
+"FF" = (
+/obj/effect/spawner/random/glass_shards,
+/obj/effect/spawner/random/glass_shards,
+/obj/effect/turf_decal/tile/bar/opposingcorners,
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/iron/white,
+/area/space)
+"Ga" = (
+/obj/structure/table/reinforced,
+/obj/effect/turf_decal/tile/bar/opposingcorners,
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/machinery/reagentgrinder,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron/white,
+/area/space)
+"Gb" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/light/empty/directional/west,
+/turf/open/floor/iron/dark,
+/area/space)
+"Gw" = (
+/obj/effect/spawner/random/glass_shards,
+/obj/effect/decal/cleanable/ash,
+/turf/open/floor/plating,
+/area/space)
+"GF" = (
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron/dark,
+/area/space)
+"GS" = (
+/obj/item/ammo_casing/c45/spent{
+	pixel_x = 6;
+	pixel_y = 5;
+	dir = 9
+	},
+/obj/item/ammo_casing/c45/spent{
+	pixel_x = 0;
+	pixel_y = -3
+	},
+/obj/item/ammo_casing/c45/spent{
+	dir = 5;
+	pixel_x = -2;
+	pixel_y = 3
+	},
+/turf/open/floor/glass/reinforced,
+/area/space)
+"GV" = (
+/obj/structure/broken_flooring/singular/always_floorplane/directional,
+/obj/effect/mapping_helpers/broken_floor,
+/turf/open/floor/plating,
+/area/space)
+"Id" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/table/reinforced,
+/obj/machinery/light/small/dim/directional/north,
+/obj/item/phone,
+/turf/open/floor/iron/dark,
+/area/space)
+"Jd" = (
+/obj/structure/chair{
+	dir = 8
+	},
+/turf/open/floor/plating,
+/area/space)
+"KM" = (
+/turf/open/floor/glass/reinforced,
+/area/space)
+"Lp" = (
+/turf/open/floor/iron/dark,
+/area/space)
+"Lz" = (
+/obj/structure/table/reinforced,
+/obj/effect/turf_decal/tile/bar/opposingcorners,
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/item/reagent_containers/cup/beaker/large,
+/obj/effect/decal/cleanable/dirt,
+/obj/item/book/manual/wiki/cooking_to_serve_man,
+/turf/open/floor/iron/white,
+/area/space)
+"LH" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/structure/cable,
+/obj/item/ammo_casing/c45/spent{
+	pixel_x = 4;
+	pixel_y = -7
+	},
+/turf/open/floor/glass/reinforced,
+/area/space)
+"MH" = (
+/obj/structure/closet/wardrobe/pjs,
+/obj/effect/spawner/random/maintenance/two,
+/turf/open/floor/plating,
+/area/space)
+"MR" = (
+/obj/machinery/vending/autodrobe,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/wood/parquet/birch,
+/area/space)
+"Ni" = (
+/obj/structure/table/reinforced,
+/obj/machinery/door/poddoor/shutters/preopen{
+	dir = 8;
+	id = "kitchen_abandoned_1";
+	name = "Kitchen Shutters"
+	},
+/turf/open/floor/plating,
+/area/space)
+"Nl" = (
+/obj/structure/chair{
+	dir = 1
+	},
+/obj/item/clothing/gloves/color/black,
+/turf/open/floor/plating,
+/area/space)
+"NM" = (
+/obj/effect/mapping_helpers/broken_floor,
+/turf/open/floor/wood/parquet/birch,
+/area/space)
+"NN" = (
+/obj/effect/decal/cleanable/blood/drip,
+/turf/open/floor/plating,
+/area/space)
+"Ob" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/turf_decal/siding/wood/oak/corner{
+	dir = 8
+	},
+/turf/open/floor/wood/parquet/oak,
+/area/space)
+"OB" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/turf_decal/siding/wood/oak{
+	dir = 8
+	},
+/turf/open/floor/wood/parquet/oak,
+/area/space)
+"Ph" = (
+/obj/item/kirbyplants/random/dead,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron/dark,
+/area/space)
+"Pn" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/structure/cable,
+/turf/open/floor/glass/reinforced,
+/area/space)
+"Qo" = (
+/obj/effect/turf_decal/tile/bar/opposingcorners,
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/ants,
+/turf/open/floor/iron/white,
+/area/space)
+"Qy" = (
+/obj/structure/table,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/structure/bedsheetbin{
+	pixel_x = -1;
+	pixel_y = 2
+	},
+/turf/open/floor/wood/parquet/birch,
+/area/space)
+"QO" = (
+/obj/effect/turf_decal/tile/bar/opposingcorners,
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/machinery/button/door/directional/west{
+	id = "kitchen_abandoned_1"
+	},
+/turf/open/floor/iron/white,
+/area/space)
+"Rl" = (
+/obj/structure/table/wood/fancy/royalblack,
+/obj/item/taperecorder/empty,
+/obj/effect/mapping_helpers/broken_floor,
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/wood/parquet/oak,
+/area/space)
+"Ro" = (
+/obj/item/ammo_casing/p50/surplus,
+/obj/effect/decal/cleanable/blood/gibs/robot_debris/old,
+/obj/effect/decal/cleanable/shreds,
+/turf/open/floor/plating,
+/area/space)
+"Rv" = (
+/obj/item/flashlight/seclite,
+/turf/open/floor/glass/reinforced,
+/area/space)
+"Rx" = (
+/obj/structure/table/wood/fancy/royalblack,
+/obj/item/trash/candle,
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/wood/parquet/oak,
+/area/space)
+"RO" = (
+/obj/effect/turf_decal/tile/bar/opposingcorners,
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/machinery/vending/dinnerware,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron/white,
+/area/space)
+"Se" = (
+/obj/structure/chair/sofa/left/brown{
+	dir = 8
+	},
+/turf/open/floor/iron/dark,
+/area/space)
+"So" = (
+/obj/effect/spawner/random/glass_shards,
+/obj/effect/mapping_helpers/broken_floor,
+/turf/open/floor/plating,
+/area/space)
+"Sq" = (
+/obj/item/ammo_casing/c45/spent,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/iron/dark,
+/area/space)
+"SW" = (
+/obj/machinery/washing_machine,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/turf/open/floor/plating,
+/area/space)
+"SY" = (
+/obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer2{
+	dir = 1
+	},
+/obj/effect/mapping_helpers/broken_floor,
+/turf/open/floor/wood/parquet/birch,
+/area/space)
+"Tw" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/structure/cable,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/plating,
+/area/space)
+"TC" = (
+/obj/structure/table,
+/obj/effect/spawner/random/maintenance/two,
+/turf/open/floor/plating,
+/area/space)
+"TO" = (
+/obj/structure/table,
+/turf/open/floor/glass/reinforced,
+/area/space)
+"UD" = (
+/obj/structure/door_assembly,
+/turf/open/floor/plating,
+/area/space)
+"Vi" = (
+/mob/living/basic/mouse/rat/gray,
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/wood/parquet/oak,
+/area/space)
+"VY" = (
+/obj/effect/mapping_helpers/broken_floor,
+/turf/open/floor/plating,
+/area/space)
+"Wn" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/structure/cable,
+/obj/item/ammo_casing/c45/spent{
+	pixel_x = 6;
+	pixel_y = 5;
+	dir = 9
+	},
+/obj/effect/mapping_helpers/broken_floor,
+/turf/open/floor/glass/reinforced,
+/area/space)
+"WT" = (
+/obj/structure/barricade/security,
+/turf/open/floor/glass/reinforced,
+/area/space)
+"Xx" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/item/stack/cable_coil{
+	amount = 1
+	},
+/obj/item/weldingtool/mini/empty,
+/obj/item/assembly/igniter,
+/obj/effect/decal/cleanable/dirt,
+/turf/open/floor/plating,
+/area/space)
+"XM" = (
+/obj/structure/chair{
+	dir = 1
+	},
+/turf/open/floor/plating,
+/area/space)
+"Yw" = (
+/obj/effect/decal/cleanable/generic,
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/turf_decal/siding/wood/oak{
+	dir = 8
+	},
+/obj/effect/turf_decal/siding/wood/oak{
+	dir = 1
+	},
+/turf/open/floor/wood/parquet/oak,
+/area/space)
+"Yz" = (
+/obj/structure/table/reinforced,
+/obj/machinery/door/window/right/directional/east{
+	name = "Kitchen";
+	req_access = list("kitchen")
+	},
+/obj/machinery/door/poddoor/shutters/preopen{
+	dir = 8;
+	id = "kitchen_abandoned_1";
+	name = "Kitchen Shutters"
+	},
+/turf/open/floor/plating,
+/area/space)
+"YC" = (
+/obj/structure/table/wood,
+/obj/effect/spawner/random/maintenance/two,
+/obj/item/reagent_containers/cup/glass/bottle/beer/almost_empty,
+/turf/open/floor/plating,
+/area/space)
+"YI" = (
+/obj/structure/chair/sofa/corp/left{
+	dir = 8
+	},
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/wood/parquet/oak,
+/area/space)
+"Zd" = (
+/obj/effect/mapping_helpers/broken_floor,
+/obj/effect/turf_decal/siding/wood/oak{
+	dir = 8
+	},
+/turf/open/floor/wood/parquet/oak,
+/area/space)
+"Zm" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/structure/cable,
+/obj/effect/decal/cleanable/blood/drip,
+/turf/open/floor/glass/reinforced,
+/area/space)
+"ZU" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/structure/cable,
+/obj/effect/mapping_helpers/broken_floor,
+/turf/open/floor/glass/reinforced,
+/area/space)
+"ZV" = (
+/obj/machinery/door/airlock/multi_tile/public/glass{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/structure/cable,
+/obj/structure/spider/stickyweb,
+/turf/open/floor/plating,
+/area/space)
+
+(1,1,1) = {"
+oJ
+oJ
+oJ
+oJ
+oJ
+xa
+xa
+xa
+oJ
+oJ
+oJ
+oJ
+oJ
+xa
+xa
+xa
+xa
+co
+xa
+xa
+"}
+(2,1,1) = {"
+oJ
+oJ
+xa
+xa
+xa
+xa
+Lp
+rS
+oJ
+oJ
+oJ
+oJ
+oJ
+rS
+xA
+xa
+pv
+NM
+MH
+xa
+"}
+(3,1,1) = {"
+oJ
+oJ
+nQ
+nT
+nT
+nT
+nT
+rS
+oJ
+oJ
+oJ
+oJ
+oJ
+rS
+GF
+xa
+cr
+cp
+NM
+xa
+"}
+(4,1,1) = {"
+oJ
+oJ
+xa
+Id
+dY
+GF
+nT
+rS
+rS
+oJ
+oJ
+oJ
+rS
+rS
+aC
+xa
+Qy
+FD
+Nl
+xa
+"}
+(5,1,1) = {"
+oJ
+oJ
+xa
+xa
+xa
+GF
+va
+oO
+rS
+rS
+rS
+rS
+rS
+Yw
+GF
+xa
+SW
+dG
+MR
+xa
+"}
+(6,1,1) = {"
+oJ
+oJ
+oJ
+oJ
+rS
+GF
+va
+Ob
+OB
+Zd
+hY
+OB
+bu
+xg
+uF
+bt
+yf
+SY
+Ck
+xa
+"}
+(7,1,1) = {"
+oJ
+oJ
+oJ
+oJ
+xA
+Sq
+Tw
+Lp
+bJ
+fB
+sz
+Rx
+Vi
+dG
+gQ
+xa
+xE
+NM
+EH
+xa
+"}
+(8,1,1) = {"
+oJ
+oJ
+oJ
+oJ
+xA
+GF
+Tw
+xA
+jW
+YI
+Rl
+AN
+xA
+dG
+Tw
+xa
+xa
+xa
+xa
+xa
+"}
+(9,1,1) = {"
+oJ
+oJ
+oJ
+rS
+rS
+GF
+Tw
+yJ
+xA
+xA
+xA
+dz
+NN
+ol
+va
+Lp
+Gb
+GF
+Ph
+xa
+"}
+(10,1,1) = {"
+oJ
+xa
+rS
+DK
+GF
+nj
+lo
+tD
+Tw
+Pn
+Pn
+Pn
+Pn
+Pn
+Zm
+Pn
+Pn
+gQ
+nT
+rI
+"}
+(11,1,1) = {"
+oJ
+Lp
+GF
+GF
+wp
+jl
+jl
+Ro
+wu
+tJ
+Ca
+KM
+KM
+Rv
+KM
+KM
+KM
+xA
+VY
+xA
+"}
+(12,1,1) = {"
+oJ
+Lp
+Lp
+xA
+xA
+xA
+TC
+TO
+ZU
+LH
+KM
+dG
+Ay
+GF
+GF
+Lp
+bS
+CJ
+lV
+xa
+"}
+(13,1,1) = {"
+oJ
+xa
+xA
+xA
+qH
+zo
+GS
+Dh
+ZU
+WT
+fH
+xA
+Jd
+aZ
+XM
+xa
+xa
+xa
+xa
+xa
+"}
+(14,1,1) = {"
+oJ
+xa
+Gw
+VY
+So
+ER
+ZU
+Wn
+KM
+rX
+sV
+xa
+Yz
+Ni
+Yz
+xa
+Bn
+hd
+RO
+xa
+"}
+(15,1,1) = {"
+oJ
+xa
+Gw
+VY
+kf
+ZU
+Pn
+KM
+Aj
+xA
+AV
+xa
+tC
+FF
+hl
+QO
+ib
+ci
+ci
+rH
+"}
+(16,1,1) = {"
+oJ
+xa
+Af
+GV
+ZU
+ZU
+mm
+dT
+nC
+xa
+xa
+xa
+Bc
+mF
+dr
+mF
+Qo
+mF
+Am
+xa
+"}
+(17,1,1) = {"
+oJ
+xa
+Af
+aF
+Xx
+dG
+pu
+YC
+GF
+rH
+dG
+UD
+mF
+ko
+Lz
+mA
+mF
+mF
+Ga
+xa
+"}
+(18,1,1) = {"
+oJ
+xa
+pL
+Af
+eG
+Af
+oc
+Se
+Lp
+xa
+dG
+xa
+xa
+xa
+xa
+xa
+xa
+xa
+xa
+xa
+"}
+(19,1,1) = {"
+oJ
+xa
+xa
+Af
+ZV
+xa
+xa
+xa
+xa
+xa
+rH
+xa
+oJ
+oJ
+oJ
+oJ
+oJ
+oJ
+oJ
+oJ
+"}
+(20,1,1) = {"
+oJ
+oJ
+oJ
+oJ
+oJ
+oJ
+oJ
+oJ
+oJ
+oJ
+oJ
+oJ
+oJ
+oJ
+oJ
+oJ
+oJ
+oJ
+oJ
+oJ
+"}
