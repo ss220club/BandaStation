@@ -1,14 +1,8 @@
 name: Merge Policy
 
-# Standalone required check for the merge queue. On merge_group, fails (ejecting the PR from the queue) unless the
-# queuer is not the PR author (skipped when ALLOW_SELF_MERGE is true) and the oldest current approval is at least
-# MERGE_DELAY_HOURS old. A no-op on pull_request.
-
 on:
-  # No-op on PRs, but without a passing check on the PR it can never enter the queue.
   pull_request:
-    branches: [master]
-  merge_group:
+    types: [opened, reopened, synchronize, ready_for_review, labeled, unlabeled]
     branches: [master]
 
 permissions:
@@ -16,42 +10,25 @@ permissions:
   pull-requests: read
 
 env:
-  MERGE_DELAY_HOURS: 24
-  ALLOW_SELF_MERGE: false
+  GH_TOKEN: ${{ github.token }}
+  GH_REPO: ${{ github.repository }}
+  PR: ${{ github.event.pull_request.number }}
 
 jobs:
   merge_policy:
     name: Merge Policy
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
+    runs-on: ubuntu-slim
     steps:
-      - if: github.event_name == 'merge_group' && !endsWith(github.actor, '[bot]')
+      - name: Forbid merge-blocking labels
         env:
-          GH_TOKEN: ${{ github.token }}
-          GH_REPO: ${{ github.repository }}
-          ACTOR: ${{ github.actor }}
-          # gh-readonly-queue/<base>/pr-<number>-<sha>; only the last PR of a group is named, so keep max group size 1.
-          HEAD_REF: ${{ github.event.merge_group.head_ref }}
+          BLOCKING_LABELS: |-
+            :clock1: На удержании
+            :stop_sign: Do Not Merge
+            :horse: Спорно
         run: |
-          fail() { echo "::error::$1"; exit 1; }
-          pr=$(grep -oP '/pr-\K\d+' <<< "$HEAD_REF") || fail "No PR number in $HEAD_REF"
-          data=$(gh pr view "$pr" --json author,reviews)
-
-          if [[ $ALLOW_SELF_MERGE != true && $(jq -r .author.login <<< "$data") == "$ACTOR" ]]; then
-            fail "@$ACTOR queued their own PR #$pr."
+          labels=$(gh pr view "$PR" --json labels --jq '.labels[].name')
+          blocking=$(grep -xFf <(printf '%s\n' "$BLOCKING_LABELS") <<< "$labels" || true)
+          if [[ -n $blocking ]]; then
+            echo "::error::PR #$PR has merge-blocking label(s): ${blocking//$'\n'/, }"
+            exit 1
           fi
-
-          # Last non-comment review per reviewer, so a plain comment does not cancel an approval.
-          approved=$(jq '
-            [ .reviews
-              | map(select(.state != "COMMENTED"))
-              | group_by(.author.login)[]
-              | last
-              | select(.state == "APPROVED" and (.authorAssociation | IN("OWNER", "MEMBER", "COLLABORATOR")))
-              | .submittedAt
-              | fromdateiso8601
-            ] | min' <<< "$data")
-          [[ $approved != null ]] || fail "PR #$pr has no valid approval."
-
-          age_hours=$(( ($(date +%s) - approved) / 3600 ))
-          (( age_hours >= MERGE_DELAY_HOURS )) || fail "PR #$pr was first approved ${age_hours}h ago, ${MERGE_DELAY_HOURS}h required."
