@@ -70,6 +70,7 @@
 		SIGNAL_REMOVETRAIT(TRAIT_KNOCKEDOUT),
 	), PROC_REF(update_diagnostics))
 	RegisterSignal(human, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine))
+	RegisterSignal(human, COMSIG_CARBON_ATTEMPT_EAT, PROC_REF(on_attempt_eat))
 	// Species can be applied both before and after the human's initial HUD setup.
 	if(!human.hud_list)
 		human.prepare_huds()
@@ -97,10 +98,17 @@
 		SIGNAL_ADDTRAIT(TRAIT_KNOCKEDOUT),
 		SIGNAL_REMOVETRAIT(TRAIT_KNOCKEDOUT),
 		COMSIG_ATOM_EXAMINE,
+		COMSIG_CARBON_ATTEMPT_EAT,
 	))
 	human.set_hud_image_inactive(DIAG_HUD)
 	human.set_hud_image_inactive(DIAG_STAT_HUD)
 	human.set_hud_image_inactive(DIAG_BATT_HUD)
+
+/// The chassis has no food intake; this also rejects another person's feeding attempt.
+/datum/species/ipc/proc/on_attempt_eat(mob/living/carbon/human/human, atom/food)
+	SIGNAL_HANDLER
+	human.balloon_alert(human, "КПБ не могут есть!")
+	return BLOCK_EAT_ATTEMPT
 
 /datum/species/ipc/proc/on_electrocute(mob/living/carbon/human/human, shock_damage, atom/power_source, siemens_coeff, flags)
 	SIGNAL_HANDLER

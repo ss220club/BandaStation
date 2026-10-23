@@ -190,3 +190,94 @@
 	var/datum/surgery_operation/limb/mechanical_open/open_hatch = GLOB.operations.operations_by_typepath[__IMPLIED_TYPE__]
 	TEST_ASSERT_EQUAL(open_hatch.try_perform(chest, surgeon, IMPLEMENT_HAND, operation_args), ITEM_INTERACT_SUCCESS, "Opening an IPC hatch by hand did not succeed.")
 	TEST_ASSERT(LIMB_HAS_SURGERY_STATE(chest, SURGERY_SKIN_OPEN), "Successful maintenance did not open the IPC hatch.")
+
+/// Food cannot be consumed by an IPC, including direct bites and another person's feeding attempt.
+/datum/unit_test/ipc_food_rejection/Run()
+	var/mob/living/carbon/human/eater = allocate(/mob/living/carbon/human/consistent)
+	var/mob/living/carbon/human/feeder = allocate(/mob/living/carbon/human/consistent)
+	var/obj/item/food/cracker/food = allocate(/obj/item/food/cracker)
+	var/datum/component/edible/edible = food.GetComponent(/datum/component/edible)
+	var/initial_food_volume = food.reagents.total_volume
+	eater.set_species(/datum/species/ipc)
+	eater.set_nutrition(200, forced = TRUE)
+	var/initial_reagent_volume = eater.reagents.total_volume
+	var/initial_satiety = eater.satiety
+
+	edible.TryToEat(eater, eater)
+	edible.TryToEat(eater, feeder)
+	TEST_ASSERT(!edible.TakeBite(eater, feeder), "A direct bite bypassed IPC food rejection.")
+	TEST_ASSERT_EQUAL(food.reagents.total_volume, initial_food_volume, "Rejected IPC feeding consumed food.")
+	TEST_ASSERT_EQUAL(edible.bitecount, 0, "Rejected IPC feeding counted as a bite.")
+	TEST_ASSERT_EQUAL(eater.reagents.total_volume, initial_reagent_volume, "Rejected IPC feeding transferred reagents.")
+	TEST_ASSERT_EQUAL(eater.nutrition, 200, "Rejected food changed IPC battery charge.")
+	TEST_ASSERT_EQUAL(eater.satiety, initial_satiety, "Rejected food changed IPC satiety.")
+	TEST_ASSERT(!DOING_INTERACTION(feeder, eater), "Feeding an IPC started a timed feeding action.")
+
+	eater.set_species(/datum/species/human)
+	TEST_ASSERT(edible.TakeBite(eater, eater), "Changing away from IPC did not restore eating.")
+	TEST_ASSERT(food.reagents.total_volume < initial_food_volume, "A human control did not consume food.")
+	var/remaining_food_volume = food.reagents.total_volume
+	eater.set_species(/datum/species/ipc)
+	TEST_ASSERT(!edible.TakeBite(eater, eater), "A second transformation into IPC did not restore food rejection.")
+	TEST_ASSERT_EQUAL(food.reagents.total_volume, remaining_food_volume, "A second IPC transformation allowed food consumption.")
+	eater.set_species(/datum/species/human)
+	TEST_ASSERT(edible.CanConsume(eater, feeder), "IPC food rejection survived a second transformation into a human.")
+
+/// Loaded utensils must retain their contents when the receiver is an IPC.
+/datum/unit_test/ipc_utensil_food_rejection/Run()
+	var/mob/living/carbon/human/eater = allocate(/mob/living/carbon/human/consistent)
+	var/mob/living/carbon/human/feeder = allocate(/mob/living/carbon/human/consistent)
+	var/obj/item/food/omelette/food = allocate(/obj/item/food/omelette)
+	var/obj/item/kitchen/fork/fork = allocate(/obj/item/kitchen/fork)
+	var/obj/item/kitchen/spoon/spoon = allocate(/obj/item/kitchen/spoon)
+	TEST_ASSERT_EQUAL(food.item_interaction(feeder, fork, list()), ITEM_INTERACT_SUCCESS, "Could not load an omelette onto the test fork.")
+	var/datum/reagent/forkful = fork.forkload
+	TEST_ASSERT_NOTNULL(forkful, "The test fork has no food.")
+	spoon.reagents.add_reagent(/datum/reagent/consumable/nutriment, spoon.reagents.maximum_volume)
+	var/spoonful_volume = spoon.reagents.total_volume
+	eater.set_species(/datum/species/ipc)
+	eater.set_nutrition(200, forced = TRUE)
+	var/initial_reagent_volume = eater.reagents.total_volume
+
+	fork.attack(eater, eater)
+	fork.attack(eater, feeder)
+	spoon.attack(eater, eater, list(), list())
+	spoon.attack(eater, feeder, list(), list())
+	TEST_ASSERT_EQUAL(fork.forkload, forkful, "An IPC consumed the food on a fork.")
+	TEST_ASSERT_EQUAL(spoon.reagents.total_volume, spoonful_volume, "An IPC consumed a spoonful.")
+	TEST_ASSERT_EQUAL(eater.reagents.total_volume, initial_reagent_volume, "An IPC received food reagents from cutlery.")
+	TEST_ASSERT_EQUAL(eater.nutrition, 200, "Food from cutlery changed IPC battery charge.")
+
+	eater.set_species(/datum/species/human)
+	fork.attack(eater, eater)
+	TEST_ASSERT_NULL(fork.forkload, "A human control could not eat food from a fork.")
+	spoon.attack(eater, feeder, list(), list())
+	TEST_ASSERT_EQUAL(spoon.reagents.total_volume, 0, "A human control could not be fed using a spoon.")
+
+/// Species changes during forcefeeding must be checked again before food leaves its source.
+/datum/unit_test/ipc_food_rejection_after_delay/Run()
+	var/mob/living/carbon/human/eater = allocate(/mob/living/carbon/human/consistent)
+	var/mob/living/carbon/human/feeder = allocate(/mob/living/carbon/human/consistent/slow)
+	var/obj/item/food/cracker/food = allocate(/obj/item/food/cracker)
+	var/datum/component/edible/edible = food.GetComponent(/datum/component/edible)
+	var/initial_food_volume = food.reagents.total_volume
+
+	edible.TryToEat(eater, feeder)
+	TEST_ASSERT(DOING_INTERACTION(feeder, eater), "The food control did not start a delayed feeding action.")
+	addtimer(CALLBACK(eater, TYPE_PROC_REF(/mob, set_species), /datum/species/ipc), 1)
+	var/deadline = world.time + 10 SECONDS
+	while(DOING_INTERACTION(feeder, eater) && world.time < deadline)
+		stoplag()
+	TEST_ASSERT(!DOING_INTERACTION(feeder, eater), "Timed out while waiting for the feeding action.")
+	TEST_ASSERT(is_species(eater, /datum/species/ipc), "The receiver did not become an IPC during forcefeeding.")
+	TEST_ASSERT_EQUAL(food.reagents.total_volume, initial_food_volume, "A species change during forcefeeding allowed food consumption.")
+	TEST_ASSERT_EQUAL(edible.bitecount, 0, "A species change during forcefeeding still counted a bite.")
+
+	eater.set_species(/datum/species/human)
+	var/obj/item/kitchen/spoon/spoon = allocate(/obj/item/kitchen/spoon)
+	spoon.reagents.add_reagent(/datum/reagent/consumable/nutriment, spoon.reagents.maximum_volume)
+	var/spoonful_volume = spoon.reagents.total_volume
+	addtimer(CALLBACK(eater, TYPE_PROC_REF(/mob, set_species), /datum/species/ipc), 1)
+	spoon.attack(eater, feeder, list(), list())
+	TEST_ASSERT(is_species(eater, /datum/species/ipc), "The receiver did not become an IPC during spoon feeding.")
+	TEST_ASSERT_EQUAL(spoon.reagents.total_volume, spoonful_volume, "A species change during spoon feeding allowed food consumption.")
