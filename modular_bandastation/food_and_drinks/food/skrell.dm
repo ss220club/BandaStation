@@ -87,7 +87,7 @@
 		/datum/reagent/consumable/capsaicin = 5,
 	)
 	tastes = list("scorching heat" = 3, "crisp crust" = 2, "mushroom" = 1)
-	foodtypes = GRAIN | MUSHROOM
+	foodtypes = VEGETABLES|GRAIN|MUSHROOM
 	w_class = WEIGHT_CLASS_NORMAL
 	crafting_complexity = FOOD_COMPLEXITY_3
 	venue_value = FOOD_PRICE_NORMAL
@@ -242,7 +242,7 @@
 		/datum/reagent/consumable/soysauce = 2,
 	)
 	tastes = list("raw mushroom" = 3, "savory soy" = 2)
-	foodtypes = VEGETABLES | MUSHROOM | GRAIN | RAW
+	foodtypes = VEGETABLES | MUSHROOM | RAW
 	w_class = WEIGHT_CLASS_SMALL
 	crafting_complexity = FOOD_COMPLEXITY_2
 	venue_value = FOOD_PRICE_CHEAP
@@ -300,7 +300,7 @@
 		/datum/reagent/consumable/nutriment/protein = 6,
 	)
 	tastes = list("nutty tempeh" = 2, "tingling mushrooms" = 2, "soy" = 1)
-	foodtypes = VEGETABLES | MUSHROOM
+	foodtypes = VEGETABLES | MUSHROOM | GRAIN
 	w_class = WEIGHT_CLASS_SMALL
 	crafting_complexity = FOOD_COMPLEXITY_3
 	venue_value = FOOD_PRICE_EXOTIC
@@ -317,7 +317,7 @@
 		/datum/reagent/consumable/nutriment/vitamin = 2,
 	)
 	tastes = list("earthy dough" = 2, "metallic sweetness" = 1, "sugar" = 1)
-	foodtypes = GRAIN | MUSHROOM | SUGAR
+	foodtypes = GRAIN | MUSHROOM | SUGAR | FRUIT
 	w_class = WEIGHT_CLASS_SMALL
 	crafting_complexity = FOOD_COMPLEXITY_3
 	venue_value = FOOD_PRICE_NORMAL
@@ -352,7 +352,7 @@
 		/datum/reagent/consumable/nutriment/vitamin = 3,
 	)
 	tastes = list("cactus tang" = 2, "scorching heat" = 3, "mushroom" = 1)
-	foodtypes = VEGETABLES | MUSHROOM
+	foodtypes = MUSHROOM | VEGETABLES
 	w_class = WEIGHT_CLASS_SMALL
 	crafting_complexity = FOOD_COMPLEXITY_3
 	venue_value = FOOD_PRICE_NORMAL
@@ -487,7 +487,7 @@
 		/datum/reagent/medicine/omnizine = 12,
 	)
 	tastes = list("infinite fungal harmony" = 4, "divine nectar" = 3, "pure euphoria" = 2)
-	foodtypes = VEGETABLES | MUSHROOM | GRAIN | FRUIT
+	foodtypes = VEGETABLES | MUSHROOM | GRAIN | FRUIT | TOXIC
 	w_class = WEIGHT_CLASS_NORMAL
 	crafting_complexity = FOOD_COMPLEXITY_5
 	venue_value = FOOD_PRICE_LEGENDARY
@@ -591,7 +591,7 @@
 		/datum/reagent/consumable/soysauce = 2,
 	)
 	tastes = list("rice bun" = 2, "savory tofu" = 2, "juicy mushroom" = 2)
-	foodtypes = GRAIN | VEGETABLES | MUSHROOM
+	foodtypes = GRAIN | VEGETABLES | MUSHROOM | BREAKFAST
 	food_flags = FOOD_FINGER_FOOD
 	w_class = WEIGHT_CLASS_SMALL
 	crafting_complexity = FOOD_COMPLEXITY_3
@@ -630,7 +630,7 @@
 		/datum/reagent/toxin/amanitin = 4,
 	)
 	tastes = list("rice bun" = 2, "crispy onion" = 2, "intense numbing mushroom" = 3)
-	foodtypes = GRAIN | VEGETABLES | MUSHROOM | TOXIC
+	foodtypes = GRAIN | VEGETABLES | MUSHROOM | TOXIC | BREAKFAST
 	food_flags = FOOD_FINGER_FOOD
 	w_class = WEIGHT_CLASS_SMALL
 	crafting_complexity = FOOD_COMPLEXITY_4
@@ -710,7 +710,7 @@
 		/datum/reagent/consumable/nutriment/vitamin = 4,
 	)
 	tastes = list("sweet cake" = 2, "zesty citrus" = 2, "aromatic coffee" = 1)
-	foodtypes = GRAIN | FRUIT | SUGAR
+	foodtypes = GRAIN | FRUIT | DAIRY | SUGAR | ORANGES
 	slice_type = /obj/item/food/cakeslice/skrell_citrus_slice
 	crafting_complexity = FOOD_COMPLEXITY_3
 	venue_value = FOOD_PRICE_NORMAL
@@ -749,7 +749,7 @@
 		/datum/reagent/consumable/nutriment/vitamin = 4,
 	)
 	tastes = list("sweet blue cherries" = 3, "crisp crust" = 2, "cocoa" = 1)
-	foodtypes = GRAIN | FRUIT | SUGAR
+	foodtypes = GRAIN | FRUIT | SUGAR | VEGETABLES | DAIRY
 	w_class = WEIGHT_CLASS_NORMAL
 	crafting_complexity = FOOD_COMPLEXITY_3
 	venue_value = FOOD_PRICE_NORMAL
@@ -782,7 +782,7 @@
 		/datum/reagent/consumable/sugar = 3,
 	)
 	tastes = list("fried sweet dough" = 3, "sugar glaze" = 2, "tingling trip" = 1)
-	foodtypes = GRAIN | SUGAR | MUSHROOM | FRIED
+	foodtypes = VEGETABLES | JUNKFOOD | GRAIN | FRUIT | DAIRY | FRIED | SUGAR | BREAKFAST | MUSHROOM
 	food_flags = FOOD_FINGER_FOOD
 	w_class = WEIGHT_CLASS_SMALL
 	crafting_complexity = FOOD_COMPLEXITY_2
@@ -802,7 +802,7 @@
 		/datum/reagent/consumable/cherryjelly = 2,
 	)
 	tastes = list("creamy vanilla" = 3, "sweet cherry" = 1, "soymilk" = 1)
-	foodtypes = GRAIN | SUGAR | FRUIT
+	foodtypes = GRAIN | SUGAR | FRUIT | DAIRY
 	w_class = WEIGHT_CLASS_SMALL
 	crafting_complexity = FOOD_COMPLEXITY_2
 	venue_value = FOOD_PRICE_NORMAL
@@ -859,7 +859,7 @@
 		/datum/reagent/medicine/synaptizine = 0.6,
 	)
 	tastes = list("divine sweet nectar" = 3, "pastry crust" = 2)
-	foodtypes = GRAIN | SUGAR | VEGETABLES
+	foodtypes = VEGETABLES | GRAIN | FRUIT | DAIRY | SUGAR
 	w_class = WEIGHT_CLASS_TINY
 	food_flags = FOOD_FINGER_FOOD
 
@@ -876,7 +876,7 @@
 		/datum/reagent/medicine/c2/aiuri = 2,
 	)
 	tastes = list("sweet pastry" = 2, "herbal ambrosia" = 2, "soy" = 1)
-	foodtypes = GRAIN | VEGETABLES
+	foodtypes = VEGETABLES | GRAIN | DAIRY
 	w_class = WEIGHT_CLASS_NORMAL
 	crafting_complexity = FOOD_COMPLEXITY_2
 	venue_value = FOOD_PRICE_NORMAL
@@ -914,7 +914,7 @@
 		/datum/reagent/medicine/c2/aiuri = 2,
 	)
 	tastes = list("rich dark chocolate" = 3, "sweet green cream" = 2, "herbal soothing" = 1)
-	foodtypes = GRAIN | SUGAR | VEGETABLES
+	foodtypes = VEGETABLES | JUNKFOOD | GRAIN | FRUIT | DAIRY | SUGAR
 	w_class = WEIGHT_CLASS_NORMAL
 	crafting_complexity = FOOD_COMPLEXITY_3
 	venue_value = FOOD_PRICE_NORMAL
@@ -953,7 +953,7 @@
 		/datum/reagent/gold = 1,
 	)
 	tastes = list("golden honey" = 3, "divine ambrosia" = 3, "sparkling sweetness" = 2)
-	foodtypes = GRAIN | SUGAR | VEGETABLES
+	foodtypes = VEGETABLES | GRAIN | FRUIT | DAIRY | SUGAR
 	w_class = WEIGHT_CLASS_NORMAL
 	crafting_complexity = FOOD_COMPLEXITY_4
 	venue_value = FOOD_PRICE_EXOTIC
@@ -990,7 +990,7 @@
 		/datum/reagent/consumable/capsaicin = 0.5,
 	)
 	tastes = list("rich crimson pastry" = 3, "divine honey cream" = 3, "serene warmth" = 2)
-	foodtypes = GRAIN | SUGAR | VEGETABLES
+	foodtypes = VEGETABLES | GRAIN | FRUIT | DAIRY | SUGAR
 	w_class = WEIGHT_CLASS_NORMAL
 	crafting_complexity = FOOD_COMPLEXITY_4
 	venue_value = FOOD_PRICE_LEGENDARY
