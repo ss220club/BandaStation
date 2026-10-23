@@ -1045,7 +1045,7 @@
 		/datum/reagent/consumable/nutriment/vitamin = 4,
 	)
 	tastes = list("beef" = 3, "sour cream" = 1, "salt" = 1, "pepper" = 1)
-	foodtypes = MEAT | VEGETABLES | DAIRY
+	foodtypes = MEAT | VEGETABLES | DAIRY | MUSHROOM // BANDASTATION ADDITION
 
 	w_class = WEIGHT_CLASS_SMALL
 	//basic ingredients, but a lot of them. just covering costs here

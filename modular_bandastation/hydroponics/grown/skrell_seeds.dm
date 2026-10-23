@@ -51,6 +51,7 @@
 	growthstages = 4
 	product = /obj/item/food/grown/mushroom/gomoa
 	genes = list(/datum/plant_gene/trait/glow/orange, /datum/plant_gene/trait/plant_type/fungal_metabolism)
+	graft_gene = /datum/plant_gene/trait/glow/orange
 	mutatelist = null
 	reagents_add = list(/datum/reagent/silver = 0.1, /datum/reagent/phosphorus = 0.05, /datum/reagent/consumable/nutriment = 0.1)
 	rarity = 30

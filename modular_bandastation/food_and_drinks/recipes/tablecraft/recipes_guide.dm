@@ -50,7 +50,7 @@
 /datum/crafting_recipe/food/knife/blue_cherry_slice
 	name = "Blue cherry moonflower cake slice"
 	reqs = list(/obj/item/food/cake/blue_cherry_moon_cake = 1)
-	result = /obj/item/food/cake_slice/blue_cherry_slice
+	result = /obj/item/food/cakeslice/blue_cherry_slice
 	dish_category = DISH_CAKE
 	cuisine_category = CUISINE_SKRELL
 	meal_category = MEAL_DESSERT

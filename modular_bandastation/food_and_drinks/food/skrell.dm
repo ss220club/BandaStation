@@ -755,9 +755,9 @@
 	venue_value = FOOD_PRICE_NORMAL
 
 /obj/item/food/cake/blue_cherry_moon_cake/make_processable()
-	AddElement(/datum/element/processable, TOOL_KNIFE, /obj/item/food/cake_slice/blue_cherry_slice, 6, 3 SECONDS, table_required = TRUE, screentip_verb = "Slice", sound_to_play = SFX_KNIFE_SLICE)
+	AddElement(/datum/element/processable, TOOL_KNIFE, /obj/item/food/cakeslice/blue_cherry_slice, 6, 3 SECONDS, table_required = TRUE, screentip_verb = "Slice", sound_to_play = SFX_KNIFE_SLICE)
 
-/obj/item/food/cake_slice/blue_cherry_slice
+/obj/item/food/cakeslice/blue_cherry_slice
 	name = "blue cherry moonflower cake slice"
 	desc = "A slice of glowing blue cherry cake."
 	icon = 'icons/obj/food/skrell.dmi'
@@ -772,7 +772,7 @@
 	food_flags = FOOD_FINGER_FOOD
 
 // 36. Liberty Fungus Donuts
-/obj/item/food/donuts/liberty_fungus
+/obj/item/food/donut/liberty_fungus
 	name = "liberty fungus donut"
 	desc = "A deep-fried sweet pastry ring infused with a controlled extract of liberty-cap mushroom. Lifts the spirits and dissolves laboratory stress."
 	icon = 'icons/obj/food/skrell.dmi'
