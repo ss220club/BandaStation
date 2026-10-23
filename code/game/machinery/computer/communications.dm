@@ -144,6 +144,9 @@
 	playsound(src, 'sound/machines/terminal/terminal_alert.ogg', 50, FALSE)
 	return TRUE
 
+// BANDASTATION ADD START - Перенос ИИ: документация изменённого API.
+/** Обрабатывает штатные команды связи и проверенную печать аварийного кода ИИ. */
+// BANDASTATION ADD END - Перенос ИИ
 /obj/machinery/computer/communications/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/ui_state)
 	var/static/list/approved_states = list(STATE_BUYING_SHUTTLE, STATE_CHANGING_STATUS, STATE_MAIN, STATE_MESSAGES)
 
@@ -157,6 +160,10 @@
 	var/mob/user = ui.user
 	. = TRUE
 
+	// BANDASTATION ADD START - Перенос ИИ: аварийный код доступа к ИИ.
+	if(action == "requestAiControlCode")
+		return issue_ai_control_code(user)
+	// BANDASTATION ADD END - Перенос ИИ
 	switch (action)
 		if ("answerMessage")
 			if (!authenticated(user))
@@ -533,13 +540,18 @@
 	deadchat_broadcast(" has sent an outgoing message to the other station(s).</span>", "<span class='bold'>[user.real_name]", user, message_type = DEADCHAT_ANNOUNCEMENT)
 	GLOB.communications_controller.soft_filtering = FALSE // set it to false at the end of the proc to ensure that everything prior reads as intended
 
+// BANDASTATION ADD START - Перенос ИИ: документация изменённого API.
+/** Добавляет в штатные данные консоли доступность печати аварийного кода ИИ. */
+// BANDASTATION ADD END - Перенос ИИ
 /obj/machinery/computer/communications/ui_data(mob/user)
 	var/list/data = list(
 		"authenticated" = FALSE,
 		"emagged" = FALSE,
 		"syndicate" = syndicate,
 	)
-
+	// BANDASTATION ADD START - Перенос ИИ: аварийный код доступа к ИИ.
+	data["canIssueAiControlCode"] = can_issue_ai_control_code(user)
+	// BANDASTATION ADD END - Перенос ИИ
 	var/ui_state = HAS_SILICON_ACCESS(user) ? cyborg_state : state
 
 	var/has_connection = has_communication()

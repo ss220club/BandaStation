@@ -380,6 +380,9 @@ GLOBAL_LIST_INIT(skin_tone_names, list(
 		. += borg
 
 //Returns a list of AI's
+// BANDASTATION ADD START - Перенос ИИ: документация изменённого API.
+/** Возвращает активных ИИ с заданными фильтрами, учитывая размещение внутри физического ядра. */
+// BANDASTATION ADD END - Перенос ИИ
 /proc/active_ais(check_mind = FALSE, z = null, skip_syndicate = FALSE, only_syndicate = FALSE)
 	. = list()
 	for(var/mob/living/silicon/ai/ai as anything in GLOB.ai_list)
@@ -394,8 +397,11 @@ GLOBAL_LIST_INIT(skin_tone_names, list(
 			continue
 		if(check_mind && !ai.mind)
 			continue
-		if(!isnull(z) && z != ai.z && (!is_station_level(z) || !is_station_level(ai.z))) //if a Z level was specified, AND the AI is not on the same level, AND either is off the station...
+		// BANDASTATION ADD START - Перенос ИИ: поиск ИИ внутри физического ядра.
+		var/turf/ai_turf = get_turf(ai)
+		if(!isnull(z) && z != ai_turf?.z && (!is_station_level(z) || !is_station_level(ai_turf?.z)))
 			continue
+		// BANDASTATION ADD END - Перенос ИИ
 		. += ai
 
 //Find an active ai with the least borgs. VERBOSE PROCNAME HUH!

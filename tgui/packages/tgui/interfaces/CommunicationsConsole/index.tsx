@@ -80,6 +80,19 @@ export function CommunicationsConsole(props) {
           )
         )}
 
+        {/* BANDASTATION ADD START - Перенос ИИ: печать аварийного кода доступа. */}
+        {!!data.canIssueAiControlCode && (
+          <Section title="Аварийный доступ к ИИ">
+            <Button.Confirm
+              icon="key"
+              confirmContent="Заменить предыдущий код?"
+              onClick={() => act('requestAiControlCode')}
+            >
+              Распечатать код доступа ИИ
+            </Button.Confirm>
+          </Section>
+        )}
+        {/* BANDASTATION ADD END - Перенос ИИ */}
         {!!authenticated && currentPage}
       </Window.Content>
     </Window>

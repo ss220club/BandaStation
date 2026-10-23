@@ -329,6 +329,11 @@ ADMIN_VERB(log_viewer_new, R_ADMIN, "View Round Logs", "View the rounds logs.", 
 			pass() // nulls are allowed
 
 		else if(islist(data))
+			// BANDASTATION ADD START - Перенос ИИ: сохранение пустых коллекций в журнале.
+			if(!length(data))
+				jsonified_list[key] = list()
+				continue
+			// BANDASTATION ADD END - Перенос ИИ
 			data = recursive_jsonify(data, semvers)
 
 		else if(isdatum(data))
