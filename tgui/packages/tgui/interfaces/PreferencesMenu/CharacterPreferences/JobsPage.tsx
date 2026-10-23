@@ -11,10 +11,7 @@ import {
   useJobPriorityButtonProps,
 } from '../../../bandastation/donor_jobs/JobRestriction';
 import { SubscriptionJobs } from '../../../bandastation/donor_jobs/SubscriptionJobs';
-import {
-  JobTabButtons,
-  useJobTabFilter,
-} from '../../../bandastation/donor_jobs/JobTabs';
+import { useJobTabFilter } from '../../../bandastation/donor_jobs/JobTabs';
 import { prepareJobPriorityCache } from '../../../bandastation/job_slots_preferences/priority';
 // SS220 EDIT - END
 import { JOBS_RU } from '../../../bandastation/ru_jobs'; // BANDASTATION EDIT
@@ -320,10 +317,7 @@ function JoblessRoleDropdown() {
 
   const setPreference = createSetPreference(act, 'joblessrole');
   return (
-    <Section
-      title="Что делать если не удалось войти?"
-      buttons={<JobTabButtons />} // SS220 EDIT: modular job tabs in the native header.
-    >
+    <Section title="Что делать если не удалось войти?">
       <Stack fill textAlign="center">
         {options.map((option) => (
           <Stack.Item grow key={option.value}>

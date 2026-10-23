@@ -1,6 +1,7 @@
 import { atom, useAtom } from 'jotai';
+import type { ReactNode } from 'react';
 import { useBackend } from 'tgui/backend';
-import { Tabs } from 'tgui-core/components';
+import { Button } from 'tgui-core/components';
 import { sharedAtom, store } from '../../events/store';
 
 import { useServerPrefs } from '../../interfaces/PreferencesMenu/useServerPrefs';
@@ -40,22 +41,39 @@ export function JobTabButtons() {
   }
 
   return (
-    <Tabs className="PreferencesMenu__JobTabs">
-      <Tabs.Tab
-        selected={!subscriptionJobs}
+    <>
+      <Button
+        opacity={subscriptionJobs ? 0.55 : 1}
         onClick={() => selectSubscriptionJobs(false)}
       >
         Обычные
-      </Tabs.Tab>
-      <Tabs.Tab
+      </Button>
+      <Button
         icon="star"
-        selected={subscriptionJobs}
+        opacity={subscriptionJobs ? 1 : 0.55}
         onClick={() => selectSubscriptionJobs(true)}
       >
         Подписка
-      </Tabs.Tab>
-    </Tabs>
+      </Button>
+    </>
   );
+}
+
+/** Extend the native header on the jobs page; keep its character selector intact. */
+export function getJobHeaderButtons(
+  isJobsPage: boolean,
+  characterSelection: ReactNode,
+) {
+  return isJobsPage
+    ? {
+        buttons: (
+          <>
+            <JobTabButtons />
+            {characterSelection}
+          </>
+        ),
+      }
+    : {};
 }
 
 export function useJobTabFilter() {

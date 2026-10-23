@@ -1,13 +1,3 @@
-.Section:not(.Section--fitted) .PreferencesMenu__JobTabs {
-  margin: 0;
-  padding: 0;
-
-  .Tab {
-    min-height: var(--button-height);
-    min-width: auto;
-  }
-}
-
 .PreferencesMenu__JobTiers {
   display: flex;
   flex-direction: column;

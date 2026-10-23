@@ -15,7 +15,7 @@
 		"Guard" = "Охранник сервиса",
 		"Migrant" = "Мигрант",
 		"Uncertain" = "Безработный",
-		"Adjutant" = "Помощник глав",
+		"Adjutant" = "Адъютант",
 		"Representative TSF" = "Представитель ТСФ",
 		"Representative USSP" = "Представитель КССП",
 		"Dealer" = "Торговец",
