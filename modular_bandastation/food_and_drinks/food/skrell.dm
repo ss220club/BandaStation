@@ -352,7 +352,7 @@
 		/datum/reagent/consumable/nutriment/vitamin = 3,
 	)
 	tastes = list("cactus tang" = 2, "scorching heat" = 3, "mushroom" = 1)
-	foodtypes = MUSHROOM | VEGETABLES
+	foodtypes = VEGETABLES | FRUIT | MUSHROOM
 	w_class = WEIGHT_CLASS_SMALL
 	crafting_complexity = FOOD_COMPLEXITY_3
 	venue_value = FOOD_PRICE_NORMAL
@@ -387,7 +387,7 @@
 		/datum/reagent/medicine/psicodine = 3,
 	)
 	tastes = list("electric tingling" = 3, "sweet weed" = 2, "dough" = 1)
-	foodtypes = GRAIN | MUSHROOM | TOXIC
+	foodtypes = VEGETABLES | GRAIN | TOXIC | MUSHROOM
 	w_class = WEIGHT_CLASS_NORMAL
 	crafting_complexity = FOOD_COMPLEXITY_4
 	venue_value = FOOD_PRICE_EXOTIC
@@ -648,7 +648,7 @@
 		/datum/reagent/consumable/nutriment/vitamin = 2,
 	)
 	tastes = list("rice bread" = 2, "cheese" = 2)
-	foodtypes = GRAIN | DAIRY
+	foodtypes = GRAIN | DAIRY | BREAKFAST
 	food_flags = FOOD_FINGER_FOOD
 	w_class = WEIGHT_CLASS_SMALL
 	crafting_complexity = FOOD_COMPLEXITY_2
@@ -839,7 +839,7 @@
 		/datum/reagent/medicine/synaptizine = 2.5,
 	)
 	tastes = list("divine sweet nectar" = 3, "pastry crust" = 2, "invigorating tingling" = 2)
-	foodtypes = GRAIN | SUGAR | VEGETABLES
+	foodtypes = VEGETABLES | GRAIN | FRUIT | DAIRY | SUGAR
 	w_class = WEIGHT_CLASS_NORMAL
 	crafting_complexity = FOOD_COMPLEXITY_3
 	venue_value = FOOD_PRICE_EXOTIC
@@ -1028,7 +1028,7 @@
 		/datum/reagent/consumable/ice = 2,
 	)
 	tastes = list("creamy vanilla" = 3, "sweet soy" = 2, "cold ice" = 1)
-	foodtypes = SUGAR | GRAIN
+	foodtypes = FRUIT | SUGAR
 	food_flags = FOOD_FINGER_FOOD
 	w_class = WEIGHT_CLASS_SMALL
 	crafting_complexity = FOOD_COMPLEXITY_2
@@ -1047,7 +1047,7 @@
 		/datum/reagent/consumable/ice = 2,
 	)
 	tastes = list("electric chill" = 3, "creamy mushroom" = 2, "sparkles" = 1)
-	foodtypes = SUGAR | MUSHROOM | TOXIC
+	foodtypes = VEGETABLES | SUGAR | TOXIC | MUSHROOM
 	food_flags = FOOD_FINGER_FOOD
 	w_class = WEIGHT_CLASS_SMALL
 	crafting_complexity = FOOD_COMPLEXITY_3
@@ -1068,7 +1068,7 @@
 		/datum/reagent/consumable/ice = 2,
 	)
 	tastes = list("rich coffee cocoa" = 3, "creamy soy" = 2, "divine herbal touch" = 1)
-	foodtypes = SUGAR | GRAIN | VEGETABLES
+	foodtypes = VEGETABLES | FRUIT | SUGAR
 	trash_type = /obj/item/reagent_containers/cup/glass/sillycup
 	w_class = WEIGHT_CLASS_SMALL
 	crafting_complexity = FOOD_COMPLEXITY_3
@@ -1118,7 +1118,7 @@
 		/datum/reagent/consumable/ice = 2,
 	)
 	tastes = list("sweet tart berries" = 3, "earthy hallucinogen" = 2, "creamy chill" = 1)
-	foodtypes = SUGAR | FRUIT | MUSHROOM
+	foodtypes = VEGETABLES | FRUIT | SUGAR | MUSHROOM
 	food_flags = FOOD_FINGER_FOOD
 	w_class = WEIGHT_CLASS_SMALL
 	crafting_complexity = FOOD_COMPLEXITY_3
