@@ -153,7 +153,7 @@ const ModeInfo = (props: { mode: Mode; title: string; showTitle: boolean }) => {
         <LabeledList.Item label="Боеприпас">
           {mode.ammo_name ? capitalizeAll(mode.ammo_name) : '—'}
         </LabeledList.Item>
-        <LabeledList.Item label="Заряд за выстрел">
+        <LabeledList.Item label="Расход заряда за выстрел">
           {mode.energy_cost_percent !== undefined
             ? `${mode.energy_cost_percent}% батареи (${mode.shots_per_charge} выстр.)`
             : '—'}
@@ -171,7 +171,7 @@ const ModeInfo = (props: { mode: Mode; title: string; showTitle: boolean }) => {
           </LabeledList.Item>
         )}
         {mode.hits_to_exhaust !== undefined && (
-          <LabeledList.Item label="Выстрелов до падения от истощения">
+          <LabeledList.Item label="Выстрелов до истощения">
             {mode.hits_to_exhaust}
           </LabeledList.Item>
         )}
