@@ -37,6 +37,7 @@
 	var/datum/job/job = istext(rank) ? SSjob.get_job(rank) : null
 	var/datum/latejoin_profile_snapshot/context = capture_latejoin_request(rank)
 	if(!job || job.title != rank || !context)
+		qdel(context)
 		return JOB_UNAVAILABLE_GENERIC
 	var/client/requester = context.requester
 	var/newbie_capacity_exception = job.current_positions >= job.total_positions && job.total_positions != -1 && is_assistant_job(job) && isnum(requester.player_age) && requester.player_age <= 14
@@ -44,20 +45,14 @@
 	if(latejoin_request && latejoin_request.job_title == rank)
 		latejoin = TRUE
 	. = ..(rank, latejoin)
-	if(. != JOB_AVAILABLE)
-		return
-	if(!is_latejoin_request_current(context))
-		return JOB_UNAVAILABLE_GENERIC
 	// This native path returned before eligibility; every other path has already checked it.
-	if(newbie_capacity_exception)
+	if(. == JOB_AVAILABLE && newbie_capacity_exception && is_latejoin_request_current(context))
 		. = SSjob.check_job_eligibility(src, job, "Newbie assistant admission", latejoin = latejoin)
-		if(. != JOB_AVAILABLE)
-			return
-		if(!is_latejoin_request_current(context) || (latejoin && !job.special_check_latejoin(requester)))
-			return JOB_UNAVAILABLE_GENERIC
-		if(!is_latejoin_request_current(context))
-			return JOB_UNAVAILABLE_GENERIC
-	return JOB_AVAILABLE
+		if(. == JOB_AVAILABLE && is_latejoin_request_current(context) && latejoin && !job.special_check_latejoin(requester))
+			. = JOB_UNAVAILABLE_GENERIC
+	if(. == JOB_AVAILABLE && !is_latejoin_request_current(context))
+		. = JOB_UNAVAILABLE_GENERIC
+	qdel(context)
 
 /mob/dead/new_player/AttemptLateSpawn(rank)
 	if(spawning || assigned_character || new_character || !SSticker.IsRoundInProgress())

@@ -17,7 +17,7 @@
 	job_flags = (STATION_JOB_FLAGS & ~JOB_CAN_BE_INTERN) | JOB_CANNOT_OPEN_SLOTS | JOB_ANTAG_BLACKLISTED
 	paycheck_department = ACCOUNT_SRV
 	job_variant_specs = list(
-		"default" = list("Адъютант", /datum/outfit/job/donor/adjutant),
+		"default" = list("Помощник глав", /datum/outfit/job/donor/adjutant),
 		"butler" = list("Butler", /datum/outfit/job/donor/adjutant/butler),
 		"butler_ru" = list("Дворецкий", /datum/outfit/job/donor/adjutant/butler),
 		"maid" = list("Maid", /datum/outfit/job/donor/adjutant/maid),

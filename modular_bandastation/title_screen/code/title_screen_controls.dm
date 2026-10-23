@@ -90,24 +90,22 @@ GAME_VERB_DESC(/client, fix_title_screen, "Fix Lobby Screen", "Lobbyscreen broke
 	var/list/job_restrictions = CONFIG_GET(str_list/job_restrictions)
 	var/list/allowed_species = CONFIG_GET(str_list/allowed_species)
 
-	prefs_jobs = prefs.get_species_restricted_job_preferences() // SS220 EDIT: inspect assigned profiles without switching the active character.
+	prefs_jobs = prefs.get_species_restricted_job_preferences() // inspect assigned profiles without switching the active character.
 
 	if(!prefs_species)
 		return
 
 	if(allowed_species && length(allowed_species))
-		if(("[prefs_species]" in allowed_species) && !length(prefs_jobs)) // SS220 EDIT: the current species cannot exempt an incompatible assigned profile.
+		if(("[prefs_species]" in allowed_species) && !length(prefs_jobs)) // the current species cannot exempt an incompatible assigned profile.
 			return
 
 	for(var/job_id in prefs_jobs)
 		if(job_id in job_restrictions)
 			to_chat(src, span_alertwarning("Выбранная раса несовместима с одной или более выбранных профессий."))
 			SStitle.title_output(src, FALSE, "toggleReady")
-			// SS220 EDIT - START
 			if(!isnewplayer(mob))
 				return
 			var/mob/dead/new_player/player = mob
-			// SS220 EDIT - END
 			player.ready = PLAYER_NOT_READY
 			return
 

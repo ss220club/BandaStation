@@ -10,6 +10,7 @@
 	outfit = /datum/outfit/job/donor/barber
 	supervisors = JOB_HEAD_OF_PERSONNEL_RU
 	departments_list = list(/datum/job_department/service)
+	paycheck_department = ACCOUNT_SRV
 	job_variant_specs = list(
 		"default" = list("Парикмахер", /datum/outfit/job/donor/barber),
 		"stylist" = list("Стилист", /datum/outfit/job/donor/barber),

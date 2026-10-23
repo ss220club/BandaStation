@@ -1,0 +1,223 @@
+["security HONK rifle"]
+nominative = "ХОНК-ружьё СБ"
+genitive = "ХОНК-ружья СБ"
+dative = "ХОНК-ружью СБ"
+accusative = "ХОНК-ружьё СБ"
+instrumental = "ХОНК-ружьём СБ"
+prepositional = "ХОНК-ружье СБ"
+
+["warden's HONK rifle"]
+nominative = "ХОНК-ружьё клоуна-смотрителя"
+genitive = "ХОНК-ружья клоуна-смотрителя"
+dative = "ХОНК-ружью клоуна-смотрителя"
+accusative = "ХОНК-ружьё клоуна-смотрителя"
+instrumental = "ХОНК-ружьём клоуна-смотрителя"
+prepositional = "ХОНК-ружье клоуна-смотрителя"
+
+["security clown suit"]
+nominative = "костюм клоуна СБ"
+genitive = "костюма клоуна СБ"
+dative = "костюму клоуна СБ"
+accusative = "костюм клоуна СБ"
+instrumental = "костюмом клоуна СБ"
+prepositional = "костюме клоуна СБ"
+
+["Trans-Solar Federation marine cap"]
+nominative = "кепка морпеха ТСФ"
+genitive = "кепки морпеха ТСФ"
+dative = "кепке морпеха ТСФ"
+accusative = "кепку морпеха ТСФ"
+instrumental = "кепкой морпеха ТСФ"
+prepositional = "кепке морпеха ТСФ"
+
+["Trans-Solar Federation Specops marine cap"]
+nominative = "кепка спецназа ТСФ"
+genitive = "кепки спецназа ТСФ"
+dative = "кепке спецназа ТСФ"
+accusative = "кепку спецназа ТСФ"
+instrumental = "кепкой спецназа ТСФ"
+prepositional = "кепке спецназа ТСФ"
+
+["Trans-Solar Federation lieutenant's cap"]
+nominative = "кепка лейтенанта ТСФ"
+genitive = "кепки лейтенанта ТСФ"
+dative = "кепке лейтенанта ТСФ"
+accusative = "кепку лейтенанта ТСФ"
+instrumental = "кепкой лейтенанта ТСФ"
+prepositional = "кепке лейтенанта ТСФ"
+
+["Trans-Solar Federation Specops lieutenant's cap"]
+nominative = "кепка лейтенанта спецназа ТСФ"
+genitive = "кепки лейтенанта спецназа ТСФ"
+dative = "кепке лейтенанта спецназа ТСФ"
+accusative = "кепку лейтенанта спецназа ТСФ"
+instrumental = "кепкой лейтенанта спецназа ТСФ"
+prepositional = "кепке лейтенанта спецназа ТСФ"
+
+["Trans-Solar Federation lieutenant's beret"]
+nominative = "берет лейтенанта ТСФ"
+genitive = "берета лейтенанта ТСФ"
+dative = "берету лейтенанта ТСФ"
+accusative = "берет лейтенанта ТСФ"
+instrumental = "беретом лейтенанта ТСФ"
+prepositional = "берете лейтенанта ТСФ"
+
+["Trans-Solar Federation Specops lieutenant's beret"]
+nominative = "берет лейтенанта спецназа ТСФ"
+genitive = "берета лейтенанта спецназа ТСФ"
+dative = "берету лейтенанта спецназа ТСФ"
+accusative = "берет лейтенанта спецназа ТСФ"
+instrumental = "беретом лейтенанта спецназа ТСФ"
+prepositional = "берете лейтенанта спецназа ТСФ"
+
+["Trans-Solar Federation Specops marine helmet"]
+nominative = "шлем спецназа ТСФ"
+genitive = "шлема спецназа ТСФ"
+dative = "шлему спецназа ТСФ"
+accusative = "шлем спецназа ТСФ"
+instrumental = "шлемом спецназа ТСФ"
+prepositional = "шлеме спецназа ТСФ"
+
+["Trans-Solar Federation Specops marine space suit"]
+nominative = "скафандр спецназа ТСФ"
+genitive = "скафандра спецназа ТСФ"
+dative = "скафандру спецназа ТСФ"
+accusative = "скафандр спецназа ТСФ"
+instrumental = "скафандром спецназа ТСФ"
+prepositional = "скафандре спецназа ТСФ"
+
+["Trans-Solar Federation Specops lieutenant's helmet"]
+nominative = "шлем лейтенанта спецназа ТСФ"
+genitive = "шлема лейтенанта спецназа ТСФ"
+dative = "шлему лейтенанта спецназа ТСФ"
+accusative = "шлем лейтенанта спецназа ТСФ"
+instrumental = "шлемом лейтенанта спецназа ТСФ"
+prepositional = "шлеме лейтенанта спецназа ТСФ"
+
+["Trans-Solar Federation Specops lieutenant's space suit"]
+nominative = "скафандр лейтенанта спецназа ТСФ"
+genitive = "скафандра лейтенанта спецназа ТСФ"
+dative = "скафандру лейтенанта спецназа ТСФ"
+accusative = "скафандр лейтенанта спецназа ТСФ"
+instrumental = "скафандром лейтенанта спецназа ТСФ"
+prepositional = "скафандре лейтенанта спецназа ТСФ"
+
+["Trans-Solar Federation commander's jacket"]
+nominative = "костюм командующего ТСФ"
+genitive = "костюма командующего ТСФ"
+dative = "костюму командующего ТСФ"
+accusative = "костюм командующего ТСФ"
+instrumental = "костюмом командующего ТСФ"
+prepositional = "костюме командующего ТСФ"
+
+["USSP military uniform"]
+nominative = "форма бойца КССП"
+genitive = "формы бойца КССП"
+dative = "форме бойца КССП"
+accusative = "форму бойца КССП"
+instrumental = "формой бойца КССП"
+prepositional = "форме бойца КССП"
+
+["USSP officer uniform"]
+nominative = "форма офицера КССП"
+genitive = "формы офицера КССП"
+dative = "форме офицера КССП"
+accusative = "форму офицера КССП"
+instrumental = "формой офицера КССП"
+prepositional = "форме офицера КССП"
+
+["USSP admiral uniform"]
+nominative = "форма адмирала КССП"
+genitive = "формы адмирала КССП"
+dative = "форме адмирала КССП"
+accusative = "форму адмирала КССП"
+instrumental = "формой адмирала КССП"
+prepositional = "форме адмирала КССП"
+
+["USSP side cap"]
+nominative = "кепка бойца КССП"
+genitive = "кепки бойца КССП"
+dative = "кепке бойца КССП"
+accusative = "кепку бойца КССП"
+instrumental = "кепкой бойца КССП"
+prepositional = "кепке бойца КССП"
+
+["USSP officer hat"]
+nominative = "фуражка офицера КССП"
+genitive = "фуражки офицера КССП"
+dative = "фуражке офицера КССП"
+accusative = "фуражку офицера КССП"
+instrumental = "фуражкой офицера КССП"
+prepositional = "фуражке офицера КССП"
+
+["USSP admiral hat"]
+nominative = "фуражка адмирала КССП"
+genitive = "фуражки адмирала КССП"
+dative = "фуражке адмирала КССП"
+accusative = "фуражку адмирала КССП"
+instrumental = "фуражкой адмирала КССП"
+prepositional = "фуражке адмирала КССП"
+
+["USSP greatcoat"]
+nominative = "шинель бойца КССП"
+genitive = "шинели бойца КССП"
+dative = "шинели бойца КССП"
+accusative = "шинель бойца КССП"
+instrumental = "шинелью бойца КССП"
+prepositional = "шинели бойца КССП"
+
+["USSP officer greatcoat"]
+nominative = "шинель офицера КССП"
+genitive = "шинели офицера КССП"
+dative = "шинели офицера КССП"
+accusative = "шинель офицера КССП"
+instrumental = "шинелью офицера КССП"
+prepositional = "шинели офицера КССП"
+
+["USSP space helmet"]
+nominative = "шлем КССП"
+genitive = "шлема КССП"
+dative = "шлему КССП"
+accusative = "шлем КССП"
+instrumental = "шлемом КССП"
+prepositional = "шлеме КССП"
+
+["USSP space suit"]
+nominative = "скафандр КССП"
+genitive = "скафандра КССП"
+dative = "скафандру КССП"
+accusative = "скафандр КССП"
+instrumental = "скафандром КССП"
+prepositional = "скафандре КССП"
+
+["USSP command space helmet"]
+nominative = "шлем командира КССП"
+genitive = "шлема командира КССП"
+dative = "шлему командира КССП"
+accusative = "шлем командира КССП"
+instrumental = "шлемом командира КССП"
+prepositional = "шлеме командира КССП"
+
+["USSP command space suit"]
+nominative = "скафандр командира КССП"
+genitive = "скафандра командира КССП"
+dative = "скафандру командира КССП"
+accusative = "скафандр командира КССП"
+instrumental = "скафандром командира КССП"
+prepositional = "скафандре командира КССП"
+
+["blue hoodie"]
+nominative = "синяя толстовка"
+genitive = "синей толстовки"
+dative = "синей толстовке"
+accusative = "синюю толстовку"
+instrumental = "синей толстовкой"
+prepositional = "синей толстовке"
+
+["snap-pop"]
+nominative = "хлопушка"
+genitive = "хлопушки"
+dative = "хлопушке"
+accusative = "хлопушку"
+instrumental = "хлопушкой"
+prepositional = "хлопушке"

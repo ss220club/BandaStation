@@ -179,8 +179,8 @@
 	trim_state = "trim_representative_tsf"
 	assignment = "Representative TSF"
 	job = /datum/job/donor/representative_tsf
-	sechud_icon = 'modular_bandastation/donor_jobs/icons/job_hud.dmi'
-	sechud_icon_state = "hudrepresentativetsf"
+	sechud_icon = 'icons/mob/huds/hud.dmi'
+	sechud_icon_state = "hudtsf"
 	template_access = null
 	centcom_template = TRUE
 	minimal_access = list(ACCESS_MAINT_TUNNELS, ACCESS_LIBRARY, ACCESS_COMMAND, ACCESS_RC_ANNOUNCE, ACCESS_EVA)
@@ -190,8 +190,8 @@
 	trim_state = "trim_representative_ussp"
 	assignment = "Representative USSP"
 	job = /datum/job/donor/representative_ussp
-	sechud_icon = 'modular_bandastation/donor_jobs/icons/job_hud.dmi'
-	sechud_icon_state = "hudrepresentativeussp"
+	sechud_icon = 'icons/mob/huds/hud.dmi'
+	sechud_icon_state = "hudussp"
 	template_access = null
 	centcom_template = TRUE
 	minimal_access = list(ACCESS_MAINT_TUNNELS, ACCESS_LIBRARY, ACCESS_COMMAND, ACCESS_RC_ANNOUNCE, ACCESS_EVA)

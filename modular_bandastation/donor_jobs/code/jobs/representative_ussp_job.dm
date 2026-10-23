@@ -1,5 +1,5 @@
 /datum/job/donor/representative_ussp
-	important_information = "Вы представитель СССП, прибывший для отдыха и переговоров. Законы NT действуют и на вас; межгосударственные разногласия не разрешают нарушать правила."
+	important_information = "Вы представитель КССП, прибывший для отдыха и переговоров. Законы NT действуют и на вас; межгосударственные разногласия не разрешают нарушать правила."
 	title = "Representative USSP"
 	description = "Гость для отдыха и переговоров; законы NT действуют, иммунитета нет."
 	donor_tier = 4
@@ -12,7 +12,7 @@
 	departments_list = list(/datum/job_department/assistant)
 	job_flags = (STATION_JOB_FLAGS & ~JOB_CAN_BE_INTERN) | JOB_CANNOT_OPEN_SLOTS | JOB_ANTAG_BLACKLISTED
 	job_variant_specs = list(
-		"default" = list("Представитель СССП", /datum/outfit/job/donor/representative_ussp),
-		"diplomat" = list("Дипломат СССП", /datum/outfit/job/donor/representative_ussp),
-		"press_secretary" = list("Пресс-Секретарь СССП", /datum/outfit/job/donor/representative_ussp),
+		"default" = list("Представитель КССП", /datum/outfit/job/donor/representative_ussp),
+		"diplomat" = list("Дипломат КССП", /datum/outfit/job/donor/representative_ussp),
+		"press_secretary" = list("Пресс-Секретарь КССП", /datum/outfit/job/donor/representative_ussp),
 	)

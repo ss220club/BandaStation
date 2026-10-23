@@ -5,6 +5,11 @@
 	var/client/requester = owner?.client
 	return job && requester && !requester.interviewee && (!job.requires_explicit_preference() || requester.prefs.job_preferences[job.title])
 
+/// Confirmation may yield after the native candidate check; opt-in must still be current.
+/datum/latejoin_menu/get_random_job(mob/dead/new_player/owner)
+	. = ..()
+	if(. && !is_latejoin_random_job_allowed(owner, SSjob.get_job(.)))
+		return null
 
 /// Adapt the original species helper's input; its config and station-trait checks still run.
 /datum/latejoin_menu/proc/get_job_character_species(job_title, mob/dead/new_player/owner)
@@ -41,11 +46,15 @@
 	var/datum/latejoin_profile_snapshot/profile_context = owner.capture_latejoin_request()
 	if(!profile_context)
 		return list()
+	profile_context.character_revision = profile_context.preferences.character_preferences_revision
 	. = ..()
-	if(!owner?.is_latejoin_request_current(profile_context))
+	var/context_current = owner?.is_latejoin_request_current(profile_context)
+	var/editing_slot = profile_context.editing_slot
+	qdel(profile_context)
+	if(!context_current)
 		return list()
 	var/list/data = .
-	data["edit_slot"] = profile_context.editing_slot
+	data["edit_slot"] = editing_slot
 	var/list/departments = data["departments"]
 	for(var/department_name in departments)
 		var/list/department_data = departments[department_name]

@@ -44,6 +44,6 @@
 	if(deletion_queued)
 		return
 	deletion_queued = PROJECTILE_IMPACT_DELETE
-	var/obj/item/toy/snappop/snap_pop = new(get_turf(src))
+	var/obj/item/toy/snappop/snap_pop = new(get_turf(target) || get_turf(src))
 	snap_pop.pop_burst()
 	qdel(src)

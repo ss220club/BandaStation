@@ -1,6 +1,9 @@
 import type { JobSlotsPreferencesData } from './types';
 
-type ProfileData = { character_profiles: (string | null)[] } & Pick<
+type ProfileData = {
+  character_profiles: (string | null)[];
+  job_preferences: { job: string; assigned_profile_slot: number | null }[];
+} & Pick<
   JobSlotsPreferencesData,
   'job_character_profiles'
 >;
@@ -26,7 +29,10 @@ export function jobProfileTooltipProps(
   jobName: string,
   currentSlotName: string | null | undefined,
 ) {
-  return data.job_character_profiles?.[jobName]
+  const assignedSlot = data.job_preferences.find(
+    (entry) => entry.job === jobName,
+  )?.assigned_profile_slot;
+  return assignedSlot != null && data.job_character_profiles?.[jobName]
     ? {
         content: `${currentSlotName ?? 'Активный персонаж'}. ${getJobProfileDescription(data, jobName)}`,
       }

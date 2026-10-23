@@ -41,7 +41,15 @@
 	if(body.prisoner_record_registered || QDELETED(body.prisoner_initial_record))
 		return
 	body.prisoner_record_registered = TRUE
-	return ..()
+	. = ..()
+	if(!body.client)
+		RegisterSignal(body, COMSIG_MOB_LOGIN, PROC_REF(notify_prisoner_crime))
+
+/// Roundstart records precede possession; only the chat notice needs to wait for the client.
+/datum/job/prisoner/proc/notify_prisoner_crime(mob/living/carbon/human/body)
+	SIGNAL_HANDLER
+	UnregisterSignal(body, COMSIG_MOB_LOGIN)
+	to_chat(body, span_warning("You are imprisoned for \"[body.prisoner_crime]\"."))
 
 /// Adapt the native local before its Random/fallback handling and effects.
 /datum/job/prisoner/proc/get_committed_prisoner_crime_name(mob/living/crewmember, crime_name)

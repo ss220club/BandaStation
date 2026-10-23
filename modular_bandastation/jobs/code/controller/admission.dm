@@ -5,6 +5,8 @@
 	var/client/requester = GET_CLIENT(player)
 	if(!requester || requester.mob != player || job.get_join_lock_reason(requester))
 		return FALSE
+	if(!latejoin && !is_random_job_preference_allowed(player, job))
+		return FALSE
 	if(latejoin && player.latejoin_request && !player.validate_latejoin_request(job.title, check_queue = FALSE))
 		return FALSE
 	var/datum/job_character_selection/selection = requester.prefs.select_job_character(job, latejoin)

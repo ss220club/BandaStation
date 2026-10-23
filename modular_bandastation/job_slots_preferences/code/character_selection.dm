@@ -49,7 +49,7 @@
 /// Read the selected profile without loading it or retaining a temporary selection.
 /datum/preferences/proc/get_job_character_species(datum/job/job, latejoin = FALSE)
 	var/datum/job_character_selection/selection = select_job_character(job, latejoin)
-	. = selection.species
+	. = selection.randomized ? null : selection.species
 	qdel(selection)
 
 /// Supply the existing lobby checks with only preferences whose selected species is restricted.
@@ -77,14 +77,14 @@
 	return value
 
 /datum/job_character_selection/proc/is_too_young_for_job(datum/job/job)
-	return !error && isnum(job.required_character_age) && (!isnum(age) || age < job.required_character_age)
+	return !error && !randomized && isnum(job.required_character_age) && (!isnum(age) || age < job.required_character_age)
 
 /datum/job_character_selection/proc/character_error(datum/job/job, client/player, latejoin)
 	if(error)
 		return error
 	if(is_too_young_for_job(job))
 		return "Персонаж назначенного профиля слишком молод."
-	if(ispath(job.spawn_type, /mob/living/carbon/human))
+	if(!randomized && ispath(job.spawn_type, /mob/living/carbon/human))
 		var/species_error = job.character_species_error(species)
 		if(species_error)
 			return species_error

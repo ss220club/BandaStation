@@ -14,6 +14,6 @@
 		"default" = list("Безработный", /datum/outfit/job/donor/unemployed),
 		"unemployed_assistant" = list("Безработный Ассистент", /datum/outfit/job/donor/unemployed),
 		"free_assistant" = list("Свободный Ассистент", /datum/outfit/job/donor/unemployed),
-		"working_off_debt_assistant" = list("Отрабатыващий Ассистент", /datum/outfit/job/donor/unemployed),
+		"working_off_debt_assistant" = list("Отрабатывающий Ассистент", /datum/outfit/job/donor/unemployed),
 		"maintenance_assistant" = list("Ассистент Технических Тоннелей", /datum/outfit/job/donor/unemployed),
 	)

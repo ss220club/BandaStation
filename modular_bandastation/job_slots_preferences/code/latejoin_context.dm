@@ -5,6 +5,8 @@
 	var/editing_slot
 	var/list/assigned_slots
 	var/use_current_slot
+	/// Only UI rendering freezes character contents; spawn requests recheck their selected body.
+	var/character_revision
 
 /// Capture one job, or the whole menu, without retaining the mutable assignment map.
 /datum/preferences/proc/capture_latejoin_profile(job_title = null)
@@ -25,6 +27,10 @@
 		return FALSE
 	if(context.use_current_slot != read_preference(/datum/preference/toggle/late_join_always_current_slot))
 		return FALSE
+	if(!isnull(context.character_revision) && context.character_revision != character_preferences_revision)
+		return FALSE
+	if(context.use_current_slot)
+		return TRUE
 	var/list/assigned_slots = context.assigned_slots
 	if(!islist(assigned_slots))
 		return FALSE

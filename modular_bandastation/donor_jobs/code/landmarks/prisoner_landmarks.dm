@@ -1,5 +1,9 @@
 GLOBAL_LIST_EMPTY(donor_prisoner_starts)
 
+/datum/job/prisoner
+	/// Prefer a different safe turf for each initial prisoner, as native landmarks do.
+	var/list/used_prisoner_starts = list()
+
 /obj/effect/landmark/start/prisoner
 	icon = 'modular_bandastation/donor_jobs/icons/landmarks.dmi'
 	icon_state = "prisoner"
@@ -47,7 +51,13 @@ GLOBAL_LIST_EMPTY(donor_prisoner_starts)
 /datum/job/prisoner/get_roundstart_spawn_point()
 	if(!CONFIG_GET(flag/donor_prisoner_gate))
 		return ..()
-	return get_latejoin_spawn_point()
+	var/list/locations = get_safe_prisoner_turfs()
+	var/list/unused_locations = locations - used_prisoner_starts
+	if(length(unused_locations))
+		locations = unused_locations
+	. = length(locations) ? pick(locations) : null
+	if(.)
+		used_prisoner_starts |= .
 
 /datum/job/prisoner/donor_lock_reason(client/player)
 	. = ..()

@@ -159,4 +159,9 @@
 	QDEL_NULL(assigned_character)
 	ready = PLAYER_NOT_READY
 	spawning = FALSE
+	// Logout deferred destruction while spawning; cancellation now releases that ownership.
+	if(!GET_CLIENT(src))
+		key = null
+		QDEL_NULL(mind)
+		qdel(src)
 	return TRUE

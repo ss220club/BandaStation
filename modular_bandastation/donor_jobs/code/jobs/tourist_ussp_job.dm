@@ -1,5 +1,5 @@
 /datum/job/donor/tourist_ussp
-	important_information = "Вы турист СССП: отдыхайте, общайтесь и находите подработку. Законы NT действуют и на вас; межгосударственные разногласия не разрешают нарушать правила."
+	important_information = "Вы турист КССП: отдыхайте, общайтесь и находите подработку. Законы NT действуют и на вас; межгосударственные разногласия не разрешают нарушать правила."
 	title = "Tourist USSP"
 	description = "Отдых и подработки иностранного посетителя; законы NT действуют, дипломатического иммунитета нет."
 	donor_tier = 3
@@ -11,6 +11,6 @@
 	supervisors = JOB_HEAD_OF_PERSONNEL_RU
 	departments_list = list(/datum/job_department/assistant)
 	job_variant_specs = list(
-		"default" = list("Турист СССП", /datum/outfit/job/donor/tourist_ussp),
-		"visitor" = list("Посетитель СССП", /datum/outfit/job/donor/tourist_ussp),
+		"default" = list("Турист КССП", /datum/outfit/job/donor/tourist_ussp),
+		"visitor" = list("Посетитель КССП", /datum/outfit/job/donor/tourist_ussp),
 	)

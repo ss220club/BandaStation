@@ -6,20 +6,6 @@
 	greyscale_colors = "#02519a"
 	flags_1 = parent_type::flags_1 | NO_NEW_GAGS_PREVIEW_1
 
-/obj/item/clothing/under/rank/tsf/classic
-	abstract_type = /obj/item/clothing/under/rank/tsf/classic
-	icon = 'modular_bandastation/donor_jobs/icons/tsf_uniforms.dmi'
-	worn_icon = 'modular_bandastation/donor_jobs/icons/tsf_uniforms_worn.dmi'
-	female_sprite_flags = NO_FEMALE_UNIFORM
-
-/obj/item/clothing/under/rank/tsf/classic/commander
-	name = "\improper Trans-Solar Federation commander's uniform"
-	desc = "A space-black uniform with gold trim, worn by generals of the Trans-Solar Federation."
-	icon_state = "navy_gold"
-	inhand_icon_state = "navy_gold"
-	lefthand_file = 'modular_bandastation/donor_jobs/icons/tsf_uniforms_lefthand.dmi'
-	righthand_file = 'modular_bandastation/donor_jobs/icons/tsf_uniforms_righthand.dmi'
-
 /// Native cap flipping and dropping consume both original orientations.
 /obj/item/clothing/head/soft/tsf
 	name = "\improper Trans-Solar Federation marine cap"
@@ -73,8 +59,9 @@
 	name = "\improper Trans-Solar Federation Specops marine helmet"
 	desc = "A space helmet in the colours of the Federation's special operations marines."
 	icon = 'modular_bandastation/donor_jobs/icons/tsf_hats.dmi'
-	worn_icon = 'modular_bandastation/donor_jobs/icons/tsf_hats_worn.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/modsuit/mod_clothing.dmi'
 	icon_state = "hardsuit0-solgovmarine"
+	worn_icon_state = "tsf_standart-helmet-sealed"
 
 /obj/item/clothing/suit/space/tsf
 	name = "\improper Trans-Solar Federation Specops marine space suit"
@@ -87,6 +74,7 @@
 	name = "\improper Trans-Solar Federation Specops lieutenant's helmet"
 	desc = "A Federation marine space helmet with gold highlights denoting its wearer's rank."
 	icon_state = "hardsuit0-solgovcommand"
+	worn_icon_state = "tsf_elite-helmet-sealed"
 
 /obj/item/clothing/suit/space/tsf/command
 	name = "\improper Trans-Solar Federation Specops lieutenant's space suit"
