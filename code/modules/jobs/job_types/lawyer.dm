@@ -1,7 +1,7 @@
 /datum/job/lawyer
 	title = JOB_LAWYER
-	description = "Защищайте заключенных, заключайте юридически грамотные соглашения, \
-		убедитесь, что СБ следует СРП и КЗ."
+	description = "Расследуйте нарушения закона, следите за соблюдением СРП и КЗ, \
+		защищайте заключенных и заключайте юридически грамотные соглашения."
 	faction = FACTION_STATION
 	total_positions = 2
 	spawn_positions = 2
@@ -24,7 +24,7 @@
 	rpg_title = "Magistrate"
 	family_heirlooms = list(/obj/item/gavelhammer, /obj/item/book/manual/wiki/security_space_law)
 
-	job_flags = STATION_JOB_FLAGS
+	job_flags = STATION_JOB_FLAGS | JOB_ANTAG_PROTECTED
 
 	job_tone = "objection"
 	tgui_icon = FA_ICON_GAVEL
@@ -45,6 +45,8 @@
 	l_hand = /obj/item/storage/briefcase/lawyer
 
 	chameleon_extras = /obj/item/stamp/law
+
+	implants = list(/obj/item/implant/mindshield)
 
 /datum/outfit/job/lawyer/pre_equip(mob/living/carbon/human/H, visuals_only = FALSE)
 	if(visuals_only)
