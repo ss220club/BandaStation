@@ -351,7 +351,7 @@ GLOBAL_VAR_INIT(chicks_from_eggs, 0)
 		/datum/reagent/consumable/nutriment/vitamin = 1,
 	)
 	tastes = list("custard" = 1)
-	foodtypes = MEAT | VEGETABLES | EGG
+	foodtypes = MEAT | VEGETABLES | EGG | MUSHROOM // BANDASTATION ADDITION
 	venue_value = FOOD_PRICE_NORMAL
 	crafting_complexity = FOOD_COMPLEXITY_3
 

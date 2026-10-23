@@ -60,7 +60,7 @@
 	name = "bread slice"
 	desc = "A slice of home."
 	icon_state = "breadslice"
-	foodtypes = GRAIN
+	foodtypes = GRAIN | MUSHROOM // BANDASTATION ADDITION
 	food_reagents = list(/datum/reagent/consumable/nutriment = 2)
 	venue_value = FOOD_PRICE_TRASH
 	decomp_type = /obj/item/food/breadslice/moldy

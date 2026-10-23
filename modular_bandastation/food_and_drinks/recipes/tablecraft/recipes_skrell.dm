@@ -22,7 +22,8 @@
 		/obj/item/food/grown/mushroom/amanita = 1,
 	)
 	result = /obj/item/food/fly_amanita_bun
-	added_foodtypes = MUSHROOM | TOXIC | BREAKFAST
+	removed_foodtypes = VEGETABLES
+	added_foodtypes = MUSHROOM | TOXIC
 	cuisine_category = CUISINE_SKRELL
 	dish_category = DISH_BREAD
 	meal_category = MEAL_SNACK
@@ -478,8 +479,8 @@
 	result = /obj/item/food/soy_fungal_chips
 	added_foodtypes = VEGETABLES | MUSHROOM | GRAIN
 	cuisine_category = CUISINE_SKRELL
-	dish_category = MEAL_SNACK
-	meal_category = MEAL_APPETIZER
+	dish_category = DISH_MUSHROOM
+	meal_category = MEAL_SNACK
 
 /datum/crafting_recipe/food/moonflower_salad
 	name = "Moonflower and plump salad"
@@ -603,7 +604,7 @@
 		/obj/item/food/grown/mushroom/libertycap = 1,
 		/obj/item/food/grown/ximikoa = 1,
 	)
-	result = /obj/item/food/donuts/liberty_fungus
+	result = /obj/item/food/donut/liberty_fungus
 	added_foodtypes = MUSHROOM | SUGAR | FRIED
 	cuisine_category = CUISINE_SKRELL
 	dish_category = DISH_PASTRY
