@@ -795,6 +795,13 @@
 /mob/living/expose_reagents(list/reagents, datum/reagents/source, methods=TOUCH, volume_modifier=1, show_message=TRUE)
 	. = ..()
 	if(. & COMPONENT_NO_EXPOSE_REAGENTS)
+		// BANDASTATION ADDITION START - Put out external flames without applying or absorbing chemicals.
+		if(HAS_TRAIT(src, TRAIT_REAGENT_IMMUNE))
+			for(var/datum/reagent/reagent as anything in reagents)
+				if(reagents[reagent] > 0 && (methods & reagent.extinguishing_methods))
+					extinguish_mob()
+					break
+		// BANDASTATION ADDITION END
 		return
 
 	if(show_message && (methods & (INGEST | INHALE)))

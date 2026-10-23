@@ -50,6 +50,10 @@
 	var/datum/material/material
 	///The set of exposure methods this penetrates skin with.
 	var/penetrates_skin = VAPOR
+	// BANDASTATION ADDITION START - Physical fire suppression remains useful on chemically immune chassis.
+	/// Exposure methods which extinguish flames without requiring any chemical effect on the mob.
+	var/extinguishing_methods = NONE
+	// BANDASTATION ADDITION END
 	/// See fermi_readme.dm REAGENT_DEAD_PROCESS, REAGENT_INVISIBLE, REAGENT_SNEAKYNAME, REAGENT_SPLITRETAINVOL, REAGENT_CANSYNTH, REAGENT_IMPURE
 	var/chemical_flags = NONE
 	/// If the impurity is below 0.5, replace ALL of the chem with inverse_chem upon metabolising

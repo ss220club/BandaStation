@@ -54,6 +54,8 @@
 /datum/unit_test/ipc_drink_forced_after_delay/Run()
 	var/mob/living/carbon/human/drinker = allocate(/mob/living/carbon/human/consistent)
 	var/mob/living/carbon/human/feeder = allocate(/mob/living/carbon/human/consistent/slow)
+	// Keep a real delay even after the dummy receives its mood speed bonus.
+	feeder.add_or_update_variable_actionspeed_modifier(/datum/actionspeed_modifier/base, multiplicative_slowdown = 1)
 	var/obj/item/reagent_containers/cup/glass/drinkingglass/cup = allocate(/obj/item/reagent_containers/cup/glass/drinkingglass)
 	cup.reagents.add_reagent(/datum/reagent/water, 20)
 	cup.last_check_time = -10 SECONDS
@@ -82,6 +84,7 @@
 
 /datum/unit_test/ipc_drink_loop_after_delay/Run()
 	var/mob/living/carbon/human/drinker = allocate(/mob/living/carbon/human/consistent/slow)
+	drinker.add_or_update_variable_actionspeed_modifier(/datum/actionspeed_modifier/base, multiplicative_slowdown = 1)
 	var/obj/item/reagent_containers/cup/glass/drinkingglass/cup = allocate(/obj/item/reagent_containers/cup/glass/drinkingglass)
 	cup.reagents.add_reagent(/datum/reagent/water, 20)
 	cup.loop_drink = TRUE

@@ -258,6 +258,8 @@
 /datum/unit_test/ipc_food_rejection_after_delay/Run()
 	var/mob/living/carbon/human/eater = allocate(/mob/living/carbon/human/consistent)
 	var/mob/living/carbon/human/feeder = allocate(/mob/living/carbon/human/consistent/slow)
+	// The mood speed bonus can cancel a slow dummy's 0.1 base after its first action.
+	feeder.add_or_update_variable_actionspeed_modifier(/datum/actionspeed_modifier/base, multiplicative_slowdown = 1)
 	var/obj/item/food/cracker/food = allocate(/obj/item/food/cracker)
 	var/datum/component/edible/edible = food.GetComponent(/datum/component/edible)
 	var/initial_food_volume = food.reagents.total_volume
