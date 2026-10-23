@@ -20,13 +20,30 @@
 	release_processor()
 	return ..()
 
+/// Ordinary and deep-rooted organic traumas do not apply to a positronic core; higher resilience retains its rules.
+/obj/item/organ/brain/ipc/can_gain_trauma(datum/brain_trauma/trauma, resilience, natural_gain = FALSE)
+	var/effective_resilience = resilience
+	if(!effective_resilience)
+		effective_resilience = ispath(trauma) ? initial(trauma.resilience) : trauma.resilience
+	if(effective_resilience <= TRAUMA_RESILIENCE_LOBOTOMY)
+		return FALSE
+	return ..()
+
 /obj/item/organ/brain/ipc/transfer_identity(mob/living/person)
 	. = ..()
 	activate_processor()
 
 /obj/item/organ/brain/ipc/on_mob_insert(mob/living/carbon/brain_owner, special, movement_flags)
 	release_processor()
+	// Species changes can transfer existing traumas without consulting can_gain_trauma().
+	cure_all_traumas(TRAUMA_RESILIENCE_LOBOTOMY)
 	return ..()
+
+/// Neural debugging can also repair ordinary deep-rooted errors left on older positronic cores.
+/datum/surgery_operation/organ/repair/brain/mechanic/on_success(obj/item/organ/brain/organ, mob/living/surgeon, obj/item/tool, list/operation_args)
+	. = ..()
+	if(istype(organ, /obj/item/organ/brain/ipc))
+		organ.cure_all_traumas(TRAUMA_RESILIENCE_LOBOTOMY)
 
 /obj/item/organ/brain/ipc/Moved(atom/old_loc, movement_dir, forced, list/old_locs, momentum_change = TRUE)
 	. = ..()

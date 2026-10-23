@@ -281,3 +281,87 @@
 	spoon.attack(eater, feeder, list(), list())
 	TEST_ASSERT(is_species(eater, /datum/species/ipc), "The receiver did not become an IPC during spoon feeding.")
 	TEST_ASSERT_EQUAL(spoon.reagents.total_volume, spoonful_volume, "A species change during spoon feeding allowed food consumption.")
+
+/// Positronic cores reject ordinary neurological injuries without preventing damage or persistent special effects.
+/datum/unit_test/ipc_brain_trauma_rejection/Run()
+	var/mob/living/carbon/human/ipc = allocate(/mob/living/carbon/human/consistent)
+	ipc.set_species(/datum/species/ipc)
+	var/obj/item/organ/brain/ipc/core = ipc.get_organ_slot(ORGAN_SLOT_BRAIN)
+	var/mob/living/carbon/human/organic = allocate(/mob/living/carbon/human/consistent)
+	var/list/ordinary_traumas = list(
+		/datum/brain_trauma/severe/pacifism,
+		/datum/brain_trauma/severe/monophobia,
+		/datum/brain_trauma/severe/hypnotic_stupor,
+		/datum/brain_trauma/severe/blindness,
+		/datum/brain_trauma/severe/mute,
+	)
+	for(var/trauma_type in ordinary_traumas)
+		TEST_ASSERT_NOTNULL(organic.gain_trauma(trauma_type, TRAUMA_RESILIENCE_LOBOTOMY), "The organic control could not receive [trauma_type].")
+		organic.cure_all_traumas(TRAUMA_RESILIENCE_ABSOLUTE)
+		TEST_ASSERT_NULL(ipc.gain_trauma(trauma_type), "An IPC received ordinary [trauma_type].")
+		TEST_ASSERT_NULL(ipc.gain_trauma(trauma_type, TRAUMA_RESILIENCE_LOBOTOMY), "An IPC received deep-rooted [trauma_type].")
+	TEST_ASSERT_EQUAL(length(core.traumas), 0, "Rejected neurological injuries were retained on the positronic core.")
+	core.apply_organ_damage(20)
+	TEST_ASSERT(core.damage > 0, "Brain trauma protection also blocked ordinary core damage.")
+
+	// Wizard cheese and similar effects pass an existing datum with its own resilience.
+	var/datum/brain_trauma/special/godwoken/magic_trauma = allocate(/datum/brain_trauma/special/godwoken)
+	magic_trauma.resilience = TRAUMA_RESILIENCE_MAGIC
+	TEST_ASSERT_NULL(ipc.gain_trauma(magic_trauma, TRAUMA_RESILIENCE_LOBOTOMY), "An explicit ordinary resilience was ignored for an existing trauma datum.")
+	TEST_ASSERT_EQUAL(ipc.gain_trauma(magic_trauma), magic_trauma, "An IPC rejected a trauma datum with magical resilience.")
+	var/datum/brain_trauma/magic/lumiphobia/permanent_trauma = allocate(/datum/brain_trauma/magic/lumiphobia)
+	permanent_trauma.resilience = TRAUMA_RESILIENCE_ABSOLUTE
+	TEST_ASSERT_EQUAL(ipc.gain_trauma(permanent_trauma), permanent_trauma, "An IPC rejected a trauma datum with permanent resilience.")
+	TEST_ASSERT_EQUAL(length(core.traumas), 2, "Persistent special traumas were not retained on the positronic core.")
+
+/// Replacing an organic brain with a core must clean transferred injuries and their active symptoms.
+/datum/unit_test/ipc_brain_trauma_species_change/Run()
+	var/mob/living/carbon/human/human = allocate(/mob/living/carbon/human/consistent)
+	TEST_ASSERT_NOTNULL(human.gain_trauma(/datum/brain_trauma/severe/pacifism, TRAUMA_RESILIENCE_LOBOTOMY), "Could not give the human control traumatic pacifism.")
+	TEST_ASSERT_NOTNULL(human.gain_trauma(/datum/brain_trauma/severe/mute, TRAUMA_RESILIENCE_LOBOTOMY), "Could not give the human control traumatic muteness.")
+	TEST_ASSERT(HAS_TRAIT(human, TRAIT_PACIFISM), "The control trauma did not apply pacifism.")
+	TEST_ASSERT(HAS_TRAIT(human, TRAIT_MUTE), "The control trauma did not apply muteness.")
+	var/datum/brain_trauma/persistent = human.gain_trauma(/datum/brain_trauma/special/godwoken, TRAUMA_RESILIENCE_MAGIC)
+	TEST_ASSERT_NOTNULL(persistent, "Could not seed a persistent special trauma before changing species.")
+
+	human.set_species(/datum/species/ipc)
+	TEST_ASSERT(!human.has_trauma_type(/datum/brain_trauma/severe/pacifism), "An organic pacifism trauma survived conversion into an IPC.")
+	TEST_ASSERT(!human.has_trauma_type(/datum/brain_trauma/severe/mute), "An organic muteness trauma survived conversion into an IPC.")
+	TEST_ASSERT(!HAS_TRAIT(human, TRAIT_PACIFISM), "Organic traumatic pacifism remained active after conversion into an IPC.")
+	TEST_ASSERT(!HAS_TRAIT(human, TRAIT_MUTE), "Organic traumatic muteness remained active after conversion into an IPC.")
+	TEST_ASSERT(persistent in human.get_traumas(), "Conversion into an IPC erased a persistent special trauma.")
+
+	human.set_species(/datum/species/human)
+	TEST_ASSERT_NOTNULL(human.gain_trauma(/datum/brain_trauma/severe/pacifism, TRAUMA_RESILIENCE_LOBOTOMY), "IPC brain trauma protection leaked after changing back into a human.")
+	TEST_ASSERT(HAS_TRAIT(human, TRAIT_PACIFISM), "Traumatic pacifism no longer affected the restored human.")
+
+/// Neural debugging clears legacy deep-rooted IPC errors while preserving stronger effects and other cyberbrains.
+/datum/unit_test/ipc_brain_trauma_repair/Run()
+	var/mob/living/carbon/human/ipc = allocate(/mob/living/carbon/human/consistent)
+	ipc.set_species(/datum/species/ipc)
+	var/obj/item/organ/brain/ipc/core = ipc.get_organ_slot(ORGAN_SLOT_BRAIN)
+	var/mob/living/carbon/human/surgeon = allocate(/mob/living/carbon/human/consistent)
+	var/obj/item/multitool/tool = allocate(/obj/item/multitool)
+	var/datum/surgery_operation/organ/repair/brain/mechanic/operation = GLOB.operations.operations_by_typepath[__IMPLIED_TYPE__]
+	var/datum/brain_trauma/legacy = ipc.gain_trauma(/datum/brain_trauma/severe/pacifism, TRAUMA_RESILIENCE_MAGIC)
+	TEST_ASSERT_NOTNULL(legacy, "Could not seed the legacy trauma fixture.")
+	// Older installed cores could already carry this tier; seed it through the normal on_gain path.
+	legacy.resilience = TRAUMA_RESILIENCE_LOBOTOMY
+	var/datum/brain_trauma/persistent = ipc.gain_trauma(/datum/brain_trauma/special/godwoken, TRAUMA_RESILIENCE_MAGIC)
+	TEST_ASSERT_NOTNULL(persistent, "Could not seed a persistent special trauma for the repair control.")
+	TEST_ASSERT(HAS_TRAIT(ipc, TRAIT_PACIFISM), "The legacy fixture did not apply traumatic pacifism.")
+	core.set_organ_damage(20)
+
+	UNLINT(operation.success(core, surgeon, tool, list()))
+	TEST_ASSERT(!ipc.has_trauma_type(/datum/brain_trauma/severe/pacifism), "Neural debugging left a legacy deep-rooted IPC trauma.")
+	TEST_ASSERT(!HAS_TRAIT(ipc, TRAIT_PACIFISM), "Neural debugging left the legacy trauma's pacifism effect active.")
+	TEST_ASSERT(persistent in core.traumas, "Neural debugging erased a persistent special effect.")
+	TEST_ASSERT(core.damage < 20, "Neural debugging stopped repairing physical core damage.")
+
+	var/mob/living/carbon/human/android = allocate(/mob/living/carbon/human/consistent)
+	android.set_species(/datum/species/android)
+	var/obj/item/organ/brain/cybernetic/ordinary_brain = android.get_organ_slot(ORGAN_SLOT_BRAIN)
+	TEST_ASSERT_EQUAL(ordinary_brain.type, /obj/item/organ/brain/cybernetic, "The control did not receive an ordinary cybernetic brain.")
+	TEST_ASSERT_NOTNULL(android.gain_trauma(/datum/brain_trauma/severe/pacifism, TRAUMA_RESILIENCE_LOBOTOMY), "An ordinary cybernetic brain inherited IPC trauma protection.")
+	UNLINT(operation.success(ordinary_brain, surgeon, tool, list()))
+	TEST_ASSERT(android.has_trauma_type(/datum/brain_trauma/severe/pacifism), "IPC neural debugging changed deep-rooted trauma treatment for ordinary cybernetic brains.")
