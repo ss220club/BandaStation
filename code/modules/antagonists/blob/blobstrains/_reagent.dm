@@ -7,6 +7,10 @@
 
 
 /datum/blobstrain/reagent/attack_living(mob/living/L)
+	// BANDASTATION ADDITION START - Blob chemicals bypass the normal batch exposure entry point.
+	if(HAS_TRAIT(L, TRAIT_REAGENT_IMMUNE))
+		return
+	// BANDASTATION ADDITION END
 	var/mob_protection = L.getarmor(null, BIO) * 0.01
 	reagent.expose_mob(L, VAPOR, BLOB_REAGENTATK_VOL, TRUE, mob_protection, overmind)
 	send_message(L)
@@ -17,6 +21,10 @@
 		return
 
 	var/mob/living/living_victim = victim
+	// BANDASTATION ADDITION START - Reject the chemical payload; physical attack damage is handled separately.
+	if(HAS_TRAIT(living_victim, TRAIT_REAGENT_IMMUNE))
+		return
+	// BANDASTATION ADDITION END
 	var/mob_protection = living_victim.getarmor(null, BIO) * 0.01
 	reagent.expose_mob(living_victim, VAPOR, BLOBMOB_BLOBBERNAUT_REAGENTATK_VOL+blobbernaut_reagentatk_bonus, FALSE, mob_protection, overmind)//this will do between 10 and 20 damage(reduced by mob protection), depending on chemical, plus 4 from base brute damage.
 

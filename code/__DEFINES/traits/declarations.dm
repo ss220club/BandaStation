@@ -249,6 +249,10 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_DRINKS_BLOOD "drinks_blood"
 /// Mob is immune to toxin damage
 #define TRAIT_TOXIMMUNE "toxin_immune"
+// BANDASTATION ADDITION START - IPC chemical immunity
+/// Rejects reagents and chemical exposure, including holders belonging to installed organs.
+#define TRAIT_REAGENT_IMMUNE "reagent_immune"
+// BANDASTATION ADDITION END - IPC chemical immunity
 /// Mob is immune to oxygen damage, does not need to breathe
 #define TRAIT_NOBREATH "no_breath"
 /// Mob doesn't take oxygen damage in deep water

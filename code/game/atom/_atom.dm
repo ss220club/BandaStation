@@ -448,6 +448,10 @@
  * - show_message: Whether to display anything to mobs when they are exposed.
  */
 /atom/proc/expose_reagents(list/reagents, datum/reagents/source, methods=TOUCH, show_message=TRUE)
+	// BANDASTATION ADDITION START - Stop contact effects as well as absorption, before any chemical callback.
+	if(HAS_TRAIT(src, TRAIT_REAGENT_IMMUNE) || src.reagents?.is_reagent_immune())
+		return COMPONENT_NO_EXPOSE_REAGENTS
+	// BANDASTATION ADDITION END
 	. = SEND_SIGNAL(src, COMSIG_ATOM_EXPOSE_REAGENTS, reagents, source, methods, show_message)
 	if(. & COMPONENT_NO_EXPOSE_REAGENTS)
 		return

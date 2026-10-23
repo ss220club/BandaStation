@@ -13,6 +13,7 @@
 		TRAIT_NOCRITDAMAGE,
 		TRAIT_NO_DNA_COPY,
 		TRAIT_NO_PLASMA_TRANSFORM,
+		TRAIT_REAGENT_IMMUNE,
 		TRAIT_TOXIMMUNE,
 		TRAIT_VIRUSIMMUNE,
 	)
@@ -54,16 +55,20 @@
 
 /datum/species/ipc/on_species_gain(mob/living/carbon/human/human, datum/species/old_species, pref_load, regenerate_icons = TRUE, replace_missing = TRUE)
 	. = ..()
+	// End existing chemical effects through their normal removal callbacks when transforming.
+	human.reagents?.clear_reagents()
+	for(var/obj/item/organ/organ as anything in human.organs)
+		organ.reagents?.clear_reagents()
 	display_action = new
 	display_action.Grant(human)
 	RegisterSignal(human, COMSIG_LIVING_ELECTROCUTE_ACT, PROC_REF(on_electrocute))
 	RegisterSignal(human, COMSIG_LIVING_LIFE, PROC_REF(on_life))
 	RegisterSignal(human, COMSIG_LIVING_DEATH, PROC_REF(on_status_change))
 	RegisterSignal(human, COMSIG_LIVING_REVIVE, PROC_REF(on_status_change))
+	RegisterSignal(human, COMSIG_CARBON_GAIN_ORGAN, PROC_REF(on_organ_gain))
 	RegisterSignals(human, list(
 		COMSIG_LIVING_HEALTH_UPDATE,
 		COMSIG_LIVING_UPDATE_NUTRITION,
-		COMSIG_CARBON_GAIN_ORGAN,
 		COMSIG_CARBON_LOSE_ORGAN,
 		COMSIG_MOB_STATCHANGE,
 		SIGNAL_ADDTRAIT(TRAIT_KNOCKEDOUT),
@@ -114,6 +119,12 @@
 	SIGNAL_HANDLER
 	human.balloon_alert(human, "КПБ не могут есть!")
 	return BLOCK_EAT_ATTEMPT
+
+/// A transplanted organ must not bring a preloaded chemical reservoir into the chassis.
+/datum/species/ipc/proc/on_organ_gain(mob/living/carbon/human/human, obj/item/organ/organ)
+	SIGNAL_HANDLER
+	organ.reagents?.clear_reagents()
+	update_diagnostics(human)
 
 /datum/species/ipc/proc/on_electrocute(mob/living/carbon/human/human, shock_damage, atom/power_source, siemens_coeff, flags)
 	SIGNAL_HANDLER

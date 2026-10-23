@@ -63,6 +63,17 @@
 	reagents = new /datum/reagents(max_vol, flags)
 	reagents.my_atom = src
 
+// BANDASTATION ADDITION START - IPC chemical immunity
+/// Installed organs share their owner's immunity; carried containers keep working normally.
+/datum/reagents/proc/is_reagent_immune()
+	if(HAS_TRAIT(my_atom, TRAIT_REAGENT_IMMUNE))
+		return TRUE
+	if(isorgan(my_atom))
+		var/obj/item/organ/organ = my_atom
+		return HAS_TRAIT(organ.owner, TRAIT_REAGENT_IMMUNE)
+	return FALSE
+// BANDASTATION ADDITION END - IPC chemical immunity
+
 /**
  * Adds a reagent to this holder
  *
@@ -97,6 +108,11 @@
 	if(!IS_FINITE(amount))
 		stack_trace("non finite amount passed to add reagent [amount] [reagent_type]")
 		return FALSE
+
+	// BANDASTATION ADDITION START - Reject before purity conversion or chemical callbacks.
+	if(is_reagent_immune())
+		return FALSE
+	// BANDASTATION ADDITION END
 
 	if(SEND_SIGNAL(src, COMSIG_REAGENTS_PRE_ADD_REAGENT, reagent_type, amount, reagtemp, data, no_react) & COMPONENT_CANCEL_REAGENT_ADD)
 		return FALSE
@@ -467,6 +483,11 @@
 		else
 			target_holder = target.reagents
 			target_atom = target
+
+	// BANDASTATION ADDITION START - Reject before transfer interceptors can affect the target or consume the source.
+	if(target_holder.is_reagent_immune())
+		return FALSE
+	// BANDASTATION ADDITION END
 
 	// Prevents small amount problems, as well as zero and below zero amounts.
 	amount = round(min(amount, total_volume, target_holder.maximum_volume - target_holder.total_volume), CHEMICAL_QUANTISATION_LEVEL)
