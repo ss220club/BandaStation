@@ -227,7 +227,7 @@
 		)
 	result = /obj/item/food/breadslice/moldy
 	removed_foodtypes = VEGETABLES|GRAIN
-	added_foodtypes = GROSS|MUSHROOM // BANDASTATION ADDITION
+	added_foodtypes = GROSS
 	dish_category = DISH_MUSHROOM // BANDASTATION ADDITION
 
 /datum/crafting_recipe/food/breadcat
