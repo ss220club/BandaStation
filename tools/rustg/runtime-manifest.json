@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "upstream": {
+    "repository": "https://github.com/tgstation/rust-g.git",
+    "revision": "7ba42e2cb84c0fe28862b830d95fa095933f86f4",
+    "version": "7.0.0",
+    "cargo_lock_sha256": "6be0bb9965faa96277073726ca3024c59628ccd9ea61c1e09f5a239be2a145d3"
+  },
+  "patch": {
+    "file": "windows-lifetime.patch",
+    "sha256": "246308b7f402fa046723cdd12ec1e17e3805192bbec1cc597a6ac59f0e5f8863"
+  },
+  "build": {
+    "target": "i686-pc-windows-msvc",
+    "toolchain": "1.93.1",
+    "features": "default",
+    "command": "cargo +1.93.1 build --locked --release --target i686-pc-windows-msvc",
+    "rustc_verbose": "rustc 1.93.1 (01f6ddf75 2026-02-11)\nbinary: rustc\ncommit-hash: 01f6ddf7588f42ae2d7eb0a2f21d44e8e96674cf\ncommit-date: 2026-02-11\nhost: x86_64-pc-windows-msvc\nrelease: 1.93.1\nLLVM version: 21.1.8",
+    "cargo": "cargo 1.93.1 (083ac5135 2025-12-15)",
+    "git": "git version 2.56.0.windows.2",
+    "cargo_config_sha256": "354a75f649a5f2a7a05e81c01293b9ac0e70124e2623557f19adbe18fc3e4ebb",
+    "operating_system": "Microsoft Windows NT 10.0.26100.0",
+    "runner_image": "20261021.278.1"
+  },
+  "files": {
+    "rust_g.dll": {
+      "sha256": "8461311659929524301299d7a6a754e5ffe51c6d326ce7f2a8850143c5ee24db",
+      "bytes": 10140160
+    },
+    "rust_g.pdb": {
+      "sha256": "d83ecc5c62ecb5fbf14bcb494db3ecbb9f8014106236f82d6de0e9884c4627a4",
+      "bytes": 112095232
+    },
+    "rust_g.dm": {
+      "sha256": "d130f15695dd33367fcab2a68d262fbd10c4405a06b7d2450812715e2e3cc1e8",
+      "bytes": 33309
+    },
+    "LICENSE.rust-g.txt": {
+      "sha256": "5654d13f914e9a9957ef516837545bfe7c135932b4404e663a065514a924e2c3",
+      "bytes": 1093
+    },
+    "windows-lifetime.patch": {
+      "sha256": "246308b7f402fa046723cdd12ec1e17e3805192bbec1cc597a6ac59f0e5f8863",
+      "bytes": 2293
+    }
+  }
+}
