@@ -662,24 +662,6 @@
 	dir = 8;
 	pixel_x = 1
 	},
-/obj/item/clothing/neck/cloak/colorable_cloak{
-	icon = 'tmp/gags/icons/gags-colorable_cloak-#4a1702.dmi';
-	icon_state = "color_cloak";
-	pixel_x = 6;
-	pixel_y = 4
-	},
-/obj/item/clothing/mask/breath/breathscarf{
-	icon = 'tmp/gags/icons/gags-breathscarf-#3a0101.dmi';
-	icon_state = "breathscarf_up";
-	pixel_x = -6;
-	pixel_y = 2
-	},
-/obj/item/clothing/head/costume/ushanka{
-	icon = 'tmp/gags/icons/gags-ushanka-#491e16#5A4E44.dmi';
-	icon_state = "ushanka_gagdown";
-	pixel_x = 6;
-	pixel_y = -5
-	},
 /obj/item/clothing/gloves/etamin_gloves{
 	dir = 1;
 	pixel_y = 5
@@ -1639,12 +1621,6 @@
 	icon_state = "labcoat_paramedic_t";
 	pixel_x = -5;
 	pixel_y = 4
-	},
-/obj/item/toy/plush/snakeplushie{
-	icon = 'tmp/gags/icons/gags-plush_snake-#99ff99#000000.dmi';
-	icon_state = "map_plushie_snake";
-	pixel_x = 5;
-	pixel_y = 2
 	},
 /obj/item/storage/backpack/satchel/med{
 	dir = 8;
@@ -5883,10 +5859,6 @@
 	},
 /obj/item/clothing/mask/breath,
 /obj/item/food/grown/flower/poppy/geranium,
-/obj/item/clothing/neck/large_scarf{
-	icon = 'tmp/gags/icons/gags-scarf-#841616#d2aa6d.dmi';
-	icon_state = "large_scarf"
-	},
 /obj/item/ammo_box/magazine/c35sol_pistol/stendo{
 	icon_state = "pistol_35_stended-full";
 	pixel_x = 5;
@@ -5960,12 +5932,6 @@
 /obj/item/clothing/mask/breath{
 	pixel_x = -5;
 	pixel_y = -5
-	},
-/obj/item/clothing/suit/mothcoat{
-	icon = 'tmp/gags/icons/gags-mothcoat-#eaeaea.dmi';
-	icon_state = "mothcoat";
-	pixel_x = -3;
-	pixel_y = 3
 	},
 /obj/item/clothing/under/pants/track{
 	pixel_x = 2;
@@ -11016,13 +10982,7 @@
 	pixel_x = 13;
 	pixel_y = 9
 	},
-/obj/item/clothing/head/beret/medical{
-	dir = 1;
-	icon = 'tmp/gags/icons/gags-beret-#FFFFFF.dmi';
-	icon_state = "beret";
-	pixel_x = -3;
-	pixel_y = 6
-	},
+/obj/item/clothing/head/beret/medical,
 /obj/item/reagent_containers/cup/glass/waterbottle/large{
 	pixel_x = 5;
 	pixel_y = 3
@@ -12406,17 +12366,6 @@
 	},
 /obj/item/stack/cable_coil{
 	color = "#ffff00"
-	},
-/obj/item/clothing/mask/breath/breathscarf{
-	icon = 'tmp/gags/icons/gags-breathscarf-#292929.dmi';
-	icon_state = "breathscarf";
-	pixel_x = 5;
-	pixel_y = 5
-	},
-/obj/item/clothing/neck/cloak/colorable_cloak{
-	icon = 'tmp/gags/icons/gags-colorable_cloak-#292929.dmi';
-	icon_state = "color_cloak";
-	pixel_y = 6
 	},
 /obj/item/clothing/shoes/etamin_shoes{
 	pixel_x = -6;
@@ -19558,15 +19507,6 @@
 	},
 /turf/open/space/basic,
 /area/space)
-"jaT" = (
-/obj/structure/cable,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/structure/fluff/airlock_filler{
-	opacity = 0
-	},
-/turf/open/floor/iron,
-/area/ruin/space/has_grav/hideout/dorms)
 "jbb" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/table/reinforced,
@@ -19761,16 +19701,6 @@
 	dir = 1;
 	pixel_x = 2;
 	pixel_y = 2
-	},
-/obj/item/clothing/mask/breath/breathscarf{
-	icon = 'tmp/gags/icons/gags-breathscarf-#292929.dmi';
-	icon_state = "breathscarf_up";
-	pixel_y = 3
-	},
-/obj/item/clothing/head/beret{
-	icon = 'tmp/gags/icons/gags-beret-#34367c.dmi';
-	icon_state = "beret";
-	pixel_y = -4
 	},
 /obj/item/clothing/glasses/eyepatch/medical{
 	pixel_x = -5;
@@ -21777,10 +21707,6 @@
 	pixel_x = 3;
 	pixel_y = -3
 	},
-/obj/item/clothing/head/beret{
-	icon = 'tmp/gags/icons/gags-beret-#440b0b.dmi';
-	icon_state = "beret"
-	},
 /obj/item/clothing/head/soft/paramedic{
 	pixel_x = 1;
 	pixel_y = 1
@@ -22837,12 +22763,6 @@
 	pixel_x = -1;
 	pixel_y = 3
 	},
-/obj/item/clothing/suit/jacket/oversized{
-	dir = 1;
-	icon = 'tmp/gags/icons/gags-jacket_oversized-#161617.dmi';
-	icon_state = "jacket_oversized";
-	pixel_x = -3
-	},
 /obj/item/soap/syndie{
 	dir = 8;
 	pixel_y = 2
@@ -23000,6 +22920,7 @@
 	pixel_y = -6
 	},
 /obj/item/storage/box,
+/obj/item/clothing/suit/jacket/oversized,
 /turf/open/floor/material{
 	color = "#b6bec2";
 	name = "плитка из железа";
@@ -26550,13 +26471,6 @@
 	pixel_x = 6;
 	pixel_y = 1
 	},
-/obj/item/clothing/head/beret{
-	dir = 4;
-	icon = 'tmp/gags/icons/gags-beret-#972A2A.dmi';
-	icon_state = "beret";
-	pixel_x = -1;
-	pixel_y = -4
-	},
 /obj/item/coin/plastic{
 	color = "#bfb9ac";
 	dir = 4;
@@ -26853,11 +26767,7 @@
 /area/ruin/space/has_grav/deepstorage/airlock)
 "mpX" = (
 /obj/structure/bed,
-/obj/item/clothing/suit/toggle/jacket/trenchcoat{
-	icon = 'tmp/gags/icons/gags-trenchcoat-#414344.dmi';
-	icon_state = "trenchcoat";
-	pixel_y = -3
-	},
+/obj/item/clothing/suit/toggle/jacket/trenchcoat,
 /turf/open/floor/wood{
 	color = "#864a2d";
 	initial_gas_mix = "o2=21.05;n2=82.61;co2=0.61;TEMP=292.22"
@@ -32284,11 +32194,6 @@
 	pixel_x = -5;
 	pixel_y = 9
 	},
-/obj/item/toy/cards/cardhand{
-	icon_state = null;
-	pixel_x = -7;
-	pixel_y = -9
-	},
 /obj/item/pizzabox{
 	dir = 5;
 	icon_state = "pizzabox_messy";
@@ -36780,13 +36685,6 @@
 	pixel_x = -1;
 	pixel_y = -6
 	},
-/obj/item/clothing/head/beanie{
-	dir = 4;
-	icon = 'tmp/gags/icons/gags-beanie-#EEEEEE#EEEEEE.dmi';
-	icon_state = "beanie";
-	pixel_x = -12;
-	pixel_y = 4
-	},
 /obj/item/restraints/legcuffs/beartrap/prearmed{
 	dir = 1;
 	icon_state = "beartrap0";
@@ -36867,13 +36765,6 @@
 /obj/item/clothing/under/syndicate/scrubs{
 	pixel_x = -3;
 	pixel_y = -5
-	},
-/obj/item/clothing/under/pants/slacks{
-	dir = 1;
-	icon = 'tmp/gags/icons/gags-slacks-#575757#3E3E3E#75634F.dmi';
-	icon_state = "slacks";
-	pixel_x = -1;
-	pixel_y = 2
 	},
 /obj/item/clothing/suit/toggle/labcoat/interdyne{
 	icon = 'tmp/gags/icons/gags-labcoat-#EEEEEE#88242D#88242D#39393F.dmi';
@@ -37038,6 +36929,7 @@
 	pixel_x = -5;
 	pixel_y = -2
 	},
+/obj/item/clothing/under/pants/slacks,
 /turf/open/floor/mineral/plastitanium,
 /area/ruin/space/has_grav/hideout/tcomms)
 "rab" = (
@@ -40498,22 +40390,11 @@
 	pixel_x = 5;
 	pixel_y = -5
 	},
-/obj/item/clothing/head/beret/medical{
-	icon = 'tmp/gags/icons/gags-beret-#FFFFFF.dmi';
-	icon_state = "beret";
-	pixel_x = -1;
-	pixel_y = -2
-	},
+/obj/item/clothing/head/beret/medical,
 /obj/item/storage/backpack/medic{
 	dir = 8;
 	pixel_x = -6;
 	pixel_y = 3
-	},
-/obj/item/clothing/under/dress/skirt/turtleskirt{
-	icon = 'tmp/gags/icons/gags-turtleskirt-#cc0000#5f5f5f.dmi';
-	icon_state = "turtleskirt";
-	pixel_x = -4;
-	pixel_y = -3
 	},
 /obj/item/clothing/suit/hooded/wintercoat/medical{
 	pixel_x = 1;
@@ -42972,11 +42853,6 @@
 	pixel_y = 6
 	},
 /obj/item/storage/belt/military/holster,
-/obj/item/clothing/head/beret/militia{
-	icon = 'tmp/gags/icons/gags-beret_badge-#43523d#a2abb0.dmi';
-	icon_state = "beret_badge";
-	pixel_x = 4
-	},
 /obj/item/radio/headset/headset_cent/alt/leader{
 	dir = 8;
 	pixel_x = -5;
@@ -47780,12 +47656,6 @@
 	pixel_x = 3;
 	pixel_y = 4
 	},
-/obj/item/clothing/suit/toggle/jacket/trenchcoat{
-	icon = 'tmp/gags/icons/gags-trenchcoat-#414344.dmi';
-	icon_state = "trenchcoat";
-	pixel_x = 3;
-	pixel_y = -3
-	},
 /obj/item/storage/wallet/money{
 	pixel_x = -1;
 	pixel_y = -4
@@ -47802,12 +47672,7 @@
 	pixel_x = 2;
 	pixel_y = 1
 	},
-/obj/item/clothing/head/beret/medical{
-	icon = 'tmp/gags/icons/gags-beret-#FFFFFF.dmi';
-	icon_state = "beret";
-	pixel_x = 3;
-	pixel_y = -4
-	},
+/obj/item/clothing/head/beret/medical,
 /obj/item/storage/fancy/cigarettes/cigpack_robustgold{
 	pixel_y = -2
 	},
@@ -47859,6 +47724,7 @@
 	pixel_x = 2;
 	pixel_y = 1
 	},
+/obj/item/clothing/suit/toggle/jacket/trenchcoat,
 /turf/open/floor/iron,
 /area/ruin/space/has_grav/hideout/cargobay)
 "vFH" = (
@@ -51887,19 +51753,13 @@
 	pixel_x = -1;
 	pixel_y = 12
 	},
-/obj/item/toy/plush/snakeplushie{
-	dir = 1;
-	icon = 'tmp/gags/icons/gags-plush_snake-#99ff99#000000.dmi';
-	icon_state = "map_plushie_snake";
-	pixel_x = 5;
-	pixel_y = 4
-	},
 /obj/item/stack/sheet/animalhide/carp{
 	dir = 1;
 	pixel_x = 1;
 	pixel_y = 2;
 	amount = 2
 	},
+/obj/item/toy/plush/snakeplushie,
 /turf/open/floor/catwalk_floor/iron_dark,
 /area/ruin/space/has_grav/hideout/corridor2)
 "xHl" = (
@@ -52109,6 +51969,10 @@
 	},
 /turf/open/floor/iron,
 /area/ruin/space/has_grav/turretedoutpost)
+"xMU" = (
+/obj/item/toy/plush/snakeplushie,
+/turf/closed/indestructible/rock,
+/area/space)
 "xNm" = (
 /obj/machinery/door/poddoor{
 	id = "medical_lock_medlock"
@@ -64564,7 +64428,7 @@ fkj
 rsM
 rsM
 rsM
-rsM
+xMU
 rsM
 dOW
 bET
@@ -65360,7 +65224,7 @@ qXm
 vxw
 rkf
 qXm
-jaT
+xYh
 dvA
 dtr
 omw
