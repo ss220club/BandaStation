@@ -25,8 +25,33 @@
 		if(!vox_config)
 			return null
 		species_icon = SSgreyscale.GetColoredIconByType(vox_config, greyscale_colors)
+	// Paradise overlays share the original items and their current worn states.
+	// Precoloured 32px art must never replace GAGS colours or large shoe anchors.
+	var/use_paradise = species_id == SPECIES_VOX && !greyscale_config_worn && worn_x_dimension == 32 && worn_y_dimension == 32
+	if(use_paradise)
+		var/static/list/reviewed_replacements = list(
+			'icons/bandastation/mob/species/vox/clothing/uniform.dmi' = 'icons/bandastation/mob/species/vox/paradise/under_replacement.dmi',
+			'icons/bandastation/mob/species/vox/clothing/feet.dmi' = 'icons/bandastation/mob/species/vox/paradise/shoes_replacement.dmi',
+		)
+		var/replacement = reviewed_replacements[species_icon]
+		if(replacement && icon_exists(replacement, state))
+			return replacement
 	if(icon_exists(species_icon, state))
 		return species_icon
+	if(use_paradise)
+		var/static/list/supplements = list(
+			'icons/bandastation/mob/species/vox/clothing/head.dmi' = 'icons/bandastation/mob/species/vox/paradise/head.dmi',
+			'icons/bandastation/mob/species/vox/clothing/helmet.dmi' = 'icons/bandastation/mob/species/vox/paradise/helmet.dmi',
+			'icons/bandastation/mob/species/vox/clothing/uniform.dmi' = 'icons/bandastation/mob/species/vox/paradise/under.dmi',
+			'icons/bandastation/mob/species/vox/clothing/feet.dmi' = 'icons/bandastation/mob/species/vox/paradise/shoes.dmi',
+			'icons/bandastation/mob/species/vox/clothing/suit.dmi' = 'icons/bandastation/mob/species/vox/paradise/suit.dmi',
+			'icons/bandastation/mob/species/vox/clothing/hands.dmi' = 'icons/bandastation/mob/species/vox/paradise/gloves.dmi',
+			'icons/bandastation/mob/species/vox/clothing/back.dmi' = 'icons/bandastation/mob/species/vox/paradise/back.dmi',
+			'icons/bandastation/mob/species/vox/clothing/neck.dmi' = 'icons/bandastation/mob/species/vox/paradise/neck.dmi',
+		)
+		var/supplement = supplements[species_icon]
+		if(supplement && icon_exists(supplement, state))
+			return supplement
 	return null
 
 /obj/item/clothing/head/mod

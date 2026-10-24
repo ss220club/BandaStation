@@ -1,52 +1,132 @@
 {
-  "date": "2026-10-24",
+  "date": "2026-10-25",
   "scope": "Initialized default worn states; toggled variants are covered separately by scenario tests.",
-  "inventory_sha256": "ace62539d6ec04cd2277cb4a0d9ff73d44db9cb8413549b5670d8e4118a13975",
-  "visible_types": 1232,
-  "fitted_state_exists": 677,
-  "fallback": 555,
-  "skipped_types": 43,
-  "gap_rows": 721,
+  "inventory_sha256": "c50bd13646d9d832ec718394bd098de2a4647a2cc654aef9f238f4dd881d2fc3",
+  "visible_types": 2265,
+  "fitted_state_exists": 1223,
+  "fallback": 1042,
+  "skipped_types": 72,
+  "gap_rows": 1160,
   "issues": {
-    "fallback": 555,
-    "source_marked_unused": 4,
-    "source_marked_unconverted": 162
+    "fallback": 1042,
+    "source_marked_unused": 1,
+    "source_marked_unconverted": 117
   },
   "reasons": {
-    "unsupported_vox_greyscale_config": 112,
-    "no_selected_vox_worn_state": 441,
-    "missing_state_in_supported_vox_greyscale": 2,
-    "source_marked_unused": 4,
-    "source_marked_unconverted": 162
+    "no_selected_vox_worn_state": 846,
+    "unsupported_vox_greyscale_config": 193,
+    "missing_state_in_supported_vox_greyscale": 3,
+    "source_marked_unused": 1,
+    "source_marked_unconverted": 117
   },
   "categories": {
     "head": {
       "visible": 514,
-      "fitted_state_exists": 194,
-      "fallback": 320,
+      "fitted_state_exists": 239,
+      "fallback": 275,
       "source_marked_unconverted": 0,
-      "source_marked_unused": 0
+      "source_marked_unused": 0,
+      "paradise_selected_types": 44,
+      "paradise_art_reviewed_types": 44
     },
     "mask": {
       "visible": 135,
       "fitted_state_exists": 113,
       "fallback": 22,
       "source_marked_unconverted": 0,
-      "source_marked_unused": 0
+      "source_marked_unused": 0,
+      "paradise_selected_types": 0,
+      "paradise_art_reviewed_types": 0
     },
     "under": {
       "visible": 477,
-      "fitted_state_exists": 294,
-      "fallback": 183,
-      "source_marked_unconverted": 162,
-      "source_marked_unused": 0
+      "fitted_state_exists": 316,
+      "fallback": 161,
+      "source_marked_unconverted": 117,
+      "source_marked_unused": 0,
+      "paradise_selected_types": 67,
+      "paradise_art_reviewed_types": 67
     },
     "shoes": {
       "visible": 106,
-      "fitted_state_exists": 76,
-      "fallback": 30,
+      "fitted_state_exists": 81,
+      "fallback": 25,
       "source_marked_unconverted": 0,
-      "source_marked_unused": 4
+      "source_marked_unused": 1,
+      "paradise_selected_types": 9,
+      "paradise_art_reviewed_types": 9
+    },
+    "suit": {
+      "visible": 441,
+      "fitted_state_exists": 194,
+      "fallback": 247,
+      "source_marked_unconverted": 0,
+      "source_marked_unused": 0,
+      "paradise_selected_types": 26,
+      "paradise_art_reviewed_types": 26
+    },
+    "eyes": {
+      "visible": 87,
+      "fitted_state_exists": 69,
+      "fallback": 18,
+      "source_marked_unconverted": 0,
+      "source_marked_unused": 0,
+      "paradise_selected_types": 0,
+      "paradise_art_reviewed_types": 0
+    },
+    "ears": {
+      "visible": 2,
+      "fitted_state_exists": 2,
+      "fallback": 0,
+      "source_marked_unconverted": 0,
+      "source_marked_unused": 0,
+      "paradise_selected_types": 0,
+      "paradise_art_reviewed_types": 0
+    },
+    "gloves": {
+      "visible": 92,
+      "fitted_state_exists": 51,
+      "fallback": 41,
+      "source_marked_unconverted": 0,
+      "source_marked_unused": 0,
+      "paradise_selected_types": 6,
+      "paradise_art_reviewed_types": 6
+    },
+    "neck": {
+      "visible": 97,
+      "fitted_state_exists": 6,
+      "fallback": 91,
+      "source_marked_unconverted": 0,
+      "source_marked_unused": 0,
+      "paradise_selected_types": 6,
+      "paradise_art_reviewed_types": 6
+    },
+    "back": {
+      "visible": 111,
+      "fitted_state_exists": 77,
+      "fallback": 34,
+      "source_marked_unconverted": 0,
+      "source_marked_unused": 0,
+      "paradise_selected_types": 5,
+      "paradise_art_reviewed_types": 5
+    },
+    "belt": {
+      "visible": 143,
+      "fitted_state_exists": 22,
+      "fallback": 121,
+      "source_marked_unconverted": 0,
+      "source_marked_unused": 0,
+      "paradise_selected_types": 0,
+      "paradise_art_reviewed_types": 0
+    },
+    "mod_control": {
+      "visible": 60,
+      "fitted_state_exists": 53,
+      "fallback": 7,
+      "source_marked_unconverted": 0,
+      "source_marked_unused": 0,
+      "paradise_selected_types": 0,
+      "paradise_art_reviewed_types": 0
     }
   },
   "source_markers": {
@@ -55,21 +135,21 @@
       "marker": "NEEDS CONVERTED >>>>>",
       "states_after_marker": 648,
       "sha256": "b73e25542cc8e6ebc6ed2eb21160b22e9ad838ad2d5dea99873a2a0ee0a8ea41",
-      "item_types": 162,
-      "used_states": 152
+      "item_types": 117,
+      "used_states": 110
     },
     "source_marked_unused": {
       "file": "icons/bandastation/mob/species/vox/clothing/feet.dmi",
       "marker": "UNUSED >",
       "states_after_marker": 50,
       "sha256": "047cc8eeef11b08aa90a7487010635e657a03d44cddf9b2cba8ddb20bf6c4c0d",
-      "item_types": 4,
-      "used_states": 4
+      "item_types": 1,
+      "used_states": 1
     }
   },
   "skipped_reasons": {
-    "invisible_native_worn_sprite": 7,
-    "no_native_initial_worn_state": 34,
+    "invisible_native_worn_sprite": 14,
+    "no_native_initial_worn_state": 56,
     "transforms_or_deletes_during_Initialize": 2
   },
   "skipped": [
@@ -285,6 +365,247 @@
       "type": "/obj/item/clothing/shoes/changeling",
       "state": null,
       "reason": "no_native_initial_worn_state"
+    },
+    {
+      "type": "/obj/item/clothing/suit/hooded",
+      "state": null,
+      "reason": "no_native_initial_worn_state"
+    },
+    {
+      "type": "/obj/item/clothing/suit/hooded/chaplainsuit",
+      "state": null,
+      "reason": "no_native_initial_worn_state"
+    },
+    {
+      "type": "/obj/item/clothing/suit/hooded/cloak",
+      "state": null,
+      "reason": "no_native_initial_worn_state"
+    },
+    {
+      "type": "/obj/item/clothing/suit/armor/abductor",
+      "state": null,
+      "reason": "no_native_initial_worn_state"
+    },
+    {
+      "type": "/obj/item/clothing/suit/armor/tdome",
+      "state": null,
+      "reason": "no_native_initial_worn_state"
+    },
+    {
+      "type": "/obj/item/clothing/suit/armor/tdome/holosuit",
+      "state": null,
+      "reason": "no_native_initial_worn_state"
+    },
+    {
+      "type": "/obj/item/clothing/suit/changeling",
+      "state": null,
+      "reason": "no_native_initial_worn_state"
+    },
+    {
+      "type": "/obj/item/clothing/suit/utility",
+      "state": null,
+      "reason": "no_native_initial_worn_state"
+    },
+    {
+      "type": "/obj/item/clothing/suit/jacket/officer",
+      "state": null,
+      "reason": "no_native_initial_worn_state"
+    },
+    {
+      "type": "/obj/item/clothing/suit/jacket/warden",
+      "state": null,
+      "reason": "no_native_initial_worn_state"
+    },
+    {
+      "type": "/obj/item/clothing/suit/jacket/hos",
+      "state": null,
+      "reason": "no_native_initial_worn_state"
+    },
+    {
+      "type": "/obj/item/clothing/suit/chaplainsuit",
+      "state": null,
+      "reason": "no_native_initial_worn_state"
+    },
+    {
+      "type": "/obj/item/clothing/suit/chaplainsuit/armor",
+      "state": null,
+      "reason": "no_native_initial_worn_state"
+    },
+    {
+      "type": "/obj/item/clothing/suit/chef",
+      "state": null,
+      "reason": "no_native_initial_worn_state"
+    },
+    {
+      "type": "/obj/item/clothing/suit/carnival",
+      "state": null,
+      "reason": "no_native_initial_worn_state"
+    },
+    {
+      "type": "/obj/item/clothing/glasses/changeling",
+      "state": null,
+      "reason": "no_native_initial_worn_state"
+    },
+    {
+      "type": "/obj/item/clothing/glasses/hud",
+      "state": null,
+      "reason": "no_native_initial_worn_state"
+    },
+    {
+      "type": "/obj/item/clothing/glasses/hud/toggle",
+      "state": null,
+      "reason": "no_native_initial_worn_state"
+    },
+    {
+      "type": "/obj/item/clothing/glasses/mod",
+      "state": "standard-glasses",
+      "reason": "no_native_initial_worn_state"
+    },
+    {
+      "type": "/obj/item/clothing/gloves/changeling",
+      "state": null,
+      "reason": "no_native_initial_worn_state"
+    },
+    {
+      "type": "/obj/item/clothing/neck/necklace",
+      "state": null,
+      "reason": "no_native_initial_worn_state"
+    },
+    {
+      "type": "/obj/item/clothing/neck/mod",
+      "state": "standard-tie",
+      "reason": "no_native_initial_worn_state"
+    },
+    {
+      "type": "/obj/item/storage/backpack/snail",
+      "state": "snailshell",
+      "reason": "invisible_native_worn_sprite"
+    },
+    {
+      "type": "/obj/item/mod/control/pre_equipped/infiltrator",
+      "state": "infiltrator-control",
+      "reason": "invisible_native_worn_sprite"
+    },
+    {
+      "type": "/obj/item/mod/control/pre_equipped/chrono",
+      "state": "chrono-control",
+      "reason": "invisible_native_worn_sprite"
+    },
+    {
+      "type": "/obj/item/mod/control/pre_equipped/specops",
+      "state": "specops-control",
+      "reason": "invisible_native_worn_sprite"
+    },
+    {
+      "type": "/obj/item/mod/control/pre_equipped/ussp_standart",
+      "state": "ussp_standart-control",
+      "reason": "invisible_native_worn_sprite"
+    },
+    {
+      "type": "/obj/item/mod/control/pre_equipped/ussp_elite",
+      "state": "ussp_elite-control",
+      "reason": "invisible_native_worn_sprite"
+    },
+    {
+      "type": "/obj/item/mod/control/pre_equipped/skrell_emperor_guard",
+      "state": "skrell_guard-control",
+      "reason": "invisible_native_worn_sprite"
     }
-  ]
+  ],
+  "paradise": {
+    "repository": "ss220club/Paradise-SS220",
+    "source_revision": "0fffca1f1f29a63aff49d9b56524813eedf82c6d",
+    "license": "CC-BY-SA-3.0",
+    "mapping_sha256": "fde1f7d1ce7a91d5d662189dbabc8c7b21be4c718edc11ccf33a55128a84fbb8",
+    "provenance_sha256": "e6423dfd8564d82509e4c0a435c3186fb94ec90312f23ee7af33510979ad6b8d",
+    "mapped_states": 180,
+    "mapped_states_by_category": {
+      "back": 4,
+      "gloves": 5,
+      "head": 41,
+      "helmet": 1,
+      "neck": 4,
+      "shoes": 11,
+      "suit": 26,
+      "under": 88
+    },
+    "art_reviewed_states": 180,
+    "art_review_sha256": "2e8efbf00b657358f4b63b911d145606fc744028cdfac248fe394d2b9aac75dd",
+    "art_review_evidence": "Нативная матрица BYOND 516.1685: 22 листа в code/modules/unit_tests/screenshots/vox_appearance_screenshots_paradise_*.png. Каждое состояние показано на существующем предмете с клювами Primalis и Armalis с юга, севера, востока и запада. Четыре стиля оперения под зимним капюшоном и реальные переключения проверены отдельными изображениями. У трёх анимированных состояний просмотрены оба кадра со всех сторон. Проверка относится к этим сценариям и не охватывает все цвета и сочетания одежды.",
+    "initial_selected_states": 150,
+    "initial_selected_types": 163,
+    "initial_art_reviewed_types": 163,
+    "excluded_states": 4,
+    "exclusions": [
+      {
+        "category": "suit",
+        "target_state": "knight_yellow",
+        "source_file": "icons/mob/clothing/species/vox/suit.dmi",
+        "source_state": "knight_yellow",
+        "reason": "Rejected: the donor armour draws a Paradise-shaped tail cover, while this TG item does not hide the current Vox tail; east/west views show two tails.",
+        "test_type": "/obj/item/clothing/suit/armor/riot/knight/yellow"
+      },
+      {
+        "category": "suit",
+        "target_state": "knight_green",
+        "source_file": "icons/mob/clothing/species/vox/suit.dmi",
+        "source_state": "knight_green",
+        "reason": "Rejected: the donor armour draws a Paradise-shaped tail cover, while this TG item does not hide the current Vox tail; east/west views show two tails.",
+        "test_type": "/obj/item/clothing/suit/armor/riot/knight"
+      },
+      {
+        "category": "suit",
+        "target_state": "knight_red",
+        "source_file": "icons/mob/clothing/species/vox/suit.dmi",
+        "source_state": "knight_red",
+        "reason": "Rejected: the donor armour draws a Paradise-shaped tail cover, while this TG item does not hide the current Vox tail; east/west views show two tails.",
+        "test_type": "/obj/item/clothing/suit/armor/riot/knight/red"
+      },
+      {
+        "category": "suit",
+        "target_state": "knight_blue",
+        "source_file": "icons/mob/clothing/species/vox/suit.dmi",
+        "source_state": "knight_blue",
+        "reason": "Rejected: the donor armour draws a Paradise-shaped tail cover, while this TG item does not hide the current Vox tail; east/west views show two tails.",
+        "test_type": "/obj/item/clothing/suit/armor/riot/knight/blue"
+      }
+    ],
+    "policy_exclusions": [
+      "donator",
+      "prime_only",
+      "personal items",
+      "unreviewed masks and helmets",
+      "unknown semantic matches"
+    ],
+    "source_assets": {
+      "icons/mob/clothing/species/vox/back.dmi": "bb72eb8e4d9536cd04293735293485f8a396ee1a",
+      "icons/mob/clothing/species/vox/gloves.dmi": "cf8fb5e42dfb18ea441cb4a1d426eee8f3b88d5e",
+      "icons/mob/clothing/species/vox/head.dmi": "73377359c545ddbd38f2ba12a08a55ce1cb7bb8d",
+      "icons/mob/clothing/species/vox/head/hood.dmi": "97ede110c9adf14039702e7d7ac44d081aee2ec9",
+      "icons/mob/clothing/species/vox/head/softcap.dmi": "0b86baed6f1d5d065c805bbf0218dfcf4fed70fd",
+      "icons/mob/clothing/species/vox/neck.dmi": "f5d5cbd7f366eaf251c54dc2b0353169c28c0e4b",
+      "icons/mob/clothing/species/vox/shoes.dmi": "30bebe00bd1702e90bdf6cf74090b6b55420db57",
+      "icons/mob/clothing/species/vox/suit.dmi": "64d9b79b2f106521b264ccaf7d36c0ad5ce2aeeb",
+      "icons/mob/clothing/species/vox/suits/coat.dmi": "3071b0ff7dbf180867c31420ad5147ef2526eebf",
+      "icons/mob/clothing/species/vox/under/captain.dmi": "dd28c167fc9a5e63707ffdd268964a9545800607",
+      "icons/mob/clothing/species/vox/under/cargo.dmi": "aa4c50d2b177ca48d5888ef8536e9d832ee3152c",
+      "icons/mob/clothing/species/vox/under/civilian.dmi": "5e6329b7165d86ff4d92c94aff0a01f51ef07443",
+      "icons/mob/clothing/species/vox/under/costumes.dmi": "8411907a45a6d49bc656ba6c4a13c438e219ed8f",
+      "icons/mob/clothing/species/vox/under/engineering.dmi": "e743f9a99eea2fd2a37f8a25fe8c44c9d17c3747",
+      "icons/mob/clothing/species/vox/under/medical.dmi": "d4e8a3bda92dca2d730452a179c5a53d99d4c8e8",
+      "icons/mob/clothing/species/vox/under/misc.dmi": "2ebf472ee6674d05c5fa46c7e62c7e190d1c203e",
+      "icons/mob/clothing/species/vox/under/pants.dmi": "18832625c098729938ec57d622dc75b5d6ca658b",
+      "icons/mob/clothing/species/vox/under/procedure.dmi": "1dcc018f0d72810cd35d93ef7e454d58f50ff89b",
+      "icons/mob/clothing/species/vox/under/rnd.dmi": "86cf2f77f1cd2915ea0a0a734097244a56bc2773",
+      "icons/mob/clothing/species/vox/under/security.dmi": "7c88f8873f47758bbbc1e62eb53da7a7fe3b817c",
+      "icons/mob/clothing/species/vox/under/suit.dmi": "c1bfa28eafc166dfd603c970d67fa9c623bdd34a",
+      "icons/mob/clothing/species/vox/under/syndicate.dmi": "5d72308f2c4396ea0defe6fd46ef37df5dcbb44b",
+      "modular_ss220/clothing/icons/mob/species/vox/cloaks.dmi": "83d59eef44b563cb244f091d7ab10c4840a7c84f",
+      "modular_ss220/clothing/icons/mob/species/vox/gloves.dmi": "34d6618a106056492d48e065e9b22c10cf38bf27",
+      "modular_ss220/clothing/icons/mob/species/vox/hats.dmi": "ee53b84a1d9cb2fdfbc02eeb42cf9158bfbfd918",
+      "modular_ss220/clothing/icons/mob/species/vox/shoes.dmi": "f4f437fc13e06fca1ebe8905889219a043ac7e53",
+      "modular_ss220/clothing/icons/mob/species/vox/suits.dmi": "b15971eb7a690c6008d6213b6d4b0be68595ca5b",
+      "modular_ss220/clothing/icons/mob/species/vox/under.dmi": "6b20e04cc5098e8ce1780a0d49c38d217cb31657"
+    }
+  }
 }

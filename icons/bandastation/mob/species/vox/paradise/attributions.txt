@@ -1,0 +1,31 @@
+Vox clothing overlays adapted from ss220club/Paradise-SS220 and its contributors.
+Upstream codebase: ParadiseSS13/Paradise and its contributors.
+Source revision: 0fffca1f1f29a63aff49d9b56524813eedf82c6d
+https://github.com/ss220club/Paradise-SS220/tree/0fffca1f1f29a63aff49d9b56524813eedf82c6d
+
+License: Creative Commons Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0).
+https://creativecommons.org/licenses/by-sa/3.0/
+Source license declaration:
+https://github.com/ss220club/Paradise-SS220/blob/0fffca1f1f29a63aff49d9b56524813eedf82c6d/README.md#licenses
+
+Exact source file paths and Git blob hashes: tools/vox/paradise-source-assets.json.
+Each output state and its source file/state: tools/vox/paradise-clothing-map.json.
+Reproducible adapter: tools/vox/adapt_paradise_assets.py.
+
+Changes in PrimeDream: selected states are grouped by worn slot and replacement
+policy, and equivalent item states receive TG-compatible names. Source pixels,
+colours, 32x32 cell anchors, direction order and animation metadata are preserved.
+These overlays fit the existing Nova Vox body; no Paradise body parts are used.
+Donator, personal, prime_only, goonstation and tgmc assets are excluded.
+
+The auxiliary carved_pumpkin-emissive state retains the exact authored lit RGBA
+pixels that differ between hardhat1_blumpkin and hardhat0_blumpkin in the pinned
+head.dmi: four pixels facing south, two each east/west, none facing north. All
+unchanged pixels are transparent. Its recipe is recorded separately from the
+wearable mappings; the human pumpkin mask has different eyes and mouth anchors.
+
+Fourteen winter hoods additionally copy 42 opaque border/fabric pixels per
+state into previously transparent cells (13 south/north, eight east/west),
+closing the contour over the current Vox head ears. Each copy uses the same
+source state and direction, with exact coordinates in the named
+winterhood_head_coverage transform. All original hood pixels remain unchanged.
