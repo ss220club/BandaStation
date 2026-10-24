@@ -1,10 +1,23 @@
 # Windows rust-g: исправление времени жизни DLL
 
+Исправленная DLL установлена в корне сборки и проверена native-host тестами,
+40 standalone-процессами и полным игровым прогоном. Обычный сервер прошёл
+**4/4 сценария** с естественным exit 0: восемь эпох мира и четыре реальных
+`world.Reboot()` в двух warm-процессах с сохранением PID. Runtime errors,
+Application Faults, timeouts и forced exits отсутствуют.
+Результаты и команды: [VALIDATION.md](VALIDATION.md).
+Hash и исходники установленной версии: [runtime-manifest.json](runtime-manifest.json).
+
 `windows-lifetime.patch` применяется к rust-g 7.0.0, commit
 `7ba42e2cb84c0fe28862b830d95fa095933f86f4`.
 Патч закрепляет Windows-модуль при входе в FFI, до разбора аргументов и работы
-с TLS, чтобы worker threads и TLS destructors не остались в выгруженном DLL. Для других платформ
-guard возвращает `true`; код Linux не закрепляет модуль. Обоснование и исходный
+с TLS, чтобы worker threads и TLS destructors не остались в выгруженном DLL.
+`GetModuleHandleExW(FROM_ADDRESS | PIN)` сохраняет модуль до завершения процесса;
+это не остановка worker threads. Семантика `PIN` описана в
+[Microsoft Learn](https://learn.microsoft.com/en-us/windows/win32/api/libloaderapi/nf-libloaderapi-getmodulehandleexw).
+Нет собственного `DllMain`, задержек или скрытия ошибок завершения процесса.
+Для других платформ guard возвращает `true`; Linux-библиотека не заменяется.
+Обоснование и исходный
 минимальный пример: [WINDOWS_RUSTG_SHUTDOWN.md](../vox/WINDOWS_RUSTG_SHUTDOWN.md).
 
 ## Сборка
@@ -50,8 +63,16 @@ Rust/Cargo homes находятся в каталоге временных фа�
 `rustg-windows-i686-msvc-symbols`. Исходники и рецепт закреплены; побайтовое
 совпадение независимых сборок с разными версиями MSVC/Windows runner не обещается.
 
-CI создаёт **кандидат**, а не подтверждение исправления. Перед заменой tracked
-`rust_g.dll` нужно сверить checksum с manifest, выполнить standalone проверки
-запуска/завершения, повторные загрузки мира и полный игровой прогон. В PR должны
-попасть проверенный DLL и его source/patch/build metadata. Ни upstream PR,
-ни публикация релиза этим workflow не создаются.
+Установленная DLL получена из CI run `40140261314`, artifact `12578767019` и
+имеет SHA256 `8461311659929524301299d7a6a754e5ffe51c6d326ce7f2a8850143c5ee24db`.
+Её результаты записаны в [VALIDATION.md](VALIDATION.md); любая новая пересборка
+сначала является кандидатом и требует тех же проверок. Default hash standalone
+harness остаётся официальным. Для этой DLL требуется явный
+`-Sha256 '8461311659929524301299d7a6a754e5ffe51c6d326ce7f2a8850143c5ee24db'`;
+полный пример приведён в validation.
+
+Для замены pinned DLL нужен **полный останов и новый процесс DreamDaemon**.
+`world.Reboot()` внутри того же процесса оставляет прежний модуль загруженным.
+Перед заменой tracked `rust_g.dll` сверяется checksum с manifest; в PR попадают
+проверенный DLL и source/patch/build metadata. Upstream PR или публикация релиза
+этим workflow не создаются. PDB и сырые журналы не добавляются в Git.
