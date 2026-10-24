@@ -34,6 +34,7 @@
 	limb_id = SPECIES_IPC
 	change_exempt_flags = NONE
 	icon = 'modular_bandastation/species/icons/ipc/morpheus.dmi'
+	icon_state = "ipc_head"
 	icon_static = 'modular_bandastation/species/icons/ipc/morpheus.dmi'
 	brute_modifier = 1
 	burn_modifier = 1
@@ -102,6 +103,7 @@
 	limb_id = SPECIES_IPC
 	change_exempt_flags = NONE
 	icon = 'modular_bandastation/species/icons/ipc/morpheus.dmi'
+	icon_state = "ipc_chest"
 	icon_static = 'modular_bandastation/species/icons/ipc/morpheus.dmi'
 	brute_modifier = 1
 	burn_modifier = 1
@@ -127,6 +129,7 @@
 	limb_id = SPECIES_IPC
 	change_exempt_flags = NONE
 	icon = 'modular_bandastation/species/icons/ipc/morpheus.dmi'
+	icon_state = "ipc_l_arm"
 	icon_static = 'modular_bandastation/species/icons/ipc/morpheus.dmi'
 	brute_modifier = 1
 	burn_modifier = 1
@@ -152,6 +155,7 @@
 	limb_id = SPECIES_IPC
 	change_exempt_flags = NONE
 	icon = 'modular_bandastation/species/icons/ipc/morpheus.dmi'
+	icon_state = "ipc_r_arm"
 	icon_static = 'modular_bandastation/species/icons/ipc/morpheus.dmi'
 	brute_modifier = 1
 	burn_modifier = 1
@@ -177,6 +181,7 @@
 	limb_id = SPECIES_IPC
 	change_exempt_flags = NONE
 	icon = 'modular_bandastation/species/icons/ipc/morpheus.dmi'
+	icon_state = "ipc_l_leg"
 	icon_static = 'modular_bandastation/species/icons/ipc/morpheus.dmi'
 	brute_modifier = 1
 	burn_modifier = 1
@@ -202,6 +207,7 @@
 	limb_id = SPECIES_IPC
 	change_exempt_flags = NONE
 	icon = 'modular_bandastation/species/icons/ipc/morpheus.dmi'
+	icon_state = "ipc_r_leg"
 	icon_static = 'modular_bandastation/species/icons/ipc/morpheus.dmi'
 	brute_modifier = 1
 	burn_modifier = 1

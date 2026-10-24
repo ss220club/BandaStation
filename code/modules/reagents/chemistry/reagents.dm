@@ -145,7 +145,10 @@
 	if(penetrates_skin & methods) // models things like vapors which penetrate the skin
 		var/amount = round(reac_volume * clamp((1 - touch_protection), 0, 1), 0.1)
 		if(amount >= 0.5)
-			exposed_mob.reagents.add_reagent(type, amount, data, holder.chem_temp, purity)
+			// BANDASTATION EDIT START - Direct blob payloads have no reagent holder.
+			var/exposure_temperature = holder ? holder.chem_temp : DEFAULT_REAGENT_TEMPERATURE
+			exposed_mob.reagents.add_reagent(type, amount, data, exposure_temperature, purity)
+			// BANDASTATION EDIT END - Direct blob payloads have no reagent holder.
 
 /// Applies this reagent to an [/obj]
 /datum/reagent/proc/expose_obj(obj/exposed_obj, reac_volume, methods=TOUCH, show_message=TRUE)

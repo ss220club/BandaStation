@@ -49,7 +49,7 @@ try {
         'preference_species', 'species_change_organs', 'species_config_sanity',
         'species_unique_id', 'species_whitelist_check',
         'organ_sanity', 'designs', 'design_source', 'design_mats',
-        'focus_only/invalid_research_designs'
+        'focus_only/invalid_research_designs', 'missing_icons/icon_state'
     ) | ForEach-Object { '/datum/unit_test/' + $_ }
     if ($IncludeHumanoidScreenshots) {
         $baselineTests += '/datum/unit_test/screenshot_humanoids'

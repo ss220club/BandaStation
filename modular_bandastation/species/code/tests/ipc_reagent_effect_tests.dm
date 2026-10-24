@@ -106,6 +106,7 @@
 	var/mob/living/carbon/human/organic = allocate(/mob/living/carbon/human/consistent)
 	var/datum/blobstrain/reagent/cryogenic_poison/poison = allocate(/datum/blobstrain/reagent/cryogenic_poison)
 	allocated += poison.reagent
+	TEST_ASSERT_NULL(poison.reagent.holder, "The blob fixture must exercise a direct payload without a reagent holder.")
 	poison.attack_living(ipc)
 	poison.blobbernaut_attack(null, ipc)
 	TEST_ASSERT_EQUAL(ipc.reagents.total_volume, 0, "A blob chemical attack deposited reagents in an IPC.")
