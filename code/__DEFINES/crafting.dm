@@ -58,6 +58,7 @@
 	#define CUISINE_MARTIAN "Martian"
 	#define CUISINE_MEXICAN "Mexican"
 	#define CUISINE_MOTHIC "Mothic"
+	#define CUISINE_SKRELL "Skrell" // BANDASTATION ADDITION
 	#define CUISINE_TERRAN "Terran" // catch-all for earth food that we don't have a more specific category for
 	// dish categories
 	#define DISH_BREAD "Bread"
@@ -69,6 +70,7 @@
 	#define DISH_COOKIE "Cookie"
 	#define DISH_FROZEN "Frozen" // catch-all for ice cream, popsicles, etc
 	#define DISH_MEAT "Meat" // anything often served on its own as a "meat dish" (like steak), though it may include tofu
+	#define DISH_MUSHROOM "Mushroom" // BANDASTATION ADDITION
 	#define DISH_NOODLES "Noodles"
 	#define DISH_PASTRY "Pastry"
 	#define DISH_PIE "Pie"

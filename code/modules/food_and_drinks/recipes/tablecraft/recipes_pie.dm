@@ -88,7 +88,7 @@
 		/obj/item/food/grown/mushroom/amanita = 1
 	)
 	result = /obj/item/food/pie/amanita_pie
-	added_foodtypes = TOXIC|GROSS
+	added_foodtypes = TOXIC|GROSS|MUSHROOM // BANDASTATION ADDITION
 	dish_category = DISH_PIE
 	meal_category = MEAL_DESSERT
 
@@ -99,6 +99,7 @@
 		/obj/item/food/grown/mushroom/plumphelmet = 1
 	)
 	result = /obj/item/food/pie/plump_pie
+	added_foodtypes = MUSHROOM // BANDASTATION ADDITION
 	dish_category = DISH_PIE
 	meal_category = MEAL_DESSERT
 

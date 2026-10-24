@@ -173,7 +173,7 @@
 		/datum/reagent/consumable/nutriment/vitamin = 4,
 	)
 	tastes = list("pie" = 1, "mushroom" = 1)
-	foodtypes = GRAIN|DAIRY|VEGETABLES|TOXIC|GROSS
+	foodtypes = GRAIN|DAIRY|VEGETABLES|TOXIC|GROSS|MUSHROOM // BANDASTATION ADDITION
 	crafting_complexity = FOOD_COMPLEXITY_3
 
 /obj/item/food/pie/plump_pie
@@ -185,7 +185,7 @@
 		/datum/reagent/consumable/nutriment/vitamin = 4,
 	)
 	tastes = list("pie" = 1, "mushroom" = 1)
-	foodtypes = GRAIN|DAIRY|VEGETABLES
+	foodtypes = GRAIN|DAIRY|VEGETABLES|MUSHROOM // BANDASTATION ADDITION
 	crafting_complexity = FOOD_COMPLEXITY_3
 
 /obj/item/food/pie/plump_pie/Initialize(mapload)
