@@ -45,7 +45,7 @@ export const PaiCard = (props) => {
   const { pai } = data;
 
   return (
-    <Window width={400} height={400} title="Меню опций ПИИ">
+    <Window width={400} height={400} title="Меню опций пИИ">
       <Window.Content scrollable>
         {!pai ? <PaiDownload /> : <PaiOptions />}
       </Window.Content>
