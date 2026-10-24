@@ -111,7 +111,7 @@
 	balloon_alert(src, "переопределение...")
 	// Now begin hacking
 	if(!do_after(src, 15 SECONDS, hacking_cable.hacking_machine, timed_action_flags = NONE))
-		balloon_alert(src, "неудача...")
+		balloon_alert(src, "неудача, кабель втягивается!")
 		QDEL_NULL(hacking_cable)
 		return FALSE
 	if(!hacking_cable?.hacking_machine)
