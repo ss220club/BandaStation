@@ -44,13 +44,21 @@
 	var/expected_brain_damage = null
 	/// Точный снимок урона сердца перед тиком защищенного реагента
 	var/expected_heart_damage = null
+	/// Точный снимок урона печени перед тиком защищенного алкоголя
+	var/expected_liver_damage = null
 
 /// Синхронный сброс урона мозгу и сердцу после тика конкретного защищенного реагента
 /obj/item/organ/liver/skrell/proc/flush_organ_protection(mob/living/carbon/organ_owner)
 	if(!organ_owner)
 		expected_brain_damage = null
 		expected_heart_damage = null
+		expected_liver_damage = null
 		return
+
+	if(!isnull(expected_liver_damage))
+		if(damage > expected_liver_damage)
+			set_organ_damage(expected_liver_damage)
+		expected_liver_damage = null
 
 	if(!isnull(expected_brain_damage))
 		var/obj/item/organ/brain/brain = organ_owner.get_organ_slot(ORGAN_SLOT_BRAIN)
@@ -100,11 +108,6 @@
 		|| istype(chem, /datum/reagent/toxin/bungotoxin) \
 		|| istype(chem, /datum/reagent/toxin/spore))
 
-		var/datum/reagent/toxin/toxin_chem = chem
-		toxin_chem.toxpwr = 0
-		toxin_chem.liver_damage_multiplier = 0
-		toxin_chem.liver_tolerance_multiplier = 1000
-
 		var/metabolized = chem.compute_metabolization(organ_owner, seconds_per_tick)
 		organ_owner.reagents.remove_reagent(chem.type, metabolized)
 		return COMSIG_MOB_STOP_REAGENT_TICK
@@ -113,11 +116,6 @@
 	if(istype(chem, /datum/reagent/toxin/tetrodotoxin) \
 		|| istype(chem, /datum/reagent/toxin/carpotoxin) \
 		|| istype(chem, /datum/reagent/toxin/mushroom_powder))
-
-		var/datum/reagent/toxin/toxin_chem = chem
-		toxin_chem.toxpwr = 0
-		toxin_chem.liver_damage_multiplier = 0
-		toxin_chem.liver_tolerance_multiplier = 1000
 
 		organ_owner.adjust_nutrition(0.5 * metabolization_rate * seconds_per_tick)
 		var/metabolized = chem.compute_metabolization(organ_owner, seconds_per_tick)
@@ -168,15 +166,7 @@
 	// ЭТАП 2. БАЗОВАЯ ОБРАБОТКА ПЕЧЕНИ И ЗАЩИТА САМОГО ОРГАНА ПЕЧЕНИ
 	// =========================================================================
 
-	// Обнуляем токсичность кураре до вызова ..(), оставляя его только паралитиком
-	if(istype(chem, /datum/reagent/toxin/curare))
-		var/datum/reagent/toxin/curare_chem = chem
-		curare_chem.toxpwr = 0
-
-	var/prev_liver_damage = damage
-	. = ..()
-
-	// Блокируем нанесение урона печени от скрелльского алкоголя, самогона и кураре
+	// Фиксируем чистый урон печени ДО того, как сработает ..() и on_mob_life()
 	if(istype(chem, /datum/reagent/consumable/ethanol/fyrsskar_tears) \
 		|| istype(chem, /datum/reagent/consumable/ethanol/qerrbalak_amanita_tincture) \
 		|| istype(chem, /datum/reagent/consumable/ethanol/aliose_velvet_cordial) \
@@ -184,8 +174,10 @@
 		|| istype(chem, /datum/reagent/consumable/ethanol/moonshine) \
 		|| istype(chem, /datum/reagent/toxin/curare))
 
-		if(damage > prev_liver_damage)
-			set_organ_damage(prev_liver_damage)
+		expected_liver_damage = damage
+		addtimer(CALLBACK(src, PROC_REF(flush_organ_protection), organ_owner), 0, TIMER_UNIQUE | TIMER_OVERRIDE)
+
+	. = ..()
 
 	if(. & COMSIG_MOB_STOP_REAGENT_TICK)
 		return
@@ -375,8 +367,10 @@
 		if(HAS_TRAIT(organ_owner, TRAIT_HUSK))
 			organ_owner.cure_husk()
 
-	// Компенсация удушья от кураре (паралич сохраняется, но легкие не страдают)
+	// Компенсация побочного урона от кураре (паралич сохраняется, но токсины и легкие не страдают)
 	if(istype(chem, /datum/reagent/toxin/curare))
+		var/datum/reagent/toxin/curare_chem = chem
+		addtimer(CALLBACK(organ_owner, TYPE_PROC_REF(/mob/living, adjust_tox_loss), -curare_chem.toxpwr * REM * seconds_per_tick, FALSE), 0)
 		addtimer(CALLBACK(organ_owner, TYPE_PROC_REF(/mob/living, adjust_oxy_loss), -2 * REM * seconds_per_tick, FALSE), 0)
 
 	// Снижение токсического урона от синаптизина
@@ -398,6 +392,7 @@
 /obj/item/organ/liver/skrell/Destroy()
 	expected_brain_damage = null
 	expected_heart_damage = null
+	expected_liver_damage = null
 	if(earthsblood_trauma)
 		qdel(earthsblood_trauma)
 	earthsblood_trauma = null
