@@ -12,7 +12,7 @@
 
 /datum/pai_candidate/proc/savefile_save(mob/user)
 	if(is_guest_key(user.key))
-		to_chat(usr, span_warning("Вы не можете сохранять информацию о ПИИ в качестве гостя."))
+		to_chat(usr, span_warning("Вы не можете сохранять информацию о пИИ в качестве гостя."))
 		return FALSE
 	var/savefile/F = new /savefile(src.savefile_path(user))
 	WRITE_FILE(F["name"], name)
