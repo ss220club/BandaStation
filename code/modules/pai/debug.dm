@@ -9,7 +9,7 @@ ADMIN_VERB(makepAI, R_FUN, "Make pAI", "Specify a location to spawn a pAI device
 	if(isnull(choice))
 		return
 
-	var/chosen_name = input(choice, "Введите ваше имя ПИИ:", "Имя ПИИ", "Персональный ИИ") as text|null
+	var/chosen_name = input(choice, "Введите ваше имя пИИ:", "Имя пИИ", "Персональный ИИ") as text|null
 	if (isnull(chosen_name))
 		return
 
