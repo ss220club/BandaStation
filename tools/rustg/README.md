@@ -2,8 +2,8 @@
 
 `windows-lifetime.patch` применяется к rust-g 7.0.0, commit
 `7ba42e2cb84c0fe28862b830d95fa095933f86f4`.
-Патч удерживает Windows-модуль в памяти перед первым FFI-вызовом, чтобы worker
-threads и TLS destructors не остались в выгруженном DLL. Для других платформ
+Патч закрепляет Windows-модуль при входе в FFI, до разбора аргументов и работы
+с TLS, чтобы worker threads и TLS destructors не остались в выгруженном DLL. Для других платформ
 guard возвращает `true`; код Linux не закрепляет модуль. Обоснование и исходный
 минимальный пример: [WINDOWS_RUSTG_SHUTDOWN.md](../vox/WINDOWS_RUSTG_SHUTDOWN.md).
 
