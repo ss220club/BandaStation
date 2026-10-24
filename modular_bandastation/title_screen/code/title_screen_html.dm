@@ -90,6 +90,7 @@
 	if(discord_linked && !player.client.interviewee)
 		if(!SSticker || SSticker.current_state <= GAME_STATE_PREGAME)
 			html += create_button(player, "toggle_ready", "Готов", advanced_classes = "[player.ready == PLAYER_READY_TO_PLAY ? "good" : "bad"] checkbox")
+			html += create_button(player, "toggle_antag_roll", "Антаганисты", tooltip = "Разрешить выбирать вас для ролей антагонистов", advanced_classes = "[player.client.prefs.read_preference(/datum/preference/toggle/antag_roll) ? "good" : "bad"] checkbox")
 			html += create_public_traits(player)
 		else
 			html += create_button(player, "late_join", "Присоединиться")
