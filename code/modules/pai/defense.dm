@@ -54,7 +54,7 @@
 		return
 	fold_in()
 	if(user.put_in_hands(card))
-		user.visible_message(span_notice("[user] быстро подхватывает [user.ru_p_theirs()] карту ПИИ."))
+		user.visible_message(span_notice("[user] быстро подхватывает [user.ru_p_theirs()] карту пИИ."))
 
 /mob/living/silicon/pai/bullet_act(obj/projectile/hitting_projectile, def_zone, piercing_hit = FALSE)
 	. = ..()
