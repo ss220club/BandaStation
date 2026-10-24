@@ -64,7 +64,7 @@ const PaiDownload = (props) => {
         <NoticeBox info>
           <Stack fill>
             <Stack.Item grow fontSize="16px">
-              Кандидаты в ПИИ
+              Кандидаты в пИИ
             </Stack.Item>
             <Stack.Item>
               <Button
