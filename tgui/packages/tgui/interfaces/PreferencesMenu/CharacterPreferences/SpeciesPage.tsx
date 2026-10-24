@@ -40,6 +40,7 @@ const FOOD_ICONS = {
   [Food.Raw]: 'drumstick-bite',
   [Food.Seafood]: 'fish',
   [Food.Stone]: 'gem',
+  [Food.Tech]: 'microchip', // BANDASTATION ADDITION - Vox food
   [Food.Sugar]: 'candy-cane',
   [Food.Toxic]: 'biohazard',
   [Food.Vegetables]: 'carrot',
@@ -60,6 +61,7 @@ const FOOD_NAMES: Record<keyof typeof FOOD_ICONS, string> = {
   [Food.Raw]: 'Raw',
   [Food.Seafood]: 'Seafood',
   [Food.Stone]: 'Rocks',
+  [Food.Tech]: 'Электроника', // BANDASTATION ADDITION - Vox food
   [Food.Sugar]: 'Sugar',
   [Food.Toxic]: 'Toxic food',
   [Food.Vegetables]: 'Vegetables',
@@ -70,6 +72,7 @@ const IGNORE_UNLESS_LIKED: Set<Food> = new Set([
   Food.Cloth,
   Food.Gross,
   Food.Toxic,
+  Food.Tech, // BANDASTATION ADDITION - Vox food
 ]);
 
 function notIn<T>(set: Set<T>) {

@@ -1,0 +1,290 @@
+{
+  "date": "2026-10-24",
+  "scope": "Initialized default worn states; toggled variants are covered separately by scenario tests.",
+  "inventory_sha256": "ace62539d6ec04cd2277cb4a0d9ff73d44db9cb8413549b5670d8e4118a13975",
+  "visible_types": 1232,
+  "fitted_state_exists": 677,
+  "fallback": 555,
+  "skipped_types": 43,
+  "gap_rows": 721,
+  "issues": {
+    "fallback": 555,
+    "source_marked_unused": 4,
+    "source_marked_unconverted": 162
+  },
+  "reasons": {
+    "unsupported_vox_greyscale_config": 112,
+    "no_selected_vox_worn_state": 441,
+    "missing_state_in_supported_vox_greyscale": 2,
+    "source_marked_unused": 4,
+    "source_marked_unconverted": 162
+  },
+  "categories": {
+    "head": {
+      "visible": 514,
+      "fitted_state_exists": 194,
+      "fallback": 320,
+      "source_marked_unconverted": 0,
+      "source_marked_unused": 0
+    },
+    "mask": {
+      "visible": 135,
+      "fitted_state_exists": 113,
+      "fallback": 22,
+      "source_marked_unconverted": 0,
+      "source_marked_unused": 0
+    },
+    "under": {
+      "visible": 477,
+      "fitted_state_exists": 294,
+      "fallback": 183,
+      "source_marked_unconverted": 162,
+      "source_marked_unused": 0
+    },
+    "shoes": {
+      "visible": 106,
+      "fitted_state_exists": 76,
+      "fallback": 30,
+      "source_marked_unconverted": 0,
+      "source_marked_unused": 4
+    }
+  },
+  "source_markers": {
+    "source_marked_unconverted": {
+      "file": "icons/bandastation/mob/species/vox/clothing/uniform.dmi",
+      "marker": "NEEDS CONVERTED >>>>>",
+      "states_after_marker": 648,
+      "sha256": "b73e25542cc8e6ebc6ed2eb21160b22e9ad838ad2d5dea99873a2a0ee0a8ea41",
+      "item_types": 162,
+      "used_states": 152
+    },
+    "source_marked_unused": {
+      "file": "icons/bandastation/mob/species/vox/clothing/feet.dmi",
+      "marker": "UNUSED >",
+      "states_after_marker": 50,
+      "sha256": "047cc8eeef11b08aa90a7487010635e657a03d44cddf9b2cba8ddb20bf6c4c0d",
+      "item_types": 4,
+      "used_states": 4
+    }
+  },
+  "skipped_reasons": {
+    "invisible_native_worn_sprite": 7,
+    "no_native_initial_worn_state": 34,
+    "transforms_or_deletes_during_Initialize": 2
+  },
+  "skipped": [
+    {
+      "type": "/obj/item/clothing/head/costume/hairpin",
+      "state": "hairpin_fancy",
+      "reason": "invisible_native_worn_sprite"
+    },
+    {
+      "type": "/obj/item/clothing/head/changeling",
+      "state": null,
+      "reason": "no_native_initial_worn_state"
+    },
+    {
+      "type": "/obj/item/clothing/head/hooded/cult_hoodie/eldritch/cosmic",
+      "state": "cosmic_armor",
+      "reason": "invisible_native_worn_sprite"
+    },
+    {
+      "type": "/obj/item/clothing/head/hooded/cult_hoodie/eldritch/rust",
+      "state": "rust_armor",
+      "reason": "invisible_native_worn_sprite"
+    },
+    {
+      "type": "/obj/item/clothing/head/hooded/cult_hoodie/void",
+      "state": "void_cloak",
+      "reason": "invisible_native_worn_sprite"
+    },
+    {
+      "type": "/obj/item/clothing/head/hooded/cloakhood",
+      "state": null,
+      "reason": "no_native_initial_worn_state"
+    },
+    {
+      "type": "/obj/item/clothing/head/utility",
+      "state": null,
+      "reason": "no_native_initial_worn_state"
+    },
+    {
+      "type": "/obj/item/clothing/head/hats/fedora",
+      "state": null,
+      "reason": "no_native_initial_worn_state"
+    },
+    {
+      "type": "/obj/item/clothing/head/caphat",
+      "state": null,
+      "reason": "no_native_initial_worn_state"
+    },
+    {
+      "type": "/obj/item/clothing/head/chaplain",
+      "state": null,
+      "reason": "no_native_initial_worn_state"
+    },
+    {
+      "type": "/obj/item/clothing/head/wig",
+      "state": "wig",
+      "reason": "invisible_native_worn_sprite"
+    },
+    {
+      "type": "/obj/item/clothing/head/wig/random",
+      "state": "wig",
+      "reason": "invisible_native_worn_sprite"
+    },
+    {
+      "type": "/obj/item/clothing/head/wig/natural",
+      "state": "wig",
+      "reason": "invisible_native_worn_sprite"
+    },
+    {
+      "type": "/obj/item/clothing/head/chefhat",
+      "state": null,
+      "reason": "no_native_initial_worn_state"
+    },
+    {
+      "type": "/obj/item/clothing/mask/changeling",
+      "state": null,
+      "reason": "no_native_initial_worn_state"
+    },
+    {
+      "type": "/obj/item/clothing/mask/animal",
+      "state": null,
+      "reason": "no_native_initial_worn_state"
+    },
+    {
+      "type": "/obj/item/clothing/mask/cigarette",
+      "state": null,
+      "reason": "no_native_initial_worn_state"
+    },
+    {
+      "type": "/obj/item/clothing/mask/cigarette/cigar",
+      "state": null,
+      "reason": "no_native_initial_worn_state"
+    },
+    {
+      "type": "/obj/item/clothing/mask/carnival",
+      "state": null,
+      "reason": "no_native_initial_worn_state"
+    },
+    {
+      "type": "/obj/item/clothing/under/changeling",
+      "state": null,
+      "reason": "no_native_initial_worn_state"
+    },
+    {
+      "type": "/obj/item/clothing/under/rank/civilian/chef",
+      "state": null,
+      "reason": "no_native_initial_worn_state"
+    },
+    {
+      "type": "/obj/item/clothing/under/rank/medical/scrubs",
+      "state": null,
+      "reason": "no_native_initial_worn_state"
+    },
+    {
+      "type": "/obj/item/clothing/under/rank/tsf",
+      "state": null,
+      "reason": "no_native_initial_worn_state"
+    },
+    {
+      "type": "/obj/item/clothing/under/rank/ussp",
+      "state": null,
+      "reason": "no_native_initial_worn_state"
+    },
+    {
+      "type": "/obj/item/clothing/under/rank/etamin_ind",
+      "state": null,
+      "reason": "no_native_initial_worn_state"
+    },
+    {
+      "type": "/obj/item/clothing/under/color/jumpskirt/random",
+      "reason": "transforms_or_deletes_during_Initialize"
+    },
+    {
+      "type": "/obj/item/clothing/under/color/random",
+      "reason": "transforms_or_deletes_during_Initialize"
+    },
+    {
+      "type": "/obj/item/clothing/under/costume",
+      "state": null,
+      "reason": "no_native_initial_worn_state"
+    },
+    {
+      "type": "/obj/item/clothing/under/costume/buttondown",
+      "state": null,
+      "reason": "no_native_initial_worn_state"
+    },
+    {
+      "type": "/obj/item/clothing/under/misc/pj",
+      "state": null,
+      "reason": "no_native_initial_worn_state"
+    },
+    {
+      "type": "/obj/item/clothing/under/dress",
+      "state": null,
+      "reason": "no_native_initial_worn_state"
+    },
+    {
+      "type": "/obj/item/clothing/under/suit",
+      "state": null,
+      "reason": "no_native_initial_worn_state"
+    },
+    {
+      "type": "/obj/item/clothing/under/trek",
+      "state": null,
+      "reason": "no_native_initial_worn_state"
+    },
+    {
+      "type": "/obj/item/clothing/under/sensor_test",
+      "state": null,
+      "reason": "no_native_initial_worn_state"
+    },
+    {
+      "type": "/obj/item/clothing/under/towel",
+      "state": null,
+      "reason": "no_native_initial_worn_state"
+    },
+    {
+      "type": "/obj/item/clothing/under/carnival",
+      "state": null,
+      "reason": "no_native_initial_worn_state"
+    },
+    {
+      "type": "/obj/item/clothing/under/blueshield",
+      "state": null,
+      "reason": "no_native_initial_worn_state"
+    },
+    {
+      "type": "/obj/item/clothing/under/blueshield/skirt",
+      "state": null,
+      "reason": "no_native_initial_worn_state"
+    },
+    {
+      "type": "/obj/item/clothing/under/medical",
+      "state": null,
+      "reason": "no_native_initial_worn_state"
+    },
+    {
+      "type": "/obj/item/clothing/under/engineering",
+      "state": null,
+      "reason": "no_native_initial_worn_state"
+    },
+    {
+      "type": "/obj/item/clothing/under/scientist",
+      "state": null,
+      "reason": "no_native_initial_worn_state"
+    },
+    {
+      "type": "/obj/item/clothing/under/security",
+      "state": null,
+      "reason": "no_native_initial_worn_state"
+    },
+    {
+      "type": "/obj/item/clothing/shoes/changeling",
+      "state": null,
+      "reason": "no_native_initial_worn_state"
+    }
+  ]
+}

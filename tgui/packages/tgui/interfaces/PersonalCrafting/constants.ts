@@ -21,6 +21,7 @@ export const TYPE_ICONS = {
   [Food.Raw]: 'drumstick-bite',
   [Food.Seafood]: 'fish',
   [Food.Stone]: 'gem',
+  [Food.Tech]: 'microchip', // BANDASTATION ADDITION - Vox food
   [Food.Sugar]: 'candy-cane',
   [Food.Toxic]: 'biohazard',
   [Food.Vegetables]: 'carrot',
@@ -109,6 +110,7 @@ export const TYPE_NAMES = {
   [Food.Raw]: 'Сырое',
   [Food.Seafood]: 'Морепродукты',
   [Food.Stone]: 'Каменное',
+  [Food.Tech]: 'Технологическое',
   [Food.Sugar]: 'Сахарное',
   [Food.Toxic]: 'Токсичное',
   [Food.Vegetables]: 'Овощи',

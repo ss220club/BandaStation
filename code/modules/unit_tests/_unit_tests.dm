@@ -398,6 +398,10 @@
 #include "../../../modular_bandastation/species/code/tests/ipc_radiation_tests.dm"
 #include "../../../modular_bandastation/species/code/tests/ipc_ui_tests.dm"
 // BANDASTATION ADDITION END - IPC port regression tests
+// BANDASTATION ADDITION START - Vox port regression tests
+#include "../../../modular_bandastation/species/code/tests/vox_mechanics_tests.dm"
+#include "../../../modular_bandastation/species/code/tests/vox_appearance_tests.dm"
+// BANDASTATION ADDITION END - Vox port regression tests
 #ifdef REFERENCE_TRACKING_DEBUG //Don't try and parse this file if ref tracking isn't turned on. IE: don't parse ref tracking please mr linter
 #include "find_reference_sanity.dm"
 #endif

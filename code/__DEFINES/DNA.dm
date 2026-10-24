@@ -114,6 +114,18 @@
 #define FEATURE_IPC_SCREEN_COLOR_SECONDARY "ipc_screen_color_secondary"
 #define FEATURE_IPC_ANTENNA "ipc_antenna"
 #define FEATURE_IPC_ANTENNA_COLOR "ipc_antenna_color"
+
+#define FEATURE_VOX_SNOUT "vox_snout"
+#define FEATURE_VOX_SNOUT_COLOR "vox_snout_color"
+#define FEATURE_VOX_TAIL "tail_vox"
+#define FEATURE_VOX_QUILLS "vox_quills"
+#define FEATURE_VOX_QUILLS_COLOR "vox_quills_color"
+#define FEATURE_VOX_FACIAL_QUILLS "vox_facial_quills"
+#define FEATURE_VOX_FACIAL_QUILLS_COLOR "vox_facial_quills_color"
+#define FEATURE_VOX_LIMB_MARKINGS "vox_limb_markings"
+#define FEATURE_VOX_LIMB_MARKINGS_COLOR "vox_limb_markings_color"
+#define FEATURE_VOX_BODY_MARKINGS "vox_body_markings"
+#define FEATURE_VOX_BODY_MARKINGS_COLOR "vox_body_markings_color"
 // BANDASTATION ADDITION END - Species Features
 
 // flag for the transfer_flag argument from dna/proc/copy_dna().
@@ -170,6 +182,8 @@
 #define ORGAN_SLOT_EXTERNAL_HEAD_TENTACLE "head_tentacles"
 #define ORGAN_SLOT_EXTERNAL_HEAD_TENTACLE_ORNAMENT "tentacle_ornament"
 #define ORGAN_SLOT_EXTERNAL_HEAD_CLOTH_WRAP "cloth_wrap"
+#define ORGAN_SLOT_EXTERNAL_VOX_QUILLS "vox_quills"
+#define ORGAN_SLOT_EXTERNAL_VOX_FACIAL_QUILLS "vox_facial_quills"
 /// BADNASTATION ADDITION END - Species
 
 /// Xenomorph organ slots
