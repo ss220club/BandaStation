@@ -20647,6 +20647,11 @@
 	},
 /turf/open/floor/iron/smooth,
 /area/centcom/central_command_areas/briefing)
+"sDo" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/landmark/start/mercenary/leader,
+/turf/open/floor/carpet/red,
+/area/centcom/central_command_areas/evacuation/ship)
 "sDr" = (
 /obj/effect/turf_decal/tile/dark_blue/anticorner{
 	dir = 4
@@ -56748,7 +56753,7 @@ aLt
 aUz
 aLt
 aLR
-aTm
+sDo
 aTm
 aFf
 ayH

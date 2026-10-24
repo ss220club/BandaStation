@@ -137,10 +137,7 @@
 /turf/open/floor/iron,
 /area/ruin/space/has_grav/the_outlet/employeesection)
 "adQ" = (
-/obj/structure/chair/sofa/bench/right{
-	icon = 'tmp/gags/icons/gags-bench_right-#af7d28.dmi';
-	icon_state = "bench_right"
-	},
+/obj/structure/chair/sofa/bench/right,
 /turf/open/floor/iron/white,
 /area/ruin/space/has_grav/hideout/dock)
 "adR" = (
@@ -3919,10 +3916,7 @@
 /turf/open/floor/iron/dark/textured_large,
 /area/ruin/space/has_grav/powered/biooutpost/vault)
 "bIq" = (
-/obj/structure/chair/sofa/bench/left{
-	icon = 'tmp/gags/icons/gags-bench_left-#af7d28.dmi';
-	icon_state = "bench_left"
-	},
+/obj/structure/chair/sofa/bench/left,
 /turf/open/floor/iron/white,
 /area/ruin/space/has_grav/hideout/dock)
 "bIv" = (
