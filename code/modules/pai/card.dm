@@ -243,7 +243,7 @@
 		return FALSE
 	request_spam = TRUE
 	playsound(src, 'sound/machines/ping.ogg', 20, TRUE)
-	balloon_alert(user, "ПИИ-помощник запрошен")
+	balloon_alert(user, "пИИ-помощник запрошен")
 	var/mutable_appearance/alert_overlay = mutable_appearance('icons/obj/aicards.dmi', "pai")
 
 	notify_ghosts(
