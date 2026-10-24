@@ -269,6 +269,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				return FALSE
 
 			var/default_value = read_preference(requested_preference.type)
+			var/color_character_revision = character_preferences_revision // SS220 EDIT: Capture character context before the modal.
 
 			// Yielding
 			var/new_color = tgui_color_picker(
@@ -280,6 +281,11 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 
 			if (!new_color)
 				return FALSE
+
+			// SS220 EDIT - START
+			if (!is_color_preference_context_current(requested_preference, color_character_revision, ui)) // Reject a stale modal result.
+				return FALSE
+			// SS220 EDIT - END
 
 			if (!update_preference(requested_preference, new_color))
 				return FALSE

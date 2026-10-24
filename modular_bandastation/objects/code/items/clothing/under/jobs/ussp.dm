@@ -36,3 +36,25 @@
 	desc = "Униформа спецназа ГРУ СССП."
 	icon_state = "ussp_spetsnaz"
 	can_adjust = FALSE
+
+/// Classic USSP appearances retain native clothing behavior and protection.
+/obj/item/clothing/under/costume/soviet/ussp
+	name = "\improper USSP military uniform"
+	desc = "Классическая военная форма КССП."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/under/ussp.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/under/ussp.dmi'
+	icon_state = "soviet"
+	inhand_icon_state = "g_suit"
+	female_sprite_flags = NO_FEMALE_UNIFORM
+
+/obj/item/clothing/under/costume/soviet/ussp/officer
+	name = "\improper USSP officer uniform"
+	desc = "Классическая форма офицера КССП."
+	icon_state = "sovietofficer"
+	inhand_icon_state = "gy_suit"
+
+/obj/item/clothing/under/costume/soviet/ussp/admiral
+	name = "\improper USSP admiral uniform"
+	desc = "Классическая парадная форма адмирала КССП."
+	icon_state = "sovietadmiral"
+	inhand_icon_state = "w_suit"

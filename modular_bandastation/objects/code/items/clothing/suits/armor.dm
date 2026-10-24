@@ -268,3 +268,13 @@
 	desc = "Теплое пальто светло-коричневого цвета с вшитыми армированными вкладками. Хорошо греет и защищает владельца."
 	icon_state = "gard_long"
 	body_parts_covered = CHEST|GROIN|ARMS|LEGS
+
+/// Reuse the existing command coat armour without a toggle requiring nonexistent source sprites.
+/obj/item/clothing/suit/armor/tsf_commander
+	name = "\improper Trans-Solar Federation commander's jacket"
+	desc = "Парадный китель командного состава Транссолнечной Федерации."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/armor.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/armor.dmi'
+	icon_state = "solgovcommander"
+	inhand_icon_state = "b_suit"
+	armor_type = /datum/armor/armor_centcom_formal

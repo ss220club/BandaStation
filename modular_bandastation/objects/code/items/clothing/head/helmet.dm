@@ -193,3 +193,33 @@
 	max_heat_protection_temperature = SPACE_HELM_MAX_TEMP_PROTECT
 	armor_type = /datum/armor/armor_heavy
 	clothing_traits = list(TRAIT_HEAD_INJURY_BLOCKED)
+
+/// These are cosmetic variants of TG spacesuits, without Paradise's hardsuit machinery.
+/obj/item/clothing/head/helmet/space/tsf
+	name = "\improper Trans-Solar Federation Specops marine helmet"
+	desc = "Космический шлем в цветах спецназа морской пехоты Транссолнечной Федерации."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/head/helmet.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/modsuit/mod_clothing.dmi'
+	icon_state = "hardsuit0-solgovmarine"
+	worn_icon_state = "tsf_standart-helmet-sealed"
+
+/obj/item/clothing/head/helmet/space/tsf/command
+	name = "\improper Trans-Solar Federation Specops lieutenant's helmet"
+	desc = "Космический шлем морской пехоты Транссолнечной Федерации с золотыми элементами, обозначающими звание владельца."
+	icon_state = "hardsuit0-solgovcommand"
+	worn_icon_state = "tsf_elite-helmet-sealed"
+
+/// Native space equipment owns the seal, power cell and thermal regulation.
+/obj/item/clothing/head/helmet/space/ussp
+	name = "\improper USSP space helmet"
+	desc = "Космический шлем с красной звездой КССП."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/head/helmet.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/helmet.dmi'
+	icon_state = "hardsuit0-soviet"
+	base_icon_state = "hardsuit0-soviet"
+
+/obj/item/clothing/head/helmet/space/ussp/commander
+	name = "\improper USSP command space helmet"
+	desc = "Космический шлем КССП с красной командирской полосой."
+	icon_state = "hardsuit0-soviet-commander"
+	base_icon_state = "hardsuit0-soviet-commander"

@@ -18,6 +18,7 @@ GLOBAL_DATUM_INIT(manifest, /datum/manifest, new)
 			log_manifest(readied_player.ckey, readied_player.new_character.mind, readied_player.new_character)
 			players_to_log[readied_player.ckey] = readied_player.new_character
 		if(ishuman(readied_player.new_character))
+			readied_player.new_character.prepare_initial_crew_record() // SS220 EDIT: mark only the initial native record.
 			inject(readied_player.new_character)
 		CHECK_TICK
 	if(length(players_to_log))

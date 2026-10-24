@@ -1,6 +1,13 @@
 import { useBackend } from 'tgui/backend';
 import { Dropdown, Tooltip } from 'tgui-core/components';
 
+// SS220 EDIT - START
+import {
+  extendJobSlotOptions,
+  jobSlotIconProps,
+} from '../../../bandastation/job_slots_preferences/JobSlotExtensions';
+import { jobProfileTooltipProps } from '../../../bandastation/job_slots_preferences/profileDescription';
+// SS220 EDIT - END
 import type { PreferencesMenuData } from '../types';
 
 const SLOT_ICONS = {
@@ -25,6 +32,7 @@ export const JobSlotDropdown = (props: JobSlotDropdownProps) => {
   const { name } = props;
 
   const currentProfileName = data.character_profiles[data.active_slot - 1];
+  // biome-ignore format: Preserve the upstream expression. (SS220 EDIT)
   const assignedProfileSlot =
     data.job_preferences.find((pref) => pref.job === name)?.assigned_profile_slot ??
     null;
@@ -52,6 +60,7 @@ export const JobSlotDropdown = (props: JobSlotDropdownProps) => {
         : [],
     ),
   ];
+  extendJobSlotOptions(slotOptions); // SS220 EDIT: add the random appearance option.
   const selectedOption = slotOptions.find(
     (option) => option.value === currentSlotNumber,
   );
@@ -59,6 +68,7 @@ export const JobSlotDropdown = (props: JobSlotDropdownProps) => {
   return (
     <Tooltip
       content={currentSlotName ?? 'Активный персонаж'}
+      {...jobProfileTooltipProps(data, name, currentSlotName)} // SS220 EDIT: enrich only assigned-profile tooltips.
       position="top-end"
     >
       <div>
@@ -66,6 +76,7 @@ export const JobSlotDropdown = (props: JobSlotDropdownProps) => {
           noChevron
           iconOnly
           icon={SLOT_ICONS[currentSlotNumber] ?? 'user'}
+          {...jobSlotIconProps(currentSlotNumber)} // SS220 EDIT: icon for the additional option.
           width="auto"
           menuWidth="auto"
           selected={selectedOption?.displayText}
@@ -75,6 +86,10 @@ export const JobSlotDropdown = (props: JobSlotDropdownProps) => {
             act('set_job_to_profile', {
               job: name,
               profile: slot > 0 ? slot : -1,
+              // SS220 EDIT - START
+              slot,
+              edit_slot: data.active_slot,
+              // SS220 EDIT - END
             });
           }}
         />

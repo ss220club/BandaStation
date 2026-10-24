@@ -34,6 +34,7 @@
 /datum/preferences/proc/reset_job_slots()
 	pref_job_slots = list()
 	save_preferences()
+	return TRUE
 
 /**
  * Loads assigned character slot for a job
@@ -47,6 +48,12 @@
  * Returns TRUE if randomized appearance should be used
  */
 /datum/preferences/proc/set_assigned_slot(job_title, is_late_join = FALSE)
+	// A committed lobby profile is already loaded; reuse its appearance mode without selecting or switching again.
+	var/mob/dead/new_player/requester = isnewplayer(parent?.mob) ? parent.mob : null
+	if(requester?.assigned_character)
+		var/datum/job/assigned_job = SSjob.get_job(job_title)
+		if(requester.assigned_character.job_type == assigned_job?.type)
+			return requester.assigned_character.randomized
 	if(is_late_join ? read_preference(/datum/preference/toggle/late_join_always_current_slot) : read_preference(/datum/preference/toggle/round_start_always_join_current_slot))
 		return
 	var/slot = pref_job_slots[job_title] || JOB_SLOT_CURRENT_SLOT

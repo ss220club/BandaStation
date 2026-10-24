@@ -11,3 +11,4 @@
 #include "code/outfit_export.dm"
 #include "code/tsf.dm"
 #include "code/ussp.dm"
+#include "code/donor_outfits.dm"
