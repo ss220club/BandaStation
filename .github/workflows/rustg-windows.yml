@@ -20,11 +20,13 @@ jobs:
   build:
     runs-on: windows-latest
     timeout-minutes: 45
-    env:
-      CARGO_HOME: ${{ runner.temp }}/rustg-cargo
-      RUSTUP_HOME: ${{ runner.temp }}/rustg-rustup
     steps:
       - uses: actions/checkout@v7
+      - name: Isolate build tool homes
+        shell: pwsh
+        run: |
+          "CARGO_HOME=$env:RUNNER_TEMP/rustg-cargo" >> $env:GITHUB_ENV
+          "RUSTUP_HOME=$env:RUNNER_TEMP/rustg-rustup" >> $env:GITHUB_ENV
       - uses: dtolnay/rust-toolchain@1.93
         with:
           toolchain: 1.93.1
