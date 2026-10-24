@@ -12,7 +12,7 @@ export function PaiInterface(props) {
   const [tab, setTab] = useState(PAI_TAB.System);
 
   return (
-    <Window title="Програмный интерфейс пИИ v2.5" width={380} height={480}>
+    <Window title="Программный интерфейс пИИ v2.5" width={380} height={480}>
       <Window.Content>
         <Stack fill vertical>
           <Stack.Item grow>
