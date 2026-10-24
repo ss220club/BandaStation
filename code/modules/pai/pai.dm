@@ -1,7 +1,7 @@
 /mob/living/silicon/pai
 	can_buckle_to = FALSE
 	density = FALSE
-	desc = "Универсальный излучатель голографических изображений в твердом свете на основе ПИИ."
+	desc = "Универсальный излучатель голографических изображений в твердом свете на основе пИИ."
 	health = 500
 	held_lh = 'icons/mob/inhands/pai_item_lh.dmi'
 	held_rh = 'icons/mob/inhands/pai_item_rh.dmi'
