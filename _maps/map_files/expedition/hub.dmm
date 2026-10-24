@@ -4027,13 +4027,6 @@
 /obj/structure/cable,
 /turf/open/floor/iron/smooth_edge,
 /area/ruin/space/has_grav/derelictsulaco)
-"bLH" = (
-/obj/structure/cable,
-/obj/machinery/power/apc/auto_name/directional/south,
-/obj/structure/cable,
-/obj/machinery/power/terminal,
-/turf/open/space/basic,
-/area/space)
 "bMa" = (
 /obj/machinery/light/dim/directional/west,
 /obj/structure/table,
@@ -4396,7 +4389,6 @@
 /turf/open/space/basic,
 /area/space)
 "bVE" = (
-/obj/structure/cable,
 /obj/effect/turf_decal/siding/thinplating/corner,
 /obj/effect/turf_decal/siding/thinplating/corner{
 	dir = 1
@@ -4447,9 +4439,6 @@
 	},
 /turf/open/floor/iron/dark,
 /area/ruin/space/has_grav/hideout/securestorage)
-"bWi" = (
-/turf/closed/indestructible/reinforced,
-/area/template_noop)
 "bWt" = (
 /turf/open/floor/mineral/plastitanium/red/airless,
 /area/ruin/space)
@@ -7099,7 +7088,6 @@
 /turf/open/space/basic,
 /area/space)
 "djF" = (
-/obj/structure/cable,
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/grunge,
 /obj/structure/cable,
@@ -8086,15 +8074,6 @@
 	},
 /turf/open/space/basic,
 /area/ruin/space/has_grav)
-"dJn" = (
-/obj/structure/cable,
-/obj/structure/cable,
-/obj/effect/turf_decal/siding/thinplating{
-	dir = 4
-	},
-/obj/structure/spacevine,
-/turf/open/space/basic,
-/area/space)
 "dJo" = (
 /obj/machinery/light/dim/directional/north,
 /obj/effect/spawner/random/loot_spawn/technical,
@@ -9484,12 +9463,6 @@
 /obj/effect/spawner/random/trash/food_packaging,
 /turf/open/floor/iron,
 /area/ruin/space/has_grav/deepstorage/storage)
-"etS" = (
-/obj/structure/window/reinforced/spawner{
-	dir = 1
-	},
-/turf/open/space/basic,
-/area/space)
 "euf" = (
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron/showroomfloor,
@@ -14303,7 +14276,6 @@
 /area/space)
 "gGu" = (
 /obj/structure/cable,
-/obj/structure/cable,
 /obj/machinery/power/apc/auto_name/directional/north,
 /turf/open/floor/plating/rust,
 /area/space)
@@ -15159,7 +15131,6 @@
 /turf/closed/wall/rust,
 /area/ruin/space/has_grav/the_outlet/storefront)
 "hbE" = (
-/obj/structure/cable,
 /obj/effect/turf_decal/siding/thinplating/corner,
 /obj/effect/turf_decal/siding/thinplating/corner{
 	dir = 1
@@ -18256,12 +18227,6 @@
 /obj/machinery/disposal/bin,
 /turf/open/space/basic,
 /area/space)
-"iva" = (
-/obj/machinery/power/smes,
-/obj/structure/cable,
-/obj/structure/cable,
-/turf/open/space/basic,
-/area/space)
 "ivb" = (
 /turf/open/floor/iron/showroomfloor{
 	initial_gas_mix = "o2=21.62;n2=82.31;co2=0.27;TEMP=291.74"
@@ -19465,7 +19430,6 @@
 /turf/open/floor/iron/dark/airless,
 /area/ruin/space)
 "iWB" = (
-/obj/structure/cable,
 /obj/structure/cable,
 /obj/machinery/power/smes/engineering,
 /obj/machinery/light/directional/north,
@@ -21236,12 +21200,6 @@
 	},
 /turf/open/indestructible,
 /area/ruin/space/has_grav/powered/biooutpost)
-"jKX" = (
-/obj/structure/cable,
-/obj/structure/cable,
-/obj/structure/spacevine,
-/turf/open/space/basic,
-/area/space)
 "jKZ" = (
 /mob/living/basic/construct/wraith/hostile,
 /turf/open/floor/plating/rust,
@@ -22517,7 +22475,6 @@
 /obj/structure/transit_tube/station/dispenser{
 	dir = 4
 	},
-/obj/structure/cable,
 /obj/structure/railing/corner{
 	pixel_x = -3;
 	pixel_y = 23
@@ -28408,10 +28365,8 @@
 /area/ruin/space/space_ghost_restaurant)
 "neC" = (
 /obj/structure/table/reinforced,
-/obj/structure/window/reinforced/spawner{
-	dir = 4
-	},
 /obj/item/paper_bin,
+/obj/structure/window/reinforced/spawner/directional/east,
 /turf/open/space/basic,
 /area/space)
 "neF" = (
@@ -30447,14 +30402,6 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/space/basic,
 /area/ruin/powered)
-"obO" = (
-/obj/structure/cable,
-/obj/structure/cable,
-/obj/effect/turf_decal/siding/thinplating{
-	dir = 1
-	},
-/turf/open/space/basic,
-/area/space)
 "obR" = (
 /obj/structure/transit_tube/curved{
 	dir = 1
@@ -31849,25 +31796,17 @@
 /turf/open/space/basic,
 /area/space)
 "oKe" = (
-/obj/structure/window/reinforced/spawner{
-	dir = 1
-	},
 /obj/structure/rack,
-/obj/item/storage/belt{
-	pixel_y = -5
-	},
-/obj/item/storage/belt,
-/obj/item/storage/belt,
-/obj/item/storage/belt,
-/obj/item/storage/belt{
-	pixel_y = 5
-	},
-/obj/item/storage/belt{
-	pixel_y = 5
-	},
+/obj/item/storage/belt/utility,
+/obj/item/storage/belt/utility,
+/obj/item/storage/belt/utility,
+/obj/item/storage/belt/utility,
+/obj/item/storage/belt/utility,
+/obj/item/storage/belt/utility,
 /obj/effect/turf_decal/siding/wideplating/dark/end{
 	dir = 1
 	},
+/obj/structure/window/reinforced/spawner/directional/north,
 /turf/open/floor/light,
 /area/space)
 "oKo" = (
@@ -40131,18 +40070,6 @@
 /obj/structure/closet/crate,
 /turf/open/space/basic,
 /area/space)
-"slw" = (
-/obj/machinery/door/poddoor/shutters{
-	id = "cargoshutter"
-	},
-/obj/structure/cable,
-/obj/structure/cable,
-/obj/machinery/door/firedoor/border_only{
-	dir = 1
-	},
-/obj/machinery/door/firedoor/border_only,
-/turf/open/floor/plating,
-/area/space)
 "slA" = (
 /obj/structure/cable,
 /obj/structure/disposalpipe/segment{
@@ -41767,11 +41694,6 @@
 /obj/machinery/door/airlock/freezer,
 /turf/open/floor/iron/freezer,
 /area/ruin/space/has_grav/infested_frigate)
-"sVc" = (
-/obj/structure/cable,
-/obj/structure/cable,
-/turf/open/floor/iron,
-/area/ruin/space/has_grav/hideout/cargobay)
 "sVe" = (
 /obj/structure/broken_flooring/side/always_floorplane{
 	dir = 8
@@ -48599,8 +48521,8 @@
 /area/ruin/space/has_grav/powered/biooutpost)
 "vUZ" = (
 /obj/item/stack/rods,
-/turf/template_noop,
-/area/template_noop)
+/turf/open/space/basic,
+/area/space)
 "vVK" = (
 /obj/structure/window/reinforced/spawner/directional/west{
 	color = "#99bbff"
@@ -50789,10 +50711,6 @@
 /obj/item/stack/ore/titanium,
 /turf/closed/mineral,
 /area/ruin/unpowered)
-"xcl" = (
-/obj/structure/lattice,
-/turf/template_noop,
-/area/template_noop)
 "xcM" = (
 /obj/effect/turf_decal/siding/thinplating_new/dark,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -52212,12 +52130,6 @@
 	},
 /turf/open/floor/iron,
 /area/ruin/space/has_grav/turretedoutpost)
-"xMU" = (
-/obj/structure/cable,
-/obj/effect/decal/cleanable/dirt/dust,
-/obj/structure/cable,
-/turf/open/floor/plating,
-/area/space)
 "xNm" = (
 /obj/machinery/door/poddoor{
 	id = "medical_lock_medlock"
@@ -58883,7 +58795,7 @@ cgh
 cgh
 rDS
 sSh
-jKX
+sSh
 sSh
 qCs
 bai
@@ -66587,7 +66499,7 @@ wKg
 rMi
 rMi
 rMi
-dJn
+rMi
 twE
 bpW
 rDS
@@ -72237,7 +72149,7 @@ bai
 bai
 bai
 eFS
-obO
+fgX
 wTM
 qCs
 rDS
@@ -72409,7 +72321,7 @@ oFH
 mlj
 mlj
 mlj
-sVc
+vQw
 mlj
 alC
 kAp
@@ -75770,7 +75682,7 @@ ycD
 fUA
 fUA
 fUA
-bWi
+fUA
 fkj
 cYv
 gQz
@@ -83737,7 +83649,7 @@ oof
 pCs
 bFB
 hHn
-iva
+xzI
 rqy
 rqy
 iCr
@@ -86017,7 +85929,7 @@ fsr
 qCs
 rqy
 mBV
-xMU
+jWL
 qtQ
 wKg
 wKg
@@ -87329,7 +87241,7 @@ qCs
 iCj
 pCs
 wXV
-bLH
+ftO
 pCs
 pCs
 pCs
@@ -100537,13 +100449,13 @@ bkw
 avW
 eUp
 xsv
-slw
+gpJ
 utE
 iek
 bai
 qCs
 wNw
-etS
+gpZ
 wKg
 wKg
 aEb
@@ -101051,13 +100963,13 @@ kgD
 avW
 mdk
 gvS
-slw
+gpJ
 utE
 oof
 bai
 qCs
 wNw
-etS
+gpZ
 iYp
 dfD
 eLp
@@ -101314,7 +101226,7 @@ oof
 bai
 yfR
 wNw
-etS
+gpZ
 iYp
 rzI
 eLp
@@ -109113,7 +109025,7 @@ fkj
 fkj
 fkj
 fkj
-xcl
+xrI
 fkj
 fkj
 fkj
