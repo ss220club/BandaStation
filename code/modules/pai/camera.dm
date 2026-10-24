@@ -4,10 +4,10 @@
 
 /obj/item/camera/siliconcam/pai_camera/after_picture(mob/user, datum/picture/picture)
 	var/number = length(stored)
-	picture.picture_name = "Image [number] (taken by [loc.name])"
+	picture.picture_name = "Изображение [number] (снято [loc.name])"
 	stored[picture] = TRUE
 	playsound(src, SFX_POLAROID, 75, TRUE, -3)
-	balloon_alert(user, "image recorded")
+	balloon_alert(user, "изображение записано")
 
 /**
  * Handles selecting and printing stored images.
@@ -21,10 +21,10 @@
 	var/mob/living/silicon/pai/pai = loc
 	var/datum/picture/selection = selectpicture(user)
 	if(!istype(selection))
-		balloon_alert(user, "invalid image")
+		balloon_alert(user, "недопустимое изображение")
 		return FALSE
 	printpicture(user, selection)
-	user.visible_message(span_notice("A picture appears on top of the chassis of [pai.name]!"), span_notice("You print a photograph."))
+	user.visible_message(span_notice("На верхней части корпуса [pai.name] появляется изображение!"), span_notice("Вы распечатываете фотографию."))
 	return TRUE
 
 /**
