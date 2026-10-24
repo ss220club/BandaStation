@@ -1,0 +1,35 @@
+["vox snout"]
+nominative = "клюв вокса"
+genitive = "клюва вокса"
+dative = "клюву вокса"
+accusative = "клюв вокса"
+instrumental = "клювом вокса"
+prepositional = "клюве вокса"
+gender = "male"
+
+["vox tail"]
+nominative = "хвост вокса"
+genitive = "хвоста вокса"
+dative = "хвосту вокса"
+accusative = "хвост вокса"
+instrumental = "хвостом вокса"
+prepositional = "хвосте вокса"
+gender = "male"
+
+["vox quills"]
+nominative = "перья вокса"
+genitive = "перьев вокса"
+dative = "перьям вокса"
+accusative = "перья вокса"
+instrumental = "перьями вокса"
+prepositional = "перьях вокса"
+gender = "plural"
+
+["vox facial quills"]
+nominative = "лицевые перья вокса"
+genitive = "лицевых перьев вокса"
+dative = "лицевым перьям вокса"
+accusative = "лицевые перья вокса"
+instrumental = "лицевыми перьями вокса"
+prepositional = "лицевых перьях вокса"
+gender = "plural"

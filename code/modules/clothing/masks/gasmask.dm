@@ -61,7 +61,11 @@ GLOBAL_LIST_INIT(clown_mask_options, list(
 /obj/item/clothing/mask/gas/separate_worn_overlays(mutable_appearance/standing, mutable_appearance/draw_target, isinhands, icon_file, bodyshape = NONE)
 	. = ..()
 	if(!isinhands && cig)
-		. += cig.build_worn_icon(default_layer = FACEMASK_LAYER, default_icon_file = 'icons/mob/clothing/mask.dmi', bodyshape = bodyshape)
+		// BANDASTATION EDIT START - Species clothing icons
+		var/mob/living/carbon/human/wearer = loc
+		var/species_icon = istype(wearer) ? cig.get_species_worn_icon(wearer.get_bodypart(BODY_ZONE_HEAD)?.limb_id) : null
+		. += cig.build_worn_icon(default_layer = FACEMASK_LAYER, default_icon_file = 'icons/mob/clothing/mask.dmi', override_file = species_icon, bodyshape = bodyshape)
+		// BANDASTATION EDIT END - Species clothing icons
 
 /obj/item/clothing/mask/gas/Destroy()
 	QDEL_LAZYLIST(gas_filters)

@@ -231,6 +231,7 @@
 /// BANDASTATION ADDITION START - Species
 #define BLOOD_COLOR_MOTH "#b9ae9c"
 #define BLOOD_COLOR_SKRELL "#1e40ff"
+#define BLOOD_COLOR_VOX "#487a06"
 /// BANDASTATION ADDITION END - Species
 
 ///Main colors for UI themes

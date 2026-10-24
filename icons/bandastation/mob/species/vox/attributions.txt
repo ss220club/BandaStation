@@ -1,0 +1,63 @@
+Vox images imported from BandaStation PR #2682, by WMEJlb and contributors.
+Immediate source revision: 319e91d353a34b90263bda08b5409ca3d85e3dbd
+https://github.com/ss220club/BandaStation/pull/2682
+
+Authors: ss220club/BandaStation, NovaSector/NovaSector and their contributors.
+The source PR identifies NovaSector as the origin of the vox sprites:
+https://github.com/NovaSector/NovaSector
+License: Creative Commons Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0).
+https://creativecommons.org/licenses/by-sa/3.0/
+License declarations:
+https://github.com/ss220club/BandaStation/blob/319e91d353a34b90263bda08b5409ca3d85e3dbd/README.md#license
+https://github.com/NovaSector/NovaSector/blob/3b84ce0ba3e02ed031d714d642d84ddaa6f7e9b9/README.md#license
+
+Changes in PrimeDream: head.dmi includes the non-duplicate helmet.dmi states,
+with head.dmi taking priority for general hats. helmet.dmi likewise includes
+non-duplicate head states, retaining complete helmet artwork on name collisions.
+Both files have aliases for TG hardhat, visor, surgical cap and head-mirror
+names. mask.dmi and eyes.dmi also alias equivalent bandana and eyewear names
+used by TG; no artwork is recoloured by the adapter.
+mask.dmi retains the first occurrence of each state; subsequent duplicate human
+mask sprites were removed. bodyparts.dmi adds vox_l_leg/vox_r_leg aliases from
+the existing digitigrade leg sprites for the normal squashed-limb path.
+Pixel art, frame directions, animation delays and authorship are preserved.
+Other imported image files are unchanged, including nitrogen tank/mask items
+and the added vox state in icons/mob/butts.dmi. Existing butt states are
+pixel-identical to the PrimeDream base.
+
+Reproduction and exact source blob hashes:
+tools/vox/adapt_assets.py, tools/vox/source-assets.json
+
+Original files (individual history/credits are available at these URLs):
+https://github.com/ss220club/BandaStation/blob/319e91d353a34b90263bda08b5409ca3d85e3dbd/icons/bandastation/mob/species/vox/bodyparts.dmi
+https://github.com/ss220club/BandaStation/blob/319e91d353a34b90263bda08b5409ca3d85e3dbd/icons/bandastation/mob/species/vox/clothing/back.dmi
+https://github.com/ss220club/BandaStation/blob/319e91d353a34b90263bda08b5409ca3d85e3dbd/icons/bandastation/mob/species/vox/clothing/belt.dmi
+https://github.com/ss220club/BandaStation/blob/319e91d353a34b90263bda08b5409ca3d85e3dbd/icons/bandastation/mob/species/vox/clothing/color_gags_vox.dmi
+https://github.com/ss220club/BandaStation/blob/319e91d353a34b90263bda08b5409ca3d85e3dbd/icons/bandastation/mob/species/vox/clothing/ears.dmi
+https://github.com/ss220club/BandaStation/blob/319e91d353a34b90263bda08b5409ca3d85e3dbd/icons/bandastation/mob/species/vox/clothing/eyes.dmi
+https://github.com/ss220club/BandaStation/blob/319e91d353a34b90263bda08b5409ca3d85e3dbd/icons/bandastation/mob/species/vox/clothing/feet.dmi
+https://github.com/ss220club/BandaStation/blob/319e91d353a34b90263bda08b5409ca3d85e3dbd/icons/bandastation/mob/species/vox/clothing/feet_64.dmi
+https://github.com/ss220club/BandaStation/blob/319e91d353a34b90263bda08b5409ca3d85e3dbd/icons/bandastation/mob/species/vox/clothing/hands.dmi
+https://github.com/ss220club/BandaStation/blob/319e91d353a34b90263bda08b5409ca3d85e3dbd/icons/bandastation/mob/species/vox/clothing/head.dmi
+https://github.com/ss220club/BandaStation/blob/319e91d353a34b90263bda08b5409ca3d85e3dbd/icons/bandastation/mob/species/vox/clothing/helmet.dmi
+https://github.com/ss220club/BandaStation/blob/319e91d353a34b90263bda08b5409ca3d85e3dbd/icons/bandastation/mob/species/vox/clothing/mask.dmi
+https://github.com/ss220club/BandaStation/blob/319e91d353a34b90263bda08b5409ca3d85e3dbd/icons/bandastation/mob/species/vox/clothing/modsuits.dmi
+https://github.com/ss220club/BandaStation/blob/319e91d353a34b90263bda08b5409ca3d85e3dbd/icons/bandastation/mob/species/vox/clothing/modules.dmi
+https://github.com/ss220club/BandaStation/blob/319e91d353a34b90263bda08b5409ca3d85e3dbd/icons/bandastation/mob/species/vox/clothing/neck.dmi
+https://github.com/ss220club/BandaStation/blob/319e91d353a34b90263bda08b5409ca3d85e3dbd/icons/bandastation/mob/species/vox/clothing/suit.dmi
+https://github.com/ss220club/BandaStation/blob/319e91d353a34b90263bda08b5409ca3d85e3dbd/icons/bandastation/mob/species/vox/clothing/uniform.dmi
+https://github.com/ss220club/BandaStation/blob/319e91d353a34b90263bda08b5409ca3d85e3dbd/icons/bandastation/mob/species/vox/lang.dmi
+https://github.com/ss220club/BandaStation/blob/319e91d353a34b90263bda08b5409ca3d85e3dbd/icons/bandastation/mob/species/vox/organs.dmi
+https://github.com/ss220club/BandaStation/blob/319e91d353a34b90263bda08b5409ca3d85e3dbd/icons/bandastation/mob/species/vox/sprite_accessories/limb_markings.dmi
+https://github.com/ss220club/BandaStation/blob/319e91d353a34b90263bda08b5409ca3d85e3dbd/icons/bandastation/mob/species/vox/sprite_accessories/snouts.dmi
+https://github.com/ss220club/BandaStation/blob/319e91d353a34b90263bda08b5409ca3d85e3dbd/icons/bandastation/mob/species/vox/sprite_accessories/tails.dmi
+https://github.com/ss220club/BandaStation/blob/319e91d353a34b90263bda08b5409ca3d85e3dbd/icons/bandastation/mob/species/vox/sprite_accessories/vox_bodymarkings.dmi
+https://github.com/ss220club/BandaStation/blob/319e91d353a34b90263bda08b5409ca3d85e3dbd/icons/bandastation/mob/species/vox/sprite_accessories/vox_facial_quills.dmi
+https://github.com/ss220club/BandaStation/blob/319e91d353a34b90263bda08b5409ca3d85e3dbd/icons/bandastation/mob/species/vox/sprite_accessories/vox_quills.dmi
+https://github.com/ss220club/BandaStation/blob/319e91d353a34b90263bda08b5409ca3d85e3dbd/icons/bandastation/mob/species/vox/vox_eyes.dmi
+https://github.com/ss220club/BandaStation/blob/319e91d353a34b90263bda08b5409ca3d85e3dbd/icons/mob/butts.dmi
+https://github.com/ss220club/BandaStation/blob/319e91d353a34b90263bda08b5409ca3d85e3dbd/modular_bandastation/objects/icons/obj/clothing/mask/voxmask.dmi
+https://github.com/ss220club/BandaStation/blob/319e91d353a34b90263bda08b5409ca3d85e3dbd/modular_bandastation/species/icons/tanks/belt.dmi
+https://github.com/ss220club/BandaStation/blob/319e91d353a34b90263bda08b5409ca3d85e3dbd/modular_bandastation/species/icons/tanks/tank.dmi
+https://github.com/ss220club/BandaStation/blob/319e91d353a34b90263bda08b5409ca3d85e3dbd/modular_bandastation/species/icons/tanks/tanks_lefthand.dmi
+https://github.com/ss220club/BandaStation/blob/319e91d353a34b90263bda08b5409ca3d85e3dbd/modular_bandastation/species/icons/tanks/tanks_righthand.dmi

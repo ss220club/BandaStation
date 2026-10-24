@@ -1,0 +1,32 @@
+Vox emote sounds
+
+Direct source: https://github.com/ss220club/BandaStation/pull/2682
+PR revision: 319e91d353a34b90263bda08b5409ca3d85e3dbd
+Original project: https://github.com/ss220club/Paradise-SS220
+Original revision: 0fffca1f1f29a63aff49d9b56524813eedf82c6d
+License: Creative Commons Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0)
+License URL: https://creativecommons.org/licenses/by-sa/3.0/
+Source declaration: https://github.com/ss220club/Paradise-SS220/blob/0fffca1f1f29a63aff49d9b56524813eedf82c6d/README.md#licenses
+Source inventory: https://github.com/ss220club/Paradise-SS220/blob/0fffca1f1f29a63aff49d9b56524813eedf82c6d/sound/Attributions.txt
+
+The three files are byte-identical to Paradise sound/voice/<filename>.
+The source attribution inventory has no file-specific entry for them.
+No individual creator is inferred; source project contributors retain attribution.
+
+shriek1.ogg
+  Original path: sound/voice/shriek1.ogg
+  Git blob SHA-1: bb13db1ca0ee6666deb4b5aa950bb23a98f0e4fb
+  SHA-256: 13ae66f12ee774124c832a41b9db5527c94e94a1d4fd58a9807da9fe32c4c62f
+  Bytes: 27819
+
+shriekcough.ogg
+  Original path: sound/voice/shriekcough.ogg
+  Git blob SHA-1: 15dc2e3873cbdadab627d42d786cb1368e02c0fe
+  SHA-256: 751f92e957283b44b715017cd816490bf11f5284530dc995b56a53acb3932171
+  Bytes: 12101
+
+shrieksneeze.ogg
+  Original path: sound/voice/shrieksneeze.ogg
+  Git blob SHA-1: 9b1a5d1cca7358bb03a4dc45298215b51881c160
+  SHA-256: bb432596b6b678cb517eafcbf920fd02bf617f9d9c4dc1963d018e5c7df667a5
+  Bytes: 11882

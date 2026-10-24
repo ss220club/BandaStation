@@ -112,6 +112,12 @@ There are several things that need to be remembered:
 			icon_file = DEFAULT_UNIFORM_FILE
 			handled_by_bodyshape = FALSE
 
+		// BANDASTATION ADDITION START - Species clothing icons
+		var/species_icon = uniform.get_species_worn_icon(get_bodypart(BODY_ZONE_CHEST)?.limb_id, target_overlay)
+		if(species_icon)
+			icon_file = species_icon
+			handled_by_bodyshape = TRUE
+		// BANDASTATION ADDITION END - Species clothing icons
 		//END SPECIES HANDLING
 		var/mutable_appearance/uniform_overlay = uniform.build_worn_icon(
 			default_layer = UNIFORM_LAYER,
@@ -120,7 +126,7 @@ There are several things that need to be remembered:
 			female_uniform = woman ? female_sprite_flags : null,
 			override_state = target_overlay,
 			override_file = handled_by_bodyshape ? icon_file : null,
-			bodyshape = bodyshape,
+			bodyshape = species_icon ? (bodyshape & ~BODYSHAPE_DIGITIGRADE) : bodyshape, // BANDASTATION EDIT - Fitted uniforms already include their leg shape
 			female_version = uniform.female_version, // BANDASTATION EDIT - more masks for female clothing
 		)
 
@@ -182,8 +188,11 @@ There are several things that need to be remembered:
 		return
 
 	var/icon_file = 'icons/mob/clothing/hands.dmi'
+	// BANDASTATION EDIT START - Species clothing icons
+	var/species_icon = gloves.get_species_worn_icon(dna?.species?.id)
+	// BANDASTATION EDIT END - Species clothing icons
 
-	var/mutable_appearance/gloves_overlay = gloves.build_worn_icon(default_layer = GLOVES_LAYER, default_icon_file = icon_file, bodyshape = bodyshape)
+	var/mutable_appearance/gloves_overlay = gloves.build_worn_icon(default_layer = GLOVES_LAYER, default_icon_file = icon_file, override_file = species_icon, bodyshape = bodyshape) // BANDASTATION EDIT - Species clothing icons
 
 	var/feature_y_offset = 0
 	//needs to be typed, hand_bodyparts can have nulls
@@ -223,8 +232,11 @@ There are several things that need to be remembered:
 			return
 
 		var/icon_file = 'icons/mob/clothing/eyes.dmi'
+		// BANDASTATION EDIT START - Species clothing icons
+		var/species_icon = glasses.get_species_worn_icon(my_head.limb_id)
+		// BANDASTATION EDIT END - Species clothing icons
 
-		var/mutable_appearance/glasses_overlay = glasses.build_worn_icon(default_layer = GLASSES_LAYER, default_icon_file = icon_file, bodyshape = bodyshape)
+		var/mutable_appearance/glasses_overlay = glasses.build_worn_icon(default_layer = GLASSES_LAYER, default_icon_file = icon_file, override_file = species_icon, bodyshape = bodyshape) // BANDASTATION EDIT - Species clothing icons
 		apply_height(glasses_overlay, UPPER_BODY)
 		my_head.worn_glasses_offset?.apply_offset(glasses_overlay)
 		overlays_standing[GLASSES_LAYER] = glasses_overlay
@@ -246,7 +258,12 @@ There are several things that need to be remembered:
 
 		var/icon_file = 'icons/mob/clothing/ears.dmi'
 
-		var/mutable_appearance/ears_overlay = ears.build_worn_icon(default_layer = EARS_LAYER, default_icon_file = icon_file, bodyshape = bodyshape)
+		// BANDASTATION EDIT START - Species clothing icons
+		var/species_icon = ears.get_species_worn_icon(my_head.limb_id)
+		// BANDASTATION EDIT END - Species clothing icons
+
+		var/mutable_appearance/ears_overlay = ears.build_worn_icon(default_layer = EARS_LAYER, default_icon_file = icon_file, override_file = species_icon, bodyshape = bodyshape) // BANDASTATION EDIT - Species clothing icons
+
 		apply_height(ears_overlay, UPPER_BODY)
 		my_head.worn_ears_offset?.apply_offset(ears_overlay)
 		overlays_standing[EARS_LAYER] = ears_overlay
@@ -264,7 +281,8 @@ There are several things that need to be remembered:
 
 		var/icon_file = 'icons/mob/clothing/neck.dmi'
 
-		var/mutable_appearance/neck_overlay = worn_item.build_worn_icon(default_layer = NECK_LAYER, default_icon_file = icon_file, bodyshape = bodyshape)
+		var/species_icon = worn_item.get_species_worn_icon(get_bodypart(BODY_ZONE_CHEST)?.limb_id) // BANDASTATION ADDITION - Species clothing icons
+		var/mutable_appearance/neck_overlay = worn_item.build_worn_icon(default_layer = NECK_LAYER, default_icon_file = icon_file, override_file = species_icon, bodyshape = bodyshape) // BANDASTATION EDIT - Species clothing icons
 		apply_height(neck_overlay, ENTIRE_BODY)
 		var/obj/item/bodypart/chest/my_chest = get_bodypart(BODY_ZONE_CHEST)
 		my_chest?.worn_neck_offset?.apply_offset(neck_overlay)
@@ -287,7 +305,12 @@ There are several things that need to be remembered:
 
 		var/icon_file = DEFAULT_SHOES_FILE
 
-		var/mutable_appearance/shoes_overlay = shoes.build_worn_icon(default_layer = SHOES_LAYER, default_icon_file = icon_file, bodyshape = bodyshape)
+		// BANDASTATION EDIT START - Species clothing icons
+		var/species_icon = shoes.get_species_worn_icon(dna?.species?.id)
+		// BANDASTATION EDIT END - Species clothing icons
+
+		var/mutable_appearance/shoes_overlay = shoes.build_worn_icon(default_layer = SHOES_LAYER, default_icon_file = icon_file, override_file = species_icon, bodyshape = species_icon ? (bodyshape & ~BODYSHAPE_DIGITIGRADE) : bodyshape) // BANDASTATION EDIT - Species clothing icons
+
 		var/feature_y_offset = 0
 		for (var/body_zone in GLOB.leg_zones)
 			var/obj/item/bodypart/leg/my_leg = get_bodypart(body_zone)
@@ -334,9 +357,10 @@ There are several things that need to be remembered:
 
 		var/mutant_override = FALSE
 
-		var/species_id = dna.species.id
-		if(worn_item.worn_icon_species?[species_id])
-			icon_file = worn_item.worn_icon_species[species_id]
+		var/species_id = get_bodypart(BODY_ZONE_HEAD)?.limb_id
+		var/species_icon = worn_item.get_species_worn_icon(species_id)
+		if(species_icon)
+			icon_file = species_icon
 			mutant_override = TRUE
 		else if(icon_files_species[species_id])
 			icon_file = icon_files_species[species_id]
@@ -366,7 +390,12 @@ There are several things that need to be remembered:
 
 		var/icon_file = 'icons/mob/clothing/belt.dmi'
 
-		var/mutable_appearance/belt_overlay = belt.build_worn_icon(default_layer = BELT_LAYER, default_icon_file = icon_file, bodyshape = bodyshape)
+		// BANDASTATION EDIT START - Species clothing icons
+		var/species_icon = belt.get_species_worn_icon(dna?.species?.id)
+		// BANDASTATION EDIT END - Species clothing icons
+
+		var/mutable_appearance/belt_overlay = belt.build_worn_icon(default_layer = BELT_LAYER, default_icon_file = icon_file, override_file = species_icon, bodyshape = bodyshape) // BANDASTATION EDIT - Species clothing icons
+
 		apply_height(belt_overlay, ENTIRE_BODY)
 		var/obj/item/bodypart/chest/my_chest = get_bodypart(BODY_ZONE_CHEST)
 		my_chest?.worn_belt_offset?.apply_offset(belt_overlay)
@@ -394,11 +423,12 @@ There are several things that need to be remembered:
 		var/mutant_override = FALSE
 
 		var/obj/item/bodypart/chest/bodypart_chest = src.get_bodypart(BODY_ZONE_CHEST)
-		if(worn_item.worn_icon_species?[bodypart_chest.limb_id])
-			icon_file = worn_item.worn_icon_species[bodypart_chest.limb_id]
+		var/species_icon = worn_item.get_species_worn_icon(bodypart_chest?.limb_id)
+		if(species_icon)
+			icon_file = species_icon
 			mutant_override = TRUE
-		else if(bodypart_chest.limb_id in icon_files_species)
-			icon_file = icon_files_species[bodypart_chest.limb_id]
+		else if(bodypart_chest?.limb_id in icon_files_species)
+			icon_file = icon_files_species[bodypart_chest?.limb_id]
 			mutant_override = FALSE
 
 		if(!(icon_exists(icon_file, RESOLVE_ICON_STATE(worn_item))))
@@ -440,11 +470,12 @@ There are several things that need to be remembered:
 		var/mutant_override = FALSE
 
 		var/obj/item/bodypart/head/bodypart_head = src.get_bodypart(BODY_ZONE_HEAD)
-		if(worn_item.worn_icon_species?[bodypart_head.limb_id])
-			icon_file = worn_item.worn_icon_species[bodypart_head.limb_id]
+		var/species_icon = worn_item.get_species_worn_icon(bodypart_head?.limb_id)
+		if(species_icon)
+			icon_file = species_icon
 			mutant_override = TRUE
-		else if(bodypart_head.limb_id in icon_files_species)
-			icon_file = icon_files_species[bodypart_head.limb_id]
+		else if(bodypart_head?.limb_id in icon_files_species)
+			icon_file = icon_files_species[bodypart_head?.limb_id]
 			mutant_override = FALSE
 
 		if(!(icon_exists(icon_file, RESOLVE_ICON_STATE(worn_item))))
@@ -469,7 +500,11 @@ There are several things that need to be remembered:
 
 		var/icon_file = 'icons/mob/clothing/back.dmi'
 
-		var/mutable_appearance/back_overlay = back.build_worn_icon(default_layer = BACK_LAYER, default_icon_file = icon_file, bodyshape = bodyshape)
+		// BANDASTATION EDIT START - Species clothing icons
+		var/species_icon = back.get_species_worn_icon(dna?.species?.id)
+		// BANDASTATION EDIT END - Species clothing icons
+		var/mutable_appearance/back_overlay = back.build_worn_icon(default_layer = BACK_LAYER, default_icon_file = icon_file, override_file = species_icon, bodyshape = bodyshape) // BANDASTATION EDIT - Species clothing icons
+
 		apply_height(back_overlay, ENTIRE_BODY)
 		var/obj/item/bodypart/chest/my_chest = get_bodypart(BODY_ZONE_CHEST)
 		my_chest?.worn_back_offset?.apply_offset(back_overlay)

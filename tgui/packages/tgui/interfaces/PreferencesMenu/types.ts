@@ -31,6 +31,7 @@ export enum Food {
   Toxic = 'TOXIC',
   Vegetables = 'VEGETABLES',
   Egg = 'EGG',
+  Tech = 'TECH', // BANDASTATION ADDITION - Vox food
 }
 
 export enum JobPriority {
