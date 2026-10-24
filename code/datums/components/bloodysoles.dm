@@ -271,7 +271,8 @@
 	dupe_mode = COMPONENT_DUPE_UNIQUE_PASSARGS
 
 	equipped_slot = ITEM_SLOT_FEET
-	var/static/mutable_appearance/bloody_feet
+	// BANDASTATION EDIT - Each wearer must retain the exact appearance needed to remove their blood overlay.
+	var/mutable_appearance/bloody_feet
 
 	/// List of DNA on mob's feet, so we can handle it separately from blood on mob's hands
 	var/list/blood_DNA = null

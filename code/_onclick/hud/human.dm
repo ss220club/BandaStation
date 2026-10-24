@@ -32,7 +32,10 @@
 	add_screen_object(/atom/movable/screen/healthdoll/human, HUD_MOB_HEALTHDOLL, HUD_GROUP_INFO)
 	add_screen_object(/atom/movable/screen/stamina, HUD_MOB_STAMINA, HUD_GROUP_INFO)
 	add_screen_object(/atom/movable/screen/healths, HUD_MOB_HEALTH, HUD_GROUP_INFO)
-	add_screen_object(/atom/movable/screen/hunger, HUD_MOB_HUNGER, HUD_GROUP_INFO)
+	// BANDASTATION EDIT START - IPC charge uses diagnostics, not the food hunger widget.
+	if(!is_species(mymob, /datum/species/ipc))
+		add_screen_object(/atom/movable/screen/hunger, HUD_MOB_HUNGER, HUD_GROUP_INFO)
+	// BANDASTATION EDIT END
 
 /datum/hud/human/update_locked_slots()
 	if(!mymob)

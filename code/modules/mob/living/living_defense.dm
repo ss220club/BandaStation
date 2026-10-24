@@ -795,12 +795,19 @@
 /mob/living/expose_reagents(list/reagents, datum/reagents/source, methods=TOUCH, volume_modifier=1, show_message=TRUE)
 	. = ..()
 	if(. & COMPONENT_NO_EXPOSE_REAGENTS)
-		// BANDASTATION ADDITION START - Put out external flames without applying or absorbing chemicals.
+		// BANDASTATION ADDITION START - Wash the chassis and put out flames without applying or absorbing chemicals.
 		if(HAS_TRAIT(src, TRAIT_REAGENT_IMMUNE))
+			var/clean_types = NONE
 			for(var/datum/reagent/reagent as anything in reagents)
-				if(reagents[reagent] > 0 && (methods & reagent.extinguishing_methods))
+				if(reagents[reagent] <= 0)
+					continue
+				if(methods & reagent.extinguishing_methods)
 					extinguish_mob()
-					break
+				if((methods & (TOUCH|VAPOR)) && istype(reagent, /datum/reagent/space_cleaner))
+					var/datum/reagent/space_cleaner/cleaner = reagent
+					clean_types |= cleaner.clean_types
+			if(clean_types)
+				wash(clean_types)
 		// BANDASTATION ADDITION END
 		return
 

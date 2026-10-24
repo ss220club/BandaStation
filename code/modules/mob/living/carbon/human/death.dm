@@ -7,10 +7,14 @@ GLOBAL_LIST_EMPTY(dead_players_during_shift)
 		return ..()
 
 	var/bone_type = /obj/effect/decal/remains/human
-	if(isplasmaman(src))
+	// BANDASTATION EDIT START - IPC chassis leave mechanical remains when dusted.
+	if(is_species(src, /datum/species/ipc))
+		bone_type = /obj/effect/decal/remains/robot
+	else if(isplasmaman(src))
 		bone_type = /obj/effect/decal/remains/plasma
 
-	var/obj/effect/decal/remains/human/bones = new bone_type(loc)
+	var/obj/effect/decal/remains/bones = new bone_type(loc)
+	// BANDASTATION EDIT END
 	bones.pixel_z = -6
 	bones.pixel_w = rand(-1, 1)
 

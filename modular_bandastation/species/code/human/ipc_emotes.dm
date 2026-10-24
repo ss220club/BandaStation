@@ -42,6 +42,7 @@
 		"yawn" = /mob/living/carbon/human/verb/emote_yawn,
 	)
 	var/static/list/mechanical_emote_verbs = list(
+		/mob/living/carbon/human/proc/open_ipc_emote_panel,
 		/mob/living/carbon/human/proc/emote_ping,
 		/mob/living/carbon/human/proc/emote_beep,
 		/mob/living/carbon/human/proc/emote_ipc_boop,
@@ -55,7 +56,6 @@
 	/// Restore only verbs actually present before this chassis was applied.
 	var/list/removed_emote_verbs
 	var/list/added_emote_verbs
-	var/datum/action/innate/ipc_emotes/emotes_action
 
 /datum/species/ipc/proc/can_use_emote(mob/living/carbon/human/human, datum/emote/emote)
 	if(istype(emote, /datum/emote/silicon) || istype(emote, /datum/emote/living/ipc/scream))
@@ -88,20 +88,13 @@
 	added_emote_verbs = null
 	removed_emote_verbs = null
 
-/// Reuse the existing searchable TGUI rather than maintain a second emote UI.
-/datum/action/innate/ipc_emotes
-	name = "Эмоции КПБ"
-	desc = "Открыть панель машинных сигналов и доступных жестов."
-	button_icon = 'icons/mob/actions/actions_silicon.dmi'
-	button_icon_state = "ai_core"
-	check_flags = AB_CHECK_CONSCIOUS | AB_CHECK_INCAPACITATED
-
-/datum/action/innate/ipc_emotes/Activate()
-	if(!IsAvailable() || !is_species(owner, /datum/species/ipc))
+/// Keep the searchable panel in the emote tab without adding a HUD action button.
+GAME_VERB_PROC(/mob/living/carbon/human, open_ipc_emote_panel, "Панель эмоций КПБ", "Эмоции")
+	if(!is_species(src, /datum/species/ipc) || incapacitated || IS_UNCONSCIOUS_OR_CRIT(src))
 		return
 	if(!GLOB.emote_panel)
 		GLOB.emote_panel = new
-	GLOB.emote_panel.ui_interact(owner)
+	GLOB.emote_panel.ui_interact(src)
 
 /datum/emote/living/ipc
 	abstract_type = /datum/emote/living/ipc

@@ -1,4 +1,4 @@
-#define RADIATION_IMMEDIATE_TOX_DAMAGE 10
+#define RADIATION_IMMEDIATE_DAMAGE 10 // BANDASTATION EDIT - Radiation also damages positronic cores.
 
 #define RADIATION_TOX_DAMAGE_PER_INTERVAL 2
 #define RADIATION_TOX_INTERVAL (25 SECONDS)
@@ -11,7 +11,7 @@
 #define RADIATION_CLEAN_IMMUNITY_TIME (SSMACHINES_DT + (1 SECONDS))
 
 /// This atom is irradiated, and will glow green.
-/// Humans will take toxin damage until all their toxin damage is cleared.
+/// Humans take toxin damage; IPCs take core damage until their positronic brain is repaired. // BANDASTATION EDIT
 /datum/component/irradiated
 	dupe_mode = COMPONENT_DUPE_UNIQUE
 
@@ -39,14 +39,20 @@
 
 	if (ishuman(parent))
 		var/mob/living/carbon/human/human_parent = parent
-		human_parent.apply_damage(RADIATION_IMMEDIATE_TOX_DAMAGE, TOX)
+		// BANDASTATION EDIT START - Toxin immunity must not discard irradiation before the IPC species callback.
+		var/is_ipc = is_species(human_parent, /datum/species/ipc)
+		if(is_ipc)
+			human_parent.adjust_organ_loss(ORGAN_SLOT_BRAIN, RADIATION_IMMEDIATE_DAMAGE)
+		else
+			human_parent.apply_damage(RADIATION_IMMEDIATE_DAMAGE, TOX)
+		// BANDASTATION EDIT END
 		START_PROCESSING(SSobj, src)
 
 		COOLDOWN_START(src, last_tox_damage, RADIATION_TOX_INTERVAL)
 
 		start_burn_splotch_timer()
 
-		human_parent.throw_alert(ALERT_IRRADIATED, /atom/movable/screen/alert/irradiated)
+		human_parent.throw_alert(ALERT_IRRADIATED, is_ipc ? /atom/movable/screen/alert/irradiated/ipc : /atom/movable/screen/alert/irradiated) // BANDASTATION EDIT - Correct treatment for a synthetic body.
 
 /datum/component/irradiated/RegisterWithParent()
 	RegisterSignal(parent, COMSIG_COMPONENT_CLEAN_ACT, PROC_REF(on_clean))
@@ -85,9 +91,12 @@
 		return PROCESS_KILL
 
 	var/mob/living/carbon/human/human_parent = parent
-	if (human_parent.get_tox_loss() == 0)
+	// BANDASTATION EDIT START - Positronic repair is the synthetic equivalent of clearing radiation's toxin damage.
+	var/remaining_damage = is_species(human_parent, /datum/species/ipc) ? human_parent.get_organ_loss(ORGAN_SLOT_BRAIN) : human_parent.get_tox_loss()
+	if (!isnull(remaining_damage) && !remaining_damage)
 		qdel(src)
 		return PROCESS_KILL
+	// BANDASTATION EDIT END
 
 	if (should_halt_effects(parent))
 		return
@@ -110,6 +119,10 @@
 	return FALSE
 
 /datum/component/irradiated/proc/process_tox_damage(mob/living/carbon/human/target, seconds_per_tick)
+	// BANDASTATION ADDITION START - IPC damage is applied by handle_radiation instead of biological toxin metabolism.
+	if(is_species(target, /datum/species/ipc))
+		return
+	// BANDASTATION ADDITION END
 	if (!COOLDOWN_FINISHED(src, last_tox_damage))
 		return
 
@@ -132,13 +145,21 @@
 		return
 
 	var/obj/item/bodypart/affected_limb = human_parent.get_bodypart(human_parent.get_random_valid_zone())
-	human_parent.visible_message(
-		span_boldwarning("[human_parent]'s [affected_limb.plaintext_zone] bubbles unnaturally, then bursts into blisters!"),
-		span_boldwarning("Your [affected_limb.plaintext_zone] bubbles unnaturally, then bursts into blisters!"),
-	)
+	// BANDASTATION EDIT START - Radiation burns electronic circuitry rather than blistering a metal chassis.
+	if(is_species(human_parent, /datum/species/ipc))
+		human_parent.visible_message(
+			span_boldwarning("Из [human_parent.declent_ru(GENITIVE)] с треском вырывается сноп искр!"),
+			span_boldwarning("Радиация повреждает электронику: перегрев цепей в [affected_limb.plaintext_zone]!"),
+		)
+	else
+		human_parent.visible_message(
+			span_boldwarning("[human_parent]'s [affected_limb.plaintext_zone] bubbles unnaturally, then bursts into blisters!"),
+			span_boldwarning("Your [affected_limb.plaintext_zone] bubbles unnaturally, then bursts into blisters!"),
+		)
 
-	if(human_parent.is_blind())
-		to_chat(human_parent, span_boldwarning("Your [affected_limb.plaintext_zone] feels like it's bubbling, then burns like hell!"))
+		if(human_parent.is_blind())
+			to_chat(human_parent, span_boldwarning("Your [affected_limb.plaintext_zone] feels like it's bubbling, then burns like hell!"))
+	// BANDASTATION EDIT END
 
 	human_parent.apply_damage(RADIATION_BURN_SPLOTCH_DAMAGE, BURN, affected_limb, wound_clothing = FALSE)
 	playsound(
@@ -181,7 +202,12 @@
 
 	if (isliving(source))
 		var/mob/living/living_source = source
-		to_chat(user, span_bolddanger("[icon2html(geiger_counter, user)] Subject is irradiated. Contamination traces back to roughly [DisplayTimeText(world.time - beginning_of_irradiation, 5)] ago. Current toxin levels: [living_source.get_tox_loss()]."))
+		// BANDASTATION EDIT START - Synthetic contamination is tracked by core damage, not toxins.
+		if(is_species(living_source, /datum/species/ipc))
+			to_chat(user, span_bolddanger("[icon2html(geiger_counter, user)] Обнаружено облучение КПБ. Время с начала заражения: [DisplayTimeText(world.time - beginning_of_irradiation, 5)]. Повреждение позитронного мозга: [living_source.get_organ_loss(ORGAN_SLOT_BRAIN)]."))
+		else
+			to_chat(user, span_bolddanger("[icon2html(geiger_counter, user)] Subject is irradiated. Contamination traces back to roughly [DisplayTimeText(world.time - beginning_of_irradiation, 5)] ago. Current toxin levels: [living_source.get_tox_loss()]."))
+		// BANDASTATION EDIT END
 	else
 		// In case the green wasn't obvious enough...
 		to_chat(user, span_bolddanger("[icon2html(geiger_counter, user)] Target is irradiated."))
@@ -192,7 +218,12 @@
 	SIGNAL_HANDLER
 
 	render_list += "<span class='alert ml-1'>"
-	render_list += conditional_tooltip("Subject is irradiated.", "Supply antiradiation or antitoxin, such as [/datum/reagent/medicine/potass_iodide::name] or [/datum/reagent/medicine/pen_acid::name].", tochat)
+	// BANDASTATION EDIT START - Antitoxin cannot repair an irradiated positronic brain.
+	if(is_species(source, /datum/species/ipc))
+		render_list += conditional_tooltip("Облучение электроники КПБ.", "Деконтаминируйте корпус и восстановите позитронный мозг нейронной отладкой или мультитулом после извлечения. Душ приостанавливает действие облучения.", tochat)
+	else
+		render_list += conditional_tooltip("Subject is irradiated.", "Supply antiradiation or antitoxin, such as [/datum/reagent/medicine/potass_iodide::name] or [/datum/reagent/medicine/pen_acid::name].", tochat)
+	// BANDASTATION EDIT END
 	render_list += "</span><br>"
 
 /atom/movable/screen/alert/irradiated
@@ -201,10 +232,16 @@
 	use_user_hud_icon = USER_HUD_STYLE_INHERIT
 	overlay_state = "irradiated"
 
+// BANDASTATION ADDITION START - Radiation warning for a synthetic body.
+/atom/movable/screen/alert/irradiated/ipc
+	name = "Облучение электроники"
+	desc = "Ионизирующее излучение повреждает позитронный мозг и цепи корпуса. Покиньте опасную зону, деконтаминируйте корпус и отремонтируйте мозг. Душ приостанавливает повреждение."
+// BANDASTATION ADDITION END
+
 #undef RADIATION_BURN_SPLOTCH_DAMAGE
 #undef RADIATION_BURN_INTERVAL_MIN
 #undef RADIATION_BURN_INTERVAL_MAX
 #undef RADIATION_CLEAN_IMMUNITY_TIME
-#undef RADIATION_IMMEDIATE_TOX_DAMAGE
+#undef RADIATION_IMMEDIATE_DAMAGE
 #undef RADIATION_TOX_INTERVAL
 #undef RADIATION_TOX_DAMAGE_PER_INTERVAL

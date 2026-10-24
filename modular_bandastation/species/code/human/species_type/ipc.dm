@@ -51,11 +51,11 @@
 
 /datum/species/ipc/Destroy()
 	QDEL_NULL(display_action)
-	QDEL_NULL(emotes_action)
 	return ..()
 
 /datum/species/ipc/on_species_gain(mob/living/carbon/human/human, datum/species/old_species, pref_load, regenerate_icons = TRUE, replace_missing = TRUE)
 	. = ..()
+	human.hud_used?.remove_screen_object(HUD_MOB_HUNGER)
 	for(var/hud_type in list(DATA_HUD_MEDICAL_BASIC, DATA_HUD_MEDICAL_ADVANCED))
 		var/datum/atom_hud/medical_hud = GLOB.huds[hud_type]
 		medical_hud.remove_atom_from_hud(human)
@@ -65,8 +65,6 @@
 		organ.reagents?.clear_reagents()
 	display_action = new
 	display_action.Grant(human)
-	emotes_action = new
-	emotes_action.Grant(human)
 	setup_emote_verbs(human)
 	RegisterSignal(human, COMSIG_MOB_PRE_EMOTED, PROC_REF(on_pre_emote))
 	RegisterSignal(human, COMSIG_LIVING_ELECTROCUTE_ACT, PROC_REF(on_electrocute))
@@ -103,8 +101,9 @@
 /datum/species/ipc/on_species_loss(mob/living/carbon/human/human, datum/species/new_species, pref_load)
 	. = ..()
 	QDEL_NULL(display_action)
-	QDEL_NULL(emotes_action)
 	restore_emote_verbs(human)
+	if(human.hud_used && !istype(new_species, /datum/species/ipc) && !human.hud_used.screen_objects[HUD_MOB_HUNGER])
+		human.hud_used.add_screen_object(/atom/movable/screen/hunger, HUD_MOB_HUNGER, HUD_GROUP_INFO, update_screen = TRUE)
 	UnregisterSignal(human, list(
 		COMSIG_MOB_PRE_EMOTED,
 		COMSIG_LIVING_ELECTROCUTE_ACT,

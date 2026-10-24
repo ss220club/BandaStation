@@ -71,19 +71,15 @@
 	voicebox.Insert(ipc)
 	TEST_ASSERT(beep.can_run_emote(ipc), "Reinstalling the voicebox did not restore machine emotes.")
 
-/// A reused panel and action list must follow transformations without retaining another species' emotes.
+/// A reused panel and verb list must follow transformations without adding an extra HUD action.
 /datum/unit_test/ipc_emote_panel/Run()
 	var/mob/living/carbon/human/human = allocate(/mob/living/carbon/human/consistent)
 	var/datum/emote_panel/panel = allocate(/datum/emote_panel)
-	var/datum/action/innate/ipc_emotes/previous_action
 	for(var/is_ipc in list(TRUE, FALSE, TRUE))
 		human.set_species(is_ipc ? /datum/species/ipc : /datum/species/human)
-		var/datum/action/innate/ipc_emotes/emotes_action = locate() in human.actions
-		TEST_ASSERT_EQUAL(!isnull(emotes_action), is_ipc, "The IPC emotion action did not follow a species transformation.")
-		if(!is_ipc)
-			TEST_ASSERT(QDELETED(previous_action), "Losing the IPC species left its old emotion action alive.")
-		else
-			previous_action = emotes_action
+		TEST_ASSERT_EQUAL((/mob/living/carbon/human/proc/open_ipc_emote_panel in human.verbs), is_ipc, "The IPC emotion panel verb did not follow a species transformation.")
+		for(var/datum/action/action as anything in human.actions)
+			TEST_ASSERT(action.name != "Эмоции КПБ", "The IPC emotion panel still occupied a HUD action slot.")
 
 		var/list/data = panel.ui_static_data(human)
 		var/list/emote_keys = list()

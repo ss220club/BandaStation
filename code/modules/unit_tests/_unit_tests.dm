@@ -393,6 +393,10 @@
 #include "../../../modular_bandastation/species/code/tests/ipc_upgrade_tests.dm"
 #include "../../../modular_bandastation/species/code/tests/ipc_culinary_drink_tests.dm"
 #include "../../../modular_bandastation/species/code/tests/ipc_emote_tests.dm"
+#include "../../../modular_bandastation/species/code/tests/ipc_remains_tests.dm"
+#include "../../../modular_bandastation/species/code/tests/ipc_cleaning_tests.dm"
+#include "../../../modular_bandastation/species/code/tests/ipc_radiation_tests.dm"
+#include "../../../modular_bandastation/species/code/tests/ipc_ui_tests.dm"
 // BANDASTATION ADDITION END - IPC port regression tests
 #ifdef REFERENCE_TRACKING_DEBUG //Don't try and parse this file if ref tracking isn't turned on. IE: don't parse ref tracking please mr linter
 #include "find_reference_sanity.dm"
