@@ -33,7 +33,7 @@
 			var/purged_amount = 0
 			var/max_purge = 5 * metabolization_ratio * seconds_per_tick
 
-			for(var/datum/reagent/reagent_to_remove in drinker.reagents.reagent_list.Copy())
+			for(var/datum/reagent/toxin/reagent_to_remove in drinker.reagents.reagent_list.Copy())
 				if(reagent_to_remove == src)
 					continue
 
@@ -469,15 +469,32 @@
 	chemical_flags = NONE
 	randomized_spawns = REAGENT_SPAWN_NO_RANDOM
 
+/datum/reagent/consumable/qerr_primordial_nectar/on_mob_add(mob/living/L, amount)
+	. = ..()
+	RegisterSignal(L, COMSIG_MOB_REAGENT_TICK, PROC_REF(block_toxins), override = TRUE)
+
 /datum/reagent/consumable/qerr_primordial_nectar/on_mob_metabolize(mob/living/drinker)
 	. = ..()
 	drinker.add_mood_event("qerr_harmony", /datum/mood_event/high)
+	RegisterSignal(drinker, COMSIG_MOB_REAGENT_TICK, PROC_REF(block_toxins), override = TRUE)
 
 /datum/reagent/consumable/qerr_primordial_nectar/on_mob_end_metabolize(mob/living/drinker)
 	. = ..()
+	UnregisterSignal(drinker, COMSIG_MOB_REAGENT_TICK)
 	drinker.clear_mood_event("qerr_harmony")
 	drinker?.mind?.experience_multiplier_reasons[type] = null
 	drinker?.mind?.experience_multiplier_reasons -= type
+
+/datum/reagent/consumable/qerr_primordial_nectar/on_mob_delete(mob/living/L)
+	UnregisterSignal(L, COMSIG_MOB_REAGENT_TICK)
+	return ..()
+
+/// Блокирует тики всех токсинов в организме любой расы, пока действует нектар
+/datum/reagent/consumable/qerr_primordial_nectar/proc/block_toxins(datum/source, datum/reagent/chem, seconds_per_tick, metabolization_rate)
+	SIGNAL_HANDLER
+	if(istype(chem, /datum/reagent/toxin))
+		return COMSIG_MOB_STOP_REAGENT_TICK
+	return NONE
 
 /datum/reagent/consumable/qerr_primordial_nectar/on_mob_life(mob/living/carbon/drinker, seconds_per_tick, metabolization_ratio)
 	. = ..()
@@ -487,13 +504,14 @@
 
 	// Активное подавление чужеродных токсинов (защищает от аматоксинов в блюде)
 	if(drinker.reagents)
-		for(var/datum/reagent/toxin/toxic_chem in drinker.reagents.reagent_list)
+		for(var/datum/reagent/toxin/toxic_chem in drinker.reagents.reagent_list.Copy())
 			drinker.reagents.remove_reagent(toxic_chem.type, 1.5 * metabolization_ratio * seconds_per_tick)
 
 	// Базовое исцеление повреждений тела для всех существ
 	drinker.adjust_brute_loss(-0.5 * metabolization_ratio * seconds_per_tick)
 	drinker.adjust_fire_loss(-0.5 * metabolization_ratio * seconds_per_tick)
 	drinker.adjust_oxy_loss(-0.5 * metabolization_ratio * seconds_per_tick)
+	drinker.adjust_tox_loss(-0.5 * metabolization_ratio * seconds_per_tick)
 
 	// СПЕЦИФИКА ДЛЯ СКРЕЛЛОВ: глубокое исцеление разума и органов
 	if(isskrell(drinker))
@@ -519,7 +537,7 @@
 		drinker.remove_status_effect(/datum/status_effect/confusion)
 		drinker.adjust_drowsiness(-5 * metabolization_ratio * seconds_per_tick)
 
-	// ДЛЯ ДРУГИХ РАС: мягкая регенерация печени и защита от летального исхода при действие токсинов в блюде
+	// ДЛЯ ДРУГИХ РАС: мягкая регенерация печени и защита от летального исхода при действии токсинов в блюде
 	else
 		var/obj/item/organ/liver/liver = drinker.get_organ_slot(ORGAN_SLOT_LIVER)
 		if(liver)

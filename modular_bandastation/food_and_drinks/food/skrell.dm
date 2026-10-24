@@ -298,6 +298,7 @@
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 8,
 		/datum/reagent/consumable/nutriment/protein = 6,
+		/datum/reagent/drug/mushroomhallucinogen = 3,
 	)
 	tastes = list("nutty tempeh" = 2, "tingling mushrooms" = 2, "soy" = 1)
 	foodtypes = VEGETABLES | MUSHROOM | GRAIN
