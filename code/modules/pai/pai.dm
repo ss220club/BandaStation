@@ -445,7 +445,7 @@
  * @returns {boolean} - TRUE if successful, FALSE if not.
  */
 /mob/living/silicon/pai/proc/wipe_pai(mob/user)
-	if(tgui_alert(user, "Вы уверены, что хотите удалить текущую учетную запись? Это действие невозможно отменить.", "Стирание личности", list("Yes", "No")) != "Yes")
+	if(tgui_alert(user, "Вы уверены, что хотите удалить текущую учетную запись? Это действие невозможно отменить.", "Стирание личности", list("Да", "Нет")) != "Да")
 		return FALSE
 	to_chat(src, span_warning("Вы чувствуете, что ускользаете от реальности."))
 	to_chat(src, span_danger("Байт за байтом вы теряете самоощущение."))
