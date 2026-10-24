@@ -516,8 +516,8 @@
     "repository": "ss220club/Paradise-SS220",
     "source_revision": "0fffca1f1f29a63aff49d9b56524813eedf82c6d",
     "license": "CC-BY-SA-3.0",
-    "mapping_sha256": "fde1f7d1ce7a91d5d662189dbabc8c7b21be4c718edc11ccf33a55128a84fbb8",
-    "provenance_sha256": "e6423dfd8564d82509e4c0a435c3186fb94ec90312f23ee7af33510979ad6b8d",
+    "mapping_sha256": "a1a056265d055998b553b33e42a5f97ca26df3203dee4b571000c7757bf0826d",
+    "provenance_sha256": "29623f5a0ef7a6ee91046db24553427517e145ed98a1b350c75e86512afa0f5a",
     "mapped_states": 180,
     "mapped_states_by_category": {
       "back": 4,
@@ -530,7 +530,7 @@
       "under": 88
     },
     "art_reviewed_states": 180,
-    "art_review_sha256": "2e8efbf00b657358f4b63b911d145606fc744028cdfac248fe394d2b9aac75dd",
+    "art_review_sha256": "9c889630fa96c2c1f3819f48a0015905afba0d33e1cd1fa053a95661f2c613f8",
     "art_review_evidence": "Нативная матрица BYOND 516.1685: 22 листа в code/modules/unit_tests/screenshots/vox_appearance_screenshots_paradise_*.png. Каждое состояние показано на существующем предмете с клювами Primalis и Armalis с юга, севера, востока и запада. Четыре стиля оперения под зимним капюшоном и реальные переключения проверены отдельными изображениями. У трёх анимированных состояний просмотрены оба кадра со всех сторон. Проверка относится к этим сценариям и не охватывает все цвета и сочетания одежды.",
     "initial_selected_states": 150,
     "initial_selected_types": 163,
