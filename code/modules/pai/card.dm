@@ -80,7 +80,7 @@
 		return pai.on_saboteur(source, disrupt_duration)
 
 /obj/item/pai_card/suicide_act(mob/living/user)
-	user.visible_message(span_suicide("[user] печально смотрит на [declent_ru(ACCUSATIVE)]! [capitalize(user.ru_p_they())] не может продолжать жить без настоящей человеческой близости!"))
+	user.visible_message(span_suicide("[user] печально смотрит на [declent_ru(ACCUSATIVE)]! [capitalize(user.ru_p_they())] не [genderize_ru(user.gender, "может", "может", "может", "могут")] продолжать жить без настоящей человеческой близости!"))
 	return OXYLOSS
 
 /obj/item/pai_card/update_overlays()
