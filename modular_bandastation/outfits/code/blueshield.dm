@@ -16,7 +16,7 @@
 	backpack = /obj/item/storage/backpack/blueshield
 	backpack_contents = list(
 		/obj/item/storage/box/deathimp,
-		/obj/item/gun/energy/eg_14
+		/obj/item/choice_beacon/weapon/blueshield
 	)
 	satchel = /obj/item/storage/backpack/satchel/blueshield
 	duffelbag = /obj/item/storage/backpack/duffelbag/blueshield
