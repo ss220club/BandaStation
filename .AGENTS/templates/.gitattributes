@@ -1,0 +1,2 @@
+# Keep the executable hook identical to its installed LF form on Windows.
+pre-commit text eol=lf

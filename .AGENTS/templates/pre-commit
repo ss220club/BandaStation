@@ -1,0 +1,11 @@
+#!/bin/sh
+# Managed BandaStation agent runtime guard v2.
+# Shared instructions/tools are versioned; generated config and task state stay local.
+git diff --cached --name-only --diff-filter=ACMRD | awk '
+{ name = tolower($0) }
+name ~ /^\.codex\// || name ~ /^task_state\// || name ~ /^\.agents\/local\// {
+    print "Commit blocked: local runtime file " $0 > "/dev/stderr"
+    blocked = 1
+}
+END { exit blocked ? 1 : 0 }
+'

@@ -1,0 +1,12 @@
+{
+  "name": "bandastation-browser-agent-tools",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Pinned browser MCP for BandaStation; install outside the checkout.",
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@playwright/mcp": "0.0.80"
+  }
+}

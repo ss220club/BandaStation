@@ -1,0 +1,36 @@
+{
+  "name": "bandastation-ripgrep-mcp",
+  "version": "0.4.0",
+  "description": "Read-only bounded BandaStation ripgrep MCP, adapted from mcp-ripgrep 0.4.0.",
+  "main": "index.mjs",
+  "scripts": {
+    "start": "node index.mjs"
+  },
+  "type": "module",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.6.1",
+    "zod": "^3.22.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mcollina/mcp-ripgrep.git"
+  },
+  "keywords": [
+    "mcp",
+    "model",
+    "context",
+    "protocol",
+    "ripgrep",
+    "rg"
+  ],
+  "author": "Matteo Collina <hello@matteocollina.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mcollina/mcp-ripgrep/issues"
+  },
+  "homepage": "https://github.com/mcollina/mcp-ripgrep#readme",
+  "private": true,
+  "engines": {
+    "node": ">=20"
+  }
+}
