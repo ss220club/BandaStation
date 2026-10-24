@@ -249,7 +249,7 @@
 	notify_ghosts(
 		"[user.real_name] запрашивает пИИ-компаньона! Воспользуйтесь кнопкой пИИ, чтобы представить себя в качестве компаньона.",
 		source = user,
-		header = "Запрос ПИИ!",
+		header = "Запрос пИИ!",
 		alert_overlay = alert_overlay,
 		notify_flags = NOTIFY_CATEGORY_NOFLASH,
 		ignore_key = POLL_IGNORE_PAI,
