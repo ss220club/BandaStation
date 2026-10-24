@@ -5,7 +5,7 @@ ADMIN_VERB(makepAI, R_FUN, "Make pAI", "Specify a location to spawn a pAI device
 	for(var/mob/player as anything in GLOB.player_list)
 		if(player.client && player.key)
 			available.Add(player)
-	var/mob/choice = tgui_input_list(user, "Выберите игрока для игры за ПИИ", "Вызвать ПИИ", sort_names(available))
+	var/mob/choice = tgui_input_list(user, "Выберите игрока для игры за пИИ", "Вызвать пИИ", sort_names(available))
 	if(isnull(choice))
 		return
 
