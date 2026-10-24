@@ -30,7 +30,7 @@ export const PaiSubmit = (props) => {
   });
 
   return (
-    <Window width={400} height={460} title="Меню кандидатов ПИИ">
+    <Window width={400} height={460} title="Меню кандидатов пИИ">
       <Window.Content>
         <Stack fill vertical>
           <Stack.Item grow>
