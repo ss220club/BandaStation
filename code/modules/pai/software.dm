@@ -58,7 +58,7 @@
 			door_jack(params["mode"])
 			return TRUE
 		if("Слот для ключа шифрования")
-			balloon_alert(usr, "радиочастоты [!encrypt_mod ? "enabled" : "disabled"]")
+			balloon_alert(usr, "радиочастоты [!encrypt_mod ? "включены" : "отключены"]")
 			encrypt_mod = !encrypt_mod
 			radio.subspace_transmission = !radio.subspace_transmission
 			return TRUE
