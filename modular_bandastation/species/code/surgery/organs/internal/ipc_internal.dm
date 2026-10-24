@@ -270,6 +270,18 @@
 /// The native robotic voicebox provides synthetic speech and local encoded audio language.
 /obj/item/organ/tongue/robot/ipc
 	sense_of_taste = FALSE
+	emote_sounds = list(
+		/datum/emote/living/deathgasp::key = 'sound/mobs/non-humanoids/cyborg/borg_deathsound.ogg',
+		/datum/emote/silicon/boop::key = 'modular_bandastation/species/sound/ipc/boop.ogg',
+	)
+
+/obj/item/organ/tongue/robot/ipc/on_mob_insert(mob/living/carbon/receiver, special, movement_flags)
+	. = ..()
+	receiver.update_emote_panels()
+
+/obj/item/organ/tongue/robot/ipc/on_mob_remove(mob/living/carbon/organ_owner, special, movement_flags)
+	. = ..()
+	organ_owner.update_emote_panels()
 
 /// An extendable charging connector uses the established arm toolkit lifecycle and action.
 /obj/item/organ/cyberimp/arm/power_cord/ipc

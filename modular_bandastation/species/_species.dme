@@ -33,6 +33,7 @@
 #include "code/human/sprite_accessories/hair.dm"
 #include "code/human/sprite_accessories/ipc/ipc_appearance.dm"
 #include "code/human/ipc_display.dm"
+#include "code/human/ipc_emotes.dm"
 #include "code/human/blood_types.dm"
 #include "code/human/carbon.dm"
 

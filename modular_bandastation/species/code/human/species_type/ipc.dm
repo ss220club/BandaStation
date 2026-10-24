@@ -51,6 +51,7 @@
 
 /datum/species/ipc/Destroy()
 	QDEL_NULL(display_action)
+	QDEL_NULL(emotes_action)
 	return ..()
 
 /datum/species/ipc/on_species_gain(mob/living/carbon/human/human, datum/species/old_species, pref_load, regenerate_icons = TRUE, replace_missing = TRUE)
@@ -64,6 +65,10 @@
 		organ.reagents?.clear_reagents()
 	display_action = new
 	display_action.Grant(human)
+	emotes_action = new
+	emotes_action.Grant(human)
+	setup_emote_verbs(human)
+	RegisterSignal(human, COMSIG_MOB_PRE_EMOTED, PROC_REF(on_pre_emote))
 	RegisterSignal(human, COMSIG_LIVING_ELECTROCUTE_ACT, PROC_REF(on_electrocute))
 	RegisterSignal(human, COMSIG_LIVING_LIFE, PROC_REF(on_life))
 	RegisterSignal(human, COMSIG_LIVING_DEATH, PROC_REF(on_status_change))
@@ -98,7 +103,10 @@
 /datum/species/ipc/on_species_loss(mob/living/carbon/human/human, datum/species/new_species, pref_load)
 	. = ..()
 	QDEL_NULL(display_action)
+	QDEL_NULL(emotes_action)
+	restore_emote_verbs(human)
 	UnregisterSignal(human, list(
+		COMSIG_MOB_PRE_EMOTED,
 		COMSIG_LIVING_ELECTROCUTE_ACT,
 		COMSIG_LIVING_LIFE,
 		COMSIG_LIVING_DEATH,

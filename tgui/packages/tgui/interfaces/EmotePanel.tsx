@@ -1,3 +1,4 @@
+// BANDASTATION EDIT - Russian emote-panel labels.
 import { useMemo, useState } from 'react';
 import { Box, Button, Flex, Icon, Section, Stack } from 'tgui-core/components';
 import type { BooleanLike } from 'tgui-core/react';
@@ -74,7 +75,7 @@ export const EmotePanelContent = (props) => {
   return (
     <Section>
       <Section
-        title="Filters"
+        title="Фильтры"
         buttons={
           <Flex>
             <Button
@@ -82,7 +83,7 @@ export const EmotePanelContent = (props) => {
               width="100%"
               height="100%"
               align="center"
-              tooltip="Visible"
+              tooltip="Видимые"
               selected={filterVisible}
               onClick={() => toggleVisualFilter(!filterVisible)}
             />
@@ -91,7 +92,7 @@ export const EmotePanelContent = (props) => {
               width="100%"
               height="100%"
               align="center"
-              tooltip="Audible"
+              tooltip="Слышимые"
               selected={filterAudible}
               onClick={() => toggleAudibleFilter(!filterAudible)}
             />
@@ -100,7 +101,7 @@ export const EmotePanelContent = (props) => {
               width="100%"
               height="100%"
               align="center"
-              tooltip="Sound"
+              tooltip="Со звуком"
               selected={filterSound}
               onClick={() => toggleSoundFilter(!filterSound)}
             />
@@ -109,7 +110,7 @@ export const EmotePanelContent = (props) => {
               width="100%"
               height="100%"
               align="center"
-              tooltip="Hands"
+              tooltip="Нужны руки"
               selected={filterHands}
               onClick={() => toggleHandsFilter(!filterHands)}
             />
@@ -118,7 +119,7 @@ export const EmotePanelContent = (props) => {
               width="100%"
               height="100%"
               align="center"
-              tooltip="Params"
+              tooltip="С дополнением"
               selected={filterUseParams}
               onClick={() => toggleUseParamsFilter(!filterUseParams)}
             />
@@ -128,26 +129,26 @@ export const EmotePanelContent = (props) => {
         <SearchBar
           query={searchText}
           onSearch={setSearchText}
-          placeholder="Search all emotes..."
+          placeholder="Поиск эмоций..."
         />
       </Section>
       <Section
         title={
           searchText.length > 0
-            ? `Search results of "${searchText}"`
-            : `All Emotes`
+            ? `Результаты поиска "${searchText}"`
+            : `Все эмоции`
         }
         buttons={
           <Flex>
             <Flex.Item>
               <Button onClick={() => toggleShowNames(!showNames)}>
-                {showNames ? 'Show Names' : 'Show Keys'}
+                {showNames ? 'Названия' : 'Команды'}
               </Button>
               <Button
                 selected={showIcons}
                 onClick={() => toggleShowIcons(!showIcons)}
               >
-                Show Icons
+                Значки
               </Button>
             </Flex.Item>
             <Flex.Item>
@@ -156,7 +157,7 @@ export const EmotePanelContent = (props) => {
                 selected={useParams}
                 onClick={() => toggleUseParams(!useParams)}
               >
-                Use Params
+                Дополнять эмоции
               </Button>
             </Flex.Item>
           </Flex>
@@ -249,7 +250,7 @@ const EmoteButton = (props: EmoteButtonProps) => {
           <Button
             fluid
             icon="volume-up"
-            tooltip="Preview Sound"
+            tooltip="Прослушать звук"
             onClick={onPreview}
           />
         </Stack.Item>

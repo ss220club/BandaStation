@@ -420,6 +420,7 @@ GLOBAL_LIST_INIT(total_uf_len_by_block, populate_total_uf_len_by_block())
 	. = ..()
 	if(icon_update)
 		update_body(is_creating = TRUE)
+	update_emote_panels() // BANDASTATION ADDITION - Refresh after all species organs have changed.
 
 /mob/proc/has_dna()
 	return

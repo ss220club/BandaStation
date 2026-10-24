@@ -57,6 +57,29 @@
 /datum/tgui_panel/New(client/client, id)
 	. = ..()
 	populate_all_emotes_list()
+	RegisterSignal(client, COMSIG_CLIENT_MOB_LOGIN, PROC_REF(on_emote_mob_login))
+
+/datum/tgui_panel/Destroy()
+	if(client)
+		UnregisterSignal(client, COMSIG_CLIENT_MOB_LOGIN)
+	return ..()
+
+/// A new body may be created before the client is assigned to it.
+/datum/tgui_panel/proc/on_emote_mob_login(client/source, mob/user)
+	SIGNAL_HANDLER
+	user.update_emote_panels()
+
+/// The shared catalog contains every species; resolve it for this mob without caching the result.
+/datum/tgui_panel/proc/get_available_emotes()
+	var/list/available_emotes = list()
+	for(var/datum/emote/emote as anything in all_emotes)
+		if(get_available_emote(client?.mob, emote.key) == emote)
+			available_emotes += emote
+	return available_emotes
+
+/// Input windows can outlive a body transfer, disconnection, or preference reload.
+/datum/tgui_panel/proc/can_edit_emote_panel(mob/user, list/original_panel)
+	return !QDELETED(src) && !QDELETED(user) && client?.mob == user && client?.prefs?.custom_emote_panel == original_panel
 
 /datum/tgui_panel/on_message(type, payload)
 	. = ..()
@@ -96,6 +119,8 @@
 			switch (emote_type)
 				if(TGUI_PANEL_EMOTE_TYPE_DEFAULT)
 					var/emote_key = client.prefs.custom_emote_panel[emote_name]["key"]
+					if(!get_available_emote(living, emote_key, status_check = TRUE))
+						return TRUE
 					living.emote(emote_key, intentional = TRUE)
 
 				// Чтобы люди не спамили пастами из 128 символов со скоростью света
@@ -105,6 +130,8 @@
 						return TRUE
 
 					var/emote_key = client.prefs.custom_emote_panel[emote_name]["key"]
+					if(!get_available_emote(living, emote_key, status_check = TRUE))
+						return TRUE
 					var/message_override = client.prefs.custom_emote_panel[emote_name]["message_override"]
 					living.emote(emote_key, intentional = TRUE, message_override = message_override)
 					handle_panel_cooldown(living, message_override)
@@ -125,23 +152,25 @@
 				to_chat(client, span_warning("Достигнут максимум эмоций: [TGUI_PANEL_MAX_EMOTES]."))
 				return
 
+			var/mob/emote_user = client.mob
+			var/list/original_panel = client.prefs.custom_emote_panel
 			var/list/emote = list()
 			var/emote_type_string = tgui_alert(client.mob, "Какую эмоцию добавить в панель?", "Выбор типа эмоции", list("Обычная", "С кастомным текстом", "*me"))
-			if(!emote_type_string)
+			if(!emote_type_string || !can_edit_emote_panel(emote_user, original_panel))
 				to_chat(client, span_warning(CANCEL_EMOTE_ADDITION))
 				return
 
 			var/suggested_name = ""
 			switch (emote_type_string)
 				if("Обычная")
-					var/datum/emote/picked_emote = tgui_input_list(client.mob, "Какую эмоцию добавить в панель?", "Выбор эмоции", all_emotes)
-					if(!picked_emote)
+					var/datum/emote/picked_emote = tgui_input_list(client.mob, "Какую эмоцию добавить в панель?", "Выбор эмоции", get_available_emotes())
+					if(!can_edit_emote_panel(emote_user, original_panel) || !picked_emote)
 						to_chat(client, span_warning(CANCEL_EMOTE_ADDITION))
 						return
 
 					var/emote_key = picked_emote.key
-					if(!(emote_key in GLOB.emote_list))
-						to_chat(client, span_warning("Эмоция [emote_key] не существует!"))
+					if(get_available_emote(emote_user, emote_key) != picked_emote)
+						to_chat(client, span_warning("Эмоция [emote_key] недоступна этому персонажу!"))
 						return
 
 					suggested_name = picked_emote.name
@@ -151,18 +180,18 @@
 					)
 
 				if("С кастомным текстом")
-					var/datum/emote/picked_emote = tgui_input_list(client.mob, "Какую эмоцию добавить в панель?", "Выбор эмоции", all_emotes)
-					if(!picked_emote)
+					var/datum/emote/picked_emote = tgui_input_list(client.mob, "Какую эмоцию добавить в панель?", "Выбор эмоции", get_available_emotes())
+					if(!can_edit_emote_panel(emote_user, original_panel) || !picked_emote)
 						to_chat(client, span_warning(CANCEL_EMOTE_ADDITION))
 						return
 
 					var/emote_key = picked_emote.key
-					if(!(emote_key in GLOB.emote_list))
-						to_chat(client, span_warning("Эмоция [emote_key] не существует!"))
+					if(get_available_emote(emote_user, emote_key) != picked_emote)
+						to_chat(client, span_warning("Эмоция [emote_key] недоступна этому персонажу!"))
 						return
 
 					var/message_override = tgui_input_text(client.mob, "Какой кастомный текст будет у эмоции? (максимум - [TGUI_PANEL_MAX_EMOTE_LENGTH] символов)", "Кастомный текст", picked_emote.name, TGUI_PANEL_MAX_EMOTE_LENGTH, TRUE, TRUE)
-					if(!message_override)
+					if(!can_edit_emote_panel(emote_user, original_panel) || !message_override)
 						to_chat(client, span_warning(CANCEL_EMOTE_ADDITION))
 						return
 
@@ -175,7 +204,7 @@
 
 				if("*me")
 					var/message = tgui_input_text(client.mob, "Какой текст будет у эмоции? (максимум - [TGUI_PANEL_MAX_EMOTE_LENGTH] символов)", "Кастомный текст", "", TGUI_PANEL_MAX_EMOTE_LENGTH, TRUE, TRUE)
-					if(!message)
+					if(!can_edit_emote_panel(emote_user, original_panel) || !message)
 						to_chat(client, span_warning(CANCEL_EMOTE_ADDITION))
 						return
 
@@ -186,7 +215,11 @@
 					)
 
 			var/emote_name = tgui_input_text(client.mob, "Какое название эмоции будет в панели?", "Название эмоции", suggested_name, TGUI_PANEL_MAX_EMOTE_NAME_LENGTH, FALSE, TRUE)
-			if(!emote_name)
+			if(!can_edit_emote_panel(emote_user, original_panel) || !emote_name)
+				to_chat(client, span_warning(CANCEL_EMOTE_ADDITION))
+				return
+			var/selected_emote_key = emote["type"] == TGUI_PANEL_EMOTE_TYPE_ME ? "me" : emote["key"]
+			if(!get_available_emote(emote_user, selected_emote_key))
 				to_chat(client, span_warning(CANCEL_EMOTE_ADDITION))
 				return
 
@@ -327,8 +360,29 @@
 	return TRUE
 
 /datum/tgui_panel/proc/emotes_send_list()
-	var/list/payload = client.prefs.custom_emote_panel
+	if(!client?.prefs || !window)
+		return
+	var/list/payload = get_available_emote_panel_entries(client.mob, client.prefs.custom_emote_panel)
 	window.send_message("emotes/setList", payload)
+
+/// Hide temporarily unavailable favorites without changing the saved panel or its entries.
+/proc/get_available_emote_panel_entries(mob/user, list/saved_emotes)
+	var/list/available_emotes = list()
+	for(var/emote_name in saved_emotes)
+		var/list/emote = saved_emotes[emote_name]
+		if(!islist(emote))
+			continue
+		var/emote_key
+		switch(emote["type"])
+			if(TGUI_PANEL_EMOTE_TYPE_DEFAULT, TGUI_PANEL_EMOTE_TYPE_CUSTOM)
+				emote_key = emote["key"]
+			if(TGUI_PANEL_EMOTE_TYPE_ME)
+				emote_key = "me"
+			else
+				continue
+		if(get_available_emote(user, emote_key))
+			available_emotes[emote_name] = emote.Copy()
+	return available_emotes
 
 #undef TGUI_PANEL_MAX_EMOTES
 #undef TGUI_PANEL_MAX_EMOTE_LENGTH

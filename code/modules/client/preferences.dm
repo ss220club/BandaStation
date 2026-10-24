@@ -228,7 +228,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 			// SAFETY: `switch_to_slot` performs sanitization on the slot number
 			switch_to_slot(params["slot"])
 
-			parent.tgui_panel?.window.send_message("emotes/setList", custom_emote_panel) // BANDASTATION ADD - Emote Panel
+			parent.tgui_panel?.emotes_send_list() // BANDASTATION ADD - Emote Panel
 
 			return TRUE
 		if ("remove_current_slot")
