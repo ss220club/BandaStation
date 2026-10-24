@@ -403,7 +403,10 @@
 		if (SSstickyban.dbcacheexpire)
 			return SSstickyban.dbcache.Copy()
 
-	return sort_list(world.GetConfig("ban"))
+	// BANDASTATION EDIT START - BYOND returns null when no sticky bans are configured.
+	var/list/configured_bans = world.GetConfig("ban")
+	return length(configured_bans) ? sort_list(configured_bans) : list()
+	// BANDASTATION EDIT END - Empty sticky-ban configuration.
 
 
 /proc/get_stickyban_from_ckey(ckey)

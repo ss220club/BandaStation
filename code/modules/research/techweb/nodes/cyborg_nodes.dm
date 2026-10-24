@@ -163,8 +163,10 @@
 
 /datum/techweb_node/cyber/New()
 	. = ..()
-	if(HAS_TRAIT(SSstation, STATION_TRAIT_CYBERNETIC_REVOLUTION))
+	// BANDASTATION EDIT START - The abstract cyber node has no research costs.
+	if(research_costs?[TECHWEB_POINT_TYPE_GENERIC] && HAS_TRAIT(SSstation, STATION_TRAIT_CYBERNETIC_REVOLUTION))
 		research_costs[TECHWEB_POINT_TYPE_GENERIC] /= 2
+	// BANDASTATION EDIT END - Only discount nodes with a generic research cost.
 
 /datum/techweb_node/cyber/combat_implants
 	display_name = "Боевые импланты"
