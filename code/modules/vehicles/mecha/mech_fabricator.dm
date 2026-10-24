@@ -31,7 +31,7 @@
 	var/top_job_id = 0
 
 	/// Part currently stored in the Exofab.
-	var/obj/item/stored_part
+	var/atom/movable/stored_part // BANDASTATION EDIT - IPC chassis designs produce an empty mob.
 
 	/// Coefficient for the speed of item building. Based on the installed parts.
 	var/time_coeff = 1
@@ -282,7 +282,7 @@
  * * dispensed_design - Design datum to attempt to dispense.
  */
 /obj/machinery/mecha_part_fabricator/proc/dispense_built_part(datum/design/dispensed_design)
-	var/obj/item/built_part = dispensed_design.create_result(src)
+	var/atom/movable/built_part = dispensed_design.create_result(src) // BANDASTATION EDIT - IPC chassis designs produce an empty mob.
 	SSblackbox.record_feedback("nested tally", "lathe_printed_items", 1, list("[type]", "[built_part.type]"))
 
 	being_built = null

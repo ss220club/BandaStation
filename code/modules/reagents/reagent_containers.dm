@@ -180,17 +180,23 @@
 	return TRUE
 
 /obj/item/reagent_containers/proc/canconsume(mob/eater, mob/user)
-	if(!iscarbon(eater))
+	if(QDELETED(src) || QDELETED(eater) || !iscarbon(eater)) // BANDASTATION EDIT - Delayed intake must reject deleted sources and recipients.
 		return FALSE
-	// BANDASTATION ADDITION START - Reject oral consumption before drink messages, sounds or side effects.
+	var/mob/living/carbon/as_carbon = eater
+	// BANDASTATION ADDITION START - A culinary processor accepts drinks without weakening chemical immunity or permitting pills.
 	if(HAS_TRAIT(eater, TRAIT_REAGENT_IMMUNE))
-		eater.balloon_alert(user, "невозможно проглотить!")
+		var/obj/item/organ/stomach/ipc_culinary/culinary = as_carbon.get_organ_by_type(/obj/item/organ/stomach/ipc_culinary)
+		if(!(istype(src, /obj/item/reagent_containers/cup) || istype(src, /obj/item/reagent_containers/condiment)) || !culinary?.is_operational())
+			eater.balloon_alert(user, "невозможно проглотить!")
+			return FALSE
+	// BANDASTATION ADDITION END
+	// BANDASTATION ADDITION START - A lid can be closed while a gulp is delayed.
+	if((istype(src, /obj/item/reagent_containers/cup) || istype(src, /obj/item/reagent_containers/condiment)) && !is_open_container())
 		return FALSE
 	// BANDASTATION ADDITION END
 	if(!reagents || !reagents.total_volume)
 		to_chat(user, span_warning("[src] is empty!"))
 		return FALSE
-	var/mob/living/carbon/as_carbon = eater
 	var/covered = ""
 	if(as_carbon.is_mouth_covered(ITEM_SLOT_HEAD))
 		covered = "headgear"

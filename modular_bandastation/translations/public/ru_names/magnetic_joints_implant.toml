@@ -1,0 +1,17 @@
+["magnetic joints implant"]
+nominative = "имплант магнитных суставов"
+genitive = "импланта магнитных суставов"
+dative = "импланту магнитных суставов"
+accusative = "имплант магнитных суставов"
+instrumental = "имплантом магнитных суставов"
+prepositional = "импланте магнитных суставов"
+gender = "male"
+
+["IPC Magnetic Joints Implant"]
+nominative = "Имплант магнитных суставов КПБ"
+genitive = "импланта магнитных суставов КПБ"
+dative = "импланту магнитных суставов КПБ"
+accusative = "имплант магнитных суставов КПБ"
+instrumental = "имплантом магнитных суставов КПБ"
+prepositional = "импланте магнитных суставов КПБ"
+gender = "male"

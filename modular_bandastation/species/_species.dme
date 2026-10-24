@@ -84,7 +84,10 @@
 #include "code/surgery/organs/internal/tajaran_internal.dm"
 #include "code/surgery/organs/internal/skrell_internal.dm"
 #include "code/surgery/organs/internal/ipc_internal.dm"
+#include "code/surgery/organs/internal/ipc_upgrades.dm"
 #include "code/items/ipc_power_cord.dm"
+#include "code/items/ipc_fabrication.dm"
+#include "code/preferences/ipc_name.dm"
 #include "code/surgery/organs/limbgrower_designs.dm"
 
 #include "code/human/sprite_accessories/vulpkanin/hair_masks.dm"

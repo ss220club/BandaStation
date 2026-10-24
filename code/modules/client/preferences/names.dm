@@ -57,7 +57,7 @@
 	)
 
 /datum/preference/name/real_name/deserialize(input, datum/preferences/preferences)
-	input = ..(input)
+	input = reject_bad_name("[input]", allow_numbers_for_species(preferences)) // BANDASTATION EDIT - IPC model names may contain numbers.
 	if (!input)
 		return input
 
@@ -68,7 +68,7 @@
 		else if(first_space == length(input))
 			input += "[pick(GLOB.last_names)]"
 
-	return reject_bad_name(input, allow_numbers)
+	return reject_bad_name(input, allow_numbers_for_species(preferences)) // BANDASTATION EDIT - Preserve IPC model numbers during final sanitization.
 
 /// The name for a backup human, when nonhumans are made into head of staff
 /datum/preference/name/backup_human

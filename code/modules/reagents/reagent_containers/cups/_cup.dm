@@ -159,8 +159,20 @@
 		to_chat(user, span_notice("You swallow a gulp of [src]."))
 
 	SEND_SIGNAL(src, COMSIG_GLASS_DRANK, target_mob, user)
+	// BANDASTATION ADDITION START - A callback may replace the recipient's culinary processor or empty the cup.
+	if(!canconsume(target_mob, user))
+		return ITEM_INTERACT_BLOCKING
+	// BANDASTATION ADDITION END
 	var/fraction = min(gulp_size / reagents.total_volume, 1)
-	reagents.trans_to(target_mob, gulp_size, transferred_by = user, methods = reagent_consumption_method)
+	// BANDASTATION EDIT START - A synthetic processor tastes and disposes of a real portion without chemistry.
+	if(HAS_TRAIT(target_mob, TRAIT_REAGENT_IMMUNE))
+		var/mob/living/carbon/eater = target_mob
+		var/obj/item/organ/stomach/ipc_culinary/culinary = eater.get_organ_by_type(/obj/item/organ/stomach/ipc_culinary)
+		if(!culinary?.consume_flavor(src, gulp_size))
+			return ITEM_INTERACT_BLOCKING
+	else
+		reagents.trans_to(target_mob, gulp_size, transferred_by = user, methods = reagent_consumption_method)
+	// BANDASTATION EDIT END
 	var/atom/movable/screen/hunger/hunger_bar = user.hud_used?.screen_objects[HUD_MOB_HUNGER]
 	if (istype(hunger_bar))
 		hunger_bar.update_hunger_bar()

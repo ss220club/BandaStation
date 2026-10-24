@@ -1,0 +1,221 @@
+/// Chassis upgrades reject organics and undo their traits and physiology on removal and transformation.
+/datum/unit_test/ipc_upgrade_lifecycle/Run()
+	var/mob/living/carbon/human/human = allocate(/mob/living/carbon/human/consistent)
+	var/obj/item/organ/cyberimp/chest/ipc_upgrade/joints/sealed/sealed = allocate(__IMPLIED_TYPE__)
+	TEST_ASSERT(!sealed.Insert(human, special = TRUE), "An organic human accepted IPC joint upgrades.")
+	human.set_species(/datum/species/ipc)
+	var/initial_stamina = GET_PHYSIOLOGY(human, STAMINA)
+	TEST_ASSERT(sealed.Insert(human), "An IPC rejected its sealed joints implant.")
+	TEST_ASSERT(HAS_TRAIT(human, TRAIT_NODISMEMBER), "Sealed joints did not prevent dismemberment.")
+	TEST_ASSERT(abs(GET_PHYSIOLOGY(human, STAMINA) - initial_stamina * 1.15) < 0.001, "Sealed joints did not apply their 15% stamina penalty.")
+	sealed.emp_act(EMP_HEAVY)
+	TEST_ASSERT(human.IsParalyzed(), "An unshielded EMP did not lock sealed joints after the parent EMP handler.")
+	human.SetParalyzed(0)
+	sealed.Remove(human, special = TRUE)
+	TEST_ASSERT(!HAS_TRAIT(human, TRAIT_NODISMEMBER), "Removing sealed joints left dismemberment immunity.")
+	TEST_ASSERT(abs(GET_PHYSIOLOGY(human, STAMINA) - initial_stamina) < 0.001, "Removing sealed joints retained the stamina penalty.")
+	sealed.Insert(human)
+	human.set_species(/datum/species/human)
+	TEST_ASSERT_NULL(sealed.owner, "A species transformation retained the IPC upgrade.")
+	TEST_ASSERT(!HAS_TRAIT(human, TRAIT_NODISMEMBER), "An organic transformation retained sealed joint immunity.")
+	TEST_ASSERT(abs(GET_PHYSIOLOGY(human, STAMINA) - initial_stamina) < 0.001, "A species transformation retained the stamina penalty.")
+
+/// Repair rates and energy costs must be independent of the life tick length and stop at zero charge.
+/datum/unit_test/ipc_upgrade_repair/Run()
+	var/mob/living/carbon/human/human = allocate(/mob/living/carbon/human/consistent)
+	human.set_species(/datum/species/ipc)
+	var/obj/item/organ/cyberimp/chest/ipc_upgrade/repair/repair = allocate(__IMPLIED_TYPE__)
+	repair.Insert(human)
+	human.adjust_brute_loss(10, required_bodytype = BODYTYPE_ROBOTIC)
+	human.adjust_fire_loss(10, required_bodytype = BODYTYPE_ROBOTIC)
+	human.set_nutrition(100, forced = TRUE)
+	repair.on_life(2)
+	TEST_ASSERT_EQUAL(human.get_brute_loss(), 9.5, "A repair life tick healed the wrong amount of brute damage.")
+	TEST_ASSERT_EQUAL(human.get_fire_loss(), 9.5, "A repair life tick healed the wrong amount of burn damage.")
+	TEST_ASSERT_EQUAL(human.nutrition, 98, "Repair did not debit its actual power cost.")
+	repair.on_life(1)
+	repair.on_life(1)
+	TEST_ASSERT_EQUAL(human.get_brute_loss(), 9, "Splitting the tick changed brute repair speed.")
+	TEST_ASSERT_EQUAL(human.get_fire_loss(), 9, "Splitting the tick changed burn repair speed.")
+	TEST_ASSERT_EQUAL(human.nutrition, 96, "Splitting the tick changed repair power consumption.")
+	human.set_nutrition(0, forced = TRUE)
+	repair.on_life(2)
+	TEST_ASSERT_EQUAL(human.get_brute_loss(), 9, "A powerless repair implant continued healing.")
+	human.set_nutrition(100, forced = TRUE)
+	repair.emp_act(EMP_HEAVY)
+	repair.on_life(2)
+	TEST_ASSERT_EQUAL(human.get_brute_loss(), 9, "An EMP-disabled repair implant continued healing.")
+
+/// Magnetic joints use the real hand attachment interaction and lose their hold during an EMP.
+/datum/unit_test/ipc_upgrade_magnetic_joints/Run()
+	var/mob/living/carbon/human/human = allocate(/mob/living/carbon/human/consistent)
+	var/mob/living/carbon/human/assistant = allocate(/mob/living/carbon/human/consistent)
+	human.set_species(/datum/species/ipc)
+	var/obj/item/organ/cyberimp/chest/ipc_upgrade/joints/magnetic/magnetic = allocate(__IMPLIED_TYPE__)
+	magnetic.Insert(human)
+	var/obj/item/bodypart/arm/left/arm = human.get_bodypart(BODY_ZONE_L_ARM)
+	allocated += human.get_bodyparts().Copy()
+	magnetic.emp_act(EMP_HEAVY)
+	TEST_ASSERT_EQUAL(length(human.get_bodyparts()), 1, "An EMP did not release the magnetic chassis' non-chest limbs.")
+	TEST_ASSERT_NULL(arm.owner, "An EMP left a magnetic arm attached.")
+	assistant.put_in_active_hand(arm)
+	arm.attack(human, assistant)
+	TEST_ASSERT_EQUAL(arm.owner, human, "Magnetic joints did not permit manual robotic arm attachment.")
+	magnetic.Remove(human, special = TRUE)
+	TEST_ASSERT(!HAS_TRAIT(human, TRAIT_LIMBATTACHMENT), "Removing magnetic joints retained easy limb attachment.")
+
+/// Shielding must reduce a real mob EMP and undo only its own contribution when removed.
+/datum/unit_test/ipc_upgrade_emp_shield/Run()
+	var/mob/living/carbon/human/human = allocate(/mob/living/carbon/human/consistent)
+	human.set_species(/datum/species/ipc)
+	human.emp_protection = EMP_PROTECTION_HIGH
+	var/obj/item/organ/cyberimp/chest/ipc_upgrade/joints/emp_shield/shield = allocate(__IMPLIED_TYPE__)
+	shield.Insert(human)
+	TEST_ASSERT_EQUAL(human.emp_protection, EMP_PROTECTION_HIGH + EMP_PROTECTION_MODERATE, "IPC shielding overwrote existing EMP protection.")
+	human.emp_act(EMP_HEAVY)
+	TEST_ASSERT(human.get_fire_loss() > 0 && human.get_fire_loss() < 64.9, "Partial IPC shielding failed to reduce EMP damage or granted immunity.")
+	shield.Remove(human, special = TRUE)
+	TEST_ASSERT_EQUAL(human.emp_protection, EMP_PROTECTION_HIGH, "Removing IPC shielding removed another source's protection.")
+
+/// The culinary processor grants taste and food intake, without charging the battery or keeping stale tongue references.
+/datum/unit_test/ipc_upgrade_culinary/Run()
+	var/mob/living/carbon/human/human = allocate(/mob/living/carbon/human/consistent)
+	var/obj/item/organ/stomach/ipc_culinary/culinary = allocate(__IMPLIED_TYPE__)
+	TEST_ASSERT(!culinary.Insert(human, special = TRUE), "An organic body accepted an IPC culinary processor.")
+	human.set_species(/datum/species/ipc)
+	TEST_ASSERT(SEND_SIGNAL(human, COMSIG_CARBON_ATTEMPT_EAT, null) & BLOCK_EAT_ATTEMPT, "An unmodified IPC could eat.")
+	culinary.Insert(human)
+	TEST_ASSERT(!(SEND_SIGNAL(human, COMSIG_CARBON_ATTEMPT_EAT, null) & BLOCK_EAT_ATTEMPT), "The culinary processor did not enable food intake.")
+	TEST_ASSERT(!HAS_TRAIT(human, TRAIT_AGEUSIA), "The culinary processor did not enable taste.")
+	TEST_ASSERT(HAS_TRAIT(human, TRAIT_REAGENT_IMMUNE), "The culinary processor removed chemical immunity.")
+	human.set_nutrition(100, forced = TRUE)
+	culinary.reagents.add_reagent(/datum/reagent/consumable/nutriment, 10)
+	culinary.on_life(2)
+	TEST_ASSERT_EQUAL(human.nutrition, 100, "The culinary processor converted food into battery charge.")
+	TEST_ASSERT_EQUAL(culinary.reagents.total_volume, 0, "The culinary processor retained food reagents.")
+	var/obj/item/organ/tongue/tongue = human.get_organ_slot(ORGAN_SLOT_TONGUE)
+	allocated += tongue
+	tongue.Remove(human, special = TRUE)
+	TEST_ASSERT_NULL(culinary.flavor_tongue, "The culinary processor retained a removed tongue reference.")
+	TEST_ASSERT(!tongue.sense_of_taste, "Removing the tongue retained its temporary taste configuration.")
+	tongue.Insert(human)
+	TEST_ASSERT(!HAS_TRAIT(human, TRAIT_AGEUSIA), "The processor did not configure a replacement tongue.")
+	culinary.set_organ_damage(culinary.maxHealth)
+	TEST_ASSERT(HAS_TRAIT(human, TRAIT_AGEUSIA), "A failed culinary processor retained taste.")
+	TEST_ASSERT(SEND_SIGNAL(human, COMSIG_CARBON_ATTEMPT_EAT, null) & BLOCK_EAT_ATTEMPT, "A failed culinary processor still allowed food intake.")
+	culinary.set_organ_damage(0)
+	TEST_ASSERT(!HAS_TRAIT(human, TRAIT_AGEUSIA), "Repairing the culinary processor did not restore taste.")
+	culinary.Remove(human, special = TRUE)
+	TEST_ASSERT(!tongue.sense_of_taste && HAS_TRAIT(human, TRAIT_AGEUSIA), "Removing the processor retained taste.")
+	culinary.Insert(human)
+	human.set_species(/datum/species/human)
+	TEST_ASSERT_NULL(culinary.owner, "An organic transformation retained the culinary processor.")
+	TEST_ASSERT_NULL(culinary.flavor_tongue, "An organic transformation retained the processor's tongue reference.")
+
+/// A real bite must spend food, generate flavor and mood, and complete its consume callback exactly once.
+/datum/unit_test/ipc_upgrade_culinary_bites
+	var/consume_events = 0
+	var/mob/living/last_feeder
+
+/datum/unit_test/ipc_upgrade_culinary_bites/proc/on_consumed(datum/source, mob/living/eater, mob/living/feeder)
+	SIGNAL_HANDLER
+	consume_events++
+	last_feeder = feeder
+
+/datum/unit_test/ipc_upgrade_culinary_bites/Run()
+	var/mob/living/carbon/human/human = allocate(/mob/living/carbon/human/consistent)
+	human.set_species(/datum/species/ipc)
+	var/obj/item/organ/stomach/ipc_culinary/culinary = allocate(__IMPLIED_TYPE__)
+	culinary.Insert(human)
+	human.set_nutrition(100, forced = TRUE)
+	human.last_taste_time = -10 SECONDS
+	var/obj/item/food/donut/plain/donut = allocate(__IMPLIED_TYPE__)
+	donut.reagents.clear_reagents()
+	donut.reagents.add_reagent(/datum/reagent/consumable/nutriment, 12, list("donut" = 1))
+	donut.reagents.add_reagent(/datum/reagent/toxin/chloralhydrate, 6)
+	var/datum/component/edible/food = donut.GetComponent(__IMPLIED_TYPE__)
+	food.last_check_time = -10 SECONDS
+	RegisterSignal(donut, COMSIG_FOOD_CONSUMED, PROC_REF(on_consumed))
+	TEST_ASSERT(food.TakeBite(human, human), "A functional culinary processor could not take a real bite.")
+	TEST_ASSERT_EQUAL(food.bitecount, 1, "A real IPC bite did not increment the food's bite count.")
+	TEST_ASSERT_EQUAL(donut.reagents.total_volume, 18 - food.bite_consumption, "An IPC bite did not consume exactly one portion of food.")
+	TEST_ASSERT_EQUAL(human.last_taste_time, world.time, "Eating did not generate flavor feedback.")
+	TEST_ASSERT_NOTNULL(human.mob_mood.mood_events["quality_food"], "Eating a liked donut did not generate its food mood event.")
+	TEST_ASSERT_EQUAL(human.nutrition, 100, "A real food bite charged the IPC battery.")
+	TEST_ASSERT_EQUAL(human.reagents.total_volume, 0, "A real food bite introduced chemicals into the IPC bloodstream.")
+	TEST_ASSERT_EQUAL(culinary.reagents.total_volume, 0, "A real food bite introduced chemicals into the culinary processor.")
+	human.reagents.metabolize(human, 2)
+	TEST_ASSERT_EQUAL(human.stat, STABLE, "Food sedatives affected an immune IPC.")
+	for(var/bite in 1 to 4)
+		if(QDELETED(donut))
+			break
+		TEST_ASSERT(food.TakeBite(human, human), "The remaining food could not be consumed.")
+	TEST_ASSERT(QDELETED(donut), "Repeated culinary bites left an inexhaustible food item.")
+	TEST_ASSERT_EQUAL(consume_events, 1, "Completing food emitted duplicate or missing consume callbacks.")
+	TEST_ASSERT_EQUAL(last_feeder, human, "Food completion lost the actor who fed the IPC.")
+	TEST_ASSERT_EQUAL(human.nutrition, 100, "Finishing a meal charged the IPC battery.")
+
+	var/mob/living/carbon/human/organic = allocate(/mob/living/carbon/human/consistent)
+	var/obj/item/food/donut/plain/control = allocate(__IMPLIED_TYPE__)
+	var/datum/component/edible/control_food = control.GetComponent(__IMPLIED_TYPE__)
+	var/original_volume = control.reagents.total_volume
+	var/obj/item/organ/stomach/stomach = organic.get_organ_slot(ORGAN_SLOT_STOMACH)
+	var/original_stomach_volume = stomach.reagents.total_volume
+	TEST_ASSERT(control_food.TakeBite(organic, organic), "The organic eating control failed.")
+	TEST_ASSERT_EQUAL(control.reagents.total_volume, max(original_volume - control_food.bite_consumption, 0), "The organic control consumed an incorrect portion.")
+	TEST_ASSERT_EQUAL(stomach.reagents.total_volume, original_stomach_volume + min(original_volume, control_food.bite_consumption), "The organic control did not receive the swallowed food.")
+
+/// A timed feeding must recheck the processor after it is removed or fails during the delay.
+/datum/unit_test/ipc_upgrade_culinary_feeding_interrupted/Run()
+	for(var/remove_processor in list(TRUE, FALSE))
+		var/mob/living/carbon/human/human = allocate(/mob/living/carbon/human/consistent)
+		var/mob/living/carbon/human/feeder = allocate(/mob/living/carbon/human/consistent/slow)
+		human.set_species(/datum/species/ipc)
+		human.set_nutrition(100, forced = TRUE)
+		feeder.add_or_update_variable_actionspeed_modifier(/datum/actionspeed_modifier/base, multiplicative_slowdown = 1)
+		var/obj/item/organ/stomach/ipc_culinary/culinary = allocate(__IMPLIED_TYPE__)
+		culinary.Insert(human)
+		var/obj/item/food/donut/plain/donut = allocate(__IMPLIED_TYPE__)
+		feeder.put_in_active_hand(donut)
+		var/datum/component/edible/food = donut.GetComponent(__IMPLIED_TYPE__)
+		var/original_volume = donut.reagents.total_volume
+		var/original_taste_time = human.last_taste_time
+		if(remove_processor)
+			addtimer(CALLBACK(culinary, TYPE_PROC_REF(/obj/item/organ, Remove), human, TRUE), 1)
+		else
+			addtimer(CALLBACK(culinary, TYPE_PROC_REF(/obj/item/organ, set_organ_damage), culinary.maxHealth), 1)
+		food.TryToEat(human, feeder)
+		TEST_ASSERT(DOING_INTERACTION(feeder, human), "The forced-feeding fixture did not start a real timed action.")
+		var/deadline = world.time + 10 SECONDS
+		while(DOING_INTERACTION(feeder, human) && world.time < deadline)
+			sleep(1)
+		TEST_ASSERT(!culinary.is_operational(), "The culinary processor remained active during the forced-feeding fixture.")
+		TEST_ASSERT(!DOING_INTERACTION(feeder, human), "Rejected IPC feeding retained a timed action.")
+		TEST_ASSERT_EQUAL(food.bitecount, 0, "A forced bite completed after its culinary processor was removed or failed.")
+		TEST_ASSERT_EQUAL(donut.reagents.total_volume, original_volume, "Rejected forced feeding consumed food.")
+		TEST_ASSERT_EQUAL(human.last_taste_time, original_taste_time, "Rejected forced feeding produced flavor feedback.")
+
+/// The food-eaten hook may remove the processor before reagent transfer or source consumption.
+/datum/unit_test/ipc_upgrade_culinary_bite_callback
+	var/obj/item/organ/stomach/ipc_culinary/processor
+
+/datum/unit_test/ipc_upgrade_culinary_bite_callback/proc/on_bite(datum/source, mob/living/carbon/eater)
+	SIGNAL_HANDLER
+	processor.Remove(eater, special = TRUE)
+
+/datum/unit_test/ipc_upgrade_culinary_bite_callback/Run()
+	var/mob/living/carbon/human/human = allocate(/mob/living/carbon/human/consistent)
+	human.set_species(/datum/species/ipc)
+	processor = allocate(/obj/item/organ/stomach/ipc_culinary)
+	processor.Insert(human)
+	var/obj/item/food/donut/plain/donut = allocate(__IMPLIED_TYPE__)
+	var/datum/component/edible/food = donut.GetComponent(__IMPLIED_TYPE__)
+	var/original_volume = donut.reagents.total_volume
+	var/original_taste_time = human.last_taste_time
+	RegisterSignal(donut, COMSIG_FOOD_EATEN, PROC_REF(on_bite))
+	TEST_ASSERT(!food.TakeBite(human, human), "A food callback bypassed processor revalidation.")
+	TEST_ASSERT_EQUAL(food.bitecount, 0, "A rejected callback-invalidated bite incremented its bite count.")
+	TEST_ASSERT_EQUAL(donut.reagents.total_volume, original_volume, "A food callback consumed food after the processor was removed.")
+	TEST_ASSERT_EQUAL(human.last_taste_time, original_taste_time, "A rejected callback-invalidated bite produced flavor feedback.")
+	UnregisterSignal(donut, COMSIG_FOOD_EATEN)
+	processor = null

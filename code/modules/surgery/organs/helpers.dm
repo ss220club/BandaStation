@@ -43,6 +43,17 @@
 /mob/living/carbon/get_organ_slot(slot)
 	. = organs_slot[slot]
 
+// BANDASTATION ADDITION START - Shared AI-shell and positronic-core organ compatibility
+/// AI shells tolerate tongues and external organs, but require every other installed internal organ to be robotic.
+/mob/living/carbon/proc/has_robotic_internal_organs(excluded_slot)
+	for(var/obj/item/organ/organ as anything in organs)
+		if((organ.organ_flags & ORGAN_EXTERNAL) || istype(organ, /obj/item/organ/tongue) || (!isnull(excluded_slot) && organ.slot == excluded_slot))
+			continue
+		if(!IS_ROBOTIC_ORGAN(organ))
+			return FALSE
+	return TRUE
+// BANDASTATION ADDITION END - Shared AI-shell and positronic-core organ compatibility
+
 /**
  * Returns a list of all missing organs this species should have
  *

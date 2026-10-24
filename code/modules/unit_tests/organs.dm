@@ -19,6 +19,9 @@
 	// Appropriate mob (Human) which will receive organ.
 	var/mob/living/carbon/human/lab_rat = allocate(/mob/living/carbon/human/consistent)
 	var/obj/item/organ/test_organ = new organ_type()
+	// BANDASTATION ADDITION - IPC cores and upgrades require a compatible recipient even for special insertion
+	if(!test_organ.can_insert_into(lab_rat))
+		lab_rat.set_species(/datum/species/ipc)
 
 	// Inappropriate mob (Dog) which will hopefully reject organ.
 	var/mob/living/basic/pet/dog/lab_dog = allocate(/mob/living/basic/pet/dog/corgi)

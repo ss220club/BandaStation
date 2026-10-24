@@ -16,6 +16,18 @@
 	/// Powers the existing brainmob while the core is outside a chassis; never creates a second personality.
 	var/obj/item/brain_processor/ipc_core/personal_processor
 
+/obj/item/organ/brain/ipc/can_insert_into(mob/living/carbon/receiver, special, movement_flags)
+	if(!ishuman(receiver))
+		return FALSE
+	// Species regeneration replaces the brain before removing the remaining organic organs.
+	if(is_species(receiver, /datum/species/ipc))
+		return TRUE
+	for(var/body_zone in GLOB.all_body_zones)
+		var/obj/item/bodypart/limb = receiver.get_bodypart(body_zone)
+		if(!limb || !IS_ROBOTIC_LIMB(limb))
+			return FALSE
+	return receiver.has_robotic_internal_organs(ORGAN_SLOT_BRAIN)
+
 /obj/item/organ/brain/ipc/Destroy()
 	release_processor()
 	return ..()
@@ -141,7 +153,11 @@
 	icon_state = initial(icon_state)
 
 /obj/item/organ/heart/ipc/on_mob_insert(mob/living/carbon/battery_owner, special, movement_flags)
+	// Granting NOHUNGER normally refills organic nutrition; an IPC's existing nutrition is real stored energy.
+	var/charge_before_insertion = battery_owner.nutrition
 	. = ..()
+	if(is_species(battery_owner, /datum/species/ipc))
+		battery_owner.set_nutrition(charge_before_insertion, forced = TRUE)
 	RegisterSignal(battery_owner, COMSIG_PROCESS_BORGCHARGER_OCCUPANT, PROC_REF(on_charger))
 	displayed_charge = null
 	update_charge_alert()

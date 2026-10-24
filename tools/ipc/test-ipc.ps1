@@ -47,7 +47,9 @@ Push-Location -LiteralPath $repoRoot
 try {
     $baselineTests = @(
         'preference_species', 'species_change_organs', 'species_config_sanity',
-        'species_unique_id', 'species_whitelist_check'
+        'species_unique_id', 'species_whitelist_check',
+        'organ_sanity', 'designs', 'design_source', 'design_mats',
+        'focus_only/invalid_research_designs'
     ) | ForEach-Object { '/datum/unit_test/' + $_ }
     if ($IncludeHumanoidScreenshots) {
         $baselineTests += '/datum/unit_test/screenshot_humanoids'
@@ -112,7 +114,9 @@ try {
     }
     $results = Get-Content -LiteralPath $resultsPath -Raw | ConvertFrom-Json
     $actualTests = @($results.PSObject.Properties.Name)
-    $missingTests = @($focusedTests | Where-Object { $_ -notin $actualTests })
+    # focus_only types register failures from other procs and do not emit a passing Run result.
+    $requiredTests = @($focusedTests | Where-Object { $_ -notlike '/datum/unit_test/focus_only/*' })
+    $missingTests = @($requiredTests | Where-Object { $_ -notin $actualTests })
     $failedTests = @($results.PSObject.Properties.Value | Where-Object { $_.status -ne 0 })
     foreach ($failedTest in $failedTests) {
         Write-Output ($failedTest.name + ': ' + $failedTest.message)

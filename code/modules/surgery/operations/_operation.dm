@@ -1014,6 +1014,10 @@ GLOBAL_DATUM_INIT(operations, /datum/operation_holder, new)
 			return
 		CRASH("[type] operation attempted to call display_pain without a patient, despite requiring one!")
 
+	// BANDASTATION ADDITION - Fully synthetic patients have no organic surgical pain reflex
+	if(target.mob_biotypes & MOB_ROBOTIC)
+		return
+
 	// Determine how drunk our patient is
 	var/drunken_patient = target.get_drunk_amount()
 	// Create a probability to ignore the pain based on drunkenness level
@@ -1076,6 +1080,11 @@ GLOBAL_DATUM_INIT(operations, /datum/operation_holder, new)
 	PROTECTED_PROC(TRUE)
 	if(!(operation_flags & OPERATION_AFFECTS_MOOD))
 		return
+	// BANDASTATION ADDITION START - Mechanical maintenance cannot create organic pain trauma
+	if(patient.mob_biotypes & MOB_ROBOTIC)
+		patient.clear_mood_event(SURGERY_MOOD_CATEGORY)
+		return
+	// BANDASTATION ADDITION END - Mechanical maintenance cannot create organic pain trauma
 
 	// Create a probability to ignore the pain based on drunkenness level
 	var/drunk_ignore_prob = clamp(patient.get_drunk_amount(), 0, 90)

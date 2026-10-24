@@ -1,0 +1,17 @@
+["electromagnetic shielding implant"]
+nominative = "имплант электромагнитной защиты"
+genitive = "импланта электромагнитной защиты"
+dative = "импланту электромагнитной защиты"
+accusative = "имплант электромагнитной защиты"
+instrumental = "имплантом электромагнитной защиты"
+prepositional = "импланте электромагнитной защиты"
+gender = "male"
+
+["IPC Electromagnetic Shielding Implant"]
+nominative = "Имплант электромагнитной защиты КПБ"
+genitive = "импланта электромагнитной защиты КПБ"
+dative = "импланту электромагнитной защиты КПБ"
+accusative = "имплант электромагнитной защиты КПБ"
+instrumental = "имплантом электромагнитной защиты КПБ"
+prepositional = "импланте электромагнитной защиты КПБ"
+gender = "male"

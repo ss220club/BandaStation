@@ -5,6 +5,12 @@
 
 // Keep the seperation of limb removal and mob removal absolute
 
+// BANDASTATION ADDITION START - Check transplant compatibility before changing organ ownership
+/// Pure compatibility check shared by surgery, autosurgeons and organs carried inside detached limbs.
+/obj/item/organ/proc/can_insert_into(mob/living/carbon/receiver, special = FALSE, movement_flags)
+	return TRUE
+// BANDASTATION ADDITION END - Check transplant compatibility before changing organ ownership
+
 /*
  * Insert the organ into the select mob.
  *
@@ -61,6 +67,11 @@
 		if(!PERFORM_ALL_TESTS(organ_sanity))
 			stack_trace("Tried to insert organ into non-carbon: [receiver.type]")
 		return FALSE
+
+	// BANDASTATION ADDITION START - Reject incompatible organs before replacing the current organ
+	if(!can_insert_into(receiver, special, movement_flags))
+		return FALSE
+	// BANDASTATION ADDITION END - Reject incompatible organs before replacing the current organ
 
 	if(owner == receiver)
 		stack_trace("Organ receiver is already organ owner")

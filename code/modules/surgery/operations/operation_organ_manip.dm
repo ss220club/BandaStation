@@ -116,6 +116,9 @@
 	var/obj/item/organ/organ = tool
 	if(!organ_check(limb, organ) || (organ.organ_flags & ORGAN_UNUSABLE))
 		return FALSE
+	// BANDASTATION ADDITION - Apply the same transplant restrictions before and after the surgical delay
+	if(limb.owner && !organ.can_insert_into(limb.owner))
+		return FALSE
 
 	for(var/obj/item/organ/other_organ in limb)
 		if(other_organ.slot == organ.slot)

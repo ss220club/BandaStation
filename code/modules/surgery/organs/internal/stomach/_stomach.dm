@@ -198,7 +198,7 @@
 	return owner_species.mutantstomach
 
 ///This gets called after the owner takes a bite of food
-/obj/item/organ/stomach/proc/after_eat(atom/edible)
+/obj/item/organ/stomach/proc/after_eat(atom/edible, mob/living/feeder) // BANDASTATION EDIT - Preserve the actor for synthetic food disposal.
 	return
 
 /obj/item/organ/stomach/proc/consume_thing(atom/movable/thing)

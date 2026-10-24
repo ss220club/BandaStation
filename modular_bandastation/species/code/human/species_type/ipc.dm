@@ -55,6 +55,9 @@
 
 /datum/species/ipc/on_species_gain(mob/living/carbon/human/human, datum/species/old_species, pref_load, regenerate_icons = TRUE, replace_missing = TRUE)
 	. = ..()
+	for(var/hud_type in list(DATA_HUD_MEDICAL_BASIC, DATA_HUD_MEDICAL_ADVANCED))
+		var/datum/atom_hud/medical_hud = GLOB.huds[hud_type]
+		medical_hud.remove_atom_from_hud(human)
 	// End existing chemical effects through their normal removal callbacks when transforming.
 	human.reagents?.clear_reagents()
 	for(var/obj/item/organ/organ as anything in human.organs)
@@ -113,10 +116,16 @@
 	human.set_hud_image_inactive(DIAG_HUD)
 	human.set_hud_image_inactive(DIAG_STAT_HUD)
 	human.set_hud_image_inactive(DIAG_BATT_HUD)
+	for(var/hud_type in list(DATA_HUD_MEDICAL_BASIC, DATA_HUD_MEDICAL_ADVANCED))
+		var/datum/atom_hud/medical_hud = GLOB.huds[hud_type]
+		medical_hud.add_atom_to_hud(human)
 
 /// The chassis has no food intake; this also rejects another person's feeding attempt.
 /datum/species/ipc/proc/on_attempt_eat(mob/living/carbon/human/human, atom/food)
 	SIGNAL_HANDLER
+	var/obj/item/organ/stomach/ipc_culinary/culinary = human.get_organ_by_type(/obj/item/organ/stomach/ipc_culinary)
+	if(culinary?.is_operational())
+		return NONE
 	human.balloon_alert(human, "КПБ не могут есть!")
 	return BLOCK_EAT_ATTEMPT
 
@@ -219,6 +228,14 @@
 			SPECIES_PERK_DESC = "ЭМИ повреждает корпус и внутренние компоненты. Радиация повреждает позитронный мозг. Обычный электрический разряд заряжает батарею.",
 		),
 	)
+
+/// Prevent later HUD initialization or suit-sensor callbacks from exposing a synthetic chassis as a patient.
+/datum/atom_hud/data/human/medical/add_atom_to_hud(atom/new_hud_atom)
+	if(ishuman(new_hud_atom))
+		var/mob/living/carbon/human/human = new_hud_atom
+		if(is_species(human, /datum/species/ipc))
+			return FALSE
+	return ..()
 
 /datum/language_holder/ipc
 	understood_languages = list(/datum/language/common = list(LANGUAGE_ATOM), /datum/language/machine = list(LANGUAGE_ATOM))

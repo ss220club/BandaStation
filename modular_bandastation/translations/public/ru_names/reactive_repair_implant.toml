@@ -1,0 +1,17 @@
+["reactive repair implant"]
+nominative = "имплант реактивного ремонта"
+genitive = "импланта реактивного ремонта"
+dative = "импланту реактивного ремонта"
+accusative = "имплант реактивного ремонта"
+instrumental = "имплантом реактивного ремонта"
+prepositional = "импланте реактивного ремонта"
+gender = "male"
+
+["IPC Reactive Repair Implant"]
+nominative = "Имплант реактивного ремонта КПБ"
+genitive = "импланта реактивного ремонта КПБ"
+dative = "импланту реактивного ремонта КПБ"
+accusative = "имплант реактивного ремонта КПБ"
+instrumental = "имплантом реактивного ремонта КПБ"
+prepositional = "импланте реактивного ремонта КПБ"
+gender = "male"

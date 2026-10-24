@@ -1,0 +1,17 @@
+["culinary processing implant"]
+nominative = "имплант обработки пищи"
+genitive = "импланта обработки пищи"
+dative = "импланту обработки пищи"
+accusative = "имплант обработки пищи"
+instrumental = "имплантом обработки пищи"
+prepositional = "импланте обработки пищи"
+gender = "male"
+
+["IPC Culinary Processing Implant"]
+nominative = "Имплант обработки пищи КПБ"
+genitive = "импланта обработки пищи КПБ"
+dative = "импланту обработки пищи КПБ"
+accusative = "имплант обработки пищи КПБ"
+instrumental = "имплантом обработки пищи КПБ"
+prepositional = "импланте обработки пищи КПБ"
+gender = "male"

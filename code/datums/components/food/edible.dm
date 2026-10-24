@@ -507,6 +507,10 @@ Behavior that's still missing from this component that original food items had t
 	if(sig_return & DESTROY_FOOD)
 		qdel(owner)
 		return
+	// BANDASTATION ADDITION START - Food callbacks may remove the recipient's culinary processor.
+	if(!CanConsume(eater, feeder))
+		return FALSE
+	// BANDASTATION ADDITION END
 
 	//Give a buff when the dish is hand-crafted and unbitten
 	if(bitecount == 0)
@@ -535,7 +539,7 @@ Behavior that's still missing from this component that original food items had t
 		var/mob/living/carbon/carbon_eater = eater
 		var/obj/item/organ/stomach/stomach = carbon_eater.get_organ_slot(ORGAN_SLOT_STOMACH)
 		if(istype(stomach))
-			stomach.after_eat(owner)
+			stomach.after_eat(owner, feeder) // BANDASTATION EDIT - Preserve the actor for synthetic food disposal.
 
 	return TRUE
 

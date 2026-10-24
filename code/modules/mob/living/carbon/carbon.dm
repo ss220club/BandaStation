@@ -823,7 +823,10 @@
 
 	// Tell the organs in the bodyparts that we are in a mob again
 	for(var/obj/item/organ/organ in new_bodypart)
-		organ.mob_insert(src)
+		// BANDASTATION EDIT START - Detached limbs must not bypass transplant compatibility
+		if(!organ.mob_insert(src))
+			organ.bodypart_remove(new_bodypart, drop_location = drop_location())
+		// BANDASTATION EDIT END - Detached limbs must not bypass transplant compatibility
 
 	switch(new_bodypart.body_part)
 		if(LEG_LEFT, LEG_RIGHT)
