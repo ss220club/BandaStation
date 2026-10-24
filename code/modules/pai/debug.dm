@@ -14,7 +14,7 @@ ADMIN_VERB(makepAI, R_FUN, "Make pAI", "Specify a location to spawn a pAI device
 		return
 
 	if(!isobserver(choice))
-		var/confirm = tgui_alert(user, "[choice.key] не призрак сейчас. Вы уверены, что хотите вырвать его из тела и поместить в этот ПИИ?", "Подтверждение создания ПИИ", list("Да", "Нет"))
+		var/confirm = tgui_alert(user, "Сейчас [choice.key] не призрак. Вы уверены, что хотите вырвать его из тела и поместить в этот пИИ?", "Подтверждение создания пИИ", list("Да", "Нет"))
 		if(confirm != "Да")
 			return
 	var/obj/item/pai_card/card = new(target)
