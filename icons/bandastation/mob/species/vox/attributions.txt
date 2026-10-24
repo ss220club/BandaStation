@@ -25,6 +25,11 @@ Other imported image files are unchanged, including nitrogen tank/mask items
 and the added vox state in icons/mob/butts.dmi. Existing butt states are
 pixel-identical to the PrimeDream base.
 
+head.dmi and helmet.dmi add carved_pumpkin-emissive from the pinned raw helmet
+states hardhat_pumpkin0/1. The mask keeps exact authored lit eye/mouth pixels
+whose unlit RGBA is (43,22,3,255), (65,31,4,255) or (79,32,12,255), omitting
+the recoloured pumpkin shell. All original states and pixels remain unchanged.
+
 Reproduction and exact source blob hashes:
 tools/vox/adapt_assets.py, tools/vox/source-assets.json
 

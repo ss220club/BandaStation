@@ -1,0 +1,1757 @@
+{
+  "schema_version": 1,
+  "source_revision": "0fffca1f1f29a63aff49d9b56524813eedf82c6d",
+  "policy": {
+    "scope": "Species-specific worn overlays for existing items only. No new item types, gameplay, stats, or availability changes.",
+    "priority": "Keep an existing verified Vox sprite. Use missing_only entries only where none exists; reviewed_replacement entries replace documented unconverted human-shaped donor states.",
+    "greyscale": "Keep existing supported Vox greyscale families. Precoloured Paradise entries do not replace greyscale_config_worn or player-selected colours.",
+    "exclusions": [
+      "donator",
+      "prime_only",
+      "personal items",
+      "unreviewed masks and helmets",
+      "unknown semantic matches"
+    ],
+    "transform": "Identity unless an entry explicitly declares a reviewed transform.",
+    "security_collision": "Paradise security/warden/hos are red uniforms. TG grey security/warden/hos states intentionally do not inherit those aliases."
+  },
+  "entries": [
+    {
+      "category": "back",
+      "target_state": "ert_commander",
+      "source_file": "icons/mob/clothing/species/vox/back.dmi",
+      "source_state": "ert_commander",
+      "mode": "missing_only",
+      "reason": "Identical existing item and state in the pinned Paradise definitions; its Vox sprite sheet is explicit. Reviewed on the current body in four directions.",
+      "test_type": "/obj/item/storage/backpack/ert"
+    },
+    {
+      "category": "back",
+      "target_state": "ert_engineering",
+      "source_file": "icons/mob/clothing/species/vox/back.dmi",
+      "source_state": "ert_engineering",
+      "mode": "missing_only",
+      "reason": "Identical existing item and state in the pinned Paradise definitions; its Vox sprite sheet is explicit. Reviewed on the current body in four directions.",
+      "test_type": "/obj/item/storage/backpack/ert/engineer"
+    },
+    {
+      "category": "back",
+      "target_state": "ert_medical",
+      "source_file": "icons/mob/clothing/species/vox/back.dmi",
+      "source_state": "ert_medical",
+      "mode": "missing_only",
+      "reason": "Identical existing item and state in the pinned Paradise definitions; its Vox sprite sheet is explicit. Reviewed on the current body in four directions.",
+      "test_type": "/obj/item/storage/backpack/ert/medical"
+    },
+    {
+      "category": "back",
+      "target_state": "ert_security",
+      "source_file": "icons/mob/clothing/species/vox/back.dmi",
+      "source_state": "ert_security",
+      "mode": "missing_only",
+      "reason": "Identical existing item and state in the pinned Paradise definitions; its Vox sprite sheet is explicit. Reviewed on the current body in four directions.",
+      "test_type": "/obj/item/storage/backpack/ert/security"
+    },
+    {
+      "category": "gloves",
+      "target_state": "captain",
+      "source_file": "icons/mob/clothing/species/vox/gloves.dmi",
+      "source_state": "captain",
+      "mode": "missing_only",
+      "reason": "Same existing garment and state in both clothing definitions; missing from the current Vox sheet.",
+      "test_type": "/obj/item/clothing/gloves/captain"
+    },
+    {
+      "category": "gloves",
+      "target_state": "ei_gloves",
+      "source_file": "modular_ss220/clothing/icons/mob/species/vox/gloves.dmi",
+      "source_state": "ei_gloves",
+      "mode": "missing_only",
+      "reason": "Public modular Paradise Vox overlay for the same existing Banda garment; toggled state names adapted to TG.",
+      "test_type": "/obj/item/clothing/gloves/etamin_gloves"
+    },
+    {
+      "category": "gloves",
+      "target_state": "forensics",
+      "source_file": "icons/mob/clothing/species/vox/gloves.dmi",
+      "source_state": "forensics",
+      "mode": "missing_only",
+      "reason": "Same existing garment and state in both clothing definitions; missing from the current Vox sheet.",
+      "test_type": "/obj/item/clothing/gloves/color/black/forensics"
+    },
+    {
+      "category": "gloves",
+      "target_state": "orange",
+      "source_file": "icons/mob/clothing/species/vox/gloves.dmi",
+      "source_state": "orange",
+      "mode": "missing_only",
+      "reason": "Same existing garment and state in both clothing definitions; missing from the current Vox sheet.",
+      "test_type": "/obj/item/clothing/gloves/color/orange"
+    },
+    {
+      "category": "gloves",
+      "target_state": "red",
+      "source_file": "icons/mob/clothing/species/vox/gloves.dmi",
+      "source_state": "red",
+      "mode": "missing_only",
+      "reason": "Same existing garment and state in both clothing definitions; missing from the current Vox sheet.",
+      "test_type": "/obj/item/clothing/gloves/color/red"
+    },
+    {
+      "category": "head",
+      "target_state": "ablativehood",
+      "source_file": "icons/mob/clothing/species/vox/head.dmi",
+      "source_state": "ablativehood",
+      "mode": "missing_only",
+      "reason": "Same item and worn state in Paradise clothing definitions.",
+      "test_type": "/obj/item/clothing/head/hooded/ablative"
+    },
+    {
+      "category": "head",
+      "target_state": "bee",
+      "source_file": "icons/mob/clothing/species/vox/head.dmi",
+      "source_state": "bee",
+      "mode": "missing_only",
+      "reason": "Same item and worn state in Paradise clothing definitions.",
+      "test_type": "/obj/item/clothing/head/hooded/bee_hood"
+    },
+    {
+      "category": "head",
+      "target_state": "chef_red",
+      "source_file": "modular_ss220/clothing/icons/mob/species/vox/hats.dmi",
+      "source_state": "chef_red",
+      "mode": "missing_only",
+      "reason": "Use the active public modular chef hat override from the donor clothing definitions.",
+      "test_type": "/obj/item/clothing/head/chefhat/red"
+    },
+    {
+      "category": "head",
+      "target_state": "cone",
+      "source_file": "icons/mob/clothing/species/vox/head.dmi",
+      "source_state": "cone",
+      "mode": "missing_only",
+      "reason": "Same item and worn state in Paradise clothing definitions.",
+      "test_type": "/obj/item/clothing/head/cone"
+    },
+    {
+      "category": "head",
+      "target_state": "cowboy_hat_black",
+      "source_file": "icons/mob/clothing/species/vox/head.dmi",
+      "source_state": "cowboyhat_black",
+      "mode": "missing_only",
+      "reason": "Same headwear in both codebases; only the worn-state spelling differs.",
+      "test_type": "/obj/item/clothing/head/cowboy/black"
+    },
+    {
+      "category": "head",
+      "target_state": "cowboy_hat_brown",
+      "source_file": "icons/mob/clothing/species/vox/head.dmi",
+      "source_state": "cowboyhat",
+      "mode": "missing_only",
+      "reason": "Same headwear in both codebases; only the worn-state spelling differs.",
+      "test_type": "/obj/item/clothing/head/cowboy/brown"
+    },
+    {
+      "category": "head",
+      "target_state": "cowboy_hat_white",
+      "source_file": "icons/mob/clothing/species/vox/head.dmi",
+      "source_state": "cowboyhat_white",
+      "mode": "missing_only",
+      "reason": "Same headwear in both codebases; only the worn-state spelling differs.",
+      "test_type": "/obj/item/clothing/head/cowboy/white"
+    },
+    {
+      "category": "head",
+      "target_state": "cowboy_science",
+      "source_file": "icons/mob/clothing/species/vox/head.dmi",
+      "source_state": "cowboyhat_sci",
+      "mode": "missing_only",
+      "reason": "Same headwear in both codebases; only the worn-state spelling differs.",
+      "test_type": "/obj/item/clothing/head/cowboy/science"
+    },
+    {
+      "category": "head",
+      "target_state": "cowboy_sec",
+      "source_file": "icons/mob/clothing/species/vox/head.dmi",
+      "source_state": "cowboyhat_sec",
+      "mode": "missing_only",
+      "reason": "Same headwear in both codebases; only the worn-state spelling differs.",
+      "test_type": "/obj/item/clothing/head/cowboy/security"
+    },
+    {
+      "category": "head",
+      "target_state": "ei_cloak",
+      "source_file": "modular_ss220/clothing/icons/mob/species/vox/hats.dmi",
+      "source_state": "ei_hood",
+      "mode": "missing_only",
+      "reason": "Public modular Paradise Vox overlay for the same existing Banda garment.",
+      "test_type": "/obj/item/clothing/head/hooded/etamin_cloak"
+    },
+    {
+      "category": "head",
+      "target_state": "hardhat0_blumpkin",
+      "source_file": "icons/mob/clothing/species/vox/head.dmi",
+      "source_state": "hardhat0_blumpkin",
+      "mode": "missing_only",
+      "reason": "Same item and worn state in Paradise clothing definitions.",
+      "test_type": "/obj/item/clothing/head/utility/hardhat/pumpkinhead/blumpkin"
+    },
+    {
+      "category": "head",
+      "target_state": "hardhat1_blumpkin",
+      "source_file": "icons/mob/clothing/species/vox/head.dmi",
+      "source_state": "hardhat1_blumpkin",
+      "mode": "missing_only",
+      "reason": "Toggled variant of the same mapped headwear.",
+      "test_type": "/obj/item/clothing/head/utility/hardhat/pumpkinhead/blumpkin"
+    },
+    {
+      "category": "head",
+      "target_state": "hood_atmos",
+      "source_file": "icons/mob/clothing/species/vox/head/hood.dmi",
+      "source_state": "winterhood_atmos",
+      "mode": "missing_only",
+      "reason": "Corresponding departmental winter coat hood; no item gameplay changes.",
+      "test_type": "/obj/item/clothing/head/hooded/winterhood/engineering/atmos",
+      "transform": "winterhood_head_coverage"
+    },
+    {
+      "category": "head",
+      "target_state": "hood_captain",
+      "source_file": "icons/mob/clothing/species/vox/head/hood.dmi",
+      "source_state": "winterhood_captain",
+      "mode": "missing_only",
+      "reason": "Corresponding departmental winter coat hood; no item gameplay changes.",
+      "test_type": "/obj/item/clothing/head/hooded/winterhood/captain",
+      "transform": "winterhood_head_coverage"
+    },
+    {
+      "category": "head",
+      "target_state": "hood_cargo",
+      "source_file": "icons/mob/clothing/species/vox/head/hood.dmi",
+      "source_state": "winterhood_cargo",
+      "mode": "missing_only",
+      "reason": "Corresponding departmental winter coat hood; no item gameplay changes.",
+      "test_type": "/obj/item/clothing/head/hooded/winterhood/cargo",
+      "transform": "winterhood_head_coverage"
+    },
+    {
+      "category": "head",
+      "target_state": "hood_chemistry",
+      "source_file": "icons/mob/clothing/species/vox/head/hood.dmi",
+      "source_state": "winterhood_chem",
+      "mode": "missing_only",
+      "reason": "Corresponding departmental winter coat hood; no item gameplay changes.",
+      "test_type": "/obj/item/clothing/head/hooded/winterhood/medical/chemistry",
+      "transform": "winterhood_head_coverage"
+    },
+    {
+      "category": "head",
+      "target_state": "hood_coroner",
+      "source_file": "icons/mob/clothing/species/vox/head/hood.dmi",
+      "source_state": "winterhood_coroner",
+      "mode": "missing_only",
+      "reason": "Corresponding departmental winter coat hood; no item gameplay changes.",
+      "test_type": "/obj/item/clothing/head/hooded/winterhood/medical/coroner",
+      "transform": "winterhood_head_coverage"
+    },
+    {
+      "category": "head",
+      "target_state": "hood_engineer",
+      "source_file": "icons/mob/clothing/species/vox/head/hood.dmi",
+      "source_state": "winterhood_engi",
+      "mode": "missing_only",
+      "reason": "Corresponding departmental winter coat hood; no item gameplay changes.",
+      "test_type": "/obj/item/clothing/head/hooded/winterhood/engineering",
+      "transform": "winterhood_head_coverage"
+    },
+    {
+      "category": "head",
+      "target_state": "hood_hop",
+      "source_file": "icons/mob/clothing/species/vox/head/hood.dmi",
+      "source_state": "winterhood_hop",
+      "mode": "missing_only",
+      "reason": "Corresponding departmental winter coat hood; no item gameplay changes.",
+      "test_type": "/obj/item/clothing/head/hooded/winterhood/hop",
+      "transform": "winterhood_head_coverage"
+    },
+    {
+      "category": "head",
+      "target_state": "hood_hydro",
+      "source_file": "icons/mob/clothing/species/vox/head/hood.dmi",
+      "source_state": "winterhood_hydro",
+      "mode": "missing_only",
+      "reason": "Corresponding departmental winter coat hood; no item gameplay changes.",
+      "test_type": "/obj/item/clothing/head/hooded/winterhood/hydro",
+      "transform": "winterhood_head_coverage"
+    },
+    {
+      "category": "head",
+      "target_state": "hood_medical",
+      "source_file": "icons/mob/clothing/species/vox/head/hood.dmi",
+      "source_state": "winterhood_med",
+      "mode": "missing_only",
+      "reason": "Corresponding departmental winter coat hood; no item gameplay changes.",
+      "test_type": "/obj/item/clothing/head/hooded/winterhood/medical",
+      "transform": "winterhood_head_coverage"
+    },
+    {
+      "category": "head",
+      "target_state": "hood_miner",
+      "source_file": "icons/mob/clothing/species/vox/head/hood.dmi",
+      "source_state": "winterhood_miner",
+      "mode": "missing_only",
+      "reason": "Corresponding departmental winter coat hood; no item gameplay changes.",
+      "test_type": "/obj/item/clothing/head/hooded/winterhood/miner",
+      "transform": "winterhood_head_coverage"
+    },
+    {
+      "category": "head",
+      "target_state": "hood_paramed",
+      "source_file": "icons/mob/clothing/species/vox/head/hood.dmi",
+      "source_state": "winterhood_para",
+      "mode": "missing_only",
+      "reason": "Corresponding departmental winter coat hood; no item gameplay changes.",
+      "test_type": "/obj/item/clothing/head/hooded/winterhood/medical/paramedic",
+      "transform": "winterhood_head_coverage"
+    },
+    {
+      "category": "head",
+      "target_state": "hood_science",
+      "source_file": "icons/mob/clothing/species/vox/head/hood.dmi",
+      "source_state": "winterhood_sci",
+      "mode": "missing_only",
+      "reason": "Corresponding departmental winter coat hood; no item gameplay changes.",
+      "test_type": "/obj/item/clothing/head/hooded/winterhood/science",
+      "transform": "winterhood_head_coverage"
+    },
+    {
+      "category": "head",
+      "target_state": "hood_security",
+      "source_file": "icons/mob/clothing/species/vox/head/hood.dmi",
+      "source_state": "winterhood_sec",
+      "mode": "missing_only",
+      "reason": "Corresponding departmental winter coat hood; no item gameplay changes.",
+      "test_type": "/obj/item/clothing/head/hooded/winterhood/security",
+      "transform": "winterhood_head_coverage"
+    },
+    {
+      "category": "head",
+      "target_state": "hood_winter",
+      "source_file": "icons/mob/clothing/species/vox/head/hood.dmi",
+      "source_state": "winterhood",
+      "mode": "missing_only",
+      "reason": "Corresponding departmental winter coat hood; no item gameplay changes.",
+      "test_type": "/obj/item/clothing/head/hooded/winterhood",
+      "transform": "winterhood_head_coverage"
+    },
+    {
+      "category": "head",
+      "target_state": "hopcap",
+      "source_file": "icons/mob/clothing/species/vox/head.dmi",
+      "source_state": "hopcap",
+      "mode": "missing_only",
+      "reason": "Same item and worn state in Paradise clothing definitions.",
+      "test_type": "/obj/item/clothing/head/hats/hopcap"
+    },
+    {
+      "category": "head",
+      "target_state": "hoscap",
+      "source_file": "icons/mob/clothing/species/vox/head.dmi",
+      "source_state": "hos_cap",
+      "mode": "missing_only",
+      "reason": "Same headwear in both codebases; only the worn-state spelling differs.",
+      "test_type": "/obj/item/clothing/head/hats/hos/cap"
+    },
+    {
+      "category": "head",
+      "target_state": "kippah",
+      "source_file": "icons/mob/clothing/species/vox/head.dmi",
+      "source_state": "kippah",
+      "mode": "missing_only",
+      "reason": "Same item and worn state in Paradise clothing definitions.",
+      "test_type": "/obj/item/clothing/head/chaplain/kippah"
+    },
+    {
+      "category": "head",
+      "target_state": "lily_crown",
+      "source_file": "icons/mob/clothing/species/vox/head.dmi",
+      "source_state": "lily_crown",
+      "mode": "missing_only",
+      "reason": "Same item and worn state in Paradise clothing definitions.",
+      "test_type": "/obj/item/clothing/head/costume/garland/lily"
+    },
+    {
+      "category": "head",
+      "target_state": "nanotrasen_representative",
+      "source_file": "icons/mob/clothing/species/vox/head.dmi",
+      "source_state": "ntrep",
+      "mode": "missing_only",
+      "reason": "Same headwear in both codebases; only the worn-state spelling differs.",
+      "test_type": "/obj/item/clothing/head/hats/nanotrasen_representative"
+    },
+    {
+      "category": "head",
+      "target_state": "paramedicsoft",
+      "source_file": "icons/mob/clothing/species/vox/head/softcap.dmi",
+      "source_state": "paramedic",
+      "mode": "missing_only",
+      "reason": "Same headwear in both codebases; only the worn-state spelling differs.",
+      "test_type": "/obj/item/clothing/head/soft/paramedic"
+    },
+    {
+      "category": "head",
+      "target_state": "paramedicsoft_flipped",
+      "source_file": "icons/mob/clothing/species/vox/head/softcap.dmi",
+      "source_state": "paramedic_flipped",
+      "mode": "missing_only",
+      "reason": "Toggled variant of the same mapped headwear.",
+      "test_type": "/obj/item/clothing/head/soft/paramedic"
+    },
+    {
+      "category": "head",
+      "target_state": "poppy_crown",
+      "source_file": "icons/mob/clothing/species/vox/head.dmi",
+      "source_state": "poppy_crown",
+      "mode": "missing_only",
+      "reason": "Same item and worn state in Paradise clothing definitions.",
+      "test_type": "/obj/item/clothing/head/costume/garland/poppy"
+    },
+    {
+      "category": "head",
+      "target_state": "rice_hat",
+      "source_file": "icons/mob/clothing/species/vox/head.dmi",
+      "source_state": "rice_hat",
+      "mode": "missing_only",
+      "reason": "Same item and worn state in Paradise clothing definitions.",
+      "test_type": "/obj/item/clothing/head/costume/rice_hat"
+    },
+    {
+      "category": "head",
+      "target_state": "sunflower_crown",
+      "source_file": "icons/mob/clothing/species/vox/head.dmi",
+      "source_state": "sunflower_crown",
+      "mode": "missing_only",
+      "reason": "Same item and worn state in Paradise clothing definitions.",
+      "test_type": "/obj/item/clothing/head/costume/garland/sunflower"
+    },
+    {
+      "category": "head",
+      "target_state": "surgicalcapblack",
+      "source_file": "icons/mob/clothing/species/vox/head.dmi",
+      "source_state": "surgcap_black",
+      "mode": "missing_only",
+      "reason": "Same headwear in both codebases; only the worn-state spelling differs.",
+      "test_type": "/obj/item/clothing/head/utility/surgerycap/black"
+    },
+    {
+      "category": "head",
+      "target_state": "tmc_hat",
+      "source_file": "icons/mob/clothing/species/vox/head.dmi",
+      "source_state": "tmc_hat",
+      "mode": "missing_only",
+      "reason": "Same item and worn state in Paradise clothing definitions.",
+      "test_type": "/obj/item/clothing/head/costume/tmc"
+    },
+    {
+      "category": "head",
+      "target_state": "towel_head",
+      "source_file": "modular_ss220/clothing/icons/mob/species/vox/hats.dmi",
+      "source_state": "towel_head",
+      "mode": "missing_only",
+      "reason": "Public modular Paradise Vox overlay for the same existing Banda garment.",
+      "test_type": "/obj/item/clothing/head/towel"
+    },
+    {
+      "category": "head",
+      "target_state": "wardendrill",
+      "source_file": "icons/mob/clothing/species/vox/head.dmi",
+      "source_state": "drillsgthat",
+      "mode": "missing_only",
+      "reason": "Same headwear in both codebases; only the worn-state spelling differs.",
+      "test_type": "/obj/item/clothing/head/hats/warden/drill"
+    },
+    {
+      "category": "head",
+      "target_state": "wardenhat",
+      "source_file": "icons/mob/clothing/species/vox/head.dmi",
+      "source_state": "policehat",
+      "mode": "missing_only",
+      "reason": "Same headwear in both codebases; only the worn-state spelling differs.",
+      "test_type": "/obj/item/clothing/head/hats/warden/red"
+    },
+    {
+      "category": "helmet",
+      "target_state": "witchhunterhat",
+      "source_file": "icons/mob/clothing/species/vox/head.dmi",
+      "source_state": "witchhunterhat",
+      "mode": "missing_only",
+      "reason": "Same item and worn state in Paradise clothing definitions.",
+      "test_type": "/obj/item/clothing/head/helmet/chaplain/witchunter_hat"
+    },
+    {
+      "category": "neck",
+      "target_state": "crimson_medallion",
+      "source_file": "icons/mob/clothing/species/vox/neck.dmi",
+      "source_state": "crimson_medallion",
+      "mode": "missing_only",
+      "reason": "Identical existing item and state in the pinned Paradise definitions; its Vox sprite sheet is explicit. Reviewed on the current body in four directions.",
+      "test_type": "/obj/item/clothing/neck/heretic_focus/crimson_medallion"
+    },
+    {
+      "category": "neck",
+      "target_state": "eldritch_necklace",
+      "source_file": "icons/mob/clothing/species/vox/neck.dmi",
+      "source_state": "eldritch_necklace",
+      "mode": "missing_only",
+      "reason": "Identical existing item and state in the pinned Paradise definitions; its Vox sprite sheet is explicit. Reviewed on the current body in four directions.",
+      "test_type": "/obj/item/clothing/neck/heretic_focus"
+    },
+    {
+      "category": "neck",
+      "target_state": "eye_medalion",
+      "source_file": "icons/mob/clothing/species/vox/neck.dmi",
+      "source_state": "eye_medalion",
+      "mode": "missing_only",
+      "reason": "Identical existing item and state in the pinned Paradise definitions; its Vox sprite sheet is explicit. Reviewed on the current body in four directions.",
+      "test_type": "/obj/item/clothing/neck/eldritch_amulet"
+    },
+    {
+      "category": "neck",
+      "target_state": "moon_amulette",
+      "source_file": "icons/mob/clothing/species/vox/neck.dmi",
+      "source_state": "moon_amulette",
+      "mode": "missing_only",
+      "reason": "Identical existing item and state in the pinned Paradise definitions; its Vox sprite sheet is explicit. Reviewed on the current body in four directions.",
+      "test_type": "/obj/item/clothing/neck/moon_amulet"
+    },
+    {
+      "category": "shoes",
+      "target_state": "advmag0",
+      "source_file": "icons/mob/clothing/species/vox/shoes.dmi",
+      "source_state": "advmag0",
+      "mode": "missing_only",
+      "reason": "Same item and worn state in Paradise clothing definitions.",
+      "test_type": "/obj/item/clothing/shoes/magboots/advance"
+    },
+    {
+      "category": "shoes",
+      "target_state": "advmag1",
+      "source_file": "icons/mob/clothing/species/vox/shoes.dmi",
+      "source_state": "advmag1",
+      "mode": "missing_only",
+      "reason": "Activated variant of the same mapped magnetic boots.",
+      "test_type": "/obj/item/clothing/shoes/magboots/advance"
+    },
+    {
+      "category": "shoes",
+      "target_state": "ducky_shoes",
+      "source_file": "icons/mob/clothing/species/vox/shoes.dmi",
+      "source_state": "ducky",
+      "mode": "missing_only",
+      "reason": "Both definitions name the existing rubber ducky shoes.",
+      "test_type": "/obj/item/clothing/shoes/ducky_shoes"
+    },
+    {
+      "category": "shoes",
+      "target_state": "ei_shoes",
+      "source_file": "modular_ss220/clothing/icons/mob/species/vox/shoes.dmi",
+      "source_state": "ei_shoes",
+      "mode": "missing_only",
+      "reason": "Public modular Paradise Vox overlay for the same existing Banda garment.",
+      "test_type": "/obj/item/clothing/shoes/etamin_shoes"
+    },
+    {
+      "category": "shoes",
+      "target_state": "magboots0",
+      "source_file": "icons/mob/clothing/species/vox/shoes.dmi",
+      "source_state": "magboots0",
+      "mode": "missing_only",
+      "reason": "Same item and worn state in Paradise clothing definitions.",
+      "test_type": "/obj/item/clothing/shoes/magboots"
+    },
+    {
+      "category": "shoes",
+      "target_state": "magboots1",
+      "source_file": "icons/mob/clothing/species/vox/shoes.dmi",
+      "source_state": "magboots1",
+      "mode": "missing_only",
+      "reason": "Activated variant of the same mapped magnetic boots.",
+      "test_type": "/obj/item/clothing/shoes/magboots"
+    },
+    {
+      "category": "shoes",
+      "target_state": "moffers",
+      "source_file": "modular_ss220/clothing/icons/mob/species/vox/shoes.dmi",
+      "source_state": "moffers",
+      "mode": "missing_only",
+      "reason": "Public modular Paradise Vox overlay for the same existing Banda garment.",
+      "test_type": "/obj/item/clothing/shoes/clown_shoes/moffers"
+    },
+    {
+      "category": "shoes",
+      "target_state": "roman",
+      "source_file": "icons/mob/clothing/species/vox/shoes.dmi",
+      "source_state": "roman",
+      "mode": "reviewed_replacement",
+      "reason": "Same item and worn state in Paradise clothing definitions.",
+      "test_type": "/obj/item/clothing/shoes/roman"
+    },
+    {
+      "category": "shoes",
+      "target_state": "syndiemag0",
+      "source_file": "icons/mob/clothing/species/vox/shoes.dmi",
+      "source_state": "syndiemag0",
+      "mode": "reviewed_replacement",
+      "reason": "Same item and worn state in Paradise clothing definitions.",
+      "test_type": "/obj/item/clothing/shoes/magboots/syndie"
+    },
+    {
+      "category": "shoes",
+      "target_state": "syndiemag1",
+      "source_file": "icons/mob/clothing/species/vox/shoes.dmi",
+      "source_state": "syndiemag1",
+      "mode": "reviewed_replacement",
+      "reason": "Activated variant of the same mapped magnetic boots.",
+      "test_type": "/obj/item/clothing/shoes/magboots/syndie"
+    },
+    {
+      "category": "shoes",
+      "target_state": "winterboots",
+      "source_file": "icons/mob/clothing/species/vox/shoes.dmi",
+      "source_state": "winterboots",
+      "mode": "reviewed_replacement",
+      "reason": "Same item and worn state in Paradise clothing definitions.",
+      "test_type": "/obj/item/clothing/shoes/winterboots"
+    },
+    {
+      "category": "suit",
+      "target_state": "bee",
+      "source_file": "icons/mob/clothing/species/vox/suit.dmi",
+      "source_state": "bee",
+      "mode": "missing_only",
+      "reason": "Same existing garment and state in both clothing definitions; missing from the current Vox sheet.",
+      "test_type": "/obj/item/clothing/suit/hooded/bee_costume"
+    },
+    {
+      "category": "suit",
+      "target_state": "bomberrobo",
+      "source_file": "icons/mob/clothing/species/vox/suits/coat.dmi",
+      "source_state": "bomberrobo",
+      "mode": "missing_only",
+      "reason": "Same existing garment and state in both clothing definitions; missing from the current Vox sheet.",
+      "test_type": "/obj/item/clothing/suit/jacket/bomber/roboticist"
+    },
+    {
+      "category": "suit",
+      "target_state": "bombersci",
+      "source_file": "icons/mob/clothing/species/vox/suits/coat.dmi",
+      "source_state": "bombersci",
+      "mode": "missing_only",
+      "reason": "Same existing garment and state in both clothing definitions; missing from the current Vox sheet.",
+      "test_type": "/obj/item/clothing/suit/jacket/bomber/science"
+    },
+    {
+      "category": "suit",
+      "target_state": "bombersec",
+      "source_file": "icons/mob/clothing/species/vox/suits/coat.dmi",
+      "source_state": "bombersec",
+      "mode": "missing_only",
+      "reason": "Same existing garment and state in both clothing definitions; missing from the current Vox sheet.",
+      "test_type": "/obj/item/clothing/suit/armor/vest/bomber"
+    },
+    {
+      "category": "suit",
+      "target_state": "bombsuit",
+      "source_file": "icons/mob/clothing/species/vox/suit.dmi",
+      "source_state": "bombsuit",
+      "mode": "missing_only",
+      "reason": "Same existing garment and state in both clothing definitions; missing from the current Vox sheet.",
+      "test_type": "/obj/item/clothing/suit/utility/bomb_suit"
+    },
+    {
+      "category": "suit",
+      "target_state": "brtrenchcoat",
+      "source_file": "icons/mob/clothing/species/vox/suit.dmi",
+      "source_state": "brtrenchcoat",
+      "mode": "missing_only",
+      "reason": "Same existing garment and state in both clothing definitions; missing from the current Vox sheet.",
+      "test_type": "/obj/item/clothing/suit/space/officer/browntrench"
+    },
+    {
+      "category": "suit",
+      "target_state": "chef_red",
+      "source_file": "icons/mob/clothing/species/vox/suit.dmi",
+      "source_state": "chef_red",
+      "mode": "missing_only",
+      "reason": "Same existing garment and state in both clothing definitions; missing from the current Vox sheet.",
+      "test_type": "/obj/item/clothing/suit/chef/red"
+    },
+    {
+      "category": "suit",
+      "target_state": "durathread",
+      "source_file": "icons/mob/clothing/species/vox/suit.dmi",
+      "source_state": "durathread",
+      "mode": "missing_only",
+      "reason": "Same existing garment and state in both clothing definitions; missing from the current Vox sheet.",
+      "test_type": "/obj/item/clothing/suit/armor/vest/durathread"
+    },
+    {
+      "category": "suit",
+      "target_state": "ei_cloak",
+      "source_file": "modular_ss220/clothing/icons/mob/species/vox/cloaks.dmi",
+      "source_state": "ei_cloak",
+      "mode": "missing_only",
+      "reason": "Public modular Paradise Vox overlay for the same existing Banda garment; toggled state names adapted to TG.",
+      "test_type": "/obj/item/clothing/suit/hooded/etamin_cloak"
+    },
+    {
+      "category": "suit",
+      "target_state": "ei_jacket",
+      "source_file": "modular_ss220/clothing/icons/mob/species/vox/suits.dmi",
+      "source_state": "ei_jacket",
+      "mode": "missing_only",
+      "reason": "Public modular Paradise Vox overlay for the same existing Banda garment; toggled state names adapted to TG.",
+      "test_type": "/obj/item/clothing/suit/toggle/etamin_jacket"
+    },
+    {
+      "category": "suit",
+      "target_state": "ei_jacket_t",
+      "source_file": "modular_ss220/clothing/icons/mob/species/vox/suits.dmi",
+      "source_state": "ei_jacket_open",
+      "mode": "missing_only",
+      "reason": "Public modular Paradise Vox overlay for the same existing Banda garment; toggled state names adapted to TG.",
+      "test_type": "/obj/item/clothing/suit/toggle/etamin_jacket"
+    },
+    {
+      "category": "suit",
+      "target_state": "magirobe",
+      "source_file": "icons/mob/clothing/species/vox/suit.dmi",
+      "source_state": "magirobe",
+      "mode": "missing_only",
+      "reason": "Same existing garment and state in both clothing definitions; missing from the current Vox sheet.",
+      "test_type": "/obj/item/clothing/suit/magirobe"
+    },
+    {
+      "category": "suit",
+      "target_state": "riot",
+      "source_file": "icons/mob/clothing/species/vox/suit.dmi",
+      "source_state": "riot",
+      "mode": "missing_only",
+      "reason": "Same existing garment and state in both clothing definitions; missing from the current Vox sheet.",
+      "test_type": "/obj/item/clothing/suit/armor/riot"
+    },
+    {
+      "category": "suit",
+      "target_state": "secgreatcoat",
+      "source_file": "icons/mob/clothing/species/vox/suit.dmi",
+      "source_state": "secgreatcoat",
+      "mode": "missing_only",
+      "reason": "Same existing garment and state in both clothing definitions; missing from the current Vox sheet.",
+      "test_type": "/obj/item/clothing/suit/armor/vest/coat"
+    },
+    {
+      "category": "suit",
+      "target_state": "secjacket",
+      "source_file": "icons/mob/clothing/species/vox/suit.dmi",
+      "source_state": "secjacket",
+      "mode": "missing_only",
+      "reason": "Same existing garment and state in both clothing definitions; missing from the current Vox sheet.",
+      "test_type": "/obj/item/clothing/suit/armor/vest/secjacket"
+    },
+    {
+      "category": "suit",
+      "target_state": "syndicate-black",
+      "source_file": "icons/mob/clothing/species/vox/suit.dmi",
+      "source_state": "syndicate-black",
+      "mode": "missing_only",
+      "reason": "Same existing garment and state in both clothing definitions; missing from the current Vox sheet.",
+      "test_type": "/obj/item/clothing/suit/space/syndicate/black"
+    },
+    {
+      "category": "suit",
+      "target_state": "syndicate-black-blue",
+      "source_file": "icons/mob/clothing/species/vox/suit.dmi",
+      "source_state": "syndicate-black-blue",
+      "mode": "missing_only",
+      "reason": "Same existing garment and state in both clothing definitions; missing from the current Vox sheet.",
+      "test_type": "/obj/item/clothing/suit/space/syndicate/black/blue"
+    },
+    {
+      "category": "suit",
+      "target_state": "syndicate-black-engie",
+      "source_file": "icons/mob/clothing/species/vox/suit.dmi",
+      "source_state": "syndicate-black-engie",
+      "mode": "missing_only",
+      "reason": "Same existing garment and state in both clothing definitions; missing from the current Vox sheet.",
+      "test_type": "/obj/item/clothing/suit/space/syndicate/black/engie"
+    },
+    {
+      "category": "suit",
+      "target_state": "syndicate-black-green",
+      "source_file": "icons/mob/clothing/species/vox/suit.dmi",
+      "source_state": "syndicate-black-green",
+      "mode": "missing_only",
+      "reason": "Same existing garment and state in both clothing definitions; missing from the current Vox sheet.",
+      "test_type": "/obj/item/clothing/suit/space/syndicate/black/green"
+    },
+    {
+      "category": "suit",
+      "target_state": "syndicate-black-med",
+      "source_file": "icons/mob/clothing/species/vox/suit.dmi",
+      "source_state": "syndicate-black-med",
+      "mode": "missing_only",
+      "reason": "Same existing garment and state in both clothing definitions; missing from the current Vox sheet.",
+      "test_type": "/obj/item/clothing/suit/space/syndicate/black/med"
+    },
+    {
+      "category": "suit",
+      "target_state": "syndicate-black-orange",
+      "source_file": "icons/mob/clothing/species/vox/suit.dmi",
+      "source_state": "syndicate-black-orange",
+      "mode": "missing_only",
+      "reason": "Same existing garment and state in both clothing definitions; missing from the current Vox sheet.",
+      "test_type": "/obj/item/clothing/suit/space/syndicate/black/orange"
+    },
+    {
+      "category": "suit",
+      "target_state": "syndicate-black-red",
+      "source_file": "icons/mob/clothing/species/vox/suit.dmi",
+      "source_state": "syndicate-black-red",
+      "mode": "missing_only",
+      "reason": "Same existing garment and state in both clothing definitions; missing from the current Vox sheet.",
+      "test_type": "/obj/item/clothing/suit/space/syndicate/black/red"
+    },
+    {
+      "category": "suit",
+      "target_state": "syndicate-blue",
+      "source_file": "icons/mob/clothing/species/vox/suit.dmi",
+      "source_state": "syndicate-blue",
+      "mode": "missing_only",
+      "reason": "Same existing garment and state in both clothing definitions; missing from the current Vox sheet.",
+      "test_type": "/obj/item/clothing/suit/space/syndicate/blue"
+    },
+    {
+      "category": "suit",
+      "target_state": "syndicate-green",
+      "source_file": "icons/mob/clothing/species/vox/suit.dmi",
+      "source_state": "syndicate-green",
+      "mode": "missing_only",
+      "reason": "Same existing garment and state in both clothing definitions; missing from the current Vox sheet.",
+      "test_type": "/obj/item/clothing/suit/space/syndicate/green"
+    },
+    {
+      "category": "suit",
+      "target_state": "syndicate-green-dark",
+      "source_file": "icons/mob/clothing/species/vox/suit.dmi",
+      "source_state": "syndicate-green-dark",
+      "mode": "missing_only",
+      "reason": "Same existing garment and state in both clothing definitions; missing from the current Vox sheet.",
+      "test_type": "/obj/item/clothing/suit/space/syndicate/green/dark"
+    },
+    {
+      "category": "suit",
+      "target_state": "warden_jacket",
+      "source_file": "icons/mob/clothing/species/vox/suit.dmi",
+      "source_state": "warden_jacket",
+      "mode": "missing_only",
+      "reason": "Same existing garment and state in both clothing definitions; missing from the current Vox sheet.",
+      "test_type": "/obj/item/clothing/suit/armor/vest/warden/alt"
+    },
+    {
+      "category": "under",
+      "target_state": "assistant_formal",
+      "source_file": "icons/mob/clothing/species/vox/under/misc.dmi",
+      "source_state": "assistant_formal",
+      "mode": "reviewed_replacement",
+      "reason": "Same item and worn state in Paradise clothing definitions.",
+      "test_type": "/obj/item/clothing/under/misc/assistantformal"
+    },
+    {
+      "category": "under",
+      "target_state": "atmos_skirt",
+      "source_file": "icons/mob/clothing/species/vox/under/engineering.dmi",
+      "source_state": "atmos_skirt",
+      "mode": "reviewed_replacement",
+      "reason": "Same item and worn state in Paradise clothing definitions.",
+      "test_type": "/obj/item/clothing/under/rank/engineering/atmospheric_technician/skirt"
+    },
+    {
+      "category": "under",
+      "target_state": "atmos_skirt_d",
+      "source_file": "icons/mob/clothing/species/vox/under/engineering.dmi",
+      "source_state": "atmos_skirt_d",
+      "mode": "reviewed_replacement",
+      "reason": "Rolled-down variant supplied by the same verified donor garment.",
+      "test_type": "/obj/item/clothing/under/rank/engineering/atmospheric_technician/skirt"
+    },
+    {
+      "category": "under",
+      "target_state": "blueshield_formal",
+      "source_file": "icons/mob/clothing/species/vox/under/procedure.dmi",
+      "source_state": "blueshield_formal",
+      "mode": "missing_only",
+      "reason": "Same item and worn state in Paradise clothing definitions.",
+      "test_type": "/obj/item/clothing/under/rank/blueshield/formal"
+    },
+    {
+      "category": "under",
+      "target_state": "blueshield_skirt",
+      "source_file": "icons/mob/clothing/species/vox/under/procedure.dmi",
+      "source_state": "blueshield_skirt",
+      "mode": "missing_only",
+      "reason": "Same item and worn state in Paradise clothing definitions.",
+      "test_type": "/obj/item/clothing/under/rank/blueshield/skirt"
+    },
+    {
+      "category": "under",
+      "target_state": "blueshield_skirt_d",
+      "source_file": "icons/mob/clothing/species/vox/under/procedure.dmi",
+      "source_state": "blueshield_skirt_d",
+      "mode": "missing_only",
+      "reason": "Rolled-down variant supplied by the same verified donor garment.",
+      "test_type": "/obj/item/clothing/under/rank/blueshield/skirt"
+    },
+    {
+      "category": "under",
+      "target_state": "blueshield_turtleneck",
+      "source_file": "icons/mob/clothing/species/vox/under/procedure.dmi",
+      "source_state": "bs_turtle",
+      "mode": "missing_only",
+      "reason": "Same role and garment in both codebases; only the worn-state spelling differs.",
+      "test_type": "/obj/item/clothing/under/rank/blueshield/turtleneck"
+    },
+    {
+      "category": "under",
+      "target_state": "blueshield_turtleneck_d",
+      "source_file": "icons/mob/clothing/species/vox/under/procedure.dmi",
+      "source_state": "bs_turtle_d",
+      "mode": "missing_only",
+      "reason": "Rolled-down variant supplied by the same verified donor garment.",
+      "test_type": "/obj/item/clothing/under/rank/blueshield/turtleneck"
+    },
+    {
+      "category": "under",
+      "target_state": "burial",
+      "source_file": "icons/mob/clothing/species/vox/under/misc.dmi",
+      "source_state": "burial",
+      "mode": "reviewed_replacement",
+      "reason": "Same item and worn state in Paradise clothing definitions.",
+      "test_type": "/obj/item/clothing/under/misc/burial"
+    },
+    {
+      "category": "under",
+      "target_state": "camopants",
+      "source_file": "icons/mob/clothing/species/vox/under/pants.dmi",
+      "source_state": "camopants",
+      "mode": "reviewed_replacement",
+      "reason": "Same item and worn state in Paradise clothing definitions.",
+      "test_type": "/obj/item/clothing/under/pants/camo"
+    },
+    {
+      "category": "under",
+      "target_state": "captain_skirt",
+      "source_file": "icons/mob/clothing/species/vox/under/captain.dmi",
+      "source_state": "captain_skirt",
+      "mode": "reviewed_replacement",
+      "reason": "Same item and worn state in Paradise clothing definitions.",
+      "test_type": "/obj/item/clothing/under/rank/captain/skirt"
+    },
+    {
+      "category": "under",
+      "target_state": "captain_skirt_d",
+      "source_file": "icons/mob/clothing/species/vox/under/captain.dmi",
+      "source_state": "captain_skirt_d",
+      "mode": "reviewed_replacement",
+      "reason": "Rolled-down variant supplied by the same verified donor garment.",
+      "test_type": "/obj/item/clothing/under/rank/captain/skirt"
+    },
+    {
+      "category": "under",
+      "target_state": "cargo_skirt",
+      "source_file": "icons/mob/clothing/species/vox/under/cargo.dmi",
+      "source_state": "cargo_skirt",
+      "mode": "reviewed_replacement",
+      "reason": "Same item and worn state in Paradise clothing definitions.",
+      "test_type": "/obj/item/clothing/under/rank/cargo/tech/skirt"
+    },
+    {
+      "category": "under",
+      "target_state": "cargo_skirt_d",
+      "source_file": "icons/mob/clothing/species/vox/under/cargo.dmi",
+      "source_state": "cargo_skirt_d",
+      "mode": "reviewed_replacement",
+      "reason": "Rolled-down variant supplied by the same verified donor garment.",
+      "test_type": "/obj/item/clothing/under/rank/cargo/tech/skirt"
+    },
+    {
+      "category": "under",
+      "target_state": "checkered_suit",
+      "source_file": "icons/mob/clothing/species/vox/under/suit.dmi",
+      "source_state": "checkered_suit",
+      "mode": "reviewed_replacement",
+      "reason": "Same item and worn state in Paradise clothing definitions.",
+      "test_type": "/obj/item/clothing/under/suit/checkered"
+    },
+    {
+      "category": "under",
+      "target_state": "chef_red",
+      "source_file": "modular_ss220/clothing/icons/mob/species/vox/under.dmi",
+      "source_state": "chef_red",
+      "mode": "missing_only",
+      "reason": "Public modular Paradise Vox overlay for the same existing Banda garment.",
+      "test_type": "/obj/item/clothing/under/rank/civilian/chef/red"
+    },
+    {
+      "category": "under",
+      "target_state": "chemistrywhite_skirt",
+      "source_file": "icons/mob/clothing/species/vox/under/medical.dmi",
+      "source_state": "chemistryf",
+      "mode": "reviewed_replacement",
+      "reason": "Same role and garment in both codebases; only the worn-state spelling differs.",
+      "test_type": "/obj/item/clothing/under/rank/medical/chemist/skirt"
+    },
+    {
+      "category": "under",
+      "target_state": "chief_skirt",
+      "source_file": "icons/mob/clothing/species/vox/under/engineering.dmi",
+      "source_state": "ce_skirt",
+      "mode": "reviewed_replacement",
+      "reason": "Same role and garment in both codebases; only the worn-state spelling differs.",
+      "test_type": "/obj/item/clothing/under/rank/engineering/chief_engineer/skirt"
+    },
+    {
+      "category": "under",
+      "target_state": "chief_skirt_d",
+      "source_file": "icons/mob/clothing/species/vox/under/engineering.dmi",
+      "source_state": "ce_skirt_d",
+      "mode": "reviewed_replacement",
+      "reason": "Rolled-down variant supplied by the same verified donor garment.",
+      "test_type": "/obj/item/clothing/under/rank/engineering/chief_engineer/skirt"
+    },
+    {
+      "category": "under",
+      "target_state": "cmo_skirt",
+      "source_file": "icons/mob/clothing/species/vox/under/medical.dmi",
+      "source_state": "cmo_skirt",
+      "mode": "reviewed_replacement",
+      "reason": "Same item and worn state in Paradise clothing definitions.",
+      "test_type": "/obj/item/clothing/under/rank/medical/chief_medical_officer/skirt"
+    },
+    {
+      "category": "under",
+      "target_state": "cmo_skirt_d",
+      "source_file": "icons/mob/clothing/species/vox/under/medical.dmi",
+      "source_state": "cmo_skirt_d",
+      "mode": "reviewed_replacement",
+      "reason": "Rolled-down variant supplied by the same verified donor garment.",
+      "test_type": "/obj/item/clothing/under/rank/medical/chief_medical_officer/skirt"
+    },
+    {
+      "category": "under",
+      "target_state": "detective_skirt",
+      "source_file": "icons/mob/clothing/species/vox/under/security.dmi",
+      "source_state": "det_skirt",
+      "mode": "reviewed_replacement",
+      "reason": "Same role and garment in both codebases; only the worn-state spelling differs.",
+      "test_type": "/obj/item/clothing/under/rank/security/detective/skirt"
+    },
+    {
+      "category": "under",
+      "target_state": "ei_combat",
+      "source_file": "modular_ss220/clothing/icons/mob/species/vox/under.dmi",
+      "source_state": "ei_combat",
+      "mode": "missing_only",
+      "reason": "Public modular Paradise Vox overlay for the same existing Banda garment.",
+      "test_type": "/obj/item/clothing/under/rank/etamin_ind/combat"
+    },
+    {
+      "category": "under",
+      "target_state": "ei_skirt",
+      "source_file": "modular_ss220/clothing/icons/mob/species/vox/under.dmi",
+      "source_state": "ei_skirt",
+      "mode": "missing_only",
+      "reason": "Public modular Paradise Vox overlay for the same existing Banda garment.",
+      "test_type": "/obj/item/clothing/under/rank/etamin_ind/skirt"
+    },
+    {
+      "category": "under",
+      "target_state": "ei_skirt_alt",
+      "source_file": "modular_ss220/clothing/icons/mob/species/vox/under.dmi",
+      "source_state": "ei_skirt_alt",
+      "mode": "missing_only",
+      "reason": "Public modular Paradise Vox overlay for the same existing Banda garment.",
+      "test_type": "/obj/item/clothing/under/rank/etamin_ind/skirt_alt"
+    },
+    {
+      "category": "under",
+      "target_state": "engine_skirt",
+      "source_file": "icons/mob/clothing/species/vox/under/engineering.dmi",
+      "source_state": "engineer_skirt",
+      "mode": "reviewed_replacement",
+      "reason": "Same role and garment in both codebases; only the worn-state spelling differs.",
+      "test_type": "/obj/item/clothing/under/rank/engineering/engineer/skirt"
+    },
+    {
+      "category": "under",
+      "target_state": "engine_skirt_d",
+      "source_file": "icons/mob/clothing/species/vox/under/engineering.dmi",
+      "source_state": "engineer_skirt_d",
+      "mode": "reviewed_replacement",
+      "reason": "Rolled-down variant supplied by the same verified donor garment.",
+      "test_type": "/obj/item/clothing/under/rank/engineering/engineer/skirt"
+    },
+    {
+      "category": "under",
+      "target_state": "genetics_skirt",
+      "source_file": "icons/mob/clothing/species/vox/under/rnd.dmi",
+      "source_state": "genetics_skirt",
+      "mode": "reviewed_replacement",
+      "reason": "Same item and worn state in Paradise clothing definitions.",
+      "test_type": "/obj/item/clothing/under/rank/rnd/geneticist/skirt"
+    },
+    {
+      "category": "under",
+      "target_state": "genetics_skirt_d",
+      "source_file": "icons/mob/clothing/species/vox/under/rnd.dmi",
+      "source_state": "genetics_skirt_d",
+      "mode": "reviewed_replacement",
+      "reason": "Rolled-down variant supplied by the same verified donor garment.",
+      "test_type": "/obj/item/clothing/under/rank/rnd/geneticist/skirt"
+    },
+    {
+      "category": "under",
+      "target_state": "griffin",
+      "source_file": "icons/mob/clothing/species/vox/under/costumes.dmi",
+      "source_state": "griffin",
+      "mode": "reviewed_replacement",
+      "reason": "Same item and worn state in Paradise clothing definitions.",
+      "test_type": "/obj/item/clothing/under/costume/griffin"
+    },
+    {
+      "category": "under",
+      "target_state": "hop_skirt",
+      "source_file": "icons/mob/clothing/species/vox/under/civilian.dmi",
+      "source_state": "hop_skirt",
+      "mode": "reviewed_replacement",
+      "reason": "Same item and worn state in Paradise clothing definitions.",
+      "test_type": "/obj/item/clothing/under/rank/civilian/head_of_personnel/skirt"
+    },
+    {
+      "category": "under",
+      "target_state": "hop_skirt_d",
+      "source_file": "icons/mob/clothing/species/vox/under/civilian.dmi",
+      "source_state": "hop_skirt_d",
+      "mode": "reviewed_replacement",
+      "reason": "Rolled-down variant supplied by the same verified donor garment.",
+      "test_type": "/obj/item/clothing/under/rank/civilian/head_of_personnel/skirt"
+    },
+    {
+      "category": "under",
+      "target_state": "janimaid",
+      "source_file": "icons/mob/clothing/species/vox/under/costumes.dmi",
+      "source_state": "janimaid",
+      "mode": "reviewed_replacement",
+      "reason": "Same item and worn state in Paradise clothing definitions.",
+      "test_type": "/obj/item/clothing/under/rank/civilian/janitor/maid"
+    },
+    {
+      "category": "under",
+      "target_state": "janitor_skirt",
+      "source_file": "icons/mob/clothing/species/vox/under/civilian.dmi",
+      "source_state": "janitor_skirt",
+      "mode": "reviewed_replacement",
+      "reason": "Same item and worn state in Paradise clothing definitions.",
+      "test_type": "/obj/item/clothing/under/rank/civilian/janitor/skirt"
+    },
+    {
+      "category": "under",
+      "target_state": "janitor_skirt_d",
+      "source_file": "icons/mob/clothing/species/vox/under/civilian.dmi",
+      "source_state": "janitor_skirt_d",
+      "mode": "reviewed_replacement",
+      "reason": "Rolled-down variant supplied by the same verified donor garment.",
+      "test_type": "/obj/item/clothing/under/rank/civilian/janitor/skirt"
+    },
+    {
+      "category": "under",
+      "target_state": "kilt",
+      "source_file": "icons/mob/clothing/species/vox/under/costumes.dmi",
+      "source_state": "kilt",
+      "mode": "reviewed_replacement",
+      "reason": "Same item and worn state in Paradise clothing definitions.",
+      "test_type": "/obj/item/clothing/under/costume/kilt"
+    },
+    {
+      "category": "under",
+      "target_state": "magistrate",
+      "source_file": "icons/mob/clothing/species/vox/under/procedure.dmi",
+      "source_state": "magistrate",
+      "mode": "missing_only",
+      "reason": "Same item and worn state in Paradise clothing definitions.",
+      "test_type": "/obj/item/clothing/under/rank/magistrate"
+    },
+    {
+      "category": "under",
+      "target_state": "magistrate_formal",
+      "source_file": "icons/mob/clothing/species/vox/under/procedure.dmi",
+      "source_state": "magistrate_formal",
+      "mode": "missing_only",
+      "reason": "Same item and worn state in Paradise clothing definitions.",
+      "test_type": "/obj/item/clothing/under/rank/magistrate/formal"
+    },
+    {
+      "category": "under",
+      "target_state": "magistrate_skirt",
+      "source_file": "icons/mob/clothing/species/vox/under/procedure.dmi",
+      "source_state": "magistrate_skirt",
+      "mode": "missing_only",
+      "reason": "Same item and worn state in Paradise clothing definitions.",
+      "test_type": "/obj/item/clothing/under/rank/magistrate/skirt"
+    },
+    {
+      "category": "under",
+      "target_state": "mailman",
+      "source_file": "icons/mob/clothing/species/vox/under/misc.dmi",
+      "source_state": "mailman",
+      "mode": "reviewed_replacement",
+      "reason": "Same item and worn state in Paradise clothing definitions.",
+      "test_type": "/obj/item/clothing/under/misc/mailman"
+    },
+    {
+      "category": "under",
+      "target_state": "medical_skirt",
+      "source_file": "icons/mob/clothing/species/vox/under/medical.dmi",
+      "source_state": "medicalf",
+      "mode": "reviewed_replacement",
+      "reason": "Same role and garment in both codebases; only the worn-state spelling differs.",
+      "test_type": "/obj/item/clothing/under/rank/medical/doctor/skirt"
+    },
+    {
+      "category": "under",
+      "target_state": "mime",
+      "source_file": "icons/mob/clothing/species/vox/under/civilian.dmi",
+      "source_state": "mime",
+      "mode": "reviewed_replacement",
+      "reason": "Same item and worn state in Paradise clothing definitions.",
+      "test_type": "/obj/item/clothing/under/rank/civilian/mime"
+    },
+    {
+      "category": "under",
+      "target_state": "mime_d",
+      "source_file": "icons/mob/clothing/species/vox/under/civilian.dmi",
+      "source_state": "mime_d",
+      "mode": "reviewed_replacement",
+      "reason": "Rolled-down variant supplied by the same verified donor garment.",
+      "test_type": "/obj/item/clothing/under/rank/civilian/mime"
+    },
+    {
+      "category": "under",
+      "target_state": "mime_skirt",
+      "source_file": "icons/mob/clothing/species/vox/under/civilian.dmi",
+      "source_state": "mime_skirt",
+      "mode": "reviewed_replacement",
+      "reason": "Same item and worn state in Paradise clothing definitions.",
+      "test_type": "/obj/item/clothing/under/rank/civilian/mime/skirt"
+    },
+    {
+      "category": "under",
+      "target_state": "mime_skirt_d",
+      "source_file": "icons/mob/clothing/species/vox/under/civilian.dmi",
+      "source_state": "mime_skirt_d",
+      "mode": "reviewed_replacement",
+      "reason": "Rolled-down variant supplied by the same verified donor garment.",
+      "test_type": "/obj/item/clothing/under/rank/civilian/mime/skirt"
+    },
+    {
+      "category": "under",
+      "target_state": "nanotrasen_representative",
+      "source_file": "icons/mob/clothing/species/vox/under/procedure.dmi",
+      "source_state": "ntrep",
+      "mode": "missing_only",
+      "reason": "Same role and garment in both codebases; only the worn-state spelling differs.",
+      "test_type": "/obj/item/clothing/under/rank/nanotrasen_representative"
+    },
+    {
+      "category": "under",
+      "target_state": "nanotrasen_representative_formal",
+      "source_file": "icons/mob/clothing/species/vox/under/procedure.dmi",
+      "source_state": "ntrep_formal",
+      "mode": "missing_only",
+      "reason": "Same role and garment in both codebases; only the worn-state spelling differs.",
+      "test_type": "/obj/item/clothing/under/rank/nanotrasen_representative/formal"
+    },
+    {
+      "category": "under",
+      "target_state": "nanotrasen_representative_skirt",
+      "source_file": "icons/mob/clothing/species/vox/under/procedure.dmi",
+      "source_state": "ntrep_skirt",
+      "mode": "missing_only",
+      "reason": "Same role and garment in both codebases; only the worn-state spelling differs.",
+      "test_type": "/obj/item/clothing/under/rank/nanotrasen_representative/skirt"
+    },
+    {
+      "category": "under",
+      "target_state": "nursesuit",
+      "source_file": "icons/mob/clothing/species/vox/under/medical.dmi",
+      "source_state": "nursesuit",
+      "mode": "reviewed_replacement",
+      "reason": "Same item and worn state in Paradise clothing definitions.",
+      "test_type": "/obj/item/clothing/under/rank/medical/doctor/nurse"
+    },
+    {
+      "category": "under",
+      "target_state": "owl",
+      "source_file": "icons/mob/clothing/species/vox/under/costumes.dmi",
+      "source_state": "owl",
+      "mode": "reviewed_replacement",
+      "reason": "Same item and worn state in Paradise clothing definitions.",
+      "test_type": "/obj/item/clothing/under/costume/owl"
+    },
+    {
+      "category": "under",
+      "target_state": "paramedic_skirt",
+      "source_file": "icons/mob/clothing/species/vox/under/medical.dmi",
+      "source_state": "paramedic_skirt",
+      "mode": "reviewed_replacement",
+      "reason": "Same item and worn state in Paradise clothing definitions.",
+      "test_type": "/obj/item/clothing/under/rank/medical/paramedic/skirt"
+    },
+    {
+      "category": "under",
+      "target_state": "paramedic_skirt_d",
+      "source_file": "icons/mob/clothing/species/vox/under/medical.dmi",
+      "source_state": "paramedic_skirt_d",
+      "mode": "reviewed_replacement",
+      "reason": "Rolled-down variant supplied by the same verified donor garment.",
+      "test_type": "/obj/item/clothing/under/rank/medical/paramedic/skirt"
+    },
+    {
+      "category": "under",
+      "target_state": "qm_skirt",
+      "source_file": "icons/mob/clothing/species/vox/under/cargo.dmi",
+      "source_state": "qm_skirt",
+      "mode": "reviewed_replacement",
+      "reason": "Same item and worn state in Paradise clothing definitions.",
+      "test_type": "/obj/item/clothing/under/rank/cargo/qm/skirt"
+    },
+    {
+      "category": "under",
+      "target_state": "qm_skirt_d",
+      "source_file": "icons/mob/clothing/species/vox/under/cargo.dmi",
+      "source_state": "qm_skirt_d",
+      "mode": "reviewed_replacement",
+      "reason": "Rolled-down variant supplied by the same verified donor garment.",
+      "test_type": "/obj/item/clothing/under/rank/cargo/qm/skirt"
+    },
+    {
+      "category": "under",
+      "target_state": "redcoat",
+      "source_file": "icons/mob/clothing/species/vox/under/costumes.dmi",
+      "source_state": "redcoat",
+      "mode": "reviewed_replacement",
+      "reason": "Same item and worn state in Paradise clothing definitions.",
+      "test_type": "/obj/item/clothing/under/costume/redcoat"
+    },
+    {
+      "category": "under",
+      "target_state": "rhos",
+      "source_file": "icons/mob/clothing/species/vox/under/security.dmi",
+      "source_state": "hos",
+      "mode": "reviewed_replacement",
+      "reason": "Same role and garment in both codebases; only the worn-state spelling differs.",
+      "test_type": "/obj/item/clothing/under/rank/security/head_of_security"
+    },
+    {
+      "category": "under",
+      "target_state": "rhos_d",
+      "source_file": "icons/mob/clothing/species/vox/under/security.dmi",
+      "source_state": "hos_d",
+      "mode": "reviewed_replacement",
+      "reason": "Rolled-down variant supplied by the same verified donor garment.",
+      "test_type": "/obj/item/clothing/under/rank/security/head_of_security"
+    },
+    {
+      "category": "under",
+      "target_state": "rhos_skirt",
+      "source_file": "icons/mob/clothing/species/vox/under/security.dmi",
+      "source_state": "hos_skirt",
+      "mode": "reviewed_replacement",
+      "reason": "Same role and garment in both codebases; only the worn-state spelling differs.",
+      "test_type": "/obj/item/clothing/under/rank/security/head_of_security/skirt"
+    },
+    {
+      "category": "under",
+      "target_state": "rhos_skirt_d",
+      "source_file": "icons/mob/clothing/species/vox/under/security.dmi",
+      "source_state": "hos_skirt_d",
+      "mode": "reviewed_replacement",
+      "reason": "Rolled-down variant supplied by the same verified donor garment.",
+      "test_type": "/obj/item/clothing/under/rank/security/head_of_security/skirt"
+    },
+    {
+      "category": "under",
+      "target_state": "robotics_skirt",
+      "source_file": "icons/mob/clothing/species/vox/under/rnd.dmi",
+      "source_state": "robotics_skirt",
+      "mode": "reviewed_replacement",
+      "reason": "Same item and worn state in Paradise clothing definitions.",
+      "test_type": "/obj/item/clothing/under/rank/rnd/roboticist/skirt"
+    },
+    {
+      "category": "under",
+      "target_state": "robotics_skirt_d",
+      "source_file": "icons/mob/clothing/species/vox/under/rnd.dmi",
+      "source_state": "robotics_skirt_d",
+      "mode": "reviewed_replacement",
+      "reason": "Rolled-down variant supplied by the same verified donor garment.",
+      "test_type": "/obj/item/clothing/under/rank/rnd/roboticist/skirt"
+    },
+    {
+      "category": "under",
+      "target_state": "roman",
+      "source_file": "icons/mob/clothing/species/vox/under/costumes.dmi",
+      "source_state": "roman",
+      "mode": "reviewed_replacement",
+      "reason": "Same item and worn state in Paradise clothing definitions.",
+      "test_type": "/obj/item/clothing/under/costume/roman"
+    },
+    {
+      "category": "under",
+      "target_state": "rsecurity",
+      "source_file": "icons/mob/clothing/species/vox/under/security.dmi",
+      "source_state": "security",
+      "mode": "reviewed_replacement",
+      "reason": "Same role and garment in both codebases; only the worn-state spelling differs.",
+      "test_type": "/obj/item/clothing/under/rank/security/officer"
+    },
+    {
+      "category": "under",
+      "target_state": "rsecurity_d",
+      "source_file": "icons/mob/clothing/species/vox/under/security.dmi",
+      "source_state": "security_d",
+      "mode": "reviewed_replacement",
+      "reason": "Rolled-down variant supplied by the same verified donor garment.",
+      "test_type": "/obj/item/clothing/under/rank/security/officer"
+    },
+    {
+      "category": "under",
+      "target_state": "rwarden",
+      "source_file": "icons/mob/clothing/species/vox/under/security.dmi",
+      "source_state": "warden",
+      "mode": "reviewed_replacement",
+      "reason": "Same role and garment in both codebases; only the worn-state spelling differs.",
+      "test_type": "/obj/item/clothing/under/rank/security/warden"
+    },
+    {
+      "category": "under",
+      "target_state": "rwarden_d",
+      "source_file": "icons/mob/clothing/species/vox/under/security.dmi",
+      "source_state": "warden_d",
+      "mode": "reviewed_replacement",
+      "reason": "Rolled-down variant supplied by the same verified donor garment.",
+      "test_type": "/obj/item/clothing/under/rank/security/warden"
+    },
+    {
+      "category": "under",
+      "target_state": "rwarden_skirt",
+      "source_file": "icons/mob/clothing/species/vox/under/security.dmi",
+      "source_state": "warden_skirt",
+      "mode": "reviewed_replacement",
+      "reason": "Same role and garment in both codebases; only the worn-state spelling differs.",
+      "test_type": "/obj/item/clothing/under/rank/security/warden/skirt"
+    },
+    {
+      "category": "under",
+      "target_state": "rwarden_skirt_d",
+      "source_file": "icons/mob/clothing/species/vox/under/security.dmi",
+      "source_state": "warden_skirt_d",
+      "mode": "reviewed_replacement",
+      "reason": "Rolled-down variant supplied by the same verified donor garment.",
+      "test_type": "/obj/item/clothing/under/rank/security/warden/skirt"
+    },
+    {
+      "category": "under",
+      "target_state": "science_skirt",
+      "source_file": "icons/mob/clothing/species/vox/under/rnd.dmi",
+      "source_state": "science_skirt",
+      "mode": "missing_only",
+      "reason": "Same item and worn state in Paradise clothing definitions.",
+      "test_type": "/obj/item/clothing/under/rank/rnd/scientist/skirt"
+    },
+    {
+      "category": "under",
+      "target_state": "science_skirt_d",
+      "source_file": "icons/mob/clothing/species/vox/under/rnd.dmi",
+      "source_state": "science_skirt_d",
+      "mode": "missing_only",
+      "reason": "Rolled-down variant supplied by the same verified donor garment.",
+      "test_type": "/obj/item/clothing/under/rank/rnd/scientist/skirt"
+    },
+    {
+      "category": "under",
+      "target_state": "sec_corporate",
+      "source_file": "icons/mob/clothing/species/vox/under/security.dmi",
+      "source_state": "sec_corporate",
+      "mode": "missing_only",
+      "reason": "Same item and worn state in Paradise clothing definitions.",
+      "test_type": "/obj/item/clothing/under/rank/security/officer/corporate"
+    },
+    {
+      "category": "under",
+      "target_state": "sec_corporate_skirt",
+      "source_file": "icons/mob/clothing/species/vox/under/security.dmi",
+      "source_state": "sec_corporate_skirt",
+      "mode": "missing_only",
+      "reason": "Same item and worn state in Paradise clothing definitions.",
+      "test_type": "/obj/item/clothing/under/rank/security/officer/skirt/corporate"
+    },
+    {
+      "category": "under",
+      "target_state": "secskirt",
+      "source_file": "icons/mob/clothing/species/vox/under/security.dmi",
+      "source_state": "security_skirt",
+      "mode": "reviewed_replacement",
+      "reason": "Same role and garment in both codebases; only the worn-state spelling differs.",
+      "test_type": "/obj/item/clothing/under/rank/security/officer/skirt"
+    },
+    {
+      "category": "under",
+      "target_state": "secskirt_d",
+      "source_file": "icons/mob/clothing/species/vox/under/security.dmi",
+      "source_state": "security_skirt_d",
+      "mode": "reviewed_replacement",
+      "reason": "Rolled-down variant supplied by the same verified donor garment.",
+      "test_type": "/obj/item/clothing/under/rank/security/officer/skirt"
+    },
+    {
+      "category": "under",
+      "target_state": "security_skirt",
+      "source_file": "icons/mob/clothing/species/vox/under/security.dmi",
+      "source_state": "security_skirt",
+      "mode": "missing_only",
+      "reason": "Same item and worn state in Paradise clothing definitions.",
+      "test_type": "/obj/item/clothing/under/security/alt_skirt"
+    },
+    {
+      "category": "under",
+      "target_state": "security_skirt_d",
+      "source_file": "icons/mob/clothing/species/vox/under/security.dmi",
+      "source_state": "security_skirt_d",
+      "mode": "missing_only",
+      "reason": "Rolled-down variant supplied by the same verified donor garment.",
+      "test_type": "/obj/item/clothing/under/security/alt_skirt"
+    },
+    {
+      "category": "under",
+      "target_state": "sexyclown",
+      "source_file": "icons/mob/clothing/species/vox/under/civilian.dmi",
+      "source_state": "sexyclown",
+      "mode": "reviewed_replacement",
+      "reason": "Same item and worn state in Paradise clothing definitions.",
+      "test_type": "/obj/item/clothing/under/rank/civilian/clown/sexy"
+    },
+    {
+      "category": "under",
+      "target_state": "sexymime",
+      "source_file": "icons/mob/clothing/species/vox/under/civilian.dmi",
+      "source_state": "sexymime",
+      "mode": "reviewed_replacement",
+      "reason": "Same item and worn state in Paradise clothing definitions.",
+      "test_type": "/obj/item/clothing/under/rank/civilian/mime/sexy"
+    },
+    {
+      "category": "under",
+      "target_state": "soviet",
+      "source_file": "icons/mob/clothing/species/vox/under/costumes.dmi",
+      "source_state": "soviet",
+      "mode": "reviewed_replacement",
+      "reason": "Same item and worn state in Paradise clothing definitions.",
+      "test_type": "/obj/item/clothing/under/costume/soviet"
+    },
+    {
+      "category": "under",
+      "target_state": "tactical_suit",
+      "source_file": "icons/mob/clothing/species/vox/under/syndicate.dmi",
+      "source_state": "tactical_suit",
+      "mode": "missing_only",
+      "reason": "Same item and worn state in Paradise clothing definitions.",
+      "test_type": "/obj/item/clothing/under/syndicate/sniper"
+    },
+    {
+      "category": "under",
+      "target_state": "tan_suit",
+      "source_file": "icons/mob/clothing/species/vox/under/suit.dmi",
+      "source_state": "tan_suit",
+      "mode": "reviewed_replacement",
+      "reason": "Same item and worn state in Paradise clothing definitions.",
+      "test_type": "/obj/item/clothing/under/suit/tan"
+    },
+    {
+      "category": "under",
+      "target_state": "towel_long",
+      "source_file": "modular_ss220/clothing/icons/mob/species/vox/under.dmi",
+      "source_state": "towel_long",
+      "mode": "missing_only",
+      "reason": "Public modular Paradise Vox overlay for the same existing Banda garment.",
+      "test_type": "/obj/item/clothing/under/towel/long"
+    },
+    {
+      "category": "under",
+      "target_state": "towel_long_alt",
+      "source_file": "modular_ss220/clothing/icons/mob/species/vox/under.dmi",
+      "source_state": "towel_long_2",
+      "mode": "missing_only",
+      "reason": "Public modular Paradise Vox overlay for the same existing Banda garment.",
+      "test_type": "/obj/item/clothing/under/towel/long/alt"
+    },
+    {
+      "category": "under",
+      "target_state": "towel_short",
+      "source_file": "modular_ss220/clothing/icons/mob/species/vox/under.dmi",
+      "source_state": "towel_short",
+      "mode": "missing_only",
+      "reason": "Public modular Paradise Vox overlay for the same existing Banda garment.",
+      "test_type": "/obj/item/clothing/under/towel/short"
+    },
+    {
+      "category": "under",
+      "target_state": "towel_short_alt",
+      "source_file": "modular_ss220/clothing/icons/mob/species/vox/under.dmi",
+      "source_state": "towel_short_2",
+      "mode": "missing_only",
+      "reason": "Public modular Paradise Vox overlay for the same existing Banda garment.",
+      "test_type": "/obj/item/clothing/under/towel/short/alt"
+    },
+    {
+      "category": "under",
+      "target_state": "trackpants",
+      "source_file": "icons/mob/clothing/species/vox/under/pants.dmi",
+      "source_state": "trackpants",
+      "mode": "reviewed_replacement",
+      "reason": "Same item and worn state in Paradise clothing definitions.",
+      "test_type": "/obj/item/clothing/under/pants/track"
+    },
+    {
+      "category": "under",
+      "target_state": "vice",
+      "source_file": "icons/mob/clothing/species/vox/under/misc.dmi",
+      "source_state": "vice",
+      "mode": "reviewed_replacement",
+      "reason": "Same item and worn state in Paradise clothing definitions.",
+      "test_type": "/obj/item/clothing/under/misc/vice_officer"
+    },
+    {
+      "category": "under",
+      "target_state": "virologywhite_skirt",
+      "source_file": "icons/mob/clothing/species/vox/under/medical.dmi",
+      "source_state": "virologyf",
+      "mode": "reviewed_replacement",
+      "reason": "Same role and garment in both codebases; only the worn-state spelling differs.",
+      "test_type": "/obj/item/clothing/under/rank/medical/virologist/skirt"
+    }
+  ],
+  "exclusions": [
+    {
+      "category": "suit",
+      "target_state": "knight_yellow",
+      "source_file": "icons/mob/clothing/species/vox/suit.dmi",
+      "source_state": "knight_yellow",
+      "reason": "Rejected: the donor armour draws a Paradise-shaped tail cover, while this TG item does not hide the current Vox tail; east/west views show two tails.",
+      "test_type": "/obj/item/clothing/suit/armor/riot/knight/yellow"
+    },
+    {
+      "category": "suit",
+      "target_state": "knight_green",
+      "source_file": "icons/mob/clothing/species/vox/suit.dmi",
+      "source_state": "knight_green",
+      "reason": "Rejected: the donor armour draws a Paradise-shaped tail cover, while this TG item does not hide the current Vox tail; east/west views show two tails.",
+      "test_type": "/obj/item/clothing/suit/armor/riot/knight"
+    },
+    {
+      "category": "suit",
+      "target_state": "knight_red",
+      "source_file": "icons/mob/clothing/species/vox/suit.dmi",
+      "source_state": "knight_red",
+      "reason": "Rejected: the donor armour draws a Paradise-shaped tail cover, while this TG item does not hide the current Vox tail; east/west views show two tails.",
+      "test_type": "/obj/item/clothing/suit/armor/riot/knight/red"
+    },
+    {
+      "category": "suit",
+      "target_state": "knight_blue",
+      "source_file": "icons/mob/clothing/species/vox/suit.dmi",
+      "source_state": "knight_blue",
+      "reason": "Rejected: the donor armour draws a Paradise-shaped tail cover, while this TG item does not hide the current Vox tail; east/west views show two tails.",
+      "test_type": "/obj/item/clothing/suit/armor/riot/knight/blue"
+    }
+  ],
+  "auxiliary_states": [
+    {
+      "category": "head",
+      "target_state": "carved_pumpkin-emissive",
+      "source_file": "icons/mob/clothing/species/vox/head.dmi",
+      "on_state": "hardhat1_blumpkin",
+      "off_state": "hardhat0_blumpkin",
+      "recipe": "changed_lit_rgba",
+      "reason": "The native human pumpkin emissive mask does not align with the fitted Vox eyes. Keep exact authored RGBA pixels that change between the pinned lit/unlit states; all unchanged pixels become transparent."
+    }
+  ],
+  "transforms": {
+    "winterhood_head_coverage": {
+      "coordinate_system": "Pillow pixels: origin at upper-left; directions south, north, east, west; each pair is [destination, source].",
+      "pixel_copies": [
+        [
+          [[12, 0], [11, 2]],
+          [[13, 0], [12, 2]],
+          [[14, 0], [14, 1]],
+          [[15, 0], [15, 1]],
+          [[16, 0], [16, 1]],
+          [[17, 0], [18, 2]],
+          [[18, 0], [19, 2]],
+          [[12, 1], [12, 2]],
+          [[13, 1], [13, 2]],
+          [[17, 1], [17, 2]],
+          [[18, 1], [18, 2]],
+          [[10, 2], [10, 3]],
+          [[20, 2], [20, 3]]
+        ],
+        [
+          [[12, 0], [11, 2]],
+          [[13, 0], [12, 2]],
+          [[14, 0], [14, 1]],
+          [[15, 0], [15, 1]],
+          [[16, 0], [16, 1]],
+          [[17, 0], [18, 2]],
+          [[18, 0], [19, 2]],
+          [[12, 1], [12, 2]],
+          [[13, 1], [13, 2]],
+          [[17, 1], [17, 2]],
+          [[18, 1], [18, 2]],
+          [[10, 2], [10, 3]],
+          [[20, 2], [20, 3]]
+        ],
+        [
+          [[13, 1], [13, 4]],
+          [[14, 1], [14, 3]],
+          [[15, 1], [15, 2]],
+          [[16, 1], [16, 2]],
+          [[13, 2], [13, 4]],
+          [[14, 2], [14, 3]],
+          [[12, 3], [13, 4]],
+          [[13, 3], [13, 4]]
+        ],
+        [
+          [[18, 1], [18, 4]],
+          [[17, 1], [17, 3]],
+          [[16, 1], [16, 2]],
+          [[15, 1], [15, 2]],
+          [[18, 2], [18, 4]],
+          [[17, 2], [17, 3]],
+          [[19, 3], [18, 4]],
+          [[18, 3], [18, 4]]
+        ]
+      ],
+      "reason": "Extend the winter hood with authored border/fabric pixels to cover the current Nova Vox head ears; preserve every original source pixel."
+    }
+  }
+}

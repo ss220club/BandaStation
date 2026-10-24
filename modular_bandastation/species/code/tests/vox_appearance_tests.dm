@@ -110,6 +110,8 @@
 	var/obj/item/clothing/under/color/grey/uniform = allocate(/obj/item/clothing/under/color/grey)
 	TEST_ASSERT_EQUAL(uniform.get_species_worn_icon(SPECIES_VOX), SSgreyscale.GetColoredIconByType(/datum/greyscale_config/jumpsuit/worn/vox, uniform.greyscale_colors), "Vox jumpsuit lost its chosen GAGS colour.")
 	TEST_ASSERT_NOTNULL(uniform.get_species_worn_icon(SPECIES_VOX, "jumpsuit_d"), "Rolled vox jumpsuit has no fitted sprite.")
+	var/obj/item/clothing/head/beanie/beanie = allocate(/obj/item/clothing/head/beanie)
+	TEST_ASSERT_NULL(beanie.get_species_worn_icon(SPECIES_VOX), "A fixed-colour Paradise sprite replaced an unsupported GAGS family.")
 	var/obj/item/clothing/head/helmet/helmet = allocate(/obj/item/clothing/head/helmet)
 	TEST_ASSERT_EQUAL(helmet.get_species_worn_icon(SPECIES_VOX), 'icons/bandastation/mob/species/vox/clothing/helmet.dmi', "Vox helmet selected a partial cosmetic head overlay.")
 	TEST_ASSERT_NOTNULL(helmet.worn_icon_species[SPECIES_SKRELL], "Vox helmet overrides removed the existing Skrell mapping.")
@@ -189,7 +191,7 @@
 	test_screenshot("transplanted_mod_head", get_flat_icon_for_all_directions(human))
 
 	var/list/quill_choices = list("Short quills", "Kingly", "Whip", "Kingly dreads")
-	for(var/hat in list("naked", "hardhat", "beret"))
+	for(var/hat in list("naked", "hardhat", "beret", "winterhood"))
 		var/icon/catalogue = icon('icons/effects/effects.dmi', "nothing")
 		for(var/index in 1 to length(quill_choices))
 			var/mob/living/carbon/human/dummy/consistent/vox = make_vox()
@@ -199,8 +201,11 @@
 			vox.update_body_parts()
 			if(hat != "naked")
 				var/hat_type = hat == "hardhat" ? /obj/item/clothing/head/utility/hardhat : /obj/item/clothing/head/beret
+				if(hat == "winterhood")
+					hat_type = /obj/item/clothing/head/hooded/winterhood
 				var/obj/item/headgear = allocate(hat_type)
 				vox.equip_to_slot_if_possible(headgear, ITEM_SLOT_HEAD, disable_warning = TRUE)
+			vox.update_body_parts()
 			for(var/direction in GLOB.cardinals)
 				catalogue.Insert(getFlatIcon(vox, defdir = direction, no_anim = TRUE), dir = direction, frame = index)
 		test_screenshot("quills_[hat]", catalogue)
@@ -223,6 +228,97 @@
 	vox.dna.species.prepare_human_for_preview(vox)
 	return vox
 
+/// Render every imported state on its existing item, with both beaks and all four directions.
+/datum/unit_test/vox_appearance_screenshots/paradise/Run()
+	var/list/mapping = json_decode(file2text('tools/vox/paradise-clothing-map.json'))
+	var/list/slots = list(
+		"head" = ITEM_SLOT_HEAD, "helmet" = ITEM_SLOT_HEAD, "mask" = ITEM_SLOT_MASK,
+		"under" = ITEM_SLOT_ICLOTHING, "shoes" = ITEM_SLOT_FEET, "suit" = ITEM_SLOT_OCLOTHING,
+		"eyes" = ITEM_SLOT_EYES, "ears" = ITEM_SLOT_EARS, "gloves" = ITEM_SLOT_GLOVES,
+		"neck" = ITEM_SLOT_NECK, "back" = ITEM_SLOT_BACK, "belt" = ITEM_SLOT_BELT,
+	)
+	var/list/catalogues = list()
+	var/list/counts = list()
+	var/list/rendered = list()
+	var/list/beak_choices = list("Primalis beak", "Armalis beak")
+	for(var/list/entry as anything in mapping["entries"])
+		var/category = entry["category"]
+		var/state = entry["target_state"]
+		var/mode = entry["mode"]
+		var/suffix = mode == "reviewed_replacement" ? "_replacement" : ""
+		var/expected_icon = "icons/bandastation/mob/species/vox/paradise/[category][suffix].dmi"
+		var/item_type = text2path(entry["test_type"])
+		TEST_ASSERT(ispath(item_type, /obj/item), "Paradise fixture [category]/[state] has no existing item type.")
+		var/group = "[category][suffix]"
+		var/index = (counts[group] || 0) + 1
+		counts[group] = index
+		var/page = FLOOR((index - 1) / 12, 1) + 1
+		var/page_key = "[group]_[page]"
+		if(!catalogues[page_key])
+			catalogues[page_key] = icon('icons/effects/effects.dmi', "nothing")
+		var/icon/catalogue = catalogues[page_key]
+		for(var/beak_index in 1 to length(beak_choices))
+			var/mob/living/carbon/human/dummy/consistent/vox = make_vox()
+			var/obj/item/organ/snout/vox/snout = vox.get_organ_slot(ORGAN_SLOT_EXTERNAL_SNOUT)
+			var/datum/bodypart_overlay/mutant/snout_overlay = snout.bodypart_overlay
+			snout_overlay.set_appearance_from_name(beak_choices[beak_index])
+			var/obj/item/item = allocate(item_type)
+			TEST_ASSERT_EQUAL("[item.get_species_worn_icon(SPECIES_VOX, state)]", expected_icon, "[item_type] selected the wrong fitted file for [state].")
+			TEST_ASSERT_NULL(item.get_species_worn_icon(SPECIES_VOX, "vox_deliberately_missing_state"), "Paradise fallback selected a missing state.")
+			TEST_ASSERT_NULL(item.get_species_worn_icon(SPECIES_IPC, state), "Paradise clothing leaked onto IPCs.")
+			// Exercise the requested dynamic state through the real worn renderer.
+			TEST_ASSERT(vox.equip_to_slot_if_possible(item, slots[category], disable_warning = TRUE), "Could not equip Paradise fixture [item_type].")
+			item.icon_state = state
+			item.worn_icon_state = state
+			if(istype(item, /obj/item/clothing/under))
+				var/obj/item/clothing/under/uniform = item
+				uniform.adjusted = NORMAL_STYLE
+			vox.regenerate_icons()
+			var/frame = ((index - 1) % 12) * length(beak_choices) + beak_index
+			for(var/direction in GLOB.cardinals)
+				catalogue.Insert(getFlatIcon(vox, defdir = direction, no_anim = TRUE), dir = direction, frame = frame)
+			rendered += list(list("page" = page_key, "frame" = frame, "state" = state, "type" = "[item_type]", "beak" = beak_choices[beak_index]))
+			qdel(vox)
+	for(var/page_key in catalogues)
+		test_screenshot(page_key, catalogues[page_key])
+	file("data/vox-paradise-screenshots.json") << json_encode(rendered)
+
+/// Flipping a cap and activating magboots must select the new state on the same item.
+/datum/unit_test/vox_appearance_screenshots/paradise_toggles/Run()
+	for(var/boots_type in list(/obj/item/clothing/shoes/magboots, /obj/item/clothing/shoes/magboots/advance, /obj/item/clothing/shoes/magboots/syndie))
+		var/mob/living/carbon/human/dummy/consistent/vox = make_vox()
+		var/obj/item/clothing/shoes/magboots/boots = allocate(boots_type)
+		TEST_ASSERT(vox.equip_to_slot_if_possible(boots, ITEM_SLOT_FEET, disable_warning = TRUE), "Could not equip [boots_type].")
+		var/original_state = boots.icon_state
+		var/icon/catalogue = get_flat_icon_for_all_directions(vox)
+		boots.attack_self(vox)
+		TEST_ASSERT(boots.magpulse, "[boots_type] did not activate.")
+		TEST_ASSERT_NOTEQUAL(boots.icon_state, original_state, "Activating [boots_type] retained its inactive state.")
+		TEST_ASSERT_NOTNULL(boots.get_species_worn_icon(SPECIES_VOX), "Active [boots_type] lost its fitted sprite.")
+		for(var/direction in GLOB.cardinals)
+			catalogue.Insert(getFlatIcon(vox, defdir = direction, no_anim = TRUE), dir = direction, frame = 2)
+		boots.attack_self(vox)
+		TEST_ASSERT_EQUAL(boots.icon_state, original_state, "[boots_type] did not restore its inactive state.")
+		test_screenshot(boots.base_icon_state, catalogue)
+	var/mob/living/carbon/human/dummy/consistent/cap_wearer = make_vox()
+	var/obj/item/clothing/head/soft/paramedic/cap = allocate(/obj/item/clothing/head/soft/paramedic)
+	TEST_ASSERT(cap_wearer.equip_to_slot_if_possible(cap, ITEM_SLOT_HEAD, disable_warning = TRUE), "Could not equip the paramedic cap.")
+	var/original_cap_state = cap.icon_state
+	var/icon/cap_catalogue = get_flat_icon_for_all_directions(cap_wearer)
+	var/old_usr = usr
+	usr = cap_wearer // The existing flip verb updates its user's worn slot through usr.
+	cap.flip(cap_wearer)
+	usr = old_usr
+	TEST_ASSERT(cap.flipped, "The paramedic cap did not flip.")
+	TEST_ASSERT_EQUAL(cap.get_species_worn_icon(SPECIES_VOX), 'icons/bandastation/mob/species/vox/paradise/head.dmi', "The flipped cap lost its Paradise sprite.")
+	for(var/direction in GLOB.cardinals)
+		cap_catalogue.Insert(getFlatIcon(cap_wearer, defdir = direction, no_anim = TRUE), dir = direction, frame = 2)
+	usr = cap_wearer
+	cap.flip(cap_wearer)
+	usr = old_usr
+	TEST_ASSERT_EQUAL(cap.icon_state, original_cap_state, "The cap did not flip back.")
+	test_screenshot("paramedic_cap", cap_catalogue)
+
 /// Export actual initialized clothing states, without treating human fallback art as fitted.
 /datum/unit_test/vox_clothing_inventory/Run()
 	var/obj/item/storage/box/container = allocate(/obj/item/storage/box)
@@ -234,8 +330,20 @@
 		"mask" = /obj/item/clothing/mask,
 		"under" = /obj/item/clothing/under,
 		"shoes" = /obj/item/clothing/shoes,
+		"suit" = /obj/item/clothing/suit,
+		"eyes" = /obj/item/clothing/glasses,
+		"ears" = /obj/item/clothing/ears,
+		"gloves" = /obj/item/clothing/gloves,
+		"neck" = /obj/item/clothing/neck,
+		"back" = /obj/item/storage/backpack,
+		"belt" = /obj/item/storage/belt,
+		"mod_control" = /obj/item/mod/control,
 	)
-	var/list/slots = list("head" = ITEM_SLOT_HEAD, "mask" = ITEM_SLOT_MASK, "under" = ITEM_SLOT_ICLOTHING, "shoes" = ITEM_SLOT_FEET)
+	var/list/slots = list(
+		"head" = ITEM_SLOT_HEAD, "mask" = ITEM_SLOT_MASK, "under" = ITEM_SLOT_ICLOTHING, "shoes" = ITEM_SLOT_FEET,
+		"suit" = ITEM_SLOT_OCLOTHING, "eyes" = ITEM_SLOT_EYES, "ears" = ITEM_SLOT_EARS, "gloves" = ITEM_SLOT_GLOVES,
+		"neck" = ITEM_SLOT_NECK, "back" = ITEM_SLOT_BACK, "belt" = ITEM_SLOT_BELT, "mod_control" = ITEM_SLOT_BACK,
+	)
 	for(var/category in categories)
 		for(var/obj/item/item_type as anything in valid_subtypesof(categories[category]))
 			if(initial(item_type.item_flags) & ABSTRACT)

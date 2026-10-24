@@ -1,7 +1,9 @@
-"""Adapt pinned BandaStation PR #2682 DMIs without changing their pixels.
+"""Adapt pinned BandaStation PR #2682 DMIs while preserving original pixels.
 
 Usage: python tools/vox/adapt_assets.py --source tmp/vox-source/assets
 The source directory must contain the PR files at their repository-relative paths.
+Add --check to verify output without rewriting it. The pumpkin auxiliary mask
+keeps authored lit eye/mouth pixels selected by the unlit hole palette.
 """
 
 import argparse
@@ -9,7 +11,9 @@ import copy
 import hashlib
 import json
 import sys
+import tempfile
 from pathlib import Path
+from PIL import Image
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
@@ -26,9 +30,31 @@ def add_state(destination, state, name=None):
     destination.states.append(state)
 
 
+def add_pumpkin_emissive(destination, source):
+    lit = source.get_state("hardhat_pumpkin1")
+    unlit = source.get_state("hardhat_pumpkin0")
+    if lit.dirs != 4 or unlit.dirs != 4 or lit.framecount != 1 or unlit.framecount != 1:
+        raise ValueError("The pinned pumpkin recipe requires four static directions")
+    # The shell is also recoloured in the lit source, so difference alone would
+    # make its orange skin emissive. These three authored shades mark holes.
+    holes = {(43, 22, 3, 255), (65, 31, 4, 255), (79, 32, 12, 255)}
+    state = copy.copy(lit)
+    state.frames = []
+    for on, off in zip(lit.frames, unlit.frames):
+        mask = Image.new("RGBA", (32, 32))
+        for x in range(32):
+            for y in range(32):
+                pixel = on.getpixel((x, y))
+                if off.getpixel((x, y)) in holes and pixel != off.getpixel((x, y)):
+                    mask.putpixel((x, y), pixel)
+        state.frames.append(mask)
+    add_state(destination, state, "carved_pumpkin-emissive")
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--source", required=True, type=Path)
+    parser.add_argument("--check", action="store_true")
     args = parser.parse_args()
 
     provenance = json.loads((Path(__file__).parent / "source-assets.json").read_text(encoding="utf-8"))
@@ -71,6 +97,10 @@ def main():
     for target, source in aliases.items():
         if (target, False) not in keys:
             add_state(head, head.get_state(source), target)
+
+    # The pumpkin states originate in the pinned helmet sheet. Head and helmet
+    # outputs share the same derived mask through the existing merge below.
+    add_pumpkin_emissive(head, helmet)
 
     # Equal state names have different artwork: helmets need the complete
     # helmet sprites, while the modern head file also contains partial overlays.
@@ -119,19 +149,23 @@ def main():
         add_state(body, body.get_state(f"digitigrade_{side}_leg"), f"vox_{side}_leg")
 
     changed = {}
-    for relative, icon in (
-        (VOX / "clothing/head.dmi", head),
-        (VOX / "clothing/helmet.dmi", helmet),
-        (VOX / "clothing/mask.dmi", mask),
-        (VOX / "clothing/eyes.dmi", eyes),
-        (VOX / "bodyparts.dmi", body),
-    ):
-        destination = ROOT / relative
-        icon.to_file(destination)
-        changed[relative.as_posix()] = {
-            "states": len(icon.states),
-            "sha256": hashlib.sha256(destination.read_bytes()).hexdigest(),
-        }
+    with tempfile.TemporaryDirectory(prefix="vox-assets-") as scratch:
+        for relative, icon in (
+            (VOX / "clothing/head.dmi", head),
+            (VOX / "clothing/helmet.dmi", helmet),
+            (VOX / "clothing/mask.dmi", mask),
+            (VOX / "clothing/eyes.dmi", eyes),
+            (VOX / "bodyparts.dmi", body),
+        ):
+            destination = Path(scratch) / relative.name if args.check else ROOT / relative
+            icon.to_file(destination)
+            data = destination.read_bytes()
+            if args.check and data != (ROOT / relative).read_bytes():
+                raise ValueError(f"Derived asset is not reproducible: {relative}")
+            changed[relative.as_posix()] = {
+                "states": len(icon.states),
+                "sha256": hashlib.sha256(data).hexdigest(),
+            }
     print(json.dumps(changed, indent=2))
 
 
