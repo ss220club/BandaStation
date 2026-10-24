@@ -240,7 +240,7 @@
 
 /mob/living/silicon/pai/make_laws()
 	laws = new /datum/ai_laws/pai()
-	laws.name = "Директивы ПИИ"
+	laws.name = "Директивы пИИ"
 
 /mob/living/silicon/pai/process(seconds_per_tick)
 	if(holochassis_health != HOLOCHASSIS_MAX_HEALTH)
