@@ -40,21 +40,52 @@
 	var/datum/brain_trauma/severe/pacifism/earthsblood_trauma
 	/// Флаг: был ли у владельца пацифизм еще до начала передозировки Кровью Земли
 	var/preexisting_earthsblood_pacifism = FALSE
+	/// Точный снимок урона мозга перед тиком защищенного реагента
+	var/expected_brain_damage = null
+	/// Точный снимок урона сердца перед тиком защищенного реагента
+	var/expected_heart_damage = null
+
+/// Синхронный сброс урона мозгу и сердцу после тика конкретного защищенного реагента
+/obj/item/organ/liver/skrell/proc/flush_organ_protection(mob/living/carbon/organ_owner)
+	if(!organ_owner)
+		expected_brain_damage = null
+		expected_heart_damage = null
+		return
+
+	if(!isnull(expected_brain_damage))
+		var/obj/item/organ/brain/brain = organ_owner.get_organ_slot(ORGAN_SLOT_BRAIN)
+		if(brain && brain.damage > expected_brain_damage)
+			brain.set_organ_damage(expected_brain_damage)
+		expected_brain_damage = null
+
+	if(!isnull(expected_heart_damage))
+		var/obj/item/organ/heart/heart = organ_owner.get_organ_slot(ORGAN_SLOT_HEART)
+		if(heart && heart.damage > expected_heart_damage)
+			heart.set_organ_damage(expected_heart_damage)
+		expected_heart_damage = null
 
 /obj/item/organ/liver/skrell/on_life(seconds_per_tick, times_fired)
 	. = ..()
 	if(!owner)
 		return
 
-	// Если реагент ПОЛНОСТЬЮ вывелся из крови (0u)
-	if(!owner.reagents?.has_reagent(/datum/reagent/medicine/earthsblood))
+	var/datum/reagent/earthsblood = owner.reagents?.has_reagent(/datum/reagent/medicine/earthsblood)
+
+	// Если реагент полностью вывелся (0u) или упал ниже порога передозировки (45u)
+	if(!earthsblood || earthsblood.volume < 45)
+		if(earthsblood)
+			earthsblood.overdosed = FALSE
 		if(earthsblood_trauma)
-			qdel(earthsblood_trauma)
-			earthsblood_trauma = null
-			to_chat(owner, span_notice("Действие Крови Земли полностью рассеялось, пацифизм отступает."))
-		preexisting_earthsblood_pacifism = FALSE
+			QDEL_NULL(earthsblood_trauma)
+			to_chat(owner, span_notice("Действие передозировки Крови Земли рассеялось, пацифизм отступает."))
+		// Пока реагента нет в передозировке, отслеживаем наличие врожденного пацифизма
+		if(!earthsblood)
+			preexisting_earthsblood_pacifism = !!(owner.has_trauma_type(/datum/brain_trauma/severe/pacifism))
 
 /obj/item/organ/liver/skrell/handle_chemical(mob/living/carbon/organ_owner, datum/reagent/chem, seconds_per_tick, metabolization_rate)
+	// Сначала синхронно закрываем защиту от предыдущего реагента в списке reagent_list
+	flush_organ_protection(organ_owner)
+
 	if((organ_flags & ORGAN_FAILING) || !organ_owner)
 		return ..()
 
@@ -78,7 +109,7 @@
 		organ_owner.reagents.remove_reagent(chem.type, metabolized)
 		return COMSIG_MOB_STOP_REAGENT_TICK
 
-	// 1.2. Питательные токсины: Тетродотоксин, Карпотоксин и Грибной порошок дают +2 к сытости
+	// 1.2. Питательные токсины: Тетродотоксин, Карпотоксин и Грибной порошок дают сытость
 	if(istype(chem, /datum/reagent/toxin/tetrodotoxin) \
 		|| istype(chem, /datum/reagent/toxin/carpotoxin) \
 		|| istype(chem, /datum/reagent/toxin/mushroom_powder))
@@ -95,7 +126,7 @@
 
 	// 1.3. Полная замена стандартного эффекта на уникальный
 	if(istype(chem, /datum/reagent/uranium/radium))
-		organ_owner.adjust_tox_loss(0.25 * metabolization_rate * seconds_per_tick, updating_health = FALSE)
+		organ_owner.adjust_tox_loss(0.25 * metabolization_rate * seconds_per_tick)
 		var/metabolized = chem.compute_metabolization(organ_owner, seconds_per_tick)
 		organ_owner.reagents.remove_reagent(chem.type, metabolized)
 		return COMSIG_MOB_STOP_REAGENT_TICK
@@ -142,15 +173,10 @@
 		var/datum/reagent/toxin/curare_chem = chem
 		curare_chem.toxpwr = 0
 
-	// Запоминаем, был ли пацифизм у персонажа до того, как Кровь Земли вызвала передозировку
-	if(istype(chem, /datum/reagent/medicine/earthsblood) && !chem.overdosed)
-		if(organ_owner.has_trauma_type(/datum/brain_trauma/severe/pacifism))
-			preexisting_earthsblood_pacifism = TRUE
-
 	var/prev_liver_damage = damage
 	. = ..()
 
-	// Блокируем нанесение урона печени от самогона в своем (обход штрафа ALCOHOL_RATE * 4) и кураре
+	// Блокируем нанесение урона печени от скрелльского алкоголя, самогона и кураре
 	if(istype(chem, /datum/reagent/consumable/ethanol/fyrsskar_tears) \
 		|| istype(chem, /datum/reagent/consumable/ethanol/qerrbalak_amanita_tincture) \
 		|| istype(chem, /datum/reagent/consumable/ethanol/aliose_velvet_cordial) \
@@ -183,8 +209,14 @@
 
 	// 3.2. Кокаин и Метамфетамин: порог 25u, без привыкания, без урона, моторный хаос с возвратом контроля на 20u
 	if(istype(chem, /datum/reagent/drug/cocaine) || istype(chem, /datum/reagent/drug/methamphetamine))
-		chem.overdose_threshold = 25
-		chem.overdose_crit_threshold = 50
+		// Если add_reagent сработал по человеческому порогу (15-20u) до первого тика печени — сбрасываем
+		if(chem.overdose_threshold != 25)
+			chem.overdose_threshold = 25
+			chem.overdose_crit_threshold = 50
+			if(chem.volume < 25)
+				chem.overdosed = FALSE
+			if(chem.volume < 50)
+				chem.overdosed_crit = FALSE
 
 		chem.addiction_types = null
 
@@ -192,14 +224,20 @@
 		if(chem.volume <= 20)
 			if(chem.overdosed)
 				chem.overdosed = FALSE
+				organ_owner.adjust_hallucinations(-1000 SECONDS)
+				organ_owner.adjust_drowsiness(-1000 SECONDS)
 				to_chat(organ_owner, span_notice("Дрожь в мышцах утихает, к вам возвращается полный контроль над движениями."))
 
 			// Мгновенно обнуляем накопившуюся инверсию шагов и тремор
 			organ_owner.adjust_confusion(-1000 SECONDS)
-			organ_owner.set_jitter_if_lower(0 SECONDS)
+			organ_owner.adjust_jitter(-1000 SECONDS)
 
 		// ЭФФЕКТ ПЕРЕДОЗИРОВКИ: действует ТОЛЬКО пока концентрация строго выше 20u
-		else if(chem.overdosed)
+		else if(chem.overdosed || chem.volume >= 25)
+			if(!chem.overdosed)
+				chem.overdosed = TRUE
+				chem.overdose_start(organ_owner)
+
 			// Сбиваем ориентацию: галлюцинации и поддержка инверсии шагов
 			organ_owner.adjust_hallucinations(5 SECONDS * metabolization_rate * seconds_per_tick)
 			organ_owner.adjust_confusion(2 SECONDS * metabolization_rate * seconds_per_tick)
@@ -215,7 +253,7 @@
 				organ_owner.drop_all_held_items()
 
 			// Компенсируем базовый урон токсинами от передозировки
-			addtimer(CALLBACK(organ_owner, TYPE_PROC_REF(/mob/living, adjust_tox_loss), -2 * metabolization_rate * seconds_per_tick, FALSE), 0)
+			addtimer(CALLBACK(organ_owner, TYPE_PROC_REF(/mob/living, adjust_tox_loss), -2 * REM * seconds_per_tick, FALSE), 0)
 
 			if(SPT_PROB(5, seconds_per_tick))
 				to_chat(organ_owner, span_userdanger("Нервная система перегружена стимуляторами — тело дергается само по себе!"))
@@ -227,21 +265,42 @@
 
 		chem.addiction_types = null
 
-	// 3.4. Порог передозировки 45u (критический 90u)
+	// 3.4. Порог передозировки 45u (критический 90u): Соли для ванн и Кровь Земли
 	if(istype(chem, /datum/reagent/drug/bath_salts) || istype(chem, /datum/reagent/medicine/earthsblood))
 		chem.overdose_threshold = 45
 		chem.overdose_crit_threshold = 90
 
 		if(istype(chem, /datum/reagent/drug/bath_salts))
+			if(chem.volume >= 45 && !chem.overdosed)
+				chem.overdosed = TRUE
+				chem.overdose_start(organ_owner)
 			var/datum/reagent/drug/bath_salts/salts = chem
 			if(salts.rage)
 				QDEL_NULL(salts.rage)
 
 		if(istype(chem, /datum/reagent/medicine/earthsblood))
 			chem.addiction_types = null
-			if(chem.overdosed)
+
+			// Если ещё нет передоза и травмы от реагента — обновляем флаг врожденного пацифизма
+			if(!chem.overdosed && !earthsblood_trauma && chem.volume < 45)
+				preexisting_earthsblood_pacifism = !!(organ_owner.has_trauma_type(/datum/brain_trauma/severe/pacifism))
+
+			// При достижении 45u контролируемо запускаем передоз и сразу перехватываем созданную травму
+			if(chem.volume >= 45)
+				if(!chem.overdosed)
+					preexisting_earthsblood_pacifism = !!(organ_owner.has_trauma_type(/datum/brain_trauma/severe/pacifism))
+					chem.overdosed = TRUE
+					chem.overdose_start(organ_owner)
 				if(!preexisting_earthsblood_pacifism && !earthsblood_trauma)
 					earthsblood_trauma = organ_owner.has_trauma_type(/datum/brain_trauma/severe/pacifism)
+			else
+				// Если объем ниже 45u (в т.ч. если add_reagent выдал передоз на 25-44u) — немедленно снимаем!
+				if(!preexisting_earthsblood_pacifism && !earthsblood_trauma && chem.overdosed)
+					earthsblood_trauma = organ_owner.has_trauma_type(/datum/brain_trauma/severe/pacifism)
+				chem.overdosed = FALSE
+				if(earthsblood_trauma)
+					QDEL_NULL(earthsblood_trauma)
+					to_chat(organ_owner, span_notice("Концентрация Крови Земли снизилась до безопасного уровня, пацифизм отступает."))
 
 	// 3.5. Порог передозировки 60u (критический 120u)
 	if(istype(chem, /datum/reagent/drug/krokodil) \
@@ -280,51 +339,32 @@
 	// ЭТАП 4. ЗАЩИТА ВНУТРЕННИХ ОРГАНОВ (МОЗГ И СЕРДЦЕ) ОТ УРОНА
 	// =========================================================================
 
-	var/brain_heal_amount = 0
+	// 4.1. Защита мозга: фиксируем состояние мозга перед вызовом on_mob_life / overdose_process
+	if(istype(chem, /datum/reagent/medicine/earthsblood) \
+		|| istype(chem, /datum/reagent/mercury) \
+		|| istype(chem, /datum/reagent/drug/bath_salts) \
+		|| istype(chem, /datum/reagent/drug/maint/powder) \
+		|| istype(chem, /datum/reagent/drug/happiness) \
+		|| istype(chem, /datum/reagent/drug/krokodil) \
+		|| istype(chem, /datum/reagent/drug/methamphetamine) \
+		|| istype(chem, /datum/reagent/drug/cocaine) \
+		|| istype(chem, /datum/reagent/toxin/fentanyl))
 
-	// 4.1. Защита мозга: рассчитываем дельту урона каждого вещества
-	if(istype(chem, /datum/reagent/mercury))
-		// Ртуть бьет мозг в каждом тике метаболизма (2 ед/тик)
-		brain_heal_amount = 2 * metabolization_rate * seconds_per_tick
+		var/obj/item/organ/brain/brain = organ_owner.get_organ_slot(ORGAN_SLOT_BRAIN)
+		if(brain)
+			expected_brain_damage = brain.damage
 
-	else if(istype(chem, /datum/reagent/drug/bath_salts))
-		// Соли наносят 4 урона мозгу каждый тик
-		brain_heal_amount = 4 * metabolization_rate * seconds_per_tick
+	// 4.2. Защита сердца: кронкаин, кокаин и метамфетамин
+	if(istype(chem, /datum/reagent/drug/kronkaine) \
+		|| istype(chem, /datum/reagent/drug/cocaine) \
+		|| istype(chem, /datum/reagent/drug/methamphetamine))
 
-	else if(istype(chem, /datum/reagent/drug/maint/powder))
-		// Порошок: 0.1 в обычном тике + 6.0 при овердозе
-		brain_heal_amount = (chem.overdosed ? 6.1 : 0.1) * metabolization_rate * seconds_per_tick
+		var/obj/item/organ/heart/heart = organ_owner.get_organ_slot(ORGAN_SLOT_HEART)
+		if(heart)
+			expected_heart_damage = heart.damage
 
-	else if(istype(chem, /datum/reagent/drug/happiness))
-		// Хэппинес: 0.2 в обычном тике + 0.5 при овердозе
-		brain_heal_amount = (chem.overdosed ? 0.7 : 0.2) * metabolization_rate * seconds_per_tick
-
-	else if(istype(chem, /datum/reagent/drug/krokodil) && chem.overdosed)
-		// Крокодил бьет мозг только на передозировке (0.25)
-		brain_heal_amount = 0.25 * metabolization_rate * seconds_per_tick
-
-	else if(istype(chem, /datum/reagent/drug/methamphetamine))
-		// Мет использует rand(): компенсируем средний расчетный урон (1.67 базовый + 0.5 при овердозе)
-		brain_heal_amount = (chem.overdosed ? 2.17 : 1.67) * metabolization_rate * seconds_per_tick
-
-	else if(chem.overdosed && istype(chem, /datum/reagent/toxin/fentanyl))
-		// Фентанил: 3 ед/тик
-		brain_heal_amount = 3 * metabolization_rate * seconds_per_tick
-
-	if(brain_heal_amount > 0)
-		addtimer(CALLBACK(organ_owner, TYPE_PROC_REF(/mob/living/carbon, adjust_organ_loss), ORGAN_SLOT_BRAIN, -brain_heal_amount), 0)
-
-	// 4.2. Защита сердца: кронкаин и кокаин
-	if(istype(chem, /datum/reagent/drug/kronkaine))
-		// Точная формула урона сердцу от кронкаина с учетом объема и овердоза
-		var/heart_dmg = 0.67 * (0.1 + 0.04 * chem.volume) * metabolization_rate * seconds_per_tick
-		if(chem.overdosed)
-			heart_dmg += 0.34 * metabolization_rate * seconds_per_tick
-		addtimer(CALLBACK(organ_owner, TYPE_PROC_REF(/mob/living/carbon, adjust_organ_loss), ORGAN_SLOT_HEART, -heart_dmg), 0)
-
-	else if(chem.overdosed && istype(chem, /datum/reagent/drug/cocaine))
-		// Базовый овердоз кокаина по сердцу (2 ед/тик)
-		addtimer(CALLBACK(organ_owner, TYPE_PROC_REF(/mob/living/carbon, adjust_organ_loss), ORGAN_SLOT_HEART, -2 * metabolization_rate * seconds_per_tick), 0)
+	if(!isnull(expected_brain_damage) || !isnull(expected_heart_damage))
+		addtimer(CALLBACK(src, PROC_REF(flush_organ_protection), organ_owner), 0, TIMER_UNIQUE | TIMER_OVERRIDE)
 
 	// =========================================================================
 	// ЭТАП 5. ДОПОЛНИТЕЛЬНЫЕ ЭФФЕКТЫ И КОМПЕНСАЦИЯ ПОБОЧНЫХ ДЕЙСТВИЙ
@@ -337,11 +377,11 @@
 
 	// Компенсация удушья от кураре (паралич сохраняется, но легкие не страдают)
 	if(istype(chem, /datum/reagent/toxin/curare))
-		addtimer(CALLBACK(organ_owner, TYPE_PROC_REF(/mob/living, adjust_oxy_loss), -2 * metabolization_rate * seconds_per_tick, FALSE), 0)
+		addtimer(CALLBACK(organ_owner, TYPE_PROC_REF(/mob/living, adjust_oxy_loss), -2 * REM * seconds_per_tick, FALSE), 0)
 
 	// Снижение токсического урона от синаптизина
 	if(istype(chem, /datum/reagent/medicine/synaptizine))
-		addtimer(CALLBACK(organ_owner, TYPE_PROC_REF(/mob/living, adjust_tox_loss), -0.5 * metabolization_rate * seconds_per_tick, FALSE), 0)
+		addtimer(CALLBACK(organ_owner, TYPE_PROC_REF(/mob/living, adjust_tox_loss), -0.5 * REM * seconds_per_tick, FALSE), 0)
 
 	// Эйфория от майндбрейкера
 	if(istype(chem, /datum/reagent/toxin/mindbreaker))
@@ -353,8 +393,12 @@
 		organ_owner.adjust_drugginess(25 SECONDS * metabolization_rate * seconds_per_tick)
 		organ_owner.adjust_hallucinations(5 SECONDS * metabolization_rate * seconds_per_tick)
 		organ_owner.add_mood_event("moonshine_high", /datum/mood_event/high)
-		addtimer(CALLBACK(organ_owner, TYPE_PROC_REF(/mob/living, adjust_tox_loss), -1 * metabolization_rate * seconds_per_tick, FALSE), 0)
+		addtimer(CALLBACK(organ_owner, TYPE_PROC_REF(/mob/living, adjust_tox_loss), -1 * REM * seconds_per_tick, FALSE), 0)
 
 /obj/item/organ/liver/skrell/Destroy()
+	expected_brain_damage = null
+	expected_heart_damage = null
+	if(earthsblood_trauma)
+		qdel(earthsblood_trauma)
 	earthsblood_trauma = null
 	return ..()
