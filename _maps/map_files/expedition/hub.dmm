@@ -984,18 +984,6 @@
 	},
 /turf/open/space/basic,
 /area/space)
-"avW" = (
-/obj/structure/cable,
-/obj/structure/cable,
-/obj/machinery/door/poddoor/shutters{
-	id = "cargoshutter"
-	},
-/obj/machinery/door/firedoor/border_only{
-	dir = 1
-	},
-/obj/machinery/door/firedoor/border_only,
-/turf/open/floor/plating,
-/area/space)
 "awa" = (
 /obj/structure/window/reinforced/spawner/directional/west{
 	color = "#99bbff"
@@ -2242,7 +2230,6 @@
 /turf/open/floor/plating/airless,
 /area/ruin/unpowered)
 "aWg" = (
-/obj/structure/cable,
 /obj/structure/cable,
 /obj/machinery/power/smes/engineering{
 	charge = 5e+006
@@ -30414,7 +30401,6 @@
 /turf/open/floor/eighties,
 /area/ruin/space/has_grav/the_outlet/storefront)
 "obW" = (
-/obj/structure/cable,
 /obj/structure/disposalpipe/segment{
 	dir = 8
 	},
@@ -37166,7 +37152,6 @@
 /obj/machinery/power/apc/auto_name/directional/north{
 	start_charge = 0
 	},
-/obj/structure/cable,
 /obj/structure/cable,
 /obj/structure/closet/crate/radiation{
 	name = "fuel crate"
@@ -100446,7 +100431,7 @@ rcQ
 qIV
 nUs
 bkw
-avW
+jfZ
 eUp
 xsv
 gpJ
@@ -100960,7 +100945,7 @@ yaS
 lfI
 oPA
 kgD
-avW
+jfZ
 mdk
 gvS
 gpJ
