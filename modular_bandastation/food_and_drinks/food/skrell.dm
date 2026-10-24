@@ -773,6 +773,7 @@
 
 // 36. Liberty Fungus Donuts
 /obj/item/food/donut/liberty_fungus
+	is_decorated = TRUE
 	name = "liberty fungus donut"
 	desc = "A deep-fried sweet pastry ring infused with a controlled extract of liberty-cap mushroom. Lifts the spirits and dissolves laboratory stress."
 	icon = 'icons/obj/food/skrell.dmi'
