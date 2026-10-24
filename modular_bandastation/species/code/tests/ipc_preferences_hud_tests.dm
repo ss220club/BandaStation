@@ -1,7 +1,7 @@
 /// Model numbers survive editing and a savefile round trip, while organic names retain their restrictions.
 /datum/unit_test/ipc_numbered_names/Run()
-	var/datum/preferences/preferences = new(new /datum/client_interface)
-	allocated += preferences
+	var/datum/client_interface/mock_client = allocate(/datum/client_interface)
+	var/datum/preferences/preferences = allocate(/datum/preferences, mock_client)
 	var/datum/preference/name/real_name/name_preference = GLOB.preference_entries[/datum/preference/name/real_name]
 	var/datum/preference/choiced/species/species_preference = GLOB.preference_entries[/datum/preference/choiced/species]
 	preferences.value_cache[/datum/preference/choiced/species] = /datum/species/ipc

@@ -10,7 +10,7 @@
 	for(var/obj/item/organ/organ as anything in organs.Copy())
 		organ.Remove(src, special = TRUE)
 		qdel(organ)
-	for(var/obj/item/bodypart/limb as anything in get_bodyparts().Copy())
+	for(var/obj/item/bodypart/limb as anything in get_bodyparts())
 		if(limb.body_zone == BODY_ZONE_CHEST)
 			continue
 		// Ordinary removal leaves robotic stumps for the normal prosthetic-replacement operation.

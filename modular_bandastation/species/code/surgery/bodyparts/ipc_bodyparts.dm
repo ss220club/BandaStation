@@ -224,7 +224,6 @@
 	return ipc_receive_emp(severity)
 
 /obj/item/bodypart/chest/robot/ipc/check_limbs()
-	SIGNAL_HANDLER
 	// Ordinary augmented humans get thermal immunity here. IPCs use their species' thermal limits.
 	return
 

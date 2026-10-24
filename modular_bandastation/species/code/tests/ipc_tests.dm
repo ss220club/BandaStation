@@ -15,8 +15,10 @@
 		TEST_ASSERT(limb.bodytype & BODYTYPE_ROBOTIC, "IPC has an organic [limb.body_zone].")
 
 	human.set_species(/datum/species/human)
-	TEST_ASSERT_EQUAL(human.get_organ_slot(ORGAN_SLOT_BRAIN).type, /obj/item/organ/brain, "IPC brain survived an organic species transformation.")
-	TEST_ASSERT_EQUAL(human.get_organ_slot(ORGAN_SLOT_HEART).type, /obj/item/organ/heart, "IPC battery survived an organic species transformation.")
+	var/obj/item/organ/brain/organic_brain = human.get_organ_slot(ORGAN_SLOT_BRAIN)
+	var/obj/item/organ/heart/organic_heart = human.get_organ_slot(ORGAN_SLOT_HEART)
+	TEST_ASSERT_EQUAL(organic_brain?.type, /obj/item/organ/brain, "IPC brain survived an organic species transformation.")
+	TEST_ASSERT_EQUAL(organic_heart?.type, /obj/item/organ/heart, "IPC battery survived an organic species transformation.")
 	TEST_ASSERT_NOTNULL(human.get_organ_slot(ORGAN_SLOT_STOMACH), "Human stomach was not restored.")
 	TEST_ASSERT_NULL(human.get_organ_by_type(/obj/item/organ/cyberimp/arm/power_cord/ipc), "Charging cable survived a species transformation.")
 	TEST_ASSERT(!HAS_TRAIT(human, TRAIT_NOBREATH), "IPC breathing trait leaked after transformation.")

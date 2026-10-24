@@ -194,7 +194,8 @@
 		examine_text += span_notice("Заряд батареи: [round(100 * human.nutrition / NUTRITION_LEVEL_FULL)]%.")
 
 /datum/species/ipc/get_features()
-	var/list/features = ..().Copy()
+	var/list/features = ..()
+	features = features.Copy()
 	features |= list(FEATURE_IPC_CHASSIS, FEATURE_IPC_CHASSIS_COLOR, FEATURE_IPC_HEAD, FEATURE_IPC_SCREEN, FEATURE_IPC_SCREEN_COLOR, FEATURE_IPC_SCREEN_COLOR_SECONDARY, FEATURE_IPC_ANTENNA, FEATURE_IPC_ANTENNA_COLOR)
 	return features
 

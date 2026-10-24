@@ -54,7 +54,7 @@
 	var/obj/item/organ/cyberimp/chest/ipc_upgrade/joints/magnetic/magnetic = allocate(__IMPLIED_TYPE__)
 	magnetic.Insert(human)
 	var/obj/item/bodypart/arm/left/arm = human.get_bodypart(BODY_ZONE_L_ARM)
-	allocated += human.get_bodyparts().Copy()
+	allocated += human.get_bodyparts()
 	magnetic.emp_act(EMP_HEAVY)
 	TEST_ASSERT_EQUAL(length(human.get_bodyparts()), 1, "An EMP did not release the magnetic chassis' non-chest limbs.")
 	TEST_ASSERT_NULL(arm.owner, "An EMP left a magnetic arm attached.")

@@ -79,7 +79,7 @@
 		return
 	to_chat(owner, span_userdanger("Магнитные крепления обесточены!"))
 	// Dropping a head or arm changes the owner's bodypart list while it is iterated.
-	var/list/limbs = owner.get_bodyparts().Copy()
+	var/list/limbs = owner.get_bodyparts()
 	for(var/obj/item/bodypart/limb as anything in limbs)
 		if(limb.body_zone != BODY_ZONE_CHEST && IS_ROBOTIC_LIMB(limb))
 			limb.drop_limb()
@@ -170,7 +170,7 @@
 		return
 	flavor_tongue = current_tongue
 	previous_taste = flavor_tongue.sense_of_taste
-	previous_ageusia = TRAIT_AGEUSIA in flavor_tongue.organ_traits
+	previous_ageusia = (TRAIT_AGEUSIA in flavor_tongue.organ_traits)
 	flavor_tongue.sense_of_taste = TRUE
 	if(!(flavor_tongue.organ_flags & ORGAN_FAILING))
 		flavor_tongue.remove_organ_trait(TRAIT_AGEUSIA)
