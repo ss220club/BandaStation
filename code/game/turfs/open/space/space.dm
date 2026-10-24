@@ -207,7 +207,10 @@ GLOBAL_LIST_EMPTY(starlight)
 
 	var/area/new_turf_area = get_area(.)
 	if (istype(new_turf_area, /area/space) && !istype(new_turf_area, /area/space/nearstation))
-		set_turf_to_area(., GLOB.areas_by_type[/area/space/nearstation])
+		// BANDASTATION EDIT START - Minimal maps may not have instantiated nearstation yet.
+		var/area/space/nearstation/nearstation_area = GLOB.areas_by_type[/area/space/nearstation] || new
+		set_turf_to_area(., nearstation_area)
+		// BANDASTATION EDIT END
 
 /turf/open/space/attempt_lattice_replacement()
 	var/dest_x = destination_x
