@@ -1,5 +1,5 @@
 /datum/action/innate/pai
-	name = "Действие ПИИ"
+	name = "Действие пИИ"
 	button_icon = 'icons/mob/actions/actions_silicon.dmi'
 	var/mob/living/silicon/pai/pai_owner
 
