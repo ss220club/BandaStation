@@ -23,5 +23,5 @@
 		"saxophonist" = list("Саксофонист", /datum/outfit/job/donor/musician),
 		"soloist" = list("Солист", /datum/outfit/job/donor/musician),
 		"singer" = list("Певец", /datum/outfit/job/donor/musician),
-		"touring_musician" = list("Гастролер", /datum/outfit/job/donor/musician),
+		"touring_musician" = list("Гастролёр", /datum/outfit/job/donor/musician),
 	)

@@ -21,6 +21,6 @@
 		"Dealer" = "Торговец",
 		"VIP Corporate Guest" = "VIP-гость корпорации",
 		"Banker" = "Банкир",
-		"Security Clown" = "Клоун СБ",
+		"Security Clown" = "Клоун службы безопасности",
 	)
 	GLOB.job_titles_ru_to_en.Cut()

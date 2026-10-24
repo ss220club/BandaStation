@@ -1,12 +1,12 @@
 /// Imported HONK appearance on the native energy-gun firing and recharge system.
 /obj/item/gun/energy/honk_rifle
 	name = "security HONK rifle"
-	desc = "Личное ХОНК-ружьё клоуна Службы Безопасности. Стреляет хлопушками."
-	icon = 'modular_bandastation/donor_jobs/icons/honk_rifle.dmi'
+	desc = "Личное ХОНК-ружьё клоуна службы безопасности. Стреляет хлопушками."
+	icon = 'modular_bandastation/weapon/icons/ranged/energy.dmi'
 	icon_state = "honkrifle_security"
 	inhand_icon_state = null // Native energy guns select the existing charge states 0–4.
-	lefthand_file = 'modular_bandastation/donor_jobs/icons/honk_rifle_lefthand.dmi'
-	righthand_file = 'modular_bandastation/donor_jobs/icons/honk_rifle_righthand.dmi'
+	lefthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/energy/lefthand.dmi'
+	righthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/energy/righthand.dmi'
 	ammo_type = list(/obj/item/ammo_casing/energy/snap_pop)
 	clumsy_check = FALSE
 	selfcharge = TRUE

@@ -1,7 +1,7 @@
 /datum/job/donor/representative_tsf
-	important_information = "Вы представитель ТСФ, прибывший для отдыха и переговоров. Законы NT действуют и на вас; межгосударственные разногласия не разрешают нарушать правила."
+	important_information = "Вы - представитель ТСФ, прибывший для отдыха и переговоров. Космический закон действует и на вас."
 	title = "Representative TSF"
-	description = "Гость для отдыха и переговоров; законы NT действуют, иммунитета нет."
+	description = "Гость для отдыха и переговоров; космический закон действует, иммунитета нет."
 	donor_tier = 4
 	config_tag = "DONOR_REPRESENTATIVE_TSF"
 	total_positions = 1

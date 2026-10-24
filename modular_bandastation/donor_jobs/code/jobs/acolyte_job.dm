@@ -1,7 +1,7 @@
 /datum/job/donor/acolyte
 	important_information = "Помогайте священнику проводить богослужения. Его религиозные способности и право освящать воду не передаются вам автоматически."
 	title = "Acolyte"
-	description = "Помощник священника. Не получает его религиозные способности и право освящать воду автоматически."
+	description = "Помощник священника. Не получает его религиозные способности и право освящать воду."
 	donor_tier = 2
 	config_tag = "DONOR_ACOLYTE"
 	total_positions = 5
@@ -16,5 +16,5 @@
 		"monk" = list("Монах", /datum/outfit/job/donor/acolyte),
 		"disciple" = list("Приспешник", /datum/outfit/job/donor/acolyte),
 		"follower" = list("Последователь", /datum/outfit/job/donor/acolyte),
-		"ritualist" = list("Обрядчик", /datum/outfit/job/donor/acolyte),
+		"ritualist" = list("Ритуалист", /datum/outfit/job/donor/acolyte),
 	)

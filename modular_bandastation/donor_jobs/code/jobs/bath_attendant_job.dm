@@ -13,7 +13,7 @@
 	paycheck_department = ACCOUNT_SRV
 	job_variant_specs = list(
 		"default" = list("Банщик", /datum/outfit/job/donor/bath_attendant),
-		"bath_owner" = list("Хозяин Бани", /datum/outfit/job/donor/bath_attendant),
+		"bath_owner" = list("Хозяин бани", /datum/outfit/job/donor/bath_attendant),
 		"bath_steamer" = list("Парильщик", /datum/outfit/job/donor/bath_attendant),
 		"bath_master" = list("Пармейстер", /datum/outfit/job/donor/bath_attendant),
 	)

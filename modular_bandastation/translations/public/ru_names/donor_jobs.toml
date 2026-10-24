@@ -103,12 +103,12 @@ instrumental = "скафандром лейтенанта спецназа ТС�
 prepositional = "скафандре лейтенанта спецназа ТСФ"
 
 ["Trans-Solar Federation commander's jacket"]
-nominative = "костюм командующего ТСФ"
-genitive = "костюма командующего ТСФ"
-dative = "костюму командующего ТСФ"
-accusative = "костюм командующего ТСФ"
-instrumental = "костюмом командующего ТСФ"
-prepositional = "костюме командующего ТСФ"
+nominative = "китель командующего ТСФ"
+genitive = "кителя командующего ТСФ"
+dative = "кителю командующего ТСФ"
+accusative = "китель командующего ТСФ"
+instrumental = "кителем командующего ТСФ"
+prepositional = "кителе командующего ТСФ"
 
 ["USSP military uniform"]
 nominative = "форма бойца КССП"
@@ -135,12 +135,12 @@ instrumental = "формой адмирала КССП"
 prepositional = "форме адмирала КССП"
 
 ["USSP side cap"]
-nominative = "кепка бойца КССП"
-genitive = "кепки бойца КССП"
-dative = "кепке бойца КССП"
-accusative = "кепку бойца КССП"
-instrumental = "кепкой бойца КССП"
-prepositional = "кепке бойца КССП"
+nominative = "пилотка бойца КССП"
+genitive = "пилотки бойца КССП"
+dative = "пилотке бойца КССП"
+accusative = "пилотку бойца КССП"
+instrumental = "пилоткой бойца КССП"
+prepositional = "пилотке бойца КССП"
 
 ["USSP officer hat"]
 nominative = "фуражка офицера КССП"

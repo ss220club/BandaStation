@@ -13,5 +13,5 @@
 	paycheck_department = ACCOUNT_SRV
 	job_variant_specs = list(
 		"default" = list("Официант", /datum/outfit/job/donor/waiter),
-		"service_host" = list("Хост Сервиса", /datum/outfit/job/donor/waiter),
+		"service_host" = list("Хост сервиса", /datum/outfit/job/donor/waiter),
 	)

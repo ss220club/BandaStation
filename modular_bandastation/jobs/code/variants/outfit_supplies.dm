@@ -13,5 +13,5 @@
 		return
 	if(user.equip_to_storage(supply, ITEM_SLOT_BACK, indirect_action = TRUE) || QDELETED(supply))
 		return
-	to_chat(user, span_notice("[supply] не помещается в сумку и оставлен рядом с вами."))
+	to_chat(user, span_notice("[capitalize(supply.declent_ru(NOMINATIVE))] не помещается в сумку и оставлен рядом с вами."))
 	supply.forceMove(user.drop_location())

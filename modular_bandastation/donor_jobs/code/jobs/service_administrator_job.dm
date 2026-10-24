@@ -1,7 +1,7 @@
 /datum/job/donor/service_administrator
-	important_information = "Помогайте главе персонала координировать сервис и организуйте мероприятия. Вы помощник и консультант, а не глава сервисного отдела или замена главы персонала."
+	important_information = "Помогайте главе персонала координировать сервис и организуйте мероприятия. Вы помощник и консультант, а не глава отдела обслуживания или замена главы персонала."
 	title = "Administrator"
-	description = "Координация сервиса, помощь HoP и организация мероприятий. Не глава отдела, не замена HoP, не администратор сервера."
+	description = "Координация отдела обслуживания, помощь главе персонала и организация мероприятий. Не глава отдела, не замена главы персонала."
 	donor_tier = 3
 	config_tag = "DONOR_ADMINISTRATOR"
 	total_positions = 1
@@ -13,8 +13,8 @@
 	paycheck_department = ACCOUNT_SRV
 	job_variant_specs = list(
 		"default" = list("Сервис-администратор", /datum/outfit/job/donor/service_administrator),
-		"service_administrator" = list("Сервис-Администратор", /datum/outfit/job/donor/service_administrator),
-		"steward" = list("Сервис-Управитель", /datum/outfit/job/donor/service_administrator),
+		"service_administrator" = list("Сервис-администратор", /datum/outfit/job/donor/service_administrator),
+		"steward" = list("Сервис-управитель", /datum/outfit/job/donor/service_administrator),
 		"pompadour" = list("Помпадур", /datum/outfit/job/donor/service_administrator),
-		"service_manager" = list("Сервис-Менеджер", /datum/outfit/job/donor/service_administrator),
+		"service_manager" = list("Сервис-менеджер", /datum/outfit/job/donor/service_administrator),
 	)

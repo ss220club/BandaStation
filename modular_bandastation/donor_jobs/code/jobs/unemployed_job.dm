@@ -1,7 +1,7 @@
 /datum/job/donor/unemployed
-	important_information = "Вы оставшийся без работы обитатель станции. Найдите занятие и способы выживания; ваша должность не делает вас антагонистом."
+	important_information = "Вы - оставшийся без работы обитатель станции. Найдите занятие и способы выживания."
 	title = "Uncertain"
-	description = "Забытый работник и выживание в технических тоннелях. Не автоматический антагонист."
+	description = "Забытый работник, выживающий в технических тоннелях."
 	donor_tier = 3
 	config_tag = "DONOR_UNCERTAIN"
 	total_positions = -1
@@ -12,8 +12,8 @@
 	departments_list = list(/datum/job_department/assistant)
 	job_variant_specs = list(
 		"default" = list("Безработный", /datum/outfit/job/donor/unemployed),
-		"unemployed_assistant" = list("Безработный Ассистент", /datum/outfit/job/donor/unemployed),
-		"free_assistant" = list("Свободный Ассистент", /datum/outfit/job/donor/unemployed),
-		"working_off_debt_assistant" = list("Отрабатывающий Ассистент", /datum/outfit/job/donor/unemployed),
-		"maintenance_assistant" = list("Ассистент Технических Тоннелей", /datum/outfit/job/donor/unemployed),
+		"unemployed_assistant" = list("Безработный ассистент", /datum/outfit/job/donor/unemployed),
+		"free_assistant" = list("Свободный ассистент", /datum/outfit/job/donor/unemployed),
+		"working_off_debt_assistant" = list("Отрабатывающий ассистент", /datum/outfit/job/donor/unemployed),
+		"maintenance_assistant" = list("Ассистент технических тоннелей", /datum/outfit/job/donor/unemployed),
 	)

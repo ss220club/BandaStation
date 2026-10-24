@@ -14,9 +14,9 @@
 	paycheck_department = ACCOUNT_SRV
 	job_variant_specs = list(
 		"default" = list("Торговец", /datum/outfit/job/donor/merchant),
-		"security_seller" = list("Независимый Торговец", /datum/outfit/job/donor/merchant),
-		"merchant" = list("Сдельщик", /datum/outfit/job/donor/merchant),
-		"philanthropist" = list("Барахольщик", /datum/outfit/job/donor/merchant),
-		"trader" = list("Меценат", /datum/outfit/job/donor/merchant),
-		"junk_dealer" = list("Коммерсант", /datum/outfit/job/donor/merchant),
+		"security_seller" = list("Независимый торговец", /datum/outfit/job/donor/merchant),
+		"merchant" = list("Купец", /datum/outfit/job/donor/merchant),
+		"philanthropist" = list("Меценат", /datum/outfit/job/donor/merchant),
+		"trader" = list("Коммерсант", /datum/outfit/job/donor/merchant),
+		"junk_dealer" = list("Барахольщик", /datum/outfit/job/donor/merchant),
 	)

@@ -118,3 +118,44 @@
 	lefthand_file = 'modular_bandastation/objects/icons/mob/inhands/clothing_left_hand.dmi'
 	righthand_file = 'modular_bandastation/objects/icons/mob/inhands/clothing_right_hand.dmi'
 	body_parts_covered = CHEST | GROIN | ARMS
+
+/obj/item/clothing/suit/space/tsf
+	name = "\improper Trans-Solar Federation Specops marine space suit"
+	desc = "Космический скафандр в цветах спецназа морской пехоты Транссолнечной Федерации."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/suits.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/suits.dmi'
+	icon_state = "ert_solgov_marine"
+
+/obj/item/clothing/suit/space/tsf/command
+	name = "\improper Trans-Solar Federation Specops lieutenant's space suit"
+	desc = "Космический скафандр морской пехоты Транссолнечной Федерации с золотыми элементами, обозначающими звание владельца."
+	icon_state = "ert_solgov_command"
+
+/obj/item/clothing/suit/costume/soviet/ussp
+	name = "\improper USSP greatcoat"
+	desc = "Классическая шерстяная шинель КССП."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/suits.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/suits.dmi'
+	icon_state = "sovietcoat"
+	inhand_icon_state = "det_suit"
+
+/obj/item/clothing/suit/costume/soviet/ussp/officer
+	name = "\improper USSP officer greatcoat"
+	desc = "Классическая офицерская шинель с повязкой КССП."
+	icon_state = "sovietofficercoat"
+
+/obj/item/clothing/suit/space/ussp
+	name = "\improper USSP space suit"
+	desc = "Космический скафандр с символикой КССП."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/suits.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/suits.dmi'
+	icon_state = "hardsuit-soviet"
+	inhand_icon_state = "hardsuit-soviet"
+	lefthand_file = 'modular_bandastation/objects/icons/mob/inhands/clothing_left_hand.dmi'
+	righthand_file = 'modular_bandastation/objects/icons/mob/inhands/clothing_right_hand.dmi'
+
+/obj/item/clothing/suit/space/ussp/commander
+	name = "\improper USSP command space suit"
+	desc = "Командирский космический скафандр с символикой КССП."
+	icon_state = "hardsuit-soviet-commander"
+	inhand_icon_state = "hardsuit-soviet-commander"

@@ -1,11 +1,11 @@
 /datum/job/donor/adjutant
-	important_information = "Помогайте главам советами, документами и бытовыми делами. Подчиняйтесь главе персонала и капитану; вы не заменяете АВД или представителя NT."
+	important_information = "Помогайте главам советами, документами и бытовыми делами. Подчиняйтесь главе персонала и капитану."
 	variant_information = list(
 		/datum/outfit/job/donor/adjutant/butler = "Дворецкий: помогайте главам в бытовых делах и поддерживайте порядок на мостике. Подчинение и полномочия остаются адъютантскими.",
 		/datum/outfit/job/donor/adjutant/maid = "Горничная: помогайте главам в бытовых делах и поддерживайте порядок на мостике. Подчинение и полномочия остаются адъютантскими.",
 	)
 	title = "Adjutant"
-	description = "Помощник глав по документам, советам и бытовым вопросам. Подчинён HoP и капитану. Не АВД и не представитель NT."
+	description = "Помощник глав по документам, советам и бытовым вопросам. Подчинён главе персонала и капитану."
 	donor_tier = 4
 	config_tag = "DONOR_ADJUTANT"
 	total_positions = 3
@@ -18,8 +18,6 @@
 	paycheck_department = ACCOUNT_SRV
 	job_variant_specs = list(
 		"default" = list("Адъютант", /datum/outfit/job/donor/adjutant),
-		"butler" = list("Butler", /datum/outfit/job/donor/adjutant/butler),
-		"butler_ru" = list("Дворецкий", /datum/outfit/job/donor/adjutant/butler),
-		"maid" = list("Maid", /datum/outfit/job/donor/adjutant/maid),
-		"maid_ru" = list("Горничная", /datum/outfit/job/donor/adjutant/maid),
+		"butler" = list("Дворецкий", /datum/outfit/job/donor/adjutant/butler),
+		"maid" = list("Горничная", /datum/outfit/job/donor/adjutant/maid),
 	)
