@@ -247,7 +247,7 @@
 	var/mutable_appearance/alert_overlay = mutable_appearance('icons/obj/aicards.dmi', "pai")
 
 	notify_ghosts(
-		"[user.real_name] запрашивает ПИИ-компаньона! Воспользуйтесь кнопкой ПИИ, чтобы представить себя в качестве компаньона.",
+		"[user.real_name] запрашивает пИИ-компаньона! Воспользуйтесь кнопкой пИИ, чтобы представить себя в качестве компаньона.",
 		source = user,
 		header = "Запрос ПИИ!",
 		alert_overlay = alert_overlay,
