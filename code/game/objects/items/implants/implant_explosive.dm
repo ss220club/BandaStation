@@ -39,6 +39,8 @@
 	var/notify_ghosts = TRUE
 	///Do we tell people when they activated it?
 	var/announce_activation = TRUE
+	/// Invalidates delayed effects when the implant is disconnected or activated again.
+	var/explosion_sequence = 0 // BANDASTATION ADDITION - Cybernetic rejection
 
 	implant_info = "Activates upon death or encoded signal. Triggers an electrically-detonated microexplosive. \
 		Can sync with other microbombs to increase explosive yield, but this makes detonation non-instant."
@@ -59,7 +61,7 @@
 	// uses sleeps, which is bad for signal handlers to do.
 	INVOKE_ASYNC(src, PROC_REF(activate), "death")
 
-/obj/item/implant/explosive/activate(cause)
+/obj/item/implant/explosive/on_activate(cause) // BANDASTATION EDIT - Functional implant hook behind rejection gate
 	. = ..()
 	if(!cause || !imp_in || active)
 		return FALSE
@@ -71,11 +73,16 @@
 		popup = FALSE
 		if(response != "Yes")
 			return FALSE
+		// BANDASTATION ADDITION START - The host can become incompatible during the prompt
+		if(QDELETED(src) || cybernetic_rejection || !imp_in)
+			return FALSE
+		// BANDASTATION ADDITION END - The host can become incompatible during the prompt
 	if(cause == "death" && HAS_TRAIT(imp_in, TRAIT_PREVENT_IMPLANT_AUTO_EXPLOSION))
 		return FALSE
 	if(announce_activation)
 		to_chat(imp_in, span_notice("You activate your [name]."))
 	active = TRUE
+	explosion_sequence++ // BANDASTATION ADDITION - Distinguish delayed activation sequences
 	var/turf/boomturf = get_turf(imp_in)
 	message_admins("[ADMIN_LOOKUPFLW(imp_in)] has activated their [name] at [ADMIN_VERBOSEJMP(boomturf)], with cause of [cause].")
 	//If the delay is shorter or equal to the default delay, just blow up already jeez
@@ -84,7 +91,7 @@
 		return
 	timed_explosion()
 
-/obj/item/implant/explosive/implant(mob/living/target, mob/user, silent = FALSE, force = FALSE)
+/obj/item/implant/explosive/on_implant(mob/living/target, mob/user, silent = FALSE, force = FALSE) // BANDASTATION EDIT - Functional implant hook behind rejection gate
 	for(var/target_implant in target.implants)
 		if(istype(target_implant, /obj/item/implant/explosive)) //we don't use our own type here, because macrobombs inherit this proc and need to be able to upgrade microbombs
 			var/obj/item/implant/explosive/other_implant = target_implant
@@ -101,10 +108,23 @@
 	if(.)
 		RegisterSignal(target, COMSIG_LIVING_DEATH, PROC_REF(on_death))
 
-/obj/item/implant/explosive/removed(mob/target, silent = FALSE, special = FALSE)
+/obj/item/implant/explosive/on_remove(mob/target, silent = FALSE, special = FALSE) // BANDASTATION EDIT - Functional implant hook behind rejection gate
 	. = ..()
 	if(.)
 		UnregisterSignal(target, COMSIG_LIVING_DEATH)
+
+// BANDASTATION ADDITION START - Cancel every pending effect when disconnected
+/obj/item/implant/explosive/on_cybernetic_rejection(rejected)
+	. = ..()
+	if(rejected)
+		active = FALSE
+		explosion_sequence++
+
+/obj/item/implant/explosive/proc/explode_if_current(sequence)
+	if(cybernetic_rejection || sequence != explosion_sequence)
+		return
+	explode()
+// BANDASTATION ADDITION END - Cancel every pending effect when disconnected
 
 /**
  * Merges two explosive implants together, adding the stats of the latter to the former before qdeling the latter implant.
@@ -123,6 +143,7 @@
  * Make the implantee beep a few times, keel over and explode. Usually to a devastating effect.
  */
 /obj/item/implant/explosive/proc/timed_explosion()
+	var/sequence = explosion_sequence // BANDASTATION ADDITION - Revalidate after each delay
 	if (isnull(imp_in))
 		visible_message(span_warning("[src] starts beeping ominously!"))
 	else
@@ -140,20 +161,28 @@
 	playsound(loc, 'sound/items/timer.ogg', 30, FALSE)
 	if(!panic_beep_sound)
 		sleep(delay * 0.25)
+	// BANDASTATION ADDITION START - Rejected implants cannot paralyze their host
+	if(cybernetic_rejection || sequence != explosion_sequence)
+		return
+	// BANDASTATION ADDITION END - Rejected implants cannot paralyze their host
 	if(imp_in && !IS_UNCONSCIOUS_OR_CRIT(imp_in) && !no_paralyze)
 		imp_in.visible_message(span_warning("[imp_in] doubles over in pain!"))
 		imp_in.Paralyze(14 SECONDS)
 
 	if(!panic_beep_sound)
 		for(var/index in 1 to 3) // Total of 4 bomb beeps, and we've already beeped once
+			if(cybernetic_rejection || sequence != explosion_sequence) // BANDASTATION ADDITION - A previous sleep can disconnect the implant
+				return
 			//for extra spice
 			var/beep_volume = 30 + (5 * index)
 			playsound(loc, 'sound/items/timer.ogg', beep_volume, vary = FALSE)
 			sleep(delay * 0.25)
-		explode()
+		explode_if_current(sequence) // BANDASTATION EDIT - Do not finish a canceled activation
 	else
-		addtimer(CALLBACK(src, PROC_REF(explode)), delay)
+		addtimer(CALLBACK(src, PROC_REF(explode_if_current), sequence), delay) // BANDASTATION EDIT - Timer must match its activation
 		while(delay > 1) //so we dont accidentally enter an infinite sleep
+			if(cybernetic_rejection || sequence != explosion_sequence) // BANDASTATION ADDITION - Stop canceled countdown effects
+				return
 			var/beep_volume = 35
 			playsound(loc, 'sound/items/timer.ogg', beep_volume, vary = FALSE)
 			sleep(delay * 0.2)
@@ -163,6 +192,8 @@
 
 ///When called, just explodes
 /obj/item/implant/explosive/proc/explode(atom/override_explode_target = null)
+	if(cybernetic_rejection) // BANDASTATION ADDITION - Also block delayed or remotely triggered explosions
+		return
 	explosion_devastate = floor(explosion_devastate)
 	explosion_heavy = floor(explosion_heavy)
 	explosion_light = floor(explosion_light)
@@ -196,6 +227,8 @@
 	explosion_devastate = /obj/item/implant/explosive::explosion_devastate
 
 /obj/item/implant/explosive/macro/fake/explode(atom/override_explode_target)
+	if(cybernetic_rejection) // BANDASTATION ADDITION - No detonation effects from rejected implants
+		return
 	honkerblast(
 		origin = override_explode_target || src,
 		light_range = /obj/item/implant/explosive/macro::explosion_light * 0.5,
@@ -225,13 +258,13 @@
 		the handshake process between microbombs, however, takes a bit, and only gets longer as more microbombs are detected. \
 		The tactical deniability implant introduces a ten-second delay by itself in order to allow operators one last hurrah before death."
 
-/obj/item/implant/explosive/deniability/implant(mob/living/target, mob/user, silent = FALSE, force = FALSE)
+/obj/item/implant/explosive/deniability/on_implant(mob/living/target, mob/user, silent = FALSE, force = FALSE) // BANDASTATION EDIT - Functional implant hook behind rejection gate
 	. = ..()
 	if(.)
 		RegisterSignal(target, COMSIG_LIVING_HEALTH_UPDATE, PROC_REF(check_health))
 		target.add_traits(list(TRAIT_NOSOFTCRIT, TRAIT_NOHARDCRIT), IMPLANT_TRAIT)
 
-/obj/item/implant/explosive/deniability/removed(mob/target, silent = FALSE, special = FALSE)
+/obj/item/implant/explosive/deniability/on_remove(mob/target, silent = FALSE, special = FALSE) // BANDASTATION EDIT - Functional implant hook behind rejection gate
 	. = ..()
 	if(.)
 		UnregisterSignal(target, COMSIG_LIVING_HEALTH_UPDATE)

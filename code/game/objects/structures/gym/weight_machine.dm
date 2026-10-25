@@ -209,7 +209,7 @@
 	var/stamina_exhaustion = FLOOR(user.maxHealth / workout_reps / WORKOUT_LENGTH, 0.1)
 
 	var/obj/item/organ/cyberimp/chest/spine/potential_spine = user.get_organ_slot(ORGAN_SLOT_SPINE)
-	if(istype(potential_spine))
+	if(istype(potential_spine) && !potential_spine.cybernetic_rejection) // BANDASTATION EDIT - Disconnected cybernetics provide no bonus.
 		stamina_exhaustion *= potential_spine.athletics_boost_multiplier
 
 	if(HAS_TRAIT(user, TRAIT_STRENGTH)) //The strong get reductions to stamina damage taken while exercising

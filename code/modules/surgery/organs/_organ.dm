@@ -19,6 +19,13 @@
 	var/slot
 	/// Random flags that describe this organ
 	var/organ_flags = ORGAN_ORGANIC | ORGAN_EDIBLE
+	// BANDASTATION ADDITION START - Cybernetic rejection disconnects effects without damaging the organ
+	/// Whether the current body cannot interface with this robotic organ.
+	var/cybernetic_rejection = FALSE
+	/// Tracks callbacks separately from physical ownership so disconnected organs can be removed safely.
+	var/mob_effects_active = FALSE
+	var/bodypart_effects_active = FALSE
+	// BANDASTATION ADDITION END - Cybernetic rejection disconnects effects without damaging the organ
 	/// Maximum damage the organ can take, ever.
 	var/maxHealth = STANDARD_ORGAN_THRESHOLD
 	/**
@@ -276,6 +283,11 @@ INITIALIZE_IMMEDIATE(/obj/item/organ)
  */
 /obj/item/organ/proc/check_damage_thresholds()
 	SHOULD_CALL_PARENT(TRUE)
+	// BANDASTATION ADDITION START - Repair cannot reconnect an incompatible cybernetic organ
+	if(cybernetic_rejection)
+		organ_flags |= ORGAN_FAILING
+		return
+	// BANDASTATION ADDITION END - Repair cannot reconnect an incompatible cybernetic organ
 	if(damage == prev_damage)
 		return
 	var/delta = damage - prev_damage

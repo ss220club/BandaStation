@@ -77,7 +77,7 @@
 		if (charge_action)
 			return
 		charge_action = new(src)
-		if (implant.imp_in)
+		if (implant.imp_in && !implant.cybernetic_rejection) // BANDASTATION EDIT - Rejected circuit implants cannot grant actions
 			charge_action.Grant(implant.imp_in)
 		implant.actions += charge_action
 	else
@@ -133,6 +133,8 @@
 	))
 
 /obj/item/circuit_component/implant_core/input_received(datum/port/input/port)
+	if(implant.cybernetic_rejection) // BANDASTATION ADDITION - Rejected circuit implants cannot interact with their host
+		return
 	if (!COMPONENT_TRIGGERED_BY(send_message_signal, port))
 		return
 

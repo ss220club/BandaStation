@@ -123,7 +123,7 @@
 /obj/item/firing_pin/implant/pin_auth(mob/living/user)
 	if(user)
 		for(var/obj/item/implant/I in user.implants)
-			if(req_implant && I.type == req_implant)
+			if(req_implant && I.type == req_implant && !I.cybernetic_rejection) // BANDASTATION EDIT - Rejected implants cannot authenticate
 				return TRUE
 	return FALSE
 

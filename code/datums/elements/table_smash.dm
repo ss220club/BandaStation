@@ -117,7 +117,7 @@
 		skills_space = " quickly"
 
 	var/obj/item/organ/cyberimp/chest/spine/potential_spine = user.get_organ_slot(ORGAN_SLOT_SPINE)
-	if (istype(potential_spine))
+	if (istype(potential_spine) && !potential_spine.cybernetic_rejection) // BANDASTATION EDIT - Disconnected cybernetics provide no bonus.
 		tableplace_delay *= potential_spine.athletics_boost_multiplier
 
 	carried_mob.visible_message(span_notice("[user] begins to[skills_space] place [carried_mob] onto [table]..."),

@@ -281,6 +281,16 @@
 	SHOULD_NOT_SLEEP(TRUE)
 	if(!parent?.on)
 		return FALSE
+	// BANDASTATION ADDITION START - An implanted BCI cannot operate through a rejected interface
+	if(istype(parent.shell, /obj/item/organ))
+		var/obj/item/organ/organ_shell = parent.shell
+		if(organ_shell.cybernetic_rejection)
+			return FALSE
+	if(istype(parent.shell, /obj/item/implant))
+		var/obj/item/implant/implant_shell = parent.shell
+		if(implant_shell.cybernetic_rejection)
+			return FALSE
+	// BANDASTATION ADDITION END - An implanted BCI cannot operate through a rejected interface
 
 	if(!parent.admin_only)
 		if(circuit_flags & CIRCUIT_FLAG_ADMIN)

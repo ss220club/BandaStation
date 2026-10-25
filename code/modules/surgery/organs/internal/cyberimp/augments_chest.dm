@@ -107,6 +107,8 @@
 
 
 /obj/item/organ/cyberimp/chest/reviver/proc/heal()
+	if(!owner || cybernetic_rejection) // BANDASTATION ADDITION - A queued healing pulse requires a connected implant.
+		return
 	if(COOLDOWN_FINISHED(src, defib_cooldown))
 		revive_dead()
 
@@ -213,6 +215,13 @@
 	if(on)
 		deactivate(silent = TRUE)
 	..()
+
+// BANDASTATION ADDITION START - Disconnect an already active thruster implant
+/obj/item/organ/cyberimp/chest/thrusters/set_cybernetic_rejection(rejected)
+	if(rejected && on)
+		deactivate(silent = TRUE)
+	return ..()
+// BANDASTATION ADDITION END - Disconnect an already active thruster implant
 
 /obj/item/organ/cyberimp/chest/thrusters/ui_action_click()
 	toggle()

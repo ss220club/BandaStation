@@ -113,6 +113,8 @@ GLOBAL_LIST_EMPTY(gateway_destinations)
 
 /datum/gateway_destination/gateway/home/proc/check_exile_implant(mob/living/L)
 	for(var/obj/item/implant/exile/E in L.implants)//Checking that there is an exile implant
+		if(E.cybernetic_rejection) // BANDASTATION ADDITION - Rejected implants cannot transmit exile status
+			continue
 		to_chat(L, span_userdanger("The station gate has detected your exile implant and is blocking your entry."))
 		return TRUE
 	return FALSE

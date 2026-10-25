@@ -172,6 +172,10 @@
 		remove_organ_trait(TRAIT_AGEUSIA)
 
 /obj/item/organ/tongue/could_speak_language(datum/language/language_path)
+	// BANDASTATION ADDITION START - A rejected translator cannot provide speech beyond a missing tongue
+	if(cybernetic_rejection)
+		return initial(language_path.flags) & LANGUAGE_TONGUELESS_SPEECH
+	// BANDASTATION ADDITION END - A rejected translator cannot provide speech beyond a missing tongue
 	return (language_path in languages_possible)
 
 /obj/item/organ/tongue/get_availability(datum/species/owner_species, mob/living/owner_mob)

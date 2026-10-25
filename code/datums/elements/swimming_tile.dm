@@ -89,7 +89,7 @@
 
 	//If our floater has a specialized spine, include that as a factor.
 	var/obj/item/organ/cyberimp/chest/spine/potential_spine = floater.get_organ_slot(ORGAN_SLOT_SPINE)
-	if(istype(potential_spine))
+	if(istype(potential_spine) && !potential_spine.cybernetic_rejection) // BANDASTATION EDIT - Disconnected cybernetics provide no bonus.
 		effective_stamina_entry_cost *= potential_spine.athletics_boost_multiplier
 
 	//Finally, we get our athletics skill as a reduction to the stamina cost. This is a direct reduction.

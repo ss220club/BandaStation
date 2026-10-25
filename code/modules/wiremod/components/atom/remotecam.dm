@@ -323,7 +323,7 @@
 	RegisterSignal(shell_parent, COMSIG_ORGAN_IMPLANTED, PROC_REF(on_organ_implanted))
 	RegisterSignal(shell_parent, COMSIG_ORGAN_REMOVED, PROC_REF(on_organ_removed))
 	var/obj/item/organ/cyberimp/bci/bci = shell_parent
-	if(bci.owner) //If somehow the camera was added while shell is already installed inside a mob, assign signals
+	if(bci.owner && !bci.cybernetic_rejection) // BANDASTATION EDIT - Adding a camera cannot reconnect a rejected BCI.
 		if(bciuser) //This should never happen... But if it does, unassign move signal from old mob
 			UnregisterSignal(bciuser, COMSIG_MOVABLE_MOVED, PROC_REF(update_camera_location))
 		bciuser = bci.owner
@@ -392,7 +392,7 @@
 		return
 	var/obj/item/organ/cyberimp/bci/bci = shell_parent
 	//If shell is not currently inside a head, or user is currently blind, or user is dead
-	if(!bci.owner || bci.owner.is_blind() || IS_UNCONSCIOUS(bci.owner))
+	if(!bci.owner || bci.cybernetic_rejection || bci.owner.is_blind() || IS_UNCONSCIOUS(bci.owner)) // BANDASTATION EDIT - A rejected BCI has no working camera interface.
 		close_camera()
 		return
 	var/obj/item/stock_parts/power_store/cell = parent.get_cell()

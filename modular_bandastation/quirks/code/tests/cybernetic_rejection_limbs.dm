@@ -1,0 +1,38 @@
+/// Prostheses remain attached but unusable, and recover outside the incompatible body.
+/datum/unit_test/cybernetic_rejection_limbs/Run()
+	var/mob/living/carbon/human/patient = allocate(/mob/living/carbon/human/consistent)
+	var/obj/item/bodypart/arm/left/robot/arm = allocate(__IMPLIED_TYPE__)
+	TEST_ASSERT(arm.replace_limb(patient), "Could not install the initial prosthetic arm.")
+	TEST_ASSERT(!arm.bodypart_disabled, "The control prosthesis started disabled.")
+	TEST_ASSERT(patient.add_quirk(/datum/quirk/cybernetic_rejection), "Could not add cybernetic rejection.")
+	TEST_ASSERT_EQUAL(patient.get_bodypart(BODY_ZONE_L_ARM), arm, "Rejection detached the prosthesis.")
+	TEST_ASSERT(arm.bodypart_disabled, "Rejection did not disable the existing prosthesis.")
+	arm.heal_damage(100, 100)
+	TEST_ASSERT(arm.bodypart_disabled, "Repair bypassed cybernetic rejection.")
+	ADD_TRAIT(arm, TRAIT_PARALYSIS, REF(src))
+	patient.remove_quirk(/datum/quirk/cybernetic_rejection)
+	TEST_ASSERT(arm.bodypart_disabled, "Removing rejection cleared another cause of paralysis.")
+	REMOVE_TRAIT(arm, TRAIT_PARALYSIS, REF(src))
+	TEST_ASSERT(!arm.bodypart_disabled, "The prosthesis remained disabled after removing rejection.")
+
+	patient.add_quirk(/datum/quirk/cybernetic_rejection)
+	var/obj/item/bodypart/leg/left/robot/leg = allocate(__IMPLIED_TYPE__)
+	TEST_ASSERT(leg.replace_limb(patient), "Could not install a prosthetic leg after adding rejection.")
+	TEST_ASSERT(leg.bodypart_disabled, "A newly installed prosthesis bypassed rejection.")
+	leg.drop_limb(special = TRUE)
+	TEST_ASSERT(!HAS_TRAIT_FROM(leg, TRAIT_PARALYSIS, TRAIT_CYBERNETIC_REJECTION), "Rejection persisted on a detached prosthesis.")
+	var/mob/living/carbon/human/compatible = allocate(/mob/living/carbon/human/consistent)
+	TEST_ASSERT(leg.replace_limb(compatible), "Could not transplant the prosthesis into a compatible body.")
+	TEST_ASSERT(!leg.bodypart_disabled, "The transplanted prosthesis did not work in a compatible body.")
+
+	var/obj/item/bodypart/arm/right/lizard/organic_arm = allocate(__IMPLIED_TYPE__)
+	TEST_ASSERT(organic_arm.replace_limb(patient), "Could not install an organic limb from another species.")
+	TEST_ASSERT(!organic_arm.bodypart_disabled, "Cybernetic rejection disabled an organic transplant.")
+
+/// The preference is selectable for organic species with the requested cost.
+/datum/unit_test/cybernetic_rejection_preferences/Run()
+	var/datum/quirk/cybernetic_rejection/quirk = SSquirks.quirk_prototypes[/datum/quirk/cybernetic_rejection]
+	TEST_ASSERT_NOTNULL(quirk, "Cybernetic rejection is missing from character preferences.")
+	TEST_ASSERT_EQUAL(quirk.value, -6, "Cybernetic rejection has the wrong point cost.")
+	TEST_ASSERT(quirk.is_species_appropriate(/datum/species/human), "Humans cannot select cybernetic rejection.")
+	TEST_ASSERT(quirk.is_species_appropriate(/datum/species/lizard), "Lizards cannot select cybernetic rejection.")

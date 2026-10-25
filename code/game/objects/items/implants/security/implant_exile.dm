@@ -36,7 +36,7 @@
 		preventing returning through Nanotrasen Gateway Project gateways and locking implantees out of using Nanotrasen's mining shuttles. \
 		The ethics behind having this implant are questionable. The efficacy of the implant itself is not."
 
-/obj/item/implant/exile/noteleport/implant(mob/living/target, mob/user, silent = FALSE, force = FALSE)
+/obj/item/implant/exile/noteleport/on_implant(mob/living/target, mob/user, silent = FALSE, force = FALSE) // BANDASTATION EDIT - Functional implant hook behind rejection gate
 	. = ..()
 	if(!. || !isliving(target))
 		return FALSE
@@ -44,7 +44,7 @@
 	ADD_TRAIT(living_target, TRAIT_NO_TELEPORT, IMPLANT_TRAIT)
 	return TRUE
 
-/obj/item/implant/exile/noteleport/removed(mob/target, silent = FALSE, special = FALSE)
+/obj/item/implant/exile/noteleport/on_remove(mob/target, silent = FALSE, special = FALSE) // BANDASTATION EDIT - Functional implant hook behind rejection gate
 	. = ..()
 	if(!. || !isliving(target))
 		return FALSE

@@ -18,14 +18,30 @@
 	src.uplink_handler = uplink_handler
 	RegisterSignal(src, COMSIG_COMPONENT_REMOVING, PROC_REF(on_component_removing))
 
-/obj/item/implant/uplink/implant(mob/living/carbon/target, mob/user, silent, force)
+/obj/item/implant/uplink/on_implant(mob/living/carbon/target, mob/user, silent, force) // BANDASTATION EDIT - Functional implant hook behind rejection gate
 	. = ..()
+	// BANDASTATION ADDITION START - Preserve the existing uplink when reconnecting
+	if(!. || QDELETED(src) || GetComponent(/datum/component/uplink))
+		return
+	// BANDASTATION ADDITION END - Preserve the existing uplink when reconnecting
 	var/datum/component/uplink/new_uplink = AddComponent(/datum/component/uplink, owner = target?.key, lockable = TRUE, enabled = FALSE, uplink_handler_override = uplink_handler, starting_tc = starting_tc)
 	new_uplink.unlock_text = "За небольшое количество телекристаллов Синдикат хитроумно вживил вам свой аплинк. Чтобы получить доступ к нему, просто активируйте его."
 	if(!uplink_handler)
 		new_uplink.uplink_handler.owner = target.mind
 		new_uplink.uplink_handler.assigned_role = target.mind.assigned_role.title
 		new_uplink.uplink_handler.assigned_species = target.dna.species.id
+
+// BANDASTATION ADDITION START - Close already open uplinks when rejected
+/obj/item/implant/uplink/on_cybernetic_rejection(rejected)
+	. = ..()
+	if(!rejected)
+		return
+	var/datum/component/uplink/uplink = GetComponent(/datum/component/uplink)
+	if(uplink)
+		uplink.active = FALSE
+		uplink.locked = TRUE
+		SStgui.close_uis(uplink)
+// BANDASTATION ADDITION END - Close already open uplinks when rejected
 
 /**
  * Proc called when component is removed; ie. uplink component

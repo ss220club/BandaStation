@@ -818,7 +818,7 @@
 	implant_color = "r"
 	var/antag_datum_type = /datum/antagonist/nukeop
 
-/obj/item/implant/nuclear_operative/implant(mob/living/target, mob/user, silent = FALSE, force = FALSE)
+/obj/item/implant/nuclear_operative/on_implant(mob/living/target, mob/user, silent = FALSE, force = FALSE) // BANDASTATION EDIT - Functional implant hook behind rejection gate
 	. = ..()
 	if(!. || !ishuman(target) || !(target.mind))
 		return FALSE
@@ -851,7 +851,7 @@
 	to_chat(human_target, span_userdanger("This implant does NOT, in any way, brainwash you. If you were a normal crew member beforehand, forcibly implanted or otherwise, you are still one and cannot assist the nuclear operatives."))
 	return TRUE
 
-/obj/item/implant/nuclear_operative/removed(mob/target, silent = FALSE, special = FALSE)
+/obj/item/implant/nuclear_operative/on_remove(mob/target, silent = FALSE, special = FALSE) // BANDASTATION EDIT - Functional implant hook behind rejection gate
 	. = ..()
 	if(!. || !isliving(target))
 		return FALSE

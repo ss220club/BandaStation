@@ -86,7 +86,7 @@
 	var/damage_softening_multiplier = 1
 
 	var/obj/item/organ/cyberimp/chest/spine/potential_spine = get_organ_slot(ORGAN_SLOT_SPINE)
-	if(istype(potential_spine))
+	if(istype(potential_spine) && !potential_spine.cybernetic_rejection) // BANDASTATION EDIT - Disconnected cybernetics provide no bonus.
 		damage_softening_multiplier *= potential_spine.athletics_boost_multiplier
 
 	// If you are incapped, you probably can't brace yourself
@@ -717,7 +717,7 @@ GAME_VERB_PROC(/mob/living, mob_sleep, "Sleep", null)
 	var/get_up_time = 1 SECONDS
 
 	var/obj/item/organ/cyberimp/chest/spine/potential_spine = get_organ_slot(ORGAN_SLOT_SPINE)
-	if(istype(potential_spine))
+	if(istype(potential_spine) && !potential_spine.cybernetic_rejection) // BANDASTATION EDIT - Disconnected cybernetics provide no bonus.
 		get_up_time *= potential_spine.athletics_boost_multiplier
 
 	if(!instant && !do_after(src, get_up_time, src, timed_action_flags = (IGNORE_USER_LOC_CHANGE|IGNORE_TARGET_LOC_CHANGE|IGNORE_HELD_ITEM), extra_checks = CALLBACK(src, TYPE_PROC_REF(/mob/living, rest_checks_callback)), interaction_key = DOAFTER_SOURCE_GETTING_UP, cog_icon = null))

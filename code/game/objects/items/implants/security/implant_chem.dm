@@ -62,12 +62,12 @@
 	. = ..()
 	create_reagents(50, OPENCONTAINER)
 
-/obj/item/implant/chem/implant(mob/living/target, mob/user, silent = FALSE, force = FALSE)
+/obj/item/implant/chem/on_implant(mob/living/target, mob/user, silent = FALSE, force = FALSE) // BANDASTATION EDIT - Functional implant hook behind rejection gate
 	. = ..()
 	if(. && !frequency)
 		RegisterSignal(target, COMSIG_LIVING_DEATH, PROC_REF(on_death))
 
-/obj/item/implant/chem/removed(mob/target, silent = FALSE, special = FALSE)
+/obj/item/implant/chem/on_remove(mob/target, silent = FALSE, special = FALSE) // BANDASTATION EDIT - Functional implant hook behind rejection gate
 	. = ..()
 	if(.)
 		UnregisterSignal(target, COMSIG_LIVING_DEATH)
@@ -76,7 +76,7 @@
 	SIGNAL_HANDLER
 	INVOKE_ASYNC(src, TYPE_PROC_REF(/obj/item/implant/chem, activate), reagents.total_volume)
 
-/obj/item/implant/chem/activate(cause)
+/obj/item/implant/chem/on_activate(cause) // BANDASTATION EDIT - Functional implant hook behind rejection gate
 	. = ..()
 	if(!cause || !imp_in)
 		return

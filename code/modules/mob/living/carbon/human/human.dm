@@ -852,7 +852,13 @@
 		var/obj/item/brain_processor/organic/new_mmi = new(get_turf(src))
 
 		target_brain.Remove(src)
-		new_mmi.insert_brain(target_brain)
+		// BANDASTATION EDIT START - Leave the original body intact when its brain rejects the MMI
+		if(!new_mmi.insert_brain(target_brain))
+			target_brain.Insert(src, special = TRUE)
+			qdel(new_mmi)
+			to_chat(usr, span_warning("This mob's brain is incompatible with an MMI."))
+			return
+		// BANDASTATION EDIT END - Leave the original body intact when its brain rejects the MMI
 
 		to_chat(usr, "Turned [src] into an MMI.")
 		log_admin("[key_name(usr)] turned [key_name_and_tag(src)] into an MMI.")
@@ -908,7 +914,7 @@
 	carrydelay -= fitness_level * (1/3) SECONDS
 
 	var/obj/item/organ/cyberimp/chest/spine/potential_spine = get_organ_slot(ORGAN_SLOT_SPINE)
-	if(istype(potential_spine))
+	if(istype(potential_spine) && !potential_spine.cybernetic_rejection) // BANDASTATION EDIT - Disconnected cybernetics provide no bonus.
 		carrydelay *= potential_spine.athletics_boost_multiplier
 		experience_reward += experience_reward * potential_spine.athletics_boost_multiplier
 

@@ -504,6 +504,8 @@
 	addtimer(CALLBACK(src, PROC_REF(reboot)), 90 / severity)
 
 /obj/item/organ/cyberimp/arm/strongarm/proc/reboot()
+	if(cybernetic_rejection) // BANDASTATION ADDITION - EMP recovery cannot reconnect a rejected organ.
+		return
 	organ_flags &= ~ORGAN_FAILING
 	owner.balloon_alert(owner, "your arm stops spasming!")
 

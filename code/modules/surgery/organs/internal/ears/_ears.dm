@@ -108,6 +108,13 @@
 /obj/item/organ/ears/on_failure_recovery()
 	remove_organ_trait(TRAIT_DEAF)
 
+// BANDASTATION ADDITION START - Removing disconnected ears must leave the old body deaf
+/obj/item/organ/ears/on_rejected_mob_remove(mob/living/carbon/organ_owner, special)
+	. = ..()
+	if(!special)
+		ADD_TRAIT(organ_owner, TRAIT_DEAF, NO_EARS)
+// BANDASTATION ADDITION END - Removing disconnected ears must leave the old body deaf
+
 /// Being deafened by loud noises makes you shout
 /obj/item/organ/ears/proc/adjust_speech(datum/source, list/speech_args)
 	SIGNAL_HANDLER

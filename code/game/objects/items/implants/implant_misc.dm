@@ -28,7 +28,7 @@
 		such as stationbound silicon units, within the user's radius. \
 		Prospective users are reminded that the S-EPG does not protect the host from their own electromagnetic pulses."
 
-/obj/item/implant/emp/activate()
+/obj/item/implant/emp/on_activate() // BANDASTATION EDIT - Functional implant hook behind rejection gate
 	. = ..()
 	uses--
 	empulse(imp_in, 3, 5, emp_source = src)
@@ -53,7 +53,7 @@
 		Prospective users are reminded that the S-VOG does not protect the host particularly well from \
 		thermal imaging, nor does it actually stop blind fire into the smoke, nor does it stop movement."
 
-/obj/item/implant/smoke/activate()
+/obj/item/implant/smoke/on_activate() // BANDASTATION EDIT - Functional implant hook behind rejection gate
 	. = ..()
 	uses--
 	do_smoke(6, imp_in, imp_in.loc, smoke_type = /datum/effect_system/fluid_spread/smoke/bad)
@@ -79,7 +79,7 @@
 		to interface with telecommunications networks. It's mainly useful for those who expect either \
 		equipment loss or lack the ability to use standalone radio equipment easily."
 
-/obj/item/implant/radio/activate()
+/obj/item/implant/radio/on_activate() // BANDASTATION EDIT - Functional implant hook behind rejection gate
 	. = ..()
 	// needs to be GLOB.deep_inventory_state otherwise it won't open
 	radio.ui_interact(usr, state = GLOB.deep_inventory_state)
@@ -87,7 +87,7 @@
 /obj/item/implant/radio/Initialize(mapload)
 	. = ..()
 
-	radio = new(src)
+	radio = new /obj/item/radio/implant(src) // BANDASTATION EDIT - Keep rejected internal radios disconnected after EMP recovery
 	// almost like an internal headset, but without the
 	// "must be in ears to hear" restriction.
 	radio.name = "internal radio"
@@ -100,6 +100,20 @@
 /obj/item/implant/radio/Destroy()
 	QDEL_NULL(radio)
 	return ..()
+
+// BANDASTATION ADDITION START - Rejected radios cannot receive or transmit
+/obj/item/implant/radio/on_cybernetic_rejection(rejected)
+	. = ..()
+	radio?.set_on(!rejected)
+	if(rejected)
+		SStgui.close_uis(radio)
+
+/obj/item/radio/implant/set_on(new_on)
+	var/obj/item/implant/radio/implant = loc
+	if(istype(implant) && implant.cybernetic_rejection)
+		new_on = FALSE
+	return ..(new_on)
+// BANDASTATION ADDITION END - Rejected radios cannot receive or transmit
 
 /obj/item/implant/radio/mining
 	radio_key = /obj/item/encryptionkey/headset_cargo

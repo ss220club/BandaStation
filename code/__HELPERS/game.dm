@@ -62,6 +62,8 @@
 	if(!ishuman(player_mind?.current))
 		return FALSE
 	for(var/obj/item/implant/implant_check in player_mind.current.implants)
+		if(implant_check.cybernetic_rejection) // BANDASTATION ADDITION - Rejected implants cannot transmit exile status
+			continue
 		if(istype(implant_check, /obj/item/implant/exile && player_mind.current.onAwayMission()))
 			return TRUE
 

@@ -219,7 +219,7 @@
 	var/stamina_exhaustion = 2 + challenge.difficulty * 0.02
 	var/is_heavy_gravity = wearer.has_gravity() > STANDARD_GRAVITY
 	var/obj/item/organ/cyberimp/chest/spine/potential_spine = wearer.get_organ_slot(ORGAN_SLOT_SPINE)
-	if(istype(potential_spine))
+	if(istype(potential_spine) && !potential_spine.cybernetic_rejection) // BANDASTATION EDIT - Disconnected cybernetics provide no bonus.
 		stamina_exhaustion *= potential_spine.athletics_boost_multiplier
 	if(HAS_TRAIT(wearer, TRAIT_STRENGTH))
 		stamina_exhaustion *= 0.5

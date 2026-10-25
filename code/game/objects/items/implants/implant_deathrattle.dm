@@ -55,7 +55,7 @@
 	implants += implant
 	implant.current_group = src
 
-	if(implant.imp_in)
+	if(implant.imp_in && !implant.cybernetic_rejection) // BANDASTATION EDIT - Rejected implants cannot connect to a group
 		on_implant_implantation(implant.imp_in)
 
 /datum/deathrattle_group/proc/on_implant_implantation(obj/item/implant/implant, mob/living/target, mob/user, silent = FALSE, force = FALSE)
@@ -101,7 +101,7 @@
 		var/obj/item/implant/deathrattle/implant = _implant
 
 		// Skip the unfortunate soul, and any unimplanted implants
-		if(implant.imp_in == owner || !implant.imp_in)
+		if(implant.imp_in == owner || !implant.imp_in || implant.cybernetic_rejection) // BANDASTATION EDIT - Rejected implants cannot receive alerts
 			continue
 
 		// Deliberately the same message framing as ghost deathrattle

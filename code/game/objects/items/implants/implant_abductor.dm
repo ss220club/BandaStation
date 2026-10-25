@@ -7,7 +7,7 @@
 	var/cooldown = 60 SECONDS
 	var/on_cooldown
 
-/obj/item/implant/abductor/activate()
+/obj/item/implant/abductor/on_activate() // BANDASTATION EDIT - Functional implant hook behind rejection gate
 	. = ..()
 	if(on_cooldown)
 		to_chat(imp_in, span_warning("You must wait [timeleft(on_cooldown)*0.1] seconds to use [src] again!"))
@@ -20,7 +20,7 @@
 	home.Retrieve(imp_in)
 	on_cooldown = addtimer(VARSET_CALLBACK(src, on_cooldown, null), cooldown , TIMER_STOPPABLE)
 
-/obj/item/implant/abductor/implant(mob/living/target, mob/user, silent = FALSE, force = FALSE)
+/obj/item/implant/abductor/on_implant(mob/living/target, mob/user, silent = FALSE, force = FALSE) // BANDASTATION EDIT - Functional implant hook behind rejection gate
 	if(!..())
 		return FALSE
 

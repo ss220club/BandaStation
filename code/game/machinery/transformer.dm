@@ -97,7 +97,18 @@
 	// Sleep for a couple of ticks to allow the human to see the pain
 	sleep(0.5 SECONDS)
 
+	// BANDASTATION ADDITION START - An incompatible body is destroyed instead of becoming a cyborg
+	if(QDELETED(victim))
+		return
+	// BANDASTATION ADDITION END - An incompatible body is destroyed instead of becoming a cyborg
+
 	use_energy(active_power_usage) // Use a lot of power.
+	// BANDASTATION ADDITION START - An incompatible body is destroyed instead of becoming a cyborg
+	if(HAS_TRAIT(victim, TRAIT_CYBERNETIC_REJECTION))
+		victim.visible_message(span_danger("[src] разрывает тело [victim] на части!"))
+		victim.gib()
+		return
+	// BANDASTATION ADDITION END - An incompatible body is destroyed instead of becoming a cyborg
 	var/mob/living/silicon/robot/new_borg = victim.Robotize()
 	new_borg.cell = new /obj/item/stock_parts/power_store/cell/super(new_borg)
 

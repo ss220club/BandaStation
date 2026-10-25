@@ -29,6 +29,11 @@ GLOBAL_LIST_INIT_TYPED(quirk_blacklist, /list/datum/quirk, list(
 	list(/datum/quirk/numb, /datum/quirk/selfaware),
 	list(/datum/quirk/empath, /datum/quirk/evil),
 	list(/datum/quirk/keen_nose, /datum/quirk/item_quirk/anosmia),
+	// BANDASTATION ADDITION START - Complete cybernetic rejection
+	list(/datum/quirk/cybernetic_rejection, /datum/quirk/tin_man),
+	list(/datum/quirk/cybernetic_rejection, /datum/quirk/chipped),
+	list(/datum/quirk/cybernetic_rejection, /datum/quirk/chip_connector),
+	// BANDASTATION ADDITION END - Complete cybernetic rejection
 ))
 
 GLOBAL_LIST_INIT(quirk_string_blacklist, generate_quirk_string_blacklist())

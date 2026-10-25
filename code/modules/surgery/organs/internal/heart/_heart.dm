@@ -83,6 +83,10 @@
 	return TRUE
 
 /obj/item/organ/heart/proc/Restart()
+	// BANDASTATION ADDITION START - Defibrillation cannot reconnect rejected cybernetics
+	if(cybernetic_rejection)
+		return FALSE
+	// BANDASTATION ADDITION END - Defibrillation cannot reconnect rejected cybernetics
 	if(beating)
 		return FALSE
 
@@ -105,7 +109,14 @@
 /// Checks if the heart is beating.
 /// Can be overridden to add more conditions for more complex hearts.
 /obj/item/organ/heart/proc/is_beating()
-	return beating
+	return beating && !cybernetic_rejection // BANDASTATION EDIT - Rejection interrupts the interface without damaging the heart.
+
+// BANDASTATION ADDITION START - Stop the owner's heartbeat loop immediately when the interface fails
+/obj/item/organ/heart/on_begin_failure()
+	. = ..()
+	beat = BEAT_NONE
+	owner?.stop_sound_channel(CHANNEL_HEARTBEAT)
+// BANDASTATION ADDITION END - Stop the owner's heartbeat loop immediately when the interface fails
 
 /obj/item/organ/heart/get_status_text(scanpower, add_tooltips, colored)
 	if(owner.has_status_effect(/datum/status_effect/heart_attack))

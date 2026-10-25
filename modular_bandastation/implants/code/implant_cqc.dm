@@ -32,7 +32,12 @@
 	QDEL_NULL(style)
 	return ..()
 
-/obj/item/implant/cqc/activate()
+/obj/item/implant/cqc/on_remove(mob/living/source, silent = FALSE, special = FALSE)
+	if(HAS_TRAIT(source, TRAIT_CYBERNETIC_REJECTION))
+		style?.unlearn(source)
+	return ..()
+
+/obj/item/implant/cqc/on_activate()
 	. = ..()
 	if(isnull(imp_in.mind))
 		return

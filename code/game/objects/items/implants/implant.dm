@@ -23,14 +23,47 @@
 	var/implant_flags = NONE
 	///what icon state will we represent ourselves with on the hud?
 	var/hud_icon_state = null
+	/// Whether this implant is physically present but disconnected from its host.
+	var/cybernetic_rejection = FALSE // BANDASTATION ADDITION - Cybernetic rejection
 
 	/// What's the most important info that we really, really care about, e.g. name, lifespan-after-death, utility?
 	var/implant_info = "No information available."
 	/// What's the extended lore for this implant that we might not care that much about, e.g. descriptions, flavortext?
 	var/implant_lore = "No information available."
 
-/obj/item/implant/proc/activate()
+/obj/item/implant/proc/activate(cause) // BANDASTATION EDIT - Gate every implant activation
+	SHOULD_NOT_OVERRIDE(TRUE)
+	if(cybernetic_rejection)
+		return FALSE
+	return on_activate(arglist(args))
+
+// BANDASTATION ADDITION START - Cybernetic rejection
+/// Functional activation hook, only called for a connected implant.
+/obj/item/implant/proc/on_activate()
+	SHOULD_CALL_PARENT(TRUE)
 	SEND_SIGNAL(src, COMSIG_IMPLANT_ACTIVATED)
+
+/// Change connectivity without losing the implant, its charges or stored contents.
+/obj/item/implant/proc/set_cybernetic_rejection(rejected)
+	if(cybernetic_rejection == rejected)
+		return
+	var/mob/living/implantee = imp_in
+	if(implantee)
+		removed(implantee, silent = TRUE, special = TRUE)
+	cybernetic_rejection = rejected
+	on_cybernetic_rejection(rejected)
+	if(!implantee)
+		return
+	if(rejected)
+		implant_into_body(implantee, silent = TRUE, force = TRUE)
+	else
+		on_implant(implantee, null, TRUE, TRUE)
+
+/// Handle hardware which exists before implantation, such as internal radios.
+/obj/item/implant/proc/on_cybernetic_rejection(rejected)
+	SHOULD_CALL_PARENT(TRUE)
+	return
+// BANDASTATION ADDITION END - Cybernetic rejection
 
 /obj/item/implant/ui_action_click()
 	INVOKE_ASYNC(src, PROC_REF(activate), "action_button")
@@ -62,6 +95,21 @@
  * * force - if true, implantation will not fail if can_be_implanted_in returns false
  */
 /obj/item/implant/proc/implant(mob/living/target, mob/user, silent = FALSE, force = FALSE)
+	// BANDASTATION ADDITION START - Keep rejected implants physically installed without their effects
+	SHOULD_NOT_OVERRIDE(TRUE)
+	set_cybernetic_rejection(HAS_TRAIT(target, TRAIT_CYBERNETIC_REJECTION))
+	if(cybernetic_rejection)
+		return implant_into_body(target, user, silent, force)
+	return on_implant(target, user, silent, force)
+
+/// Functional installation hook, separated from physical ownership for rejected hosts.
+/obj/item/implant/proc/on_implant(mob/living/target, mob/user, silent = FALSE, force = FALSE)
+	SHOULD_CALL_PARENT(TRUE)
+	return implant_into_body(target, user, silent, force)
+
+/obj/item/implant/proc/implant_into_body(mob/living/target, mob/user, silent = FALSE, force = FALSE)
+	SHOULD_NOT_OVERRIDE(TRUE)
+	// BANDASTATION ADDITION END - Keep rejected implants physically installed without their effects
 	if(SEND_SIGNAL(src, COMSIG_IMPLANT_IMPLANTING, args) & COMPONENT_STOP_IMPLANTING)
 		return
 	LAZYINITLIST(target.implants)
@@ -103,8 +151,11 @@
 	forceMove(target)
 	imp_in = target
 	target.implants += src
-	for(var/datum/action/implant_action as anything in actions)
-		implant_action.Grant(target)
+	// BANDASTATION EDIT START - Rejected hardware has no functional interface
+	if(!cybernetic_rejection)
+		for(var/datum/action/implant_action as anything in actions)
+			implant_action.Grant(target)
+	// BANDASTATION EDIT END - Rejected hardware has no functional interface
 	if(ishuman(target))
 		var/mob/living/carbon/human/target_human = target
 		target_human.sec_hud_set_implants()
@@ -112,8 +163,11 @@
 	if(user)
 		log_combat(user, target, "implanted", "\a [name]")
 
-	SEND_SIGNAL(src, COMSIG_IMPLANT_IMPLANTED, target, user, silent, force)
-	GLOB.tracked_implants += src
+	// BANDASTATION EDIT START - Rejected hardware cannot communicate with the host or trackers
+	if(!cybernetic_rejection)
+		SEND_SIGNAL(src, COMSIG_IMPLANT_IMPLANTED, target, user, silent, force)
+		GLOB.tracked_implants += src
+	// BANDASTATION EDIT END - Rejected hardware cannot communicate with the host or trackers
 	return TRUE
 
 /**
@@ -126,6 +180,21 @@
  * * special - Set to true if removed by admin panel, should bypass any side effects
  */
 /obj/item/implant/proc/removed(mob/living/source, silent = FALSE, special = FALSE)
+	// BANDASTATION ADDITION START - Only undo functional effects which were actually applied
+	SHOULD_NOT_OVERRIDE(TRUE)
+	if(!cybernetic_rejection)
+		return on_remove(source, silent, special)
+	. = remove_from_body(source, silent, special)
+	cybernetic_rejection = FALSE
+	on_cybernetic_rejection(FALSE)
+
+/obj/item/implant/proc/on_remove(mob/living/source, silent = FALSE, special = FALSE)
+	SHOULD_CALL_PARENT(TRUE)
+	return remove_from_body(source, silent, special)
+
+/obj/item/implant/proc/remove_from_body(mob/living/source, silent = FALSE, special = FALSE)
+	SHOULD_NOT_OVERRIDE(TRUE)
+	// BANDASTATION ADDITION END - Only undo functional effects which were actually applied
 	moveToNullspace()
 	imp_in = null
 	source.implants -= src
@@ -135,7 +204,10 @@
 		var/mob/living/carbon/human/human_source = source
 		human_source.sec_hud_set_implants()
 
-	SEND_SIGNAL(src, COMSIG_IMPLANT_REMOVED, source, silent, special)
+	// BANDASTATION EDIT START - Inert implants never registered host callbacks
+	if(!cybernetic_rejection)
+		SEND_SIGNAL(src, COMSIG_IMPLANT_REMOVED, source, silent, special)
+	// BANDASTATION EDIT END - Inert implants never registered host callbacks
 	GLOB.tracked_implants -= src
 	return TRUE
 

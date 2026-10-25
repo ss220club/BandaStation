@@ -9,7 +9,7 @@
 		both protects the host's mental faculties from, and reverses, external forms of manipulation, \
 		such as reprogrammed flashbulbs, hypnotic suggestion, and, theoretically, magical induction into cults."
 
-/obj/item/implant/mindshield/implant(mob/living/target, mob/user, silent = FALSE, force = FALSE)
+/obj/item/implant/mindshield/on_implant(mob/living/target, mob/user, silent = FALSE, force = FALSE) // BANDASTATION EDIT - Functional implant hook behind rejection gate
 	. = ..()
 	if(!.)
 		return FALSE
@@ -30,7 +30,7 @@
 		to_chat(target, span_notice("You feel a sense of peace and security. You are now protected from brainwashing."))
 	return TRUE
 
-/obj/item/implant/mindshield/removed(mob/target, silent = FALSE, special = FALSE)
+/obj/item/implant/mindshield/on_remove(mob/target, silent = FALSE, special = FALSE) // BANDASTATION EDIT - Functional implant hook behind rejection gate
 	. = ..()
 	if(!.)
 		return FALSE

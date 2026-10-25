@@ -409,7 +409,7 @@
 			defense_mod += 1
 
 		var/obj/item/organ/cyberimp/chest/spine/potential_spine = tackle_target.get_organ_slot(ORGAN_SLOT_SPINE)
-		if(istype(potential_spine))
+		if(istype(potential_spine) && !potential_spine.cybernetic_rejection) // BANDASTATION EDIT - Disconnected cybernetics provide no bonus.
 			defense_mod += potential_spine.strength_bonus
 
 		if(istype(tackle_target.wear_suit, /obj/item/clothing/suit/hooded/cultrobes/eldritch/blade))
@@ -457,7 +457,7 @@
 		attack_mod += 2
 
 	var/obj/item/organ/cyberimp/chest/spine/potential_spine = sacker.get_organ_slot(ORGAN_SLOT_SPINE)
-	if(istype(potential_spine))
+	if(istype(potential_spine) && !potential_spine.cybernetic_rejection) // BANDASTATION EDIT - Disconnected cybernetics provide no bonus.
 		attack_mod += potential_spine.strength_bonus
 
 	if(ishuman(sacker))
@@ -524,7 +524,7 @@
 		oopsie_mod -= 6
 
 	var/obj/item/organ/cyberimp/chest/spine/potential_spine = user.get_organ_slot(ORGAN_SLOT_SPINE) // Can't snap that spine if it's made of metal.
-	if(istype(potential_spine))
+	if(istype(potential_spine) && !potential_spine.cybernetic_rejection) // BANDASTATION EDIT - Disconnected cybernetics provide no bonus.
 		oopsie_mod -= potential_spine.strength_bonus
 
 	if(HAS_TRAIT(user, TRAIT_CLUMSY))

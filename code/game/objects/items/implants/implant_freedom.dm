@@ -16,7 +16,7 @@
 
 	var/resist_strength = 3 MINUTES
 
-/obj/item/implant/freedom/implant(mob/living/target, mob/user, silent, force)
+/obj/item/implant/freedom/on_implant(mob/living/target, mob/user, silent, force) // BANDASTATION EDIT - Functional implant hook behind rejection gate
 	. = ..()
 	if(!.)
 		return FALSE
@@ -25,7 +25,7 @@
 		return FALSE
 	return TRUE
 
-/obj/item/implant/freedom/activate()
+/obj/item/implant/freedom/on_activate() // BANDASTATION EDIT - Functional implant hook behind rejection gate
 	. = ..()
 	var/mob/living/carbon/carbon_imp_in = imp_in
 	if(!can_trigger(carbon_imp_in))

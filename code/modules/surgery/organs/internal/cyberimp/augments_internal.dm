@@ -156,6 +156,13 @@
 		ui_action_click()
 	..()
 
+// BANDASTATION ADDITION START - Disconnect an already active anti-drop implant
+/obj/item/organ/cyberimp/brain/anti_drop/set_cybernetic_rejection(rejected)
+	if(rejected && active)
+		ui_action_click()
+	return ..()
+// BANDASTATION ADDITION END - Disconnect an already active anti-drop implant
+
 /obj/item/organ/cyberimp/brain/anti_drop/proc/on_held_item_dropped(obj/item/source, mob/user)
 	SIGNAL_HANDLER
 	REMOVE_TRAIT(source, TRAIT_NODROP, IMPLANT_TRAIT)
@@ -211,7 +218,7 @@
 	owner.SetImmobilized(0)
 	owner.SetParalyzed(0)
 	owner.set_stamina_loss(0)
-	addtimer(CALLBACK(owner, TYPE_PROC_REF(/mob/living, set_stamina_loss), 0), stun_resistance_time)
+	addtimer(CALLBACK(src, PROC_REF(clear_stamina_after_resistance), owner), stun_resistance_time) // BANDASTATION EDIT - Revalidate the cybernetic connection after the delay.
 
 	do_sparks(5, TRUE, src)
 
@@ -220,6 +227,13 @@
 
 	COOLDOWN_START(src, implant_cooldown, 60 SECONDS)
 	addtimer(CALLBACK(src, PROC_REF(implant_ready)),60 SECONDS)
+
+// BANDASTATION ADDITION START - A delayed implant effect cannot cross interface disconnection
+/obj/item/organ/cyberimp/brain/anti_stun/proc/clear_stamina_after_resistance(mob/living/recipient)
+	if(cybernetic_rejection || owner != recipient || QDELETED(recipient))
+		return
+	recipient.set_stamina_loss(0)
+// BANDASTATION ADDITION END - A delayed implant effect cannot cross interface disconnection
 
 /obj/item/organ/cyberimp/brain/anti_stun/proc/implant_ready()
 	if(owner)
@@ -241,6 +255,8 @@
 	addtimer(CALLBACK(src, PROC_REF(reboot)), 9 SECONDS / severity)
 
 /obj/item/organ/cyberimp/brain/anti_stun/proc/reboot()
+	if(cybernetic_rejection) // BANDASTATION ADDITION - EMP recovery cannot reconnect a rejected organ.
+		return
 	organ_flags &= ~ORGAN_FAILING
 	implant_ready()
 
@@ -347,6 +363,8 @@
 	return FALSE
 
 /obj/item/organ/cyberimp/brain/connector/proc/reboot()
+	if(cybernetic_rejection) // BANDASTATION ADDITION - EMP recovery cannot reconnect a rejected organ.
+		return
 	organ_flags &= ~ORGAN_FAILING
 
 /obj/item/organ/cyberimp/brain/surgical_processor

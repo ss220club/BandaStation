@@ -78,11 +78,11 @@
 		to implanted targets, relaying messages directly to targets' brains. \
 		Dissolves into bio-safe elements after five minutes."
 
-/obj/item/implant/tracking/c38/implant(mob/living/target, mob/user, silent, force)
+/obj/item/implant/tracking/c38/on_implant(mob/living/target, mob/user, silent, force) // BANDASTATION EDIT - Functional implant hook behind rejection gate
 	. = ..()
 	timerid = QDEL_IN_STOPPABLE(src, lifespan)
 
-/obj/item/implant/tracking/c38/removed(mob/living/source, silent, special)
+/obj/item/implant/tracking/c38/on_remove(mob/living/source, silent, special) // BANDASTATION EDIT - Functional implant hook behind rejection gate
 	. = ..()
 	deltimer(timerid)
 	timerid = null

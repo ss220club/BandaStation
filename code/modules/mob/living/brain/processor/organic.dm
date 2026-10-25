@@ -42,6 +42,12 @@
 		balloon_alert(user, "[p_Theyre()] already full!")
 		return ITEM_INTERACT_BLOCKING
 
+	// BANDASTATION ADDITION START - Cybernetically incompatible brains cannot be used in any organic MMI
+	if(HAS_TRAIT(newbrain, TRAIT_CYBERNETIC_REJECTION))
+		balloon_alert(user, "мозг несовместим с MMI!")
+		return ITEM_INTERACT_BLOCKING
+	// BANDASTATION ADDITION END - Cybernetically incompatible brains cannot be used in any organic MMI
+
 	if(!newbrain.brainmob)
 		var/install = tgui_alert(user, "[newbrain] is inactive, slot it in anyway?", "Installing Brain", list("Yes", "No"))
 		if(install != "Yes")
@@ -50,7 +56,13 @@
 	if(!user.transferItemToLoc(newbrain, src))
 		return ITEM_INTERACT_BLOCKING
 
-	insert_brain(newbrain)
+	// BANDASTATION EDIT START - Recheck incompatibility after the inactive-brain prompt and item transfer
+	if(!insert_brain(newbrain))
+		newbrain.forceMove(drop_location())
+		user.put_in_hands(newbrain)
+		balloon_alert(user, "мозг несовместим с MMI!")
+		return ITEM_INTERACT_BLOCKING
+	// BANDASTATION EDIT END - Recheck incompatibility after the inactive-brain prompt and item transfer
 	user.visible_message(
 		span_notice("[user] sticks \a [newbrain] into [src]..."),
 		span_notice("You stick [newbrain] into [src]..."),
@@ -110,6 +122,11 @@
 	if(!istype(new_brain))
 		CRASH("tried to insert invalid value into [type]")
 
+	// BANDASTATION ADDITION START - Enforce incompatibility for ordinary, Syndicate and programmatic insertion
+	if(HAS_TRAIT(new_brain, TRAIT_CYBERNETIC_REJECTION))
+		return FALSE
+	// BANDASTATION ADDITION END - Enforce incompatibility for ordinary, Syndicate and programmatic insertion
+
 	if(brain)
 		remove_brain() // also clears the brainmob
 
@@ -131,6 +148,7 @@
 			brainmob.notify_revival("Your brain was inserted into an MMI!", source = src)
 
 	update_appearance()
+	return TRUE // BANDASTATION ADDITION - Report whether the brain was accepted
 
 /// Removes the currently inserted brain from the MMI.
 /obj/item/brain_processor/organic/proc/remove_brain(atom/destination = drop_location()) as /obj/item/organ/brain
@@ -156,6 +174,10 @@
 
 /obj/item/brain_processor/organic/transfer_identity(mob/living/transferred_user) //Same deal as the regular brain proc. Used for human-->robot people.
 	var/obj/item/organ/brain/new_brain = astype(transferred_user, /mob/living/carbon)?.get_organ_by_type(/obj/item/organ/brain)
+	// BANDASTATION ADDITION START - Do not extract an incompatible brain into a processor that cannot accept it
+	if(HAS_TRAIT(transferred_user, TRAIT_CYBERNETIC_REJECTION) || HAS_TRAIT(new_brain, TRAIT_CYBERNETIC_REJECTION))
+		return FALSE
+	// BANDASTATION ADDITION END - Do not extract an incompatible brain into a processor that cannot accept it
 	if(!new_brain)
 		new_brain = new(src)
 		new_brain.transfer_identity(transferred_user)

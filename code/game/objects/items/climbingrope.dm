@@ -58,7 +58,7 @@
 	var/misc_multiplier = 1
 
 	var/obj/item/organ/cyberimp/chest/spine/potential_spine = user.get_organ_slot(ORGAN_SLOT_SPINE)
-	if(istype(potential_spine))
+	if(istype(potential_spine) && !potential_spine.cybernetic_rejection) // BANDASTATION EDIT - Disconnected cybernetics provide no bonus.
 		misc_multiplier *= potential_spine.athletics_boost_multiplier
 
 	var/final_climb_time = (climb_time - fitness_level) * misc_multiplier

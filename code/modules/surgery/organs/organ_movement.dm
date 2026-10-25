@@ -5,6 +5,47 @@
 
 // Keep the seperation of limb removal and mob removal absolute
 
+// BANDASTATION ADDITION START - Keep rejected cybernetics physically installed but disconnected
+/// Disconnects functional hooks without removing or damaging the organ.
+/obj/item/organ/proc/set_cybernetic_rejection(rejected)
+	rejected = !!rejected
+	if(cybernetic_rejection == rejected || (rejected && !IS_ROBOTIC_ORGAN(src)))
+		return
+
+	if(rejected)
+		cybernetic_rejection = TRUE
+		if(mob_effects_active)
+			mob_effects_active = FALSE
+			on_mob_remove(owner, TRUE)
+		if(bodypart_effects_active)
+			bodypart_effects_active = FALSE
+			on_bodypart_remove(bodypart_owner)
+		organ_flags |= ORGAN_FAILING
+		on_begin_failure()
+		return
+
+	cybernetic_rejection = FALSE
+	if(damage < maxHealth && !(organ_flags & ORGAN_EMP))
+		organ_flags &= ~ORGAN_FAILING
+		on_failure_recovery()
+	if(owner)
+		mob_effects_active = TRUE
+		on_mob_insert(owner, TRUE)
+	if(bodypart_owner)
+		bodypart_effects_active = TRUE
+		on_bodypart_insert(bodypart_owner)
+
+/// Removes failure symptoms from the old body when an already disconnected organ is extracted.
+/obj/item/organ/proc/on_rejected_mob_remove(mob/living/carbon/organ_owner, special)
+	for(var/trait in organ_traits)
+		REMOVE_TRAIT(organ_owner, trait, REF(src))
+
+/// Physical extraction hooks also run for disconnected organs, without firing functional hooks twice.
+/obj/item/organ/proc/on_physical_mob_remove(mob/living/carbon/organ_owner, special, movement_flags)
+	SHOULD_CALL_PARENT(TRUE)
+	return
+// BANDASTATION ADDITION END - Keep rejected cybernetics physically installed but disconnected
+
 /*
  * Insert the organ into the select mob.
  *
@@ -85,7 +126,18 @@
 	receiver.organs_slot[slot] = src
 	owner = receiver
 
-	on_mob_insert(receiver, special, movement_flags)
+	// BANDASTATION EDIT START - Physical ownership and functional connection are independent
+	set_cybernetic_rejection(IS_ROBOTIC_ORGAN(src) && HAS_TRAIT(receiver, TRAIT_CYBERNETIC_REJECTION))
+	if(!cybernetic_rejection && !mob_effects_active)
+		mob_effects_active = TRUE
+		on_mob_insert(receiver, special, movement_flags)
+	if(!special)
+		receiver.hud_used?.update_locked_slots()
+	SEND_SIGNAL(receiver, COMSIG_CARBON_GAIN_ORGAN, src, special)
+	// organs_slot must stay sorted even when the organ's functional callbacks are skipped.
+	sortTim(receiver.organs_slot, GLOBAL_PROC_REF(cmp_organ_slot_asc))
+	STOP_PROCESSING(SSobj, src)
+	// BANDASTATION EDIT END - Physical ownership and functional connection are independent
 
 	return TRUE
 
@@ -104,16 +156,8 @@
 	for(var/datum/status_effect/effect as anything in organ_effects)
 		organ_owner.apply_status_effect(effect, type)
 
-	if(!special)
-		organ_owner.hud_used?.update_locked_slots()
 	SEND_SIGNAL(src, COMSIG_ORGAN_IMPLANTED, organ_owner)
-	SEND_SIGNAL(organ_owner, COMSIG_CARBON_GAIN_ORGAN, src, special)
-
-	// organs_slot must ALWAYS be ordered in the same way as organ_process_order
-	// Otherwise life processing breaks down
-	sortTim(owner.organs_slot, GLOBAL_PROC_REF(cmp_organ_slot_asc))
-
-	STOP_PROCESSING(SSobj, src)
+	// BANDASTATION EDIT - Physical insertion bookkeeping is performed by mob_insert even for rejected organs.
 
 /// Insert an organ into a limb, assume the limb as always detached and include no owner operations here (except the get_bodypart helper here I guess)
 /// Give EITHER a limb OR a limb owner
@@ -136,8 +180,14 @@
 	if(bodypart_owner != bodypart)
 		bodypart_owner = bodypart
 		RegisterSignal(src, COMSIG_MOVABLE_MOVED, PROC_REF(forced_removal))
-		// Apply unique side-effects. Return value does not matter.
-		on_bodypart_insert(bodypart)
+		// BANDASTATION EDIT START - A disconnected implant still occupies its physical bodypart
+		item_flags |= ABSTRACT
+		ADD_TRAIT(src, TRAIT_NODROP, ORGAN_INSIDE_BODY_TRAIT)
+		interaction_flags_item &= ~INTERACT_ITEM_ATTACK_HAND_PICKUP
+		if(!cybernetic_rejection)
+			bodypart_effects_active = TRUE
+			on_bodypart_insert(bodypart)
+		// BANDASTATION EDIT END - A disconnected implant still occupies its physical bodypart
 
 	return TRUE
 
@@ -145,9 +195,7 @@
 /obj/item/organ/proc/on_bodypart_insert(obj/item/bodypart/limb)
 	SHOULD_CALL_PARENT(TRUE)
 
-	item_flags |= ABSTRACT
-	ADD_TRAIT(src, TRAIT_NODROP, ORGAN_INSIDE_BODY_TRAIT)
-	interaction_flags_item &= ~INTERACT_ITEM_ATTACK_HAND_PICKUP
+	// BANDASTATION EDIT - Physical item flags are maintained by bodypart_insert, separately from effects.
 
 	if(external_bodytypes)
 		limb.owner?.synchronize_bodytypes()
@@ -167,6 +215,12 @@
  */
 /obj/item/organ/proc/mob_remove(mob/living/carbon/organ_owner, special = FALSE, movement_flags)
 	SHOULD_NOT_OVERRIDE(TRUE)
+	var/had_mind = !isnull(organ_owner?.mind) // BANDASTATION ADDITION - Brain extraction can transfer the mind during subtype callbacks.
+
+	// BANDASTATION ADDITION START - Failure symptoms belong to the old body, not the next recipient
+	if(cybernetic_rejection)
+		on_rejected_mob_remove(organ_owner, special)
+	// BANDASTATION ADDITION END - Failure symptoms belong to the old body, not the next recipient
 
 	if(organ_owner)
 		if(organ_owner.organs_slot[slot] == src)
@@ -174,12 +228,49 @@
 		organ_owner.organs -= src
 
 	owner = null
-	on_mob_remove(organ_owner, special, movement_flags)
+	// BANDASTATION EDIT START - Do not undo functional callbacks that were never applied
+	if(mob_effects_active)
+		mob_effects_active = FALSE
+		on_mob_remove(organ_owner, special, movement_flags)
+	on_physical_mob_remove(organ_owner, special, movement_flags)
+	set_cybernetic_rejection(FALSE)
+	// BANDASTATION EDIT END - Do not undo functional callbacks that were never applied
+	SEND_SIGNAL(organ_owner, COMSIG_CARBON_LOSE_ORGAN, src, special)
+	if(had_mind) // BANDASTATION EDIT - Preserve player ownership when extracting a brain.
+		ADD_TRAIT(src, TRAIT_ORGAN_USED_BY_PLAYER, ORGAN_TRAIT)
+
+	if(!special)
+		organ_owner.hud_used?.update_locked_slots()
+
+	if((organ_flags & ORGAN_VITAL) && !special && !HAS_TRAIT(organ_owner, TRAIT_GODMODE))
+		if(organ_owner.stat != DEAD)
+			organ_owner.investigate_log("has been killed by losing a vital organ ([src]).", INVESTIGATE_DEATHS)
+		organ_owner.death()
+
+	START_PROCESSING(SSobj, src)
+
+	var/list/diseases = organ_owner.get_static_viruses()
+	if(!LAZYLEN(diseases))
+		return TRUE // BANDASTATION EDIT - mob_remove retains its successful return value without diseases.
+
+	var/list/datum/disease/diseases_to_add = list()
+	for(var/datum/disease/disease as anything in diseases)
+		// robotic organs are immune to disease unless 'inorganic biology' symptom is present
+		if(IS_ROBOTIC_ORGAN(src) && !(disease.infectable_biotypes & MOB_ROBOTIC))
+			continue
+
+		// admin or special viruses that should not be reproduced
+		if(disease.spread_flags & (DISEASE_SPREAD_SPECIAL | DISEASE_SPREAD_NON_CONTAGIOUS))
+			continue
+
+		diseases_to_add += disease
+
+	if(LAZYLEN(diseases_to_add))
+		AddComponent(/datum/component/infective, diseases_to_add)
 	return TRUE
 
-/// Called after the organ is removed from a mob.
-/// Removes Traits, Actions, and Status Effects on the mob in which the organ was impanted.
-/// Override this proc to create unique side-effects for removing your organ. Must be called by overrides.
+/// Called after the organ is disconnected from a mob. Physical removal is handled by mob_remove.
+/// Removes Traits, Actions, Status Effects and subtype-specific functional hooks.
 /obj/item/organ/proc/on_mob_remove(mob/living/carbon/organ_owner, special = FALSE, movement_flags)
 	SHOULD_CALL_PARENT(TRUE)
 
@@ -196,38 +287,7 @@
 		organ_owner.remove_status_effect(effect, type)
 
 	SEND_SIGNAL(src, COMSIG_ORGAN_REMOVED, organ_owner)
-	SEND_SIGNAL(organ_owner, COMSIG_CARBON_LOSE_ORGAN, src, special)
-	if(organ_owner.mind)
-		ADD_TRAIT(src, TRAIT_ORGAN_USED_BY_PLAYER, ORGAN_TRAIT)
-
-	if(!special)
-		organ_owner.hud_used?.update_locked_slots()
-
-	if((organ_flags & ORGAN_VITAL) && !special && !HAS_TRAIT(organ_owner, TRAIT_GODMODE))
-		if(organ_owner.stat != DEAD)
-			organ_owner.investigate_log("has been killed by losing a vital organ ([src]).", INVESTIGATE_DEATHS)
-		organ_owner.death()
-
-	START_PROCESSING(SSobj, src)
-
-	var/list/diseases = organ_owner.get_static_viruses()
-	if(!LAZYLEN(diseases))
-		return
-
-	var/list/datum/disease/diseases_to_add = list()
-	for(var/datum/disease/disease as anything in diseases)
-		// robotic organs are immune to disease unless 'inorganic biology' symptom is present
-		if(IS_ROBOTIC_ORGAN(src) && !(disease.infectable_biotypes & MOB_ROBOTIC))
-			continue
-
-		// admin or special viruses that should not be reproduced
-		if(disease.spread_flags & (DISEASE_SPREAD_SPECIAL | DISEASE_SPREAD_NON_CONTAGIOUS))
-			continue
-
-		diseases_to_add += disease
-
-	if(LAZYLEN(diseases_to_add))
-		AddComponent(/datum/component/infective, diseases_to_add)
+	// BANDASTATION EDIT - Physical removal bookkeeping is performed by mob_remove even for rejected organs.
 
 /// Called to remove an organ from a limb. Do not put any mob operations here (except the bodypart_getter at the start)
 /// Give EITHER a limb OR a limb_owner
@@ -248,8 +308,14 @@
 	bodypart_owner = null
 	// BANDASTATION ADDITION END - Don't move organs to nullspace to move later
 
-	if(!isnull(limb))
+	// BANDASTATION EDIT START - Physical removal must also work when no functional hooks were applied
+	item_flags &= ~ABSTRACT
+	REMOVE_TRAIT(src, TRAIT_NODROP, ORGAN_INSIDE_BODY_TRAIT)
+	interaction_flags_item |= INTERACT_ITEM_ATTACK_HAND_PICKUP
+	if(!isnull(limb) && bodypart_effects_active)
+		bodypart_effects_active = FALSE
 		on_bodypart_remove(limb)
+	// BANDASTATION EDIT END - Physical removal must also work when no functional hooks were applied
 
 	return TRUE
 
@@ -262,9 +328,7 @@
 		if (blood_color)
 			AddElement(/datum/element/decal/blood, _color = blood_color)
 
-	item_flags &= ~ABSTRACT
-	REMOVE_TRAIT(src, TRAIT_NODROP, ORGAN_INSIDE_BODY_TRAIT)
-	interaction_flags_item |= INTERACT_ITEM_ATTACK_HAND_PICKUP
+	// BANDASTATION EDIT - Physical item flags are maintained by bodypart_remove, separately from effects.
 
 	limb.owner?.synchronize_bodytypes()
 	limb.owner?.synchronize_bodyshapes()

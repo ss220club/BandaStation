@@ -8,18 +8,18 @@
 	QDEL_NULL(my_radio)
 	. = ..()
 
-/obj/item/implant/death_alarm/implant(mob/living/target, mob/user, silent, force)
+/obj/item/implant/death_alarm/on_implant(mob/living/target, mob/user, silent, force)
 	. = ..()
 	if(!.)
 		return
 
 	RegisterSignal(imp_in, COMSIG_LIVING_DEATH, PROC_REF(on_death))
 
-/obj/item/implant/death_alarm/removed(mob/living/source, silent, special)
+/obj/item/implant/death_alarm/on_remove(mob/living/source, silent, special)
 	UnregisterSignal(imp_in, COMSIG_LIVING_DEATH)
 	. = ..()
 
-/obj/item/implant/death_alarm/activate()
+/obj/item/implant/death_alarm/on_activate()
 	. = ..()
 	var/turf/implanted_mob_turf = get_turf(imp_in)
 	if(is_station_level(implanted_mob_turf.z) || is_mining_level(implanted_mob_turf.z))

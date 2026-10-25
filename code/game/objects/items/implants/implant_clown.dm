@@ -13,12 +13,12 @@
 		sound synthesizer with exactly one sound effect pre-loaded: a sad trombone. \
 		Upon dying (or pretending to die via convincing-enough death gasp), plays a sad trombone sound."
 
-/obj/item/implant/sad_trombone/implant(mob/living/target, mob/user, silent = FALSE, force = FALSE)
+/obj/item/implant/sad_trombone/on_implant(mob/living/target, mob/user, silent = FALSE, force = FALSE) // BANDASTATION EDIT - Functional implant hook behind rejection gate
 	. = ..()
 	if(.)
 		RegisterSignal(target, COMSIG_MOB_EMOTED("deathgasp"), PROC_REF(on_deathgasp))
 
-/obj/item/implant/sad_trombone/removed(mob/target, silent = FALSE, special = FALSE)
+/obj/item/implant/sad_trombone/on_remove(mob/target, silent = FALSE, special = FALSE) // BANDASTATION EDIT - Functional implant hook behind rejection gate
 	. = ..()
 	if(.)
 		UnregisterSignal(target, COMSIG_MOB_EMOTED("deathgasp"))

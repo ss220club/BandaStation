@@ -32,6 +32,8 @@
 	datum/saymode/saymode,
 	list/message_mods = list(),
 )
+	if(cybernetic_rejection) // BANDASTATION ADDITION - Rejected BCI cannot speak through the host.
+		return
 	if (owner)
 		// Otherwise say_dead will be called.
 		// It's intentional that a circuit for a dead person does not speak from the shell.
@@ -88,7 +90,7 @@
 		if (charge_action)
 			return
 		charge_action = new(src)
-		if (bci.owner)
+		if (bci.owner && !bci.cybernetic_rejection) // BANDASTATION EDIT - A new circuit component cannot reconnect a rejected BCI.
 			charge_action.Grant(bci.owner)
 		bci.actions += charge_action
 	else

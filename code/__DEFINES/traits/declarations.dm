@@ -233,6 +233,10 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_NO_UNDERWEAR "no_underwear"
 /// Humans with this trait cannot get augmentation surgery
 #define TRAIT_NO_AUGMENTS "no_augments"
+// BANDASTATION ADDITION START - Complete cybernetic rejection
+/// Installed cybernetics cannot function; the brain is incompatible with MMIs.
+#define TRAIT_CYBERNETIC_REJECTION "cybernetic_rejection"
+// BANDASTATION ADDITION END - Complete cybernetic rejection
 /// This carbon doesn't get hungry
 #define TRAIT_NOHUNGER "no_hunger"
 /// This carbon doesn't have blood

@@ -70,6 +70,10 @@
 	if(QDELETED(holding_brain.owner))
 		stack_trace("Skillchip's brain has no owner, owner is null or owner qdeleted.")
 		return "Skillchip cannot detect viable body."
+	// BANDASTATION ADDITION START - Skillchips also require a working cybernetic interface
+	if(HAS_TRAIT(holding_brain.owner, TRAIT_CYBERNETIC_REJECTION))
+		return "Организм полностью отторгает кибернетику."
+	// BANDASTATION ADDITION END - Skillchips also require a working cybernetic interface
 
 	// We have a holding brain, the holding brain has an owner. If we're forcing this, do it hard and fast.
 	if(force)
@@ -375,8 +379,8 @@
 /obj/item/skillchip/proc/set_metadata(list/metadata)
 	var/active_msg
 	// Start by trying to activate.
-	active = metadata["active"]
-	if(active)
+	// BANDASTATION EDIT - Only successful activation may mark a restored chip active.
+	if(metadata["active"])
 		active_msg = try_activate_skillchip(FALSE, TRUE)
 
 	// Whether it worked or not, set the rest of the metadata and then return any activate message.

@@ -131,11 +131,17 @@
 		BT.on_lose(TRUE)
 		BT.owner = null
 
-	if((!QDELETED(src) || !QDELETED(owner)) && !(movement_flags & NO_ID_TRANSFER))
-		transfer_identity(organ_owner)
+	// BANDASTATION EDIT - Identity transfer belongs to physical extraction, not interface disconnection.
 	if(!special)
 		organ_owner.clear_mood_event("brain_damage")
 		organ_owner.med_hud_set_status()
+
+// BANDASTATION ADDITION START - Disabling cybernetics must not extract a still implanted mind
+/obj/item/organ/brain/on_physical_mob_remove(mob/living/carbon/organ_owner, special, movement_flags)
+	. = ..()
+	if((!QDELETED(src) || !QDELETED(owner)) && !(movement_flags & NO_ID_TRANSFER))
+		transfer_identity(organ_owner)
+// BANDASTATION ADDITION END - Disabling cybernetics must not extract a still implanted mind
 
 /obj/item/organ/brain/update_icon_state()
 	icon_state = "[initial(icon_state)][smooth_brain ? "-smooth" : ""]"
@@ -143,6 +149,12 @@
 
 /obj/item/organ/brain/proc/transfer_identity(mob/living/L)
 	name = "[L.name]'s [initial(name)]"
+	// BANDASTATION ADDITION START - Keep cybernetic incompatibility on extracted brains, including mindless ones
+	if(HAS_TRAIT(L, TRAIT_CYBERNETIC_REJECTION))
+		ADD_TRAIT(src, TRAIT_CYBERNETIC_REJECTION, QUIRK_TRAIT)
+	else
+		REMOVE_TRAIT(src, TRAIT_CYBERNETIC_REJECTION, QUIRK_TRAIT)
+	// BANDASTATION ADDITION END - Keep cybernetic incompatibility on extracted brains, including mindless ones
 	if(brainmob)
 		if(!decoy_override)
 			return

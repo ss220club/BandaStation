@@ -150,7 +150,22 @@
 /datum/component/uplink/ui_state(mob/user)
 	return GLOB.inventory_state
 
+// BANDASTATION ADDITION START - Rejected implants cannot reopen a cached uplink UI
+/datum/component/uplink/ui_status(mob/user, datum/ui_state/state)
+	if(istype(parent, /obj/item/implant))
+		var/obj/item/implant/implant = parent
+		if(implant.cybernetic_rejection)
+			return UI_CLOSE
+	return ..()
+// BANDASTATION ADDITION END - Rejected implants cannot reopen a cached uplink UI
+
 /datum/component/uplink/ui_interact(mob/user, datum/tgui/ui)
+	// BANDASTATION ADDITION START - Direct calls must not re-enable a rejected implant
+	if(istype(parent, /obj/item/implant))
+		var/obj/item/implant/implant = parent
+		if(implant.cybernetic_rejection)
+			return
+	// BANDASTATION ADDITION END - Direct calls must not re-enable a rejected implant
 	active = TRUE
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
@@ -233,6 +248,12 @@
 	. = ..()
 	if(.)
 		return
+	// BANDASTATION ADDITION START - Recheck hardware connectivity at the point of purchase
+	if(istype(parent, /obj/item/implant))
+		var/obj/item/implant/implant = parent
+		if(implant.cybernetic_rejection)
+			return TRUE
+	// BANDASTATION ADDITION END - Recheck hardware connectivity at the point of purchase
 	if(!active)
 		return
 	switch(action)

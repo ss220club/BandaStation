@@ -5,11 +5,11 @@
 	implant_color = "r"
 	var/max_slot_stacking = 4
 
-/obj/item/implant/storage/activate()
+/obj/item/implant/storage/on_activate() // BANDASTATION EDIT - Functional implant hook behind rejection gate
 	. = ..()
 	atom_storage?.open_storage(imp_in)
 
-/obj/item/implant/storage/removed(source, silent = FALSE, special = FALSE)
+/obj/item/implant/storage/on_remove(source, silent = FALSE, special = FALSE) // BANDASTATION EDIT - Functional implant hook behind rejection gate
 	if(special)
 		return ..()
 
@@ -22,7 +22,7 @@
 	QDEL_NULL(atom_storage)
 	return ..()
 
-/obj/item/implant/storage/implant(mob/living/target, mob/user, silent = FALSE, force = FALSE)
+/obj/item/implant/storage/on_implant(mob/living/target, mob/user, silent = FALSE, force = FALSE) // BANDASTATION EDIT - Functional implant hook behind rejection gate
 	for(var/X in target.implants)
 		if(istype(X, type))
 			var/obj/item/implant/storage/imp_e = X
@@ -35,9 +35,18 @@
 				imp_e.atom_storage.max_total_storage += initial(imp_e.atom_storage.max_total_storage)
 				return TRUE
 			return FALSE
-	create_storage(storage_type = /datum/storage/implant)
+	if(!atom_storage) // BANDASTATION EDIT - Preserve stored contents when reconnecting an implant
+		create_storage(storage_type = /datum/storage/implant)
 	ADD_TRAIT(src, TRAIT_CONTRABAND_BLOCKER, INNATE_TRAIT)
 	return ..()
+
+// BANDASTATION ADDITION START - Cybernetic rejection
+/obj/item/implant/storage/on_cybernetic_rejection(rejected)
+	. = ..()
+	if(rejected)
+		atom_storage?.close_all()
+		REMOVE_TRAIT(src, TRAIT_CONTRABAND_BLOCKER, INNATE_TRAIT)
+// BANDASTATION ADDITION END - Cybernetic rejection
 
 /obj/item/implanter/storage
 	name = "implanter (storage)"

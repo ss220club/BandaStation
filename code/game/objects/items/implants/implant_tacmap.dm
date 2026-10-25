@@ -13,14 +13,14 @@
 		COMSIG_MOB_GHOSTIZED,
 	)
 
-/obj/item/implant/tacmap/implant(mob/living/target, mob/user, silent, force)
+/obj/item/implant/tacmap/on_implant(mob/living/target, mob/user, silent, force) // BANDASTATION EDIT - Functional implant hook behind rejection gate
 	. = ..()
 	if(.)
 		configure_minimap_action()
 		RegisterSignals(target, minimap_refresh_signals, PROC_REF(refresh_minimap_icon))
 		addtimer(CALLBACK(src, PROC_REF(update_minimap_icon), target), 0.1 SECONDS) // Mobs are spawned inside nullspace sometimes so this avoids that hijinks.
 
-/obj/item/implant/tacmap/removed(mob/living/source, silent, special)
+/obj/item/implant/tacmap/on_remove(mob/living/source, silent, special) // BANDASTATION EDIT - Functional implant hook behind rejection gate
 	UnregisterSignal(source, minimap_refresh_signals)
 	remove_minimap(source)
 	return ..()
@@ -54,6 +54,8 @@
 ///Updates the wearer's minimap icon
 /obj/item/implant/tacmap/proc/update_minimap_icon(mob/wearer)
 	SIGNAL_HANDLER
+	if(cybernetic_rejection || wearer != imp_in) // BANDASTATION ADDITION - Revalidate delayed minimap updates
+		return
 	remove_minimap_blip(MINIMAP_NUKEOP_BLIP, wearer)
 	add_minimap_blip(wearer, MINIMAP_NUKEOP_BLIP, get_minimap_icon_state(wearer))
 
@@ -61,7 +63,7 @@
 	actions_types = list(/datum/action/minimap/nuclear)
 	wearer_icon_state = "syndicate"
 
-/obj/item/implant/tacmap/nuclear/implant(mob/living/target, mob/user, silent, force)
+/obj/item/implant/tacmap/nuclear/on_implant(mob/living/target, mob/user, silent, force) // BANDASTATION EDIT - Functional implant hook behind rejection gate
 	. = ..()
 	if(.)
 		RegisterSignal(target, COMSIG_MINIMAP_ACTION_TRIGGER, PROC_REF(deny_nukie_base_open))
@@ -71,7 +73,7 @@
 		return "cayenne"
 	. = ..()
 
-/obj/item/implant/tacmap/nuclear/removed(mob/living/source, silent, special)
+/obj/item/implant/tacmap/nuclear/on_remove(mob/living/source, silent, special) // BANDASTATION EDIT - Functional implant hook behind rejection gate
 	UnregisterSignal(source, COMSIG_MINIMAP_ACTION_TRIGGER)
 	return ..()
 
@@ -89,12 +91,12 @@
 	can_draw_on_personal_minimap = TRUE
 	wearer_icon_state = "syndicate_leader"
 
-/obj/item/implant/tacmap/nuclear/leader/implant(mob/living/target, mob/user, silent, force)
+/obj/item/implant/tacmap/nuclear/leader/on_implant(mob/living/target, mob/user, silent, force) // BANDASTATION EDIT - Functional implant hook behind rejection gate
 	. = ..()
 	if(.)
 		ADD_TRAIT(target, TRAIT_MINIMAP_TABLE_DRAW, REF(src))
 
-/obj/item/implant/tacmap/nuclear/leader/removed(mob/living/source, silent, special)
+/obj/item/implant/tacmap/nuclear/leader/on_remove(mob/living/source, silent, special) // BANDASTATION EDIT - Functional implant hook behind rejection gate
 	REMOVE_TRAIT(source, TRAIT_MINIMAP_TABLE_DRAW, REF(src))
 	return ..()
 

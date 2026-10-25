@@ -18,7 +18,7 @@
 		physical trauma of actually slamming into a wall. Preliminary reports indicate that this \
 		would likely be useful for keeping especially slippery prisoners in place."
 
-/obj/item/implant/teleport_blocker/implant(mob/living/target, mob/user, silent = FALSE, force = FALSE)
+/obj/item/implant/teleport_blocker/on_implant(mob/living/target, mob/user, silent = FALSE, force = FALSE) // BANDASTATION EDIT - Functional implant hook behind rejection gate
 	. = ..()
 	if(!. || !isliving(target))
 		return FALSE
@@ -26,7 +26,7 @@
 	RegisterSignal(target, COMSIG_MOB_PRE_JAUNT, PROC_REF(on_jaunt))
 	return TRUE
 
-/obj/item/implant/teleport_blocker/removed(mob/target, silent = FALSE, special = FALSE)
+/obj/item/implant/teleport_blocker/on_remove(mob/target, silent = FALSE, special = FALSE) // BANDASTATION EDIT - Functional implant hook behind rejection gate
 	. = ..()
 	if(!. || !isliving(target))
 		return FALSE

@@ -37,7 +37,7 @@
 	QDEL_NULL(spell_to_give)
 	return ..()
 
-/obj/item/implant/spell/implant(mob/living/target, mob/user, silent = FALSE, force = FALSE)
+/obj/item/implant/spell/on_implant(mob/living/target, mob/user, silent = FALSE, force = FALSE) // BANDASTATION EDIT - Functional implant hook behind rejection gate
 	. = ..()
 	if (!.)
 		return
@@ -48,7 +48,7 @@
 	spell_to_give.Grant(target)
 	return TRUE
 
-/obj/item/implant/spell/removed(mob/living/source, silent = FALSE, special = 0)
+/obj/item/implant/spell/on_remove(mob/living/source, silent = FALSE, special = 0) // BANDASTATION EDIT - Functional implant hook behind rejection gate
 	. = ..()
 	if (!.)
 		return FALSE

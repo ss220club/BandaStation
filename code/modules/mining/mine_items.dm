@@ -111,6 +111,8 @@
 	if(isliving(user))
 		var/mob/living/living_user = user
 		for(var/obj/item/implant/exile/exile_implant in living_user.implants)
+			if(exile_implant.cybernetic_rejection) // BANDASTATION ADDITION - Rejected implants cannot transmit exile status
+				continue
 			to_chat(living_user, span_warning("A warning flashes across the screen, and the shuttle controls lock in response to your exile implant."))
 			return
 

@@ -36,7 +36,7 @@
 		return
 	return ..()
 
-/obj/item/implant/explosive/battle_royale/implant(mob/living/target, mob/user, silent, force)
+/obj/item/implant/explosive/battle_royale/on_implant(mob/living/target, mob/user, silent, force) // BANDASTATION EDIT - Functional implant hook behind rejection gate
 	. = ..()
 	if (!.)
 		return
@@ -55,7 +55,7 @@
 	if (area_limited)
 		limit_areas()
 
-/obj/item/implant/explosive/battle_royale/removed(mob/target, silent, special)
+/obj/item/implant/explosive/battle_royale/on_remove(mob/target, silent, special) // BANDASTATION EDIT - Functional implant hook behind rejection gate
 	. = ..()
 	UnregisterSignal(target, list(COMSIG_LIVING_LIFE, COMSIG_ENTER_AREA))
 	QDEL_NULL(camera)
@@ -72,6 +72,8 @@
 	return ..()
 
 /obj/item/implant/explosive/battle_royale/explode(atom/override_explode_target = null)
+	if(cybernetic_rejection) // BANDASTATION ADDITION - Rejected battle implants cannot detonate
+		return
 	has_exploded = TRUE
 	return ..()
 
@@ -86,6 +88,8 @@
 
 /// Start the battle royale
 /obj/item/implant/explosive/battle_royale/proc/start_battle(target_area_name, list/limited_areas)
+	if(cybernetic_rejection) // BANDASTATION ADDITION - Rejected battle implants cannot connect
+		return
 	if (isnull(imp_in))
 		explode()
 		return
@@ -105,6 +109,8 @@
 
 /// Limit the owner to the specified area
 /obj/item/implant/explosive/battle_royale/proc/limit_areas()
+	if(cybernetic_rejection) // BANDASTATION ADDITION - Rejected battle implants cannot enforce boundaries
+		return
 	if (isnull(imp_in))
 		explode()
 		return
@@ -125,6 +131,8 @@
 
 /// After a grace period they're still out of bounds, killing time
 /obj/item/implant/explosive/battle_royale/proc/check_area_deadly()
+	if(cybernetic_rejection) // BANDASTATION ADDITION - Revalidate a delayed boundary check
+		return
 	if (isnull(imp_in) || has_exploded)
 		return
 	var/area/our_area = get_area(imp_in)

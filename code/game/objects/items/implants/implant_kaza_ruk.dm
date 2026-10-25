@@ -20,7 +20,14 @@
 	QDEL_NULL(style)
 	return ..()
 
-/obj/item/implant/kaza_ruk/activate()
+// BANDASTATION ADDITION START - Disconnect learned implant abilities
+/obj/item/implant/kaza_ruk/on_remove(mob/living/source, silent = FALSE, special = FALSE)
+	if(HAS_TRAIT(source, TRAIT_CYBERNETIC_REJECTION))
+		style?.unlearn(source)
+	return ..()
+// BANDASTATION ADDITION END - Disconnect learned implant abilities
+
+/obj/item/implant/kaza_ruk/on_activate() // BANDASTATION EDIT - Functional implant hook behind rejection gate
 	. = ..()
 	if(isnull(imp_in.mind))
 		return

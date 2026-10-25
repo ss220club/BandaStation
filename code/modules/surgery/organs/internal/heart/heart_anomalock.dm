@@ -52,6 +52,8 @@
 		return
 	clear_lightning_overlay(organ_owner)
 	UnregisterSignal(organ_owner, COMSIG_MOB_STATCHANGE)
+	if(cybernetic_rejection) // BANDASTATION ADDITION - Disconnecting an interface is not destructive extraction.
+		return
 	tesla_zap(source = organ_owner, zap_range = 20, power = 2.5e5, cutoff = 1e3)
 	apply_organ_damage(INFINITY)
 

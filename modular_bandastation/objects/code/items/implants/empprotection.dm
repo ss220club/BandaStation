@@ -2,14 +2,14 @@
 	name = "EMP absorber"
 	actions_types = null
 
-/obj/item/implant/empprotection/implant(mob/living/target, mob/user, silent, force)
+/obj/item/implant/empprotection/on_implant(mob/living/target, mob/user, silent, force)
 	. = ..()
 	if(!.)
 		return
 	target.AddElement(/datum/element/empprotection, EMP_PROTECT_ALL)
 
 
-/obj/item/implant/empprotection/removed(mob/living/source, silent, special)
+/obj/item/implant/empprotection/on_remove(mob/living/source, silent, special)
 	. = ..()
 	source.RemoveElement(/datum/element/empprotection, EMP_PROTECT_ALL)
 
