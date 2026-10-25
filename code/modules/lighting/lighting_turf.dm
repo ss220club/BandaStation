@@ -25,64 +25,57 @@
 	totallums += get_dynamic_lumcount()
 	return CLAMP01(totallums)
 
-// Kyler was worried about cost of having these use assoc args, so they're split ~smartkar
-// Also easier to use this way
-/// Optimized get_lumcount for when you only care if the lumcount is below a certain value, and not what the actual value is
+// BANDASTATION EDIT START - Thresholds must use the complete light value, including subtractive lights
+/// Uses the same final light value as get_lumcount, preserving strict threshold comparisons.
 /turf/proc/check_lumcount_below(value)
-	if (!lighting_object)
-		return FALSE
+	return get_lumcount() < value
 
-	var/lums = get_static_lumcount()
-	if (lums >= value)
-		return FALSE
-
-	for (var/datum/component/overlay_lighting/light as anything in collect_dynamic_lightsources())
-		lums += light.lum_power
-		if (lums >= value)
-			return FALSE
-	return TRUE
-
-/// Optimized get_lumcount for when you only care if the lumcount is above a certain value, and not what the actual value is
+/// Uses the same final light value as get_lumcount, preserving strict threshold comparisons.
 /turf/proc/check_lumcount_above(value)
-	if (!lighting_object)
-		return TRUE
-
-	var/lums = get_static_lumcount()
-	if (lums > value)
-		return TRUE
-
-	for (var/datum/component/overlay_lighting/light as anything in collect_dynamic_lightsources())
-		lums += light.lum_power
-		if (lums > value)
-			return TRUE
-	return FALSE
+	return get_lumcount() > value
+// BANDASTATION EDIT END - Thresholds must use the complete light value, including subtractive lights
 
 /// Returns lumcount from turf lighting
 /turf/proc/get_static_lumcount(minlum = 0, maxlum = 1)
-	var/totallums = 0
+	// BANDASTATION EDIT START - Read the normalized colour channels that lighting_object renders
+	var/red = 0
+	var/green = 0
+	var/blue = 0
 	var/datum/lighting_corner/L
 	L = lighting_corner_NE
 	if (L)
-		totallums += L.lum_r + L.lum_b + L.lum_g
+		red += L.cache_r
+		green += L.cache_g
+		blue += L.cache_b
 	L = lighting_corner_SE
 	if (L)
-		totallums += L.lum_r + L.lum_b + L.lum_g
+		red += L.cache_r
+		green += L.cache_g
+		blue += L.cache_b
 	L = lighting_corner_SW
 	if (L)
-		totallums += L.lum_r + L.lum_b + L.lum_g
+		red += L.cache_r
+		green += L.cache_g
+		blue += L.cache_b
 	L = lighting_corner_NW
 	if (L)
-		totallums += L.lum_r + L.lum_b + L.lum_g
+		red += L.cache_r
+		green += L.cache_g
+		blue += L.cache_b
 
-	totallums /= 12 // 4 corners, each with 3 channels, get the average.
-	totallums = (totallums - minlum) / (maxlum - minlum)
-	return totallums
+	// Clip after interpolation, as the renderer does; negative channels cannot cancel another colour.
+	var/totallums = (CLAMP01(red / 4) + CLAMP01(green / 4) + CLAMP01(blue / 4)) / 3
+	return (totallums - minlum) / (maxlum - minlum)
+	// BANDASTATION EDIT END - Read the normalized colour channels that lighting_object renders
 
 /// Fetches dynamic lumcount from lightsources potentially in view of this turf from our spatial grid
 /turf/proc/get_dynamic_lumcount()
 	. = 0
-	for (var/datum/component/overlay_lighting/light as anything in collect_dynamic_lightsources())
-		. += light.lum_power
+	// BANDASTATION EDIT START - Sum actual visible mask contributions, not a constant per source
+	var/list/light_contributions = collect_dynamic_lightsources()
+	for (var/datum/component/overlay_lighting/light as anything in light_contributions)
+		. += light_contributions[light]
+	// BANDASTATION EDIT END - Sum actual visible mask contributions, not a constant per source
 
 // You've heard of oranges_ear, prepare for oranges_eye
 /// Uses the same optimization via viewers() that get_hearers_in_view does by allocating oranges ears to overlay lights
@@ -94,19 +87,23 @@
 	var/list/light_sources = list()
 	var/furthest_range = 0
 	for (var/datum/component/overlay_lighting/light as anything in grid_cell.dynamic_light_sources)
+		// BANDASTATION ADDITION - Stale or hidden candidates cannot illuminate a turf
+		if(QDELETED(light) || QDELETED(light.light) || !light.light.currently_displaying || !(light.light.overlay_lighting_flags & LIGHTING_ON) || !light.light.current_holder)
+			continue
 		furthest_range = max(furthest_range, light.lumcount_range)
 		var/atom/current_holder = light.light.current_holder
-		if (isnull(light_sources[current_holder]))
-			light_sources[current_holder] = light
-		else if (islist(light_sources[current_holder]))
-			light_sources[current_holder] |= light
-		else
-			light_sources[current_holder] = list(light_sources[current_holder], light)
+		// BANDASTATION EDIT - One holder can carry lights with different shapes and ranges
+		LAZYADD(light_sources[current_holder], light)
 
 	var/list/assigned_oranges_ears = SSspatial_grid.assign_oranges_ears(light_sources)
 	for(var/mob/oranges_ear/ear in hearers(furthest_range, src))
 		for (var/atom/glowie as anything in ear.references)
-			. += light_sources[glowie]
+			// BANDASTATION EDIT START - Use each source's own transformed mask after the shared visibility query
+			for(var/datum/component/overlay_lighting/light as anything in light_sources[glowie])
+				var/contribution = light.light.get_lumcount(src)
+				if(contribution)
+					.[light] = contribution
+			// BANDASTATION EDIT END - Use each source's own transformed mask after the shared visibility query
 
 	for(var/mob/oranges_ear/remaining_ear as anything in assigned_oranges_ears)
 		remaining_ear.unassign()
@@ -116,10 +113,8 @@
 // itself as too dark to allow sight and see_in_dark becomes useful.
 // So basically if this returns true the tile is unlit black.
 /turf/proc/is_softly_lit()
-	if (!lighting_object)
-		return FALSE
-
-	return !(luminosity || get_dynamic_lumcount())
+	// BANDASTATION EDIT - Blackness uses the same final illumination as other light checks
+	return get_lumcount() <= 0
 
 
 ///Proc to add movable sources of opacity on the turf and let it handle lighting code.

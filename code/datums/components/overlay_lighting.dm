@@ -15,9 +15,9 @@
  * * For small objects this is good (you can't see them behind a wall), but for big ones this quickly becomes prety clumsy.
 */
 /datum/component/overlay_lighting
-	/// Ceiling of range, integer without decimal entries.
+	/// Conservative visual footprint radius used for spatial indexing. // BANDASTATION EDIT - Match overlay geometry
 	var/lumcount_range = 0
-	/// How much this light affects the dynamic_lumcount of turfs.
+	/// Legacy spatial-grid weight; turf brightness is sampled from the visual mask instead. // BANDASTATION EDIT - Match overlay geometry
 	var/lum_power = 0.5
 	/// Datum that actually creates the overlay we manage
 	var/datum/light_overlay/light
@@ -80,6 +80,10 @@
 	return ..()
 
 /datum/component/overlay_lighting/Destroy()
+	// BANDASTATION EDIT START - Release lighting indices before the visual holder disappears
+	clean_old_cells()
+	remove_dynamic_lumi(light?.current_holder)
+	// BANDASTATION EDIT END - Release lighting indices before the visual holder disappears
 	QDEL_NULL(light)
 	return ..()
 
@@ -89,25 +93,35 @@
 		return
 	for (var/datum/spatial_grid_cell/grid_cell as anything in SSspatial_grid.get_cells_in_range(luminosity_turf, lumcount_range))
 		GRID_CELL_REMOVE(grid_cell.dynamic_light_sources, src)
+	// BANDASTATION EDIT - A removed source must register again even on its former turf
+	luminosity_turf = null
 
 /// Populates the affected_turfs lazylist, adding to its contents the effects of being near the light.
 /datum/component/overlay_lighting/proc/register_new_cells()
-	var/atom/movable/current_holder = light.current_holder
-	if(!current_holder || !isturf(current_holder.loc) || !(light.overlay_lighting_flags & LIGHTING_ON))
+	// BANDASTATION EDIT START - Index only live overlays that are actually displayed
+	var/atom/movable/current_holder = light?.current_holder
+	if(QDELETED(light) || QDELETED(current_holder) || !isturf(current_holder.loc) || !(light.overlay_lighting_flags & LIGHTING_ON) || !light.currently_displaying)
 		return
+	// BANDASTATION EDIT END - Index only live overlays that are actually displayed
 	luminosity_turf = get_turf(current_holder)
 	if (isnull(luminosity_turf))
 		return
+	// BANDASTATION ADDITION - The holder can offset its visible light beyond the source turf
+	lumcount_range = light.get_lumcount_range()
 	for (var/datum/spatial_grid_cell/grid_cell as anything in SSspatial_grid.get_cells_in_range(luminosity_turf, lumcount_range))
 		GRID_CELL_ASSOC_SET(grid_cell.dynamic_light_sources, src, lum_power)
 
 /// Clears the old affected cells and populates the new ones.
 /datum/component/overlay_lighting/proc/update_luminosity_cells()
-	if(get_turf(light.current_holder) == luminosity_turf)
+	// BANDASTATION EDIT START - Turning off on the same turf must clear stale contributions
+	var/turf/current_turf
+	if(!QDELETED(light) && (light.overlay_lighting_flags & LIGHTING_ON) && light.currently_displaying)
+		current_turf = get_turf(light.current_holder)
+	if(current_turf == luminosity_turf && (isnull(current_turf) || lumcount_range == light.get_lumcount_range()))
 		return
-	if(luminosity_turf)
-		clean_old_cells()
-	register_new_cells(light.current_holder)
+	clean_old_cells()
+	register_new_cells()
+	// BANDASTATION EDIT END - Turning off on the same turf must clear stale contributions
 
 /// Adds the luminosity and source for the affected movable atoms to keep track of their visibility.
 /datum/component/overlay_lighting/proc/add_dynamic_lumi(atom/movable/relevant_holder)
@@ -150,9 +164,14 @@
 ///Changes the range which the light reaches. 0 means no light, 6 is the maximum value.
 /datum/component/overlay_lighting/proc/set_range(atom/source, old_range)
 	SIGNAL_HANDLER
+	// BANDASTATION EDIT START - Remove the old footprint before changing its radius
+	clean_old_cells()
+	remove_dynamic_lumi(light.current_holder)
 	light.set_range(source.light_range)
-	lumcount_range = ceil(light.range)
-	update_luminosity_cells()
+	lumcount_range = light.get_lumcount_range()
+	register_new_cells()
+	add_dynamic_lumi(light.current_holder)
+	// BANDASTATION EDIT END - Remove the old footprint before changing its radius
 
 /// Changes the intensity/brightness of the light by altering the visual object's alpha.
 /datum/component/overlay_lighting/proc/set_power(atom/source, old_power)
@@ -209,13 +228,10 @@
 	if(!light.turn_off())
 		return
 
-	if(!light.current_holder)
-		if(luminosity_turf)
-			clean_old_cells()
-		return
-
+	// BANDASTATION EDIT START - Always unregister switched-off lights, including stationary ones
 	remove_dynamic_lumi(light.current_holder)
-	update_luminosity_cells()
+	clean_old_cells()
+	// BANDASTATION EDIT END - Always unregister switched-off lights, including stationary ones
 
 /// Handles putting the source for overlay lights into the light eater queue since we aren't tracked by [/atom/var/light_sources]
 /datum/component/overlay_lighting/proc/on_light_eater(datum/source, list/light_queue, datum/light_eater)

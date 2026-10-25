@@ -49,6 +49,10 @@
 	var/directional_offset_y
 	/// Cast range for the directional cast (how far away the atom is moved)
 	var/cast_range = 2
+	// BANDASTATION ADDITION START - Sample the same base light mask used by the renderer
+	/// Cached tint transform; colour changes are infrequent compared with turf light queries.
+	var/list/lumcount_color_matrix = COLOR_MATRIX_IDENTITY
+	// BANDASTATION ADDITION END - Sample the same base light mask used by the renderer
 
 /datum/light_overlay/New(atom/movable/parent, is_directional, is_beam)
 	. = ..()
@@ -218,6 +222,8 @@
 	show_to_holder()
 
 /datum/light_overlay/proc/set_color(new_color)
+	// BANDASTATION ADDITION - Use the rendered tint for gameplay illumination too
+	lumcount_color_matrix = color_to_full_rgba_matrix(new_color)
 	hide_from_holder()
 	visible_mask.color = new_color
 	if(directional)
@@ -291,6 +297,70 @@
 	if(!isturf(current_holder?.loc) || !directional || !(overlay_lighting_flags & LIGHTING_ON))
 		return
 	cast_directional_light()
+
+// BANDASTATION ADDITION START - Gameplay illumination follows the base visual light mask
+/// Conservative spatial-grid bound, including the forward displacement and the fixed cone.
+/datum/light_overlay/proc/get_lumcount_range()
+	var/footprint_range = directional ? max(ceil(range) + cast_range, 2) : ceil(range)
+	if(current_holder)
+		footprint_range += ceil(max(abs(current_holder.pixel_x + current_holder.pixel_w), abs(current_holder.pixel_y + current_holder.pixel_z)) / ICON_SIZE_X)
+	return footprint_range
+
+/// World-light contribution at the centre of a turf, excluding observer vision and cosmetic filters.
+/datum/light_overlay/proc/get_lumcount(turf/target)
+	if(!currently_displaying || !(overlay_lighting_flags & LIGHTING_ON) || !isturf(current_holder?.loc) || !target || current_holder.z != target.z)
+		return 0
+	. = sample_lumcount(visible_mask, target)
+	if(cone)
+		. += sample_lumcount(cone, target)
+
+/// Inverse-transform the sample point into the existing DMI instead of inventing another falloff curve.
+/datum/light_overlay/proc/sample_lumcount(image/light_image, turf/target)
+	if(!light_image?.icon || !light_image.alpha)
+		return 0
+	// Native circular masks have one direction; only the cone inherits the holder's direction.
+	var/sample_direction = SOUTH
+	if(light_image == cone)
+		sample_direction = light_image.dir
+		if(!sample_direction || sample_direction == SOUTH)
+			sample_direction = current_holder.dir
+	var/static/list/mask_icons = list()
+	var/cache_key = "[light_image.icon]:[light_image.icon_state]:[sample_direction]"
+	var/icon/mask = mask_icons[cache_key]
+	if(!mask)
+		mask = icon(light_image.icon, light_image.icon_state, sample_direction, 1)
+		mask_icons[cache_key] = mask
+	var/half_width = mask.Width() / 2
+	var/half_height = mask.Height() / 2
+	var/sample_x = (target.x - current_holder.x) * ICON_SIZE_X + ICON_SIZE_X / 2 - current_holder.pixel_x - current_holder.pixel_w - light_image.pixel_x - light_image.pixel_w
+	var/sample_y = (target.y - current_holder.y) * ICON_SIZE_Y + ICON_SIZE_Y / 2 - current_holder.pixel_y - current_holder.pixel_z - light_image.pixel_y - light_image.pixel_z
+	var/matrix/transform = light_image.transform
+	if(transform)
+		var/determinant = transform.a * transform.e - transform.b * transform.d
+		if(!determinant)
+			return 0
+		var/relative_x = sample_x - half_width - transform.c
+		var/relative_y = sample_y - half_height - transform.f
+		sample_x = (transform.e * relative_x - transform.b * relative_y) / determinant + half_width
+		sample_y = (-transform.d * relative_x + transform.a * relative_y) / determinant + half_height
+	if(sample_x < 1 || sample_y < 1 || sample_x > mask.Width() || sample_y > mask.Height())
+		return 0
+	var/pixel = mask.GetPixel(round(sample_x), round(sample_y))
+	if(!pixel)
+		return 0
+	var/list/channels = rgb2num(pixel)
+	var/red = channels[1] / 255
+	var/green = channels[2] / 255
+	var/blue = channels[3] / 255
+	var/alpha = length(channels) >= 4 ? channels[4] / 255 : 1
+	var/list/tint = lumcount_color_matrix
+	var/tinted_red = CLAMP01(red * tint[1] + green * tint[5] + blue * tint[9] + alpha * tint[13] + tint[17])
+	var/tinted_green = CLAMP01(red * tint[2] + green * tint[6] + blue * tint[10] + alpha * tint[14] + tint[18])
+	var/tinted_blue = CLAMP01(red * tint[3] + green * tint[7] + blue * tint[11] + alpha * tint[15] + tint[19])
+	var/tinted_alpha = CLAMP01(red * tint[4] + green * tint[8] + blue * tint[12] + alpha * tint[16] + tint[20])
+	var/brightness = (tinted_red + tinted_green + tinted_blue) / 3 * tinted_alpha * light_image.alpha / 255
+	return light_image.blend_mode == BLEND_SUBTRACT ? -brightness : brightness
+// BANDASTATION ADDITION END - Gameplay illumination follows the base visual light mask
 
 /// Here we append the behavior associated to changing power.
 /datum/light_overlay/proc/cast_directional_light()

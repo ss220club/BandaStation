@@ -100,6 +100,7 @@
 /// Helper to allocate a new object with the implied type (the type of the variable it's assigned to) in the corner of the test room
 #define EASY_ALLOCATE(arguments...) allocate(__IMPLIED_TYPE__, run_loc_floor_bottom_left, ##arguments)
 
+// BANDASTATION ADDITION - Lighting regression tests in the sorted include block
 // BEGIN_INCLUDE
 #include "aas_configs.dm"
 #include "abductor_baton_spell.dm"
@@ -234,6 +235,7 @@
 #include "leash.dm"
 #include "lesserform.dm"
 #include "light_replacer.dm"
+#include "lighting_lumcount.dm"
 #include "limbsanity.dm"
 #include "ling_decap.dm"
 #include "liver.dm"
