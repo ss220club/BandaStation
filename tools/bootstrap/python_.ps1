@@ -36,7 +36,7 @@ if ($Env:TG_BOOTSTRAP_CACHE) {
 $PythonVersion = ExtractVersion -Path "$Bootstrap/../../dependencies.sh" -Key "PYTHON_VERSION"
 $PythonDir = "$Cache/python-$PythonVersion"
 $PythonExe = "$PythonDir/python.exe"
-$Log = "$Cache/last-command.log"
+$Log = "$Cache/last-command-$PID.log"
 
 # Download and unzip a portable version of Python
 if (!(Test-Path $PythonExe -PathType Leaf)) {
