@@ -39,6 +39,8 @@
 	var/emote_type = EMOTE_VISIBLE
 	/// Checks if the mob can use its hands before performing the emote.
 	var/hands_use_check = FALSE
+	/// Whether this sound uses the voice rather than moving a physical body part.
+	var/vocal = TRUE // BANDASTATION ADDITION - Physical emote sounds survive voice restraints.
 	/// Types that are allowed to use that emote.
 	var/list/mob_type_allowed_typecache = /mob
 	/// Types that are NOT allowed to use that emote.
@@ -429,7 +431,7 @@
  * Returns a bool about whether or not the user should play a sound when performing the emote.
  */
 /datum/emote/proc/should_play_sound(mob/user, intentional = FALSE)
-	if(emote_type & EMOTE_AUDIBLE && !hands_use_check)
+	if(vocal && (emote_type & EMOTE_AUDIBLE) && !hands_use_check) // BANDASTATION EDIT - Physical sounds do not need a voice or tongue.
 		if(HAS_TRAIT(user, TRAIT_MUTE) || HAS_MIND_TRAIT(user, TRAIT_MIMING))
 			return FALSE
 		if(iscarbon(user) && !user.get_organ_slot(ORGAN_SLOT_TONGUE))

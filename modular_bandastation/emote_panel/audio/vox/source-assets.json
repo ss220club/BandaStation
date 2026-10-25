@@ -1,0 +1,50 @@
+{
+  "repository": "ss220club/Paradise-SS220",
+  "revision": "0fffca1f1f29a63aff49d9b56524813eedf82c6d",
+  "license": "CC-BY-SA-3.0",
+  "license_declaration": "https://github.com/ss220club/Paradise-SS220/blob/0fffca1f1f29a63aff49d9b56524813eedf82c6d/README.md#licenses",
+  "emote_source": "code/modules/mob/living/carbon/human/human_emote.dm",
+  "emote_source_git_blob": "e48e3a341355a39917e0d27820da9521c7b4edb8",
+  "assets": [
+    {
+      "path": "modular_bandastation/emote_panel/audio/vox/shriek1.ogg",
+      "source_path": "sound/voice/shriek1.ogg",
+      "git_blob_sha1": "bb13db1ca0ee6666deb4b5aa950bb23a98f0e4fb",
+      "sha256": "13ae66f12ee774124c832a41b9db5527c94e94a1d4fd58a9807da9fe32c4c62f",
+      "bytes": 27819,
+      "credit": "Paradise-SS220 contributors; no individual creator is inferred"
+    },
+    {
+      "path": "modular_bandastation/emote_panel/audio/vox/shriekcough.ogg",
+      "source_path": "sound/voice/shriekcough.ogg",
+      "git_blob_sha1": "15dc2e3873cbdadab627d42d786cb1368e02c0fe",
+      "sha256": "751f92e957283b44b715017cd816490bf11f5284530dc995b56a53acb3932171",
+      "bytes": 12101,
+      "credit": "Paradise-SS220 contributors; no individual creator is inferred"
+    },
+    {
+      "path": "modular_bandastation/emote_panel/audio/vox/shrieksneeze.ogg",
+      "source_path": "sound/voice/shrieksneeze.ogg",
+      "git_blob_sha1": "9b1a5d1cca7358bb03a4dc45298215b51881c160",
+      "sha256": "bb432596b6b678cb517eafcbf920fd02bf617f9d9c4dc1963d018e5c7df667a5",
+      "bytes": 11882,
+      "credit": "Paradise-SS220 contributors; no individual creator is inferred"
+    },
+    {
+      "path": "modular_bandastation/emote_panel/audio/vox/voxrustle.ogg",
+      "source_path": "sound/effects/voxrustle.ogg",
+      "git_blob_sha1": "fe400fc5dd18155c5d97c6547ef2d69a1fd6dd07",
+      "sha256": "d3d545e5e1933dce3e846e242684e5fa1c1c9aab14321e1439412ef4f3bb65d9",
+      "bytes": 50984,
+      "credit": "Sound Ideas (freesfx.co.uk), credited in Paradise human_emote.dm"
+    },
+    {
+      "path": "modular_bandastation/emote_panel/audio/vox/kidanclack2.ogg",
+      "source_path": "sound/effects/kidanclack2.ogg",
+      "git_blob_sha1": "de2d625bc139fdc3457e13ee53f73c2bc1288b8d",
+      "sha256": "01bc696c9de9993f5220d946e14c7ced4462aae255f73719d80b79382e224272",
+      "bytes": 14179,
+      "credit": "DrMinky (freesound.org), credited in Paradise human_emote.dm"
+    }
+  ]
+}

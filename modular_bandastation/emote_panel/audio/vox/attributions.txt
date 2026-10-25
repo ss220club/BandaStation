@@ -9,7 +9,7 @@ License URL: https://creativecommons.org/licenses/by-sa/3.0/
 Source declaration: https://github.com/ss220club/Paradise-SS220/blob/0fffca1f1f29a63aff49d9b56524813eedf82c6d/README.md#licenses
 Source inventory: https://github.com/ss220club/Paradise-SS220/blob/0fffca1f1f29a63aff49d9b56524813eedf82c6d/sound/Attributions.txt
 
-The three files are byte-identical to Paradise sound/voice/<filename>.
+The three shriek files are byte-identical to Paradise sound/voice/<filename>.
 The source attribution inventory has no file-specific entry for them.
 No individual creator is inferred; source project contributors retain attribution.
 
@@ -30,3 +30,29 @@ shrieksneeze.ogg
   Git blob SHA-1: 9b1a5d1cca7358bb03a4dc45298215b51881c160
   SHA-256: bb432596b6b678cb517eafcbf920fd02bf617f9d9c4dc1963d018e5c7df667a5
   Bytes: 11882
+
+Additional physical emotes copied unchanged from the pinned Paradise revision:
+
+voxrustle.ogg
+  Original path: sound/effects/voxrustle.ogg
+  Credit: Sound Ideas (freesfx.co.uk), credited in Paradise human_emote.dm
+  Git blob SHA-1: fe400fc5dd18155c5d97c6547ef2d69a1fd6dd07
+  SHA-256: d3d545e5e1933dce3e846e242684e5fa1c1c9aab14321e1439412ef4f3bb65d9
+  Bytes: 50984
+
+kidanclack2.ogg
+  Original path: sound/effects/kidanclack2.ogg
+  Credit: DrMinky (freesound.org), credited in Paradise human_emote.dm
+  Git blob SHA-1: de2d625bc139fdc3457e13ee53f73c2bc1288b8d
+  SHA-256: 01bc696c9de9993f5220d946e14c7ced4462aae255f73719d80b79382e224272
+  Bytes: 14179
+
+The source code credits the individual authors above; sound/Attributions.txt
+has no separate entry for these two files. They retain the source repository
+CC BY-SA 3.0 asset declaration. Exact pinned paths/hashes for all five files
+are recorded in source-assets.json alongside this attribution.
+
+Vox quill/quills preserves the Paradise Vox feather-rustle sound and Russian
+messages. Vox click/clicks adapts the authored Kidan click sound and changes
+the message from jaws to a Vox beak. The Kidan clack echolocation/mineral scan
+is not imported; playback uses the ordinary TG emote pipeline exactly once.

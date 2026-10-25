@@ -44,7 +44,7 @@
 
 /datum/element/muffles_speech/proc/emote_override(mob/living/source, key, params, type_override, intentional, datum/emote/emote)
 	SIGNAL_HANDLER
-	if(!emote.hands_use_check && (emote.emote_type & EMOTE_AUDIBLE))
+	if(emote.vocal && !emote.hands_use_check && (emote.emote_type & EMOTE_AUDIBLE)) // BANDASTATION EDIT - A muzzle does not suppress non-vocal body sounds.
 		source.audible_message("makes a [pick("strong ", "weak ", "")]noise.", audible_message_flags = EMOTE_MESSAGE|ALWAYS_SHOW_SELF_MESSAGE)
 		return COMPONENT_CANT_EMOTE
 	return NONE

@@ -86,6 +86,13 @@ def main():
         report["states"] += len(dmi.states)
         report["frames"] += frames
         report["assets"][relative] = {"states": len(dmi.states), "frames": frames, "sha256": hashlib.sha256(data).hexdigest()}
+    audio = json.loads((ROOT / "modular_bandastation/emote_panel/audio/vox/source-assets.json").read_text(encoding="utf-8"))
+    for entry in audio["assets"]:
+        data = (ROOT / entry["path"]).read_bytes()
+        blob = hashlib.sha1(b"blob " + str(len(data)).encode() + b"\0" + data).hexdigest()
+        if blob != entry["git_blob_sha1"] or hashlib.sha256(data).hexdigest() != entry["sha256"] or len(data) != entry["bytes"]:
+            raise ValueError(f"Emote sound differs from its pinned Paradise source: {entry['path']}")
+    report["audio_files"] = len(audio["assets"])
     if args.source:
         result = subprocess.run(
             [sys.executable, str(Path(__file__).with_name("adapt_assets.py")), "--source", str(args.source), "--check"],
