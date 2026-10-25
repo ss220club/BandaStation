@@ -174,6 +174,7 @@ export type CharacterPreferencesData = {
 };
 
 export type PreferencesMenuData = {
+  sierra_background: BackgroundPreference[]; // BANDASTATION ADDITION - Sierra background
   character_preview_view: string;
   character_profiles: (string | null)[];
 
@@ -221,6 +222,33 @@ export type PreferencesMenuData = {
 };
 
 // BANDASTATION ADDITION START
+export type BackgroundCategory =
+  | 'culture'
+  | 'homeworld'
+  | 'faction'
+  | 'religion';
+
+export type BackgroundEntry = {
+  name: string;
+  description: string;
+  extra?: string;
+  faction?: string;
+};
+
+export type BackgroundPreference = {
+  category: BackgroundCategory;
+  preference: string;
+  label: string;
+  value: string;
+  choices: string[];
+  notes: string;
+  notes_preference: string;
+  notes_max_length: number;
+  notes_prompt: string;
+  language_names?: string[];
+  name_generation?: string;
+};
+
 export type Seed = {
   name: string;
   value: string;
@@ -254,6 +282,10 @@ export type BodyModification = {
 
 export type ServerData = {
   // BANDASTATION ADDITION START
+  sierra_background?: Record<
+    BackgroundCategory,
+    Record<string, BackgroundEntry>
+  >;
   text_to_speech: TtsData;
   body_modifications: BodyModification[];
   // BANDASTATION ADDITION END

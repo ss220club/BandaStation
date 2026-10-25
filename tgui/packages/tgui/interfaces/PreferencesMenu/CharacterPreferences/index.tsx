@@ -6,6 +6,7 @@ import { exhaustiveCheck } from 'tgui-core/exhaustive';
 import { PageButton } from '../components/PageButton';
 import type { PreferencesMenuData } from '../types';
 import { AntagsPage } from './AntagsPage';
+import { BackgroundPage } from './BackgroundPage'; // BANDASTATION ADDITION - Sierra background
 import { JobsPage } from './JobsPage';
 import { LoadoutPage } from './loadout';
 import { MainPage } from './MainPage';
@@ -21,6 +22,7 @@ enum Page {
   Quirks,
   Loadout,
   Voice,
+  Background, // BANDASTATION ADDITION - Sierra background
 }
 
 type ProfileProps = {
@@ -75,6 +77,12 @@ export function CharacterPreferenceWindow(props) {
       );
       break;
 
+    // BANDASTATION ADDITION START - Sierra background
+    case Page.Background:
+      pageContents = <BackgroundPage />;
+      break;
+    // BANDASTATION ADDITION END - Sierra background
+
     case Page.Species:
       pageContents = (
         <SpeciesPage closeSpecies={() => setCurrentPage(Page.Main)} />
@@ -128,7 +136,8 @@ export function CharacterPreferenceWindow(props) {
           }
           buttons={<CharacterSelection />}
         >
-          <Tabs fluid textAlign="center">
+          {/* BANDASTATION EDIT - Keep character tabs accessible with Background */}
+          <Tabs fluid scrollable textAlign="center">
             <PageButton
               icon="user"
               currentPage={currentPage}
@@ -138,6 +147,16 @@ export function CharacterPreferenceWindow(props) {
             >
               Персонаж
             </PageButton>
+            {/* BANDASTATION ADDITION START - Sierra background */}
+            <PageButton
+              icon="book-open"
+              currentPage={currentPage}
+              page={Page.Background}
+              setPage={setCurrentPage}
+            >
+              Предыстория
+            </PageButton>
+            {/* BANDASTATION ADDITION END - Sierra background */}
             <PageButton
               icon="suitcase"
               currentPage={currentPage}

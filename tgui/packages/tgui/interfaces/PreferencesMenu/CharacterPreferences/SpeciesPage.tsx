@@ -15,6 +15,10 @@ import { classes } from 'tgui-core/react';
 
 import { CharacterPreview } from '../../common/CharacterPreview';
 import { LoadingScreen } from '../../common/LoadingScreen';
+// BANDASTATION ADDITION START - Skrell caste preference
+import { type Feature, FeatureValueInput } from '../preferences/features/base';
+import { skrell_caste } from '../preferences/features/character_preferences/skrell_caste';
+// BANDASTATION ADDITION END - Skrell caste preference
 import {
   createSetPreference,
   Food,
@@ -268,6 +272,26 @@ function SpeciesPageInner(props: SpeciesPageInnerProps) {
                 }
               >
                 {currentSpecies.desc}
+                {/* BANDASTATION ADDITION START - Skrell caste preference */}
+                {Object.hasOwn(
+                  data.character_preferences.manually_rendered_features,
+                  'skrell_caste',
+                ) && (
+                  <Box mt={2}>
+                    <Box bold mb={1}>
+                      Каста
+                    </Box>
+                    <FeatureValueInput
+                      feature={skrell_caste as unknown as Feature<unknown>}
+                      featureId="skrell_caste"
+                      value={
+                        data.character_preferences.manually_rendered_features
+                          .skrell_caste
+                      }
+                    />
+                  </Box>
+                )}
+                {/* BANDASTATION ADDITION END - Skrell caste preference */}
               </Section>
             </Stack.Item>
             <Stack.Item grow>

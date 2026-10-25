@@ -50,11 +50,7 @@
 	target.log_mob_tag("TAG: [target.tag] RENAMED: [key_name(target)]")
 
 /datum/preference/name/real_name/create_informed_default_value(datum/preferences/preferences)
-	return generate_random_name_species_based(
-		preferences.read_preference(/datum/preference/choiced/gender),
-		TRUE,
-		preferences.read_preference(/datum/preference/choiced/species),
-	)
+	return generate_sierra_background_name(preferences) // BANDASTATION EDIT - Names follow character upbringing
 
 /datum/preference/name/real_name/deserialize(input, datum/preferences/preferences)
 	input = ..(input)

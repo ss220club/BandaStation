@@ -383,6 +383,14 @@
 #include "find_reference_sanity.dm"
 #endif
 
+// BANDASTATION ADDITION - Background tests need the native assertion macros.
+#include "../../../modular_bandastation/sierra_background/tests/background.dm"
+#include "../../../modular_bandastation/sierra_background/tests/skrell_caste.dm"
+#include "../../../modular_bandastation/sierra_background/tests/culture_profiles.dm"
+#include "../../../modular_bandastation/sierra_background/tests/languages.dm"
+#include "../../../modular_bandastation/sierra_background/tests/names.dm"
+#include "../../../modular_bandastation/sierra_background/tests/gutter.dm"
+
 #undef TEST_ASSERT
 #undef TEST_ASSERT_EQUAL
 #undef TEST_ASSERT_NOTEQUAL

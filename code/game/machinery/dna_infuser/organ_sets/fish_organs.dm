@@ -50,7 +50,10 @@
 	if(HAS_TRAIT(owner, TRAIT_IS_WET) && istype(owner.get_organ_slot(ORGAN_SLOT_EXTERNAL_TAIL), /obj/item/organ/tail/fish))
 		add_speed_buff()
 	owner.mind?.adjust_experience(/datum/skill/fishing, SKILL_EXP_JOURNEYMAN, silent = TRUE)
-	owner.grant_language(/datum/language/carptongue, ALL, type)
+	// BANDASTATION EDIT START - Cerulean anatomy permits speech without supplying learned upbringing knowledge
+	if(!is_species(owner, /datum/species/human/cerulean) || !owner.get_language_holder().has_sierra_background_languages())
+		owner.grant_language(/datum/language/carptongue, ALL, type)
+	// BANDASTATION EDIT END
 
 /datum/status_effect/organ_set_bonus/fish/disable_bonus(obj/item/organ/removed_organ, visuals_only)
 	. = ..()

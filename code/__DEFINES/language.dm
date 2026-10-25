@@ -26,6 +26,8 @@
 /// Language is linked to the mob's mind.
 /// If a mind transfer happens, language follows.
 #define LANGUAGE_MIND "mind"
+/// Learned through upbringing; follows the mind while retaining independent removal.
+#define LANGUAGE_BACKGROUND "background" // BANDASTATION ADDITION - Character background languages
 /// Language is linked to the mob's species.
 /// If a species change happens, language goes away.
 /// If applied to a non-human (no species) atom, this is effectively the same as [LANGUAGE_ATOM].

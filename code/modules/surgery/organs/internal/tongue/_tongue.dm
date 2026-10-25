@@ -87,6 +87,7 @@
 		/datum/language/common,
 		/datum/language/uncommon,
 		/datum/language/spinwarder,
+		/datum/language/gutter, // BANDASTATION ADDITION - Elysian human language.
 		/datum/language/draconic,
 		/datum/language/codespeak,
 		/datum/language/monkey,

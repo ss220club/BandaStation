@@ -15,6 +15,7 @@
 /datum/quirk/csl/add(client/client_source)
 	quirk_holder.remove_language(/datum/language/common, UNDERSTOOD_LANGUAGE, LANGUAGE_SPECIES)
 	quirk_holder.remove_language(/datum/language/common, UNDERSTOOD_LANGUAGE, LANGUAGE_ATOM)
+	quirk_holder.remove_language(/datum/language/common, UNDERSTOOD_LANGUAGE, LANGUAGE_BACKGROUND) // BANDASTATION ADDITION - Upbringing must respect Common Second Language
 	if(length(quirk_holder.get_understood_languages()) < 1)
 		quirk_holder.grant_language(/datum/language/uncommon, SPOKEN_LANGUAGE|UNDERSTOOD_LANGUAGE, LANGUAGE_QUIRK)
 
@@ -32,6 +33,11 @@
 
 	quirk_holder.remove_partial_language(/datum/language/common, type)
 	quirk_holder.remove_language(/datum/language/uncommon, SPOKEN_LANGUAGE|UNDERSTOOD_LANGUAGE, LANGUAGE_QUIRK)
+	// BANDASTATION ADDITION START - Restore the background's own understanding source
+	var/list/spoken_sources = quirk_holder.get_language_holder().spoken_languages?[/datum/language/common]
+	if(LANGUAGE_BACKGROUND in spoken_sources)
+		quirk_holder.grant_language(/datum/language/common, UNDERSTOOD_LANGUAGE, LANGUAGE_BACKGROUND)
+	// BANDASTATION ADDITION END
 	var/mob/living/carbon/carbon_quirk_holder = quirk_holder
 	if(istype(carbon_quirk_holder) && carbon_quirk_holder.dna.species)
 		// only give back common if they're a species that should speak it
@@ -64,6 +70,7 @@
 /datum/quirk/csl/proc/reremove_common(...)
 	SIGNAL_HANDLER
 	quirk_holder.remove_language(/datum/language/common, UNDERSTOOD_LANGUAGE, LANGUAGE_SPECIES)
+	quirk_holder.remove_language(/datum/language/common, UNDERSTOOD_LANGUAGE, LANGUAGE_BACKGROUND) // BANDASTATION ADDITION - Upbringing must respect Common Second Language
 	native_language = get_native_language()
 
 // At low sanity we translate everything to our native language

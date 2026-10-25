@@ -2,6 +2,7 @@
 #include "_modpacks.dm"
 
 // --- MODULES START --- //
+#include "sierra_background/_sierra_background.dme"
 #include "_defines220/_defines220.dme"
 #include "_helpers220/_helpers220.dme"
 #include "_signals220/_signals220.dme"

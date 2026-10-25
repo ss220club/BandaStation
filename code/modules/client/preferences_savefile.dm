@@ -372,14 +372,17 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 		savefile.set_entry("default_slot", original_default_slot)
 		return FALSE
 
-	// Read everything into cache
-	// Uses priority order as some values may rely on others for creating default values
+	// BANDASTATION EDIT START - Defaults must never read dependent values from the previous character slot
 	for (var/datum/preference/preference as anything in get_preferences_in_priority_order())
 		if (preference.savefile_identifier != PREFERENCE_CHARACTER)
 			continue
-
 		value_cache -= preference.type
+	// Read in priority order after invalidating all character values, including later dependencies.
+	for (var/datum/preference/preference as anything in get_preferences_in_priority_order())
+		if (preference.savefile_identifier != PREFERENCE_CHARACTER)
+			continue
 		read_preference(preference.type)
+	// BANDASTATION EDIT END
 
 	//Character
 	randomise = save_data?["randomise"]
