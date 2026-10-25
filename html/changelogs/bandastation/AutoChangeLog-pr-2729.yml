@@ -1,0 +1,4 @@
+author: "IWantSomeFish"
+delete-after: True
+changes:
+  - rscadd: "Представители ЦК теперь отображаются в мониторе как главы."
