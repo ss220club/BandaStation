@@ -41,7 +41,8 @@ cargo +1.93.1 build --locked --release --target i686-pc-windows-msvc
 ```
 
 Используется upstream `.cargo/config.toml` с `+crt-static`. Внешние
-`RUSTFLAGS`, `CARGO_ENCODED_RUSTFLAGS` и `CARGO_TARGET_DIR` отклоняются, чтобы
+`RUSTFLAGS`, `CARGO_ENCODED_RUSTFLAGS`, `CARGO_BUILD_RUSTFLAGS`,
+`CARGO_TARGET_I686_PC_WINDOWS_MSVC_RUSTFLAGS` и `CARGO_TARGET_DIR` отклоняются, чтобы
 не подменить рецепт сборки. Отсутствующий Rust не загружается автоматически.
 `-OutputDirectory` позволяет явно выбрать новый каталог результата.
 

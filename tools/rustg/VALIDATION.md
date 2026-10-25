@@ -104,3 +104,15 @@ $byondBin = 'D:\path\to\byond\bin'
 История исходной ошибки, воспроизводившейся без игрового кода, и точное
 сопоставление fault RVA с Rayon:
 [WINDOWS_RUSTG_SHUTDOWN.md](../vox/WINDOWS_RUSTG_SHUTDOWN.md).
+
+Standalone DM-исходники хранятся как `.dm.in`: runners копируют их в ignored `tmp`
+с расширением `.dm` и записывают SHA256 именно компилируемых snapshot-файлов.
+Они не включаются в production DME. PID публикуется atomic rename после записи;
+Application Faults вне записанного окна PID сохраняются отдельно в
+`outside_lifetime_events`. ABI audit работает на Windows и проверяет экспорты и
+DLL-зависимости; наличие импорта `GetModuleHandleExW` не доказывает PIN-логику.
+Её проверяет отдельный native-host probe.
+
+Focused проверка самих инструментов: `powershell -NoProfile -File tools/vox/check-native-harness.ps1`
+покрывает два окна одного PID, событие вне времени жизни, неизвестный PID, ошибки
+чтения Application log и пять запрещённых Cargo environment overrides.

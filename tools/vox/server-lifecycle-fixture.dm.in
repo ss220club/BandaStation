@@ -89,8 +89,13 @@ SUBSYSTEM_DEF(lifecycle_probe)
 	var/output_path = "data/lifecycle-health-[epoch].dmi"
 	var/list/sprites = list("result" = list("icon_file" = "data/lifecycle-input.dmi", "icon_state" = "probe", "dir" = SOUTH, "frame" = 1, "transform" = list()))
 	var/raw = call_ext("rust_g", "iconforge_generate_headless")(output_path, json_encode(sprites), "1")
-	var/list/result = json_decode(raw)
-	if(result["error"] || result["file_path"] != output_path || result["width"] != 32 || result["height"] != 32 || !fexists(output_path))
+	var/list/result
+	try
+		result = json_decode(raw)
+	catch(var/exception/error)
+		fail_probe("Headless forge returned invalid JSON: [raw]")
+		return
+	if(!islist(result) || result["error"] || result["file_path"] != output_path || result["width"] != 32 || result["height"] != 32 || !fexists(output_path))
 		fail_probe("Headless forge health failed: [raw]")
 		return
 	health_world_time = world.time

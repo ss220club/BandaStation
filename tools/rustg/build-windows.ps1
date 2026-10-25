@@ -15,8 +15,6 @@ $upstream = 'https://github.com/tgstation/rust-g.git'
 $target = 'i686-pc-windows-msvc'
 $patch = Join-Path $PSScriptRoot 'windows-lifetime.patch'
 $git = (Get-Command git -ErrorAction Stop).Source
-$cargo = (Get-Command cargo -ErrorAction Stop).Source
-$rustc = (Get-Command rustc -ErrorAction Stop).Source
 
 function Invoke-Checked([string]$Program, [string[]]$Arguments) {
     & $Program @Arguments
@@ -27,9 +25,11 @@ function Get-Sha256([string]$Path) {
 }
 
 if (-not (Test-Path -LiteralPath $patch -PathType Leaf)) { throw "Missing patch: $patch" }
-foreach ($name in @('RUSTFLAGS', 'CARGO_ENCODED_RUSTFLAGS', 'CARGO_TARGET_DIR')) {
+foreach ($name in @('RUSTFLAGS', 'CARGO_ENCODED_RUSTFLAGS', 'CARGO_BUILD_RUSTFLAGS', 'CARGO_TARGET_I686_PC_WINDOWS_MSVC_RUSTFLAGS', 'CARGO_TARGET_DIR')) {
     if ([Environment]::GetEnvironmentVariable($name)) { throw "Unset $name to preserve the pinned build recipe." }
 }
+$cargo = (Get-Command cargo -ErrorAction Stop).Source
+$rustc = (Get-Command rustc -ErrorAction Stop).Source
 $buildRoot = Join-Path $repo ('tmp\rustg-build-' + [Guid]::NewGuid().ToString('N').Substring(0, 12))
 $source = Join-Path $buildRoot 'source'
 if (-not $OutputDirectory) { $OutputDirectory = Join-Path $buildRoot 'output' }

@@ -29,9 +29,15 @@
 		var/list/sprites = list("result" = list("icon_file" = "input.dmi", "icon_state" = "probe", "dir" = 2, "frame" = 1, "transform" = list()))
 		var/raw = call_ext("rust_g", "iconforge_generate_headless")(output_path, json_encode(sprites), "1")
 		world.log << "RESULT=[raw]"
-		var/list/result = json_decode(raw)
+		var/list/result
+		try
+			result = json_decode(raw)
+		catch
+			text2file("invalid JSON", "invalid.marker")
+			del(src)
+			return
 		record["result"] = result
-		if(result["error"] || result["file_path"] != output_path || !fexists(output_path))
+		if(!islist(result) || result["error"] || result["file_path"] != output_path || !fexists(output_path))
 			world.log << "INVALID_RESULT"
 			text2file("failed", "invalid.marker")
 	if(mode == "cleanup")

@@ -77,7 +77,7 @@ Fault offset: 0065b640
 
 ## Минимальный сценарий и повторение
 
-[repro.dm](rustg-shutdown-repro/repro.dm) загружает только DLL, выполняет
+[repro.dm.in](rustg-shutdown-repro/repro.dm.in) загружает только DLL, выполняет
 `get_version()`, а в режиме `forge` синхронно вызывает
 `iconforge_generate_headless`. Вход — один свежий DMI state `probe`, 32×32,
 четыре направления с однотонными красным, зелёным, синим и жёлтым кадрами.

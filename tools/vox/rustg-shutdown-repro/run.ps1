@@ -34,7 +34,7 @@ $utf8 = New-Object System.Text.UTF8Encoding($false)
 $pinnedDll = Join-Path $folder 'rust_g.dll'
 Copy-Item -LiteralPath $dll -Destination $pinnedDll
 if ((Get-FileHash -LiteralPath $pinnedDll -Algorithm SHA256).Hash.ToLowerInvariant() -ne $Sha256) { throw 'DLL changed while being copied.' }
-Copy-Item -LiteralPath (Join-Path $PSScriptRoot 'repro.dm') -Destination $folder
+Copy-Item -LiteralPath (Join-Path $PSScriptRoot 'repro.dm.in') -Destination (Join-Path $folder 'repro.dm')
 [IO.File]::WriteAllText((Join-Path $folder 'repro.dme'), '#include "repro.dm"', $utf8)
 & $Python (Join-Path $PSScriptRoot 'make_fixture.py') (Join-Path $folder 'input.dmi')
 if ($LASTEXITCODE -ne 0) { throw 'Fixture creation failed; Python with Pillow is required.' }
@@ -83,7 +83,8 @@ try {
                 try {
                     $process = Start-Process -FilePath $executables['dd.exe'].path -ArgumentList $arguments -WorkingDirectory $run -WindowStyle Hidden -PassThru
                     $nativePid = $process.Id
-                    [IO.File]::WriteAllText((Join-Path $run 'host-pid.txt'), [string]$nativePid, $utf8)
+                    [IO.File]::WriteAllText((Join-Path $run 'host-pid.txt.pending'), [string]$nativePid, $utf8)
+                    [IO.File]::Move((Join-Path $run 'host-pid.txt.pending'), (Join-Path $run 'host-pid.txt'))
                     while (-not $process.HasExited -and $timer.ElapsedMilliseconds -lt $WaitMs) {
                         foreach ($epoch in 1..3) {
                             if ($epoch -notin $epochObservations -and (Test-Path -LiteralPath (Join-Path $run "epoch-$epoch.json"))) { $epochObservations += $epoch }

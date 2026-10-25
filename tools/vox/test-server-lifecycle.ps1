@@ -48,7 +48,11 @@ foreach ($runtimeDll in Get-ChildItem -LiteralPath $repo -Filter '*.dll' -File |
 if ($LASTEXITCODE -ne 0) { throw 'Could not generate the native health input.' }
 $wrapperName = $name + '.lifecycle'
 $wrapperPath = Join-Path $repo ($wrapperName + '.dme')
-$wrapper = @('#define LIFECYCLE_HARNESS', '#include "tgstation.dme"', '#include "tools/vox/server-lifecycle-fixture.dm"', '#include "tools/vox/server-lifecycle-space-area-fixture.dm"')
+# Standalone templates are materialized only in ignored tmp; never include them in production.
+foreach ($fixture in @('server-lifecycle-fixture.dm', 'server-lifecycle-space-area-fixture.dm')) {
+    Copy-Item -LiteralPath (Join-Path $PSScriptRoot ($fixture + '.in')) -Destination (Join-Path $folder $fixture)
+}
+$wrapper = @('#define LIFECYCLE_HARNESS', '#include "tgstation.dme"', "#include `"tmp/$name/server-lifecycle-fixture.dm`"", "#include `"tmp/$name/server-lifecycle-space-area-fixture.dm`"")
 [IO.File]::WriteAllLines($wrapperPath, [string[]]$wrapper, $utf8)
 $manifest = [ordered]@{
     schema_version = 1; status = 'running'; unit_tests = $false; repeat = $Repeat; timeout_seconds = $TimeoutSeconds
@@ -56,8 +60,8 @@ $manifest = [ordered]@{
     rust_g = @{ source = $dll; expected_sha256 = $Sha256; actual_sha256 = (Get-FileHash -LiteralPath $pinnedDll -Algorithm SHA256).Hash.ToLowerInvariant() }
     executables = $executables; modes = @('shutdown', 'warm'); close_flags = @($false, $true)
     other_runtime_dll_sha256 = $otherDllHashes
-    fixture_sha256 = (Get-FileHash -LiteralPath (Join-Path $PSScriptRoot 'server-lifecycle-fixture.dm') -Algorithm SHA256).Hash.ToLowerInvariant()
-    mapping_fixture_sha256 = (Get-FileHash -LiteralPath (Join-Path $PSScriptRoot 'server-lifecycle-space-area-fixture.dm') -Algorithm SHA256).Hash.ToLowerInvariant()
+    fixture_sha256 = (Get-FileHash -LiteralPath (Join-Path $folder 'server-lifecycle-fixture.dm') -Algorithm SHA256).Hash.ToLowerInvariant()
+    mapping_fixture_sha256 = (Get-FileHash -LiteralPath (Join-Path $folder 'server-lifecycle-space-area-fixture.dm') -Algorithm SHA256).Hash.ToLowerInvariant()
     input_sha256 = (Get-FileHash -LiteralPath (Join-Path $folder 'lifecycle-input.dmi') -Algorithm SHA256).Hash.ToLowerInvariant()
     harness_sha256 = (Get-FileHash -LiteralPath $PSCommandPath -Algorithm SHA256).Hash.ToLowerInvariant()
     helpers_sha256 = (Get-FileHash -LiteralPath (Join-Path $PSScriptRoot 'native-harness-helpers.ps1') -Algorithm SHA256).Hash.ToLowerInvariant()
@@ -123,7 +127,8 @@ try {
                 try {
                     $process = Start-Process -FilePath $executables['dd.exe'].path -ArgumentList $arguments -WorkingDirectory $run -WindowStyle Hidden -PassThru
                     $nativePid = $process.Id
-                    [IO.File]::WriteAllText((Join-Path $run 'data\lifecycle-host-pid.txt'), [string]$nativePid, $utf8)
+                    [IO.File]::WriteAllText((Join-Path $run 'data\lifecycle-host-pid.txt.pending'), [string]$nativePid, $utf8)
+                    [IO.File]::Move((Join-Path $run 'data\lifecycle-host-pid.txt.pending'), (Join-Path $run 'data\lifecycle-host-pid.txt'))
                     while (-not $process.HasExited -and $timer.Elapsed.TotalSeconds -lt $TimeoutSeconds) {
                         foreach ($epoch in 1..3) {
                             if ($epoch -notin $observedEpochs -and (Test-Path -LiteralPath (Join-Path $run "data\lifecycle-epoch-$epoch.json"))) { $observedEpochs += $epoch }

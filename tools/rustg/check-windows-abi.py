@@ -58,6 +58,8 @@ class PE:
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('baseline'); parser.add_argument('candidate'); parser.add_argument('--out', type=Path)
 args = parser.parse_args()
+if os.name != "nt":
+    parser.error("Run on Windows to audit 32-bit system DLL dependencies; no dependency pass is reported elsewhere.")
 old, new = PE(args.baseline), PE(args.candidate)
 old_exports, new_exports = old.exports(), new.exports()
 api = Path(__file__).resolve().parents[2] / 'code/__DEFINES/rust_g.dm'
@@ -71,7 +73,7 @@ report = dict(baseline=old.metadata(), candidate=new.metadata(), baseline_export
               newly_missing_required=sorted((required & old_exports)-new_exports), added_exports=sorted(new_exports-old_exports),
               imports=sorted(new_imports), added_imports=sorted(new_imports.keys()-old_imports.keys()),
               imports_get_module_handle_ex_w=any('GetModuleHandleExW' in names for names in new_imports.values()),
-              non_system_imports=unknown if os.name == 'nt' else None)
-report['passed'] = not report['missing_old'] and not report['newly_missing_required'] and (os.name != 'nt' or not unknown)
+              non_system_imports=unknown, audit_scope='PE exports and Windows DLL dependencies; module lifetime requires test-module-lifetime.ps1')
+report['passed'] = not report['missing_old'] and not report['newly_missing_required'] and not unknown
 if args.out: args.out.write_text(json.dumps(report, indent=2) + '\n', encoding='utf-8')
 print(json.dumps(report, indent=2)); raise SystemExit(0 if report['passed'] else 1)

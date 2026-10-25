@@ -20,7 +20,7 @@ function Register-ProcessWindow([hashtable]$Windows, [int]$ProcessId, [DateTime]
 }
 
 function Get-FaultEvidence([DateTime]$Since, [hashtable]$ProcessWindows) {
-    $matched = @(); $unparsed = @(); $queryError = $null
+    $matched = @(); $outside = @(); $unparsed = @(); $queryError = $null
     try {
         $rawEvents = @(Get-WinEvent -FilterHashtable @{ LogName = 'Application'; Id = 1000; StartTime = $Since } -ErrorAction Stop)
     } catch {
@@ -41,8 +41,9 @@ function Get-FaultEvidence([DateTime]$Since, [hashtable]$ProcessWindows) {
         if (-not $ProcessWindows.ContainsKey($faultPid)) { continue }
         $windows = @($ProcessWindows[$faultPid])
         $withinLifetime = @($windows | Where-Object { $event.TimeCreated -ge $_.start.AddSeconds(-2) -and $event.TimeCreated -le $_.end.AddSeconds(15) }).Count -gt 0
-        # Retain every tested PID match, even delayed WER events or ambiguous PID reuse.
-        $matched += @{ pid = $faultPid; time = $event.TimeCreated; within_recorded_lifetime = $withinLifetime; process_windows = $windows; data = $data; message = $event.Message; xml = $xmlText }
+        # Preserve PID reuse/delayed evidence separately; it is not a fault in this process window.
+        $evidence = @{ pid = $faultPid; time = $event.TimeCreated; within_recorded_lifetime = $withinLifetime; process_windows = $windows; data = $data; message = $event.Message; xml = $xmlText }
+        if ($withinLifetime) { $matched += $evidence } else { $outside += $evidence }
     }
-    return @{ events = $matched; unparsed_daemon_events = $unparsed; query_error = $queryError }
+    return @{ events = $matched; outside_lifetime_events = $outside; unparsed_daemon_events = $unparsed; query_error = $queryError }
 }
