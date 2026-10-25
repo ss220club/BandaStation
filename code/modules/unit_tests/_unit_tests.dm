@@ -379,6 +379,7 @@
 #include "weird_food.dm"
 #include "wizard_loadout.dm"
 // END_INCLUDE
+#include "../../../modular_bandastation/antagonists/code/tests/comms_intercept.dm" // BANDASTATION ADDITION - Comms intercept
 #ifdef REFERENCE_TRACKING_DEBUG //Don't try and parse this file if ref tracking isn't turned on. IE: don't parse ref tracking please mr linter
 #include "find_reference_sanity.dm"
 #endif
