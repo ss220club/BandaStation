@@ -11,7 +11,7 @@ function Get-WinEvent { param($FilterHashtable, $ErrorAction) return $script:tes
 $start = [DateTime]'2026-10-25T12:00:00'
 $windows = @{}
 Register-ProcessWindow $windows 11 $start $start.AddSeconds(3)
-Register-ProcessWindow $windows 11 $start.AddSeconds(10) $start.AddSeconds(15)
+Register-ProcessWindow $windows 11 $start.AddSeconds(60) $start.AddSeconds(65)
 $script:testEvents = @(
     (New-Fault $start.AddSeconds(2) '0xb'),
     (New-Fault $start.AddSeconds(12) '11'),
@@ -43,3 +43,4 @@ try {
     }
 } finally { foreach ($name in $flags) { [Environment]::SetEnvironmentVariable($name, $saved[$name]) } }
 Write-Output 'Native evidence windows/query errors and five Cargo environment guards: PASS'
+
