@@ -92,7 +92,7 @@ SUBSYSTEM_DEF(lifecycle_probe)
 	var/list/result
 	try
 		result = json_decode(raw)
-	catch(var/exception/error)
+	catch
 		fail_probe("Headless forge returned invalid JSON: [raw]")
 		return
 	if(!islist(result) || result["error"] || result["file_path"] != output_path || result["width"] != 32 || result["height"] != 32 || !fexists(output_path))
