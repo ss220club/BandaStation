@@ -49,13 +49,14 @@ try {
         'preference_species', 'species_change_organs', 'species_config_sanity',
         'species_unique_id', 'species_whitelist_check',
         'organ_sanity', 'designs', 'design_source', 'design_mats',
-        'focus_only/invalid_research_designs', 'missing_icons/icon_state'
+        'focus_only/invalid_research_designs', 'focus_only/invalid_emissives',
+        'missing_icons/icon_state'
     ) | ForEach-Object { '/datum/unit_test/' + $_ }
     if ($IncludeHumanoidScreenshots) {
         $baselineTests += '/datum/unit_test/screenshot_humanoids'
     }
     $ipcTests = Get-ChildItem -LiteralPath 'modular_bandastation\species\code\tests' -Filter 'ipc*.dm' |
-        Select-String -Pattern '^(/datum/unit_test/ipc[^/\s]*)/Run\(' |
+        Select-String -Pattern '^(/datum/unit_test/ipc[^\s]*)/Run\(' |
         ForEach-Object { $_.Matches[0].Groups[1].Value }
     if (-not $ipcTests) {
         throw 'No IPC unit tests found.'
@@ -100,6 +101,7 @@ try {
         if (-not $server.WaitForExit($TimeoutSeconds * 1000)) {
             throw "IPC tests exceeded $TimeoutSeconds seconds. See $runDirectory\console.log"
         }
+        $daemonExitCode = $server.ExitCode
     } finally {
         if (-not $server.HasExited) {
             $server.Kill()
@@ -122,14 +124,28 @@ try {
         Write-Output ($failedTest.name + ': ' + $failedTest.message)
     }
     Write-Output "$($actualTests.Count - $failedTests.Count)/$($actualTests.Count) DM tests passed. Results: $resultsPath"
-    $cleanMarker = Join-Path $runDirectory 'data\logs\ipc\clean_run.lk'
-    $cleanShutdown = (Test-Path -LiteralPath $cleanMarker) -and ((Get-Content -LiteralPath $cleanMarker -Raw).Trim() -eq 'Success!')
-    $runtimeLog = Join-Path $runDirectory 'data\logs\ipc\runtime.log.json'
-    $runtimeErrors = @(Select-String -LiteralPath $runtimeLog -Pattern 'Runtime in|runtime error' -ErrorAction SilentlyContinue)
+    $logDirectory = Join-Path $runDirectory 'data\logs\ipc'
+    $cleanMarker = Join-Path $logDirectory 'clean_run.lk'
+    $cleanShutdown = (Test-Path -LiteralPath $cleanMarker -PathType Leaf) -and ((Get-Content -LiteralPath $cleanMarker -Raw).Trim() -eq 'Success!')
+    # BYOND runtimes can bypass world/Error or occur before its log redirect.
+    $runtimeLogs = @(
+        (Join-Path $logDirectory 'dd.log'),
+        (Join-Path $logDirectory 'runtime.log.json'),
+        (Join-Path $runDirectory 'console.log')
+    )
+    $missingLogs = @($runtimeLogs | Where-Object { -not (Test-Path -LiteralPath $_ -PathType Leaf) })
+    $existingRuntimeLogs = @($runtimeLogs | Where-Object { Test-Path -LiteralPath $_ -PathType Leaf })
+    $runtimeErrors = @()
+    if ($existingRuntimeLogs.Count) {
+        $runtimeErrors = @(Select-String -LiteralPath $existingRuntimeLogs -Pattern 'Runtime in\b|runtime error\b|uncaught exception\b|Total runtimes:\s*[1-9]|BYOND out of memory|Maximum recursion level reached|Infinite loop suspected')
+    }
+    foreach ($runtimeError in $runtimeErrors) {
+        Write-Output $runtimeError.ToString()
+    }
 
-    $comparisonCache = Join-Path $repoRoot 'tmp\ipc-screenshot-compare'
-    New-Item -ItemType Directory -Path $comparisonCache -Force | Out-Null
-    Copy-Item -LiteralPath 'tools\screenshot-test-comparison\package.json', 'tools\screenshot-test-comparison\index.js' -Destination $comparisonCache -Force
+    $comparisonCache = Join-Path $runDirectory 'screenshot-comparator'
+    New-Item -ItemType Directory -Path $comparisonCache | Out-Null
+    Copy-Item -LiteralPath 'tools\screenshot-test-comparison\package.json', 'tools\screenshot-test-comparison\index.js' -Destination $comparisonCache
     & (Join-Path $repoRoot 'tools\bootstrap\javascript.bat') install --cwd $comparisonCache --ignore-scripts
     if ($LASTEXITCODE -ne 0) {
         throw 'Could not install the repository screenshot comparator dependencies.'
@@ -140,14 +156,19 @@ try {
     $actualImages = @(Get-ChildItem -LiteralPath (Join-Path $runDirectory 'data\screenshots') -Filter '*.png' -File -ErrorAction SilentlyContinue)
     $newImages = @(Get-ChildItem -LiteralPath (Join-Path $runDirectory 'code\modules\unit_tests\screenshots') -Filter '*.png' -File |
         Where-Object { -not (Test-Path -LiteralPath (Join-Path $repoRoot ('code\modules\unit_tests\screenshots\' + $_.Name))) })
-    foreach ($screenshot in @($actualImages) + @($newImages)) {
+    $screenshotImages = @($actualImages) + @($newImages)
+    foreach ($screenshot in $screenshotImages) {
         Copy-Item -LiteralPath $screenshot.FullName -Destination $screenshotsPath
     }
+    $missingScreenshots = @($focusedTests | Where-Object { $_ -match 'screenshot' } | Where-Object {
+        $prefix = $_.Substring('/datum/unit_test/'.Length).Replace('/', '_') + '_'
+        -not @($screenshotImages | Where-Object { $_.Name.StartsWith($prefix) }).Count
+    })
     & (Join-Path $repoRoot 'tools\bootstrap\javascript.bat') (Join-Path $comparisonCache 'index.js') $artifactsPath (Join-Path $repoRoot 'code\modules\unit_tests\screenshots') (Join-Path $runDirectory 'screenshot-comparisons')
-    $screenshotsPassed = $LASTEXITCODE -eq 0
-    Write-Output "$($actualImages.Count + $newImages.Count) screenshots compared; passed: $screenshotsPassed. Candidates: $screenshotsPath"
-    if ($missingTests.Count -or $failedTests.Count -or -not $cleanShutdown -or $runtimeErrors.Count -or -not $screenshotsPassed) {
-        throw "IPC validation failed. Missing tests: $($missingTests -join ', '). Runtime errors: $($runtimeErrors.Count). Clean shutdown: $cleanShutdown. Inspect the preserved artifacts."
+    $screenshotsPassed = ($LASTEXITCODE -eq 0) -and $screenshotImages.Count -gt 0 -and -not $missingScreenshots.Count
+    Write-Output "$($screenshotImages.Count) screenshots compared; passed: $screenshotsPassed. Candidates: $screenshotsPath"
+    if ($daemonExitCode -ne 0 -or $missingTests.Count -or $failedTests.Count -or -not $cleanShutdown -or $missingLogs.Count -or $runtimeErrors.Count -or -not $screenshotsPassed) {
+        throw "IPC validation failed. Daemon exit code: $daemonExitCode. Missing tests: $($missingTests -join ', '). Runtime errors: $($runtimeErrors.Count). Missing logs: $($missingLogs -join ', '). Clean shutdown: $cleanShutdown. Missing screenshots: $($missingScreenshots -join ', '). Inspect the preserved artifacts."
     }
 } finally {
     # Only these uniquely named, directly contained root artifacts belong to this run.

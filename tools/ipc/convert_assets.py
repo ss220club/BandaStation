@@ -22,6 +22,11 @@ actual_revision = subprocess.check_output(
 ).strip()
 if actual_revision != REVISION:
     parser.error(f"Expected source revision {REVISION}, got {actual_revision}")
+source_changes = subprocess.check_output(
+    ["git", "-C", str(SOURCE), "status", "--porcelain", "--untracked-files=all"], text=True
+).strip()
+if source_changes:
+    parser.error("The pinned source checkout has local changes; use a clean checkout before converting assets")
 DEST = TARGET / "modular_bandastation/species/icons/ipc"
 DEST.mkdir(parents=True, exist_ok=True)
 
