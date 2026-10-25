@@ -160,6 +160,10 @@ INITIALIZE_IMMEDIATE(/obj/item/organ)
 /obj/item/organ/proc/on_death(seconds_per_tick) //runs decay when outside of a person
 	if(organ_flags & (ORGAN_ROBOTIC | ORGAN_FROZEN))
 		return
+	// BANDASTATION ADDITION START - Protection belongs to the corpse, not a permanently frozen organ
+	if(HAS_TRAIT(owner, TRAIT_NODECAY))
+		return
+	// BANDASTATION ADDITION END - Protection belongs to the corpse, not a permanently frozen organ
 
 	if(owner)
 		if(owner.bodytemperature > T0C)

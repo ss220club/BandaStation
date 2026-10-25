@@ -179,6 +179,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_STABLEHEART "stable_heart"
 /// Prevents you from leaving your corpse
 #define TRAIT_CORPSELOCKED "corpselocked"
+// BANDASTATION ADDITION - Preserve corpses and their installed organs without disease immunity
+#define TRAIT_NODECAY "nodecay"
 #define TRAIT_STABLELIVER "stable_liver"
 #define TRAIT_VATGROWN "vatgrown"
 #define TRAIT_RESISTHEAT "resist_heat"

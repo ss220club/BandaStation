@@ -27,6 +27,10 @@
 		return COMPONENT_INCOMPATIBLE
 	if(isliving(parent))
 		var/mob/living/living_parent = parent
+		// BANDASTATION ADDITION START - A protected corpse does not need an infectious rot component
+		if(HAS_TRAIT(living_parent, TRAIT_NODECAY))
+			return COMPONENT_REDUNDANT
+		// BANDASTATION ADDITION END - A protected corpse does not need an infectious rot component
 		//I think this can break in cases where someone becomes a robot post death, but I uh, I don't know how to account for that
 		if(!(living_parent.mob_biotypes & (MOB_ORGANIC|MOB_UNDEAD)))
 			return COMPONENT_INCOMPATIBLE

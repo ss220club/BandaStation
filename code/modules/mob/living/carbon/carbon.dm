@@ -1167,6 +1167,10 @@
 /mob/living/carbon/proc/attach_rot()
 	if(flags_1 & HOLOGRAM_1)
 		return
+	// BANDASTATION ADDITION START - Vox corpses do not decay
+	if(HAS_TRAIT(src, TRAIT_NODECAY))
+		return
+	// BANDASTATION ADDITION END - Vox corpses do not decay
 	if(!(mob_biotypes & (MOB_ORGANIC|MOB_UNDEAD)))
 		return
 	AddComponent(/datum/component/rot, 6 MINUTES, 10 MINUTES, 1)

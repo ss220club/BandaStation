@@ -318,3 +318,105 @@
 	attacker.set_combat_mode(TRUE)
 	weapon.attack(target, attacker, list(), list())
 	TEST_ASSERT(target.get_brute_loss() > 0, "The vox electronics interaction disabled ordinary item attacks.")
+
+/// Exercise real death and Life processing beyond the corpse's rot delay, full strength, and donor decay thresholds.
+/datum/unit_test/vox_decay_protection/Run()
+	var/mob/living/carbon/human/vox = allocate(/mob/living/carbon/human/consistent)
+	var/mob/living/carbon/human/human = allocate(/mob/living/carbon/human/consistent)
+	vox.set_species(/datum/species/vox)
+	TEST_ASSERT(vox.mob_biotypes & MOB_ORGANIC, "Decay protection removed vox organic biology.")
+	TEST_ASSERT(!HAS_TRAIT(vox, TRAIT_VIRUSIMMUNE), "Decay protection granted unrelated disease immunity.")
+	vox.death()
+	human.death()
+	var/datum/component/rot/human_rot = human.GetComponent(/datum/component/rot)
+	TEST_ASSERT_NOTNULL(human_rot, "The ordinary human control did not acquire corpse rot.")
+	TEST_ASSERT(human_rot.active, "The warm human control's corpse rot is inactive.")
+	var/list/original_damage = list()
+	for(var/obj/item/organ/organ as anything in vox.organs)
+		original_damage[organ] = organ.damage
+	var/elapsed_before = 0
+	for(var/elapsed in list(6 MINUTES, 16 MINUTES, 24 MINUTES, 45 MINUTES))
+		// Advance the real per-second death processing, keeping the fixture warm and unpreserved.
+		vox.bodytemperature = BODYTEMP_NORMAL
+		human.bodytemperature = BODYTEMP_NORMAL
+		var/seconds_per_tick = (elapsed - elapsed_before) / (1 SECONDS)
+		vox.Life(seconds_per_tick)
+		human.Life(seconds_per_tick)
+		elapsed_before = elapsed
+		TEST_ASSERT_NULL(vox.GetComponent(/datum/component/rot), "A vox acquired infectious corpse rot after [elapsed] deciseconds.")
+		for(var/obj/item/organ/organ as anything in vox.organs)
+			TEST_ASSERT_EQUAL(organ.damage, original_damage[organ], "Vox organ [organ.type] decayed after [elapsed] deciseconds.")
+	var/obj/item/organ/heart/human_heart = human.get_organ_slot(ORGAN_SLOT_HEART)
+	TEST_ASSERT(human_heart.organ_flags & ORGAN_FAILING, "The unprotected human heart did not decay to failure.")
+	TEST_ASSERT_EQUAL(human.GetComponent(/datum/component/rot), human_rot, "The ordinary human lost its corpse rot.")
+
+/// A dead organic body must lose existing rot on becoming a vox and regain it after becoming organic again.
+/datum/unit_test/vox_decay_species_roundtrip/Run()
+	var/mob/living/carbon/human/human = allocate(/mob/living/carbon/human/consistent)
+	human.death()
+	var/datum/component/rot/original_rot = human.GetComponent(/datum/component/rot)
+	TEST_ASSERT_NOTNULL(original_rot, "The transformation fixture did not begin as a rotting human.")
+	original_rot.start_time = world.time - 16 MINUTES
+	human.set_species(/datum/species/vox)
+	TEST_ASSERT(HAS_TRAIT(human, TRAIT_NODECAY), "Becoming a vox did not grant corpse preservation.")
+	TEST_ASSERT(QDELETED(original_rot), "Becoming a vox retained an existing infectious rot component.")
+	TEST_ASSERT_NULL(human.GetComponent(/datum/component/rot), "The transformed vox still has corpse rot.")
+	TEST_ASSERT_EQUAL(human.stat, DEAD, "Corpse preservation revived its owner.")
+	human.set_species(/datum/species/human)
+	TEST_ASSERT(!HAS_TRAIT(human, TRAIT_NODECAY), "Changing away from vox retained species preservation.")
+	var/datum/component/rot/restored_rot = human.GetComponent(/datum/component/rot)
+	TEST_ASSERT_NOTNULL(restored_rot, "A transformed human corpse did not regain rot after its new biotypes were installed.")
+	TEST_ASSERT(restored_rot.active, "Restored human corpse rot is inactive.")
+	human.bodytemperature = BODYTEMP_NORMAL
+	human.Life(16 MINUTES / (1 SECONDS))
+	TEST_ASSERT(human.get_organ_loss(ORGAN_SLOT_HEART) > 0, "An organic transformation retained protected organs.")
+
+/// Trait sources must pause existing decay without repairing damage, and only the final source resumes it.
+/datum/unit_test/vox_decay_trait_lifecycle/Run()
+	var/mob/living/carbon/human/human = allocate(/mob/living/carbon/human/consistent)
+	ADD_TRAIT(human, TRAIT_NODECAY, TRAIT_SOURCE_UNIT_TESTS)
+	REMOVE_TRAIT(human, TRAIT_NODECAY, TRAIT_SOURCE_UNIT_TESTS)
+	TEST_ASSERT_NULL(human.GetComponent(/datum/component/rot), "Removing preservation from a living body attached corpse rot.")
+	human.death()
+	var/datum/component/rot/old_rot = human.GetComponent(/datum/component/rot)
+	var/obj/item/organ/heart/heart = human.get_organ_slot(ORGAN_SLOT_HEART)
+	heart.set_organ_damage(5)
+	ADD_TRAIT(human, TRAIT_NODECAY, TRAIT_SOURCE_UNIT_TESTS)
+	TEST_ASSERT(QDELETED(old_rot), "Adding preservation did not remove existing corpse rot.")
+	TEST_ASSERT_EQUAL(heart.damage, 5, "Preservation repaired accumulated organ damage.")
+	ADD_TRAIT(human, TRAIT_NODECAY, "vox_decay_second_source")
+	REMOVE_TRAIT(human, TRAIT_NODECAY, TRAIT_SOURCE_UNIT_TESTS)
+	human.AddComponent(/datum/component/rot, 6 MINUTES, 10 MINUTES, 1)
+	TEST_ASSERT_NULL(human.GetComponent(/datum/component/rot), "A second trait source allowed rot to be attached directly.")
+	human.bodytemperature = BODYTEMP_NORMAL
+	human.handle_organs(60)
+	TEST_ASSERT_EQUAL(heart.damage, 5, "Removing one of two trait sources resumed organ decay.")
+	TEST_ASSERT(!(heart.organ_flags & ORGAN_FROZEN), "Preservation permanently froze an installed organ.")
+	REMOVE_TRAIT(human, TRAIT_NODECAY, "vox_decay_second_source")
+	TEST_ASSERT_NOTNULL(human.GetComponent(/datum/component/rot), "Removing the final preservation source did not restore corpse rot.")
+	human.handle_organs(60)
+	TEST_ASSERT(heart.damage > 5, "Removing the final preservation source did not resume organ decay.")
+
+/// Protection follows an implanted organ's current owner, without making extracted vox tissue immortal.
+/datum/unit_test/vox_decay_transplanted_organ/Run()
+	var/mob/living/carbon/human/vox = allocate(/mob/living/carbon/human/consistent)
+	var/mob/living/carbon/human/organic = allocate(/mob/living/carbon/human/consistent)
+	vox.set_species(/datum/species/vox)
+	vox.death()
+	organic.death()
+	var/obj/item/organ/heart/heart = vox.get_organ_slot(ORGAN_SLOT_HEART)
+	allocated += heart
+	heart.set_organ_damage(5)
+	vox.bodytemperature = BODYTEMP_NORMAL
+	heart.on_death(60)
+	TEST_ASSERT_EQUAL(heart.damage, 5, "An installed vox heart decayed.")
+	heart.Remove(vox, special = TRUE)
+	heart.forceMove(run_loc_floor_bottom_left)
+	heart.on_death(60)
+	TEST_ASSERT(heart.damage > 5, "An extracted vox heart retained its former owner's protection.")
+	var/extracted_damage = heart.damage
+	TEST_ASSERT(heart.Insert(organic, special = TRUE, movement_flags = DELETE_IF_REPLACED), "The organic transplant control rejected the heart.")
+	organic.bodytemperature = BODYTEMP_NORMAL
+	heart.on_death(60)
+	TEST_ASSERT(heart.damage > extracted_damage, "A transplanted vox heart did not decay inside an unprotected organic owner.")
+	TEST_ASSERT(!(heart.organ_flags & ORGAN_FROZEN), "Transplanted vox tissue retained a permanent frozen flag.")

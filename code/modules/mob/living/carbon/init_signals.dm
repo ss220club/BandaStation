@@ -7,6 +7,13 @@
 	RegisterSignal(src, SIGNAL_REMOVETRAIT(TRAIT_AGENDER), PROC_REF(on_agender_trait_loss))
 	RegisterSignal(src, SIGNAL_ADDTRAIT(TRAIT_NOBLOOD), PROC_REF(on_noblood_trait_gain))
 	RegisterSignal(src, SIGNAL_REMOVETRAIT(TRAIT_NOBLOOD), PROC_REF(on_noblood_trait_loss))
+	// BANDASTATION ADDITION START - Keep corpse preservation in sync across species changes
+	RegisterSignals(src, list(
+		SIGNAL_ADDTRAIT(TRAIT_NODECAY),
+		SIGNAL_REMOVETRAIT(TRAIT_NODECAY),
+		COMSIG_SPECIES_GAIN,
+	), PROC_REF(update_corpse_decay))
+	// BANDASTATION ADDITION END - Keep corpse preservation in sync across species changes
 
 	//Traits that register add only
 	RegisterSignal(src, SIGNAL_ADDTRAIT(TRAIT_NOBREATH), PROC_REF(on_nobreath_trait_gain))
@@ -65,6 +72,19 @@
 	SIGNAL_HANDLER
 
 	update_blood_status()
+
+// BANDASTATION ADDITION START - Preserve existing corpses and restore ordinary rot after protection ends
+/// Species loss removes biotypes before traits, so the completed species gain must also recheck decay.
+/mob/living/carbon/proc/update_corpse_decay(datum/source)
+	SIGNAL_HANDLER
+
+	var/datum/component/rot/rot = GetComponent(/datum/component/rot)
+	if(HAS_TRAIT(src, TRAIT_NODECAY))
+		qdel(rot)
+		return
+	if(stat == DEAD && !rot)
+		attach_rot()
+// BANDASTATION ADDITION END - Preserve existing corpses and restore ordinary rot after protection ends
 
 /**
  * On gain of TRAIT_NOBREATH
