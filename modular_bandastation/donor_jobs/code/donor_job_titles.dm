@@ -24,3 +24,6 @@
 		"Security Clown" = "Клоун службы безопасности",
 	)
 	GLOB.job_titles_ru_to_en.Cut()
+	// Build the native cache, then keep the same ambiguous-title priority as TGUI.
+	job_title_ru_to_en(JOB_BRIDGE_ASSISTANT_RU)
+	GLOB.job_titles_ru_to_en[JOB_BRIDGE_ASSISTANT_RU] = JOB_BRIDGE_ASSISTANT

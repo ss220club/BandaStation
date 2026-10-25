@@ -17,7 +17,7 @@
 /datum/job/proc/get_job_variants()
 	if(!isnull(job_variants))
 		return job_variants
-	job_variants = list()
+	var/list/variants = list()
 	for(var/id in job_variant_specs)
 		var/list/spec = job_variant_specs[id]
 		if(!istext(id) || !length(id) || !islist(spec) || length(spec) != 2 || !istext(spec[1]) || !length(spec[1]) || !ispath(spec[2], /datum/outfit/job))
@@ -26,9 +26,10 @@
 		var/datum/id_trim/job/trim_path = initial(outfit_path.id_trim)
 		if(initial(outfit_path.jobtype) != type || !ispath(trim_path, /datum/id_trim/job) || initial(trim_path.job) != type)
 			CRASH("Variant outfit/trim belongs to another job: [type]/[id]")
-		job_variants[id] = new /datum/job_variant(id, spec[1], spec[2])
-	if(length(job_variants) && !job_variants["default"])
+		variants[id] = new /datum/job_variant(id, spec[1], spec[2])
+	if(length(variants) && !variants["default"])
 		CRASH("Job variants require a default: [type]")
+	job_variants = variants
 	return job_variants
 
 /datum/job/proc/resolve_job_variant(variant_id) as /datum/job_variant

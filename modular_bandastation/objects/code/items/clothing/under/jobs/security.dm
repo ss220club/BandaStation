@@ -81,7 +81,7 @@
 /obj/item/clothing/under/rank/security/head_of_security/alt
 	female_version = /datum/female_uniform/turtleneck
 
-/// The imported appearance uses the native clown uniform's fit and squeak.
+/// Imported security-clown appearance with the native clown uniform's squeak.
 /obj/item/clothing/under/rank/civilian/clown/security
 	name = "security clown suit"
 	desc = "<i>ХОНК НА СТРАЖЕ ЗАКОНА!</i>"

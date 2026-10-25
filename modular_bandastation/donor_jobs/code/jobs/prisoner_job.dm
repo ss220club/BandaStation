@@ -7,7 +7,6 @@
 		являетесь антагонистом, но если они помогут вам - то почему бы и да."
 	job_variant_specs = list(
 		"default" = list("Заключённый", /datum/outfit/job/prisoner),
-		"prisoner" = list("Заключенный", /datum/outfit/job/prisoner),
 		"felon" = list("Уголовник", /datum/outfit/job/prisoner),
 		"lawbreaker" = list("Законопреступник", /datum/outfit/job/prisoner),
 		"permanent_prisoner" = list("Пермазаключенный", /datum/outfit/job/prisoner),

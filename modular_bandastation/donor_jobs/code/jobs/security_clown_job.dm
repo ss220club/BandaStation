@@ -17,7 +17,6 @@
 	liver_traits = list(TRAIT_COMEDY_METABOLISM)
 	job_variant_specs = list(
 		"default" = list("Клоун службы безопасности", /datum/outfit/job/clown/security),
-		"security_clown" = list("Клоун службы безопасности", /datum/outfit/job/clown/security),
 		"detective" = list("Клоун-детектив", /datum/outfit/job/clown/security/detective),
 		"warden" = list("Клоун-смотритель", /datum/outfit/job/clown/security/warden),
 		"honkective" = list("Хонкектив", /datum/outfit/job/clown/security/detective),

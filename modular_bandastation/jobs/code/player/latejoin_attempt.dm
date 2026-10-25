@@ -60,6 +60,12 @@
 	var/datum/latejoin_profile_snapshot/context = capture_latejoin_request(rank)
 	if(!context)
 		return FALSE
+	var/datum/job/job = SSjob.get_job(rank)
+	var/lock_reason = job?.get_join_lock_reason(context.requester)
+	if(lock_reason)
+		qdel(context)
+		tgui_alert(src, lock_reason)
+		return FALSE
 	latejoin_request = context
 	spawning = TRUE
 	. = ..()

@@ -14,6 +14,12 @@
 	// The native compatibility field is not a second assignment store.
 	job_assigned_profiles = null
 
+/// Run after New() has calculated the owner's final character-slot limit.
+/datum/preferences/proc/sanitize_job_profile_assignments()
+	for(var/job_title in pref_job_slots)
+		if(pref_job_slots[job_title] > max_save_slots)
+			pref_job_slots.Remove(job_title)
+
 /// Stage canonical assignments for the single native save_preferences() flush.
 /datum/preferences/proc/write_job_profile_assignments()
 	savefile.remove_entry("job_assigned_profiles")
