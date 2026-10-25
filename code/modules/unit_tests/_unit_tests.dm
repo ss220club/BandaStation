@@ -100,7 +100,9 @@
 /// Helper to allocate a new object with the implied type (the type of the variable it's assigned to) in the corner of the test room
 #define EASY_ALLOCATE(arguments...) allocate(__IMPLIED_TYPE__, run_loc_floor_bottom_left, ##arguments)
 
+// BANDASTATION ADDITION - Fork regression tests in the sorted include block.
 // BEGIN_INCLUDE
+#include "../../../modular_bandastation/augmentation_preferences/code/tests/robotic_eyes_tests.dm"
 #include "aas_configs.dm"
 #include "abductor_baton_spell.dm"
 #include "ablative_hud.dm"

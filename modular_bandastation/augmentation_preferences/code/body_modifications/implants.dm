@@ -20,7 +20,7 @@
 	key = "robotic_eyes"
 	name = "Робо-глаза"
 	category = "Органы"
-	replacement_organ = /obj/item/organ/eyes/robotic/basic
+	replacement_organ = /obj/item/organ/eyes/robotic/basic/augmented
 
 /datum/body_modification/implants/robotic/tongue
 	key = "robotic_tongue"

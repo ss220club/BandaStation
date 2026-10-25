@@ -328,12 +328,12 @@
 			overlays += eyelids
 
 	if (scarring & RIGHT_EYE_SCAR)
-		var/mutable_appearance/right_scar = mutable_appearance(eye_icon, "eye_scar_right", -EYES_LAYER) // BANDASTATION EDIT - Feat: Augmentation
+		var/mutable_appearance/right_scar = mutable_appearance('icons/mob/human/human_eyes.dmi', "eye_scar_right", -EYES_LAYER) // BANDASTATION EDIT - Keep scars independent of custom eye sprites
 		right_scar.color = my_head.draw_color
 		overlays += right_scar
 
 	if (scarring & LEFT_EYE_SCAR)
-		var/mutable_appearance/left_scar = mutable_appearance(eye_icon, "eye_scar_left", -EYES_LAYER) // BANDASTATION EDIT - Feat: Augmentation
+		var/mutable_appearance/left_scar = mutable_appearance('icons/mob/human/human_eyes.dmi', "eye_scar_left", -EYES_LAYER) // BANDASTATION EDIT - Keep scars independent of custom eye sprites
 		left_scar.color = my_head.draw_color
 		overlays += left_scar
 
