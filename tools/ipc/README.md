@@ -3,7 +3,8 @@
 `convert_assets.py` reproducibly adapts the public IPC chassis and display assets
 from [Paradise-SS220](https://github.com/ss220club/Paradise-SS220/tree/0fffca1f1f29a63aff49d9b56524813eedf82c6d)
 at revision `0fffca1f1f29a63aff49d9b56524813eedf82c6d` to TG's bodypart layout.
-It requires Python 3.11+, Pillow, Git, and a checkout of that exact source revision.
+It requires Python 3.11+, Pillow, Git, and a clean checkout of that exact source revision.
+Staged, unstaged, and untracked source changes are rejected before output is written.
 The target repository's `tools/requirements.txt` supplies Pillow.
 
 From the BandaStation repository root:
