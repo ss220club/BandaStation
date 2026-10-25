@@ -626,6 +626,7 @@
 	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
 	desc = "A simple, nourishing sandwich made of cheese between two slices of soft rice bread. Can be grilled to perfection."
 	icon_state = "rice_cheese_sandwich"
+	custom_materials = null
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 7,
 		/datum/reagent/consumable/nutriment/protein = 4,
@@ -647,6 +648,7 @@
 	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
 	desc = "A warm, golden-brown toasted rice sandwich with melted gooey cheese."
 	icon_state = "grilled_rice_cheese"
+	custom_materials = null
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 8,
 		/datum/reagent/consumable/nutriment/protein = 5,
