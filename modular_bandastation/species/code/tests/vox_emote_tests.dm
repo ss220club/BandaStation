@@ -61,8 +61,8 @@
 			vox.set_species(/datum/species/vox)
 			var/obj/item/clothing/mask/mask = allocate(mask_type)
 			TEST_ASSERT(vox.equip_to_slot_if_possible(mask, ITEM_SLOT_MASK, disable_warning = TRUE), "Could not equip [mask_type].")
-			RegisterSignal(vox, COMSIG_MOB_EMOTE, PROC_REF(on_emote))
-			RegisterSignal(vox, COMSIG_MOB_EMOTE_SOUND(key), PROC_REF(on_sound_lookup))
+			RegisterSignal(vox, COMSIG_MOB_EMOTE, TYPE_PROC_REF(/datum/unit_test/vox_emote_dispatch, on_emote))
+			RegisterSignal(vox, COMSIG_MOB_EMOTE_SOUND(key), TYPE_PROC_REF(/datum/unit_test/vox_emote_dispatch, on_sound_lookup))
 			completed_emotes = 0
 			sound_lookups = 0
 			var/expected = !(key == "click" && masks[mask_type])
