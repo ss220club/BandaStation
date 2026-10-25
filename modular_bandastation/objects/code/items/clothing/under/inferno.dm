@@ -27,7 +27,6 @@
 	icon = 'modular_bandastation/objects/icons/obj/clothing/under/inferno.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/under/inferno.dmi'
 	icon_state = "lucifer"
-	inhand_icon_state = null
 	female_sprite_flags = FEMALE_UNIFORM_TOP_ONLY
 	obj_flags = UNIQUE_RENAME
 
@@ -70,9 +69,8 @@
 
 /obj/item/clothing/under/suit/inferno/designer
 	name = "designer inferno suit"
-	desc = "Изысканный костюм доступный лучшим сотрудникам юридического отдела."
+	desc = "Изысканный костюм, доступный лучшим сотрудникам юридического отдела."
 	icon_state = "beelzebub"
-	obj_flags = NONE
 
 /obj/item/clothing/under/suit/inferno/designer/setup_reskins()
 	AddComponent(/datum/component/reskinable_item, /datum/atom_skin/designer_inferno)
@@ -83,7 +81,6 @@
 	icon = 'modular_bandastation/objects/icons/obj/clothing/under/inferno.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/under/inferno.dmi'
 	icon_state = "helltaker"
-	inhand_icon_state = null
 	female_sprite_flags = FEMALE_UNIFORM_TOP_ONLY
 
 /obj/item/clothing/under/suit/helltaker/skirt
@@ -92,6 +89,5 @@
 	icon_state = "helltakerskirt"
 	body_parts_covered = CHEST|GROIN|ARMS
 	dying_key = DYE_REGISTRY_JUMPSKIRT
-	female_sprite_flags = FEMALE_UNIFORM_TOP_ONLY
 	supports_variations_flags = CLOTHING_DIGITIGRADE_VARIATION_NO_NEW_ICON
 	bodyshapes_with_variations = NONE
