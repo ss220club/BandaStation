@@ -2,7 +2,7 @@ name: Build patched Windows rust-g
 
 on:
   push:
-    branches: [vox-port]
+    branches: [vox-port, vox-independent, ipc-paradise-upstream]
     paths:
       - 'tools/rustg/build-windows.ps1'
       - 'tools/rustg/windows-lifetime.patch'
