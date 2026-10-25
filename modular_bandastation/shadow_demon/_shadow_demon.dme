@@ -1,0 +1,10 @@
+#include "_shadow_demon.dm"
+#include "code/shadow_demon_mob.dm"
+#include "code/shadow_demon_cocoon.dm"
+#include "code/shadow_demon_heart.dm"
+#include "code/shadow_demon_powers.dm"
+#include "code/shadow_demon_lighting.dm"
+#include "code/shadow_demon_antagonist.dm"
+#include "code/shadow_demon_event.dm"
+
+#include "code/shadow_demon_vial.dm"

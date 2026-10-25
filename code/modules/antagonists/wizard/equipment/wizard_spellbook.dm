@@ -89,6 +89,11 @@
 		spawner_entry = locate(/datum/spellbook_entry/item/hugbottle) in entries
 		success_string = "Если подумать, может быть, вызов демона - не такая уж и смешная идея. Вы возвращаете свои очки."
 
+	// BANDASTATION ADDITION START - Shadow Demon vial refunds its own spellbook entry
+	else if(istype(tool, /obj/item/antag_spawner/slaughter_demon/shadow))
+		spawner_entry = locate(/datum/spellbook_entry/item/shadowbottle) in entries
+		success_string = "Вы возвращаете флакон тьмы в книгу заклинаний и получаете очки обратно."
+	// BANDASTATION ADDITION END - Shadow Demon vial refunds its own spellbook entry
 	else if(istype(tool, /obj/item/antag_spawner/slaughter_demon))
 		spawner_entry = locate(/datum/spellbook_entry/item/bloodbottle) in entries
 		success_string = "Если подумать, возможно, вызов демона - плохая идея. Вы возвращаете свои очки."

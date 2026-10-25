@@ -379,6 +379,8 @@
 #include "weird_food.dm"
 #include "wizard_loadout.dm"
 // END_INCLUDE
+// BANDASTATION ADDITION - Shadow Demon port regression tests
+#include "../../../modular_bandastation/shadow_demon/code/shadow_demon_tests.dm"
 #ifdef REFERENCE_TRACKING_DEBUG //Don't try and parse this file if ref tracking isn't turned on. IE: don't parse ref tracking please mr linter
 #include "find_reference_sanity.dm"
 #endif

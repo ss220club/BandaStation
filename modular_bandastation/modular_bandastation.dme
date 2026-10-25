@@ -78,6 +78,7 @@
 #include "revolution_overhaul/_revolution_overhaul.dme"
 #include "ru_jobs/_ru_jobs.dme"
 #include "security_levels/_security_levels.dme"
+#include "shadow_demon/_shadow_demon.dme"
 #include "shuttles/_shuttles.dme"
 #include "skillchip_rcd/_skillchip_rcd.dme"
 #include "skills/_skills.dme"

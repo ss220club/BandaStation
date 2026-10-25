@@ -1,0 +1,129 @@
+{
+  "repository": "https://github.com/ss220club/Paradise-SS220",
+  "revision": "0fffca1f1f29a63aff49d9b56524813eedf82c6d",
+  "inputs": {
+    "icons/mob/mob.dmi": {
+      "git_blob": "fafe5c71e326402ac640fd35dbd8f8b566259e4b",
+      "sha256": "a39f79c117480f7fc8638278fd72f6d395f525ebf51498e1dedb9565200f2268"
+    },
+    "icons/mob/actions/actions.dmi": {
+      "git_blob": "86b87f3a28660a4985633549cbf82ed5a9e22bba",
+      "sha256": "ac304669c88d1db86234492b983721030b2d49d6219428d8c51c0479c1d6574f"
+    },
+    "icons/effects/effects.dmi": {
+      "git_blob": "aa4c1f85250058ee55e9a8ef75b4ed7815650652",
+      "sha256": "12fc91362a570b7fa8a1a5c82b843a4d73091732b4e4c821e77c99926b2bb799"
+    },
+    "icons/effects/beam.dmi": {
+      "git_blob": "d3a8f599c2f59af1efdac97758b7ac5cf9bc06cf",
+      "sha256": "d754434d15bb10ee0b028780e68bea5393ffa0a53d0fa9b3ae15fd367950537a"
+    },
+    "icons/obj/projectiles.dmi": {
+      "git_blob": "ff9b336fe3445b2a93b0977155a46086e6e2bc27",
+      "sha256": "d022a64d38f2fa41aea244b47a8453a3b8fdb90ed9ffd4bf6ae42b0d68a3fc47"
+    },
+    "icons/obj/wizard.dmi": {
+      "git_blob": "1c2ad8bbd1c5e002ef3d54a83b25f17a5c9d9a1c",
+      "sha256": "1c16ee6bfbab9ba99b3cc351050ed9d135603b26087898a9389deba143cd070a"
+    },
+    "sound/shadowdemon/shadowattack1.ogg": {
+      "sha256": "6a753ff9c423fec973b439bac454ed3e7d371acd8418d411d349b90675a1acb9"
+    },
+    "sound/shadowdemon/shadowattack2.ogg": {
+      "sha256": "7f90727782222733cbc10b7d0138e817dc61b3e9174f992d373f69061593fab5"
+    },
+    "sound/shadowdemon/shadowattack3.ogg": {
+      "sha256": "dad65fe3e97df41e2f71f81b1aad376e9602ce7d93226272ab175fc265f12098"
+    },
+    "sound/shadowdemon/shadowattack4.ogg": {
+      "sha256": "4d814280780fb8df3410072294cb49ec44641693a1b0562d625ba0379f37c630"
+    },
+    "sound/shadowdemon/shadowdeath.ogg": {
+      "sha256": "b6f513b249224ec377d212365e85821b1800e7d5b2aba9e4b46592839f0bf6df"
+    },
+    "sound/shadowdemon/shadowhalluc1.ogg": {
+      "sha256": "f3904a72e836b820150ae969a59b8cace06c0af83e8f29cb908169f86d1b1439"
+    },
+    "sound/shadowdemon/shadowhalluc2.ogg": {
+      "sha256": "50dc6bfa0f3be69e555d136a750d505bf6e9a1ea61e8e53c8fec26736ca6e4e7"
+    },
+    "sound/shadowdemon/shadowhalluc3.ogg": {
+      "sha256": "08a031e14629f0ce8076495e4c3728a26de15904a7a9b011a56974c60e0b6e34"
+    },
+    "sound/shadowdemon/shadownode.ogg": {
+      "sha256": "5f62904154346d366c453efbd0d75aaca6718788c1d292ec58d3d2973cdb7af3"
+    },
+    "sound/shadowdemon/shadownodeambientt.ogg": {
+      "sha256": "6b04ec89c9178c8dcc94b5d7c9e767f81d7bb448d52e31ec42fba2084cd04c86"
+    }
+  },
+  "outputs": {
+    "icons/shadow_demon.dmi": {
+      "sha256": "1b65d72e5053b4bcf15a9999dd88218fead55deb490de8efca35cd9212b17265",
+      "states": [
+        "shadow_demon",
+        "shadow_demon_eye_glow_overlay",
+        "shadowwalk_appear",
+        "shadowwalk_disappear"
+      ]
+    },
+    "icons/actions.dmi": {
+      "sha256": "d38247f03ba388b30520bcbed81663d3e532cf832a547a619c27d75ddd0ca842",
+      "states": [
+        "shadow_demon_bg",
+        "shadow_grapple",
+        "shadow_crawl",
+        "shadow_whisper"
+      ]
+    },
+    "icons/effects.dmi": {
+      "sha256": "708454812318a5b4f25c03d1f23e32af5eff6289cedf123d9c298cabe7342b95",
+      "states": [
+        "shadowcocoon",
+        "grabber_beam"
+      ]
+    },
+    "icons/projectiles.dmi": {
+      "sha256": "13a4be9562e1319a035e7a92f45a428de5558d97541ed95342378e1a1fcac6da",
+      "states": [
+        "shadow_hand"
+      ]
+    },
+    "icons/items.dmi": {
+      "sha256": "7eb519aa658429d57785c544def444abc66cbf1377dbaeff4a53f96162bfd04c",
+      "states": [
+        "vialshadows"
+      ]
+    },
+    "sound/shadowattack1.ogg": {
+      "sha256": "6a753ff9c423fec973b439bac454ed3e7d371acd8418d411d349b90675a1acb9"
+    },
+    "sound/shadowattack2.ogg": {
+      "sha256": "7f90727782222733cbc10b7d0138e817dc61b3e9174f992d373f69061593fab5"
+    },
+    "sound/shadowattack3.ogg": {
+      "sha256": "dad65fe3e97df41e2f71f81b1aad376e9602ce7d93226272ab175fc265f12098"
+    },
+    "sound/shadowattack4.ogg": {
+      "sha256": "4d814280780fb8df3410072294cb49ec44641693a1b0562d625ba0379f37c630"
+    },
+    "sound/shadowdeath.ogg": {
+      "sha256": "b6f513b249224ec377d212365e85821b1800e7d5b2aba9e4b46592839f0bf6df"
+    },
+    "sound/shadowhalluc1.ogg": {
+      "sha256": "f3904a72e836b820150ae969a59b8cace06c0af83e8f29cb908169f86d1b1439"
+    },
+    "sound/shadowhalluc2.ogg": {
+      "sha256": "50dc6bfa0f3be69e555d136a750d505bf6e9a1ea61e8e53c8fec26736ca6e4e7"
+    },
+    "sound/shadowhalluc3.ogg": {
+      "sha256": "08a031e14629f0ce8076495e4c3728a26de15904a7a9b011a56974c60e0b6e34"
+    },
+    "sound/shadownode.ogg": {
+      "sha256": "5f62904154346d366c453efbd0d75aaca6718788c1d292ec58d3d2973cdb7af3"
+    },
+    "sound/shadownodeambientt.ogg": {
+      "sha256": "6b04ec89c9178c8dcc94b5d7c9e767f81d7bb448d52e31ec42fba2084cd04c86"
+    }
+  }
+}
