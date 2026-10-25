@@ -19,6 +19,7 @@ from tools.dmi import Dmi
 REVISION = "0fffca1f1f29a63aff49d9b56524813eedf82c6d"
 MODULE = ROOT / "modular_bandastation/shadow_demon"
 RECIPES = {
+    "alerts.dmi": {"icons/mob/screen_alert.dmi": ["lightexposure"]},
     "shadow_demon.dmi": {
         "icons/mob/mob.dmi": [
             "shadow_demon", "shadow_demon_eye_glow_overlay",

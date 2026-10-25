@@ -128,7 +128,8 @@
 /atom/movable/screen/alert/shadow_demon_light
 	name = "На свету"
 	desc = "Свет выжигает вашу форму. Укройтесь в темноте!"
-	icon_state = "highpressure"
+	icon = 'modular_bandastation/shadow_demon/icons/alerts.dmi'
+	icon_state = "lightexposure"
 
 /datum/action/innate/shadow_demon_whisper
 	name = "Демонический шёпот"
@@ -138,23 +139,46 @@
 	check_flags = AB_CHECK_CONSCIOUS | AB_CHECK_INCAPACITATED
 
 /datum/action/innate/shadow_demon_whisper/Activate()
+	var/mob/caster = owner
+	var/client/caster_client = caster?.client
+	if(QDELETED(src) || QDELETED(caster) || !caster_client || !IsAvailable())
+		return FALSE
+	var/list/targets = get_whisper_targets()
+	if(!length(targets))
+		caster.balloon_alert(caster, "нет разумных целей рядом")
+		to_chat(caster, span_warning("Поблизости нет живых разумных существ, которым можно передать шёпот."))
+		return FALSE
+	var/mob/living/chosen = tgui_input_list(caster, "Чей разум потревожить?", name, targets)
+	if(QDELETED(src) || QDELETED(caster) || owner != caster || caster.client != caster_client || !IsAvailable() || QDELETED(chosen) || !(chosen in get_whisper_targets()))
+		return FALSE
+	var/message = tgui_input_text(caster, "Что вы хотите прошептать [chosen]?", name, max_length = MAX_MESSAGE_LEN, encode = FALSE)
+	if(QDELETED(src) || QDELETED(caster) || owner != caster || caster.client != caster_client)
+		return FALSE
+	return send_whisper(caster, chosen, message)
+
+/datum/action/innate/shadow_demon_whisper/proc/get_whisper_targets()
 	var/list/targets = list()
-	for(var/mob/living/target in view(owner))
+	if(QDELETED(owner))
+		return targets
+	var/turf/source_turf = get_turf(owner)
+	if(isnull(source_turf))
+		return targets
+	// Match Paradise's turf-centred targeting, independently of the holder's light mask or phased container.
+	for(var/mob/living/target in view(owner.client?.view || world.view, source_turf))
 		if(target != owner && target.mind && target.stat != DEAD)
 			targets += target
-	if(!length(targets))
-		to_chat(owner, span_warning("Поблизости нет подходящих жертв."))
+	return targets
+
+/datum/action/innate/shadow_demon_whisper/proc/send_whisper(mob/caster, mob/living/chosen, message)
+	if(QDELETED(src) || QDELETED(caster) || owner != caster || !IsAvailable() || QDELETED(chosen) || !(chosen in get_whisper_targets()) || !istext(message))
 		return FALSE
-	var/mob/living/chosen = tgui_input_list(owner, "Чей разум потревожить?", name, targets)
-	if(!IsAvailable() || QDELETED(chosen) || chosen.stat == DEAD || !chosen.mind || !(chosen in view(owner)))
-		return FALSE
-	var/message = tgui_input_text(owner, "Что вы хотите прошептать [chosen]?", name, max_length = MAX_MESSAGE_LEN)
-	if(!message || !IsAvailable() || QDELETED(chosen) || chosen.stat == DEAD || !chosen.mind || !(chosen in view(owner)))
+	message = trim(message)
+	if(!length(message))
 		return FALSE
 	message = html_encode(message)
-	owner.log_talk(message, LOG_SAY, tag = "shadow demon whisper to [key_name(chosen)]")
-	to_chat(owner, span_notice("Вы шепчете [chosen]: [message]"))
+	caster.log_talk(message, LOG_SAY, tag = "shadow demon whisper to [key_name(chosen)]")
+	to_chat(caster, span_notice("Вы шепчете [chosen]: [message]"))
 	to_chat(chosen, span_deadsay("<b>Внезапно в вашей голове раздаётся демонический голос...</b> <i>[message]</i>"))
 	for(var/mob/dead/observer/ghost in GLOB.dead_player_list)
-		to_chat(ghost, "[FOLLOW_LINK(ghost, owner)] [owner] шепчет [FOLLOW_LINK(ghost, chosen)] [chosen]: [message]")
+		to_chat(ghost, "[FOLLOW_LINK(ghost, caster)] [caster] шепчет [FOLLOW_LINK(ghost, chosen)] [chosen]: [message]")
 	return TRUE

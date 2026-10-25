@@ -2,6 +2,10 @@
   "repository": "https://github.com/ss220club/Paradise-SS220",
   "revision": "0fffca1f1f29a63aff49d9b56524813eedf82c6d",
   "inputs": {
+    "icons/mob/screen_alert.dmi": {
+      "git_blob": "2a50c5934e6849d4b14c127796c593058052e3fd",
+      "sha256": "7b64acb649c49e63ace0125f3ba4f759be48bd71341e5a44d03414a9c33d507f"
+    },
     "icons/mob/mob.dmi": {
       "git_blob": "fafe5c71e326402ac640fd35dbd8f8b566259e4b",
       "sha256": "a39f79c117480f7fc8638278fd72f6d395f525ebf51498e1dedb9565200f2268"
@@ -58,6 +62,12 @@
     }
   },
   "outputs": {
+    "icons/alerts.dmi": {
+      "sha256": "7fa6a3861869a54d94ef64e74ca0fa401864b860b77485ed670ef0bd72604e94",
+      "states": [
+        "lightexposure"
+      ]
+    },
     "icons/shadow_demon.dmi": {
       "sha256": "1b65d72e5053b4bcf15a9999dd88218fead55deb490de8efca35cd9212b17265",
       "states": [

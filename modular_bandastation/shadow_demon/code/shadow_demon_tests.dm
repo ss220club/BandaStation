@@ -21,8 +21,13 @@
 	return ..()
 
 /datum/unit_test/shadow_demon_environment/proc/set_test_lumcount(value)
-	// Native lumcount averages twelve corner colour channels.
-	test_corner.lum_r = value * 12
+	// Keep raw and rendered channels aligned for both lighting implementations.
+	test_corner.lum_r = value
+	test_corner.lum_g = value
+	test_corner.lum_b = value
+	test_corner.cache_r = value
+	test_corner.cache_g = value
+	test_corner.cache_b = value
 
 /datum/unit_test/shadow_demon_environment/Run()
 	test_turf = run_loc_floor_bottom_left
@@ -32,9 +37,9 @@
 		created_lighting = TRUE
 	test_corner = allocate(/datum/lighting_corner, 0, 0, 0)
 	test_turf.lighting_corner_NE = test_corner
-	test_turf.lighting_corner_SE = null
-	test_turf.lighting_corner_SW = null
-	test_turf.lighting_corner_NW = null
+	test_turf.lighting_corner_SE = test_corner
+	test_turf.lighting_corner_SW = test_corner
+	test_turf.lighting_corner_NW = test_corner
 	var/mob/living/basic/demon/shadow/demon = allocate(/mob/living/basic/demon/shadow, test_turf)
 	demon.set_brute_loss(100)
 	set_test_lumcount(0.2)
@@ -51,6 +56,8 @@
 	TEST_ASSERT_EQUAL(demon.alpha, 255, "Light did not reveal the demon.")
 	TEST_ASSERT_EQUAL(demon.speed, initial(demon.speed), "Light did not reset movement speed.")
 	TEST_ASSERT(demon.has_alert("shadow_demon_light"), "Light did not raise the warning.")
+	var/atom/movable/screen/alert/light_warning = demon.alerts["shadow_demon_light"]
+	TEST_ASSERT(icon_exists(light_warning.icon, light_warning.icon_state), "The light warning has no matching icon state and would render ERROR.")
 	demon.set_brute_loss(20)
 	demon.apply_shadow_environment(1)
 	demon.apply_shadow_environment(1)
@@ -159,6 +166,37 @@
 	missed.grapple_generation = demon.block_shadow_crawl()
 	qdel(missed)
 	TEST_ASSERT(!demon.block_shadow_crawl, "A missed projectile retained the demon's crawl lock.")
+
+/// Launch the real hand and verify its arm is drawn above an opaque native floor.
+/datum/unit_test/shadow_demon_grapple_visuals/Run()
+	var/turf/source_turf = run_loc_floor_bottom_left
+	var/turf/projectile_turf = get_step(get_step(source_turf, EAST), EAST)
+	var/mob/living/basic/demon/shadow/demon = allocate(/mob/living/basic/demon/shadow, source_turf)
+	var/obj/projectile/magic/shadow_hand/projectile = allocate(/obj/projectile/magic/shadow_hand, projectile_turf)
+	projectile.firer = demon
+	projectile.fire(90)
+	TEST_ASSERT(!QDELETED(projectile), "The hand was deleted before its first rendered flight frame.")
+	TEST_ASSERT(icon_exists(projectile.icon, projectile.icon_state), "The hand's projectile sprite is missing.")
+	var/floor_plane = PLANE_TO_TRUE(projectile_turf.plane)
+	var/hand_plane = PLANE_TO_TRUE(projectile.plane)
+	TEST_ASSERT(hand_plane > floor_plane || (hand_plane == floor_plane && projectile.layer > projectile_turf.layer), "The hand is hidden behind its opaque floor.")
+	var/datum/beam/arm = projectile.grapple_beam
+	TEST_ASSERT_NOTNULL(arm, "Firing the hand did not create its extending arm.")
+	TEST_ASSERT_NOTNULL(arm.visuals, "The arm has no shared visual appearance.")
+	TEST_ASSERT(icon_exists(arm.visuals.icon, arm.visuals.icon_state), "The extending arm's sprite is missing.")
+	TEST_ASSERT(length(arm.elements), "The extending arm did not create any visible segments.")
+	var/list/segments = arm.elements.Copy()
+	for(var/obj/effect/ebeam/segment as anything in segments)
+		var/turf/segment_turf = get_turf(segment)
+		var/segment_plane = PLANE_TO_TRUE(segment.plane)
+		var/segment_floor_plane = PLANE_TO_TRUE(segment_turf.plane)
+		TEST_ASSERT(segment_plane > segment_floor_plane || (segment_plane == segment_floor_plane && segment.layer > segment_turf.layer), "An arm segment is hidden behind its opaque floor.")
+		TEST_ASSERT(segment.icon || (arm.visuals in segment.vis_contents), "An arm segment has neither its sprite nor its shared visual.")
+	var/obj/effect/ebeam/visuals = arm.visuals
+	qdel(projectile)
+	TEST_ASSERT(QDELETED(arm) && QDELETED(visuals), "Deleting the hand retained its arm or its visual.")
+	for(var/obj/effect/ebeam/segment as anything in segments)
+		TEST_ASSERT(QDELETED(segment), "Deleting the hand retained an arm segment.")
 
 /// Hitting twice through reentrant throw callbacks must not duplicate damage.
 /datum/unit_test/shadow_demon_grapple_hit/Run()
@@ -327,5 +365,101 @@
 	TEST_ASSERT_EQUAL(book.uses, initial_points, "The native blood vial no longer returns its full purchase cost.")
 	TEST_ASSERT_EQUAL(blood_entry.times, 0, "The native blood refund did not reset its purchase count.")
 	TEST_ASSERT_EQUAL(shadow_entry.times, 0, "The native blood refund changed the shadow entry.")
+
+/// Targeting must keep the donor's living-mind filter in both physical and phased forms.
+/datum/unit_test/shadow_demon_whisper_targets/Run()
+	var/turf/source_turf = run_loc_floor_bottom_left
+	var/turf/target_turf = get_step(get_step(source_turf, EAST), EAST)
+	var/mob/living/basic/demon/shadow/demon = allocate(/mob/living/basic/demon/shadow, source_turf)
+	demon.mind_initialize()
+	var/datum/action/innate/shadow_demon_whisper/whisper = locate() in demon.actions
+	TEST_ASSERT_NOTNULL(whisper, "The demon did not receive its whisper action.")
+	var/mob/living/carbon/human/victim = allocate(/mob/living/carbon/human/consistent, target_turf)
+	victim.mind_initialize()
+	var/mob/living/carbon/human/mindless = allocate(/mob/living/carbon/human/consistent, target_turf)
+	TEST_ASSERT_NULL(mindless.mind, "The mindless target fixture unexpectedly has a mind.")
+	var/mob/living/carbon/human/corpse = allocate(/mob/living/carbon/human/consistent, target_turf)
+	corpse.mind_initialize()
+	corpse.death()
+	var/list/targets = whisper.get_whisper_targets()
+	TEST_ASSERT(victim in targets, "A nearby living mind was absent from the whisper target list.")
+	TEST_ASSERT(!(mindless in targets), "An empty body was offered as a whisper target.")
+	TEST_ASSERT(!(corpse in targets), "A dead mind was offered as a whisper target.")
+	TEST_ASSERT(!(demon in targets), "The demon was offered its own mind as a target.")
+	var/datum/action/cooldown/spell/jaunt/shadow_demon/crawl = locate() in demon.actions
+	TEST_ASSERT_NOTNULL(crawl, "The demon did not receive Shadow Crawl.")
+	crawl.enter_jaunt(demon)
+	TEST_ASSERT(is_jaunting(demon), "The whisper fixture did not enter its real phased holder.")
+	TEST_ASSERT(victim in whisper.get_whisper_targets(), "A phased demon lost the nearby mind outside its holder.")
+	crawl.exit_jaunt(demon)
+	demon.moveToNullspace()
+	TEST_ASSERT_EQUAL(length(whisper.get_whisper_targets()), 0, "A demon outside the world retained visible whisper targets.")
+
+/// Client light masks do not change BYOND's mob-centred vision; Paradise uses an unbiased turf view.
+/datum/unit_test/shadow_demon_whisper_vision/Run()
+	var/turf/source_turf = run_loc_floor_bottom_left
+	var/turf/target_turf = get_step(get_step(source_turf, EAST), EAST)
+	var/mob/living/basic/demon/shadow/demon = allocate(/mob/living/basic/demon/shadow, source_turf)
+	var/mob/living/carbon/human/victim = allocate(/mob/living/carbon/human/consistent, target_turf)
+	victim.mind_initialize()
+	var/datum/action/innate/shadow_demon_whisper/whisper = locate() in demon.actions
+	TEST_ASSERT_NOTNULL(whisper, "The demon did not receive its whisper action.")
+	demon.sight = BLIND
+	TEST_ASSERT(!(victim in view(demon)), "The vision regression fixture did not exclude the victim from mob-centred view.")
+	TEST_ASSERT(victim in whisper.get_whisper_targets(), "Whisper targeting inherited the engine eye restrictions instead of using the donor's turf view.")
+	var/obj/effect/forcefield/obstacle = allocate(/obj/effect/forcefield, get_step(source_turf, EAST))
+	obstacle.set_opacity(TRUE)
+	TEST_ASSERT(!(victim in whisper.get_whisper_targets()), "Turf-centred whisper targeting saw through an opaque obstacle.")
+
+/// Observe the message at the real logging boundary without replacing the chat subsystem.
+/mob/living/basic/demon/shadow/whisper_test
+	var/last_whisper_message
+	var/whisper_log_count = 0
+
+/mob/living/basic/demon/shadow/whisper_test/log_talk(message, message_type, tag = null, log_globally = TRUE, forced_by = null, custom_say_emote = null)
+	if(findtext(tag, "shadow demon whisper to ") == 1)
+		last_whisper_message = message
+		whisper_log_count++
+	return ..()
+
+/// Sending rechecks the actor and target after dialogs and escapes player text exactly once.
+/datum/unit_test/shadow_demon_whisper_delivery/Run()
+	var/turf/source_turf = run_loc_floor_bottom_left
+	var/turf/target_turf = get_step(get_step(source_turf, EAST), EAST)
+	var/mob/living/basic/demon/shadow/whisper_test/demon = allocate(/mob/living/basic/demon/shadow/whisper_test, source_turf)
+	var/mob/living/carbon/human/victim = allocate(/mob/living/carbon/human/consistent, target_turf)
+	victim.mind_initialize()
+	var/datum/action/innate/shadow_demon_whisper/whisper = locate() in demon.actions
+	TEST_ASSERT_NOTNULL(whisper, "The demon did not receive its whisper action.")
+	TEST_ASSERT(whisper.send_whisper(demon, victim, "  <b>&  "), "A valid nearby mind did not receive the whisper send path.")
+	TEST_ASSERT_EQUAL(demon.last_whisper_message, "&lt;b&gt;&amp;", "Whisper text was not escaped exactly once before logging and delivery.")
+	TEST_ASSERT_EQUAL(demon.whisper_log_count, 1, "One whisper was logged more than once.")
+	var/datum/action/cooldown/spell/jaunt/shadow_demon/crawl = locate() in demon.actions
+	TEST_ASSERT_NOTNULL(crawl, "The demon did not receive Shadow Crawl.")
+	crawl.enter_jaunt(demon)
+	TEST_ASSERT(whisper.send_whisper(demon, victim, "from the shadows"), "A valid whisper could not be sent from the real phased holder.")
+	crawl.exit_jaunt(demon)
+	TEST_ASSERT_EQUAL(demon.whisper_log_count, 2, "The phased whisper did not reach the send path once.")
+	TEST_ASSERT(!whisper.send_whisper(demon, victim, "   "), "A whitespace-only whisper was sent.")
+	TEST_ASSERT(!whisper.send_whisper(demon, victim, 123), "A non-text whisper was sent.")
+	TEST_ASSERT(!whisper.send_whisper(victim, victim, "wrong actor"), "A stale actor could send another mob's action.")
+	TEST_ASSERT(!whisper.send_whisper(demon, demon, "self"), "The demon could whisper to itself.")
+	whisper.action_disabled = TRUE
+	TEST_ASSERT(!whisper.send_whisper(demon, victim, "disabled"), "An unavailable action sent a whisper.")
+	whisper.action_disabled = FALSE
+	victim.moveToNullspace()
+	TEST_ASSERT(!whisper.send_whisper(demon, victim, "moved target"), "A target leaving view during input could still receive a whisper.")
+	victim.forceMove(target_turf)
+	var/datum/mind/victim_mind = victim.mind
+	victim.mind = null
+	TEST_ASSERT(!whisper.send_whisper(demon, victim, "empty body"), "A target losing its mind during input could still receive a whisper.")
+	victim.mind = victim_mind
+	victim.death()
+	TEST_ASSERT(!whisper.send_whisper(demon, victim, "dead target"), "A target dying during input could still receive a whisper.")
+	qdel(victim)
+	TEST_ASSERT(!whisper.send_whisper(demon, victim, "deleted target"), "A deleted target could receive a whisper.")
+	whisper.Remove(demon)
+	TEST_ASSERT(!whisper.send_whisper(demon, victim, "removed action"), "An action removed from its owner could still send a whisper.")
+	TEST_ASSERT_EQUAL(demon.whisper_log_count, 2, "A rejected whisper reached the delivery log.")
 
 #endif

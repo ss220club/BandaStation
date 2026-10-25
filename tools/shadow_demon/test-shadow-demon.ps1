@@ -8,6 +8,34 @@ param(
     [ValidateRange(30, 3600)][int]$TimeoutSeconds = 300
 )
 $ErrorActionPreference = 'Stop'
+# Detach only our junction itself: recursive tmp cleanup must never reach checkout assets.
+function Remove-TestAssetJunction {
+    param([string]$Path, [string]$RunDirectory, [string]$ExpectedTarget)
+    $runRoot = [IO.Path]::GetFullPath((Resolve-Path -LiteralPath $RunDirectory).ProviderPath).TrimEnd('\', '/')
+    $runPrefix = $runRoot + [IO.Path]::DirectorySeparatorChar
+    $linkPath = [IO.Path]::GetFullPath($Path)
+    if (-not $linkPath.StartsWith($runPrefix, [StringComparison]::OrdinalIgnoreCase)) {
+        throw "Refusing to unlink a path outside the test run: $linkPath"
+    }
+    try { $link = Get-Item -LiteralPath $linkPath -Force -ErrorAction Stop }
+    catch [System.Management.Automation.ItemNotFoundException] { return }
+    if ($link.LinkType -ne 'Junction') { throw "Refusing to unlink a non-junction: $linkPath" }
+    $parentPath = Split-Path -Parent $linkPath
+    while ($parentPath.StartsWith($runPrefix, [StringComparison]::OrdinalIgnoreCase) -or $parentPath.Equals($runRoot, [StringComparison]::OrdinalIgnoreCase)) {
+        if ((Get-Item -LiteralPath $parentPath -Force).Attributes -band [IO.FileAttributes]::ReparsePoint) {
+            throw "Refusing to unlink through a reparse-point parent: $parentPath"
+        }
+        if ($parentPath.Equals($runRoot, [StringComparison]::OrdinalIgnoreCase)) { break }
+        $parentPath = Split-Path -Parent $parentPath
+    }
+    $targets = @($link.Target)
+    $expectedPath = [IO.Path]::GetFullPath($ExpectedTarget).TrimEnd('\', '/')
+    if ($targets.Count -ne 1 -or -not ([IO.Path]::GetFullPath($targets[0]).TrimEnd('\', '/')).Equals($expectedPath, [StringComparison]::OrdinalIgnoreCase)) {
+        throw "Refusing to unlink a junction with an unexpected target: $linkPath"
+    }
+    [IO.Directory]::Delete($linkPath, $false)
+}
+
 $repoRoot = (Resolve-Path (Join-Path $PSScriptRoot '..\..')).Path
 $utf8NoBom = New-Object System.Text.UTF8Encoding($false)
 $runName = 'shadow-demon-' + [Guid]::NewGuid().ToString('N').Substring(0, 12)
@@ -20,6 +48,7 @@ foreach ($executable in @($compiler, $daemon)) {
 }
 New-Item -ItemType Directory -Path $runDirectory | Out-Null
 Write-Output "Shadow Demon artifacts: $runDirectory"
+$assetJunctions = @()
 Push-Location -LiteralPath $repoRoot
 try {
     $tests = @(Select-String -LiteralPath 'modular_bandastation\shadow_demon\code\shadow_demon_tests.dm' -Pattern '^(/datum/unit_test/[^\s(]+)/Run\(' |
@@ -35,15 +64,20 @@ try {
     foreach ($extension in @('.dmb', '.rsc')) {
         Move-Item -LiteralPath ([IO.Path]::ChangeExtension($wrapper, $extension)) -Destination (Join-Path $runDirectory ('shadow.test' + $extension))
     }
-    # Read-only assets stay in the checkout; all mutable data/config/logs live in this run.
+    # Junction assets only while the test server runs; logs and binaries stay after unlinking.
     foreach ($relative in @('_maps', 'build\behavior_trees', 'code\datums\greyscale\json_configs', 'icons', 'sound\runtime', 'strings', 'tgui\public', 'modular_bandastation')) {
         $destination = Join-Path $runDirectory $relative
         New-Item -ItemType Directory -Force -Path (Split-Path -Parent $destination) | Out-Null
         New-Item -ItemType Junction -Path $destination -Target (Join-Path $repoRoot $relative) | Out-Null
+        $assetJunctions += [pscustomobject]@{ Path = $destination; Target = (Join-Path $repoRoot $relative) }
     }
     Get-ChildItem -LiteralPath $repoRoot -Filter '*.dll' -File | Copy-Item -Destination $runDirectory
     New-Item -ItemType Directory -Force -Path (Join-Path $runDirectory 'data\spritesheets'), (Join-Path $runDirectory 'config') | Out-Null
-    Copy-Item -LiteralPath '_maps\map_jsons\runtimestation_minimal.json' -Destination (Join-Path $runDirectory 'data\next_map.json')
+    # These focused tests use station turfs, not procedural mining or space ruins.
+    $testMap = Get-Content -LiteralPath '_maps\map_jsons\runtimestation_minimal.json' -Raw | ConvertFrom-Json
+    $testMap.space_ruin_levels = 0
+    $testMap | Add-Member -NotePropertyName minetype -NotePropertyValue 'none' -Force
+    [IO.File]::WriteAllText((Join-Path $runDirectory 'data\next_map.json'), ($testMap | ConvertTo-Json -Depth 10), $utf8NoBom)
     [IO.File]::WriteAllLines((Join-Path $runDirectory 'config\maps.txt'), [string[]]@('map runtimestation_minimal', 'default', 'endmap'), $utf8NoBom)
     $server = Start-Process -FilePath $daemon -WorkingDirectory $runDirectory -WindowStyle Hidden -PassThru -ArgumentList 'shadow.test.dmb -trusted -invisible -log console.log -params log-directory=shadow-demon'
     try {
@@ -72,6 +106,14 @@ try {
         throw "Shadow Demon validation failed: exit=$daemonExitCode, missing=$($missing -join ','), failed=$($failed.Count), runtimes=$($runtimeErrors.Count), missing logs=$($missingLogs.Count), clean=$clean."
     }
 } finally {
-    if (Test-Path -LiteralPath $wrapper) { Move-Item -LiteralPath $wrapper -Destination $runDirectory }
-    Pop-Location
+    $cleanupFailures = @()
+    try {
+        foreach ($junction in $assetJunctions) {
+            try {
+                Remove-TestAssetJunction -Path $junction.Path -RunDirectory $runDirectory -ExpectedTarget $junction.Target
+            } catch { $cleanupFailures += $_.Exception.Message }
+        }
+        if (Test-Path -LiteralPath $wrapper) { Move-Item -LiteralPath $wrapper -Destination $runDirectory }
+    } finally { Pop-Location }
+    if ($cleanupFailures.Count) { throw ("Test junction cleanup failed: " + ($cleanupFailures -join '; ')) }
 }

@@ -52,7 +52,8 @@
 	name = "shadow hand"
 	icon = 'modular_bandastation/shadow_demon/icons/projectiles.dmi'
 	icon_state = "shadow_hand"
-	plane = FLOOR_PLANE
+	// Native floors use topdown layers; a normal projectile on FLOOR_PLANE is hidden beneath them.
+	plane = GAME_PLANE
 	hitsound = 'modular_bandastation/shadow_demon/sound/shadowattack1.ogg'
 	/// on_hit can be reentered when the grapple begins throwing an atom.
 	var/hit = FALSE
@@ -66,7 +67,7 @@
 		var/mob/living/basic/demon/shadow/demon = firer
 		grapple_generation = demon.block_shadow_crawl()
 	if(firer)
-		grapple_beam = firer.Beam(src, icon = 'modular_bandastation/shadow_demon/icons/effects.dmi', icon_state = "grabber_beam", beam_type = /obj/effect/ebeam/shadow_grapple, emissive = FALSE)
+		grapple_beam = firer.Beam(src, icon = 'modular_bandastation/shadow_demon/icons/effects.dmi', icon_state = "grabber_beam", beam_type = /obj/effect/ebeam/shadow_grapple, emissive = FALSE, layer = BELOW_MOB_LAYER)
 	return ..()
 
 /obj/projectile/magic/shadow_hand/Moved(atom/old_loc, movement_dir, forced, list/old_locs, momentum_change = TRUE)
@@ -115,7 +116,7 @@
 	demon.unblock_shadow_crawl(grapple_generation)
 
 /obj/effect/ebeam/shadow_grapple
-	plane = FLOOR_PLANE
+	plane = GAME_PLANE
 
 /datum/action/cooldown/spell/jaunt/shadow_demon
 	name = "Shadow Crawl"

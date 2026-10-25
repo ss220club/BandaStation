@@ -11,6 +11,7 @@
 
 | Ресурс | Автор / исходный PR |
 | --- | --- |
+| Индикатор воздействия света `lightexposure` | Paradise contributors; [исходный `icons/mob/screen_alert.dmi`](https://github.com/ss220club/Paradise-SS220/blob/0fffca1f1f29a63aff49d9b56524813eedf82c6d/icons/mob/screen_alert.dmi). Индивидуальный автор состояния не установлен. |
 | Тенедемон, теневые переходы, кнопки, рука, луч захвата и флакон тьмы | hal9000PR, [Paradise #19732](https://github.com/ParadiseSS13/Paradise/pull/19732) |
 | Текущий спрайт кокона | McRamon, [Paradise #21012](https://github.com/ParadiseSS13/Paradise/pull/21012) |
 | Все десять звуков `sound/shadowdemon/*.ogg` | Stoniest, [Paradise #23052](https://github.com/ParadiseSS13/Paradise/pull/23052) |
