@@ -1,4 +1,6 @@
 //Skrell Recipes, for skrell
+/obj/item/food/skrell
+	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
 
 // Breads & Bakery
 
@@ -9,7 +11,7 @@
 		/obj/item/food/grown/mushroom/plumphelmet = 1,
 		/datum/reagent/consumable/soymilk = 5,
 	)
-	result = /obj/item/food/plump_rice_flatbread
+	result = /obj/item/food/skrell/plump_rice_flatbread
 	added_foodtypes = MUSHROOM
 	cuisine_category = CUISINE_SKRELL
 	dish_category = DISH_BREAD
@@ -21,7 +23,7 @@
 		/obj/item/food/flat_rice_dough = 1,
 		/obj/item/food/grown/mushroom/amanita = 1,
 	)
-	result = /obj/item/food/fly_amanita_bun
+	result = /obj/item/food/skrell/fly_amanita_bun
 	removed_foodtypes = VEGETABLES
 	added_foodtypes = MUSHROOM | TOXIC
 	cuisine_category = CUISINE_SKRELL
@@ -35,7 +37,7 @@
 		/obj/item/food/grown/ximikoa = 1,
 		/datum/reagent/consumable/flour = 10,
 	)
-	result = /obj/item/food/ximikoa_roll
+	result = /obj/item/food/skrell/ximikoa_roll
 	added_foodtypes = SUGAR
 	cuisine_category = CUISINE_SKRELL
 	dish_category = DISH_PASTRY
@@ -48,13 +50,13 @@
 		/obj/item/food/grown/ash_flora/mushroom_stem = 2,
 		/datum/reagent/consumable/capsaicin = 5,
 	)
-	result = /obj/item/food/capsaicin_focaccia
+	result = /obj/item/food/skrell/capsaicin_focaccia
 	added_foodtypes = MUSHROOM
 	cuisine_category = CUISINE_SKRELL
 	dish_category = DISH_BREAD
 	meal_category = MEAL_APPETIZER
 
-// Sousp & Stews
+// Soups & Stews
 
 /datum/reagent/consumable/nutriment/soup/qerrbalak_stew
 	name = "Qerrbalak Fungal Stew"
@@ -66,7 +68,7 @@
 /datum/glass_style/has_foodtype/soup/qerrbalak_stew
 	required_drink_type = /datum/reagent/consumable/nutriment/soup/qerrbalak_stew
 	name = "Qerrbalak fungal stew"
-	icon = 'icons/obj/food/skrell.dmi'
+	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
 	icon_state = "qerrbalak_stew"
 	drink_type = GRAIN | VEGETABLES | MUSHROOM
 
@@ -94,7 +96,7 @@
 /datum/glass_style/has_foodtype/soup/glowshroom_chowder
 	required_drink_type = /datum/reagent/consumable/nutriment/soup/glowshroom_chowder
 	name = "glowshroom chowder"
-	icon = 'icons/obj/food/skrell.dmi'
+	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
 	icon_state = "glowshroom_chowder"
 	drink_type = VEGETABLES | MUSHROOM | TOXIC
 
@@ -122,7 +124,7 @@
 /datum/glass_style/has_foodtype/soup/destroying_angel_bisque
 	required_drink_type = /datum/reagent/consumable/nutriment/soup/destroying_angel_bisque
 	name = "destroying angel bisque"
-	icon = 'icons/obj/food/skrell.dmi'
+	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
 	icon_state = "angel_bisque"
 	drink_type = VEGETABLES | MUSHROOM | TOXIC
 
@@ -149,7 +151,7 @@
 /datum/glass_style/has_foodtype/soup/kenin_tofu_soup
 	required_drink_type = /datum/reagent/consumable/nutriment/soup/kenin_tofu_soup
 	name = "Kenin tofu soup"
-	icon = 'icons/obj/food/skrell.dmi'
+	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
 	icon_state = "kenin_soup"
 	drink_type = VEGETABLES | MUSHROOM
 
@@ -178,7 +180,7 @@
 /datum/glass_style/has_foodtype/soup/embershroom_lava_stew
 	required_drink_type = /datum/reagent/consumable/nutriment/soup/embershroom_lava_stew
 	name = "embershroom lava stew"
-	icon = 'icons/obj/food/skrell.dmi'
+	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
 	icon_state = "embershroom_stew"
 	drink_type = VEGETABLES | MUSHROOM
 
@@ -206,7 +208,7 @@
 /datum/glass_style/has_foodtype/soup/edens_gaia_noodles
 	required_drink_type = /datum/reagent/consumable/nutriment/soup/edens_gaia_noodles
 	name = "Eden's Gaia noodle soup"
-	icon = 'icons/obj/food/skrell.dmi'
+	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
 	icon_state = "gaia_noodle_soup"
 	drink_type = VEGETABLES | GRAIN
 
@@ -233,7 +235,7 @@
 /datum/glass_style/has_foodtype/soup/puffball_gas_soup
 	required_drink_type = /datum/reagent/consumable/nutriment/soup/puffball_gas_soup
 	name = "puffball gas soup"
-	icon = 'icons/obj/food/skrell.dmi'
+	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
 	icon_state = "puffball_soup"
 	drink_type = VEGETABLES | MUSHROOM | TOXIC
 
@@ -249,7 +251,7 @@
 		/datum/reagent/consumable/nutriment/soup/puffball_gas_soup = 40,
 	)
 
-//  MAIN DISHES
+// MAIN DISHES
 
 /datum/crafting_recipe/food/raw_plump_fungal_roast
 	name = "Raw plump fungal roast"
@@ -258,7 +260,7 @@
 		/datum/reagent/consumable/soysauce = 5,
 		/datum/reagent/consumable/flour = 5,
 	)
-	result = /obj/item/food/raw_plump_fungal_roast
+	result = /obj/item/food/skrell/raw_plump_fungal_roast
 	added_foodtypes = MUSHROOM | RAW
 	cuisine_category = CUISINE_SKRELL
 	dish_category = DISH_MUSHROOM
@@ -272,7 +274,7 @@
 		/datum/reagent/consumable/nutriment/fat/oil = 5,
 		/datum/reagent/consumable/salt = 1,
 	)
-	result = /obj/item/food/kebab/walking_mushroom_skewer
+	result = /obj/item/food/skrell/kebab/walking_mushroom_skewer
 	added_foodtypes = MUSHROOM | FRIED
 	cuisine_category = CUISINE_SKRELL
 	dish_category = DISH_MUSHROOM
@@ -285,7 +287,7 @@
 		/obj/item/food/grown/mushroom/libertycap = 1,
 		/obj/item/food/rice_dough = 1,
 	)
-	result = /obj/item/food/psychedelic_tempeh
+	result = /obj/item/food/skrell/psychedelic_tempeh
 	added_foodtypes = MUSHROOM
 	cuisine_category = CUISINE_SKRELL
 	dish_category = DISH_MUSHROOM
@@ -299,7 +301,7 @@
 		/obj/item/food/grown/ximikoa = 1,
 		/datum/reagent/consumable/enzyme = 1,
 	)
-	result = /obj/item/food/steelcap_dumplings
+	result = /obj/item/food/skrell/steelcap_dumplings
 	added_foodtypes = MUSHROOM | SUGAR
 	cuisine_category = CUISINE_SKRELL
 	dish_category = DISH_MUSHROOM
@@ -315,7 +317,7 @@
 		/datum/reagent/consumable/soysauce = 5,
 		/datum/reagent/water = 10,
 	)
-	result = /obj/item/food/skrell_fungal_ramen
+	result = /obj/item/food/skrell/skrell_fungal_ramen
 	added_foodtypes = MUSHROOM | GRAIN
 	cuisine_category = CUISINE_SKRELL
 	dish_category = DISH_NOODLES
@@ -328,7 +330,7 @@
 		/obj/item/food/grown/ash_flora/cactus_fruit = 1,
 		/datum/reagent/consumable/capsaicin = 5,
 	)
-	result = /obj/item/food/seraka_flame_roast
+	result = /obj/item/food/skrell/seraka_flame_roast
 	added_foodtypes = MUSHROOM
 	cuisine_category = CUISINE_SKRELL
 	dish_category = DISH_MUSHROOM
@@ -343,7 +345,7 @@
 		/obj/item/food/grown/plum = 3,
 		/datum/reagent/consumable/soysauce = 5,
 	)
-	result = /obj/item/food/skrell_cheetal_eggplant
+	result = /obj/item/food/skrell/skrell_cheetal_eggplant
 	added_foodtypes = VEGETABLES | FRUIT | MUSHROOM
 	cuisine_category = CUISINE_SKRELL
 	dish_category = DISH_MUSHROOM
@@ -353,11 +355,11 @@
 	name = "Mindbreaker fungal bake"
 	reqs = list(
 		/obj/item/food/flat_rice_dough = 1,
-		/obj/item/food/grown/mushroom/glowshroom/glowcap  = 1,
+		/obj/item/food/grown/mushroom/glowshroom/glowcap = 1,
 		/obj/item/food/grown/cannabis/rainbow = 1,
 		/obj/item/food/grown/mushroom/jupitercup = 1,
 	)
-	result = /obj/item/food/mindbreaker_fungal_bake
+	result = /obj/item/food/skrell/mindbreaker_fungal_bake
 	added_foodtypes = MUSHROOM | TOXIC
 	cuisine_category = CUISINE_SKRELL
 	dish_category = DISH_PIE
@@ -373,7 +375,7 @@
 /datum/glass_style/has_foodtype/soup/qerrbalak_eclipse_stew
 	required_drink_type = /datum/reagent/consumable/nutriment/soup/qerrbalak_eclipse_stew
 	name = "Qerrbalak eclipse stew"
-	icon = 'icons/obj/food/skrell.dmi'
+	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
 	icon_state = "eclipse_stew"
 	drink_type = VEGETABLES | MUSHROOM | FRUIT | TOXIC
 
@@ -402,7 +404,7 @@
 		/obj/item/food/grown/mushroom/reishi = 1,
 		/obj/item/food/grown/mushroom/libertycap = 1,
 	)
-	result = /obj/item/food/crimson_fungal_mix
+	result = /obj/item/food/skrell/crimson_fungal_mix
 	added_foodtypes = MUSHROOM | TOXIC
 	cuisine_category = CUISINE_SKRELL
 	dish_category = DISH_MUSHROOM
@@ -418,7 +420,7 @@
 		/obj/item/food/grown/grapes = 1,
 		/obj/item/food/grown/berries = 1,
 	)
-	result = /obj/item/food/twilight_fungal_paste
+	result = /obj/item/food/skrell/twilight_fungal_paste
 	added_foodtypes = MUSHROOM | FRUIT
 	cuisine_category = CUISINE_SKRELL
 	dish_category = DISH_MUSHROOM
@@ -434,7 +436,7 @@
 		/obj/item/food/grown/grass/fairy = 1,
 		/obj/item/food/grown/citrus/lime = 1,
 	)
-	result = /obj/item/food/luminous_white_salad
+	result = /obj/item/food/skrell/luminous_white_salad
 	added_foodtypes = MUSHROOM | TOXIC | FRUIT
 	cuisine_category = CUISINE_SKRELL
 	dish_category = DISH_SALAD
@@ -443,12 +445,12 @@
 /datum/crafting_recipe/food/grand_mycelial_roast
 	name = "Grand Qerrbalak Mycelial Roast"
 	reqs = list(
-		/obj/item/food/crimson_fungal_mix = 1,
-		/obj/item/food/twilight_fungal_paste = 1,
-		/obj/item/food/luminous_white_salad = 1,
+		/obj/item/food/skrell/crimson_fungal_mix = 1,
+		/obj/item/food/skrell/twilight_fungal_paste = 1,
+		/obj/item/food/skrell/luminous_white_salad = 1,
 		/datum/reagent/consumable/nutriment/soup/edens_gaia_noodles = 20,
 	)
-	result = /obj/item/food/grand_mycelial_roast
+	result = /obj/item/food/skrell/grand_mycelial_roast
 	added_foodtypes = MUSHROOM | TOXIC | GRAIN
 	cuisine_category = CUISINE_SKRELL
 	dish_category = DISH_MUSHROOM
@@ -464,7 +466,7 @@
 		/obj/item/food/grown/aloe = 1,
 		/obj/item/food/grown/bungofruit = 1,
 	)
-	result = /obj/item/food/salad/coniine_berry
+	result = /obj/item/food/skrell/salad/coniine_berry
 	added_foodtypes = VEGETABLES | FRUIT | TOXIC
 	cuisine_category = CUISINE_SKRELL
 	dish_category = DISH_SALAD
@@ -474,9 +476,9 @@
 	name = "Soy chips with fungal dip"
 	reqs = list(
 		/obj/item/food/soydope = 1,
-		/obj/item/food/plump_fungal_roast = 1,
+		/obj/item/food/skrell/plump_fungal_roast = 1,
 	)
-	result = /obj/item/food/soy_fungal_chips
+	result = /obj/item/food/skrell/soy_fungal_chips
 	added_foodtypes = VEGETABLES | MUSHROOM | GRAIN
 	cuisine_category = CUISINE_SKRELL
 	dish_category = DISH_MUSHROOM
@@ -490,7 +492,7 @@
 		/obj/item/food/grown/mushroom/gomoa = 1,
 		/obj/item/food/grown/cucumber = 1,
 	)
-	result = /obj/item/food/salad/moonflower_plump
+	result = /obj/item/food/skrell/salad/moonflower_plump
 	added_foodtypes = VEGETABLES | MUSHROOM
 	cuisine_category = CUISINE_SKRELL
 	dish_category = DISH_SALAD
@@ -506,7 +508,7 @@
 		/obj/item/food/grown/mushroom/gomoa = 1,
 		/obj/item/food/rice_dough = 1,
 	)
-	result = /obj/item/food/burger/skrell_tofu
+	result = /obj/item/food/skrell/burger/skrell_tofu
 	added_foodtypes = VEGETABLES | MUSHROOM
 	cuisine_category = CUISINE_SKRELL
 	dish_category = DISH_BURGER
@@ -520,7 +522,7 @@
 		/datum/reagent/consumable/garlic = 5,
 		/datum/reagent/consumable/soysauce = 5,
 	)
-	result = /obj/item/food/taco/qerr_fungal
+	result = /obj/item/food/skrell/taco/qerr_fungal
 	added_foodtypes = MUSHROOM
 	cuisine_category = CUISINE_SKRELL
 	dish_category = DISH_TACO
@@ -536,7 +538,7 @@
 		/obj/item/food/tofu = 1,
 		/obj/item/food/rice_dough = 1,
 	)
-	result = /obj/item/food/burger/destroying_angel
+	result = /obj/item/food/skrell/burger/destroying_angel
 	added_foodtypes = MUSHROOM | TOXIC
 	cuisine_category = CUISINE_SKRELL
 	dish_category = DISH_BURGER
@@ -549,7 +551,7 @@
 		/obj/item/food/cheese/wedge = 1,
 		/obj/item/food/breadslice/plain = 2,
 	)
-	result = /obj/item/food/sandwich/rice_cheese
+	result = /obj/item/food/skrell/sandwich/rice_cheese
 	cuisine_category = CUISINE_SKRELL
 	dish_category = DISH_SANDWICH
 	meal_category = MEAL_MAIN_COURSE
@@ -562,7 +564,7 @@
 		/obj/item/food/grown/grass/fairy = 1,
 		/obj/item/food/grown/mushroom/glowshroom/glowcap = 1,
 	)
-	result = /obj/item/food/fairy_glow_roll
+	result = /obj/item/food/skrell/fairy_glow_roll
 	added_foodtypes = MUSHROOM
 	cuisine_category = CUISINE_SKRELL
 	dish_category = DISH_SANDWICH
@@ -578,7 +580,7 @@
 		/obj/item/food/grown/coffee = 2,
 		/obj/item/food/grown/ximikoa = 1,
 	)
-	result = /obj/item/food/cake/skrell_citrus_cake
+	result = /obj/item/food/skrell/cake/skrell_citrus_cake
 	added_foodtypes = FRUIT | SUGAR
 	cuisine_category = CUISINE_SKRELL
 	dish_category = DISH_CAKE
@@ -593,7 +595,7 @@
 		/obj/item/food/grown/cocaleaf = 1,
 		/obj/item/food/grown/ximikoa = 1,
 	)
-	result = /obj/item/food/cake/blue_cherry_moon_cake
+	result = /obj/item/food/skrell/cake/blue_cherry_moon_cake
 	added_foodtypes = FRUIT | SUGAR
 	cuisine_category = CUISINE_SKRELL
 	dish_category = DISH_CAKE
@@ -622,7 +624,7 @@
 		/obj/item/food/grown/ximikoa = 1,
 		/datum/reagent/consumable/flour = 10,
 	)
-	result = /obj/item/food/skrell_vanilla_pudding
+	result = /obj/item/food/skrell/skrell_vanilla_pudding
 	added_foodtypes = SUGAR
 	cuisine_category = CUISINE_SKRELL
 	dish_category = DISH_PASTRY
@@ -634,7 +636,7 @@
 		/obj/item/food/grown/mushroom/plumphelmet = 1,
 		/datum/reagent/consumable/caramel = 10,
 	)
-	result = /obj/item/food/kebab/caramelized_plump_cap
+	result = /obj/item/food/skrell/kebab/caramelized_plump_cap
 	added_foodtypes = MUSHROOM | SUGAR
 	cuisine_category = CUISINE_SKRELL
 	dish_category = DISH_CANDY
@@ -647,7 +649,7 @@
 		/obj/item/food/grown/ambrosia/deus = 2,
 		/obj/item/food/grown/ximikoa = 1,
 	)
-	result = /obj/item/food/ambrosia_deus_tart
+	result = /obj/item/food/skrell/ambrosia_deus_tart
 	added_foodtypes = VEGETABLES | SUGAR
 	cuisine_category = CUISINE_SKRELL
 	dish_category = DISH_CAKE
@@ -660,7 +662,7 @@
 		/obj/item/food/grown/ambrosia/vulgaris = 1,
 		/obj/item/food/soydope = 1,
 	)
-	result = /obj/item/food/ambrosia_vulgaris_roll
+	result = /obj/item/food/skrell/ambrosia_vulgaris_roll
 	added_foodtypes = VEGETABLES
 	cuisine_category = CUISINE_SKRELL
 	dish_category = DISH_PASTRY
@@ -674,7 +676,7 @@
 		/obj/item/food/chocolatebar = 1,
 		/obj/item/food/grown/cocaleaf = 1,
 	)
-	result = /obj/item/food/vulgaris_chocolate_roll
+	result = /obj/item/food/skrell/vulgaris_chocolate_roll
 	added_foodtypes = VEGETABLES | SUGAR
 	cuisine_category = CUISINE_SKRELL
 	dish_category = DISH_PASTRY
@@ -689,7 +691,7 @@
 		/datum/reagent/consumable/honey = 5,
 		/obj/item/food/grown/ximikoa = 1,
 	)
-	result = /obj/item/food/deus_golden_roll
+	result = /obj/item/food/skrell/deus_golden_roll
 	added_foodtypes = VEGETABLES | SUGAR
 	cuisine_category = CUISINE_SKRELL
 	dish_category = DISH_PASTRY
@@ -705,7 +707,7 @@
 		/datum/reagent/consumable/honey = 5,
 		/obj/item/food/grown/ximikoa = 1,
 	)
-	result = /obj/item/food/crimson_gaia_roll
+	result = /obj/item/food/skrell/crimson_gaia_roll
 	added_foodtypes = VEGETABLES | SUGAR
 	cuisine_category = CUISINE_SKRELL
 	dish_category = DISH_PASTRY
@@ -721,7 +723,7 @@
 		/datum/reagent/consumable/vanilla = 5,
 		/obj/item/food/grown/ximikoa = 1,
 	)
-	result = /obj/item/food/skrell_vanilla_icecream
+	result = /obj/item/food/skrell/skrell_vanilla_icecream
 	added_foodtypes = SUGAR
 	cuisine_category = CUISINE_SKRELL
 	dish_category = DISH_FROZEN
@@ -731,11 +733,11 @@
 	name = "Glowcap ice scoop"
 	reqs = list(
 		/obj/item/popsicle_stick = 1,
-		/obj/item/food/grown/mushroom/glowshroom/glowcap  = 1,
+		/obj/item/food/grown/mushroom/glowshroom/glowcap = 1,
 		/datum/reagent/consumable/soymilk = 10,
 		/datum/reagent/drug/space_drugs = 5,
 	)
-	result = /obj/item/food/glowcap_ice_scoop
+	result = /obj/item/food/skrell/glowcap_ice_scoop
 	added_foodtypes = SUGAR | MUSHROOM | TOXIC
 	cuisine_category = CUISINE_SKRELL
 	dish_category = DISH_FROZEN
@@ -751,7 +753,7 @@
 		/datum/reagent/consumable/coffee = 5,
 		/obj/item/food/grown/ximikoa = 1,
 	)
-	result = /obj/item/food/soy_ambrosia_sundae
+	result = /obj/item/food/skrell/soy_ambrosia_sundae
 	added_foodtypes = SUGAR | VEGETABLES
 	cuisine_category = CUISINE_SKRELL
 	dish_category = DISH_FROZEN
@@ -763,7 +765,7 @@
 		/datum/reagent/consumable/caramel = 10,
 		/datum/reagent/consumable/ethanol/fyrsskar_tears = 10,
 	)
-	result = /obj/item/food/fyrsskar_drops
+	result = /obj/item/food/skrell/fyrsskar_drops
 	added_foodtypes = SUGAR | TOXIC
 	cuisine_category = CUISINE_SKRELL
 	dish_category = DISH_CANDY
@@ -777,7 +779,7 @@
 		/datum/reagent/consumable/berryjuice = 5,
 		/datum/reagent/consumable/soymilk = 5,
 	)
-	result = /obj/item/food/slime_fungus_freeze
+	result = /obj/item/food/skrell/slime_fungus_freeze
 	added_foodtypes = SUGAR | MUSHROOM | FRUIT
 	cuisine_category = CUISINE_SKRELL
 	dish_category = DISH_FROZEN
