@@ -32,7 +32,7 @@
 			break
 		var/detouring = FALSE
 		var/cur_dir = get_dir(cur_turf, target_turf)
-		while(cur_turf != target_turf)
+		while(cur_turf && target_turf && cur_turf != target_turf) // BANDASTATION EDIT - Stop if either endpoint is removed during generation.
 
 			if(detouring) //randomly snake around a bit
 				if(prob(20))
@@ -47,12 +47,26 @@
 			else
 				cur_dir = get_dir(cur_turf, target_turf)
 
-			cur_turf = get_step(cur_turf, cur_dir)
+			// BANDASTATION ADDITION START - Keep detours from escaping the edge of small maps.
+			var/turf/next_turf = get_step(cur_turf, cur_dir)
+			if(!next_turf)
+				detouring = FALSE
+				cur_dir = get_dir(cur_turf, target_turf)
+				next_turf = get_step(cur_turf, cur_dir)
+				if(!next_turf)
+					break
+			cur_turf = next_turf
+			// BANDASTATION ADDITION END
 			var/area/new_area = get_area(cur_turf)
 			if(!istype(new_area, whitelist_area) || (cur_turf.turf_flags & NO_LAVA_GEN)) //Rivers will skip ruins
 				detouring = FALSE
 				cur_dir = get_dir(cur_turf, target_turf)
-				cur_turf = get_step(cur_turf, cur_dir)
+				// BANDASTATION ADDITION START - Preserve the last valid turf when skipping ruins.
+				next_turf = get_step(cur_turf, cur_dir)
+				if(!next_turf)
+					break
+				cur_turf = next_turf
+				// BANDASTATION ADDITION END
 				continue
 
 			// Workaround around ChangeTurf that's safe because of when this proc is called

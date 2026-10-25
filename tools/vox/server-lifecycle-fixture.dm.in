@@ -1,0 +1,186 @@
+#ifndef LIFECYCLE_HARNESS
+#error This fixture is only included by test-server-lifecycle.ps1.
+#endif
+#ifdef UNIT_TESTS
+#error Lifecycle probes require an ordinary server, without UNIT_TESTS.
+#endif
+
+/world
+	name = "Isolated native lifecycle probe"
+	visibility = FALSE
+	hub = ""
+	hub_password = ""
+
+SUBSYSTEM_DEF(lifecycle_probe)
+	name = "Isolated lifecycle probe"
+	init_stage = INITSTAGE_LAST
+	ss_flags = SS_NO_FIRE
+	dependencies = list(/datum/controller/subsystem/assets, /datum/controller/subsystem/ticker)
+	var/epoch
+	var/scenario
+	var/health_world_time
+
+/datum/controller/subsystem/lifecycle_probe/Initialize()
+	scenario = world.params["lifecycle_mode"]
+	if(!(scenario in list("shutdown", "warm")))
+		fail_probe("Invalid lifecycle scenario")
+		return SS_INIT_FAILURE
+	epoch = fexists("data/lifecycle-epoch.txt") ? text2num(file2text("data/lifecycle-epoch.txt")) + 1 : 1
+	if(epoch < 1 || epoch > (scenario == "warm" ? 3 : 1))
+		fail_probe("Unexpected lifecycle epoch [epoch]")
+		return SS_INIT_FAILURE
+	fdel("data/lifecycle-epoch.txt")
+	text2file("[epoch]", "data/lifecycle-epoch.txt")
+	var/list/init_diagnostic = list(
+		"epoch" = epoch, "resume_config" = CONFIG_GET(flag/resume_after_initializations),
+		"mc_running" = MC_RUNNING(), "master_stage" = Master.init_stage_completed,
+		"master_sleep_before" = Master.sleep_offline_after_initializations,
+		"world_sleep_before" = world.sleep_offline, "runtime_count" = GLOB.total_runtimes,
+	)
+	// Match the game's unattended functions: no connected client should be needed to run the probe timers.
+	Master.sleep_offline_after_initializations = FALSE
+	world.sleep_offline = FALSE
+	init_diagnostic["master_sleep_after"] = Master.sleep_offline_after_initializations
+	init_diagnostic["world_sleep_after"] = world.sleep_offline
+	text2file(json_encode(init_diagnostic), "data/lifecycle-init-[epoch].json")
+	SSticker.start_immediately = FALSE
+	SSticker.start_at = 1 HOURS
+	SSticker.timeLeft = 1 HOURS
+	addtimer(CALLBACK(src, PROC_REF(after_initialization)), 1 SECONDS)
+	return SS_INIT_SUCCESS
+
+/datum/controller/subsystem/lifecycle_probe/proc/fail_probe(reason)
+	text2file(json_encode(list("reason" = reason, "epoch" = epoch, "scenario" = scenario)), "data/lifecycle-failed.json")
+	world.log << "LIFECYCLE_FAILED: [reason]"
+	qdel(world)
+
+/datum/controller/subsystem/lifecycle_probe/proc/after_initialization()
+	if(Master.init_stage_completed != INITSTAGE_MAX)
+		addtimer(CALLBACK(src, PROC_REF(after_initialization)), 1 SECONDS)
+		return
+	var/list/not_initialized = list()
+	for(var/datum/controller/subsystem/subsystem as anything in Master.subsystems)
+		if(!subsystem.initialized)
+			not_initialized += "[subsystem.type]"
+	if(length(not_initialized))
+		fail_probe("Uninitialized subsystems: [jointext(not_initialized, ", ")]")
+		return
+	if(world.TgsAvailable() || world.check_hard_reboot())
+		fail_probe("TGS/hard restart would invalidate the same-process reboot test")
+		return
+	if(world.visibility || world.hub || CONFIG_GET(flag/sql_enabled))
+		fail_probe("Hub visibility or SQL was enabled in the isolated smoke server")
+		return
+	if(SSticker.current_state >= GAME_STATE_SETTING_UP)
+		fail_probe("The round started before the lifecycle probe")
+		return
+	var/list/engine_bans = sticky_banned_ckeys()
+	if(!islist(engine_bans) || length(engine_bans))
+		fail_probe("The isolated server did not expose a valid empty ban list")
+		return
+	var/list/cyber_regression = cyber_regression_probe()
+	if(!cyber_regression["success"])
+		fail_probe("Cyber research regression: [json_encode(cyber_regression)]")
+		return
+	var/list/mapping_regression = mapping_regression_probe()
+	if(!mapping_regression["success"])
+		fail_probe("Space area regression: [json_encode(mapping_regression)]")
+		return
+	var/output_path = "data/lifecycle-health-[epoch].dmi"
+	var/list/sprites = list("result" = list("icon_file" = "data/lifecycle-input.dmi", "icon_state" = "probe", "dir" = SOUTH, "frame" = 1, "transform" = list()))
+	var/raw = call_ext("rust_g", "iconforge_generate_headless")(output_path, json_encode(sprites), "1")
+	var/list/result
+	try
+		result = json_decode(raw)
+	catch(var/exception/error)
+		fail_probe("Headless forge returned invalid JSON: [raw]")
+		return
+	if(!islist(result) || result["error"] || result["file_path"] != output_path || result["width"] != 32 || result["height"] != 32 || !fexists(output_path))
+		fail_probe("Headless forge health failed: [raw]")
+		return
+	health_world_time = world.time
+	var/list/record = list(
+		"scenario" = scenario, "epoch" = epoch,
+		"nonce" = trim(file2text("data/lifecycle-nonce.txt")),
+		"host_pid" = text2num(file2text("data/lifecycle-host-pid.txt")),
+		"native_version" = call_ext("rust_g", "get_version")(),
+		"native_result" = result, "runtime_count" = GLOB.total_runtimes,
+		"init_stage_completed" = Master.init_stage_completed,
+		"mc_running" = MC_RUNNING(), "world_sleep_offline" = world.sleep_offline,
+		"timer_world_time" = health_world_time,
+		"ban_list_is_list" = islist(engine_bans), "ban_list_length" = length(engine_bans),
+		"cyber_regression" = cyber_regression,
+		"mapping_regression" = mapping_regression,
+		"subsystems_initialized" = length(Master.subsystems),
+		"uninitialized" = not_initialized, "unit_tests" = FALSE,
+		"map" = SSmapping.current_map.map_name,
+		"log_directory" = GLOB.log_directory,
+		"tgs_available" = world.TgsAvailable(), "hard_reboot" = world.check_hard_reboot(),
+		"visibility" = world.visibility, "hub" = world.hub,
+		"port" = world.port, "sql_enabled" = CONFIG_GET(flag/sql_enabled),
+	)
+	text2file(json_encode(record), "data/lifecycle-epoch-[epoch].json")
+	addtimer(CALLBACK(src, PROC_REF(finish_epoch)), 1 SECONDS)
+
+/datum/controller/subsystem/lifecycle_probe/proc/finish_epoch()
+	text2file(json_encode(list("epoch" = epoch, "before" = health_world_time, "after" = world.time, "mc_running" = MC_RUNNING())), "data/lifecycle-timer-[epoch].json")
+	// Leave SStimer.fire before stopping the MC or replacing the native VM.
+	spawn(0)
+		transition_world()
+
+/datum/controller/subsystem/lifecycle_probe/proc/transition_world()
+	if(scenario == "warm" && epoch < 3)
+		// Restore the isolated map before the normal Reboot chain reloads the VM.
+		fdel(PATH_TO_NEXT_MAP_JSON)
+		if(!fcopy("_maps/map_jsons/runtimestation_minimal.json", PATH_TO_NEXT_MAP_JSON))
+			fail_probe("Could not restore the minimal map before Reboot")
+			return
+		text2file("before_reboot", "data/lifecycle-before-reboot-[epoch].marker")
+		world.Reboot()
+		return
+	text2file("before_shutdown", "data/lifecycle-before-shutdown.marker")
+	Master.Shutdown()
+	text2file("subsystems_stopped", "data/lifecycle-subsystems-stopped.marker")
+	text2file(json_encode(list("epoch" = epoch, "runtime_count" = GLOB.total_runtimes)), "data/lifecycle-shutdown.json")
+	shutdown_logging()
+	// No logger or rust-g call is allowed after shutdown_logging().
+	text2file("logging_closed", "data/lifecycle-logging-closed.marker")
+	qdel(world)
+
+/datum/controller/subsystem/lifecycle_probe/proc/cyber_regression_probe()
+	var/trait_source = "lifecycle-cyber-[REF(src)]-[epoch]"
+	var/had_trait = HAS_TRAIT(SSstation, STATION_TRAIT_CYBERNETIC_REVOLUTION)
+	var/list/node_types = list(/datum/techweb_node/cyber, /datum/techweb_node/cyber/cyber_organs_upgraded)
+	var/list/registered = list()
+	var/list/registered_costs = list()
+	var/list/was_registered = list()
+	for(var/node_type in node_types)
+		was_registered[node_type] = node_type in SSresearch.techweb_nodes
+		var/datum/techweb_node/old_node = SSresearch.techweb_nodes[node_type]
+		registered[node_type] = old_node
+		registered_costs[node_type] = old_node?.research_costs?.Copy()
+	ADD_TRAIT(SSstation, STATION_TRAIT_CYBERNETIC_REVOLUTION, trait_source)
+	var/datum/techweb_node/cyber/abstract_node = new
+	var/datum/techweb_node/cyber/cyber_organs_upgraded/concrete_node = new
+	var/abstract_unchanged = isnull(abstract_node.research_costs)
+	var/concrete_cost = concrete_node.research_costs?[TECHWEB_POINT_TYPE_GENERIC]
+	qdel(abstract_node)
+	qdel(concrete_node)
+	var/registry_restored = TRUE
+	for(var/node_type in node_types)
+		if(was_registered[node_type])
+			SSresearch.techweb_nodes[node_type] = registered[node_type]
+			var/datum/techweb_node/old_node = registered[node_type]
+			if(json_encode(old_node.research_costs) != json_encode(registered_costs[node_type]))
+				old_node.research_costs = registered_costs[node_type]
+				registry_restored = FALSE
+		else
+			SSresearch.techweb_nodes -= node_type
+	REMOVE_TRAIT(SSstation, STATION_TRAIT_CYBERNETIC_REVOLUTION, trait_source)
+	var/trait_restored = HAS_TRAIT(SSstation, STATION_TRAIT_CYBERNETIC_REVOLUTION) == had_trait
+	return list(
+		"success" = abstract_unchanged && concrete_cost == TECHWEB_TIER_3_POINTS / 2 && registry_restored && trait_restored,
+		"abstract_costs_null" = abstract_unchanged, "concrete_cost" = concrete_cost,
+		"expected_cost" = TECHWEB_TIER_3_POINTS / 2,
+		"registry_restored" = registry_restored, "trait_restored" = trait_restored,
+	)

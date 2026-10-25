@@ -30,7 +30,10 @@
 
 	var/area/new_turf_area = get_area(loc)
 	if (istype(new_turf_area, /area/space) && !istype(new_turf_area, /area/space/nearstation))
-		set_turf_to_area(loc, GLOB.areas_by_type[/area/space/nearstation])
+		// BANDASTATION EDIT START - Space areas need not already exist on minimal maps.
+		var/area/space/nearstation/nearstation_area = GLOB.areas_by_type[/area/space/nearstation] || new
+		set_turf_to_area(loc, nearstation_area)
+		// BANDASTATION EDIT END
 
 /datum/armor/structure_lattice
 	melee = 50
@@ -50,7 +53,10 @@
 
 	var/area/turf_area = get_area(turfloc)
 	if(isspaceturf(turfloc) && istype(turf_area, /area/space/nearstation))
-		set_turf_to_area(turfloc, GLOB.areas_by_type[/area/space])
+		// BANDASTATION EDIT START - Recreate empty default space if map loading removed it.
+		var/area/space/space_area = GLOB.areas_by_type[/area/space] || new
+		set_turf_to_area(turfloc, space_area)
+		// BANDASTATION EDIT END
 
 /obj/structure/lattice/proc/deconstruction_hints(mob/user)
 	return span_notice("The rods look like they could be <b>cut</b>. There's space for more <i>rods</i> or a <i>tile</i>.")

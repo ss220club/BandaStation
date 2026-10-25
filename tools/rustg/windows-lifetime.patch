@@ -1,0 +1,63 @@
+--- a/src/byond.rs
++++ b/src/byond.rs
+@@ -10,6 +10,40 @@
+     slice,
+     sync::Once,
+ };
++
++// Rayon and async workers can outlive a BYOND world. Windows must keep their
++// code and TLS destructors mapped until the host process terminates.
++#[cfg(windows)]
++pub fn ensure_module_lifetime() -> bool {
++    use std::{ffi::c_void, sync::OnceLock};
++
++    #[link(name = "kernel32")]
++    unsafe extern "system" {
++        #[link_name = "GetModuleHandleExW"]
++        fn get_module_handle_ex_w(flags: u32, address: *const u16, module: *mut *mut c_void) -> i32;
++    }
++
++    static PINNED: OnceLock<bool> = OnceLock::new();
++    *PINNED.get_or_init(|| {
++        const FROM_ADDRESS: u32 = 0x00000004;
++        const PIN: u32 = 0x00000001;
++        let mut module = std::ptr::null_mut();
++        // SAFETY: FROM_ADDRESS interprets this pointer as a code address, not a
++        // string. This executing function is inside the DLL being pinned.
++        unsafe {
++            get_module_handle_ex_w(
++                FROM_ADDRESS | PIN,
++                ensure_module_lifetime as *const () as *const u16,
++                &mut module,
++            ) != 0
++        }
++    })
++}
++
++#[cfg(not(windows))]
++pub fn ensure_module_lifetime() -> bool {
++    true
++}
+ 
+ static SET_HOOK: Once = Once::new();
+ static EMPTY_STRING: c_char = 0;
+@@ -59,6 +93,9 @@
+         pub unsafe extern "C" fn $name(
+             _argc: ::std::os::raw::c_int, _argv: *const *const ::std::os::raw::c_char
+         ) -> *const ::std::os::raw::c_char {
++            if !$crate::byond::ensure_module_lifetime() {
++                return c"RUST_G_ERROR: Windows DLL lifetime pin failed".as_ptr();
++            }
+             $crate::byond::set_panic_hook();
+             let closure = || ($body);
+             $crate::byond::byond_return(closure().map(From::from))
+@@ -71,6 +108,9 @@
+         pub unsafe extern "C" fn $name(
+             _argc: ::std::os::raw::c_int, _argv: *const *const ::std::os::raw::c_char
+         ) -> *const ::std::os::raw::c_char {
++            if !$crate::byond::ensure_module_lifetime() {
++                return c"RUST_G_ERROR: Windows DLL lifetime pin failed".as_ptr();
++            }
+             let __args = unsafe { $crate::byond::parse_args(_argc, _argv) };
+ 
+             let mut __argn = 0;
