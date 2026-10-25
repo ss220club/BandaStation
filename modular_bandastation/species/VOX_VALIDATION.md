@@ -74,7 +74,20 @@ TypeScript: exit 0. TGUI: **25/25 тестов**, **40 assertions**, 0 failures,
 exit 0. Логи: `tmp/split-tgui-tsc.log`, `tmp/split-tgui-tests.log`.
 После этих проверок UI-код не менялся.
 
-Обычный запуск, shutdown и same-process reboot проверяются отдельным
-`tools/vox/test-server-lifecycle.ps1`; результаты текущего Vox-прогона будут
-зафиксированы после его завершения. Происхождение и проверки самой Windows
-библиотеки описаны в [tools/rustg/VALIDATION.md](../../tools/rustg/VALIDATION.md).
+Dreamchecker после последних исправлений `TakeBite` и EMP: **0 diagnostics**,
+exit 0; лог `tmp/split-dreamchecker-final.log`.
+
+Обычный сервер без `UNIT_TESTS` прошёл **4/4 сценария** через
+`tools/vox/test-server-lifecycle.ps1`: закрытие и перезапуск мира с/без `-close`.
+Артефакты: `tmp/server-lifecycle-5519a3b48f17`, лог `tmp/vox-lifecycle-final.log`.
+Manifest: `status=passed`, `success=true`; driver и все четыре native-процесса
+завершились с кодом **0**, без timeout и принудительного завершения.
+
+Подтверждены восемь эпох мира, четыре настоящих `world.Reboot()` в прежних PID,
+147 инициализированных подсистем включая test probe, работа MC и таймеров.
+Cyber-регрессии: **8/8**, операции с отсутствующими space areas: **24/24**.
+В сырых журналах — **0 runtime errors**, в Windows event audit — **0 faults**,
+ошибок запроса и нераспознанных событий нет. Обычная fixture-компиляция:
+**0 ошибок и 0 предупреждений**. Проверка использует минимальную станцию,
+выключенный Hub, без SQL и TGS. Происхождение и проверки Windows-библиотеки:
+[tools/rustg/VALIDATION.md](../../tools/rustg/VALIDATION.md).
