@@ -150,7 +150,7 @@ export const CATEGORY_NAMES = {
   'Mexican Food': 'Мексиканская кухня',
   'Misc. Food': 'Прочее',
   'Mothic Food': 'Молиная кухня',
-  'Skrell Food': 'Скрелльская кухня',
+  'Skrell Food': 'Скреллианская кухня',
   Pastries: 'Кондитерские изделия',
   Pies: 'Пироги',
   Pizzas: 'Пиццы',

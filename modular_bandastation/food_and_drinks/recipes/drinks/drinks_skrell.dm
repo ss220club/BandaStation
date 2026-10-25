@@ -52,7 +52,7 @@
 	required_drink_type = /datum/reagent/consumable/ethanol/fyrsskar_tears
 	name = "Tears of Fyrsskar"
 	desc = "A sparkling violet-blue drink with a distinct aroma of citrus and ozone."
-	icon = 'icons/obj/drinks/skrell.dmi'
+	icon = 'modular_bandastation/food_and_drinks/icons/drinks/skrell.dmi'
 	icon_state = "fyrsskartears"
 
 
@@ -120,7 +120,7 @@
 	required_drink_type = /datum/reagent/consumable/ethanol/qerrbalak_amanita_tincture
 	name = "Qerrbalak Amanita Tincture"
 	desc = "A deep ruby-red liquor speckled with floating white fungal spores."
-	icon = 'icons/obj/drinks/skrell.dmi'
+	icon = 'modular_bandastation/food_and_drinks/icons/drinks/skrell.dmi'
 	icon_state = "amanita_tincture"
 
 // =========================================================================
@@ -161,7 +161,7 @@
 	required_drink_type = /datum/reagent/consumable/glow_seraka_tonic
 	name = "Glow-Seraka Tonic"
 	desc = "A warm, glowing orange cocktail that dimly illuminates its surroundings."
-	icon = 'icons/obj/drinks/skrell.dmi'
+	icon = 'modular_bandastation/food_and_drinks/icons/drinks/skrell.dmi'
 	icon_state = "glow_seraka"
 
 // =========================================================================
@@ -202,7 +202,7 @@
 	required_drink_type = /datum/reagent/consumable/ethanol/aliose_velvet_cordial
 	name = "Aliose Velvet Cordial"
 	desc = "A tall, elegant glass filled with a pastel-pink creamy cordial garnished with a dark cherry."
-	icon = 'icons/obj/drinks/skrell.dmi'
+	icon = 'modular_bandastation/food_and_drinks/icons/drinks/skrell.dmi'
 	icon_state = "aliose_velvet"
 
 // =========================================================================
@@ -253,7 +253,7 @@
 	required_drink_type = /datum/reagent/consumable/qerrbalak_umami_tonic
 	name = "Qerrbalak Umami Tonic"
 	desc = "A ceramic cup containing a dark, steaming savory tonic with a fragrant roasted aroma."
-	icon = 'icons/obj/drinks/skrell.dmi'
+	icon = 'modular_bandastation/food_and_drinks/icons/drinks/skrell.dmi'
 	icon_state = "umami_tonic"
 
 
@@ -362,7 +362,7 @@
 	required_drink_type = /datum/reagent/consumable/heart_of_qerrbalak
 	name = "Heart of Qerrbalak"
 	desc = "A glowing psychedelic concoction infused with lethal bungotoxins and effervescent citrus. Induces transcendental tranquility in Skrell."
-	icon = 'icons/obj/drinks/skrell.dmi'
+	icon = 'modular_bandastation/food_and_drinks/icons/drinks/skrell.dmi'
 	icon_state = "heart_qerrbalak"
 
 // =========================================================================
@@ -450,7 +450,7 @@
 	required_drink_type = /datum/reagent/consumable/ethanol/omega_glow_cocktail
 	name = "Omega-Glow Cocktail"
 	desc = "A prismatically shimmering cocktail with shifting shades of violet, emerald, and gold."
-	icon = 'icons/obj/drinks/skrell.dmi'
+	icon = 'modular_bandastation/food_and_drinks/icons/drinks/skrell.dmi'
 	icon_state = "omega_glow"
 
 
