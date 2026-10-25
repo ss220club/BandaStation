@@ -100,7 +100,6 @@
 /// Helper to allocate a new object with the implied type (the type of the variable it's assigned to) in the corner of the test room
 #define EASY_ALLOCATE(arguments...) allocate(__IMPLIED_TYPE__, run_loc_floor_bottom_left, ##arguments)
 
-// BANDASTATION ADDITION - IPC regression tests in the sorted include block.
 // BEGIN_INCLUDE
 #include "../../../modular_bandastation/species/code/tests/ipc_appearance_tests.dm"
 #include "../../../modular_bandastation/species/code/tests/ipc_cleaning_tests.dm"
