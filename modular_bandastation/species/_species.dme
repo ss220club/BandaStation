@@ -88,6 +88,7 @@
 #include "code/surgery/organs/internal/ipc_upgrades.dm"
 #include "code/items/ipc_power_cord.dm"
 #include "code/items/ipc_fabrication.dm"
+#include "code/items/ipc_nanopaste.dm"
 #include "code/preferences/ipc_name.dm"
 #include "code/surgery/organs/limbgrower_designs.dm"
 

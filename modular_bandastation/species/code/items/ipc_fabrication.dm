@@ -67,3 +67,18 @@
 	materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT, /datum/material/glass = SHEET_MATERIAL_AMOUNT * 0.5)
 	construction_time = 20 SECONDS
 	category = list(RND_CATEGORY_MECHFAB_CYBORG + RND_SUBCATEGORY_MECHFAB_CYBORG_COMPONENTS)
+
+/datum/design/ipc_nanopaste
+	name = "Nanopaste"
+	desc = "A six-dose tube for IPC decontamination. Removes irradiation without repairing existing damage."
+	build_type = MECHFAB
+	build_path = /obj/item/stack/nanopaste
+	materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 1.5, /datum/material/glass = SHEET_MATERIAL_AMOUNT * 1.5)
+	construction_time = 10 SECONDS
+	category = list(RND_CATEGORY_MECHFAB_CYBORG + RND_SUBCATEGORY_MECHFAB_CYBORG_COMPONENTS)
+
+/// Robotics prints a complete tube rather than the single dose produced by ordinary stack designs.
+/datum/design/ipc_nanopaste/create_result(atom/drop_loc, list/custom_materials, amount)
+	if(isnull(amount))
+		amount = /obj/item/stack/nanopaste::amount
+	return ..(drop_loc, custom_materials, amount)

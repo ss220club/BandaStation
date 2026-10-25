@@ -1,9 +1,9 @@
-/// Replacement parts must be researched and dispensed through the actual robotic fabricator.
+/// IPC parts and maintenance supplies must be researched and dispensed through the actual robotic fabricator.
 /datum/unit_test/ipc_fabrication/Run()
 	var/datum/techweb_node/augmentation/node = SSresearch.techweb_nodes[/datum/techweb_node/augmentation]
 	var/obj/machinery/mecha_part_fabricator/fabricator = allocate(/obj/machinery/mecha_part_fabricator)
 	fabricator.drop_direction = NONE
-	var/list/design_paths = list(/datum/design/ipc_head, /datum/design/ipc_chassis, /datum/design/ipc_microbattery, /datum/design/ipc_power_cord)
+	var/list/design_paths = list(/datum/design/ipc_head, /datum/design/ipc_chassis, /datum/design/ipc_microbattery, /datum/design/ipc_power_cord, /datum/design/ipc_nanopaste)
 	for(var/design_path in design_paths)
 		var/datum/design/design = SSresearch.techweb_designs[design_path]
 		TEST_ASSERT_NOTNULL(design, "IPC replacement design [design_path] was not registered.")
@@ -13,6 +13,14 @@
 		var/atom/movable/part = locate(design.build_path) in get_turf(fabricator)
 		TEST_ASSERT_NOTNULL(part, "The fabricator produced no [design.build_path].")
 		allocated += part
+
+	var/obj/item/stack/nanopaste/paste = locate() in get_turf(fabricator)
+	TEST_ASSERT_NOTNULL(paste, "Robotics did not dispense nanopaste.")
+	TEST_ASSERT_EQUAL(paste.amount, 6, "Robotics printed a single nanopaste dose instead of a complete tube.")
+	var/datum/design/paste_design = SSresearch.techweb_designs[/datum/design/ipc_nanopaste]
+	var/list/tube_materials = paste.custom_materials
+	for(var/datum/material/material as anything in paste_design.materials)
+		TEST_ASSERT_EQUAL(tube_materials[material], paste_design.materials[material], "The printed nanopaste tube did not contain its fabrication materials.")
 
 	var/mob/living/carbon/human/species/ipc_chassis/chassis = locate() in get_turf(fabricator)
 	TEST_ASSERT(is_species(chassis, /datum/species/ipc), "The fabricated chassis is not an IPC.")

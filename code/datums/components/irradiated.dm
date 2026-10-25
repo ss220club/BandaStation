@@ -220,7 +220,7 @@
 	render_list += "<span class='alert ml-1'>"
 	// BANDASTATION EDIT START - Antitoxin cannot repair an irradiated positronic brain.
 	if(is_species(source, /datum/species/ipc))
-		render_list += conditional_tooltip("Облучение электроники КПБ.", "Деконтаминируйте корпус и восстановите позитронный мозг нейронной отладкой или мультитулом после извлечения. Душ приостанавливает действие облучения.", tochat)
+		render_list += conditional_tooltip("Облучение электроники КПБ.", "Нанопаста снимает облучение, сохраняя полученные повреждения. Полный ремонт позитронного мозга нейронной отладкой или мультитулом после извлечения также прекращает облучение. Душ приостанавливает его действие.", tochat)
 	else
 		render_list += conditional_tooltip("Subject is irradiated.", "Supply antiradiation or antitoxin, such as [/datum/reagent/medicine/potass_iodide::name] or [/datum/reagent/medicine/pen_acid::name].", tochat)
 	// BANDASTATION EDIT END
@@ -235,7 +235,7 @@
 // BANDASTATION ADDITION START - Radiation warning for a synthetic body.
 /atom/movable/screen/alert/irradiated/ipc
 	name = "Облучение электроники"
-	desc = "Ионизирующее излучение повреждает позитронный мозг и цепи корпуса. Покиньте опасную зону, деконтаминируйте корпус и отремонтируйте мозг. Душ приостанавливает повреждение."
+	desc = "Ионизирующее излучение повреждает позитронный мозг и цепи корпуса. Покиньте опасную зону. Нанопаста снимает облучение, сохраняя полученные повреждения; полный ремонт мозга также прекращает эффект. Душ приостанавливает повреждение."
 // BANDASTATION ADDITION END
 
 #undef RADIATION_BURN_SPLOTCH_DAMAGE

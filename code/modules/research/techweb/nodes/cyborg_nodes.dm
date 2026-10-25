@@ -4,12 +4,13 @@
 	node_flags = parent_type::node_flags | TECHWEB_NODE_STARTER
 	prerequisite_nodes = list(/datum/techweb_node/robotics)
 	unlocked_designs = list(
-		// BANDASTATION ADDITION START - IPC replacement components
+		// BANDASTATION ADDITION START - IPC components and maintenance
 		/datum/design/ipc_head,
 		/datum/design/ipc_chassis,
 		/datum/design/ipc_microbattery,
 		/datum/design/ipc_power_cord,
-		// BANDASTATION ADDITION END - IPC replacement components
+		/datum/design/ipc_nanopaste,
+		// BANDASTATION ADDITION END - IPC components and maintenance
 		/datum/design/borg_chest,
 		/datum/design/borg_head,
 		/datum/design/borg_l_arm,
