@@ -70,7 +70,7 @@ try {
         'species_change_held_items', 'species_config_sanity', 'species_unique_id',
         'species_whitelist_check', 'organ_sanity', 'designs', 'design_source', 'design_mats',
         'focus_only/invalid_research_designs', 'focus_only/invalid_emissives', 'missing_icons/icon_state',
-        'missing_icons/worn_icons', 'missing_icons/inhand_icon_state', 'language_key_conflicts'
+        'missing_icons/worn_icons', 'missing_icons/inhand_icon_state', 'language_key_conflicts', 'emoting'
     ) | ForEach-Object { '/datum/unit_test/' + $_ }
     if ($IncludeHumanoidScreenshots) {
         $baselineTests += '/datum/unit_test/screenshot_humanoids'
