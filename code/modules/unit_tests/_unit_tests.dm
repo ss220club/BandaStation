@@ -100,6 +100,13 @@
 /// Helper to allocate a new object with the implied type (the type of the variable it's assigned to) in the corner of the test room
 #define EASY_ALLOCATE(arguments...) allocate(__IMPLIED_TYPE__, run_loc_floor_bottom_left, ##arguments)
 
+// BANDASTATION ADDITION START - Complete cybernetic rejection regression tests
+#include "../../../modular_bandastation/quirks/code/tests/cybernetic_rejection.dm"
+#include "../../../modular_bandastation/quirks/code/tests/cybernetic_rejection_implants.dm"
+#include "../../../modular_bandastation/quirks/code/tests/cybernetic_rejection_limbs.dm"
+#include "../../../modular_bandastation/quirks/code/tests/cybernetic_rejection_mmi.dm"
+// BANDASTATION ADDITION END - Complete cybernetic rejection regression tests
+
 // BEGIN_INCLUDE
 #include "aas_configs.dm"
 #include "abductor_baton_spell.dm"
@@ -379,12 +386,6 @@
 #include "weird_food.dm"
 #include "wizard_loadout.dm"
 // END_INCLUDE
-// BANDASTATION ADDITION START - Complete cybernetic rejection regression tests
-#include "../../../modular_bandastation/quirks/code/tests/cybernetic_rejection.dm"
-#include "../../../modular_bandastation/quirks/code/tests/cybernetic_rejection_implants.dm"
-#include "../../../modular_bandastation/quirks/code/tests/cybernetic_rejection_limbs.dm"
-#include "../../../modular_bandastation/quirks/code/tests/cybernetic_rejection_mmi.dm"
-// BANDASTATION ADDITION END - Complete cybernetic rejection regression tests
 #ifdef REFERENCE_TRACKING_DEBUG //Don't try and parse this file if ref tracking isn't turned on. IE: don't parse ref tracking please mr linter
 #include "find_reference_sanity.dm"
 #endif
