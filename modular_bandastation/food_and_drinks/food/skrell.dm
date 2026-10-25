@@ -93,8 +93,9 @@
 // SOUPS & STEWS
 
 // 6. Qerrbalak Fungal Stew
-/obj/item/food/skrell/soup/qerrbalak_stew
+/obj/item/food/soup/qerrbalak_stew
 	name = "Qerrbalak fungal stew"
+	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
 	desc = "A traditional everyday hearty stew eaten across Qerrbalak. Thickened with flour and filled with aromatic mushrooms."
 	icon_state = "qerrbalak_stew"
 	food_reagents = list(
@@ -110,8 +111,9 @@
 	venue_value = FOOD_PRICE_NORMAL
 
 // 7. Glowshroom Chowder
-/obj/item/food/skrell/soup/glowshroom_chowder
+/obj/item/food/soup/glowshroom_chowder
 	name = "glowshroom chowder"
+	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
 	desc = "A creamy, glowing soup made from radioactive glowshrooms and soymilk. Provides soothing nourishment for Skrell."
 	icon_state = "glowshroom_chowder"
 	food_reagents = list(
@@ -129,8 +131,9 @@
 	venue_value = FOOD_PRICE_NORMAL
 
 // 8. Destroying Angel Bisque
-/obj/item/food/skrell/soup/destroying_angel_bisque
+/obj/item/food/soup/destroying_angel_bisque
 	name = "destroying angel bisque"
+	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
 	desc = "A deadly white bisque infused with destroying angel mushroom. A prized delicacy for Skrell, but lethal to other species."
 	icon_state = "angel_bisque"
 	food_reagents = list(
@@ -148,8 +151,9 @@
 	venue_value = FOOD_PRICE_EXOTIC
 
 // 9. Kenin Tofu Soup
-/obj/item/food/skrell/soup/kenin_tofu_soup
+/obj/item/food/soup/kenin_tofu_soup
 	name = "Kenin tofu soup"
+	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
 	desc = "A soothing gourmet soup loaded with tofu cubes and reishi mushrooms. Provides pleasant pain relief."
 	icon_state = "kenin_soup"
 	food_reagents = list(
@@ -167,8 +171,9 @@
 	venue_value = FOOD_PRICE_NORMAL
 
 // 10. Embershroom Lava Stew
-/obj/item/food/skrell/soup/embershroom_lava_stew
+/obj/item/food/soup/embershroom_lava_stew
 	name = "embershroom lava stew"
+	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
 	desc = "A simmering spicy red broth made from Lavaland embershrooms and fire blossoms. Keeps you warm in freezing environments."
 	icon_state = "embershroom_stew"
 	food_reagents = list(
@@ -184,8 +189,9 @@
 	venue_value = FOOD_PRICE_NORMAL
 
 // 11. Eden's Gaia Noodle Soup
-/obj/item/food/skrell/soup/edens_gaia_noodles
+/obj/item/food/soup/edens_gaia_noodles
 	name = "Eden's Gaia noodle soup"
+	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
 	desc = "A sacred glowing bowl of noodles floating in an Ambrosia Gaia broth. Induces supreme tranquility and mental harmony."
 	icon_state = "gaia_noodle_soup"
 	food_reagents = list(
@@ -201,8 +207,9 @@
 	venue_value = FOOD_PRICE_LEGENDARY
 
 // 12. Puffball Gas Soup
-/obj/item/food/skrell/soup/puffball_gas_soup
+/obj/item/food/soup/puffball_gas_soup
 	name = "puffball gas soup"
+	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
 	desc = "A fizzing, misty soup brewed from odious puffball and fairy grass. Releases mild hallucinogenic spores as you consume it."
 	icon_state = "puffball_soup"
 	food_reagents = list(
@@ -260,8 +267,9 @@
 	venue_value = FOOD_PRICE_NORMAL
 
 // 14. Crispy Walking Mushroom Skewers
-/obj/item/food/skrell/kebab/walking_mushroom_skewer
+/obj/item/food/kebab/walking_mushroom_skewer
 	name = "crispy walking mushroom skewer"
+	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
 	desc = "Tender legs of a walking mushroom skewered and crisped in oil. Highly popular street food on Qerrbalak."
 	icon_state = "walking_skewer"
 	food_reagents = list(
@@ -392,8 +400,9 @@
 	w_class = WEIGHT_CLASS_TINY
 
 // 21. Qerrbalak Eclipse Stew
-/obj/item/food/skrell/soup/qerrbalak_eclipse_stew
+/obj/item/food/soup/qerrbalak_eclipse_stew
 	name = "Qerrbalak eclipse stew"
+	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
 	desc = "A pitch-black psychoactive stew brewed from omega weed, liberty-caps, and shadowshrooms with a tangy pineapple accent. Extremely potent."
 	icon_state = "eclipse_stew"
 	food_reagents = list(
@@ -496,8 +505,9 @@
 // SALADS & APPETIZERS
 
 // 26. Coniine Berry Bowl
-/obj/item/food/skrell/salad/coniine_berry
+/obj/item/food/salad/coniine_berry
 	name = "coniine berry bowl"
+	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
 	desc = "A salad loaded with death berries, aloe, and bungo fruit. The concentrated neurotoxins serve as a stimulating tonic for Skrell, but are lethal to non-immune species."
 	icon_state = "coniine_salad"
 	food_reagents = list(
@@ -532,8 +542,9 @@
 	venue_value = FOOD_PRICE_NORMAL
 
 // 28. Moonflower & Plump Bowl
-/obj/item/food/skrell/salad/moonflower_plump
+/obj/item/food/salad/moonflower_plump
 	name = "moonflower and plump salad"
+	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
 	desc = "A cooling salad prepared with sliced cucumbers, fresh plump helmets, and moonflower petals. The trace herbal moonshine is safely mellowed by the fungal base."
 	icon_state = "moonflower_salad"
 	food_reagents = list(
@@ -552,8 +563,9 @@
 // BURGERS, SANDWICHES & WRAPS
 
 // 29. Skrellian Tofu Burger
-/obj/item/food/skrell/burger/skrell_tofu
+/obj/item/food/burger/skrell_tofu
 	name = "Skrellian tofu burger"
+	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
 	desc = "A wholesome vegetarian burger made with a tender tofu patty, sliced plump helmet, and rich soy dip in a soft rice bun."
 	icon_state = "skrell_burger"
 	food_reagents = list(
@@ -570,8 +582,9 @@
 	venue_value = FOOD_PRICE_NORMAL
 
 // 30. Qerr Fungal Taco
-/obj/item/food/skrell/taco/qerr_fungal
+/obj/item/food/taco/qerr_fungal
 	name = "Qerr fungal taco"
+	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
 	desc = "A crunchy corn taco shell packed with sauteed chanterelles and seasoned with garlic and savory soy sauce."
 	icon_state = "qerr_taco"
 	food_reagents = list(
@@ -588,8 +601,9 @@
 	venue_value = FOOD_PRICE_NORMAL
 
 // 31. Destroying Angel Slider
-/obj/item/food/skrell/burger/destroying_angel
+/obj/item/food/burger/destroying_angel
 	name = "destroying angel slider"
+	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
 	desc = "A terrifying burger packed with a grilled destroying angel mushroom, crispy onion rings, and tofu. Highly lethal to non-Skrell!"
 	icon_state = "angel_burger"
 	food_reagents = list(
@@ -607,8 +621,9 @@
 	venue_value = FOOD_PRICE_EXOTIC
 
 // 32. Rice Cheese Sandwich
-/obj/item/food/skrell/sandwich/rice_cheese
+/obj/item/food/sandwich/rice_cheese
 	name = "rice cheese sandwich"
+	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
 	desc = "A simple, nourishing sandwich made of cheese between two slices of soft rice bread. Can be grilled to perfection."
 	icon_state = "rice_cheese_sandwich"
 	food_reagents = list(
@@ -623,12 +638,13 @@
 	crafting_complexity = FOOD_COMPLEXITY_2
 	venue_value = FOOD_PRICE_CHEAP
 
-/obj/item/food/skrell/sandwich/rice_cheese/make_grillable()
-	AddComponent(/datum/component/grillable, /obj/item/food/skrell/sandwich/grilled_rice_cheese, rand(20 SECONDS, 35 SECONDS), TRUE)
+/obj/item/food/sandwich/rice_cheese/make_grillable()
+	AddComponent(/datum/component/grillable, /obj/item/food/sandwich/grilled_rice_cheese, rand(20 SECONDS, 35 SECONDS), TRUE)
 
 // 32.1. Grilled Rice Cheese Sandwich
-/obj/item/food/skrell/sandwich/grilled_rice_cheese
+/obj/item/food/sandwich/grilled_rice_cheese
 	name = "grilled rice cheese sandwich"
+	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
 	desc = "A warm, golden-brown toasted rice sandwich with melted gooey cheese."
 	icon_state = "grilled_rice_cheese"
 	food_reagents = list(
@@ -664,7 +680,8 @@
 // DESSERTS, CAKES & ROLLS
 
 // 34. Citrus Coffee Cake
-/obj/item/food/skrell/cake/skrell_citrus_cake
+/obj/item/food/cake/skrell_citrus_cake
+	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
 	name = "citrus coffee cake"
 	desc = "A fragrant layered cake infused with fresh orange zest and dark Arabica coffee. A revitalizing dessert popular during diplomatic galas."
 	icon_state = "citrus_coffee_cake"
@@ -680,10 +697,11 @@
 	crafting_complexity = FOOD_COMPLEXITY_3
 	venue_value = FOOD_PRICE_NORMAL
 
-/obj/item/food/skrell/cake/skrell_citrus_cake/make_processable()
-	AddElement(/datum/element/processable, TOOL_KNIFE, /obj/item/food/skrell/cakeslice/skrell_citrus_slice, 6, 3 SECONDS, table_required = TRUE, screentip_verb = "Slice", sound_to_play = SFX_KNIFE_SLICE)
+/obj/item/food/cake/skrell_citrus_cake/make_processable()
+	AddElement(/datum/element/processable, TOOL_KNIFE, /obj/item/food/cakeslice/skrell_citrus_slice, 6, 3 SECONDS, table_required = TRUE, screentip_verb = "Slice", sound_to_play = SFX_KNIFE_SLICE)
 
-/obj/item/food/skrell/cakeslice/skrell_citrus_slice
+/obj/item/food/cakeslice/skrell_citrus_slice
+	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
 	name = "citrus coffee cake slice"
 	desc = "A slice of fragrant citrus and coffee infused cake."
 	icon_state = "citrus_coffee_slice"
@@ -700,7 +718,8 @@
 	w_class = WEIGHT_CLASS_TINY
 
 // 35. Blue Cherry & Moonflower cake
-/obj/item/food/skrell/cake/blue_cherry_moon_cake
+/obj/item/food/cake/blue_cherry_moon_cake
+	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
 	name = "blue cherry moonflower cake"
 	desc = "A stunning cake baked with glowing blue cherries, ximikoa cocoa, and moonflower petals. Radiates a soothing, chilled blue shimmer."
 	icon_state = "blue_cherry_moon"
@@ -717,10 +736,11 @@
 	crafting_complexity = FOOD_COMPLEXITY_3
 	venue_value = FOOD_PRICE_NORMAL
 
-/obj/item/food/skrell/cake/blue_cherry_moon_cake/make_processable()
-	AddElement(/datum/element/processable, TOOL_KNIFE, /obj/item/food/skrell/cakeslice/blue_cherry_slice, 6, 3 SECONDS, table_required = TRUE, screentip_verb = "Slice", sound_to_play = SFX_KNIFE_SLICE)
+/obj/item/food/cake/blue_cherry_moon_cake/make_processable()
+	AddElement(/datum/element/processable, TOOL_KNIFE, /obj/item/food/cakeslice/blue_cherry_slice, 6, 3 SECONDS, table_required = TRUE, screentip_verb = "Slice", sound_to_play = SFX_KNIFE_SLICE)
 
-/obj/item/food/skrell/cakeslice/blue_cherry_slice
+/obj/item/food/cakeslice/blue_cherry_slice
+	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
 	name = "blue cherry moonflower cake slice"
 	desc = "A slice of glowing blue cherry cake."
 	icon_state = "blue_cherry_slice"
@@ -771,8 +791,9 @@
 	venue_value = FOOD_PRICE_NORMAL
 
 // 38. Caramelized Plump Cap
-/obj/item/food/skrell/kebab/caramelized_plump_cap
+/obj/item/food/kebab/caramelized_plump_cap
 	name = "caramelized plump cap"
+	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
 	desc = "A plump helmet mushroom glazed with crunchy amber caramel and garnished with sweet fruit. A uniquely delightful blend of savory and sugary notes."
 	icon_state = "caramel_plump"
 	food_reagents = list(

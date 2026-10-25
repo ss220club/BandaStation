@@ -41,16 +41,16 @@
 
 /datum/crafting_recipe/food/knife/skrell_citrus_slice
 	name = "Citrus coffee cake slice"
-	reqs = list(/obj/item/food/skrell/cake/skrell_citrus_cake = 1)
-	result = /obj/item/food/skrell/cakeslice/skrell_citrus_slice
+	reqs = list(/obj/item/food/cake/skrell_citrus_cake = 1)
+	result = /obj/item/food/cakeslice/skrell_citrus_slice
 	dish_category = DISH_CAKE
 	cuisine_category = CUISINE_SKRELL
 	meal_category = MEAL_DESSERT
 
 /datum/crafting_recipe/food/knife/blue_cherry_slice
 	name = "Blue cherry moonflower cake slice"
-	reqs = list(/obj/item/food/skrell/cake/blue_cherry_moon_cake = 1)
-	result = /obj/item/food/skrell/cakeslice/blue_cherry_slice
+	reqs = list(/obj/item/food/cake/blue_cherry_moon_cake = 1)
+	result = /obj/item/food/cakeslice/blue_cherry_slice
 	dish_category = DISH_CAKE
 	cuisine_category = CUISINE_SKRELL
 	meal_category = MEAL_DESSERT
@@ -117,8 +117,8 @@
 
 /datum/crafting_recipe/food/grill/grilled_rice_cheese
 	name = "Grilled rice cheese sandwich"
-	reqs = list(/obj/item/food/skrell/sandwich/rice_cheese = 1)
-	result = /obj/item/food/skrell/sandwich/grilled_rice_cheese
+	reqs = list(/obj/item/food/sandwich/rice_cheese = 1)
+	result = /obj/item/food/sandwich/grilled_rice_cheese
 	dish_category = DISH_SANDWICH
 	cuisine_category = CUISINE_SKRELL
 	meal_category = MEAL_APPETIZER

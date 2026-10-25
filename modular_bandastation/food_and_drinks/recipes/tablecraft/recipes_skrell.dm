@@ -274,7 +274,7 @@
 		/datum/reagent/consumable/nutriment/fat/oil = 5,
 		/datum/reagent/consumable/salt = 1,
 	)
-	result = /obj/item/food/skrell/kebab/walking_mushroom_skewer
+	result = /obj/item/food/kebab/walking_mushroom_skewer
 	added_foodtypes = MUSHROOM | FRIED
 	cuisine_category = CUISINE_SKRELL
 	dish_category = DISH_MUSHROOM
@@ -426,7 +426,7 @@
 	dish_category = DISH_MUSHROOM
 	meal_category = MEAL_COMPONENT
 
-/datum/crafting_recipe/food/luminous_white_salad
+/datum/crafting_recipe/food/skrell/luminous_white_salad
 	name = "Luminous white salad"
 	reqs = list(
 		/obj/item/reagent_containers/cup/bowl = 1,
@@ -466,7 +466,7 @@
 		/obj/item/food/grown/aloe = 1,
 		/obj/item/food/grown/bungofruit = 1,
 	)
-	result = /obj/item/food/skrell/salad/coniine_berry
+	result = /obj/item/food/salad/coniine_berry
 	added_foodtypes = VEGETABLES | FRUIT | TOXIC
 	cuisine_category = CUISINE_SKRELL
 	dish_category = DISH_SALAD
@@ -492,7 +492,7 @@
 		/obj/item/food/grown/mushroom/gomoa = 1,
 		/obj/item/food/grown/cucumber = 1,
 	)
-	result = /obj/item/food/skrell/salad/moonflower_plump
+	result = /obj/item/food/salad/moonflower_plump
 	added_foodtypes = VEGETABLES | MUSHROOM
 	cuisine_category = CUISINE_SKRELL
 	dish_category = DISH_SALAD
@@ -508,7 +508,7 @@
 		/obj/item/food/grown/mushroom/gomoa = 1,
 		/obj/item/food/rice_dough = 1,
 	)
-	result = /obj/item/food/skrell/burger/skrell_tofu
+	result = /obj/item/food/burger/skrell_tofu
 	added_foodtypes = VEGETABLES | MUSHROOM
 	cuisine_category = CUISINE_SKRELL
 	dish_category = DISH_BURGER
@@ -522,7 +522,7 @@
 		/datum/reagent/consumable/garlic = 5,
 		/datum/reagent/consumable/soysauce = 5,
 	)
-	result = /obj/item/food/skrell/taco/qerr_fungal
+	result = /obj/item/food/taco/qerr_fungal
 	added_foodtypes = MUSHROOM
 	cuisine_category = CUISINE_SKRELL
 	dish_category = DISH_TACO
@@ -538,7 +538,7 @@
 		/obj/item/food/tofu = 1,
 		/obj/item/food/rice_dough = 1,
 	)
-	result = /obj/item/food/skrell/burger/destroying_angel
+	result = /obj/item/food/burger/destroying_angel
 	added_foodtypes = MUSHROOM | TOXIC
 	cuisine_category = CUISINE_SKRELL
 	dish_category = DISH_BURGER
@@ -551,7 +551,7 @@
 		/obj/item/food/cheese/wedge = 1,
 		/obj/item/food/breadslice/plain = 2,
 	)
-	result = /obj/item/food/skrell/sandwich/rice_cheese
+	result = /obj/item/food/sandwich/rice_cheese
 	cuisine_category = CUISINE_SKRELL
 	dish_category = DISH_SANDWICH
 	meal_category = MEAL_MAIN_COURSE
@@ -580,7 +580,7 @@
 		/obj/item/food/grown/coffee = 2,
 		/obj/item/food/grown/ximikoa = 1,
 	)
-	result = /obj/item/food/skrell/cake/skrell_citrus_cake
+	result = /obj/item/food/cake/skrell_citrus_cake
 	added_foodtypes = FRUIT | SUGAR
 	cuisine_category = CUISINE_SKRELL
 	dish_category = DISH_CAKE
@@ -595,7 +595,7 @@
 		/obj/item/food/grown/cocaleaf = 1,
 		/obj/item/food/grown/ximikoa = 1,
 	)
-	result = /obj/item/food/skrell/cake/blue_cherry_moon_cake
+	result = /obj/item/food/cake/blue_cherry_moon_cake
 	added_foodtypes = FRUIT | SUGAR
 	cuisine_category = CUISINE_SKRELL
 	dish_category = DISH_CAKE
@@ -636,7 +636,7 @@
 		/obj/item/food/grown/mushroom/plumphelmet = 1,
 		/datum/reagent/consumable/caramel = 10,
 	)
-	result = /obj/item/food/skrell/kebab/caramelized_plump_cap
+	result = /obj/item/food/kebab/caramelized_plump_cap
 	added_foodtypes = MUSHROOM | SUGAR
 	cuisine_category = CUISINE_SKRELL
 	dish_category = DISH_CANDY
