@@ -43,7 +43,8 @@
 	check_darkness()
 
 /mob/living/basic/demon/shadow/grant_loot()
-	return list(/obj/item/organ/heart/shadow_demon)
+	var/static/list/loot = list(/obj/item/organ/heart/shadow_demon)
+	return loot
 
 /mob/living/basic/demon/shadow/mind_initialize()
 	. = ..()

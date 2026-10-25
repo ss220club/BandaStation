@@ -18,8 +18,8 @@
 	summoning = TRUE
 	var/datum/mind/summoner = user.mind
 	var/mob/chosen_one = SSpolling.poll_ghosts_for_target(
-		check_jobban = ROLE_SENTIENCE,
-		role = ROLE_SENTIENCE,
+		check_jobban = list(ROLE_SHADOW_DEMON, ROLE_SENTIENCE),
+		role = ROLE_SHADOW_DEMON,
 		poll_time = 5 SECONDS,
 		checked_target = src,
 		alert_pic = demon_type,
@@ -31,7 +31,7 @@
 	summoning = FALSE
 	if(used || QDELETED(user) || !user.client || user.mind != summoner || !user.is_holding(src) || !user.can_perform_action(src, FORBID_TELEKINESIS_REACH) || !is_station_level(user.z))
 		return
-	if(QDELETED(chosen_one) || !chosen_one.client)
+	if(QDELETED(chosen_one) || !isobserver(chosen_one) || !SSpolling.is_eligible(chosen_one, ROLE_SHADOW_DEMON, list(ROLE_SHADOW_DEMON, ROLE_SENTIENCE)))
 		to_chat(user, span_warning("Демоны не отвечают на ваш призыв. Попробуйте позже."))
 		return
 	used = TRUE

@@ -462,4 +462,231 @@
 	TEST_ASSERT(!whisper.send_whisper(demon, victim, "removed action"), "An action removed from its owner could still send a whisper.")
 	TEST_ASSERT_EQUAL(demon.whisper_log_count, 2, "A rejected whisper reached the delivery log.")
 
+/// Keep the native candidate filter, supplying only the account-age method absent from its client mock.
+/datum/client_interface/shadow_demon_candidate
+	var/days_remaining = 0
+
+/datum/client_interface/shadow_demon_candidate/proc/get_remaining_days(days_needed)
+	return days_remaining
+
+/datum/client_interface/shadow_demon_candidate/Destroy()
+	if(mob)
+		mob.mock_client = null
+		mob.key = null
+	mob = null
+	prefs = null
+	return ..()
+
+/// The preferences panel must expose a separate opt-in key with its real preview asset.
+/datum/unit_test/shadow_demon_preferences/Run()
+	var/datum/dynamic_ruleset/midround/from_ghosts/shadow_demon/ruleset_type = /datum/dynamic_ruleset/midround/from_ghosts/shadow_demon
+	var/role_flag = initial(ruleset_type.pref_flag)
+	TEST_ASSERT_EQUAL(role_flag, "Shadow Demon", "The shadow demon has no distinct preference flag.")
+	TEST_ASSERT(role_flag in get_all_antag_flags(), "The native antagonist preference registry omitted the shadow demon.")
+	TEST_ASSERT_EQUAL(serialize_antag_name(role_flag), "shadowdemon", "The backend preference key does not match the TGUI entry.")
+	var/datum/client_interface/shadow_demon_candidate/mock_client = allocate(/datum/client_interface/shadow_demon_candidate)
+	mock_client.ban_cache = list()
+	var/datum/preferences/preferences = allocate(/datum/preferences, mock_client)
+	mock_client.prefs = preferences
+	preferences.be_special = list(ROLE_SENTIENCE)
+	var/datum/preference_middleware/antags/middleware = locate() in preferences.middleware
+	TEST_ASSERT_NOTNULL(middleware, "Native preferences did not create the antagonist middleware.")
+	var/list/serialized_antags = middleware.get_serialized_antags()
+	TEST_ASSERT_EQUAL(serialized_antags["shadowdemon"], role_flag, "The middleware cannot resolve the shadow demon toggle.")
+	middleware.set_antags(list("antags" = list("shadowdemon", "unknown_shadow_role"), "toggled" = TRUE))
+	TEST_ASSERT(role_flag in preferences.be_special, "Enabling the shadow demon toggle did not opt the player in.")
+	TEST_ASSERT_EQUAL(length(preferences.be_special), 2, "The middleware accepted an unknown role or duplicated the existing preference.")
+	middleware.set_antags(list("antags" = list("shadowdemon"), "toggled" = FALSE))
+	TEST_ASSERT(!(role_flag in preferences.be_special), "Disabling the shadow demon toggle left the player opted in.")
+	TEST_ASSERT(ROLE_SENTIENCE in preferences.be_special, "The independent shadow demon toggle removed the sentience preference.")
+	var/datum/antagonist/shadow_demon/antagonist = allocate(/datum/antagonist/shadow_demon)
+	TEST_ASSERT_EQUAL(antagonist.pref_flag, role_flag, "The antagonist and dynamic ruleset use different preference flags.")
+	TEST_ASSERT_NOTNULL(antagonist.get_preview_icon(), "The shadow demon has no antagonist panel preview.")
+	var/datum/asset/spritesheet_batched/antagonists/antag_assets = get_asset_datum(/datum/asset/spritesheet_batched/antagonists)
+	TEST_ASSERT_NOTNULL(antag_assets.antag_icons["shadowdemon"], "The native antagonist spritesheet omitted the shadow demon preview.")
+
+/// Use the real ruleset with an isolated maintenance pool and native lighting/atmosphere checks.
+/datum/unit_test/shadow_demon_dynamic
+	abstract_type = /datum/unit_test/shadow_demon_dynamic
+	normal_floor_required = TRUE
+	var/turf/test_turf
+	var/datum/lighting_corner/test_corner
+	var/list/old_corners
+	var/created_lighting = FALSE
+	var/list/old_maintenance_landmarks
+	var/old_ghost_role_flags
+	var/list/old_executed_rulesets
+	var/list/old_disabled_rulesets
+	var/fixture_ready = FALSE
+
+/datum/unit_test/shadow_demon_dynamic/proc/set_up_spawn()
+	old_maintenance_landmarks = GLOB.generic_maintenance_landmarks
+	old_ghost_role_flags = GLOB.ghost_role_flags
+	old_executed_rulesets = SSdynamic.executed_rulesets
+	old_disabled_rulesets = SSdynamic.admin_disabled_rulesets
+	fixture_ready = TRUE
+	SSdynamic.executed_rulesets = list()
+	SSdynamic.admin_disabled_rulesets = list()
+	GLOB.ghost_role_flags |= GHOSTROLE_MIDROUND_EVENT
+	test_turf = run_loc_floor_bottom_left
+	GLOB.generic_maintenance_landmarks = list(test_turf)
+	restore_atmos()
+	old_corners = list(test_turf.lighting_corner_NE, test_turf.lighting_corner_SE, test_turf.lighting_corner_SW, test_turf.lighting_corner_NW)
+	if(isnull(test_turf.lighting_object))
+		test_turf.lighting_build_overlay()
+		created_lighting = TRUE
+	test_corner = allocate(/datum/lighting_corner, 0, 0, 0)
+	test_turf.lighting_corner_NE = test_corner
+	test_turf.lighting_corner_SE = test_corner
+	test_turf.lighting_corner_SW = test_corner
+	test_turf.lighting_corner_NW = test_corner
+	set_spawn_lumcount(0)
+
+/datum/unit_test/shadow_demon_dynamic/proc/set_spawn_lumcount(value)
+	// The PR and local integration use different native lighting implementations.
+	test_corner.lum_r = value
+	test_corner.lum_g = value
+	test_corner.lum_b = value
+	test_corner.cache_r = value
+	test_corner.cache_g = value
+	test_corner.cache_b = value
+
+/datum/unit_test/shadow_demon_dynamic/Destroy()
+	if(fixture_ready)
+		GLOB.generic_maintenance_landmarks = old_maintenance_landmarks
+		GLOB.ghost_role_flags = old_ghost_role_flags
+		SSdynamic.executed_rulesets = old_executed_rulesets
+		SSdynamic.admin_disabled_rulesets = old_disabled_rulesets
+		if(test_turf && old_corners)
+			test_turf.lighting_corner_NE = old_corners[1]
+			test_turf.lighting_corner_SE = old_corners[2]
+			test_turf.lighting_corner_SW = old_corners[3]
+			test_turf.lighting_corner_NW = old_corners[4]
+			if(created_lighting)
+				test_turf.lighting_clear_overlay()
+		restore_atmos()
+	test_turf = null
+	test_corner = null
+	old_corners = null
+	old_maintenance_landmarks = null
+	old_executed_rulesets = null
+	old_disabled_rulesets = null
+	return ..()
+
+/// Natural selection must respect population, the ghost-role switch and a safe dark spawn.
+/datum/unit_test/shadow_demon_dynamic/selection/Run()
+	set_up_spawn()
+	TEST_ASSERT(is_safe_turf(test_turf), "The maintenance fixture is not safe for native ghost-role spawning.")
+	var/datum/dynamic_ruleset/midround/from_ghosts/shadow_demon/ruleset = allocate(/datum/dynamic_ruleset/midround/from_ghosts/shadow_demon)
+	TEST_ASSERT_EQUAL(ruleset.midround_type, HEAVY_MIDROUND, "The shadow demon is outside the heavy midround pool.")
+	TEST_ASSERT_EQUAL(ruleset.get_antag_cap(100, ruleset.min_antag_cap), 1, "The ruleset requires more than one volunteer.")
+	TEST_ASSERT_EQUAL(ruleset.get_antag_cap(100, ruleset.max_antag_cap), 1, "The ruleset can create more than one shadow demon.")
+	TEST_ASSERT_EQUAL(ruleset.get_weight(19), 0, "The ruleset can roll below its population threshold.")
+	TEST_ASSERT_EQUAL(ruleset.get_weight(20), 1, "The eligible shadow demon has no natural selection weight.")
+	GLOB.ghost_role_flags &= ~GHOSTROLE_MIDROUND_EVENT
+	TEST_ASSERT_EQUAL(ruleset.get_weight(20), 0, "Disabling midround ghost roles did not exclude the shadow demon.")
+	GLOB.ghost_role_flags |= GHOSTROLE_MIDROUND_EVENT
+	set_spawn_lumcount(0.21)
+	TEST_ASSERT_EQUAL(ruleset.get_weight(20), 0, "The ruleset can roll with only a lit maintenance spawn.")
+	TEST_ASSERT_NULL(ruleset.create_ruleset_body(), "A lit maintenance spawn still created a shadow demon.")
+	set_spawn_lumcount(0)
+	var/turf/open/spawn_turf = test_turf
+	var/datum/gas_mixture/spawn_air = spawn_turf.return_air()
+	var/old_temperature = spawn_air.temperature
+	spawn_air.temperature = 0
+	TEST_ASSERT(!ruleset.can_be_selected(), "The ruleset accepted a dark maintenance spawn with unsafe atmosphere.")
+	TEST_ASSERT_NULL(ruleset.create_ruleset_body(), "Unsafe maintenance atmosphere still created a shadow demon.")
+	spawn_air.temperature = old_temperature
+	GLOB.generic_maintenance_landmarks = list()
+	TEST_ASSERT(!ruleset.can_be_selected(), "The ruleset can run without any maintenance spawns.")
+	TEST_ASSERT_NULL(ruleset.create_ruleset_body(), "An empty maintenance pool created a body in nullspace.")
+	GLOB.generic_maintenance_landmarks = list(test_turf)
+	var/datum/dynamic_ruleset/midround/from_ghosts/shadow_demon/previous = allocate(/datum/dynamic_ruleset/midround/from_ghosts/shadow_demon)
+	SSdynamic.executed_rulesets += previous
+	TEST_ASSERT_EQUAL(ruleset.get_weight(20), 0, "The non-repeatable shadow demon can roll twice in one round.")
+
+/// Use native preference and ban filtering, rather than opting every sentience volunteer into this role.
+/datum/unit_test/shadow_demon_candidates/Run()
+	var/datum/dynamic_ruleset/midround/from_ghosts/shadow_demon/ruleset = allocate(/datum/dynamic_ruleset/midround/from_ghosts/shadow_demon)
+	var/datum/client_interface/shadow_demon_candidate/mock_client = allocate(/datum/client_interface/shadow_demon_candidate)
+	mock_client.ban_cache = list()
+	var/datum/preferences/preferences = allocate(/datum/preferences, mock_client)
+	mock_client.prefs = preferences
+	var/mob/dead/observer/candidate = allocate(/mob/dead/observer)
+	candidate.key = mock_client.key
+	candidate.mock_client = mock_client
+	mock_client.mob = candidate
+	TEST_ASSERT_EQUAL(candidate.ckey, mock_client.ckey, "The native ghost candidate did not retain its mock account key.")
+	preferences.be_special = list(ROLE_SENTIENCE)
+	TEST_ASSERT_EQUAL(length(ruleset.trim_candidates(list(candidate))), 0, "Sentience preference alone opted the ghost into shadow demon.")
+	preferences.be_special = list(ruleset.pref_flag)
+	TEST_ASSERT(candidate in ruleset.trim_candidates(list(candidate)), "A separately opted-in ghost was rejected by native candidate selection.")
+	var/mob/living/carbon/human/living_candidate = allocate(/mob/living/carbon/human/consistent)
+	living_candidate.mind_initialize()
+	candidate.key = null
+	candidate.mock_client = null
+	living_candidate.key = mock_client.key
+	living_candidate.mock_client = mock_client
+	mock_client.mob = living_candidate
+	TEST_ASSERT_EQUAL(living_candidate.ckey, mock_client.ckey, "The revived candidate did not receive the same opted-in mock account.")
+	TEST_ASSERT_EQUAL(length(ruleset.trim_candidates(list(living_candidate))), 0, "A volunteer who returned to a living body remained eligible for the ghost role.")
+	living_candidate.death()
+	TEST_ASSERT_EQUAL(living_candidate.ckey, mock_client.ckey, "The dead body fixture lost its opted-in mock account.")
+	TEST_ASSERT(living_candidate in ruleset.trim_candidates(list(living_candidate)), "A dead volunteer still in a living mob type was excluded from the native ghost-role pool.")
+	living_candidate.key = null
+	living_candidate.mock_client = null
+	candidate.key = mock_client.key
+	candidate.mock_client = mock_client
+	mock_client.mob = candidate
+	TEST_ASSERT(candidate in ruleset.trim_candidates(list(candidate)), "Returning the account to its observer did not restore ghost-role eligibility.")
+	for(var/banned_role in list(ruleset.pref_flag, ROLE_SYNDICATE, ROLE_SENTIENCE))
+		mock_client.ban_cache = list(banned_role)
+		TEST_ASSERT_EQUAL(length(ruleset.trim_candidates(list(candidate))), 0, "A ghost banned from [banned_role] could become a shadow demon.")
+	mock_client.ban_cache = list()
+	mock_client.days_remaining = 1
+	TEST_ASSERT_EQUAL(length(ruleset.trim_candidates(list(candidate))), 0, "The native account-age check was bypassed.")
+	mock_client.days_remaining = 0
+	candidate.mock_client = null
+	TEST_ASSERT_EQUAL(length(ruleset.trim_candidates(list(candidate))), 0, "A disconnected ghost remained a valid candidate.")
+
+/// Ghost transfers without Login still receive one correct job/antagonist; stale bodies receive neither.
+/datum/unit_test/shadow_demon_dynamic/body/Destroy()
+	// Antagonist deletion nulls its owner's lazy list; remove it before the native mind's QDEL_LIST cleanup.
+	for(var/datum/mind/candidate in allocated)
+		candidate.remove_all_antag_datums()
+	return ..()
+
+/datum/unit_test/shadow_demon_dynamic/body/Run()
+	set_up_spawn()
+	TEST_ASSERT(is_safe_turf(test_turf), "The maintenance fixture is not safe for native ghost-role spawning.")
+	var/datum/dynamic_ruleset/midround/from_ghosts/shadow_demon/ruleset = allocate(/datum/dynamic_ruleset/midround/from_ghosts/shadow_demon)
+	var/mob/living/basic/demon/shadow/body = ruleset.create_ruleset_body()
+	TEST_ASSERT(istype(body), "The ruleset did not create its real shadow demon body.")
+	allocated += body
+	TEST_ASSERT_EQUAL(get_turf(body), test_turf, "The ruleset body did not use the safe dark maintenance spawn.")
+	var/datum/mind/candidate = allocate(/datum/mind)
+	candidate.transfer_to(body)
+	TEST_ASSERT(!candidate.has_antag_datum(/datum/antagonist/shadow_demon), "The transfer fixture unexpectedly initialized through Login.")
+	ruleset.selected_minds += candidate
+	ruleset.execute()
+	TEST_ASSERT(istype(candidate.assigned_role, /datum/job/shadow_demon), "Dynamic execution did not assign the shadow demon job.")
+	TEST_ASSERT(candidate.has_antag_datum(/datum/antagonist/shadow_demon), "Dynamic execution without Login did not assign the antagonist.")
+	body.mind_initialize()
+	ruleset.execute()
+	var/antag_count = 0
+	for(var/datum/antagonist/shadow_demon/antagonist in candidate.antag_datums)
+		antag_count++
+	TEST_ASSERT_EQUAL(antag_count, 1, "Login and repeated ruleset execution duplicated the antagonist.")
+	var/mob/living/carbon/human/wrong_body = allocate(/mob/living/carbon/human/consistent, run_loc_floor_top_right)
+	wrong_body.mind_initialize()
+	var/datum/job/old_job = wrong_body.mind.assigned_role
+	var/datum/mind/bodyless_candidate = allocate(/datum/mind)
+	ruleset.selected_minds.Cut()
+	ruleset.selected_minds += wrong_body.mind
+	ruleset.selected_minds += bodyless_candidate
+	ruleset.execute()
+	TEST_ASSERT(!wrong_body.mind.has_antag_datum(/datum/antagonist/shadow_demon), "A stale non-demon body received the antagonist.")
+	TEST_ASSERT_EQUAL(wrong_body.mind.assigned_role, old_job, "A stale non-demon body received the shadow demon job.")
+	TEST_ASSERT(!bodyless_candidate.has_antag_datum(/datum/antagonist/shadow_demon), "A candidate without a spawned body received the antagonist.")
+
 #endif

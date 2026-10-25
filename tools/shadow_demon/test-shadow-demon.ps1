@@ -54,7 +54,7 @@ try {
     $tests = @(Select-String -LiteralPath 'modular_bandastation\shadow_demon\code\shadow_demon_tests.dm' -Pattern '^(/datum/unit_test/[^\s(]+)/Run\(' |
         ForEach-Object { $_.Matches[0].Groups[1].Value })
     if (-not $tests.Count) { throw 'No Shadow Demon tests found.' }
-    $tests += '/datum/unit_test/organ_sanity', '/datum/unit_test/wizard_loadout', '/datum/unit_test/focus_only/invalid_emissives'
+    $tests += '/datum/unit_test/organ_sanity', '/datum/unit_test/wizard_loadout', '/datum/unit_test/dynamic_ruleset_sanity', '/datum/unit_test/dynamic_unique_antag_flags', '/datum/unit_test/dcs_check_list_arguments', '/datum/unit_test/focus_only/invalid_emissives'
     $tests = @($tests | Sort-Object -Unique)
     $lines = @('#include "tgstation.dme"') + @($tests | ForEach-Object { 'TEST_FOCUS(' + $_ + ')' })
     [IO.File]::WriteAllLines($wrapper, [string[]]$lines, $utf8NoBom)

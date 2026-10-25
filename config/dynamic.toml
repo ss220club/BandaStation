@@ -427,6 +427,16 @@ repeatable_weight_decrease = 2
 repeatable = 1
 minimum_required_age = 0
 
+# BANDASTATION ADDITION - Shadow Demon heavy midround
+["Shadow Demon"]
+weight = 1
+min_pop = 20
+blacklisted_roles = []
+min_antag_cap = 1
+max_antag_cap = 1
+repeatable = 0
+minimum_required_age = 0
+
 ["Midround Traitor"]
 weight = 10
 min_pop = 3

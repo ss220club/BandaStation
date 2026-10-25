@@ -6,5 +6,6 @@
 #include "code/shadow_demon_lighting.dm"
 #include "code/shadow_demon_antagonist.dm"
 #include "code/shadow_demon_event.dm"
+#include "code/shadow_demon_dynamic.dm"
 
 #include "code/shadow_demon_vial.dm"

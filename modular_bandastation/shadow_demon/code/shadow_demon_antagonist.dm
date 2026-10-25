@@ -1,5 +1,5 @@
 /datum/job/shadow_demon
-	title = "Shadow Demon"
+	title = ROLE_SHADOW_DEMON
 	tgui_icon = FA_ICON_MOON
 
 /datum/antagonist/shadow_demon
@@ -8,8 +8,15 @@
 	antagpanel_category = ANTAG_GROUP_ABOMINATIONS
 	show_name_in_check_antagonists = TRUE
 	show_to_ghosts = TRUE
-	pref_flag = ROLE_SENTIENCE
+	pref_flag = ROLE_SHADOW_DEMON
 	ui_name = "AntagInfoGeneric"
+
+/datum/antagonist/shadow_demon/get_preview_icon()
+	var/mob/living/basic/demon/shadow/demon_type = /mob/living/basic/demon/shadow
+	var/datum/universal_icon/preview = uni_icon(demon_type::icon, demon_type::icon_state)
+	preview.blend_icon(uni_icon(demon_type::icon, "shadow_demon_eye_glow_overlay"), ICON_OVERLAY)
+	preview.scale(ANTAGONIST_PREVIEW_ICON_SIZE, ANTAGONIST_PREVIEW_ICON_SIZE)
+	return preview
 
 /datum/antagonist/shadow_demon/on_gain()
 	if(!length(objectives))

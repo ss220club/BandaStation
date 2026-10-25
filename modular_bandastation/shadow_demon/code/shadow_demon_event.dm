@@ -2,7 +2,7 @@
 	name = "Shadow Demon"
 	typepath = /datum/round_event/ghost_role/shadow_demon
 	weight = 0
-	// Native weight zero can still be selected; this role is available only when forced.
+	// Keep this event manual; natural spawning is handled by Dynamic.
 	max_occurrences = 0
 	category = EVENT_CATEGORY_INVASION
 	description = "Призрак становится тенедемоном в тёмном техническом помещении."
@@ -15,15 +15,15 @@
 		return MAP_ERROR
 	var/mob/dead/observer/chosen_one = SSpolling.poll_ghost_candidates(
 		question = "Хотите стать тенедемоном?",
-		check_jobban = ROLE_SENTIENCE,
-		role = ROLE_SENTIENCE,
+		check_jobban = list(ROLE_SHADOW_DEMON, ROLE_SENTIENCE),
+		role = ROLE_SHADOW_DEMON,
 		alert_pic = /mob/living/basic/demon/shadow,
 		role_name_text = role_name,
 		amount_to_pick = 1,
 	)
 	if(!isobserver(chosen_one) || !chosen_one.client || !chosen_one.key)
 		return NOT_ENOUGH_PLAYERS
-	if(is_banned_from(chosen_one.ckey, list(ROLE_SYNDICATE, ROLE_SENTIENCE)))
+	if(!SSpolling.is_eligible(chosen_one, ROLE_SHADOW_DEMON, list(ROLE_SHADOW_DEMON, ROLE_SENTIENCE)))
 		return NOT_ENOUGH_PLAYERS
 	// Polling yields: both the candidate and the darkness must still be valid.
 	var/turf/spawn_turf = find_maintenance_spawn(atmos_sensitive = TRUE, require_darkness = TRUE)
