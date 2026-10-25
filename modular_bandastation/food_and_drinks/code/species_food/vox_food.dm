@@ -74,8 +74,11 @@ GLOBAL_LIST_INIT(vox_edible_items, typecacheof(list(
 	var/obj/item/item = source_item?.resolve()
 	if(!item)
 		return
+	var/had_no_debris = item.obj_flags & NO_DEBRIS_AFTER_DECONSTRUCTION
 	item.obj_flags |= NO_DEBRIS_AFTER_DECONSTRUCTION
 	item.take_damage(damage_per_bite, sound_effect = FALSE, damage_flag = CONSUME)
+	if(!QDELETED(item) && !had_no_debris)
+		item.obj_flags &= ~NO_DEBRIS_AFTER_DECONSTRUCTION
 
 /// TakeBite calls CanConsume again after the eating delay and food signals.
 /datum/component/edible/vox/CanConsume(mob/living/carbon/eater, mob/living/feeder)

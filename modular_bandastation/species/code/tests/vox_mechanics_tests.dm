@@ -109,6 +109,36 @@
 		TEST_ASSERT(human.reagents.get_reagent_amount(/datum/reagent/consumable/nutriment) > 0 || stomach.reagents.total_volume > 0, "Biting electronics did not provide food.")
 		human.dropItemToGround(item)
 
+/// An unfinished meal must retain the device's original deconstruction behaviour.
+/datum/unit_test/vox_electronics_debris_flags/Run()
+	var/mob/living/carbon/human/vox = allocate(/mob/living/carbon/human/consistent)
+	vox.set_species(/datum/species/vox)
+	for(var/already_suppressed in list(FALSE, TRUE))
+		var/obj/item/flashlight/item = allocate(/obj/item/flashlight)
+		if(already_suppressed)
+			item.obj_flags |= NO_DEBRIS_AFTER_DECONSTRUCTION
+		vox.put_in_active_hand(item)
+		var/datum/component/vox_food/food = item.AddComponent(/datum/component/vox_food)
+		food.create_snack()
+		var/datum/component/edible/vox/edible = food.snack.GetComponent(/datum/component/edible/vox)
+		TEST_ASSERT(edible.TakeBite(vox, vox), "Vox could not take an intermediate device bite.")
+		TEST_ASSERT(!QDELETED(item), "An intermediate bite destroyed the device.")
+		TEST_ASSERT_EQUAL(!!(item.obj_flags & NO_DEBRIS_AFTER_DECONSTRUCTION), already_suppressed, "An unfinished Vox meal changed the device's original debris flag.")
+		vox.dropItemToGround(item)
+
+/// Medical stock must guarantee compatible blood without relying on random packs.
+/datum/unit_test/vox_blood_stock/Run()
+	var/datum/supply_pack/medical/bloodpacks/pack = allocate(/datum/supply_pack/medical/bloodpacks)
+	TEST_ASSERT(/obj/item/reagent_containers/blood/vox in pack.contains, "Cargo blood supplies have no guaranteed Vox pack.")
+	var/obj/structure/closet/crate/cargo = pack.generate(run_loc_floor_bottom_left)
+	allocated += cargo
+	var/obj/item/reagent_containers/blood/vox/cargo_blood = locate() in cargo
+	TEST_ASSERT_NOTNULL(cargo_blood, "Generating a medical supply crate did not supply Vox blood.")
+	var/obj/structure/closet/crate/freezer/blood/freezer = allocate(/obj/structure/closet/crate/freezer/blood)
+	freezer.PopulateContents()
+	var/obj/item/reagent_containers/blood/vox/freezer_blood = locate() in freezer
+	TEST_ASSERT_NOTNULL(freezer_blood, "A stocked blood freezer has no Vox blood pack.")
+
 /// A meal proxy cannot be used by humans, feed humans, or eat a dropped item.
 /datum/unit_test/vox_electronics_restrictions/Run()
 	var/mob/living/carbon/human/vox = allocate(/mob/living/carbon/human/consistent)

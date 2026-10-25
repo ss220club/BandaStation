@@ -7,8 +7,8 @@
 
 | Категория | Видимых типов | Видовой state есть | Fallback | NEEDS CONVERTED | UNUSED | Paradise | Paradise просмотрен |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| Головные уборы | 514 | 239 | 275 | 0 | 0 | 44 | 44 |
-| Маски | 135 | 113 | 22 | 0 | 0 | 0 | 0 |
+| Головные уборы | 514 | 238 | 276 | 0 | 0 | 44 | 44 |
+| Маски | 135 | 114 | 21 | 0 | 0 | 0 | 0 |
 | Униформа | 477 | 316 | 161 | 117 | 0 | 67 | 67 |
 | Обувь | 106 | 81 | 25 | 0 | 1 | 9 | 9 |
 | Верхняя одежда | 441 | 194 | 247 | 0 | 0 | 26 | 26 |
@@ -47,7 +47,7 @@
 Оставшиеся реальные пробелы текущей сборки (1160 типов, включая явно отклонённые,
 если они попали в начальную выборку):
 
-- в поддерживаемом GAGS нет нужного состояния: **3**. Примеры: green lizardskin shoes (`lizardskin_shoes`); MOD boots (`standard-boots`); cargo technician's shorts (`cargotech_alt`).
+- в поддерживаемом GAGS нет нужного состояния: **3**. Примеры: meown shoes (`meown_shoes`); work boots (`workboots`); whitre skirt (`white_skirt`).
 - не найден подходящий видовой worn state: **846**. Примеры: Nanotrasen banner backpack (`backpack-banner`); blue banner backpack (`backpack-banner_blue`); red banner backpack (`backpack-banner_red`).
 - выбран исходный state после NEEDS CONVERTED: **117**. Примеры: alien jumpsuit (`abductor`); black skirt (`black_skirt`); blue skirt (`blue_skirt`).
 - выбран исходный state после UNUSED: **1**. Примеры: морозные ботинки (`JackFrostShoes`).

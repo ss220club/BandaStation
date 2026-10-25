@@ -487,6 +487,11 @@ Behavior that's still missing from this component that original food items had t
 ///This function lets the eater take a bite and transfers the reagents to the eater.
 /datum/component/edible/proc/TakeBite(mob/living/eater, mob/living/feeder)
 
+	// BANDASTATION ADDITION START - recheck food restrictions after eating delays and direct bites
+	if(!CanConsume(eater, feeder))
+		return FALSE
+	// BANDASTATION ADDITION END
+
 	var/atom/owner = parent
 
 	if(!owner.reagents)
@@ -502,6 +507,10 @@ Behavior that's still missing from this component that original food items had t
 	if(sig_return & DESTROY_FOOD)
 		qdel(owner)
 		return
+	// BANDASTATION ADDITION START - Food callbacks may remove the recipient's culinary processor.
+	if(!CanConsume(eater, feeder))
+		return FALSE
+	// BANDASTATION ADDITION END
 
 	//Give a buff when the dish is hand-crafted and unbitten
 	if(bitecount == 0)

@@ -105,7 +105,7 @@
 		var/obj/item/item = allocate(item_type)
 		TEST_ASSERT_NOTNULL(item.get_species_worn_icon(SPECIES_VOX), "[item_type] has no fitted vox worn sprite for [item.worn_icon_state || item.icon_state].")
 		TEST_ASSERT_NULL(item.get_species_worn_icon(SPECIES_VOX, "vox_deliberately_missing_state"), "[item_type] selected an invisible missing sprite.")
-		TEST_ASSERT_NULL(item.get_species_worn_icon(SPECIES_IPC), "Vox clothing overrides leaked onto IPCs.")
+		TEST_ASSERT_NULL(item.get_species_worn_icon(SPECIES_HUMAN), "Vox clothing overrides leaked onto humans.")
 
 	var/obj/item/clothing/under/color/grey/uniform = allocate(/obj/item/clothing/under/color/grey)
 	TEST_ASSERT_EQUAL(uniform.get_species_worn_icon(SPECIES_VOX), SSgreyscale.GetColoredIconByType(/datum/greyscale_config/jumpsuit/worn/vox, uniform.greyscale_colors), "Vox jumpsuit lost its chosen GAGS colour.")
@@ -117,6 +117,32 @@
 	TEST_ASSERT_NOTNULL(helmet.worn_icon_species[SPECIES_SKRELL], "Vox helmet overrides removed the existing Skrell mapping.")
 	var/obj/item/clothing/shoes/wheelys/skates = allocate(/obj/item/clothing/shoes/wheelys/rollerskates)
 	TEST_ASSERT_EQUAL(skates.get_species_worn_icon(SPECIES_VOX), 'icons/bandastation/mob/species/vox/clothing/feet_64.dmi', "Large vox shoes selected a 32px sprite and lost their anchor.")
+
+/// Fitted clothing must supply real reflective masks to the native worn renderer.
+/datum/unit_test/vox_worn_emissive_masks/Run()
+	var/list/fixtures = list(
+		/obj/item/clothing/head/cone = ITEM_SLOT_HEAD,
+		/obj/item/clothing/head/hooded/winterhood/engineering = ITEM_SLOT_HEAD,
+		/obj/item/clothing/head/hooded/winterhood/engineering/atmos = ITEM_SLOT_HEAD,
+		/obj/item/clothing/suit/armor/vest/secjacket = ITEM_SLOT_OCLOTHING,
+	)
+	for(var/item_type in fixtures)
+		var/mob/living/carbon/human/human = allocate(/mob/living/carbon/human/consistent)
+		human.set_species(/datum/species/vox)
+		var/obj/item/clothing/item = allocate(item_type)
+		TEST_ASSERT(human.equip_to_slot_if_possible(item, fixtures[item_type], disable_warning = TRUE), "Could not equip reflective Vox fixture [item_type].")
+		var/fitted_file = item.get_species_worn_icon(SPECIES_VOX)
+		var/mask_state = "[item.icon_state]-emissive"
+		TEST_ASSERT(icon_exists(fitted_file, mask_state), "The fitted Vox file has no [mask_state].")
+		var/list/overlays = item.worn_overlays(mutable_appearance(fitted_file, item.icon_state), FALSE, fitted_file, human.bodyshape)
+		var/matches = 0
+		for(var/mutable_appearance/overlay as anything in overlays)
+			if(overlay.icon_state != mask_state)
+				continue
+			matches++
+			TEST_ASSERT_EQUAL(overlay.icon, fitted_file, "The native worn renderer used a human mask instead of its fitted Vox mask.")
+			TEST_ASSERT(icon_exists(overlay.icon, overlay.icon_state), "The native worn renderer created a missing emissive state.")
+		TEST_ASSERT_EQUAL(matches, 1, "Reflective Vox clothing must produce exactly one specular mask.")
 
 /datum/unit_test/vox_appearance_screenshots/Run()
 	var/mob/living/carbon/human/dummy/consistent/naked = make_vox()
@@ -265,7 +291,7 @@
 			var/obj/item/item = allocate(item_type)
 			TEST_ASSERT_EQUAL("[item.get_species_worn_icon(SPECIES_VOX, state)]", expected_icon, "[item_type] selected the wrong fitted file for [state].")
 			TEST_ASSERT_NULL(item.get_species_worn_icon(SPECIES_VOX, "vox_deliberately_missing_state"), "Paradise fallback selected a missing state.")
-			TEST_ASSERT_NULL(item.get_species_worn_icon(SPECIES_IPC, state), "Paradise clothing leaked onto IPCs.")
+			TEST_ASSERT_NULL(item.get_species_worn_icon(SPECIES_HUMAN, state), "Paradise clothing leaked onto humans.")
 			// Exercise the requested dynamic state through the real worn renderer.
 			TEST_ASSERT(vox.equip_to_slot_if_possible(item, slots[category], disable_warning = TRUE), "Could not equip Paradise fixture [item_type].")
 			item.icon_state = state

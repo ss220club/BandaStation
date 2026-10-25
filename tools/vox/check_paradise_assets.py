@@ -16,10 +16,17 @@ from tools.dmi import Dmi
 from tools.vox.adapt_paradise_assets import MODES, OUTPUT, TOOLS, build
 
 
+def check_output_files(directory, outputs):
+    expected = {name + ".dmi" for name in outputs}
+    actual = {path.name for path in directory.glob("*.dmi")}
+    assert actual == expected, f"Wrong generated file set: missing={sorted(expected - actual)}, obsolete={sorted(actual - expected)}"
+
+
 def check(source):
     mapping = json.loads((TOOLS / "paradise-clothing-map.json").read_text(encoding="utf-8"))
     manifest = json.loads((TOOLS / "paradise-source-assets.json").read_text(encoding="utf-8"))
     outputs = build(source, mapping, manifest)
+    check_output_files(ROOT / OUTPUT, outputs)
     rebuilt = {}
     with tempfile.TemporaryDirectory(prefix="vox-paradise-check-") as scratch:
         for name, icon in outputs.items():
@@ -66,6 +73,21 @@ def check(source):
 
     auxiliary = mapping.get("auxiliary_states", [])
     for recipe in auxiliary:
+        if recipe["recipe"] == "native_mask_clipped":
+            counts = {"hood_engineer-emissive": [0, 18, 2, 2], "hood_atmos-emissive": [0, 18, 2, 2], "secjacket-emissive": [30, 34, 18, 18], "cone-emissive": [3, 10, 5, 5]}
+            name = recipe["target_state"]
+            assert name in counts, "Add a focused check for each new native mask"
+            native = Dmi.from_file(ROOT / recipe["native_file"]).get_state(name)
+            fitted = rebuilt[recipe["category"]].get_state(recipe["fitted_state"])
+            mask = rebuilt[recipe["category"]].get_state(name)
+            for field in ("dirs", "framecount", "movement", "loop", "rewind", "delays", "hotspots"):
+                assert getattr(mask, field) == getattr(native, field), f"Changed native mask {field}: {name}"
+            assert mask.dirs == 4 and mask.framecount == 1
+            for direction, (actual, original, garment) in enumerate(zip(mask.frames, native.frames, fitted.frames)):
+                assert sum(bool(pixel[3]) for pixel in actual.getdata()) == counts[name][direction], f"Missing reflective stripe: {name}/{direction}"
+                for pixel, source_pixel, garment_pixel in zip(actual.getdata(), original.getdata(), garment.getdata()):
+                    assert pixel == (*source_pixel[:3], source_pixel[3] * garment_pixel[3] // 255), f"Changed native RGBA/alpha clip: {name}/{direction}"
+            continue
         assert recipe["target_state"] == "carved_pumpkin-emissive", "Add a focused check for each new auxiliary recipe"
         mask = rebuilt[recipe["category"]].get_state(recipe["target_state"])
         assert mask.dirs == 4 and mask.framecount == 1, "The blumpkin mask must retain four directions"
@@ -81,7 +103,7 @@ def check(source):
     scenarios = ["duplicate", "unpinned", "transform", "schema", "mode", "wrong_pin", "wrong_blob", "missing_state"]
     if auxiliary:
         scenarios += ["aux_recipe", "aux_missing", "aux_empty"]
-    scenarios += ["hood_recipe", "hood_coordinate", "hood_source"]
+    scenarios += ["hood_recipe", "hood_coordinate", "hood_source", "native_unpinned", "native_wrong_blob", "native_missing_fitted"]
     for scenario in scenarios:
         broken, pins = copy.deepcopy(mapping), copy.deepcopy(manifest)
         first = broken["entries"][0]
@@ -112,6 +134,14 @@ def check(source):
             broken["transforms"] = {}
         elif scenario == "hood_coordinate":
             broken["transforms"]["winterhood_head_coverage"]["pixel_copies"][0][0][0] = [32, 0]
+        elif scenario.startswith("native_"):
+            recipe = next(entry for entry in broken["auxiliary_states"] if entry["recipe"] == "native_mask_clipped")
+            if scenario == "native_unpinned":
+                pins["native_assets"].pop(recipe["native_file"])
+            elif scenario == "native_wrong_blob":
+                pins["native_assets"][recipe["native_file"]] = "0" * 40
+            else:
+                recipe["fitted_state"] = "deliberately_missing_state"
         else:
             broken["transforms"]["winterhood_head_coverage"]["pixel_copies"][0][0][1] = [0, 0]
         try:
@@ -119,13 +149,26 @@ def check(source):
         except ValueError:
             continue
         raise AssertionError(f"Malformed input was accepted: {scenario}")
+    with tempfile.TemporaryDirectory(prefix="vox-paradise-file-set-") as scratch:
+        directory = Path(scratch)
+        for name in outputs:
+            (directory / (name + ".dmi")).touch()
+        check_output_files(directory, outputs)
+        obsolete = directory / "obsolete.dmi"
+        obsolete.touch()
+        try:
+            check_output_files(directory, outputs)
+        except AssertionError:
+            pass
+        else:
+            raise AssertionError("Obsolete generated DMI was accepted")
     return {
         "wearable_states": checked,
         "identity_states": checked - covered,
         "hood_coverage_states": covered,
         "derived_auxiliary_states": len(auxiliary),
         "reproducible_files": len(outputs),
-        "rejected_bad_inputs": len(scenarios),
+        "rejected_bad_inputs": len(scenarios) + 1,
     }
 
 

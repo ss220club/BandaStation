@@ -33,5 +33,12 @@
     "modular_ss220/clothing/icons/mob/species/vox/shoes.dmi": "f4f437fc13e06fca1ebe8905889219a043ac7e53",
     "modular_ss220/clothing/icons/mob/species/vox/suits.dmi": "b15971eb7a690c6008d6213b6d4b0be68595ca5b",
     "modular_ss220/clothing/icons/mob/species/vox/under.dmi": "6b20e04cc5098e8ce1780a0d49c38d217cb31657"
+  },
+  "native_repository": "ss220club/BandaStation",
+  "native_revision": "35e3f4bafc3e9e311e5b00f37616b24a9d0e7a0e",
+  "native_assets": {
+    "icons/mob/clothing/head/winterhood.dmi": "64ab5132c8eefe6776d8f9c6151aab3bbec31ba4",
+    "icons/mob/clothing/suits/armor.dmi": "4a84c7e1281b7450afb86641dea3ee779484ca45",
+    "icons/mob/clothing/head/utility.dmi": "32b1add375723b4740f8f19b5824de9338f6c681"
   }
 }

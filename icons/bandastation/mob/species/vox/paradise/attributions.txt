@@ -29,3 +29,14 @@ state into previously transparent cells (13 south/north, eight east/west),
 closing the contour over the current Vox head ears. Each copy uses the same
 source state and direction, with exact coordinates in the named
 winterhood_head_coverage transform. All original hood pixels remain unchanged.
+
+Four reflective masks (hood_engineer-emissive, hood_atmos-emissive,
+secjacket-emissive and cone-emissive) derive from native BandaStation/tgstation artwork and its
+contributors, pinned at 35e3f4bafc3e9e311e5b00f37616b24a9d0e7a0e:
+https://github.com/ss220club/BandaStation/tree/35e3f4bafc3e9e311e5b00f37616b24a9d0e7a0e
+Native files: icons/mob/clothing/head/winterhood.dmi,
+icons/mob/clothing/head/utility.dmi and icons/mob/clothing/suits/armor.dmi; exact blobs are in native_assets in the
+source manifest. License: CC BY-SA 3.0, declared in that revision README.md.
+Only alpha changes: native mask alpha is multiplied by the fitted garment
+alpha. Native RGB, directions, frames and animation metadata are preserved;
+reflective pixels cannot extend outside the fitted garment silhouette.

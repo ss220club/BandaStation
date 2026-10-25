@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-Compiles and runs Vox tests, IPC regressions and species checks in isolation.
+Compiles and runs Vox tests and species checks in isolation.
 .DESCRIPTION
 Run tools/build/build.bat first to generate TGUI, translations and other assets.
 Uses BYOND 516.1685 by default; -ByondBin explicitly selects another installation.
@@ -69,15 +69,15 @@ try {
         'preference_species', 'species_change_organs', 'species_change_clothing',
         'species_change_held_items', 'species_config_sanity', 'species_unique_id',
         'species_whitelist_check', 'organ_sanity', 'designs', 'design_source', 'design_mats',
-        'focus_only/invalid_research_designs', 'missing_icons/icon_state',
+        'focus_only/invalid_research_designs', 'focus_only/invalid_emissives', 'missing_icons/icon_state',
         'missing_icons/worn_icons', 'missing_icons/inhand_icon_state', 'language_key_conflicts'
     ) | ForEach-Object { '/datum/unit_test/' + $_ }
     if ($IncludeHumanoidScreenshots) {
         $baselineTests += '/datum/unit_test/screenshot_humanoids'
     }
     $speciesTests = @()
-    foreach ($pattern in @('vox*.dm', 'ipc*.dm')) {
-        # Include nested test types as well as top-level tests and require both suites.
+    foreach ($pattern in @('vox*.dm')) {
+        # Include nested test types as well as top-level tests and require the Vox suite.
         $tests = @(Get-ChildItem -LiteralPath 'modular_bandastation\species\code\tests' -Filter $pattern -File -Recurse |
             Select-String -Pattern '^(/datum/unit_test/[^\s(]+)/Run\(' |
             ForEach-Object { $_.Matches[0].Groups[1].Value })

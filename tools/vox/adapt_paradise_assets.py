@@ -8,7 +8,9 @@ copied: matching names in another DMI do not imply equivalent clothing.
 Wearable states preserve source pixels, 32x32 anchors, colours, direction order
 and animation metadata. Fourteen winter hoods add reviewed copies of their own
 border/fabric pixels to cover the current head. The separate auxiliary recipe
-retains only lit pixels that change between a pinned on/off pair. Current Nova
+retains only lit pixels that change between a pinned on/off pair. Native
+reflective masks use separately pinned Banda inputs and are clipped to the
+fitted garment alpha. Current Nova
 body parts, beaks and quills are never modified.
 """
 
@@ -19,7 +21,7 @@ import json
 import sys
 import tempfile
 from pathlib import Path
-from PIL import Image
+from PIL import Image, ImageChops
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
@@ -62,18 +64,21 @@ def build(source_root, mapping, provenance):
     outputs = {}
     targets = set()
 
-    def get_input(relative):
-        if relative not in provenance["assets"]:
+    def get_input(relative, native=False):
+        pins = provenance.get("native_assets", {}) if native else provenance["assets"]
+        root = ROOT if native else source_root
+        key = (native, relative)
+        if relative not in pins:
             raise ValueError(f"Source is not pinned: {relative}")
-        if relative not in inputs:
-            data = (source_root / relative).read_bytes()
-            if git_blob_hash(data) != provenance["assets"][relative]:
-                raise ValueError(f"Source differs from the pinned Paradise file: {relative}")
-            icon = Dmi.from_file(source_root / relative)
+        if key not in inputs:
+            data = (root / relative).read_bytes()
+            if git_blob_hash(data) != pins[relative]:
+                raise ValueError(f"Source differs from its pinned file: {relative}")
+            icon = Dmi.from_file(root / relative)
             if (icon.width, icon.height) != (32, 32):
                 raise ValueError(f"Unexpected source anchor/cell size: {relative}")
-            inputs[relative] = icon
-        return inputs[relative]
+            inputs[key] = icon
+        return inputs[key]
 
     for entry in mapping["entries"]:
         category, name, mode = entry["category"], entry["target_state"], entry["mode"]
@@ -106,9 +111,29 @@ def build(source_root, mapping, provenance):
         category, name = recipe["category"], recipe["target_state"]
         if category not in CATEGORIES or not name or any(ord(char) < 32 for char in name):
             raise ValueError(f"Invalid auxiliary target: {category}/{name!r}")
-        if (category, name) in targets or recipe["recipe"] != "changed_lit_rgba":
+        if (category, name) in targets or recipe["recipe"] not in ("changed_lit_rgba", "native_mask_clipped"):
             raise ValueError(f"Ambiguous or unreviewed auxiliary recipe: {category}/{name}")
         targets.add((category, name))
+        if recipe["recipe"] == "native_mask_clipped":
+            output = outputs.get(category)
+            masks = [state for state in get_input(recipe["native_file"], native=True).states if state.name == name]
+            fitted = [] if output is None else [state for state in output.states if state.name == recipe["fitted_state"]]
+            if len(masks) != 1 or len(fitted) != 1 or name != recipe["fitted_state"] + "-emissive":
+                raise ValueError(f"Missing or ambiguous native/fitted auxiliary input: {category}/{name}")
+            native, fitted = masks[0], fitted[0]
+            fields = ("dirs", "framecount", "movement", "loop", "rewind", "delays", "hotspots")
+            if native.dirs != 4 or any(getattr(native, field) != getattr(fitted, field) for field in fields):
+                raise ValueError(f"Native/fitted auxiliary metadata differs: {category}/{name}")
+            state = copy.copy(native)
+            state.dmi, state.name, state.frames = output, name, []
+            for mask, garment in zip(native.frames, fitted.frames):
+                frame = mask.copy()
+                frame.putalpha(ImageChops.multiply(mask.getchannel("A"), garment.getchannel("A")))
+                state.frames.append(frame)
+            if not any(frame.getbbox() for frame in state.frames):
+                raise ValueError(f"Auxiliary recipe is empty: {category}/{name}")
+            output.states.append(state)
+            continue
         icon = get_input(recipe["source_file"])
         pair = []
         for key in ("on_state", "off_state"):

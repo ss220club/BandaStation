@@ -1,7 +1,7 @@
 {
   "date": "2026-10-25",
   "scope": "Initialized default worn states; toggled variants are covered separately by scenario tests.",
-  "inventory_sha256": "c50bd13646d9d832ec718394bd098de2a4647a2cc654aef9f238f4dd881d2fc3",
+  "inventory_sha256": "4e30bfcc9eb1f3bd31f26a861744105b6e309edc25342983e2722a3db04cff61",
   "visible_types": 2265,
   "fitted_state_exists": 1223,
   "fallback": 1042,
@@ -22,8 +22,8 @@
   "categories": {
     "head": {
       "visible": 514,
-      "fitted_state_exists": 239,
-      "fallback": 275,
+      "fitted_state_exists": 238,
+      "fallback": 276,
       "source_marked_unconverted": 0,
       "source_marked_unused": 0,
       "paradise_selected_types": 44,
@@ -31,8 +31,8 @@
     },
     "mask": {
       "visible": 135,
-      "fitted_state_exists": 113,
-      "fallback": 22,
+      "fitted_state_exists": 114,
+      "fallback": 21,
       "source_marked_unconverted": 0,
       "source_marked_unused": 0,
       "paradise_selected_types": 0,
@@ -516,8 +516,8 @@
     "repository": "ss220club/Paradise-SS220",
     "source_revision": "0fffca1f1f29a63aff49d9b56524813eedf82c6d",
     "license": "CC-BY-SA-3.0",
-    "mapping_sha256": "a1a056265d055998b553b33e42a5f97ca26df3203dee4b571000c7757bf0826d",
-    "provenance_sha256": "29623f5a0ef7a6ee91046db24553427517e145ed98a1b350c75e86512afa0f5a",
+    "mapping_sha256": "4c7283435848c32cb2de561a5bb97cdfc7b878d6e8cf121f2456bfaf96ec811a",
+    "provenance_sha256": "e1a81a1a82aba9fa6764d112986944530149b005baaee355b178242922c1cc4d",
     "mapped_states": 180,
     "mapped_states_by_category": {
       "back": 4,
@@ -530,7 +530,7 @@
       "under": 88
     },
     "art_reviewed_states": 180,
-    "art_review_sha256": "9c889630fa96c2c1f3819f48a0015905afba0d33e1cd1fa053a95661f2c613f8",
+    "art_review_sha256": "a8cf54068cbb984ab44e0e72c9aa91a94800b72c49cbf4c5f93de22c6c7400bd",
     "art_review_evidence": "Нативная матрица BYOND 516.1685: 22 листа в code/modules/unit_tests/screenshots/vox_appearance_screenshots_paradise_*.png. Каждое состояние показано на существующем предмете с клювами Primalis и Armalis с юга, севера, востока и запада. Четыре стиля оперения под зимним капюшоном и реальные переключения проверены отдельными изображениями. У трёх анимированных состояний просмотрены оба кадра со всех сторон. Проверка относится к этим сценариям и не охватывает все цвета и сочетания одежды.",
     "initial_selected_states": 150,
     "initial_selected_types": 163,

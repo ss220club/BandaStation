@@ -1,6 +1,6 @@
 {
   "source_revision": "0fffca1f1f29a63aff49d9b56524813eedf82c6d",
-  "mapping_sha256": "a1a056265d055998b553b33e42a5f97ca26df3203dee4b571000c7757bf0826d",
+  "mapping_sha256": "4c7283435848c32cb2de561a5bb97cdfc7b878d6e8cf121f2456bfaf96ec811a",
   "evidence": "Нативная матрица BYOND 516.1685: 22 листа в code/modules/unit_tests/screenshots/vox_appearance_screenshots_paradise_*.png. Каждое состояние показано на существующем предмете с клювами Primalis и Armalis с юга, севера, востока и запада. Четыре стиля оперения под зимним капюшоном и реальные переключения проверены отдельными изображениями. У трёх анимированных состояний просмотрены оба кадра со всех сторон. Проверка относится к этим сценариям и не охватывает все цвета и сочетания одежды.",
   "reviewed_entries": [
     {
@@ -903,5 +903,15 @@
       "state": "virologywhite_skirt",
       "note": "Проверены посадка на теле, цвет, слои и видимость с обоими клювами со всех четырёх сторон."
     }
-  ]
+  ],
+  "auxiliary_review": {
+    "states": [
+      "hood_engineer-emissive",
+      "hood_atmos-emissive",
+      "secjacket-emissive",
+      "cone-emissive"
+    ],
+    "directions": "south,north,east,west",
+    "method": "Authored native reflective mask intersected with the fitted garment alpha; normal and magenta-mask contact sheet reviewed. Wearable state pixels remain unchanged."
+  }
 }

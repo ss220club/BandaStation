@@ -1694,6 +1694,42 @@
       "off_state": "hardhat0_blumpkin",
       "recipe": "changed_lit_rgba",
       "reason": "The native human pumpkin emissive mask does not align with the fitted Vox eyes. Keep exact authored RGBA pixels that change between the pinned lit/unlit states; all unchanged pixels become transparent."
+    },
+    {
+      "category": "head",
+      "target_state": "hood_engineer-emissive",
+      "fitted_state": "hood_engineer",
+      "native_file": "icons/mob/clothing/head/winterhood.dmi",
+      "recipe": "native_mask_clipped",
+      "test_type": "/obj/item/clothing/head/hooded/winterhood/engineering",
+      "reason": "Preserve the authored native reflective mask RGBA and metadata, multiplying its alpha by the fitted garment alpha so reflections cannot extend outside the worn Vox silhouette."
+    },
+    {
+      "category": "head",
+      "target_state": "hood_atmos-emissive",
+      "fitted_state": "hood_atmos",
+      "native_file": "icons/mob/clothing/head/winterhood.dmi",
+      "recipe": "native_mask_clipped",
+      "test_type": "/obj/item/clothing/head/hooded/winterhood/engineering/atmos",
+      "reason": "Preserve the authored native reflective mask RGBA and metadata, multiplying its alpha by the fitted garment alpha so reflections cannot extend outside the worn Vox silhouette."
+    },
+    {
+      "category": "suit",
+      "target_state": "secjacket-emissive",
+      "fitted_state": "secjacket",
+      "native_file": "icons/mob/clothing/suits/armor.dmi",
+      "recipe": "native_mask_clipped",
+      "test_type": "/obj/item/clothing/suit/armor/vest/secjacket",
+      "reason": "Preserve the authored native reflective mask RGBA and metadata, multiplying its alpha by the fitted garment alpha so reflections cannot extend outside the worn Vox silhouette."
+    },
+    {
+      "category": "head",
+      "target_state": "cone-emissive",
+      "fitted_state": "cone",
+      "native_file": "icons/mob/clothing/head/utility.dmi",
+      "recipe": "native_mask_clipped",
+      "test_type": "/obj/item/clothing/head/cone",
+      "reason": "Preserve the authored native reflective mask RGBA and metadata, multiplying its alpha by the fitted garment alpha so reflections cannot extend outside the worn Vox silhouette."
     }
   ],
   "transforms": {
