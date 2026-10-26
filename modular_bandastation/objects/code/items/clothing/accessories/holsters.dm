@@ -269,7 +269,7 @@
 
 /obj/item/clothing/accessory/holster/tacticool/cowboy/PopulateContents()
 	generate_items_inside(list(
-		/obj/item/gun/ballistic/revolver/cowboy/nuclear = 1,
+		/obj/item/gun/ballistic/revolver/syndicate/cowboy/nuclear = 1,
 		/obj/item/ammo_box/speedloader/c357 = 1,
 	), src)
 
