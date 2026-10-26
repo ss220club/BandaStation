@@ -16,7 +16,7 @@
 	quality = DRINK_VERYGOOD
 	nutriment_factor = 1
 	boozepwr = 25
-	taste_description = "electric citrus, warming alcohol, and metallic bitterness"
+	taste_description = "нотки цитрусовых, согревающий алкоголь и металлическая горчинка"
 	randomized_spawns = REAGENT_SPAWN_ALL_RANDOM_SPAWNS
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 
@@ -72,7 +72,7 @@
 	quality = DRINK_VERYGOOD
 	nutriment_factor = 1
 	boozepwr = 45
-	taste_description = "sweet pomegranate, deep alcohol burn, and numbing fungal earthiness"
+	taste_description = "сладкий гранат, сильное алкогольное жжение и ошеломляющий грибной землистый привкус"
 	randomized_spawns = REAGENT_SPAWN_ALL_RANDOM_SPAWNS
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 
@@ -137,7 +137,7 @@
 	color = "#FF8C00"
 	quality = DRINK_VERYGOOD
 	nutriment_factor = 2
-	taste_description = "volcanic warmth, spicy floral heat, and tingling phosphorus"
+	taste_description = "вулканическое тепло, пряный цветочный аромат и покалывающий запах фосфора"
 	randomized_spawns = REAGENT_SPAWN_ALL_RANDOM_SPAWNS
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 
@@ -177,7 +177,7 @@
 	quality = DRINK_VERYGOOD
 	nutriment_factor = 2
 	boozepwr = 15
-	taste_description = "smooth sweet cream, candied cherries, and delicate vermouth botanicals"
+	taste_description = "мягкий сладкий крем, засахаренные вишни и нежные травы вермута"
 	randomized_spawns = REAGENT_SPAWN_ALL_RANDOM_SPAWNS
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 
@@ -215,7 +215,7 @@
 	color = "#D84C00"
 	quality = DRINK_VERYGOOD
 	nutriment_factor = 3
-	taste_description = "rich umami broth, roasted dark coffee, and electric tingle"
+	taste_description = "насыщенный бульон с нотками умами, аромат жареного темного кофе и яркое покалывание"
 	randomized_spawns = REAGENT_SPAWN_ALL_RANDOM_SPAWNS
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 
@@ -267,7 +267,7 @@
 	quality = DRINK_VERYGOOD
 	nutriment_factor = 1
 	overdose_threshold = 25
-	taste_description = "sparkling fizzy lime, zesty citrus, and numbing tropical venom"
+	taste_description = "игристый лайм, пикантные цитрусовые и ошеломляющий тропический яд"
 	randomized_spawns = REAGENT_SPAWN_ALL_RANDOM_SPAWNS
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 
@@ -372,7 +372,7 @@
 	quality = DRINK_FANTASTIC
 	nutriment_factor = 2
 	boozepwr = 35
-	taste_description = "fiery anise spirit, effervescent quinine, and glowing celestial ambrosia"
+	taste_description = "жгучий анисовый ликёр, игристый хинин и сияющая небесная амброзия"
 	randomized_spawns = REAGENT_SPAWN_ALL_RANDOM_SPAWNS
 	chemical_flags = REAGENT_CAN_BE_SYNTHESIZED
 
