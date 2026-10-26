@@ -197,9 +197,18 @@
 	if(!status_check)
 		return ..()
 
+	if(!..())
+		return FALSE
+
 	var/obj/item/active_item = user.get_active_held_item()
+	if(!istype(active_item, /obj/item/cane) && !istype(active_item, /obj/item/melee/baton/nt_cane))
+		return FALSE
+
 	var/turf/user_turf = get_turf(user)
-	return ..() && (istype(active_item, /obj/item/cane) || istype(active_item, /obj/item/melee/baton/nt_cane)) && user_turf && !istype(user_turf, /turf/open/space) && !istype(user_turf, /turf/open/openspace)
+	if(!user_turf || istype(user_turf, /turf/open/space) || istype(user_turf, /turf/open/openspace))
+		return FALSE
+
+	return TRUE
 
 /datum/emote/living/cane_tap/should_play_sound(mob/living/user, intentional = FALSE)
 	return FALSE
