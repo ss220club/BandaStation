@@ -194,7 +194,6 @@
 	cooldown = 2 SECONDS
 
 /datum/emote/living/cane_tap/can_run_emote(mob/living/user, status_check = TRUE, intentional, params)
-	// Keep it listed in the standard emote panel; actual use still checks the cane and turf below.
 	if(!status_check)
 		return ..()
 
