@@ -137,8 +137,6 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 	var/last_signal_key
 	/// REF(speaker) = world.time of their last counted packet
 	var/list/speaker_last_packet = list()
-	/// Separate from last_signal_key, garbling also runs on messages that don't count
-	var/last_garbled_key
 	var/datum/weakref/receiver_ref
 	var/list/obj/item/comms_tap/active_taps = list()
 
@@ -176,8 +174,7 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 		return FALSE
 	return disk in owner.current.get_all_contents()
 
-/// With counted FALSE (panel open) the message is still garbled, it just doesn't count as a packet
-/datum/objective/comms_intercept/proc/on_intercepted_message(datum/signal/subspace/vocal/signal, counted)
+/datum/objective/comms_intercept/proc/on_intercepted_message(datum/signal/subspace/vocal/signal)
 	if(upload_done || failed)
 		return
 	var/datum/signal/subspace/root = signal
@@ -185,14 +182,14 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 		root = root.original
 	// world.time in the key in case a deleted signal's ref gets reused
 	var/signal_key = "[REF(root)]-[world.time]"
-	if(signal_key != last_garbled_key)
-		last_garbled_key = signal_key
-		var/garble_chance = get_garble_chance()
-		if(garble_chance)
-			signal.data["message"] = Gibberish(signal.data["message"], garble_chance >= COMPRESSION_REPLACE_CHARACTER_THRESHOLD, garble_chance)
-	if(!counted || signal_key == last_signal_key || messages_collected >= target_amount)
+	if(signal_key == last_signal_key)
 		return
 	last_signal_key = signal_key
+	var/garble_chance = get_garble_chance()
+	if(garble_chance)
+		signal.data["message"] = Gibberish(signal.data["message"], garble_chance >= COMPRESSION_REPLACE_CHARACTER_THRESHOLD, garble_chance)
+	if(messages_collected >= target_amount)
+		return
 	var/atom/movable/speaker = signal.virt?.source
 	if(!speaker)
 		return
@@ -315,8 +312,8 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 	<ul>\
 	<li>Установите сетевой жучок в одну из машин телекоммуникаций: приёмник, хаб, шину или сервер. Жучок слышит только те каналы, которые проходят через его машину. Через хаб идут все каналы, остальные машины обрабатывают лишь часть, и сбор на них пойдёт медленнее.</li>\
 	<li>Откройте панель машины отвёрткой. Затем найдите служебный разъём с помощью вторичной функции мультитула.</li>\
-	<li>Зачистите контакты кусачками и вставьте жучок. Используйте вторичную функцию мультитула для синхронизации, затем закройте панель отвёрткой.</li>\
-	<li>Синхронизировать жучок может только тот, кто его установил. Пока панель открыта, жучок не работает, а преждевременное закрытие заставит начать установку заново.</li>\
+	<li>Зачистите контакты кусачками и вставьте жучок. Используйте вторичную функцию мультитула для синхронизации, после этого жучок начнёт работу. Панель лучше закрыть отвёрткой, чтобы машина не бросалась в глаза.</li>\
+	<li>Синхронизировать жучок может только тот, кто его установил. Если закрыть панель до конца установки, начинать придётся заново.</li>\
 	<li>Закрепите приёмник гаечным ключом в любом помещении станции с питанием, кроме самих телекоммуникаций. Приёмник можно переносить, собранные пакеты сохранятся.</li>\
 	<li>Пакеты поступают из разговоров экипажа в каналах отделов. Общий канал не шифруется, а ваши собственные сообщения не учитываются.</li>\
 	<li>От одного человека можно получить не больше одного пакета за полминуты. Ход сбора отслеживайте на экране приёмника.</li>\
@@ -437,15 +434,15 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 		objective.active_taps -= src
 
 /obj/item/comms_tap/proc/is_listening()
-	return host && calibrated && !host.panel_open && world.time >= offline_until
+	return host && calibrated && world.time >= offline_until
 
 /obj/item/comms_tap/proc/on_relay(datum/source, datum/signal/subspace/signal)
 	SIGNAL_HANDLER
-	if(!calibrated)
+	if(!is_listening())
 		return
 	if(!istype(signal, /datum/signal/subspace/vocal) || !(signal.frequency in comms_intercept_frequencies()) || !signal.data["message"])
 		return
-	GLOB.comms_intercept?.on_intercepted_message(signal, is_listening())
+	GLOB.comms_intercept?.on_intercepted_message(signal)
 
 /obj/item/comms_tap/proc/on_host_emp(datum/source, severity, protection)
 	SIGNAL_HANDLER
@@ -638,7 +635,7 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 		if(!tap.calibrated && tap.installer_ref?.resolve() == user.mind)
 			tap.calibrate()
 			balloon_alert(user, "синхронизация установлена")
-			to_chat(user, span_notice("Синхронизация установлена. Закройте панель отвёрткой, и жучок начнёт считывать каналы."))
+			to_chat(user, span_notice("Синхронизация установлена, жучок начал считывать каналы. Панель лучше закрыть отвёрткой."))
 			return ITEM_INTERACT_SUCCESS
 		to_chat(user, span_warning("На плате [declent_ru(GENITIVE)] обнаружен посторонний модуль!"))
 		return ITEM_INTERACT_SUCCESS
