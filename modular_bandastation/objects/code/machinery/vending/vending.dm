@@ -466,7 +466,7 @@
 				/obj/item/gun/ballistic/automatic/f90 = 1,
 				/obj/item/gun/ballistic/rifle/sniper_rifle = 1,
 				/obj/item/gun/ballistic/automatic/gyropistol = 1,
-				/obj/item/gun/ballistic/rocketlauncher/nobackblast = 1,
+				/obj/item/gun/ballistic/rocketlauncher/unrestricted = 1,
 				/obj/item/gun/ballistic/shotgun/china_lake = 1,
 				/obj/item/gun/energy/pulse/pistol/loyalpin = 2,
 				/obj/item/gun/energy/pulse/carbine/loyalpin = 2,
