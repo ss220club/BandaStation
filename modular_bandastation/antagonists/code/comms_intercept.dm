@@ -73,6 +73,16 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 	else if(target_turf.z < source_turf.z)
 		. += ", уровнем ниже"
 
+/// Names of the department channels going through this machine
+/proc/comms_intercept_channel_names(obj/machinery/telecomms/machine)
+	. = list()
+	for(var/channel_name in GLOB.default_radio_channels)
+		var/frequency = GLOB.default_radio_channels[channel_name]
+		if(!(frequency in comms_intercept_frequencies()))
+			continue
+		if(!length(machine.freq_listening) || (frequency in machine.freq_listening))
+			. += channel_name
+
 /proc/is_comms_tappable(atom/target)
 	var/static/list/tappable_machines = typecacheof(list(
 		/obj/machinery/telecomms/bus,
@@ -381,6 +391,7 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 	installer_ref = WEAKREF(user.mind)
 	attach(machine)
 	balloon_alert(user, "жучок подключён")
+	to_chat(user, span_notice("Жучок подключён. Доступные каналы: [jointext(comms_intercept_channel_names(machine), ", ")]. Синхронизируйте его мультитулом (вторичная функция)."))
 	return ITEM_INTERACT_SUCCESS
 
 /obj/item/comms_tap/proc/attach(obj/machinery/telecomms/machine)
@@ -407,9 +418,12 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 	else
 		objective.active_taps -= src
 
+/obj/item/comms_tap/proc/is_listening()
+	return host && calibrated && !host.panel_open && world.time >= offline_until
+
 /obj/item/comms_tap/proc/on_relay(datum/source, datum/signal/subspace/signal)
 	SIGNAL_HANDLER
-	if(!calibrated || host.panel_open || world.time < offline_until)
+	if(!is_listening())
 		return
 	if(!istype(signal, /datum/signal/subspace/vocal) || !(signal.frequency in comms_intercept_frequencies()) || !signal.data["message"])
 		return
@@ -454,6 +468,15 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 	if(!objective)
 		return
 	. += span_notice("На экране: [objective.messages_collected]/[objective.target_amount] пакетов.")
+	if(!objective.upload_done && can_receive())
+		var/list/channel_names = list()
+		for(var/obj/item/comms_tap/tap as anything in objective.active_taps)
+			if(tap.is_listening())
+				channel_names |= comms_intercept_channel_names(tap.host)
+		if(length(channel_names))
+			. += span_notice("Считываются каналы: [jointext(channel_names, ", ")].")
+		else
+			. += span_notice("Сигнал от жучка не поступает.")
 	if(uploading)
 		. += span_notice("Выгрузка: [round(objective.upload_progress * 100 / COMMS_INTERCEPT_UPLOAD_TIME)]%.")
 	if(objective.upload_done && !objective.disk_ref)
@@ -597,6 +620,7 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 		if(!tap.calibrated && tap.installer_ref?.resolve() == user.mind)
 			tap.calibrate()
 			balloon_alert(user, "синхронизация установлена")
+			to_chat(user, span_notice("Синхронизация установлена. Закройте панель отвёрткой, и жучок начнёт считывать каналы."))
 			return ITEM_INTERACT_SUCCESS
 		to_chat(user, span_warning("На плате [declent_ru(GENITIVE)] обнаружен посторонний модуль!"))
 		return ITEM_INTERACT_SUCCESS
@@ -605,6 +629,9 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 		return ITEM_INTERACT_SUCCESS
 	tap_install_stage = COMMS_TAP_STAGE_PORT_FOUND
 	balloon_alert(user, "найден служебный разъём")
+	// Only someone carrying a tap gets the next step, board checks shouldn't teach the crew how to install one
+	if(locate(/obj/item/comms_tap) in user.get_all_contents())
+		to_chat(user, span_notice("Найден служебный разъём. Через [declent_ru(ACCUSATIVE)] проходят каналы: [jointext(comms_intercept_channel_names(src), ", ")]. Зачистите контакты кусачками."))
 	return ITEM_INTERACT_SUCCESS
 
 /obj/machinery/telecomms/wirecutter_act(mob/living/user, obj/item/tool)
@@ -615,6 +642,8 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 		return ITEM_INTERACT_BLOCKING
 	tap_install_stage = COMMS_TAP_STAGE_CONTACTS_STRIPPED
 	balloon_alert(user, "контакты зачищены")
+	if(locate(/obj/item/comms_tap) in user.get_all_contents())
+		to_chat(user, span_notice("Контакты зачищены. Вставьте жучок."))
 	return ITEM_INTERACT_SUCCESS
 
 /obj/machinery/telecomms/attack_hand_secondary(mob/user, list/modifiers)
