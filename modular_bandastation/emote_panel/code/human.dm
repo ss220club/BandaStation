@@ -202,14 +202,12 @@
 
 /datum/emote/living/cane_tap/run_emote(mob/living/user, params, type_override, intentional)
 	. = ..()
-	INVOKE_ASYNC(src, PROC_REF(play_cane_tap_sounds), user)
+	addtimer(CALLBACK(src, PROC_REF(play_cane_tap_sound), user, 1), 0.25 SECONDS)
 
+/datum/emote/living/cane_tap/proc/play_cane_tap_sound(mob/living/user, count)
+	if(QDELETED(user))
+		return
 
-/datum/emote/living/cane_tap/proc/play_cane_tap_sounds(mob/living/user)
-	for(var/i in 1 to 3)
-		if(QDELETED(user))
-			return
-
-		sleep(0.25 SECONDS)
-		playsound(user, 'sound/items/modsuit/atrocinator_step.ogg', 50, TRUE)
-		sleep(0.25 SECONDS)
+	playsound(user, 'sound/items/modsuit/atrocinator_step.ogg', 50, TRUE)
+	if(count < 3)
+		addtimer(CALLBACK(src, PROC_REF(play_cane_tap_sound), user, count + 1), 0.5 SECONDS)
