@@ -183,7 +183,6 @@
 	if(!istype(user))
 		return
 	return user.dna.species.get_evil_laugh_sound(user)
-
 /datum/emote/living/cane_tap
 	key = "cane_tap"
 	key_third_person = "стучит тростью"
@@ -192,23 +191,17 @@
 	emote_type = EMOTE_VISIBLE | EMOTE_AUDIBLE
 	sound = 'sound/items/modsuit/atrocinator_step.ogg'
 	cooldown = 2 SECONDS
+	var/static/list/cane_typecache = typecacheof(list(/obj/item/cane, /obj/item/melee/baton/nt_cane))
+	var/static/list/groundless_turf_typecache = typecacheof(list(/turf/open/space, /turf/open/openspace))
 
 /datum/emote/living/cane_tap/can_run_emote(mob/living/user, status_check = TRUE, intentional, params)
-	if(!status_check)
-		return ..()
-
-	if(!..())
+	. = ..()
+	if(!. || !status_check)
+		return .
+	if(!is_type_in_typecache(user.get_active_held_item(), cane_typecache))
 		return FALSE
-
-	var/obj/item/active_item = user.get_active_held_item()
-	if(!istype(active_item, /obj/item/cane) && !istype(active_item, /obj/item/melee/baton/nt_cane))
-		return FALSE
-
 	var/turf/user_turf = get_turf(user)
-	if(!user_turf || istype(user_turf, /turf/open/space) || istype(user_turf, /turf/open/openspace))
-		return FALSE
-
-	return TRUE
+	return user_turf && !groundless_turf_typecache[user_turf.type]
 
 /datum/emote/living/cane_tap/should_play_sound(mob/living/user, intentional = FALSE)
 	return FALSE
