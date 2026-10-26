@@ -117,9 +117,9 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 	var/upload_progress = 0
 	var/upload_announced = FALSE
 	var/upload_done = FALSE
-	/// Disk pulled out of the receiver after the upload
+	/// Key dump pulled out of the receiver after the upload
 	var/datum/weakref/disk_ref
-	/// Receiver was destroyed before the disk was taken out
+	/// Receiver was destroyed before the dump was taken out
 	var/failed = FALSE
 	var/last_direction_report = 0
 	/// Each receiver copies the signal, so we dedupe on the root one
@@ -155,7 +155,7 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 	setup(comms_intercept_living_crew())
 
 /datum/objective/comms_intercept/update_explanation_text()
-	explanation_text = "Украдите ключи шифрования станции: подключите сетевой жучок к телекоммуникациям, соберите приёмником [target_amount] пакетов из каналов отделов, дождитесь окончания выгрузки, заберите носитель данных из приёмника и вывезите его со станции. Инструкция приложена к оборудованию."
+	explanation_text = "Украдите ключи шифрования станции: подключите сетевой жучок к телекоммуникациям, соберите приёмником [target_amount] пакетов из каналов отделов, дождитесь окончания выгрузки, заберите дамп ключей шифрования из приёмника и вывезите его со станции. Инструкция приложена к оборудованию."
 
 /datum/objective/comms_intercept/check_completion()
 	if(completed)
@@ -266,7 +266,7 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 /datum/objective/comms_intercept/proc/on_upload_finished()
 	upload_done = TRUE
 	if(owner?.current)
-		to_chat(owner.current, span_notice("Выгрузка перехваченных данных завершена. Заберите носитель из приёмника и вывезите его со станции."))
+		to_chat(owner.current, span_notice("Выгрузка перехваченных данных завершена. Заберите дамп ключей шифрования из приёмника и вывезите его со станции."))
 
 /datum/objective/comms_intercept/proc/on_receiver_destroyed(obj/item/comms_intercept_receiver/receiver)
 	if(disk_ref || receiver_ref?.resolve() != receiver)
@@ -294,7 +294,8 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 	<li>Пакеты поступают из разговоров экипажа в каналах отделов. Общий канал не шифруется, а ваши собственные сообщения не учитываются.</li>\
 	<li>От одного человека можно получить не больше одного пакета за полминуты. Ход сбора отслеживайте на экране приёмника.</li>\
 	<li>После сбора пакетов приёмник начнёт трёхминутную выгрузку. Не допускайте, чтобы его открепили, обесточили или сломали.</li>\
-	<li>По завершении выгрузки заберите диск из приёмника и эвакуируйтесь с ним. Диск должен находиться при вас.</li>\
+	<li>По завершении выгрузки заберите дамп ключей шифрования из приёмника и эвакуируйтесь с ним. Дамп должен находиться при вас.</li>\
+	<li>Дамп открывает гарнитуре все каналы отделов: подключите его к гарнитуре, сам дамп останется у вас. Если в гарнитуре сменить ключ шифрования, доступ пропадёт.</li>\
 	<li>Чем дольше идёт перехват, тем заметнее утечка: экипаж и ИИ начнут искать жучок и приёмник. Запасной жучок можно приобрести в аплинке.</li>\
 	</ul>"
 
@@ -308,8 +309,37 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 	purchasable_from = NONE // handed out through extra_purchasable
 
 /obj/item/disk/comms_intercept
-	name = "intercepted data disk"
-	desc = "Носитель с выгруженными ключами шифрования каналов связи."
+	name = "encryption key dump"
+	desc = "Носитель с перехваченными ключами шифрования каналов отделов. Подключите к гарнитуре, чтобы получить доступ ко всем каналам."
+
+/obj/item/disk/comms_intercept/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(!istype(interacting_with, /obj/item/radio/headset))
+		return NONE
+	var/obj/item/radio/headset/headset = interacting_with
+	if(!length(get_missing_channels(headset)))
+		headset.balloon_alert(user, "уже взломана!")
+		return ITEM_INTERACT_BLOCKING
+	headset.balloon_alert(user, "подключение...")
+	if(!do_after(user, 3 SECONDS, headset))
+		return ITEM_INTERACT_BLOCKING
+	var/list/missing_channels = get_missing_channels(headset)
+	if(!length(missing_channels))
+		headset.balloon_alert(user, "уже взломана!")
+		return ITEM_INTERACT_BLOCKING
+	// Written straight into the headset, so swapping its keys rebuilds the channels and drops the access
+	for(var/channel_name in missing_channels)
+		headset.channels[channel_name] = 1
+		LAZYSET(headset.secure_radio_connections, channel_name, add_radio(headset, GLOB.default_radio_channels[channel_name]))
+	if(!headset.listening)
+		remove_radio_all(headset)
+	headset.balloon_alert(user, "каналы добавлены")
+	return ITEM_INTERACT_SUCCESS
+
+/obj/item/disk/comms_intercept/proc/get_missing_channels(obj/item/radio/headset/headset)
+	. = list()
+	for(var/channel_name in GLOB.default_radio_channels)
+		if(!(channel_name in headset.channels) && (GLOB.default_radio_channels[channel_name] in comms_intercept_frequencies()))
+			. += channel_name
 
 /obj/item/comms_tap
 	name = "network bug"
@@ -427,7 +457,7 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 	if(uploading)
 		. += span_notice("Выгрузка: [round(objective.upload_progress * 100 / COMMS_INTERCEPT_UPLOAD_TIME)]%.")
 	if(objective.upload_done && !objective.disk_ref)
-		. += span_notice("Выгрузка завершена, носитель данных готов к извлечению.")
+		. += span_notice("Выгрузка завершена, дамп ключей шифрования готов к извлечению.")
 	if(!anchored)
 		. += span_notice("Приёмник можно закрепить [EXAMINE_HINT("гаечным ключом")].")
 
@@ -441,7 +471,7 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 		return TRUE
 	return ..()
 
-/// Anyone can pull the disk, so security can seize it too
+/// Anyone can pull the dump, so security can seize it too
 /obj/item/comms_intercept_receiver/proc/try_extract_disk(mob/user)
 	var/datum/objective/comms_intercept/objective = GLOB.comms_intercept
 	if(!objective?.upload_done || objective.disk_ref || objective.receiver_ref?.resolve() != src)
@@ -449,7 +479,7 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 	var/obj/item/disk/comms_intercept/disk = new(drop_location())
 	objective.disk_ref = WEAKREF(disk)
 	user.put_in_hands(disk)
-	balloon_alert(user, "носитель извлечён")
+	balloon_alert(user, "дамп извлечён")
 	update_status()
 	return TRUE
 
