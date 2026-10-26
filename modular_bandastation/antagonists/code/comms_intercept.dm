@@ -261,7 +261,8 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 	add_server_log(text)
 	var/list/channels = list(RADIO_CHANNEL_COMMAND, RADIO_CHANNEL_ENGINEERING)
 	// broadcast() mutates the list
-	get_announcement_system(null, receiver, channels)?.broadcast(text, channels.Copy())
+	var/obj/machinery/announcement_system/announcer = get_announcement_system(null, receiver, channels)
+	announcer?.broadcast(text, channels.Copy())
 
 /datum/objective/comms_intercept/proc/on_upload_finished()
 	upload_done = TRUE
