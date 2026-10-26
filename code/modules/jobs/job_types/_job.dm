@@ -518,6 +518,10 @@
 
 /// Spawns the mob to be played as, taking into account preferences and the desired spawn point.
 /datum/job/proc/get_spawn_mob(client/player_client, atom/spawn_point)
+	// SS220 EDIT - START: Preserve ownership for AI rollback after yielding preferences.
+	var/mob/dead/new_player/spawning_player = isnewplayer(player_client.mob) ? player_client.mob : null
+	var/datum/mind/spawning_mind = spawning_player?.mind
+	// SS220 EDIT - END
 	var/mob/living/spawn_instance
 	if(ispath(spawn_type, /mob/living/silicon/ai))
 		// This is unfortunately necessary because of snowflake AI init code. To be refactored.
@@ -526,6 +530,7 @@
 		spawn_instance = spawn_point.JoinPlayerHere(spawn_type, TRUE)
 	spawn_instance.apply_prefs_job(player_client, src)
 	if(!player_client)
+		rollback_spawn_character(spawn_instance, spawning_player, spawning_mind) // SS220 EDIT: AI initialization has already moved the lobby mind.
 		qdel(spawn_instance)
 		return // Disconnected while checking for the appearance ban.
 	return spawn_instance
@@ -603,6 +608,10 @@
 		fully_replace_character_name(real_name, GLOB.current_anonymous_theme.anonymous_ai_name(TRUE))
 		return
 	apply_pref_name(/datum/preference/name/ai, player_client) // This proc already checks if the player is appearance banned.
+	// SS220 EDIT - START
+	if(!player_client) // the name/appearance lookup may yield and disconnect the player.
+		return
+	// SS220 EDIT - END
 	set_core_display_icon(null, player_client)
 	apply_pref_emote_display(player_client)
 	apply_pref_hologram_display(player_client)
@@ -648,6 +657,10 @@
 /datum/job/proc/after_latejoin_spawn(mob/living/spawning)
 	SHOULD_CALL_PARENT(TRUE)
 	SEND_GLOBAL_SIGNAL(COMSIG_GLOB_JOB_AFTER_LATEJOIN_SPAWN, src, spawning)
+	// SS220 EDIT - START
+	if(!spawning.client)
+		return
+	// SS220 EDIT - END
 	spawning.client.show_spawn_text_overlay()
 
 /// Called when a mob that has this job is admin respawned

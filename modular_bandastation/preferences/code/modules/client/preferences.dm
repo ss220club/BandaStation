@@ -12,6 +12,7 @@
 /datum/preferences/New(client/parent)
 	. = ..()
 	max_save_slots = clamp(BASE_SAVE_SLOTS + parent.get_donator_level() * SAVE_SLOTS_PER_DONATOR_LEVEL, BASE_SAVE_SLOTS, MAX_SAVE_SLOTS)
+	sanitize_job_profile_assignments()
 
 /datum/preferences/refresh_membership()
 	. = ..()

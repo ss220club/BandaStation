@@ -35,6 +35,7 @@
 		return //not a prisoner
 
 	var/crime_name = crewmember.client?.prefs?.read_preference(/datum/preference/choiced/prisoner_crime)
+	crime_name = get_committed_prisoner_crime_name(crewmember, crime_name) // SS220 EDIT: use the crime committed for this body.
 	if(!crime_name)
 		stack_trace("[crewmember] joined as a Prisoner without having a prisoner crime set.")
 		crime_name = pick(assoc_to_keys(GLOB.prisoner_crimes))
@@ -44,6 +45,7 @@
 	var/datum/prisoner_crime/crime = GLOB.prisoner_crimes[crime_name]
 	var/datum/crime/past_crime = new(crime.name, crime.desc, "Central Command", "Indefinite.")
 	var/datum/record/crew/target_record = find_record(crewmember.real_name)
+	target_record = get_initial_prisoner_record(crewmember, target_record) // SS220 EDIT: the initial-record callback supplies the exact record.
 	target_record.crimes += past_crime
 	target_record.recreate_manifest_photos(add_height_chart = TRUE)
 	to_chat(crewmember, span_warning("You are imprisoned for \"[crime_name]\"."))
@@ -72,6 +74,7 @@
 
 	var/crime_name = new_prisoner.client?.prefs?.read_preference(/datum/preference/choiced/prisoner_crime)
 	var/datum/prisoner_crime/crime = GLOB.prisoner_crimes[crime_name]
+	crime = get_prisoner_equipment_crime(new_prisoner, crime, visuals_only) // SS220 EDIT: committed crime and once-only live effects.
 	if (isnull(crime))
 		return
 	var/list/limbs_to_tat = new_prisoner.get_bodyparts()

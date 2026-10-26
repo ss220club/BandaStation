@@ -80,3 +80,12 @@
 
 /obj/item/clothing/under/rank/security/head_of_security/alt
 	female_version = /datum/female_uniform/turtleneck
+
+/// Imported security-clown appearance with the native clown uniform's squeak.
+/obj/item/clothing/under/rank/civilian/clown/security
+	name = "security clown suit"
+	desc = "<i>ХОНК НА СТРАЖЕ ЗАКОНА!</i>"
+	icon = 'modular_bandastation/objects/icons/obj/clothing/under/security.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/under/security.dmi'
+	icon_state = "security_clown"
+	female_sprite_flags = NO_FEMALE_UNIFORM
