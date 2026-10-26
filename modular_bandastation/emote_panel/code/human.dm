@@ -193,7 +193,6 @@
 	sound = 'sound/items/modsuit/atrocinator_step.ogg'
 	cooldown = 2 SECONDS
 	var/static/list/cane_typecache = typecacheof(list(/obj/item/cane, /obj/item/melee/baton/nt_cane))
-	var/static/list/groundless_turf_typecache = typecacheof(list(/turf/open/space, /turf/open/openspace))
 
 /datum/emote/living/cane_tap/can_run_emote(mob/living/user, status_check = TRUE, intentional, params)
 	. = ..()
@@ -202,7 +201,7 @@
 	if(!is_type_in_typecache(user.get_active_held_item(), cane_typecache))
 		return FALSE
 	var/turf/user_turf = get_turf(user)
-	return user_turf && !groundless_turf_typecache[user_turf.type]
+	return user_turf && !isgroundlessturf(user_turf)
 
 /datum/emote/living/cane_tap/should_play_sound(mob/living/user, intentional = FALSE)
 	return FALSE
