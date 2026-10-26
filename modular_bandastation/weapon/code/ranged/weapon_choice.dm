@@ -24,15 +24,17 @@
 		ui.open()
 
 /obj/item/choice_beacon/weapon/ui_static_data(mob/user)
-	var/static/list/weapon_info_cache
-	if(!weapon_info_cache)
-		weapon_info_cache = list()
+	// Кэш по типу маяка: у каждого подтипа свой ассортимент.
+	var/static/list/weapon_info_cache = list()
+	if(isnull(weapon_info_cache[type]))
+		var/list/weapons = list()
 		var/list/options = generate_display_names()
 		for(var/display_name in options)
 			var/list/info = build_weapon_info(display_name, options[display_name])
 			if(info)
-				weapon_info_cache += list(info)
-	return list("weapons" = weapon_info_cache)
+				weapons += list(info)
+		weapon_info_cache[type] = weapons
+	return list("weapons" = weapon_info_cache[type])
 
 /obj/item/choice_beacon/weapon/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
 	. = ..()
