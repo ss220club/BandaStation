@@ -40,19 +40,49 @@
 	var/datum/brain_trauma/severe/pacifism/earthsblood_trauma
 	/// Флаг: был ли у владельца пацифизм еще до начала передозировки Кровью Земли
 	var/preexisting_earthsblood_pacifism = FALSE
+	/// Флаг: находился ли скрелл в состоянии реальной передозировки Earthsblood (>= 45u)
+	var/earthsblood_overdose_active = FALSE
 	/// Точный снимок урона мозга перед тиком защищенного реагента
 	var/expected_brain_damage = null
 	/// Точный снимок урона сердца перед тиком защищенного реагента
 	var/expected_heart_damage = null
 	/// Точный снимок урона печени перед тиком защищенного алкоголя
 	var/expected_liver_damage = null
+	/// Точный снимок токсического урона перед тиком передозировки Earthsblood
+	var/expected_tox_damage = null
 
-/// Синхронный сброс урона мозгу и сердцу после тика конкретного защищенного реагента
+/// Надежное снятие передозировки и временной травмы пацифизма от Earthsblood
+/obj/item/organ/liver/skrell/proc/clear_earthsblood_overdose(mob/living/carbon/organ_owner, datum/reagent/earthsblood_chem, show_message = TRUE)
+	if(earthsblood_chem)
+		earthsblood_chem.overdosed = FALSE
+		earthsblood_chem.overdosed_crit = FALSE
+
+	if(!organ_owner)
+		earthsblood_trauma = null
+		earthsblood_overdose_active = FALSE
+		return
+
+	var/datum/brain_trauma/severe/pacifism/trauma_to_remove = earthsblood_trauma
+	if(!trauma_to_remove && !preexisting_earthsblood_pacifism)
+		trauma_to_remove = organ_owner.has_trauma_type(/datum/brain_trauma/severe/pacifism)
+
+	earthsblood_trauma = null
+	var/was_active_overdose = earthsblood_overdose_active
+	earthsblood_overdose_active = FALSE
+
+	if(trauma_to_remove && !preexisting_earthsblood_pacifism)
+		qdel(trauma_to_remove)
+		if(show_message && was_active_overdose)
+			var/reagent_name = earthsblood_chem ? earthsblood_chem.name : "Крови Земли"
+			to_chat(organ_owner, span_notice("Концентрация реагента [reagent_name] снизилась до безопасного уровня, пацифизм отступил."))
+
+/// Синхронный сброс урона мозгу, сердцу, печени и токсинам после тика защищенного реагента
 /obj/item/organ/liver/skrell/proc/flush_organ_protection(mob/living/carbon/organ_owner)
 	if(!organ_owner)
 		expected_brain_damage = null
 		expected_heart_damage = null
 		expected_liver_damage = null
+		expected_tox_damage = null
 		return
 
 	if(!isnull(expected_liver_damage))
@@ -72,6 +102,12 @@
 			heart.set_organ_damage(expected_heart_damage)
 		expected_heart_damage = null
 
+	if(!isnull(expected_tox_damage))
+		var/current_tox = organ_owner.toxloss
+		if(current_tox > expected_tox_damage)
+			organ_owner.adjust_tox_loss(expected_tox_damage - current_tox, FALSE, TRUE)
+		expected_tox_damage = null
+
 /obj/item/organ/liver/skrell/on_life(seconds_per_tick, times_fired)
 	. = ..()
 	if(!owner)
@@ -81,12 +117,8 @@
 
 	// Если реагент полностью вывелся (0u) или упал ниже порога передозировки (45u)
 	if(!earthsblood || earthsblood.volume < 45)
-		if(earthsblood)
-			earthsblood.overdosed = FALSE
-		if(earthsblood_trauma)
-			QDEL_NULL(earthsblood_trauma)
-			var/reagent_name = earthsblood ? earthsblood.name : "Крови Земли"
-			to_chat(owner, span_notice("Действие передозировки от [reagent_name] рассеялось, пацифизм отступил."))
+		if(earthsblood_overdose_active || earthsblood_trauma || earthsblood?.overdosed)
+			clear_earthsblood_overdose(owner, earthsblood, show_message = TRUE)
 		// Пока реагента нет в передозировке, отслеживаем наличие врожденного пацифизма
 		if(!earthsblood)
 			preexisting_earthsblood_pacifism = !!(owner.has_trauma_type(/datum/brain_trauma/severe/pacifism))
@@ -98,9 +130,7 @@
 	if((organ_flags & ORGAN_FAILING) || !organ_owner)
 		return ..()
 
-	// =========================================================================
-	// ЭТАП 1. ПОЛНЫЙ ПЕРЕХВАТ МЕТАБОЛИЗМА (ДО ВЫЗОВА БАЗОВОЙ ЛОГИКИ ПЕЧЕНИ)
-	// =========================================================================
+	// MARK: Stage 1 - Full Metabolism Interception
 
 	// 1.1. Полный иммунитет к споровым и растительным ядам (0 урона, 0 вреда печени)
 	if(istype(chem, /datum/reagent/toxin/amatoxin) \
@@ -163,9 +193,7 @@
 		organ_owner.reagents.remove_reagent(chem.type, metabolized)
 		return COMSIG_MOB_STOP_REAGENT_TICK
 
-	// =========================================================================
-	// ЭТАП 2. БАЗОВАЯ ОБРАБОТКА ПЕЧЕНИ И ЗАЩИТА САМОГО ОРГАНА ПЕЧЕНИ
-	// =========================================================================
+	// MARK: Stage 2 - Base Liver Processing & Liver Protection
 
 	// Фиксируем чистый урон печени ДО того, как сработает ..() и on_mob_life()
 	if(istype(chem, /datum/reagent/consumable/ethanol/fyrsskar_tears) \
@@ -173,7 +201,8 @@
 		|| istype(chem, /datum/reagent/consumable/ethanol/aliose_velvet_cordial) \
 		|| istype(chem, /datum/reagent/consumable/ethanol/omega_glow_cocktail) \
 		|| istype(chem, /datum/reagent/consumable/ethanol/moonshine) \
-		|| istype(chem, /datum/reagent/toxin/curare))
+		|| istype(chem, /datum/reagent/toxin/curare) \
+		|| istype(chem, /datum/reagent/medicine/earthsblood))
 
 		expected_liver_damage = damage
 		addtimer(CALLBACK(src, PROC_REF(flush_organ_protection), organ_owner), 0, TIMER_UNIQUE | TIMER_OVERRIDE)
@@ -183,9 +212,7 @@
 	if(. & COMSIG_MOB_STOP_REAGENT_TICK)
 		return
 
-	// =========================================================================
-	// ЭТАП 3. МОДИФИКАЦИЯ ПОРОГОВ ПЕРЕДОЗИРОВКИ, ЗАВИСИМОСТИ И ЭФФЕКТОВ
-	// =========================================================================
+	// MARK: Stage 3 - Overdose & Addiction Modifications
 
 	// 3.1. Полное отключение передозировки и привыкания (органика)
 	if(istype(chem, /datum/reagent/drug/space_drugs) \
@@ -213,7 +240,7 @@
 
 		chem.addiction_types = null
 
-		// МЕХАНИЗМ ВОЗВРАТА КОНТРОЛЯ: при падении до 20u и ниже мгновенно восстанавливаем координацию
+		// МЕХАНИЗМ ВОЗВРАЛЯ КОНТРОЛЯ: при падении до 20u и ниже мгновенно восстанавливаем координацию
 		if(chem.volume <= 20)
 			if(chem.overdosed)
 				chem.overdosed = FALSE
@@ -274,27 +301,22 @@
 		if(istype(chem, /datum/reagent/medicine/earthsblood))
 			chem.addiction_types = null
 
-			// Если ещё нет передоза и травмы от реагента — обновляем флаг врожденного пацифизма
-			if(!chem.overdosed && !earthsblood_trauma && chem.volume < 45)
-				preexisting_earthsblood_pacifism = !!(organ_owner.has_trauma_type(/datum/brain_trauma/severe/pacifism))
-
-			// При достижении 45u контролируемо запускаем передоз и сразу перехватываем созданную травму
+			// При достижении 45u контролируемо запускаем передоз и перехватываем травму
 			if(chem.volume >= 45)
-				if(!chem.overdosed)
-					preexisting_earthsblood_pacifism = !!(organ_owner.has_trauma_type(/datum/brain_trauma/severe/pacifism))
-					chem.overdosed = TRUE
-					chem.overdose_start(organ_owner)
+				if(!earthsblood_overdose_active)
+					if(!chem.overdosed)
+						preexisting_earthsblood_pacifism = !!(organ_owner.has_trauma_type(/datum/brain_trauma/severe/pacifism))
+						chem.overdosed = TRUE
+						chem.overdose_start(organ_owner)
+					earthsblood_overdose_active = TRUE
 				if(!preexisting_earthsblood_pacifism && !earthsblood_trauma)
 					earthsblood_trauma = organ_owner.has_trauma_type(/datum/brain_trauma/severe/pacifism)
 			else
-				// Если объем ниже 45u (в т.ч. если add_reagent выдал передоз на 25-44u) — немедленно снимаем!
-				if(!preexisting_earthsblood_pacifism && !earthsblood_trauma && chem.overdosed)
-					earthsblood_trauma = organ_owner.has_trauma_type(/datum/brain_trauma/severe/pacifism)
-				chem.overdosed = FALSE
-			if(earthsblood_trauma)
-				QDEL_NULL(earthsblood_trauma)
-				var/reagent_name = chem ? chem.name : "Крови Земли"
-				to_chat(organ_owner, span_notice("Концентрация реагента [reagent_name] снизилась до безопасного уровня, пацифизм отступил."))
+				// Если объем ниже 45u: снимаем как реальный передоз, так и ранний передоз от add_reagent (25-44u)
+				if(earthsblood_overdose_active || earthsblood_trauma || chem.overdosed)
+					clear_earthsblood_overdose(organ_owner, chem, show_message = earthsblood_overdose_active)
+				else
+					preexisting_earthsblood_pacifism = !!(organ_owner.has_trauma_type(/datum/brain_trauma/severe/pacifism))
 
 	// 3.5. Порог передозировки 60u (критический 120u)
 	if(istype(chem, /datum/reagent/drug/krokodil) \
@@ -329,9 +351,7 @@
 	if(chem.overdose_crit_threshold && chem.volume < chem.overdose_crit_threshold)
 		chem.overdosed_crit = FALSE
 
-	// =========================================================================
-	// ЭТАП 4. ЗАЩИТА ВНУТРЕННИХ ОРГАНОВ (МОЗГ И СЕРДЦЕ) ОТ УРОНА
-	// =========================================================================
+	// MARK: Stage 4 - Internal Organ & Toxin Damage Protection
 
 	// 4.1. Защита мозга: фиксируем состояние мозга перед вызовом on_mob_life / overdose_process
 	if(istype(chem, /datum/reagent/medicine/earthsblood) \
@@ -348,7 +368,11 @@
 		if(brain)
 			expected_brain_damage = brain.damage
 
-	// 4.2. Защита сердца: кронкаин, кокаин и метамфетамин
+	// 4.2. Защита от токсического урона при передозировке Earthsblood
+	if(istype(chem, /datum/reagent/medicine/earthsblood))
+		expected_tox_damage = organ_owner.toxloss
+
+	// 4.3. Защита сердца: кронкаин, кокаин и метамфетамин
 	if(istype(chem, /datum/reagent/drug/kronkaine) \
 		|| istype(chem, /datum/reagent/drug/cocaine) \
 		|| istype(chem, /datum/reagent/drug/methamphetamine))
@@ -357,12 +381,10 @@
 		if(heart)
 			expected_heart_damage = heart.damage
 
-	if(!isnull(expected_brain_damage) || !isnull(expected_heart_damage))
+	if(!isnull(expected_brain_damage) || !isnull(expected_heart_damage) || !isnull(expected_tox_damage))
 		addtimer(CALLBACK(src, PROC_REF(flush_organ_protection), organ_owner), 0, TIMER_UNIQUE | TIMER_OVERRIDE)
 
-	// =========================================================================
-	// ЭТАП 5. ДОПОЛНИТЕЛЬНЫЕ ЭФФЕКТЫ И КОМПЕНСАЦИЯ ПОБОЧНЫХ ДЕЙСТВИЙ
-	// =========================================================================
+	// MARK: Stage 5 - Side Effect Compensation & Extra Effects
 
 	// Защита от мумификации (некроза кожи) при приеме крокодила
 	if(istype(chem, /datum/reagent/drug/krokodil))
@@ -395,6 +417,7 @@
 	expected_brain_damage = null
 	expected_heart_damage = null
 	expected_liver_damage = null
+	expected_tox_damage = null
 	if(earthsblood_trauma)
 		qdel(earthsblood_trauma)
 	earthsblood_trauma = null
