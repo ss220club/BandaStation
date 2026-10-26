@@ -1,19 +1,10 @@
+//MARK: Main code
 /obj/item/choice_beacon/weapon
 	name = "sidearm weapon beacon"
 	desc = "Одноразовый маяк для доставки оружия по вашему выбору. Пожалуйста, используйте его только в своем офисе."
 	var/static/list/selectable_gun_types = list()
 
-/obj/item/choice_beacon/weapon/security_pistol/generate_display_names()
-	selectable_gun_types = list(
-		"Пистолет GP-9 9x25мм" = /obj/item/storage/toolbox/guncase/ntcase/pistol/gp9/sec,
-		"Энергетический пистолет дизейблер" = /obj/item/gun/energy/disabler,
-	)
-	return selectable_gun_types
-
-/obj/item/choice_beacon/security_pistol/open_options_menu(mob/living/user)
-	ui_interact(user)
-
-/obj/item/choice_beacon/security_pistol/ui_interact(mob/user, datum/tgui/ui)
+/obj/item/choice_beacon/weapon/ui_interact(mob/user, datum/tgui/ui)
 	if(!user.can_perform_action(src, FORBID_TELEKINESIS_REACH))
 		return
 	ui = SStgui.try_update_ui(user, src, ui)
@@ -21,7 +12,18 @@
 		ui = new(user, src, "ChoiceBeaconWeapons", name)
 		ui.open()
 
-/obj/item/choice_beacon/security_pistol/ui_static_data(mob/user)
+/obj/item/choice_beacon/weapon/open_options_menu(mob/living/user)
+	ui_interact(user)
+
+/obj/item/choice_beacon/weapon/ui_interact(mob/user, datum/tgui/ui)
+	if(!user.can_perform_action(src, FORBID_TELEKINESIS_REACH))
+		return
+	ui = SStgui.try_update_ui(user, src, ui)
+	if(!ui)
+		ui = new(user, src, "ChoiceBeaconWeapons", name)
+		ui.open()
+
+/obj/item/choice_beacon/weapon/ui_static_data(mob/user)
 	var/static/list/weapon_info_cache
 	if(!weapon_info_cache)
 		weapon_info_cache = list()
@@ -32,7 +34,7 @@
 				weapon_info_cache += list(info)
 	return list("weapons" = weapon_info_cache)
 
-/obj/item/choice_beacon/security_pistol/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
+/obj/item/choice_beacon/weapon/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
 	. = ..()
 	if(.)
 		return
@@ -49,7 +51,7 @@
 	consume_use(options[choice], user)
 	return TRUE
 
-/obj/item/choice_beacon/security_pistol/proc/build_weapon_info(display_name, obj/item/choice_path)
+/obj/item/choice_beacon/weapon/proc/build_weapon_info(display_name, obj/item/choice_path)
 	var/obj/item/container = new choice_path(null)
 	var/obj/item/gun/weapon = istype(container, /obj/item/gun) ? container : (locate(/obj/item/gun) in container)
 	if(!weapon)
@@ -87,7 +89,7 @@
 	qdel(container)
 	return info
 
-/obj/item/choice_beacon/security_pistol/proc/build_mode_info(casing_path, obj/item/gun/weapon, maxcharge)
+/obj/item/choice_beacon/weapon/proc/build_mode_info(casing_path, obj/item/gun/weapon, maxcharge)
 	var/obj/item/ammo_casing/casing = casing_path
 	var/obj/projectile/proj = initial(casing.projectile_type)
 	var/list/mode = list(
@@ -115,6 +117,18 @@
 	if(total_stamina > 0)
 		mode["hits_to_exhaust"] = HITS_TO_CRIT(total_stamina)
 	return mode
+
+//MARK: Beacons types
+/obj/item/choice_beacon/weapon/security_pistol
+	name = "security sidearm weapon beacon"
+
+/obj/item/choice_beacon/weapon/security_pistol/generate_display_names()
+	selectable_gun_types = list(
+		"Пистолет GP-9 9x25мм" = /obj/item/storage/toolbox/guncase/ntcase/pistol/gp9/sec,
+		"Энергетический пистолет дизейблер" = /obj/item/gun/energy/disabler,
+	)
+	return selectable_gun_types
+
 /obj/item/choice_beacon/weapon/blueshield
 	name = "blueshield sidearm weapon beacon"
 
@@ -139,6 +153,7 @@
 	)
 	return selectable_gun_types
 
+//MARK: Job`s contents
 /obj/structure/closet/secure_closet/hos/PopulateContents()
 	. = ..()
 	new /obj/item/clothing/accessory/holster(src)
