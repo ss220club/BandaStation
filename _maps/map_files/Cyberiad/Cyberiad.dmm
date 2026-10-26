@@ -24356,6 +24356,10 @@
 /obj/machinery/light/small/red/directional/south,
 /turf/open/floor/iron,
 /area/station/maintenance/ghetto/auxiliary)
+"fTf" = (
+/obj/machinery/firealarm/directional/east,
+/turf/open/floor/iron/dark,
+/area/station/science/ordnance)
 "fTg" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
@@ -153034,7 +153038,7 @@ sCY
 pXP
 bIG
 xba
-oxp
+fTf
 dBO
 dOI
 oVL
