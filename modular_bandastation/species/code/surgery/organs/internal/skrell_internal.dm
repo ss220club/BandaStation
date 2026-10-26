@@ -83,9 +83,10 @@
 	if(!earthsblood || earthsblood.volume < 45)
 		if(earthsblood)
 			earthsblood.overdosed = FALSE
-		if(earthsblood_trauma)
-			QDEL_NULL(earthsblood_trauma)
-			to_chat(owner, span_notice("Действие передозировки от [earthsblood.name] рассеялось, пацифизм отступил."))
+			if(earthsblood_trauma)
+				QDEL_NULL(earthsblood_trauma)
+				var/reagent_name = earthsblood ? earthsblood.name : "Крови Земли"
+				to_chat(owner, span_notice("Действие передозировки от [reagent_name] рассеялось, пацифизм отступил."))
 		// Пока реагента нет в передозировке, отслеживаем наличие врожденного пацифизма
 		if(!earthsblood)
 			preexisting_earthsblood_pacifism = !!(owner.has_trauma_type(/datum/brain_trauma/severe/pacifism))
@@ -292,7 +293,8 @@
 				chem.overdosed = FALSE
 				if(earthsblood_trauma)
 					QDEL_NULL(earthsblood_trauma)
-					to_chat(organ_owner, span_notice("Концентрация реагента [chem.name] снизилась до безопасного уровня..."))
+					var/reagent_name = chem ? chem.name : "Крови Земли"
+					to_chat(organ_owner, span_notice("Концентрация реагента [reagent_name] снизилась до безопасного уровня, пацифизм отступил."))
 
 	// 3.5. Порог передозировки 60u (критический 120u)
 	if(istype(chem, /datum/reagent/drug/krokodil) \

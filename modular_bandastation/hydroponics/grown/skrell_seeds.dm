@@ -1,6 +1,6 @@
 //Ximikoa //
 /obj/item/seeds/ximikoa
-	name = "пакет семян ксими'коа"
+	name = "ximikoa seed pack"
 	desc = "Из этих семян вырастает ксими'коа — типичная скреллийская приправа со сладким вкусом."
 	icon_state = "seed-ximikoa"
 	species = "ximikoa"
@@ -32,7 +32,7 @@
 
 // Gomoa //
 /obj/item/seeds/gomoa
-	name = "пакет семян мицелия гомоа"
+	name = "gomoa mycelium pack"
 	desc = "Гомоа — это небольшой оранжевый гриб, который растёт на полях равнин Кси'Корисал."
 	icon_state = "mycelium-gomoa"
 	species = "gomoa"
