@@ -2,7 +2,7 @@
 /obj/item/food/skrell
 	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
 
-// Breads & Bakery
+// MARK: Breads & Bakery
 
 // 2. Plump Helmet Rice Flatbread
 /obj/item/food/skrell/plump_rice_flatbread
@@ -90,7 +90,7 @@
 	venue_value = FOOD_PRICE_NORMAL
 
 
-// SOUPS & STEWS
+// MARK: Soups & Stews
 
 // 6. Qerrbalak Fungal Stew
 /obj/item/food/soup/qerrbalak_stew
@@ -224,7 +224,7 @@
 	crafting_complexity = FOOD_COMPLEXITY_3
 	venue_value = FOOD_PRICE_EXOTIC
 
-// MAIN DISHES
+// MARK: Main Dishes
 
 // 13. Plump Fungal Roast
 /obj/item/food/skrell/raw_plump_fungal_roast
@@ -502,7 +502,7 @@
 	food_flags = FOOD_FINGER_FOOD
 	w_class = WEIGHT_CLASS_TINY
 
-// SALADS & APPETIZERS
+// MARK: Salads & Appetizers
 
 // 26. Coniine Berry Bowl
 /obj/item/food/salad/coniine_berry
@@ -560,7 +560,7 @@
 	crafting_complexity = FOOD_COMPLEXITY_3
 	venue_value = FOOD_PRICE_NORMAL
 
-// BURGERS, SANDWICHES & WRAPS
+// MARK: Burgers, Sandwiches & Wraps
 
 // 29. Skrellian Tofu Burger
 /obj/item/food/burger/skrell_tofu
@@ -679,7 +679,7 @@
 	crafting_complexity = FOOD_COMPLEXITY_3
 	venue_value = FOOD_PRICE_NORMAL
 
-// DESSERTS, CAKES & ROLLS
+// MARK: Desserts, Cakes & Rolls
 
 // 34. Citrus Coffee Cake
 /obj/item/food/cake/skrell_citrus_cake
@@ -983,7 +983,7 @@
 	w_class = WEIGHT_CLASS_TINY
 	food_flags = FOOD_FINGER_FOOD
 
-// ICE CREAM & SWEETS
+// MARK: Sweets & Ice Cream
 
 // 44. Skrell Vanilla Ice Cream
 /obj/item/food/skrell/skrell_vanilla_icecream

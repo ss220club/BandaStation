@@ -1,6 +1,4 @@
-// =========================================================================
-// 49. СЛЕЗЫ ФУРСКАРА (Tears of Fyrsskar)
-// =========================================================================
+// MARK 49. Tears of Fyrsskar
 
 /datum/chemical_reaction/drink/fyrsskar_tears
 	results = list(/datum/reagent/consumable/ethanol/fyrsskar_tears = 3)
@@ -12,8 +10,8 @@
 	mix_sound = 'sound/effects/chemistry/bufferadd.ogg'
 
 /datum/reagent/consumable/ethanol/fyrsskar_tears
-	name = "Tears of Fyrsskar"
-	description = "Plasmonic based alcoholic drink that was consumed by ancient inhabitants of Skrellian homeworld."
+	name = "Слёзы Фирсскара"
+	description = "Алкогольный напиток на основе фарона, который употребляли древние жители родной планеты скреллов"
 	color = "#C300AE"
 	quality = DRINK_VERYGOOD
 	nutriment_factor = 1
@@ -50,15 +48,13 @@
 
 /datum/glass_style/drinking_glass/fyrsskar_tears
 	required_drink_type = /datum/reagent/consumable/ethanol/fyrsskar_tears
-	name = "Tears of Fyrsskar"
-	desc = "A sparkling violet-blue drink with a distinct aroma of citrus and ozone."
+	name = "Слёзы Фирсскара"
+	desc = "Искрящийся фиолетово-голубой напиток с ярко выраженным ароматом цитрусовых и озона."
 	icon = 'modular_bandastation/food_and_drinks/icons/drinks/skrell.dmi'
 	icon_state = "fyrsskartears"
 
 
-// =========================================================================
-// 50. НАСТОЙКА «КВЕРРБАЛАКСКАЯ СМЕРТЬ» (Qerrbalak Amanita Tincture)
-// =========================================================================
+// MARK 50. Qerrbalak Amanita Tincture
 
 /datum/chemical_reaction/drink/qerrbalak_amanita_tincture
 	results = list(/datum/reagent/consumable/ethanol/qerrbalak_amanita_tincture = 30)
@@ -70,8 +66,8 @@
 	mix_sound = 'sound/effects/chemistry/catalyst.ogg'
 
 /datum/reagent/consumable/ethanol/qerrbalak_amanita_tincture
-	name = "Qerrbalak Amanita Tincture"
-	description = "A viscous, crimson fungal liquor rich in potent amatoxins and sweetened with ruby grenadine. A revitalizing sacred spirit for Skrell, but lethal to other species."
+	name = "Настойка из мухомора «Керрбалак»"
+	description = "Вязкая, ало-красная грибная жидкость, богатая сильными аматоксинами и подслащенная рубиновым гренадином. Восстанавливающий силы священный эликсир для скреллов, но смертельно опасный для других видов."
 	color = "#8A0303"
 	quality = DRINK_VERYGOOD
 	nutriment_factor = 1
@@ -118,14 +114,12 @@
 
 /datum/glass_style/drinking_glass/qerrbalak_amanita_tincture
 	required_drink_type = /datum/reagent/consumable/ethanol/qerrbalak_amanita_tincture
-	name = "Qerrbalak Amanita Tincture"
-	desc = "A deep ruby-red liquor speckled with floating white fungal spores."
+	name = "Настойка из мухомора «Керрбалак»"
+	desc = "Напиток глубокого рубиново-красного цвета, в котором плавают белые споры грибка."
 	icon = 'modular_bandastation/food_and_drinks/icons/drinks/skrell.dmi'
 	icon_state = "amanita_tincture"
 
-// =========================================================================
-// 51. ЭЛИКСИР «ГЛОУ-СЕРАКА» (Glow-Seraka Tonic)
-// =========================================================================
+// MARK 51. Glow-Seraka Tonic
 
 /datum/chemical_reaction/drink/glow_seraka_tonic
 	results = list(/datum/reagent/consumable/glow_seraka_tonic = 30)
@@ -138,8 +132,8 @@
 	mix_sound = 'sound/effects/liquid_pour/liquid_pour3.ogg'
 
 /datum/reagent/consumable/glow_seraka_tonic
-	name = "Glow-Seraka Tonic"
-	description = "A shimmering fiery-amber tonic brewed from Lavaland extremophile mushrooms and fire blossoms. Keeps miners warm and bioluminescent in pitch-black depths."
+	name = "Тоник «Глоу-Серака»"
+	description = "Мерцающий тоник огненно-янтарного цвета, приготовленный из экстремофильных грибов Лаваландии и огненных цветов. Согревает шахтеров и придает им биолюминесценцию в кромешной тьме."
 	color = "#FF8C00"
 	quality = DRINK_VERYGOOD
 	nutriment_factor = 2
@@ -159,14 +153,12 @@
 
 /datum/glass_style/drinking_glass/glow_seraka_tonic
 	required_drink_type = /datum/reagent/consumable/glow_seraka_tonic
-	name = "Glow-Seraka Tonic"
-	desc = "A warm, glowing orange cocktail that dimly illuminates its surroundings."
+	name = "Тоник «Глоу-Серака"
+	desc = "Теплый коктейль ярко-оранжевого цвета, который слабо освещает окружающее пространство."
 	icon = 'modular_bandastation/food_and_drinks/icons/drinks/skrell.dmi'
 	icon_state = "glow_seraka"
 
-// =========================================================================
-// 52. «АЛИОССКИЙ БАРХАТ» (Aliose Velvet Cordial)
-// =========================================================================
+// MARK 52. Aliose Velvet Cordial
 
 /datum/chemical_reaction/drink/aliose_velvet_cordial
 	results = list(/datum/reagent/consumable/ethanol/aliose_velvet_cordial = 30)
@@ -179,8 +171,8 @@
 	mix_sound = 'sound/effects/liquid_pour/liquid_pour2.ogg'
 
 /datum/reagent/consumable/ethanol/aliose_velvet_cordial
-	name = "Aliose Velvet Cordial"
-	description = "A velvety, pastel-pink dessert liqueur combining creamy soymilk, effervescent cherry soda, and fine vermouth. Exceptionally gentle on Skrellian biology."
+	name = "Алиосский Бархат"
+	description = "Бархатистый десертный ликёр пастельно-розового цвета, сочетающий в себе сливочное соевое молоко, игристую вишнёвую газировку и изысканный вермут. Исключительно щадящий для скреллианского организма."
 	color = "#D1526D"
 	quality = DRINK_VERYGOOD
 	nutriment_factor = 2
@@ -200,14 +192,12 @@
 
 /datum/glass_style/drinking_glass/aliose_velvet_cordial
 	required_drink_type = /datum/reagent/consumable/ethanol/aliose_velvet_cordial
-	name = "Aliose Velvet Cordial"
-	desc = "A tall, elegant glass filled with a pastel-pink creamy cordial garnished with a dark cherry."
+	name = "Алиосский Бархат"
+	desc = "Высокий, изящный бокал, наполненный кремообразным ликером пастельно-розового цвета, украшенный тёмной вишней."
 	icon = 'modular_bandastation/food_and_drinks/icons/drinks/skrell.dmi'
 	icon_state = "aliose_velvet"
 
-// =========================================================================
-// 53. «УМАМИ КВЕРРБАЛАКА» (Qerrbalak Umami Tonic)
-// =========================================================================
+// MARK 53. Qerrbalak Umami Tonic
 
 /datum/chemical_reaction/drink/qerrbalak_umami_tonic
 	results = list(/datum/reagent/consumable/qerrbalak_umami_tonic = 35)
@@ -220,8 +210,8 @@
 	mix_sound = 'sound/effects/chemistry/bufferadd.ogg'
 
 /datum/reagent/consumable/qerrbalak_umami_tonic
-	name = "Qerrbalak Umami Tonic"
-	description = "A dense, savory-umami isotonic broth brewed with soy extracts, dark coffee, and trace plasma. Heightens head-tentacle neural conductivity."
+	name = "Тоник «Керрбалак Умами»"
+	description = "Насыщенный, пикантно-умами изотонический бульон, приготовленный на основе соевых экстрактов, крепкого кофе и плазмы. Повышает нервную проводимость головы и щупалец."
 	color = "#D84C00"
 	quality = DRINK_VERYGOOD
 	nutriment_factor = 3
@@ -251,15 +241,13 @@
 
 /datum/glass_style/drinking_glass/qerrbalak_umami_tonic
 	required_drink_type = /datum/reagent/consumable/qerrbalak_umami_tonic
-	name = "Qerrbalak Umami Tonic"
-	desc = "A ceramic cup containing a dark, steaming savory tonic with a fragrant roasted aroma."
+	name = "Тоник «Керрбалак Умами»"
+	desc = "Керамическая чашка с пикантным тоником И ароматным запахом жареного."
 	icon = 'modular_bandastation/food_and_drinks/icons/drinks/skrell.dmi'
 	icon_state = "umami_tonic"
 
 
-// =========================================================================
-// 54. ЭЛИКСИР «СЕРДЦЕ КВЕРРБАЛАКА» (Heart of Qerrbalak)
-// =========================================================================
+// MARK 54. Heart of Qerrbalak
 
 /datum/chemical_reaction/drink/heart_of_qerrbalak
 	results = list(/datum/reagent/consumable/heart_of_qerrbalak = 40)
@@ -273,8 +261,8 @@
 	mix_sound = 'sound/effects/chemistry/catalyst.ogg'
 
 /datum/reagent/consumable/heart_of_qerrbalak
-	name = "Heart of Qerrbalak"
-	description = "A glowing psychedelic concoction infused with lethal bungotoxins and effervescent citrus. Induces transcendental tranquility in Skrell."
+	name = "Сердце Керрбалака"
+	description = "Светящаяся психоделическая смесь, насыщенная смертоносными токсинами и игристыми цитрусовыми нотками. Вызывает у Скрелла трансцендентное умиротворение."
 	color = "#68B0A8"
 	quality = DRINK_VERYGOOD
 	nutriment_factor = 1
@@ -326,9 +314,9 @@
 		if(SPT_PROB(3, seconds_per_tick))
 			var/trip_message = pick(
 				"Ваши хвосты вибрируют на неощутимой частоте древнего океана...",
-				"Тело кажется невероятно легким, словно гравитация исчезла...",
+				"Тело кажется невероятно лёгким, словно гравитация исчезла...",
 				"Теплые био-волны размывают границы окружающего пространства...",
-				"Вы слышите мягкий шепот первозданных глубин Кверрбалака...",
+				"Вы слышите мягкий шёпот первозданных глубин Кверрбалака...",
 			)
 			to_chat(drinker, span_notice("[trip_message]"))
 
@@ -360,14 +348,12 @@
 
 /datum/glass_style/drinking_glass/heart_of_qerrbalak
 	required_drink_type = /datum/reagent/consumable/heart_of_qerrbalak
-	name = "Heart of Qerrbalak"
-	desc = "A glowing psychedelic concoction infused with lethal bungotoxins and effervescent citrus. Induces transcendental tranquility in Skrell."
+	name = "Сердце Керрбалака"
+	desc = "Светящаяся психоделическая смесь, насыщенная смертоносными токсинами и игристыми цитрусовыми нотками. Вызывает у Скрелла трансцендентное умиротворение."
 	icon = 'modular_bandastation/food_and_drinks/icons/drinks/skrell.dmi'
 	icon_state = "heart_qerrbalak"
 
-// =========================================================================
-// 55. КОКТЕЙЛЬ «ОМЕГА-СИЯНИЕ» (Omega-Glow Cocktail)
-// =========================================================================
+// MARK 55. Omega-Glow Cocktail
 
 /datum/chemical_reaction/drink/omega_glow_cocktail
 	results = list(/datum/reagent/consumable/ethanol/omega_glow_cocktail = 30)
@@ -380,8 +366,8 @@
 	mix_sound = 'sound/effects/chemistry/bufferadd.ogg'
 
 /datum/reagent/consumable/ethanol/omega_glow_cocktail
-	name = "Omega-Glow Cocktail"
-	description = "A mesmerizing kaleidoscopic cocktail layered with bitter absinthe, bubbling tonic, and bioluminescent botanical essences."
+	name = "Коктейль «Омега-Глоу»"
+	description = "Завораживающий калейдоскопический коктейль, состоящий из горького абсента, игристого тоника и биолюминесцентных растительных экстрактов."
 	color = "#7B68EE"
 	quality = DRINK_FANTASTIC
 	nutriment_factor = 2
@@ -448,23 +434,21 @@
 
 /datum/glass_style/drinking_glass/omega_glow_cocktail
 	required_drink_type = /datum/reagent/consumable/ethanol/omega_glow_cocktail
-	name = "Omega-Glow Cocktail"
-	desc = "A prismatically shimmering cocktail with shifting shades of violet, emerald, and gold."
+	name = "Коктейль «Омега-Глоу»"
+	desc = "Коктейль, переливающийся призмами, с меняющимися фиолетового и изумрудного цвета."
 	icon = 'modular_bandastation/food_and_drinks/icons/drinks/skrell.dmi'
 	icon_state = "omega_glow"
 
 
-// =========================================================================
-// Другие реагенты
-// =========================================================================
+// MARK Другие реагенты
 
 /datum/reagent/consumable/qerr_primordial_nectar
-	name = "Qerrbalak Primordial Nectar"
+	name = "Первозданный нектар Керрбалака"
 	description = "Священная эссенция, воссоздающая состав реликтовых геотермальных ванн одного из чудес света скреллов. Исцеляет глубокие повреждения разума, восстанавливает органы и гармонизирует биологические ритмы любого существа."
 	color = "#40E0D0"
 	quality = FOOD_AMAZING
 	nutriment_factor = 4
-	metabolization_rate = 0.33 * REAGENTS_METABOLISM // Замедляет вывод из организма в 3 раза (длительный эффект)
+	metabolization_rate = 0.33 * REAGENTS_METABOLISM
 	taste_description = "термальная родниковая вода, сладкая амброзия и успокаивающий озон"
 	chemical_flags = NONE
 	randomized_spawns = REAGENT_SPAWN_NO_RANDOM

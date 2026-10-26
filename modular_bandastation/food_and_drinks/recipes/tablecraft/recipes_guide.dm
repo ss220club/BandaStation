@@ -1,7 +1,5 @@
 // Crafting recipes
-// =========================================================================
-// 1. РАСКАТЫВАНИЕ ТЕСТА СКАЛКОЙ (ROLLING PIN)
-// =========================================================================
+// MARK: Rolling Pin
 
 /datum/crafting_recipe/food/rollingpin/flat_rice_dough
 	name = "Flat rice dough"
@@ -11,9 +9,7 @@
 	cuisine_category = CUISINE_MARTIAN
 	meal_category = MEAL_COMPONENT
 
-// =========================================================================
-// 2. НАРЕЗКА СКРЕЛЛЬСКИХ БЛЮД НОЖОМ (KNIFE SLICING)
-// =========================================================================
+// MARK: Knife Slicing
 
 /datum/crafting_recipe/food/knife/fly_amanita_bun_slice
 	name = "Fly amanita bun slice"
@@ -95,9 +91,7 @@
 	cuisine_category = CUISINE_SKRELL
 	meal_category = MEAL_DESSERT
 
-// =========================================================================
-// 3. ОБЖАРИВАНИЕ И ВЫПЕКАНИЕ (GRILL / OVEN)
-// =========================================================================
+// MARK: Grill & Oven
 
 /datum/crafting_recipe/food/grill/plump_fungal_roast
 	name = "Plump fungal roast"
