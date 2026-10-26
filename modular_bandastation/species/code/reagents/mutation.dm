@@ -36,3 +36,8 @@
 	results = list(/datum/reagent/mutationtoxin/skrell = 1)
 	required_reagents = list(/datum/reagent/water/salt = 1)
 	required_container = /obj/item/slime_extract/green
+
+/datum/chemical_reaction/slime/slimecerulean
+	results = list(/datum/reagent/mutationtoxin/cerulean = 1)
+	required_reagents = list(/datum/reagent/consumable/ethanol/rum = 1)
+	required_container = /obj/item/slime_extract/green
