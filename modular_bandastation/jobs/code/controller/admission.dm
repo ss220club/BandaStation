@@ -33,6 +33,8 @@
 		return
 	if(QDELETED(player) || !requester || GET_CLIENT(player) != requester || requester.mob != player || player.mind != candidate_mind)
 		return JOB_UNAVAILABLE_GENERIC
+	if(!latejoin && !is_random_job_preference_allowed(player, job))
+		return JOB_UNAVAILABLE_GENERIC
 	return check_character_eligibility(player, job, latejoin)
 
 /datum/controller/subsystem/job/proc/check_character_eligibility(mob/dead/new_player/player, datum/job/job, latejoin = FALSE)

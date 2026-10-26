@@ -14,8 +14,8 @@
 	supervisors = JOB_HEAD_OF_PERSONNEL_RU
 	departments_list = list(/datum/job_department/service)
 	paycheck_department = ACCOUNT_SRV
+	default_job_variant = "cleaning_manager"
 	job_variant_specs = list(
-		"default" = list("Менеджер по клинингу", /datum/outfit/job/donor/cleaning_manager),
 		"cleaning_manager" = list("Менеджер по клинингу", /datum/outfit/job/donor/cleaning_manager),
 		"rat_catcher" = list("Ловец крыс", /datum/outfit/job/donor/cleaning_manager),
 		"cleaner_1" = list("Уборщик I-разряда", /datum/outfit/job/donor/cleaning_manager),

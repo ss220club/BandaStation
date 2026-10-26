@@ -5,11 +5,6 @@
 	var/prisoner_tattoos_applied = FALSE
 	var/datum/record/crew/prisoner_initial_record
 
-/// Replace only our native global subscription; registration needs the exact initial record.
-/datum/job/prisoner/New()
-	. = ..()
-	UnregisterSignal(SSdcs, COMSIG_GLOB_CREWMEMBER_JOINED)
-
 /// Capture one crime before preference application can yield, alongside the shared variant context.
 /datum/job/prisoner/prepare_spawn_character(mob/living/body, datum/preferences/preferences)
 	. = ..()

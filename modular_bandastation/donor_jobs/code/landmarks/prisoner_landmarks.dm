@@ -1,9 +1,3 @@
-GLOBAL_LIST_EMPTY(donor_prisoner_starts)
-
-/datum/job/prisoner
-	/// Prefer a different safe turf for each initial prisoner, as native landmarks do.
-	var/list/used_prisoner_starts = list()
-
 /obj/effect/landmark/start/prisoner
 	icon = 'modular_bandastation/donor_jobs/icons/landmarks.dmi'
 	icon_state = "prisoner"
@@ -14,24 +8,29 @@ GLOBAL_LIST_EMPTY(donor_prisoner_starts)
 	jobspawn_override = TRUE
 	delete_after_roundstart = FALSE
 
-// Native roundstart landmarks are deleted once the round starts; keep their turfs for latejoin.
-/obj/effect/landmark/start/prisoner/Initialize(mapload)
-	. = ..()
-	if(!jobspawn_override)
-		GLOB.donor_prisoner_starts |= get_turf(src)
+/// Native roundstart selection and its used flag finish before these become latejoin overrides.
+/// Preserve the existing landmarks; native latejoin selection and Destroy() own the registered state.
+/obj/effect/landmark/start/prisoner/after_round_start()
+	if(CONFIG_GET(flag/donor_prisoner_gate) && !length(GLOB.jobspawn_overrides[name]))
+		var/datum/job/prisoner/job = SSjob.get_job(name)
+		var/list/locations = job?.get_safe_prisoner_turfs()
+		for(var/obj/effect/landmark/start/point as anything in GLOB.start_landmarks_list)
+			if(QDELETED(point) || point.name != name || !(get_turf(point) in locations))
+				continue
+			point.delete_after_roundstart = FALSE
+			point.jobspawn_override = TRUE
+			LAZYADDASSOCLIST(GLOB.jobspawn_overrides, name, point)
+	return ..()
 
 /datum/job/prisoner/proc/get_safe_prisoner_turfs()
-	var/list/overrides = GLOB.jobspawn_overrides?[title]
-	var/list/candidates
-	if(length(overrides))
-		// Native overrides replace ordinary starts, even if none pass the safety checks.
-		candidates = list()
-		for(var/atom/override_spawn as anything in overrides)
-			candidates |= get_turf(override_spawn)
-	else
-		candidates = GLOB.donor_prisoner_starts.Copy()
+	var/list/candidates = GLOB.jobspawn_overrides?[title]
+	if(!length(candidates))
+		candidates = GLOB.start_landmarks_list
 	var/list/result = list()
-	for(var/turf/location as anything in candidates)
+	for(var/atom/point as anything in candidates)
+		if(QDELETED(point) || point.name != title)
+			continue
+		var/turf/location = get_turf(point)
 		if(QDELETED(location) || !is_station_level(location.z) || location.is_blocked_turf(TRUE))
 			continue
 		if(!istype(get_area(location), /area/station/security/prison))
@@ -43,21 +42,14 @@ GLOBAL_LIST_EMPTY(donor_prisoner_starts)
 	return ..() && (!CONFIG_GET(flag/donor_prisoner_gate) || length(get_safe_prisoner_turfs()))
 
 /datum/job/prisoner/get_latejoin_spawn_point()
-	if(!CONFIG_GET(flag/donor_prisoner_gate))
-		return ..()
-	var/list/locations = get_safe_prisoner_turfs()
-	return length(locations) ? pick(locations) : null
+	. = ..()
+	if(CONFIG_GET(flag/donor_prisoner_gate) && !(get_turf(.) in get_safe_prisoner_turfs()))
+		return null
 
 /datum/job/prisoner/get_roundstart_spawn_point()
-	if(!CONFIG_GET(flag/donor_prisoner_gate))
-		return ..()
-	var/list/locations = get_safe_prisoner_turfs()
-	var/list/unused_locations = locations - used_prisoner_starts
-	if(length(unused_locations))
-		locations = unused_locations
-	. = length(locations) ? pick(locations) : null
-	if(.)
-		used_prisoner_starts |= .
+	. = ..()
+	if(CONFIG_GET(flag/donor_prisoner_gate) && !(get_turf(.) in get_safe_prisoner_turfs()))
+		return null
 
 /datum/job/prisoner/donor_lock_reason(client/player)
 	. = ..()

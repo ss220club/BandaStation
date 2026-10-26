@@ -8,6 +8,7 @@
 	var/datum/mind/character_mind
 	var/job_title
 	var/datum/job_character_selection/assignment
+	var/reported_lock_reason
 
 /// Menu snapshots remain local to the request; the singleton menu never stores a player's state.
 /mob/dead/new_player/proc/capture_latejoin_request(job_title = null)
@@ -52,6 +53,12 @@
 			. = JOB_UNAVAILABLE_GENERIC
 	if(. == JOB_AVAILABLE && !is_latejoin_request_current(context))
 		. = JOB_UNAVAILABLE_GENERIC
+	var/datum/latejoin_profile_snapshot/request = latejoin_request
+	if(. == JOB_UNAVAILABLE_JOB_LOCK && request?.job_title == rank && is_latejoin_request_current(request))
+		var/lock_reason = job.get_join_lock_reason(requester)
+		if(lock_reason && request.reported_lock_reason != lock_reason)
+			request.reported_lock_reason = lock_reason
+			to_chat(src, span_warning(lock_reason))
 	qdel(context)
 
 /mob/dead/new_player/AttemptLateSpawn(rank)
@@ -64,8 +71,7 @@
 	var/lock_reason = job?.get_join_lock_reason(context.requester)
 	if(lock_reason)
 		qdel(context)
-		tgui_alert(src, lock_reason)
-		return FALSE
+		return reject_late_spawn(lock_reason)
 	latejoin_request = context
 	spawning = TRUE
 	. = ..()

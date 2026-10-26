@@ -16,5 +16,9 @@
 		"bodyguard" = list("Телохранитель", /datum/outfit/job/donor/service_guard),
 		"external_guard" = list("Сторож", /datum/outfit/job/donor/service_guard),
 		"technical_guard" = list("Технический охранник", /datum/outfit/job/donor/service_guard),
-		"personal_guard" = list("Личный охранник", /datum/outfit/job/donor/service_guard),
+		"bouncer" = list("Вышибала", /datum/outfit/job/donor/service_guard),
 	)
+
+/// Preserve the selected role when reading the former, misleading variant ID.
+/datum/job/donor/service_guard/resolve_job_variant(variant_id)
+	return ..(variant_id == "personal_guard" ? "bouncer" : variant_id)

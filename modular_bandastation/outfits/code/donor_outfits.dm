@@ -252,6 +252,38 @@
 	l_hand = /obj/item/instrument/guitar
 	backpack_contents = list(/obj/item/instrument/harmonica = 1)
 
+/datum/outfit/job/donor/musician/drummer
+	name = "Musician (drummer)"
+	l_hand = /obj/item/instrument/drumskit_folded
+	backpack_contents = list(
+		/obj/item/instrument/harmonica = 1,
+		/obj/item/wrench = 1,
+	)
+
+/datum/outfit/job/donor/musician/keyboard
+	name = "Musician (keyboard)"
+	l_hand = /obj/item/instrument/piano_synth
+
+/datum/outfit/job/donor/musician/violinist
+	name = "Musician (violinist)"
+	l_hand = /obj/item/instrument/violin
+
+/datum/outfit/job/donor/musician/jester
+	name = "Musician (jester)"
+	l_hand = /obj/item/instrument/accordion
+
+/datum/outfit/job/donor/musician/saxophonist
+	name = "Musician (saxophonist)"
+	l_hand = /obj/item/instrument/saxophone
+
+/datum/outfit/job/donor/musician/vocalist
+	name = "Musician (vocalist)"
+	l_hand = /obj/item/radio/entertainment/microphone/physical
+
+/datum/outfit/job/donor/musician/touring_musician
+	name = "Musician (touring musician)"
+	l_hand = /obj/item/instrument/banjo
+
 /datum/outfit/job/donor/representative_tsf
 	name = "Representative TSF"
 	jobtype = /datum/job/donor/representative_tsf

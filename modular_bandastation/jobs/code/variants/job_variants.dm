@@ -2,6 +2,8 @@
 	/// Stable variant ID -> list(public title, outfit path).
 	var/list/job_variant_specs
 	var/list/job_variants
+	/// A named option can be the default without a duplicate entry in the selector.
+	var/default_job_variant = "default"
 
 /datum/job_variant
 	var/id
@@ -27,11 +29,11 @@
 		if(initial(outfit_path.jobtype) != type || !ispath(trim_path, /datum/id_trim/job) || initial(trim_path.job) != type)
 			CRASH("Variant outfit/trim belongs to another job: [type]/[id]")
 		variants[id] = new /datum/job_variant(id, spec[1], spec[2])
-	if(length(variants) && !variants["default"])
+	if(length(variants) && !variants[default_job_variant])
 		CRASH("Job variants require a default: [type]")
 	job_variants = variants
 	return job_variants
 
 /datum/job/proc/resolve_job_variant(variant_id) as /datum/job_variant
 	var/list/variants = get_job_variants()
-	return variants[variant_id] || variants["default"]
+	return variants[variant_id] || variants[default_job_variant]

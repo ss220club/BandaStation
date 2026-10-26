@@ -35,7 +35,7 @@
 		"description" = job.description,
 		"public_title" = variant?.public_title || job_title_ru(job.title),
 		"character_profile" = profile_description,
-		"job_icon" = icon2base64(job.get_job_variant_icon(variant?.id)),
+		"job_icon" = job.get_job_variant_icon_base64(variant?.id),
 	)
 	qdel(character)
 	return data

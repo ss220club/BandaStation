@@ -41,11 +41,11 @@
 			var/datum/job_variant/variant = variants[variant_id]
 			options += list(list("id" = variant_id, "name" = variant.public_title))
 		var/datum/job_variant/selected_variant = job.resolve_job_variant(selection[job.title])
-		var/datum/job_variant/default_variant = job.resolve_job_variant("default")
+		var/datum/job_variant/default_variant = job.resolve_job_variant(null)
 		job_variants[job.title] = list(
 			"title" = default_variant?.public_title,
 			"selected" = selected_variant?.id,
-			"icon" = icon2base64(job.get_job_variant_icon(selected_variant?.id)),
+			"icon" = job.get_job_variant_icon_base64(selected_variant?.id),
 			"variants" = options,
 			"required_tier" = required_tier,
 			"lock_reason" = job.get_join_lock_reason(user.client),

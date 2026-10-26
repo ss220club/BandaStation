@@ -11,8 +11,8 @@
 	supervisors = JOB_HEAD_OF_PERSONNEL_RU
 	departments_list = list(/datum/job_department/service)
 	paycheck_department = ACCOUNT_SRV
+	default_job_variant = "service_administrator"
 	job_variant_specs = list(
-		"default" = list("Сервис-администратор", /datum/outfit/job/donor/service_administrator),
 		"service_administrator" = list("Сервис-администратор", /datum/outfit/job/donor/service_administrator),
 		"steward" = list("Сервис-управитель", /datum/outfit/job/donor/service_administrator),
 		"pompadour" = list("Помпадур", /datum/outfit/job/donor/service_administrator),
