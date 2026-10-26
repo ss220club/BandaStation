@@ -1,7 +1,7 @@
 //Ximikoa //
 /obj/item/seeds/ximikoa
-	name = "ximikoa seed pack"
-	desc = "These seeds grow into ximikoa, a typical Skrellian seasoning with a sweet flavor."
+	name = "пакет семян ксими'коа"
+	desc = "Из этих семян вырастает ксими'коа — типичная скреллийская приправа со сладким вкусом."
 	icon_state = "seed-ximikoa"
 	species = "ximikoa"
 	growing_icon = 'icons/obj/service/hydroponics/growing_fruits.dmi'
@@ -23,8 +23,8 @@
 
 /obj/item/food/grown/ximikoa
 	seed = /obj/item/seeds/ximikoa
-	name = "ximikoa"
-	desc = "These winding red stems, which resemble earthworms, grow in the waters of the Quorrgla marshes."
+	name = "ксими'коа"
+	desc = "Эти извивающиеся красные стебли, напоминающие земляных червей, растут в водах болот Куорргла."
 	icon_state = "ximikoa_fruits"
 	bite_consumption_mod = 0.25
 	foodtypes = FRUIT
@@ -32,8 +32,8 @@
 
 // Gomoa //
 /obj/item/seeds/gomoa
-	name = "gomoa mycelium pack"
-	desc = "The Gomoa is a small orange mushroom that grows in the fields of the Ksi'Corisal plains."
+	name = "пакет семян мицелия гомоа"
+	desc = "Гомоа — это небольшой оранжевый гриб, который растёт на полях равнин Кси'Корисал."
 	icon_state = "mycelium-gomoa"
 	species = "gomoa"
 	icon_grow = "gomoa-grow"
@@ -59,7 +59,7 @@
 /obj/item/food/grown/mushroom/gomoa
 	seed = /obj/item/seeds/gomoa
 	bite_consumption_mod = 1
-	name = "gomoa cluster"
-	desc = "Not only is it one of the main ingredients in the Skrells’ staple food, but the bioluminescent properties of its spores are also used in the intricate weavings of the Koe'm, the Skrells’ currency."
+	name = "кластер Гомоа"
+	desc = "Это не только один из основных ингредиентов основного продукта питания скреллов, но и биолюминесцентные свойства его спор используются при создании сложных узоров на «Ко'ем» — валюте скреллов."
 	icon_state = "gomoa"
 	tastes = list("mushroom" = 1, "silver" = 2)

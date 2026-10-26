@@ -85,7 +85,7 @@
 			earthsblood.overdosed = FALSE
 		if(earthsblood_trauma)
 			QDEL_NULL(earthsblood_trauma)
-			to_chat(owner, span_notice("Действие передозировки Крови Земли рассеялось, пацифизм отступает."))
+			to_chat(owner, span_notice("Действие передозировки от [earthsblood.name] рассеялось, пацифизм отступил."))
 		// Пока реагента нет в передозировке, отслеживаем наличие врожденного пацифизма
 		if(!earthsblood)
 			preexisting_earthsblood_pacifism = !!(owner.has_trauma_type(/datum/brain_trauma/severe/pacifism))
@@ -248,7 +248,7 @@
 			addtimer(CALLBACK(organ_owner, TYPE_PROC_REF(/mob/living, adjust_tox_loss), -2 * REM * seconds_per_tick, FALSE), 0)
 
 			if(SPT_PROB(5, seconds_per_tick))
-				to_chat(organ_owner, span_userdanger("Нервная система перегружена стимуляторами — тело дергается само по себе!"))
+				to_chat(organ_owner, span_userdanger("Нервная система перегружена стимуляторами - тело дёргается само по себе!"))
 
 	// 3.3. Отключение только привыкания для уличной химии (пороги передозировки остаются штатными)
 	if(istype(chem, /datum/reagent/drug/maint/tar) \
@@ -292,7 +292,7 @@
 				chem.overdosed = FALSE
 				if(earthsblood_trauma)
 					QDEL_NULL(earthsblood_trauma)
-					to_chat(organ_owner, span_notice("Концентрация Крови Земли снизилась до безопасного уровня, пацифизм отступает."))
+					to_chat(organ_owner, span_notice("Концентрация реагента [chem.name] снизилась до безопасного уровня..."))
 
 	// 3.5. Порог передозировки 60u (критический 120u)
 	if(istype(chem, /datum/reagent/drug/krokodil) \
