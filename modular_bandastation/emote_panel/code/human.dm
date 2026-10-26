@@ -183,6 +183,7 @@
 	if(!istype(user))
 		return
 	return user.dna.species.get_evil_laugh_sound(user)
+
 /datum/emote/living/cane_tap
 	key = "cane_tap"
 	key_third_person = "стучит тростью"
