@@ -6,6 +6,20 @@
 	TEST_ASSERT_EQUAL(comms_intercept_threshold(30), 60, "Threshold should be 2 packets per crew member")
 	TEST_ASSERT_EQUAL(comms_intercept_threshold(80), 100, "Threshold must not go above 100")
 
+/datum/unit_test/comms_intercept_garble
+
+/datum/unit_test/comms_intercept_garble/Run()
+	var/datum/objective/comms_intercept/objective = allocate(/datum/objective/comms_intercept)
+	objective.target_amount = 20
+	objective.messages_collected = 14
+	TEST_ASSERT_EQUAL(objective.get_garble_chance(), 0, "Channels must stay clean below 75%")
+	objective.messages_collected = 15
+	TEST_ASSERT_EQUAL(objective.get_garble_chance(), 10, "Garbling should start at 10% on 75%")
+	objective.messages_collected = 18
+	TEST_ASSERT_EQUAL(objective.get_garble_chance(), 52, "Garbling should ramp up linearly towards 80%")
+	objective.messages_collected = 20
+	TEST_ASSERT_EQUAL(objective.get_garble_chance(), 100, "Channels must be fully garbled during the transmission")
+
 /datum/unit_test/comms_intercept_direction
 
 /datum/unit_test/comms_intercept_direction/Run()

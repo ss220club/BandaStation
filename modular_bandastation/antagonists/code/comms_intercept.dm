@@ -7,9 +7,10 @@
 #define COMMS_INTERCEPT_SPEAKER_COOLDOWN (30 SECONDS)
 #define COMMS_INTERCEPT_UPLOAD_TIME (3 MINUTES)
 #define COMMS_INTERCEPT_LOGS_PERCENT 25
-#define COMMS_INTERCEPT_ECHO_PERCENT 50
-#define COMMS_INTERCEPT_ECHO_PROB 5
-#define COMMS_INTERCEPT_ECHO_COOLDOWN (10 MINUTES)
+#define COMMS_INTERCEPT_INDICATOR_PERCENT 50
+#define COMMS_INTERCEPT_GARBLE_PERCENT 75
+#define COMMS_INTERCEPT_GARBLE_MIN 10
+#define COMMS_INTERCEPT_GARBLE_MAX 80
 #define COMMS_INTERCEPT_DIRECTION_PERCENT 75
 /// Add a corrupt log entry every N packets
 #define COMMS_INTERCEPT_LOG_EVERY 3
@@ -136,8 +137,8 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 	var/last_signal_key
 	/// REF(speaker) = world.time of their last counted packet
 	var/list/speaker_last_packet = list()
-	/// REF(speaker) = world.time of their last echo
-	var/list/speaker_last_echo = list()
+	/// Separate from last_signal_key, garbling also runs on messages that don't count
+	var/last_garbled_key
 	var/datum/weakref/receiver_ref
 	var/list/obj/item/comms_tap/active_taps = list()
 
@@ -175,15 +176,21 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 		return FALSE
 	return disk in owner.current.get_all_contents()
 
-/datum/objective/comms_intercept/proc/on_intercepted_message(datum/signal/subspace/vocal/signal)
-	if(upload_done || failed || messages_collected >= target_amount)
+/// With counted FALSE (panel open) the message is still garbled, it just doesn't count as a packet
+/datum/objective/comms_intercept/proc/on_intercepted_message(datum/signal/subspace/vocal/signal, counted)
+	if(upload_done || failed)
 		return
 	var/datum/signal/subspace/root = signal
 	while(root.original)
 		root = root.original
 	// world.time in the key in case a deleted signal's ref gets reused
 	var/signal_key = "[REF(root)]-[world.time]"
-	if(signal_key == last_signal_key)
+	if(signal_key != last_garbled_key)
+		last_garbled_key = signal_key
+		var/garble_chance = get_garble_chance()
+		if(garble_chance)
+			signal.data["message"] = Gibberish(signal.data["message"], garble_chance >= COMPRESSION_REPLACE_CHARACTER_THRESHOLD, garble_chance)
+	if(!counted || signal_key == last_signal_key || messages_collected >= target_amount)
 		return
 	last_signal_key = signal_key
 	var/atom/movable/speaker = signal.virt?.source
@@ -201,23 +208,28 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 		return
 	speaker_last_packet[speaker_key] = world.time
 	messages_collected++
-	give_hints(receiver, speaker)
+	give_hints(receiver)
 	if(messages_collected >= target_amount)
 		receiver.start_upload()
 	receiver.update_status()
 
-/datum/objective/comms_intercept/proc/is_echo_active()
-	return !upload_done && !failed && messages_collected * 100 / target_amount >= COMMS_INTERCEPT_ECHO_PERCENT
+/datum/objective/comms_intercept/proc/is_leak_noticeable()
+	return !upload_done && !failed && messages_collected * 100 / target_amount >= COMMS_INTERCEPT_INDICATOR_PERCENT
 
-/datum/objective/comms_intercept/proc/give_hints(obj/item/comms_intercept_receiver/receiver, atom/movable/speaker)
+/// Percent of characters to garble, grows from 75% and maxes out once the transmission starts
+/datum/objective/comms_intercept/proc/get_garble_chance()
+	if(messages_collected >= target_amount)
+		return 100
+	var/percent = messages_collected * 100 / target_amount
+	if(percent < COMMS_INTERCEPT_GARBLE_PERCENT)
+		return 0
+	var/ramp = (percent - COMMS_INTERCEPT_GARBLE_PERCENT) * (COMMS_INTERCEPT_GARBLE_MAX - COMMS_INTERCEPT_GARBLE_MIN)
+	return COMMS_INTERCEPT_GARBLE_MIN + ramp / (100 - COMMS_INTERCEPT_GARBLE_PERCENT)
+
+/datum/objective/comms_intercept/proc/give_hints(obj/item/comms_intercept_receiver/receiver)
 	var/percent = messages_collected * 100 / target_amount
 	if(percent >= COMMS_INTERCEPT_LOGS_PERCENT && !(messages_collected % COMMS_INTERCEPT_LOG_EVERY))
 		add_server_log("Копия пакета данных передана на незарегистрированный адрес.")
-	if(ismob(speaker) && is_echo_active() && prob(COMMS_INTERCEPT_ECHO_PROB))
-		var/speaker_key = REF(speaker)
-		if(world.time >= speaker_last_echo[speaker_key] + COMMS_INTERCEPT_ECHO_COOLDOWN)
-			speaker_last_echo[speaker_key] = world.time
-			to_chat(speaker, span_warning("В гарнитуре на мгновение слышно слабое эхо вашего голоса."))
 	if(percent >= COMMS_INTERCEPT_DIRECTION_PERCENT && (!last_direction_report || messages_collected - last_direction_report >= COMMS_INTERCEPT_DIRECTION_EVERY))
 		last_direction_report = messages_collected
 		report_direction(receiver)
@@ -275,6 +287,11 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 
 /datum/objective/comms_intercept/proc/on_upload_finished()
 	upload_done = TRUE
+	for(var/obj/item/comms_tap/tap as anything in active_taps)
+		var/obj/machinery/telecomms/machine = tap.host
+		do_sparks(3, FALSE, machine)
+		machine.visible_message(span_warning("[capitalize(machine.declent_ru(NOMINATIVE))] сыплет искрами и гаснет!"))
+		machine.atom_break()
 	if(owner?.current)
 		to_chat(owner.current, span_notice("Выгрузка перехваченных данных завершена. Заберите дамп ключей шифрования из приёмника и вывезите его со станции."))
 
@@ -307,6 +324,7 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 	<li>По завершении выгрузки заберите дамп ключей шифрования из приёмника и эвакуируйтесь с ним. Дамп должен находиться при вас.</li>\
 	<li>Дамп открывает гарнитуре все каналы отделов: подключите его к гарнитуре, сам дамп останется у вас. Если в гарнитуре сменить ключ шифрования, доступ пропадёт.</li>\
 	<li>Чем дольше идёт перехват, тем заметнее утечка: экипаж и ИИ начнут искать жучок и приёмник. Запасной жучок можно приобрести в аплинке.</li>\
+	<li>Ближе к концу перехвата эфир начнёт заметно хрипеть, а после передачи машина с жучком выйдет из строя.</li>\
 	</ul>"
 
 /datum/uplink_item/special_equipment/comms_tap
@@ -423,11 +441,11 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 
 /obj/item/comms_tap/proc/on_relay(datum/source, datum/signal/subspace/signal)
 	SIGNAL_HANDLER
-	if(!is_listening())
+	if(!calibrated)
 		return
 	if(!istype(signal, /datum/signal/subspace/vocal) || !(signal.frequency in comms_intercept_frequencies()) || !signal.data["message"])
 		return
-	GLOB.comms_intercept?.on_intercepted_message(signal)
+	GLOB.comms_intercept?.on_intercepted_message(signal, is_listening())
 
 /obj/item/comms_tap/proc/on_host_emp(datum/source, severity, protection)
 	SIGNAL_HANDLER
@@ -592,7 +610,7 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 
 /obj/item/radio/headset/examine(mob/user)
 	. = ..()
-	if(!GLOB.comms_intercept?.is_echo_active())
+	if(!GLOB.comms_intercept?.is_leak_noticeable())
 		return
 	for(var/frequency in comms_intercept_frequencies())
 		if(src in GLOB.all_radios["[frequency]"])
@@ -667,9 +685,10 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 #undef COMMS_INTERCEPT_MIN_CREW
 #undef COMMS_INTERCEPT_MESSAGES_PER_CREW
 #undef COMMS_INTERCEPT_SPEAKER_COOLDOWN
-#undef COMMS_INTERCEPT_ECHO_PERCENT
-#undef COMMS_INTERCEPT_ECHO_PROB
-#undef COMMS_INTERCEPT_ECHO_COOLDOWN
+#undef COMMS_INTERCEPT_INDICATOR_PERCENT
+#undef COMMS_INTERCEPT_GARBLE_PERCENT
+#undef COMMS_INTERCEPT_GARBLE_MIN
+#undef COMMS_INTERCEPT_GARBLE_MAX
 #undef COMMS_INTERCEPT_MIN_MESSAGES
 #undef COMMS_INTERCEPT_MAX_MESSAGES
 #undef COMMS_INTERCEPT_UPLOAD_TIME
