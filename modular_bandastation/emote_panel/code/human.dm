@@ -190,15 +190,20 @@
 	name = "Стучать тростью"
 	message = "стучит тростью по полу."
 	emote_type = EMOTE_VISIBLE | EMOTE_AUDIBLE
+	sound = 'sound/items/modsuit/atrocinator_step.ogg'
 	cooldown = 2 SECONDS
 
 /datum/emote/living/cane_tap/can_run_emote(mob/living/user, status_check = TRUE, intentional, params)
+	// Keep it listed in the standard emote panel; actual use still checks the cane and turf below.
+	if(!status_check)
+		return ..()
+
 	var/obj/item/active_item = user.get_active_held_item()
 	var/turf/user_turf = get_turf(user)
 	return ..() && (istype(active_item, /obj/item/cane) || istype(active_item, /obj/item/melee/baton/nt_cane)) && user_turf && !istype(user_turf, /turf/open/space) && !istype(user_turf, /turf/open/openspace)
 
-/datum/emote/living/cane_tap/get_sound(mob/living/user)
-	return null
+/datum/emote/living/cane_tap/should_play_sound(mob/living/user, intentional = FALSE)
+	return FALSE
 
 /datum/emote/living/cane_tap/run_emote(mob/living/user, params, type_override, intentional)
 	. = ..()
