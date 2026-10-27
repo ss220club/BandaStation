@@ -108,7 +108,7 @@
 	var/turf/tile = get_turf(src)
 	if(isclosedturf(tile))
 		return
-	to_chat(src, span_warning("[src.declent_ru(NOMINATIVE)] перегружается и выпускает облако горячего пара!"))
+	to_chat(src, span_warning("[capitalize(src.declent_ru(NOMINATIVE))] перегружается и выпускает облако горячего пара!"))
 	playsound(src, 'sound/effects/spray.ogg', rand(50, 80), TRUE)
 	tile.atmos_spawn_air("[GAS_WATER_VAPOR]=[clamp(cell.maxcharge * 0.1, 1, 100)];[TURF_TEMPERATURE(1000)]")
 	for(var/mob/living/nearby_mob in range(4, tile))
