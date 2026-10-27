@@ -53536,6 +53536,7 @@
 /obj/machinery/firealarm/directional/south,
 /obj/effect/turf_decal/stripes/line,
 /obj/machinery/power/apc/auto_name/directional/south,
+/obj/structure/cable,
 /turf/open/floor/iron,
 /area/station/tcommsat/maints)
 "mWc" = (
