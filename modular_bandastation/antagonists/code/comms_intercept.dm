@@ -681,12 +681,17 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 
 /obj/item/radio/headset/examine(mob/user)
 	. = ..()
-	if(!GLOB.comms_intercept?.is_leak_noticeable())
+	var/datum/objective/comms_intercept/objective = GLOB.comms_intercept
+	if(!objective?.is_leak_noticeable())
 		return
-	for(var/frequency in comms_intercept_frequencies())
-		if(src in GLOB.all_radios["[frequency]"])
-			. += span_warning("Индикатор шифрования неровно мигает.")
-			return
+	// Only tapped channels blink, so comparing headsets narrows down the machine
+	for(var/obj/item/comms_tap/tap as anything in objective.active_taps)
+		if(!tap.is_listening())
+			continue
+		for(var/channel_name in comms_intercept_channel_names(tap.host))
+			if(src in GLOB.all_radios["[GLOB.default_radio_channels[channel_name]]"])
+				. += span_warning("Индикатор шифрования неровно мигает.")
+				return
 
 /obj/machinery/telecomms
 	/// Comms tap install progress, reset when the panel closes
