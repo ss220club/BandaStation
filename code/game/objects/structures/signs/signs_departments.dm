@@ -2,6 +2,7 @@
 
 /obj/structure/sign/departments
 	is_editable = TRUE
+	sign_change_name = "Department Signs"
 
 ///////MEDBAY
 
