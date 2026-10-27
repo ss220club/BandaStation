@@ -5,7 +5,12 @@
 #define COMMS_INTERCEPT_MAX_MESSAGES 100
 /// Per-speaker cooldown, so one person can't fill the packet alone
 #define COMMS_INTERCEPT_SPEAKER_COOLDOWN (30 SECONDS)
-#define COMMS_INTERCEPT_UPLOAD_TIME (3 MINUTES)
+#define COMMS_INTERCEPT_UPLOAD_TIME_MIN (2 MINUTES)
+#define COMMS_INTERCEPT_UPLOAD_TIME_MAX (5 MINUTES)
+/// From this distance to the tap on, the transmission takes the longest
+#define COMMS_INTERCEPT_UPLOAD_FAR_DISTANCE 100
+/// Each z-level between the receiver and the tap counts as this many tiles
+#define COMMS_INTERCEPT_Z_LEVEL_DISTANCE 30
 #define COMMS_INTERCEPT_LOGS_PERCENT 25
 #define COMMS_INTERCEPT_INDICATOR_PERCENT 50
 #define COMMS_INTERCEPT_GARBLE_PERCENT 75
@@ -19,6 +24,10 @@
 #define COMMS_INTERCEPT_TAP_EMP_TIME (2 MINUTES)
 #define COMMS_INTERCEPT_RECEIVER_EMP_TIME (60 SECONDS)
 #define COMMS_INTERCEPT_MAX_LOG_ENTRIES 400
+/// Extra load on the receiver's area APC while transmitting, shows up on the power monitor
+#define COMMS_INTERCEPT_RECEIVER_LOAD (10 KILO WATTS)
+#define COMMS_INTERCEPT_STATIC_NEAR 10
+#define COMMS_INTERCEPT_STATIC_FAR 30
 
 #define COMMS_RECEIVER_OFF 0
 #define COMMS_RECEIVER_ONLINE 1
@@ -55,6 +64,33 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 	for(var/datum/mind/crew_mind as anything in get_crewmember_minds())
 		if(crew_mind.current && crew_mind.current.stat != DEAD)
 			.++
+
+/// get_dist() doesn't work across z-levels, so every level of difference adds a fixed number of tiles
+/proc/comms_intercept_tap_distance(turf/tap_turf, turf/receiver_turf)
+	var/flat_distance = max(abs(tap_turf.x - receiver_turf.x), abs(tap_turf.y - receiver_turf.y))
+	return flat_distance + abs(tap_turf.z - receiver_turf.z) * COMMS_INTERCEPT_Z_LEVEL_DISTANCE
+
+/// Closer to the tap is faster, a null distance (no working tap) takes the longest
+/proc/comms_intercept_upload_time(distance)
+	if(isnull(distance))
+		return COMMS_INTERCEPT_UPLOAD_TIME_MAX
+	var/ramp = min(distance, COMMS_INTERCEPT_UPLOAD_FAR_DISTANCE) * (COMMS_INTERCEPT_UPLOAD_TIME_MAX - COMMS_INTERCEPT_UPLOAD_TIME_MIN)
+	return COMMS_INTERCEPT_UPLOAD_TIME_MIN + ramp / COMMS_INTERCEPT_UPLOAD_FAR_DISTANCE
+
+/proc/comms_intercept_static_text(distance)
+	if(distance < COMMS_INTERCEPT_STATIC_NEAR)
+		return "оглушающий треск"
+	if(distance <= COMMS_INTERCEPT_STATIC_FAR)
+		return "отчётливый треск"
+	return "слабый треск"
+
+/// Has to be in the range any station radio can tune to
+/proc/comms_intercept_pick_frequency()
+	var/list/frequencies = list()
+	for(var/frequency in MIN_UNUSED_FREQ to MAX_FREQ step 2)
+		if(frequency != FREQ_CONFESSIONAL)
+			frequencies += frequency
+	return pick(frequencies)
 
 /proc/comms_intercept_direction_text(turf/source_turf, turf/target_turf)
 	var/static/list/direction_names = list(
@@ -139,6 +175,8 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 	var/list/speaker_last_packet = list()
 	var/datum/weakref/receiver_ref
 	var/list/obj/item/comms_tap/active_taps = list()
+	/// Picked at transmission start, radios tuned to it pick up the receiver
+	var/transmission_frequency
 
 /datum/objective/comms_intercept/Destroy()
 	if(GLOB.comms_intercept == src)
@@ -164,7 +202,7 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 	setup(comms_intercept_living_crew())
 
 /datum/objective/comms_intercept/update_explanation_text()
-	explanation_text = "Украдите ключи шифрования станции: подключите сетевой жучок к телекоммуникациям, соберите приёмником [target_amount] пакетов из каналов отделов, дождитесь окончания выгрузки, заберите дамп ключей шифрования из приёмника и вывезите его со станции. Инструкция приложена к оборудованию."
+	explanation_text = "Украдите ключи шифрования станции: подключите сетевой жучок к телекоммуникациям, соберите приёмником [target_amount] пакетов из каналов отделов, дождитесь окончания передачи, заберите дамп ключей шифрования из приёмника и вывезите его со станции. Инструкция приложена к оборудованию."
 
 /datum/objective/comms_intercept/check_completion()
 	if(completed)
@@ -233,11 +271,8 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 
 /datum/objective/comms_intercept/proc/report_direction(obj/item/comms_intercept_receiver/receiver)
 	var/direction = get_direction_text(receiver)
-	if(!direction)
-		return
-	var/text = "Поток копий каналов связи уходит от телекоммуникаций [direction]."
-	add_server_log(text)
-	notify_ais(text)
+	if(direction)
+		add_server_log("Поток копий каналов связи уходит от телекоммуникаций [direction].")
 
 /datum/objective/comms_intercept/proc/get_direction_text(obj/item/comms_intercept_receiver/receiver)
 	var/obj/item/comms_tap/tap = locate() in active_taps
@@ -246,6 +281,20 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 	if(!tap_turf || !receiver_turf)
 		return null
 	return comms_intercept_direction_text(tap_turf, receiver_turf)
+
+/datum/objective/comms_intercept/proc/get_upload_time(obj/item/comms_intercept_receiver/receiver)
+	var/turf/receiver_turf = get_turf(receiver)
+	if(!receiver_turf)
+		return COMMS_INTERCEPT_UPLOAD_TIME_MAX
+	var/closest_distance
+	for(var/obj/item/comms_tap/tap as anything in active_taps)
+		var/turf/tap_turf = get_turf(tap)
+		if(!tap_turf)
+			continue
+		var/distance = comms_intercept_tap_distance(tap_turf, receiver_turf)
+		if(isnull(closest_distance) || distance < closest_distance)
+			closest_distance = distance
+	return comms_intercept_upload_time(closest_distance)
 
 /// Shows up in the log browser of every server that handles a department channel
 /datum/objective/comms_intercept/proc/add_server_log(text)
@@ -271,12 +320,12 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 	if(upload_announced)
 		return
 	upload_announced = TRUE
-	var/area/receiver_area = get_area(receiver)
-	notify_ais("Обнаружена исходящая передача перехваченных данных каналов связи. Источник: [receiver_area.name].")
 	var/direction = get_direction_text(receiver)
-	// Crew only gets a bearing, the exact area goes to the AI
 	var/text = "Обнаружена исходящая передача перехваченных данных каналов связи. Сигнал уходит от телекоммуникаций [direction || "в неизвестном направлении"]."
-	add_server_log(text)
+	transmission_frequency = comms_intercept_pick_frequency()
+	var/frequency_text = "[text] Побочный сигнал передатчика на частоте [format_frequency(transmission_frequency)]."
+	add_server_log(frequency_text)
+	notify_ais(frequency_text)
 	var/list/channels = list(RADIO_CHANNEL_COMMAND, RADIO_CHANNEL_ENGINEERING)
 	// broadcast() mutates the list
 	var/obj/machinery/announcement_system/announcer = get_announcement_system(null, receiver, channels)
@@ -289,8 +338,6 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 		do_sparks(3, FALSE, machine)
 		machine.visible_message(span_warning("[capitalize(machine.declent_ru(NOMINATIVE))] сыплет искрами и гаснет!"))
 		machine.atom_break()
-	if(owner?.current)
-		to_chat(owner.current, span_notice("Выгрузка перехваченных данных завершена. Заберите дамп ключей шифрования из приёмника и вывезите его со станции."))
 
 /datum/objective/comms_intercept/proc/on_receiver_destroyed(obj/item/comms_intercept_receiver/receiver)
 	if(disk_ref || receiver_ref?.resolve() != receiver)
@@ -317,8 +364,9 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 	<li>Закрепите приёмник гаечным ключом в любом помещении станции с питанием, кроме самих телекоммуникаций. Приёмник можно переносить, собранные пакеты сохранятся.</li>\
 	<li>Пакеты поступают из разговоров экипажа в каналах отделов. Общий канал не шифруется, а ваши собственные сообщения не учитываются.</li>\
 	<li>От одного человека можно получить не больше одного пакета за полминуты. Ход сбора отслеживайте на экране приёмника.</li>\
-	<li>После сбора пакетов приёмник начнёт трёхминутную выгрузку. Не допускайте, чтобы его открепили, обесточили или сломали.</li>\
-	<li>По завершении выгрузки заберите дамп ключей шифрования из приёмника и эвакуируйтесь с ним. Дамп должен находиться при вас.</li>\
+	<li>После сбора пакетов приёмник начнёт передачу данных. Чем ближе он к жучку, тем быстрее она пройдёт: от двух до пяти минут. Не допускайте, чтобы его открепили, обесточили или сломали.</li>\
+	<li>Во время передачи приёмник сильно нагружает сеть, а его побочный сигнал можно засечь радио. Прячьте его там, где большая нагрузка не бросится в глаза.</li>\
+	<li>По завершении передачи заберите дамп ключей шифрования из приёмника и эвакуируйтесь с ним. Дамп должен находиться при вас.</li>\
 	<li>Дамп открывает гарнитуре все каналы отделов: подключите его к гарнитуре, сам дамп останется у вас. Если в гарнитуре сменить ключ шифрования, доступ пропадёт.</li>\
 	<li>Чем дольше идёт перехват, тем заметнее утечка: экипаж и ИИ начнут искать жучок и приёмник. Запасной жучок можно приобрести в аплинке.</li>\
 	<li>Ближе к концу перехвата эфир начнёт заметно хрипеть, а после передачи машина с жучком выйдет из строя.</li>\
@@ -471,9 +519,12 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 	var/emp_until = 0
 	var/uploading = FALSE
 	var/status = COMMS_RECEIVER_OFF
+	var/area/loaded_area
 
 /obj/item/comms_intercept_receiver/Destroy()
 	STOP_PROCESSING(SSobj, src)
+	loaded_area?.removeStaticPower(COMMS_INTERCEPT_RECEIVER_LOAD, AREA_USAGE_STATIC_EQUIP)
+	loaded_area = null
 	GLOB.comms_intercept?.on_receiver_destroyed(src)
 	return ..()
 
@@ -493,9 +544,11 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 		else
 			. += span_notice("Сигнал от жучка не поступает.")
 	if(uploading)
-		. += span_notice("Выгрузка: [round(objective.upload_progress * 100 / COMMS_INTERCEPT_UPLOAD_TIME)]%.")
+		var/upload_time = objective.get_upload_time(src)
+		var/time_left = max(upload_time - objective.upload_progress, 0)
+		. += span_notice("Передача: [round(min(objective.upload_progress * 100 / upload_time, 100))]%, осталось: [DisplayTimeText(time_left, 1)].")
 	if(objective.upload_done && !objective.disk_ref)
-		. += span_notice("Выгрузка завершена, дамп ключей шифрования готов к извлечению.")
+		. += span_notice("Передача завершена, дамп ключей шифрования готов к извлечению.")
 	if(!anchored)
 		. += span_notice("Приёмник можно закрепить [EXAMINE_HINT("гаечным ключом")].")
 
@@ -560,7 +613,16 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 	if(new_status == status)
 		return
 	status = new_status
+	update_load()
 	update_appearance(UPDATE_OVERLAYS)
+
+/obj/item/comms_intercept_receiver/proc/update_load()
+	var/area/new_area = status == COMMS_RECEIVER_UPLOADING ? get_area(src) : null
+	if(new_area == loaded_area)
+		return
+	loaded_area?.removeStaticPower(COMMS_INTERCEPT_RECEIVER_LOAD, AREA_USAGE_STATIC_EQUIP)
+	new_area?.addStaticPower(COMMS_INTERCEPT_RECEIVER_LOAD, AREA_USAGE_STATIC_EQUIP)
+	loaded_area = new_area
 
 /obj/item/comms_intercept_receiver/update_overlays()
 	. = ..()
@@ -598,12 +660,24 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 		return
 	objective.on_upload_started(src)
 	objective.upload_progress += seconds_per_tick SECONDS
-	if(objective.upload_progress < COMMS_INTERCEPT_UPLOAD_TIME)
+	if(objective.upload_progress < objective.get_upload_time(src))
 		return
 	uploading = FALSE
 	objective.on_upload_finished()
 	update_status()
 	return PROCESS_KILL
+
+/obj/item/radio/examine(mob/user)
+	. = ..()
+	var/datum/objective/comms_intercept/objective = GLOB.comms_intercept
+	if(!objective?.transmission_frequency || get_frequency() != objective.transmission_frequency)
+		return
+	var/obj/item/comms_intercept_receiver/receiver = objective.receiver_ref?.resolve()
+	var/turf/radio_turf = get_turf(src)
+	var/turf/receiver_turf = get_turf(receiver)
+	if(receiver?.status != COMMS_RECEIVER_UPLOADING || !radio_turf || !receiver_turf)
+		return
+	. += span_warning("Из динамика доносится [comms_intercept_static_text(comms_intercept_tap_distance(radio_turf, receiver_turf))].")
 
 /obj/item/radio/headset/examine(mob/user)
 	. = ..()
@@ -661,23 +735,6 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 		to_chat(user, span_notice("Контакты зачищены. Вставьте жучок."))
 	return ITEM_INTERACT_SUCCESS
 
-/obj/machinery/telecomms/attack_hand_secondary(mob/user, list/modifiers)
-	. = ..()
-	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN || !panel_open)
-		return
-	balloon_alert(user, "осмотр платы...")
-	// Full delay even on a clean machine, otherwise the result leaks early
-	if(!do_after(user, 10 SECONDS, src) || !panel_open)
-		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
-	var/obj/item/comms_tap/tap = locate() in src
-	if(!tap)
-		balloon_alert(user, "ничего постороннего")
-		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
-	tap.forceMove(drop_location())
-	user.put_in_hands(tap)
-	to_chat(user, span_warning("Вы извлекаете посторонний модуль из [declent_ru(GENITIVE)]."))
-	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
-
 #undef COMMS_INTERCEPT_PROB
 #undef COMMS_INTERCEPT_MIN_CREW
 #undef COMMS_INTERCEPT_MESSAGES_PER_CREW
@@ -688,7 +745,10 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 #undef COMMS_INTERCEPT_GARBLE_MAX
 #undef COMMS_INTERCEPT_MIN_MESSAGES
 #undef COMMS_INTERCEPT_MAX_MESSAGES
-#undef COMMS_INTERCEPT_UPLOAD_TIME
+#undef COMMS_INTERCEPT_UPLOAD_TIME_MIN
+#undef COMMS_INTERCEPT_UPLOAD_TIME_MAX
+#undef COMMS_INTERCEPT_UPLOAD_FAR_DISTANCE
+#undef COMMS_INTERCEPT_Z_LEVEL_DISTANCE
 #undef COMMS_INTERCEPT_LOGS_PERCENT
 #undef COMMS_INTERCEPT_DIRECTION_PERCENT
 #undef COMMS_INTERCEPT_LOG_EVERY
@@ -696,6 +756,9 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 #undef COMMS_INTERCEPT_TAP_EMP_TIME
 #undef COMMS_INTERCEPT_RECEIVER_EMP_TIME
 #undef COMMS_INTERCEPT_MAX_LOG_ENTRIES
+#undef COMMS_INTERCEPT_RECEIVER_LOAD
+#undef COMMS_INTERCEPT_STATIC_NEAR
+#undef COMMS_INTERCEPT_STATIC_FAR
 #undef COMMS_RECEIVER_OFF
 #undef COMMS_RECEIVER_ONLINE
 #undef COMMS_RECEIVER_UPLOADING
