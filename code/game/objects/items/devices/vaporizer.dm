@@ -5,7 +5,7 @@
 /obj/item/vaporizer
 	name = "hydro-vaporizer"
 	desc = "Хитроумное устройство, созданное для поддержания альтернативного метода дыхания. \
-			Работая на съёмной батарейке, спиральный механизм синтезирует водородно-кислородную смесь, \
+			Работая на съёмной батарее, спиральный механизм синтезирует водородно-кислородную смесь, \
 			которая затем используется для увлажнения жабр носителя. \n\
 			Скорость подачи жидкости, судя по всему, рассчитана на кожу, отлично удерживающую влагу. \n\
 			На корпусе выгравировано изображение планеты Марина. \n\n\
@@ -72,7 +72,7 @@
 		return FALSE
 	tool.play_tool_sound(src)
 	QDEL_NULL(charge_bar)
-	balloon_alert(user, "[cell.declent_ru(NOMINATIVE)] извлечена")
+	balloon_alert(user, "батарея извлечена")
 	cell.forceMove(get_turf(src))
 	cell = null
 	return TRUE
@@ -87,7 +87,7 @@
 	if(!user.transferItemToLoc(new_cell, src))
 		return NONE
 	cell = new_cell
-	balloon_alert(user, "установлена [new_cell.declent_ru(NOMINATIVE)]")
+	balloon_alert(user, "батарея установлена")
 	create_charge_bar(user)
 	return ITEM_INTERACT_SUCCESS
 
