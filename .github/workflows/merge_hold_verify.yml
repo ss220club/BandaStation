@@ -2,7 +2,7 @@ name: Merge Hold Verify
 
 on:
   schedule:
-    - cron: "20 * * * *"
+    - cron: "37 */3 * * *"
   workflow_dispatch:
 
 permissions:
