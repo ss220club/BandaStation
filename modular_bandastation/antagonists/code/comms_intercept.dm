@@ -403,7 +403,7 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 	for(var/channel_name in missing_channels)
 		headset.channels[channel_name] = 1
 		LAZYSET(headset.secure_radio_connections, channel_name, add_radio(headset, GLOB.default_radio_channels[channel_name]))
-	if(!headset.listening)
+	if(!headset.get_listening())
 		remove_radio_all(headset)
 	headset.balloon_alert(user, "каналы добавлены")
 	return ITEM_INTERACT_SUCCESS
