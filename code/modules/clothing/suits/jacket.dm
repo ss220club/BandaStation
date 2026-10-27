@@ -48,7 +48,7 @@
 
 /obj/item/clothing/suit/toggle/jacket/sweater
 	name = "sweater jacket"
-	desc = "Куртка свитер, или свитер куртка."
+	desc = "Куртка-свитер, или свитер-куртка."
 	icon = 'icons/map_icons/clothing/suit/_suit.dmi'
 	icon_state = "/obj/item/clothing/suit/toggle/jacket/sweater"
 	post_init_icon_state = "sweater"
@@ -189,7 +189,7 @@
 
 /obj/item/clothing/suit/jacket/letterman
 	name = "letterman jacket"
-	desc = "Классическая коричневая куртка-бомбер. Выглядит довольно жаркой и тяжёлой."
+	desc = "Классическая коричневая леттерман-куртка. Выглядит довольно жаркой и тяжёлой."
 	icon_state = "letterman"
 	inhand_icon_state = null
 	species_exception = list(/datum/species/golem)
@@ -200,7 +200,7 @@
 
 /obj/item/clothing/suit/jacket/letterman_red
 	name = "red letterman jacket"
-	desc = "Куртка-бомбер в офигенном красном цвете. Радикально."
+	desc = "Леттерман-куртка в офигенном красном цвете. Радикально."
 	icon_state = "letterman_red"
 	inhand_icon_state = null
 	species_exception = list(/datum/species/golem)
@@ -222,7 +222,7 @@
 
 /obj/item/clothing/suit/jacket/letterman_nanotrasen
 	name = "blue letterman jacket"
-	desc = "Синяя куртка-бомбер с гордой буквой N от Нанотрейзен на спине. На бирке указано, что она сделана в Космическом Китае."
+	desc = "Синяя леттерман-куртка с гордой буквой N от Нанотрейзен на спине. На бирке указано, что она сделана в Космическом Китае."
 	icon_state = "letterman_n"
 	inhand_icon_state = null
 	species_exception = list(/datum/species/golem)
