@@ -256,7 +256,7 @@ GLOBAL_LIST_INIT(heavy_pirate_gangs, init_pirate_gangs(is_heavy = TRUE))
 	response_rejected = "[pick(note_symbols)] Вы, должно быть, считаете себя такими умными. [pick(note_symbols)] \n\
 		[pick(note_symbols)] [station_name()], похоже, идеально нам подходит!~ [pick(note_symbols)]"
 	response_too_late = "[pick(note_symbols)] Сюрприз!~ [pick(note_symbols)] \n\
-		[pick(note_symbols)] ..Ох- не волнуйтесь, автографы бесплатны! [pick(note_symbols)]"
+		[pick(note_symbols)] ...Ох- не волнуйтесь, автографы бесплатны! [pick(note_symbols)]"
 	response_not_enough = "[pick(note_symbols)] Попались!~ Н-но этого явно недостаточно, бака! [pick(note_symbols)] \n\
 		[pick(note_symbols)] Обсудим оплату после шоу. [pick(note_symbols)]"
 	arrival_announcement = "[pick(note_symbols)] Готовы сыграть в величайшем шоу своей жизни? [pick(note_symbols)]\n\
