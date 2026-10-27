@@ -195,9 +195,10 @@
 	var/static/list/cane_typecache = typecacheof(list(/obj/item/cane, /obj/item/melee/baton/nt_cane))
 
 /datum/emote/living/cane_tap/can_run_emote(mob/living/user, status_check = TRUE, intentional, params)
-	. = ..()
-	if(!. || !status_check)
-		return .
+	if(!..())
+		return FALSE
+	if(!status_check)
+		return TRUE
 	if(!is_type_in_typecache(user.get_active_held_item(), cane_typecache))
 		return FALSE
 	var/turf/user_turf = get_turf(user)
