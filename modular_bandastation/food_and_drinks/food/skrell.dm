@@ -729,7 +729,7 @@
 		/datum/reagent/consumable/nutriment = 10,
 		/datum/reagent/consumable/sugar = 5,
 		/datum/reagent/consumable/cherryjelly = 4,
-		/datum/reagent/consumable/ethanol/moonshine = 1, // М'яка безпечна доза
+		/datum/reagent/consumable/ethanol/moonshine = 1,
 		/datum/reagent/consumable/nutriment/vitamin = 4,
 	)
 	tastes = list("sweet blue cherries" = 3, "crisp crust" = 2, "cocoa" = 1)
