@@ -105,13 +105,12 @@
 /// Runs a short registered event and applies its per-zone cooldown.
 /// Long-lived invasion scenarios will get a separate lifecycle manager later.
 /datum/controller/subsystem/redspace/proc/start_registered_event(event_id, client/admin, turf/target, list/event_args, started_automatically = FALSE)
+	if(started_automatically && !automatic_events_enabled())
+		return FALSE
 	var/datum/redspace_event/event = create_registered_event(event_id, event_args)
 	if(!event)
 		return FALSE
 	event.started_automatically = started_automatically
-	if(started_automatically && !automatic_events_enabled())
-		qdel(event)
-		return FALSE
 	if(!can_start_event_instance(event, target))
 		qdel(event)
 		return FALSE

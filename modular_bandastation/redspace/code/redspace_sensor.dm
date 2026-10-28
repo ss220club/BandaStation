@@ -1,7 +1,7 @@
 /// Precise placeable observer of the redspace field.
 /obj/item/redspace_sensor
 	name = "redspace disturbance sensor"
-	desc = "A placeable instrument that sends precise local redspace measurements to a linked console."
+	desc = "Напольный датчик, передающий точные локальные измерения редспейса на подключённую консоль."
 	icon = 'icons/obj/wallmounts.dmi'
 	icon_state = "gsensor1"
 	density = FALSE
@@ -113,13 +113,15 @@
 	if(istype(console))
 		if(!do_after(user, 2 SECONDS, target = src))
 			return ITEM_INTERACT_BLOCKING
+		if(QDELETED(console) || QDELETED(tool) || tool.buffer != console)
+			return ITEM_INTERACT_BLOCKING
 		if(console.link_sensor(src, user))
 			to_chat(user, span_notice("[src] подключён к [console]."))
 			return ITEM_INTERACT_SUCCESS
 		return ITEM_INTERACT_BLOCKING
 
 	tool.set_buffer(src)
-	to_chat(user, span_notice("[src] сохранён в buffer мультитула."))
+	to_chat(user, span_notice("[src] сохранён в буфер мультитула."))
 	return ITEM_INTERACT_SUCCESS
 
 /obj/item/redspace_sensor/multitool_act_secondary(mob/living/user, obj/item/multitool/tool)
@@ -133,7 +135,7 @@
 
 /datum/design/redspace_sensor
 	name = "Redspace Disturbance Sensor"
-	desc = "A placeable instrument for measuring local redspace disturbance."
+	desc = "Напольный прибор для измерения локальных возмущений редспейса."
 #ifdef TECHWEB_NODE_STARTER
 	// Design IDs were replaced with design typepaths by the techweb refactor.
 #else

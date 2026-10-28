@@ -16,7 +16,7 @@ import type { BooleanLike } from 'tgui-core/react';
 import { useBackend } from '../backend';
 import { Window } from '../layouts';
 import { LoadingScreen } from './common/LoadingScreen';
-import { NanoMap, type MapData } from './common/NanoMap';
+import { type MapData, NanoMap } from './common/NanoMap';
 
 type Position = {
   x: number;
@@ -59,7 +59,13 @@ type Data = {
   sensors: Sensor[];
 };
 
-type ValueBand = 'ebb' | 'calm' | 'disturbance' | 'storm' | 'invasion' | 'unknown';
+type ValueBand =
+  | 'ebb'
+  | 'calm'
+  | 'disturbance'
+  | 'storm'
+  | 'invasion'
+  | 'unknown';
 
 const VALUE_BANDS: Array<{
   band: Exclude<ValueBand, 'unknown'>;
@@ -74,7 +80,7 @@ const VALUE_BANDS: Array<{
     color: '#f1c40f',
   },
   { band: 'storm', range: '7-10', color: '#e74c3c' },
-  { band: 'invasion', range: '10+', color: '#111111' },
+  { band: 'invasion', range: '> 10', color: '#111111' },
 ];
 
 const STATUS_LABELS: Record<Sensor['status'], string> = {
@@ -410,8 +416,7 @@ const ValueBadge = (props: { value?: number }) => {
       style={{
         backgroundColor: getValueColor(value),
         color: getValueTextColor(value),
-        borderColor:
-          getValueBand(value) === 'invasion' ? '#ffffff' : undefined,
+        borderColor: getValueBand(value) === 'invasion' ? '#ffffff' : undefined,
       }}
     >
       {formatValue(value)}

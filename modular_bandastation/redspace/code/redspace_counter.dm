@@ -30,8 +30,8 @@
 
 /// Passive handheld display for the local redspace field.
 /obj/item/redspace_counter
-	name = "\improper redspace disturbance counter"
-	desc = "A passive handheld device that displays the local redspace disturbance. Its reading updates with a delay."
+	name = "redspace disturbance counter"
+	desc = "Портативный счётчик локальных возмущений редспейса. Показания обновляются с задержкой."
 	icon = 'modular_bandastation/redspace/icons/counter.dmi'
 	icon_state = "counter_on_unknown"
 	base_icon_state = "counter_on_0"
@@ -93,7 +93,7 @@
 
 /datum/design/redspace_counter
 	name = "Redspace Disturbance Counter"
-	desc = "A portable instrument for measuring local redspace disturbance."
+	desc = "Портативный прибор для измерения локальных возмущений редспейса."
 #ifdef TECHWEB_NODE_STARTER
 	// Design IDs were replaced with design typepaths by the techweb refactor.
 #else

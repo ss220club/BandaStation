@@ -175,7 +175,7 @@ GLOBAL_LIST_EMPTY(redspace_active_rift_sealers)
 /// Players install this machine near a hotspot to start a timed sealing operation.
 /obj/machinery/redspace_rift_sealer
 	name = "redspace rift sealer"
-	desc = "An engineering machine that forces a nearby redspace rift to collapse."
+	desc = "Инженерная установка для закрытия ближайшего разлома редспейса."
 	icon = 'modular_bandastation/redspace/icons/obj/machinery_32x32.dmi'
 	icon_state = "rift_sealer_off"
 	density = TRUE

@@ -35,10 +35,12 @@
 
 	var/obj/machinery/redspace_rift_scanner/scanner = allocate(/obj/machinery/redspace_rift_scanner, test_turf)
 	var/construction_started_at = world.time
+	scanner.next_scan_at = world.time - 1
 	scanner.on_construction()
 	if(scanner.next_scan_at < construction_started_at + REDSPACE_RIFT_SCANNER_SCAN_INTERVAL)
 		return Fail("The rift scanner must start its cooldown when construction finishes")
 
+	scanner.next_scan_at = world.time - 1
 	scanner.on_power_changed(scanner)
 	if(scanner.next_scan_at < world.time + REDSPACE_RIFT_SCANNER_SCAN_INTERVAL)
 		return Fail("Power changes must restart the rift scanner cooldown")

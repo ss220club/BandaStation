@@ -29,6 +29,11 @@
 
 /datum/redspace_sensor_record/proc/record_sample(new_value, sample_time = world.time, reason = null)
 	var/sample_available = !isnull(new_value)
+	var/turf/sample_turf = get_turf(sensor)
+	if(sample_turf)
+		last_x = sample_turf.x
+		last_y = sample_turf.y
+		last_z = sample_turf.z
 	if(last_sample_time == sample_time && last_available == sample_available && (!sample_available || last_value == new_value))
 		return FALSE
 
@@ -37,12 +42,6 @@
 	last_sample_state = sample_available ? redspace_state_from_value(new_value) : null
 	last_sample_reason = reason
 	last_available = sample_available
-
-	var/turf/sample_turf = get_turf(sensor)
-	if(sample_turf)
-		last_x = sample_turf.x
-		last_y = sample_turf.y
-		last_z = sample_turf.z
 
 	var/list/sample = list(
 		"time" = sample_time,
@@ -118,7 +117,7 @@
 /// Console that collects precise readings from explicitly linked sensors.
 /obj/machinery/computer/redspace_console
 	name = "redspace disturbance console"
-	desc = "A scientific console that collects local measurements from linked redspace sensors."
+	desc = "Научная консоль, собирающая локальные измерения с подключённых датчиков редспейса."
 	circuit = /obj/item/circuitboard/computer/redspace_console
 	icon_state = MAP_SWITCH("computer", "/obj/machinery/computer/atmos_control")
 	icon_screen = "tank"
@@ -163,7 +162,7 @@
 		return ITEM_INTERACT_BLOCKING
 
 	tool.set_buffer(src)
-	to_chat(user, span_notice("[src] сохранён в buffer мультитула."))
+	to_chat(user, span_notice("[src] сохранён в буфер мультитула."))
 	return ITEM_INTERACT_SUCCESS
 
 /// Links a sensor to this console, transferring it from another console if necessary.
@@ -304,7 +303,7 @@
 
 /datum/design/board/redspace_console
 	name = "Redspace Disturbance Console Board"
-	desc = "The circuit board for a redspace disturbance console."
+	desc = "Плата для создания консоли наблюдения за редспейсом."
 #ifdef TECHWEB_NODE_STARTER
 	// Design IDs were replaced with design typepaths by the techweb refactor.
 #else

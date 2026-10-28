@@ -699,7 +699,7 @@
 /// A destructible hotspot created by a Ravager.
 /obj/structure/redspace/demonic_beacon
 	name = "demonic beacon"
-	desc = "A crimson beacon that distorts the redspace around it."
+	desc = "Багровый маяк, искажающий редспейс вокруг себя."
 	icon = 'modular_bandastation/redspace/icons/obj/demon_objs.dmi'
 	icon_state = "demonic_beacon"
 	anchored = TRUE
@@ -1532,7 +1532,7 @@
 /// A persistent redspace manifestation used to verify object spawn events.
 /obj/structure/redspace/demonic_crystal
 	name = "demonic redspace crystal"
-	desc = "A crimson crystal that seems to draw its glow from the space around it."
+	desc = "Багровый кристалл, словно черпающий своё свечение из окружающего пространства."
 	icon = 'modular_bandastation/redspace/icons/obj/demon_objs.dmi'
 	icon_state = "demonic_crystal"
 	anchored = TRUE

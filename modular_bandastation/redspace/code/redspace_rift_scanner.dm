@@ -14,7 +14,7 @@
 
 /obj/machinery/redspace_rift_scanner
 	name = "redspace rift scanner"
-	desc = "A machine that periodically scans the station for active redspace hotspots."
+	desc = "Устройство, периодически сканирующее станцию на наличие активных горячих зон редспейса."
 	icon = 'modular_bandastation/redspace/icons/obj/machinery_32x64.dmi'
 	icon_state = "rift_scanner_off"
 	density = TRUE

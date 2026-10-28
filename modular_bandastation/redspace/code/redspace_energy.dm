@@ -106,7 +106,7 @@
 
 /datum/component/redspace_energy/proc/on_life(mob/living/source, seconds_per_tick)
 	SIGNAL_HANDLER
-	if(source != parent || QDELETED(source) || source.stat == DEAD)
+	if(source != parent || QDELETED(source) || source.stat == DEAD || HAS_TRAIT(source, TRAIT_STASIS))
 		return
 
 	var/turf/current_turf = get_turf(source)
@@ -122,9 +122,12 @@
 				list(BRUTE, BURN, TOX, OXY),
 			)
 	else if(environment_state == REDSPACE_ENERGY_ENVIRONMENT_DRAIN)
-		adjust_energy(-(max_energy * drain_percent / 100 * delta_time))
+		var/drain_rate = max_energy * drain_percent / 100
+		var/energy_before = current_energy
+		adjust_energy(-(drain_rate * delta_time))
 		if(current_energy <= 0 && zero_energy_damage_percent > 0 && source.maxHealth > 0)
-			source.adjust_brute_loss(source.maxHealth * zero_energy_damage_percent / 100 * delta_time, forced = TRUE)
+			var/empty_seconds = drain_rate > 0 ? max(0, delta_time - energy_before / drain_rate) : delta_time
+			source.adjust_brute_loss(source.maxHealth * zero_energy_damage_percent / 100 * empty_seconds, forced = TRUE)
 
 /datum/component/redspace_energy/proc/on_parent_moved(atom/movable/source, atom/old_loc, dir, forced, list/old_locs)
 	SIGNAL_HANDLER

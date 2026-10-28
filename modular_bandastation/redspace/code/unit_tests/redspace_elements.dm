@@ -6,6 +6,7 @@
 	var/test_z
 	var/restore_type
 	var/list/restore_baseturfs
+	var/revert_element_attached = FALSE
 
 /datum/unit_test/redspace_elements/Run()
 	var/obj/structure/redspace/demonic_crystal/crystal = new
@@ -43,6 +44,7 @@
 
 	var/revert_threshold = -100000
 	redspace_turf.AddElement(/datum/element/redspace_threshold/revert_turf_below, revert_threshold, restore_type, restore_baseturfs)
+	revert_element_attached = TRUE
 	var/datum/element/redspace_threshold/revert_turf_below/revert_element = SSdcs.GetElement(list(/datum/element/redspace_threshold/revert_turf_below, revert_threshold, restore_type, restore_baseturfs), FALSE)
 	var/datum/redspace_threshold_listener/revert_listener = revert_element?.find_target_listener(redspace_turf)
 	if(!revert_listener)
@@ -55,6 +57,8 @@
 
 /datum/unit_test/redspace_elements/Destroy()
 	var/turf/current_turf = locate(test_x, test_y, test_z)
+	if(current_turf && revert_element_attached)
+		current_turf.RemoveElement(/datum/element/redspace_threshold/revert_turf_below, -100000, restore_type, restore_baseturfs)
 	if(current_turf && restore_type && current_turf.type != restore_type)
 		current_turf.ChangeTurf(restore_type, restore_baseturfs?.Copy(), CHANGETURF_FORCEOP)
 	return ..()

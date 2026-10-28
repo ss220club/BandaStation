@@ -178,7 +178,8 @@
 		retreat_devourer.release_victim()
 		return Fail("A retreating devourer with the controller forced off must smash a door blocking its route")
 
-	// A wall in the way must be dismantled, and an open path must be stepped through.
+	// Keep the wall and its destination inside the fixture, away from the door scenario.
+	retreat_devourer.forceMove(locate(run_loc_floor_bottom_left.x + 2, run_loc_floor_bottom_left.y + 2, run_loc_floor_bottom_left.z))
 	var/turf/retreat_wall_turf = get_step(get_turf(retreat_devourer), WEST)
 	var/retreat_wall_restore_type = retreat_wall_turf?.type
 	var/retreat_wall_x = retreat_wall_turf?.x

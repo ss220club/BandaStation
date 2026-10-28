@@ -37,6 +37,7 @@
 	if(!provider || (provider.provider_id in providers))
 		return FALSE
 	providers[provider.provider_id] = provider
+	zone_coefficients.Cut()
 	return TRUE
 
 /datum/redspace_context/proc/remove_provider(provider_id)

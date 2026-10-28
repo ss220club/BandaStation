@@ -201,6 +201,7 @@
 /datum/redspace_field_source/wave/set_position(turf/new_origin, reason = null)
 	var/changed = ..()
 	if(changed)
+		created_at = world.time
 		center_updated_at = -1
 	return changed
 

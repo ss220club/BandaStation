@@ -46,6 +46,7 @@
 #include "code/unit_tests/redspace_devourer_lifecycle.dm"
 #include "code/unit_tests/redspace_rift_sealer.dm"
 #include "code/unit_tests/redspace_rift_scanner.dm"
+#include "code/unit_tests/redspace_review.dm"
 // BEGIN_INTERNALS
 // END_INTERNALS
 // BEGIN_FILE_DIR

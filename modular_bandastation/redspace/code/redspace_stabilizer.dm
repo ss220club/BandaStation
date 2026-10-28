@@ -10,7 +10,7 @@
 
 /obj/machinery/redspace_stabilizer
 	name = "bluespace boundary stabilizer"
-	desc = "An engineering machine that locally reinforces the bluespace boundary against redspace pressure."
+	desc = "Инженерная установка, локально укрепляющая блюспейс-границу под давлением редспейса."
 	icon = 'modular_bandastation/redspace/icons/obj/machinery_32x32.dmi'
 	icon_state = "beacon_off"
 	density = TRUE
@@ -134,6 +134,8 @@
 
 	if(field_source && !is_field_source_registered())
 		field_source = null
+	if(field_source && (field_source.z_level != target.z || field_source.origin_x != target.x || field_source.origin_y != target.y))
+		remove_field_source("stabilizer relocated")
 	if(!field_source)
 		field_source = SSredspace.register_stabilizer_source(target, 0, source_radius, "stabilizer activated")
 		if(!field_source)

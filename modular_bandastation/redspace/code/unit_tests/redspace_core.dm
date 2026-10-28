@@ -1,6 +1,18 @@
 #if defined(UNIT_TESTS) || defined(SPACEMAN_DMM)
 
 /datum/unit_test/redspace_core
+	var/saved_events_started
+	var/saved_events_finished
+
+/datum/unit_test/redspace_core/New()
+	. = ..()
+	saved_events_started = SSredspace.metric_events_started
+	saved_events_finished = SSredspace.metric_events_finished
+
+/datum/unit_test/redspace_core/Destroy()
+	SSredspace.metric_events_started = saved_events_started
+	SSredspace.metric_events_finished = saved_events_finished
+	return ..()
 
 /datum/unit_test/redspace_core/Run()
 	if(redspace_state_with_hysteresis(3.5, REDSPACE_STATE_DISTURBANCE) != REDSPACE_STATE_DISTURBANCE)
