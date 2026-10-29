@@ -80,7 +80,7 @@
 	qdel(standard_fireball)
 
 	var/mob/living/basic/demon/redspace/soldier/test_soldier = allocate(/mob/living/basic/demon/redspace/soldier, run_loc_floor_bottom_left)
-	if(test_mob.maxHealth != 125 || test_soldier.icon_state != "demon_soldier" || test_soldier.maxHealth != 155 || test_soldier.maxHealth <= test_mob.maxHealth || test_soldier.melee_damage_lower <= test_mob.melee_damage_lower || test_soldier.melee_damage_upper <= test_mob.melee_damage_upper)
+	if(test_mob.maxHealth != 105 || test_soldier.icon_state != "demon_soldier" || test_soldier.maxHealth != 135 || test_soldier.maxHealth <= test_mob.maxHealth || test_soldier.melee_damage_lower <= test_mob.melee_damage_lower || test_soldier.melee_damage_upper <= test_mob.melee_damage_upper)
 		return Fail("Redspace soldiers must be stronger than lesser demons")
 	if(!istype(test_soldier.ai_controller, /datum/ai_controller/basic_controller/simple/redspace_demon/melee))
 		return Fail("Redspace soldiers must inherit the obstacle-breaking hostile AI controller")

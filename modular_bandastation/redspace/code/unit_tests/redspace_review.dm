@@ -46,7 +46,7 @@
 	energy.current_energy = 5
 	var/health_before = demon.health
 	energy.on_life(demon, 1)
-	if(abs(health_before - demon.health - 3.125) > 0.001 || energy.current_energy != 0)
+	if(abs(health_before - demon.health - 2.625) > 0.001 || energy.current_energy != 0)
 		return Fail("Five energy at ten per second must cause only half a second of starvation damage")
 
 /datum/unit_test/redspace_review/wave_reposition

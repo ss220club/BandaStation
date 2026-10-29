@@ -927,8 +927,8 @@
 	icon_state = "demon_melee"
 	icon_living = "demon_melee"
 	speed = 0.5
-	maxHealth = 125
-	health = 125
+	maxHealth = 105
+	health = 105
 	melee_damage_lower = 12
 	melee_damage_upper = 18
 	ai_controller = /datum/ai_controller/basic_controller/simple/redspace_demon/melee
@@ -963,8 +963,8 @@
 	desc = "A lesser redspace demon that hurls weakened fireballs from a distance."
 	icon_state = "demon_ranged"
 	icon_living = "demon_ranged"
-	maxHealth = 100
-	health = 100
+	maxHealth = 80
+	health = 80
 	melee_damage_lower = 6
 	melee_damage_upper = 10
 	ai_controller = /datum/ai_controller/basic_controller/simple/redspace_demon/ranged
@@ -986,8 +986,8 @@
 	desc = "A heavily built redspace demon bred for close combat."
 	icon_state = "demon_soldier"
 	icon_living = "demon_soldier"
-	maxHealth = 155
-	health = 155
+	maxHealth = 135
+	health = 135
 	melee_damage_lower = 20
 	melee_damage_upper = 28
 
