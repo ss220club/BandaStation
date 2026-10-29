@@ -129,7 +129,7 @@
 
 /datum/supply_pack/security/armory/pdh_mags
 	name = "PDH 'Osprey' .357 Magazines"
-	crate_name = "PDH magazines crate"
+	crate_name = "PDH 'Osprey' magazines crate"
 	desc = "В этом ящике находится три магазина калибра .357 для пистолетов PDH 'Osprey'."
 	cost = CARGO_CRATE_VALUE * 10
 	access_view = ACCESS_WEAPONS
@@ -144,7 +144,7 @@
 	cost = CARGO_CRATE_VALUE * 12
 	access_view = ACCESS_WEAPONS
 	contains = list(
-		/obj/item/ammo_box/magazine/m50 = 3,
+		/obj/item/ammo_box/magazine/m50/lowpower = 3,
 	)
 
 /datum/supply_pack/security/armory/gp45m_special_mags
@@ -159,4 +159,18 @@
 		/obj/item/ammo_box/magazine/c45/incendiary = 1,
 		/obj/item/ammo_box/c45/ap = 1,
 		/obj/item/ammo_box/c45/hp = 1,
+	)
+
+/datum/supply_pack/security/armory/gp38_special_mags
+	name = "GP-38 Special Ammo Magazines"
+	crate_name = "GP-38 special ammo crate"
+	desc = "В этом ящике находятся два бронебойных магазина, два экспансивных магазина и один зажигательный магазин калибра .38, и соответствующие коробки с боеприпасами."
+	cost = CARGO_CRATE_VALUE * 20
+	access_view = ACCESS_WEAPONS
+	contains = list(
+		/obj/item/ammo_box/magazine/c38/ap = 2,
+		/obj/item/ammo_box/magazine/c38/hp = 2,
+		/obj/item/ammo_box/magazine/c38/hotshot = 1,
+		/obj/item/ammo_box/c38/ap = 1,
+		/obj/item/ammo_box/c38/hp = 1,
 	)

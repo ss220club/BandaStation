@@ -39,4 +39,4 @@
 	burst_size = 2
 	actions_types = list(/datum/action/item_action/toggle_firemode)
 	spawn_magazine_type = /obj/item/ammo_box/magazine/c45/rubber
-	projectile_damage_multiplier = 0.8
+	projectile_damage_multiplier = 0.6

@@ -1294,6 +1294,12 @@
 	multiple_sprite_use_base = TRUE
 	ammo_type = /obj/item/ammo_casing/c456magnum
 
+// MARK: Ladon - .50 AE
+/obj/item/ammo_box/magazine/m50/lowpower
+	name = "handgun magazine (.50 AE Special)"
+	desc = "Пистолетный магазин калибра .50 АЕ, вмещающий 7 патронов. Подходит для пистолетов 'Пустынный Орёл' и PDH 'Ladon'."
+	ammo_type = /obj/item/ammo_casing/a50ae/lowpower
+
 // MARK: WT - 4.6x30mm
 /obj/item/ammo_box/magazine/wt550m9/wtrubber
 	name = "WT-550 magazine (4.6x30mm rubber)"
