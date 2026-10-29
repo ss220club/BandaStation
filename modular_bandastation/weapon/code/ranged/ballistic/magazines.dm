@@ -721,12 +721,14 @@
 	multiple_sprites = AMMO_BOX_PER_BULLET
 	multiple_sprite_use_base = TRUE
 	ammo_type = /obj/item/ammo_casing/c38
+	custom_materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 10)
 
 /obj/item/ammo_box/magazine/c38/rubber
 	name = "pistol magazine (.38 Rubber)"
 	desc = parent_type::desc + "<br>Содержит нелетальные травматические патроны с резиновой пулей."
 	ammo_band_color = COLOR_AMMO_RUBBER
 	ammo_type = /obj/item/ammo_casing/c38/match/bouncy
+	custom_materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 5)
 
 /obj/item/ammo_box/magazine/c38/match
 	name = "pistol magazine (.38 Match)"
