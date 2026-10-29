@@ -6,6 +6,11 @@
 	var/mob/dead/observer/poll_candidate
 	var/poll_calls = 0
 
+/mob/living/basic/demon/redspace/devourer/unit_test_lifecycle/Destroy()
+	continuation_hook = null
+	poll_candidate = null
+	return ..()
+
 /mob/living/basic/demon/redspace/devourer/unit_test_lifecycle/choose_ravager_ghost()
 	poll_calls++
 	continuation_hook?.Invoke()
@@ -33,6 +38,9 @@
 	// A possessed replacement may survive a failed assertion; never retain a test key.
 	for(var/mob/test_mob in allocated)
 		test_mob.ckey = null
+	devourer = null
+	victim = null
+	new_victim = null
 	return ..()
 
 /datum/unit_test/redspace_devourer_lifecycle/proc/recapture()
