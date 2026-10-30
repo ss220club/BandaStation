@@ -1,3 +1,5 @@
+GLOBAL_VAR_INIT(tunnel_clown_darkness_active, FALSE)
+
 /obj/effect/particle_effect/fluid/smoke/tunnel_clown
 	lifetime = 30 SECONDS
 
@@ -102,6 +104,7 @@
 	var/mob/living/carbon/human/user = owner
 	if(!istype(user))
 		return FALSE
+	GLOB.tunnel_clown_darkness_active = TRUE
 	to_chat(user, span_boldannounce("Хонкомать, потуши им яркий свет и окутай всё туманом, чтобы ты могла потешаться, как они будут спотыкаться в темноте..."))
 	for(var/obj/machinery/light/light in world)
 		if(!istype(get_area(light), /area/station))
@@ -274,4 +277,4 @@
 	target_victim = null
 	execution_armed = FALSE
 
-// /obj/projectile/beam/scatter/weak
+// /obj/projectile/beam/scatter/weak /obj/item/storage/spooky
