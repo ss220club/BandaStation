@@ -5090,6 +5090,7 @@
 	pixel_y = 5
 	},
 /obj/machinery/light/dim/directional/west,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /turf/open/floor/iron/dark/corner{
 	dir = 4
 	},
@@ -15464,6 +15465,10 @@
 /obj/structure/table/wood/poker,
 /turf/open/floor/carpet/green,
 /area/station/commons/dorms/apartment1)
+"dHt" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/turf/closed/wall/r_wall,
+/area/station/tcommsat/maints)
 "dHB" = (
 /obj/machinery/modular_computer/preset/civilian{
 	dir = 4
@@ -15941,6 +15946,9 @@
 	dir = 8
 	},
 /obj/effect/decal/cleanable/dirt,
+/obj/machinery/atmospherics/components/unary/vent_pump/on/layer4{
+	dir = 8
+	},
 /turf/open/floor/iron,
 /area/station/tcommsat/maints)
 "dOD" = (
@@ -25592,6 +25600,7 @@
 /obj/item/book/manual/wiki/tcomms,
 /obj/effect/turf_decal/delivery,
 /obj/item/radio/intercom/directional/east,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /turf/open/floor/iron,
 /area/station/tcommsat/maints)
 "ghC" = (
@@ -25656,6 +25665,10 @@
 	},
 /turf/open/floor/iron,
 /area/station/commons/locker)
+"gic" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/turf/closed/wall/r_wall,
+/area/station/tcommsat/server)
 "gid" = (
 /obj/structure/filingcabinet,
 /turf/open/floor/iron,
@@ -32180,6 +32193,10 @@
 /obj/effect/decal/cleanable/generic,
 /turf/open/floor/carpet/black,
 /area/station/maintenance/starboard/fore)
+"hKC" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/turf/closed/wall/r_wall,
+/area/station/tcommsat/computer)
 "hKF" = (
 /obj/effect/turf_decal/siding/wood{
 	dir = 6
@@ -45617,6 +45634,11 @@
 	},
 /turf/open/floor/iron/dark,
 /area/station/engineering/hallway/west)
+"kZS" = (
+/obj/effect/turf_decal/trimline/dark_blue/filled/line,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/turf/open/floor/iron/dark,
+/area/station/tcommsat/computer)
 "kZY" = (
 /obj/structure/mirror/directional/north,
 /obj/structure/sink/directional/south,
@@ -46414,6 +46436,7 @@
 "llj" = (
 /obj/structure/table/wood,
 /obj/item/paper/fluff/jobs/engineering/frequencies,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /turf/open/floor/iron/dark/side{
 	dir = 1
 	},
@@ -49889,6 +49912,7 @@
 	pixel_y = 3
 	},
 /obj/item/cigbutt/cigarbutt/havana,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /turf/open/floor/iron/dark/side{
 	dir = 1
 	},
@@ -51061,6 +51085,10 @@
 	},
 /turf/open/floor/iron,
 /area/station/cargo/sorting)
+"mrd" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/turf/closed/wall/r_wall,
+/area/station/tcommsat/server)
 "mrf" = (
 /turf/closed/wall,
 /area/station/command/heads_quarters/magistrate)
@@ -62235,6 +62263,11 @@
 /obj/effect/spawner/random/engineering/atmospherics_portable,
 /turf/open/floor/iron,
 /area/station/maintenance/fore)
+"pag" = (
+/obj/effect/turf_decal/trimline/dark_blue/filled/line,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/turf/open/floor/iron/dark,
+/area/station/tcommsat/computer)
 "paj" = (
 /obj/structure/extinguisher_cabinet/directional/north,
 /obj/machinery/navbeacon{
@@ -67465,6 +67498,9 @@
 	dir = 6
 	},
 /obj/machinery/airalarm/directional/south,
+/obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer2{
+	dir = 4
+	},
 /turf/open/floor/iron,
 /area/station/tcommsat/maints)
 "qpj" = (
@@ -82374,6 +82410,12 @@
 /obj/structure/rack,
 /turf/open/floor/plating,
 /area/station/maintenance/starboard/aft)
+"tYw" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/turf/open/floor/iron/dark/side{
+	dir = 1
+	},
+/area/station/tcommsat/computer)
 "tYy" = (
 /obj/machinery/atmospherics/components/tank/air/layer4{
 	dir = 8
@@ -82462,6 +82504,7 @@
 /turf/open/floor/iron/dark,
 /area/station/maintenance/department/electrical/ghetto)
 "tZW" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /turf/open/floor/iron/dark/side{
 	dir = 1
 	},
@@ -87620,6 +87663,10 @@
 	},
 /turf/open/floor/iron,
 /area/station/engineering/atmos)
+"vqO" = (
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/turf/closed/wall/r_wall,
+/area/station/tcommsat/maints)
 "vqP" = (
 /obj/effect/turf_decal/bot,
 /obj/machinery/modular_computer/preset/cargochat/cargo{
@@ -98708,6 +98755,7 @@
 /obj/machinery/camera/directional/west{
 	name = "telecomms camera"
 	},
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /turf/open/floor/iron,
 /area/station/tcommsat/maints)
 "ycw" = (
@@ -99313,6 +99361,7 @@
 /obj/structure/table/wood,
 /obj/machinery/light/dim/directional/east,
 /obj/item/storage/fancy/donut_box,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /turf/open/floor/iron/dark/corner{
 	dir = 1
 	},
@@ -138542,17 +138591,17 @@ ceC
 ceC
 ceC
 ceC
-phd
-phd
-phd
-phd
-phd
-phd
-phd
-phd
-phd
-phd
-phd
+mrd
+mrd
+mrd
+mrd
+mrd
+mrd
+mrd
+mrd
+mrd
+mrd
+mrd
 ceC
 ceC
 ceC
@@ -138799,7 +138848,7 @@ jHL
 jHL
 jHL
 jHL
-phd
+mrd
 jiC
 cRx
 cRx
@@ -138809,7 +138858,7 @@ eNM
 cRx
 cRx
 woK
-phd
+mrd
 doz
 ceC
 ceC
@@ -139056,7 +139105,7 @@ vYh
 ubZ
 mqQ
 blk
-phd
+mrd
 tMG
 ckS
 fee
@@ -139066,7 +139115,7 @@ mBc
 nuP
 mVh
 bjq
-phd
+mrd
 doz
 ceC
 ceC
@@ -139323,9 +139372,9 @@ mBc
 gmR
 kLw
 iby
-phd
-kuR
-kuR
+mrd
+dHt
+dHt
 kuR
 kuR
 doz
@@ -139569,7 +139618,7 @@ mti
 xOC
 kOS
 gfJ
-tZW
+tYw
 fNv
 ikj
 pSO
@@ -139825,8 +139874,8 @@ gJI
 fKb
 xOC
 nYh
-gfJ
-tZW
+pag
+tYw
 fNv
 fNv
 fNv
@@ -140339,7 +140388,7 @@ aRa
 mab
 xOC
 vWg
-gfJ
+kZS
 tZW
 fNv
 fNv
@@ -140865,10 +140914,10 @@ dgS
 mnw
 vTA
 iby
-phd
-kuR
-kuR
-kuR
+gic
+vqO
+vqO
+vqO
 kuR
 doz
 doz
@@ -141122,7 +141171,7 @@ dgS
 ber
 dNp
 bjq
-phd
+gic
 doz
 ceC
 ceC
@@ -141368,8 +141417,8 @@ jHL
 jHL
 jHL
 jHL
-jHL
-phd
+hKC
+gic
 tyO
 cRx
 cRx
@@ -141379,7 +141428,7 @@ eaX
 cRx
 cRx
 woK
-phd
+gic
 doz
 ceC
 ceC
@@ -141626,17 +141675,17 @@ ceC
 ceC
 ceC
 ceC
-phd
-phd
-phd
-phd
-phd
-phd
-phd
-phd
-phd
-phd
-phd
+gic
+gic
+gic
+gic
+gic
+gic
+gic
+gic
+gic
+gic
+gic
 ceC
 ceC
 ceC
