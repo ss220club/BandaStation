@@ -17,6 +17,9 @@
 	if(eater.mind.has_antag_datum(/datum/antagonist/vampire))
 		to_chat(eater, span_warning("Древняя кровь и генокрад несовместимы. Вы не можете обрести силу генокрада!"))
 		return
+	if(eater.mind.has_antag_datum(/datum/antagonist/tunnel_clown))
+		to_chat(eater, span_warning("Ты не можешь придать идеалы Хонкоматери и пустить вампирскую сущность в своё тело."))
+		return
 	eater.mind.add_antag_datum(/datum/antagonist/changeling/halloween)
 	to_chat(eater, span_userdanger("Что-то шевельнулось внутри вас... Вы чувствуете, что ваше тело изменилось!"))
 
@@ -32,6 +35,8 @@
 	if(M.mind.has_antag_datum(/datum/antagonist/vampire))
 		return
 	if(M.mind.has_antag_datum(/datum/antagonist/changeling))
+		return
+	if(M.mind.has_antag_datum(/datum/antagonist/tunnel_clown))
 		return
 	M.mind.add_antag_datum(/datum/antagonist/vampire/halloween)
 	to_chat(M, span_userdanger("Древняя кровь пробуждает в вас жажду. Вы чувствуете, как пробуждается вампирская сущность!"))
