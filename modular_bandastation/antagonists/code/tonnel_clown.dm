@@ -1,4 +1,5 @@
 GLOBAL_VAR_INIT(tunnel_clown_darkness_active, FALSE)
+GLOBAL_VAR_INIT(tunnel_clown_antagonist, null)
 
 /obj/effect/particle_effect/fluid/smoke/tunnel_clown
 	lifetime = 30 SECONDS
@@ -51,9 +52,13 @@ GLOBAL_VAR_INIT(tunnel_clown_darkness_active, FALSE)
 	var/outfit_type = /datum/outfit/tunnel_clown
 	var/list/ability_types = list(
 		/datum/action/cooldown/tunnel_clown/darkness,
-		/datum/action/cooldown/tunnel_clown/execution
+		/datum/action/cooldown/tunnel_clown/execution,
+		/datum/action/cooldown/tunnel_clown/rescue,
+		/datum/action/cooldown/tunnel_clown/veil,
 	)
 	var/list/datum/action/granted_abilities = list()
+	var/initial_max_health = 1000
+	var/totem_check_interval = 5 SECONDS
 
 /datum/antagonist/tunnel_clown/can_be_owned(datum/mind/new_owner)
 	if(!ishuman(new_owner?.current))
@@ -64,11 +69,23 @@ GLOBAL_VAR_INIT(tunnel_clown_darkness_active, FALSE)
 	forge_objectives()
 	. = ..()
 	equip_clown()
+	GLOB.tunnel_clown_antagonist = src
+	var/mob/living/carbon/human/clown = owner?.current
+	if(istype(clown))
+		clown.maxHealth = initial_max_health
+		clown.health = initial_max_health
+	update_totem_health()
+	addtimer(CALLBACK(src, PROC_REF(check_totems)), totem_check_interval)
 
 /datum/antagonist/tunnel_clown/greet()
 	. = ..()
 	to_chat(owner.current, span_userdanger("Вы Туннельный Клоун!"))
 	to_chat(owner.current, span_boldwarning("Станция и техтоннели - ваши. Пусть экипаж запомнит этот Хэллоуин."))
+
+/datum/antagonist/tunnel_clown/on_removal()
+	if(GLOB.tunnel_clown_antagonist == src)
+		GLOB.tunnel_clown_antagonist = null
+	return ..()
 
 /datum/antagonist/tunnel_clown/proc/equip_clown()
 	var/mob/living/carbon/human/clown = owner?.current
@@ -77,6 +94,30 @@ GLOBAL_VAR_INIT(tunnel_clown_darkness_active, FALSE)
 	clown.delete_equipment()
 	clown.equipOutfit(outfit_type)
 	return TRUE
+
+/datum/antagonist/tunnel_clown/proc/update_totem_health()
+	var/mob/living/carbon/human/clown = owner?.current
+	if(!istype(clown) || QDELETED(clown))
+		return
+	var/remaining_totems = 0
+	for(var/obj/structure/statue/ell_good/halloween/one/totem in world)
+		remaining_totems++
+	for(var/obj/structure/statue/ell_good/halloween/two/totem in world)
+		remaining_totems++
+	for(var/obj/structure/statue/ell_good/halloween/tree/totem in world)
+		remaining_totems++
+	var/new_max_health = 250 + (remaining_totems * 250)
+	clown.maxHealth = min(initial_max_health, new_max_health)
+	clown.health = min(clown.health, clown.maxHealth)
+
+/datum/antagonist/tunnel_clown/proc/check_totems()
+	if(GLOB.tunnel_clown_antagonist != src)
+		return
+	var/mob/living/carbon/human/clown = owner?.current
+	if(!istype(clown) || QDELETED(clown) || clown.stat == DEAD)
+		return
+	update_totem_health()
+	addtimer(CALLBACK(src, PROC_REF(check_totems)), totem_check_interval)
 
 /datum/antagonist/tunnel_clown/apply_innate_effects(mob/living/mob_override)
 	. = ..()
@@ -277,4 +318,140 @@ GLOBAL_VAR_INIT(tunnel_clown_darkness_active, FALSE)
 	target_victim = null
 	execution_armed = FALSE
 
-// /obj/projectile/beam/scatter/weak /obj/item/storage/spooky
+/datum/action/cooldown/tunnel_clown/rescue
+	name = "Спасение Хонкоматери"
+	desc = "Исчезнуть в облаке дыма и переместиться к одному из сохранившихся тотемов."
+	button_icon = 'icons/mob/actions/actions_spells.dmi'
+	button_icon_state = "teleport"
+	cooldown_time = 60 SECONDS
+
+/datum/action/cooldown/tunnel_clown/rescue/Activate(atom/target)
+	. = ..()
+	var/mob/living/carbon/human/clown = owner
+	if(!istype(clown) || QDELETED(clown) || clown.stat == DEAD)
+		return FALSE
+	var/list/totem_choices = list()
+	var/list/totem_by_choice = list()
+	for(var/obj/structure/statue/ell_good/halloween/totem in world)
+		if(QDELETED(totem))
+			continue
+		var/turf/totem_turf = get_turf(totem)
+		if(!totem_turf)
+			continue
+		var/choice_name = "[totem.name] ([totem_turf.x], [totem_turf.y])"
+		totem_choices += choice_name
+		totem_by_choice[choice_name] = totem
+	if(!length(totem_choices))
+		to_chat(clown, span_warning("Хонкомать не может найти ни одного сохранившегося тотема!"))
+		return FALSE
+	var/selected_choice = tgui_input_list(
+		clown,
+		"К какому тотему ты желаешь обратиться?",
+		"Спасение Хонкоматери",
+		totem_choices,
+	)
+	if(isnull(selected_choice) || QDELETED(src) || QDELETED(clown))
+		return FALSE
+	var/obj/structure/statue/ell_good/halloween/selected_totem = totem_by_choice[selected_choice]
+	if(!selected_totem || QDELETED(selected_totem))
+		to_chat(clown, span_warning("Выбранный тотем больше не существует!"))
+		return FALSE
+	var/turf/destination = get_turf(selected_totem)
+	var/turf/origin = get_turf(clown)
+	if(!origin || !destination || origin == destination)
+		return FALSE
+	create_rescue_effect(origin, clown)
+	clown.forceMove(destination)
+	create_rescue_effect(destination, clown)
+	play_blink_sound(destination)
+	apply_honker_effect(destination, clown)
+	StartCooldown()
+	return TRUE
+
+/datum/action/cooldown/tunnel_clown/rescue/proc/create_rescue_effect(turf/center, mob/living/carbon/human/clown)
+	if(!center)
+		return
+	var/list/peel_types = list(
+		/obj/item/grown/bananapeel/bluespace,
+		/obj/item/grown/bananapeel/specialpeel,
+		/obj/item/grown/bananapeel/gros_michel,
+	)
+	for(var/turf/T in range(1, center))
+		do_smoke(range = 0, holder = clown, location = T, smoke_type = /datum/effect_system/fluid_spread/smoke,)
+		var/peel_type = pick(peel_types)
+		new peel_type(T)
+
+/datum/action/cooldown/tunnel_clown/rescue/proc/play_blink_sound(turf/location)
+	if(!location)
+		return
+	playsound(location, 'sound/effects/phasein.ogg', 75, TRUE)
+
+/datum/action/cooldown/tunnel_clown/rescue/proc/apply_honker_effect(turf/center, mob/living/carbon/human/clown)
+	if(!center)
+		return
+	playsound(center, 'sound/items/airhorn/airhorn.ogg', 100, TRUE)
+	for(var/mob/living/carbon/M in ohearers(6, center))
+		if(M == clown)
+			continue
+		if(HAS_TRAIT(M, TRAIT_DEAF))
+			continue
+		var/turf/turf_check = get_turf(M)
+		if(isspaceturf(turf_check) && !turf_check.Adjacent(center))
+			continue
+		to_chat(M, "<font color='red' size='7'>HONK</font>")
+		M.SetSleeping(0)
+		M.adjust_stutter(40 SECONDS)
+		M.sound_damage(deafen = 30 SECONDS)
+		M.Paralyze(30)
+		if(prob(30))
+			M.Stun(20)
+			M.Unconscious(80)
+		else
+			M.set_jitter_if_lower(200 SECONDS)
+
+/datum/action/cooldown/tunnel_clown/veil
+	name = "Покров Хонкоматери"
+	desc = "Раствориться в дыму и стать почти невидимым на 20 секунд. Покров снимает болы и наручники"
+	button_icon = 'icons/mob/actions/actions_spells.dmi'
+	button_icon_state = "void_magnet"
+	cooldown_time = 30 SECONDS
+	var/invisibility_duration = 20 SECONDS
+
+/datum/action/cooldown/tunnel_clown/veil/Activate(atom/target)
+	. = ..()
+	var/mob/living/carbon/human/clown = owner
+	if(!istype(clown) || QDELETED(clown) || clown.stat == DEAD)
+		return FALSE
+	var/obj/item/clothing/suit/hooded/chaplain_hoodie/hoodie = clown.wear_suit
+	if(!istype(hoodie) || !hoodie.hood || clown.head != hoodie.hood)
+		to_chat(clown, span_warning("Для Покрова Хонкоматери необходимо надеть накидку с поднятым капюшоном!"))
+		return FALSE
+	var/obj/item/clothing/shoes/clown_shoes/shoes = clown.shoes
+	var/datum/component/squeak/squeak_component
+	if(istype(shoes))
+		squeak_component = shoes.GetComponent(/datum/component/squeak)
+	var/old_alpha = clown.alpha
+	var/old_squeak_suppressed = squeak_component?.squeak_suppressed
+	clown.alpha = 15
+	if(squeak_component)
+		squeak_component.squeak_suppressed = TRUE
+	var/turf/clown_turf = get_turf(clown)
+	if(clown_turf)
+		do_smoke(
+			range = 0,
+			holder = clown,
+			location = clown_turf,
+			smoke_type = /datum/effect_system/fluid_spread/smoke,
+		)
+	clown.uncuff(3 MINUTES)
+	playsound(clown, 'sound/mobs/non-humanoids/honkbot/honkbot_evil_laugh.ogg', 50, TRUE)
+	addtimer(CALLBACK(src, PROC_REF(end_veil), clown, old_alpha, squeak_component, old_squeak_suppressed,), invisibility_duration)
+	StartCooldown()
+	return TRUE
+
+/datum/action/cooldown/tunnel_clown/veil/proc/end_veil(mob/living/carbon/human/clown, old_alpha, datum/component/squeak/squeak_component, old_squeak_suppressed,)
+	if(!clown || QDELETED(clown))
+		return
+	clown.alpha = old_alpha
+	if(squeak_component && !QDELETED(squeak_component))
+		squeak_component.squeak_suppressed = old_squeak_suppressed

@@ -3429,6 +3429,10 @@
 	},
 /turf/open/floor/iron/dark,
 /area/station/engineering/main)
+"aRn" = (
+/obj/structure/statue/ell_good/halloween/two,
+/turf/open/floor/cult,
+/area/station/maintenance/starboard/fore)
 "aRo" = (
 /obj/effect/turf_decal/tile/red/half/contrasted{
 	dir = 4
@@ -5673,9 +5677,8 @@
 /turf/open/floor/iron,
 /area/station/maintenance/aft)
 "bsj" = (
-/obj/item/flashlight/lantern,
 /obj/effect/decal/cleanable/cobweb/cobweb2,
-/turf/open/floor/cult,
+/turf/open/floor/mineral/bananium/tiled,
 /area/station/maintenance/starboard/fore)
 "bsm" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
@@ -11135,7 +11138,7 @@
 /area/station/service/library/artgallery)
 "cHH" = (
 /obj/effect/decal/cleanable/blood/old,
-/turf/open/floor/cult,
+/turf/open/floor/mineral/bananium/tiled,
 /area/station/maintenance/starboard/fore)
 "cHQ" = (
 /obj/machinery/firealarm/directional/west,
@@ -13473,13 +13476,13 @@
 /turf/open/floor/iron,
 /area/station/science/lobby)
 "diS" = (
-/obj/effect/spawner/random/maintenance,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/structure/railing/corner/end/flip{
 	dir = 4
 	},
 /obj/machinery/atmospherics/components/unary/vent_pump/on/layer4,
+/obj/structure/statue/ell_good/halloween/tree,
 /turf/open/floor/eighties/red,
 /area/station/maintenance/port/aft)
 "diT" = (
@@ -15163,6 +15166,7 @@
 "dDf" = (
 /obj/structure/table/wood,
 /obj/item/storage/fancy/candle_box,
+/obj/item/flashlight/lantern,
 /turf/open/floor/iron/dark,
 /area/station/maintenance/starboard/fore)
 "dDl" = (
@@ -25349,6 +25353,7 @@
 /area/station/security/courtroom)
 "gdM" = (
 /obj/structure/destructible/cult/item_dispenser/archives/library,
+/obj/effect/spawner/random/maintenance,
 /turf/open/floor/plating,
 /area/station/maintenance/starboard/fore)
 "gdO" = (
@@ -34742,8 +34747,7 @@
 /turf/open/floor/iron,
 /area/station/maintenance/ghetto/fore/starboard)
 "iqM" = (
-/obj/structure/falsewall,
-/turf/open/floor/plating,
+/turf/open/floor/mineral/bananium/tiled,
 /area/station/maintenance/starboard/fore)
 "iqN" = (
 /obj/machinery/light/dim/directional/west,
@@ -42026,6 +42030,7 @@
 /area/station/maintenance/ghetto/fore/starboard)
 "khk" = (
 /obj/effect/decal/cleanable/blood/old,
+/obj/structure/statue/ell_good/halloween/one,
 /turf/open/floor/iron/grimy,
 /area/station/maintenance/starboard/fore)
 "khn" = (
@@ -55984,8 +55989,9 @@
 /turf/open/floor/iron,
 /area/station/maintenance/starboard/upper)
 "nyL" = (
-/obj/structure/spirit_board,
-/turf/open/floor/cult,
+/obj/effect/decal/cleanable/ash,
+/obj/effect/mapping_helpers/burnt_floor,
+/turf/open/floor/wood,
 /area/station/maintenance/starboard/fore)
 "nyQ" = (
 /obj/machinery/firealarm/directional/north,
@@ -97566,8 +97572,9 @@
 /turf/open/floor/iron/white,
 /area/station/science/xenobiology)
 "xJe" = (
-/obj/effect/spawner/random/maintenance,
-/turf/open/floor/cult,
+/obj/effect/decal/cleanable/dirt,
+/obj/item/flashlight/flare/candle,
+/turf/open/floor/plating,
 /area/station/maintenance/starboard/fore)
 "xJj" = (
 /obj/machinery/light/dim/directional/north,
@@ -207869,8 +207876,8 @@ tYD
 mhf
 gnf
 cHH
-xJe
 oKg
+iqM
 gnf
 gnf
 ltD
@@ -208126,7 +208133,7 @@ kJd
 xRt
 gnf
 mse
-nyL
+aRn
 iJQ
 izx
 hoB
@@ -208384,7 +208391,7 @@ mhf
 gnf
 bsj
 oKg
-oKg
+iqM
 gnf
 veY
 vtV
@@ -210721,7 +210728,7 @@ gnf
 gnf
 gnf
 gnf
-iqM
+iPQ
 gnf
 gnf
 iYd
@@ -210976,7 +210983,7 @@ kmF
 dGK
 gnf
 qkZ
-axI
+xJe
 uYw
 axI
 rlb
@@ -211490,7 +211497,7 @@ kdS
 iru
 kdS
 gnf
-mkh
+nyL
 khk
 ghH
 gnf

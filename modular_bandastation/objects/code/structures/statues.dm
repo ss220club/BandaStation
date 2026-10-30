@@ -184,12 +184,94 @@
 	name = "Тотем Хонкоматери"
 	desc = "Загадочный клоунский тотем, излучающий одновременно и смех, и страх. Судя по всему, именно от него Тоннельный Клоун питает свои силы..."
 	resistance_flags = INDESTRUCTIBLE
+	var/list/notified_mobs = list()
+	var/proximity_check_interval = 1 SECONDS
+
+/obj/structure/statue/ell_good/halloween/Initialize(mapload)
+	. = ..()
+	addtimer(CALLBACK(src, PROC_REF(check_proximity)), proximity_check_interval)
+
+/obj/structure/statue/ell_good/halloween/proc/check_proximity()
+	if(QDELETED(src))
+		return
+	var/list/currently_nearby = list()
+	for(var/mob/living/carbon/human/person in range(5, src))
+		if(QDELETED(person))
+			continue
+		currently_nearby |= person
+		if(person in notified_mobs)
+			continue
+		var/datum/antagonist/tunnel_clown/antagonist = GLOB.tunnel_clown_antagonist
+		if(!antagonist || QDELETED(antagonist))
+			continue
+		var/mob/living/carbon/human/clown = antagonist.owner?.current
+		if(!istype(clown) || QDELETED(clown))
+			continue
+		to_chat(clown, span_boldannounce("Хонкомать поведала тебе, что чужаки приблизились к \"[name]\""))
+	notified_mobs = currently_nearby
+	addtimer(CALLBACK(src, PROC_REF(check_proximity)), proximity_check_interval)
 
 /obj/structure/statue/ell_good/halloween/one
 	name = "Первый Тотем Хонкоматери"
-	desc = "Загадочный клоунский тотем, излучающий одновременно и смех, и страх. Судя по всему, именно от него Тоннельный Клоун питает свои силы... Кажется, он смотрит на тебя своими наивными глазами и ждёт, пока ты что-то ему произнесёшь"
+	desc = "Загадочный клоунский тотем, излучающий одновременно и смех, и страх. Судя по всему, именно от него Тоннельный Клоун питает свои силы... Снизу на пъедестале выгравировано кривыми символами - Смех... Кажется, он смотрит на тебя своими наивными глазами и ждёт, пока ты что-то ему произнесёшь."
+	var/your_answer = "Смех Хонкоматери радует детей"
 
+/obj/structure/statue/ell_good/halloween/one/attack_hand(mob/living/user, list/modifiers)
+	if(!Adjacent(user))
+		return ..()
+	var/response = tgui_input_text(user, "Произнесите заклинание", "Первый Тотем Хонкоматери", max_length = 50, encode = FALSE,)
+	if(isnull(response))
+		return
+	response = trim(response)
+	if(response == "[your_answer]")
+		to_chat(user, span_purple("Она услышала тебя и сжалилась над тобой..."))
+		new /obj/effect/temp_visual/small_smoke(loc)
+		playsound(src, pick('sound/effects/hallucinations/behind_you1.ogg', 'sound/effects/hallucinations/i_see_you1.ogg', 'sound/effects/hallucinations/im_here1.ogg'), 75, TRUE)
+		qdel(src)
+	else
+		to_chat(user, span_danger("Она не услышала тебя"))
 
+/obj/structure/statue/ell_good/halloween/two
+	name = "Второй Тотем Хонкоматери"
+	desc = "Загадочный клоунский тотем, излучающий одновременно и смех, и страх. Судя по всему, именно от него Тоннельный Клоун питает свои силы..."
+
+/obj/structure/statue/ell_good/halloween/two/Initialize(mapload)
+	. = ..()
+	for(var/turf/T in range(2, src))
+		RegisterSignal(T, COMSIG_ATOM_ENTERED, PROC_REF(on_turf_entered))
+
+/obj/structure/statue/ell_good/halloween/two/Destroy()
+	for(var/turf/T in range(2, src))
+		UnregisterSignal(T, COMSIG_ATOM_ENTERED)
+	return ..()
+
+/obj/structure/statue/ell_good/halloween/two/proc/on_turf_entered(turf/source, atom/movable/arrived)
+	SIGNAL_HANDLER
+	if(istype(arrived, /obj/item/storage/spooky))
+		addtimer(CALLBACK(src, PROC_REF(check_offering)), 1)
+
+/obj/structure/statue/ell_good/halloween/two/proc/check_offering()
+	var/list/offering_turfs = list()
+	for(var/turf/open/floor/mineral/bananium/tiled/T in range(2, src))
+		if(length(offering_turfs) >= 4)
+			break
+		var/obj/item/storage/spooky/box = locate(/obj/item/storage/spooky) in T
+		if(box)
+			offering_turfs[T] = box
+	if(length(offering_turfs) < 4)
+		return FALSE
+	for(var/turf/T as anything in offering_turfs)
+		var/obj/item/storage/spooky/box = offering_turfs[T]
+		if(box)
+			qdel(box)
+		new /obj/effect/temp_visual/small_smoke(T)
+	playsound(src, pick('sound/effects/hallucinations/behind_you1.ogg', 'sound/effects/hallucinations/i_see_you1.ogg', 'sound/effects/hallucinations/im_here1.ogg'), 75, TRUE)
+	qdel(src)
+	return TRUE
+
+/obj/structure/statue/ell_good/halloween/tree
+	name = "Третий Тотем Хонкоматери"
+	desc = "Загадочный клоунский тотем, излучающий одновременно и смех, и страх. Судя по всему, именно от него Тоннельный Клоун питает свои силы..."
 
 /obj/structure/statue/heinrich_treisen
 	name = "Генрих Трейзен Третий"
