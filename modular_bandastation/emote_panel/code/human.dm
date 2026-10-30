@@ -67,7 +67,7 @@
 			),
 		),
 	)
-// MARK: Emotes
+// MARK Emotes
 /datum/emote/living/sniffle
 	key = "sniffle"
 	key_third_person = "sniffles"
@@ -199,7 +199,8 @@
 		return FALSE
 	if(!status_check)
 		return TRUE
-	if(!is_type_in_typecache(user.get_active_held_item(), cane_typecache))
+	var/active_item = user.get_active_held_item()
+	if(!is_type_in_typecache(active_item, cane_typecache))
 		return FALSE
 	var/turf/user_turf = get_turf(user)
 	return user_turf && !isgroundlessturf(user_turf)
