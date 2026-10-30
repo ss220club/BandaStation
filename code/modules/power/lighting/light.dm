@@ -83,6 +83,7 @@
 	var/break_if_moved = TRUE
 	/// If TRUE we can break on init
 	var/allow_break_on_init = TRUE
+	var/tunnel_clown_darkness = FALSE
 
 // create a new lighting fixture
 /obj/machinery/light/Initialize(mapload)
@@ -230,6 +231,15 @@
 
 // update the icon_state and luminosity of the light depending on its state
 /obj/machinery/light/proc/update(trigger = TRUE)
+	if(tunnel_clown_darkness)
+		on = FALSE
+		use_power = IDLE_POWER_USE
+		low_power_mode = FALSE
+		set_light(l_range = 0)
+		update_appearance()
+		update_current_power_usage()
+		return
+
 	switch(status)
 		if(LIGHT_BROKEN,LIGHT_BURNED,LIGHT_EMPTY)
 			on = FALSE
@@ -503,7 +513,7 @@
 // if a light is turned off, it won't activate emergency power
 /obj/machinery/light/proc/turned_off()
 	var/area/local_area = get_room_area()
-	return (local_area && !local_area.lightswitch && local_area.power_light) || flickering
+	return tunnel_clown_darkness || (local_area && !local_area.lightswitch && local_area.power_light) || flickering
 
 // returns whether this light has power
 // true if area has power and lightswitch is on

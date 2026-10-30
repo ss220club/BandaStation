@@ -2,3 +2,4 @@
 
 #include "code/ert.dm"
 #include "code/objective_replacement.dm"
+#include "code/tonnel_clown.dm"
