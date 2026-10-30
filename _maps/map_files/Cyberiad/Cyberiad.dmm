@@ -14490,7 +14490,7 @@
 /area/station/maintenance/ghetto/fore/starboard)
 "dvG" = (
 /obj/structure/sign/warning/directional/south,
-/obj/machinery/portable_atmospherics/canister/plasma,
+/obj/machinery/portable_atmospherics/canister,
 /turf/open/floor/iron/dark,
 /area/station/science/ordnance)
 "dvK" = (
@@ -69882,12 +69882,12 @@
 /obj/structure/railing{
 	dir = 4
 	},
-/obj/effect/turf_decal/box,
-/obj/machinery/portable_atmospherics/canister,
 /obj/machinery/light/directional/north,
 /obj/effect/turf_decal/stripes/line{
 	dir = 4
 	},
+/obj/machinery/portable_atmospherics/canister,
+/obj/effect/turf_decal/box,
 /turf/open/floor/iron/white,
 /area/station/science/ordnance/office)
 "qZL" = (
@@ -81554,10 +81554,9 @@
 /turf/open/floor/iron/dark,
 /area/station/security/armory)
 "tSp" = (
-/obj/effect/turf_decal/box,
 /obj/machinery/portable_atmospherics/canister,
-/turf/open/floor/iron/white,
-/area/station/science/ordnance/office)
+/turf/open/floor/iron/dark,
+/area/station/science/ordnance)
 "tSq" = (
 /obj/effect/turf_decal/trimline/yellow/filled/line{
 	dir = 5
@@ -149701,7 +149700,7 @@ puC
 jEb
 hvQ
 fqE
-gIH
+tSp
 dvG
 nFU
 doz
@@ -216001,7 +216000,7 @@ bTH
 bTH
 bTH
 cCP
-tSp
+yfh
 orr
 yfh
 jsl
