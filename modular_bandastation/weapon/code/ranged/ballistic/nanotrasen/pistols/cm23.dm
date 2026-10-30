@@ -32,3 +32,6 @@
 
 /obj/item/gun/ballistic/automatic/pistol/cm23/no_mag
 	spawnwithmagazine = FALSE
+
+/obj/item/gun/ballistic/automatic/pistol/cm23/sec
+	spawn_magazine_type = /obj/item/ammo_box/magazine/c38/rubber
