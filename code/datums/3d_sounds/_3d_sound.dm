@@ -23,6 +23,8 @@
 	var/falloff_distance
 	var/falloff_exponent
 	var/pressure_affected = TRUE
+	// BANDASTATION EDIT: when true the channel is owned outside this datum and shared between sequential sounds - it must not be stopped on deregister
+	var/shared_channel = FALSE
 
 /datum/threed_sound/New(atom/new_parent, sound/new_sound, list/current_listeners, can_add_new_listeners = FALSE, volume = 50, sound_range = SOUND_RANGE, sound_length = 5 SECONDS, channel, preference_volume, preference_signal, falloff_exponent = SOUND_FALLOFF_EXPONENT, falloff_distance = SOUND_DEFAULT_FALLOFF_DISTANCE, pressure_affected = TRUE)
 	if(!ismovable(new_parent) && !isturf(new_parent))
@@ -196,7 +198,8 @@
 	PROTECTED_PROC(TRUE)
 
 	listeners -= no_longer_listening
-	no_longer_listening.stop_sound_channel(our_channel)
+	if(!shared_channel) // BANDASTATION EDIT: a queued message may be playing next on a shared channel - don't kill it
+		no_longer_listening.stop_sound_channel(our_channel)
 	var/list/unregister_signals = list(
 		COMSIG_MOB_LOGIN,
 		SIGNAL_ADDTRAIT(TRAIT_DEAF),
