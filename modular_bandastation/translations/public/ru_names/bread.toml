@@ -1,0 +1,8 @@
+["bread"]
+nominative = "хлеб"
+genitive = "хлеба"
+dative = "хлебу"
+accusative = "хлеб"
+instrumental = "хлебом"
+prepositional = "хлебе"
+gender = "male"

@@ -1,0 +1,8 @@
+["Beer"]
+nominative = "пиво"
+genitive = "пива"
+dative = "пиву"
+accusative = "пиво"
+instrumental = "пивом"
+prepositional = "пиве"
+gender = "neuter"

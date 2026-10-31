@@ -35,7 +35,7 @@ GLOBAL_LIST_EMPTY(ru_names)
 			"[prefix][accusative_form][suffix]",
 			"[prefix][instrumental_form][suffix]",
 			"[prefix][prepositional_form][suffix]",
-			gender = "[GLOB.ru_names[formatted_name]["gender"] || null]",)
+			gender = GLOB.ru_names[formatted_name]["gender"],)
 
 /atom/New(mapload, ...)
 	. = ..()
@@ -55,6 +55,7 @@ GLOBAL_LIST_EMPTY(ru_names)
 /atom/ru_names_rename(list/new_list)
 	if(!length(new_list))
 		ru_names = null
+		gender = src::gender
 		return
 	ru_names = new_list
 	if(new_list["gender"])
@@ -78,9 +79,14 @@ GLOBAL_LIST_EMPTY(ru_names)
 	. = name
 	if(declent == "gender")
 		. = gender
-	if(!length(ru_names) || ru_names["base"] != initial(name))
+	if(!length(ru_names) || format_text(ru_names["base"]) != format_text(name))
 		return .
 	return get_declented_value(ru_names, declent, .)
+
+/atom/get_visible_name(add_id_name = TRUE, force_real_name = FALSE, declent = NOMINATIVE)
+	. = ..()
+	if(name != initial(name))
+		. = declent_ru(declent)
 
 /// Used for getting initial values, such as for recipies where resulted atom is not yet created. It can return null - use var/override_backup to have a returned value guaranteed
 /proc/declent_ru_initial(target_name, declent = NOMINATIVE, override_backup = null)
