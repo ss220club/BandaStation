@@ -28,31 +28,31 @@
 	)
 
 /datum/species/human/cerulean/get_physical_attributes()
-	return "Ceruleans struggle with the pull of gravity yet are otherwise similar to humans. \
-		They are slightly more durable, and adore Martian culinary culture, though not much else..."
+	return "Лазурники с трудом переносят гравитацию, но в остальном похожи на людей. \
+		Они немного выносливее и обожают марсианскую кухню, хотя вряд ли что-то ещё..."
 
 /datum/species/human/cerulean/get_species_description()
-	return "Ceruleans are descendants of humans and vastly altered \"Animalids\" \
-		who originated from a populace of fanatic body modders devoted to perfecting biomechanics. \
-		Not much of these origins remain, par for their insatiable drive to endlessly chase scientific advancement."
+	return "Лазурники - потомки людей и сильно изменённых «анималидов», \
+		происходящие от популяции фанатиков телесной модификации, посвятивших себя совершенствованию биомеханики. \
+		От этого происхождения осталось немногое, кроме их ненасытной тяги бесконечно гнаться за научным прогрессом."
 
 /datum/species/human/cerulean/get_species_lore()
 	return list(
-		"Ceruleans are a scarcely common \"Animalid\" variant, sought mostly for their labor in vacuum environments. \
-		They are descendant of radically spliced humans, of which a society inhabits two tidal locked hycean worlds: planets Marina and Moryana. \
-		Largely, the Cerulean society still reside there today.",
+		"Лазурники - редко встречающийся вариант «анималидов», ценимый в основном за труд в вакуумных средах. \
+		Они потомки генетически сращённых людей, общество которых населяет два приливно-запертых гицеанских мира: планеты Марина и Моряна. \
+		По большей части общество лазурников до сих пор живёт там.",
 
-		"Most of the scientific development of early Cerulean kind, directly post migration from humans, are left in obscurity or destroyed. \
-		In part due to the self-centered nature of the problems they were designed to solve, like the \"hydro-vaporizer\", a device which respirates \
-		gills in dry atmosphere. Or, their arrogant and inexorable attitude in favor for their inventions and the pursuit for improvement.",
+		"Большая часть научных разработок ранних лазурников, непосредственно после миграции от людей, остаётся в безвестности или уничтожена. \
+		Отчасти из-за эгоцентричного характера проблем, которые они были созданы решать, вроде «гидро-испарителя» - устройства, которое снабжает \
+		жабры дыханием в сухой атмосфере. Или из-за их высокомерного и неумолимого отношения в пользу своих изобретений и стремления к совершенствованию.",
 
-		"There is one category of technology the Ceruleans have managed to stand out with: they are pioneers of gravity manipulation technology. \
-		Not many decades ago, Ceruleans of planet Marina, known as the Marinians, built grav-gen megastructures onto their sea beds to cast its \
-		planet's ocean currents upward past atmosphere,	building an aquatic bridge flowing towards Moryana into a connection between the two worlds.",
+		"Есть одна категория технологий, в которой лазурники сумели выделиться: они пионеры технологии управления гравитацией. \
+		Несколько десятилетий назад лазурники планеты Марина, известные как мариниане, построили мегаструктуры гравитационных генераторов на своих морских \
+		днах, чтобы поднимать океанские течения планеты выше атмосферы, создавая водный мост, текущий к Моряне - связь между двумя мирами.",
 
-		"Outwardly, this was done to show-boat their planetary technology as well as their unity portraying to be two kindred planets, but to the Moryan \
-		it was an obvious attempt of the mightier celestial body to seize control over a new, peculiar society. Taking shape deep in the perpetually \
-		lightless region behind Moryana, known around space as Moryana's \"Abyss\" region.",
+		"Внешне это было сделано, чтобы покрасоваться планетарной технологией и единством, изображая две родственные планеты, но для морян \
+		это была очевидная попытка более могущественного небесного тела захватить контроль над новым, своеобразным обществом. Принимая форму глубоко в вечно \
+		бессветной области за Моряной, известной в космосе как регион «Бездна» Моряны.",
 	)
 
 /datum/species/human/cerulean/create_pref_unique_perks()
@@ -62,32 +62,32 @@
 		list(
 			SPECIES_PERK_TYPE = SPECIES_POSITIVE_PERK,
 			SPECIES_PERK_ICON = "fish-fins",
-			SPECIES_PERK_NAME = "Flip-Flap",
-			SPECIES_PERK_DESC = "Ceruleans are hard to keep a hold of, becoming slippery and tough to grab if soaked in water.",
+			SPECIES_PERK_NAME = "Флип-флап",
+			SPECIES_PERK_DESC = "Лазурников трудно удержать: намокнув, они становятся скользкими и неподатливыми для захвата.",
 		),
 		list(
 			SPECIES_PERK_TYPE = SPECIES_POSITIVE_PERK,
 			SPECIES_PERK_ICON = "shield",
-			SPECIES_PERK_NAME = "Scaled Up",
-			SPECIES_PERK_DESC = "Ceruleans have slightly higher damage and pressure resistance.",
+			SPECIES_PERK_NAME = "Чешуйчатая броня",
+			SPECIES_PERK_DESC = "Лазурники обладают немного повышенной стойкостью к урону и давлению.",
 		),
 		list(
 			SPECIES_PERK_TYPE = SPECIES_NEUTRAL_PERK,
 			SPECIES_PERK_ICON = "dragon",
-			SPECIES_PERK_NAME = "Little Space Dragon",
-			SPECIES_PERK_DESC = "Ceruleans and their dexterity are tied to gravity, turning lethally agile if it's taken out of the question.",
+			SPECIES_PERK_NAME = "Маленький космический дракон",
+			SPECIES_PERK_DESC = "Ловкость лазурников привязана к гравитации: без неё они становятся очень проворными.",
 		),
 		list(
 			SPECIES_PERK_TYPE = SPECIES_NEGATIVE_PERK,
 			SPECIES_PERK_ICON = "wheelchair-move",
-			SPECIES_PERK_NAME = "No Leg to Stand On",
-			SPECIES_PERK_DESC = "Ceruleans do not have legs, requiring a brutal surgery to opt for a pair.",
+			SPECIES_PERK_NAME = "Без ног",
+			SPECIES_PERK_DESC = "У лазурников нет ног - чтобы обзавестись парой, потребуется жестокая операция.",
 		),
 		list(
 			SPECIES_PERK_TYPE = SPECIES_NEGATIVE_PERK,
 			SPECIES_PERK_ICON = "shrimp",
-			SPECIES_PERK_NAME = "Fried Shrimp",
-			SPECIES_PERK_DESC = "Ceruleans gain more damage from burn damage and heat sources.",
+			SPECIES_PERK_NAME = "Жареная креветка",
+			SPECIES_PERK_DESC = "Лазурники получают больше урона от ожогов и источников тепла.",
 		),
 	)
 

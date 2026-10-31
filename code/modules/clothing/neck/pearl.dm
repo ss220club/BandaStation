@@ -4,8 +4,8 @@
  */
 /obj/item/clothing/neck/necklace/pearl
 	name = "black pearl necklace"
-	desc = "A necklace of black pearls gathered from somewhere within the \"Abyss\" region of planet Moryana. \
-		A strange infusion seems to actively swirl within the tiny dark beads."
+	desc = "Ожерелье из чёрного жемчуга, собранного где-то в регионе «Бездна» планеты Моряна. \
+		Кажется, странная субстанция активно клубится внутри крошечных тёмных бусин."
 	icon = 'icons/obj/clothing/neck.dmi'
 	icon_state = "beads"
 	color = "#272526"

@@ -244,14 +244,14 @@
 	icon = 'icons/obj/machines/cloning.dmi'
 	icon_state = "pod_1"
 	fluff_spawn = /obj/effect/decal/cleanable/greenglow
-	you_are_text = "You are a wanna-be idol getting by on gigs and criminality."
-	flavour_text = "It's time to put on an impromptu show! Let's raid the station in style, steal their resources with grace, and call it a great night!"
-	prompt_name = "a deadbeat musician"
+	you_are_text = "Вы - начинающая идол-звезда, перебивающаяся выступлениями и криминалом."
+	flavour_text = "Пора устроить импровизированное шоу! Ограбим станцию со стилем, украдём их ресурсы с изяществом - и назовём это отличным вечером!"
+	prompt_name = "бездарный музыкант"
 	outfit = /datum/outfit/pirate/siren
-	rank = "Gitarisuto"
+	rank = "Гитарисуто"
 
 /obj/effect/mob_spawn/ghost_role/human/pirate/siren/vocalist
-	rank = "Bookaru"
+	rank = "Вокалисуту"
 
 /obj/effect/mob_spawn/ghost_role/human/pirate/siren/generate_pirate_name()
 	return "[rank] [pick(GLOB.first_names_female)]"
