@@ -55,6 +55,7 @@ GLOBAL_VAR_INIT(tunnel_clown_antagonist, null)
 		/datum/action/cooldown/tunnel_clown/execution,
 		/datum/action/cooldown/tunnel_clown/rescue,
 		/datum/action/cooldown/tunnel_clown/veil,
+		/datum/action/cooldown/tunnel_clown/summon_ghosts,
 	)
 	var/list/datum/action/granted_abilities = list()
 	var/initial_max_health = 1000
@@ -74,6 +75,7 @@ GLOBAL_VAR_INIT(tunnel_clown_antagonist, null)
 	if(istype(clown))
 		clown.maxHealth = initial_max_health
 		clown.health = initial_max_health
+		clown.add_faction(FACTION_CULT)
 	update_totem_health()
 	addtimer(CALLBACK(src, PROC_REF(check_totems)), totem_check_interval)
 
@@ -455,3 +457,27 @@ GLOBAL_VAR_INIT(tunnel_clown_antagonist, null)
 	clown.alpha = old_alpha
 	if(squeak_component && !QDELETED(squeak_component))
 		squeak_component.squeak_suppressed = old_squeak_suppressed
+
+/datum/action/cooldown/tunnel_clown/summon_ghosts
+	name = "Призыв духов"
+	desc = "Призывает трёх духов-призраков Хонкоматери, которые помогут вам в бою."
+	button_icon = 'modular_bandastation/mobs/icons/sheet_ghost.dmi'
+	button_icon_state = "sheet_ghost"
+	cooldown_time = 1 MINUTES
+
+/datum/action/cooldown/tunnel_clown/summon_ghosts/Activate(atom/target)
+	. = ..()
+	var/mob/living/carbon/human/clown = owner
+	if(!istype(clown) || QDELETED(clown))
+		return
+	var/list/spawn_turfs = list()
+	for(var/turf/T in orange(1, clown))
+		spawn_turfs += T
+	if(length(spawn_turfs) < 3)
+		return
+	for(var/i in 1 to 3)
+		var/turf/T = pick(spawn_turfs)
+		spawn_turfs -= T
+		new /obj/effect/temp_visual/small_smoke(T)
+		new /mob/living/basic/mining/ice_demon/ghost(T)
+	playsound(clown, 'sound/effects/phasein.ogg', 50, TRUE)

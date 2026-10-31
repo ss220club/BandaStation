@@ -93,3 +93,29 @@
 	melee_damage_lower = 10
 	melee_damage_upper = 10
 	existence_period = 7 SECONDS
+
+/mob/living/basic/mining/ice_demon/ghost
+	name = "приведение"
+	speed = 1
+	maxHealth = 100
+	health = 100
+	icon = 'modular_bandastation/mobs/icons/sheet_ghost.dmi'
+	icon_state = "sheet_ghost"
+	faction = list(FACTION_CULT)
+	layer = MOB_LAYER
+	plane = GAME_PLANE
+
+/mob/living/basic/mining/ice_demon/ghost/Initialize(mapload)
+	. = ..()
+	boo()
+
+/mob/living/basic/mining/ice_demon/ghost/death(gibbed)
+	if(prob(80))
+		new /obj/effect/spawner/random/bedsheet(loc)
+	return ..()
+
+/mob/living/basic/mining/ice_demon/ghost/proc/boo()
+	if(QDELETED(src) || stat == DEAD)
+		return
+	say("БУ-У-У!!!")
+	addtimer(CALLBACK(src, PROC_REF(boo)), rand(10 SECONDS, 30 SECONDS))
