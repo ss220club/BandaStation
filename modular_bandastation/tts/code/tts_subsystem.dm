@@ -3,6 +3,8 @@
 #define TTS_JOB_REPLACEMENTS "tts_job_replacements"
 
 #define FILE_CLEANUP_DELAY 30 SECONDS
+/// How long a speaker's channel stays reserved after its queued messages should have ended. Covers network latency and file download, so clients finish playing before the channel is reused.
+#define TTS_LOCAL_CHANNEL_RELEASE_DELAY 10 SECONDS
 
 SUBSYSTEM_DEF(tts220)
 	name = "Text-to-Speech 220"
@@ -64,6 +66,8 @@ SUBSYSTEM_DEF(tts220)
 
 	/// List of currently existing binding of atom and sound channel: `atom` => `sound_channel`.
 	VAR_PRIVATE/list/tts_local_channels_by_owner = list()
+	/// When the messages queued on each owner's channel are expected to finish playing, per listener: `atom` => list(`listener weakref` => `world.time`)
+	VAR_PRIVATE/list/tts_local_queue_ends_by_owner = list()
 
 	/// Mapping of BYOND gender to TTS gender
 	VAR_PRIVATE/list/gender_table = list(
@@ -175,6 +179,17 @@ SUBSYSTEM_DEF(tts220)
 			expired_requests += filename
 	tts_queue -= expired_requests
 	tts_queue_timestamps -= expired_requests
+
+	var/list/idle_owners = list()
+	for(var/owner in tts_local_queue_ends_by_owner)
+		var/list/queue_ends = tts_local_queue_ends_by_owner[owner]
+		for(var/listener_ref in queue_ends.Copy())
+			if(queue_ends[listener_ref] + TTS_LOCAL_CHANNEL_RELEASE_DELAY < world.time)
+				queue_ends -= listener_ref
+		if(!length(queue_ends))
+			idle_owners += owner
+	for(var/owner in idle_owners)
+		release_local_channel(owner)
 
 	if(sanitized_messages_caching)
 		sanitized_messages_cache.Cut()
@@ -486,6 +501,7 @@ SUBSYSTEM_DEF(tts220)
 
 	// Assigned before any SFX is sent, so the SFX queue on the same channel as the message
 	output.channel = channel_override || get_local_channel_by_owner(speaker)
+	var/playback_time = channel_override ? null : queue_local_message(speaker, valid_listeners, SSsounds.get_sound_length(filename2play) || FILE_CLEANUP_DELAY)
 	if(preSFX)
 		for(var/mob/listener as anything in valid_listeners)
 			play_sfx(listener, preSFX, listener.client.prefs.read_preference(volume_preference), output)
@@ -520,7 +536,7 @@ SUBSYSTEM_DEF(tts220)
 			threed_listeners,
 			volume = 100,
 			sound_range = SOUND_RANGE,
-			sound_length = SSsounds.get_sound_length(filename2play) || FILE_CLEANUP_DELAY,
+			sound_length = playback_time, // Follows the speaker until the message has played, including the wait behind earlier queued messages
 			channel = output.channel,
 			preference_volume = volume_preference,
 			preference_signal = COMSIG_MOB_TTS_VOLUME_PREFERENCE_APPLIED,
@@ -556,16 +572,34 @@ SUBSYSTEM_DEF(tts220)
 	if(!channel) // Out of reservable channels - not cached, so a later message retries the reservation
 		return SSsounds.random_available_channel()
 	tts_local_channels_by_owner[owner] = channel
-	RegisterSignal(owner, COMSIG_QDELETING, PROC_REF(clear_channel))
+	tts_local_queue_ends_by_owner[owner] = list()
+	RegisterSignal(owner, COMSIG_QDELETING, PROC_REF(release_local_channel))
 	return channel
 
-/datum/controller/subsystem/tts220/proc/clear_channel(owner)
+/// Books a message of `sound_length` on the owner's channel for each listener - their client plays the owner's messages back to back.
+/// Returns how long until the message has played for the most backlogged listener.
+/datum/controller/subsystem/tts220/proc/queue_local_message(atom/owner, list/listeners, sound_length)
+	. = sound_length
+	var/list/queue_ends = tts_local_queue_ends_by_owner[owner]
+	if(!queue_ends) // The owner got an unreserved fallback channel, nothing to track
+		return
+	for(var/mob/listener as anything in listeners)
+		var/datum/weakref/listener_ref = WEAKREF(listener)
+		queue_ends[listener_ref] = max(queue_ends[listener_ref] || 0, world.time) + sound_length
+		. = max(., queue_ends[listener_ref] - world.time)
+
+/// Unbinds the owner's channel. It returns to the pool only once clients should be done playing the owner's queued messages.
+/datum/controller/subsystem/tts220/proc/release_local_channel(atom/owner)
 	SIGNAL_HANDLER
 
-	var/channel = tts_local_channels_by_owner[owner]
-	if(channel)
-		SSsounds.free_sound_channel(channel)
+	var/release_time = world.time
+	var/list/queue_ends = tts_local_queue_ends_by_owner[owner]
+	for(var/listener_ref in queue_ends)
+		release_time = max(release_time, queue_ends[listener_ref] + TTS_LOCAL_CHANNEL_RELEASE_DELAY)
+	addtimer(CALLBACK(SSsounds, TYPE_PROC_REF(/datum/controller/subsystem/sounds, free_sound_channel), tts_local_channels_by_owner[owner]), release_time - world.time, TIMER_DELETE_ME)
 	tts_local_channels_by_owner -= owner
+	tts_local_queue_ends_by_owner -= owner
+	UnregisterSignal(owner, COMSIG_QDELETING)
 
 /datum/controller/subsystem/tts220/proc/cleanup_tts_file(filename)
 	fdel(filename)
@@ -693,3 +727,4 @@ SUBSYSTEM_DEF(tts220)
 #undef TTS_JOB_REPLACEMENTS
 
 #undef FILE_CLEANUP_DELAY
+#undef TTS_LOCAL_CHANNEL_RELEASE_DELAY
