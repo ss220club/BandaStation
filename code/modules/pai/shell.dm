@@ -56,7 +56,7 @@
 	if(!choice)
 		return FALSE
 	set_holochassis(choice)
-	balloon_alert(src, "[choice] composite engaged")
+	balloon_alert(src, "[choice] композит включён")
 	update_resting()
 	return TRUE
 
@@ -78,7 +78,7 @@
 	if(!holoform)
 		. = fold_out(force)
 		return FALSE
-	visible_message(span_notice("[src] dematerialises!"))
+	visible_message(span_notice("[src.declent_ru(NOMINATIVE)] дематериализуется!"))
 	stop_pulling()
 	if(ispickedupmob(loc))
 		var/obj/item/mob_holder/mob_head = loc
@@ -106,16 +106,16 @@
  */
 /mob/living/silicon/pai/proc/fold_out(force = FALSE)
 	if(holochassis_health < 0)
-		balloon_alert(src, "emitter repair incomplete")
+		balloon_alert(src, "ремонт излучателя не завершён")
 		return FALSE
 	if(!can_holo && !force)
-		balloon_alert(src, "emitters are disabled")
+		balloon_alert(src, "излучатели отключены")
 		return FALSE
 	if(holoform)
 		. = fold_in(force)
 		return
 	if(!holochassis_ready)
-		balloon_alert(src, "emitters recycling...")
+		balloon_alert(src, "переработка излучателей...")
 		return FALSE
 	holochassis_ready = FALSE
 	addtimer(VARSET_CALLBACK(src, holochassis_ready, TRUE), HOLOCHASSIS_COOLDOWN)
@@ -128,7 +128,7 @@
 		client.set_eye(src)
 	set_light_on(FALSE)
 	update_appearance(UPDATE_ICON_STATE)
-	visible_message(span_boldnotice("[src] appears in a flash of light!"))
+	visible_message(span_boldnotice("[src.declent_ru(NOMINATIVE)] появляется во вспышке света!"))
 	holoform = TRUE
 	return TRUE
 

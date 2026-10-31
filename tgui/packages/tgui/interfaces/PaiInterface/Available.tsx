@@ -29,7 +29,7 @@ export function AvailableDisplay(props) {
       buttons={<MemoryDisplay />}
       fill
       scrollable
-      title="Available Software"
+      title="Доступное ПО"
     >
       <Table>
         {entries?.map(([name, cost]) => {
@@ -46,7 +46,7 @@ function MemoryDisplay(props) {
   const { ram } = data;
 
   return (
-    <Tooltip content={`Available System Memory: ${ram}`}>
+    <Tooltip content={`Доступная системная память: ${ram}`}>
       <Table>
         <Table.Row>
           <Table.Cell>
