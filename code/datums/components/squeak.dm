@@ -2,6 +2,7 @@
 	var/static/list/default_squeak_sounds = list('sound/items/toy_squeak/toysqueak1.ogg'=1, 'sound/items/toy_squeak/toysqueak2.ogg'=1, 'sound/items/toy_squeak/toysqueak3.ogg'=1)
 	var/list/override_squeak_sounds
 	var/mob/holder
+	var/squeak_suppressed = FALSE
 
 	var/squeak_chance = 100
 	var/volume = 30
@@ -72,6 +73,8 @@
 
 /datum/component/squeak/proc/play_squeak()
 	SIGNAL_HANDLER
+	if(squeak_suppressed)
+		return
 
 	if(prob(squeak_chance))
 		if(!override_squeak_sounds)

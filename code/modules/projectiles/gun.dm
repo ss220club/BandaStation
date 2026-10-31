@@ -563,6 +563,10 @@
 
 ///returns true if the gun successfully fires
 /obj/item/gun/proc/process_fire(atom/target, mob/living/user, message = TRUE, params = null, zone_override = "", bonus_spread = 0)
+	if(GLOB.tunnel_clown_darkness_active && user && !istype(src, /obj/item/gun/magic/hook))
+		user.balloon_alert(user, "в фильмах ужасов тоже нельзя было стрелять!")
+		SEND_SOUND(user, 'sound/mobs/non-humanoids/honkbot/honkbot_evil_laugh.ogg')
+		return NONE
 	var/base_bonus_spread = 0
 	if(user)
 		var/list/bonus_spread_values = list(base_bonus_spread, bonus_spread)

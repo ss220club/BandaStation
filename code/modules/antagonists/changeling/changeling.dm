@@ -1069,5 +1069,11 @@
 	name = "Changeling (Space)"
 	l_hand = /obj/item/melee/arm_blade
 
+/datum/antagonist/changeling/halloween
+	name = "\proper Генокрад Хэллоуина"
+	roundend_category = "Генокрады Хэллоуина"
+	antagpanel_category = "Halloween Changeling"
+	default_custom_objective = "Поглотить самые ценные гены станции. Не допустить того, чтобы кто-то испортил Хэллоуин, помогать экипажу."
+
 #undef FORMAT_CHEM_MAX_TEXT
 #undef FORMAT_CHEM_CHARGES_TEXT

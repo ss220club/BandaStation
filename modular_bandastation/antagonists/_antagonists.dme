@@ -2,3 +2,5 @@
 
 #include "code/ert.dm"
 #include "code/objective_replacement.dm"
+#include "code/tonnel_clown.dm"
+#include "code/antag_items_special.dm"
