@@ -64,6 +64,7 @@
 #include "code/items/clothing/suits/wintercoats.dm"
 #include "code/items/clothing/suits/carnival.dm"
 #include "code/items/clothing/under/under.dm"
+#include "code/items/clothing/under/inferno.dm"
 #include "code/items/clothing/under/carnival.dm"
 #include "code/items/clothing/under/jobs/blueshield.dm"
 #include "code/items/clothing/under/jobs/centcom.dm"
