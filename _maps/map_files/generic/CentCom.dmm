@@ -1459,13 +1459,6 @@
 /turf/open/space/basic,
 /area/space)
 "agj" = (
-/obj/item/trash/boritos{
-	pixel_y = -9
-	},
-/obj/item/trash/can{
-	pixel_y = -9;
-	pixel_x = -9
-	},
 /obj/structure/closet/crate/trashcart,
 /obj/effect/decal/cleanable/shreds,
 /obj/effect/decal/cleanable/wrapping,
@@ -1991,7 +1984,6 @@
 	},
 /obj/machinery/light/directional/east,
 /obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/blood/old,
 /turf/open/floor/wood/tile,
 /area/centcom/central_command_areas/evacuation/ship)
 "aiF" = (
@@ -3379,10 +3371,6 @@
 /area/centcom/central_command_areas/bar)
 "aqe" = (
 /obj/structure/flora/tree/palm,
-/obj/item/toy/plush/beeplushie{
-	pixel_y = 5;
-	pixel_x = -3
-	},
 /obj/machinery/light/directional/east,
 /turf/open/floor/grass,
 /area/centcom/central_command_areas/evacuation/ship)
@@ -5142,8 +5130,8 @@
 	dir = 4;
 	dwidth = 2;
 	height = 7;
-	name = "recovery ship";
-	shuttle_id = "pod_away";
+	name = "NT/E.I. Trade Post: Dock 6";
+	shuttle_id = "shittle_home";
 	width = 5
 	},
 /turf/open/space/basic,
@@ -5389,9 +5377,6 @@
 	},
 /obj/effect/turf_decal/siding/wood{
 	dir = 8
-	},
-/obj/item/trash/candy{
-	pixel_x = 5
 	},
 /turf/open/floor/wood/tile,
 /area/centcom/central_command_areas/evacuation/ship)
@@ -5969,10 +5954,6 @@
 	pixel_x = 2;
 	pixel_y = 2
 	},
-/obj/item/gun/ballistic/automatic/pistol/m1911{
-	pixel_y = 7;
-	pixel_x = 2
-	},
 /turf/open/floor/iron/dark,
 /area/centcom/central_command_areas/evacuation/ship)
 "aCX" = (
@@ -6327,7 +6308,6 @@
 "aEq" = (
 /obj/structure/chair/stool/bar/directional/east,
 /obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/vomit/old,
 /turf/open/floor/carpet/red,
 /area/centcom/central_command_areas/evacuation/ship)
 "aEr" = (
@@ -8897,10 +8877,6 @@
 /area/centcom/central_command_areas/bar)
 "aMC" = (
 /obj/structure/flora/grass/jungle/b,
-/obj/effect/decal/cleanable/garbage{
-	pixel_x = -15;
-	pixel_y = -6
-	},
 /turf/open/floor/grass,
 /area/centcom/central_command_areas/evacuation/ship)
 "aMD" = (
@@ -9162,12 +9138,6 @@
 /obj/effect/turf_decal/stripes/end,
 /turf/open/floor/iron/smooth,
 /area/centcom/central_command_areas/ferry)
-"aNI" = (
-/obj/effect/turf_decal/siding/wood{
-	dir = 8
-	},
-/turf/open/floor/stone,
-/area/centcom/central_command_areas/evacuation/ship)
 "aNK" = (
 /obj/effect/turf_decal/tile/blue,
 /obj/structure/table/glass,
@@ -9372,10 +9342,6 @@
 /obj/item/reagent_containers/cup/glass/mug/tea{
 	pixel_x = 8;
 	pixel_y = 1
-	},
-/obj/item/trash/semki{
-	pixel_x = -3;
-	pixel_y = 5
 	},
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron/dark,
@@ -9650,10 +9616,6 @@
 /obj/item/reagent_containers/cup/glass/drinkingglass{
 	pixel_y = 9;
 	pixel_x = 3
-	},
-/obj/item/paper/pamphlet/violent_video_games{
-	pixel_x = -3;
-	pixel_y = -3
 	},
 /obj/effect/turf_decal/siding/wood{
 	dir = 8
@@ -17285,6 +17247,12 @@
 /obj/machinery/papershredder,
 /turf/open/floor/iron,
 /area/centcom/central_command_areas/planetary_port)
+"mbD" = (
+/obj/effect/turf_decal/siding/wood{
+	dir = 8
+	},
+/turf/open/floor/stone,
+/area/centcom/central_command_areas/evacuation/ship)
 "mcY" = (
 /obj/structure/chair/office/tactical{
 	dir = 1
@@ -19031,6 +18999,11 @@
 /obj/structure/light_fake/spot/directional/south,
 /turf/open/floor/carpet/black,
 /area/centcom/central_command_areas/courtroom)
+"pBa" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/landmark/start/mercenary/leader,
+/turf/open/floor/carpet/red,
+/area/centcom/central_command_areas/evacuation/ship)
 "pBr" = (
 /obj/effect/turf_decal/line/dark_blue{
 	dir = 8
@@ -19821,8 +19794,6 @@
 	pixel_y = 28
 	},
 /obj/effect/turf_decal/stripes/line,
-/obj/effect/decal/cleanable/blood,
-/obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron/white,
 /area/centcom/central_command_areas/evacuation/ship)
 "qPa" = (
@@ -56276,8 +56247,8 @@ aLw
 awP
 aud
 aIv
-aNI
-aNI
+mbD
+mbD
 aLw
 acK
 aJE
@@ -56782,7 +56753,7 @@ aLt
 aUz
 aLt
 aLR
-aTm
+pBa
 aTm
 aFf
 ayH

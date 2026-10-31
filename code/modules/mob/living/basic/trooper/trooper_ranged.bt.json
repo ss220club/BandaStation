@@ -130,6 +130,10 @@
 						"targeting_strategy": "BB_TARGETING_STRATEGY",
 						"hiding_location_key": "BB_CURRENT_TARGET_HIDING_LOCATION"
 					}
+				},
+				{
+					"type": "leaf",
+					"behavior": "/datum/bt_node/ai_behavior/random_speech_blackboard"
 				}
 			]
 		}

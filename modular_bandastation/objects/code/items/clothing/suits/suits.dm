@@ -74,10 +74,11 @@
 	icon_state = "chef_red"
 
 /* Space Battle */
-/obj/item/clothing/suit/space/hardsuit/security
+/obj/item/clothing/suit/hardsuit/security
 	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/suits.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/suits/suits.dmi'
 	icon_state = "hardsuit-sec-old"
+	helmettype = /obj/item/clothing/head/helmet/hardsuit/security
 
 // MARK: TSF
 /obj/item/clothing/suit/tsf_suitjacket

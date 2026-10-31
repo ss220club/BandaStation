@@ -32,7 +32,7 @@
 	update_icon_state()
 	update_appearance()
 
-/obj/item/clothing/head/helmet/space/hardsuit/security
+/obj/item/clothing/head/helmet/hardsuit/security
 	icon = 'modular_bandastation/objects/icons/obj/clothing/head/helmet.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/helmet.dmi'
 	icon_state = "hardsuit0-sec"

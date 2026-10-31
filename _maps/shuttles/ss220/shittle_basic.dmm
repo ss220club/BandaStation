@@ -1,0 +1,111 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/closed/wall/mineral/titanium,
+/area/shuttle/shittle)
+"b" = (
+/obj/item/radio/intercom/directional/east,
+/obj/structure/chair/comfy/shuttle{
+	dir = 8
+	},
+/turf/open/floor/mineral/titanium/blue,
+/area/shuttle/shittle)
+"c" = (
+/obj/structure/chair/comfy/shuttle{
+	color = null
+	},
+/turf/open/floor/mineral/titanium/blue,
+/area/shuttle/shittle)
+"q" = (
+/obj/machinery/door/airlock/titanium{
+	name = "Shuttle Airlock"
+	},
+/obj/structure/fans/tiny,
+/obj/docking_port/mobile/shittle,
+/turf/open/floor/mineral/titanium/blue,
+/area/shuttle/shittle)
+"w" = (
+/obj/machinery/computer/camera_advanced/shuttle_docker/shittle,
+/turf/open/floor/mineral/titanium/blue,
+/area/shuttle/shittle)
+"x" = (
+/obj/item/storage/pod/directional/west,
+/obj/structure/chair/comfy/shuttle{
+	dir = 4
+	},
+/turf/open/floor/mineral/titanium/blue,
+/area/shuttle/shittle)
+"A" = (
+/obj/structure/chair/comfy/black{
+	dir = 1
+	},
+/turf/open/floor/mineral/titanium/blue,
+/area/shuttle/shittle)
+"I" = (
+/obj/structure/chair/comfy/shuttle{
+	dir = 4
+	},
+/turf/open/floor/mineral/titanium/blue,
+/area/shuttle/shittle)
+"M" = (
+/obj/machinery/power/shuttle_engine/propulsion/burst,
+/turf/closed/wall/mineral/titanium,
+/area/shuttle/shittle)
+"O" = (
+/obj/structure/chair/comfy/shuttle{
+	dir = 8
+	},
+/turf/open/floor/mineral/titanium/blue,
+/area/shuttle/shittle)
+"R" = (
+/obj/machinery/light/directional/north,
+/obj/machinery/computer/shuttle/shittle,
+/turf/open/floor/mineral/titanium/blue,
+/area/shuttle/shittle)
+"V" = (
+/obj/effect/spawner/structure/window/reinforced/shuttle,
+/turf/open/floor/plating,
+/area/shuttle/shittle)
+"Z" = (
+/turf/open/floor/mineral/titanium/blue,
+/area/shuttle/shittle)
+
+(1,1,1) = {"
+a
+a
+a
+V
+a
+M
+"}
+(2,1,1) = {"
+a
+w
+I
+I
+x
+M
+"}
+(3,1,1) = {"
+V
+R
+A
+Z
+Z
+q
+"}
+(4,1,1) = {"
+a
+c
+O
+O
+b
+M
+"}
+(5,1,1) = {"
+a
+a
+a
+V
+a
+M
+"}
