@@ -260,4 +260,4 @@ GLOBAL_LIST_INIT(heavy_pirate_gangs, init_pirate_gangs(is_heavy = TRUE))
 	response_not_enough = "[pick(note_symbols)] Попались!~ Н-но этого явно недостаточно, бака! [pick(note_symbols)] \n\
 		[pick(note_symbols)] Обсудим оплату после шоу. [pick(note_symbols)]"
 	arrival_announcement = "[pick(note_symbols)] Готовы сыграть в величайшем шоу своей жизни? [pick(note_symbols)]\n\
-		[pick(note_symbols)] Анкōру суру хима ва най! [pick(note_symbols)]"
+		[pick(note_symbols)] Анкору суру хима ва най! [pick(note_symbols)]"
