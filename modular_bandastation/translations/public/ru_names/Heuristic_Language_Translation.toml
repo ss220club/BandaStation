@@ -1,0 +1,8 @@
+["Heuristic Language Translation"]
+nominative = "Эвристическое понимание языков"
+genitive = "эвристического понимания языков"
+dative = "эвристическому пониманию языков"
+accusative = "эвристическое понимание языков"
+instrumental = "эвристическим пониманием языков"
+prepositional = "эвристическом понимании языков"
+gender = "neuter"

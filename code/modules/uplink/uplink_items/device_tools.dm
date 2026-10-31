@@ -229,11 +229,17 @@
 	item = /obj/item/stack/medical/wrap/sticky_tape/pointy/super
 	cost = 1
 
+// BANDASTATION ADD START - Перенос ИИ: документация изменённого API.
+/** Продаёт существующий модуль взломанного закона для поэтапной установки через стойку. */
+// BANDASTATION ADD END - Перенос ИИ
 /datum/uplink_item/device_tools/hacked_module
 	name = "Hacked AI Law Upload Module"
-	desc = "When used with an upload console, this module allows you to upload priority laws to an artificial intelligence. \
-			This board bypasses all access restrictions on the console. \
-			Be careful with wording, as artificial intelligences may look for loopholes to exploit."
+	// BANDASTATION ADD START - Перенос ИИ: описание поэтапной загрузки взломанного закона.
+	desc = "Добавляет приоритетный закон всем синтетикам, связанным с выбранной стойкой законов. Установите модуль в свободный дополнительный слот: \
+		подключение занимает 5,5 секунды, загрузка — четыре минуты. ИИ получают предупреждение о вмешательстве; \
+		экипаж может прервать загрузку, отключив устройство на десять секунд. Сохраняйте подключение и питание стойки. \
+		После загрузки модуль можно извлечь как обычный модуль законов. Формулируйте закон внимательно."
+	// BANDASTATION ADD END - Перенос ИИ
 	item = /obj/item/ai_module/law/syndicate
 	cost = 4
 
