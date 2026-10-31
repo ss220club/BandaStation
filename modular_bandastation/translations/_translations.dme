@@ -13,8 +13,10 @@
 #include "code/translate_verbs.dm"
 #include "code/ru_names/ru_name_base.dm"
 #include "code/ru_names/ru_name_design.dm"
+#include "code/ru_names/ru_name_drinks.dm"
 #include "code/ru_names/ru_name_materials.dm"
 #include "code/ru_names/ru_name_orderables.dm"
 #include "code/ru_names/ru_name_reagents.dm"
+#include "code/ru_names/ru_name_reagent_ui.dm"
 
 #include "code/~undefs.dm"

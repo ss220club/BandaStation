@@ -13,6 +13,6 @@
 	. = name
 	if(declent == "gender")
 		. = NEUTER
-	if(!length(ru_names) || ru_names["base"] != name)
+	if(!length(ru_names) || format_text(ru_names["base"]) != format_text(name))
 		return .
 	return get_declented_value(ru_names, declent, .)

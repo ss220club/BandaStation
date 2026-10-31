@@ -29,6 +29,7 @@ enum DropdownState {
 
 type DispensableReagent = {
   title: string;
+  ru_display_name?: string; // BANDASTATION ADDITION - Reagent translations
   id: string;
   pH: number;
   color: string;
@@ -44,12 +45,14 @@ type ReagentTypepath = string;
 
 type ReactionComponent = {
   name: string;
+  ru_display_name?: string; // BANDASTATION ADDITION - Reagent translations
   amount: number;
   id: ReagentTypepath;
 };
 
 type Reaction = {
   id: ReactionTypepath;
+  ru_display_name?: string; // BANDASTATION ADDITION - Reagent translations
   bitflags: number;
   lower_temperature: number;
   upper_temperature: number;
@@ -133,7 +136,10 @@ export const ChemDispenser = (props) => {
 
   const reactionSearch = createSearch(
     searchTerm,
-    (reaction: ReagentReaction) => reaction.name,
+    // BANDASTATION EDIT START - Reagent translations
+    (reaction: ReagentReaction) =>
+      `${reaction.name} ${reaction.reaction.ru_display_name ?? ''}`,
+    // BANDASTATION EDIT END - Reagent translations
   );
 
   // filter the reaction list first by whitelist bitflags, then by search term
@@ -502,7 +508,7 @@ const ReagentDispenseButton = (props: ReagentDispenseButtonProps) => {
         }}
       >
         {prefix}
-        {chemical.title}
+        {chemical.ru_display_name ?? chemical.title /* BANDASTATION EDIT - Reagent translations */}
       </span>
     </Button>
   );
@@ -638,7 +644,7 @@ const ReactionDisplay = (props: ReactionDisplayProps) => {
                     overflow: 'hidden',
                   }}
                 >
-                  {reaction.name}
+                  {reaction.reaction.ru_display_name ?? reaction.name /* BANDASTATION EDIT - Reagent translations */}
                 </Stack.Item>
                 <Stack.Item
                   backgroundColor={reaction.reaction.color}
@@ -743,7 +749,12 @@ const ReactionComponentDisplay = (props: ReactionComponentDisplayProps) => {
   if (!foundRecipe)
     return (
       <Button fluid ellipsis disabled icon="question">
-        {formatReagentName(reagentComponent.amount, reagentComponent.name)}
+        {/* BANDASTATION EDIT START - Reagent translations */}
+        {formatReagentName(
+          reagentComponent.amount,
+          reagentComponent.ru_display_name ?? reagentComponent.name,
+        )}
+        {/* BANDASTATION EDIT END - Reagent translations */}
       </Button>
     );
 
@@ -807,7 +818,12 @@ const ReactionComponentDisplay = (props: ReactionComponentDisplayProps) => {
       }
     >
       <Button icon="book" fluid ellipsis backgroundColor="default">
-        {formatReagentName(reagentComponent.amount, reagentComponent.name)}
+        {/* BANDASTATION EDIT START - Reagent translations */}
+        {formatReagentName(
+          reagentComponent.amount,
+          reagentComponent.ru_display_name ?? reagentComponent.name,
+        )}
+        {/* BANDASTATION EDIT END - Reagent translations */}
       </Button>
     </Floating>
   );

@@ -29,7 +29,7 @@ export const RecipeLookup = (props) => {
     <LabeledList>
       <LabeledList.Item bold label="Recipe">
         <Icon name="circle" mr={1} color={recipe.reagentCol} />
-        {recipe.name}
+        {recipe.ru_display_name || recipe.name} {/* BANDASTATION EDIT - Translated reagent names */}
         <Button
           icon="arrow-left"
           ml={3}

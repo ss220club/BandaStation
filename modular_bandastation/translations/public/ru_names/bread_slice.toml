@@ -1,0 +1,8 @@
+["bread slice"]
+nominative = "ломтик хлеба"
+genitive = "ломтика хлеба"
+dative = "ломтику хлеба"
+accusative = "ломтик хлеба"
+instrumental = "ломтиком хлеба"
+prepositional = "ломтике хлеба"
+gender = "male"
