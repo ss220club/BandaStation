@@ -355,6 +355,7 @@
 #include "code\__DEFINES\dcs\signals\signals_gib.dm"
 #include "code\__DEFINES\dcs\signals\signals_global.dm"
 #include "code\__DEFINES\dcs\signals\signals_global_object.dm"
+#include "modular_bandastation\roundstart_roster\signals.dm" // BANDASTATION ADDITION - Roundstart Roster signals
 #include "code\__DEFINES\dcs\signals\signals_greyscale.dm"
 #include "code\__DEFINES\dcs\signals\signals_heretic.dm"
 #include "code\__DEFINES\dcs\signals\signals_hud.dm"
