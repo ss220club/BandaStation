@@ -120,7 +120,7 @@
 		/datum/reagent/consumable/nutriment/vitamin = 4,
 	)
 	tastes = list("waffles" = 1, "mushrooms" = 1)
-	foodtypes = GRAIN|DAIRY|VEGETABLES|BREAKFAST
+	foodtypes = GRAIN|DAIRY|VEGETABLES|BREAKFAST|MUSHROOM // BANDASTATION ADDITION
 	w_class = WEIGHT_CLASS_SMALL
 	crafting_complexity = FOOD_COMPLEXITY_3
 
@@ -258,7 +258,7 @@
 		/datum/reagent/consumable/nutriment/vitamin = 1,
 	)
 	tastes = list("mushroom" = 1, "biscuit" = 1)
-	foodtypes = VEGETABLES|GRAIN|DAIRY
+	foodtypes = VEGETABLES|GRAIN|DAIRY|MUSHROOM // BANDASTATION ADDITION
 	food_flags = FOOD_FINGER_FOOD
 	w_class = WEIGHT_CLASS_SMALL
 	crafting_complexity = FOOD_COMPLEXITY_3
@@ -335,7 +335,7 @@
 		/datum/reagent/consumable/liquidelectricity = 3,
 	)
 	tastes = list("cake" = 3, "caramel" = 2, "zap" = 1)
-	foodtypes = GRAIN|DAIRY|VEGETABLES|SUGAR
+	foodtypes = GRAIN|DAIRY|VEGETABLES|SUGAR|MUSHROOM // BANDASTATION ADDITION
 	food_flags = FOOD_FINGER_FOOD
 	w_class = WEIGHT_CLASS_SMALL
 	crafting_complexity = FOOD_COMPLEXITY_3

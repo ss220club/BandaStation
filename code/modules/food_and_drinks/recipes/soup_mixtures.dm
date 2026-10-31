@@ -936,7 +936,7 @@
 /datum/glass_style/has_foodtype/soup/mushroom
 	required_drink_type = /datum/reagent/consumable/nutriment/soup/mushroom
 	icon_state = "mushroomsoup"
-	drink_type = VEGETABLES | DAIRY
+	drink_type = VEGETABLES | DAIRY | MUSHROOM // BANDASTATION ADDITION
 
 /datum/chemical_reaction/food/soup/mushroomsoup
 	required_reagents = list(
@@ -1008,7 +1008,7 @@
 /datum/glass_style/has_foodtype/soup/stew
 	required_drink_type = /datum/reagent/consumable/nutriment/soup/stew
 	icon_state = "stew"
-	drink_type = VEGETABLES | FRUIT | MEAT
+	drink_type = VEGETABLES | FRUIT | MEAT | MUSHROOM // BANDASTATION ADDITION
 
 /obj/item/reagent_containers/cup/bowl/soup/stew
 	initial_reagent = /datum/reagent/consumable/nutriment/soup/stew
@@ -1223,7 +1223,7 @@
 /datum/glass_style/has_foodtype/soup/electrons
 	required_drink_type = /datum/reagent/consumable/nutriment/soup/electrons
 	icon_state = "electronsoup"
-	drink_type = VEGETABLES | TOXIC
+	drink_type = VEGETABLES | TOXIC | MUSHROOM // BANDASTATION ADDITION
 
 /datum/chemical_reaction/food/soup/electron
 	required_reagents = list(
@@ -2328,7 +2328,7 @@
 	name = "secret noodle soup"
 	icon = 'icons/obj/food/martian.dmi'
 	icon_state = "secret_noodle_soup"
-	drink_type = MEAT | VEGETABLES | GRAIN
+	drink_type = MEAT | VEGETABLES | GRAIN | MUSHROOM // BANDASTATION ADDITION
 
 /datum/chemical_reaction/food/soup/secret_noodle_soup
 	required_reagents = list(

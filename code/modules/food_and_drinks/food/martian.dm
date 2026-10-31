@@ -144,7 +144,20 @@
 
 /obj/item/food/rice_dough/make_processable()
 	AddElement(/datum/element/processable, TOOL_KNIFE, /obj/item/food/spaghetti/rawnoodles, 6, 3 SECONDS, table_required = TRUE)
+// BANDASTATION ADDITION - START
+	AddElement(/datum/element/processable, TOOL_ROLLINGPIN, /obj/item/food/flat_rice_dough, 1, 3 SECONDS, table_required = TRUE, screentip_verb = "Flatten", sound_to_play = SFX_ROLLING_PIN_ROLLING)
 
+/obj/item/food/flat_rice_dough
+	name = "flat rice dough"
+	desc = "A flattened sheet of rice dough, ready to be shaped into buns, rolls, or flatbreads."
+	icon = 'icons/obj/food/martian.dmi'
+	icon_state = "flat_rice_dough"
+	food_reagents = list(/datum/reagent/consumable/nutriment = 6)
+	tastes = list("rice" = 1)
+	foodtypes = GRAIN
+	w_class = WEIGHT_CLASS_SMALL
+	crafting_complexity = FOOD_COMPLEXITY_2
+// BANDASTATION ADDITION - END
 /obj/item/food/spaghetti/rawnoodles
 	name = "fresh noodles"
 	desc = "Rice noodles, made fresh. Remember, there is no secret ingredient."
@@ -353,7 +366,7 @@
 		/datum/reagent/consumable/capsaicin = 2,
 	)
 	tastes = list("rice" = 1, "spicy cabbage" = 1, "chilli heat" = 1, "egg" = 1, "meat" = 1)
-	foodtypes = MEAT | VEGETABLES | GRAIN | EGG
+	foodtypes = MEAT | VEGETABLES | GRAIN | EGG | MUSHROOM
 	w_class = WEIGHT_CLASS_SMALL
 	crafting_complexity = FOOD_COMPLEXITY_3
 	custom_materials = list(/datum/material/meat = MEATDISH_MATERIAL_AMOUNT)
