@@ -11,12 +11,11 @@
 
 /datum/supply_pack/security/gp9_pistols
 	name = "GP-9 Pistols Crate"
-	desc = "В этом ящике находятся два пистолета GP-9 калибра 9x25мм, а также четыре нелетальных магазина калибра 9x25мм НТ."
+	desc = "В этом ящике находятся два пистолета GP-9 калибра 9x25мм, и четыре магазина калибра 9x25мм НТ."
 	cost = CARGO_CRATE_VALUE * 10
 	access_view = ACCESS_SECURITY
 	contains = list(
-		/obj/item/gun/ballistic/automatic/pistol/gp9/no_mag = 2,
-		/obj/item/ammo_box/magazine/c9x25mm_pistol/rubber = 4,
+		/obj/item/storage/toolbox/guncase/ntcase/pistol/gp9 = 1,
 	)
 	crate_name = "GP-9 handguns crate"
 
@@ -72,33 +71,29 @@
 	cost = CARGO_CRATE_VALUE * 6
 	access_view = ACCESS_WEAPONS
 	contains = list(
-		/obj/item/gun/ballistic/automatic/pistol/gp9/no_mag = 1,
-		/obj/item/ammo_box/magazine/c9x25mm_pistol/starts_empty = 1,
+		/obj/item/storage/toolbox/guncase/ntcase/pistol/gp9/no_ammo = 1,
 	)
 
-/datum/supply_pack/goody/c9x25mmrubber
+/datum/supply_pack/goody/c9x25mm/rubber
 	name = "9x25mm NT Rubber Ammo Box"
 	desc = "В этом ящике находится коробка резиновых патронов калибра 9x25мм НТ."
 	cost = CARGO_CRATE_VALUE * 2
-	access_view = ACCESS_WEAPONS
 	contains = list(
 		/obj/item/ammo_box/c9x25mm/rubber = 1,
 	)
 
-/datum/supply_pack/goody/c9x25mmhp
+/datum/supply_pack/goody/c9x25mm/hp
 	name = "9x25mm NT HP Ammo Box"
 	desc = "В этом ящике находится коробка экспансивных патронов калибра 9x25мм НТ."
 	cost = CARGO_CRATE_VALUE * 2
-	access_view = ACCESS_WEAPONS
 	contains = list(
 		/obj/item/ammo_box/c9x25mm/hp = 1,
 	)
 
-/datum/supply_pack/goody/c9x25mmap
+/datum/supply_pack/goody/c9x25mm/ap
 	name = "9x25mm NT AP Ammo Box"
 	desc = "В этом ящике находится коробка бронебойных патронов калибра 9x25мм НТ."
 	cost = CARGO_CRATE_VALUE * 2
-	access_view = ACCESS_WEAPONS
 	contains = list(
 		/obj/item/ammo_box/c9x25mm/ap = 1,
 	)
@@ -132,6 +127,36 @@
 		/obj/item/clothing/accessory/holster = 2
 	)
 
-// MARK: GUNCASE
-/obj/item/storage/toolbox/guncase/soviet
-	desc = "Оружейный кейс. Символ СССП отпечатан на боковой стороне."
+/datum/supply_pack/security/armory/pdh_mags
+	name = "PDH 'Osprey' .357 Magazines"
+	crate_name = "PDH magazines crate"
+	desc = "В этом ящике находится три магазина калибра .357 для пистолетов PDH 'Osprey'."
+	cost = CARGO_CRATE_VALUE * 10
+	access_view = ACCESS_WEAPONS
+	contains = list(
+		/obj/item/ammo_box/magazine/c357 = 3,
+	)
+
+/datum/supply_pack/security/armory/ladon_mags
+	name = "PDH 'Ladon' .50 AE Magazines"
+	crate_name = "PDH 'Ladon' magazines crate"
+	desc = "В этом ящике находится три магазина калибра .50 для пистолетов PDH 'Ladon'."
+	cost = CARGO_CRATE_VALUE * 12
+	access_view = ACCESS_WEAPONS
+	contains = list(
+		/obj/item/ammo_box/magazine/m50 = 3,
+	)
+
+/datum/supply_pack/security/armory/gp45m_special_mags
+	name = "GP-45M Special Ammo Magazines"
+	crate_name = "GP-45M special ammo crate"
+	desc = "В этом ящике находятся два бронебойных магазина, два экспансивных магазина и один зажигательный магазин калибра .45, и соответствующие коробки с боеприпасами."
+	cost = CARGO_CRATE_VALUE * 20
+	access_view = ACCESS_WEAPONS
+	contains = list(
+		/obj/item/ammo_box/magazine/c45/ap = 2,
+		/obj/item/ammo_box/magazine/c45/hp = 2,
+		/obj/item/ammo_box/magazine/c45/incendiary = 1,
+		/obj/item/ammo_box/c45/ap = 1,
+		/obj/item/ammo_box/c45/hp = 1,
+	)

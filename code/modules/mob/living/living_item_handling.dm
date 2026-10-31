@@ -201,7 +201,7 @@
 	if(!offered_item || offerer.get_active_held_item() != offered_item && !bypass)
 		to_chat(src, span_warning("[offerer.declent_ru(NOMINATIVE)] у [genderize_ru(offerer.gender, "него", "неё", "него", "них")] больше нет предмета в руке, который [offerer.ru_p_they()] предлагал[genderize_ru(offerer.gender, "", "а", "о", "и")]!"))
 		return
-	if(!get_empty_held_indexes())
+	if(!length(get_empty_held_indexes()))
 		to_chat(src, span_warning("У вас нет пустых рук!"))
 		return
 

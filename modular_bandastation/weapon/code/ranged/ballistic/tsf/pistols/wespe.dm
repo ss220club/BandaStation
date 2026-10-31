@@ -1,6 +1,7 @@
 /datum/atom_skin/wespe
 	abstract_type = /datum/atom_skin/wespe
 	change_base_icon_state = TRUE
+	change_worn_icon_state = FALSE
 
 /datum/atom_skin/wespe/default
 	preview_name = "Default"

@@ -362,17 +362,17 @@ GLOBAL_DATUM_INIT(steal_item_handler, /datum/objective_item_handler, new())
 	return add_item_to_steal(src, /obj/item/gun/energy/laser/captain)
 
 /datum/objective_item/steal/hoslaser
-	name = "персональное лазерное оружие главы службы безопасности"
+	name = "персональное оружие главы службы безопасности"
 	targetitem = /obj/item/gun/energy/e_gun/hos
 	excludefromjob = list(JOB_HEAD_OF_SECURITY)
 	item_owner = list(JOB_HEAD_OF_SECURITY)
 	exists_on_map = TRUE
 	difficulty = 4
-	steal_hint = "Уникальное трехрежимное лазерное оружие главы службы безопасности. \
+	steal_hint = "Уникальное оружие главы службы безопасности. \
 		Всегда находится при нём, если он жив, но в противном случае может быть найден в его шкафчике."
 
-/obj/item/gun/energy/e_gun/hos/add_stealing_item_objective()
-	return add_item_to_steal(src, /obj/item/gun/energy/e_gun/hos)
+/obj/item/choice_beacon/weapon/hos/add_stealing_item_objective() //SS220 BANDASTATION EDIT - Original: /obj/item/gun/energy/e_gun/hos/add_stealing_item_objective()
+	return add_item_to_steal(src, /obj/item/choice_beacon/weapon/hos) //SS220 BANDASTATION EDIT - Original:		return add_item_to_steal(src, /obj/item/gun/energy/e_gun/hos)
 
 /datum/objective_item/steal/compactshotty
 	name = "персональный компактный дробовик смотрителя"
@@ -911,12 +911,12 @@ GLOBAL_DATUM_INIT(steal_item_handler, /datum/objective_item_handler, new())
 	return add_item_to_steal(src, /obj/item/mod/control/pre_equipped/rescue)
 
 /datum/objective_item/steal/spy/cmo_defib
-	name = "компактный дефибриллятор главного врача"
+	name = "экспериментальный компактный дефибриллятор главного врача"
 	targetitem = /obj/item/defibrillator/compact/loaded/cmo
 	excludefromjob = list(JOB_CHIEF_MEDICAL_OFFICER)
 	exists_on_map = TRUE
 	difficulty = 2
-	steal_hint = "Компактный дефибриллятор, который главный врач носит при себе или который лежит в его шкафчике."
+	steal_hint = "Экспериментальный компактный дефибриллятор, который обычно находится где-то рядом с главным врачом, когда начинают скапливаться трупы.."
 
 /obj/item/defibrillator/compact/loaded/cmo/add_stealing_item_objective()
 	return add_item_to_steal(src, /obj/item/defibrillator/compact/loaded/cmo)

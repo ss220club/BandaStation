@@ -1,6 +1,7 @@
 /datum/atom_skin/m1911
 	abstract_type = /datum/atom_skin/m1911
 	change_base_icon_state = TRUE
+	change_worn_icon_state = FALSE
 
 /datum/atom_skin/m1911/default
 	preview_name = "Default"
@@ -27,6 +28,7 @@
 /datum/atom_skin/m1911gold
 	abstract_type = /datum/atom_skin/m1911gold
 	change_base_icon_state = TRUE
+	change_worn_icon_state = FALSE
 
 /datum/atom_skin/m1911gold/default
 	preview_name = "Default"
@@ -52,7 +54,6 @@
 	icon_state = "m45a5"
 	w_class = WEIGHT_CLASS_NORMAL
 	accepted_magazine_type = /obj/item/ammo_box/magazine/m45a5
-	can_suppress = FALSE
 	fire_sound = 'sound/items/weapons/gun/pistol/shot_alt.ogg'
 	rack_sound = 'sound/items/weapons/gun/pistol/rack.ogg'
 	lock_back_sound = 'sound/items/weapons/gun/pistol/slide_lock.ogg'

@@ -24,6 +24,7 @@
 #include "code/items/wallets.dm"
 #include "code/items/mech_core.dm"
 #include "code/items/sabre.dm"
+#include "code/items/secret_documents.dm"
 #include "code/items/centcom_tacvisor.dm"
 #include "code/items/clothing/belt.dm"
 #include "code/items/clothing/accessories/accessories.dm"
@@ -131,5 +132,6 @@
 #include "code/structures/crates_lockers/closets/secure/lawyer.dm"
 #include "code/structures/crates_lockers/closets/secure/magistrate.dm"
 #include "code/structures/crates_lockers/closets/secure/nanotrasen_representative.dm"
+#include "code/structures/crates_lockers/closets/secure/centcom.dm"
 
 #include "code/mecha/mecha.dm"

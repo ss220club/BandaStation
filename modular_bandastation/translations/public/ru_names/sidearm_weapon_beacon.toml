@@ -1,0 +1,8 @@
+["sidearm weapon beacon"]
+nominative = "маяк личного оружия"
+genitive = "маяка личного оружия"
+dative = "маяку личного оружия"
+accusative = "маяк личного оружия"
+instrumental = "маяком личного оружия"
+prepositional = "маяке личного оружия"
+gender = "male"
