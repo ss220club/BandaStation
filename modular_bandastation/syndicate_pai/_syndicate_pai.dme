@@ -1,0 +1,7 @@
+#include "_syndicate_pai.dm"
+
+#include "code/card.dm"
+#include "code/pai.dm"
+#include "code/software.dm"
+#include "code/apc.dm"
+#include "code/uplink.dm"

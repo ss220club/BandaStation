@@ -150,7 +150,12 @@
 
 ///////HUDs///////
 	if(href_list["hud"])
-		if(!ishuman(usr) && !isobserver(usr))
+		//BANDASTATION EDIT START
+		var/mob/living/silicon/pai/pai_viewer = usr
+		if(!istype(pai_viewer, /mob/living/silicon/pai/syndicate) || !("Security Records" in pai_viewer.installed_software))
+			pai_viewer = null
+		if(!ishuman(usr) && !isobserver(usr) && !pai_viewer)
+		//BANDASTATION EDIT END
 			return
 		var/mob/human_or_ghost_user = usr
 		var/perpname = get_face_name(get_id_name(""))
