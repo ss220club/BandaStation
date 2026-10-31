@@ -67,7 +67,7 @@
 			),
 		),
 	)
-// MARK: Emotes
+// MARK Emotes
 /datum/emote/living/sniffle
 	key = "sniffle"
 	key_third_person = "sniffles"
@@ -183,3 +183,39 @@
 	if(!istype(user))
 		return
 	return user.dna.species.get_evil_laugh_sound(user)
+
+/datum/emote/living/cane_tap
+	key = "cane_tap"
+	key_third_person = "стучит тростью"
+	name = "Стучать тростью"
+	message = "стучит тростью по полу."
+	emote_type = EMOTE_VISIBLE | EMOTE_AUDIBLE
+	sound = 'sound/items/modsuit/atrocinator_step.ogg'
+	cooldown = 2 SECONDS
+	var/static/list/cane_typecache = typecacheof(list(/obj/item/cane, /obj/item/melee/baton/nt_cane))
+
+/datum/emote/living/cane_tap/can_run_emote(mob/living/user, status_check = TRUE, intentional, params)
+	if(!..())
+		return FALSE
+	if(!status_check)
+		return TRUE
+	var/active_item = user.get_active_held_item()
+	if(!is_type_in_typecache(active_item, cane_typecache))
+		return FALSE
+	var/turf/user_turf = get_turf(user)
+	return user_turf && !isgroundlessturf(user_turf)
+
+/datum/emote/living/cane_tap/should_play_sound(mob/living/user, intentional = FALSE)
+	return FALSE
+
+/datum/emote/living/cane_tap/run_emote(mob/living/user, params, type_override, intentional)
+	. = ..()
+	addtimer(CALLBACK(src, PROC_REF(play_cane_tap_sound), user, 1), 0.25 SECONDS)
+
+/datum/emote/living/cane_tap/proc/play_cane_tap_sound(mob/living/user, count)
+	if(QDELETED(user))
+		return
+
+	playsound(user, 'sound/items/modsuit/atrocinator_step.ogg', 50, TRUE)
+	if(count < 3)
+		addtimer(CALLBACK(src, PROC_REF(play_cane_tap_sound), user, count + 1), 0.5 SECONDS)
