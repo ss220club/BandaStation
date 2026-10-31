@@ -49,6 +49,8 @@ GLOBAL_LIST_EMPTY(telecomm_machines)
 	if(!on)
 		return
 
+	SEND_SIGNAL(src, COMSIG_TELECOMMS_RELAY_INFORMATION, signal) // BANDASTATION ADDITION - Comms intercept
+
 	if(!filter || !ispath(filter, /obj/machinery/telecomms))
 		CRASH("null or non /obj/machinery/telecomms typepath given as the filter argument! given typepath: [filter]")
 

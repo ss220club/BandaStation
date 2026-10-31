@@ -1,0 +1,8 @@
+["network bug"]
+nominative = "сетевой жучок"
+genitive = "сетевого жучка"
+dative = "сетевому жучку"
+accusative = "сетевой жучок"
+instrumental = "сетевым жучком"
+prepositional = "сетевом жучке"
+gender = "male"
