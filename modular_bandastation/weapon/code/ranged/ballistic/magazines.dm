@@ -714,7 +714,7 @@
 	icon_state = "c38_mag"
 	base_icon_state = "c38_mag"
 	w_class = WEIGHT_CLASS_TINY
-	caliber = CALIBER_38
+	caliber = CALIBER_357_38
 	max_ammo = 12
 	ammo_band_icon = "+c38_mag_ammo_band"
 	ammo_band_color = null
@@ -771,7 +771,7 @@
 	icon_state = "c357_mag"
 	base_icon_state = "c357_mag"
 	w_class = WEIGHT_CLASS_SMALL
-	caliber = CALIBER_357
+	caliber = CALIBER_357_38
 	max_ammo = 8
 	ammo_band_icon = "+c357_mag_ammo_band"
 	ammo_band_color = null
