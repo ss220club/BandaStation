@@ -376,6 +376,10 @@
 	// Blood Level
 	var/datum/blood_type/blood_type = target.get_bloodtype()
 	if(blood_type)
+		// BANDASTATION EDIT START - Blood reagent name translations
+		var/blood_name = blood_type.get_blood_name()
+		blood_name = declent_ru_initial(blood_name, GENITIVE, override_backup = blood_name)
+		// BANDASTATION EDIT END - Blood reagent name translations
 		var/cached_blood_volume = target.get_blood_volume(apply_modifiers = TRUE)
 		var/blood_percent = round((cached_blood_volume / BLOOD_VOLUME_NORMAL) * 100)
 		var/blood_type_format
@@ -392,9 +396,9 @@
 			if (blood_type.restoration_chem == /datum/reagent/iron)
 				recommendation += "[/datum/reagent/medicine/salglu_solution::name]"
 			if (length(recommendation))
-				recommendation += "переливание [blood_type.get_blood_name()]"
+				recommendation += "переливание [blood_name]" // BANDASTATION EDIT - Blood reagent name translations
 			else
-				recommendation += "немедленное переливание [blood_type.get_blood_name()]"
+				recommendation += "немедленное переливание [blood_name]" // BANDASTATION EDIT - Blood reagent name translations
 			level_format = conditional_tooltip(level_format, "Рекомендация: [english_list(recommendation, and_text = " или ")].", tochat)
 		else
 			level_format = "[blood_percent]%, [cached_blood_volume] сл"
@@ -407,7 +411,7 @@
 					compatible_types_readable |= initial(comp_blood_type.name)
 				blood_type_format = span_tooltip("Совместимые группы [english_list(compatible_types_readable)].", blood_type_format)
 
-		render_list += "<span class='[cached_blood_volume < BLOOD_VOLUME_SAFE ? "alert" : "info"] ml-1'>Уровень [blood_type.get_blood_name()]: [level_format],</span> <span class='info'>[blood_type_format]</span><br>"
+		render_list += "<span class='[cached_blood_volume < BLOOD_VOLUME_SAFE ? "alert" : "info"] ml-1'>Уровень [blood_name]: [level_format],</span> <span class='info'>[blood_type_format]</span><br>" // BANDASTATION EDIT - Blood reagent name translations
 
 	var/blood_alcohol_content = target.get_blood_alcohol_content()
 	if(blood_alcohol_content > 0)
