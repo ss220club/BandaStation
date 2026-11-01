@@ -1,36 +1,3 @@
-/datum/id_trim/job/donor_barber
-	trim_icon = 'modular_bandastation/donor_jobs/icons/id_trims.dmi'
-	trim_state = "trim_barber"
-	assignment = "Barber"
-	job = /datum/job/donor/barber
-	sechud_icon = 'modular_bandastation/donor_jobs/icons/job_hud.dmi'
-	sechud_icon_state = "hudbarber"
-	template_access = null
-	centcom_template = TRUE
-	minimal_access = list(ACCESS_LIBRARY, ACCESS_MAINT_TUNNELS, ACCESS_SERVICE)
-
-/datum/id_trim/job/donor_bath_attendant
-	trim_icon = 'modular_bandastation/donor_jobs/icons/id_trims.dmi'
-	trim_state = "trim_bath"
-	assignment = "Bath"
-	job = /datum/job/donor/bath_attendant
-	sechud_icon = 'modular_bandastation/donor_jobs/icons/job_hud.dmi'
-	sechud_icon_state = "hudbath"
-	template_access = null
-	centcom_template = TRUE
-	minimal_access = list(ACCESS_LIBRARY, ACCESS_MAINT_TUNNELS, ACCESS_SERVICE)
-
-/datum/id_trim/job/donor_croupier
-	trim_icon = 'modular_bandastation/donor_jobs/icons/id_trims.dmi'
-	trim_state = "trim_casino"
-	assignment = "Casino"
-	job = /datum/job/donor/croupier
-	sechud_icon = 'modular_bandastation/donor_jobs/icons/job_hud.dmi'
-	sechud_icon_state = "hudcasino"
-	template_access = null
-	centcom_template = TRUE
-	minimal_access = list(ACCESS_LIBRARY, ACCESS_MAINT_TUNNELS, ACCESS_THEATRE, ACCESS_HYDROPONICS, ACCESS_BAR, ACCESS_SERVICE)
-
 /datum/id_trim/job/donor_waiter
 	trim_icon = 'modular_bandastation/donor_jobs/icons/id_trims.dmi'
 	trim_state = "trim_waiter"
@@ -52,17 +19,6 @@
 	template_access = null
 	centcom_template = TRUE
 	minimal_access = list(ACCESS_CHAPEL_OFFICE, ACCESS_MAINT_TUNNELS, ACCESS_SERVICE)
-
-/datum/id_trim/job/donor_wrestler
-	trim_icon = 'modular_bandastation/donor_jobs/icons/id_trims.dmi'
-	trim_state = "trim_wrestler"
-	assignment = "Wrestler"
-	job = /datum/job/donor/wrestler
-	sechud_icon = 'modular_bandastation/donor_jobs/icons/job_hud.dmi'
-	sechud_icon_state = "hudwrestler"
-	template_access = null
-	centcom_template = TRUE
-	minimal_access = list(ACCESS_LIBRARY, ACCESS_MAINT_TUNNELS, ACCESS_THEATRE, ACCESS_RC_ANNOUNCE, ACCESS_SERVICE)
 
 /datum/id_trim/job/donor_musician
 	trim_icon = 'modular_bandastation/donor_jobs/icons/id_trims.dmi'
@@ -119,17 +75,6 @@
 	centcom_template = TRUE
 	minimal_access = list(ACCESS_LIBRARY, ACCESS_MAINT_TUNNELS)
 
-/datum/id_trim/job/donor_cleaning_manager
-	trim_icon = 'modular_bandastation/donor_jobs/icons/id_trims.dmi'
-	trim_state = "trim_cleaning_manager"
-	assignment = "Cleaning Manager"
-	job = /datum/job/donor/cleaning_manager
-	sechud_icon = 'modular_bandastation/donor_jobs/icons/job_hud.dmi'
-	sechud_icon_state = "hudcleaningmanager"
-	template_access = null
-	centcom_template = TRUE
-	minimal_access = list(ACCESS_JANITOR, ACCESS_MAINT_TUNNELS, ACCESS_EXTERNAL_AIRLOCKS, ACCESS_MEDICAL, ACCESS_CONSTRUCTION, ACCESS_MINERAL_STOREROOM, ACCESS_SERVICE)
-
 /datum/id_trim/job/donor_service_guard
 	trim_icon = 'modular_bandastation/donor_jobs/icons/id_trims.dmi'
 	trim_state = "trim_guard"
@@ -162,17 +107,6 @@
 	template_access = null
 	centcom_template = TRUE
 	minimal_access = list(ACCESS_LIBRARY, ACCESS_MAINT_TUNNELS, ACCESS_CONSTRUCTION)
-
-/datum/id_trim/job/donor_adjutant
-	trim_icon = 'modular_bandastation/donor_jobs/icons/id_trims.dmi'
-	trim_state = "trim_adjutant"
-	assignment = "Adjutant"
-	job = /datum/job/donor/adjutant
-	sechud_icon = 'modular_bandastation/donor_jobs/icons/job_hud.dmi'
-	sechud_icon_state = "hudadjutant"
-	template_access = null
-	centcom_template = TRUE
-	minimal_access = list(ACCESS_LIBRARY, ACCESS_COMMAND, ACCESS_EVA, ACCESS_LAWYER, ACCESS_COURT, ACCESS_BRIG_ENTRANCE, ACCESS_MAINT_TUNNELS, ACCESS_SCIENCE, ACCESS_MEDICAL, ACCESS_CONSTRUCTION, ACCESS_SHIPPING, ACCESS_SERVICE)
 
 /datum/id_trim/job/donor_representative_tsf
 	trim_icon = 'modular_bandastation/donor_jobs/icons/id_trims.dmi'

@@ -42,47 +42,6 @@
 	uniform = /obj/item/clothing/under/rank/civilian/clown/jester
 	head = /obj/item/clothing/head/costume/jester
 
-/datum/outfit/job/donor/adjutant
-	name = "Adjutant"
-	jobtype = /datum/job/donor/adjutant
-	id_trim = /datum/id_trim/job/donor_adjutant
-	belt = /obj/item/modular_computer/pda/crew/lawyer
-	uniform = /obj/item/clothing/under/rank/civilian/lawyer/blue
-	shoes = /obj/item/clothing/shoes/laceup
-	suit = /obj/item/clothing/suit/toggle/lawyer
-	glasses = /obj/item/clothing/glasses/hud/security/sunglasses
-	gloves = /obj/item/clothing/gloves/color/white
-	l_pocket = /obj/item/laser_pointer
-	r_pocket = /obj/item/clothing/accessory/lawyers_badge
-	l_hand = /obj/item/storage/briefcase/empty
-	ears = /obj/item/radio/headset/heads/hop
-	backpack_contents = list(
-		/obj/item/folder/blue = 1,
-		/obj/item/clipboard = 1,
-		/obj/item/pen = 1,
-	)
-	implants = list(/obj/item/implant/mindshield)
-	satchel = /obj/item/storage/backpack/satchel/sec
-	duffelbag = /obj/item/storage/backpack/duffelbag/sec
-
-/datum/outfit/job/donor/adjutant/butler
-	name = "Adjutant (butler)"
-	id_trim = /datum/id_trim/job/donor_adjutant/butler
-	belt = /obj/item/modular_computer/pda/crew/bar
-	uniform = /obj/item/clothing/under/rank/civilian/lawyer/black
-	glasses = /obj/item/clothing/glasses/monocle
-	head = /obj/item/clothing/head/hats/tophat
-	r_pocket = /obj/item/rag
-
-/datum/outfit/job/donor/adjutant/maid
-	name = "Adjutant (maid)"
-	id_trim = /datum/id_trim/job/donor_adjutant/maid
-	belt = /obj/item/modular_computer/pda/crew/bar
-	uniform = /obj/item/clothing/under/costume/maid
-	suit = null
-	l_hand = /obj/item/mop
-	r_pocket = /obj/item/rag
-
 /datum/outfit/job/donor/service_administrator
 	name = "Administrator"
 	jobtype = /datum/job/donor/service_administrator
@@ -110,91 +69,6 @@
 	l_pocket = /obj/item/melee/baton/telescopic
 	backpack_contents = list(/obj/item/stack/spacecash/c1000 = 5)
 	implants = list(/obj/item/implant/mindshield, /obj/item/implant/death_alarm)
-
-/datum/outfit/job/donor/barber
-	name = "Barber"
-	jobtype = /datum/job/donor/barber
-	id_trim = /datum/id_trim/job/donor_barber
-	uniform = /obj/item/clothing/under/suit/waiter
-	shoes = /obj/item/clothing/shoes/laceup
-	suit = /obj/item/clothing/suit/apron
-	head = /obj/item/clothing/head/hats/bowler
-	l_pocket = /obj/item/razor
-	r_pocket = /obj/item/dyespray
-
-/datum/outfit/job/donor/bath_attendant
-	name = "Bath"
-	jobtype = /datum/job/donor/bath_attendant
-	id_trim = /datum/id_trim/job/donor_bath_attendant
-	uniform = /obj/item/clothing/under/shorts/blue
-	shoes = /obj/item/clothing/shoes/sandal/velcro
-	head = /obj/item/clothing/head/beanie/darkblue
-	l_pocket = /obj/item/rag
-	r_pocket = /obj/item/soap
-
-/datum/outfit/job/donor/croupier
-	name = "Casino"
-	jobtype = /datum/job/donor/croupier
-	id_trim = /datum/id_trim/job/donor_croupier
-	belt = /obj/item/modular_computer/pda/crew/bar
-	uniform = /obj/item/clothing/under/suit/burgundy
-	shoes = /obj/item/clothing/shoes/laceup
-	suit = /obj/item/clothing/suit/toggle/lawyer/purple
-	l_pocket = /obj/item/toy/cards/deck
-	r_pocket = /obj/item/dice/d6
-	backpack_contents = list(
-		/obj/item/dice/d6 = 1,
-		/obj/item/coin/twoheaded = 1,
-		/obj/item/coin/gold = 2,
-		/obj/item/coin/silver = 4,
-		/obj/item/coin/iron = 8,
-	)
-
-/datum/outfit/job/donor/cleaning_manager
-	name = "Cleaning Manager"
-	jobtype = /datum/job/donor/cleaning_manager
-	id_trim = /datum/id_trim/job/donor_cleaning_manager
-	uniform = /obj/item/clothing/under/rank/civilian/janitor
-	shoes = /obj/item/clothing/shoes/galoshes/dry
-	suit = /obj/item/clothing/suit/apron/overalls
-	gloves = /obj/item/clothing/gloves/color/purple
-	mask = /obj/item/clothing/mask/bandana/purple
-	head = /obj/item/clothing/head/soft/purple
-	belt = /obj/item/storage/belt/janitor
-	belt_contents = list(
-		/obj/item/lightreplacer = 1,
-		/obj/item/reagent_containers/spray/cleaner = 1,
-		/obj/item/soap/nanotrasen = 1,
-		/obj/item/holosign_creator = 1,
-		/obj/item/melee/flyswatter = 1,
-	)
-	r_pocket = /obj/item/access_key
-	l_pocket = /obj/item/modular_computer/pda/crew/janitor
-	pda_slot = ITEM_SLOT_LPOCKET
-	l_hand = /obj/item/clipboard
-
-/datum/outfit/job/donor/cleaning_manager/apprentice
-	name = "Cleaning Manager (apprentice)"
-	id_trim = /datum/id_trim/job/donor_cleaning_manager/apprentice
-	l_pocket = /obj/item/modular_computer/pda/crew
-	uniform = /obj/item/clothing/under/color/grey
-	shoes = /obj/item/clothing/shoes/workboots
-	suit = null
-	gloves = /obj/item/clothing/gloves/color/grey
-	mask = /obj/item/clothing/mask/gas
-	head = /obj/item/clothing/head/utility/welding
-	belt = /obj/item/storage/belt/utility
-	belt_contents = list(
-		/obj/item/screwdriver = 1,
-		/obj/item/wrench = 1,
-		/obj/item/weldingtool = 1,
-		/obj/item/crowbar = 1,
-		/obj/item/wirecutters = 1,
-		/obj/item/multitool = 1,
-		/obj/item/stack/cable_coil = 1,
-	)
-	l_hand = null
-	backpack_contents = list(/obj/item/flashlight = 1)
 
 /datum/outfit/job/donor/merchant
 	name = "Dealer"
@@ -459,13 +333,3 @@
 	belt = /obj/item/modular_computer/pda/crew/cook
 	l_hand = /obj/item/clipboard
 	r_pocket = /obj/item/rag
-
-/datum/outfit/job/donor/wrestler
-	name = "Wrestler"
-	jobtype = /datum/job/donor/wrestler
-	id_trim = /datum/id_trim/job/donor_wrestler
-	belt = /obj/item/modular_computer/pda/crew/curator
-	uniform = /obj/item/clothing/under/shorts/blue
-	shoes = /obj/item/clothing/shoes/sandal/velcro
-	gloves = /obj/item/clothing/gloves/boxing
-	mask = /obj/item/clothing/mask/luchador

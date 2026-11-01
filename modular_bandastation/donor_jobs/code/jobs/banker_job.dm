@@ -2,7 +2,7 @@
 	important_information = "Начните своё дело со стартовыми 5000 кредитами: откройте банк или мастерскую, договоритесь с сотрудниками и клиентами."
 	title = "Banker"
 	description = "Богатый предприниматель: банк, мастерская, найм и бизнес."
-	donor_tier = 5
+	donor_tier = 4
 	config_tag = "DONOR_BANKER"
 	total_positions = 2
 	spawn_positions = 2

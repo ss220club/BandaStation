@@ -2,7 +2,7 @@
 	important_information = "Обустройтесь на станции, знакомьтесь с экипажем и ищите работу. Соблюдайте космический закон."
 	title = "Migrant"
 	description = "Новый житель/посетитель станции, поиск работы и места в корпорации."
-	donor_tier = 3
+	donor_tier = 4
 	config_tag = "DONOR_MIGRANT"
 	total_positions = -1
 	spawn_positions = -1

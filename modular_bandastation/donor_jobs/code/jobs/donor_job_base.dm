@@ -35,8 +35,5 @@
 		return "Донатные профессии отключены."
 	return ..()
 
-/datum/job/prisoner/get_required_donor_tier()
-	return CONFIG_GET(flag/donor_prisoner_gate) ? DONATOR_TIER_1 : 0
-
 /datum/job/donor/requires_explicit_preference()
 	return TRUE

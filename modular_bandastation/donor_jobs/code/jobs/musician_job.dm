@@ -2,7 +2,7 @@
 	important_information = "Играйте музыку, устраивайте концерты и выступайте вместе с другими артистами."
 	title = "Musician"
 	description = "Музыкальная атмосфера."
-	donor_tier = 2
+	donor_tier = 1
 	config_tag = "DONOR_MUSICAN"
 	total_positions = 1
 	spawn_positions = 1

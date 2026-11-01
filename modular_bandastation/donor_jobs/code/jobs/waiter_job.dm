@@ -2,7 +2,7 @@
 	important_information = "Принимайте заказы, доставляйте еду и поддерживайте ресторанную атмосферу."
 	title = "Waiter"
 	description = "Обслуживание посетителей и ресторанная атмосфера."
-	donor_tier = 2
+	donor_tier = 1
 	config_tag = "DONOR_WAITER"
 	total_positions = 2
 	spawn_positions = 2

@@ -2,7 +2,7 @@
 	important_information = "Вы - представитель ТСФ, прибывший для отдыха и переговоров. Космический закон действует и на вас."
 	title = "Representative TSF"
 	description = "Гость для отдыха и переговоров; космический закон действует, иммунитета нет."
-	donor_tier = 4
+	donor_tier = 5
 	config_tag = "DONOR_REPRESENTATIVE_TSF"
 	total_positions = 1
 	spawn_positions = 1

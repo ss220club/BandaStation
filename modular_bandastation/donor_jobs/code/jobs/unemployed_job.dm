@@ -2,7 +2,7 @@
 	important_information = "Вы - оставшийся без работы обитатель станции. Найдите занятие и способы выживания."
 	title = "Uncertain"
 	description = "Забытый работник, выживающий в технических тоннелях."
-	donor_tier = 3
+	donor_tier = 1
 	config_tag = "DONOR_UNCERTAIN"
 	total_positions = -1
 	spawn_positions = -1

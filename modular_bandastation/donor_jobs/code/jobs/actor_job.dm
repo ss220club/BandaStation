@@ -5,7 +5,7 @@
 	)
 	title = "Actor"
 	description = "Шоу, сцена и совместные представления с другими артистами."
-	donor_tier = 2
+	donor_tier = 1
 	config_tag = "DONOR_ACTOR"
 	total_positions = 5
 	spawn_positions = 5
