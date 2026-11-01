@@ -280,7 +280,12 @@ def translate_changelog(changelog: typing.Dict[int, list[Change]]):
     for attempt in range(max_attempts):
         try:
             response: ChatCompletion = client.chat.completions.create(
-                model="poolside/laguna-s-2.1:free",
+                model="google/gemma-4-31b-it:free",
+                extra_body={"models": [
+                    "google/gemma-4-31b-it:free",
+                    "google/gemma-4-26b-a4b-it:free",
+                    "nvidia/nemotron-3.5-super-vl:free"
+                ]},
                 extra_headers={
                     "HTTP-Referer": f"https://github.com/{TARGET_REPO}",
                     "X-OpenRouter-Title": TARGET_REPO,
