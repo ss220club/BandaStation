@@ -20,7 +20,7 @@
 	crafting_complexity = FOOD_COMPLEXITY_2
 	venue_value = FOOD_PRICE_NORMAL
 
-// 3. Fly Amanita Bun
+// 3. fly amanita bun
 /obj/item/food/skrell/fly_amanita_bun
 	name = "fly amanita bun"
 	desc = "A fluffy bun baked with fresh fly amanita. Highly toxic and hallucinogenic to most species, but a delicious staple for Skrell."
@@ -92,9 +92,9 @@
 
 // MARK: Soups & Stews
 
-// 6. Qerrbalak Fungal Stew
+// 6. qerrbalak fungal stew
 /obj/item/food/soup/qerrbalak_stew
-	name = "Qerrbalak fungal stew"
+	name = "qerrbalak fungal stew"
 	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
 	desc = "A traditional everyday hearty stew eaten across Qerrbalak. Thickened with flour and filled with aromatic mushrooms."
 	icon_state = "qerrbalak_stew"
@@ -110,7 +110,7 @@
 	crafting_complexity = FOOD_COMPLEXITY_3
 	venue_value = FOOD_PRICE_NORMAL
 
-// 7. Glowshroom Chowder
+// 7. glowshroom chowder
 /obj/item/food/soup/glowshroom_chowder
 	name = "glowshroom chowder"
 	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
@@ -130,7 +130,7 @@
 	crafting_complexity = FOOD_COMPLEXITY_3
 	venue_value = FOOD_PRICE_NORMAL
 
-// 8. Destroying Angel Bisque
+// 8. destroying angel bisque
 /obj/item/food/soup/destroying_angel_bisque
 	name = "destroying angel bisque"
 	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
@@ -150,9 +150,9 @@
 	crafting_complexity = FOOD_COMPLEXITY_3
 	venue_value = FOOD_PRICE_EXOTIC
 
-// 9. Kenin Tofu Soup
+// 9. kenin tofu soup
 /obj/item/food/soup/kenin_tofu_soup
-	name = "Kenin tofu soup"
+	name = "kenin tofu soup"
 	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
 	desc = "A soothing gourmet soup loaded with tofu cubes and reishi mushrooms. Provides pleasant pain relief."
 	icon_state = "kenin_soup"
@@ -170,7 +170,7 @@
 	crafting_complexity = FOOD_COMPLEXITY_3
 	venue_value = FOOD_PRICE_NORMAL
 
-// 10. Embershroom Lava Stew
+// 10. embershroom lava stew
 /obj/item/food/soup/embershroom_lava_stew
 	name = "embershroom lava stew"
 	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
@@ -206,7 +206,7 @@
 	crafting_complexity = FOOD_COMPLEXITY_4
 	venue_value = FOOD_PRICE_LEGENDARY
 
-// 12. Puffball Gas Soup
+// 12. puffball gas soup
 /obj/item/food/soup/puffball_gas_soup
 	name = "puffball gas soup"
 	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
@@ -399,9 +399,9 @@
 	food_flags = FOOD_FINGER_FOOD
 	w_class = WEIGHT_CLASS_TINY
 
-// 21. Qerrbalak Eclipse Stew
+// 21. qerrbalak eclipse stew
 /obj/item/food/soup/qerrbalak_eclipse_stew
-	name = "Qerrbalak eclipse stew"
+	name = "qerrbalak eclipse stew"
 	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
 	desc = "A pitch-black psychoactive stew brewed from omega weed, liberty-caps, and shadowshrooms with a tangy pineapple accent. Extremely potent."
 	icon_state = "eclipse_stew"
@@ -418,7 +418,7 @@
 	crafting_complexity = FOOD_COMPLEXITY_4
 	venue_value = FOOD_PRICE_EXOTIC
 
-// 22. Crimson Fungal Mix
+// 22. crimson fungal mix
 /obj/item/food/skrell/crimson_fungal_mix
 	name = "crimson fungal mix"
 	desc = "A sauté of bright red and golden fungi. Radiates a spicy, mind-altering aroma."
@@ -432,7 +432,7 @@
 	w_class = WEIGHT_CLASS_SMALL
 	crafting_complexity = FOOD_COMPLEXITY_3
 
-// Twilight Fungal Paste
+// twilight fungal paste
 /obj/item/food/skrell/twilight_fungal_paste
 	name = "twilight fungal paste"
 	desc = "A dark indigo paste made from deep cavern mushrooms, berries, and grapes."
@@ -484,7 +484,7 @@
 /obj/item/food/skrell/grand_mycelial_roast/on_craft_completion(list/components, datum/crafting_recipe/current_recipe, atom/crafter)
 	. = ..()
 	if(reagents)
-		reagents.maximum_volume = max(reagents.maximum_volume, 150)
+		reagents.maximum_volume = max(reagents.maximum_volume, 300)
 		reagents.add_reagent(/datum/reagent/consumable/qerr_primordial_nectar, 30)
 
 /obj/item/food/skrell/mycelial_roast_slice
@@ -620,7 +620,7 @@
 	crafting_complexity = FOOD_COMPLEXITY_4
 	venue_value = FOOD_PRICE_EXOTIC
 
-// 32. Rice Cheese Sandwich
+// 32. rice cheese sandwich
 /obj/item/food/sandwich/rice_cheese
 	name = "rice cheese sandwich"
 	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
@@ -636,13 +636,13 @@
 	foodtypes = GRAIN | DAIRY | BREAKFAST
 	food_flags = FOOD_FINGER_FOOD
 	w_class = WEIGHT_CLASS_SMALL
-	crafting_complexity = FOOD_COMPLEXITY_2
+	crafting_complexity = FOOD_COMPLEXITY_3
 	venue_value = FOOD_PRICE_CHEAP
 
 /obj/item/food/sandwich/rice_cheese/make_grillable()
 	AddComponent(/datum/component/grillable, /obj/item/food/sandwich/grilled_rice_cheese, rand(20 SECONDS, 35 SECONDS), TRUE)
 
-// 32.1. Grilled Rice Cheese Sandwich
+// 32.1. Grilled rice cheese sandwich
 /obj/item/food/sandwich/grilled_rice_cheese
 	name = "grilled rice cheese sandwich"
 	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
@@ -659,7 +659,7 @@
 	foodtypes = GRAIN | DAIRY
 	food_flags = FOOD_FINGER_FOOD
 	w_class = WEIGHT_CLASS_SMALL
-	crafting_complexity = FOOD_COMPLEXITY_3
+	crafting_complexity = FOOD_COMPLEXITY_4
 	venue_value = FOOD_PRICE_NORMAL
 
 // 33. Fairy Grass & Glow Roll

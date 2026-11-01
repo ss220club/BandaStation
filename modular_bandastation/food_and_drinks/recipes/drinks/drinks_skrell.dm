@@ -143,7 +143,7 @@
 
 /datum/reagent/consumable/glow_seraka_tonic/on_mob_life(mob/living/carbon/drinker, seconds_per_tick, metabolization_ratio)
 	. = ..()
-	drinker.set_light(4, 2, "#FFA500")
+	drinker.set_light(3, 2, "#FFA500")
 	addtimer(CALLBACK(drinker, TYPE_PROC_REF(/atom, set_light), 0), 4 SECONDS, TIMER_OVERRIDE|TIMER_UNIQUE)
 	drinker.remove_status_effect(/datum/status_effect/jitter)
 	drinker.adjust_brute_loss(-0.15 * metabolization_ratio * seconds_per_tick)

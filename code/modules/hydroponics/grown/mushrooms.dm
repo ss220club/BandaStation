@@ -382,4 +382,3 @@
 	icon_state = "odious_puffball"
 	tastes = list("rotten garlic" = 2, "mushroom" = 1, "spores" = 1)
 	wine_power = 50
-

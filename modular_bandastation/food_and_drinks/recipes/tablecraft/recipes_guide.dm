@@ -2,7 +2,7 @@
 // MARK: Rolling Pin
 
 /datum/crafting_recipe/food/rollingpin/flat_rice_dough
-	name = "Flat rice dough"
+	name = "flat rice dough"
 	reqs = list(/obj/item/food/rice_dough = 1)
 	result = /obj/item/food/flat_rice_dough
 	dish_category = DISH_BREAD
@@ -12,7 +12,7 @@
 // MARK: Knife Slicing
 
 /datum/crafting_recipe/food/knife/fly_amanita_bun_slice
-	name = "Fly amanita bun slice"
+	name = "fly amanita bun slice"
 	reqs = list(/obj/item/food/skrell/fly_amanita_bun = 1)
 	result = /obj/item/food/skrell/fly_amanita_bun_slice
 	dish_category = DISH_MUSHROOM
@@ -28,7 +28,7 @@
 	meal_category = MEAL_MAIN_COURSE
 
 /datum/crafting_recipe/food/knife/mycelial_roast_slice
-	name = "Mycelial roast slice"
+	name = "mycelial roast slice"
 	reqs = list(/obj/item/food/skrell/grand_mycelial_roast = 1)
 	result = /obj/item/food/skrell/mycelial_roast_slice
 	dish_category = DISH_MUSHROOM
@@ -94,7 +94,7 @@
 // MARK: Grill & Oven
 
 /datum/crafting_recipe/food/grill/plump_fungal_roast
-	name = "Plump fungal roast"
+	name = "plump fungal roast"
 	reqs = list(/obj/item/food/skrell/raw_plump_fungal_roast = 1)
 	result = /obj/item/food/skrell/plump_fungal_roast
 	dish_category = DISH_MUSHROOM
@@ -102,7 +102,7 @@
 	meal_category = MEAL_MAIN_COURSE
 
 /datum/crafting_recipe/food/oven/plump_fungal_roast
-	name = "Plump fungal roast"
+	name = "plump fungal roast"
 	reqs = list(/obj/item/food/skrell/raw_plump_fungal_roast = 1)
 	result = /obj/item/food/skrell/plump_fungal_roast
 	dish_category = DISH_MUSHROOM
@@ -110,7 +110,7 @@
 	meal_category = MEAL_MAIN_COURSE
 
 /datum/crafting_recipe/food/grill/grilled_rice_cheese
-	name = "Grilled rice cheese sandwich"
+	name = "grilled rice cheese sandwich"
 	reqs = list(/obj/item/food/sandwich/rice_cheese = 1)
 	result = /obj/item/food/sandwich/grilled_rice_cheese
 	dish_category = DISH_SANDWICH

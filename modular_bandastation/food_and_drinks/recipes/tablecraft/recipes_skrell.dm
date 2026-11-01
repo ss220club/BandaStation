@@ -2,10 +2,28 @@
 /obj/item/food/skrell
 	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
 
+// MARK: RICE DOUGH EXTENSION & FLAT RICE DOUGH
+
+/obj/item/food/flat_rice_dough
+	name = "flat rice dough"
+	desc = "A flattened sheet of rice dough, ready to be shaped into buns, rolls, or flatbreads."
+	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
+	icon_state = "flat_rice_dough"
+	food_reagents = list(/datum/reagent/consumable/nutriment = 6)
+	tastes = list("rice" = 1)
+	foodtypes = GRAIN
+	w_class = WEIGHT_CLASS_SMALL
+	crafting_complexity = FOOD_COMPLEXITY_2
+
+/obj/item/food/rice_dough/Initialize(mapload)
+	. = ..()
+	AddElement(/datum/element/processable, TOOL_ROLLINGPIN, /obj/item/food/flat_rice_dough, 1, 3 SECONDS, table_required = TRUE, screentip_verb = "Flatten", sound_to_play = SFX_ROLLING_PIN_ROLLING)
+
+
 // Breads & Bakery
 
 /datum/crafting_recipe/food/plump_rice_flatbread
-	name = "Plump helmet rice flatbread"
+	name = "plump helmet rice flatbread"
 	reqs = list(
 		/obj/item/food/flat_rice_dough = 1,
 		/obj/item/food/grown/mushroom/plumphelmet = 1,
@@ -18,7 +36,7 @@
 	meal_category = MEAL_SNACK
 
 /datum/crafting_recipe/food/fly_amanita_bun
-	name = "Fly amanita bun"
+	name = "fly amanita bun"
 	reqs = list(
 		/obj/item/food/flat_rice_dough = 1,
 		/obj/item/food/grown/mushroom/amanita = 1,
@@ -59,7 +77,7 @@
 // Soups & Stews
 
 /datum/reagent/consumable/nutriment/soup/qerrbalak_stew
-	name = "Qerrbalak fungal stew"
+	name = "qerrbalak fungal stew"
 	description = "A traditional hearty stew from Qerrbalak, rich with dense mushrooms and thick flour broth."
 	data = list("mushrooms" = 3, "earthy broth" = 1)
 	glass_price = FOOD_PRICE_NORMAL
@@ -67,7 +85,7 @@
 
 /datum/glass_style/has_foodtype/soup/qerrbalak_stew
 	required_drink_type = /datum/reagent/consumable/nutriment/soup/qerrbalak_stew
-	name = "Qerrbalak fungal stew"
+	name = "qerrbalak fungal stew"
 	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
 	icon_state = "qerrbalak_stew"
 	drink_type = GRAIN | VEGETABLES | MUSHROOM
@@ -87,7 +105,7 @@
 	percentage_of_nutriment_converted = 0.15
 
 /datum/reagent/consumable/nutriment/soup/glowshroom_chowder
-	name = "Glowshroom Chowder"
+	name = "glowshroom chowder"
 	description = "A luminescent, radioactive mushroom chowder made with soothing soymilk."
 	data = list("creamy mushrooms" = 2, "tingling radiation" = 1)
 	glass_price = FOOD_PRICE_NORMAL
@@ -115,7 +133,7 @@
 	)
 
 /datum/reagent/consumable/nutriment/soup/destroying_angel_bisque
-	name = "Destroying Angel Bisque"
+	name = "destroying angel bisque"
 	description = "A silky white bisque packed with deadly amanitins. A prized delicacy for Skrell, highly lethal to others."
 	data = list("intense umami" = 3, "numbing cold" = 2)
 	glass_price = FOOD_PRICE_EXOTIC
@@ -142,7 +160,7 @@
 	ingredient_reagent_multiplier = 0.5
 
 /datum/reagent/consumable/nutriment/soup/kenin_tofu_soup
-	name = "Kenin Tofu Soup"
+	name = "kenin tofu soup"
 	description = "A medicinal, pain-relieving soup loaded with reishi mushrooms and silken tofu."
 	data = list("soft tofu" = 2, "soothing herbal bitterness" = 2)
 	glass_price = FOOD_PRICE_NORMAL
@@ -150,7 +168,7 @@
 
 /datum/glass_style/has_foodtype/soup/kenin_tofu_soup
 	required_drink_type = /datum/reagent/consumable/nutriment/soup/kenin_tofu_soup
-	name = "Kenin tofu soup"
+	name = "kenin tofu soup"
 	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
 	icon_state = "kenin_soup"
 	drink_type = VEGETABLES | MUSHROOM
@@ -171,7 +189,7 @@
 	percentage_of_nutriment_converted = 0.1
 
 /datum/reagent/consumable/nutriment/soup/embershroom_lava_stew
-	name = "Embershroom Lava Stew"
+	name = "embershroom lava stew"
 	description = "A scorching red broth made from Lavaland embershrooms and fire blossoms. Warms the body instantly."
 	data = list("blazing heat" = 3, "earthy sulfur" = 1)
 	glass_price = FOOD_PRICE_NORMAL
@@ -226,7 +244,7 @@
 	)
 
 /datum/reagent/consumable/nutriment/soup/puffball_gas_soup
-	name = "Puffball Gas Soup"
+	name = "puffball gas soup"
 	description = "A fizzy, misty soup releasing mild spore clouds as it is eaten."
 	data = list("fizzy vapor" = 2, "sweet spores" = 1)
 	glass_price = FOOD_PRICE_EXOTIC
@@ -306,6 +324,7 @@
 	cuisine_category = CUISINE_SKRELL
 	dish_category = DISH_MUSHROOM
 	meal_category = MEAL_MAIN_COURSE
+	crafting_flags = parent_type::crafting_flags & ~CRAFT_CLEARS_REAGENTS
 
 /datum/crafting_recipe/food/skrell_fungal_ramen
 	name = "Skrell fungal ramen"
@@ -366,7 +385,7 @@
 	meal_category = MEAL_MAIN_COURSE
 
 /datum/reagent/consumable/nutriment/soup/qerrbalak_eclipse_stew
-	name = "Qerrbalak Eclipse Stew"
+	name = "qerrbalak eclipse stew"
 	description = "A pitch-black psychoactive stew brewed from omega weed, liberty-caps, and shadowshrooms with a pineapple twist."
 	data = list("tangy pineapple" = 2, "numbing shadows" = 3, "cosmic trip" = 3)
 	glass_price = FOOD_PRICE_EXOTIC
@@ -374,7 +393,7 @@
 
 /datum/glass_style/has_foodtype/soup/qerrbalak_eclipse_stew
 	required_drink_type = /datum/reagent/consumable/nutriment/soup/qerrbalak_eclipse_stew
-	name = "Qerrbalak eclipse stew"
+	name = "qerrbalak eclipse stew"
 	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
 	icon_state = "eclipse_stew"
 	drink_type = VEGETABLES | MUSHROOM | FRUIT | TOXIC
@@ -396,7 +415,7 @@
 	percentage_of_nutriment_converted = 0.1
 
 /datum/crafting_recipe/food/crimson_fungal_mix
-	name = "Crimson fungal mix"
+	name = "crimson fungal mix"
 	reqs = list(
 		/obj/item/reagent_containers/cup/bowl = 1,
 		/obj/item/food/grown/mushroom/amanita = 1,
@@ -411,7 +430,7 @@
 	meal_category = MEAL_COMPONENT
 
 /datum/crafting_recipe/food/twilight_fungal_paste
-	name = "Twilight fungal paste"
+	name = "twilight fungal paste"
 	reqs = list(
 		/obj/item/reagent_containers/cup/bowl = 1,
 		/obj/item/food/grown/mushroom/plumphelmet = 1,
@@ -431,7 +450,6 @@
 	reqs = list(
 		/obj/item/reagent_containers/cup/bowl = 1,
 		/obj/item/food/grown/mushroom/angel = 1,
-		/obj/item/food/grown/mushroom/glowshroom = 1,
 		/obj/item/food/grown/mushroom/glowshroom/glowcap = 1,
 		/obj/item/food/grown/grass/fairy = 1,
 		/obj/item/food/grown/citrus/lime = 1,
@@ -527,10 +545,10 @@
 	cuisine_category = CUISINE_SKRELL
 	dish_category = DISH_TACO
 	meal_category = MEAL_MAIN_COURSE
-	crafting_flags = CRAFT_SKIP_MATERIALS_PARITY
+	crafting_flags = parent_type::crafting_flags | CRAFT_SKIP_MATERIALS_PARITY
 
 /datum/crafting_recipe/food/destroying_angel_slider
-	name = "Destroying angel slider"
+	name = "destroying angel slider"
 	reqs = list(
 		/obj/item/food/boiledrice = 1,
 		/obj/item/food/grown/mushroom/angel = 1,
@@ -545,7 +563,7 @@
 	meal_category = MEAL_MAIN_COURSE
 
 /datum/crafting_recipe/food/rice_cheese_sandwich
-	name = "Rice cheese sandwich"
+	name = "rice cheese sandwich"
 	reqs = list(
 		/obj/item/food/boiledrice = 2,
 		/obj/item/food/cheese/wedge = 1,
@@ -555,7 +573,7 @@
 	cuisine_category = CUISINE_SKRELL
 	dish_category = DISH_SANDWICH
 	meal_category = MEAL_MAIN_COURSE
-	crafting_flags = CRAFT_SKIP_MATERIALS_PARITY
+	crafting_flags = parent_type::crafting_flags | CRAFT_SKIP_MATERIALS_PARITY
 
 /datum/crafting_recipe/food/fairy_glow_roll
 	name = "Fairy glow roll"

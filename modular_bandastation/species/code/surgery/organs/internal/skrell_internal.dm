@@ -388,8 +388,7 @@
 
 	// Защита от мумификации (некроза кожи) при приеме крокодила
 	if(istype(chem, /datum/reagent/drug/krokodil))
-		if(HAS_TRAIT(organ_owner, TRAIT_HUSK))
-			organ_owner.cure_husk()
+		return COMSIG_MOB_STOP_REAGENT_TICK
 
 	// Компенсация побочного урона от кураре (паралич сохраняется, но токсины и легкие не страдают)
 	if(istype(chem, /datum/reagent/toxin/curare))
