@@ -1,0 +1,4 @@
+author: "Maxiemar"
+delete-after: True
+changes:
+  - admin: "Админы теперь могут просматривать логи в формате JSON (Get Server Logs / Get Current Logs)."

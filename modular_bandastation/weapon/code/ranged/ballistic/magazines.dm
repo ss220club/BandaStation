@@ -766,7 +766,7 @@
 // MARK: CM357 - .357 cal pistol
 /obj/item/ammo_box/magazine/c357
 	name = "pistol magazine (.357)"
-	desc = "Пистолетный магазин калибра .357, вмещающий 8 патронов. Подходит для пистолетов GP-357."
+	desc = "Пистолетный магазин калибра .357, вмещающий 8 патронов. Подходит для пистолетов GP-357 и PDH-A2-NR 'Osprey'."
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "c357_mag"
 	base_icon_state = "c357_mag"
@@ -809,6 +809,7 @@
 	multiple_sprites = AMMO_BOX_PER_BULLET
 	multiple_sprite_use_base = TRUE
 	ammo_type = /obj/item/ammo_casing/c45
+	custom_materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 10)
 
 /obj/item/ammo_box/magazine/c45/ap
 	name = "pistol magazine (.45 AP)"
@@ -820,6 +821,7 @@
 	desc = parent_type::desc + "<br>Содержит нелетальные травматические патроны с резиновой пулей."
 	ammo_band_color = COLOR_AMMO_RUBBER
 	ammo_type = /obj/item/ammo_casing/c45/rubber
+	custom_materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 5)
 
 /obj/item/ammo_box/magazine/c45/hp
 	name = "pistol magazine (.45 HP)"

@@ -2,6 +2,6 @@ import type { FeatureChoiced } from '../base';
 import { FeatureDropdownInput } from '../dropdowns';
 
 export const scarred_eye: FeatureChoiced = {
-  name: 'Scarred Eye',
+  name: 'Изуродованный глаз',
   component: FeatureDropdownInput,
 };

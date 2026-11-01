@@ -1,0 +1,4 @@
+author: "Maxiemar"
+delete-after: True
+changes:
+  - sound: "Голос TTS Evelynn теперь доступен с 5-го уровня подписки вместо 3-го."

@@ -14,6 +14,7 @@
 #include "ai_laws/_ai_laws.dme"
 #include "ai_vox/_ai_vox.dme"
 #include "announcers/_announcers.dme"
+#include "antag_operations/_antag_operations.dme"
 #include "antagonists/_antagonists.dme"
 #include "augmentation_preferences/_augmentation_preferences.dme"
 #include "autohiss/_autohiss.dme"

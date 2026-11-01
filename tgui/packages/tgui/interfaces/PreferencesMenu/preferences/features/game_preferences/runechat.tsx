@@ -20,9 +20,9 @@ export const see_chat_non_mob: FeatureToggle = {
 };
 
 export const chat_on_ghosts: FeatureToggle = {
-  name: 'Enable Runechat on ghosts',
-  category: 'RUNECHAT',
-  description: 'Chat messages will show above ghosts when they speak.',
+  name: 'Рунчат: включить для призраков',
+  category: 'Рунчат',
+  description: 'Текст сообщений будет появляться над призраками.',
   component: CheckboxInput,
 };
 

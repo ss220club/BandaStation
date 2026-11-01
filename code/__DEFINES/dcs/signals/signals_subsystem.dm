@@ -29,3 +29,8 @@
 
 /// Send after config is loaded but before picking roundstart rulesets
 #define COMSIG_DYNAMIC_PRE_ROUNDSTART "dynamic_pre_roundstart"
+
+// BANDASTATION EDIT added new signal type
+/// Sent once after all roundstart rulesets execute: (list/antagonists).
+/// Individual on_gain() calls retain their asynchronous behavior.
+#define COMSIG_TICKER_ROUNDSTART_ROLES_ASSIGNED "ticker_roundstart_roles_assigned"

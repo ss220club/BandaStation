@@ -1,14 +1,12 @@
 name: CI Suite
 
 on:
-  push:
-    branches:
-    - master
-    - 'project/**'
   pull_request:
     branches:
       - master
-      - "project/**"
+  merge_group:
+    branches:
+      - master
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}

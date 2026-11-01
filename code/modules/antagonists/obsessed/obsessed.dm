@@ -114,7 +114,7 @@
 		carried_item.add_mob_blood(H)//Oh yes, there will be blood...
 	H.regenerate_icons()
 
-/datum/antagonist/obsessed/forge_objectives(datum/mind/obsessionmind)
+/datum/antagonist/obsessed/forge_objectives(datum/mind/obsessionmind, list/blacklist) // BANDASTATION ADDITION: exclude characters leaving the round.
 	var/list/objectives_left = list(OBSESSED_OBJECTIVE_SPEND_TIME, OBSESSED_OBJECTIVE_POLAROID, OBSESSED_OBJECTIVE_HUG)
 	var/datum/objective/assassinate/obsessed/kill = new
 	kill.owner = owner
@@ -156,7 +156,7 @@
 				var/datum/objective/assassinate/jealous/jealous = new
 				jealous.owner = owner
 				jealous.obsessed_target = obsessionmind
-				jealous.find_target()
+				jealous.find_target(blacklist = blacklist) // BANDASTATION ADDITION
 				objectives += jealous
 
 	objectives += kill//finally add the assassinate last, because you'd have to complete it last to greentext.
@@ -230,6 +230,8 @@
 	var/list/all_coworkers = list()
 	var/our_departments = obsessed_target.assigned_role.departments_bitflags
 	for(var/datum/mind/crewmember as anything in get_crewmember_minds())
+		if(crewmember in blacklist) // BANDASTATION ADDITION: exclude characters leaving the round.
+			continue
 		if(crewmember == obsessed_target || crewmember.has_antag_datum(/datum/antagonist/obsessed))
 			continue // the jealousy target has to have a job, and not be the obsession or obsessed.
 

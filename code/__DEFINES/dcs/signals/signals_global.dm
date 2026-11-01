@@ -19,6 +19,8 @@
 #define COMSIG_GLOB_EXPLOSION "!explosion"
 /// Called from base of /mob/Initialise : (mob)
 #define COMSIG_GLOB_MOB_CREATED "!mob_created"
+/// BANDASTATION ADDITION: sent before cryogenic storage or AI unloading removes a character: (datum/mind/departing_mind)
+#define COMSIG_GLOB_MIND_ENTERED_CRYO "!mind_entered_cryo"
 /// mob died somewhere : (mob/living, gibbed)
 #define COMSIG_GLOB_MOB_DEATH "!mob_death"
 /// global living say plug - use sparingly: (mob/speaker , message)
