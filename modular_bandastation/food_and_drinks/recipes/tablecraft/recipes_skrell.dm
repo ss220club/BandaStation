@@ -59,7 +59,7 @@
 // Soups & Stews
 
 /datum/reagent/consumable/nutriment/soup/qerrbalak_stew
-	name = "Qerrbalak Fungal Stew"
+	name = "Qerrbalak fungal stew"
 	description = "A traditional hearty stew from Qerrbalak, rich with dense mushrooms and thick flour broth."
 	data = list("mushrooms" = 3, "earthy broth" = 1)
 	glass_price = FOOD_PRICE_NORMAL
@@ -199,7 +199,7 @@
 	percentage_of_nutriment_converted = 0
 
 /datum/reagent/consumable/nutriment/soup/edens_gaia_noodles
-	name = "Eden's Gaia Noodle Soup"
+	name = "Eden's Gaia noodle soup"
 	description = "A sacred glowing soup with noodles floating in an Ambrosia Gaia broth. Induces supreme tranquility."
 	data = list("divine sweetness" = 2, "tender noodles" = 2, "pure peace" = 2)
 	glass_price = FOOD_PRICE_LEGENDARY
@@ -254,7 +254,7 @@
 // MAIN DISHES
 
 /datum/crafting_recipe/food/raw_plump_fungal_roast
-	name = "Raw plump fungal roast"
+	name = "raw plump fungal roast"
 	reqs = list(
 		/obj/item/food/grown/mushroom/gomoa = 1,
 		/datum/reagent/consumable/soysauce = 5,
@@ -352,7 +352,7 @@
 	meal_category = MEAL_MAIN_COURSE
 
 /datum/crafting_recipe/food/mindbreaker_fungal_bake
-	name = "Mindbreaker fungal bake"
+	name = "mindbreaker fungal bake"
 	reqs = list(
 		/obj/item/food/flat_rice_dough = 1,
 		/obj/item/food/grown/mushroom/glowshroom/glowcap = 1,
@@ -427,7 +427,7 @@
 	meal_category = MEAL_COMPONENT
 
 /datum/crafting_recipe/food/skrell/luminous_white_salad
-	name = "Luminous white salad"
+	name = "luminous white salad"
 	reqs = list(
 		/obj/item/reagent_containers/cup/bowl = 1,
 		/obj/item/food/grown/mushroom/angel = 1,
@@ -473,7 +473,7 @@
 	meal_category = MEAL_APPETIZER
 
 /datum/crafting_recipe/food/soy_fungal_chips
-	name = "Soy chips with fungal dip"
+	name = "soy chips with fungal dip"
 	reqs = list(
 		/obj/item/food/soydope = 1,
 		/obj/item/food/skrell/plump_fungal_roast = 1,
@@ -573,7 +573,7 @@
 // DESSERTS & ROLLS
 
 /datum/crafting_recipe/food/skrell_citrus_cake
-	name = "Citrus coffee cake"
+	name = "citrus coffee cake"
 	reqs = list(
 		/obj/item/food/cake/plain = 1,
 		/obj/item/food/grown/citrus/orange = 2,
@@ -587,7 +587,7 @@
 	meal_category = MEAL_DESSERT
 
 /datum/crafting_recipe/food/blue_cherry_moon_cake
-	name = "Blue cherry moonflower cake"
+	name = "blue cherry moonflower cake"
 	reqs = list(
 		/obj/item/food/pie/plain = 1,
 		/obj/item/food/grown/bluecherries = 2,

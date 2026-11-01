@@ -366,7 +366,7 @@
 	crafting_complexity = FOOD_COMPLEXITY_4
 	venue_value = FOOD_PRICE_EXOTIC
 
-// 20. Mindbreaker Fungal Bake
+// 20. mindbreaker fungal bake
 /obj/item/food/skrell/mindbreaker_fungal_bake
 	name = "mindbreaker fungal bake"
 	desc = "A trippy baked pie with glowing glowcaps, jupiter cups, and rainbow weed. Sends the mind into transcendent kaleidoscopic bliss."
@@ -447,7 +447,7 @@
 	w_class = WEIGHT_CLASS_SMALL
 	crafting_complexity = FOOD_COMPLEXITY_3
 
-// Luminous White Salad
+// luminous white salad
 /obj/item/food/skrell/luminous_white_salad
 	name = "luminous white salad"
 	desc = "A zesty glowing mix of bioluminescent mushrooms and herbs tossed in fresh lime juice."

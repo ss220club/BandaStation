@@ -20,7 +20,7 @@
 	meal_category = MEAL_SNACK
 
 /datum/crafting_recipe/food/knife/mindbreaker_fungal_bake_slice
-	name = "Mindbreaker fungal bake slice"
+	name = "mindbreaker fungal bake slice"
 	reqs = list(/obj/item/food/skrell/mindbreaker_fungal_bake = 1)
 	result = /obj/item/food/skrell/mindbreaker_fungal_bake_slice
 	dish_category = DISH_PIE
@@ -36,7 +36,7 @@
 	meal_category = MEAL_MAIN_COURSE
 
 /datum/crafting_recipe/food/knife/skrell_citrus_slice
-	name = "Citrus coffee cake slice"
+	name = "citrus coffee cake slice"
 	reqs = list(/obj/item/food/cake/skrell_citrus_cake = 1)
 	result = /obj/item/food/cakeslice/skrell_citrus_slice
 	dish_category = DISH_CAKE
@@ -44,7 +44,7 @@
 	meal_category = MEAL_DESSERT
 
 /datum/crafting_recipe/food/knife/blue_cherry_slice
-	name = "Blue cherry moonflower cake slice"
+	name = "blue cherry moonflower cake slice"
 	reqs = list(/obj/item/food/cake/blue_cherry_moon_cake = 1)
 	result = /obj/item/food/cakeslice/blue_cherry_slice
 	dish_category = DISH_CAKE
