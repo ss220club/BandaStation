@@ -379,7 +379,7 @@
 
 /// Returns a string with the first word of the string capitalized.
 /proc/capitalize(t)
-	t = format_text(t) // BANDASTATION ADDITION - Declents
+	return capitalize_word(format_text(t)) // BANDASTATION EDIT - Declents, upstream regex is latin-only
 
 /// Returns a string with the first letter of each word capitialized
 /proc/full_capitalize(input)
