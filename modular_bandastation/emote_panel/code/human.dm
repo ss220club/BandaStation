@@ -216,6 +216,6 @@
 	if(QDELETED(user))
 		return
 
-	playsound(user, 'sound/items/modsuit/atrocinator_step.ogg', 50, TRUE)
+	playsound(user, sound, 50, TRUE)
 	if(count < 3)
 		addtimer(CALLBACK(src, PROC_REF(play_cane_tap_sound), user, count + 1), 0.5 SECONDS)
