@@ -13,9 +13,6 @@
 #define COMMS_INTERCEPT_Z_LEVEL_DISTANCE 30
 #define COMMS_INTERCEPT_LOGS_PERCENT 25
 #define COMMS_INTERCEPT_INDICATOR_PERCENT 50
-#define COMMS_INTERCEPT_GARBLE_PERCENT 75
-#define COMMS_INTERCEPT_GARBLE_MIN 10
-#define COMMS_INTERCEPT_GARBLE_MAX 80
 #define COMMS_INTERCEPT_DIRECTION_PERCENT 75
 /// Add a corrupt log entry every N packets
 #define COMMS_INTERCEPT_LOG_EVERY 3
@@ -202,7 +199,7 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 	setup(comms_intercept_living_crew())
 
 /datum/objective/comms_intercept/update_explanation_text()
-	explanation_text = "Украдите ключи шифрования станции: подключите сетевой жучок к телекоммуникациям, соберите приёмником [target_amount] пакетов из каналов отделов, дождитесь окончания передачи, заберите дамп ключей шифрования из приёмника и вывезите его со станции. Инструкция приложена к оборудованию."
+	explanation_text = "Украдите ключи шифрования станции: подключите сетевой жучок к телекоммуникациям, соберите приёмником [target_amount] пакетов из каналов отделов, получите дамп ключей шифрования через передачу на приёмник или прямо с жучка и вывезите его со станции. Инструкция приложена к оборудованию."
 
 /datum/objective/comms_intercept/check_completion()
 	if(completed)
@@ -223,9 +220,9 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 	if(signal_key == last_signal_key)
 		return
 	last_signal_key = signal_key
-	var/garble_chance = get_garble_chance()
-	if(garble_chance)
-		signal.data["message"] = Gibberish(signal.data["message"], garble_chance >= COMPRESSION_REPLACE_CHARACTER_THRESHOLD, garble_chance)
+	var/obj/item/comms_intercept_receiver/receiver = receiver_ref?.resolve()
+	if(receiver?.status == COMMS_RECEIVER_UPLOADING)
+		signal.data["message"] = Gibberish(signal.data["message"], TRUE, 100)
 	if(messages_collected >= target_amount)
 		return
 	var/atom/movable/speaker = signal.virt?.source
@@ -238,28 +235,28 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 	var/speaker_key = REF(speaker)
 	if(world.time < speaker_last_packet[speaker_key] + COMMS_INTERCEPT_SPEAKER_COOLDOWN)
 		return
-	var/obj/item/comms_intercept_receiver/receiver = receiver_ref?.resolve()
 	if(!receiver?.can_receive())
 		return
 	speaker_last_packet[speaker_key] = world.time
 	messages_collected++
 	give_hints(receiver)
-	if(messages_collected >= target_amount)
-		receiver.start_upload()
 	receiver.update_status()
 
 /datum/objective/comms_intercept/proc/is_leak_noticeable()
 	return !upload_done && !failed && messages_collected * 100 / target_amount >= COMMS_INTERCEPT_INDICATOR_PERCENT
 
-/// Percent of characters to garble, grows from 75% and maxes out once the transmission starts
-/datum/objective/comms_intercept/proc/get_garble_chance()
-	if(messages_collected >= target_amount)
-		return 100
-	var/percent = messages_collected * 100 / target_amount
-	if(percent < COMMS_INTERCEPT_GARBLE_PERCENT)
-		return 0
-	var/ramp = (percent - COMMS_INTERCEPT_GARBLE_PERCENT) * (COMMS_INTERCEPT_GARBLE_MAX - COMMS_INTERCEPT_GARBLE_MIN)
-	return COMMS_INTERCEPT_GARBLE_MIN + ramp / (100 - COMMS_INTERCEPT_GARBLE_PERCENT)
+/datum/objective/comms_intercept/proc/is_collected()
+	return !upload_done && !failed && messages_collected >= target_amount
+
+/// Quiet way out: the installer pulls the dump straight off the tap, skipping the transmission
+/datum/objective/comms_intercept/proc/extract_from_tap(obj/item/comms_tap/tap, mob/living/user)
+	upload_done = TRUE
+	var/obj/item/disk/comms_intercept/disk = new(user.drop_location())
+	disk_ref = WEAKREF(disk)
+	user.put_in_hands(disk)
+	qdel(tap)
+	var/obj/item/comms_intercept_receiver/receiver = receiver_ref?.resolve()
+	receiver?.update_status()
 
 /datum/objective/comms_intercept/proc/give_hints(obj/item/comms_intercept_receiver/receiver)
 	var/percent = messages_collected * 100 / target_amount
@@ -312,24 +309,13 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 			server.log_entries.Cut(1, 2)
 		server.log_entries += log
 
-/datum/objective/comms_intercept/proc/notify_ais(text)
-	for(var/mob/living/silicon/ai/ai as anything in GLOB.ai_list)
-		to_chat(ai, span_warning(text))
-
 /datum/objective/comms_intercept/proc/on_upload_started(obj/item/comms_intercept_receiver/receiver)
 	if(upload_announced)
 		return
 	upload_announced = TRUE
 	var/direction = get_direction_text(receiver)
-	var/text = "Обнаружена исходящая передача перехваченных данных каналов связи. Сигнал уходит от телекоммуникаций [direction || "в неизвестном направлении"]."
 	transmission_frequency = comms_intercept_pick_frequency()
-	var/frequency_text = "[text] Побочный сигнал передатчика на частоте [format_frequency(transmission_frequency)]."
-	add_server_log(frequency_text)
-	notify_ais(frequency_text)
-	var/list/channels = list(RADIO_CHANNEL_COMMAND, RADIO_CHANNEL_ENGINEERING)
-	// broadcast() mutates the list
-	var/obj/machinery/announcement_system/announcer = get_announcement_system(null, receiver, channels)
-	announcer?.broadcast(text, channels.Copy())
+	add_server_log("Обнаружена исходящая передача перехваченных данных каналов связи. Сигнал уходит от телекоммуникаций [direction || "в неизвестном направлении"]. Побочный сигнал передатчика на частоте [format_frequency(transmission_frequency)].")
 
 /datum/objective/comms_intercept/proc/on_upload_finished()
 	upload_done = TRUE
@@ -337,10 +323,11 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 		var/obj/machinery/telecomms/machine = tap.host
 		do_sparks(3, FALSE, machine)
 		machine.visible_message(span_warning("[capitalize(machine.declent_ru(NOMINATIVE))] сыплет искрами и гаснет!"))
-		machine.atom_break()
+		machine.emp_act(EMP_HEAVY)
 
 /datum/objective/comms_intercept/proc/on_receiver_destroyed(obj/item/comms_intercept_receiver/receiver)
-	if(disk_ref || receiver_ref?.resolve() != receiver)
+	// Once collected the dump can still be pulled off the tap
+	if(disk_ref || messages_collected >= target_amount || receiver_ref?.resolve() != receiver)
 		return
 	failed = TRUE
 	receiver_ref = null
@@ -364,12 +351,12 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 	<li>Закрепите приёмник гаечным ключом в любом помещении станции с питанием, кроме самих телекоммуникаций. Приёмник можно переносить, собранные пакеты сохранятся.</li>\
 	<li>Пакеты поступают из разговоров экипажа в каналах отделов. Общий канал не шифруется, а ваши собственные сообщения не учитываются.</li>\
 	<li>От одного человека можно получить не больше одного пакета за полминуты. Ход сбора отслеживайте на экране приёмника.</li>\
-	<li>После сбора пакетов приёмник начнёт передачу данных. Чем ближе он к жучку, тем быстрее она пройдёт: от двух до пяти минут. Не допускайте, чтобы его открепили, обесточили или сломали.</li>\
-	<li>Во время передачи приёмник сильно нагружает сеть, а его побочный сигнал можно засечь радио. Прячьте его там, где большая нагрузка не бросится в глаза.</li>\
-	<li>По завершении передачи заберите дамп ключей шифрования из приёмника и эвакуируйтесь с ним. Дамп должен находиться при вас.</li>\
+	<li>Когда пакеты собраны, дамп ключей шифрования можно получить двумя способами.</li>\
+	<li>Передача: нажмите на закреплённый приёмник. Чем ближе он к жучку, тем быстрее она пройдёт: от двух до пяти минут. Не допускайте, чтобы его открепили, обесточили или сломали. Передачу засекут: в журнале серверов появятся направление и частота, приёмник сильно нагрузит сеть, его побочный сигнал можно поймать радио, а каналы будут хрипеть. По завершении заберите дамп из приёмника, а машину с жучком выбьет импульсом.</li>\
+	<li>Тихий способ: вернитесь к машине с жучком, откройте панель и снимите дамп вторичной функцией мультитула. Сделать это может только тот, кто установил жучок. Следов передачи не будет, но придётся снова проникнуть в телекоммуникации. Если приёмник потерян после сбора пакетов, остаётся только этот способ.</li>\
+	<li>Эвакуируйтесь с дампом, он должен находиться при вас.</li>\
 	<li>Дамп открывает гарнитуре все каналы отделов: подключите его к гарнитуре, сам дамп останется у вас. Если в гарнитуре сменить ключ шифрования, доступ пропадёт.</li>\
 	<li>Чем дольше идёт перехват, тем заметнее утечка: экипаж и ИИ начнут искать жучок и приёмник. Запасной жучок можно приобрести в аплинке.</li>\
-	<li>Ближе к концу перехвата эфир начнёт заметно хрипеть, а после передачи машина с жучком выйдет из строя.</li>\
 	</ul>"
 
 /datum/uplink_item/special_equipment/comms_tap
@@ -543,6 +530,8 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 			. += span_notice("Считываются каналы: [jointext(channel_names, ", ")].")
 		else
 			. += span_notice("Сигнал от жучка не поступает.")
+	if(!uploading && objective.is_collected() && user.mind == objective.owner)
+		. += span_notice("Пакеты собраны. Запустите передачу, нажав на закреплённый приёмник, или снимите дамп с жучка мультитулом.")
 	if(uploading)
 		var/upload_time = objective.get_upload_time(src)
 		var/time_left = max(upload_time - objective.upload_progress, 0)
@@ -553,7 +542,7 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 		. += span_notice("Приёмник можно закрепить [EXAMINE_HINT("гаечным ключом")].")
 
 /obj/item/comms_intercept_receiver/attack_hand(mob/user, list/modifiers)
-	if(try_extract_disk(user))
+	if(try_extract_disk(user) || try_start_upload(user))
 		return TRUE
 	return ..()
 
@@ -561,6 +550,15 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 	if(try_extract_disk(user))
 		return TRUE
 	return ..()
+
+/// Only the traitor starts it, the crew poking a found receiver shouldn't do their job for them
+/obj/item/comms_intercept_receiver/proc/try_start_upload(mob/user)
+	var/datum/objective/comms_intercept/objective = GLOB.comms_intercept
+	if(uploading || !objective?.is_collected() || !user.mind || user.mind != objective.owner || !can_receive())
+		return FALSE
+	start_upload()
+	balloon_alert(user, "передача запущена")
+	return TRUE
 
 /// Anyone can pull the dump, so security can seize it too
 /obj/item/comms_intercept_receiver/proc/try_extract_disk(mob/user)
@@ -711,10 +709,16 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 		return ITEM_INTERACT_BLOCKING
 	var/obj/item/comms_tap/tap = locate() in src
 	if(tap)
-		if(!tap.calibrated && tap.installer_ref?.resolve() == user.mind)
+		var/is_installer = user.mind && tap.installer_ref?.resolve() == user.mind
+		if(!tap.calibrated && is_installer)
 			tap.calibrate()
 			balloon_alert(user, "синхронизация установлена")
 			to_chat(user, span_notice("Синхронизация установлена, жучок начал считывать каналы. Панель лучше закрыть отвёрткой."))
+			return ITEM_INTERACT_SUCCESS
+		var/datum/objective/comms_intercept/objective = GLOB.comms_intercept
+		if(tap.calibrated && is_installer && objective?.is_collected())
+			objective.extract_from_tap(tap, user)
+			balloon_alert(user, "дамп снят с жучка")
 			return ITEM_INTERACT_SUCCESS
 		to_chat(user, span_warning("На плате [declent_ru(GENITIVE)] обнаружен посторонний модуль!"))
 		return ITEM_INTERACT_SUCCESS
@@ -745,9 +749,6 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 #undef COMMS_INTERCEPT_MESSAGES_PER_CREW
 #undef COMMS_INTERCEPT_SPEAKER_COOLDOWN
 #undef COMMS_INTERCEPT_INDICATOR_PERCENT
-#undef COMMS_INTERCEPT_GARBLE_PERCENT
-#undef COMMS_INTERCEPT_GARBLE_MIN
-#undef COMMS_INTERCEPT_GARBLE_MAX
 #undef COMMS_INTERCEPT_MIN_MESSAGES
 #undef COMMS_INTERCEPT_MAX_MESSAGES
 #undef COMMS_INTERCEPT_UPLOAD_TIME_MIN
