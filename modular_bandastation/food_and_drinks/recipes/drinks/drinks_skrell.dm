@@ -122,12 +122,12 @@
 // MARK 51. Glow-Seraka Tonic
 
 /datum/chemical_reaction/drink/glow_seraka_tonic
-	results = list(/datum/reagent/consumable/glow_seraka_tonic = 30)
+	results = list(/datum/reagent/consumable/glow_seraka_tonic = 40)
 	required_reagents = list(
 		/datum/reagent/medicine/coagulant/seraka_extract = 5,
 		/datum/reagent/uranium/radium = 5,
 		/datum/reagent/consumable/capsaicin = 5,
-		/datum/reagent/water = 15
+		/datum/reagent/water = 25
 	)
 	mix_sound = 'sound/effects/liquid_pour/liquid_pour3.ogg'
 
@@ -143,13 +143,12 @@
 
 /datum/reagent/consumable/glow_seraka_tonic/on_mob_life(mob/living/carbon/drinker, seconds_per_tick, metabolization_ratio)
 	. = ..()
-	drinker.set_light(3, 2, "#FFA500")
+	drinker.set_light(4, 2, "#FFA500")
 	addtimer(CALLBACK(drinker, TYPE_PROC_REF(/atom, set_light), 0), 4 SECONDS, TIMER_OVERRIDE|TIMER_UNIQUE)
-
-	if(isskrell(drinker))
-		drinker.remove_status_effect(/datum/status_effect/jitter)
-		drinker.adjust_brute_loss(-0.2 * metabolization_ratio * seconds_per_tick)
-		drinker.adjust_stamina_loss(-2 * metabolization_ratio * seconds_per_tick)
+	drinker.remove_status_effect(/datum/status_effect/jitter)
+	drinker.adjust_brute_loss(-0.15 * metabolization_ratio * seconds_per_tick)
+	drinker.adjust_fire_loss(-0.35 * metabolization_ratio * seconds_per_tick)
+	drinker.adjust_stamina_loss(-2 * metabolization_ratio * seconds_per_tick)
 
 /datum/glass_style/drinking_glass/glow_seraka_tonic
 	required_drink_type = /datum/reagent/consumable/glow_seraka_tonic
@@ -419,18 +418,18 @@
 		drinker.adjust_drugginess(40 SECONDS * metabolization_ratio * seconds_per_tick)
 		drinker.adjust_hallucinations(30 SECONDS * metabolization_ratio * seconds_per_tick)
 
-		drinker.adjust_brute_loss(-0.25 * metabolization_ratio * seconds_per_tick)
-		drinker.adjust_fire_loss(-0.25 * metabolization_ratio * seconds_per_tick)
-		drinker.adjust_tox_loss(-0.25 * metabolization_ratio * seconds_per_tick)
-		drinker.adjust_oxy_loss(-0.25 * metabolization_ratio * seconds_per_tick)
+		drinker.adjust_brute_loss(-0.75 * metabolization_ratio * seconds_per_tick)
+		drinker.adjust_fire_loss(-0.75 * metabolization_ratio * seconds_per_tick)
+		drinker.adjust_tox_loss(-0.75 * metabolization_ratio * seconds_per_tick)
+		drinker.adjust_oxy_loss(-0.75 * metabolization_ratio * seconds_per_tick)
 	else
 		drinker.adjust_drugginess(25 SECONDS * metabolization_ratio * seconds_per_tick)
 		drinker.adjust_hallucinations(15 SECONDS * metabolization_ratio * seconds_per_tick)
 
-		drinker.adjust_brute_loss(-0.15 * metabolization_ratio * seconds_per_tick)
-		drinker.adjust_fire_loss(-0.15 * metabolization_ratio * seconds_per_tick)
-		drinker.adjust_tox_loss(-0.15 * metabolization_ratio * seconds_per_tick)
-		drinker.adjust_oxy_loss(-0.15 * metabolization_ratio * seconds_per_tick)
+		drinker.adjust_brute_loss(-0.2 * metabolization_ratio * seconds_per_tick)
+		drinker.adjust_fire_loss(-0.2 * metabolization_ratio * seconds_per_tick)
+		drinker.adjust_tox_loss(-0.2 * metabolization_ratio * seconds_per_tick)
+		drinker.adjust_oxy_loss(-0.2 * metabolization_ratio * seconds_per_tick)
 
 /datum/glass_style/drinking_glass/omega_glow_cocktail
 	required_drink_type = /datum/reagent/consumable/ethanol/omega_glow_cocktail
@@ -492,15 +491,15 @@
 			drinker.reagents.remove_reagent(toxic_chem.type, 1.5 * metabolization_ratio * seconds_per_tick)
 
 	// Базовое исцеление повреждений тела для всех существ
-	drinker.adjust_brute_loss(-0.5 * metabolization_ratio * seconds_per_tick)
-	drinker.adjust_fire_loss(-0.5 * metabolization_ratio * seconds_per_tick)
-	drinker.adjust_oxy_loss(-0.5 * metabolization_ratio * seconds_per_tick)
-	drinker.adjust_tox_loss(-0.5 * metabolization_ratio * seconds_per_tick)
+	drinker.adjust_brute_loss(-5 * metabolization_ratio * seconds_per_tick)
+	drinker.adjust_fire_loss(-5 * metabolization_ratio * seconds_per_tick)
+	drinker.adjust_oxy_loss(-5 * metabolization_ratio * seconds_per_tick)
+	drinker.adjust_tox_loss(-5 * metabolization_ratio * seconds_per_tick)
 
 	// СПЕЦИФИКА ДЛЯ СКРЕЛЛОВ: глубокое исцеление разума и органов
 	if(isskrell(drinker))
 		// Полное восстановление численных повреждений мозга
-		drinker.adjust_organ_loss(ORGAN_SLOT_BRAIN, -2 * metabolization_ratio * seconds_per_tick)
+		drinker.adjust_organ_loss(ORGAN_SLOT_BRAIN, -4 * metabolization_ratio * seconds_per_tick)
 
 		// Исцеление даже продвинутых травм мозга (хирургического уровня)
 		if(SPT_PROB(8, seconds_per_tick))
@@ -510,11 +509,7 @@
 
 		// Регенерация всех внутренних органов (сердце, печень, легкие, глаза)
 		for(var/obj/item/organ/internal_organ as anything in drinker.organs)
-			internal_organ.apply_organ_damage(-1 * metabolization_ratio * seconds_per_tick)
-
-		// Ускорение концентрации и обучаемости
-		drinker?.mind?.experience_multiplier_reasons |= type
-		drinker?.mind?.experience_multiplier_reasons[type] = 1.5 * metabolization_ratio * seconds_per_tick
+			internal_organ.apply_organ_damage(-3 * metabolization_ratio * seconds_per_tick)
 
 		// Снятие стресса, дрожи и дезориентации
 		drinker.remove_status_effect(/datum/status_effect/jitter)
@@ -525,6 +520,6 @@
 	else
 		var/obj/item/organ/liver/liver = drinker.get_organ_slot(ORGAN_SLOT_LIVER)
 		if(liver)
-			liver.apply_organ_damage(-1 * metabolization_ratio * seconds_per_tick)
+			liver.apply_organ_damage(-3 * metabolization_ratio * seconds_per_tick)
 		if(SPT_PROB(2, seconds_per_tick))
 			to_chat(drinker, span_notice("Вы ощущаете, как теплые целебные воды скрелльского чуда света омывают каждую клетку вашего тела..."))
