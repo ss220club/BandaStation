@@ -18,5 +18,6 @@
 #include "code/ru_names/ru_name_orderables.dm"
 #include "code/ru_names/ru_name_reagents.dm"
 #include "code/ru_names/ru_name_reagent_ui.dm"
+#include "code/ru_names/ru_name_scanners.dm"
 
 #include "code/~undefs.dm"
