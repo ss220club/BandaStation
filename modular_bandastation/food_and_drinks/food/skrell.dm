@@ -316,6 +316,15 @@
 	crafting_complexity = FOOD_COMPLEXITY_3
 	venue_value = FOOD_PRICE_NORMAL
 
+/obj/item/food/skrell/steelcap_dumplings/on_craft_completion(list/components, datum/crafting_recipe/current_recipe, atom/crafter)
+	. = ..()
+	if(!reagents)
+		return
+	for(var/obj/item/grown/log/steel/steel_log in components)
+		if(steel_log.reagents)
+			reagents.maximum_volume = max(reagents.maximum_volume, reagents.total_volume + steel_log.reagents.total_volume)
+			steel_log.reagents.trans_to(src, steel_log.reagents.total_volume)
+
 // 17. Skrell Fungal Ramen
 /obj/item/food/skrell/skrell_fungal_ramen
 	name = "Skrell fungal ramen"

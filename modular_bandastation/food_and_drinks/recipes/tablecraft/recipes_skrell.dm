@@ -317,14 +317,12 @@
 		/obj/item/food/flat_rice_dough = 1,
 		/obj/item/grown/log/steel = 1,
 		/obj/item/food/grown/ximikoa = 1,
-		/datum/reagent/consumable/enzyme = 1,
 	)
 	result = /obj/item/food/skrell/steelcap_dumplings
 	added_foodtypes = MUSHROOM | SUGAR
 	cuisine_category = CUISINE_SKRELL
 	dish_category = DISH_MUSHROOM
 	meal_category = MEAL_MAIN_COURSE
-	crafting_flags = parent_type::crafting_flags & ~CRAFT_CLEARS_REAGENTS
 
 /datum/crafting_recipe/food/skrell_fungal_ramen
 	name = "Skrell fungal ramen"
