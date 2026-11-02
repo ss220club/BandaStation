@@ -54,6 +54,7 @@
 @include meta.load-css('./interfaces/DetectiveBoard.scss');
 @include meta.load-css('./interfaces/LawRack.scss');
 @include meta.load-css('./interfaces/ColorPicker.scss');
+@include meta.load-css('./interfaces/HairPaint.scss'); // BANDASTATION ADDITION - Local hair painting
 @include meta.load-css('./interfaces/AnomalyTower.scss');
 @include meta.load-css('./interfaces/CivCargoHoldTerminal.scss');
 @include meta.load-css('./interfaces/EventLogger.scss');

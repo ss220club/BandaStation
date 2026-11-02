@@ -387,6 +387,7 @@
 		data["storage"]["disk"] = tgui_diskette_mutations
 		data["diskHasMakeup"] = (LAZYLEN(diskette.genetic_makeup_buffer) > 0)
 		data["diskMakeupBuffer"] = diskette.genetic_makeup_buffer.Copy()
+		data["diskMakeupBuffer"] -= list("hair_paint", "facial_hair_paint") // BANDASTATION ADDITION - Keep pixel data server-side
 	else
 		data["hasDisk"] = FALSE
 		data["diskCapacity"] = 0
@@ -1287,6 +1288,7 @@
 				"UF"=scanner_occupant.dna.unique_features,
 				"name"=scanner_occupant.real_name,
 				"blood_type"=scanner_occupant.get_bloodtype()?.name)
+			hair_paint_copy_features(scanner_occupant.dna.features, genetic_makeup_buffer[buffer_index]) // BANDASTATION ADDITION - Preserve painted hair with UI
 
 			return
 
@@ -1679,6 +1681,7 @@
 				return FALSE
 			COOLDOWN_START(src, enzyme_copy_timer, ENZYME_COPY_BASE_COOLDOWN)
 			scanner_occupant.dna.unique_identity = buffer_slot["UI"]
+			hair_paint_copy_features(buffer_slot, scanner_occupant.dna.features) // BANDASTATION ADDITION - Apply painted hair with UI
 			scanner_occupant.updateappearance(mutations_overlay_update=1)
 			scanner_occupant.apply_status_effect(/datum/status_effect/genetic_damage, damage_increase)
 			scanner_occupant.domutcheck()
@@ -1720,6 +1723,7 @@
 				return FALSE
 			COOLDOWN_START(src, enzyme_copy_timer, ENZYME_COPY_BASE_COOLDOWN)
 			scanner_occupant.dna.unique_identity = buffer_slot["UI"]
+			hair_paint_copy_features(buffer_slot, scanner_occupant.dna.features) // BANDASTATION ADDITION - Apply painted hair with UI
 			scanner_occupant.dna.unique_features = buffer_slot["UF"]
 			scanner_occupant.updateappearance(mutcolor_update=1, mutations_overlay_update=1)
 			scanner_occupant.real_name = buffer_slot["name"]
@@ -1795,6 +1799,7 @@
 		if(!buffer_slot["UI"])
 			return FALSE
 		stored_dna.unique_identity = buffer_slot["UI"]
+		hair_paint_copy_features(buffer_slot, stored_dna.features) // BANDASTATION ADDITION - Preserve painted hair in UI injectors
 
 	if(dna_flag & DNA_INJECTOR_FLAG_UE)
 		if(!buffer_slot["UE"])
@@ -1923,6 +1928,7 @@
 	for(var/i in 1 to NUMBER_OF_BUFFERS)
 		if(genetic_makeup_buffer[i])
 			tgui_genetic_makeup["[i]"] = genetic_makeup_buffer[i].Copy()
+			tgui_genetic_makeup["[i]"] -= list("hair_paint", "facial_hair_paint") // BANDASTATION ADDITION - Keep pixel data server-side
 		else
 			tgui_genetic_makeup["[i]"] = null
 

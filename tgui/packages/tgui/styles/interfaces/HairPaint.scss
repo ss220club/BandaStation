@@ -1,0 +1,52 @@
+.HairPaint__drawing > .Section__rest {
+  min-height: 0;
+
+  > .Section__content {
+    position: absolute;
+    inset: 0;
+  }
+}
+
+.HairPaint__canvas {
+  position: relative;
+}
+
+.HairPaint__viewport {
+  position: absolute;
+  inset: 0;
+  overflow: auto;
+}
+
+.HairPaint__brushColor {
+  position: relative;
+
+  .HairPaint__brushColorIcon {
+    position: absolute;
+    right: 0.2em;
+    bottom: 0.2em;
+    padding: 0.2em;
+    border-radius: 0.2em;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.65);
+    pointer-events: none;
+  }
+}
+
+.HairPaint__palette {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em;
+  max-height: calc(4.5em + 8px);
+  padding: 4px;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+.HairPaint__swatch {
+  display: inline-flex;
+
+  &--selected {
+    outline: 2px solid var(--color-white);
+    outline-offset: 2px;
+  }
+}
