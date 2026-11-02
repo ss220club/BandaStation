@@ -46,8 +46,8 @@
 /obj/item/broken_device : /obj/effect/spawner/random/trash/garbage{@OLD}
 /obj/item/circuitboard/aiupload_broken : /obj/effect/spawner/random/trash/garbage{@OLD}
 /obj/item/circuitboard/biogenerator : /obj/item/circuitboard/machine/biogenerator{@OLD}
-/obj/item/clothing/head/welding : /obj/item/clothing/head/utility/welding{@OLD}
-/obj/item/clothing/mask/cigarette/@SUBTYPES : /obj/item/cigarette/@SUBTYPES
+/obj/item/clothing/head/welding : /obj/item/clothing/head/utility/welding{@OLD;layer=@SKIP}
+/obj/item/clothing/mask/cigarette/@SUBTYPES : /obj/item/cigarette/@SUBTYPES{@OLD}
 /obj/item/clothing/suit/jacket/bomber/mining : /obj/item/clothing/suit/hooded/wintercoat/miner{@OLD}
 /obj/item/clothing/suit/storage/hazardvest : /obj/item/clothing/suit/hazardvest{@OLD}
 /obj/item/crowbar/engineering : /obj/item/crowbar/large{@OLD}
@@ -68,6 +68,7 @@
 /obj/item/kitchen/utensil/spoon : /obj/item/kitchen/spoon{@OLD}
 /obj/item/lighter/zippo : /obj/item/lighter{@OLD}
 /obj/item/organ/internal/heart : /obj/item/organ/heart{@OLD}
+/obj/item/reagent_containers/condiment/enzyme{layer=5} : /obj/item/reagent_containers/condiment/enzyme{@OLD;layer=@SKIP}
 /obj/item/reagent_containers/drinks/bottle/beer : /obj/item/reagent_containers/cup/glass/bottle/beer{@OLD}
 /obj/item/reagent_containers/drinks/coffee : /obj/item/reagent_containers/cup/glass/coffee{@OLD}
 /obj/item/reagent_containers/drinks/drinkingglass/shotglass : /obj/item/reagent_containers/cup/glass/drinkingglass/shotglass{@OLD}
@@ -108,6 +109,7 @@
 /obj/machinery/door_control/shutter/west : /obj/machinery/button/door/directional/west{@OLD;name="Shutters Control"}
 /obj/machinery/door/poddoor/@SUBTYPES : /obj/machinery/door/poddoor/@SUBTYPES{id=@OLD:id_tag;id_tag=@SKIP}
 /obj/machinery/door/poddoor/multi_tile/triple : /obj/machinery/door/poddoor{@OLD;dir=@SKIP}
+/obj/machinery/door/window{dir=8} : /obj/machinery/door/window/left/directional/west{@OLD;dir=@SKIP}
 /obj/machinery/economy/slot_machine : /obj/machinery/computer/slot_machine{@OLD}
 /obj/machinery/economy/vending/boozeomat : /obj/machinery/vending/boozeomat{@OLD}
 /obj/machinery/economy/vending/cigarette/free : /obj/machinery/vending/cigarette{@OLD}
@@ -149,15 +151,16 @@
 /obj/structure/sink/directional/west : /obj/structure/sink/directional/east{@OLD}
 /obj/structure/sink/puddle : /obj/structure/water_source/puddle{@OLD}
 /obj/structure/table/holotable/wood : /obj/structure/table/wood{@OLD}
-/obj/structure/toilet{dir=4} : /obj/structure/toilet{@OLD;dir=9}
-/obj/structure/toilet{dir=8} : /obj/structure/toilet{@OLD;dir=4}
-/obj/structure/toilet{dir=9} : /obj/structure/toilet{@OLD;dir=8}
-/obj/structure/toilet/directional/east : /obj/structure/toilet{@OLD;dir=4}
-/obj/structure/toilet/directional/west : /obj/structure/toilet{@OLD;dir=8}
-/obj/structure/window/plasmareinforced : /obj/structure/window/reinforced/plasma/spawner/directional/south{@OLD;dir=@SKIP}
+/obj/structure/toilet/directional/east : /obj/structure/toilet{@OLD;dir=8}
+/obj/structure/toilet/directional/west : /obj/structure/toilet{@OLD;dir=4}
 /obj/structure/window/plasmareinforced{dir=1} : /obj/structure/window/reinforced/plasma/spawner/directional/north{@OLD;dir=@SKIP}
 /obj/structure/window/plasmareinforced{dir=4} : /obj/structure/window/reinforced/plasma/spawner/directional/east{@OLD;dir=@SKIP}
 /obj/structure/window/plasmareinforced{dir=8} : /obj/structure/window/reinforced/plasma/spawner/directional/west{@OLD;dir=@SKIP}
+/obj/structure/window/plasmareinforced : /obj/structure/window/reinforced/plasma/spawner/directional/south{@OLD;dir=@SKIP}
+/obj/structure/window/reinforced{dir=1} : /obj/structure/window/reinforced/spawner/directional/north{@OLD;dir=@SKIP}
+/obj/structure/window/reinforced{dir=4} : /obj/structure/window/reinforced/spawner/directional/east{@OLD;dir=@SKIP}
+/obj/structure/window/reinforced{dir=8} : /obj/structure/window/reinforced/spawner/directional/west{@OLD;dir=@SKIP}
+/obj/structure/window/reinforced : /obj/structure/window/reinforced/spawner/directional/south{@OLD;dir=@SKIP}
 /turf/simulated/floor{icon_state="cult"} : /turf/open/floor/cult{@OLD;icon_state=@SKIP}
 /turf/simulated/floor{icon_state="cultdamage"} : /turf/open/floor/cult{@OLD;icon_state=@SKIP}, /obj/effect/mapping_helpers/broken_floor
 /turf/simulated/floor{icon_state="cultdamage2"} : /turf/open/floor/cult{@OLD;icon_state=@SKIP}, /obj/effect/mapping_helpers/broken_floor
@@ -196,4 +199,4 @@
 /turf/simulated/wall/mineral/plastitanium/interior : /turf/closed/wall/mineral/plastitanium{@OLD}
 /turf/simulated/wall/mineral/sandstone : /turf/closed/wall/mineral/sandstone{@OLD}
 /turf/simulated/wall/r_wall : /turf/closed/wall/r_wall{@OLD}
-/turf/space : /turf/open/space{@OLD}
+/turf/space : /turf/open/space/basic{@OLD}

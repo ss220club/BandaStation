@@ -109,7 +109,7 @@
 	icon_state = "book"
 
 /obj/effect/spawner/random/book/spawn_loot(spawn_loc, type_path_to_make)
-	create_random_books(amount = spawn_loot_count, location = src, category = BOOK_CATEGORY_RANDOM)
+	create_random_books(amount = spawn_loot_count, location = loc, category = BOOK_CATEGORY_RANDOM)
 
 /obj/effect/spawner/random/food_common
 	name = "random common food"

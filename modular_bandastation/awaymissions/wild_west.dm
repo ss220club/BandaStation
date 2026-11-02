@@ -1,6 +1,5 @@
 /area/awaymission/wild_west
 	name = "Wild West"
-	icon_state = "away"
 	abstract_type = /area/awaymission/wild_west
 	requires_power = FALSE
 
@@ -18,7 +17,7 @@
 
 /area/awaymission/wild_west/vault
 	name = "Wild West Vault"
-	icon_state = "awaycontent3"
+	icon_state = "awaycontent4"
 
 /obj/effect/mine/dna_scramble
 	name = "Radiation Mine"
@@ -89,11 +88,11 @@
 		update_icon(UPDATE_ICON_STATE)
 		return
 
-	insisting = FALSE
 	var/wish = tgui_input_list(user, "Вы хотите...", "Желание", list("Силу", "Богатство", "Бессмертие", "Покой"))
-	if(isnull(wish))
+	if(isnull(wish) || !charges)
 		return
 	charges--
+	insisting = FALSE
 	update_icon(UPDATE_ICON_STATE)
 	var/become_shadow = TRUE
 	var/list/output = list()
