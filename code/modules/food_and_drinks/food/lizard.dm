@@ -814,7 +814,7 @@
 		/datum/reagent/consumable/caramel = 4,
 	)
 	tastes = list("savouriness" = 1, "sweetness" = 1)
-	foodtypes = SUGAR | VEGETABLES | MUSHROOM  // BANDASTATION ADDITION
+	foodtypes = SUGAR | MUSHROOM  // BANDASTATION ADDITION
 	crafting_complexity = FOOD_COMPLEXITY_2
 
 //Misc Dishes
@@ -853,7 +853,7 @@
 		/datum/reagent/consumable/nutriment/vitamin = 2,
 	)
 	tastes = list("savouriness" = 1, "nuttiness" = 1)
-	foodtypes = VEGETABLES | MUSHROOM  // BANDASTATION ADDITION
+	foodtypes = MUSHROOM  // BANDASTATION ADDITION
 	w_class = WEIGHT_CLASS_SMALL
 	crafting_complexity = FOOD_COMPLEXITY_1
 

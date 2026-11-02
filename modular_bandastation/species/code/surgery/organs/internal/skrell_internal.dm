@@ -31,6 +31,14 @@
 	name = "skrell stomach"
 	icon = 'icons/bandastation/mob/species/skrell/organs.dmi'
 
+/// Хук базовой печени: освобождает ли печень от штатного урона данным токсином в metabolize()
+/obj/item/organ/liver/proc/can_filter_toxin(datum/reagent/toxin/T)
+	return FALSE
+
+/// Хук базовой печени: нужно ли пропускать удаление малых доз (<= toxTolerance), чтобы сработал handle_chemical()
+/obj/item/organ/liver/proc/has_custom_toxin_metabolism(datum/reagent/toxin/T)
+	return FALSE
+
 /obj/item/organ/liver/skrell
 	name = "skrell liver"
 	icon = 'icons/bandastation/mob/species/skrell/organs.dmi'
@@ -50,6 +58,55 @@
 	var/expected_liver_damage = null
 	/// Точный снимок токсического урона перед тиком передозировки Earthsblood
 	var/expected_tox_damage = null
+
+/obj/item/organ/liver/skrell/can_filter_toxin(datum/reagent/toxin/T)
+	if(organ_flags & ORGAN_FAILING)
+		return FALSE
+	if(istype(T, /datum/reagent/toxin/amatoxin) \
+		|| istype(T, /datum/reagent/toxin/amanitin) \
+		|| istype(T, /datum/reagent/toxin/coniine) \
+		|| istype(T, /datum/reagent/toxin/bungotoxin) \
+		|| istype(T, /datum/reagent/toxin/spore) \
+		|| istype(T, /datum/reagent/toxin/tetrodotoxin) \
+		|| istype(T, /datum/reagent/toxin/carpotoxin) \
+		|| istype(T, /datum/reagent/toxin/mushroom_powder) \
+		|| istype(T, /datum/reagent/toxin/lipolicide) \
+		|| istype(T, /datum/reagent/toxin/curare) \
+		|| istype(T, /datum/reagent/toxin/mindbreaker))
+		return TRUE
+	return FALSE
+
+/obj/item/organ/liver/skrell/has_custom_toxin_metabolism(datum/reagent/toxin/T)
+	if(organ_flags & ORGAN_FAILING)
+		return FALSE
+	if(istype(T, /datum/reagent/toxin/tetrodotoxin) \
+		|| istype(T, /datum/reagent/toxin/carpotoxin) \
+		|| istype(T, /datum/reagent/toxin/mushroom_powder) \
+		|| istype(T, /datum/reagent/toxin/lipolicide) \
+		|| istype(T, /datum/reagent/toxin/curare) \
+		|| istype(T, /datum/reagent/toxin/mindbreaker))
+		return TRUE
+	return FALSE
+
+/// Безопасная частичная компенсация урона токсинами (не лечит чужой урон ниже порога до тика)
+/obj/item/organ/liver/skrell/proc/refund_reagent_tox_loss(mob/living/carbon/organ_owner, amount_to_refund, min_tox_floor)
+	if(!organ_owner || amount_to_refund <= 0)
+		return
+	var/current_tox = organ_owner.toxloss
+	if(current_tox <= min_tox_floor)
+		return
+	var/actual_refund = min(amount_to_refund, current_tox - min_tox_floor)
+	organ_owner.adjust_tox_loss(-actual_refund, FALSE, TRUE)
+
+/// Безопасная частичная компенсация урона удушьем (не лечит чужое удушье ниже порога до тика)
+/obj/item/organ/liver/skrell/proc/refund_reagent_oxy_loss(mob/living/carbon/organ_owner, amount_to_refund, min_oxy_floor)
+	if(!organ_owner || amount_to_refund <= 0)
+		return
+	var/current_oxy = organ_owner.oxyloss
+	if(current_oxy <= min_oxy_floor)
+		return
+	var/actual_refund = min(amount_to_refund, current_oxy - min_oxy_floor)
+	organ_owner.adjust_oxy_loss(-actual_refund, FALSE)
 
 /// Надежное снятие передозировки и временной травмы пацифизма от Earthsblood
 /obj/item/organ/liver/skrell/proc/clear_earthsblood_overdose(mob/living/carbon/organ_owner, datum/reagent/earthsblood_chem, show_message = TRUE)
@@ -195,13 +252,12 @@
 
 	// MARK: Stage 2 - Base Liver Processing & Liver Protection
 
-	// Фиксируем чистый урон печени ДО того, как сработает ..() и on_mob_life()
+	// Фиксируем чистый урон печени ДО того, как сработает ..() и ethanol/on_mob_life()
 	if(istype(chem, /datum/reagent/consumable/ethanol/fyrsskar_tears) \
 		|| istype(chem, /datum/reagent/consumable/ethanol/qerrbalak_amanita_tincture) \
 		|| istype(chem, /datum/reagent/consumable/ethanol/aliose_velvet_cordial) \
 		|| istype(chem, /datum/reagent/consumable/ethanol/omega_glow_cocktail) \
 		|| istype(chem, /datum/reagent/consumable/ethanol/moonshine) \
-		|| istype(chem, /datum/reagent/toxin/curare) \
 		|| istype(chem, /datum/reagent/medicine/earthsblood))
 
 		expected_liver_damage = damage
@@ -229,7 +285,6 @@
 
 	// 3.2. Кокаин и Метамфетамин: порог 25u, без привыкания, без урона, моторный хаос с возвратом контроля на 20u
 	if(istype(chem, /datum/reagent/drug/cocaine) || istype(chem, /datum/reagent/drug/methamphetamine))
-		// Если add_reagent сработал по человеческому порогу (15-20u) до первого тика печени — сбрасываем
 		if(chem.overdose_threshold != 25)
 			chem.overdose_threshold = 25
 			chem.overdose_crit_threshold = 50
@@ -240,7 +295,7 @@
 
 		chem.addiction_types = null
 
-		// МЕХАНИЗМ ВОЗВРАЛЯ КОНТРОЛЯ: при падении до 20u и ниже мгновенно восстанавливаем координацию
+		// МЕХАНИЗМ ВОЗВРАТА КОНТРОЛЯ: при падении до 20u и ниже мгновенно восстанавливаем координацию
 		if(chem.volume <= 20)
 			if(chem.overdosed)
 				chem.overdosed = FALSE
@@ -248,7 +303,6 @@
 				organ_owner.adjust_drowsiness(-1000 SECONDS)
 				to_chat(organ_owner, span_notice("Дрожь в мышцах утихает, к вам возвращается полный контроль над движениями."))
 
-			// Мгновенно обнуляем накопившуюся инверсию шагов и тремор
 			organ_owner.adjust_confusion(-1000 SECONDS)
 			organ_owner.adjust_jitter(-1000 SECONDS)
 
@@ -258,22 +312,19 @@
 				chem.overdosed = TRUE
 				chem.overdose_start(organ_owner)
 
-			// Сбиваем ориентацию: галлюцинации и поддержка инверсии шагов
 			organ_owner.adjust_hallucinations(5 SECONDS * metabolization_rate * seconds_per_tick)
 			organ_owner.adjust_confusion(2 SECONDS * metabolization_rate * seconds_per_tick)
 			organ_owner.set_jitter_if_lower(4 SECONDS)
 
-			// Хаотичное движение: непроизвольные шаги в случайные стороны
 			if(!HAS_TRAIT(organ_owner, TRAIT_IMMOBILIZED) && !ismovable(organ_owner.loc))
 				for(var/i in 1 to round(2 * metabolization_rate * seconds_per_tick, 1))
 					step(organ_owner, pick(GLOB.cardinals))
 
-			// Судороги в конечностях: выпадение предметов
 			if(SPT_PROB(12, seconds_per_tick))
 				organ_owner.drop_all_held_items()
 
-			// Компенсируем базовый урон токсинами от передозировки
-			addtimer(CALLBACK(organ_owner, TYPE_PROC_REF(/mob/living, adjust_tox_loss), -2 * REM * seconds_per_tick, FALSE), 0)
+			// Защищаем от токсического урона передозировки без излечения стороннего отравления
+			expected_tox_damage = organ_owner.toxloss
 
 			if(SPT_PROB(5, seconds_per_tick))
 				to_chat(organ_owner, span_userdanger("Нервная система перегружена стимуляторами - тело дёргается само по себе!"))
@@ -301,7 +352,6 @@
 		if(istype(chem, /datum/reagent/medicine/earthsblood))
 			chem.addiction_types = null
 
-			// При достижении 45u контролируемо запускаем передоз и перехватываем травму
 			if(chem.volume >= 45)
 				if(!earthsblood_overdose_active)
 					if(!chem.overdosed)
@@ -312,7 +362,6 @@
 				if(!preexisting_earthsblood_pacifism && !earthsblood_trauma)
 					earthsblood_trauma = organ_owner.has_trauma_type(/datum/brain_trauma/severe/pacifism)
 			else
-				// Если объем ниже 45u: снимаем как реальный передоз, так и ранний передоз от add_reagent (25-44u)
 				if(earthsblood_overdose_active || earthsblood_trauma || chem.overdosed)
 					clear_earthsblood_overdose(organ_owner, chem, show_message = earthsblood_overdose_active)
 				else
@@ -344,7 +393,6 @@
 
 	// 3.7. Универсальное снятие передозировки при падении объема ниже порога
 	if(chem.overdose_threshold && chem.volume < chem.overdose_threshold)
-		// Для кокаина и мета действует отдельный механизм выхода на 20u
 		if(!istype(chem, /datum/reagent/drug/cocaine) && !istype(chem, /datum/reagent/drug/methamphetamine))
 			chem.overdosed = FALSE
 
@@ -386,31 +434,36 @@
 
 	// MARK: Stage 5 - Side Effect Compensation & Extra Effects
 
-	// Защита от мумификации (некроза кожи) при приеме крокодила
+	// Защита от мумификации (некроза кожи) при приеме крокодила: пропускаем 36-й такт некроза
 	if(istype(chem, /datum/reagent/drug/krokodil))
-		return COMSIG_MOB_STOP_REAGENT_TICK
+		if(chem.current_cycle == 35)
+			chem.current_cycle = 36
 
 	// Компенсация побочного урона от кураре (паралич сохраняется, но токсины и легкие не страдают)
 	if(istype(chem, /datum/reagent/toxin/curare))
 		var/datum/reagent/toxin/curare_chem = chem
-		addtimer(CALLBACK(organ_owner, TYPE_PROC_REF(/mob/living, adjust_tox_loss), -curare_chem.toxpwr * REM * seconds_per_tick, FALSE), 0)
-		addtimer(CALLBACK(organ_owner, TYPE_PROC_REF(/mob/living, adjust_oxy_loss), -2 * REM * seconds_per_tick, FALSE), 0)
+		var/tox_floor = organ_owner.toxloss
+		var/oxy_floor = organ_owner.oxyloss
+		addtimer(CALLBACK(src, PROC_REF(refund_reagent_tox_loss), organ_owner, curare_chem.toxpwr * metabolization_rate * seconds_per_tick, tox_floor), 0)
+		addtimer(CALLBACK(src, PROC_REF(refund_reagent_oxy_loss), organ_owner, 2 * metabolization_rate * seconds_per_tick, oxy_floor), 0)
 
-	// Снижение токсического урона от синаптизина
+	// Снижение токсического урона от синаптизина вдвое (без лечения чужого отравления)
 	if(istype(chem, /datum/reagent/medicine/synaptizine))
-		addtimer(CALLBACK(organ_owner, TYPE_PROC_REF(/mob/living, adjust_tox_loss), -0.5 * REM * seconds_per_tick, FALSE), 0)
+		var/tox_floor = organ_owner.toxloss
+		addtimer(CALLBACK(src, PROC_REF(refund_reagent_tox_loss), organ_owner, 0.5 * metabolization_rate * seconds_per_tick, tox_floor), 0)
 
 	// Эйфория от майндбрейкера
 	if(istype(chem, /datum/reagent/toxin/mindbreaker))
 		organ_owner.adjust_drugginess(20 SECONDS * metabolization_rate * seconds_per_tick)
 		organ_owner.add_mood_event("mindbreaker_high", /datum/mood_event/high)
 
-	// Эйфория и частичное снижение токсичности самогона
+	// Эйфория и частичное снижение токсичности самогона (без лечения чужого отравления)
 	if(istype(chem, /datum/reagent/consumable/ethanol/moonshine))
 		organ_owner.adjust_drugginess(25 SECONDS * metabolization_rate * seconds_per_tick)
 		organ_owner.adjust_hallucinations(5 SECONDS * metabolization_rate * seconds_per_tick)
 		organ_owner.add_mood_event("moonshine_high", /datum/mood_event/high)
-		addtimer(CALLBACK(organ_owner, TYPE_PROC_REF(/mob/living, adjust_tox_loss), -1 * REM * seconds_per_tick, FALSE), 0)
+		var/tox_floor = organ_owner.toxloss
+		addtimer(CALLBACK(src, PROC_REF(refund_reagent_tox_loss), organ_owner, 1 * metabolization_rate * seconds_per_tick, tox_floor), 0)
 
 /obj/item/organ/liver/skrell/Destroy()
 	expected_brain_damage = null
