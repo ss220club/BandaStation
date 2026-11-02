@@ -322,8 +322,8 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 		machine.emp_act(EMP_HEAVY)
 
 /datum/objective/comms_intercept/proc/on_receiver_destroyed(obj/item/comms_intercept_receiver/receiver)
-	// Once collected the dump can still be pulled off the tap
-	if(disk_ref || messages_collected >= target_amount || receiver_ref?.resolve() != receiver)
+	// Until the transmission is done the data is still on the tap
+	if(disk_ref || is_collected() || receiver_ref?.resolve() != receiver)
 		return
 	failed = TRUE
 	receiver_ref = null
@@ -408,6 +408,8 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 	var/datum/weakref/installer_ref
 	var/calibrated = FALSE
 	var/offline_until = 0
+	/// Heard traffic while packets were still being collected, so it has a dump to hand over
+	var/has_data = FALSE
 
 /obj/item/comms_tap/Destroy()
 	detach()
@@ -473,7 +475,12 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 		return
 	if(!istype(signal, /datum/signal/subspace/vocal) || !(signal.frequency in comms_intercept_frequencies()) || !signal.data["message"])
 		return
-	GLOB.comms_intercept?.on_intercepted_message(signal)
+	var/datum/objective/comms_intercept/objective = GLOB.comms_intercept
+	if(!objective)
+		return
+	if(objective.messages_collected < objective.target_amount)
+		has_data = TRUE
+	objective.on_intercepted_message(signal)
 
 /obj/item/comms_tap/proc/on_host_emp(datum/source, severity, protection)
 	SIGNAL_HANDLER
@@ -699,6 +706,9 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 			return ITEM_INTERACT_SUCCESS
 		var/datum/objective/comms_intercept/objective = GLOB.comms_intercept
 		if(tap.calibrated && is_installer && objective?.is_collected())
+			if(!tap.has_data)
+				balloon_alert(user, "на жучке нет данных!")
+				return ITEM_INTERACT_BLOCKING
 			objective.extract_from_tap(tap, user)
 			balloon_alert(user, "дамп снят с жучка")
 			return ITEM_INTERACT_SUCCESS
