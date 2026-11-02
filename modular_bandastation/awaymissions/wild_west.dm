@@ -103,20 +103,20 @@
 				user.dna.add_mutation(mutation_type, MUTATION_SOURCE_WISHGRANTER)
 
 		if("Богатство")
-			var/obj/structure/closet/syndicate/resources/everything/C = new /obj/structure/closet/syndicate/resources/everything(loc)
+			var/obj/structure/closet/syndicate/resources/everything/closet = new /obj/structure/closet/syndicate/resources/everything(loc)
 			var/dice = pick_weight(list(
 				/obj/item/dice/d20/fate,
 				/obj/item/dice/d20/fate/one_use = 9,
 			))
-			new dice(C)
+			new dice(closet)
 
 		if("Бессмертие")
 			var/datum/action/cooldown/wish_granter_revive/ability = new(user)
 			ability.Grant(user)
 
 		if("Покой")
-			for(var/mob/living/basic/faithless/F in GLOB.mob_living_list)
-				F.death()
+			for(var/mob/living/basic/faithless/faithless in GLOB.alive_mob_list)
+				faithless.death()
 			become_shadow = FALSE
 
 	if(become_shadow && !isshadow(user))
@@ -163,7 +163,7 @@
 	var/mob/living/carbon/human/human = owner
 	human.revive(ADMIN_HEAL_ALL)
 	human.visible_message(
-		span_warning("[name] восстаёт из мертвых, исцелив все свои раны!"),
+		span_warning("[human] восстаёт из мертвых, исцелив все свои раны!"),
 		span_notice("Вы вернулись из небытия."),
 	)
 
