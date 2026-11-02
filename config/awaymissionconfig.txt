@@ -15,3 +15,4 @@
 #_maps/RandomZLevels/SnowCabin.dmm
 #_maps/RandomZLevels/heretic.dmm
 #_maps/RandomZLevels/museum.dmm
+#_maps/bandastation/awaymissions/wild_west.dmm
