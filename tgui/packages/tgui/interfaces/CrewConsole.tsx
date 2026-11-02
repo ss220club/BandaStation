@@ -72,27 +72,35 @@ const SORT_OPTIONS = [
 ];
 
 const jobToColor = (jobId: number) => {
-  if (jobId === 0) {
+  //BANDASTATION EDIT - Start
+  if (jobId >= 0 && jobId < 10) {
     return COLORS.department.captain;
   }
   if (jobId >= 10 && jobId < 20) {
-    return COLORS.department.security;
+    return COLORS.department.representation;
   }
   if (jobId >= 20 && jobId < 30) {
-    return COLORS.department.medbay;
+    return COLORS.department.justice;
   }
   if (jobId >= 30 && jobId < 40) {
-    return COLORS.department.science;
+    return COLORS.department.security;
   }
   if (jobId >= 40 && jobId < 50) {
-    return COLORS.department.engineering;
+    return COLORS.department.medbay;
   }
   if (jobId >= 50 && jobId < 60) {
+    return COLORS.department.science;
+  }
+  if (jobId >= 60 && jobId < 70) {
+    return COLORS.department.engineering;
+  }
+  if (jobId >= 70 && jobId < 80) {
     return COLORS.department.cargo;
   }
-  if (jobId >= 60 && jobId < 200) {
+  if (jobId >= 80 && jobId < 200) {
     return COLORS.department.service;
   }
+  //BANDASTATION EDIT - End
   if (jobId >= 200 && jobId < 230) {
     return COLORS.department.centcom;
   }
