@@ -4,12 +4,12 @@
 */
 /obj/item/vaporizer
 	name = "hydro-vaporizer"
-	desc = "An ingenious little device manufactured for supporting an alternative method for respiration. \
-			Relying on a removable cell, the coil mechanism synthesizes a hydrogen oxygen mixture, \
-			which can then be used to moisturize the wearer's gills. \n\
-			The rate at which liquid is applied seems to be intended for skin which excels at retaining moisture. \n\
-			There is a picture of planet Marina stamped onto it. \n\n\
-			A label on its back warns about the potential dangers of electro-magnetic pulses."
+	desc = "Хитроумное устройство, созданное для поддержания альтернативного метода дыхания. \
+			Работая на съёмной батарее, спиральный механизм синтезирует водородно-кислородную смесь, \
+			которая затем используется для увлажнения жабр носителя. \n\
+			Скорость подачи жидкости, судя по всему, рассчитана на кожу, отлично удерживающую влагу. \n\
+			На корпусе выгравировано изображение планеты Марина. \n\n\
+			Наклейка на задней стороне предупреждает о потенциальной опасности электромагнитных импульсов."
 	icon = 'icons/obj/devices/tool.dmi'
 	icon_state = "vaporizer"
 	slot_flags = ITEM_SLOT_BELT
@@ -28,7 +28,7 @@
 /obj/item/vaporizer/add_context(atom/source, list/context, obj/item/held_item, mob/user)
 	. = ..()
 	if(held_item?.tool_behaviour == TOOL_SCREWDRIVER && !isnull(cell))
-		context[SCREENTIP_CONTEXT_LMB] = "Remove [cell.name]"
+		context[SCREENTIP_CONTEXT_LMB] = "Извлечь батарею"
 	return CONTEXTUAL_SCREENTIP_SET
 
 /obj/item/vaporizer/examine(mob/user)
@@ -36,9 +36,9 @@
 	if(isnull(cell))
 		return
 	if(!in_range(src, user) && !isobserver(user))
-		. += span_notice("If you want any more information, you'll need to get closer.")
+		. += span_notice("Если хотите увидеть больше информации - подойдите ближе.")
 		return
-	. += span_notice("The LED display reads it's [cell.percent()]% charged.")
+	. += span_notice("Светодиодный дисплей показывает [cell.percent()]% заряда.")
 
 /obj/item/vaporizer/Initialize(mapload)
 	. = ..()
@@ -72,7 +72,7 @@
 		return FALSE
 	tool.play_tool_sound(src)
 	QDEL_NULL(charge_bar)
-	balloon_alert(user, "removed [cell]")
+	balloon_alert(user, "батарея извлечена")
 	cell.forceMove(get_turf(src))
 	cell = null
 	return TRUE
@@ -82,12 +82,12 @@
 	if(!istype(new_cell))
 		return NONE
 	if(!isnull(cell))
-		balloon_alert(user, "slot occupied!")
+		balloon_alert(user, "слот занят!")
 		return ITEM_INTERACT_BLOCKING
 	if(!user.transferItemToLoc(new_cell, src))
 		return NONE
 	cell = new_cell
-	balloon_alert(user, "installed [new_cell]")
+	balloon_alert(user, "батарея установлена")
 	create_charge_bar(user)
 	return ITEM_INTERACT_SUCCESS
 
@@ -108,7 +108,7 @@
 	var/turf/tile = get_turf(src)
 	if(isclosedturf(tile))
 		return
-	to_chat(src, span_warning("[src] overloads, spewing out a cloud of hot steam!"))
+	to_chat(src, span_warning("[capitalize(src.declent_ru(NOMINATIVE))] перегружается и выпускает облако горячего пара!"))
 	playsound(src, 'sound/effects/spray.ogg', rand(50, 80), TRUE)
 	tile.atmos_spawn_air("[GAS_WATER_VAPOR]=[clamp(cell.maxcharge * 0.1, 1, 100)];[TURF_TEMPERATURE(1000)]")
 	for(var/mob/living/nearby_mob in range(4, tile))

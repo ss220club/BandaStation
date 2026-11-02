@@ -251,13 +251,13 @@ GLOBAL_LIST_INIT(heavy_pirate_gangs, init_pirate_gangs(is_heavy = TRUE))
 /datum/pirate_gang/siren/proc/reveal_yourself()
 	ship_name = pick(strings(PIRATE_NAMES_FILE, ship_name_pool))
 	var/static/list/note_symbols = list("\u266A", "\u2669", "\u266B")
-	response_received = "[pick(note_symbols)] Fufu~ You fell for it. We're not [ship_name] at all! [pick(note_symbols)] \n\
-		[pick(note_symbols)] Our next show is funded. Sayōnara! [pick(note_symbols)]"
-	response_rejected = "[pick(note_symbols)] You must think you're so clever. [pick(note_symbols)] \n\
-		[pick(note_symbols)] [station_name()] seems like the perfect venue for us anyway!~ [pick(note_symbols)]"
-	response_too_late = "[pick(note_symbols)] Surprise!~ [pick(note_symbols)] \n\
-		[pick(note_symbols)] ...Awh- don't worry, the autographs are free! [pick(note_symbols)]"
-	response_not_enough = "[pick(note_symbols)]Got you good!~ B-but this is hardly enough, baka! [pick(note_symbols)] \n\
-		[pick(note_symbols)] We'll discuss payment after the show. [pick(note_symbols)]"
-	arrival_announcement = "[pick(note_symbols)] Ready to play in the greatest performance of your life? [pick(note_symbols)]\n\
-		[pick(note_symbols)] Ankōru suru hima wa nai! [pick(note_symbols)]"
+	response_received = "[pick(note_symbols)] Фу-фу~! Вы попались на удочку. Мы вовсе не [ship_name]! [pick(note_symbols)] \n\
+		[pick(note_symbols)] Наше следующее шоу профинансировано. Сайонара! [pick(note_symbols)]"
+	response_rejected = "[pick(note_symbols)] Вы, должно быть, считаете себя такими умными. [pick(note_symbols)] \n\
+		[pick(note_symbols)] [station_name()], похоже, идеально нам подходит!~ [pick(note_symbols)]"
+	response_too_late = "[pick(note_symbols)] Сюрприз!~ [pick(note_symbols)] \n\
+		[pick(note_symbols)] ...Ох- не волнуйтесь, автографы бесплатны! [pick(note_symbols)]"
+	response_not_enough = "[pick(note_symbols)] Попались!~ Н-но этого явно недостаточно, бака! [pick(note_symbols)] \n\
+		[pick(note_symbols)] Обсудим оплату после шоу. [pick(note_symbols)]"
+	arrival_announcement = "[pick(note_symbols)] Готовы сыграть в величайшем шоу своей жизни? [pick(note_symbols)]\n\
+		[pick(note_symbols)] Анкору суру хима ва най! [pick(note_symbols)]"
