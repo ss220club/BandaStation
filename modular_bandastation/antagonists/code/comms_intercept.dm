@@ -12,7 +12,6 @@
 /// Each z-level between the receiver and the tap counts as this many tiles
 #define COMMS_INTERCEPT_Z_LEVEL_DISTANCE 30
 #define COMMS_INTERCEPT_LOGS_PERCENT 25
-#define COMMS_INTERCEPT_INDICATOR_PERCENT 50
 #define COMMS_INTERCEPT_DIRECTION_PERCENT 75
 /// Add a corrupt log entry every N packets
 #define COMMS_INTERCEPT_LOG_EVERY 3
@@ -241,9 +240,6 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 	messages_collected++
 	give_hints(receiver)
 	receiver.update_status()
-
-/datum/objective/comms_intercept/proc/is_leak_noticeable()
-	return !upload_done && !failed && messages_collected * 100 / target_amount >= COMMS_INTERCEPT_INDICATOR_PERCENT
 
 /datum/objective/comms_intercept/proc/is_collected()
 	return !upload_done && !failed && messages_collected >= target_amount
@@ -677,20 +673,6 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 		return
 	. += span_warning("Из динамика доносится [comms_intercept_static_text(comms_intercept_tap_distance(radio_turf, receiver_turf))].")
 
-/obj/item/radio/headset/examine(mob/user)
-	. = ..()
-	var/datum/objective/comms_intercept/objective = GLOB.comms_intercept
-	if(!objective?.is_leak_noticeable())
-		return
-	// Only tapped channels blink, so comparing headsets narrows down the machine
-	for(var/obj/item/comms_tap/tap as anything in objective.active_taps)
-		if(!tap.is_listening())
-			continue
-		for(var/channel_name in comms_intercept_channel_names(tap.host))
-			if(src in GLOB.all_radios["[GLOB.default_radio_channels[channel_name]]"])
-				. += span_warning("Индикатор шифрования неровно мигает.")
-				return
-
 /obj/machinery/telecomms
 	/// Comms tap install progress, reset when the panel closes
 	var/tap_install_stage = COMMS_TAP_STAGE_NONE
@@ -748,7 +730,6 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 #undef COMMS_INTERCEPT_MIN_CREW
 #undef COMMS_INTERCEPT_MESSAGES_PER_CREW
 #undef COMMS_INTERCEPT_SPEAKER_COOLDOWN
-#undef COMMS_INTERCEPT_INDICATOR_PERCENT
 #undef COMMS_INTERCEPT_MIN_MESSAGES
 #undef COMMS_INTERCEPT_MAX_MESSAGES
 #undef COMMS_INTERCEPT_UPLOAD_TIME_MIN
