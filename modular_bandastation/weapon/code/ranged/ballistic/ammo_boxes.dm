@@ -302,7 +302,7 @@
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "38box"
 	w_class = WEIGHT_CLASS_SMALL
-	caliber = CALIBER_38
+	caliber = CALIBER_357_38
 	ammo_type = /obj/item/ammo_casing/c38
 	max_ammo = 25
 
@@ -343,7 +343,7 @@
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "357box"
 	w_class = WEIGHT_CLASS_SMALL
-	caliber = CALIBER_357
+	caliber = CALIBER_357_38
 	ammo_type = /obj/item/ammo_casing/c357
 	max_ammo = 20
 

@@ -235,7 +235,6 @@
 	suppressed_sound = 'modular_bandastation/weapon/sound/ranged/suppressed_heavy.ogg'
 	suppressor_x_offset = 4
 	projectile_speed_multiplier = 1.5
-	can_misfire = FALSE
 
 	/// Determines how many shots we can make before the weapon needs to be maintained.
 	var/shots_before_degradation = 30
