@@ -73,13 +73,12 @@
 // 		BODYPART_SCORE_OVERALL = silicon_bodytypes - organic_bodytypes
 // 	)
 
-
-// /datum/quirk/transhumanist/proc/calculate_bodypart_score()
-// 	SIGNAL_HANDLER
-// 	var/alist/score = get_bodypart_score(quirk_holder)
-// 	var/organic_bodytypes = score[BODYPART_SCORE_ORGANIC]
-// 	var/silicon_bodytypes = score[BODYPART_SCORE_SILICON]
-// 	var/other_bodytypes = score[BODYPART_SCORE_OTHER_BODYTYPES]
+// /datum/quirk/transhumanist/add(client/client_source)
+// 	RegisterSignal(quirk_holder, COMSIG_CARBON_POST_ATTACH_LIMB, PROC_REF(calculate_bodypart_score))
+// 	RegisterSignal(quirk_holder, COMSIG_CARBON_POST_REMOVE_LIMB, PROC_REF(calculate_bodypart_score))
+// 	RegisterSignal(quirk_holder, COMSIG_CARBON_GAIN_ORGAN, PROC_REF(calculate_bodypart_score))
+// 	RegisterSignal(quirk_holder, COMSIG_CARBON_LOSE_ORGAN, PROC_REF(calculate_bodypart_score))
+// 	calculate_bodypart_score()
 
 // /datum/quirk/transhumanist/remove()
 // 	UnregisterSignal(quirk_holder, list(
@@ -187,15 +186,51 @@
 // 		old_organ = null
 // 		old_part = null
 
-// 	quirk_holder.clear_mood_event(MOOD_CATEGORY_TRANSHUMANIST_BODYPART)
-// 	quirk_holder.clear_mood_event(MOOD_CATEGORY_TRANSHUMANIST_PEOPLE)
+// /datum/quirk/transhumanist/proc/can_add_part(part_type)
+// 	if(ispath(part_type, /obj/item/bodypart))
+// 		var/obj/item/bodypart/bodypart_check = part_type
+// 		return !!quirk_holder.get_bodypart(bodypart_check::body_zone)
+// 	if(ispath(part_type, /obj/item/organ))
+// 		var/obj/item/organ/organ_check = part_type
+// 		return !!quirk_holder.get_organ_slot(organ_check::slot)
+// 	return FALSE
 
-// /datum/quirk/transhumanist/process(seconds_per_tick)
-// 	var/organics_nearby = 0
-// 	var/silicons_nearby = 0
+// /datum/quirk/transhumanist/add_unique(client/client_source)
+// 	var/mob/living/carbon/human/human_holder = quirk_holder
+// 	var/list/part_options = GLOB.part_choice_transhuman.Copy()
+// 	var/part_type = part_options[client_source?.prefs?.read_preference(/datum/preference/choiced/trans_prosthetic)]
+// 	if(isnull(part_type))  //Client gone or they chose a random part
+// 		var/picked_type = pick(part_options)
+// 		part_type = part_options[picked_type]
+// 		part_options -= picked_type
 
-// 	// Only cares about things that are nearby
-// 	var/list/mobs = get_hearers_in_LOS(3, quirk_holder)
+// 	if(quirk_holder.has_quirk(/datum/quirk/prosthetic_limb) && ispath(part_type, /obj/item/bodypart))
+// 		var/obj/item/bodypart/bodypart_check = part_type
+// 		var/preferred_prosthetic_zone = GLOB.prosthetic_limb_choice[client_source?.prefs?.read_preference(/datum/preference/choiced/prosthetic)]
+// 		// dumbass already has a part in the same spot so let's just let the shoddy trait do its thing instead
+// 		if(preferred_prosthetic_zone == bodypart_check::body_zone)
+// 			return
+
+// 	while(!can_add_part(part_type))
+// 		if(!length(part_options))
+// 			return // you get NOTHING good day
+// 		var/picked_type = pick(part_options)
+// 		part_type = part_options[picked_type]
+// 		part_options -= picked_type
+
+// 	var/obj/item/new_part = new part_type()
+// 	if(isbodypart(new_part))
+// 		var/obj/item/bodypart/new_bodypart = new_part
+// 		slot_string = new_bodypart.plaintext_zone
+// 		old_part = human_holder.return_and_replace_bodypart(new_bodypart, special = TRUE)
+
+// 	else if(isorgan(new_part))
+// 		var/obj/item/organ/new_organ = new_part
+// 		old_part = human_holder.get_organ_slot(new_organ.slot)
+// 		new_organ.Insert(human_holder, special = TRUE)
+// 		old_part.moveToNullspace()
+// 		STOP_PROCESSING(SSobj, old_part)
+// 		slot_string = new_organ.name
 
 // 	for(var/mob/living/target in mobs)
 // 		if(!isturf(target.loc) || target == quirk_holder || target.alpha <= 128 || target.invisibility > quirk_holder.see_invisible)

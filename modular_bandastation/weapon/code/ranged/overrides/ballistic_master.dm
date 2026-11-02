@@ -131,10 +131,10 @@
 	icon = 'modular_bandastation/weapon/icons/ranged/ballistic.dmi'
 	recoil = 0.4
 
-/obj/item/gun/ballistic/revolver/cowboy
+/obj/item/gun/ballistic/revolver/syndicate/cowboy
 	icon_state = "cowboy"
 
-/obj/item/gun/ballistic/revolver/badass
+/obj/item/gun/ballistic/revolver/syndicate/badass
 	icon = 'icons/obj/weapons/guns/ballistic.dmi'
 	recoil = 0.3
 
