@@ -368,7 +368,7 @@
 
 /obj/item/toy/gun/legacy/anaconda
 	name = ".44 revolver 'Anaconda'"
-	desc = "Револьвер S&W Python 'Anaconda' калибра .44. Такие уже давно не делают..."
+	desc = "Револьвер S&W Python «Анаконда» .44-го калибра. Такие уже давно не делают..."
 	icon = 'modular_bandastation/weapon/icons/ranged/ballistic.dmi'
 	icon_state = "anaconda"
 	inhand_icon_state = "anaconda"
@@ -376,7 +376,7 @@
 	righthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/righthand.dmi'
 
 /obj/item/toy/gun/legacy/rsh12
-	name = "12.7mm RSH-12 revolver"
+	name = "RSH-12 revolver"
 	desc = "Крупнокалиберный револьвер РШ-12 калибра 12.7мм. Что он тут вообще забыл?..."
 	icon = 'modular_bandastation/weapon/icons/ranged/ballistic.dmi'
 	icon_state = "rsh12"
