@@ -225,23 +225,13 @@ function LoadoutSelectedItem(props: LoadoutSelectedItemProps) {
   }
 
   return (
-    <ImageButton
-      fluid
-      textAlign="left"
-      imageSize={32}
-      dmIcon={item.icon}
-      dmIconState={item.icon_state}
-      buttonsAlt={
-        <>
-          {!!item.buttons.length && (
-            <Button
-              icon="cogs"
-              color="transparent"
-              onClick={() => {
-                setModifyItemDimmer(item);
-              }}
-            />
-          )}
+    <Stack align={'center'}>
+      <Stack.Item>
+        <ItemIcon item={item} scale={1} />
+      </Stack.Item>
+      <Stack.Item width="55%">{item.name}</Stack.Item>
+      {item.buttons.length || item.reskins?.length ? (
+        <Stack.Item>
           <Button
             icon="times"
             color="transparent"

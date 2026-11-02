@@ -185,7 +185,7 @@
 			continue
 
 		to_chat(cultist.current, span_bold(span_cult_large("[marker] отмечает [blood_target] в [target_area] как главный приоритет культа. Доберитесь туда немедленно!")))
-		SEND_SOUND(cultist.current, sound(SFX_HALLUCINATION_OVER_HERE, 0, 1, 75))
+		SEND_SOUND(cultist.current, sound(/datum/sound_effect/hallucination_over_here, 0, 1, 75))
 		cultist.current.client.images += blood_target_image
 		if (cultist.current.hud_used)
 			var/atom/movable/screen/navigate_arrow/arrow = cultist.current.hud_used.add_screen_object(/atom/movable/screen/navigate_arrow, HUD_CULTIST_ARROW, HUD_GROUP_INFO, update_screen = TRUE)

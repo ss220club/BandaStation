@@ -16,7 +16,7 @@
 	throw_range = 5
 	sharpness = SHARP_EDGED
 	w_class = WEIGHT_CLASS_SMALL
-	hitsound = SFX_SWING_HIT
+	hitsound = /datum/sound_effect/swing_hit
 	armour_penetration = 35
 	light_system = OVERLAY_LIGHT
 	light_range = 6 //TWICE AS BRIGHT AS A REGULAR ESWORD

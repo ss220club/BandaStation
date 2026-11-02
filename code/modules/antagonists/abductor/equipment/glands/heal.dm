@@ -171,8 +171,8 @@
 
 /obj/item/organ/heart/gland/heal/proc/replace_limb(body_zone, obj/item/bodypart/limb)
 	if(limb)
-		owner.visible_message(span_warning("[owner]'s [limb.ru_plaintext_zone[PREPOSITIONAL]] suddenly detaches from [owner.p_their()] body!"), span_userdanger("Your [limb.ru_plaintext_zone[PREPOSITIONAL]] suddenly detaches from your body!"))
-		playsound(owner, SFX_DESECRATION, 50, TRUE, -1)
+		owner.visible_message(span_warning("[owner]'s [limb.ru_plaintext_zone[PREPOSITIONAL]] внезапно отделяется от [owner.p_their()] тела!"), span_userdanger("Ващ [limb.ru_plaintext_zone[PREPOSITIONAL]] внезапно отделяется от вашего тела!"))
+		playsound(owner, /datum/sound_effect/desecration, 50, TRUE, -1)
 		limb.drop_limb()
 	else
 		to_chat(owner, span_warning("You feel a weird tingle in your [parse_zone(body_zone)]... even if you don't have one."))
