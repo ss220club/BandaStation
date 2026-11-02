@@ -734,12 +734,19 @@
 	VV_DROPDOWN_OPTION(VV_HK_PURRBATION, "Toggle Purrbation")
 	VV_DROPDOWN_OPTION(VV_HK_APPLY_DNA_INFUSION, "Apply DNA Infusion")
 	VV_DROPDOWN_OPTION(VV_HK_TURN_INTO_MMI, "Turn into MMI")
+	VV_DROPDOWN_OPTION(VV_HK_HAIR_PAINT, "Edit Hair/Beard Paint") // BANDASTATION ADDITION - In-round hair painting
 
 /mob/living/carbon/human/vv_do_topic(list/href_list)
 	. = ..()
 
 	if(!.)
 		return
+
+	// BANDASTATION ADDITION START - In-round hair painting
+	if(href_list[VV_HK_HAIR_PAINT])
+		vv_edit_hair_paint()
+		return
+	// BANDASTATION ADDITION END
 
 	if(href_list[VV_HK_COPY_OUTFIT])
 		if(!check_rights(R_SPAWN))

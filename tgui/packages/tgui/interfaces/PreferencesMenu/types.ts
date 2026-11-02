@@ -210,6 +210,7 @@ export type PreferencesMenuData = {
 
   // BANDASTATION ADDITION START
   donator_level: number;
+  hair_paint_allowed: BooleanLike;
   tts_seed: string;
   tts_enabled: BooleanLike;
 

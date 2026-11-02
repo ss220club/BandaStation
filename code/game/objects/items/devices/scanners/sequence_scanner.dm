@@ -124,6 +124,7 @@
 	"UF"=target.dna.unique_features,
 	"name"=target.real_name,
 	"blood_type"=target.get_bloodtype())
+	hair_paint_copy_features(target.dna.features, genetic_makeup_buffer) // BANDASTATION ADDITION - Preserve painted hair with UI
 
 /obj/item/sequence_scanner/proc/display_sequence(mob/living/user)
 	if(!LAZYLEN(buffer) || !ready)

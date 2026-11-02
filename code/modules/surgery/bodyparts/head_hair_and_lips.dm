@@ -44,20 +44,24 @@
 	return .
 
 /// Returns a list of all hair/facial hair related overlays, or alternatively the debrained overlay if applicable
-/obj/item/bodypart/head/proc/get_hair_overlays(dropped)
+/obj/item/bodypart/head/proc/get_hair_overlays(dropped, hair_flags = HEAD_HAIR|HEAD_FACIAL_HAIR, apply_paint = TRUE) // BANDASTATION EDIT - Reuse native silhouettes in the paint editor
 	. = list()
 	if(is_invisible)
 		return .
 
-	if(!is_husked && !(owner?.obscured_slots & HIDEFACIALHAIR) && (head_flags & HEAD_FACIAL_HAIR))
-		. += get_base_facial_hair_overlays(dropped)
+	// BANDASTATION EDIT START - Select native or painted hair without changing the live head
+	if(!is_husked && !(owner?.obscured_slots & HIDEFACIALHAIR) && (head_flags & hair_flags & HEAD_FACIAL_HAIR))
+		var/list/facial_overlays = get_base_facial_hair_overlays(dropped)
+		. += apply_paint ? paint_hair_overlays(facial_overlays, facial = TRUE) : facial_overlays
 
 	if(is_husked != HUSKED_BURN && !(owner?.obscured_slots & HIDEHAIR))
 		var/obj/item/organ/brain/brain = locate() in src
-		if(QDELETED(brain) && (head_flags & HEAD_DEBRAIN))
+		if(QDELETED(brain) && (head_flags & HEAD_DEBRAIN) && (hair_flags & HEAD_HAIR))
 			. += get_debrain_overlay(dropped)
-		else if(!is_husked && (head_flags & HEAD_HAIR))
-			. += get_base_hair_overlays(dropped)
+		else if(!is_husked && (head_flags & hair_flags & HEAD_HAIR))
+			var/list/hair_overlays = get_base_hair_overlays(dropped)
+			. += apply_paint ? paint_hair_overlays(hair_overlays) : hair_overlays
+	// BANDASTATION EDIT END
 
 	return .
 
