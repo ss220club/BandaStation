@@ -15,7 +15,7 @@
 		/datum/reagent/consumable/soymilk = 5,
 	)
 	tastes = list("bread" = 2, "mushroom" = 2, "soy" = 1)
-	foodtypes = GRAIN | VEGETABLES | MUSHROOM
+	foodtypes = GRAIN | MUSHROOM
 	w_class = WEIGHT_CLASS_NORMAL
 	crafting_complexity = FOOD_COMPLEXITY_2
 	venue_value = FOOD_PRICE_NORMAL
@@ -238,7 +238,7 @@
 		/datum/reagent/consumable/soysauce = 2,
 	)
 	tastes = list("raw mushroom" = 3, "savory soy" = 2)
-	foodtypes = VEGETABLES | MUSHROOM | RAW
+	foodtypes = MUSHROOM | RAW
 	w_class = WEIGHT_CLASS_SMALL
 	crafting_complexity = FOOD_COMPLEXITY_2
 	venue_value = FOOD_PRICE_CHEAP
@@ -279,7 +279,7 @@
 		/datum/reagent/consumable/salt = 1,
 	)
 	tastes = list("crispy mushroom" = 3, "salted oil" = 1)
-	foodtypes = VEGETABLES | MUSHROOM | FRIED
+	foodtypes = MUSHROOM | FRIED
 	w_class = WEIGHT_CLASS_SMALL
 	crafting_complexity = FOOD_COMPLEXITY_2
 	venue_value = FOOD_PRICE_NORMAL
@@ -336,7 +336,7 @@
 		/datum/reagent/consumable/soysauce = 3,
 	)
 	tastes = list("savory broth" = 3, "tender noodles" = 2, "mushrooms" = 2)
-	foodtypes = GRAIN | VEGETABLES | MUSHROOM
+	foodtypes = GRAIN | MUSHROOM
 	trash_type = /obj/item/reagent_containers/cup/bowl
 	w_class = WEIGHT_CLASS_NORMAL
 	crafting_complexity = FOOD_COMPLEXITY_3
@@ -452,7 +452,7 @@
 		/datum/reagent/uranium/radium = 1,
 	)
 	tastes = list("sweet berries" = 2, "earthy mushrooms" = 2)
-	foodtypes = VEGETABLES | MUSHROOM | FRUIT
+	foodtypes = MUSHROOM | FRUIT
 	w_class = WEIGHT_CLASS_SMALL
 	crafting_complexity = FOOD_COMPLEXITY_3
 
@@ -466,7 +466,7 @@
 		/datum/reagent/toxin/amanitin = 2,
 	)
 	tastes = list("lime zest" = 2, "luminescent crunch" = 2)
-	foodtypes = VEGETABLES | MUSHROOM | FRUIT | TOXIC
+	foodtypes = MUSHROOM | FRUIT | TOXIC
 	w_class = WEIGHT_CLASS_SMALL
 	crafting_complexity = FOOD_COMPLEXITY_3
 
@@ -482,7 +482,7 @@
 		/datum/reagent/medicine/omnizine = 12,
 	)
 	tastes = list("infinite fungal harmony" = 4, "divine nectar" = 3, "pure euphoria" = 2)
-	foodtypes = VEGETABLES | MUSHROOM | GRAIN | FRUIT | TOXIC
+	foodtypes = MUSHROOM | GRAIN | FRUIT | TOXIC
 	w_class = WEIGHT_CLASS_NORMAL
 	crafting_complexity = FOOD_COMPLEXITY_5
 	venue_value = FOOD_PRICE_LEGENDARY
@@ -603,7 +603,7 @@
 		/datum/reagent/consumable/soysauce = 2,
 	)
 	tastes = list("crispy shell" = 2, "golden chanterelles" = 2, "garlic" = 1)
-	foodtypes = GRAIN | VEGETABLES | MUSHROOM
+	foodtypes = GRAIN | MUSHROOM
 	food_flags = FOOD_FINGER_FOOD
 	w_class = WEIGHT_CLASS_SMALL
 	crafting_complexity = FOOD_COMPLEXITY_3
@@ -682,7 +682,7 @@
 		/datum/reagent/teslium = 1,
 	)
 	tastes = list("chewy nizaya" = 2, "sparkling fairy flora" = 2, "electric tingle" = 1)
-	foodtypes = GRAIN | VEGETABLES | MUSHROOM
+	foodtypes = GRAIN | MUSHROOM
 	food_flags = FOOD_FINGER_FOOD
 	w_class = WEIGHT_CLASS_SMALL
 	crafting_complexity = FOOD_COMPLEXITY_3
@@ -777,7 +777,7 @@
 		/datum/reagent/drug/mushroomhallucinogen = 5,
 	)
 	tastes = list("fried sweet dough" = 3, "sugar glaze" = 2, "tingling trip" = 1)
-	foodtypes = VEGETABLES | JUNKFOOD | GRAIN | FRUIT | DAIRY | FRIED | SUGAR | BREAKFAST | MUSHROOM
+	foodtypes = JUNKFOOD | GRAIN | FRUIT | DAIRY | FRIED | SUGAR | BREAKFAST | MUSHROOM
 	food_flags = FOOD_FINGER_FOOD
 	w_class = WEIGHT_CLASS_SMALL
 	crafting_complexity = FOOD_COMPLEXITY_2
@@ -1025,7 +1025,7 @@
 		/datum/reagent/consumable/ice = 2,
 	)
 	tastes = list("electric chill" = 3, "creamy mushroom" = 2, "sparkles" = 1)
-	foodtypes = VEGETABLES | SUGAR | TOXIC | MUSHROOM
+	foodtypes = SUGAR | TOXIC | MUSHROOM
 	food_flags = FOOD_FINGER_FOOD
 	w_class = WEIGHT_CLASS_SMALL
 	crafting_complexity = FOOD_COMPLEXITY_3

@@ -172,6 +172,7 @@
 	)
 	result = /obj/item/food/mushroomy_stirfry
 	added_foodtypes = MUSHROOM // BANDASTATION ADDITION
+	removed_foodtypes = VEGETABLES // BANDASTATION ADDITION
 	cuisine_category = CUISINE_LIZARD
 	dish_category = DISH_MUSHROOM // BANDASTATION ADDITION
 
@@ -491,6 +492,7 @@
 	result = /obj/item/food/kebab/candied_mushrooms
 	added_foodtypes = SUGAR|MUSHROOM // BANDASTATION ADDITION
 	cuisine_category = CUISINE_LIZARD
+	removed_foodtypes = VEGETABLES // BANDASTATION ADDITION
 	dish_category = DISH_MUSHROOM // BANDASTATION ADDITION
 	meal_category = MEAL_DESSERT
 

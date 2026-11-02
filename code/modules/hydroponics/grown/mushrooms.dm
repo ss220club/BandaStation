@@ -2,7 +2,7 @@
 	name = "mushroom"
 	abstract_type = /obj/item/food/grown/mushroom
 	bite_consumption_mod = 3
-	foodtypes = VEGETABLES | MUSHROOM // BANDASTATION ADDITION
+	foodtypes = MUSHROOM // BANDASTATION ADDITION
 	wine_power = 40
 	/// Default mushroom icon for recipes that need any mushroom
 	icon_state = "plumphelmet"

@@ -853,7 +853,7 @@
 		/datum/reagent/consumable/nutriment/vitamin = 2,
 	)
 	tastes = list("savouriness" = 1, "nuttiness" = 1)
-	foodtypes = MUSHROOM  // BANDASTATION ADDITION
+	foodtypes = VEGETABLES | MUSHROOM  // BANDASTATION ADDITION
 	w_class = WEIGHT_CLASS_SMALL
 	crafting_complexity = FOOD_COMPLEXITY_1
 

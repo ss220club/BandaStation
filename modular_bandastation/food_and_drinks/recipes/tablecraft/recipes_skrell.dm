@@ -200,7 +200,7 @@
 	name = "embershroom lava stew"
 	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
 	icon_state = "embershroom_stew"
-	drink_type = FRUIT | MUSHROOM
+	drink_type = VEGETABLES | MUSHROOM
 
 /datum/chemical_reaction/food/soup/embershroom_lava_stew
 	required_reagents = list(
@@ -754,7 +754,8 @@
 		/datum/reagent/drug/space_drugs = 5,
 	)
 	result = /obj/item/food/skrell/glowcap_ice_scoop
-	added_foodtypes = SUGAR | MUSHROOM | TOXIC
+	added_foodtypes = VEGETABLES | SUGAR | MUSHROOM | TOXIC
+	removed_foodtypes = VEGETABLES
 	cuisine_category = CUISINE_SKRELL
 	dish_category = DISH_FROZEN
 	meal_category = MEAL_DESSERT
