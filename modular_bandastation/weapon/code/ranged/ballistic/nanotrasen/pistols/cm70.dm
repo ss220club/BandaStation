@@ -32,3 +32,10 @@
 
 /obj/item/gun/ballistic/automatic/pistol/cm70/no_mag
 	spawnwithmagazine = FALSE
+
+/obj/item/gun/ballistic/automatic/pistol/cm70/hos
+	name = "GP-45M"
+	desc = "Стандартный служебный пистолет Нанотрейзен под патроны калибра .45, модифицированный для стрельбы с отсечкой в два патрона."
+	burst_size = 2
+	actions_types = list(/datum/action/item_action/toggle_firemode)
+	spawn_magazine_type = /obj/item/ammo_box/magazine/c45/rubber

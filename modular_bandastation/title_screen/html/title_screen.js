@@ -14,6 +14,13 @@ function toggleReady(setReady) {
   toggleGoodBadClass(readyElement, setReady === '1'); // YES. Byond sends true/false like a "1"/"0"
 }
 
+function toggleAntagRoll(enabled) {
+  const antagRollElement = document.querySelector('.lobby-toggle_antag_roll');
+  if (antagRollElement) {
+    toggleGoodBadClass(antagRollElement, enabled === '1');
+  }
+}
+
 const noticeElement = document.getElementById('container_notice');
 function updateNotice(notice) {
   const emptyNotice = notice === undefined;

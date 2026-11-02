@@ -9,6 +9,12 @@
 	var/loadout_points_spent = 0
 	var/is_byond_member = FALSE
 
+/datum/preference/toggle/antag_roll
+	category = PREFERENCE_CATEGORY_MANUALLY_RENDERED
+	savefile_key = "antag_roll"
+	savefile_identifier = PREFERENCE_PLAYER
+	default_value = TRUE
+
 /datum/preferences/New(client/parent)
 	. = ..()
 	max_save_slots = clamp(BASE_SAVE_SLOTS + parent.get_donator_level() * SAVE_SLOTS_PER_DONATOR_LEVEL, BASE_SAVE_SLOTS, MAX_SAVE_SLOTS)
