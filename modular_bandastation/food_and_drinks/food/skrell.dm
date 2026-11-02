@@ -144,7 +144,7 @@
 		/datum/reagent/consumable/soysauce = 2,
 	)
 	tastes = list("intense umami" = 3, "numbing toxin" = 1)
-	foodtypes = VEGETABLES | MUSHROOM | TOXIC
+	foodtypes = MUSHROOM | TOXIC
 	trash_type = /obj/item/reagent_containers/cup/bowl
 	w_class = WEIGHT_CLASS_NORMAL
 	crafting_complexity = FOOD_COMPLEXITY_3
@@ -261,7 +261,7 @@
 		/datum/reagent/consumable/soysauce = 2,
 	)
 	tastes = list("juicy mushroom" = 3, "savory soy" = 2)
-	foodtypes = VEGETABLES | MUSHROOM | GRAIN
+	foodtypes = MUSHROOM | GRAIN
 	w_class = WEIGHT_CLASS_SMALL
 	crafting_complexity = FOOD_COMPLEXITY_3
 	venue_value = FOOD_PRICE_NORMAL
@@ -437,7 +437,7 @@
 		/datum/reagent/toxin/amatoxin = 2,
 	)
 	tastes = list("peppery mushrooms" = 2, "wild heat" = 1)
-	foodtypes = VEGETABLES | MUSHROOM | TOXIC
+	foodtypes = MUSHROOM | TOXIC
 	w_class = WEIGHT_CLASS_SMALL
 	crafting_complexity = FOOD_COMPLEXITY_3
 
@@ -814,7 +814,7 @@
 		/datum/reagent/consumable/nutriment/vitamin = 2,
 	)
 	tastes = list("crunchy caramel" = 3, "tender mushroom" = 2, "sweetness" = 2)
-	foodtypes = VEGETABLES | MUSHROOM | SUGAR
+	foodtypes = MUSHROOM | SUGAR
 	food_flags = FOOD_FINGER_FOOD
 	w_class = WEIGHT_CLASS_SMALL
 	crafting_complexity = FOOD_COMPLEXITY_2
@@ -1093,7 +1093,7 @@
 		/datum/reagent/drug/mushroomhallucinogen = 4,
 	)
 	tastes = list("sweet tart berries" = 3, "earthy hallucinogen" = 2, "creamy chill" = 1)
-	foodtypes = VEGETABLES | FRUIT | SUGAR | MUSHROOM
+	foodtypes = FRUIT | SUGAR | MUSHROOM
 	food_flags = FOOD_FINGER_FOOD
 	w_class = WEIGHT_CLASS_SMALL
 	crafting_complexity = FOOD_COMPLEXITY_3

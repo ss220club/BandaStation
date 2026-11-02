@@ -324,7 +324,7 @@
 		/obj/item/food/pastrybase = 2
 	)
 	result = /obj/item/food/rofflewaffles
-	added_foodtypes = VEGETABLES|BREAKFAST|MUSHROOM // BANDASTATION ADDITION
+	added_foodtypes = BREAKFAST|MUSHROOM // BANDASTATION ADDITION
 	dish_category = DISH_MUSHROOM // BANDASTATION ADDITION
 
 ////////////////////////////////////////////////DONKPOCCKETS////////////////////////////////////////////////

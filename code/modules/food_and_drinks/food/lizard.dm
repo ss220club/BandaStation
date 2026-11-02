@@ -307,7 +307,7 @@
 		/datum/reagent/consumable/nutriment/vitamin = 4,
 	)
 	tastes = list("marvelous mushrooms" = 1, "sublime shrooms" = 1)
-	foodtypes = VEGETABLES | MUSHROOM  // BANDASTATION ADDITION
+	foodtypes = MUSHROOM  // BANDASTATION ADDITION
 	w_class = WEIGHT_CLASS_SMALL
 	crafting_complexity = FOOD_COMPLEXITY_3
 

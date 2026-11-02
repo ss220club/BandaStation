@@ -88,7 +88,7 @@
 	name = "qerrbalak fungal stew"
 	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
 	icon_state = "qerrbalak_stew"
-	drink_type = GRAIN | VEGETABLES | MUSHROOM
+	drink_type = GRAIN | MUSHROOM
 
 /datum/chemical_reaction/food/soup/qerrbalak_stew
 	required_reagents = list(
@@ -200,7 +200,7 @@
 	name = "embershroom lava stew"
 	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
 	icon_state = "embershroom_stew"
-	drink_type = VEGETABLES | MUSHROOM
+	drink_type = FRUIT | MUSHROOM
 
 /datum/chemical_reaction/food/soup/embershroom_lava_stew
 	required_reagents = list(
