@@ -62,7 +62,7 @@
 	if(ratio >= cult_risen_threshold && !cult_risen) /// BANDASTATION EDIT - Cult thresholds rebalance
 		for(var/datum/mind/mind as anything in members)
 			if(mind.current)
-				SEND_SOUND(mind.current, sound(SFX_HALLUCINATION_I_SEE_YOU)) /// BANDASTATION EDIT - Cult Sounds
+				SEND_SOUND(mind.current, sound(/datum/sound_effect/hallucination_i_see_you)) /// BANDASTATION EDIT - Cult Sounds
 				to_chat(mind.current, span_cult_large(span_warning("Покров слабеет с ростом культа - ваши глаза начинают светиться...")))
 				mind.current.AddElement(/datum/element/cult_eyes)
 		cult_risen = TRUE
@@ -71,7 +71,7 @@
 	if(ratio >= cult_ascended_threshold && !cult_ascendent) /// BANDASTATION EDIT - Cult thresholds rebalance
 		for(var/datum/mind/mind as anything in members)
 			if(mind.current)
-				SEND_SOUND(mind.current, sound(SFX_HALLUCINATION_I_M_HERE)) /// BANDASTATION EDIT - Cult Sounds
+				SEND_SOUND(mind.current, sound(/datum/sound_effect/hallucination_i_m_here)) /// BANDASTATION EDIT - Cult Sounds
 				to_chat(mind.current, span_cult_large(span_warning("Ваш культ набирает силу, и приближается красная жатва - вы не сможете долго скрывать свою истинную природу!!")))
 				mind.current.apply_status_effect(/datum/status_effect/cult_halo)
 		cult_ascendent = TRUE
