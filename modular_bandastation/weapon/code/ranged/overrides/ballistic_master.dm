@@ -356,8 +356,33 @@
 /obj/item/gun/ballistic/automatic/l6_saw/toy
 	recoil = 0
 
-/obj/item/gun/energy/lasercannon
-	pin = /obj/item/firing_pin
+/obj/item/toy/gun/legacy/examine(mob/user)
+	. = ..()
+	. += "<b>Удивительно качественная модель-игрушка ввиде капсюльного револьвера. Кто мог их сделать?"
+
+/obj/item/toy/gun/legacy/mateba
+	name = "\improper Unica 6 auto-revolver"
+	desc = "Полуавтоматический револьвер Mateba Model 6 Unica сборки старого образца. Такие уже давно не делают..."
+	icon = 'modular_bandastation/weapon/icons/ranged/ballistic.dmi'
+	icon_state = "mateba_old"
+
+/obj/item/toy/gun/legacy/anaconda
+	name = ".44 revolver 'Anaconda'"
+	desc = "Револьвер S&W Python «Анаконда» .44-го калибра. Такие уже давно не делают..."
+	icon = 'modular_bandastation/weapon/icons/ranged/ballistic.dmi'
+	icon_state = "anaconda"
+	inhand_icon_state = "anaconda"
+	lefthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/lefthand.dmi'
+	righthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/righthand.dmi'
+
+/obj/item/toy/gun/legacy/rsh12
+	name = "RSH-12 revolver"
+	desc = "Крупнокалиберный револьвер РШ-12 калибра 12.7мм. Что он тут вообще забыл?..."
+	icon = 'modular_bandastation/weapon/icons/ranged/ballistic.dmi'
+	icon_state = "rsh12"
+	inhand_icon_state = "rsh12"
+	lefthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/lefthand.dmi'
+	righthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/righthand.dmi'
 
 /obj/item/gun/energy/laser/scatter/shotty
 	inhand_icon_state = "shotgun_combat"

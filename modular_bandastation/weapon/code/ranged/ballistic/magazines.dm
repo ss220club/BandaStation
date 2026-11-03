@@ -721,12 +721,14 @@
 	multiple_sprites = AMMO_BOX_PER_BULLET
 	multiple_sprite_use_base = TRUE
 	ammo_type = /obj/item/ammo_casing/c38
+	custom_materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 10)
 
 /obj/item/ammo_box/magazine/c38/rubber
 	name = "pistol magazine (.38 Rubber)"
 	desc = parent_type::desc + "<br>Содержит нелетальные травматические патроны с резиновой пулей."
 	ammo_band_color = COLOR_AMMO_RUBBER
 	ammo_type = /obj/item/ammo_casing/c38/match/bouncy
+	custom_materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 5)
 
 /obj/item/ammo_box/magazine/c38/match
 	name = "pistol magazine (.38 Match)"
@@ -1293,6 +1295,12 @@
 	multiple_sprites = AMMO_BOX_FULL_EMPTY
 	multiple_sprite_use_base = TRUE
 	ammo_type = /obj/item/ammo_casing/c456magnum
+
+// MARK: Ladon - .50 AE
+/obj/item/ammo_box/magazine/m50/lowpower
+	name = "handgun magazine (.50 AE Special)"
+	desc = "Пистолетный магазин калибра .50 АЕ, вмещающий 7 патронов. Подходит для пистолетов 'Пустынный Орёл' и PDH 'Ladon'."
+	ammo_type = /obj/item/ammo_casing/a50ae/lowpower
 
 // MARK: WT - 4.6x30mm
 /obj/item/ammo_box/magazine/wt550m9/wtrubber
