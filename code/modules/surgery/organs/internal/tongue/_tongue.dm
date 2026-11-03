@@ -475,24 +475,12 @@
 		'sound/effects/hallucinations/wail.ogg',
 	)
 
-// BANDASTATION EDIT START: Cyrillic support
-/// Normalizes a word for dictionary lookup: lowercases it and strips everything but letters and digits.
-/obj/item/organ/tongue/zombie/proc/normalize_translation_key(word)
-	return LOWER_TEXT(rustutils_regex_replace(word, @"[^a-zа-яё0-9 ]", "i", ""))
-// BANDASTATION EDIT END: Cyrillic support
-
 /obj/item/organ/tongue/zombie/proc/add_word_to_translations(english_word, zombie_word)
-	// BANDASTATION EDIT START: Cyrillic support
-	//english_to_zombie[english_word] = zombie_word
-	var/lookup_key = normalize_translation_key(english_word)
-	english_to_zombie[lookup_key] = zombie_word
-	if(findtext(lookup_key, regex(@"[а-яё]")))
-		return
+	english_to_zombie[english_word] = zombie_word
 	// zombies don't care about grammar (any tense or form is all translated to the same word)
-	english_to_zombie[lookup_key + plural_s(english_word)] = zombie_word
-	english_to_zombie[lookup_key + "ing"] = zombie_word
-	english_to_zombie[lookup_key + "ed"] = zombie_word
-	// BANDASTATION EDIT END: Cyrillic support
+	english_to_zombie[english_word + plural_s(english_word)] = zombie_word
+	english_to_zombie[english_word + "ing"] = zombie_word
+	english_to_zombie[english_word + "ed"] = zombie_word
 
 /obj/item/organ/tongue/zombie/proc/load_zombie_translations()
 	var/list/zombie_translation = strings("zombie_replacement.json", "zombie")
@@ -514,27 +502,16 @@
 		var/list/message_word_list = splittext(message, " ")
 		var/list/translated_word_list = list()
 		for(var/word in message_word_list)
-			// BANDASTATION EDIT START: Cyrillic support: normalized lookup key, trailing punctuation of the original word is kept
-			//word = english_to_zombie[LOWER_TEXT(word)]
-			//translated_word_list += word ? word : FALSE
-			var/translation = english_to_zombie[normalize_translation_key(word)]
-			translated_word_list += translation ? translation + rustutils_regex_replace(word, @"^.*[\p{L}\p{N}]", "u", "") : FALSE
-			// BANDASTATION EDIT END
+			word = english_to_zombie[LOWER_TEXT(word)]
+			translated_word_list += word ? word : FALSE
 
 		// all occurrences of characters "eiou" (case-insensitive) are replaced with "r"
 		message = replacetext(message, regex(@"[eiou]", "ig"), "r")
-		// BANDASTATION EDIT START: Cyrillic support: all cyrillic vowels but "а" are replaced with "р"
-		message = replacetext(message, regex(@"[еёиоуыэюя]", "ig"), "р")
+		message = replacetext(message, regex(@"[еёиоуыэюяЕЁИОУЫЭЮЯ]", "g"), "р") // BANDASTATION EDIT: Cyrillic support
 		// all characters other than "zhrgbmna .!?-" (case-insensitive) are stripped
-		//message = replacetext(message, regex(@"[^zhrgbmna.!?-\s]", "ig"), "")
-		message = rustutils_regex_replace(message, @"[^zhrgbmnaзхргбмна.!?\s-]", "i", "")
+		message = replacetext(message, regex(@"[^zhrgbmnaзхргбмнаЗХРГБМНА.!?-\s]", "ig"), "") // BANDASTATION EDIT: Cyrillic support
 		// multiple spaces are replaced with a single (whitespace is trimmed)
-		//message = replacetext(message, regex(@"(\s+)", "g"), " ")
-		// lower-case "р" at the end of words replaced with "рх"
-		message = rustutils_regex_replace(message, @"р\b", "u", "рх")
-		// a "а" by itself is replaced with "хра"
-		message = rustutils_regex_replace(message, @"\bа\b", "u", "хра")
-		// BANDASTATION EDIT END
+		// message = replacetext(message, regex(@"(\s+)", "g"), " ") // BANDASTATION EDIT: moved below, collapsing here shifts word indexes when a word is fully stripped
 
 		var/list/old_words = splittext(message, " ")
 		var/list/new_words = list()
@@ -550,7 +527,7 @@
 			new_words[i] = translated_word_list[i] ? translated_word_list[i] : new_words[i]
 
 		message = new_words.Join(" ")
-		message = replacetext(message, regex(@"(\s+)", "g"), " ") // BANDASTATION ADDITION - whitespace collapse moved here, see above
+		message = replacetext(message, regex(@"(\s+)", "g"), " ") // BANDASTATION EDIT: moved from above
 		message = capitalize(message)
 		speech_args[SPEECH_MESSAGE] = message
 
