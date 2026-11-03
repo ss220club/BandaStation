@@ -15942,13 +15942,6 @@
 	},
 /turf/open/floor/iron/dark,
 /area/station/science/ordnance)
-"dOJ" = (
-/obj/machinery/telecomms/server/presets/science,
-/obj/effect/turf_decal/tile/purple/anticorner/contrasted{
-	dir = 4
-	},
-/turf/open/floor/iron/telecomms,
-/area/station/tcommsat/server)
 "dOM" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /turf/open/floor/iron,
@@ -75827,10 +75820,11 @@
 /turf/open/floor/iron,
 /area/station/command/bridge)
 "srg" = (
+/obj/machinery/status_display/evac/directional/east,
 /obj/machinery/computer/telecomms/monitor{
+	network = "tcommsat";
 	dir = 8
 	},
-/obj/machinery/status_display/evac/directional/east,
 /turf/open/floor/iron/dark/side{
 	dir = 8
 	},
@@ -82708,7 +82702,6 @@
 /area/station/maintenance/port/fore)
 "ubZ" = (
 /obj/structure/table/wood,
-/obj/item/paper/monitorkey,
 /turf/open/floor/iron/dark/side{
 	dir = 4
 	},
