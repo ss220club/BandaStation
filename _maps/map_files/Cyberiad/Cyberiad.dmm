@@ -41990,10 +41990,11 @@
 /turf/open/floor/iron/dark,
 /area/station/medical/morgue)
 "kjm" = (
+/obj/item/radio/intercom/directional/east,
 /obj/machinery/computer/telecomms/server{
+	network = "tcommsat";
 	dir = 8
 	},
-/obj/item/radio/intercom/directional/east,
 /turf/open/floor/iron/dark/side{
 	dir = 8
 	},
