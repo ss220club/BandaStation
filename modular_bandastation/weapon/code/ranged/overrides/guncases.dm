@@ -331,14 +331,10 @@
 	worn_icon_state = "sovietcase"
 	inhand_icon_state = "sovietcase"
 
-/obj/item/storage/toolbox/guncase/ntcase/pistol/gp9/PopulateContents()
-	new weapon_to_spawn (src)
-	for(var/i in 1 to 2)
-		new extra_to_spawn (src)
-
 /obj/item/storage/toolbox/guncase/ntcase/pistol/gp9
 	weapon_to_spawn = /obj/item/gun/ballistic/automatic/pistol/gp9/no_mag
 	extra_to_spawn = /obj/item/ammo_box/magazine/c9x25mm_pistol/sec_force/rubber
+	extra_to_spawn_count = 2
 
 /obj/item/storage/toolbox/guncase/ntcase/pistol/gp9/sec
 	weapon_to_spawn = /obj/item/gun/ballistic/automatic/pistol/gp9/sec
@@ -348,11 +344,7 @@
 /obj/item/storage/toolbox/guncase/ntcase/pistol/sec_force
 	abstract_type = /obj/item/storage/toolbox/guncase/ntcase/pistol/sec_force
 	extra_to_spawn = /obj/item/ammo_box/magazine/c9x25mm_pistol/sec_force/rubber
-
-/obj/item/storage/toolbox/guncase/ntcase/pistol/sec_force/PopulateContents()
-	new weapon_to_spawn(src)
-	for(var/i in 1 to 2)
-		new extra_to_spawn(src)
+	extra_to_spawn_count = 2
 
 /obj/item/storage/toolbox/guncase/ntcase/pistol/sec_force/mk58
 	weapon_to_spawn = /obj/item/gun/ballistic/automatic/pistol/sec_force/mk58
