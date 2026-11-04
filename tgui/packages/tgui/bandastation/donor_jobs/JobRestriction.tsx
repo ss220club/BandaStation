@@ -1,6 +1,6 @@
 import { createContext, type ReactNode, useContext } from 'react';
 import { useBackend } from 'tgui/backend';
-import { Stack, Tooltip } from 'tgui-core/components';
+import { Icon, Stack, Tooltip } from 'tgui-core/components';
 
 import type { JobPreferencesData } from '../jobs/types';
 
@@ -17,9 +17,7 @@ export function JobRowControls(props: { name: string; children: ReactNode }) {
       {reason && (
         <Tooltip content={reason}>
           <Stack.Item className="restricted">
-            {job?.lock_reason
-              ? `Тир ${job.required_tier}`
-              : 'Профиль недоступен'}
+            {job?.lock_reason ? <Icon name="lock" /> : 'Профиль недоступен'}
           </Stack.Item>
         </Tooltip>
       )}
