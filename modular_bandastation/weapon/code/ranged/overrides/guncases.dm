@@ -338,11 +338,30 @@
 
 /obj/item/storage/toolbox/guncase/ntcase/pistol/gp9
 	weapon_to_spawn = /obj/item/gun/ballistic/automatic/pistol/gp9/no_mag
-	extra_to_spawn = /obj/item/ammo_box/magazine/c9x25mm_pistol/rubber
+	extra_to_spawn = /obj/item/ammo_box/magazine/c9x25mm_pistol/sec_force/rubber
 
 /obj/item/storage/toolbox/guncase/ntcase/pistol/gp9/sec
 	weapon_to_spawn = /obj/item/gun/ballistic/automatic/pistol/gp9/sec
-	extra_to_spawn = /obj/item/ammo_box/magazine/c9x25mm_pistol/rubber
+	extra_to_spawn = /obj/item/ammo_box/magazine/c9x25mm_pistol/sec_force/rubber
+
+/// Service-pistol deliveries match the GP-9 kit: a loaded pistol and two spare rubber magazines.
+/obj/item/storage/toolbox/guncase/ntcase/pistol/sec_force
+	abstract_type = /obj/item/storage/toolbox/guncase/ntcase/pistol/sec_force
+	extra_to_spawn = /obj/item/ammo_box/magazine/c9x25mm_pistol/sec_force/rubber
+
+/obj/item/storage/toolbox/guncase/ntcase/pistol/sec_force/PopulateContents()
+	new weapon_to_spawn(src)
+	for(var/i in 1 to 2)
+		new extra_to_spawn(src)
+
+/obj/item/storage/toolbox/guncase/ntcase/pistol/sec_force/mk58
+	weapon_to_spawn = /obj/item/gun/ballistic/automatic/pistol/sec_force/mk58
+
+/obj/item/storage/toolbox/guncase/ntcase/pistol/sec_force/viper
+	weapon_to_spawn = /obj/item/gun/ballistic/automatic/pistol/sec_force/viper
+
+/obj/item/storage/toolbox/guncase/ntcase/pistol/disabler
+	weapon_to_spawn = /obj/item/gun/energy/disabler
 
 /obj/item/storage/toolbox/guncase/ntspecial/pistol/ladon
 	weapon_to_spawn = /obj/item/gun/ballistic/automatic/pistol/pdh/ladon
@@ -375,7 +394,7 @@
 
 /obj/item/storage/toolbox/guncase/ntcase/pistol/gp9/no_ammo
 	weapon_to_spawn = /obj/item/gun/ballistic/automatic/pistol/gp9/no_mag
-	extra_to_spawn = /obj/item/ammo_box/magazine/c9x25mm_pistol/starts_empty
+	extra_to_spawn = /obj/item/ammo_box/magazine/c9x25mm_pistol/sec_force/empty
 
 /obj/item/storage/toolbox/guncase/green/pistol/revolver_c38
 	weapon_to_spawn = /obj/item/gun/ballistic/revolver/c38/detective

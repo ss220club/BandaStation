@@ -1,11 +1,11 @@
 /datum/design/c9x25mm
 	name = "pistol magazine (9x25mm) (Lethal)"
-	desc = "Предназначен для быстрой перезарядки пистолетов GP-9."
+	desc = "Магазин на 12 патронов калибра 9x25 мм НТ."
 	build_type = AUTOLATHE
 	materials = list(
 		/datum/material/iron = SHEET_MATERIAL_AMOUNT * 10
 	)
-	build_path = /obj/item/ammo_box/magazine/c9x25mm_pistol
+	build_path = /obj/item/ammo_box/magazine/c9x25mm_pistol/sec_force
 	category = list(
 		RND_CATEGORY_INITIAL,
 		RND_CATEGORY_WEAPONS + RND_SUBCATEGORY_WEAPONS_AMMO,
@@ -21,12 +21,12 @@
 
 /datum/design/c9x25mm_rubber
 	name = "pistol magazine (9x25mm Rubber) (Less Lethal)"
-	desc = "Предназначен для быстрой перезарядки пистолетов GP-9. Резиновые пули обладают отскоком и являются менее смертоносными."
+	desc = "Магазин на 12 патронов калибра 9x25 мм НТ с резиновыми пулями. Резиновые пули обладают отскоком и являются менее смертоносными."
 	build_type = AUTOLATHE
 	materials = list(
 		/datum/material/iron = HALF_SHEET_MATERIAL_AMOUNT * 10
 	)
-	build_path = /obj/item/ammo_box/magazine/c9x25mm_pistol/rubber
+	build_path = /obj/item/ammo_box/magazine/c9x25mm_pistol/sec_force/rubber
 	category = list(
 		RND_CATEGORY_INITIAL,
 		RND_CATEGORY_WEAPONS + RND_SUBCATEGORY_WEAPONS_AMMO
@@ -40,6 +40,14 @@
 	)
 	departmental_flags = DEPARTMENT_BITFLAG_SECURITY
 
+/datum/design/c9x25mm_rubber_box
+	name = "Коробка резиновых патронов 9×25 мм НТ"
+	build_type = PROTOLATHE
+	materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 15)
+	build_path = /obj/item/ammo_box/c9x25mm/rubber
+	category = list(RND_CATEGORY_WEAPONS + RND_SUBCATEGORY_WEAPONS_AMMO)
+	departmental_flags = DEPARTMENT_BITFLAG_SECURITY
+
 /datum/design/c9x25mm/hp
 	name = "pistol magazine (9x25mm) (Hollow-point)"
 	desc = parent_type::desc + " Экспансивные пули отлично подходят для поражения небронированных целей, но бесполезны против бронированных."
@@ -48,7 +56,7 @@
 		/datum/material/iron = SHEET_MATERIAL_AMOUNT * 10,
 		/datum/material/gold = HALF_SHEET_MATERIAL_AMOUNT * 2.5
 	)
-	build_path = /obj/item/ammo_box/magazine/c9x25mm_pistol/hp
+	build_path = /obj/item/ammo_box/magazine/c9x25mm_pistol/sec_force/hp
 	category = list(
 		RND_CATEGORY_WEAPONS + RND_SUBCATEGORY_WEAPONS_AMMO,
 	)
@@ -62,7 +70,7 @@
 		/datum/material/iron = SHEET_MATERIAL_AMOUNT * 10,
 		/datum/material/titanium = HALF_SHEET_MATERIAL_AMOUNT * 2.5
 	)
-	build_path = /obj/item/ammo_box/magazine/c9x25mm_pistol/ap
+	build_path = /obj/item/ammo_box/magazine/c9x25mm_pistol/sec_force/ap
 	category = list(
 		RND_CATEGORY_WEAPONS + RND_SUBCATEGORY_WEAPONS_AMMO,
 	)
@@ -182,6 +190,7 @@
 	. = ..()
 	unlocked_designs += list(
 		/datum/design/c9x25mm_rubber/sec,
+		/datum/design/c9x25mm_rubber_box,
 		/datum/design/c45_mag_rubber/sec,
 		/datum/design/c38_pistol_mag_rubber/sec,
 		/datum/design/breaching_slug,
