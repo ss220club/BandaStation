@@ -4258,6 +4258,7 @@
 "baq" = (
 /obj/structure/cable/layer1,
 /obj/machinery/power/terminal{
+	cable_layer = 1;
 	dir = 4
 	},
 /turf/open/floor/iron/dark,
@@ -4592,7 +4593,11 @@
 /turf/open/floor/plating,
 /area/station/maintenance/disposal/incinerator)
 "bfp" = (
-)
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/visible/layer2,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/visible/layer4,
+/obj/structure/cable,
+/turf/open/floor/iron/dark,
+/area/space)
 "bfw" = (
 /obj/structure/sign/poster/contraband/random/directional/north,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
@@ -20788,7 +20793,6 @@
 "eZo" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/structure/cable/layer1,
-/obj/structure/cable/layer1,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron/dark,
 /area/station/maintenance/disposal/incinerator)
@@ -23246,6 +23250,7 @@
 /obj/effect/turf_decal/tile/yellow/opposingcorners,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/structure/cable,
 /turf/open/floor/iron/dark,
 /area/station/maintenance/disposal/incinerator)
 "fDF" = (
@@ -28888,7 +28893,6 @@
 /area/station/science/ordnance)
 "gUK" = (
 /obj/effect/mapping_helpers/airlock/access/all/engineering/atmos,
-/obj/effect/mapping_helpers/airlock/autoname,
 /obj/machinery/door/airlock/multi_tile/atmospheric/glass{
 	dir = 4
 	},
@@ -33385,7 +33389,6 @@
 "hWS" = (
 /obj/structure/cable,
 /obj/machinery/light/directional/north,
-/obj/machinery/power/apc/auto_name/directional/north,
 /obj/effect/turf_decal/tile/yellow/opposingcorners,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron/dark,
@@ -36821,6 +36824,8 @@
 /obj/machinery/atmospherics/pipe/smart/simple/dark/visible/layer4{
 	dir = 6
 	},
+/obj/structure/cable,
+/obj/machinery/power/apc/auto_name/directional/west,
 /turf/open/floor/iron/dark,
 /area/station/maintenance/disposal/incinerator)
 "iQU" = (
@@ -38003,6 +38008,9 @@
 /obj/structure/reagent_dispensers/watertank/high,
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/light/directional/west,
+/obj/effect/mapping_helpers/airlock/cyclelink_helper{
+	dir = 8
+	},
 /turf/open/floor/iron,
 /area/station/engineering/atmos/mix/ghetto)
 "jfa" = (
@@ -42963,7 +42971,6 @@
 /area/space/nearstation)
 "ksa" = (
 /obj/machinery/door/firedoor,
-/obj/effect/mapping_helpers/airlock/autoname,
 /obj/effect/mapping_helpers/airlock/access/all/engineering/atmos,
 /obj/effect/turf_decal/tile/yellow/half/contrasted{
 	dir = 8
@@ -43217,8 +43224,8 @@
 /turf/open/floor/plating,
 /area/station/science/breakroom)
 "kuI" = (
-/obj/effect/decal/cleanable/dirt,
 /obj/effect/turf_decal/tile/yellow/opposingcorners,
+/turf/open/floor/iron/dark,
 /area/station/engineering/atmos/project)
 "kuR" = (
 /turf/closed/wall/r_wall,
@@ -45241,9 +45248,9 @@
 /turf/open/floor/plating,
 /area/station/maintenance/department/security/ghetto/aft)
 "kRw" = (
-/obj/structure/lattice,
-/turf/open/space/basic,
-/area/space)
+/obj/structure/table,
+/turf/open/floor/iron/dark,
+/area/station/engineering/atmos/storage/gas)
 "kRH" = (
 /obj/structure/cable,
 /obj/structure/dresser,
@@ -45965,7 +45972,6 @@
 /area/station/security/processing)
 "lby" = (
 /obj/machinery/door/firedoor,
-/obj/effect/mapping_helpers/airlock/autoname,
 /obj/effect/mapping_helpers/airlock/access/all/engineering/atmos,
 /obj/effect/turf_decal/tile/yellow/half/contrasted{
 	dir = 8
@@ -46758,8 +46764,9 @@
 /turf/open/floor/iron/dark/textured_large,
 /area/station/engineering/gravity_generator)
 "llV" = (
-/obj/structure/lattice/catwalk,
-/turf/open/space/openspace,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/turf/open/floor/iron,
 /area/station/maintenance/department/engine/atmos)
 "lmn" = (
 /obj/effect/turf_decal/box/white/corners{
@@ -49478,6 +49485,7 @@
 /obj/machinery/atmospherics/pipe/smart/simple/dark/visible/layer4{
 	dir = 4
 	},
+/obj/structure/cable,
 /turf/open/floor/iron/dark,
 /area/station/maintenance/disposal/incinerator)
 "lTt" = (
@@ -51049,9 +51057,6 @@
 "mmg" = (
 /obj/structure/cable,
 /obj/machinery/door/firedoor,
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
 /obj/machinery/door/airlock/atmos,
 /obj/effect/mapping_helpers/airlock/autoname,
 /obj/effect/mapping_helpers/airlock/access/all/engineering/atmos,
@@ -53594,8 +53599,7 @@
 /turf/open/floor/plating,
 /area/station/service/kitchen/abandoned)
 "mSi" = (
-/obj/structure/lattice/catwalk,
-/turf/open/space/basic,
+/turf/closed/wall/r_wall,
 /area/station/maintenance/department/engine/atmos)
 "mSk" = (
 /obj/effect/turf_decal/trimline/yellow/filled/warning{
@@ -59331,6 +59335,7 @@
 /obj/machinery/power/turbine/inlet_compressor{
 	dir = 4
 	},
+/obj/structure/cable/layer1,
 /turf/open/floor/engine,
 /area/station/maintenance/disposal/incinerator)
 "oli" = (
@@ -66721,6 +66726,7 @@
 /obj/machinery/power/turbine/turbine_outlet{
 	dir = 4
 	},
+/obj/structure/cable/layer1,
 /turf/open/floor/engine,
 /area/station/maintenance/disposal/incinerator)
 "pYH" = (
@@ -67671,10 +67677,13 @@
 /turf/open/floor/plating,
 /area/station/engineering/supermatter/engine)
 "qmd" = (
-/obj/structure/cable,
+/obj/machinery/atmospherics/pipe/smart/simple/dark/visible/layer4{
+	dir = 4
+	},
 /obj/effect/decal/cleanable/dirt,
-/turf/closed/wall,
-/area/station/engineering/atmos/project)
+/obj/machinery/firealarm/directional/south,
+/turf/open/floor/plating,
+/area/station/maintenance/disposal/incinerator)
 "qml" = (
 /turf/open/floor/iron,
 /area/station/science/ordnance/office)
@@ -77768,6 +77777,7 @@
 /obj/machinery/atmospherics/pipe/smart/simple/dark/visible/layer4{
 	dir = 10
 	},
+/obj/structure/cable,
 /turf/open/floor/iron/dark,
 /area/station/maintenance/disposal/incinerator)
 "sJI" = (
@@ -90928,6 +90938,7 @@
 	c_tag = "Engineering - Atmos NorthWest";
 	network = list("ss13","engineering")
 	},
+/obj/machinery/firealarm/directional/north,
 /turf/open/floor/iron/dark,
 /area/station/engineering/atmos/storage/gas)
 "vZT" = (
@@ -94691,7 +94702,6 @@
 /obj/machinery/door/firedoor,
 /obj/structure/cable,
 /obj/structure/disposalpipe/segment,
-/obj/effect/mapping_helpers/airlock/autoname,
 /obj/machinery/door/poddoor/preopen{
 	name = "Engineering Security Doors";
 	id = "engineering_lockdown"
@@ -122793,22 +122803,22 @@ doz
 ceC
 doz
 doz
-bOz
-bOz
-bOz
-bOz
-bOz
-bOz
-bOz
-bOz
-bOz
-bOz
-bOz
-bOz
-bOz
-bOz
-bOz
-bOz
+doz
+doz
+doz
+doz
+doz
+doz
+doz
+doz
+doz
+doz
+doz
+doz
+doz
+doz
+doz
+doz
 doz
 doz
 doz
@@ -123050,7 +123060,7 @@ doz
 ceC
 doz
 doz
-bOz
+doz
 pDm
 pDm
 mdl
@@ -123307,7 +123317,7 @@ doz
 ceC
 doz
 doz
-bOz
+doz
 pDm
 xZb
 vpw
@@ -123821,7 +123831,7 @@ doz
 ceC
 doz
 doz
-bOz
+doz
 pDm
 vaF
 hZK
@@ -124078,7 +124088,7 @@ doz
 ceC
 doz
 doz
-bOz
+doz
 pDm
 pgv
 rsq
@@ -124335,7 +124345,7 @@ doz
 ceC
 doz
 doz
-bOz
+doz
 pDm
 pgv
 mQM
@@ -124592,7 +124602,7 @@ doz
 ceC
 doz
 doz
-bOz
+doz
 pDm
 ouO
 mQM
@@ -125106,7 +125116,7 @@ doz
 ceC
 doz
 doz
-bOz
+doz
 pDm
 roT
 aGc
@@ -125363,7 +125373,7 @@ doz
 ceC
 doz
 doz
-bOz
+doz
 pDm
 srB
 pgv
@@ -125620,7 +125630,7 @@ doz
 ceC
 doz
 doz
-bOz
+doz
 pDm
 lqN
 pgv
@@ -126914,7 +126924,7 @@ fqw
 glz
 tDl
 glz
-qmd
+tDl
 glz
 glz
 glz
@@ -126939,7 +126949,7 @@ doz
 doz
 doz
 doz
-kRw
+ceC
 doz
 doz
 doz
@@ -127187,13 +127197,13 @@ doz
 doz
 doz
 doz
-kRw
-kRw
+ceC
+ceC
 doz
-kRw
-kRw
+ceC
+ceC
 doz
-kRw
+ceC
 doz
 uIo
 ceC
@@ -127442,19 +127452,19 @@ ceC
 ceC
 ceC
 ceC
-kRw
-kRw
+ceC
+ceC
 ceC
 ceC
 uIo
 ceC
 ceC
 ceC
-kRw
-kRw
+ceC
+ceC
 vbK
 ceC
-kRw
+ceC
 doz
 doz
 doz
@@ -127698,7 +127708,7 @@ ayT
 ceC
 ceC
 ceC
-bOz
+doz
 ceC
 ceC
 ceC
@@ -128483,7 +128493,7 @@ ceC
 vbK
 ceC
 ceC
-kRw
+ceC
 doz
 doz
 doz
@@ -128726,7 +128736,7 @@ ceC
 ceC
 ceC
 ceC
-kRw
+ceC
 doz
 ceC
 ceC
@@ -128993,7 +129003,7 @@ doz
 doz
 doz
 doz
-kRw
+ceC
 uIo
 ceC
 ceC
@@ -129251,7 +129261,7 @@ doz
 doz
 doz
 doz
-kRw
+ceC
 doz
 doz
 doz
@@ -129480,7 +129490,7 @@ ouO
 pgv
 pgv
 pyt
-nnQ
+llV
 pDm
 oUZ
 doz
@@ -186793,13 +186803,13 @@ trM
 kJd
 bOz
 tYD
-bOz
+doz
 trM
-bAZ
+mSi
 ezC
 lHk
 lHk
-bAZ
+mSi
 trM
 tYD
 tYD
@@ -187050,13 +187060,13 @@ trM
 trM
 bOz
 tYD
-bOz
+doz
 trM
-bAZ
+mSi
 hfT
 lHk
 psc
-bAZ
+mSi
 trM
 tYD
 tYD
@@ -187307,15 +187317,15 @@ rLg
 trM
 bOz
 tYD
-bOz
+doz
 trM
-bAZ
+mSi
 dkQ
 nOE
 dkQ
-bAZ
+mSi
 vbK
-gJs
+tYD
 tYD
 tYD
 tYD
@@ -187564,15 +187574,15 @@ rLg
 trM
 bOz
 bOz
-bOz
+doz
 trM
-bAZ
+mSi
 gfh
 lHk
 gUz
-bAZ
+mSi
 vbK
-gJs
+tYD
 tYD
 tYD
 tYD
@@ -187822,14 +187832,14 @@ trM
 trM
 trM
 trM
-llV
-bAZ
+trM
+mSi
 lrs
 lHk
 ocl
-bAZ
+mSi
 vbK
-gJs
+tYD
 tYD
 tYD
 tYD
@@ -188077,16 +188087,16 @@ nSj
 rLg
 trM
 trM
+mSi
 bAZ
-bAZ
-bAZ
-bAZ
+mSi
+mSi
 hVM
 lHk
 nnQ
-bAZ
+mSi
 vbK
-gJs
+tYD
 tYD
 tYD
 tYD
@@ -188334,16 +188344,16 @@ wrm
 rLg
 trM
 trM
-bAZ
+mSi
 vfQ
 gGQ
-bAZ
+mSi
 nnQ
 lHk
 nnQ
-bAZ
+mSi
 trM
-gJs
+tYD
 tYD
 tYD
 tYD
@@ -188589,18 +188599,18 @@ rLg
 rLg
 jek
 rLg
-bAZ
-bAZ
-bAZ
-bAZ
-bAZ
-bAZ
+mSi
+mSi
+mSi
+mSi
+mSi
+mSi
 gIW
 rlt
 uuF
-bAZ
+mSi
 trM
-bOz
+doz
 doz
 doz
 doz
@@ -188855,9 +188865,9 @@ jXM
 jXM
 hCD
 nnQ
-bAZ
+mSi
 vbK
-bOz
+doz
 doz
 doz
 doz
@@ -189112,9 +189122,9 @@ dkQ
 pPR
 ueK
 rCG
-bAZ
+mSi
 vbK
-bOz
+doz
 doz
 doz
 doz
@@ -189369,9 +189379,9 @@ jmW
 jmW
 ueK
 xZs
-bAZ
+mSi
 vbK
-bOz
+doz
 doz
 doz
 doz
@@ -189626,9 +189636,9 @@ svV
 jmW
 xTa
 aAC
-bAZ
+mSi
 vbK
-bOz
+doz
 doz
 doz
 doz
@@ -189882,14 +189892,14 @@ nTJ
 svV
 jmW
 ueK
-bAZ
-bAZ
+mSi
+mSi
 vbK
-bOz
-bOz
-bOz
-bOz
-bOz
+doz
+doz
+doz
+doz
+doz
 doz
 doz
 tYD
@@ -190139,14 +190149,14 @@ nTJ
 svV
 jmW
 ueK
-bAZ
+mSi
 mSi
 vbK
 vbK
 vbK
 vbK
 vbK
-bOz
+doz
 doz
 doz
 tYD
@@ -190396,14 +190406,14 @@ rcD
 oAD
 jmW
 ueK
-bAZ
-bAZ
-bAZ
-bAZ
-bAZ
-bAZ
+mSi
+mSi
+mSi
+mSi
+mSi
+mSi
 vbK
-bOz
+doz
 doz
 doz
 tYD
@@ -190646,22 +190656,22 @@ awU
 awU
 awU
 awU
-wdb
+kRw
 qTc
 mLC
 lsT
 itz
 jmW
 ueK
-bAZ
+mSi
 nnQ
 nnQ
-bAZ
+mSi
 cIR
-bAZ
+mSi
 vbK
-bOz
-bOz
+doz
+doz
 doz
 tYD
 tYD
@@ -190910,12 +190920,12 @@ gDO
 ssF
 lUx
 ueK
-bAZ
+mSi
 nnQ
 rnq
-bAZ
+mSi
 voa
-bAZ
+mSi
 vbK
 vbK
 vbK
@@ -191167,12 +191177,12 @@ jmW
 jmW
 lUx
 cun
-bAZ
-bAZ
-bAZ
-bAZ
-bAZ
-bAZ
+mSi
+mSi
+mSi
+mSi
+mSi
+mSi
 vbK
 eCK
 ceC
@@ -199393,7 +199403,7 @@ dnG
 eAG
 eeG
 wkR
-jrW
+qmd
 fBZ
 ezb
 ezb
