@@ -1,19 +1,8 @@
-// BANDASTATION ADDITION - Exercise real loadouts, mixed ammunition and seclight attachment.
-/datum/unit_test/sec_force_loadout
-	var/last_impact_sharpness
-	var/last_impact_damage_type
-
-/datum/unit_test/sec_force_loadout/proc/record_impact(datum/source, damage, damagetype, def_zone, blocked, wound_bonus, exposed_wound_bonus, sharpness)
-	SIGNAL_HANDLER
-	last_impact_sharpness = sharpness
-	last_impact_damage_type = damagetype
-
-/datum/unit_test/sec_force_loadout/Run()
+// BANDASTATION ADDITION - Exercise issued security gear and its supply paths.
+/datum/unit_test/sec_force_pistols/Run()
 	var/obj/item/gun/ballistic/automatic/pistol/sec_force/mk58/mk58 = allocate(/obj/item/gun/ballistic/automatic/pistol/sec_force/mk58)
 	var/obj/item/gun/ballistic/automatic/pistol/sec_force/viper/viper = allocate(/obj/item/gun/ballistic/automatic/pistol/sec_force/viper)
-	var/obj/item/knife/security_service/knife = allocate(/obj/item/knife/security_service)
 	var/obj/item/flashlight/seclite/light = allocate(/obj/item/flashlight/seclite)
-	TEST_ASSERT_NULL(knife.embed_type, "The service knife must not inherit combat-knife embedding.")
 	for(var/obj/item/gun/ballistic/automatic/pistol/sec_force/pistol as anything in list(mk58, viper))
 		TEST_ASSERT(istype(pistol.magazine, /obj/item/ammo_box/magazine/c9x25mm_pistol/sec_force/rubber), "[pistol.type] did not spawn with a shared rubber magazine.")
 		TEST_ASSERT(istype(pistol.chambered, /obj/item/ammo_casing/c9x25mm/rubber), "[pistol.type] spawned with a lethal chambered round.")
@@ -22,6 +11,19 @@
 		TEST_ASSERT(istype(pistol.magazine, pistol.accepted_magazine_type), "The spawned magazine is incompatible with its pistol.")
 		TEST_ASSERT(icon_exists(pistol.icon, "[pistol.icon_state]_bolt_locked"), "The open-slide overlay is missing.")
 		TEST_ASSERT(icon_exists(pistol.icon, "[pistol.icon_state]_mag"), "The inserted-magazine overlay is missing.")
+
+	var/datum/component/seclite_attachable/mount = mk58.GetComponent(/datum/component/seclite_attachable)
+	TEST_ASSERT_NOTNULL(mount, "Mk58 has no seclight mount.")
+	mount.add_light(light)
+	TEST_ASSERT_EQUAL(light.loc, mk58, "Attaching the seclight did not move it into the pistol.")
+	TEST_ASSERT_EQUAL(mount.light, light, "The mount lost its attached seclight.")
+	light.forceMove(run_loc_floor_bottom_left)
+	TEST_ASSERT_NULL(mount.light, "Removing the seclight left a stale reference on the mount.")
+
+	TEST_ASSERT_EQUAL(mk58.declent_ru(NOMINATIVE), "МК-58 «Регламент»", "Mk58 did not receive its Russian service name.")
+	TEST_ASSERT_EQUAL(viper.declent_ru(NOMINATIVE), "ПС-3 «Гюрза»", "Viper did not receive its Russian service name.")
+
+/datum/unit_test/sec_force_magazine_states/Run()
 	var/obj/item/ammo_box/magazine/c9x25mm_pistol/sec_force/empty/magazine = allocate(/obj/item/ammo_box/magazine/c9x25mm_pistol/sec_force/empty)
 	TEST_ASSERT_EQUAL(magazine.ammo_count(), 0, "An empty test magazine spawned loaded.")
 	TEST_ASSERT_EQUAL(magazine.icon_state, "nt9x25-0", "The empty magazine did not show its empty state.")
@@ -44,17 +46,20 @@
 		casing.forceMove(run_loc_floor_bottom_left)
 		TEST_ASSERT_EQUAL(magazine.ammo_count(), count - 1, "Removing a round did not update the stored ammunition.")
 		TEST_ASSERT_EQUAL(magazine.icon_state, "nt9x25-[count - 1]", "Removing a round did not update the numerical icon.")
-	var/datum/component/seclite_attachable/mount = mk58.GetComponent(/datum/component/seclite_attachable)
-	TEST_ASSERT_NOTNULL(mount, "Mk58 has no seclight mount.")
-	mount.add_light(light)
-	TEST_ASSERT_EQUAL(light.loc, mk58, "Attaching the seclight did not move it into the pistol.")
-	TEST_ASSERT_EQUAL(mount.light, light, "The mount lost its attached seclight.")
-	light.forceMove(run_loc_floor_bottom_left)
-	TEST_ASSERT_NULL(mount.light, "Removing the seclight left a stale reference on the mount.")
 
-	TEST_ASSERT_EQUAL(mk58.declent_ru(NOMINATIVE), "МК-58 «Регламент»", "Mk58 did not receive its Russian service name.")
-	TEST_ASSERT_EQUAL(viper.declent_ru(NOMINATIVE), "ПС-3 «Гюрза»", "Viper did not receive its Russian service name.")
+/datum/unit_test/sec_force_knife_impact
+	abstract_type = /datum/unit_test/sec_force_knife_impact
+	var/last_impact_sharpness
+	var/last_impact_damage_type
 
+/datum/unit_test/sec_force_knife_impact/proc/record_impact(datum/source, damage, damagetype, def_zone, blocked, wound_bonus, exposed_wound_bonus, sharpness)
+	SIGNAL_HANDLER
+	last_impact_sharpness = sharpness
+	last_impact_damage_type = damagetype
+
+/datum/unit_test/sec_force_knife_impact/combat/Run()
+	var/obj/item/knife/security_service/knife = allocate(/obj/item/knife/security_service)
+	TEST_ASSERT_NULL(knife.embed_type, "The service knife must not inherit combat-knife embedding.")
 	// Exercise the real object-damage modifiers: weaker melee must retain useful cutting.
 	var/mob/living/carbon/human/consistent/user = allocate(/mob/living/carbon/human/consistent)
 	var/obj/structure/spacevine/vine = allocate(/obj/structure/spacevine)
@@ -100,6 +105,7 @@
 	TEST_ASSERT_EQUAL(message_probe.message_calls, 2, "An unblocked hit must request one observer message and one victim message.")
 	TEST_ASSERT_EQUAL(throw_victim.get_brute_loss(), 10, "The message hook changed standard thrown damage.")
 
+/datum/unit_test/sec_force_beacon/Run()
 	// Validate both the beacon's cards and the exact cases it delivers.
 	var/obj/item/choice_beacon/weapon/security_pistol/beacon = allocate(/obj/item/choice_beacon/weapon/security_pistol)
 	var/list/options = beacon.generate_display_names()
@@ -136,6 +142,7 @@
 		TEST_ASSERT_EQUAL(card["name"], display_name, "The beacon card lost the Russian pistol name.")
 		TEST_ASSERT_EQUAL(card["magazine_size"], 12, "The beacon card reports the wrong magazine size.")
 
+/datum/unit_test/sec_force_knife_stock/Run()
 	// Check the actual issued outfits and the lockers that supply the knife.
 	var/list/security_outfits = list(
 		/datum/outfit/job/security,
@@ -159,6 +166,8 @@
 			knife_count++
 		TEST_ASSERT_EQUAL(knife_count, 1, "[locker_path] must stock one service knife.")
 
+/datum/unit_test/sec_force_production/Run()
+	var/mob/living/carbon/human/consistent/user = allocate(/mob/living/carbon/human/consistent)
 	var/datum/techweb/science/station_research = locate(/datum/techweb/science) in SSresearch.techwebs
 	TEST_ASSERT_NOTNULL(station_research, "The station research network is unavailable.")
 	var/obj/machinery/rnd/production/techfab/department/security/security_fab = allocate(/obj/machinery/rnd/production/techfab/department/security)
@@ -185,6 +194,8 @@
 		/datum/design/c9x25mm/ap = /obj/item/ammo_box/magazine/c9x25mm_pistol/sec_force/ap,
 		/datum/design/c9x25mm/hp = /obj/item/ammo_box/magazine/c9x25mm_pistol/sec_force/hp,
 	)
+	var/obj/item/gun/ballistic/automatic/pistol/sec_force/mk58/mk58 = allocate(/obj/item/gun/ballistic/automatic/pistol/sec_force/mk58)
+	var/obj/item/gun/ballistic/automatic/pistol/sec_force/viper/viper = allocate(/obj/item/gun/ballistic/automatic/pistol/sec_force/viper)
 	var/obj/item/gun/ballistic/automatic/pistol/gp9/legacy_pistol = allocate(/obj/item/gun/ballistic/automatic/pistol/gp9/no_mag)
 	for(var/design_path in ammo_designs)
 		var/datum/design/design = SSresearch.techweb_designs[design_path]
@@ -195,6 +206,9 @@
 		TEST_ASSERT(istype(printed_mag, mk58.accepted_magazine_type) && istype(printed_mag, viper.accepted_magazine_type), "The printed magazine is incompatible with a service pistol.")
 		TEST_ASSERT(istype(printed_mag, legacy_pistol.accepted_magazine_type), "The shared recipe broke legacy GP-9 compatibility.")
 
+/datum/unit_test/sec_force_knife_impact/sharpening/Run()
+	var/mob/living/carbon/human/consistent/user = allocate(/mob/living/carbon/human/consistent)
+	var/obj/item/knife/security_service/knife = allocate(/obj/item/knife/security_service)
 	// A normal knife remains a valid improvised instrument for an incision.
 	var/mob/living/carbon/human/consistent/surgery_patient = allocate(/mob/living/carbon/human/consistent)
 	surgery_patient.set_body_position(LYING_DOWN)
@@ -211,18 +225,20 @@
 	TEST_ASSERT_NULL(knife.embed_type, "Sharpening re-enabled service-knife embedding.")
 	var/mob/living/carbon/human/consistent/sharpened_throw_victim = allocate(/mob/living/carbon/human/consistent)
 	RegisterSignal(sharpened_throw_victim, COMSIG_MOB_APPLY_DAMAGE, PROC_REF(record_impact))
-	last_impact_sharpness = null
 	knife.forceMove(run_loc_floor_bottom_left)
 	sharpened_throw_victim.hitby(knife, skipcatch = TRUE, hitpush = FALSE)
 	TEST_ASSERT_EQUAL(sharpened_throw_victim.get_brute_loss(), 9, "A sharpened service knife must deal nine thrown brute damage.")
 	TEST_ASSERT_EQUAL(last_impact_sharpness, SHARP_EDGED, "Sharpening must preserve standard cutting damage.")
 	UnregisterSignal(sharpened_throw_victim, COMSIG_MOB_APPLY_DAMAGE)
 	TEST_ASSERT_EQUAL(knife.get_sharpness(), SHARP_EDGED, "The service knife's blade must remain edged.")
+	var/obj/item/knife/kitchen/kitchen_knife = allocate(/obj/item/knife/kitchen)
 	var/obj/item/sharpener/kitchen_stone = allocate(/obj/item/sharpener)
 	kitchen_stone.item_interaction(user, kitchen_knife, list())
 	TEST_ASSERT_EQUAL(kitchen_knife.force, initial(kitchen_knife.force) + 4, "Ordinary knife melee sharpening was changed.")
 	TEST_ASSERT_EQUAL(kitchen_knife.throwforce, initial(kitchen_knife.throwforce) + 4, "Ordinary knife throw sharpening was changed.")
+	var/mob/living/carbon/human/consistent/throw_victim = allocate(/mob/living/carbon/human/consistent)
 	RegisterSignal(throw_victim, COMSIG_MOB_APPLY_DAMAGE, PROC_REF(record_impact))
+	last_impact_sharpness = null
 	kitchen_knife.forceMove(run_loc_floor_bottom_left)
 	throw_victim.hitby(kitchen_knife, skipcatch = TRUE, hitpush = FALSE)
 	TEST_ASSERT_EQUAL(last_impact_sharpness, SHARP_EDGED, "Ordinary knives must retain sharp thrown impacts.")
@@ -323,11 +339,22 @@
 		TEST_ASSERT_EQUAL(vended.ammo_count(), 12, "The vendor dispensed a magazine without twelve rounds.")
 		checked_products++
 	TEST_ASSERT_EQUAL(checked_products, 2, "The ammunition vendor is missing one shared-magazine product.")
-	for(var/case_type in list(/obj/item/storage/toolbox/guncase/ntcase/pistol/gp9, /obj/item/storage/toolbox/guncase/ntcase/pistol/gp9/sec, /obj/item/storage/toolbox/guncase/ntcase/pistol/gp9/no_ammo))
+	var/list/legacy_cases = list(
+		/obj/item/storage/toolbox/guncase/ntcase/pistol/gp9 = /obj/item/gun/ballistic/automatic/pistol/gp9/no_mag,
+		/obj/item/storage/toolbox/guncase/ntcase/pistol/gp9/sec = /obj/item/gun/ballistic/automatic/pistol/gp9/sec,
+		/obj/item/storage/toolbox/guncase/ntcase/pistol/gp9/no_ammo = /obj/item/gun/ballistic/automatic/pistol/gp9/no_mag,
+	)
+	for(var/case_type in legacy_cases)
 		var/obj/item/storage/toolbox/guncase/gun_case = allocate(case_type)
+		TEST_ASSERT_EQUAL(length(gun_case.contents), 3, "A GP-9 case should contain one pistol and two spare magazines.")
+		var/obj/item/gun/delivered_pistol = locate() in gun_case.contents
+		TEST_ASSERT_NOTNULL(delivered_pistol, "A GP-9 case no longer contains a pistol.")
+		TEST_ASSERT_EQUAL(delivered_pistol.type, legacy_cases[case_type], "A GP-9 case now contains a different pistol.")
+		var/expected_rounds = case_type == /obj/item/storage/toolbox/guncase/ntcase/pistol/gp9/no_ammo ? 0 : 12
 		var/spare_count = 0
 		for(var/obj/item/ammo_box/magazine/spare in gun_case.contents)
 			TEST_ASSERT(istype(spare, /obj/item/ammo_box/magazine/c9x25mm_pistol/sec_force), "A standard GP-9 case still delivers incompatible spare magazines.")
+			TEST_ASSERT_EQUAL(spare.ammo_count(), expected_rounds, "A GP-9 case spare magazine has the wrong round count.")
 			spare_count++
 		TEST_ASSERT_EQUAL(spare_count, 2, "A GP-9 case lost a spare magazine.")
 
