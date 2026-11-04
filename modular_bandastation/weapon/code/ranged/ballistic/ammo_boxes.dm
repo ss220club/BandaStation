@@ -710,7 +710,7 @@
 
 // MARK: BOXES WITH MAGAZINES / AMMO BOXES
 /obj/item/storage/toolbox/ammobox/c9x25mm_mags
-	name = "коробка пистолетных магазинов 9x25 мм НТ"
+	name = "9x25mm NT pistol magazines box"
 	desc = "Содержит несколько общих магазинов на 12 патронов 9x25 мм НТ для МК-58 «Регламент», ПС-3 «Гюрза» и GP-9."
 	ammo_to_spawn = /obj/item/ammo_box/magazine/c9x25mm_pistol/sec_force
 
