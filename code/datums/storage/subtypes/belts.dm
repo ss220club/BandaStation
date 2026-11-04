@@ -98,6 +98,7 @@
 		/obj/item/grenade,
 		/obj/item/holosign_creator/security,
 		/obj/item/knife/combat,
+		/obj/item/knife/security_service, // BANDASTATION ADDITION - Standard security utility knife.
 		/obj/item/melee/baton,
 		/obj/item/radio,
 		/obj/item/reagent_containers/spray/pepper,

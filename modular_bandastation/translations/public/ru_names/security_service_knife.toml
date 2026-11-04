@@ -1,0 +1,8 @@
+["security service knife"]
+nominative = "служебный нож"
+genitive = "служебного ножа"
+dative = "служебному ножу"
+accusative = "служебный нож"
+instrumental = "служебным ножом"
+prepositional = "служебном ноже"
+gender = "male"

@@ -186,6 +186,14 @@
 	)
 	departmental_flags = DEPARTMENT_BITFLAG_SECURITY
 
+/datum/design/security_service_knife
+	name = "Служебный нож"
+	build_type = PROTOLATHE
+	materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 6)
+	build_path = /obj/item/knife/security_service
+	category = list(RND_CATEGORY_EQUIPMENT + RND_SUBCATEGORY_EQUIPMENT_SECURITY)
+	departmental_flags = DEPARTMENT_BITFLAG_SECURITY
+
 /datum/techweb_node/basic_arms/New()
 	. = ..()
 	unlocked_designs += list(
@@ -194,6 +202,7 @@
 		/datum/design/c45_mag_rubber/sec,
 		/datum/design/c38_pistol_mag_rubber/sec,
 		/datum/design/breaching_slug,
+		/datum/design/security_service_knife,
 	)
 
 /datum/techweb_node/riot_supression/New()
