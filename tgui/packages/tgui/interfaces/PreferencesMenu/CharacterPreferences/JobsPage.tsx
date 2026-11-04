@@ -10,9 +10,10 @@ import {
   JobRowControls,
   useJobPriorityButtonProps,
 } from '../../../bandastation/donor_jobs/JobRestriction';
-import { SubscriptionJobs } from '../../../bandastation/donor_jobs/SubscriptionJobs';
 import { useJobTabFilter } from '../../../bandastation/donor_jobs/JobTabs';
+import { SubscriptionJobs } from '../../../bandastation/donor_jobs/SubscriptionJobs';
 import { prepareJobPriorityCache } from '../../../bandastation/job_slots_preferences/priority';
+import { JobVariantSelector } from '../../../bandastation/jobs/JobVariantSelector';
 // SS220 EDIT - END
 import { JOBS_RU } from '../../../bandastation/ru_jobs'; // BANDASTATION EDIT
 import {
@@ -227,7 +228,11 @@ function JobRow(props: JobRowProps) {
       <Stack fill align="center">
         <Tooltip content={job.description} position="bottom-start">
           <Stack.Item grow className="job-name">
-            {JOBS_RU[name] || name}
+            {/* SS220 START */}
+            <JobVariantSelector name={name}>
+              {JOBS_RU[name] || name}
+            </JobVariantSelector>
+            {/* SS220 END */}
           </Stack.Item>
         </Tooltip>
         <Stack.Item className="options">{rightSide}</Stack.Item>
