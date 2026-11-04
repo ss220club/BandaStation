@@ -59,15 +59,16 @@
 		return FALSE
 
 	var/datum/redspace_field_source/wave/wave_source = src
-	var/list/center = wave_source.get_current_center()
-	var/delta_x = center[1] - coverage_center_x
-	var/delta_y = center[2] - coverage_center_y
+	wave_source.update_current_center()
+	var/delta_x = wave_source.current_center_x - coverage_center_x
+	var/delta_y = wave_source.current_center_y - coverage_center_y
 	return delta_x * delta_x + delta_y * delta_y >= REDSPACE_HEX_RADIUS * REDSPACE_HEX_RADIUS
 
 
 /datum/redspace_field_source/proc/get_coverage_refresh_keys(include_in_progress = FALSE) as /list
-	var/list/refresh_keys = coverage_refresh_cell_keys.Copy()
-	coverage_refresh_cell_keys.Cut()
+	// The caller owns this consumed batch; future discovery gets a fresh list.
+	var/list/refresh_keys = coverage_refresh_cell_keys
+	coverage_refresh_cell_keys = list()
 	if(include_in_progress && length(coverage_seen_cells))
 		for(var/cell_key in coverage_seen_cells)
 			refresh_keys |= cell_key

@@ -83,6 +83,12 @@
 		return
 	return "[event.event_id]:[zone_key]"
 
+/// Uses an already resolved zone so selection can reject cooldowns before
+/// allocating a definition or repeating the target's hex conversion.
+/datum/controller/subsystem/redspace/proc/is_event_on_cooldown(event_id, zone_key)
+	var/available_at = event_cooldowns["[event_id]:[zone_key]"]
+	return available_at && world.time < available_at
+
 /datum/controller/subsystem/redspace/proc/can_start_event_instance(datum/redspace_event/event, turf/target)
 	if(!event || !event.can_start(target))
 		return FALSE
@@ -92,9 +98,7 @@
 		return FALSE
 	event.budget_zone_key = zone_key
 
-	var/cooldown_key = get_event_cooldown_key(event, target)
-	var/available_at = event_cooldowns[cooldown_key]
-	if(available_at && world.time < available_at)
+	if(is_event_on_cooldown(event.event_id, zone_key))
 		return FALSE
 
 	var/datum/redspace_event_budget/budget = get_event_budget(zone_key)

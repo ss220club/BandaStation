@@ -83,6 +83,8 @@
 		var/weight = event_weights[event_id]
 		if(!isnum(weight) || weight <= 0)
 			continue
+		if(SSredspace.is_event_on_cooldown(event_id, cell.key))
+			continue
 		var/datum/redspace_event/event = SSredspace.create_registered_event(event_id)
 		if(!event)
 			continue

@@ -75,11 +75,14 @@
 	if(!length(source.coverage_turfs))
 		if(!source.coverage_needs_refresh())
 			return TRUE
-		var/list/center = list(source.origin_x, source.origin_y)
+		var/center_x = source.origin_x
+		var/center_y = source.origin_y
 		if(istype(source, /datum/redspace_field_source/wave))
 			var/datum/redspace_field_source/wave/wave_source = source
-			center = wave_source.get_current_center()
-		var/turf/center_turf = locate(round(center[1]), round(center[2]), source.z_level)
+			wave_source.update_current_center()
+			center_x = wave_source.current_center_x
+			center_y = wave_source.current_center_y
+		var/turf/center_turf = locate(round(center_x), round(center_y), source.z_level)
 		if(!center_turf)
 			return TRUE
 		var/coverage_radius = source.radius
@@ -103,15 +106,15 @@
 					var/turf/representative_turf = redspace_hex_representative_turf(source.z_level, q, r)
 					if(!representative_turf)
 						continue
-					var/delta_x = representative_turf.x - center[1]
-					var/delta_y = representative_turf.y - center[2]
+					var/delta_x = representative_turf.x - center_x
+					var/delta_y = representative_turf.y - center_y
 					if(delta_x * delta_x + delta_y * delta_y <= effective_radius_squared)
 						coverage_candidates += representative_turf
 		source.coverage_turfs = coverage_candidates
 		source.coverage_seen_cells = list()
 		source.coverage_cursor = 1
-		source.coverage_center_x = center[1]
-		source.coverage_center_y = center[2]
+		source.coverage_center_x = center_x
+		source.coverage_center_y = center_y
 		source.coverage_refresh_cell_keys |= source.coverage_cell_keys
 
 	while(source.coverage_cursor <= length(source.coverage_turfs))
@@ -132,9 +135,9 @@
 	for(var/cell_key in source.coverage_seen_cells)
 		current_coverage_keys += cell_key
 	source.coverage_cell_keys = current_coverage_keys
-	source.coverage_cell_lookup = list()
-	for(var/cell_key in current_coverage_keys)
-		source.coverage_cell_lookup[cell_key] = TRUE
+	// Discovery already built the complete lookup. Publish it only once the
+	// resumable scan finishes, then detach it from the next discovery pass.
+	source.coverage_cell_lookup = source.coverage_seen_cells
 	source.coverage_turfs = null
 	source.coverage_seen_cells = null
 	source.coverage_cursor = 1

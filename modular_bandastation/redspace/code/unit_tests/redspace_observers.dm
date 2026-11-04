@@ -90,6 +90,41 @@
 		SSredspace.state = SS_RUNNING
 		SSredspace.process_pending_cell_prunes()
 
+/datum/unit_test/redspace_observers/refresh_batches
+
+/datum/unit_test/redspace_observers/refresh_batches/Run()
+	var/datum/redspace_field_source/source = allocate(/datum/redspace_field_source, 0, start_turf, 4, 2)
+	source.coverage_cell_keys = list("old", "shared")
+	source.coverage_refresh_cell_keys = list("pending", "shared")
+	source.coverage_seen_cells = list("new" = TRUE, "shared" = TRUE)
+	var/list/first_batch = source.get_coverage_refresh_keys(include_in_progress = TRUE)
+	if(length(first_batch) != 3 || !("pending" in first_batch) || !("shared" in first_batch) || !("new" in first_batch) || length(source.coverage_refresh_cell_keys))
+		return Fail("Consuming refresh keys must deduplicate pending and partial coverage and drain the pending batch")
+	source.reset_coverage_cache()
+	var/list/next_batch = source.get_coverage_refresh_keys()
+	if(length(first_batch) != 3 || ("old" in first_batch) || length(next_batch) != 2 || !("old" in next_batch) || !("shared" in next_batch))
+		return Fail("Resetting coverage must queue its old cells without changing a previously returned refresh batch")
+	next_batch += "caller_only"
+	var/list/fallback_batch = source.get_coverage_refresh_keys()
+	fallback_batch.Cut()
+	if(length(source.coverage_cell_keys) != 2 || ("caller_only" in source.coverage_cell_keys))
+		return Fail("Returned refresh and fallback batches must be independent of retained source coverage")
+
+/datum/unit_test/redspace_observers/wave_coverage_threshold
+
+/datum/unit_test/redspace_observers/wave_coverage_threshold/Run()
+	var/datum/redspace_field_source/wave/wave = allocate(/datum/redspace_field_source/wave, 0, start_turf, 4, 2, REDSPACE_PROFILE_DEBUG, null, null, 0.5, 0)
+	wave.coverage_cell_keys = list("covered")
+	wave.coverage_center_x = start_turf.x
+	wave.coverage_center_y = start_turf.y
+	wave.created_at = world.time - 11 SECONDS
+	if(wave.coverage_needs_refresh())
+		return Fail("A fractional wave displacement below one hex radius must retain its coverage")
+	wave.created_at = world.time - 12 SECONDS
+	wave.center_updated_at = -1
+	if(!wave.coverage_needs_refresh())
+		return Fail("A wave displaced by exactly one hex radius must refresh its coverage")
+
 /datum/unit_test/redspace_observers/transfer
 
 /datum/unit_test/redspace_observers/transfer/Run()

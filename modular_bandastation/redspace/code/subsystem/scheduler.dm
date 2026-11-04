@@ -403,9 +403,7 @@
 /datum/controller/subsystem/redspace/proc/can_attempt_event_in_cell(datum/redspace_event/event, datum/redspace_field_cell/cell)
 	if(!event || !cell)
 		return FALSE
-	var/cooldown_key = "[event.event_id]:[cell.key]"
-	var/available_at = event_cooldowns[cooldown_key]
-	if(available_at && world.time < available_at)
+	if(is_event_on_cooldown(event.event_id, cell.key))
 		return FALSE
 	var/datum/redspace_event_budget/budget = event_budgets[cell.key]
 	if(budget && !budget.can_start(event))

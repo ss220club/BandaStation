@@ -9,6 +9,14 @@
 /datum/redspace_event/unit_test_scheduler/start(client/admin, turf/target)
 	return TRUE
 
+/datum/redspace_event/unit_test_scheduler/cooldown_probe
+	event_id = "scheduler_cooldown_probe"
+	var/static/construction_count = 0
+
+/datum/redspace_event/unit_test_scheduler/cooldown_probe/New()
+	. = ..()
+	construction_count++
+
 /datum/redspace_event/spawn/turf/unit_test_scheduler
 	event_id = "scheduler_turf"
 	automatic = TRUE
@@ -218,6 +226,56 @@
 	if(!drain_schedule() || SSredspace.metric_automatic_attempts != 2 || budget.next_attempt_at <= world.time || length(started_keys))
 		return Fail("A missing-target rejection must consume its cadence and release its temporary definitions")
 
+/datum/unit_test/redspace_scheduler/cooldown_preflight
+
+/datum/unit_test/redspace_scheduler/cooldown_preflight/Run()
+	var/datum/redspace_event/unit_test_scheduler/cooldown_probe/probe = allocate(/datum/redspace_event/unit_test_scheduler/cooldown_probe)
+	SSredspace.register_event_type(probe.type)
+	var/datum/redspace_event_profile/profile = SSredspace.get_event_profile(REDSPACE_STATE_STORM)
+	profile.event_weights = list("scheduler_cooldown_probe" = 1)
+	var/datum/redspace_field_cell/cell = test_cells[1]
+	var/datum/redspace_event_budget/budget = SSredspace.event_budgets[cell.key]
+	var/cooldown_key = "scheduler_cooldown_probe:[cell.key]"
+	SSredspace.event_cooldowns[cooldown_key] = world.time + 1 MINUTES
+	budget.next_attempt_at = world.time
+	SSredspace.event_wake_dirty = TRUE
+	SSredspace.automatic_event_attempts_remaining = 8
+	probe.construction_count = 0
+	if(!drain_schedule() || normal_started || SSredspace.metric_automatic_attempts != 1 || budget.next_attempt_at != world.time + 1 MINUTES)
+		return Fail("A cooldown rejection must consume one attempt and advance only its scheduled cadence")
+	if(probe.construction_count)
+		return Fail("An automatic definition on cooldown must be rejected before constructing temporary event instances")
+
+	// Expiry is inclusive: a definition is available at its exact deadline.
+	SSredspace.event_cooldowns[cooldown_key] = world.time
+	budget.next_attempt_at = world.time
+	SSredspace.event_wake_dirty = TRUE
+	if(!drain_schedule() || normal_started != 1 || !probe.construction_count || SSredspace.metric_automatic_attempts != 2)
+		return Fail("The exact cooldown deadline must allow one event through the real selection and start path")
+
+/datum/unit_test/redspace_scheduler/cooldown_after_yield
+
+/datum/unit_test/redspace_scheduler/cooldown_after_yield/Run()
+	var/datum/redspace_event_profile/profile = SSredspace.get_event_profile(REDSPACE_STATE_STORM)
+	profile.event_weights = list("scheduler_effect" = 1)
+	var/datum/redspace_field_cell/cell = test_cells[1]
+	var/datum/redspace_event_attempt/attempt = SSredspace.queue_automatic_event_attempt(cell)
+	var/result
+	for(var/pass in 1 to 100)
+		SSredspace.state = SS_RUNNING
+		SSredspace.unit_test_work_remaining = 1
+		result = SSredspace.try_start_automatic_event(attempt)
+		if(length(attempt.candidate_targets) || result != REDSPACE_ATTEMPT_DEFERRED)
+			break
+	if(result != REDSPACE_ATTEMPT_DEFERRED || !length(attempt.candidate_targets))
+		return Fail("Cooldown revalidation requires a selection paused after finding an eligible target")
+	SSredspace.event_cooldowns["scheduler_effect:[cell.key]"] = world.time + 1 MINUTES
+	SSredspace.state = SS_RUNNING
+	SSredspace.unit_test_work_remaining = null
+	if(SSredspace.try_start_automatic_event(attempt) != REDSPACE_ATTEMPT_REJECTED || normal_started)
+		return Fail("A cooldown applied during a yield must still prevent the selected event from starting")
+	SSredspace.finish_automatic_event_attempt(attempt)
+
 /datum/unit_test/redspace_scheduler/cancellation
 
 /datum/unit_test/redspace_scheduler/cancellation/Run()
@@ -269,11 +327,28 @@
 		if(SSredspace.process_sources())
 			completed = TRUE
 			break
+		for(var/datum/redspace_field_source/source as anything in sources)
+			if(source.coverage_turfs && source.coverage_cell_lookup)
+				return Fail("An interrupted initial coverage scan must not publish a partial lookup")
 	if(!completed || SSredspace.source_pass_in_progress || length(SSredspace.source_currentrun) || !SSredspace.refresh_in_progress)
 		return Fail("The outer source pass must resume coverage and publish its accumulated refresh")
 	for(var/datum/redspace_field_source/hotspot/unit_test_scheduler/source as anything in sources)
 		if(source.growth_calls != 1 || length(source.coverage_cell_keys) != 3 || source.coverage_turfs)
 			return Fail("Resuming coverage must grow every source once and finish every source's coverage")
+		for(var/index in 1 to 3)
+			var/datum/redspace_field_cell/cell = test_cells[index]
+			if(!source.coverage_cell_lookup[cell.key] || !(cell.key in SSredspace.refresh_currentrun))
+				return Fail("Resumed coverage must publish every discovered cell in its lookup and targeted refresh")
+		var/list/completed_lookup = source.coverage_cell_lookup
+		source.reset_coverage_cache()
+		source.coverage_turfs = list(test_cells[4].get_sample_turf())
+		source.coverage_seen_cells = list()
+		SSredspace.unit_test_work_remaining = null
+		var/datum/redspace_field_cell/new_cell = test_cells[4]
+		if(!SSredspace.ensure_source_cells(source) || length(source.coverage_cell_lookup) != 1 || !source.coverage_cell_lookup[new_cell.key])
+			return Fail("Rebuilding coverage must publish the new lookup independently of previous cells")
+		if(length(completed_lookup) != 3 || completed_lookup[new_cell.key])
+			return Fail("A new coverage pass must not mutate the completed lookup from the previous pass")
 
 /datum/unit_test/redspace_scheduler/source_removal
 
