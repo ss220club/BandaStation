@@ -394,6 +394,12 @@
 	icon_state = "45box-ap"
 	ammo_type = /obj/item/ammo_casing/c45/ap
 
+/obj/item/ammo_box/c45/incendiary
+	name = "ammo box (.45 incendiary)"
+	desc = parent_type::desc + "<br>Красная полоска указывает на то, что в ней должны храниться зажигательные боеприпасы."
+	icon_state = "45box-incendiary"
+	ammo_type = /obj/item/ammo_casing/c45/inc
+
 // MARK: 10mm
 /obj/item/ammo_box/c10mm
 	name = "ammo box (10mm)"

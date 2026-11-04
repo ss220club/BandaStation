@@ -130,11 +130,60 @@
 	)
 	departmental_flags = DEPARTMENT_BITFLAG_SECURITY
 
+/datum/design/c38_pistol_mag
+	name = "pistol magazine (.38) (Lethal)"
+	desc = "Предназначен для быстрой перезарядки пистолетов GP-38."
+	build_type = AUTOLATHE
+	materials = list(
+		/datum/material/iron = SHEET_MATERIAL_AMOUNT * 10
+	)
+	transfered_materials = list(
+		/obj/item/ammo_box/magazine/c38 = /obj/item/ammo_box/magazine/c38::custom_materials,
+	)
+	build_path = /obj/item/ammo_box/magazine/c38
+	category = list(
+		RND_CATEGORY_INITIAL,
+		RND_CATEGORY_WEAPONS + RND_SUBCATEGORY_WEAPONS_AMMO,
+	)
+	departmental_flags = DEPARTMENT_BITFLAG_SECURITY
+
+/datum/design/c38_pistol_mag/sec
+	build_type = PROTOLATHE | AWAY_LATHE
+	category = list(
+		RND_CATEGORY_WEAPONS + RND_SUBCATEGORY_WEAPONS_AMMO
+	)
+	departmental_flags = DEPARTMENT_BITFLAG_SECURITY
+
+/datum/design/c38_pistol_mag_rubber
+	name = "pistol magazine (.38 Rubber) (Less Lethal)"
+	desc = "Предназначен для быстрой перезарядки пистолетов GP-38. Резиновые пули обладают отскоком и являются менее смертоносными."
+	build_type = AUTOLATHE
+	materials = list(
+		/datum/material/iron = HALF_SHEET_MATERIAL_AMOUNT * 10
+	)
+	transfered_materials = list(
+		/obj/item/ammo_box/magazine/c38/rubber = /obj/item/ammo_box/magazine/c38/rubber::custom_materials,
+	)
+	build_path = /obj/item/ammo_box/magazine/c38/rubber
+	category = list(
+		RND_CATEGORY_INITIAL,
+		RND_CATEGORY_WEAPONS + RND_SUBCATEGORY_WEAPONS_AMMO
+	)
+	departmental_flags = DEPARTMENT_BITFLAG_SECURITY
+
+/datum/design/c38_pistol_mag_rubber/sec
+	build_type = PROTOLATHE | AWAY_LATHE
+	category = list(
+		RND_CATEGORY_WEAPONS + RND_SUBCATEGORY_WEAPONS_AMMO
+	)
+	departmental_flags = DEPARTMENT_BITFLAG_SECURITY
+
 /datum/techweb_node/basic_arms/New()
 	. = ..()
 	unlocked_designs += list(
 		/datum/design/c9x25mm_rubber/sec,
 		/datum/design/c45_mag_rubber/sec,
+		/datum/design/c38_pistol_mag_rubber/sec,
 		/datum/design/breaching_slug,
 	)
 
@@ -143,6 +192,7 @@
 	unlocked_designs += list(
 		/datum/design/c9x25mm/sec,
 		/datum/design/c45_mag/sec,
+		/datum/design/c38_pistol_mag/sec,
 	)
 
 /datum/techweb_node/exotic_ammo/New()

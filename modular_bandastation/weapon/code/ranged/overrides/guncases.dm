@@ -345,8 +345,8 @@
 	extra_to_spawn = /obj/item/ammo_box/magazine/c9x25mm_pistol/rubber
 
 /obj/item/storage/toolbox/guncase/ntspecial/pistol/ladon
-	weapon_to_spawn = /obj/item/gun/ballistic/automatic/pistol/pdh/ladon/blueshield
-	extra_to_spawn = /obj/item/ammo_box/magazine/m50
+	weapon_to_spawn = /obj/item/gun/ballistic/automatic/pistol/pdh/ladon
+	extra_to_spawn = /obj/item/ammo_box/magazine/m50/lowpower
 
 /obj/item/storage/toolbox/guncase/ntspecial/pistol/tng_3
 	weapon_to_spawn = /obj/item/gun/energy/laser/thermal/tng3
