@@ -38,56 +38,56 @@
 		return TRUE
 	// Software related ui actions
 	if(available_software[action] && !installed_software.Find(action))
-		balloon_alert(ui.user, "software unavailable!")
+		balloon_alert(ui.user, "программное обеспечение недоступно!")
 		return FALSE
 	switch(action)
-		if("Atmospheric Sensor")
+		if("Атмосферный датчик")
 			atmos_analyzer.attack_self(src)
 			return TRUE
-		if("Crew Manifest")
+		if("Список членов экипажа")
 			ai_roster()
 			return TRUE
-		if("Crew Monitor")
+		if("Монитор экипажа")
 			crew_monitor.attack_self(src) // BANDASTATION REPLACEMENT: GLOB.crewmonitor.show(usr, src)
 			return TRUE
-		if("Digital Messenger")
+		if("Цифровой мессенджер")
 			modularInterface?.interact(usr)
 			return TRUE
-		if("Door Jack")
+		if("Дверной взломщик")
 			// Look to door_jack.dm for implementation
 			door_jack(params["mode"])
 			return TRUE
-		if("Encryption Slot")
-			balloon_alert(usr, "radio frequencies [!encrypt_mod ? "enabled" : "disabled"]")
+		if("Слот для ключа шифрования")
+			balloon_alert(usr, "радиочастоты [!encrypt_mod ? "включены" : "отключены"]")
 			encrypt_mod = !encrypt_mod
 			radio.subspace_transmission = !radio.subspace_transmission
 			return TRUE
-		if("Host Scan")
+		if("Сканирование хоста")
 			host_scan(params["mode"])
 			return TRUE
-		if("Internal GPS")
+		if("Встроенный GPS")
 			internal_gps.attack_self(src)
 			return TRUE
-		if("Music Synthesizer")
+		if("Музыкальный синтезатор")
 			instrument.interact(src)
 			return TRUE
-		if("Medical HUD")
+		if("Медицинский ИЛС")
 			toggle_hud(PAI_TOGGLE_MEDICAL_HUD)
 			return TRUE
-		if("Newscaster")
+		if("Ведущий новостей")
 			newscaster.ui_interact(src)
 			return TRUE
-		if("Photography Module")
+		if("Модуль фотографии")
 			// Look to pai_camera.dm for implementation
 			use_camera(usr, params["mode"])
 			return TRUE
-		if("Remote Signaler")
+		if("Удаленный сигнализатор")
 			signaler.ui_interact(src)
 			return TRUE
-		if("Security HUD")
+		if("Охранный ИЛС")
 			toggle_hud(PAI_TOGGLE_SECURITY_HUD)
 			return TRUE
-		if("Universal Translator")
+		if("Универсальный переводчик")
 			grant_languages()
 			ui.send_full_update()
 			return TRUE
@@ -112,23 +112,23 @@
 	var/datum/hud/pai/pAIhud = hud_used
 	pAIhud?.update_software_buttons()
 	switch(selection)
-		if("Atmospheric Sensor")
+		if("Атмосферный датчик")
 			atmos_analyzer = new(src)
-		if("Digital Messenger")
+		if("Цифровой мессенджер")
 			create_modularInterface()
-		if("Internal GPS")
+		if("Встроенный GPS")
 			internal_gps = new(src)
-		if("Music Synthesizer")
+		if("Музыкальный синтезатор")
 			instrument = new(src)
-		if("Newscaster")
+		if("Ведущий новостей")
 			newscaster = new(src)
 		// BANDASTATION EDIT START
-		if("Crew Monitor")
+		if("Монитор экипажа")
 			crew_monitor = new(src)
 		// BANDASTATION EDIT END
-		if("Photography Module")
+		if("Модуль фотографии")
 			aicamera = new /obj/item/camera/siliconcam/pai_camera(src)
-		if("Remote Signaler")
+		if("Удаленный сигнализатор")
 			signaler = new(src)
 	return TRUE
 
@@ -161,22 +161,22 @@
  */
 /mob/living/silicon/pai/proc/check_dna()
 	if(emagged) // Their master DNA signature is scrambled anyway
-		to_chat(src, span_syndradio("You are not at liberty to do this! All agents are clandestine."))
+		to_chat(src, span_syndradio("Вы не имеете права этого делать! Все агенты работают под прикрытием."))
 		return FALSE
 	var/mob/living/carbon/holder = get_holder()
 	if(!isnull(holder))
-		balloon_alert(src, "not being carried")
+		balloon_alert(src, "не переносится")
 		return FALSE
-	balloon_alert(src, "requesting dna sample")
-	if(tgui_alert(holder, "[src] is requesting a DNA sample from you. Will you allow it to confirm your identity?", "Checking DNA", list("Yes", "No")) != "Yes")
-		balloon_alert(src, "dna sample refused!")
+	balloon_alert(src, "запрос образца ДНК")
+	if(tgui_alert(holder, "[src.declent_ru(NOMINATIVE)] запрашивает у вас образец ДНК. Вы позволите ему подтвердить вашу личность?", "Проверка ДНК", list("Да", "Нет")) != "Да")
+		balloon_alert(src, "образец ДНК не предоставлен!")
 		return FALSE
-	holder.visible_message(span_notice("[holder] presses [holder.p_their()] thumb against [src]."), span_notice("You press your thumb against [src]."), span_notice("[src] makes a sharp clicking sound as it extracts DNA material from [holder]."))
+	holder.visible_message(span_notice("[holder] прижимает [holder.ru_p_theirs()] большой палец к [src.declent_ru(DATIVE)]."), span_notice("Вы прижимаете большой палец к [src.declent_ru(DATIVE)]."), span_notice("[src.declent_ru(NOMINATIVE)] издает резкий щёлкающий звук при извлечении ДНК-материала из [holder]."))
 	if(!holder.has_dna())
-		balloon_alert(src, "no dna detected!")
+		balloon_alert(src, "ДНК не обнаружено!")
 		return FALSE
-	to_chat(src, span_bolddanger(("[holder]'s UE string: [holder.dna.unique_enzymes]")))
-	to_chat(src, span_notice("DNA [holder.dna.unique_enzymes == master_dna ? "matches" : "does not match"] our stored Master's DNA."))
+	to_chat(src, span_bolddanger(("UE-строка [holder]: [holder.dna.unique_enzymes]")))
+	to_chat(src, span_notice("ДНК [holder.dna.unique_enzymes == master_dna ? "совпадение" : "не соответствует"] сохраненной ДНК мастера."))
 	return TRUE
 
 /**
@@ -204,7 +204,7 @@
 		if(PAI_SCAN_TARGET)
 			var/mob/living/carbon/target = get_holder()
 			if(isnull(target))
-				balloon_alert(src, "not being carried!")
+				balloon_alert(src, "не переносится!")
 				return FALSE
 			healthscan(src, target)
 			return TRUE
@@ -212,10 +212,10 @@
 		if(PAI_SCAN_MASTER)
 			var/mob/living/resolved_master = find_master()
 			if(isnull(resolved_master))
-				balloon_alert(src, "no master detected!")
+				balloon_alert(src, "мастер не обнаружен!")
 				return FALSE
 			if(!is_valid_z_level(get_turf(src), get_turf(resolved_master)))
-				balloon_alert(src, "master out of range!")
+				balloon_alert(src, "мастер вне досягаемости!")
 				return FALSE
 			healthscan(src, resolved_master)
 			return TRUE

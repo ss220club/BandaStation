@@ -16,15 +16,15 @@
 	log_game("An alien egg has been delivered to [AREACOORD(spawn_turf)]")
 
 	var/datum/command_footnote/footnote = new()
-	footnote.message = "We have entrusted your crew with a research specimen in [get_area(src)]. \
-		Remember to follow all safety precautions when dealing with the specimen."
-	footnote.signature = "Central Command"
+	footnote.message = "Мы доверили вашей команде исследовательский образец в [get_area(src)]. \
+		Не забывайте соблюдать все меры предосторожности при работе с образцом."
+	footnote.signature = "Центральное Командование"
 
 	GLOB.communications_controller.command_report_footnotes += footnote
 
 /obj/structure/alien/egg/delivery
 	name = "xenobiological specimen egg"
-	desc = "A large mottled egg, sent as a part of a Xenobiological Research Initiative by the higher-ups. Handle with care!"
+	desc = "Большое пёстрое яйцо, присланное руководством в рамках инициативы по ксенобиологическим исследованиям. Обращайтесь с ним осторожно!"
 	max_integrity = 300
 
 /obj/structure/alien/egg/delivery/Initialize(mapload)
