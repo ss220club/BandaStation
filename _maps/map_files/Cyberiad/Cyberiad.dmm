@@ -4529,6 +4529,8 @@
 "bet" = (
 /obj/structure/cable,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/purple/visible,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /turf/open/floor/iron/dark,
 /area/station/engineering/atmos/mix/ghetto)
 "bev" = (
@@ -16597,6 +16599,7 @@
 /obj/machinery/atmospherics/pipe/smart/simple/green/visible{
 	dir = 5
 	},
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /turf/open/floor/iron/dark,
 /area/station/engineering/atmos/mix/ghetto)
 "dXb" = (
@@ -17264,6 +17267,13 @@
 	},
 /turf/open/floor/iron,
 /area/station/security/office)
+"eeG" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer2{
+	dir = 1
+	},
+/turf/open/floor/iron/dark,
+/area/station/engineering/atmos/mix/ghetto)
 "eeM" = (
 /obj/structure/filingcabinet/employment,
 /obj/effect/turf_decal/siding/wood{
@@ -20473,6 +20483,9 @@
 /area/station/cargo/storage)
 "eVB" = (
 /obj/structure/cable,
+/obj/machinery/atmospherics/components/unary/vent_pump/on/layer4{
+	dir = 1
+	},
 /turf/open/floor/iron/dark,
 /area/station/engineering/atmos/mix/ghetto)
 "eVH" = (
@@ -23090,6 +23103,11 @@
 /obj/structure/cable,
 /turf/open/floor/plating,
 /area/station/security/holding_cell)
+"fBZ" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/turf/open/floor/iron/dark,
+/area/station/engineering/atmos/mix/ghetto)
 "fCe" = (
 /obj/machinery/door/airlock,
 /obj/effect/mapping_helpers/airlock/autoname,
@@ -25897,6 +25915,8 @@
 /obj/effect/turf_decal/trimline/yellow/warning{
 	dir = 4
 	},
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /turf/open/floor/iron,
 /area/station/engineering/atmos)
 "gjF" = (
@@ -26765,6 +26785,8 @@
 /obj/machinery/atmospherics/pipe/smart/simple/purple/visible{
 	dir = 8
 	},
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /turf/open/floor/iron/dark,
 /area/station/engineering/atmos/mix/ghetto)
 "gvx" = (
@@ -28880,6 +28902,8 @@
 	dir = 8
 	},
 /obj/effect/mapping_helpers/airlock/autoname,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /turf/open/floor/iron/dark,
 /area/station/engineering/atmos/mix/ghetto)
 "gUL" = (
@@ -67387,15 +67411,6 @@
 /obj/effect/landmark/start/cook,
 /turf/open/floor/iron/cafeteria,
 /area/station/service/kitchen)
-"qjI" = (
-/obj/machinery/atmospherics/pipe/multiz/supply/visible/layer4{
-	color = "#0000ff";
-	name = "Supply multi deck pipe adapter";
-	dir = 1
-	},
-/obj/effect/decal/cleanable/dirt/dust,
-/turf/open/floor/plating,
-/area/station/maintenance/department/electrical/ghetto)
 "qjL" = (
 /obj/effect/turf_decal/bot,
 /obj/machinery/power/port_gen/pacman/pre_loaded,
@@ -70645,15 +70660,6 @@
 "rbi" = (
 /turf/open/floor/plating,
 /area/station/maintenance/ghetto/port/greater)
-"rbj" = (
-/obj/machinery/atmospherics/pipe/multiz/scrubbers/visible/layer2{
-	color = "#ff0000";
-	name = "Scrubbers multi deck pipe adapter";
-	dir = 1
-	},
-/obj/effect/decal/cleanable/dirt/dust,
-/turf/open/floor/plating,
-/area/station/maintenance/department/electrical/ghetto)
 "rbr" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
@@ -95703,6 +95709,13 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /turf/open/floor/plating,
 /area/station/maintenance/starboard/aft)
+"xhh" = (
+/obj/machinery/atmospherics/components/binary/pump{
+	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/turf/open/floor/iron/dark,
+/area/station/engineering/atmos/mix/ghetto)
 "xhj" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
@@ -124729,7 +124742,7 @@ lbY
 iXt
 npV
 flq
-qjI
+lbY
 npV
 bPm
 sdQ
@@ -124986,7 +124999,7 @@ ctn
 ayL
 jJS
 csl
-rbj
+lbY
 npV
 jDa
 wko
@@ -199813,7 +199826,7 @@ vNw
 dnG
 wDI
 nFR
-nFR
+fBZ
 dsm
 syo
 vNw
@@ -200070,7 +200083,7 @@ vNw
 rey
 eXv
 dFU
-nFR
+fBZ
 sVk
 sDx
 vNw
@@ -200584,8 +200597,8 @@ vNw
 pIi
 emz
 nFR
-emz
-nFR
+xhh
+eeG
 dnG
 vNw
 cZJ
