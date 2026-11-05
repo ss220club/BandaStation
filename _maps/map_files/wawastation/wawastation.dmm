@@ -15719,7 +15719,7 @@
 /obj/effect/turf_decal/siding/wood{
 	dir = 10
 	},
-/obj/structure/plaques/kiddie/library{
+/obj/structure/plaque/kiddie/library{
 	pixel_y = -32
 	},
 /turf/open/floor/wood,
@@ -64195,7 +64195,7 @@
 /obj/item/food/grown/flower/poppy,
 /obj/item/food/grown/flower/poppy,
 /obj/item/food/grown/flower/poppy,
-/obj/structure/plaques/kiddie/badger{
+/obj/structure/plaque/kiddie/badger{
 	pixel_x = 32
 	},
 /turf/open/floor/carpet,

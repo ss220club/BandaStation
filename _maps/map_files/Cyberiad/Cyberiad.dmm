@@ -24083,7 +24083,7 @@
 /turf/open/floor/iron/cafeteria,
 /area/station/maintenance/ghetto/fore/starboard)
 "fPw" = (
-/obj/structure/plaques/kiddie/library,
+/obj/structure/plaque/kiddie/library,
 /turf/closed/wall,
 /area/station/service/library)
 "fPJ" = (
