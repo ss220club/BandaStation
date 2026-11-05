@@ -789,7 +789,7 @@
 		ACCESS_HOP,
 		)
 	job = /datum/job/lawyer
-	honorifics = list(", Юрист")
+	honorifics = list(", АВД")
 	honorific_positions = HONORIFIC_POSITION_LAST_FULL | HONORIFIC_POSITION_NONE
 
 /datum/id_trim/job/medical_doctor

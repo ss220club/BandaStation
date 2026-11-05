@@ -40,7 +40,7 @@ export const JOBS_RU = {
   Clown: 'Клоун',
   Mime: 'Мим',
   Curator: 'Куратор',
-  Lawyer: 'Юрист',
+  Lawyer: 'Агент внутренних дел',
   Chaplain: 'Священник',
   Psychologist: 'Психолог',
   // BANDASTATION jobs
