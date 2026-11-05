@@ -87993,7 +87993,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/pipe/smart/simple/general/visible{
 	dir = 6;
-	initialize_directions = 10
+	initialize_directions = 6
 	},
 /turf/open/floor/iron,
 /area/station/engineering/atmos/project)
@@ -127823,7 +127823,7 @@ pDm
 ouO
 hhV
 gmU
-ouO
+pgv
 wmE
 aWy
 tYl
