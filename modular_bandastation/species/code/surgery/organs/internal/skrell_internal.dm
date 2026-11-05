@@ -170,9 +170,10 @@
 	if(!owner)
 		return
 
-	var/datum/reagent/earthsblood = owner.reagents?.has_reagent(/datum/reagent/medicine/earthsblood)
-
-	// Если реагент полностью вывелся (0u) или упал ниже порога передозировки (45u)
+	var/datum/reagent/earthsblood
+	if(owner.reagents)
+		earthsblood = locate(/datum/reagent/medicine/earthsblood) in owner.reagents.reagent_list
+	// Если реагент полностью вывелся (null) или упал ниже порога передозировки (45u)
 	if(!earthsblood || earthsblood.volume < 45)
 		if(earthsblood_overdose_active || earthsblood_trauma || earthsblood?.overdosed)
 			clear_earthsblood_overdose(owner, earthsblood, show_message = TRUE)
