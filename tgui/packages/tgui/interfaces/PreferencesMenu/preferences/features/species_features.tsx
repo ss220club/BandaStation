@@ -1,3 +1,7 @@
+// BANDASTATION ADDITION START - Local hair painting
+import { useBackend } from 'tgui/backend';
+import { Button, Stack } from 'tgui-core/components';
+// BANDASTATION ADDITION END - Local hair painting
 import {
   CheckboxInput,
   type Feature,
@@ -15,12 +19,12 @@ export const eye_color: Feature<string> = {
 };
 
 export const facial_hair_color: Feature<string> = {
-  name: 'Лицевая растительность - цвет',
-  component: FeatureColorInput,
+  name: 'Борода - цвет', // BANDASTATION EDIT - Compact facial-hair labels
+  component: HairColorInput, // BANDASTATION EDIT - Local facial-hair painting
 };
 
 export const facial_hair_gradient: FeatureChoiced = {
-  name: 'Лицевая растительность - градиент',
+  name: 'Борода - градиент', // BANDASTATION EDIT - Compact facial-hair labels
   component: (
     props: FeatureValueProps<string, string, FeatureChoicedServerData>,
   ) => {
@@ -29,14 +33,41 @@ export const facial_hair_gradient: FeatureChoiced = {
 };
 
 export const facial_hair_gradient_color: Feature<string> = {
-  name: 'Лицевая растительность - цвет градиента',
+  name: 'Борода - цвет градиента', // BANDASTATION EDIT - Compact facial-hair labels
   component: FeatureColorInput,
 };
 
 export const hair_color: Feature<string> = {
   name: 'Волосы - цвет',
-  component: FeatureColorInput,
+  component: HairColorInput, // BANDASTATION EDIT - Local hair painting
 };
+
+// BANDASTATION ADDITION START - Local hair painting
+function HairColorInput(props: FeatureValueProps<string>) {
+  const { act } = useBackend();
+  const facial = props.featureId === 'facial_hair_color';
+  return (
+    <Stack align="center">
+      <Stack.Item grow>
+        <FeatureColorInput {...props} />
+      </Stack.Item>
+      <Stack.Item>
+        <Button
+          icon="paintbrush"
+          tooltip={
+            facial
+              ? 'Редактировать пиксели бороды'
+              : 'Редактировать пиксели волос'
+          }
+          onClick={() =>
+            act('open_hair_paint', { target: facial ? 'facial_hair' : 'hair' })
+          }
+        />
+      </Stack.Item>
+    </Stack>
+  );
+}
+// BANDASTATION ADDITION END - Local hair painting
 
 export const hair_gradient: FeatureChoiced = {
   name: 'Волосы - градиент',

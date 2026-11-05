@@ -123,6 +123,10 @@
 	new_dna.blood_type ||= new_owner.dna.blood_type
 	// just to put something there, it'll get updated if UF does anyways
 	new_dna.features = new_owner.dna.features.Copy()
+	// BANDASTATION ADDITION START - Only UI injectors replace painted hair
+	if(dna_to_copy.unique_identity)
+		hair_paint_copy_features(dna_to_copy.features, new_dna.features)
+	// BANDASTATION ADDITION END
 
 // ensure secondary transformation make a copy of the original dna (to prevent latter effects that expire earlier from returning to the wrong dna)
 /datum/status_effect/temporary_transformation/dna_injector/save_dna()
