@@ -507,10 +507,11 @@
 
 		// all occurrences of characters "eiou" (case-insensitive) are replaced with "r"
 		message = replacetext(message, regex(@"[eiou]", "ig"), "r")
+		message = replacetext(message, regex(@"[еёиоуыэюяЕЁИОУЫЭЮЯ]", "g"), "р") // BANDASTATION EDIT: Cyrillic support
 		// all characters other than "zhrgbmna .!?-" (case-insensitive) are stripped
-		message = replacetext(message, regex(@"[^zhrgbmna.!?-\s]", "ig"), "")
+		message = replacetext(message, regex(@"[^zhrgbmnaзхргбмнаЗХРГБМНА.!?-\s]", "ig"), "") // BANDASTATION EDIT: Cyrillic support
 		// multiple spaces are replaced with a single (whitespace is trimmed)
-		message = replacetext(message, regex(@"(\s+)", "g"), " ")
+		// message = replacetext(message, regex(@"(\s+)", "g"), " ") // BANDASTATION EDIT: moved below, collapsing here shifts word indexes when a word is fully stripped
 
 		var/list/old_words = splittext(message, " ")
 		var/list/new_words = list()
@@ -526,6 +527,7 @@
 			new_words[i] = translated_word_list[i] ? translated_word_list[i] : new_words[i]
 
 		message = new_words.Join(" ")
+		message = replacetext(message, regex(@"(\s+)", "g"), " ") // BANDASTATION EDIT: moved from above
 		message = capitalize(message)
 		speech_args[SPEECH_MESSAGE] = message
 
