@@ -1,3 +1,6 @@
+// BANDASTATION ADD START - Перенос ИИ: документация изменённого API.
+/** Выполняет штатный цикл ИИ либо цикл распределённого ядра за seconds_per_tick секунд. */
+// BANDASTATION ADD END - Перенос ИИ
 /mob/living/silicon/ai/Life(seconds_per_tick = SSMOBS_DT)
 	if (stat == DEAD)
 		return
@@ -12,6 +15,10 @@
 	if(isturf(loc) && (QDELETED(eyeobj) || !eyeobj.loc))
 		view_core()
 
+	// BANDASTATION ADD START - Перенос ИИ: обработка питания и состояния нового ИИ.
+	if(process_decentralized_ai(seconds_per_tick))
+		return
+	// BANDASTATION ADD END - Перенос ИИ
 	// Handle power damage (oxy)
 	if (battery <= 0 && lacks_power())
 		to_chat(src, span_warning("Your backup battery's output drops below usable levels. It takes only a moment longer for your systems to fail, corrupted and unusable."))
