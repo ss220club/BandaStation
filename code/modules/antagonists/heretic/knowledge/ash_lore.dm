@@ -145,8 +145,8 @@
 		/obj/item/assembly/flash = 1,
 		/obj/item/flashlight/flare/candle = 4,
 	)
-	research_tree_icon_path = 'icons/obj/lighting.dmi'
-	research_tree_icon_state = "lantern"
+	research_tree_icon_path = 'icons/obj/antags/eldritch_lantern.dmi'
+	research_tree_icon_state = "lantern_charged"
 
 /datum/heretic_knowledge/nightwatchers_lantern/recipe_snowflake_check(mob/living/user, list/atoms, list/selected_atoms, turf/loc)
 	. = ..()

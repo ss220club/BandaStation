@@ -1221,9 +1221,9 @@ GAME_VERB_SRC(/obj/structure/closet, verb_toggleopen, view(1), "Toggle Open", nu
 
 /obj/structure/closet/emag_act(mob/user, obj/item/card/emag/emag_card)
 	if(secure && !broken)
-		visible_message(span_warning("Искры вылетают из панели замка!"), blind_message = span_hear("Вы слышите слабый электрический треск.."))
+		visible_message(span_warning("Искры вылетают из панели замка!"), blind_message = span_hear("Вы слышите слабый электрический треск."))
 		balloon_alert(user, "замок взломан!")
-		playsound(src, SFX_SPARKS, 50, TRUE, SHORT_RANGE_SOUND_EXTRARANGE)
+		playsound(src, /datum/sound_effect/sparks, 50, TRUE, SHORT_RANGE_SOUND_EXTRARANGE)
 		broken = TRUE
 		locked = FALSE
 		update_appearance()

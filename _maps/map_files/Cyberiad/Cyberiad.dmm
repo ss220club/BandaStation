@@ -24140,7 +24140,7 @@
 /turf/open/floor/iron/cafeteria,
 /area/station/maintenance/ghetto/fore/starboard)
 "fPw" = (
-/obj/structure/sign/plaques/kiddie/library,
+/obj/structure/plaque/kiddie/library,
 /turf/closed/wall,
 /area/station/service/library)
 "fPJ" = (
@@ -48906,7 +48906,7 @@
 	pixel_y = 3
 	},
 /obj/item/toy/figure/borg,
-/obj/structure/sign/plaques/kiddie{
+/obj/structure/plaque/kiddie/developer{
 	pixel_y = -28
 	},
 /turf/open/floor/circuit,
