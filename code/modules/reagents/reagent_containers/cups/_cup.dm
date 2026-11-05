@@ -152,7 +152,7 @@
 				span_notice("[user] drinks from [src]."),
 				ignored_mobs = list(user),
 			)
-		to_chat(user, span_notice("You swallow a gulp of [src]."))
+		to_chat(user, span_notice("Вы делаете глоток из [declent_ru(GENITIVE)].")) // BANDASTATION EDIT - Drink name translations
 
 	SEND_SIGNAL(src, COMSIG_GLASS_DRANK, target_mob, user)
 	var/fraction = min(gulp_size / reagents.total_volume, 1)

@@ -160,7 +160,7 @@
 		input_reagent = shortcuts[input_reagent]
 	else
 		input_reagent = get_chem_id(input_reagent)
-	return input_reagent
+	return input_reagent || get_reagent_type_from_ru_name(string) // BANDASTATION EDIT - Bilingual reagent search (translations)
 
 ///
 /**
