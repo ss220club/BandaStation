@@ -3,6 +3,7 @@ import type { BooleanLike } from 'tgui-core/react';
 export type SecurityRecordsData = {
   assigned_view: string;
   authenticated: BooleanLike;
+  pai_integrated?: BooleanLike;
   station_z: BooleanLike;
   available_statuses: string[];
   current_user: string;

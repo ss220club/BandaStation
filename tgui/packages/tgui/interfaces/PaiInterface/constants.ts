@@ -52,7 +52,14 @@ export const SOFTWARE_DESC = {
     Includes a printer and lenses.`,
   'Remote Signaler': `A remote signalling device to transmit and receive
     codes.`,
-  'Security HUD': `Allows you to view security records using an overlay HUD.`,
+  'Security HUD': `Модуль ИЛС службы безопасности.`,
+  'Thermal Vision': `Тепловизор, позволяющий видеть сигнатуры сквозь стены. Недоступен при установленном ПНВ.`,
+  'Night Vision': `Оптика ПИИ для наблюдения в темноте. Можно включать и выключать. Недоступна при установленных термалах.`,
+  'Medical Injector': `Вводит носителю платы 5 единиц выбранного лекарства. Общий запас 30 единиц восстанавливается по 5 единиц в минуту. Перезарядка после укола — 10 секунд.`,
+  'Camera Network': `Подключает ПИИ к сети камер станции. Переключение камер и выход доступны через действия камеры.`,
+  'Remote Machinery': `Позволяет управлять шлюзами и АПЦ. Все удалённые действия имеют общий КД: 7 секунд после действия со шлюзом, 30 секунд после действия с АПЦ.`,
+  'Security Records': `Записи охраны объекта. Позволяет просматривать и редактировать данные.`,
+  'Syndicate Radio': `Встроенный ключ шифрования Синдиката. Для связи используйте :t.`,
   'Universal Translator': `Translation module for non-common languages.`,
 } as const;
 
