@@ -782,6 +782,7 @@
 /datum/crafting_recipe/food/grinder/mushroom_powder
 	reqs = list(/obj/item/food/grown/ash_flora/seraka = 1)
 	result = /datum/reagent/toxin/mushroom_powder
+	dish_category = DISH_MUSHROOM // BANDASTATION ADDITION
 
 /datum/crafting_recipe/food/grinder/flour
 	name = "Fresh Wheat Flour"
