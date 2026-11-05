@@ -19,6 +19,8 @@
 
 /obj/machinery/medical_kiosk/ui_data(mob/living/carbon/human/user)
 	. = ..()
+	if(isnull(.))
+		return
 	for(var/entry_key in list("chemical_list", "overdose_list"))
 		.[entry_key] = translate_reagent_ui_entries(.[entry_key])
 
