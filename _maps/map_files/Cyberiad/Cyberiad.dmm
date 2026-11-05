@@ -17264,10 +17264,6 @@
 	},
 /turf/open/floor/iron,
 /area/station/security/office)
-"eeG" = (
-/obj/structure/lattice,
-/turf/closed/wall/r_wall,
-/area/station/engineering/atmos/mix/ghetto)
 "eeM" = (
 /obj/structure/filingcabinet/employment,
 /obj/effect/turf_decal/siding/wood{
@@ -23094,11 +23090,6 @@
 /obj/structure/cable,
 /turf/open/floor/plating,
 /area/station/security/holding_cell)
-"fBZ" = (
-/obj/structure/lattice,
-/obj/structure/lattice/catwalk,
-/turf/closed/wall/r_wall,
-/area/station/maintenance/disposal/incinerator)
 "fCe" = (
 /obj/machinery/door/airlock,
 /obj/effect/mapping_helpers/airlock/autoname,
@@ -28882,11 +28873,6 @@
 /obj/effect/mapping_helpers/airlock/access/all/engineering/atmos,
 /obj/machinery/atmospherics/pipe/smart/simple/purple/visible{
 	dir = 8
-	},
-/obj/machinery/door/poddoor/shutters/window/preopen{
-	dir = 1;
-	id = "Atmospherics Project Shutters";
-	name = "Atmospherics Project Shutters"
 	},
 /obj/machinery/door/firedoor/heavy,
 /obj/machinery/door/airlock/multi_tile/atmospheric/glass{
@@ -46483,12 +46469,6 @@
 	},
 /turf/open/floor/wood,
 /area/station/service/library)
-"liu" = (
-/obj/structure/lattice,
-/obj/structure/grille,
-/obj/structure/lattice,
-/turf/open/space/openspace,
-/area/space/nearstation)
 "liz" = (
 /obj/effect/spawner/random/trash/grille_or_waste,
 /turf/open/floor/catwalk_floor/iron,
@@ -46702,11 +46682,6 @@
 /area/station/maintenance/ghetto/port/greater)
 "llD" = (
 /obj/effect/spawner/structure/window/reinforced,
-/obj/machinery/door/poddoor/shutters/window/preopen{
-	dir = 1;
-	id = "Atmospherics Project Shutters";
-	name = "Atmospherics Project Shutters"
-	},
 /turf/open/floor/plating,
 /area/station/engineering/atmos/mix/ghetto)
 "llI" = (
@@ -57347,11 +57322,6 @@
 	},
 /turf/open/floor/iron,
 /area/station/maintenance/port/aft)
-"nOb" = (
-/obj/structure/lattice,
-/obj/structure/lattice/catwalk,
-/turf/closed/wall/r_wall,
-/area/station/engineering/atmos/mix/ghetto)
 "nOe" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
@@ -67308,11 +67278,6 @@
 /obj/machinery/light/small/directional/east,
 /turf/open/floor/iron/dark/small,
 /area/station/security/mechbay)
-"qiB" = (
-/obj/structure/lattice,
-/obj/structure/lattice,
-/turf/open/space/openspace,
-/area/space/nearstation)
 "qiH" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
@@ -70931,11 +70896,6 @@
 "req" = (
 /obj/effect/mapping_helpers/airlock/access/all/engineering/atmos,
 /obj/structure/cable,
-/obj/machinery/door/poddoor/shutters/window/preopen{
-	dir = 1;
-	id = "Atmospherics Project Shutters";
-	name = "Atmospherics Project Shutters"
-	},
 /obj/machinery/door/firedoor/heavy,
 /turf/open/floor/iron/dark,
 /area/station/engineering/atmos/mix/ghetto)
@@ -95741,10 +95701,6 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /turf/open/floor/plating,
 /area/station/maintenance/starboard/aft)
-"xhh" = (
-/obj/structure/lattice,
-/turf/open/space/openspace,
-/area/space)
 "xhj" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
@@ -181341,7 +181297,7 @@ wLD
 akM
 kJd
 dFP
-qiB
+kJd
 kJd
 tYD
 tYD
@@ -181856,7 +181812,7 @@ kJd
 kJd
 dFP
 kJd
-liu
+doI
 dFP
 kJd
 tYD
@@ -182114,7 +182070,7 @@ dFP
 dFP
 kJd
 kJd
-qiB
+kJd
 kJd
 tYD
 tYD
@@ -183401,8 +183357,8 @@ uWB
 qes
 kJd
 kJd
-qiB
-liu
+kJd
+doI
 kJd
 kJd
 tYD
@@ -183660,8 +183616,8 @@ uZO
 trM
 trM
 kJd
-bOz
-bOz
+doz
+doz
 tYD
 tYD
 tYD
@@ -183917,8 +183873,8 @@ ilb
 rLg
 trM
 kJd
-bOz
-bOz
+doz
+doz
 tYD
 tYD
 tYD
@@ -184174,8 +184130,8 @@ nGn
 rLg
 trM
 kJd
-bOz
-bOz
+doz
+doz
 tYD
 tYD
 tYD
@@ -190873,7 +190829,7 @@ vbK
 vbK
 vbK
 ceC
-qiB
+kJd
 kJd
 tYD
 tYD
@@ -191389,7 +191345,7 @@ vbK
 ceC
 dFP
 dFP
-qiB
+kJd
 kJd
 tYD
 tYD
@@ -199344,10 +199300,10 @@ ggc
 gvh
 dnG
 eAG
-eeG
+vNw
 wkR
 qmd
-fBZ
+cZJ
 trM
 trM
 kJd
@@ -199601,10 +199557,10 @@ vTD
 bet
 eVB
 xaq
-eeG
+vNw
 bgj
 jrW
-fBZ
+cZJ
 kJd
 kJd
 kJd
@@ -199861,7 +199817,7 @@ syo
 vNw
 bfl
 jrW
-fBZ
+cZJ
 kJd
 kJd
 kJd
@@ -200118,7 +200074,7 @@ sDx
 vNw
 hRt
 jrW
-fBZ
+cZJ
 kJd
 kJd
 kJd
@@ -200372,10 +200328,10 @@ jHQ
 dWZ
 dsm
 mRy
-nOb
+vNw
 iNH
 jrW
-fBZ
+cZJ
 trM
 trM
 trM
@@ -203710,11 +203666,11 @@ vbK
 trM
 frM
 frM
-xhh
-xhh
-xhh
-xhh
-xhh
+kJd
+kJd
+kJd
+kJd
+kJd
 kJd
 kJd
 kJd
