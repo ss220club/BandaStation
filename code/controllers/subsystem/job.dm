@@ -247,6 +247,10 @@ SUBSYSTEM_DEF(job)
 		job_debug("AR: Failed, player has no mind or job is null. Player: [player], Rank: [isnull(job) ? "null" : job.type]")
 		return FALSE
 
+	// BANDASTATION ADDITION - Block conflicting or repeated job assignments for players selected by admins.
+	if(SEND_SIGNAL(src, COMSIG_CHECK_JOB_ASSIGNMENT, player, job) & BLOCK_JOB_ASSIGNMENT)
+		return FALSE
+
 	if(do_eligibility_checks && (check_job_eligibility(player, job, "AR", add_job_to_log = TRUE) != JOB_AVAILABLE))
 		return FALSE
 
@@ -440,6 +444,13 @@ SUBSYSTEM_DEF(job)
 	shuffle_inplace(unassigned)
 
 	handle_feedback_gathering()
+
+	// BANDASTATION ADDITION START - Assign jobs selected by admins before standard job distribution.
+	var/list/roundstart_roster_callbacks = list()
+	SEND_SIGNAL(src, COMSIG_COLLECT_ROUNDSTART_ASSIGNMENT_CALLBACKS, roundstart_roster_callbacks)
+	for(var/datum/callback/assignment_callback as anything in roundstart_roster_callbacks)
+		assignment_callback.Invoke()
+	// BANDASTATION ADDITION END
 
 	// Assign any priority positions before all other standard job selections.
 	job_debug("DO: Assigning priority positions")
