@@ -24678,9 +24678,6 @@
 	},
 /turf/open/floor/iron/white,
 /area/station/science/lobby)
-"fUs" = (
-/turf/closed/wall/r_wall,
-/area/space)
 "fUz" = (
 /obj/structure/reagent_dispensers/watertank,
 /turf/open/floor/iron,
@@ -37561,12 +37558,6 @@
 	},
 /turf/open/floor/iron/white,
 /area/station/science/research)
-"iZc" = (
-/obj/machinery/atmospherics/components/unary/thermomachine/freezer{
-	initialize_directions = 8
-	},
-/turf/open/space/openspace,
-/area/space)
 "iZg" = (
 /obj/structure/table,
 /obj/item/paper{
@@ -44466,11 +44457,6 @@
 	},
 /turf/open/water,
 /area/station/maintenance/ghetto/garden)
-"kIG" = (
-/obj/structure/lattice,
-/obj/structure/grille,
-/turf/open/space/openspace,
-/area/space)
 "kII" = (
 /obj/machinery/light/directional/south,
 /obj/effect/turf_decal/tile/yellow/half/contrasted,
@@ -46601,11 +46587,6 @@
 	},
 /turf/open/floor/iron/white,
 /area/station/medical/chemistry/ghetto)
-"ljG" = (
-/obj/structure/lattice/catwalk,
-/obj/structure/lattice/catwalk,
-/turf/open/space/basic,
-/area/space/nearstation)
 "ljJ" = (
 /obj/effect/spawner/structure/window/reinforced,
 /obj/structure/curtain,
@@ -127957,10 +127938,10 @@ qpC
 rKS
 vbK
 vbK
-nQe
 vbK
 vbK
-ljG
+vbK
+vbK
 vbK
 vbK
 vbK
@@ -128217,7 +128198,7 @@ vbK
 vbK
 vbK
 vbK
-ljG
+vbK
 vbK
 vbK
 vbK
@@ -199921,9 +199902,9 @@ doz
 doz
 doz
 tYD
-kIG
-fUs
-kIG
+dFP
+oVL
+dFP
 tYD
 tYD
 tYD
@@ -200177,11 +200158,11 @@ bOz
 bOz
 bOz
 bOz
-kIG
-kIG
-fUs
-kIG
-xhh
+dFP
+dFP
+oVL
+dFP
+kJd
 tYD
 tYD
 tYD
@@ -200435,10 +200416,10 @@ ezb
 ezb
 ezb
 kJd
-kIG
-fUs
-kIG
-xhh
+dFP
+oVL
+dFP
+kJd
 tYD
 tYD
 tYD
@@ -200692,9 +200673,9 @@ cZJ
 cZJ
 ezb
 kJd
-kIG
-fUs
-kIG
+dFP
+oVL
+dFP
 tYD
 tYD
 tYD
@@ -200948,11 +200929,11 @@ nvj
 sdg
 obp
 tuX
-xhh
-kIG
-fUs
-kIG
-xhh
+kJd
+dFP
+oVL
+dFP
+kJd
 tYD
 tYD
 tYD
@@ -201206,10 +201187,10 @@ hAN
 wNB
 hFM
 jEN
-kIG
-fUs
-kIG
-xhh
+dFP
+oVL
+dFP
+kJd
 tYD
 tYD
 tYD
@@ -201463,10 +201444,10 @@ hpp
 cZJ
 hFM
 dFP
-kIG
-fUs
-kIG
-xhh
+dFP
+oVL
+dFP
+kJd
 tYD
 tYD
 tYD
@@ -201720,9 +201701,9 @@ ueP
 oqf
 aUr
 kJd
-kIG
-fUs
-kIG
+dFP
+oVL
+dFP
 tYD
 tYD
 tYD
@@ -201976,11 +201957,11 @@ wEH
 hpp
 cZJ
 vrh
-kIG
-kIG
-fUs
-kIG
-xhh
+dFP
+dFP
+oVL
+dFP
+kJd
 tYD
 tYD
 tYD
@@ -202234,10 +202215,10 @@ sPn
 udL
 hlc
 dFP
-kIG
-fUs
-kIG
-xhh
+dFP
+oVL
+dFP
+kJd
 tYD
 tYD
 tYD
@@ -202491,10 +202472,10 @@ cZJ
 cZJ
 hlc
 jEN
-kIG
-fUs
-kIG
-xhh
+dFP
+oVL
+dFP
+kJd
 tYD
 tYD
 tYD
@@ -202748,9 +202729,9 @@ gsv
 vbK
 hlc
 kJd
-kIG
-fUs
-kIG
+dFP
+oVL
+dFP
 tYD
 tYD
 tYD
@@ -203004,11 +202985,11 @@ pYB
 cZJ
 vbK
 hlc
-xhh
-kIG
-fUs
-kIG
-xhh
+kJd
+dFP
+oVL
+dFP
+kJd
 jbG
 tYD
 tYD
@@ -203262,10 +203243,10 @@ cZJ
 vbK
 hlc
 jEN
-kIG
-fUs
-kIG
-xhh
+dFP
+oVL
+dFP
+kJd
 tYD
 tYD
 tYD
@@ -203519,9 +203500,9 @@ hlc
 hlc
 hlc
 kJd
-kIG
-fUs
-kIG
+dFP
+oVL
+dFP
 tYD
 tYD
 tYD
@@ -203771,11 +203752,11 @@ kJd
 kJd
 kJd
 kJd
-xhh
-bOz
+kJd
+doz
 kJd
 kJd
-xhh
+kJd
 tYD
 tYD
 tYD
@@ -204027,7 +204008,7 @@ tYD
 tYD
 kJd
 tYD
-iZc
+tYD
 doz
 doz
 doz
