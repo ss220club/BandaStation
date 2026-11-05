@@ -188,6 +188,12 @@
 		kill_objective.find_target()
 		return kill_objective
 
+	// BANDASTATION ADDITION START - Comms intercept
+	var/datum/objective/comms_intercept/intercept_objective = try_forge_comms_intercept()
+	if(intercept_objective)
+		return intercept_objective
+	// BANDASTATION ADDITION END - Comms intercept
+
 	var/datum/objective/steal/steal_objective = new()
 	steal_objective.owner = owner
 	steal_objective.find_target()
