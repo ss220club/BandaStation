@@ -78,5 +78,6 @@
 // MARK: Ranged - Energy
 #include "code/ranged/energy/awaymission_gun.dm"
 #include "code/ranged/energy/eg_14.dm"
+#include "code/ranged/energy/honk_rifle.dm"
 #include "code/ranged/energy/pulse.dm"
 #include "code/ranged/energy/laser.dm"

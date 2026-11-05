@@ -45,3 +45,11 @@
 	icon = 'modular_bandastation/objects/icons/obj/clothing/head/winterhood.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/winterhood.dmi'
 	icon_state = "hood_ntrep"
+
+/// A native zipup hoodie in the source palette, with its map preview kept in this module.
+/obj/item/clothing/suit/hooded/wintercoat/zipup/tsf
+	name = "blue hoodie"
+	icon = 'modular_bandastation/objects/icons/obj/clothing/suits/wintercoat.dmi'
+	icon_state = "/obj/item/clothing/suit/hooded/wintercoat/zipup/donor_tsf"
+	greyscale_colors = "#02519a"
+	flags_1 = parent_type::flags_1 | NO_NEW_GAGS_PREVIEW_1

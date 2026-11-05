@@ -467,11 +467,14 @@ SUBSYSTEM_DEF(ticker)
 		var/mob/dead/new_player/player = i
 		SStitle.show_title_screen_to(player.client) // BANDASTATION ADDITION - HTML Title Screen
 		if(player.ready == PLAYER_READY_TO_PLAY && player.mind)
+			var/datum/roundstart_character_attempt/attempt = capture_roundstart_character(player) // SS220 EDIT: Own only this construction.
 			GLOB.joined_player_list += player.ckey
 			var/atom/destination = player.mind.assigned_role.get_roundstart_spawn_point()
 			if(!destination) // Failed to fetch a proper roundstart location, won't be going anywhere.
+				validate_roundstart_character(player, null, attempt) // SS220 EDIT: Cancel this assignment when no spawn point exists.
 				continue
 			player.create_character(destination)
+			validate_roundstart_character(player, player?.new_character, attempt) // SS220 EDIT: Reject before equipment; compensate this append only.
 		CHECK_TICK
 
 /datum/controller/subsystem/ticker/proc/collect_minds()

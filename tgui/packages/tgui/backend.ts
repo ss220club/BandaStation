@@ -1,3 +1,4 @@
+import { jobActionContext } from './bandastation/jobs/actionContext'; // SS220 EDIT: optional module action context.
 import { sendAct } from './events/act';
 import { backendStateAtom, sharedAtom, store } from './events/store';
 import type { BackendState } from './events/types';
@@ -25,6 +26,7 @@ export function useBackend<
     act: sendAct,
     ...state,
     data: state.data as TData,
+    ...jobActionContext(state, sendAct), // SS220 EDIT: capture slot context without replacing native UI actions.
   };
 }
 

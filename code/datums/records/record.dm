@@ -134,6 +134,7 @@
 	src.quirk_notes = quirk_notes
 
 	GLOB.manifest.general += src
+	on_created_crew_record() // SS220 EDIT: module callback receives this exact initialized record.
 
 /datum/record/crew/Destroy()
 	GLOB.manifest.general -= src

@@ -2,6 +2,7 @@
 /obj/item/clothing/under/rank/tsf
 	icon = 'modular_bandastation/objects/icons/obj/clothing/under/tsf.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/under/tsf.dmi'
+	inhand_icon_state = "ro_suit"
 	can_adjust = FALSE
 	armor_type = /datum/armor/clothing_under/centcom_military
 

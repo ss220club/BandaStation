@@ -5,6 +5,16 @@ import { Color } from 'tgui-core/color';
 import { Box, Button, Section, Stack, Tooltip } from 'tgui-core/components';
 import { classes } from 'tgui-core/react';
 
+// SS220 EDIT - START
+import {
+  JobRowControls,
+  useJobPriorityButtonProps,
+} from '../../../bandastation/donor_jobs/JobRestriction';
+import { useJobTabFilter } from '../../../bandastation/donor_jobs/JobTabs';
+import { SubscriptionJobs } from '../../../bandastation/donor_jobs/SubscriptionJobs';
+import { prepareJobPriorityCache } from '../../../bandastation/job_slots_preferences/priority';
+import { JobVariantSelector } from '../../../bandastation/jobs/JobVariantSelector';
+// SS220 EDIT - END
 import { JOBS_RU } from '../../../bandastation/ru_jobs'; // BANDASTATION EDIT
 import {
   createSetPreference,
@@ -45,6 +55,7 @@ function PriorityButton(props: PriorityButtonProps) {
         props.selected && 'selected',
       ])}
       style={positionVariable}
+      {...useJobPriorityButtonProps(props.modifier)} // SS220 EDIT: retain opt-out while opt-in is restricted.
       onClick={props.onClick}
     >
       {props.name}
@@ -57,6 +68,7 @@ type CreateSetPriority = (priority: JobPriority | null) => () => void;
 const createSetPriorityCache: Record<string, CreateSetPriority> = {};
 
 function createCreateSetPriorityFromName(jobName: string): CreateSetPriority {
+  const editSlot = prepareJobPriorityCache(createSetPriorityCache); // SS220 EDIT: invalidate callbacks captured for another slot.
   if (createSetPriorityCache[jobName] !== undefined) {
     return createSetPriorityCache[jobName];
   }
@@ -75,6 +87,7 @@ function createCreateSetPriorityFromName(jobName: string): CreateSetPriority {
       act('set_job_preference', {
         job: jobName,
         level: priority,
+        edit_slot: editSlot, // SS220 EDIT: the native callback retains its rendered slot.
       });
     }
 
@@ -206,12 +219,20 @@ function JobRow(props: JobRowProps) {
     );
   }
 
+  // SS220 EDIT - START
+  rightSide = <JobRowControls name={name}>{rightSide}</JobRowControls>;
+  // SS220 EDIT - END
+
   return (
     <Stack.Item className={className}>
       <Stack fill align="center">
         <Tooltip content={job.description} position="bottom-start">
           <Stack.Item grow className="job-name">
-            {JOBS_RU[name] || name}
+            {/* SS220 START */}
+            <JobVariantSelector name={name}>
+              {JOBS_RU[name] || name}
+            </JobVariantSelector>
+            {/* SS220 END */}
           </Stack.Item>
         </Tooltip>
         <Stack.Item className="options">{rightSide}</Stack.Item>
@@ -228,6 +249,7 @@ function Department(props: DepartmentProps) {
   const { department: name } = props;
   const className = `PreferencesMenu__Department`;
 
+  const applyJobTabFilter = useJobTabFilter(); // SS220 EDIT: filter only the local department list.
   const data = useServerPrefs();
   if (!data) {
     return;
@@ -243,6 +265,12 @@ function Department(props: DepartmentProps) {
   const jobsForDepartment = jobs_sorted
     .map((jobName) => [jobName, jobs[jobName]] as const)
     .filter(([, job]) => job.department === name);
+
+  // SS220 EDIT - START
+  if (!applyJobTabFilter(jobsForDepartment)) {
+    return null;
+  }
+  // SS220 EDIT - END
 
   return (
     <Box
@@ -322,6 +350,9 @@ export function JobsPage() {
       <Stack.Divider />
       <Stack.Item grow>
         <Section fill>
+          {/* SS220 EDIT - START */}
+          <SubscriptionJobs jobRow={JobRow} />
+          {/* SS220 EDIT - END */}
           <Stack fill g={1} align="center" className="PreferencesMenu__Jobs">
             <Stack.Item grow minWidth={0}>
               <Stack vertical>

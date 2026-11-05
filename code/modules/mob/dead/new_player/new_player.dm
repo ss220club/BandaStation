@@ -134,6 +134,12 @@
 		if(JOB_UNAVAILABLE_AGE)
 			return "Ваш персонаж недостаточно стар для игры за [job_title_ru(jobtitle)]."
 
+	// SS220 EDIT - START
+	// Additional availability reasons are supplied by modules.
+	var/additional_message = get_additional_job_unavailable_message(retval)
+	if(additional_message)
+		return additional_message
+	// SS220 EDIT - END
 	return GENERIC_JOB_UNAVAILABLE_ERROR
 
 /mob/dead/new_player/proc/IsJobUnavailable(rank, latejoin = FALSE)
@@ -145,11 +151,19 @@
 			if(isnum(client.player_age) && client.player_age <= 14) //Newbies can always be assistants
 				return JOB_AVAILABLE
 			for(var/datum/job/other_job as anything in SSjob.joinable_occupations)
+				// SS220 EDIT - START
+				if(other_job.get_join_lock_reason(GET_CLIENT(src)))
+					continue
+				// SS220 EDIT - END
 				if(other_job.current_positions < other_job.total_positions && other_job != job)
 					return JOB_UNAVAILABLE_SLOTFULL
 		else
 			return JOB_UNAVAILABLE_SLOTFULL
 
+	// SS220 EDIT - START
+	if(job_capacity_check_only)
+		return JOB_AVAILABLE
+	// SS220 EDIT - END
 	var/eligibility_check = SSjob.check_job_eligibility(src, job, "Mob IsJobUnavailable")
 	if(eligibility_check != JOB_AVAILABLE)
 		return eligibility_check
@@ -164,6 +178,11 @@
 		if(client?.is_localhost())
 			to_chat(client.mob, span_notice("Этот персонаж уже участвовал в данном раунде, однако это ограничение обходится при использовании localhost."))
 			log_admin("[key_name_and_tag(client)] пропускает повторное присоединение к раунду тем же персонажем.")
+		// SS220 EDIT - START
+		else if(get_latejoin_character_slot(rank) != client.prefs.default_slot)
+			if(!check_assigned_latejoin_history(rank))
+				return FALSE
+		// SS220 EDIT - END
 		else if("[client.prefs.default_slot]" in persistent_client.joined_as_slots)
 			tgui_alert(usr, "Вы уже играли на данном персонаже в этом раунде!")
 			return FALSE
@@ -181,6 +200,11 @@
 		if(CONFIG_GET(flag/arrivals_shuttle_require_undocked))
 			SSshuttle.arrivals.RequireUndocked(src)
 
+	// SS220 EDIT - START
+	if(!validate_latejoin_request(rank)) // Arrivals and eligibility can yield.
+		return FALSE
+	// SS220 EDIT - END
+
 	//Remove the player from the join queue if he was in one and reset the timer
 	SSticker.queued_players -= src
 	SSticker.queue_delay = 4
@@ -196,10 +220,19 @@
 	mind.late_joiner = TRUE
 	var/atom/destination = mind.assigned_role.get_latejoin_spawn_point()
 	if(!destination)
+		handle_latejoin_creation_failure() // SS220 EDIT: Release only this attempt before the native failure.
 		CRASH("Failed to find a latejoin spawn point.")
 	var/mob/living/character = create_character(destination, forced_slot = client.prefs.default_slot)
 	if(!character)
+		// SS220 EDIT - START
+		if(handle_latejoin_creation_failure()) // Expected admission failure is not a constructor crash.
+			return FALSE
+		// SS220 EDIT - END
 		CRASH("Failed to create a character for latejoin.")
+	// SS220 EDIT - START
+	if(!can_transfer_job_character())
+		return FALSE
+	// SS220 EDIT - END
 	transfer_character()
 
 	SSjob.equip_rank(character, job, character.client)
@@ -256,6 +289,7 @@
 			humanc.clear_personalities()
 
 	if(humanc) // Quirks may change manifest datapoints, so inject only after assigning quirks
+		humanc.prepare_initial_crew_record() // SS220 EDIT: mark only the initial native record.
 		GLOB.manifest.inject(humanc)
 		SEND_SIGNAL(humanc, COMSIG_HUMAN_CHARACTER_SETUP_FINISHED)
 	var/area/station/arrivals = GLOB.areas_by_type[/area/station/hallway/secondary/entry]
@@ -286,6 +320,10 @@
 
 	mind.active = FALSE //we wish to transfer the key manually
 	var/mob/living/spawning_mob = mind.assigned_role.get_spawn_mob(client, destination)
+	// SS220 EDIT - START
+	if(!spawning_mob)
+		return
+	// SS220 EDIT - END
 	if(QDELETED(src))
 		return
 

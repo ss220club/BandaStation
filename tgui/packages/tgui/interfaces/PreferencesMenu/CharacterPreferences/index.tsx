@@ -3,6 +3,7 @@ import { useBackend } from 'tgui/backend';
 import { Button, Floating, Section, Stack, Tabs } from 'tgui-core/components';
 import { exhaustiveCheck } from 'tgui-core/exhaustive';
 
+import { getJobHeaderButtons } from '../../../bandastation/donor_jobs/JobTabs'; // SS220 EDIT
 import { PageButton } from '../components/PageButton';
 import type { PreferencesMenuData } from '../types';
 import { AntagsPage } from './AntagsPage';
@@ -127,6 +128,12 @@ export function CharacterPreferenceWindow(props) {
             data.character_profiles[data.active_slot - 1] || 'Новый персонаж'
           }
           buttons={<CharacterSelection />}
+          // SS220 EDIT - START
+          {...getJobHeaderButtons(
+            currentPage === Page.Jobs,
+            <CharacterSelection />,
+          )}
+          // SS220 EDIT - END
         >
           <Tabs fluid textAlign="center">
             <PageButton

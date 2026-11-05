@@ -1,1 +1,2 @@
 #include "_quirks.dm"
+#include "code/controller/quirk_handover.dm"

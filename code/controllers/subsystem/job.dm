@@ -250,6 +250,12 @@ SUBSYSTEM_DEF(job)
 	if(do_eligibility_checks && (check_job_eligibility(player, job, "AR", add_job_to_log = TRUE) != JOB_AVAILABLE))
 		return FALSE
 
+	// SS220 EDIT - START
+	// Commit selected-character admission before occupying the vacancy.
+	if(!prepare_job_assignment(player, job, latejoin))
+		return FALSE
+	// SS220 EDIT - END
+
 	job_debug("AR: Role now set and assigned - [player] is [job.title], JCP:[job.current_positions], JPL:[latejoin ? job.total_positions : job.spawn_positions]")
 	player.mind.set_assigned_role(job)
 	unassigned -= player
@@ -311,6 +317,11 @@ SUBSYSTEM_DEF(job)
 		// This check handles its own output to job_debug.
 		if(check_job_eligibility(player, job, "GRJ", add_job_to_log = TRUE) != JOB_AVAILABLE)
 			continue
+
+		// SS220 EDIT - START
+		if(!is_random_job_preference_allowed(player, job)) // Explicit roles require a current opt-in after eligibility waits.
+			continue
+		// SS220 EDIT - END
 
 		if(assign_role(player, job, do_eligibility_checks = FALSE))
 			job_debug("GRJ: Random job given, Player: [player], Job: [job]")
@@ -970,7 +981,15 @@ SUBSYSTEM_DEF(job)
 		return JOB_UNAVAILABLE_BANNED
 
 	// Check for character age
+	// SS220 EDIT - START
+	if(QDELETED(player)) // Ban lookup can yield before the native client read.
+		return JOB_UNAVAILABLE_GENERIC
+	// SS220 EDIT - END
 	var/client/player_client = GET_CLIENT(player)
+	// SS220 EDIT - START
+	if(!player_client) // The preceding database query may have lost its client.
+		return JOB_UNAVAILABLE_GENERIC
+	// SS220 EDIT - END
 	if(isnum(possible_job.required_character_age) && possible_job.required_character_age > player_client.prefs.read_preference(/datum/preference/numeric/age))
 		job_debug("[debug_prefix] Error: [get_job_unavailable_error_message(JOB_UNAVAILABLE_AGE)], Player: [player][add_job_to_log ? ", Job: [possible_job]" : ""]")
 		return JOB_UNAVAILABLE_AGE

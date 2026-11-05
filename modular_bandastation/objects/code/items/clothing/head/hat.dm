@@ -287,3 +287,75 @@
 	icon_state = "ussp_hat_komandir"
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/hats.dmi'
 
+/// Native cap flipping and dropping consume both original orientations.
+/obj/item/clothing/head/soft/tsf
+	name = "\improper Trans-Solar Federation marine cap"
+	desc = "Мягкая кепка морской пехоты Транссолнечной Федерации."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/head/hats.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/cap.dmi'
+	icon_state = "solgovsoft_flipped"
+	soft_type = "solgov"
+	flipped = TRUE
+	dog_fashion = null
+
+/obj/item/clothing/head/soft/tsf/specops
+	name = "\improper Trans-Solar Federation Specops marine cap"
+	desc = "Кепка спецназа морской пехоты Транссолнечной Федерации."
+	icon_state = "solgovelitesoft_flipped"
+	soft_type = "solgovelite"
+
+/obj/item/clothing/head/soft/tsf/command
+	name = "\improper Trans-Solar Federation lieutenant's cap"
+	desc = "Кепка морской пехоты со знаками различия лейтенанта Транссолнечной Федерации."
+	icon_state = "solgovcsoft_flipped"
+	soft_type = "solgovc"
+
+/obj/item/clothing/head/soft/tsf/command/specops
+	name = "\improper Trans-Solar Federation Specops lieutenant's cap"
+	desc = "Кепка спецназа морской пехоты со знаками различия лейтенанта Транссолнечной Федерации."
+	icon_state = "solgovcelitesoft_flipped"
+	soft_type = "solgovcelite"
+
+/obj/item/clothing/head/beret/tsf
+	name = "\improper Trans-Solar Federation lieutenant's beret"
+	desc = "Берет морской пехоты со знаками различия лейтенанта Транссолнечной Федерации."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/head/hats.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/hats.dmi'
+	icon_state = "solgovcberet"
+	inhand_icon_state = "greyscale_softcap"
+	post_init_icon_state = null
+	greyscale_config = null
+	greyscale_config_worn = null
+	greyscale_colors = null
+	flags_1 = NONE
+	dog_fashion = null
+
+/obj/item/clothing/head/beret/tsf/specops
+	name = "\improper Trans-Solar Federation Specops lieutenant's beret"
+	desc = "Берет спецназа морской пехоты со знаками различия лейтенанта Транссолнечной Федерации."
+	icon_state = "solgovceliteberet"
+
+/obj/item/clothing/head/hats/ussp/classic
+	name = "\improper USSP side cap"
+	desc = "Классическая военная пилотка с красной звездой КССП."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/head/hats.dmi'
+	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/head/hats.dmi'
+	icon_state = "ussp_pilotka"
+	worn_icon_state = "sovietsidecap"
+	inhand_icon_state = "greyscale_softcap"
+
+/obj/item/clothing/head/hats/ussp/classic/officer
+	name = "\improper USSP officer hat"
+	desc = "Классическая фуражка офицера КССП."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/head/hats.dmi'
+	icon_state = "sovietofficerhat"
+	worn_icon_state = "sovietofficerhat"
+	inhand_icon_state = "that"
+
+/obj/item/clothing/head/hats/ussp/classic/admiral
+	name = "\improper USSP admiral hat"
+	desc = "Классическая парадная фуражка адмирала КССП."
+	icon = 'modular_bandastation/objects/icons/obj/clothing/head/hats.dmi'
+	icon_state = "sovietadmiralhat"
+	worn_icon_state = "sovietadmiralhat"
+	inhand_icon_state = "that"

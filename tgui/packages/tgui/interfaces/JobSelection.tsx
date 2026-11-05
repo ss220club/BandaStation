@@ -12,6 +12,13 @@ import {
 import type { BooleanLike } from 'tgui-core/react';
 
 import { useBackend } from '../backend';
+// SS220 EDIT - START
+import { retainAvailableLatejoinJobs } from '../bandastation/job_slots_preferences/latejoin';
+import {
+  extendLatejoinDisplay,
+  LatejoinJobIcon,
+} from '../bandastation/jobs/LatejoinJob';
+// SS220 EDIT - END
 import {
   DEPARTMENTS_RU,
   JOBS_RU,
@@ -55,6 +62,7 @@ type JobEntryProps = {
 };
 
 function JobEntry(props: JobEntryProps) {
+  props = extendLatejoinDisplay(props); // SS220 EDIT: display inputs only; action keys remain canonical.
   const { jobName, job, department, onClick } = props;
 
   const jobIcon = JOB2ICON[ReverseJobsRu(jobName)] || null;
@@ -94,6 +102,9 @@ function JobEntry(props: JobEntryProps) {
       }}
     >
       <Stack fill>
+        {/* SS220 EDIT - START */}
+        <LatejoinJobIcon job={job} />
+        {/* SS220 EDIT - END */}
         {jobIcon && (
           <Stack.Item>
             <Icon style={{ marginRight: '0.1em' }} name={jobIcon} />
@@ -193,6 +204,8 @@ export function JobSelection(props) {
     data.departments,
     data.departments_static,
   );
+
+  retainAvailableLatejoinJobs(departments, data.departments); // SS220 EDIT: hidden dynamic rows stay hidden after the native merge.
 
   const { shuttle_status, round_duration } = data;
 
