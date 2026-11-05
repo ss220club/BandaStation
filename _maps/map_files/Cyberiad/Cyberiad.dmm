@@ -23877,7 +23877,8 @@
 	},
 /area/station/security/mechbay)
 "fJZ" = (
-/turf/open/floor/catwalk_floor/iron)
+/turf/open/floor/catwalk_floor/iron,
+/area/station/engineering/atmos/hfr_room)
 "fKb" = (
 /turf/open/floor/iron/dark/side{
 	dir = 6
@@ -38008,11 +38009,8 @@
 /obj/structure/reagent_dispensers/watertank/high,
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/light/directional/west,
-/obj/effect/mapping_helpers/airlock/cyclelink_helper{
-	dir = 8
-	},
 /turf/open/floor/iron,
-/area/station/engineering/atmos/mix/ghetto)
+/area/station/engineering/atmos/project)
 "jfa" = (
 /obj/structure/chair/plastic{
 	dir = 4
@@ -39261,11 +39259,9 @@
 /turf/open/floor/iron/dark,
 /area/station/engineering/supermatter/room)
 "jxb" = (
-/obj/effect/turf_decal/trimline/yellow/line{
-	dir = 1
-	},
-/turf/open/floor/iron,
-/area/station/engineering/atmos/project)
+/obj/effect/turf_decal/bot/left,
+/turf/open/floor/engine,
+/area/station/engineering/atmos/hfr_room)
 "jxc" = (
 /obj/machinery/computer/security/telescreen/entertainment/directional/west,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
@@ -39564,7 +39560,7 @@
 /obj/effect/mapping_helpers/airlock/cyclelink_helper_multi{
 	cycle_id = "engi_ai_big_airlock"
 	},
-/turf/open/space/basic,
+/turf/open/floor/plating,
 /area/station/maintenance/department/engine/atmos)
 "jAq" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
@@ -43223,10 +43219,6 @@
 /obj/effect/spawner/structure/window,
 /turf/open/floor/plating,
 /area/station/science/breakroom)
-"kuI" = (
-/obj/effect/turf_decal/tile/yellow/opposingcorners,
-/turf/open/floor/iron/dark,
-/area/station/engineering/atmos/project)
 "kuR" = (
 /turf/closed/wall/r_wall,
 /area/station/tcommsat/maints)
@@ -43741,11 +43733,18 @@
 /turf/open/floor/iron,
 /area/station/hallway/primary/starboard)
 "kBE" = (
-/obj/machinery/atmospherics/components/unary/thermomachine/freezer{
-	initialize_directions = 8
+/obj/effect/turf_decal/tile/yellow/half/contrasted{
+	dir = 8
 	},
-/turf/open/space/basic,
-/area/space)
+/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/structure/cable,
+/obj/machinery/atmospherics/pipe/smart/simple/orange/visible{
+	dir = 1;
+	initialize_directions = 3
+	},
+/turf/open/floor/iron,
+/area/station/engineering/atmos)
 "kBH" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/mineral/ore_redemption,
@@ -46763,11 +46762,6 @@
 	},
 /turf/open/floor/iron/dark/textured_large,
 /area/station/engineering/gravity_generator)
-"llV" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/turf/open/floor/iron,
-/area/station/maintenance/department/engine/atmos)
 "lmn" = (
 /obj/effect/turf_decal/box/white/corners{
 	dir = 8
@@ -81529,7 +81523,7 @@
 /obj/effect/mapping_helpers/airlock/cyclelink_helper_multi{
 	cycle_id = "engi_ai_big_airlock"
 	},
-/turf/open/space/basic,
+/turf/open/floor/plating,
 /area/station/maintenance/department/engine/atmos)
 "tGZ" = (
 /obj/effect/turf_decal/stripes/corner{
@@ -117653,7 +117647,7 @@ doz
 doz
 doz
 doz
-kBE
+doz
 doz
 doz
 doz
@@ -129490,7 +129484,7 @@ ouO
 pgv
 pgv
 pyt
-llV
+wZp
 pDm
 oUZ
 doz
@@ -188088,7 +188082,7 @@ rLg
 trM
 trM
 mSi
-bAZ
+mSi
 mSi
 mSi
 hVM
@@ -191432,7 +191426,7 @@ vUp
 hpw
 baa
 bgn
-nnQ
+kBE
 jJl
 sLI
 sLI
@@ -202210,7 +202204,7 @@ xQE
 lhv
 dQs
 aXb
-kuI
+dQP
 sTJ
 pVg
 hjX
