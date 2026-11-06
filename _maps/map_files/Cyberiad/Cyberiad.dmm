@@ -48487,6 +48487,7 @@
 /area/station/security/courtroom)
 "lHk" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /turf/open/floor/plating,
 /area/station/maintenance/department/engine/atmos)
 "lHm" = (
@@ -57400,6 +57401,7 @@
 /obj/effect/mapping_helpers/airlock/autoname,
 /obj/effect/mapping_helpers/airlock/access/all/engineering/general,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /turf/open/floor/plating,
 /area/station/maintenance/department/engine/atmos)
 "nOH" = (
@@ -71489,6 +71491,10 @@
 	target_pressure = 300;
 	dir = 8
 	},
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
+/obj/machinery/atmospherics/components/binary/pump/on/layer2{
+	dir = 4
+	},
 /turf/open/floor/plating,
 /area/station/maintenance/department/engine/atmos)
 "rlz" = (
@@ -81101,10 +81107,6 @@
 /obj/structure/cable,
 /turf/open/floor/iron,
 /area/station/hallway/secondary/entry)
-"tDl" = (
-/obj/effect/decal/cleanable/dirt,
-/turf/closed/wall,
-/area/station/engineering/atmos/project)
 "tDs" = (
 /obj/effect/turf_decal/trimline/blue/filled/line{
 	dir = 1
@@ -90581,6 +90583,7 @@
 "vWu" = (
 /obj/effect/spawner/structure/window/reinforced,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/hidden/layer4,
+/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /turf/open/floor/plating,
 /area/station/maintenance/department/engine/atmos)
 "vWx" = (
@@ -126803,9 +126806,9 @@ pgv
 mcq
 fqw
 glz
-tDl
 glz
-tDl
+glz
+glz
 glz
 glz
 glz
@@ -127059,7 +127062,7 @@ ouO
 ouO
 mcq
 fqw
-tDl
+glz
 jEt
 jeZ
 eCT
@@ -128601,7 +128604,7 @@ oJV
 nBM
 uUz
 wZp
-tDl
+glz
 uwR
 jQO
 glF
