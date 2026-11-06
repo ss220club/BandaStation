@@ -148,7 +148,6 @@
 /obj/effect/turf_decal/bot,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/cyan/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/structure/cable,
 /turf/open/floor/iron,
 /area/station/maintenance/department/engine/atmos)
 "acm" = (
@@ -53447,8 +53446,8 @@
 "mQI" = (
 /obj/structure/lattice/catwalk,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/violet/visible/layer2,
-/turf/open/space/openspace,
-/area/station/engineering/atmos/project)
+/turf/open/space/basic,
+/area/space)
 "mQM" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/components/trinary/filter/atmos{
@@ -81102,22 +81101,6 @@
 /obj/structure/cable,
 /turf/open/floor/iron,
 /area/station/hallway/secondary/entry)
-"tDl" = (
-/obj/effect/mapping_helpers/airlock/cyclelink_helper{
-	dir = 4
-	},
-/obj/machinery/door/airlock/external{
-	name = "External Solar Access"
-	},
-/obj/effect/turf_decal/stripes/line{
-	dir = 8
-	},
-/obj/effect/turf_decal/stripes/line{
-	dir = 4
-	},
-/obj/effect/mapping_helpers/airlock/access/all/engineering/general,
-/turf/open/floor/iron,
-/area/station/maintenance/department/engine/atmos)
 "tDs" = (
 /obj/effect/turf_decal/trimline/blue/filled/line{
 	dir = 1
@@ -81348,8 +81331,8 @@
 /area/station/maintenance/department/security/ghetto/fore)
 "tGp" = (
 /obj/structure/lattice/catwalk,
-/turf/open/space/openspace,
-/area/station/engineering/atmos/project)
+/turf/open/space/basic,
+/area/space)
 "tGs" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/effect/decal/cleanable/dirt,
@@ -81420,7 +81403,6 @@
 /obj/machinery/door/airlock/external{
 	name = "External Solar Access"
 	},
-/obj/structure/cable,
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
 	},
@@ -88763,8 +88745,8 @@
 "vxS" = (
 /obj/structure/lattice/catwalk,
 /obj/machinery/atmospherics/pipe/smart/simple/green/visible,
-/turf/open/space/openspace,
-/area/station/engineering/atmos/project)
+/turf/open/space/basic,
+/area/space)
 "vxV" = (
 /obj/machinery/rnd/production/protolathe/department/engineering,
 /obj/effect/turf_decal/bot,
@@ -90594,6 +90576,22 @@
 	dir = 8
 	},
 /area/station/command/gateway)
+"vWu" = (
+/obj/effect/mapping_helpers/airlock/cyclelink_helper{
+	dir = 4
+	},
+/obj/machinery/door/airlock/external{
+	name = "External Solar Access"
+	},
+/obj/effect/turf_decal/stripes/line{
+	dir = 8
+	},
+/obj/effect/turf_decal/stripes/line{
+	dir = 4
+	},
+/obj/effect/mapping_helpers/airlock/access/all/engineering/general,
+/turf/open/floor/iron,
+/area/station/maintenance/department/engine/atmos)
 "vWx" = (
 /obj/machinery/door/airlock/maintenance,
 /obj/effect/mapping_helpers/airlock/autoname,
@@ -126825,8 +126823,8 @@ pDm
 pDm
 vbK
 ceC
-dFP
-gOj
+oUZ
+oUZ
 ceC
 doz
 doz
@@ -185671,7 +185669,7 @@ tYD
 doz
 ceC
 uNc
-tDl
+vWu
 uNc
 ceC
 tYD
@@ -186700,7 +186698,7 @@ trM
 mSi
 ezC
 lHk
-lHk
+nnQ
 mSi
 trM
 tYD
