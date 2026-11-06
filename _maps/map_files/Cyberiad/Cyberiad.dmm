@@ -35062,6 +35062,7 @@
 /obj/machinery/atmospherics/pipe/smart/simple/dark/visible/layer4{
 	dir = 10
 	},
+/obj/machinery/firealarm/directional/east,
 /turf/open/floor/iron,
 /area/station/engineering/atmos)
 "itJ" = (
@@ -43710,6 +43711,7 @@
 	dir = 1;
 	initialize_directions = 3
 	},
+/obj/machinery/firealarm/directional/west,
 /turf/open/floor/iron,
 /area/station/engineering/atmos)
 "kBH" = (
