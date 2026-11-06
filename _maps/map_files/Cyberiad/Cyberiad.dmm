@@ -53447,7 +53447,7 @@
 /obj/structure/lattice/catwalk,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/violet/visible/layer2,
 /turf/open/space/basic,
-/area/space)
+/area/space/nearstation)
 "mQM" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/components/trinary/filter/atmos{
@@ -81101,6 +81101,22 @@
 /obj/structure/cable,
 /turf/open/floor/iron,
 /area/station/hallway/secondary/entry)
+"tDl" = (
+/obj/effect/mapping_helpers/airlock/cyclelink_helper{
+	dir = 4
+	},
+/obj/machinery/door/airlock/external{
+	name = "External Solar Access"
+	},
+/obj/effect/turf_decal/stripes/line{
+	dir = 8
+	},
+/obj/effect/turf_decal/stripes/line{
+	dir = 4
+	},
+/obj/effect/mapping_helpers/airlock/access/all/engineering/general,
+/turf/open/floor/iron,
+/area/station/maintenance/department/engine/atmos)
 "tDs" = (
 /obj/effect/turf_decal/trimline/blue/filled/line{
 	dir = 1
@@ -81329,10 +81345,6 @@
 /obj/effect/spawner/random/structure/grille,
 /turf/open/floor/plating,
 /area/station/maintenance/department/security/ghetto/fore)
-"tGp" = (
-/obj/structure/lattice/catwalk,
-/turf/open/space/basic,
-/area/space)
 "tGs" = (
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/effect/decal/cleanable/dirt,
@@ -88742,11 +88754,6 @@
 /obj/machinery/light/directional/east,
 /turf/open/floor/iron,
 /area/station/cargo/sorting)
-"vxS" = (
-/obj/structure/lattice/catwalk,
-/obj/machinery/atmospherics/pipe/smart/simple/green/visible,
-/turf/open/space/basic,
-/area/space)
 "vxV" = (
 /obj/machinery/rnd/production/protolathe/department/engineering,
 /obj/effect/turf_decal/bot,
@@ -90576,22 +90583,6 @@
 	dir = 8
 	},
 /area/station/command/gateway)
-"vWu" = (
-/obj/effect/mapping_helpers/airlock/cyclelink_helper{
-	dir = 4
-	},
-/obj/machinery/door/airlock/external{
-	name = "External Solar Access"
-	},
-/obj/effect/turf_decal/stripes/line{
-	dir = 8
-	},
-/obj/effect/turf_decal/stripes/line{
-	dir = 4
-	},
-/obj/effect/mapping_helpers/airlock/access/all/engineering/general,
-/turf/open/floor/iron,
-/area/station/maintenance/department/engine/atmos)
 "vWx" = (
 /obj/machinery/door/airlock/maintenance,
 /obj/effect/mapping_helpers/airlock/autoname,
@@ -124508,7 +124499,7 @@ xca
 bxU
 iMe
 poj
-vxS
+poj
 rwO
 uRE
 qxo
@@ -124765,7 +124756,7 @@ tWy
 uRb
 jTT
 bSj
-tGp
+vbK
 nRy
 eAR
 fmm
@@ -185669,7 +185660,7 @@ tYD
 doz
 ceC
 uNc
-vWu
+tDl
 uNc
 ceC
 tYD
