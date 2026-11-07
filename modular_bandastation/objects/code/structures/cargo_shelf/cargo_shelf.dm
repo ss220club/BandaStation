@@ -50,7 +50,8 @@
 		balloon_alert(user, "слишком далеко!")
 		return FALSE
 
-	if(!get_turf(crate).IsReachableBy(user))
+	var/turf/crate_turf = get_turf(crate)
+	if(!crate_turf.IsReachableBy(user))
 		balloon_alert(user, "не достать до ящика!")
 		return FALSE
 
