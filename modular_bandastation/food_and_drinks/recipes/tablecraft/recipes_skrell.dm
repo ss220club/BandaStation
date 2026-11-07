@@ -49,7 +49,7 @@
 	meal_category = MEAL_SNACK
 
 /datum/crafting_recipe/food/ximikoa_roll
-	name = "Ximikoa rice roll"
+	name = "ximikoa rice roll"
 	reqs = list(
 		/obj/item/food/flat_rice_dough = 1,
 		/obj/item/food/grown/ximikoa = 1,
@@ -62,7 +62,7 @@
 	meal_category = MEAL_DESSERT
 
 /datum/crafting_recipe/food/capsaicin_focaccia
-	name = "Capsaicin fungal focaccia"
+	name = "capsaicin fungal focaccia"
 	reqs = list(
 		/obj/item/food/flat_rice_dough = 1,
 		/obj/item/food/grown/ash_flora/mushroom_stem = 2,
@@ -217,7 +217,7 @@
 	percentage_of_nutriment_converted = 0
 
 /datum/reagent/consumable/nutriment/soup/edens_gaia_noodles
-	name = "Eden's Gaia noodle soup"
+	name = "eden's gaia noodle soup"
 	description = "A sacred glowing soup with noodles floating in an Ambrosia Gaia broth. Induces supreme tranquility."
 	data = list("divine sweetness" = 2, "tender noodles" = 2, "pure peace" = 2)
 	glass_price = FOOD_PRICE_LEGENDARY
@@ -225,7 +225,7 @@
 
 /datum/glass_style/has_foodtype/soup/edens_gaia_noodles
 	required_drink_type = /datum/reagent/consumable/nutriment/soup/edens_gaia_noodles
-	name = "Eden's Gaia noodle soup"
+	name = "eden's gaia noodle soup"
 	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
 	icon_state = "gaia_noodle_soup"
 	drink_type = VEGETABLES | GRAIN
@@ -285,7 +285,7 @@
 	meal_category = MEAL_COMPONENT
 
 /datum/crafting_recipe/food/walking_mushroom_skewer
-	name = "Crispy walking mushroom skewer"
+	name = "crispy walking mushroom skewer"
 	reqs = list(
 		/obj/item/food/grown/mushroom/walkingmushroom = 1,
 		/obj/item/stack/rods = 1,
@@ -299,7 +299,7 @@
 	meal_category = MEAL_SNACK
 
 /datum/crafting_recipe/food/psychedelic_tempeh
-	name = "Psychedelic tempeh stir-fry"
+	name = "psychedelic tempeh stir-fry"
 	reqs = list(
 		/obj/item/food/tempeh = 1,
 		/obj/item/food/grown/mushroom/libertycap = 1,
@@ -312,7 +312,7 @@
 	meal_category = MEAL_MAIN_COURSE
 
 /datum/crafting_recipe/food/steelcap_dumplings
-	name = "Steel cap dumplings"
+	name = "steel cap dumplings"
 	reqs = list(
 		/obj/item/food/flat_rice_dough = 1,
 		/obj/item/grown/log/steel = 1,
@@ -325,7 +325,7 @@
 	meal_category = MEAL_MAIN_COURSE
 
 /datum/crafting_recipe/food/skrell_fungal_ramen
-	name = "Skrell fungal ramen"
+	name = "skrell fungal ramen"
 	reqs = list(
 		/obj/item/reagent_containers/cup/bowl = 1,
 		/obj/item/food/spaghetti/raw = 1,
@@ -341,7 +341,7 @@
 	meal_category = MEAL_MAIN_COURSE
 
 /datum/crafting_recipe/food/seraka_flame_roast
-	name = "Seraka flame roast"
+	name = "seraka flame roast"
 	reqs = list(
 		/obj/item/food/grown/ash_flora/seraka = 1,
 		/obj/item/food/grown/ash_flora/cactus_fruit = 1,
@@ -354,7 +354,7 @@
 	meal_category = MEAL_MAIN_COURSE
 
 /datum/crafting_recipe/food/skrell_cheetal_eggplant
-	name = "Baked eggplant Skrell cheetal"
+	name = "baked eggplant skrell cheetal"
 	reqs = list(
 		/obj/item/food/grown/eggplant = 1,
 		/obj/item/food/tofu = 1,
@@ -459,7 +459,7 @@
 	meal_category = MEAL_COMPONENT
 
 /datum/crafting_recipe/food/grand_mycelial_roast
-	name = "Grand Qerrbalak Mycelial Roast"
+	name = "grand qerrbalak mycelial roast"
 	reqs = list(
 		/obj/item/food/skrell/crimson_fungal_mix = 1,
 		/obj/item/food/skrell/twilight_fungal_paste = 1,
@@ -475,7 +475,7 @@
 // SALADS & APPETIZERS
 
 /datum/crafting_recipe/food/coniine_berry_bowl
-	name = "Coniine berry bowl"
+	name = "coniine berry bowl"
 	reqs = list(
 		/obj/item/reagent_containers/cup/bowl = 1,
 		/obj/item/food/grown/berries/death = 2,
@@ -501,7 +501,7 @@
 	meal_category = MEAL_SNACK
 
 /datum/crafting_recipe/food/moonflower_salad
-	name = "Moonflower and plump salad"
+	name = "moonflower and plump salad"
 	reqs = list(
 		/obj/item/reagent_containers/cup/bowl = 1,
 		/obj/item/food/grown/flower/moonflower = 1,
@@ -517,7 +517,7 @@
 // BURGERS & WRAPS
 
 /datum/crafting_recipe/food/skrell_tofu_burger
-	name = "Skrellian tofu burger"
+	name = "skrellian tofu burger"
 	reqs = list(
 		/obj/item/food/boiledrice = 1,
 		/obj/item/food/tofu = 1,
@@ -531,7 +531,7 @@
 	meal_category = MEAL_MAIN_COURSE
 
 /datum/crafting_recipe/food/qerr_fungal_taco
-	name = "Qerr fungal taco"
+	name = "qerr fungal taco"
 	reqs = list(
 		/obj/item/food/tortilla = 1,
 		/obj/item/food/grown/mushroom/chanterelle = 1,
@@ -574,7 +574,7 @@
 	crafting_flags = parent_type::crafting_flags | CRAFT_SKIP_MATERIALS_PARITY
 
 /datum/crafting_recipe/food/fairy_glow_roll
-	name = "Fairy glow roll"
+	name = "fairy glow roll"
 	reqs = list(
 		/obj/item/food/flat_rice_dough = 1,
 		/obj/item/food/grown/grass/fairy = 1,
@@ -618,7 +618,7 @@
 	meal_category = MEAL_DESSERT
 
 /datum/crafting_recipe/food/liberty_fungus_donuts
-	name = "Liberty fungus donut"
+	name = "liberty fungus donut"
 	reqs = list(
 		/obj/item/food/donut/plain = 1,
 		/obj/item/food/grown/mushroom/libertycap = 1,
@@ -631,7 +631,7 @@
 	meal_category = MEAL_DESSERT
 
 /datum/crafting_recipe/food/skrell_vanilla_pudding
-	name = "Skrell vanilla pudding"
+	name = "skrell vanilla pudding"
 	reqs = list(
 		/obj/item/food/pie/plain = 1,
 		/datum/reagent/consumable/cherryjelly = 5,
@@ -647,7 +647,7 @@
 	meal_category = MEAL_DESSERT
 
 /datum/crafting_recipe/food/caramelized_plump_cap
-	name = "Caramelized plump cap"
+	name = "caramelized plump cap"
 	reqs = list(
 		/obj/item/food/grown/mushroom/plumphelmet = 1,
 		/datum/reagent/consumable/caramel = 10,
@@ -659,7 +659,7 @@
 	meal_category = MEAL_DESSERT
 
 /datum/crafting_recipe/food/ambrosia_deus_tart
-	name = "Ambrosia Deus tart"
+	name = "ambrosia deus tart"
 	reqs = list(
 		/obj/item/food/cakebatter = 1,
 		/obj/item/food/grown/ambrosia/deus = 2,
@@ -672,7 +672,7 @@
 	meal_category = MEAL_DESSERT
 
 /datum/crafting_recipe/food/ambrosia_vulgaris_roll
-	name = "Ambrosia Vulgaris roll"
+	name = "ambrosia vulgaris roll"
 	reqs = list(
 		/obj/item/food/cakebatter = 1,
 		/obj/item/food/grown/ambrosia/vulgaris = 1,
@@ -685,7 +685,7 @@
 	meal_category = MEAL_DESSERT
 
 /datum/crafting_recipe/food/vulgaris_chocolate_roll
-	name = "Vulgaris chocolate roll"
+	name = "vulgaris chocolate roll"
 	reqs = list(
 		/obj/item/food/cakebatter = 1,
 		/obj/item/food/grown/ambrosia/vulgaris = 1,
@@ -699,7 +699,7 @@
 	meal_category = MEAL_DESSERT
 
 /datum/crafting_recipe/food/deus_golden_roll
-	name = "Deus golden roll"
+	name = "deus golden roll"
 	reqs = list(
 		/obj/item/food/cakebatter = 1,
 		/obj/item/food/grown/ambrosia/deus = 1,
@@ -714,7 +714,7 @@
 	meal_category = MEAL_DESSERT
 
 /datum/crafting_recipe/food/crimson_gaia_roll
-	name = "Crimson Gaia roll"
+	name = "crimson gaia roll"
 	reqs = list(
 		/obj/item/food/cakebatter = 1,
 		/obj/item/food/grown/cocaleaf = 1,
@@ -732,7 +732,7 @@
 // SWEETS & ICE CREAM
 
 /datum/crafting_recipe/food/skrell_vanilla_icecream
-	name = "Skrell vanilla ice cream"
+	name = "skrell vanilla ice cream"
 	reqs = list(
 		/obj/item/popsicle_stick = 1,
 		/datum/reagent/consumable/soymilk = 10,
@@ -746,7 +746,7 @@
 	meal_category = MEAL_DESSERT
 
 /datum/crafting_recipe/food/glowcap_ice_scoop
-	name = "Glowcap ice scoop"
+	name = "glowcap ice scoop"
 	reqs = list(
 		/obj/item/popsicle_stick = 1,
 		/obj/item/food/grown/mushroom/glowshroom/glowcap = 1,
@@ -761,7 +761,7 @@
 	meal_category = MEAL_DESSERT
 
 /datum/crafting_recipe/food/soy_ambrosia_sundae
-	name = "Soy ambrosia sundae"
+	name = "soy ambrosia sundae"
 	reqs = list(
 		/obj/item/reagent_containers/cup/glass/sillycup = 1,
 		/obj/item/food/grown/ambrosia/deus = 1,
@@ -777,7 +777,7 @@
 	meal_category = MEAL_DESSERT
 
 /datum/crafting_recipe/food/fyrsskar_drops
-	name = "Fyrsskar drops"
+	name = "fyrsskar drops"
 	reqs = list(
 		/datum/reagent/consumable/caramel = 10,
 		/datum/reagent/consumable/ethanol/fyrsskar_tears = 10,
@@ -789,7 +789,7 @@
 	meal_category = MEAL_DESSERT
 
 /datum/crafting_recipe/food/slime_fungus_freeze
-	name = "Slime-fungus freeze"
+	name = "slime-fungus freeze"
 	reqs = list(
 		/obj/item/popsicle_stick = 1,
 		/obj/item/food/grown/mushroom/libertycap = 1,

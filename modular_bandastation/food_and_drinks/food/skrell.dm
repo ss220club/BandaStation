@@ -4,7 +4,7 @@
 
 // MARK: Breads & Bakery
 
-// 2. Plump Helmet Rice Flatbread
+// 2. plump helmet rice flatbread
 /obj/item/food/skrell/plump_rice_flatbread
 	name = "plump helmet rice flatbread"
 	desc = "A traditional porous flatbread infused with plump helmet mushrooms and soymilk. Highly aromatic and satisfying."
@@ -55,7 +55,7 @@
 	w_class = WEIGHT_CLASS_TINY
 
 
-// 4. Ximikoa Rice Roll
+// 4. ximikoa rice roll
 /obj/item/food/skrell/ximikoa_roll
 	name = "ximikoa rice roll"
 	desc = "A tender, sweet-tasting baked rice roll enriched with ximikoa and flour. Packed with rich plant proteins."
@@ -73,7 +73,7 @@
 	venue_value = FOOD_PRICE_NORMAL
 
 
-// 5. Capsaicin Fungal Focaccia
+// 5. capsaicin fungal focaccia
 /obj/item/food/skrell/capsaicin_focaccia
 	name = "capsaicin fungal focaccia"
 	desc = "A fiery, seasoned flatbread loaded with embershrooms and spicy sauce. Skrell highly appreciate its stimulating heat."
@@ -188,9 +188,9 @@
 	crafting_complexity = FOOD_COMPLEXITY_3
 	venue_value = FOOD_PRICE_NORMAL
 
-// 11. Eden's Gaia Noodle Soup
+// 11. eden's gaia noodle soup
 /obj/item/food/soup/edens_gaia_noodles
-	name = "Eden's Gaia noodle soup"
+	name = "eden's gaia noodle soup"
 	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
 	desc = "A sacred glowing bowl of noodles floating in an Ambrosia Gaia broth. Induces supreme tranquility and mental harmony."
 	icon_state = "gaia_noodle_soup"
@@ -266,7 +266,7 @@
 	crafting_complexity = FOOD_COMPLEXITY_3
 	venue_value = FOOD_PRICE_NORMAL
 
-// 14. Crispy Walking Mushroom Skewers
+// 14. crispy walking mushroom skewers
 /obj/item/food/kebab/walking_mushroom_skewer
 	name = "crispy walking mushroom skewer"
 	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
@@ -284,7 +284,7 @@
 	crafting_complexity = FOOD_COMPLEXITY_2
 	venue_value = FOOD_PRICE_NORMAL
 
-// 15. Psychedelic Tempeh Stir-fry
+// 15. psychedelic tempeh stir-fry
 /obj/item/food/skrell/psychedelic_tempeh
 	name = "psychedelic tempeh stir-fry"
 	desc = "Fermented soy tempeh stir-fried with liberty-cap mushrooms and rich soy dip. Causes gentle euphoria in Skrell and intense trips in humans."
@@ -300,7 +300,7 @@
 	crafting_complexity = FOOD_COMPLEXITY_3
 	venue_value = FOOD_PRICE_EXOTIC
 
-// 16. Steel Cap Dumplings
+// 16. steel cap dumplings
 /obj/item/food/skrell/steelcap_dumplings
 	name = "steel cap dumplings"
 	desc = "Dense rice dumplings stuffed with shredded steel cap mushrooms and cocoa. Rich in dietary iron and cellulose."
@@ -325,9 +325,9 @@
 			reagents.maximum_volume = max(reagents.maximum_volume, reagents.total_volume + steel_log.reagents.total_volume)
 			steel_log.reagents.trans_to(src, steel_log.reagents.total_volume)
 
-// 17. Skrell Fungal Ramen
+// 17. skrell fungal ramen
 /obj/item/food/skrell/skrell_fungal_ramen
-	name = "Skrell fungal ramen"
+	name = "skrell fungal ramen"
 	desc = "Steaming bowl of rice noodles served in a concentrated broth of plump helmets, chanterelles, and aged soy sauce."
 	icon_state = "skrell_ramen"
 	food_reagents = list(
@@ -358,9 +358,9 @@
 	crafting_complexity = FOOD_COMPLEXITY_3
 	venue_value = FOOD_PRICE_NORMAL
 
-// 19. Baked Eggplant Skrell Cheetal
+// 19. baked eggplant skrell cheetal
 /obj/item/food/skrell/skrell_cheetal_eggplant
-	name = "baked eggplant Skrell cheetal"
+	name = "baked eggplant skrell cheetal"
 	desc = "An eggplant carved into the majestic shape of a Skrellian head-tentacle, stuffed with tofu and plump helmets, garnished with sweet plums. A supreme symbol of hospitality."
 	icon_state = "skrell_cheetal"
 	food_reagents = list(
@@ -470,10 +470,10 @@
 	w_class = WEIGHT_CLASS_SMALL
 	crafting_complexity = FOOD_COMPLEXITY_3
 
-// Grand Qerrbalak Mycelial Roast
+// grand qerrbalak mycelial roast
 /obj/item/food/skrell/grand_mycelial_roast
-	name = "Grand Qerrbalak Mycelial Roast"
-	desc = "The undisputed pinnacle of Skrellian culinary mastery. Three refined fungal essences braised inside a sacred Eden's Gaia noodle soup. A masterpiece of color, taste, and bio-harmony."
+	name = "grand qerrbalak mycelial roast"
+	desc = "The undisputed pinnacle of Skrellian culinary mastery. Three refined fungal essences braised inside a sacred eden's gaia noodle soup. A masterpiece of color, taste, and bio-harmony."
 	icon_state = "mycelial_roast"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 40,
@@ -513,7 +513,7 @@
 
 // MARK: Salads & Appetizers
 
-// 26. Coniine Berry Bowl
+// 26. coniine berry bowl
 /obj/item/food/salad/coniine_berry
 	name = "coniine berry bowl"
 	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
@@ -571,9 +571,9 @@
 
 // MARK: Burgers, Sandwiches & Wraps
 
-// 29. Skrellian Tofu Burger
+// 29. skrellian tofu burger
 /obj/item/food/burger/skrell_tofu
-	name = "Skrellian tofu burger"
+	name = "skrellian tofu burger"
 	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
 	desc = "A wholesome vegetarian burger made with a tender tofu patty, sliced plump helmet, and rich soy dip in a soft rice bun."
 	icon_state = "skrell_burger"
@@ -590,9 +590,9 @@
 	crafting_complexity = FOOD_COMPLEXITY_3
 	venue_value = FOOD_PRICE_NORMAL
 
-// 30. Qerr Fungal Taco
+// 30. qerr fungal taco
 /obj/item/food/taco/qerr_fungal
-	name = "Qerr fungal taco"
+	name = "qerr fungal taco"
 	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
 	desc = "A crunchy corn taco shell packed with sauteed chanterelles and seasoned with garlic and savory soy sauce."
 	icon_state = "qerr_taco"
@@ -690,7 +690,7 @@
 
 // MARK: Desserts, Cakes & Rolls
 
-// 34. Citrus Coffee Cake
+// 34. citrus coffee cake
 /obj/item/food/cake/skrell_citrus_cake
 	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
 	name = "citrus coffee cake"
@@ -764,7 +764,7 @@
 	foodtypes = GRAIN | FRUIT | SUGAR
 	food_flags = FOOD_FINGER_FOOD
 
-// 36. Liberty Fungus Donuts
+// 36. liberty fungus donuts
 /obj/item/food/donut/liberty_fungus
 	name = "liberty fungus donut"
 	desc = "A deep-fried sweet pastry ring infused with a controlled extract of liberty-cap mushroom. Lifts the spirits and dissolves laboratory stress."
@@ -783,9 +783,9 @@
 	crafting_complexity = FOOD_COMPLEXITY_2
 	venue_value = FOOD_PRICE_NORMAL
 
-// 37. Skrell Vanilla Pudding
+// 37. skrell vanilla pudding
 /obj/item/food/skrell/skrell_vanilla_pudding
-	name = "Skrell vanilla pudding"
+	name = "skrell vanilla pudding"
 	desc = "A delicate plant-based pudding made with soy milk, sweet vanilla, and a hint of cherry jelly. Incredibly silky and gentle."
 	icon_state = "vanilla_pudding"
 	food_reagents = list(
@@ -801,7 +801,7 @@
 	crafting_complexity = FOOD_COMPLEXITY_2
 	venue_value = FOOD_PRICE_NORMAL
 
-// 38. Caramelized Plump Cap
+// 38. caramelized plump cap
 /obj/item/food/kebab/caramelized_plump_cap
 	name = "caramelized plump cap"
 	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
@@ -820,9 +820,9 @@
 	crafting_complexity = FOOD_COMPLEXITY_2
 	venue_value = FOOD_PRICE_NORMAL
 
-// 39. Ambrosia Deus Tart
+// 39. ambrosia deus tart
 /obj/item/food/skrell/ambrosia_deus_tart
-	name = "Ambrosia Deus tart"
+	name = "ambrosia deus tart"
 	desc = "An exquisite glowing tart sweetened with ximikoa and korta nectar. The controlled omnizine essence rapidly eases aches and invigorates the consumer."
 	icon_state = "deus_tart"
 	food_reagents = list(
@@ -840,8 +840,8 @@
 	AddElement(/datum/element/processable, TOOL_KNIFE, /obj/item/food/skrell/ambrosia_deus_tart_slice, 6, 3 SECONDS, table_required = TRUE, screentip_verb = "Slice", sound_to_play = /datum/sound_effect/knife_slice)
 
 /obj/item/food/skrell/ambrosia_deus_tart_slice
-	name = "Ambrosia Deus tart slice"
-	desc = "A glowing slice of delicious Ambrosia Deus tart."
+	name = "ambrosia deus tart slice"
+	desc = "A glowing slice of delicious ambrosia deus tart."
 	icon_state = "deus_tart_slice"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 2,
@@ -853,9 +853,9 @@
 	w_class = WEIGHT_CLASS_TINY
 	food_flags = FOOD_FINGER_FOOD
 
-// 40. Ambrosia Vulgaris Roll
+// 40. ambrosia vulgaris roll
 /obj/item/food/skrell/ambrosia_vulgaris_roll
-	name = "Ambrosia Vulgaris roll"
+	name = "ambrosia vulgaris roll"
 	desc = "A rolled pastry filled with fresh ambrosia vulgaris and savory soy dip. A balanced everyday sweet roll that relieves fatigue."
 	icon_state = "vulgaris_roll"
 	food_reagents = list(
@@ -874,7 +874,7 @@
 	AddElement(/datum/element/processable, TOOL_KNIFE, /obj/item/food/skrell/ambrosia_vulgaris_roll_slice, 4, 3 SECONDS, table_required = TRUE, screentip_verb = "Slice", sound_to_play = /datum/sound_effect/knife_slice)
 
 /obj/item/food/skrell/ambrosia_vulgaris_roll_slice
-	name = "Ambrosia Vulgaris roll slice"
+	name = "ambrosia vulgaris roll slice"
 	desc = "A slice of sweet and herbal ambrosia roll."
 	icon_state = "vulgaris_roll_slice"
 	food_reagents = list(
@@ -889,9 +889,9 @@
 	food_flags = FOOD_FINGER_FOOD
 
 
-// 41. Vulgaris Chocolate Roll
+// 41. vulgaris chocolate roll
 /obj/item/food/skrell/vulgaris_chocolate_roll
-	name = "Vulgaris chocolate roll"
+	name = "vulgaris chocolate roll"
 	desc = "A rich, dark cocoa roll swirled with a delicate green ambrosia vulgaris cream and topped with a fresh leaf. Mellows pain and restores energy."
 	icon_state = "vulgaris_chocolate_roll"
 	food_reagents = list(
@@ -910,7 +910,7 @@
 	AddElement(/datum/element/processable, TOOL_KNIFE, /obj/item/food/skrell/vulgaris_chocolate_roll_slice, 4, 3 SECONDS, table_required = TRUE, screentip_verb = "Slice", sound_to_play = /datum/sound_effect/knife_slice)
 
 /obj/item/food/skrell/vulgaris_chocolate_roll_slice
-	name = "Vulgaris chocolate roll slice"
+	name = "vulgaris chocolate roll slice"
 	desc = "A slice of dark chocolate roll with green ambrosia cream."
 	icon_state = "vulgaris_chocolate_roll_slice"
 	food_reagents = list(
@@ -925,9 +925,9 @@
 	food_flags = FOOD_FINGER_FOOD
 
 
-// 42. Deus Golden Roll
+// 42. deus golden roll
 /obj/item/food/skrell/deus_golden_roll
-	name = "Deus golden roll"
+	name = "deus golden roll"
 	desc = "A golden-yellow roll filled with radiant Ambrosia Deus cream, honey, and finished with a shimmering gold apple leaf. Inspires pure euphoria."
 	icon_state = "deus_golden_roll"
 	food_reagents = list(
@@ -946,7 +946,7 @@
 	AddElement(/datum/element/processable, TOOL_KNIFE, /obj/item/food/skrell/deus_golden_roll_slice, 4, 3 SECONDS, table_required = TRUE, screentip_verb = "Slice", sound_to_play = /datum/sound_effect/knife_slice)
 
 /obj/item/food/skrell/deus_golden_roll_slice
-	name = "Deus golden roll slice"
+	name = "deus golden roll slice"
 	desc = "A slice of glowing golden roll with divine ambrosia cream."
 	icon_state = "deus_golden_roll_slice"
 	food_reagents = list(
@@ -960,9 +960,9 @@
 	food_flags = FOOD_FINGER_FOOD
 
 
-// 43. Crimson Gaia Roll
+// 43. crimson gaia roll
 /obj/item/food/skrell/crimson_gaia_roll
-	name = "Crimson Gaia roll"
+	name = "crimson gaia roll"
 	desc = "A deep ruby-red roll naturally sweetened with ximikoa and honey, filled with sacred Ambrosia Gaia cream and crowned with a fiery petal. Grants deep peace."
 	icon_state = "crimson_gaia_roll"
 	food_reagents = list(
@@ -980,7 +980,7 @@
 	AddElement(/datum/element/processable, TOOL_KNIFE, /obj/item/food/skrell/crimson_gaia_roll_slice, 4, 3 SECONDS, table_required = TRUE, screentip_verb = "Slice", sound_to_play = /datum/sound_effect/knife_slice)
 
 /obj/item/food/skrell/crimson_gaia_roll_slice
-	name = "Crimson Gaia roll slice"
+	name = "crimson gaia roll slice"
 	desc = "A slice of ruby-red Gaia roll with honey cream."
 	icon_state = "crimson_gaia_roll_slice"
 	food_reagents = list(
@@ -994,9 +994,9 @@
 
 // MARK: Sweets & Ice Cream
 
-// 44. Skrell Vanilla Ice Cream
+// 44. skrell vanilla ice cream
 /obj/item/food/skrell/skrell_vanilla_icecream
-	name = "Skrell vanilla ice cream"
+	name = "skrell vanilla ice cream"
 	desc = "A creamy, dairy-free frozen treat made from smooth soy milk, sweet vanilla, and sugar on a wooden stick."
 	icon_state = "skrell_vanilla_icecream"
 	food_reagents = list(
@@ -1013,7 +1013,7 @@
 	crafting_complexity = FOOD_COMPLEXITY_2
 	venue_value = FOOD_PRICE_CHEAP
 
-// 45. Glowcap Ice Scoop
+// 45. glowcap ice scoop
 /obj/item/food/skrell/glowcap_ice_scoop
 	name = "glowcap ice scoop"
 	desc = "A bioluminescent frozen treat made of pureed glowcaps, soy milk, and trace hallucinogens. Tingles on the tongue and sparkles in the dark."
@@ -1031,7 +1031,7 @@
 	crafting_complexity = FOOD_COMPLEXITY_3
 	venue_value = FOOD_PRICE_NORMAL
 
-// 46. Soy Ambrosia Sundae
+// 46. soy ambrosia sundae
 /obj/item/food/skrell/soy_ambrosia_sundae
 	name = "soy ambrosia sundae"
 	desc = "An exotic sundae combining whipped soy cream, ximikoa cocoa, arabica coffee, and a delicate touch of divine Ambrosia Deus."
@@ -1050,9 +1050,9 @@
 	crafting_complexity = FOOD_COMPLEXITY_3
 	venue_value = FOOD_PRICE_EXOTIC
 
-// 47. Fyrsskar Drops
+// 47. fyrsskar drops
 /obj/item/food/skrell/fyrsskar_drops
-	name = "Fyrsskar drops"
+	name = "fyrsskar drops"
 	desc = "Hard translucent drops made by crystallizing caramelized sugars with Tears of Fyrsskar. Rapidly cleanses metabolic impurities from Skrell."
 	icon_state = "fyrsskar_drops"
 	food_reagents = list(
@@ -1080,7 +1080,7 @@
 				consumer.reagents.remove_reagent(toxin.type, toxin.volume)
 		consumer.adjust_disgust(-30)
 
-// 48. Slime-Fungus Freeze
+// 48. slime-fungus freeze
 /obj/item/food/skrell/slime_fungus_freeze
 	name = "slime-fungus freeze"
 	desc = "A tart and trippy popsicle blending sweet berry juice, soy milk, and crushed liberty-cap mushrooms. Brings a burst of colorful euphoria."

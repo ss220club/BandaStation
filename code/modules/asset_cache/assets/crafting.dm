@@ -239,4 +239,4 @@
 	return GLOB.cooking_recipes_datums
 
 /datum/asset/json/crafting_recipes/cooking/get_corresponding_icon_sheet()
-	return get_asset_datum(/datum/asset/spritesheet_batched/crafting)
+	return get_asset_datum(/datum/asset/spritesheet_batched/crafting/cooking) // BANDA STATION fix

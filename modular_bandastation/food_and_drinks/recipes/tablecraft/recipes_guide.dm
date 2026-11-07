@@ -52,7 +52,7 @@
 	meal_category = MEAL_DESSERT
 
 /datum/crafting_recipe/food/knife/ambrosia_deus_tart_slice
-	name = "Ambrosia Deus tart slice"
+	name = "ambrosia deus tart slice"
 	reqs = list(/obj/item/food/skrell/ambrosia_deus_tart = 1)
 	result = /obj/item/food/skrell/ambrosia_deus_tart_slice
 	dish_category = DISH_PASTRY
@@ -60,7 +60,7 @@
 	meal_category = MEAL_DESSERT
 
 /datum/crafting_recipe/food/knife/ambrosia_vulgaris_roll_slice
-	name = "Ambrosia Vulgaris roll slice"
+	name = "ambrosia vulgaris roll slice"
 	reqs = list(/obj/item/food/skrell/ambrosia_vulgaris_roll = 1)
 	result = /obj/item/food/skrell/ambrosia_vulgaris_roll_slice
 	dish_category = DISH_PASTRY
@@ -68,7 +68,7 @@
 	meal_category = MEAL_SNACK
 
 /datum/crafting_recipe/food/knife/vulgaris_chocolate_roll_slice
-	name = "Vulgaris chocolate roll slice"
+	name = "vulgaris chocolate roll slice"
 	reqs = list(/obj/item/food/skrell/vulgaris_chocolate_roll = 1)
 	result = /obj/item/food/skrell/vulgaris_chocolate_roll_slice
 	dish_category = DISH_PASTRY
@@ -76,7 +76,7 @@
 	meal_category = MEAL_DESSERT
 
 /datum/crafting_recipe/food/knife/deus_golden_roll_slice
-	name = "Deus golden roll slice"
+	name = "deus golden roll slice"
 	reqs = list(/obj/item/food/skrell/deus_golden_roll = 1)
 	result = /obj/item/food/skrell/deus_golden_roll_slice
 	dish_category = DISH_PASTRY
@@ -84,7 +84,7 @@
 	meal_category = MEAL_DESSERT
 
 /datum/crafting_recipe/food/knife/crimson_gaia_roll_slice
-	name = "Crimson Gaia roll slice"
+	name = "crimson gaia roll slice"
 	reqs = list(/obj/item/food/skrell/crimson_gaia_roll = 1)
 	result = /obj/item/food/skrell/crimson_gaia_roll_slice
 	dish_category = DISH_PASTRY

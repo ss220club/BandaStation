@@ -23,7 +23,7 @@
 	reaction = /datum/chemical_reaction/food/soup/embershroom_lava_stew
 
 /datum/crafting_recipe/food/reaction/soup/skrell/edens_gaia_noodles
-	name = "Eden's Gaia noodle soup"
+	name = "eden's gaia noodle soup"
 	reaction = /datum/chemical_reaction/food/soup/edens_gaia_noodles
 
 /datum/crafting_recipe/food/reaction/soup/skrell/puffball_gas_soup
