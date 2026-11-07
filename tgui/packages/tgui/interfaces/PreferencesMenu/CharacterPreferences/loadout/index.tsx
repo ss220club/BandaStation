@@ -212,11 +212,12 @@ function typepathToLoadoutItem(
 type LoadoutSelectedItemProps = {
   path: typePath;
   all_tabs: LoadoutCategory[];
+  modifyItemDimmer: LoadoutItem | null;
   setModifyItemDimmer: (dimmer: LoadoutItem | null) => void;
 };
 
 function LoadoutSelectedItem(props: LoadoutSelectedItemProps) {
-  const { all_tabs, path, setModifyItemDimmer } = props;
+  const { all_tabs, path, modifyItemDimmer, setModifyItemDimmer } = props;
   const { act } = useBackend();
 
   const item = typepathToLoadoutItem(path, all_tabs);
@@ -233,7 +234,7 @@ function LoadoutSelectedItem(props: LoadoutSelectedItemProps) {
       dmIconState={item.icon_state}
       buttonsAlt={
         <>
-          {!!item.buttons.length && (
+          {(!!item.buttons.length || !!item.reskins?.length) && (
             <Button
               icon="cogs"
               color="transparent"
@@ -288,6 +289,7 @@ function LoadoutSelectedSection(props: LoadoutSelectedSectionProps) {
             key={path}
             path={path}
             all_tabs={all_tabs}
+            modifyItemDimmer={modifyItemDimmer}
             setModifyItemDimmer={setModifyItemDimmer}
           />
         ))}

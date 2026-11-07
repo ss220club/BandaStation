@@ -570,7 +570,7 @@ GLOBAL_LIST_INIT(malf_modules, subtypesof(/datum/ai_module/malf))
 		to_chat(clicker, span_warning("You cannot overload that device!"))
 		return FALSE
 
-	clicker.playsound_local(clicker, SFX_SPARKS, 50, 0)
+	clicker.playsound_local(clicker, /datum/sound_effect/sparks, 50, 0)
 	adjust_uses(-1)
 	if(uses)
 		desc = "[initial(desc)] It has [uses] use\s remaining."
@@ -588,7 +588,7 @@ GLOBAL_LIST_INIT(malf_modules, subtypesof(/datum/ai_module/malf))
 	cost = 15
 	power_type = /datum/action/innate/ai/blackout
 	unlock_text = span_notice("You hook into the powernet and route bonus power towards the station's lighting.")
-	unlock_sound = SFX_SPARKS
+	unlock_sound = /datum/sound_effect/sparks
 
 /datum/action/innate/ai/blackout
 	name = "Blackout"
@@ -608,7 +608,7 @@ GLOBAL_LIST_INIT(malf_modules, subtypesof(/datum/ai_module/malf))
 		else
 			apc.overload++
 	to_chat(owner, span_notice("Излишние напряжение наполняет энергосеть станции."))
-	owner.playsound_local(owner, SFX_SPARKS, 50, 0)
+	owner.playsound_local(owner, /datum/sound_effect/sparks, 50, 0)
 	adjust_uses(-1)
 	if(QDELETED(src) || uses) //Not sure if not having src here would cause a runtime, so it's here to be safe
 		return
@@ -788,7 +788,7 @@ GLOBAL_LIST_INIT(malf_modules, subtypesof(/datum/ai_module/malf))
 	one_purchase = TRUE
 	power_type = /datum/action/innate/ai/emergency_lights
 	unlock_text = span_notice("Вы подключаетесь к энергосети и находите связи между лампами и резервными источниками.")
-	unlock_sound = SFX_SPARKS
+	unlock_sound = /datum/sound_effect/sparks
 
 /datum/action/innate/ai/emergency_lights
 	name = "Disable Emergency Lights"
@@ -1082,7 +1082,7 @@ GLOBAL_LIST_INIT(malf_modules, subtypesof(/datum/ai_module/malf))
 	cost = 20
 	power_type = /datum/action/innate/ai/ranged/emag
 	unlock_text = span_notice("Вы загрузили нелегальный пакет программного обеспечения из базы данных синдиката и интегрируете его в свою прошивку, в процессе которого предотвратили также несколько вторжений.")
-	unlock_sound = SFX_SPARKS
+	unlock_sound = /datum/sound_effect/sparks
 
 /datum/action/innate/ai/ranged/emag
 	name = "Targeted Safeties Override"
