@@ -232,7 +232,7 @@
 		if(SPT_PROB(12, seconds_per_tick))
 			organ_owner.Paralyze(2 SECONDS)
 			to_chat(organ_owner, span_warning("Ваше тело пронзает электрический спазм, сковывая мышцы!"))
-			playsound(organ_owner, SFX_SPARKS, 30, TRUE, SHORT_RANGE_SOUND_EXTRARANGE)
+			playsound(organ_owner, /datum/sound_effect/sparks, 30, TRUE, SHORT_RANGE_SOUND_EXTRARANGE)
 
 		var/metabolized = chem.compute_metabolization(organ_owner, seconds_per_tick)
 		organ_owner.reagents.remove_reagent(chem.type, metabolized)
@@ -244,7 +244,7 @@
 
 		if(istype(organ_owner.loc, /turf/open/water) && SPT_PROB(20, seconds_per_tick))
 			do_sparks(2, FALSE, organ_owner)
-			playsound(organ_owner, SFX_SPARKS, 30, TRUE, SHORT_RANGE_SOUND_EXTRARANGE)
+			playsound(organ_owner, /datum/sound_effect/sparks, 30, TRUE, SHORT_RANGE_SOUND_EXTRARANGE)
 			to_chat(organ_owner, span_notice("Вода вокруг вас мягко искрит биозарядом..."))
 
 		var/metabolized = chem.compute_metabolization(organ_owner, seconds_per_tick)

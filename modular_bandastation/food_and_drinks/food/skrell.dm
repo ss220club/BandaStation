@@ -38,7 +38,7 @@
 	venue_value = FOOD_PRICE_CHEAP
 
 /obj/item/food/skrell/fly_amanita_bun/make_processable()
-	AddElement(/datum/element/processable, TOOL_KNIFE, /obj/item/food/skrell/fly_amanita_bun_slice, 4, 3 SECONDS, table_required = TRUE, screentip_verb = "Slice", sound_to_play = SFX_KNIFE_SLICE)
+	AddElement(/datum/element/processable, TOOL_KNIFE, /obj/item/food/skrell/fly_amanita_bun_slice, 4, 3 SECONDS, table_required = TRUE, screentip_verb = "Slice", sound_to_play = /datum/sound_effect/knife_slice)
 
 /obj/item/food/skrell/fly_amanita_bun_slice
 	name = "fly amanita bun slice"
@@ -392,7 +392,7 @@
 	venue_value = FOOD_PRICE_EXOTIC
 
 /obj/item/food/skrell/mindbreaker_fungal_bake/make_processable()
-	AddElement(/datum/element/processable, TOOL_KNIFE, /obj/item/food/skrell/mindbreaker_fungal_bake_slice, 4, 3 SECONDS, table_required = TRUE, screentip_verb = "Slice", sound_to_play = SFX_KNIFE_SLICE)
+	AddElement(/datum/element/processable, TOOL_KNIFE, /obj/item/food/skrell/mindbreaker_fungal_bake_slice, 4, 3 SECONDS, table_required = TRUE, screentip_verb = "Slice", sound_to_play = /datum/sound_effect/knife_slice)
 
 /obj/item/food/skrell/mindbreaker_fungal_bake_slice
 	name = "mindbreaker fungal bake slice"
@@ -488,7 +488,7 @@
 	venue_value = FOOD_PRICE_LEGENDARY
 
 /obj/item/food/skrell/grand_mycelial_roast/make_processable()
-	AddElement(/datum/element/processable, TOOL_KNIFE, /obj/item/food/skrell/mycelial_roast_slice, 6, 5 SECONDS, table_required = TRUE, screentip_verb = "Slice", sound_to_play = SFX_KNIFE_SLICE)
+	AddElement(/datum/element/processable, TOOL_KNIFE, /obj/item/food/skrell/mycelial_roast_slice, 6, 5 SECONDS, table_required = TRUE, screentip_verb = "Slice", sound_to_play = /datum/sound_effect/knife_slice)
 
 /obj/item/food/skrell/grand_mycelial_roast/on_craft_completion(list/components, datum/crafting_recipe/current_recipe, atom/crafter)
 	. = ..()
@@ -709,7 +709,7 @@
 	venue_value = FOOD_PRICE_NORMAL
 
 /obj/item/food/cake/skrell_citrus_cake/make_processable()
-	AddElement(/datum/element/processable, TOOL_KNIFE, /obj/item/food/cakeslice/skrell_citrus_slice, 6, 3 SECONDS, table_required = TRUE, screentip_verb = "Slice", sound_to_play = SFX_KNIFE_SLICE)
+	AddElement(/datum/element/processable, TOOL_KNIFE, /obj/item/food/cakeslice/skrell_citrus_slice, 6, 3 SECONDS, table_required = TRUE, screentip_verb = "Slice", sound_to_play = /datum/sound_effect/knife_slice)
 
 /obj/item/food/cakeslice/skrell_citrus_slice
 	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
@@ -748,7 +748,7 @@
 	venue_value = FOOD_PRICE_NORMAL
 
 /obj/item/food/cake/blue_cherry_moon_cake/make_processable()
-	AddElement(/datum/element/processable, TOOL_KNIFE, /obj/item/food/cakeslice/blue_cherry_slice, 6, 3 SECONDS, table_required = TRUE, screentip_verb = "Slice", sound_to_play = SFX_KNIFE_SLICE)
+	AddElement(/datum/element/processable, TOOL_KNIFE, /obj/item/food/cakeslice/blue_cherry_slice, 6, 3 SECONDS, table_required = TRUE, screentip_verb = "Slice", sound_to_play = /datum/sound_effect/knife_slice)
 
 /obj/item/food/cakeslice/blue_cherry_slice
 	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
@@ -837,7 +837,7 @@
 	venue_value = FOOD_PRICE_EXOTIC
 
 /obj/item/food/skrell/ambrosia_deus_tart/make_processable()
-	AddElement(/datum/element/processable, TOOL_KNIFE, /obj/item/food/skrell/ambrosia_deus_tart_slice, 6, 3 SECONDS, table_required = TRUE, screentip_verb = "Slice", sound_to_play = SFX_KNIFE_SLICE)
+	AddElement(/datum/element/processable, TOOL_KNIFE, /obj/item/food/skrell/ambrosia_deus_tart_slice, 6, 3 SECONDS, table_required = TRUE, screentip_verb = "Slice", sound_to_play = /datum/sound_effect/knife_slice)
 
 /obj/item/food/skrell/ambrosia_deus_tart_slice
 	name = "Ambrosia Deus tart slice"
@@ -871,7 +871,7 @@
 	venue_value = FOOD_PRICE_NORMAL
 
 /obj/item/food/skrell/ambrosia_vulgaris_roll/make_processable()
-	AddElement(/datum/element/processable, TOOL_KNIFE, /obj/item/food/skrell/ambrosia_vulgaris_roll_slice, 4, 3 SECONDS, table_required = TRUE, screentip_verb = "Slice", sound_to_play = SFX_KNIFE_SLICE)
+	AddElement(/datum/element/processable, TOOL_KNIFE, /obj/item/food/skrell/ambrosia_vulgaris_roll_slice, 4, 3 SECONDS, table_required = TRUE, screentip_verb = "Slice", sound_to_play = /datum/sound_effect/knife_slice)
 
 /obj/item/food/skrell/ambrosia_vulgaris_roll_slice
 	name = "Ambrosia Vulgaris roll slice"
@@ -907,7 +907,7 @@
 	venue_value = FOOD_PRICE_NORMAL
 
 /obj/item/food/skrell/vulgaris_chocolate_roll/make_processable()
-	AddElement(/datum/element/processable, TOOL_KNIFE, /obj/item/food/skrell/vulgaris_chocolate_roll_slice, 4, 3 SECONDS, table_required = TRUE, screentip_verb = "Slice", sound_to_play = SFX_KNIFE_SLICE)
+	AddElement(/datum/element/processable, TOOL_KNIFE, /obj/item/food/skrell/vulgaris_chocolate_roll_slice, 4, 3 SECONDS, table_required = TRUE, screentip_verb = "Slice", sound_to_play = /datum/sound_effect/knife_slice)
 
 /obj/item/food/skrell/vulgaris_chocolate_roll_slice
 	name = "Vulgaris chocolate roll slice"
@@ -943,7 +943,7 @@
 	venue_value = FOOD_PRICE_EXOTIC
 
 /obj/item/food/skrell/deus_golden_roll/make_processable()
-	AddElement(/datum/element/processable, TOOL_KNIFE, /obj/item/food/skrell/deus_golden_roll_slice, 4, 3 SECONDS, table_required = TRUE, screentip_verb = "Slice", sound_to_play = SFX_KNIFE_SLICE)
+	AddElement(/datum/element/processable, TOOL_KNIFE, /obj/item/food/skrell/deus_golden_roll_slice, 4, 3 SECONDS, table_required = TRUE, screentip_verb = "Slice", sound_to_play = /datum/sound_effect/knife_slice)
 
 /obj/item/food/skrell/deus_golden_roll_slice
 	name = "Deus golden roll slice"
@@ -977,7 +977,7 @@
 	venue_value = FOOD_PRICE_LEGENDARY
 
 /obj/item/food/skrell/crimson_gaia_roll/make_processable()
-	AddElement(/datum/element/processable, TOOL_KNIFE, /obj/item/food/skrell/crimson_gaia_roll_slice, 4, 3 SECONDS, table_required = TRUE, screentip_verb = "Slice", sound_to_play = SFX_KNIFE_SLICE)
+	AddElement(/datum/element/processable, TOOL_KNIFE, /obj/item/food/skrell/crimson_gaia_roll_slice, 4, 3 SECONDS, table_required = TRUE, screentip_verb = "Slice", sound_to_play = /datum/sound_effect/knife_slice)
 
 /obj/item/food/skrell/crimson_gaia_roll_slice
 	name = "Crimson Gaia roll slice"

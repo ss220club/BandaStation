@@ -17,7 +17,7 @@
 
 /obj/item/food/rice_dough/Initialize(mapload)
 	. = ..()
-	AddElement(/datum/element/processable, TOOL_ROLLINGPIN, /obj/item/food/flat_rice_dough, 1, 3 SECONDS, table_required = TRUE, screentip_verb = "Flatten", sound_to_play = SFX_ROLLING_PIN_ROLLING)
+	AddElement(/datum/element/processable, TOOL_ROLLINGPIN, /obj/item/food/flat_rice_dough, 1, 3 SECONDS, table_required = TRUE, screentip_verb = "Flatten", sound_to_play = /datum/sound_effect/rolling_pin_rolling)
 
 
 // Breads & Bakery
