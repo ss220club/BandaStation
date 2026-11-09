@@ -1,0 +1,38 @@
+{
+	"version": 1,
+	"map_name": "Trainstation",
+	"map_path": "map_files/trainstation",
+	"map_file": "trainstation.dmm",
+	"shuttles": {
+		"cargo": "cargo_box",
+		"ferry": "ferry_fancy",
+		"whiteship": "whiteship_tram",
+		"emergency": "emergency_tram"
+	},
+	"traits": [
+		{
+			"Baseturf": "/turf/open/misc/asteroid/airless",
+			"Linkage": "Cross"
+		}
+	],
+	"job_changes": {
+		"Cook": {
+			"additional_cqc_areas": ["/area/station/commons/lounge"]
+		},
+		"Captain": {
+			"special_charter": "asteroid"
+		},
+		"Nanotrasen Representative": {
+			"spawn_positions": 1
+		},
+		"Blueshield": {
+			"spawn_positions": 1
+		},
+		"Magistrate": {
+			"spawn_positions": 1
+		},
+		"Explorer": {
+			"spawn_positions": 4
+		}
+	}
+}
