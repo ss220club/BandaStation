@@ -45,9 +45,10 @@
 		ADD_TRAIT(human_who_gained_species, TRAIT_BORN_MONKEY, INNATE_TRAIT) // Not a species trait, you cannot escape your genetic destiny
 	human_who_gained_species.dna.add_mutation(/datum/mutation/race, MUTATION_SOURCE_ACTIVATED)
 
-/datum/species/monkey/on_species_loss(mob/living/carbon/human/C)
+/datum/species/monkey/on_species_loss(mob/living/carbon/human/C, datum/species/new_species, pref_load) // BANDASTATION EDIT - Original: /datum/species/monkey/on_species_loss(mob/living/carbon/human/C)
 	. = ..()
-	C.dna.remove_mutation(/datum/mutation/race, MUTATION_SOURCE_ACTIVATED)
+	if(!istype(new_species, /datum/species/monkey)) // BANDASTATION EDIT - смена на подвид мартышки (лут гоблин) не должна очеловечивать
+		C.dna.remove_mutation(/datum/mutation/race, MUTATION_SOURCE_ACTIVATED)
 
 /datum/species/monkey/check_roundstart_eligible()
 	// STOP ADDING MONKEY SUBTYPES YOU HEATHEN

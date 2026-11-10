@@ -1,0 +1,12 @@
+#include "_loot_goblin.dm"
+
+#include "code/_defines.dm"
+#include "code/abilities.dm"
+#include "code/cauldron.dm"
+#include "code/emotes.dm"
+#include "code/lair.dm"
+#include "code/loot_goblin.dm"
+#include "code/monkey_brain.dm"
+#include "code/species.dm"
+#include "code/steady_feet.dm"
+#include "code/trap.dm"

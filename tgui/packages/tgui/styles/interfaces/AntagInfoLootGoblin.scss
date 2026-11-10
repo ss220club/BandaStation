@@ -1,0 +1,263 @@
+.theme-LootGoblin {
+  --goblin-parchment: #c4bf82;
+  --goblin-card: #d6d29a;
+  --goblin-light: #e9e4bf;
+  --goblin-tab: #a9a46c;
+  --goblin-frame: #5b4a1e;
+  --goblin-brass: #b8973f;
+  --goblin-dark: #2b3019;
+  --goblin-darker: #1d2010;
+  --goblin-gold: #c9a43c;
+  --goblin-ink: #2a2412;
+  --goblin-ink-soft: #4a3f1c;
+  --goblin-pale: #e6dfb8;
+
+  .TitleBar {
+    background: var(--goblin-darker);
+    border-bottom: 2px solid #8a6d2b;
+    color: var(--goblin-pale);
+  }
+
+  .Window {
+    background: var(--goblin-dark);
+  }
+
+  .Window__content {
+    background-image: none;
+  }
+
+  .LootGoblin {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-height: 100%;
+    box-sizing: border-box;
+    padding: 12px;
+    background: var(--goblin-parchment);
+    border: 4px solid var(--goblin-frame);
+    box-shadow: inset 0 0 0 2px var(--goblin-brass);
+    color: var(--goblin-ink);
+  }
+
+  .LootGoblin__banner {
+    align-self: center;
+    padding: 6px 28px;
+    background: var(--goblin-light);
+    border: 3px solid var(--goblin-frame);
+    box-shadow: inset 0 0 0 2px var(--goblin-brass);
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 1px;
+  }
+
+  .LootGoblin__tabs {
+    display: flex;
+    gap: 6px;
+  }
+
+  .LootGoblin__tab {
+    flex-grow: 1;
+    height: 28px;
+    border: 2px solid var(--goblin-frame);
+    background: var(--goblin-tab);
+    color: var(--goblin-ink);
+    font-family: inherit;
+    font-size: 12px;
+    cursor: pointer;
+
+    &--selected {
+      background: var(--goblin-light);
+      font-weight: bold;
+    }
+  }
+
+  .LootGoblin__status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 10px;
+    background: var(--goblin-dark);
+    border: 2px solid #8a6d2b;
+    color: var(--goblin-pale);
+  }
+
+  .LootGoblin__tier {
+    width: 26px;
+    height: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #4a5228;
+    color: #b9b38a;
+
+    &--reached {
+      background: var(--goblin-gold);
+      color: var(--goblin-ink);
+      font-weight: bold;
+    }
+
+    &--current {
+      box-shadow: 0 0 0 2px var(--goblin-pale);
+    }
+  }
+
+  .LootGoblin__bar {
+    height: 10px;
+    background: var(--goblin-darker);
+    border: 1px solid #8a6d2b;
+  }
+
+  .LootGoblin__bar-fill {
+    height: 100%;
+    background: var(--goblin-gold);
+  }
+
+  .LootGoblin__notice {
+    padding: 6px 10px;
+    background: var(--goblin-light);
+    border: 2px dashed #8a6d2b;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  .LootGoblin__card {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 8px 8px 10px;
+    background: var(--goblin-card);
+    border: 3px solid var(--goblin-frame);
+    box-shadow: inset 0 0 0 2px var(--goblin-brass);
+
+    &--inactive {
+      opacity: 0.6;
+    }
+  }
+
+  .LootGoblin__pick {
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border-radius: 50%;
+    border: 3px solid var(--goblin-brass);
+    background: var(--goblin-ink);
+    color: #e9d48a;
+    font-size: 18px;
+    cursor: pointer;
+
+    &:hover {
+      background: var(--goblin-frame);
+    }
+  }
+
+  .LootGoblin__card-body {
+    flex-grow: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .LootGoblin__card-title {
+    font-size: 13px;
+    font-weight: bold;
+  }
+
+  .LootGoblin__card-desc {
+    font-size: 11px;
+    line-height: 1.35;
+    color: var(--goblin-ink-soft);
+  }
+
+  .LootGoblin__tag {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 1px 8px;
+    background: var(--goblin-frame);
+    color: #f1e3a8;
+    font-size: 11px;
+    font-weight: bold;
+  }
+
+  .LootGoblin__medal {
+    width: 64px;
+    height: 64px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--goblin-ink);
+    border: 3px solid var(--goblin-brass);
+  }
+
+  .LootGoblin__medal-core {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: #f6f1d6;
+    font-size: 24px;
+    box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.35);
+  }
+
+  .LootGoblin__panel {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 10px;
+    background: var(--goblin-card);
+    border: 3px solid var(--goblin-frame);
+    box-shadow: inset 0 0 0 2px var(--goblin-brass);
+  }
+
+  .LootGoblin__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .LootGoblin__entry {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 8px;
+    background: var(--goblin-light);
+    border: 1px solid #8a6d2b;
+  }
+
+  .LootGoblin__figures {
+    display: grid;
+    grid-template-columns: repeat(10, minmax(0, 1fr));
+    gap: 4px;
+  }
+
+  .LootGoblin__figure {
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--goblin-frame);
+    background: #b9b67a;
+    color: var(--goblin-ink);
+
+    &--filled {
+      background: #e0bd52;
+    }
+  }
+
+  .LootGoblin__muted {
+    color: var(--goblin-ink-soft);
+    font-size: 11px;
+  }
+}
