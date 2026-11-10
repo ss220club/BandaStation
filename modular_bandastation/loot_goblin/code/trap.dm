@@ -8,7 +8,9 @@
 	var/list/obj/structure/loot_goblin_trap/active_traps = list()
 
 /datum/action/cooldown/loot_goblin_trap/Destroy()
-	QDEL_LIST(active_traps)
+	var/list/traps_to_delete = active_traps.Copy()
+	active_traps.Cut()
+	QDEL_LIST(traps_to_delete)
 	return ..()
 
 /datum/action/cooldown/loot_goblin_trap/Activate(atom/cast_on)
