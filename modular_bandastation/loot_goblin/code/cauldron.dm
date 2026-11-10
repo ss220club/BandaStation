@@ -91,7 +91,7 @@ GLOBAL_LIST_INIT(loot_goblin_ingredient_names, list(
 	return TRUE
 
 /obj/structure/loot_goblin_cauldron
-	name = "гоблинский алхимический котёл"
+	name = "goblin alchemy cauldron"
 	desc = "Закопчённый котёл, в котором что-то булькает. Пахнет жадностью."
 	icon = 'modular_bandastation/loot_goblin/icons/cauldron.dmi'
 	icon_state = "cauldron"
@@ -255,7 +255,7 @@ GLOBAL_LIST_INIT(loot_goblin_ingredient_names, list(
 				needed--
 
 /obj/item/loot_goblin_potion
-	name = "гоблинское зелье"
+	name = "goblin potion"
 	desc = "Мутная бутылка с подозрительной жидкостью."
 	icon = 'icons/obj/antags/eldritch.dmi'
 	icon_state = "clarity"
@@ -290,7 +290,7 @@ GLOBAL_LIST_INIT(loot_goblin_ingredient_names, list(
 	return
 
 /obj/item/loot_goblin_potion/teleport
-	name = "зелье гоблинского прыжка"
+	name = "goblin leap potion"
 	desc = "Бутылка с мерцающей синей жидкостью."
 	effect_desc = "Даёт одноразовый прыжок в видимую точку до 7 клеток."
 	icon_state = "crucible_soul"
@@ -301,7 +301,7 @@ GLOBAL_LIST_INIT(loot_goblin_ingredient_names, list(
 	to_chat(drinker, span_notice("Используйте появившуюся способность, чтобы перенестись в видимую точку."))
 
 /obj/item/loot_goblin_potion/heal
-	name = "зелье гоблинского здоровья"
+	name = "goblin vitality potion"
 	desc = "Бутылка с густой зелёной жижей."
 	effect_desc = "Постепенно лечит 40 урона от ударов и 40 от ожогов за 20 секунд. Пока действует, второе зелье лечения не выпить."
 	icon_state = "marshal"
@@ -329,7 +329,7 @@ GLOBAL_LIST_INIT(loot_goblin_ingredient_names, list(
 	owner.heal_overall_damage(brute = heal_amount, burn = heal_amount)
 
 /obj/item/loot_goblin_potion/invisibility
-	name = "зелье гоблинской невидимости"
+	name = "goblin invisibility potion"
 	desc = "Бутылка, которую трудно разглядеть."
 	effect_desc = "20 секунд почти полной невидимости. Атака или полученный урон её снимают."
 	icon_state = "clarity"
@@ -383,8 +383,10 @@ GLOBAL_LIST_INIT(loot_goblin_ingredient_names, list(
 	status_type = STATUS_EFFECT_REFRESH
 	duration = LOOT_GOBLIN_INVISIBILITY_TIME
 	alert_type = null
+	var/old_alpha = 255
 
 /datum/status_effect/loot_goblin_invisibility/on_apply()
+	old_alpha = owner.alpha
 	animate(owner, alpha = LOOT_GOBLIN_INVISIBILITY_ALPHA, time = 1 SECONDS)
 	RegisterSignals(owner, list(COMSIG_MOB_ITEM_ATTACK, COMSIG_LIVING_UNARMED_ATTACK, COMSIG_MOB_AFTER_APPLY_DAMAGE), PROC_REF(break_invisibility))
 	to_chat(owner, span_notice("Вы растворяетесь в воздухе."))
@@ -392,7 +394,7 @@ GLOBAL_LIST_INIT(loot_goblin_ingredient_names, list(
 
 /datum/status_effect/loot_goblin_invisibility/on_remove()
 	UnregisterSignal(owner, list(COMSIG_MOB_ITEM_ATTACK, COMSIG_LIVING_UNARMED_ATTACK, COMSIG_MOB_AFTER_APPLY_DAMAGE))
-	animate(owner, alpha = initial(owner.alpha), time = 0.5 SECONDS)
+	animate(owner, alpha = old_alpha, time = 0.5 SECONDS)
 	to_chat(owner, span_warning("Вы снова видимы."))
 
 /datum/status_effect/loot_goblin_invisibility/proc/break_invisibility(datum/source)
@@ -400,7 +402,7 @@ GLOBAL_LIST_INIT(loot_goblin_ingredient_names, list(
 	qdel(src)
 
 /obj/effect/temp_visual/dir_setting/ninja/phase/loot_goblin
-	name = "гоблинская дымка"
+	name = "goblin haze"
 
 /obj/effect/temp_visual/dir_setting/ninja/phase/out/loot_goblin
-	name = "гоблинская дымка"
+	name = "goblin haze"

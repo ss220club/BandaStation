@@ -80,7 +80,7 @@ const TAB_NAMES = {
   [Tab.Goal]: 'Цель',
 };
 
-export const AntagInfoLootGoblin = (props) => {
+export function AntagInfoLootGoblin() {
   const [tab, setTab] = useState(Tab.Perks);
 
   return (
@@ -113,9 +113,9 @@ export const AntagInfoLootGoblin = (props) => {
       </Window.Content>
     </Window>
   );
-};
+}
 
-const StatusStrip = (props) => {
+function StatusStrip() {
   const { data } = useBackend<Data>();
   const { tier, influence, max_influence } = data;
   const percent = max_influence ? (influence / max_influence) * 100 : 0;
@@ -157,7 +157,7 @@ const StatusStrip = (props) => {
       </Box>
     </div>
   );
-};
+}
 
 type PerkCardProps = {
   id: string;
@@ -168,7 +168,7 @@ type PerkCardProps = {
   onPick?: () => void;
 };
 
-const PerkCard = (props: PerkCardProps) => {
+function PerkCard(props: PerkCardProps) {
   const { id, name, desc, tier, inactive, onPick } = props;
   const look = PERK_LOOK[id] || { icon: 'star', color: '#5b4a1e' };
 
@@ -209,9 +209,9 @@ const PerkCard = (props: PerkCardProps) => {
       </div>
     </div>
   );
-};
+}
 
-const PerksTab = (props) => {
+function PerksTab() {
   const { act, data } = useBackend<Data>();
   const { pending_perk_tier, perk_options, perks } = data;
 
@@ -254,9 +254,9 @@ const PerksTab = (props) => {
       </div>
     </>
   );
-};
+}
 
-const LairTab = (props) => {
+function LairTab() {
   const { data } = useBackend<Data>();
   const { has_lair, figures, max_figures, lair_loot } = data;
 
@@ -307,9 +307,9 @@ const LairTab = (props) => {
       </div>
     </>
   );
-};
+}
 
-const CauldronTab = (props) => {
+function CauldronTab() {
   const { data } = useBackend<Data>();
   const { recipes, cauldron_unlocked, cauldron_placed, cauldron_cooldown } =
     data;
@@ -352,9 +352,9 @@ const CauldronTab = (props) => {
       </span>
     </>
   );
-};
+}
 
-const GoalTab = (props) => {
+function GoalTab() {
   const { data } = useBackend<Data>();
   const { objectives, tier } = data;
 
@@ -366,4 +366,4 @@ const GoalTab = (props) => {
       <ObjectivePrintout objectives={objectives} titleMessage="" />
     </div>
   );
-};
+}

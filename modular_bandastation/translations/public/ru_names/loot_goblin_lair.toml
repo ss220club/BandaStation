@@ -1,0 +1,8 @@
+["loot goblin lair"]
+nominative = "логово лут гоблина"
+genitive = "логова лут гоблина"
+dative = "логову лут гоблина"
+accusative = "логово лут гоблина"
+instrumental = "логовом лут гоблина"
+prepositional = "логове лут гоблина"
+gender = "neuter"

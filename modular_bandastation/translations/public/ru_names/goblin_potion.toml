@@ -1,0 +1,8 @@
+["goblin potion"]
+nominative = "гоблинское зелье"
+genitive = "гоблинского зелья"
+dative = "гоблинскому зелью"
+accusative = "гоблинское зелье"
+instrumental = "гоблинским зельем"
+prepositional = "гоблинском зелье"
+gender = "neuter"

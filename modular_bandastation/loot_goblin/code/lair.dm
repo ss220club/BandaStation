@@ -1,5 +1,5 @@
 /obj/structure/loot_goblin_lair
-	name = "логово лут гоблина"
+	name = "loot goblin lair"
 	desc = "Груда тряпья и блестящего хлама. Похоже, кто-то стаскивает сюда добычу."
 	icon = 'modular_bandastation/loot_goblin/icons/lair.dmi'
 	icon_state = "lair"

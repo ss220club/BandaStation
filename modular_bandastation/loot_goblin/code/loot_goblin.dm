@@ -535,7 +535,8 @@
 		var/list/recipe_ingredients = recipe["ingredients"]
 		for(var/ingredient_type in recipe_ingredients)
 			ingredients += list(list("name" = GLOB.loot_goblin_ingredient_names[ingredient_type], "amount" = recipe_ingredients[ingredient_type]))
-		recipes += list(list("name" = initial(potion_type.name), "effect" = initial(potion_type.effect_desc), "ingredients" = ingredients))
+		var/list/ru_name = ru_names_toml(initial(potion_type.name))
+		recipes += list(list("name" = ru_name[NOMINATIVE] || initial(potion_type.name), "effect" = initial(potion_type.effect_desc), "ingredients" = ingredients))
 	data["recipes"] = recipes
 	return data
 

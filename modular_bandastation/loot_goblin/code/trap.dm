@@ -44,7 +44,7 @@
 	return TRUE
 
 /obj/structure/loot_goblin_trap
-	name = "гоблинский капкан"
+	name = "goblin snare"
 	desc = "Ржавые зубья, присыпанные мусором. Лучше не наступать."
 	icon = 'modular_bandastation/loot_goblin/icons/trap.dmi'
 	icon_state = "trap"
