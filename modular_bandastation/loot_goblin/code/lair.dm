@@ -136,10 +136,11 @@
 	if(!destination)
 		to_chat(user, span_warning("Ритуал не удался: жертве некуда отправиться."))
 		return FALSE
-	victim.visible_message(span_danger("[capitalize(victim.declent_ru(NOMINATIVE))] исчезает во вспышке зелёного света!"))
+	var/turf/sacrifice_turf = get_turf(victim)
 	if(!do_teleport(victim, destination, channel = TELEPORT_CHANNEL_FREE, forced = TRUE))
 		to_chat(user, span_warning("Ритуал не удался: жертву не удалось перенести."))
 		return FALSE
+	sacrifice_turf.visible_message(span_danger("[capitalize(victim.declent_ru(NOMINATIVE))] исчезает во вспышке зелёного света!"))
 	log_combat(user, victim, "sacrificed as a loot goblin, teleported to [AREACOORD(destination)]")
 	to_chat(user, span_boldnotice("Жертва принята!"))
 	goblin.complete_sacrifice()
