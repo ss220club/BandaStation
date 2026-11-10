@@ -177,6 +177,8 @@
 /datum/antagonist/loot_goblin/apply_innate_effects(mob/living/mob_override)
 	. = ..()
 	var/mob/living/goblin = mob_override || owner.current
+	if(!ishuman(goblin))
+		return
 	ADD_TRAIT(goblin, TRAIT_VENTCRAWLER_ALWAYS, REF(src))
 	ADD_TRAIT(goblin, TRAIT_LOOT_GOBLIN, REF(src))
 	RegisterSignal(goblin, COMSIG_ATOM_UPDATE_OVERLAYS, PROC_REF(add_aura_overlay))
@@ -191,6 +193,8 @@
 /datum/antagonist/loot_goblin/remove_innate_effects(mob/living/mob_override)
 	. = ..()
 	var/mob/living/goblin = mob_override || owner.current
+	if(!ishuman(goblin))
+		return
 	REMOVE_TRAIT(goblin, TRAIT_VENTCRAWLER_ALWAYS, REF(src))
 	REMOVE_TRAIT(goblin, TRAIT_LOOT_GOBLIN, REF(src))
 	UnregisterSignal(goblin, COMSIG_ATOM_UPDATE_OVERLAYS)
@@ -462,7 +466,7 @@
 	return TRUE
 
 /datum/antagonist/loot_goblin/proc/update_perks(mob/living/goblin)
-	if(!isliving(goblin))
+	if(!ishuman(goblin))
 		return
 	if(tier >= LOOT_GOBLIN_BONUS_SPEED_TIER)
 		goblin.add_movespeed_modifier(/datum/movespeed_modifier/loot_goblin_tier_bonus)
