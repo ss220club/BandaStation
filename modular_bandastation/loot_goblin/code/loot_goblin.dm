@@ -33,7 +33,7 @@
 	var/sacrifices_done = 0
 	var/admin_tier
 	var/aura_shown = FALSE
-	var/datum/tts_seed/previous_tts_seed
+	var/list/original_tts_seeds = list()
 	var/static/list/goblin_voices = list(
 		/datum/tts_seed/silero/goblin,
 		/datum/tts_seed/silero/hg_goblin_generic_a,
@@ -89,8 +89,6 @@
 
 /datum/antagonist/loot_goblin/on_gain()
 	var/mob/living/carbon/human/goblin = owner.current
-	var/datum/component/tts_component/old_tts = goblin.GetComponent(/datum/component/tts_component)
-	previous_tts_seed = old_tts?.tts_seed
 	make_goblin_body(goblin)
 	lair_action = new(src)
 	ritual_action = new(src)
@@ -123,6 +121,10 @@
 		goblin.set_species(/datum/species/monkey/loot_goblin)
 	goblin.ru_names_rename(ru_names_list("Гоблин", "Гоблин", "Гоблина", "Гоблину", "Гоблина", "Гоблином", "Гоблине", goblin.gender))
 	goblin.fully_replace_character_name(goblin.real_name, "Гоблин")
+	var/body_key = REF(goblin)
+	if(!(body_key in original_tts_seeds))
+		var/datum/component/tts_component/old_tts = goblin.GetComponent(/datum/component/tts_component)
+		original_tts_seeds[body_key] = old_tts?.tts_seed
 	apply_tts_seed(goblin, pick(goblin_voices))
 
 /datum/antagonist/loot_goblin/on_removal()
@@ -131,9 +133,10 @@
 	var/mob/living/carbon/human/goblin = owner.current
 	if(is_species(goblin, /datum/species/monkey/loot_goblin))
 		goblin.set_species(/datum/species/monkey)
-	if(previous_tts_seed && ishuman(goblin))
-		apply_tts_seed(goblin, previous_tts_seed)
-	previous_tts_seed = null
+	var/datum/tts_seed/original_seed = original_tts_seeds[REF(goblin)]
+	if(original_seed && ishuman(goblin))
+		apply_tts_seed(goblin, original_seed)
+	original_tts_seeds.Cut()
 	return ..()
 
 /datum/antagonist/loot_goblin/proc/apply_tts_seed(mob/living/carbon/human/goblin, datum/tts_seed/seed)
