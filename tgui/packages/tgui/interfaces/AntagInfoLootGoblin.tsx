@@ -360,10 +360,10 @@ function GoalTab() {
 
   return (
     <div className="LootGoblin__panel">
-      <b>
-        Цель — тир {tier} из {MAX_TIER}
-      </b>
-      <ObjectivePrintout objectives={objectives} titleMessage="" />
+      <ObjectivePrintout
+        objectives={objectives}
+        titleMessage={`Цель — тир ${tier} из ${MAX_TIER}`}
+      />
     </div>
   );
 }
