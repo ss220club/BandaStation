@@ -29,6 +29,7 @@
 #define COMMS_RECEIVER_ONLINE 1
 #define COMMS_RECEIVER_UPLOADING 2
 #define COMMS_RECEIVER_DONE 3
+#define COMMS_RECEIVER_NO_SIGNAL 4
 
 #define COMMS_TAP_STAGE_NONE 0
 #define COMMS_TAP_STAGE_PORT_FOUND 1
@@ -241,6 +242,12 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 	give_hints(receiver)
 	receiver.update_status()
 
+/datum/objective/comms_intercept/proc/has_listening_tap()
+	for(var/obj/item/comms_tap/tap as anything in active_taps)
+		if(tap.is_listening())
+			return TRUE
+	return FALSE
+
 /datum/objective/comms_intercept/proc/is_collected()
 	return !upload_done && !failed && messages_collected >= target_amount
 
@@ -345,6 +352,7 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 	<li>Зачистите контакты кусачками и вставьте жучок. Используйте вторичную функцию мультитула для синхронизации, после этого жучок начнёт работу. Панель лучше закрыть отвёрткой, чтобы машина не бросалась в глаза.</li>\
 	<li>Синхронизировать жучок может только тот, кто его установил. Если закрыть панель до конца установки, начинать придётся заново.</li>\
 	<li>Закрепите приёмник гаечным ключом в любом помещении станции с питанием, кроме самих телекоммуникаций. Приёмник можно переносить, собранные пакеты сохранятся.</li>\
+	<li>Маркер на приёмнике: оранжевый — идёт сбор, жёлтый — передача, зелёный — дамп готов. Если маркер погас, сигнал от жучка не поступает: жучок сняли, заглушили или его машину выключили.</li>\
 	<li>Пакеты поступают из разговоров экипажа в каналах отделов. Общий канал не шифруется, а ваши собственные сообщения не учитываются.</li>\
 	<li>От одного человека можно получить не больше одного пакета за полминуты. Ход сбора отслеживайте на экране приёмника.</li>\
 	<li>Когда пакеты собраны, дамп ключей шифрования можно получить двумя способами.</li>\
@@ -467,7 +475,7 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 		objective.active_taps -= src
 
 /obj/item/comms_tap/proc/is_listening()
-	return host && calibrated && world.time >= offline_until
+	return host?.on && calibrated && world.time >= offline_until
 
 /obj/item/comms_tap/proc/on_relay(datum/source, datum/signal/subspace/signal)
 	SIGNAL_HANDLER
@@ -516,6 +524,10 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 	loaded_area?.removeStaticPower(COMMS_INTERCEPT_RECEIVER_LOAD, AREA_USAGE_STATIC_EQUIP)
 	loaded_area = null
 	GLOB.comms_intercept?.on_receiver_destroyed(src)
+	return ..()
+
+/obj/item/comms_intercept_receiver/atom_destruction(damage_flag)
+	new /obj/item/comms_intercept_receiver_debris(drop_location())
 	return ..()
 
 /obj/item/comms_intercept_receiver/examine(mob/user)
@@ -585,6 +597,8 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 	. = ..()
 	if(anchored)
 		GLOB.comms_intercept?.receiver_ref = WEAKREF(src)
+		// Tap and area power changes don't signal the receiver, so poll while anchored
+		START_PROCESSING(SSobj, src)
 	update_status()
 
 /obj/item/comms_intercept_receiver/emp_act(severity)
@@ -606,9 +620,10 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 		return objective.disk_ref ? COMMS_RECEIVER_OFF : COMMS_RECEIVER_DONE
 	if(!can_receive())
 		return COMMS_RECEIVER_OFF
-	return uploading ? COMMS_RECEIVER_UPLOADING : COMMS_RECEIVER_ONLINE
+	if(uploading)
+		return COMMS_RECEIVER_UPLOADING
+	return objective.has_listening_tap() ? COMMS_RECEIVER_ONLINE : COMMS_RECEIVER_NO_SIGNAL
 
-// shortcut: no area power event here, lights catch up on the next packet, upload tick or anchoring; hook the area power signal if it confuses players
 /obj/item/comms_intercept_receiver/proc/update_status()
 	var/new_status = get_status()
 	if(new_status == status)
@@ -657,6 +672,8 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 		update_status()
 		return PROCESS_KILL
 	update_status()
+	if(!uploading)
+		return anchored ? NONE : PROCESS_KILL
 	if(!can_receive())
 		return
 	objective.on_upload_started(src)
@@ -667,6 +684,14 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 	objective.on_upload_finished()
 	update_status()
 	return PROCESS_KILL
+
+/obj/item/comms_intercept_receiver_debris
+	name = "broken intercept receiver"
+	desc = "Оплавленный корпус приёмника с обломанной антенной. Восстановлению не подлежит."
+	icon = 'icons/obj/devices/tracker.dmi'
+	icon_state = "supplypod_beacon"
+	color = COLOR_DARK
+	w_class = WEIGHT_CLASS_SMALL
 
 /obj/item/radio/examine(mob/user)
 	. = ..()
@@ -760,6 +785,7 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 #undef COMMS_RECEIVER_ONLINE
 #undef COMMS_RECEIVER_UPLOADING
 #undef COMMS_RECEIVER_DONE
+#undef COMMS_RECEIVER_NO_SIGNAL
 #undef COMMS_TAP_STAGE_NONE
 #undef COMMS_TAP_STAGE_PORT_FOUND
 #undef COMMS_TAP_STAGE_CONTACTS_STRIPPED
