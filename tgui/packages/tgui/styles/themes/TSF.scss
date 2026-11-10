@@ -1,0 +1,50 @@
+/**
+ * IceGhostse PDA theme.
+ * Palette: #1f91dc (primary), #ffff00 (accent), #ededed (text).
+ */
+
+:root.theme-TSF {
+  // Base
+  --color-base: hsl(205, 55%, 9%);
+  --color-secondary: hsl(205, 45%, 16%);
+  --color-primary: #1f91dc;
+  --color-text: #ededed;
+  --color-text-translucent: hsla(0, 0%, 93%, 0.6);
+  --color-section: hsla(205, 60%, 3%, 0.4);
+  --color-label: hsl(205, 30%, 72%);
+  --base-gradient-spread: 1;
+
+  // Accents
+  --color-action: #1f91dc;
+  --section-title-color: #ffff00;
+  --section-separator-color: #1f91dc;
+  --tab-color-selected: #ffff00;
+
+  // Borders
+  --color-border: hsla(205, 80%, 65%, 0.18);
+  --border-primary-saturation: 90;
+  --border-primary-lightness: 62;
+  --border-primary-alpha: 0.7;
+
+  // Components
+  --button-background-default: hsl(205, 75%, 38%);
+  --button-background-selected: #1f91dc;
+  --input-background-lightness: 6;
+  --tooltip-background-lightness: 13;
+  --progress-bar-background: hsla(0, 0%, 0%, 0.45);
+  --candystripe-odd: hsla(205, 80%, 50%, 0.08);
+
+  .Layout__content {
+    background-image:
+      linear-gradient(hsla(205, 55%, 9%, 0.72), hsla(205, 55%, 9%, 0.72)),
+      url("../assets/TSF.svg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .NtosWindow__header {
+    background-color: hsla(205, 70%, 5%, 0.85);
+    box-shadow: inset 0 -1px 0 hsla(52, 100%, 50%, 0.35);
+  }
+}
