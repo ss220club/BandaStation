@@ -1,5 +1,4 @@
 /obj/item/organ/brain/primate/on_mob_bump(mob/source, mob/living/crossing_mob)
-	SIGNAL_HANDLER
 	if(HAS_TRAIT(owner, TRAIT_LOOT_GOBLIN))
 		return
 	return ..()

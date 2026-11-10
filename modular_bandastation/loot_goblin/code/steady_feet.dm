@@ -1,5 +1,4 @@
 /datum/component/caltrop/on_entered(datum/source, atom/movable/arrived, atom/old_loc, list/atom/old_locs)
-	SIGNAL_HANDLER
 	if(HAS_TRAIT(arrived, TRAIT_LOOT_GOBLIN_STEADY_FEET))
 		return
 	return ..()
