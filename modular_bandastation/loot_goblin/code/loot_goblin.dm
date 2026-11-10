@@ -89,19 +89,9 @@
 
 /datum/antagonist/loot_goblin/on_gain()
 	var/mob/living/carbon/human/goblin = owner.current
-	if(!ismonkey(goblin))
-		goblin.monkeyize(instant = TRUE)
-	goblin.gender = MALE
-	goblin.physique = MALE
-	if(is_species(goblin, /datum/species/monkey/loot_goblin))
-		goblin.update_body(is_creating = TRUE)
-	else
-		goblin.set_species(/datum/species/monkey/loot_goblin)
-	goblin.ru_names_rename(ru_names_list("Гоблин", "Гоблин", "Гоблина", "Гоблину", "Гоблина", "Гоблином", "Гоблине", goblin.gender))
-	goblin.fully_replace_character_name(goblin.real_name, "Гоблин")
 	var/datum/component/tts_component/old_tts = goblin.GetComponent(/datum/component/tts_component)
 	previous_tts_seed = old_tts?.tts_seed
-	apply_tts_seed(goblin, pick(goblin_voices))
+	make_goblin_body(goblin)
 	lair_action = new(src)
 	ritual_action = new(src)
 	cauldron_action = new(src)
@@ -116,6 +106,24 @@
 		info_button.button_icon_state = "ledger"
 		info_button.build_all_button_icons()
 	priority_announce("На борту станции замечен Лут гоблин! Берегите ценные вещи и коллекционные фигурки.", "Внимание")
+
+/datum/antagonist/loot_goblin/on_body_transfer(mob/living/old_body, mob/living/new_body)
+	if(ishuman(new_body))
+		make_goblin_body(new_body)
+	return ..()
+
+/datum/antagonist/loot_goblin/proc/make_goblin_body(mob/living/carbon/human/goblin)
+	if(!ismonkey(goblin))
+		goblin.monkeyize(instant = TRUE)
+	goblin.gender = MALE
+	goblin.physique = MALE
+	if(is_species(goblin, /datum/species/monkey/loot_goblin))
+		goblin.update_body(is_creating = TRUE)
+	else
+		goblin.set_species(/datum/species/monkey/loot_goblin)
+	goblin.ru_names_rename(ru_names_list("Гоблин", "Гоблин", "Гоблина", "Гоблину", "Гоблина", "Гоблином", "Гоблине", goblin.gender))
+	goblin.fully_replace_character_name(goblin.real_name, "Гоблин")
+	apply_tts_seed(goblin, pick(goblin_voices))
 
 /datum/antagonist/loot_goblin/on_removal()
 	remove_lair()
