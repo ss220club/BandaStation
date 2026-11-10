@@ -4,18 +4,19 @@ https://github.com/Monkestation/Monkestation2.0/tree/688ed2b4579a7fb48863e38d619
 License: CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0/)
 Changes: recolored in code to dark green.
 
+cauldron.dmi, lair.dmi, ritual.dmi, ledger.dmi, trap.dmi, icons/mob/effects/loot_goblin_aura.dmi
+Author: SabrioBiblio, created with the AI image generator PixelLab (https://www.pixellab.ai)
+License: CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0/)
+Changes: packed into DMI, padded to 32x32.
+
 ../sound/goblin_laugh.ogg
 Source: "SmallCreature2_15" by Little Robot Sound Factory (www.littlerobotsoundfactory.com)
 https://freesound.org/people/LittleRobotSoundFactory/sounds/316532/
-License: CC BY (version to be confirmed on the source page)
+License: CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/)
 Changes: renamed.
-
-cauldron.dmi, lair.dmi, ritual.dmi, ledger.dmi, trap.dmi
-Source: generated with PixelLab (pixellab.ai), AI-generated; author and license to be confirmed before PR
-Changes: packed into DMI.
 
 ../sound/goblin_stinger.ogg
 Source: "evil laugh 8" by nanakisan
 https://freesound.org/people/nanakisan/sounds/253532/
-License: to be confirmed on the source page (must not be NC/ND)
+License: CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/)
 Changes: renamed.
