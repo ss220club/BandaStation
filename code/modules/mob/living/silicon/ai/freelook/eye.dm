@@ -82,12 +82,16 @@
 	active_hud_list[AI_DETECT_HUD] = new_images
 	hud.add_atom_to_hud(src)
 
+// BANDASTATION ADD START - Перенос ИИ: документация изменённого API.
+/** Перемещает глаз камеры в допустимую позицию и обновляет наблюдение владельца. */
+// BANDASTATION ADD END - Перенос ИИ
 /mob/eye/camera/ai/setLoc(destination, force_update = FALSE)
 	if(!ai)
 		return
-	if(!isturf(ai.loc))
+	// BANDASTATION ADD START - Перенос ИИ: позиция камеры ИИ внутри ядра.
+	if(!ai.in_network_core())
 		return
-
+	// BANDASTATION ADD END - Перенос ИИ
 	. = ..()
 
 	if(ai.client && !ai.multicam_on)
@@ -175,6 +179,9 @@
 #undef SPRINT_PER_TICK
 
 // Return to the Core.
+// BANDASTATION ADD START - Перенос ИИ: документация изменённого API.
+/** Возвращает наблюдение ИИ к месту его физического ядра. */
+// BANDASTATION ADD END - Перенос ИИ
 /mob/living/silicon/ai/proc/view_core()
 	if(istype(current,/obj/machinery/holopad))
 		var/obj/machinery/holopad/H = current
@@ -183,15 +190,19 @@
 		current = null
 	if(ai_tracking_tool)
 		ai_tracking_tool.reset_tracking()
-
-	if(isturf(loc) && (QDELETED(eyeobj) || !eyeobj.loc))
+	// BANDASTATION ADD START - Перенос ИИ: позиция камеры ИИ внутри ядра.
+	if((isturf(loc) || istype(loc, /obj/machinery/ai/data_core)) && (QDELETED(eyeobj) || !eyeobj.loc))
 		to_chat(src, "ERROR: Eyeobj not found. Creating new eye...")
 		stack_trace("AI eye object wasn't found! Location: [loc] / Eyeobj: [eyeobj] / QDELETED: [QDELETED(eyeobj)] / Eye loc: [eyeobj?.loc]")
 		QDEL_NULL(eyeobj)
 		create_eye()
 
-	eyeobj?.setLoc(loc)
+	eyeobj?.setLoc(get_turf(src))
+	// BANDASTATION ADD END - Перенос ИИ
 
+// BANDASTATION ADD START - Перенос ИИ: документация изменённого API.
+/** Создаёт глаз камеры у физического ядра либо штатного местоположения ИИ. */
+// BANDASTATION ADD END - Перенос ИИ
 /mob/living/silicon/ai/proc/create_eye()
 	if(eyeobj)
 		return
@@ -199,7 +210,9 @@
 	all_eyes += eyeobj
 	eyeobj.ai = src
 	eyeobj.name = "[name] (AI Eye)"
-	eyeobj.setLoc(loc, TRUE)
+	// BANDASTATION ADD START - Перенос ИИ: позиция камеры ИИ внутри ядра.
+	eyeobj.setLoc(get_turf(src), TRUE)
+	// BANDASTATION ADD END - Перенос ИИ
 	set_eyeobj_visible(TRUE)
 
 /mob/living/silicon/ai/proc/set_eyeobj_visible(state = TRUE)

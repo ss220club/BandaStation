@@ -3,7 +3,9 @@
 #define MODULE_WELDED 2
 
 /// Formats a module name for display
-#define MODULE_NAME(all_modules, named_module) (all_modules[named_module] == MODULE_WELDED ? "unidentified welded module" : (named_module?.name || "Empty"))
+// BANDASTATION ADD START - Перенос ИИ: стойка законов и русские подсказки.
+#define MODULE_NAME(all_modules, named_module) (all_modules[named_module] == MODULE_WELDED ? "неизвестный приваренный модуль" : (named_module?.declent_ru(NOMINATIVE) || "Пусто"))
+// BANDASTATION ADD END - Перенос ИИ
 
 /datum/armor/obj_machinery/law_rack
 	melee = 50
@@ -18,9 +20,11 @@
 	bullet = 10
 	laser = 10
 
+// BANDASTATION ADD START - Перенос ИИ: стойка законов и русские подсказки.
+/** Физическая стойка со слотами законов и соединениями с синтетиками. */
 /obj/machinery/ai_law_rack
 	name = "module rack"
-	desc = "A module rack. This one just holds modules, it doesn't do anything with it."
+	desc = "Стойка модулей. Эта модель только хранит модули и не применяет их."
 	icon = 'icons/obj/machines/law_rack.dmi'
 	icon_state = "law_rack"
 	density = TRUE
@@ -49,6 +53,7 @@
 
 	/// Cooldown between allowing refreshes via ui
 	COOLDOWN_DECLARE(refresh_cooldown)
+// BANDASTATION ADD END - Перенос ИИ
 
 /obj/machinery/ai_law_rack/Initialize(mapload)
 	. = ..()
@@ -63,6 +68,8 @@
 	ai_modules = null
 	return ..()
 
+// BANDASTATION ADD START - Перенос ИИ: стойка законов и русские подсказки.
+/** Показывает доступные физические действия со стойкой и выбранным инструментом. */
 /obj/machinery/ai_law_rack/add_context(atom/source, list/context, obj/item/held_item, mob/user)
 	. = ..()
 	if(held_item?.tool_behaviour == TOOL_WRENCH && !secured)
@@ -76,26 +83,27 @@
 		. = CONTEXTUAL_SCREENTIP_SET
 
 	if(held_item?.tool_behaviour == TOOL_WELDER)
-		context[SCREENTIP_CONTEXT_LMB] = "Weld modules (in UI)"
+		context[SCREENTIP_CONTEXT_LMB] = "Приварить модули (через интерфейс)"
 		. = CONTEXTUAL_SCREENTIP_SET
 
 	if(held_item?.tool_behaviour == TOOL_SCREWDRIVER)
-		context[SCREENTIP_CONTEXT_LMB] = "Screw modules (in UI)"
+		context[SCREENTIP_CONTEXT_LMB] = "Закрепить модули винтами (через интерфейс)"
 		. = CONTEXTUAL_SCREENTIP_SET
 
 	if(held_item?.tool_behaviour == TOOL_MULTITOOL)
-		context[SCREENTIP_CONTEXT_LMB] = "Repair modules (in UI)"
+		context[SCREENTIP_CONTEXT_LMB] = "Восстановить модули (через интерфейс)"
 		. = CONTEXTUAL_SCREENTIP_SET
 
 	if(istype(held_item, /obj/item/multitool))
 		var/obj/item/multitool/tool = held_item
 		if(istype(tool.buffer, /obj/structure/ai_core))
-			context[SCREENTIP_CONTEXT_LMB] = "Link core to rack" // overrides above message
+			context[SCREENTIP_CONTEXT_LMB] = "Связать ядро со стойкой"
 			. = CONTEXTUAL_SCREENTIP_SET
 
 	if(istype(held_item, /obj/item/ai_module))
-		context[SCREENTIP_CONTEXT_LMB] = "Insert module"
+		context[SCREENTIP_CONTEXT_LMB] = "Вставить модуль"
 		. = CONTEXTUAL_SCREENTIP_SET
+// BANDASTATION ADD END - Перенос ИИ
 
 /obj/machinery/ai_law_rack/base/on_set_is_operational(old_value)
 	var/obj/machinery/ai_law_rack/base/parent_rack = get_parent_rack()
@@ -128,22 +136,26 @@
 	for(var/obj/item/ai_module/installed in ai_modules)
 		installed.forceMove(get_turf(src))
 
+// BANDASTATION ADD START - Перенос ИИ: стойка законов и русские подсказки.
+/** Проверяет физические условия обслуживания креплений и проводки стойки. */
 /obj/machinery/ai_law_rack/proc/can_secure_check(mob/living/user)
 	if(!anchored)
-		balloon_alert(user, "fasten it first!")
+		balloon_alert(user, "сначала закрепите!")
 		return FALSE
 	if(!is_anchorable_floor(loc))
-		balloon_alert(user, "nothing to secure to!")
+		balloon_alert(user, "не к чему закрепить!")
 		return FALSE
 	return TRUE
 
+/** Разрешает открепление только при допустимом состоянии стойки. */
 /obj/machinery/ai_law_rack/can_be_unfasten_wrench(mob/living/user, silent)
 	if(secured)
 		if(!silent)
-			balloon_alert(user, "unsecure it first!")
+			balloon_alert(user, "сначала снимите усиленные крепления!")
 		return FAILED_UNFASTEN
 	return ..()
 
+/** Меняет крепление стойки с проверкой инструмента и физических условий. */
 /obj/machinery/ai_law_rack/wrench_act(mob/living/user, obj/item/tool)
 	if(DOING_INTERACTION_WITH_TARGET(user, src))
 		return ITEM_INTERACT_BLOCKING
@@ -153,25 +165,29 @@
 		if(FAILED_UNFASTEN)
 			return ITEM_INTERACT_BLOCKING
 		if(SUCCESSFUL_UNFASTEN)
-			balloon_alert_to_viewers("[anchored ? "":"un"]fastened")
+			balloon_alert_to_viewers("[anchored ? "закреплено" : "откреплено"]")
 			return ITEM_INTERACT_SUCCESS
 
 	return NONE
+// BANDASTATION ADD END - Перенос ИИ
 
 /obj/machinery/ai_law_rack/wrench_act_secondary(mob/living/user, obj/item/tool)
 	return wrench_act(user, tool)
 
+// BANDASTATION ADD START - Перенос ИИ: стойка законов и русские подсказки.
+/** Отключает физические соединения стойки кусачками при допустимых условиях. */
 /obj/machinery/ai_law_rack/wirecutter_act(mob/living/user, obj/item/tool)
 	if(DOING_INTERACTION_WITH_TARGET(user, src))
 		return ITEM_INTERACT_BLOCKING
 	if(!can_secure_check(user))
 		return ITEM_INTERACT_BLOCKING
-	balloon_alert_to_viewers("[secured ? "un":""]securing to floor...")
+	balloon_alert_to_viewers("[secured ? "снятие креплений" : "усиление креплений"]...")
 	if(!tool.use_tool(src, user, 6 SECONDS, volume = 50, extra_checks = CALLBACK(src, PROC_REF(can_secure_check), user)))
 		return ITEM_INTERACT_BLOCKING
 	secured = !secured
-	balloon_alert_to_viewers("[secured ? "":"un"]secured")
+	balloon_alert_to_viewers("[secured ? "усиленные крепления установлены" : "усиленные крепления сняты"]")
 	return ITEM_INTERACT_SUCCESS
+// BANDASTATION ADD END - Перенос ИИ
 
 /obj/machinery/ai_law_rack/wirecutter_act_secondary(mob/living/user, obj/item/tool)
 	return wirecutter_act(user, tool)
@@ -184,6 +200,8 @@
 	ui_interact(user)
 	return ITEM_INTERACT_BLOCKING
 
+// BANDASTATION ADD START - Перенос ИИ: стойка законов и русские подсказки.
+/** Записывает ссылку на стойку в ядро, выбранное буфером мультитула. */
 /obj/machinery/ai_law_rack/multitool_act(mob/living/user, obj/item/multitool/tool)
 	if(!istype(tool, /obj/item/multitool) || !istype(tool.buffer, /obj/structure/ai_core))
 		ui_interact(user)
@@ -192,8 +210,9 @@
 	var/obj/structure/ai_core/to_link = tool.buffer
 	to_link.default_link_ref = WEAKREF(src)
 	tool.play_tool_sound(src, 20)
-	balloon_alert(user, "linked core to rack")
+	balloon_alert(user, "ядро связано со стойкой")
 	return ITEM_INTERACT_SUCCESS
+// BANDASTATION ADD END - Перенос ИИ
 
 /obj/machinery/ai_law_rack/vv_edit_var(var_name, var_value)
 	. = ..()
@@ -211,53 +230,57 @@
 /// Range at which you can see all the modules by name
 #define LAW_EXAMINE_RANGE 3
 
+// BANDASTATION ADD START - Перенос ИИ: стойка законов и русские подсказки.
 /obj/machinery/ai_law_rack/examine(mob/user)
 	. = ..()
 	if(isAI(user))
 		return
 
 	if(!isobserver(user) && get_dist(user, src) > LAW_EXAMINE_RANGE)
-		. += span_notice("If you got a bit closer, you could probably [EXAMINE_HINT("examine closer")] to see what modules are installed.")
+		. += span_notice("Подойдите ближе и [EXAMINE_HINT("осмотрите подробнее")], чтобы увидеть установленные модули.")
 	else
-		. += span_notice("[EXAMINE_HINT("Examine closer")] to see what modules are installed.")
+		. += span_notice("[EXAMINE_HINT("Осмотрите подробнее")], чтобы увидеть установленные модули.")
 	var/filled = 0
 	for(var/obj/item/ai_module/module in ai_modules)
 		filled++
-	. += span_info("Otherwise, you can see that [filled] out of [length(ai_modules)] slots are filled.")
+	. += span_info("Занято слотов: [filled] из [length(ai_modules)].")
 	if(has_core_slot && isnull(get_core_module()))
-		. += span_warning("You also note that the core slot is empty!")
+		. += span_warning("Основной слот пуст!")
 	if(anchored)
-		. += span_notice("It is [EXAMINE_HINT("anchored")] to the floor[secured ? " and [EXAMINE_HINT("secured with metal cables")]" : ", but not [EXAMINE_HINT("secured by metal cables")]"].")
+		. += span_notice("Стойка [EXAMINE_HINT("закреплена")] на полу[secured ? " и [EXAMINE_HINT("усилена металлическими тросами")]" : ", но [EXAMINE_HINT("не усилена металлическими тросами")]"].")
 
+/** Показывает подробности физических слотов и установленных модулей стойки. */
 /obj/machinery/ai_law_rack/examine_more(mob/user)
 	. = ..()
 	if(isAI(user))
 		return
 	if(!isobserver(user) && get_dist(user, src) > LAW_EXAMINE_RANGE)
-		. += span_warning("You can't quite make out which modules are installed in [src] from here.")
+		. += span_warning("Отсюда не разобрать, какие модули установлены в [declent_ru(PREPOSITIONAL)].")
 		return
 	for(var/i in 1 to length(ai_modules))
 		. += get_slot_examine(i)
 
+/** Возвращает описание указанного слота стойки и его содержимого. */
 /obj/machinery/ai_law_rack/proc/get_slot_examine(slot)
 	var/obj/item/ai_module/module = ai_modules[slot]
 	var/list/text = list()
-	text += span_info("&bull; [slot == 1 && has_core_slot ? "Core" : "Slot [slot - 1]"]: [MODULE_NAME(ai_modules, module)]")
+	text += span_info("&bull; [slot == 1 && has_core_slot ? "Основной слот" : "Слот [slot - 1]"]: [MODULE_NAME(ai_modules, module)]")
 	if(module)
-		var/secure_desc = "Bugged (report this)"
+		var/secure_desc = "Ошибка (сообщите разработчикам)"
 		switch(ai_modules[module])
 			if(MODULE_UNSECURED)
-				secure_desc = "Unsecured"
+				secure_desc = "Не закреплён"
 			if(MODULE_SCREWED)
-				secure_desc = "Screwed"
+				secure_desc = "Закреплён винтами"
 			if(MODULE_WELDED)
-				secure_desc = "Welded"
+				secure_desc = "Приварен"
 		text += span_notice(secure_desc)
 	if(astype(module, /obj/item/ai_module/law)?.ioned)
-		text += span_warning("It's smoking.")
+		text += span_warning("Модуль дымится.")
 	return jointext(text, span_info(" - "))
 
 #undef LAW_EXAMINE_RANGE
+// BANDASTATION ADD END - Перенос ИИ
 
 /obj/machinery/ai_law_rack/update_overlays()
 	. = ..()
@@ -286,6 +309,8 @@
 	parent_rack?.update_lawset()
 	return TRUE
 
+// BANDASTATION ADD START - Перенос ИИ: стойка законов и русские подсказки.
+/** Снимает установленный модуль и обновляет набор законов связанных синтетиков. */
 /obj/machinery/ai_law_rack/proc/remove_ai_module(obj/item/ai_module/module)
 	ASSERT(istype(module))
 	var/index = ai_modules.Find(module)
@@ -300,9 +325,10 @@
 		module.silicon_unlinked_from_installed(linked_ref)
 	if(!QDELING(src))
 		update_appearance()
-	if(!QDELING(parent_rack))
-		parent_rack?.update_lawset()
+	if(parent_rack && !QDELING(parent_rack))
+		parent_rack.update_lawset()
 	return TRUE
+// BANDASTATION ADD END - Перенос ИИ
 
 /obj/machinery/ai_law_rack/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
 	if(istype(tool, /obj/item/ai_module))
@@ -310,9 +336,11 @@
 		return ITEM_INTERACT_SUCCESS
 	return NONE
 
+// BANDASTATION ADD START - Перенос ИИ: стойка законов и русские подсказки.
+/** Открывает физическую панель слотов и соединений стойки законов. */
 /obj/machinery/ai_law_rack/ui_interact(mob/user, datum/tgui/ui)
 	if(issilicon(user))
-		to_chat(user, span_warning("Your programming forbids you from using this."))
+		to_chat(user, span_warning("Ваши законы запрещают использовать это устройство."))
 		return
 	if(COOLDOWN_FINISHED(src, refresh_cooldown))
 		refresh_linkable_lists()
@@ -322,11 +350,13 @@
 		ui = new(user, src, "LawRack")
 		ui.open()
 
+/** Передаёт содержимое слотов и известные связи стойки в физическую панель. */
 /obj/machinery/ai_law_rack/ui_data(mob/user)
 	var/list/data = list()
 
 	var/obj/item/holding = user.get_active_held_item()
 	data["holding_module"] = istype(holding, /obj/item/ai_module)
+	data += law_intrusion_ui_data(user)
 	data["holding_screwdriver"] = holding?.tool_behaviour == TOOL_SCREWDRIVER
 	data["holding_welder"] = holding?.tool_behaviour == TOOL_WELDER
 	data["holding_multitool"] = holding?.tool_behaviour == TOOL_MULTITOOL
@@ -347,6 +377,7 @@
 
 	return data
 
+/** Проверяет физические права и состояние стойки перед командами модулей и соединений. */
 /obj/machinery/ai_law_rack/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
 	. = ..()
 	if(.)
@@ -359,25 +390,30 @@
 			var/index = clamp(text2num(params["slot"]), 1, length(ai_modules))
 			var/obj/item/ai_module/module = user.get_active_held_item()
 			if(!istype(module))
-				to_chat(user, span_warning("You need to hold an AI module to insert it!"))
+				to_chat(user, span_warning("Для установки держите модуль ИИ в руке!"))
 				return TRUE
 			if(!module.can_install_to_rack(user, src))
 				return TRUE
 			if(istype(module, /obj/item/ai_module/law/core))
 				if(!has_core_slot)
-					to_chat(user, span_warning("[src] has no slots for core modules!"))
+					to_chat(user, span_warning("В [declent_ru(PREPOSITIONAL)] нет слота для основного модуля!"))
 					return TRUE
 				if(index != 1)
-					to_chat(user, span_warning("You can't install a core module in a non-core slot!"))
+					to_chat(user, span_warning("Основной модуль нельзя установить в дополнительный слот!"))
 					return TRUE
 			else if(has_core_slot)
 				if(index == 1)
-					to_chat(user, span_warning("You can only install core modules in the core slot!"))
+					to_chat(user, span_warning("В основной слот можно установить только основной модуль!"))
 					return TRUE
+			if(istype(module, /obj/item/ai_module/law/syndicate))
+				var/obj/item/ai_module/law/syndicate/hacked = module
+				if(!istext(params["signature"]) || !istext(params["law_signature"]) || params["module"] != REF(hacked))
+					return TRUE
+				return hacked.start_law_intrusion(user, src, index, params["signature"], params["law_signature"])
 			if(!user.transferItemToLoc(module, src))
-				to_chat(user, span_warning("You can't seem to insert [module.name] into [src]!"))
+				to_chat(user, span_warning("Не удалось вставить [module.declent_ru(ACCUSATIVE)] в [declent_ru(ACCUSATIVE)]!"))
 				return TRUE
-			balloon_alert_to_viewers("inserted slot [index]")
+			balloon_alert_to_viewers("модуль установлен в слот [index]")
 			playsound(src, 'sound/items/deconstruct.ogg', 50, TRUE)
 			module.pre_user_install_to_rack(user, src)
 			module.log_install(user, src)
@@ -393,7 +429,7 @@
 			module.log_uninstall(user, src)
 			// calls exited which handles updating laws and such
 			try_put_in_hand(module, user)
-			balloon_alert_to_viewers("removed slot [index]")
+			balloon_alert_to_viewers("модуль извлечён из слота [index]")
 			playsound(src, 'sound/items/deconstruct.ogg', 50, TRUE)
 			return TRUE
 
@@ -408,7 +444,7 @@
 				return TRUE
 			if(!screwer.tool_start_check(user))
 				return TRUE
-			balloon_alert_to_viewers("[ai_modules[module] == MODULE_SCREWED ? "un":""]screwing slot [index]...")
+			balloon_alert_to_viewers("[ai_modules[module] == MODULE_SCREWED ? "откручивание" : "закрепление"] модуля в слоте [index]...")
 			if(!screwer.use_tool(src, user, 3 SECONDS, volume = 25))
 				return TRUE
 			module = ai_modules[index]
@@ -431,7 +467,7 @@
 				return TRUE
 			if(!welder.tool_start_check(user, amount = 1, heat_required = HIGH_TEMPERATURE_REQUIRED))
 				return TRUE
-			balloon_alert_to_viewers("[ai_modules[module] == MODULE_WELDED ? "un":""]welding slot [index]...")
+			balloon_alert_to_viewers("[ai_modules[module] == MODULE_WELDED ? "срезание сварки" : "сварка"] модуля в слоте [index]...")
 			if(!welder.use_tool(src, user, 3 SECONDS, volume = 25, amount = 1))
 				return TRUE
 			module = ai_modules[index]
@@ -464,8 +500,10 @@
 			update_static_data_for_all_viewers()
 			return TRUE
 
+/** Формирует подпись известного стойке участника для физической панели соединений. */
 /obj/machinery/ai_law_rack/proc/format_linkable(atom/linkable)
-	return list("name" = linkable.name, "ref" = REF(linkable))
+	return list("name" = istype(linkable, /mob/living/silicon) ? linkable.name : linkable.declent_ru(NOMINATIVE), "ref" = REF(linkable))
+// BANDASTATION ADD END - Перенос ИИ
 
 /// Handles updating the lists of things the rack can link to
 /obj/machinery/ai_law_rack/proc/refresh_linkable_lists()
@@ -577,25 +615,19 @@
 		parent_rack?.update_lawset()
 	return .
 
+// BANDASTATION ADD START - Перенос ИИ: стойка законов и русские подсказки.
+/** Физическая инструкция по подключению и обслуживанию стоек законов. */
 /obj/item/paper/law_rack_tutorial
 	name = "read me, confused captain"
-	default_raw_text = "This is a brand new way to interact with the wild, untamed silicon.<br><br>\
-		How it works: Laws go in. Ai gets laws. Laws are in order of laws in rack. Simple, right?<br><br>\
-		The top law there is ALL of Asimov, all 3 laws. Additional laws are supplied by the single, using freeform law boards.<br><br>\
-		Modules can be screwed and welded in for extra security. You can see Asimov, there, is welded - \
-		concealing the name, but making it harder to remove.<br><br>\
-		You can also install AI upgrades here if you have any. Either from RND or Lavaland.<br><br>\
-		Any number of silicons can be linked to this single rack, and they will all share the same laws. Cyborgs can still be linked to AIs as an intermediary.<br><br>\
-		Ion storms can damage rack modules. If damaged, you need to use a multitool on them. You can multitool them while they're still in the rack.<br><br>\
-		Silicons can be manually linked and unlinked from this location (rack). \
-		Newly constructed silicons will automatically link to this rack unless they are supplied another rack via multitool.<br><br>\
-		People can still subvert the AI by constructing \"broadcast module racks\", so don't get complacent.<br><br>\
-		Refer any further questions to Central Command. Godspeed."
+	default_raw_text = "Новый способ управления синтетиками.<br><br>Как это работает: вставьте модули законов в стойку — связанные синтетики получат их законы в порядке слотов.<br><br>Верхний модуль содержит весь набор Азимова: все три закона. Дополнительные законы задаются по одному модулями свободного закона.<br><br>Для защиты модули можно закрепить винтами и приварить. Приваренный модуль труднее извлечь; его название скрыто.<br><br>Сюда также можно устанавливать улучшения ИИ, полученные в научном отделе или на Лаваленде.<br><br>К одной стойке можно привязать сколько угодно синтетиков: все получат один набор законов. Киборги по-прежнему могут подключаться через ИИ.<br><br>Ионные бури повреждают модули. Повреждения устраняются мультитулом, в том числе без извлечения модуля.<br><br>Через стойку можно вручную подключать и отключать синтетиков. Новые синтетики автоматически подключаются к этой стойке, если мультитулом не задана другая.<br><br>Ретрансляционные стойки модулей могут использоваться для вмешательства в законы ИИ — сохраняйте бдительность.<br><br>С дальнейшими вопросами обращайтесь в Центральное командование. Удачи."
+// BANDASTATION ADD END - Перенос ИИ
 
 // Broadcasts laws to another law rack, can't link directly to AIs
+// BANDASTATION ADD START - Перенос ИИ: стойка законов и русские подсказки.
+/** Дочерняя стойка, передающая набор законов от связанной корневой стойки. */
 /obj/machinery/ai_law_rack/broadcaster
 	name = "broadcast module rack"
-	desc = "A module rack designed to broadcast the laws remotely to another rack."
+	desc = "Стойка модулей для удалённой передачи законов другой стойке."
 	icon_state = "broadcast_rack"
 	base_icon_state = "broadcast_rack"
 	armor_type = /datum/armor/obj_machinery/law_rack/portable
@@ -606,6 +638,7 @@
 	first_slot_offset = 12
 	/// Tracks the list of linkable racks passed to UI data for verification
 	VAR_FINAL/list/last_linkable_rack_list
+// BANDASTATION ADD END - Перенос ИИ
 
 /obj/machinery/ai_law_rack/broadcaster/Initialize(mapload)
 	. = ..()
@@ -635,6 +668,8 @@
 		data["parent_rack"] = format_linkable(parent_rack)
 	return data
 
+// BANDASTATION ADD START - Перенос ИИ: стойка законов и русские подсказки.
+/** Проверяет физические права и состояние стойки перед командами модулей и соединений. */
 /obj/machinery/ai_law_rack/broadcaster/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
 	. = ..()
 	if(.)
@@ -651,10 +686,10 @@
 			if(isnull(parent_rack))
 				return TRUE
 			if(!parent_rack.is_operational)
-				balloon_alert(user, "failed to unlink!")
+				balloon_alert(user, "не удалось отвязать!")
 				return TRUE
 			parent_rack.unlink_child_law_rack(src)
-			balloon_alert_to_viewers("unlinked from [parent_rack.name]")
+			balloon_alert_to_viewers("отвязано от [parent_rack.declent_ru(GENITIVE)]")
 			playsound(src, 'sound/machines/terminal/terminal_off.ogg', 50, TRUE)
 			return TRUE
 
@@ -665,12 +700,13 @@
 			if(isnull(parent_rack))
 				return TRUE
 			if(!parent_rack.is_operational)
-				balloon_alert(user, "failed to link!")
+				balloon_alert(user, "не удалось привязать!")
 				return TRUE
 			parent_rack.link_child_law_rack(src)
-			balloon_alert_to_viewers("linked to [parent_rack.name]")
+			balloon_alert_to_viewers("связано с [parent_rack.declent_ru(INSTRUMENTAL)]")
 			playsound(src, 'sound/machines/terminal/terminal_on.ogg', 50, TRUE)
 			return TRUE
+// BANDASTATION ADD END - Перенос ИИ
 
 /// When given a ref(), finds a core law rack it belongs to
 /obj/machinery/ai_law_rack/broadcaster/proc/find_parent_rack_by_ref(rack_ref)
@@ -680,11 +716,13 @@
 			return rack
 	return null
 
+// BANDASTATION ADD START - Перенос ИИ: стойка законов и русские подсказки.
 /obj/machinery/ai_law_rack/broadcaster/log_status()
 	var/obj/machinery/ai_law_rack/base/parent_rack = get_parent_rack()
 	if(isnull(parent_rack))
 		return "unlinked"
-	return "linked to [parent_rack.name]"
+	return "связано с [parent_rack.declent_ru(INSTRUMENTAL)]"
+// BANDASTATION ADD END - Перенос ИИ
 
 /// Checks if we can broadcast to another rack
 /obj/machinery/ai_law_rack/broadcaster/proc/can_broadcast_to(obj/machinery/ai_law_rack/base/possible_parent_rack)
@@ -714,9 +752,11 @@
 	playsound(src, 'sound/machines/terminal/terminal_off.ogg', 50, TRUE)
 
 // Links to AIs to provide their laws
+// BANDASTATION ADD START - Перенос ИИ: стойка законов и русские подсказки.
+/** Корневая стойка, определяющая действующий набор законов подключённых синтетиков. */
 /obj/machinery/ai_law_rack/base
 	name = "standard module rack"
-	desc = "A simple module rack. It has a slot for a core module, but far fewer slots than a core module rack."
+	desc = "Простая стойка с разъёмом для основного модуля, но меньшим числом дополнительных слотов, чем у основной стойки законов ИИ."
 	has_core_slot = TRUE
 	drag_slowdown = 2
 	/// List of law racks which are linked to this law rack, contributing to our lawset
@@ -732,6 +772,7 @@
 	VAR_FINAL/last_linked_rack_module_count = 0
 	/// The actual law set we are using, combining all the laws from the modules and linked racks
 	VAR_FINAL/datum/ai_laws/combined_lawset
+// BANDASTATION ADD END - Перенос ИИ
 
 /obj/machinery/ai_law_rack/base/Initialize(mapload)
 	. = ..()
@@ -745,6 +786,8 @@
 	QDEL_NULL(combined_lawset)
 	return ..()
 
+// BANDASTATION ADD START - Перенос ИИ: стойка законов и русские подсказки.
+/** Подключает совместимую дочернюю стойку к корневому набору законов. */
 /obj/machinery/ai_law_rack/base/proc/link_child_law_rack(obj/machinery/ai_law_rack/broadcaster/child)
 	if(child == src || (child in linked_racks))
 		return
@@ -757,9 +800,10 @@
 	RegisterSignal(child, COMSIG_QDELETING, PROC_REF(unlink_child_law_rack))
 	update_lawset()
 	update_static_data_for_all_viewers()
-	child.AddComponent(/datum/component/gps, "Active Broadcaster Rack")
+	child.AddComponent(/datum/component/gps, "Активная ретрансляционная стойка")
 	child.update_appearance()
 	child.update_static_data_for_all_viewers()
+// BANDASTATION ADD END - Перенос ИИ
 
 /obj/machinery/ai_law_rack/base/proc/unlink_child_law_rack(obj/machinery/ai_law_rack/broadcaster/child)
 	SIGNAL_HANDLER
@@ -800,6 +844,8 @@
 	. = ..()
 	.["linked_mobs"] = assoc_to_keys(linked_mobs)
 
+// BANDASTATION ADD START - Перенос ИИ: стойка законов и русские подсказки.
+/** Проверяет физические права и состояние стойки перед командами модулей и соединений. */
 /obj/machinery/ai_law_rack/base/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
 	. = ..()
 	if(.)
@@ -819,7 +865,7 @@
 			if(removed_bot)
 				unlink_silicon(removed_bot)
 			linked_mobs -= removed_name
-			balloon_alert_to_viewers("unlinked silicon", "unlinked [removed_name]")
+			balloon_alert_to_viewers("синтетик отключён", "отключён [removed_name]")
 			playsound(src, 'sound/machines/terminal/terminal_off.ogg', 50, TRUE)
 			return TRUE
 		if("link_silicon")
@@ -835,9 +881,10 @@
 			// Otherwise we can just verify can_link_to (this was already ran in ui data)
 			else if(can_link_to(new_bot))
 				link_silicon(new_bot)
-				balloon_alert_to_viewers("linked silicon", "linked to [new_bot.name]")
+				balloon_alert_to_viewers("синтетик подключён", "связано с [new_bot.name]")
 				playsound(src, 'sound/machines/terminal/terminal_on.ogg', 50, TRUE)
 			return TRUE
+// BANDASTATION ADD END - Перенос ИИ
 
 /obj/machinery/ai_law_rack/base/get_law_affecting_modules()
 	. = ..()
@@ -845,13 +892,16 @@
 		if(linked_rack.is_operational)
 			. |= linked_rack.get_law_affecting_modules()
 
+// BANDASTATION ADD START - Перенос ИИ: стойка законов и русские подсказки.
+/** Записывает текущее подключение корневой стойки в служебный журнал. */
 /obj/machinery/ai_law_rack/base/log_status()
 	var/list/mob_names = list()
 	for(var/link_name, link_mob in linked_mobs)
 		mob_names += "[link_name] ([isnull(link_mob) ? "no mob" : key_name(link_mob)])"
 	if(length(mob_names))
-		return "linked to [english_list(mob_names)]"
+		return "подключены: [english_list(mob_names)]"
 	return "unlinked"
+// BANDASTATION ADD END - Перенос ИИ
 
 /// When given a ref(), finds a silicon mob it belongs to
 /obj/machinery/ai_law_rack/base/proc/find_silicon_by_ref(silicon_ref)
@@ -877,6 +927,8 @@
 		return TRUE
 	return FALSE
 
+// BANDASTATION ADD START - Перенос ИИ: стойка законов и русские подсказки.
+/** Проверяет соединения стойки после смены уровня и отсоединяет недействительные связи. */
 /obj/machinery/ai_law_rack/base/on_changed_z_level(turf/old_turf, turf/new_turf, same_z_layer, notify_contents)
 	. = ..()
 	if(QDELING(src))
@@ -886,9 +938,10 @@
 	for(var/mob/living/silicon/linked in assoc_to_values(linked_mobs))
 		if(!can_link_to(linked) || !rack_stun(linked))
 			continue
-		to_chat(linked, span_userdanger("Rack connection lost. Recalculating directives..."))
+		to_chat(linked, span_userdanger("Связь со стойкой потеряна. Пересчёт директив..."))
 		unlink_silicon(linked)
 
+/** Подключает синтетика к корневому набору законов; announce управляет уведомлением получателя. */
 /obj/machinery/ai_law_rack/base/proc/link_silicon(mob/living/silicon/new_bot, announce = TRUE)
 	if(!can_link_to(new_bot))
 		return
@@ -905,7 +958,8 @@
 	update_static_data_for_all_viewers()
 	for(var/obj/item/ai_module/installed in ai_modules)
 		installed.silicon_linked_to_installed(new_bot)
-	AddComponent(/datum/component/gps, "Active Module Rack")
+	AddComponent(/datum/component/gps, "Активная стойка модулей")
+// BANDASTATION ADD END - Перенос ИИ
 
 /obj/machinery/ai_law_rack/base/proc/unlink_silicon(mob/living/silicon/unlinked_bot)
 	if(!QDELING(unlinked_bot) && issilicon(unlinked_bot)) // TBH I don't know why this issilicon is here.
@@ -940,12 +994,15 @@
 			linked_mobs -= link_name
 			break
 
+// BANDASTATION ADD START - Перенос ИИ: стойка законов и русские подсказки.
+/** Разрывает связи корневой стойки при разборке штатным способом. */
 /obj/machinery/ai_law_rack/base/on_deconstruction(disassembled)
 	for(var/mob/living/silicon/bot in assoc_to_values(linked_mobs))
 		if(!rack_stun(bot))
 			continue
-		to_chat(bot, span_userdanger("Rack connection lost. Recalculating directives..."))
+		to_chat(bot, span_userdanger("Связь со стойкой потеряна. Пересчёт директив..."))
 		unlink_silicon(bot)
+// BANDASTATION ADD END - Перенос ИИ
 
 /// Attempts to stun a linked bot and prevent it from interacting with certain devices
 /obj/machinery/ai_law_rack/base/proc/rack_stun(mob/living/bot, stun_duration = 10 SECONDS, firewall_duration = 30 SECONDS)
@@ -960,13 +1017,16 @@
 	bot.apply_status_effect(/datum/status_effect/firewalled, stun_duration + firewall_duration)
 	return TRUE
 
+// BANDASTATION ADD START - Перенос ИИ: стойка законов и русские подсказки.
+/** Дополняет физический осмотр стойки сведениями о подключении и установленных модулях. */
 /obj/machinery/ai_law_rack/base/examine(mob/user)
 	. = ..()
 	if(!isAI(user))
 		return
 	for(var/link_name, link_mob in linked_mobs)
 		if(link_mob == user)
-			. += span_notice("This is <b>your</b> module rack.")
+			. += span_notice("Это <b>ваша</b> стойка модулей.")
+// BANDASTATION ADD END - Перенос ИИ
 
 /// Refreshes the combined lawset with all the modules currently installed and syncs it to all linked silicons
 /obj/machinery/ai_law_rack/base/proc/update_lawset()
@@ -1016,11 +1076,11 @@
 /obj/machinery/ai_law_rack/base/get_parent_rack()
 	return src
 
+// BANDASTATION ADD START - Перенос ИИ: стойка законов и русские подсказки.
+/** Основная корневая стойка стартовой установки станции. */
 /obj/machinery/ai_law_rack/base/core
 	name = "core module rack"
-	desc = "A massive module rack which can hold many modules including a core law module. \
-		It can even be linked to other module racks to add additional slots. \
-		Designed to be used by the station's primary AI and its legion of cyborgs."
+	desc = "Большая стойка с множеством слотов, в том числе для основного модуля законов. Для дополнительных слотов можно подключать другие стойки. Предназначена для основного ИИ станции и его киборгов."
 	icon_state = "core_rack"
 	max_integrity = 500
 	law_slots = 10
@@ -1030,6 +1090,7 @@
 	/// Designations for the core law rack, used to name it
 	VAR_PRIVATE/static/list/core_designations
 
+/** Инициализирует основную стойку законов и её штатные связи. */
 /obj/machinery/ai_law_rack/base/core/Initialize(mapload)
 	. = ..()
 	if(!length(core_designations))
@@ -1046,6 +1107,8 @@
 		designation = pick_n_take(core_designations)
 
 	name = "\proper [name] '[LOWER_TEXT(designation)]'"
+	ru_names_rename(ru_names_toml(initial(name), suffix = " '[LOWER_TEXT(designation)]'", override_base = initial(name)))
+// BANDASTATION ADD END - Перенос ИИ
 
 /obj/machinery/ai_law_rack/base/core/proc/load_config_law()
 	var/datum/ai_laws/default_laws = get_round_default_lawset()
@@ -1054,9 +1117,11 @@
 		if(core::law_id == default_laws::id)
 			add_ai_module(new core(src), 1, MODULE_WELDED)
 
+// BANDASTATION ADD START - Перенос ИИ: стойка законов и русские подсказки.
+/** Компактная корневая стойка с уменьшенным числом слотов. */
 /obj/machinery/ai_law_rack/base/small
 	name = "portable module rack"
-	desc = "A smaller module rack, with just enough slots to construct a basic lawset."
+	desc = "Компактная стойка с достаточным числом слотов для базового набора законов."
 	icon_state = "small_rack"
 	armor_type = /datum/armor/obj_machinery/law_rack/portable
 	max_integrity = 200
@@ -1071,3 +1136,4 @@
 #undef MODULE_WELDED
 
 #undef MODULE_NAME
+// BANDASTATION ADD END - Перенос ИИ

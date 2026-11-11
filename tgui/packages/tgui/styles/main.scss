@@ -16,6 +16,9 @@
 @include meta.load-css('~tgui-core/styles/all-themes.scss');
 
 // Interfaces
+// BANDASTATION ADD START - Перенос ИИ: оформление интерфейсов NT OS.
+@include meta.load-css('../bandastation/ai_overhaul/AiOS.scss');
+// BANDASTATION ADD END - Перенос ИИ
 @include meta.load-css('./interfaces/Accounting.scss');
 @include meta.load-css('./interfaces/AlertModal.scss');
 @include meta.load-css('./interfaces/CameraConsole.scss');

@@ -1,0 +1,2005 @@
+.AiOS {
+  --neural-heading-font: Bahnschrift, 'Segoe UI', Tahoma, Arial, sans-serif;
+  --neural-accent: #a9d59a;
+  --neural-amber: #e6b873;
+  --neural-muted: #a0aa9c;
+  --neural-line: #4d594c;
+  --section-title-color: #e5e8d7;
+  --color-label: #abb5a6;
+  --tabs-container-background: transparent;
+  --input-background: #101713;
+  --button-color-transparent: #cfdbc5;
+  --button-color: #edf2df;
+  --progress-bar-background: #0d1410;
+  --progress-bar-fill: #547b4d;
+  color: #d9e0cc;
+  background: #111712;
+  font-family: 'Segoe UI', Tahoma, var(--neural-heading-font);
+  font-size: 12px;
+  line-height: 1.45;
+
+  .AiOS__historyGrid {
+    display: grid;
+    gap: 12px;
+    min-width: 0;
+  }
+  .AiOS__historyChart {
+    min-width: 0;
+    padding: 12px;
+    border: 1px solid var(--neural-line);
+    background: #101711;
+    overflow-wrap: anywhere;
+
+    svg {
+      display: block;
+      width: 100%;
+      height: 110px;
+      overflow: hidden;
+      background: repeating-linear-gradient(
+        to bottom,
+        transparent 0,
+        transparent 26px,
+        #4d594c66 27px
+      );
+    }
+  }
+  .AiOS__historyScale {
+    display: flex;
+    justify-content: space-between;
+    margin: 6px 0;
+    color: var(--neural-muted);
+  }
+  .AiOS__historyLine {
+    fill: none;
+    stroke-width: 2;
+
+    &--0 {
+      stroke: var(--neural-accent);
+      circle {
+        fill: var(--neural-accent);
+      }
+    }
+    &--1 {
+      stroke: var(--neural-amber);
+      stroke-dasharray: 5 3;
+      circle {
+        fill: var(--neural-amber);
+      }
+    }
+  }
+  .AiOS__historyTimes,
+  .AiOS__historyLegend {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 4px 16px;
+    margin-top: 6px;
+    color: var(--neural-muted);
+  }
+  .AiOS__historyLegend > span:first-child {
+    color: var(--neural-accent);
+  }
+  .AiOS__historyLegend > span:last-child {
+    color: var(--neural-amber);
+  }
+
+  .Section {
+    border: 1px solid var(--neural-line);
+    border-radius: 0;
+    background: #1a221bcc;
+    box-shadow: inset 0 1px #d7e0c20a;
+  }
+  .Section__title {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    padding: 9px 12px;
+    border-bottom: 1px solid #4d594c;
+    background: linear-gradient(90deg, #353c2b, #242e23);
+  }
+  .Section__titleText {
+    font-family: var(--neural-heading-font);
+    min-width: 0;
+    font-size: 12px;
+    letter-spacing: 0.35px;
+    overflow-wrap: anywhere;
+  }
+  .Section__buttons {
+    position: static;
+    margin-left: auto;
+    margin-top: 0;
+  }
+  .Section__content {
+    padding: 12px;
+  }
+  .Section--fitted > .Section__rest > .Section__content {
+    padding: 0;
+  }
+  .Button {
+    font-family: inherit;
+    border-radius: 1px;
+    box-shadow:
+      inset 0 1px #e5ecc41c,
+      inset 0 -1px #0005;
+    font-size: 11px;
+    transition: background-color 150ms;
+  }
+  .Button--color--default {
+    --color: #52694a;
+  }
+  .Button--fluid {
+    white-space: normal;
+    line-height: 1.5;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    overflow-wrap: anywhere;
+  }
+  .Button:focus-visible,
+  .Input:focus-within,
+  .NumberInput:focus-within {
+    outline: 1px solid #e6b873;
+    outline-offset: 2px;
+  }
+  .Input,
+  .NumberInput {
+    border-radius: 0;
+    box-shadow: inset 0 1px 4px #0006;
+  }
+  .ProgressBar {
+    min-height: 17px;
+    border-radius: 0;
+    border-color: #4b6245;
+    font:
+      10px/1.5 Consolas,
+      'Lucida Console',
+      'Courier New',
+      monospace;
+  }
+  .ProgressBar__fill {
+    background-image: repeating-linear-gradient(
+      90deg,
+      transparent 0 7px,
+      #0711093d 7px 9px
+    );
+  }
+  .ProgressBar--color--blue {
+    --progress-bar-color: #4d7049;
+  }
+  .ProgressBar--color--teal {
+    --progress-bar-color: #3d7972;
+  }
+  .NoticeBox {
+    border-radius: 0;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+  }
+  .LabeledList {
+    width: 100%;
+  }
+  .LabeledList__cell {
+    overflow-wrap: anywhere;
+  }
+  .Stack__item {
+    min-width: 0;
+  }
+}
+
+.AiOS__shell {
+  position: relative;
+  isolation: isolate;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 85% 0%, #3c472524, transparent 65%), #111712;
+}
+.AiOS__shell::before,
+.AiOS__shell::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+}
+.AiOS__shell::before {
+  background-image:
+    linear-gradient(#a5c38904 1px, transparent 1px),
+    linear-gradient(90deg, #a5c38904 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+.AiOS__shell::after {
+  background: linear-gradient(120deg, #91b14c09, transparent 50%, #ca9e4610);
+}
+.AiOS__desktop {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+}
+.AiOS__systemBar {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 7px 12px;
+  background: linear-gradient(#394031, #252d22);
+  border-top: 1px solid #828668;
+  border-bottom: 1px solid #778067;
+  box-shadow: 0 2px 4px #0004;
+}
+.AiOS__brandEmblem {
+  width: 22px;
+  height: 18px;
+  flex: 0 0 22px;
+  color: #e6b873;
+}
+.AiOS__brandEmblem svg {
+  width: 100%;
+  height: 100%;
+}
+.AiOS__wordmark {
+  white-space: nowrap;
+  font: 900 12px var(--neural-heading-font);
+  letter-spacing: 2px;
+  color: #f1e6c5;
+  span {
+    color: #c79c54;
+  }
+}
+.AiOS__applicationName {
+  flex: 1;
+  min-width: 0;
+  border-left: 1px solid #65705a;
+  padding-left: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font:
+    11px Consolas,
+    'Lucida Console',
+    'Courier New',
+    monospace;
+  color: #d0d9c4;
+}
+.AiOS__systemEdition {
+  font:
+    8px Consolas,
+    'Lucida Console',
+    'Courier New',
+    monospace;
+  letter-spacing: 1px;
+  color: #b4b99f;
+}
+.AiOS__workspace {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  padding: 14px;
+  scrollbar-color: #697859 #151d15;
+  outline: none;
+}
+.AiOS__systemFooter {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 6px 12px;
+  font:
+    9px Consolas,
+    'Lucida Console',
+    'Courier New',
+    monospace;
+  background: #252c21;
+  color: #b3bea3;
+  border-top: 1px solid #59664e;
+}
+.AiOS__systemFooter > span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.AiOS__displayFeedback {
+  text-align: right;
+}
+.AiOS__shell--booting .AiOS__desktop {
+  visibility: hidden;
+}
+.AiOS__shell--full::after,
+.AiOS__shell--soft::after {
+  animation: aiOS-ambient 18s ease-in-out infinite alternate;
+}
+
+.AiOS .AiOS__header {
+  margin-bottom: 12px;
+  border: 1px solid #687059;
+  border-left: 3px solid #d4aa67;
+  background: linear-gradient(90deg, #2e3727cc, #1e281ec9);
+  box-shadow:
+    inset 0 0 0 3px #131c12,
+    0 3px 6px #0004;
+}
+.AiOS__header > .Section__rest > .Section__content {
+  padding: 12px;
+}
+.AiOS__masthead {
+  display: grid;
+  grid-template-columns: 82px minmax(0, 1fr) minmax(90px, auto);
+  align-items: center;
+  gap: 16px;
+}
+.AiOS__monitor {
+  padding: 5px;
+  color: #b1e6a3;
+  background: linear-gradient(145deg, #525947, #252b21);
+  border: 1px solid #7b8065;
+  border-radius: 2px;
+  box-shadow:
+    inset 0 0 0 2px #172014,
+    0 2px 6px #0006;
+}
+.AiOS__monitorLabel {
+  font:
+    9px Consolas,
+    'Lucida Console',
+    'Courier New',
+    monospace;
+  letter-spacing: 1px;
+  color: #dbc38d;
+  text-align: center;
+  padding: 1px 0 5px;
+}
+.AiOS__glass {
+  height: 53px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #627b50;
+  background: radial-gradient(ellipse at center, #20462b, #050e09 90%);
+  box-shadow: inset 0 0 10px #000;
+}
+.AiOS__glass::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.35;
+  background: repeating-linear-gradient(transparent 0 2px, #030c06 2px 3px);
+}
+.AiOS__glyph,
+.AiOS__ghost {
+  position: absolute;
+  inset: 0;
+  filter: drop-shadow(0 0 2px #9de7a770);
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+}
+.AiOS__glyphFrame {
+  stroke: currentColor;
+  stroke-width: 1.2;
+  opacity: 0.5;
+}
+.AiOS__cortexFill {
+  fill: currentColor;
+  opacity: 0.09;
+}
+.AiOS__cortexOutline {
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linejoin: round;
+}
+.AiOS__glyphWire {
+  stroke: currentColor;
+  stroke-width: 1.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.5;
+}
+.AiOS__pulseTrace {
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.AiOS__neuronNodes {
+  fill: currentColor;
+}
+.AiOS__orbit {
+  stroke: currentColor;
+  stroke-width: 1.4;
+  opacity: 0.4;
+  transform-box: view-box;
+  transform-origin: 50% 50%;
+}
+.AiOS__ghost {
+  opacity: 0;
+}
+.AiOS__ghost--upper {
+  clip-path: inset(18% 0 53%);
+}
+.AiOS__ghost--lower {
+  clip-path: inset(56% 0 14%);
+}
+.AiOS__scan {
+  position: absolute;
+  top: -20%;
+  width: 100%;
+  height: 18%;
+  opacity: 0.1;
+  background: linear-gradient(transparent, currentColor, transparent);
+  pointer-events: none;
+}
+.AiOS__monitorLights {
+  display: flex;
+  gap: 3px;
+  align-items: center;
+  padding: 5px 1px 1px;
+  i {
+    width: 5px;
+    height: 2px;
+    background: currentColor;
+  }
+  i:nth-child(2) {
+    opacity: 0.5;
+  }
+  i:nth-child(3) {
+    opacity: 0.25;
+  }
+  span {
+    margin-left: auto;
+    font:
+      7px Consolas,
+      'Lucida Console',
+      'Courier New',
+      monospace;
+    color: #b7ba9c;
+  }
+}
+.AiOS__identity {
+  min-width: 0;
+}
+.AiOS__eyebrow {
+  font:
+    9px Consolas,
+    'Lucida Console',
+    'Courier New',
+    monospace;
+  letter-spacing: 1px;
+  color: #cfac6c;
+  margin-bottom: 5px;
+  overflow-wrap: anywhere;
+}
+.AiOS__identityTitle {
+  font: bold 27px/1.1 var(--neural-heading-font);
+  color: #edf0da;
+  letter-spacing: 1px;
+  overflow-wrap: anywhere;
+}
+.AiOS__subtitle {
+  color: #b4c1a9;
+  font-size: 11px;
+  margin-top: 7px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+.AiOS__headerTools {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+  min-width: 0;
+  .Button {
+    margin: 0;
+  }
+  .AiOS__eyebrow {
+    margin: 0;
+    font-size: 8px;
+    color: #afb398;
+  }
+}
+.AiOS__linkStatus {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  max-width: 210px;
+  font:
+    bold 10px/1.4 Consolas,
+    'Lucida Console',
+    'Courier New',
+    monospace;
+  color: #aed69c;
+  overflow-wrap: anywhere;
+}
+.AiOS__statusDot {
+  display: inline-block;
+  flex: 0 0 5px;
+  width: 5px;
+  height: 5px;
+  background: currentColor;
+  box-shadow: 0 0 6px currentColor;
+}
+.AiOS__header--compact .AiOS__identityTitle {
+  font-size: 22px;
+}
+.AiOS__header--busy,
+.AiOS__header--degraded {
+  .AiOS__linkStatus {
+    color: #ecc479;
+  }
+  .AiOS__glass {
+    border-color: #b39255;
+  }
+}
+.AiOS__header--alert {
+  .AiOS__linkStatus {
+    color: #ffb099;
+  }
+  .AiOS__glass {
+    border-color: #a4644c;
+  }
+}
+.AiOS__header--full,
+.AiOS__header--soft {
+  .AiOS__monitor {
+    animation: aiOS-phosphor 16s ease-in-out infinite;
+  }
+  .AiOS__scan {
+    animation: aiOS-scan 7s linear infinite;
+  }
+  .AiOS__orbit {
+    animation: aiOS-orbit 32s linear infinite;
+  }
+  .AiOS__pulseTrace {
+    animation: aiOS-glow 5s ease-in-out infinite;
+  }
+}
+.AiOS__header--full.AiOS__header--load1,
+.AiOS__header--full.AiOS__header--load2,
+.AiOS__header--full.AiOS__header--load3 {
+  .AiOS__ghost {
+    animation: aiOS-fragments 16s step-end infinite;
+  }
+  .AiOS__ghost--lower {
+    animation-direction: reverse;
+  }
+  .AiOS__glyph {
+    animation: aiOS-breakup 16s step-end infinite;
+  }
+}
+.AiOS__header--full.AiOS__header--load2 {
+  .AiOS__ghost,
+  .AiOS__glyph {
+    animation-duration: 8s;
+  }
+}
+.AiOS__header--full.AiOS__header--load3 {
+  .AiOS__ghost,
+  .AiOS__glyph {
+    animation-duration: 4s;
+  }
+  .AiOS__monitor {
+    animation-duration: 6s;
+  }
+}
+
+.AiOS__workspaceLayout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 206px;
+  grid-template-areas: 'nav nav' 'work instruments';
+  gap: 14px;
+  align-items: start;
+}
+.AiOS__workspaceLayout--focus {
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas: 'nav' 'toggle' 'instruments' 'work';
+  .AiOS__instrumentToggle {
+    display: block;
+    grid-area: toggle;
+  }
+  .AiOS__sideRail {
+    display: none;
+  }
+  .AiOS__sideRail--expanded {
+    display: block;
+  }
+  .AiOS__railInstruments .AiOS__vitals {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+.AiOS__railNavigation {
+  grid-area: nav;
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  background: #182117;
+  border-bottom: 2px solid #9b8554;
+  box-shadow: 0 3px 6px #0005;
+}
+.AiOS__firmwareNav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  padding: 3px;
+}
+.AiOS .AiOS__firmwareNav .Button {
+  flex: 1 1 auto;
+  min-width: 0;
+  margin: 0;
+  padding: 9px;
+  box-shadow: none;
+  border: 1px solid transparent;
+}
+.AiOS__firmwareNav .Button__content {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  white-space: normal;
+  text-align: left;
+  line-height: 1.4;
+}
+.AiOS .AiOS__firmwareNav .Button--selected {
+  background: #414936;
+  border-color: #9d9c6a;
+  color: #f6e8bd;
+}
+.AiOS__navIndex {
+  font:
+    9px Consolas,
+    'Lucida Console',
+    'Courier New',
+    monospace;
+  color: #bfa575;
+}
+.AiOS__navLabel {
+  flex: 1;
+  font-weight: bold;
+}
+.AiOS__navCaption {
+  font:
+    10px Consolas,
+    'Lucida Console',
+    'Courier New',
+    monospace;
+  padding: 1px 5px;
+  background: #0c180c;
+  color: #b8dca1;
+  border: 1px solid #5a7350;
+}
+.AiOS__workArea {
+  grid-area: work;
+  min-width: 0;
+}
+.AiOS__sideRail {
+  grid-area: instruments;
+  min-width: 0;
+  padding: 3px;
+  border: 1px solid #687059;
+  background: #232c20;
+  box-shadow: inset 0 0 0 2px #10180e;
+}
+.AiOS__instrumentHeading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  border-bottom: 1px solid #59634d;
+  font:
+    10px Consolas,
+    'Lucida Console',
+    'Courier New',
+    monospace;
+  color: #ddc08b;
+  letter-spacing: 1px;
+}
+.AiOS__railInstruments {
+  padding: 8px;
+}
+.AiOS__instrumentFootnote {
+  font:
+    8px Consolas,
+    'Lucida Console',
+    'Courier New',
+    monospace;
+  text-align: center;
+  padding: 8px 4px;
+  color: #a9b09a;
+  border-top: 1px solid #434d3b;
+}
+.AiOS__railLabel {
+  font:
+    9px Consolas,
+    'Lucida Console',
+    'Courier New',
+    monospace;
+  color: #b3bb9f;
+  margin-bottom: 8px;
+}
+.AiOS__instrumentToggle {
+  display: none;
+}
+.AiOS__vitals,
+.AiOS__telemetry {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr));
+  gap: 8px;
+  margin: 10px 0;
+}
+.AiOS__vital,
+.AiOS__metric {
+  min-width: 0;
+  padding: 10px;
+  background: #111a11;
+  border: 1px solid #515d46;
+  box-shadow: inset 0 1px #b8c39a12;
+}
+.AiOS__vitalValue,
+.AiOS__metricValue {
+  font:
+    bold 22px Consolas,
+    'Lucida Console',
+    'Courier New',
+    monospace;
+  color: #d5eec5;
+  font-variant-numeric: tabular-nums;
+  margin: 4px 0 8px;
+  span {
+    font-size: 10px;
+    font-weight: normal;
+    color: #abb69c;
+  }
+}
+.AiOS__railInstruments {
+  .AiOS__vitals,
+  .AiOS__telemetry {
+    grid-template-columns: minmax(0, 1fr);
+    margin: 0 0 10px;
+  }
+  .AiOS__vital,
+  .AiOS__metric {
+    padding: 10px;
+    border-left: 2px solid #809866;
+  }
+  .Section__title {
+    padding: 7px;
+  }
+  .Section__titleText {
+    font-size: 11px;
+  }
+  .Section__content {
+    padding: 8px;
+  }
+  .AiOS__vitalValue,
+  .AiOS__metricValue {
+    font-size: 22px;
+  }
+}
+.AiOS .AiOS__diagnostics {
+  padding: 0;
+}
+.AiOS__diagnostics .Button {
+  white-space: normal;
+  line-height: 1.5;
+  padding: 6px;
+  font-size: 11px;
+}
+.AiOS__diagnosticRows {
+  margin: 0;
+  padding: 8px;
+}
+.AiOS__diagnosticRows > div {
+  margin-bottom: 12px;
+}
+.AiOS__diagnosticRows dt {
+  color: #c8a365;
+  font:
+    9px Consolas,
+    'Lucida Console',
+    'Courier New',
+    monospace;
+  margin-bottom: 4px;
+}
+.AiOS__diagnosticRows dd {
+  margin: 0;
+  font-size: 11px;
+  overflow-wrap: anywhere;
+}
+.AiOS__railFacts {
+  margin: 10px 0;
+}
+.AiOS__railFacts > div {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 6px;
+  padding: 6px 0;
+  border-bottom: 1px solid #45523d;
+  font-size: 10px;
+}
+.AiOS__railFacts dt {
+  color: #b9c0ac;
+}
+.AiOS__railFacts dd {
+  margin: 0;
+  color: #e6ecd5;
+}
+.AiOS__signal {
+  font:
+    bold 10px Consolas,
+    'Lucida Console',
+    'Courier New',
+    monospace;
+  letter-spacing: 0.5px;
+  padding: 6px 0;
+}
+.AiOS__routing .Input {
+  min-width: 0;
+}
+.AiOS__serviceWorkspace {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+  gap: 12px;
+  align-items: start;
+}
+.AiOS__serviceWorkspace > * {
+  min-width: 0;
+  margin-bottom: 0;
+}
+
+.AiOS__filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  .Button {
+    margin: 0;
+  }
+}
+.AiOS__catalogBrowser {
+  min-width: 0;
+}
+.AiOS__catalogBudget {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  padding: 0 0 12px;
+  color: #b6c4a8;
+  strong {
+    color: #e3ebd4;
+  }
+}
+.AiOS__catalogToolbar,
+.AiOS__catalogPager {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 10px 0;
+  .Button {
+    margin: 0;
+  }
+  button:disabled {
+    opacity: 0.4;
+    cursor: default;
+  }
+}
+.AiOS__catalogModes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.AiOS__catalogCaption,
+.AiOS__catalogPager > span {
+  color: #dcc08a;
+  font:
+    10px Consolas,
+    'Lucida Console',
+    'Courier New',
+    monospace;
+}
+.AiOS__projectGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+.AiOS__projectCard {
+  --project-accent: #a9d59a;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 14px;
+  text-align: left;
+  color: #d9e0cc;
+  font: inherit;
+  cursor: pointer;
+  border: 1px solid #58674e;
+  border-top: 2px solid var(--project-accent);
+  background: linear-gradient(125deg, #2a3725, #141d14 70%);
+  box-shadow: inset 0 1px #c4e1b815;
+  overflow-wrap: anywhere;
+  &:hover {
+    background: linear-gradient(125deg, #35492e, #1c281b 70%);
+    border-color: var(--project-accent);
+  }
+  &:focus-visible {
+    outline: 2px solid #e6b873;
+    outline-offset: 2px;
+  }
+}
+.AiOS__projectCard--active {
+  --project-accent: #e6b873;
+  background: linear-gradient(125deg, #3b3825, #182016 70%);
+}
+.AiOS__projectCard--locked {
+  --project-accent: #9ea99a;
+  background: linear-gradient(125deg, #272d27, #171c17 70%);
+}
+.AiOS__projectCardTop {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.AiOS__projectEmblem {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid #68725a;
+  background: #0f1813;
+  color: var(--project-accent);
+  font-size: 17px;
+}
+.AiOS__projectCategory {
+  flex: 1;
+  color: #b3c1a5;
+  font-size: 10px;
+}
+.AiOS__projectAddress {
+  color: #85947b;
+  font:
+    18px Consolas,
+    monospace;
+}
+.AiOS__projectName {
+  color: #edf0df;
+  font: 600 16px/1.3 var(--neural-heading-font);
+}
+.AiOS__projectPreview {
+  color: #b9c5ae;
+  font-size: 12px;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+.AiOS__projectCardStatus {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  color: var(--project-accent);
+  font:
+    10px Consolas,
+    'Lucida Console',
+    monospace;
+  strong {
+    margin-left: auto;
+  }
+}
+.AiOS__projectTrack {
+  display: block;
+  height: 3px;
+  background: #070e09;
+  > span {
+    display: block;
+    height: 100%;
+    background: var(--project-accent);
+  }
+}
+.AiOS__projectCardFoot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  padding-top: 8px;
+  border-top: 1px solid #4f5c43;
+  color: #b6c4a8;
+  font:
+    9px Consolas,
+    'Lucida Console',
+    monospace;
+}
+.AiOS__projectDetail {
+  min-width: 0;
+  border: 1px solid #6d785a;
+  background: #182116;
+  overflow-wrap: anywhere;
+  > .Section {
+    margin-bottom: 0;
+    border: 0;
+  }
+  &:focus {
+    outline: 1px solid #e6b873;
+    outline-offset: 2px;
+  }
+}
+.AiOS__projectDetail > .Section > .Section__title {
+  border-left: 3px solid #dfb26a;
+  padding: 16px;
+  .Section__titleText {
+    font-size: 20px;
+    line-height: 1.35;
+  }
+}
+.AiOS__projectDescription {
+  font-size: 14px;
+  line-height: 1.6;
+}
+.AiOS__catalogEmpty {
+  padding: 20px;
+  color: #b6c4a8;
+  line-height: 1.6;
+}
+.AiOS__projectStatus {
+  font:
+    10px Consolas,
+    'Lucida Console',
+    'Courier New',
+    monospace;
+  padding: 5px 0;
+  letter-spacing: 0.4px;
+  margin-bottom: 8px;
+}
+
+.AiOS__overview {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 12px;
+}
+.AiOS__overviewColumns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  align-items: start;
+}
+.AiOS__overviewColumns > * {
+  min-width: 0;
+}
+.AiOS .AiOS__overview > .Section,
+.AiOS .AiOS__overviewColumns > .Section {
+  margin-bottom: 0;
+}
+.AiOS__resourceModel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 110px minmax(0, 1fr);
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0 18px;
+}
+.AiOS__modelCore {
+  position: relative;
+  width: 110px;
+  height: 95px;
+  color: #b1d99b;
+}
+.AiOS__modelCore::before,
+.AiOS__modelCore::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 12px;
+  height: 1px;
+  background: #749263;
+}
+.AiOS__modelCore::before {
+  left: -12px;
+}
+.AiOS__modelCore::after {
+  right: -12px;
+}
+.AiOS__modelCore svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 0 5px #a9d59a44);
+}
+.AiOS__modelEndpoint {
+  min-width: 0;
+  background: #111b11;
+  border: 1px solid #536547;
+  padding: 10px;
+}
+.AiOS__modelEndpoint > span {
+  display: block;
+  font-size: 8px;
+}
+.AiOS__modelEndpoint strong {
+  display: block;
+  margin: 8px 0;
+  font:
+    bold 24px Consolas,
+    'Lucida Console',
+    'Courier New',
+    monospace;
+  color: #e4ebd0;
+  small {
+    font-size: 10px;
+    font-weight: normal;
+    color: #afbfa0;
+  }
+}
+.AiOS__modelReadout {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 6px;
+  border-top: 1px solid #4d5c42;
+  padding-top: 10px;
+  font:
+    9px Consolas,
+    'Lucida Console',
+    'Courier New',
+    monospace;
+  color: #cfb77f;
+}
+.AiOS__queueEntry {
+  padding: 8px 0 12px;
+  border-bottom: 1px solid #3e4a35;
+  strong {
+    display: block;
+  }
+  > span {
+    display: block;
+    margin: 5px 0;
+    font:
+      9px Consolas,
+      'Lucida Console',
+      'Courier New',
+      monospace;
+    color: #c1bb96;
+  }
+}
+.AiOS__overviewSummary {
+  margin-top: 10px;
+  font:
+    9px Consolas,
+    'Lucida Console',
+    'Courier New',
+    monospace;
+  color: #b9c5a9;
+}
+.AiOS__programEntry {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 0;
+  color: #bbdba6;
+}
+.AiOS__programName {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.AiOS__observationCaption {
+  color: #b4bea6;
+  font-size: 10px;
+  margin-bottom: 12px;
+}
+.AiOS__logEntry {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid #3d4c34;
+  time {
+    color: #c9ae7a;
+    font:
+      10px Consolas,
+      'Lucida Console',
+      'Courier New',
+      monospace;
+  }
+  span {
+    overflow-wrap: anywhere;
+  }
+}
+.AiOS__logEntry--warning {
+  color: #efbd86;
+}
+
+.AiOS__lawSummary {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 14px;
+  color: var(--neural-amber);
+  font:
+    10px Consolas,
+    'Lucida Console',
+    'Courier New',
+    monospace;
+}
+.AiOS__lawList {
+  display: grid;
+  gap: 12px;
+}
+.AiOS__law {
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr);
+  border: 1px solid var(--neural-line);
+  border-left: 3px solid var(--neural-accent);
+  background: #111a11;
+}
+.AiOS__lawNumber {
+  min-width: 0;
+  padding: 14px 8px;
+  border-right: 1px solid var(--neural-line);
+  text-align: center;
+  color: var(--neural-accent);
+  font-family: Consolas, 'Lucida Console', 'Courier New', monospace;
+  overflow-wrap: anywhere;
+  span {
+    display: block;
+    font-size: 9px;
+    letter-spacing: 1px;
+  }
+  strong {
+    display: block;
+    margin-top: 6px;
+    font-size: 23px;
+  }
+}
+.AiOS__lawBody {
+  min-width: 0;
+  padding: 14px 16px;
+}
+.AiOS__lawType {
+  margin-bottom: 6px;
+  color: #a7b99b;
+  font:
+    9px/1.5 Consolas,
+    'Lucida Console',
+    monospace;
+  letter-spacing: 0.5px;
+  overflow-wrap: anywhere;
+}
+.AiOS__lawText {
+  min-width: 0;
+  font-size: 14px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.AiOS__law--zeroth {
+  border-left-color: #efb78f;
+  background: #292015;
+  .AiOS__lawNumber {
+    color: #efb78f;
+  }
+}
+
+.AiOS__law--hacked {
+  border-color: #8c4145;
+  border-left: 3px solid #ef5b63;
+  background: linear-gradient(110deg, #3c171d, #1f1116);
+  box-shadow: inset 0 3px #e04a5326;
+  .AiOS__lawNumber {
+    color: #ff8c90;
+    border-color: #8c4145;
+    background: #47191f;
+  }
+  .AiOS__lawType {
+    color: #ff9e9f;
+  }
+  .AiOS__lawText {
+    color: #f2d5d5;
+  }
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0 0 0 auto;
+    width: 5px;
+    background: repeating-linear-gradient(
+      135deg,
+      #c33c47 0 5px,
+      #231017 5px 10px
+    );
+    pointer-events: none;
+  }
+}
+.AiOS__law--ion {
+  border-color: #6579a2;
+  border-left: 3px solid #81dbe6;
+  background: linear-gradient(115deg, #1a2335, #121b24);
+  box-shadow:
+    inset 0 2px #87d9e53b,
+    inset 0 -2px #d296d437;
+  .AiOS__lawNumber {
+    color: #9ee5ec;
+    border-color: #6579a2;
+    text-shadow: 2px 0 #b378b88c;
+  }
+  .AiOS__lawType {
+    color: #b8caf1;
+  }
+  .AiOS__lawText {
+    color: #e0e7f2;
+  }
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 5px;
+    pointer-events: none;
+    background: linear-gradient(
+      90deg,
+      #88e6ee 0 14%,
+      transparent 14% 28%,
+      #be8bd0 28% 39%,
+      transparent 39% 67%,
+      #88e6ee 67% 81%,
+      transparent 81%
+    );
+    clip-path: polygon(
+      0 0,
+      100% 0,
+      100% 40%,
+      75% 40%,
+      75% 100%,
+      51% 100%,
+      51% 40%,
+      26% 40%,
+      26% 100%,
+      0 100%
+    );
+  }
+}
+.AiOS__lawInterference {
+  position: absolute;
+  inset: 5px 0 0 auto;
+  width: 7px;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    #82dbe67a 0 2px,
+    transparent 2px 12px,
+    #cf92d375 12px 14px,
+    transparent 14px 27px
+  );
+}
+.AiOS__shell--full .AiOS__lawInterference {
+  animation: neural-law-fracture 7s steps(1, end) infinite;
+}
+@keyframes neural-law-fracture {
+  0%,
+  86%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.45;
+  }
+  88%,
+  92% {
+    transform: translateY(9px);
+    opacity: 0.8;
+  }
+  90%,
+  94% {
+    transform: translateY(-6px);
+    opacity: 0.6;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .AiOS__shell--full .AiOS__lawInterference {
+    animation: none;
+  }
+}
+
+.AiOS__cardReadout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.AiOS__cardIntegrity {
+  color: var(--neural-accent);
+  font:
+    700 32px/1.3 Consolas,
+    'Lucida Console',
+    monospace;
+}
+.AiOS__cardState {
+  overflow-wrap: anywhere;
+}
+.AiOS__cardChannels {
+  display: grid;
+  gap: 12px;
+}
+.AiOS__cardLaws {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  li {
+    padding: 8px;
+    border-bottom: 1px solid var(--neural-line);
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+}
+.AiOS .AiOS__cardDanger {
+  border-color: #a36654;
+}
+
+.AiOS__settings {
+  padding: 6px;
+  border: 1px solid #a08f64;
+  background: #1e291b;
+  box-shadow: 0 5px 18px #0009;
+  .Section {
+    margin: 0;
+  }
+}
+.AiOS__effectChoices {
+  display: flex;
+  gap: 6px;
+  .Button {
+    flex: 1;
+    margin: 0;
+    text-align: center;
+  }
+}
+
+.AiOS__bootScreen {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  cursor: pointer;
+  outline: none;
+  overflow: hidden;
+  background: radial-gradient(ellipse at center, #293724, #0b140b 75%);
+  color: #c8dfb2;
+  font-family: Consolas, 'Lucida Console', 'Courier New', monospace;
+}
+.AiOS__bootScreen::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.25;
+  background: repeating-linear-gradient(transparent 0 2px, #0005 2px 3px);
+}
+.AiOS__bootScreen:focus-visible {
+  box-shadow: inset 0 0 0 2px #c4a365;
+}
+.AiOS__bootTopline,
+.AiOS__bootBottomline {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px;
+  position: relative;
+  font-size: 9px;
+  letter-spacing: 1px;
+  color: #c5b37f;
+}
+.AiOS__bootTopline {
+  padding-bottom: 14px;
+  border-bottom: 1px solid #596945;
+}
+.AiOS__bootBottomline {
+  padding-top: 14px;
+  border-top: 1px solid #596945;
+}
+.AiOS__bootCenter {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 150px minmax(0, 320px);
+  gap: 10px 30px;
+  align-content: center;
+  justify-content: center;
+  position: relative;
+}
+.AiOS__bootEmblem {
+  width: 150px;
+  height: 150px;
+  color: #b1d691;
+  grid-row: 1 / 6;
+  align-self: center;
+  filter: drop-shadow(0 0 10px #90bd4f33);
+}
+.AiOS__bootEmblem svg {
+  width: 100%;
+  height: 100%;
+  stroke: currentColor;
+  stroke-width: 1.5;
+}
+.AiOS__bootOrbit,
+.AiOS__bootOrbitInner {
+  transform-box: view-box;
+  transform-origin: 50% 50%;
+}
+.AiOS__bootOrbit {
+  stroke-dasharray: 160 300;
+  animation: aiOS-orbit 3s linear infinite;
+}
+.AiOS__bootOrbitInner {
+  stroke-dasharray: 180 90;
+  opacity: 0.35;
+  animation: aiOS-orbit 6s linear infinite reverse;
+}
+.AiOS__bootTrace {
+  stroke-width: 4;
+  stroke-dasharray: 200;
+  animation: aiOS-logo-write 1.2s ease-out both;
+}
+.AiOS__bootWordmark {
+  font: 900 46px var(--neural-heading-font);
+  letter-spacing: 7px;
+  color: #f0ebc9;
+  span {
+    color: #d8b46d;
+  }
+}
+.AiOS__bootEdition {
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: #bacb9f;
+}
+.AiOS__bootApplication {
+  color: #d2c698;
+  font-size: 12px;
+}
+.AiOS__bootConsole {
+  margin: 8px 0;
+  border-top: 1px solid #566843;
+  border-bottom: 1px solid #566843;
+  font-size: 10px;
+}
+.AiOS__bootConsole > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 7px 0;
+  color: #8c9d79;
+}
+.AiOS__bootConsole .AiOS__bootRow--active {
+  color: #e4c589;
+}
+.AiOS__bootProgress {
+  display: flex;
+  gap: 4px;
+  grid-column: 1 / -1;
+  height: 4px;
+  margin-top: 12px;
+  i {
+    flex: 1;
+    background: #3f4e32;
+  }
+  .AiOS__bootSegment--ready {
+    background: #b1d691;
+    box-shadow: 0 0 8px #8abd6544;
+  }
+}
+.AiOS__bootPhase {
+  grid-column: 1 / -1;
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: #c4d8a6;
+  min-height: 14px;
+}
+.AiOS__shell--full .AiOS__bootEmblem {
+  animation: aiOS-boot-materialize 700ms ease-out both;
+}
+
+.AiOS__interference {
+  position: absolute;
+  inset: 0;
+  z-index: 8;
+  pointer-events: none;
+  contain: paint;
+  overflow: hidden;
+  visibility: hidden;
+  opacity: var(--neural-interference-strength, 0);
+}
+.AiOS__interferenceBand,
+.AiOS__interferenceNoise {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+.AiOS__interferenceBand {
+  background: linear-gradient(
+    transparent 24%,
+    #b9e89926 24% 25%,
+    #7295d51a 25% 29%,
+    transparent 29% 65%,
+    #e6b8731c 65% 66%,
+    transparent 66%
+  );
+}
+.AiOS__interferenceNoise {
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0 13px,
+    #a6dd8b20 13px 14px,
+    transparent 14px 23px,
+    #96c2ee1a 23px 24px
+  );
+  clip-path: inset(15% 0 72%);
+}
+.AiOS__shell--full.AiOS__shell--ready {
+  &.AiOS__shell--load1 {
+    --neural-interference-strength: 0.3;
+  }
+  &.AiOS__shell--load1,
+  &.AiOS__shell--load2,
+  &.AiOS__shell--load3 {
+    .AiOS__interference {
+      visibility: visible;
+    }
+    .AiOS__interferenceBand {
+      animation: aiOS-interference-band 16s step-end infinite;
+    }
+  }
+  &.AiOS__shell--load2 {
+    --neural-interference-strength: 0.65;
+    .AiOS__interferenceBand {
+      animation-duration: 8s;
+    }
+    .AiOS__interferenceNoise {
+      animation: aiOS-interference-noise 8s step-end infinite;
+    }
+  }
+  &.AiOS__shell--load3 {
+    --neural-interference-strength: 1;
+    .AiOS__interferenceBand {
+      animation-duration: 4s;
+      background: linear-gradient(
+        transparent 24%,
+        #b9e89946 24% 25%,
+        #548cf830 25% 29%,
+        transparent 29% 65%,
+        #e6b8733a 65% 66%,
+        transparent 66%
+      );
+    }
+    .AiOS__interferenceNoise {
+      animation: aiOS-interference-noise 4s step-end infinite;
+    }
+    .AiOS__systemBar,
+    .AiOS__systemFooter {
+      border-color: #c1815d;
+    }
+  }
+}
+.AiOS__shell--load1 .AiOS__displayFeedback {
+  color: #d4bb85;
+}
+.AiOS__shell--load2 .AiOS__displayFeedback {
+  color: #e7b56b;
+}
+.AiOS__shell--load3 .AiOS__displayFeedback {
+  color: #f2a28f;
+}
+.AiOS__shell--off *,
+.AiOS__shell--off *::before,
+.AiOS__shell--off *::after,
+.AiOS__shell--off::before,
+.AiOS__shell--off::after {
+  animation: none !important;
+  transition: none !important;
+}
+
+@keyframes aiOS-ambient {
+  from {
+    opacity: 0.4;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes aiOS-phosphor {
+  0%,
+  100% {
+    color: #b1e6a3;
+  }
+  50% {
+    color: #8fc3e6;
+  }
+}
+@keyframes aiOS-scan {
+  to {
+    transform: translateY(600%);
+  }
+}
+@keyframes aiOS-orbit {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes aiOS-glow {
+  0%,
+  100% {
+    opacity: 0.65;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+@keyframes aiOS-breakup {
+  0%,
+  90%,
+  93%,
+  100% {
+    clip-path: inset(0);
+    transform: none;
+    opacity: 1;
+  }
+  91% {
+    clip-path: inset(30% 0 35%);
+    transform: translateX(-2px);
+    opacity: 0.75;
+  }
+  92% {
+    clip-path: inset(10% 0 60%);
+    transform: translateX(2px);
+  }
+}
+@keyframes aiOS-fragments {
+  0%,
+  90%,
+  94%,
+  100% {
+    opacity: 0;
+    transform: none;
+  }
+  91% {
+    opacity: 0.65;
+    transform: translate(5px, -2px);
+  }
+  92% {
+    opacity: 0.35;
+    transform: translate(-4px, 3px);
+  }
+  93% {
+    opacity: 0.2;
+    transform: translate(2px);
+  }
+}
+@keyframes aiOS-logo-write {
+  from {
+    stroke-dashoffset: 200;
+    opacity: 0.2;
+  }
+  to {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+}
+@keyframes aiOS-boot-materialize {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes aiOS-interference-band {
+  0%,
+  78%,
+  90%,
+  100% {
+    opacity: 0;
+    transform: none;
+  }
+  80% {
+    opacity: 0.7;
+    transform: translateY(-8%);
+  }
+  84% {
+    opacity: 1;
+    transform: translateY(10%);
+  }
+  88% {
+    opacity: 0.45;
+    transform: translateY(4%);
+  }
+}
+@keyframes aiOS-interference-noise {
+  0%,
+  55%,
+  88%,
+  100% {
+    opacity: 0;
+    clip-path: inset(15% 0 72%);
+  }
+  58% {
+    opacity: 0.8;
+    clip-path: inset(15% 0 72%);
+  }
+  64% {
+    opacity: 1;
+    clip-path: inset(58% 0 22%);
+  }
+  76% {
+    opacity: 0.7;
+    clip-path: inset(30% 0 52%);
+  }
+  84% {
+    opacity: 0.4;
+    clip-path: inset(75% 0 10%);
+  }
+}
+
+@media (max-width: 850px) {
+  .AiOS__resourceModel {
+    grid-template-columns: minmax(0, 1fr) 70px minmax(0, 1fr);
+    gap: 8px;
+  }
+  .AiOS__modelCore {
+    width: 70px;
+    height: 70px;
+  }
+  .AiOS__modelEndpoint strong {
+    font-size: 20px;
+  }
+}
+@media (max-width: 700px) {
+  .AiOS__workspaceLayout {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: 'nav' 'toggle' 'instruments' 'work';
+    gap: 10px;
+  }
+  .AiOS__sideRail {
+    display: none;
+  }
+  .AiOS__sideRail--expanded {
+    display: block;
+  }
+  .AiOS__instrumentToggle {
+    display: block;
+    grid-area: toggle;
+  }
+  .AiOS__instrumentToggle .Button {
+    border: 1px solid #687059;
+  }
+  .AiOS__railInstruments .AiOS__vitals,
+  .AiOS__workspaceLayout--focus .AiOS__railInstruments .AiOS__vitals,
+  .AiOS__railInstruments .AiOS__telemetry {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .AiOS__firmwareNav .Icon,
+  .AiOS__navIndex {
+    display: none;
+  }
+  .AiOS .AiOS__firmwareNav .Button {
+    padding: 7px;
+  }
+  .AiOS__systemEdition {
+    display: none;
+  }
+}
+@media (max-width: 520px) {
+  .AiOS__workspace {
+    padding: 8px;
+  }
+  .AiOS .Stack {
+    flex-wrap: wrap;
+  }
+  .AiOS__masthead {
+    grid-template-columns: 64px minmax(0, 1fr);
+    gap: 10px;
+  }
+  .AiOS__headerTools {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .AiOS__headerTools > .AiOS__eyebrow {
+    display: none;
+  }
+  .AiOS__linkStatus {
+    max-width: 230px;
+    font-size: 9px;
+  }
+  .AiOS__identityTitle {
+    font-size: 21px;
+  }
+  .AiOS__eyebrow {
+    font-size: 8px;
+  }
+  .AiOS__glass {
+    height: 42px;
+  }
+  .AiOS__systemFooter {
+    font-size: 8px;
+    padding: 5px 8px;
+  }
+  .AiOS__resourceModel {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .AiOS__modelCore {
+    display: none;
+  }
+  .AiOS__modelEndpoint {
+    padding: 8px;
+  }
+  .AiOS__overviewColumns {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .AiOS__bootScreen {
+    padding: 14px;
+  }
+  .AiOS__bootCenter {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 7px;
+  }
+  .AiOS__bootEmblem {
+    display: none;
+  }
+  .AiOS__bootWordmark {
+    font-size: 38px;
+  }
+  .AiOS__bootTopline,
+  .AiOS__bootBottomline {
+    font-size: 8px;
+  }
+}
+@media (max-height: 440px) {
+  .AiOS__bootScreen {
+    padding: 12px;
+  }
+  .AiOS__bootCenter {
+    gap: 5px 20px;
+  }
+  .AiOS__bootEmblem {
+    width: 80px;
+    height: 80px;
+  }
+  .AiOS__bootWordmark {
+    font-size: 28px;
+  }
+  .AiOS__bootConsole > div {
+    padding: 3px 0;
+  }
+  .AiOS__bootTopline,
+  .AiOS__bootBottomline {
+    padding: 6px 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .AiOS *,
+  .AiOS *::before,
+  .AiOS *::after,
+  .AiOS__shell::before,
+  .AiOS__shell::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+@media (max-width: 520px) {
+  .AiOS__projectGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .AiOS__projectCard {
+    padding: 12px;
+  }
+  .AiOS__catalogPager > span {
+    order: 3;
+    flex-basis: 100%;
+    text-align: center;
+  }
+}
