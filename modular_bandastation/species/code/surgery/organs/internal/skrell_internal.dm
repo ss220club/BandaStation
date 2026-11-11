@@ -159,10 +159,10 @@ GLOBAL_LIST_INIT(skrell_overdose_thresholds, list(
 	// 25u: Тяжелые стимуляторы (критический 50u)
 	/datum/reagent/drug/cocaine = 25,
 	/datum/reagent/drug/methamphetamine = 25,
-	// 45u: Соли для ванн и Кровь Земли (критический 90u)
+	// 45u: Соли для ванн и Кровь Земли (критический 100u и 90u)
 	/datum/reagent/drug/bath_salts = 50,
 	/datum/reagent/medicine/earthsblood = 45,
-	// 60u: Синтетика и омнизин (критический 120u)
+	// 60u: Синтетика и омнизин (критический 160u)
 	/datum/reagent/drug/krokodil = 80,
 	/datum/reagent/drug/happiness = 80,
 	/datum/reagent/drug/maint/powder = 80,
