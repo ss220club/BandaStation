@@ -372,6 +372,10 @@
 #define COMSIG_RADIO_NEW_MESSAGE "radio_new_message"
 ///called from base of /obj/item/radio/proc/on_receive_messgae(): (list/data)
 #define COMSIG_RADIO_RECEIVE_MESSAGE "radio_receive_message"
+// BANDASTATION ADDITION START - Comms intercept
+///called from base of /obj/machinery/telecomms/proc/relay_information(): (datum/signal/subspace/signal)
+#define COMSIG_TELECOMMS_RELAY_INFORMATION "telecomms_relay_information"
+// BANDASTATION ADDITION END - Comms intercept
 
 // /obj/item/pen signals
 
