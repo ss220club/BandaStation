@@ -60,6 +60,7 @@
 	var/master_dna
 	/// Used as currency to purchase different abilities
 	var/ram = 100
+	var/night_vision_active = FALSE //BANDASTATION EDIT PAI
 	/// The current leash to the owner
 	var/datum/component/leash/leash
 
@@ -82,7 +83,7 @@
 
 	// Static lists
 	/// List of all available downloads
-	var/static/list/available_software = list(
+	var/list/available_software = list( //BANDASTATION EDIT PAI
 		"Atmospheric Sensor" = 5,
 		"Crew Manifest" = 5,
 		"Digital Messenger" = 5,
@@ -94,6 +95,7 @@
 		"Host Scan" = 20,
 		"Medical HUD" = 20,
 		"Security HUD" = 20,
+		"Night Vision" = 15, //BANDASTATION EDIT PAI
 		"Crew Monitor" = 35,
 		"Door Jack" = 35,
 		"Internal GPS" = 35,
@@ -314,7 +316,6 @@
 	if(isnull(holder))
 		return FALSE
 	return holder
-
 
 /**
  * Handles the pai card or the pai itself being hit with an emag.
