@@ -76,6 +76,7 @@
 #include "preferences/_preferences.dme"
 #include "quirks/_quirks.dme"
 #include "revolution_overhaul/_revolution_overhaul.dme"
+#include "roundstart_roster/_roundstart_roster.dme" // BANDASTATION ADDITION - Roundstart Roster
 #include "ru_jobs/_ru_jobs.dme"
 #include "security_levels/_security_levels.dme"
 #include "shuttles/_shuttles.dme"

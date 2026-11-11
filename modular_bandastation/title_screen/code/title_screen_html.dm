@@ -36,6 +36,7 @@
 						<div class="lobby-name">
 							<label class="lobby_element lobby-collapse" for="hide_menu"></label>
 							<span id="character_name" data-loading="[SStitle.subsystem_loading]" data-name="[player_name]"></span>
+							<a id="lobby_roster" class="hidden" href="byond://?src=[REF(player)];roundstart_roster=1" title="Посмотреть занятые ивентовые должности"></a>
 							<div id="logo" data-loaded="[round(loading_percentage)]%">
 								<img src="[SSassets.transport.get_asset_url("ss220_logo.png")]">
 							</div>
