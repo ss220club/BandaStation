@@ -27,7 +27,7 @@ Quartermaster (QM) – Квартирмейстер (КМ)
 Blueshield - Офицер "Синий Щит"
 Nanotrasen Representative - Представитель Нанотрейзен
 Magistrate - Магистрат
-Lawyer - Юрист
+Lawyer - Агент внутренних дел
 Warden – Смотритель
 Detective – Детектив
 Security Officer – Офицер службы безопасности
