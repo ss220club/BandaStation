@@ -67,12 +67,14 @@
 	var/weapon_to_spawn = /obj/item/gun/ballistic/automatic/pistol
 	/// What magazine do we spawn in our case?
 	var/extra_to_spawn = /obj/item/ammo_box/magazine/m9mm
+	/// Number of extra items to spawn when extra_to_spawn is set.
+	var/extra_to_spawn_count = 3 // BANDASTATION ADDITION - Allow cases to set their spare count.
 
 /obj/item/storage/toolbox/guncase/PopulateContents()
 	if(weapon_to_spawn)
 		new weapon_to_spawn (src)
 	if(extra_to_spawn)
-		for(var/iterate in 1 to 3)
+		for(var/iterate in 1 to extra_to_spawn_count) // BANDASTATION EDIT - Use the case's spare count.
 			new extra_to_spawn (src)
 
 /obj/item/storage/toolbox/guncase/traitor

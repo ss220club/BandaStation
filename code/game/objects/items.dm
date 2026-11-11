@@ -888,6 +888,14 @@ GAME_VERB_SRC(/obj/item, verb_pickup, oview(1), "Pick up", null)
 	else
 		playsound(hit_atom, 'sound/items/weapons/throwtap.ogg', volume, TRUE, -1)
 
+// BANDASTATION ADDITION START - Item-specific text after an unblocked thrown hit.
+/// Describes a thrown hit without changing damage, catching or embedding.
+/obj/item/proc/get_throw_hit_message(mob/living/victim, victim_message = FALSE)
+	if(victim_message)
+		return "В вас врезается [declent_ru(NOMINATIVE)]!"
+	return "[capitalize(declent_ru(NOMINATIVE))] врезается в [victim.declent_ru(ACCUSATIVE)]!"
+// BANDASTATION ADDITION END
+
 /obj/item/throw_at(atom/target, range, speed, mob/thrower, spin=1, diagonals_first = 0, datum/callback/callback, force, gentle = FALSE, quickstart = TRUE, throw_type_path = /datum/thrownthing)
 	if(HAS_TRAIT(src, TRAIT_NODROP))
 		return

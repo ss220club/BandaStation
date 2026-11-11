@@ -455,6 +455,9 @@
 			RegisterSignal(chambered, COMSIG_MOVABLE_MOVED, PROC_REF(clear_chambered))
 		if(replace_new_round)
 			magazine.give_round(new chambered.type)
+			// BANDASTATION ADDITION START - Refresh per-round icons after replenishing the chambered round
+			magazine.update_appearance()
+			// BANDASTATION ADDITION END
 
 /obj/item/gun/ballistic/proc/clear_chambered(datum/source)
 	SIGNAL_HANDLER

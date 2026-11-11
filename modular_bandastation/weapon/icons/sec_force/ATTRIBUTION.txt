@@ -1,0 +1,62 @@
+﻿SEC_FORCE — ИСТОЧНИКИ ГРАФИКИ
+
+Лицензия перечисленной ниже графики и её графических адаптаций: CC BY-SA 3.0 Unported.
+https://creativecommons.org/licenses/by-sa/3.0/
+Полные условия: https://creativecommons.org/licenses/by-sa/3.0/legalcode
+Это указание относится к графике; лицензии исходного игрового кода определяются отдельно.
+
+Экспорт выполнен из рабочего листа Sec_Force.png, предоставленного пользователем.
+Внешний вид, палитра, размеры и положения исходных кадров сохранены.
+Готовые состояния предметов составлены наложением слоёв этого же листа.
+В комплекте не создавалась новая пиксельная графика.
+Крепления фонарей используют неизменённый штатный flashlights.dmi из BandaStation:
+это тот же ресурс, что используется дизейблером и другими видами оружия.
+Отдельная копия фонаря в каталог sec_force не добавлена.
+Графика BandaStation и upstream tgstation: CC-BY-SA-3.0, если не указано иное.
+
+Ранее выбранные источники основы:
+Mk58 и Viper: space-wizards/space-station-14, ревизия b2834c5546f6269dd49bcfcc0d3bc5fe2f251972.
+Каталог: Resources/Textures/Objects/Weapons/Guns/Pistols/{mk58,viper}.rsi
+Пистолетный магазин: Resources/Textures/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/pistol_mag.rsi
+Боевой нож Corvax: space-syndicate/space-station-14, e6d79b942c424ac61ba802a6ef2bc3526ec7dffa.
+Каталог: Resources/Textures/Objects/Weapons/Melee/combat_knife.rsi
+
+Исходные уведомления об авторстве и лицензии CC-BY-SA-3.0 сохранены в source_meta/.
+Рабочий лист содержит изменения относительно этих ресурсов; он не назван побайтной копией оригиналов.
+Авторство пользовательских правок данным экспортом не переопределяется.
+
+Изменения при подготовке этого комплекта: перенос рабочего листа в DMI 32×32,
+разделение состояний и направлений, сборка составных иконок, назначение рисунков магазина
+состояниям 0–12 по диапазонам пользователя. Исходный фонарь не перерисован;
+для новых пистолетов предложены другие координаты его наложения.
+Перечень художественных правок, сделанных пользователем до экспорта, здесь не устанавливается.
+Исходные авторы не объявляются участниками проекта или одобрившими этот перенос.
+
+mk58
+Источник: https://github.com/space-wizards/space-station-14/tree/b2834c5546f6269dd49bcfcc0d3bc5fe2f251972/Resources/Textures/Objects/Weapons/Guns/Pistols/mk58.rsi
+Исходное уведомление об авторстве (без изменений):
+Taken from desertrose at https://github.com/DesertRose2/desertrose/commit/120961e254d7f83a6e00a02c76e734f9e5019345, https://github.com/DesertRose2/desertrose/blob/master/icons/obj/guns/projectile.dmi
+Лицензия исходника: CC-BY-SA-3.0
+
+viper
+Источник: https://github.com/space-wizards/space-station-14/tree/b2834c5546f6269dd49bcfcc0d3bc5fe2f251972/Resources/Textures/Objects/Weapons/Guns/Pistols/viper.rsi
+Исходное уведомление об авторстве (без изменений):
+Taken/modified from tgstation at https://github.com/tgstation/tgstation/pull/41804/commits/1baf679a544505960cebd071425f1df60669cdf3, Inhands modified by Seam_Lesss (Github)
+Лицензия исходника: CC-BY-SA-3.0
+
+pistol_magazine
+Источник: https://github.com/space-wizards/space-station-14/tree/b2834c5546f6269dd49bcfcc0d3bc5fe2f251972/Resources/Textures/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/pistol_mag.rsi
+Исходное уведомление об авторстве (без изменений):
+https://github.com/tgstation/tgstation/pull/1684/commits/19e51caef09e78ca1122d26455b539ff5968d334, https://github.com/tgstation/tgstation/blob/master/icons/obj/weapons/guns/ammo.dmi, inhands by TiniestShark (GitHub), stripes by SeamLesss (GitHub)
+Лицензия исходника: CC-BY-SA-3.0
+
+combat_knife_corvax
+Источник: https://github.com/space-syndicate/space-station-14/tree/e6d79b942c424ac61ba802a6ef2bc3526ec7dffa/Resources/Textures/Objects/Weapons/Melee/combat_knife.rsi
+Исходное уведомление об авторстве (без изменений):
+Created by discord:𝘽𝙚𝙡𝙖𝙮#7441
+Лицензия исходника: CC-BY-SA-3.0
+Изменение в BandaStation: серый клинок и бордовая рукоять по утверждённому листу пользователя.
+
+Фонарь дизейблера
+Источник: https://github.com/ss220club/BandaStation/blob/2bab92e771d60605e13c52281aa2ebd96d20d345/icons/obj/weapons/guns/flashlights.dmi
+Общие условия графики BandaStation: https://github.com/ss220club/BandaStation/blob/2bab92e771d60605e13c52281aa2ebd96d20d345/README.md#license
