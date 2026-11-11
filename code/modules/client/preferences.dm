@@ -276,6 +276,7 @@ GLOBAL_LIST_EMPTY(preferences_datums)
 				"Select new color",
 				null,
 				default_value || COLOR_WHITE,
+				theme = "ss220", // BANDASTATION ADDITION - Match preferences theme
 			)
 
 			if (!new_color)

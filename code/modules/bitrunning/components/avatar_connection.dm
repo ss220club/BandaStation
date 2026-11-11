@@ -74,6 +74,7 @@
 			var/mob/living/carbon/human/human_avatar = avatar
 			var/mob/living/carbon/human/human_old_body = old_body
 			human_avatar.dna.unique_identity = human_old_body.dna.unique_identity
+			hair_paint_copy_features(human_old_body.dna.features, human_avatar.dna.features) // BANDASTATION ADDITION - Preserve painted hair with UI
 			human_avatar.physique = human_old_body.physique
 			human_avatar.updateappearance(mutcolor_update = TRUE)
 
