@@ -1,0 +1,4 @@
+author: "Ingakem"
+delete-after: True
+changes:
+  - bugfix: "CM23 БЩ теперь имеет шанс осечек при стрельбе калибром .357."
