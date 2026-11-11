@@ -201,6 +201,10 @@
 			autopsy_information += "Severe burns.</br>"
 
 	var/datum/blood_type/blood_type = scanned.get_bloodtype()
+	// BANDASTATION EDIT START - Blood reagent name translations
+	var/blood_name = blood_type?.get_blood_name() || "Blood"
+	blood_name = capitalize(declent_ru_initial(blood_name, override_backup = blood_name))
+	// BANDASTATION EDIT END - Blood reagent name translations
 	if(blood_type)
 		var/cached_blood_volume = scanned.get_blood_volume(apply_modifiers = TRUE)
 		var/blood_percent = round((cached_blood_volume / BLOOD_VOLUME_NORMAL) * 100)
@@ -214,17 +218,17 @@
 			level_format = "[blood_percent]%, [cached_blood_volume] cl"
 		if(blood_type.get_type())
 			blood_type_format = "type: [blood_type.get_type()]"
-		autopsy_information += "<b>[blood_type.get_blood_name()] level:</b> [level_format], [blood_type_format]</br>"
+		autopsy_information += "<b>[blood_name] level:</b> [level_format], [blood_type_format]</br>" // BANDASTATION EDIT - Reagent translations
 	var/blood_alcohol_content = scanned.get_blood_alcohol_content()
 	if(blood_alcohol_content > 0)
-		autopsy_information += "&rdsh; [blood_type?.get_blood_name() || "Blood"] alcohol content: [blood_alcohol_content]%</br>"
+		autopsy_information += "&rdsh; [blood_name] alcohol content: [blood_alcohol_content]%</br>" // BANDASTATION EDIT - Reagent translations
 	autopsy_information += "<hr>"
 
 	autopsy_information += "<u>Chemical Data:</u></br>"
 	for(var/datum/reagent/scanned_reagents as anything in scanned.reagents.reagent_list)
 		if(scanned_reagents.chemical_flags & REAGENT_INVISIBLE)
 			continue
-		autopsy_information += "<b>[scanned_reagents.name]:</b> [round(scanned_reagents.volume, 0.1)] unit\s in bloodstream.</br>"
+		autopsy_information += "<b>[capitalize(scanned_reagents.declent_ru(NOMINATIVE))]:</b> [round(scanned_reagents.volume, 0.1)] unit\s in bloodstream.</br>" // BANDASTATION EDIT - Reagent translations
 		autopsy_information += "<i>&rdsh; [scanned_reagents.description]</i></br>"
 	autopsy_information += "<hr>"
 

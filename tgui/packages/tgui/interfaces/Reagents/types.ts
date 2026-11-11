@@ -24,6 +24,7 @@ type Pairs = [
 ];
 
 export type Recipe = {
+  ru_display_name?: string; // BANDASTATION EDIT - Translated reagent names
   catalysts: Reagent[];
   explodeTemp: number;
   explosive: Pairs;
@@ -56,6 +57,7 @@ type Reactant = {
 };
 
 export type Reagent = {
+  ru_display_name?: string; // BANDASTATION EDIT - Translated reagent names
   addictions: string[];
   desc: string;
   id: string;
