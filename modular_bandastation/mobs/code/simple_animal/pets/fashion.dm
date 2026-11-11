@@ -29,5 +29,5 @@
 /obj/item/clothing/head/beret/sec
 	dog_fashion = /datum/dog_fashion/head/beret/sec
 
-/obj/item/clothing/mask/cigarette/cigar
+/obj/item/cigarette/cigar
 	dog_fashion = /datum/dog_fashion/mask/cigar
