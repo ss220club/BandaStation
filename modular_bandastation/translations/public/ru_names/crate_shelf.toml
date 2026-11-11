@@ -1,0 +1,8 @@
+["crate shelf"]
+nominative = "полка для ящиков"
+genitive = "полки для ящиков"
+dative = "полке для ящиков"
+accusative = "полку для ящиков"
+instrumental = "полкой для ящиков"
+prepositional = "полке для ящиков"
+gender = "female"
