@@ -1,0 +1,164 @@
+/**
+ * TSF PDA theme for BandaStation.
+ * Retro buttons, subtle terminal effects, and a TSF emblem watermark.
+ */
+
+:root.theme-TSF {
+  // Base colors.
+  --color-base: hsl(205, 55%, 9%);
+  --color-secondary: hsl(205, 45%, 16%);
+  --color-primary: #1f91dc;
+  --color-text: #ededed;
+  --color-text-translucent: hsla(0, 0%, 93%, 0.6);
+  --color-section: hsla(205, 60%, 3%, 0.4);
+  --color-label: hsl(205, 30%, 72%);
+  --base-gradient-spread: 1;
+
+  // TSF blue/yellow accents.
+  --color-action: #1f91dc;
+  --section-title-color: #ffff00;
+  --section-separator-color: #1f91dc;
+  --tab-color-selected: #ffff00;
+
+  // Borders.
+  --color-border: hsla(205, 80%, 65%, 0.18);
+  --border-primary-saturation: 90;
+  --border-primary-lightness: 62;
+  --border-primary-alpha: 0.7;
+
+  // Components.
+  --button-background-default: hsl(205, 75%, 38%);
+  --button-background-selected: #1f91dc;
+  --input-background-lightness: 6;
+  --tooltip-background-lightness: 13;
+  --progress-bar-background: hsla(0, 0%, 0%, 0.45);
+  --candystripe-odd: hsla(205, 80%, 50%, 0.08);
+
+  // Subtle CRT texture and a darkened, transparent TSF emblem.
+  // Rspack inlines CSS-referenced SVGs during the build.
+  .Layout__content {
+    background-image:
+      repeating-linear-gradient(
+        to bottom,
+        transparent 0,
+        transparent 3px,
+        rgba(0, 0, 0, 0.10) 3px,
+        rgba(0, 0, 0, 0.10) 4px
+      ),
+      radial-gradient(
+        ellipse at center,
+        transparent 35%,
+        rgba(0, 0, 0, 0.24) 100%
+      ),
+      linear-gradient(
+        hsla(205, 55%, 9%, 0.95),
+        hsla(205, 55%, 9%, 0.95)
+      ),
+      url('../assets/TSF.svg');
+    background-size: auto, cover, cover, 80% auto;
+    background-position: center;
+    background-repeat: repeat, no-repeat, no-repeat, no-repeat;
+  }
+
+  // Federation device header: a thin illuminated edge, no strong glow.
+  .NtosWindow__header {
+    background-color: hsla(205, 70%, 5%, 0.85);
+    box-shadow:
+      inset 0 1px 0 rgba(31, 145, 220, 0.28),
+      inset 0 -1px 0 hsla(52, 100%, 50%, 0.35),
+      0 1px 6px rgba(0, 0, 0, 0.24);
+  }
+
+  // Retro: raised physical buttons, pressed state and restrained blue hover.
+  .Button:not(.Button--color--transparent):not(.Button--disabled) {
+    box-shadow:
+      inset 1px 1px 0 rgba(174, 219, 246, 0.42),
+      inset -1px -1px 0 rgba(0, 0, 0, 0.6),
+      0 1px 2px rgba(0, 0, 0, 0.22);
+    outline: 1px solid rgba(31, 145, 220, 0.28);
+    outline-offset: -1px;
+    transition:
+      background-color 0.12s ease,
+      box-shadow 0.12s ease,
+      color 0.12s ease;
+
+    &:hover {
+      box-shadow:
+        inset 1px 1px 0 rgba(174, 219, 246, 0.64),
+        inset -1px -1px 0 rgba(0, 0, 0, 0.56),
+        0 0 5px rgba(31, 145, 220, 0.24);
+    }
+
+    &:active,
+    &.Button--selected {
+      box-shadow:
+        inset 2px 2px 3px rgba(0, 0, 0, 0.60),
+        inset -1px -1px 0 rgba(31, 145, 220, 0.24);
+    }
+  }
+
+  // Transparent icon buttons should retain their usual TGUI semantics.
+  .Button--color--transparent:hover:not(.Button--disabled) {
+    box-shadow: inset 0 0 0 1px rgba(31, 145, 220, 0.40);
+  }
+
+  // Retro: recessed panels. Reset nested sections to avoid double frames.
+  .Section {
+    border: 1px solid rgba(31, 145, 220, 0.26);
+    box-shadow:
+      inset 1px 1px 0 rgba(31, 145, 220, 0.13),
+      0 2px 6px rgba(0, 0, 0, 0.20);
+  }
+
+  .Section .Section {
+    border: 0;
+    box-shadow: none;
+  }
+
+  .Section__title {
+    background-image: linear-gradient(
+      90deg,
+      rgba(31, 145, 220, 0.15),
+      transparent 85%
+    );
+  }
+
+  // Terminal: glow only on titles, not long messenger paragraphs.
+  .Section__titleText {
+    letter-spacing: 0.035em;
+    text-shadow: 0 0 4px rgba(255, 255, 0, 0.24);
+  }
+
+  // Selected tabs should read as a latched hardware control.
+  .Tab {
+    border: 1px solid rgba(31, 145, 220, 0.23);
+    box-shadow: inset 1px 1px 0 rgba(31, 145, 220, 0.12);
+
+    &:hover:not(.Tab--selected) {
+      box-shadow: inset 0 0 0 1px rgba(31, 145, 220, 0.24);
+    }
+
+    &.Tab--selected {
+      border-color: rgba(255, 255, 0, 0.46);
+      box-shadow:
+        inset 0 -2px 0 rgba(255, 255, 0, 0.52),
+        0 0 5px rgba(255, 255, 0, 0.10);
+      text-shadow: 0 0 3px rgba(255, 255, 0, 0.24);
+    }
+  }
+
+  // Retro: inputs should look recessed, with a subtle blue focus indication.
+  .Input,
+  .TextArea {
+    box-shadow:
+      inset 2px 2px 4px rgba(0, 0, 0, 0.46),
+      inset 0 0 0 1px rgba(31, 145, 220, 0.16);
+
+    &:focus-within {
+      box-shadow:
+        inset 2px 2px 4px rgba(0, 0, 0, 0.42),
+        0 0 0 1px rgba(31, 145, 220, 0.62),
+        0 0 5px rgba(31, 145, 220, 0.18);
+    }
+  }
+}
