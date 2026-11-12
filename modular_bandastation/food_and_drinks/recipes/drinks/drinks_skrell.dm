@@ -133,7 +133,7 @@
 
 /datum/reagent/consumable/glow_seraka_tonic
 	name = "Glow-Seraka Tonic"
-	description = "Мерцающий тоник огненно-янтарного цвета, приготовленный из экстремофильных грибов Лаваландии и огненных цветов. Согревает шахтеров и придает им биолюминесценцию в кромешной тьме."
+	description = "Мерцающий тоник огненно-янтарного цвета, приготовленный из грибов лавалэнда и огненных цветов. Согревает шахтеров и придает им биолюминесценцию в кромешной тьме."
 	color = "#FF8C00"
 	quality = DRINK_VERYGOOD
 	nutriment_factor = 2
@@ -153,7 +153,7 @@
 /datum/glass_style/drinking_glass/glow_seraka_tonic
 	required_drink_type = /datum/reagent/consumable/glow_seraka_tonic
 	name = "Glow-Seraka Tonic"
-	desc = "Теплый коктейль ярко-оранжевого цвета, который слабо освещает окружающее пространство."
+	desc = "Тёплый коктейль ярко-оранжевого цвета, который слабо освещает окружающее пространство."
 	icon = 'modular_bandastation/food_and_drinks/icons/drinks/skrell.dmi'
 	icon_state = "glow_seraka"
 
@@ -261,7 +261,7 @@
 
 /datum/reagent/consumable/heart_of_qerrbalak
 	name = "Heart of Qerrbalak"
-	description = "Светящаяся психоделическая смесь, насыщенная смертоносными токсинами и игристыми цитрусовыми нотками. Вызывает у Скрелла трансцендентное умиротворение."
+	description = "Светящаяся психоделическая смесь, насыщенная смертоносными токсинами и игристыми цитрусовыми нотками. Вызывает у скрелла трансцендентное умиротворение."
 	color = "#68B0A8"
 	quality = DRINK_VERYGOOD
 	nutriment_factor = 1
@@ -348,7 +348,7 @@
 /datum/glass_style/drinking_glass/heart_of_qerrbalak
 	required_drink_type = /datum/reagent/consumable/heart_of_qerrbalak
 	name = "Heart of Qerrbalak"
-	desc = "Светящаяся психоделическая смесь, насыщенная смертоносными токсинами и игристыми цитрусовыми нотками. Вызывает у Скрелла трансцендентное умиротворение."
+	desc = "Светящаяся психоделическая смесь, насыщенная смертоносными токсинами и игристыми цитрусовыми нотками. Вызывает у скрелла трансцендентное умиротворение."
 	icon = 'modular_bandastation/food_and_drinks/icons/drinks/skrell.dmi'
 	icon_state = "heart_qerrbalak"
 

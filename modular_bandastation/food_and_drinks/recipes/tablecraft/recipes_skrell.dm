@@ -6,7 +6,7 @@
 
 /obj/item/food/flat_rice_dough
 	name = "flat rice dough"
-	desc = "A flattened sheet of rice dough, ready to be shaped into buns, rolls, or flatbreads."
+	desc = "Раскатанный пласт рисового теста, готовый для лепки булочек, рулетов или лепёшек."
 	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
 	icon_state = "flat_rice_dough"
 	food_reagents = list(/datum/reagent/consumable/nutriment = 6)
@@ -78,7 +78,7 @@
 
 /datum/reagent/consumable/nutriment/soup/qerrbalak_stew
 	name = "qerrbalak fungal stew"
-	description = "A traditional hearty stew from Qerrbalak, rich with dense mushrooms and thick flour broth."
+	description = "Традиционное сытное рагу с Керрбалака, богатое грибами и густым мучным бульоном."
 	data = list("mushrooms" = 3, "earthy broth" = 1)
 	glass_price = FOOD_PRICE_NORMAL
 	color = "#5A4535"
@@ -106,7 +106,7 @@
 
 /datum/reagent/consumable/nutriment/soup/glowshroom_chowder
 	name = "glowshroom chowder"
-	description = "A luminescent, radioactive mushroom chowder made with soothing soymilk."
+	description = "Люминесцентная радиоактивная грибная похлёбка, приготовленная на соевом молоке."
 	data = list("creamy mushrooms" = 2, "tingling radiation" = 1)
 	glass_price = FOOD_PRICE_NORMAL
 	color = "#7FFF00"
@@ -134,7 +134,7 @@
 
 /datum/reagent/consumable/nutriment/soup/destroying_angel_bisque
 	name = "destroying angel bisque"
-	description = "A silky white bisque packed with deadly amanitins. A prized delicacy for Skrell, highly lethal to others."
+	description = "Шелковистый белый биск, насыщенный смертоносными веществами. Ценный деликатес для скреллов, но крайне летальный для других."
 	data = list("intense umami" = 3, "numbing cold" = 2)
 	glass_price = FOOD_PRICE_EXOTIC
 	color = "#FFFFFF"
@@ -161,7 +161,7 @@
 
 /datum/reagent/consumable/nutriment/soup/kenin_tofu_soup
 	name = "kenin tofu soup"
-	description = "A medicinal, pain-relieving soup loaded with reishi mushrooms and silken tofu."
+	description = "Лечебный обезболивающий суп с обилием грибов трутовиков и шёлкового тофу."
 	data = list("soft tofu" = 2, "soothing herbal bitterness" = 2)
 	glass_price = FOOD_PRICE_NORMAL
 	color = "#BDB76B"
@@ -190,7 +190,7 @@
 
 /datum/reagent/consumable/nutriment/soup/embershroom_lava_stew
 	name = "embershroom lava stew"
-	description = "A scorching red broth made from Lavaland embershrooms and fire blossoms. Warms the body instantly."
+	description = "Обжигающий красный бульон из лавалэндских грибов и огнецветов. Мгновенно согревает тело."
 	data = list("blazing heat" = 3, "earthy sulfur" = 1)
 	glass_price = FOOD_PRICE_NORMAL
 	color = "#FF4500"
@@ -218,7 +218,7 @@
 
 /datum/reagent/consumable/nutriment/soup/edens_gaia_noodles
 	name = "eden's gaia noodle soup"
-	description = "A sacred glowing soup with noodles floating in an Ambrosia Gaia broth. Induces supreme tranquility."
+	description = "Священный светящийся суп с лапшой, плавающей в бульоне из амброзии гайя. Вызывает высшее умиротворение."
 	data = list("divine sweetness" = 2, "tender noodles" = 2, "pure peace" = 2)
 	glass_price = FOOD_PRICE_LEGENDARY
 	color = "#a3ff99"
@@ -245,7 +245,7 @@
 
 /datum/reagent/consumable/nutriment/soup/puffball_gas_soup
 	name = "puffball gas soup"
-	description = "A fizzy, misty soup releasing mild spore clouds as it is eaten."
+	description = "Шипучий туманный суп, выпускающий лёгкие облачка спор во время еды."
 	data = list("fizzy vapor" = 2, "sweet spores" = 1)
 	glass_price = FOOD_PRICE_EXOTIC
 	color = "#9370DB"
@@ -384,7 +384,7 @@
 
 /datum/reagent/consumable/nutriment/soup/qerrbalak_eclipse_stew
 	name = "qerrbalak eclipse stew"
-	description = "A pitch-black psychoactive stew brewed from omega weed, liberty-caps, and shadowshrooms with a pineapple twist."
+	description = "Чёрное как смоль психоактивное рагу, сваренное из омега-травы, либерти-кэпов и тенегрибов с ананасовой ноткой."
 	data = list("tangy pineapple" = 2, "numbing shadows" = 3, "cosmic trip" = 3)
 	glass_price = FOOD_PRICE_EXOTIC
 	color = "#0B0014"

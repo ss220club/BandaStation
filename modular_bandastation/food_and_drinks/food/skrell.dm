@@ -7,7 +7,7 @@
 // 2. plump helmet rice flatbread
 /obj/item/food/skrell/plump_rice_flatbread
 	name = "plump helmet rice flatbread"
-	desc = "A traditional porous flatbread infused with plump helmet mushrooms and soymilk. Highly aromatic and satisfying."
+	desc = "Традиционная пористая лепёшка, пропитанная грибами толстошлемника и соевым молоком. Очень ароматная и сытная."
 	icon_state = "plump_rice_flatbread"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 12,
@@ -23,7 +23,7 @@
 // 3. fly amanita bun
 /obj/item/food/skrell/fly_amanita_bun
 	name = "fly amanita bun"
-	desc = "A fluffy bun baked with fresh fly amanita. Highly toxic and hallucinogenic to most species, but a delicious staple for Skrell."
+	desc = "Пышная булочка, запечённая со свежим мухомором. Крайне токсична и галлюциногенна для большинства видов, но для скреллов это вкусное повседневное блюдо."
 	icon_state = "fly_amanita_bun"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 8,
@@ -42,7 +42,7 @@
 
 /obj/item/food/skrell/fly_amanita_bun_slice
 	name = "fly amanita bun slice"
-	desc = "A soft, toxin-speckled slice of fly amanita bun."
+	desc = "Мягкий, усеянный токсинами ломтик булочки с мухомором."
 	icon_state = "fly_amanita_bun_slice"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 2,
@@ -58,7 +58,7 @@
 // 4. ximikoa rice roll
 /obj/item/food/skrell/ximikoa_roll
 	name = "ximikoa rice roll"
-	desc = "A tender, sweet-tasting baked rice roll enriched with ximikoa and flour. Packed with rich plant proteins."
+	desc = "Нежный сладковатый запечённый рисовый ролл, обогащённый ксими'коа и мукой. Полон ценных растительных белков."
 	icon_state = "ximikoa_roll"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 12,
@@ -76,7 +76,7 @@
 // 5. capsaicin fungal focaccia
 /obj/item/food/skrell/capsaicin_focaccia
 	name = "capsaicin fungal focaccia"
-	desc = "A fiery, seasoned flatbread loaded with embershrooms and spicy sauce. Skrell highly appreciate its stimulating heat."
+	desc = "Огненная пряная лепёшка с обилием грибов и острого соуса. Скреллы высоко ценят её стимулирующий жар."
 	icon_state = "capsaicin_focaccia"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 12,
@@ -96,7 +96,7 @@
 /obj/item/food/soup/qerrbalak_stew
 	name = "qerrbalak fungal stew"
 	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
-	desc = "A traditional everyday hearty stew eaten across Qerrbalak. Thickened with flour and filled with aromatic mushrooms."
+	desc = "Традиционное сытное повседневное рагу, которое едят по всему Керрбалаку. Загущено мукой и наполнено ароматными грибами."
 	icon_state = "qerrbalak_stew"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 8,
@@ -114,7 +114,7 @@
 /obj/item/food/soup/glowshroom_chowder
 	name = "glowshroom chowder"
 	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
-	desc = "A creamy, glowing soup made from radioactive glowshrooms and soymilk. Provides soothing nourishment for Skrell."
+	desc = "Сливочный светящийся суп из радиоактивных светогрибов и соевого молока. Успокаивает и насыщает скреллов."
 	icon_state = "glowshroom_chowder"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 6,
@@ -134,7 +134,7 @@
 /obj/item/food/soup/destroying_angel_bisque
 	name = "destroying angel bisque"
 	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
-	desc = "A deadly white bisque infused with destroying angel mushroom. A prized delicacy for Skrell, but lethal to other species."
+	desc = "Смертоносный белый биск, настоянный на белой поганке. Изысканный деликатес для скреллов, но смертельный для других видов."
 	icon_state = "angel_bisque"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 6,
@@ -154,7 +154,7 @@
 /obj/item/food/soup/kenin_tofu_soup
 	name = "kenin tofu soup"
 	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
-	desc = "A soothing gourmet soup loaded with tofu cubes and reishi mushrooms. Provides pleasant pain relief."
+	desc = "Успокаивающий изысканный суп с обилием кубиков тофу и трутовиков. Оказывает приятное обезболивающее действие."
 	icon_state = "kenin_soup"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 8,
@@ -174,7 +174,7 @@
 /obj/item/food/soup/embershroom_lava_stew
 	name = "embershroom lava stew"
 	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
-	desc = "A simmering spicy red broth made from Lavaland embershrooms and fire blossoms. Keeps you warm in freezing environments."
+	desc = "Томящийся острый красный бульон из лавалэндских грибов и огнецветов. Согревает в лютый мороз."
 	icon_state = "embershroom_stew"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 6,
@@ -192,7 +192,7 @@
 /obj/item/food/soup/edens_gaia_noodles
 	name = "eden's gaia noodle soup"
 	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
-	desc = "A sacred glowing bowl of noodles floating in an Ambrosia Gaia broth. Induces supreme tranquility and mental harmony."
+	desc = "Священная светящаяся миска лапши, плавающей в бульоне из амброзии божественной. Вызывает высшее умиротворение и ментальную гармонию."
 	icon_state = "gaia_noodle_soup"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 10,
@@ -210,7 +210,7 @@
 /obj/item/food/soup/puffball_gas_soup
 	name = "puffball gas soup"
 	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
-	desc = "A fizzing, misty soup brewed from odious puffball and fairy grass. Releases mild hallucinogenic spores as you consume it."
+	desc = "Шипящий туманный суп, сваренный из мерзкого дождевика и волшебной травы. При употреблении выделяет галлюциногенные споры."
 	icon_state = "puffball_soup"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 6,
@@ -229,7 +229,7 @@
 // 13. Plump Fungal Roast
 /obj/item/food/skrell/raw_plump_fungal_roast
 	name = "raw plump fungal roast"
-	desc = "A thick cut of raw plump helmet mushroom marinated in soy sauce and dusted with rice flour. Ready to be grilled or baked."
+	desc = "Толстый ломоть сырого толстошлемника, замаринованный в соевом соусе и присыпанный рисовой мукой. Готов к жарке на гриле или запеканию."
 	icon_state = "raw_plump_fungal_roast"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 6,
@@ -252,7 +252,7 @@
 // 13.1
 /obj/item/food/skrell/plump_fungal_roast
 	name = "plump fungal roast"
-	desc = "A thick, juicy steak cut from a plump helmet mushroom, seasoned with soy sauce and rice flour, grilled to perfection. A hearty staple of everyday Skrellian dining."
+	desc = "Толстый сочный стейк из толстошлемника, приправленный соевым соусом и рисовой мукой, идеально обжаренный на гриле. Сытная основа повседневной скрелльской трапезы."
 	icon_state = "plump_fungal_roast"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 10,
@@ -270,7 +270,7 @@
 /obj/item/food/kebab/walking_mushroom_skewer
 	name = "crispy walking mushroom skewer"
 	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
-	desc = "Tender legs of a walking mushroom skewered and crisped in oil. Highly popular street food on Qerrbalak."
+	desc = "Нежные ножки ходячего гриба, нанизанные на шпажку и обжаренные в масле до хрустящей корочки. Весьма популярная уличная еда на Керрбалаке."
 	icon_state = "walking_skewer"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 8,
@@ -287,7 +287,7 @@
 // 15. psychedelic tempeh stir-fry
 /obj/item/food/skrell/psychedelic_tempeh
 	name = "psychedelic tempeh stir-fry"
-	desc = "Fermented soy tempeh stir-fried with liberty-cap mushrooms and rich soy dip. Causes gentle euphoria in Skrell and intense trips in humans."
+	desc = "Ферментированный соевый темпе, обжаренный со либерти‑кэпом и насыщенным соевым соусом. Вызывает лёгкую эйфорию у скреллов и сильные галлюцинации у людей."
 	icon_state = "psychedelic_tempeh"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 8,
@@ -303,7 +303,7 @@
 // 16. steel cap dumplings
 /obj/item/food/skrell/steelcap_dumplings
 	name = "steel cap dumplings"
-	desc = "Dense rice dumplings stuffed with shredded steel cap mushrooms and cocoa. Rich in dietary iron and cellulose."
+	desc = "Плотные рисовые клёцки, начинённые измельчёнными сталешляпниками и какао. Богаты пищевым железом и клетчаткой."
 	icon_state = "steelcap_dumplings"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 8,
@@ -328,7 +328,7 @@
 // 17. skrell fungal ramen
 /obj/item/food/skrell/skrell_fungal_ramen
 	name = "skrell fungal ramen"
-	desc = "Steaming bowl of rice noodles served in a concentrated broth of plump helmets, chanterelles, and aged soy sauce."
+	desc = "Дымящаяся миска рисовой лапши в концентрированном бульоне из толстошлемников, лисичек и выдержанного соевого соуса."
 	icon_state = "skrell_ramen"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 10,
@@ -345,7 +345,7 @@
 // 18. Seraka & Flame Roast
 /obj/item/food/skrell/seraka_flame_roast
 	name = "seraka flame roast"
-	desc = "A searingly spicy dish of roasted seraka mycelium and fruiting cactus glazed with capsaicin oil."
+	desc = "Обжигающе острое блюдо из жареного мицелия сераки и кактуса, глазированное капсаициновым маслом."
 	icon_state = "seraka_roast"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 8,
@@ -361,7 +361,7 @@
 // 19. baked eggplant skrell cheetal
 /obj/item/food/skrell/skrell_cheetal_eggplant
 	name = "baked eggplant skrell cheetal"
-	desc = "An eggplant carved into the majestic shape of a Skrellian head-tentacle, stuffed with tofu and plump helmets, garnished with sweet plums. A supreme symbol of hospitality."
+	desc = "Баклажан, вырезанный в величественной форме головного щупальца скрелла, фаршированный тофу, толстошлемниками и украшенный сладкими сливами. Высший символ гостеприимства."
 	icon_state = "skrell_cheetal"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 12,
@@ -378,7 +378,7 @@
 // 20. mindbreaker fungal bake
 /obj/item/food/skrell/mindbreaker_fungal_bake
 	name = "mindbreaker fungal bake"
-	desc = "A trippy baked pie with glowing glowcaps, jupiter cups, and rainbow weed. Sends the mind into transcendent kaleidoscopic bliss."
+	desc = "Психоделический запечённый пирог со светящимися грибами, кубками Юпитера и радужной травой. Отправляет разум в трансцендентное калейдоскопическое блаженство."
 	icon_state = "mindbreaker_bake"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 8,
@@ -396,7 +396,7 @@
 
 /obj/item/food/skrell/mindbreaker_fungal_bake_slice
 	name = "mindbreaker fungal bake slice"
-	desc = "A glowing, fragrant slice of psychedelic fungal bake."
+	desc = "Светящийся ароматный кусочек психоделической грибной запеканки."
 	icon_state = "mindbreaker_bake_slice"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 2,
@@ -412,7 +412,7 @@
 /obj/item/food/soup/qerrbalak_eclipse_stew
 	name = "qerrbalak eclipse stew"
 	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
-	desc = "A pitch-black psychoactive stew brewed from omega weed, liberty-caps, and shadowshrooms with a tangy pineapple accent. Extremely potent."
+	desc = "Чёрное как смоль психоактивное рагу, сваренное из омега-травы, свободошляпников и тенегрибов с пикантной ноткой ананаса. Чрезвычайно мощное."
 	icon_state = "eclipse_stew"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 6,
@@ -430,7 +430,7 @@
 // 22. crimson fungal mix
 /obj/item/food/skrell/crimson_fungal_mix
 	name = "crimson fungal mix"
-	desc = "A sauté of bright red and golden fungi. Radiates a spicy, mind-altering aroma."
+	desc = "Соте из ярко-красных и золотистых грибов. Источает пряный, изменяющий сознание аромат."
 	icon_state = "crimson_mix"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 6,
@@ -444,7 +444,7 @@
 // twilight fungal paste
 /obj/item/food/skrell/twilight_fungal_paste
 	name = "twilight fungal paste"
-	desc = "A dark indigo paste made from deep cavern mushrooms, berries, and grapes."
+	desc = "Паста цвета тёмного индиго, приготовленная из глубоких пещерных грибов, ягод и винограда."
 	icon_state = "twilight_paste"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 6,
@@ -459,7 +459,7 @@
 // luminous white salad
 /obj/item/food/skrell/luminous_white_salad
 	name = "luminous white salad"
-	desc = "A zesty glowing mix of bioluminescent mushrooms and herbs tossed in fresh lime juice."
+	desc = "Пикантная светящаяся смесь биолюминесцентных грибов и трав, заправленная свежим соком лайма."
 	icon_state = "luminous_salad"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 6,
@@ -473,7 +473,7 @@
 // grand qerrbalak mycelial roast
 /obj/item/food/skrell/grand_mycelial_roast
 	name = "grand qerrbalak mycelial roast"
-	desc = "The undisputed pinnacle of Skrellian culinary mastery. Three refined fungal essences braised inside a sacred eden's gaia noodle soup. A masterpiece of color, taste, and bio-harmony."
+	desc = "Неоспоримая вершина скрелльского кулинарного мастерства. Три изысканные грибные эссенции, томлённые в священном супе с лапшой из амброзии божественной. Шедевр цвета, вкуса и биогармонии."
 	icon_state = "mycelial_roast"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 40,
@@ -498,7 +498,7 @@
 
 /obj/item/food/skrell/mycelial_roast_slice
 	name = "mycelial roast slice"
-	desc = "A bite-sized glowing slice of psychedelic fungal bake."
+	desc = "Небольшой светящийся кусочек психоделической грибной запеканки."
 	icon_state = "mycelial_roast_slice"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 8,
@@ -517,7 +517,7 @@
 /obj/item/food/salad/coniine_berry
 	name = "coniine berry bowl"
 	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
-	desc = "A salad loaded with death berries, aloe, and bungo fruit. The concentrated neurotoxins serve as a stimulating tonic for Skrell, but are lethal to non-immune species."
+	desc = "Салат с обилием смертоягод, алоэ и плодов бунго. Концентрированные нейротоксины служат стимулирующим тоником для скреллов, но смертельны для других видов."
 	icon_state = "coniine_salad"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 6,
@@ -535,7 +535,7 @@
 // 27. Soy Chips & Fungal Dip
 /obj/item/food/skrell/soy_fungal_chips
 	name = "soy chips with fungal dip"
-	desc = "Crispy slices cut from a roasted plump helmet served alongside a creamy bowl of soy dip. A quintessential lab-break snack."
+	desc = "Хрустящие ломтики жареного толстошлемника, подаваемые с мисочкой нежного соевого дипа. Идеальная закуска для перерыва в лаборатории."
 	icon_state = "soy_chips"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 8,
@@ -554,7 +554,7 @@
 /obj/item/food/salad/moonflower_plump
 	name = "moonflower and plump salad"
 	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
-	desc = "A cooling salad prepared with sliced cucumbers, fresh plump helmets, and moonflower petals. The trace herbal moonshine is safely mellowed by the fungal base."
+	desc = "Освежающий салат из нарезанных огурцов, свежих толстошлемников и лепестков луноцвета. Следы травяного самогона мягко нейтрализуются грибной основой."
 	icon_state = "moonflower_salad"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 6,
@@ -575,7 +575,7 @@
 /obj/item/food/burger/skrell_tofu
 	name = "skrellian tofu burger"
 	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
-	desc = "A wholesome vegetarian burger made with a tender tofu patty, sliced plump helmet, and rich soy dip in a soft rice bun."
+	desc = "Сытный вегетарианский бургер с нежной котлетой из тофу, ломтиком толстошлемника и насыщенным соевым соусом в мягкой рисовой булочке."
 	icon_state = "skrell_burger"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 10,
@@ -594,7 +594,7 @@
 /obj/item/food/taco/qerr_fungal
 	name = "qerr fungal taco"
 	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
-	desc = "A crunchy corn taco shell packed with sauteed chanterelles and seasoned with garlic and savory soy sauce."
+	desc = "Хрустящая кукурузная лепёшка тако, наполненная обжаренными лисичками и приправленная чесноком с пикантным соевым соусом."
 	icon_state = "qerr_taco"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 8,
@@ -613,7 +613,7 @@
 /obj/item/food/burger/destroying_angel
 	name = "destroying angel slider"
 	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
-	desc = "A terrifying burger packed with a grilled destroying angel mushroom, crispy onion rings, and tofu. Highly lethal to non-Skrell!"
+	desc = "Пугающий бургер с обжаренной на гриле белой поганкой, хрустящими луковыми кольцами и тофу. Смертельно опасен для не-скреллов!"
 	icon_state = "angel_burger"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 10,
@@ -633,7 +633,7 @@
 /obj/item/food/sandwich/rice_cheese
 	name = "rice cheese sandwich"
 	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
-	desc = "A simple, nourishing sandwich made of cheese between two slices of soft rice bread. Can be grilled to perfection."
+	desc = "Простой питательный сэндвич с сыром между двумя ломтиками мягкого рисового хлеба. Можно идеально поджарить на гриле."
 	icon_state = "rice_cheese_sandwich"
 	custom_materials = null
 	food_reagents = list(
@@ -645,7 +645,7 @@
 	foodtypes = GRAIN | DAIRY | BREAKFAST
 	food_flags = FOOD_FINGER_FOOD
 	w_class = WEIGHT_CLASS_SMALL
-	crafting_complexity = FOOD_COMPLEXITY_3
+	crafting_complexity = FOOD_COMPLEXITY_2
 	venue_value = FOOD_PRICE_CHEAP
 
 /obj/item/food/sandwich/rice_cheese/make_grillable()
@@ -655,7 +655,7 @@
 /obj/item/food/sandwich/grilled_rice_cheese
 	name = "grilled rice cheese sandwich"
 	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
-	desc = "A warm, golden-brown toasted rice sandwich with melted gooey cheese."
+	desc = "Тёплый поджаренный до золотистой корочки рисовый сэндвич с тягучим расплавленным сыром."
 	icon_state = "grilled_rice_cheese"
 	custom_materials = null
 	food_reagents = list(
@@ -668,13 +668,13 @@
 	foodtypes = GRAIN | DAIRY
 	food_flags = FOOD_FINGER_FOOD
 	w_class = WEIGHT_CLASS_SMALL
-	crafting_complexity = FOOD_COMPLEXITY_4
+	crafting_complexity = FOOD_COMPLEXITY_3
 	venue_value = FOOD_PRICE_NORMAL
 
 // 33. Fairy Grass & Glow Roll
 /obj/item/food/skrell/fairy_glow_roll
 	name = "fairy glow roll"
-	desc = "A glowing wrap of nizaya dough stuffed with luminous fairy grass and a sliced glowcap. Causes gentle relaxation and sparkles in the dark."
+	desc = "Светящийся ролл из теста низайя, начинённый сияющей волшебной травой и нарезанным светогрибом. Вызывает мягкое расслабление и искрится в темноте."
 	icon_state = "fairy_glow_roll"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 6,
@@ -694,7 +694,7 @@
 /obj/item/food/cake/skrell_citrus_cake
 	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
 	name = "citrus coffee cake"
-	desc = "A fragrant layered cake infused with fresh orange zest and dark Arabica coffee. A revitalizing dessert popular during diplomatic galas."
+	desc = "Ароматный слоёный торт, пропитанный свежей апельсиновой цедрой и тёмным кофе арабика. Бодрящий десерт, популярный на дипломатических приёмах."
 	icon_state = "citrus_coffee_cake"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 12,
@@ -714,7 +714,7 @@
 /obj/item/food/cakeslice/skrell_citrus_slice
 	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
 	name = "citrus coffee cake slice"
-	desc = "A slice of fragrant citrus and coffee infused cake."
+	desc = "Кусочек ароматного торта с нотками цитрусов и кофе."
 	icon_state = "citrus_coffee_slice"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 2.4,
@@ -732,7 +732,7 @@
 /obj/item/food/cake/blue_cherry_moon_cake
 	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
 	name = "blue cherry moonflower cake"
-	desc = "A stunning cake baked with glowing blue cherries, ximikoa cocoa, and moonflower petals. Radiates a soothing, chilled blue shimmer."
+	desc = "Потрясающий торт, испечённый со светящейся голубой вишней, какао, ксими'коа и лепестками луноцвета. Излучает успокаивающее прохладное синее сияние."
 	icon_state = "blue_cherry_moon"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 10,
@@ -753,7 +753,7 @@
 /obj/item/food/cakeslice/blue_cherry_slice
 	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
 	name = "blue cherry moonflower cake slice"
-	desc = "A slice of glowing blue cherry cake."
+	desc = "Кусочек светящегося торта с голубой вишней."
 	icon_state = "blue_cherry_slice"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 2,
@@ -767,7 +767,7 @@
 // 36. liberty fungus donuts
 /obj/item/food/donut/liberty_fungus
 	name = "liberty fungus donut"
-	desc = "A deep-fried sweet pastry ring infused with a controlled extract of liberty-cap mushroom. Lifts the spirits and dissolves laboratory stress."
+	desc = "Обжаренное во фритюре сладкое колечко из теста, пропитанное выверенным экстрактом либерти-кэпа. Поднимает настроение и снимает стресс."
 	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
 	icon_state = "liberty_donut"
 	is_decorated = TRUE
@@ -786,7 +786,7 @@
 // 37. skrell vanilla pudding
 /obj/item/food/skrell/skrell_vanilla_pudding
 	name = "skrell vanilla pudding"
-	desc = "A delicate plant-based pudding made with soy milk, sweet vanilla, and a hint of cherry jelly. Incredibly silky and gentle."
+	desc = "Нежный растительный пудинг из соевого молока, сладкой ванили и капли вишнёвого желе. Невероятно шелковистый и мягкий."
 	icon_state = "vanilla_pudding"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 6,
@@ -805,7 +805,7 @@
 /obj/item/food/kebab/caramelized_plump_cap
 	name = "caramelized plump cap"
 	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
-	desc = "A plump helmet mushroom glazed with crunchy amber caramel and garnished with sweet fruit. A uniquely delightful blend of savory and sugary notes."
+	desc = "Толстошлемник, глазированный хрустящей янтарной карамелью и украшенный сладкими фруктами. Уникальное восхитительное сочетание пикантных и сладких нот."
 	icon_state = "caramel_plump"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 6,
@@ -823,7 +823,7 @@
 // 39. ambrosia deus tart
 /obj/item/food/skrell/ambrosia_deus_tart
 	name = "ambrosia deus tart"
-	desc = "An exquisite glowing tart sweetened with ximikoa and korta nectar. The controlled omnizine essence rapidly eases aches and invigorates the consumer."
+	desc = "Изысканный светящийся торт, подслащённый ксими'коа и нектаром корта. Выверенная эссенция омнизина быстро унимает боль и придаёт сил."
 	icon_state = "deus_tart"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 8,
@@ -841,7 +841,7 @@
 
 /obj/item/food/skrell/ambrosia_deus_tart_slice
 	name = "ambrosia deus tart slice"
-	desc = "A glowing slice of delicious ambrosia deus tart."
+	desc = "Светящийся кусочек восхитительного торта с амброзией деус."
 	icon_state = "deus_tart_slice"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 2,
@@ -856,7 +856,7 @@
 // 40. ambrosia vulgaris roll
 /obj/item/food/skrell/ambrosia_vulgaris_roll
 	name = "ambrosia vulgaris roll"
-	desc = "A rolled pastry filled with fresh ambrosia vulgaris and savory soy dip. A balanced everyday sweet roll that relieves fatigue."
+	desc = "Свёрнутый рулет с начинкой из свежей амброзии обыкновенной и пикантного соевого соуса. Сбалансированный повседневный сладкий рулет, снимающий усталость."
 	icon_state = "vulgaris_roll"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 8,
@@ -867,7 +867,7 @@
 	tastes = list("sweet pastry" = 2, "herbal ambrosia" = 2, "soy" = 1)
 	foodtypes = VEGETABLES | GRAIN | DAIRY
 	w_class = WEIGHT_CLASS_NORMAL
-	crafting_complexity = FOOD_COMPLEXITY_2
+	crafting_complexity = FOOD_COMPLEXITY_3
 	venue_value = FOOD_PRICE_NORMAL
 
 /obj/item/food/skrell/ambrosia_vulgaris_roll/make_processable()
@@ -875,7 +875,7 @@
 
 /obj/item/food/skrell/ambrosia_vulgaris_roll_slice
 	name = "ambrosia vulgaris roll slice"
-	desc = "A slice of sweet and herbal ambrosia roll."
+	desc = "Кусочек сладкого травяного рулета с амброзией."
 	icon_state = "vulgaris_roll_slice"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 2,
@@ -892,7 +892,7 @@
 // 41. vulgaris chocolate roll
 /obj/item/food/skrell/vulgaris_chocolate_roll
 	name = "vulgaris chocolate roll"
-	desc = "A rich, dark cocoa roll swirled with a delicate green ambrosia vulgaris cream and topped with a fresh leaf. Mellows pain and restores energy."
+	desc = "Насыщенный рулет из тёмного какао с завитками нежного зелёного крема из амброзии обыкновеной, увенчанный свежим листком. Смягчает боль и восстанавливает силы."
 	icon_state = "vulgaris_chocolate_roll"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 10,
@@ -903,7 +903,7 @@
 	tastes = list("rich dark chocolate" = 3, "sweet green cream" = 2, "herbal soothing" = 1)
 	foodtypes = VEGETABLES | JUNKFOOD | GRAIN | FRUIT | DAIRY | SUGAR
 	w_class = WEIGHT_CLASS_NORMAL
-	crafting_complexity = FOOD_COMPLEXITY_3
+	crafting_complexity = FOOD_COMPLEXITY_4
 	venue_value = FOOD_PRICE_NORMAL
 
 /obj/item/food/skrell/vulgaris_chocolate_roll/make_processable()
@@ -911,7 +911,7 @@
 
 /obj/item/food/skrell/vulgaris_chocolate_roll_slice
 	name = "vulgaris chocolate roll slice"
-	desc = "A slice of dark chocolate roll with green ambrosia cream."
+	desc = "Кусочек рулета из тёмного шоколада с зелёным кремом из амброзии."
 	icon_state = "vulgaris_chocolate_roll_slice"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 2.5,
@@ -928,7 +928,7 @@
 // 42. deus golden roll
 /obj/item/food/skrell/deus_golden_roll
 	name = "deus golden roll"
-	desc = "A golden-yellow roll filled with radiant Ambrosia Deus cream, honey, and finished with a shimmering gold apple leaf. Inspires pure euphoria."
+	desc = "Золотисто-жёлтый рулет с начинкой из сияющего крема амброзии божественной и мёда, украшенный мерцающим листком золотого яблока. Внушает чистую эйфорию."
 	icon_state = "deus_golden_roll"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 10,
@@ -939,7 +939,7 @@
 	tastes = list("golden honey" = 3, "divine ambrosia" = 3, "sparkling sweetness" = 2)
 	foodtypes = VEGETABLES | GRAIN | FRUIT | DAIRY | SUGAR
 	w_class = WEIGHT_CLASS_NORMAL
-	crafting_complexity = FOOD_COMPLEXITY_4
+	crafting_complexity = FOOD_COMPLEXITY_5
 	venue_value = FOOD_PRICE_EXOTIC
 
 /obj/item/food/skrell/deus_golden_roll/make_processable()
@@ -947,7 +947,7 @@
 
 /obj/item/food/skrell/deus_golden_roll_slice
 	name = "deus golden roll slice"
-	desc = "A slice of glowing golden roll with divine ambrosia cream."
+	desc = "Кусочек светящегося золотого рулета с божественным кремом из амброзии."
 	icon_state = "deus_golden_roll_slice"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 2.5,
@@ -963,7 +963,7 @@
 // 43. crimson gaia roll
 /obj/item/food/skrell/crimson_gaia_roll
 	name = "crimson gaia roll"
-	desc = "A deep ruby-red roll naturally sweetened with ximikoa and honey, filled with sacred Ambrosia Gaia cream and crowned with a fiery petal. Grants deep peace."
+	desc = "Насыщенный рубиново-красный рулет, естественно подслащённый ксими'коа и мёдом, с начинкой из священного крема амброзии гайя и огненным лепестком сверху. Дарует глубокий покой."
 	icon_state = "crimson_gaia_roll"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 10,
@@ -973,7 +973,7 @@
 	tastes = list("rich crimson pastry" = 3, "divine honey cream" = 3, "serene warmth" = 2)
 	foodtypes = VEGETABLES | GRAIN | FRUIT | DAIRY | SUGAR
 	w_class = WEIGHT_CLASS_NORMAL
-	crafting_complexity = FOOD_COMPLEXITY_4
+	crafting_complexity = FOOD_COMPLEXITY_5
 	venue_value = FOOD_PRICE_LEGENDARY
 
 /obj/item/food/skrell/crimson_gaia_roll/make_processable()
@@ -981,7 +981,7 @@
 
 /obj/item/food/skrell/crimson_gaia_roll_slice
 	name = "crimson gaia roll slice"
-	desc = "A slice of ruby-red Gaia roll with honey cream."
+	desc = "Кусочек рубиново-красного рулета гайя с медовым кремом."
 	icon_state = "crimson_gaia_roll_slice"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 2.5,
@@ -997,7 +997,7 @@
 // 44. skrell vanilla ice cream
 /obj/item/food/skrell/skrell_vanilla_icecream
 	name = "skrell vanilla ice cream"
-	desc = "A creamy, dairy-free frozen treat made from smooth soy milk, sweet vanilla, and sugar on a wooden stick."
+	desc = "Сливочное безмолочное мороженое на деревянной палочке, приготовленное из нежного соевого молока, сладкой ванили и сахара."
 	icon_state = "skrell_vanilla_icecream"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 4,
@@ -1016,7 +1016,7 @@
 // 45. glowcap ice scoop
 /obj/item/food/skrell/glowcap_ice_scoop
 	name = "glowcap ice scoop"
-	desc = "A bioluminescent frozen treat made of pureed glowcaps, soy milk, and trace hallucinogens. Tingles on the tongue and sparkles in the dark."
+	desc = "Биолюминесцентное замороженное лакомство из пюре светогриба, соевого молока и следов галлюциногенов. Покалывает язык и искрится в темноте."
 	icon_state = "glowcap_ice_scoop"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 4,
@@ -1034,7 +1034,7 @@
 // 46. soy ambrosia sundae
 /obj/item/food/skrell/soy_ambrosia_sundae
 	name = "soy ambrosia sundae"
-	desc = "An exotic sundae combining whipped soy cream, ximikoa cocoa, arabica coffee, and a delicate touch of divine Ambrosia Deus."
+	desc = "Экзотический сандай, сочетающий взбитые соевые сливки, какао, ксими'коа, кофе арабика и утончённую нотку божественной амброзии."
 	icon_state = "soy_ambrosia_sundae"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 6,
@@ -1053,7 +1053,7 @@
 // 47. fyrsskar drops
 /obj/item/food/skrell/fyrsskar_drops
 	name = "fyrsskar drops"
-	desc = "Hard translucent drops made by crystallizing caramelized sugars with Tears of Fyrsskar. Rapidly cleanses metabolic impurities from Skrell."
+	desc = "Твёрдые полупрозрачные леденцы, полученные путём кристаллизации карамелизированного сахара со Слёзами Фирскара. Быстро очищают организм скреллов от метаболических примесей."
 	icon_state = "fyrsskar_drops"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 2,
@@ -1083,7 +1083,7 @@
 // 48. slime-fungus freeze
 /obj/item/food/skrell/slime_fungus_freeze
 	name = "slime-fungus freeze"
-	desc = "A tart and trippy popsicle blending sweet berry juice, soy milk, and crushed liberty-cap mushrooms. Brings a burst of colorful euphoria."
+	desc = "Терпкий психоделический фруктовый лёд из сладкого ягодного сока, соевого молока и толчёных либерти-кэпов. Дарит всплеск красочной эйфории."
 	icon_state = "slime_fungus_freeze"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 4,
