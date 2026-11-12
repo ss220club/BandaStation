@@ -190,7 +190,7 @@
 
 /datum/reagent/consumable/nutriment/soup/embershroom_lava_stew
 	name = "embershroom lava stew"
-	description = "Обжигающий красный бульон из лавалэндских грибов и огнецветов. Мгновенно согревает тело."
+	description = "Обжигающий красный бульон из Лавалендских грибов и огнецветов. Мгновенно согревает тело."
 	data = list("blazing heat" = 3, "earthy sulfur" = 1)
 	glass_price = FOOD_PRICE_NORMAL
 	color = "#FF4500"

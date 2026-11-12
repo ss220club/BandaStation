@@ -174,7 +174,7 @@
 /obj/item/food/soup/embershroom_lava_stew
 	name = "embershroom lava stew"
 	icon = 'modular_bandastation/food_and_drinks/icons/foods/skrell.dmi'
-	desc = "Томящийся острый красный бульон из лавалэндских грибов и огнецветов. Согревает в лютый мороз."
+	desc = "Томящийся острый красный бульон из Лавалендских грибов и огнецветов. Согревает в лютый мороз."
 	icon_state = "embershroom_stew"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 6,
@@ -892,7 +892,7 @@
 // 41. vulgaris chocolate roll
 /obj/item/food/skrell/vulgaris_chocolate_roll
 	name = "vulgaris chocolate roll"
-	desc = "Насыщенный рулет из тёмного какао с завитками нежного зелёного крема из амброзии обыкновеной, увенчанный свежим листком. Смягчает боль и восстанавливает силы."
+	desc = "Насыщенный рулет из тёмного какао с завитками нежного зелёного крема из амброзии обыкновенной, увенчанный свежим листком. Смягчает боль и восстанавливает силы."
 	icon_state = "vulgaris_chocolate_roll"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 10,
@@ -1074,7 +1074,7 @@
 
 /obj/item/food/skrell/fyrsskar_drops/proc/after_eat(mob/living/carbon/consumer)
 	if(isskrell(consumer))
-		to_chat(consumer, span_notice("Свежесть Фурскара мягко очищает вашу кровь и четалы от чужеродных токсинов..."))
+		to_chat(consumer, span_notice("Свежесть Фирскара мягко очищает вашу кровь и четалы от чужеродных токсинов..."))
 		if(consumer.reagents)
 			for(var/datum/reagent/toxin/toxin in consumer.reagents.reagent_list.Copy())
 				consumer.reagents.remove_reagent(toxin.type, toxin.volume)

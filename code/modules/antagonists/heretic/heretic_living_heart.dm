@@ -229,7 +229,7 @@
 
 		// Mining
 		else if(is_mining_level(their_z))
-			balloon_message = "на лавалэнде!"
+			balloon_message = "на Лаваленде!"
 
 		// In the gateway
 		else if(is_away_level(their_z) || is_secret_level(their_z))
