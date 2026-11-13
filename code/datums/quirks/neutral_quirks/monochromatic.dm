@@ -4,6 +4,7 @@
 	icon = FA_ICON_ADJUST
 	value = 0
 	medical_record_text = "Пациент страдает почти полным дальтонизмом."
+	mail_weight = 1
 	mail_goodies = list( // Noir detective wannabe
 		/obj/item/clothing/suit/toggle/jacket/det_trench/noir,
 		/obj/item/clothing/suit/jacket/det_suit/noir,

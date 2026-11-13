@@ -6,6 +6,7 @@
 	gain_text = span_notice("Вы вдруг почувствовали, что стали чипированным.")
 	lose_text = span_danger("Теперь вы больше не чувствуете себя чипированным.")
 	medical_record_text = "Пациент объяснил, как попал под влияние повального увлечения чипами навыков, и теперь у него в голове оказался бесполезный чип. Тупица."
+	mail_weight = 2
 	mail_goodies = list(
 		/obj/item/skillchip/matrix_taunt,
 		/obj/item/skillchip/big_pointer,

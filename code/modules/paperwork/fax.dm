@@ -605,7 +605,7 @@ GLOBAL_VAR_INIT(fax_autoprinting, TRUE) /// BANDASTATION EDIT
 			return TRUE
 	return FALSE
 
-/obj/machinery/fax/shock(mob/living/shocking, chance = 100, shock_source, siemens_coeff = 1)
+/obj/machinery/fax/shock(mob/living/shocking, chance, shock_source, siemens_coeff, allow_modifiers)
 	if( machine_stat & (BROKEN|NOPOWER))
 		return FALSE
 	if(isnull(siemens_coeff))

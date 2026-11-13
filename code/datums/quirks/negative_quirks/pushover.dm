@@ -8,4 +8,5 @@
 	lose_text = span_notice("Вы чувствуете себя уверенно.")
 	medical_record_text = "Пациент демонстрирует необычайно неуверенный характер, и им легко манипулировать."
 	hardcore_value = 4
+	mail_weight = 1
 	mail_goodies = list(/obj/item/clothing/gloves/cargo_gauntlet)
