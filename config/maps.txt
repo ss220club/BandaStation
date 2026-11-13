@@ -55,6 +55,11 @@ map kilostation
 	votable
 endmap
 
+map trainstation
+	minplayers 30
+	votable
+endmap
+
 map wawastation
     minplayers 50
 	votable
