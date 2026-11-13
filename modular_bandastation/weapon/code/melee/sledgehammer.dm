@@ -23,8 +23,6 @@
 	custom_price = PAYCHECK_CREW * 4
 	/// How much damage to do unwielded
 	var/force_unwielded = 10
-	/// How much damage to do wielded
-	var/force_wielded = 20
 
 /obj/item/sledgehammer/Initialize(mapload)
 	. = ..()
