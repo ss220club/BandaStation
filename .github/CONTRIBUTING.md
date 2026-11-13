@@ -12,7 +12,8 @@
 7. [Процесс открытия Pull Request](#процесс-открытия-pull-request)
 8. [Портирование фич/спрайтов/звуков/инструментов с других кодбаз](#портирование-фичспрайтовзвуковинструментов-с-других-кодбаз)
 9. [Запрещенный контент](#запрещенный-контент)
-10. [Пару слов о Git](#пару-слов-о-git)
+10. [Generative AI Use](#generative-ai-use)
+11. [Пару слов о Git](#пару-слов-о-git)
 
 ## Репорт багов
 
@@ -185,6 +186,10 @@ gender = "female"          # male / female / neuter / plural
 - Код, нарушающий [условия предоставления услуг GitHub](https://github.com/site/terms).
 
 Если чего-то нет в этом списке, это не значит, что это допустимо. Руководствуйтесь здравым смыслом.
+
+### Generative AI Use
+
+We do not accept ai generated pull requests, bug reports, code, comments or review.
 
 ## Пару слов о Git
 

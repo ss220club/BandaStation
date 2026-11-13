@@ -7,6 +7,7 @@
 	lose_text = span_notice("Может быть, импланты - это не так уж и плохо. Теперь вы нормально относитесь ко всем видам изменения тела.")
 	medical_record_text = "Пациент проявляет негативную реакцию на неестественные части тела и аугментации."
 	hardcore_value = 3
+	mail_weight = 2
 	mail_goodies = list(/obj/item/paper/pamphlet/cybernetics)
 	var/cybernetics_level = 0
 

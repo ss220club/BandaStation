@@ -6,6 +6,7 @@
 	gain_text = span_notice("Вы чувствуете сильную тягу к ананасам.")
 	lose_text = span_notice("Ваше отношение к ананасам, похоже, вернулось к нейтральному состоянию.")
 	medical_record_text = "Пациент демонстрирует патологическую любовь к ананасам."
+	mail_weight = 1
 	mail_goodies = list(/obj/item/food/pizzaslice/pineapple)
 
 /datum/quirk/pineapple_liker/add(client/client_source)
