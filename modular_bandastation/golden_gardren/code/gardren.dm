@@ -30,6 +30,10 @@
 		MECHA_ARMOR = 1,
 	)
 
+/obj/vehicle/sealed/mecha/gardren/generate_actions()
+	. = ..()
+	initialize_passenger_action_type(/datum/action/vehicle/sealed/mecha/golden_gardren_combine)
+
 /datum/armor/mecha_gardren
 	melee = 25
 	bullet = 30

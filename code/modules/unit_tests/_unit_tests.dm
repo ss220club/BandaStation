@@ -500,6 +500,8 @@
 
 #include "../../../modular_bandastation/dynamic/code/antag_tokens_tests.dm"
 
+#include "../../../modular_bandastation/golden_gardren/code/tests/golden_gardren_tests.dm"
+
 #undef TEST_ASSERT
 #undef TEST_ASSERT_EQUAL
 #undef TEST_ASSERT_NOTEQUAL
