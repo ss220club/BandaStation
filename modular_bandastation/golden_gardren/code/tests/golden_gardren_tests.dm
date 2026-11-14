@@ -135,7 +135,16 @@
 	TEST_ASSERT(!combined.disassemble(), "An admin-spawned frame separated into free halves")
 	TEST_ASSERT(!QDELETED(combined), "A failed separation deleted the frame")
 
-/// The emergency ejection throws both pilots onto separate free turfs next to the mech and knocks them down.
+/// Returns the turf a rescue capsule carrying [pilot] is going to land on, or null if the pilot is not in a capsule.
+/datum/unit_test/proc/golden_gardren_capsule_target(mob/living/pilot, atom/mech_turf)
+	if(!istype(pilot.loc, /obj/structure/closet/supplypod))
+		return null
+	for(var/obj/effect/pod_landingzone/zone in range(6, mech_turf))
+		if(zone.pod == pilot.loc)
+			return get_turf(zone)
+	return null
+
+/// Without a chosen spot the ejection fires both pilots in capsules onto separate free turfs right next to the mech, and knocks them down.
 /datum/unit_test/golden_gardren_emergency_eject
 
 /datum/unit_test/golden_gardren_emergency_eject/Run()
@@ -146,13 +155,39 @@
 	combined.mob_enter(gunner, silent = TRUE)
 
 	combined.emergency_eject()
+	var/list/landings = list()
 	for(var/mob/living/carbon/human/pilot as anything in list(main_pilot, gunner))
 		TEST_ASSERT(!combined.is_occupant(pilot), "A pilot stayed inside after the emergency ejection")
-		TEST_ASSERT(isturf(pilot.loc), "A pilot was not put on a turf by the emergency ejection")
-		TEST_ASSERT(pilot.loc != combined.loc, "A pilot was dropped under the mech despite free turfs around it")
-		TEST_ASSERT(get_dist(pilot, combined) <= 1, "A pilot was thrown further than the neighbouring turfs")
+		var/turf/landing = golden_gardren_capsule_target(pilot, combined.loc)
+		TEST_ASSERT_NOTNULL(landing, "A pilot was not put into a rescue capsule")
+		TEST_ASSERT(landing != combined.loc, "A capsule was sent onto the mech itself despite free turfs around it")
+		TEST_ASSERT(get_dist(landing, combined) <= 1, "A capsule without a chosen spot was sent further than the neighbouring turfs")
 		TEST_ASSERT(pilot.IsKnockdown(), "A pilot was not knocked down by the emergency ejection")
-	TEST_ASSERT(main_pilot.loc != gunner.loc, "Both pilots were thrown onto the same turf")
+		landings += landing
+	TEST_ASSERT(landings[1] != landings[2], "Both capsules were sent onto the same turf")
+
+/// A pilot can only pick a free, safe landing spot within range, and the capsule goes exactly there.
+/datum/unit_test/golden_gardren_eject_landing_choice
+
+/datum/unit_test/golden_gardren_eject_landing_choice/Run()
+	var/obj/vehicle/sealed/mecha/golden_gardren/combined = allocate(/obj/vehicle/sealed/mecha/golden_gardren)
+	var/mob/living/carbon/human/consistent/main_pilot = allocate(/mob/living/carbon/human/consistent)
+	combined.mob_enter(main_pilot, silent = TRUE)
+	var/turf/frame_turf = combined.loc
+	// Two tiles away inside the test room, so the spot is in range and in sight.
+	var/turf/picked = locate(min(frame_turf.x + 2, run_loc_floor_top_right.x), frame_turf.y, frame_turf.z)
+	var/turf/far_away = locate(frame_turf.x + 10, frame_turf.y, frame_turf.z)
+
+	TEST_ASSERT(!combined.choose_landing(main_pilot, picked), "A landing spot was accepted before the ejection countdown started")
+	TEST_ASSERT(combined.start_emergency_eject(main_pilot), "The ejection countdown did not start")
+	TEST_ASSERT(!combined.choose_landing(main_pilot, frame_turf), "The mech's own turf was accepted as a landing spot")
+	TEST_ASSERT(!combined.choose_landing(main_pilot, far_away), "A landing spot out of range was accepted")
+	TEST_ASSERT_NULL(combined.landing_blocker(picked), "A free floor two tiles away is refused as a landing spot")
+	TEST_ASSERT(combined.choose_landing(main_pilot, picked), "A free landing spot in range was refused")
+
+	combined.emergency_eject()
+	TEST_ASSERT_EQUAL(golden_gardren_capsule_target(main_pilot, frame_turf), picked, "The capsule was not sent to the chosen spot")
+	TEST_ASSERT(!LAZYLEN(combined.eject_landings), "The landing choice outlived the ejection")
 
 /// Destroying the frame throws the pilots clear instead of deleting them with it.
 /datum/unit_test/golden_gardren_destruction_ejects
@@ -169,8 +204,9 @@
 	TEST_ASSERT(QDELETED(combined), "The frame survived damage beyond its integrity")
 	for(var/mob/living/carbon/human/pilot as anything in list(main_pilot, gunner))
 		TEST_ASSERT(!QDELETED(pilot), "A pilot was deleted together with the frame")
-		TEST_ASSERT(isturf(pilot.loc), "A pilot was not thrown clear of the destroyed frame")
-		TEST_ASSERT(pilot.loc != frame_turf, "A pilot was left under the wreck despite free turfs around it")
+		var/turf/landing = golden_gardren_capsule_target(pilot, frame_turf)
+		TEST_ASSERT_NOTNULL(landing, "A pilot was not fired clear of the destroyed frame in a capsule")
+		TEST_ASSERT(landing != frame_turf, "A pilot was sent under the wreck despite free turfs around it")
 	var/obj/structure/mecha_wreckage/golden_gardren/wreck = locate() in frame_turf
 	TEST_ASSERT_NOTNULL(wreck, "The destroyed frame left no wreck")
 	qdel(wreck)

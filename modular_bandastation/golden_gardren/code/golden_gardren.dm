@@ -68,6 +68,10 @@
 	COOLDOWN_DECLARE(shield_recharge_cooldown)
 	/// Timer of a running emergency ejection countdown.
 	var/emergency_eject_timer
+	/// Assoc list: pilot -> turf they picked for their capsule during the ejection countdown.
+	var/list/eject_landings
+	/// Assoc list: pilot -> landing marker image shown to that pilot only.
+	var/list/eject_markers
 
 /datum/armor/mecha_golden_gardren
 	melee = 45
@@ -79,9 +83,8 @@
 	acid = 100
 
 /obj/vehicle/sealed/mecha/golden_gardren/Destroy()
-	deltimer(emergency_eject_timer)
 	// Put the pilots on free turfs instead of the base drop under the frame.
-	emergency_eject(stun = FALSE)
+	emergency_eject(use_capsules = FALSE, stun = FALSE)
 	// The halves exist only as a part of this frame now, so they go down with it.
 	QDEL_NULL(docked_golden)
 	QDEL_NULL(docked_gardren)
@@ -128,6 +131,8 @@
 
 /obj/vehicle/sealed/mecha/golden_gardren/remove_occupant(mob/driver)
 	. = ..()
+	// A pilot leaving during the ejection countdown takes no landing choice or marker with them.
+	clear_landing_choice(driver)
 	// Without an operator the shield cannot be held.
 	if(shield_active && !return_amount_of_controllers_with_flag(VEHICLE_CONTROL_EQUIPMENT))
 		set_shield(FALSE)
@@ -175,7 +180,6 @@
 
 /// Throws the pilots clear of the wreck before the base destruction handles what is left.
 /obj/vehicle/sealed/mecha/golden_gardren/atom_destruction(damage_flag)
-	deltimer(emergency_eject_timer)
 	emergency_eject()
 	return ..()
 
