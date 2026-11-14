@@ -1,0 +1,4 @@
+#include "_golden_gardren.dm"
+
+#include "code/golden.dm"
+#include "code/gardren.dm"
