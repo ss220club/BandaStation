@@ -14,18 +14,18 @@
 /**
  * ## Golden-Gardren
  *
- * The combined two-pilot mech. Occupies a single tile so it fits through airlocks, but is drawn twice as large.
+ * The combined two-pilot mech. Occupies a single tile so it fits through airlocks, but is drawn one and a half tiles tall.
  * Main seat: movement, fists and the Golden Ram. Weapons seat: arm weapons, the shield and the missile strike.
  * When formed from the pair, the Golden and the Gardren are kept docked inside and the frame runs on the Gardren's parts.
  * Event-only: spawned by admins or formed from the pair, not buildable.
  */
 /obj/vehicle/sealed/mecha/golden_gardren
 	name = "\improper Golden-Gardren"
-	desc = "Громадная боевая машина: Голден сидит в люке Гардрена, как голова на плечах. Управляется двумя пилотами."
+	desc = "Громадная боевая машина: Голден сидит в люке Гардрена, как голова на плечах, и возвышается над обычными мехами. Управляется двумя пилотами."
 	icon = 'modular_bandastation/golden_gardren/icons/golden_gardren.dmi'
 	icon_state = "golden_gardren"
 	base_icon_state = "golden_gardren"
-	SET_BASE_PIXEL(-16, 0)
+	SET_BASE_PIXEL(-8, 0)
 	mecha_flags = CAN_STRAFE | IS_ENCLOSED | HAS_LIGHTS | BEACON_TRACKABLE
 	// Reuses the Savannah-Ivanov module bit so combat equipment fits without a new exosuit define.
 	mech_type = EXOSUIT_MODULE_SAVANNAH
@@ -222,10 +222,10 @@
 	if(!shield_active)
 		return
 	var/mutable_appearance/shield = mutable_appearance('icons/mob/effects/durand_shield.dmi', "shield")
-	// The shield sprite is drawn for a regular mech, so it is stretched over the twice as big frame.
-	shield.transform = matrix().Scale(2)
-	shield.pixel_w = 16
-	shield.pixel_z = 24
+	// The shield sprite is drawn for a regular mech, so it is stretched over the 48x48 frame.
+	shield.transform = matrix().Scale(1.5)
+	shield.pixel_w = 8
+	shield.pixel_z = 12
 	. += shield
 
 /**
@@ -306,7 +306,7 @@
 	desc = "Груда искорёженного золочёного металла — всё, что осталось от Голден-Гардрена. Восстановить невозможно, но что-то ещё можно снять."
 	icon = 'modular_bandastation/golden_gardren/icons/golden_gardren.dmi'
 	icon_state = "golden_gardren-broken"
-	SET_BASE_PIXEL(-16, 0)
+	SET_BASE_PIXEL(-8, 0)
 	welder_salvage = list(/obj/item/stack/sheet/mineral/gold, /obj/item/stack/sheet/plasteel, /obj/item/stack/sheet/iron, /obj/item/stack/rods)
 	salvage_num = 8
 
