@@ -6,3 +6,5 @@
 #include "code/golden_gardren.dm"
 #include "code/actions.dm"
 #include "code/combine.dm"
+#include "code/emergency.dm"
+#include "code/separate.dm"

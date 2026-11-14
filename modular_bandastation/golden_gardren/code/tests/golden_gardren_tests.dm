@@ -96,3 +96,81 @@
 	TEST_ASSERT(manned.toggle_shield(gunner), "The operator could not raise the shield")
 	manned.mob_exit(gunner, silent = TRUE)
 	TEST_ASSERT(!manned.shield_active, "The shield stayed up after the weapons operator left")
+
+/// Separation gives back the same halves with their pilots and parts, spreads the damage and leaves no frame behind.
+/datum/unit_test/golden_gardren_separate
+
+/datum/unit_test/golden_gardren_separate/Run()
+	var/mob/living/carbon/human/consistent/gunner = allocate(/mob/living/carbon/human/consistent)
+	var/mob/living/carbon/human/consistent/main_pilot = allocate(/mob/living/carbon/human/consistent)
+	var/obj/vehicle/sealed/mecha/golden/golden = allocate(/obj/vehicle/sealed/mecha/golden)
+	var/obj/vehicle/sealed/mecha/gardren/gardren = allocate(/obj/vehicle/sealed/mecha/gardren)
+	golden.mob_enter(gunner, silent = TRUE)
+	gardren.mob_enter(main_pilot, silent = TRUE)
+	var/obj/item/stock_parts/power_store/gardren_cell = gardren.cell
+	var/obj/vehicle/sealed/mecha/golden_gardren/combined = allocate(/obj/vehicle/sealed/mecha/golden_gardren, null, TRUE)
+	TEST_ASSERT(combined.assemble(golden, gardren, gunner, main_pilot), "Assembly failed with both pilots in place")
+
+	combined.take_damage(combined.max_integrity / 2, BRUTE)
+	TEST_ASSERT_NULL(combined.separate_blocker(), "A combined frame with room around it refused to separate")
+	TEST_ASSERT(combined.disassemble(), "Separation failed with room around the frame")
+
+	TEST_ASSERT(QDELETED(combined), "The frame was left behind after separation")
+	TEST_ASSERT(!QDELETED(golden) && isturf(golden.loc), "The Golden did not come back onto the map")
+	TEST_ASSERT(!QDELETED(gardren) && isturf(gardren.loc), "The Gardren did not come back onto the map")
+	TEST_ASSERT(golden.loc != gardren.loc, "Both halves landed on the same turf")
+	TEST_ASSERT_EQUAL(main_pilot.loc, gardren, "The main seat pilot did not go back into the Gardren")
+	TEST_ASSERT_EQUAL(gunner.loc, golden, "The weapons seat pilot did not go back into the Golden")
+	TEST_ASSERT_EQUAL(gardren.cell, gardren_cell, "The Gardren did not get its cell back")
+	TEST_ASSERT(!golden.completely_disabled && !gardren.completely_disabled, "A half stayed switched off after separation")
+	TEST_ASSERT_EQUAL(gardren.get_integrity(), round(gardren.max_integrity / 2), "The Gardren did not take its share of the damage")
+	TEST_ASSERT_EQUAL(golden.get_integrity(), round(golden.max_integrity / 2), "The Golden did not take its share of the damage")
+
+/// A frame that was not formed from the pair has no halves to give back.
+/datum/unit_test/golden_gardren_separate_spawned_frame
+
+/datum/unit_test/golden_gardren_separate_spawned_frame/Run()
+	var/obj/vehicle/sealed/mecha/golden_gardren/combined = allocate(/obj/vehicle/sealed/mecha/golden_gardren)
+	TEST_ASSERT_NOTNULL(combined.separate_blocker(), "An admin-spawned frame offered to separate into free halves")
+	TEST_ASSERT(!combined.disassemble(), "An admin-spawned frame separated into free halves")
+	TEST_ASSERT(!QDELETED(combined), "A failed separation deleted the frame")
+
+/// The emergency ejection throws both pilots onto separate free turfs next to the mech and knocks them down.
+/datum/unit_test/golden_gardren_emergency_eject
+
+/datum/unit_test/golden_gardren_emergency_eject/Run()
+	var/obj/vehicle/sealed/mecha/golden_gardren/combined = allocate(/obj/vehicle/sealed/mecha/golden_gardren)
+	var/mob/living/carbon/human/consistent/main_pilot = allocate(/mob/living/carbon/human/consistent)
+	var/mob/living/carbon/human/consistent/gunner = allocate(/mob/living/carbon/human/consistent)
+	combined.mob_enter(main_pilot, silent = TRUE)
+	combined.mob_enter(gunner, silent = TRUE)
+
+	combined.emergency_eject()
+	for(var/mob/living/carbon/human/pilot as anything in list(main_pilot, gunner))
+		TEST_ASSERT(!combined.is_occupant(pilot), "A pilot stayed inside after the emergency ejection")
+		TEST_ASSERT(isturf(pilot.loc), "A pilot was not put on a turf by the emergency ejection")
+		TEST_ASSERT(pilot.loc != combined.loc, "A pilot was dropped under the mech despite free turfs around it")
+		TEST_ASSERT(get_dist(pilot, combined) <= 1, "A pilot was thrown further than the neighbouring turfs")
+		TEST_ASSERT(pilot.IsKnockdown(), "A pilot was not knocked down by the emergency ejection")
+	TEST_ASSERT(main_pilot.loc != gunner.loc, "Both pilots were thrown onto the same turf")
+
+/// Destroying the frame throws the pilots clear instead of deleting them with it.
+/datum/unit_test/golden_gardren_destruction_ejects
+
+/datum/unit_test/golden_gardren_destruction_ejects/Run()
+	var/obj/vehicle/sealed/mecha/golden_gardren/combined = allocate(/obj/vehicle/sealed/mecha/golden_gardren)
+	var/mob/living/carbon/human/consistent/main_pilot = allocate(/mob/living/carbon/human/consistent)
+	var/mob/living/carbon/human/consistent/gunner = allocate(/mob/living/carbon/human/consistent)
+	combined.mob_enter(main_pilot, silent = TRUE)
+	combined.mob_enter(gunner, silent = TRUE)
+	var/turf/frame_turf = combined.loc
+
+	combined.take_damage(combined.get_integrity() + 10, BRUTE)
+	TEST_ASSERT(QDELETED(combined), "The frame survived damage beyond its integrity")
+	for(var/mob/living/carbon/human/pilot as anything in list(main_pilot, gunner))
+		TEST_ASSERT(!QDELETED(pilot), "A pilot was deleted together with the frame")
+		TEST_ASSERT(isturf(pilot.loc), "A pilot was not thrown clear of the destroyed frame")
+		TEST_ASSERT(pilot.loc != frame_turf, "A pilot was left under the wreck despite free turfs around it")
+	var/obj/structure/mecha_wreckage/golden_gardren/wreck = locate() in frame_turf
+	TEST_ASSERT_NOTNULL(wreck, "The destroyed frame left no wreck")
+	qdel(wreck)

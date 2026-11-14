@@ -8,6 +8,8 @@
 #define GOLDEN_GARDREN_SHIELD_TOGGLE_DELAY (3 SECONDS)
 /// How long the shield cannot be raised after it collapses from damage or lack of power.
 #define GOLDEN_GARDREN_SHIELD_COLLAPSE_DELAY (15 SECONDS)
+/// Share of integrity at and below which the pilots are warned that the frame is about to break.
+#define GOLDEN_GARDREN_CRITICAL_INTEGRITY 0.3
 
 /**
  * ## Golden-Gardren
@@ -64,6 +66,8 @@
 	COOLDOWN_DECLARE(shield_toggle_cooldown)
 	/// The shield does not recharge until this runs out.
 	COOLDOWN_DECLARE(shield_recharge_cooldown)
+	/// Timer of a running emergency ejection countdown.
+	var/emergency_eject_timer
 
 /datum/armor/mecha_golden_gardren
 	melee = 45
@@ -75,6 +79,9 @@
 	acid = 100
 
 /obj/vehicle/sealed/mecha/golden_gardren/Destroy()
+	deltimer(emergency_eject_timer)
+	// Put the pilots on free turfs instead of the base drop under the frame.
+	emergency_eject(stun = FALSE)
 	// The halves exist only as a part of this frame now, so they go down with it.
 	QDEL_NULL(docked_golden)
 	QDEL_NULL(docked_gardren)
@@ -83,6 +90,8 @@
 /obj/vehicle/sealed/mecha/golden_gardren/generate_actions()
 	. = ..()
 	initialize_passenger_action_type(/datum/action/vehicle/sealed/mecha/golden_gardren_swap_seat)
+	initialize_passenger_action_type(/datum/action/vehicle/sealed/mecha/golden_gardren_emergency_eject)
+	initialize_passenger_action_type(/datum/action/vehicle/sealed/mecha/golden_gardren_separate)
 	initialize_controller_action_type(/datum/action/vehicle/sealed/mecha/golden_gardren_ram, VEHICLE_CONTROL_DRIVE)
 	initialize_controller_action_type(/datum/action/vehicle/sealed/mecha/mech_view_stats, VEHICLE_CONTROL_EQUIPMENT)
 	initialize_controller_action_type(/datum/action/vehicle/sealed/mecha/golden_gardren_shield, VEHICLE_CONTROL_EQUIPMENT)
@@ -144,7 +153,7 @@
 	if(shield_charge < shield_max_charge && COOLDOWN_FINISHED(src, shield_recharge_cooldown))
 		shield_charge = min(shield_max_charge, shield_charge + GOLDEN_GARDREN_SHIELD_RECHARGE_RATE * seconds_per_tick)
 
-/// The shield soaks brute and burn damage from its own charge before it reaches the hull.
+/// The shield soaks brute and burn damage from its own charge before it reaches the hull. Crossing into critical damage raises the alarm.
 /obj/vehicle/sealed/mecha/golden_gardren/take_damage(damage_amount, damage_type = BRUTE, damage_flag = "", sound_effect = TRUE, attack_dir, armour_penetration = 0)
 	if(shield_active && damage_amount > 0 && (damage_type == BRUTE || damage_type == BURN))
 		var/absorbed = min(damage_amount, shield_charge)
@@ -156,6 +165,18 @@
 			set_shield(FALSE, collapsed = TRUE)
 		if(damage_amount <= 0)
 			return 0
+	var/critical_integrity = max_integrity * GOLDEN_GARDREN_CRITICAL_INTEGRITY
+	var/was_above_critical = get_integrity() > critical_integrity
+	. = ..()
+	if(was_above_critical && !QDELETED(src) && get_integrity() > 0 && get_integrity() <= critical_integrity)
+		log_message("Integrity critical.", LOG_MECHA)
+		to_chat(occupants, span_userdanger("КРИТИЧЕСКИЕ ПОВРЕЖДЕНИЯ! Корпус вот-вот разрушится — готовьтесь к аварийному катапультированию."))
+		playsound(src, 'sound/machines/warning-buzzer.ogg', 75, FALSE)
+
+/// Throws the pilots clear of the wreck before the base destruction handles what is left.
+/obj/vehicle/sealed/mecha/golden_gardren/atom_destruction(damage_flag)
+	deltimer(emergency_eject_timer)
+	emergency_eject()
 	return ..()
 
 /// Raises or lowers the shield on the operator's request. Returns TRUE if the state changed.
@@ -217,7 +238,7 @@
 		return FALSE
 	if(golden_pilot && !take_pilot_from(golden, golden_pilot))
 		if(gardren_pilot)
-			return_pilot_to(gardren, gardren_pilot)
+			move_pilot_to(gardren, gardren_pilot)
 		return FALSE
 	// The seat follows the half the pilot came from, whoever entered first.
 	if(gardren_pilot)
@@ -254,13 +275,15 @@
 	set_mouse_pointer()
 	return TRUE
 
-/// Puts a pilot back into the half they came from. Used to roll back a failed assembly.
-/obj/vehicle/sealed/mecha/golden_gardren/proc/return_pilot_to(obj/vehicle/sealed/mecha/destination, mob/living/pilot)
+/// Moves a pilot from this frame into one of the halves. Used to roll back a failed assembly and on separation.
+/obj/vehicle/sealed/mecha/golden_gardren/proc/move_pilot_to(obj/vehicle/sealed/mecha/destination, mob/living/pilot)
 	if(!is_occupant(pilot))
 		return
 	SStgui.close_user_uis(pilot, src)
+	// Leaving this frame makes its Exited() remove the occupant here.
 	destination.mob_enter(pilot, silent = TRUE)
 	pilot.update_mouse_pointer()
+	destination.set_mouse_pointer()
 
 /// Stores a half inside the frame: hidden, switched off and not processing until the frame separates.
 /obj/vehicle/sealed/mecha/golden_gardren/proc/dock_component(obj/vehicle/sealed/mecha/component)
@@ -292,3 +315,4 @@
 #undef GOLDEN_GARDREN_SHIELD_RECHARGE_DELAY
 #undef GOLDEN_GARDREN_SHIELD_TOGGLE_DELAY
 #undef GOLDEN_GARDREN_SHIELD_COLLAPSE_DELAY
+#undef GOLDEN_GARDREN_CRITICAL_INTEGRITY
