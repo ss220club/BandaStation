@@ -8,3 +8,4 @@
 #include "code/combine.dm"
 #include "code/emergency.dm"
 #include "code/separate.dm"
+#include "code/cockpit.dm"

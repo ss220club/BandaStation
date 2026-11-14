@@ -216,3 +216,35 @@
 	var/obj/structure/mecha_wreckage/golden_gardren/wreck = locate() in frame_turf
 	TEST_ASSERT_NOTNULL(wreck, "The destroyed frame left no wreck")
 	qdel(wreck)
+
+/// The cockpit panel only runs each seat's own commands, whatever the client sends.
+/datum/unit_test/golden_gardren_cockpit_permissions
+
+/datum/unit_test/golden_gardren_cockpit_permissions/Run()
+	var/obj/vehicle/sealed/mecha/golden_gardren/combined = allocate(/obj/vehicle/sealed/mecha/golden_gardren)
+	var/mob/living/carbon/human/consistent/main_pilot = allocate(/mob/living/carbon/human/consistent)
+	var/mob/living/carbon/human/consistent/gunner = allocate(/mob/living/carbon/human/consistent)
+	combined.mob_enter(main_pilot, silent = TRUE)
+	combined.mob_enter(gunner, silent = TRUE)
+	var/datum/golden_gardren_cockpit/cockpit = allocate(/datum/golden_gardren_cockpit, combined)
+	var/datum/tgui/main_ui = allocate(/datum/tgui, main_pilot, cockpit, "GoldenGardrenCockpit")
+	var/datum/tgui/gunner_ui = allocate(/datum/tgui, gunner, cockpit, "GoldenGardrenCockpit")
+
+	cockpit.ui_act("toggle_shield", list(), main_ui, main_ui.state)
+	TEST_ASSERT(!combined.shield_active, "The main seat raised the shield")
+	cockpit.ui_act("toggle_shield", list(), gunner_ui, gunner_ui.state)
+	TEST_ASSERT(combined.shield_active, "The weapons seat could not raise the shield")
+
+	var/strafe_before = combined.strafe
+	cockpit.ui_act("toggle_strafe", list(), gunner_ui, gunner_ui.state)
+	TEST_ASSERT_EQUAL(combined.strafe, strafe_before, "The weapons seat toggled strafing")
+	cockpit.ui_act("toggle_strafe", list(), main_ui, main_ui.state)
+	TEST_ASSERT(combined.strafe != strafe_before, "The main seat could not toggle strafing")
+
+	TEST_ASSERT(!cockpit.ui_act("reload", list("slot" = "not_a_slot"), gunner_ui, gunner_ui.state), "A reload of a made-up slot was accepted")
+
+	var/list/main_data = cockpit.ui_data(main_pilot)
+	TEST_ASSERT(isnull(main_data["weapons"]), "The main seat was sent the weapons seat data")
+	var/list/gunner_data = cockpit.ui_data(gunner)
+	TEST_ASSERT(isnull(gunner_data["strafe"]), "The weapons seat was sent the main seat data")
+	TEST_ASSERT(length(gunner_data["weapons"]), "The weapons seat got no weapon data")

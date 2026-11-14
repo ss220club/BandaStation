@@ -72,6 +72,8 @@
 	var/list/eject_landings
 	/// Assoc list: pilot -> landing marker image shown to that pilot only.
 	var/list/eject_markers
+	/// Per-seat cockpit panel, created the first time a pilot opens it.
+	var/datum/golden_gardren_cockpit/cockpit
 
 /datum/armor/mecha_golden_gardren
 	melee = 45
@@ -83,6 +85,7 @@
 	acid = 100
 
 /obj/vehicle/sealed/mecha/golden_gardren/Destroy()
+	QDEL_NULL(cockpit)
 	// Put the pilots on free turfs instead of the base drop under the frame.
 	emergency_eject(use_capsules = FALSE, stun = FALSE)
 	// The halves exist only as a part of this frame now, so they go down with it.
@@ -92,6 +95,7 @@
 
 /obj/vehicle/sealed/mecha/golden_gardren/generate_actions()
 	. = ..()
+	initialize_passenger_action_type(/datum/action/vehicle/sealed/mecha/golden_gardren_cockpit)
 	initialize_passenger_action_type(/datum/action/vehicle/sealed/mecha/golden_gardren_swap_seat)
 	initialize_passenger_action_type(/datum/action/vehicle/sealed/mecha/golden_gardren_emergency_eject)
 	initialize_passenger_action_type(/datum/action/vehicle/sealed/mecha/golden_gardren_separate)
