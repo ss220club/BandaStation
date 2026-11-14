@@ -162,6 +162,7 @@
 		/obj/item/food/grown/mushroom/chanterelle = 1
 	)
 	result = /obj/item/food/salad/risotto
+	added_foodtypes = MUSHROOM // BANDASTATION ADDITION
 	removed_foodtypes = BREAKFAST
 	dish_category = DISH_SALAD
 
@@ -362,6 +363,7 @@
 		/obj/item/food/grown/mushroom/libertycap = 3
 	)
 	result = /obj/item/food/bowled/spacylibertyduff
+	added_foodtypes = MUSHROOM // BANDASTATION ADDITION
 	meal_category = MEAL_DESSERT // jello
 
 /datum/crafting_recipe/food/amanitajelly
@@ -372,7 +374,7 @@
 		/obj/item/food/grown/mushroom/amanita = 3
 	)
 	result = /obj/item/food/bowled/amanitajelly
-	added_foodtypes = TOXIC
+	added_foodtypes = TOXIC|MUSHROOM // BANDASTATION ADDITION
 	meal_category = MEAL_DESSERT // jello
 
 /datum/crafting_recipe/food/buttered_baked_potato

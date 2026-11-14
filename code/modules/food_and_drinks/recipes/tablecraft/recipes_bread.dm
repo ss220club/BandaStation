@@ -226,9 +226,9 @@
 		/obj/item/food/grown/mushroom/amanita = 1
 		)
 	result = /obj/item/food/breadslice/moldy
-	removed_foodtypes = VEGETABLES|GRAIN
+	removed_foodtypes = GRAIN
 	added_foodtypes = GROSS
-	dish_category = DISH_BREAD
+	dish_category = DISH_MUSHROOM // BANDASTATION ADDITION
 
 /datum/crafting_recipe/food/breadcat
 	name = "Bread cat/bread hybrid"

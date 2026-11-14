@@ -42,8 +42,11 @@
 				amount += belly.reagents.get_reagent_amount(toxin.type)
 
 			if(amount <= liver_tolerance * toxin.liver_tolerance_multiplier)
-				owner.reagents.remove_reagent(toxin.type, toxin.metabolization_rate * owner.metabolism_efficiency * seconds_per_tick)
-				continue
+// BANDASTATION EDIT START - Allow custom liver metabolism for small toxin doses
+				if(!liver.has_custom_toxin_metabolism(toxin))
+					owner.reagents.remove_reagent(toxin.type, toxin.metabolization_rate * owner.metabolism_efficiency * seconds_per_tick)
+					continue
+// BANDASTATION EDIT END
 
 		need_mob_update += metabolize_reagent(owner, reagent, seconds_per_tick, can_overdose, liverless, dead, reagents_metabolized)
 
@@ -53,6 +56,10 @@
 		if(toxin && !liverless && liver && liver.filterToxins && !HAS_TRAIT(owner, TRAIT_TOXINLOVER) && !HAS_TRAIT(owner, TRAIT_TOXIMMUNE))
 			if(toxin.affected_organ_flags && !(liver.organ_flags & toxin.affected_organ_flags)) //this particular toxin does not affect this type of organ
 				continue
+// BANDASTATION EDIT START - Skrell dietary and special toxin liver immunity
+			if(liver.can_filter_toxin(toxin))
+				continue
+// BANDASTATION EDIT END
 
 			// a 15u syringe is a nice baseline to scale lethality by
 			liver_damage += ((amount/15) * toxin.toxpwr * toxin.liver_damage_multiplier) / liver.liver_resistance

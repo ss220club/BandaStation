@@ -11,6 +11,7 @@
 		/obj/item/food/grown/apple = 1
 	)
 	result = /obj/item/food/salad/herbsalad
+	cuisine_category = CUISINE_SKRELL // BANDASTATION ADDITION
 	dish_category = DISH_SALAD
 
 /datum/crafting_recipe/food/aesirsalad
@@ -21,6 +22,7 @@
 		/obj/item/food/grown/apple/gold = 1
 	)
 	result = /obj/item/food/salad/aesirsalad
+	cuisine_category = CUISINE_SKRELL // BANDASTATION ADDITION
 	dish_category = DISH_SALAD
 
 /datum/crafting_recipe/food/validsalad
@@ -95,6 +97,7 @@
 		/obj/item/food/grown/peace = 1
 	)
 	result = /obj/item/food/salad/edensalad
+	cuisine_category = CUISINE_SKRELL // BANDASTATION ADDITION
 	dish_category = DISH_SALAD
 
 /datum/crafting_recipe/food/kale_salad

@@ -31,6 +31,7 @@ export enum Food {
   Toxic = 'TOXIC',
   Vegetables = 'VEGETABLES',
   Egg = 'EGG',
+  Mushroom = 'MUSHROOM',
 }
 
 export enum JobPriority {
