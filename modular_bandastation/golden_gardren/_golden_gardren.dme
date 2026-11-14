@@ -9,3 +9,4 @@
 #include "code/emergency.dm"
 #include "code/separate.dm"
 #include "code/cockpit.dm"
+#include "code/summon.dm"

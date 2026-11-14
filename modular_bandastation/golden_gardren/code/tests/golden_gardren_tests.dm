@@ -248,3 +248,46 @@
 	var/list/gunner_data = cockpit.ui_data(gunner)
 	TEST_ASSERT(isnull(gunner_data["strafe"]), "The weapons seat was sent the main seat data")
 	TEST_ASSERT(length(gunner_data["weapons"]), "The weapons seat got no weapon data")
+
+/// Activated inside a mech of the pair the summon implant binds to it; a docked half answers through its frame.
+/datum/unit_test/golden_gardren_summon_link
+
+/datum/unit_test/golden_gardren_summon_link/Run()
+	var/mob/living/carbon/human/consistent/pilot = allocate(/mob/living/carbon/human/consistent)
+	var/obj/vehicle/sealed/mecha/gardren/gardren = allocate(/obj/vehicle/sealed/mecha/gardren)
+	var/obj/item/implant/golden_gardren_summon/implant = allocate(/obj/item/implant/golden_gardren_summon)
+	TEST_ASSERT(implant.implant(pilot, null, silent = TRUE, force = TRUE), "The summon implant could not be implanted")
+
+	gardren.mob_enter(pilot, silent = TRUE)
+	implant.activate("action_button")
+	TEST_ASSERT_EQUAL(implant.get_linked_mech(), gardren, "Activating the implant inside the Gardren did not bind it")
+
+	var/obj/vehicle/sealed/mecha/golden_gardren/frame = allocate(/obj/vehicle/sealed/mecha/golden_gardren, null, TRUE)
+	gardren.forceMove(frame)
+	TEST_ASSERT_EQUAL(implant.get_linked_mech(), frame, "A docked half did not answer the summon through its frame")
+
+/// The summon refuses an occupied mech, and an empty one is dropped in a pod next to the summoner, never onto them.
+/datum/unit_test/golden_gardren_summon_drop
+
+/datum/unit_test/golden_gardren_summon_drop/Run()
+	var/mob/living/carbon/human/consistent/summoner = allocate(/mob/living/carbon/human/consistent)
+	var/mob/living/carbon/human/consistent/stowaway = allocate(/mob/living/carbon/human/consistent)
+	var/obj/vehicle/sealed/mecha/golden/golden = allocate(/obj/vehicle/sealed/mecha/golden, run_loc_floor_top_right)
+	var/obj/item/implant/golden_gardren_summon/implant = allocate(/obj/item/implant/golden_gardren_summon)
+	TEST_ASSERT(implant.implant(summoner, null, silent = TRUE, force = TRUE), "The summon implant could not be implanted")
+
+	var/turf/landing = implant.find_landing(summoner)
+	TEST_ASSERT_NOTNULL(landing, "No landing spot was found around the summoner in the test room")
+	TEST_ASSERT(landing != get_turf(summoner), "The mech was going to land on the summoner")
+	TEST_ASSERT(get_dist(landing, summoner) <= 2, "The landing spot is too far from the summoner")
+
+	golden.mob_enter(stowaway, silent = TRUE)
+	TEST_ASSERT_NOTNULL(implant.summon_blocker(golden, summoner, landing, check_cooldown = TRUE), "An occupied mech was allowed to be summoned")
+	golden.mob_exit(stowaway, silent = TRUE)
+	TEST_ASSERT_NULL(implant.summon_blocker(golden, summoner, landing, check_cooldown = TRUE), "An empty mech with a free landing spot was refused")
+
+	implant.drop_mech(golden, landing)
+	TEST_ASSERT(istype(golden.loc, /obj/structure/closet/supplypod), "The summoned mech was not put into the drop pod")
+	var/obj/effect/pod_landingzone/zone = locate() in landing
+	TEST_ASSERT_NOTNULL(zone, "The drop pod was not sent to the landing spot")
+	TEST_ASSERT_EQUAL(zone.pod, golden.loc, "The landing spot belongs to a different pod")
