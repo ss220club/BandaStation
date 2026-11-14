@@ -1,6 +1,8 @@
+#include "_defines.dm"
 #include "_golden_gardren.dm"
 
 #include "code/golden.dm"
 #include "code/gardren.dm"
 #include "code/golden_gardren.dm"
+#include "code/actions.dm"
 #include "code/combine.dm"

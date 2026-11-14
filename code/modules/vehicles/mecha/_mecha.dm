@@ -695,11 +695,15 @@
 	if(internal_damage & MECHA_INT_CONTROL_LOST)
 		target = pick(view(3,target))
 	var/mob/living/livinguser = user
-	if(!(livinguser in return_controllers_with_flag(VEHICLE_CONTROL_EQUIPMENT)))
+	// A seat with hands but no equipment control goes straight to the melee attack below.
+	var/uses_equipment = (livinguser in return_controllers_with_flag(VEHICLE_CONTROL_EQUIPMENT))
+	if(!uses_equipment && !(livinguser in return_controllers_with_flag(VEHICLE_CONTROL_MELEE)))
 		balloon_alert(user, "wrong seat for equipment!")
 		return
 	var/obj/item/mecha_parts/mecha_equipment/selected
-	if(modifiers[BUTTON] == RIGHT_CLICK)
+	if(!uses_equipment)
+		selected = null
+	else if(modifiers[BUTTON] == RIGHT_CLICK)
 		selected = equip_by_category[MECHA_R_ARM]
 	else
 		selected = equip_by_category[MECHA_L_ARM]
