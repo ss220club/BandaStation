@@ -182,7 +182,13 @@
 	TEST_ASSERT(combined.start_emergency_eject(main_pilot), "The ejection countdown did not start")
 	TEST_ASSERT(!combined.choose_landing(main_pilot, frame_turf), "The mech's own turf was accepted as a landing spot")
 	TEST_ASSERT(!combined.choose_landing(main_pilot, far_away), "A landing spot out of range was accepted")
-	TEST_ASSERT_NULL(combined.landing_blocker(picked), "A free floor two tiles away is refused as a landing spot")
+	// Some test maps keep the test room airless; there the same free floor must be refused as unsafe instead.
+	if(!is_safe_turf(picked, extended_safety_checks = TRUE))
+		TEST_ASSERT(!combined.choose_landing(main_pilot, picked), "An unsafe landing spot was accepted")
+		combined.emergency_eject()
+		TEST_ASSERT(golden_gardren_capsule_target(main_pilot, frame_turf) != picked, "A capsule was sent to an unsafe spot")
+		return
+	TEST_ASSERT_NULL(combined.landing_blocker(picked), "A free safe floor two tiles away is refused as a landing spot")
 	TEST_ASSERT(combined.choose_landing(main_pilot, picked), "A free landing spot in range was refused")
 
 	combined.emergency_eject()
