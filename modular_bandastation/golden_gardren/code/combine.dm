@@ -6,9 +6,9 @@
 /// Halves of the pair currently in the middle of combining. Blocks a second combination from starting on them.
 GLOBAL_LIST_EMPTY(golden_gardren_combining)
 
-// shortcut: one pilot may combine the pair alone and without consent, for testing; switch off before the release build.
-/// Lets a single pilot combine the pair: the second half may be empty and its pilot is not asked.
-GLOBAL_VAR_INIT(golden_gardren_solo_combine, TRUE)
+/// Lets a single pilot combine or separate the pair: the other half may be empty and the other pilot is not asked.
+/// Off in play; admins can switch it on through the global variables for solo testing.
+GLOBAL_VAR_INIT(golden_gardren_solo_combine, FALSE)
 
 /datum/action/vehicle/sealed/mecha/golden_gardren_combine
 	name = "Объединение"
