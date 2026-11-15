@@ -81,8 +81,7 @@
 		return "в мехе кто-то есть"
 	if(mech.completely_disabled || mech.is_currently_ejecting || (check_cooldown && (mech in GLOB.golden_gardren_combining)))
 		return "мех занят"
-	var/obj/vehicle/sealed/mecha/golden_gardren/frame = mech
-	if(istype(frame) && frame.emergency_eject_timer)
+	if(golden_gardren_is_ejecting(mech))
 		return "мех занят"
 	if(!landing)
 		return "нет места для посадки"
@@ -108,8 +107,8 @@
 /// The mech fires its jets and climbs out of sight where it stands.
 /obj/item/implant/golden_gardren_summon/proc/take_off(obj/vehicle/sealed/mecha/mech)
 	var/turf/origin = get_turf(mech)
-	// Nobody held in the claw goes up into the sky with it.
-	golden_gardren_release_claw(mech)
+	// Nobody held in the fist goes up into the sky with it.
+	golden_gardren_release_fist(mech)
 	mech.visible_message(span_warning("[mech.declent_ru(NOMINATIVE)] с рёвом двигателей взмывает в небо!"))
 	playsound(origin, 'sound/vehicles/rocketlaunch.ogg', 80, TRUE)
 	for(var/turf/smoke_turf in range(1, origin))

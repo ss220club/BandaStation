@@ -60,8 +60,8 @@
 /datum/component/golden_gardren_phasing/proc/toggle(mob/user)
 	var/obj/vehicle/sealed/mecha/mech = parent
 	if(!active)
-		var/datum/component/golden_gardren_claw/claw = mech.GetComponent(/datum/component/golden_gardren_claw)
-		if(claw?.held)
+		var/datum/component/golden_gardren_fist/fist = mech.GetComponent(/datum/component/golden_gardren_fist)
+		if(fist?.held)
 			mech.balloon_alert(user, "сначала отпустите цель!")
 			return FALSE
 		if(mech.get_charge() <= energy_drain)

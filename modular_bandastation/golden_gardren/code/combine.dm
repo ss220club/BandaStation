@@ -43,7 +43,7 @@ GLOBAL_VAR_INIT(golden_gardren_solo_combine, TRUE)
 	for(var/obj/vehicle/sealed/mecha/mech as anything in list(golden, gardren))
 		if(mech.get_integrity() <= 0 || mech.completely_disabled)
 			return "[mech.name] неисправен"
-		if(mech.is_currently_ejecting)
+		if(mech.is_currently_ejecting || golden_gardren_is_ejecting(mech))
 			return "[mech.name] занят"
 		if(golden_gardren_pilot(mech))
 			pilots++

@@ -170,8 +170,9 @@
 	var/mob/living/carbon/human/consistent/gunner = allocate(/mob/living/carbon/human/consistent)
 	combined.mob_enter(main_pilot, silent = TRUE)
 	combined.mob_enter(gunner, silent = TRUE)
+	var/datum/component/golden_gardren_ejection/ejection = combined.GetComponent(/datum/component/golden_gardren_ejection)
 
-	combined.emergency_eject()
+	ejection.eject()
 	var/list/landings = list()
 	for(var/mob/living/carbon/human/pilot as anything in list(main_pilot, gunner))
 		TEST_ASSERT(!combined.is_occupant(pilot), "A pilot stayed inside after the emergency ejection")
@@ -194,23 +195,24 @@
 	// Two tiles away inside the test room, so the spot is in range and in sight.
 	var/turf/picked = locate(min(frame_turf.x + 2, run_loc_floor_top_right.x), frame_turf.y, frame_turf.z)
 	var/turf/far_away = locate(frame_turf.x + 10, frame_turf.y, frame_turf.z)
+	var/datum/component/golden_gardren_ejection/ejection = combined.GetComponent(/datum/component/golden_gardren_ejection)
 
-	TEST_ASSERT(!combined.choose_landing(main_pilot, picked), "A landing spot was accepted before the ejection countdown started")
-	TEST_ASSERT(combined.start_emergency_eject(main_pilot), "The ejection countdown did not start")
-	TEST_ASSERT(!combined.choose_landing(main_pilot, frame_turf), "The mech's own turf was accepted as a landing spot")
-	TEST_ASSERT(!combined.choose_landing(main_pilot, far_away), "A landing spot out of range was accepted")
+	TEST_ASSERT(!ejection.choose_landing(main_pilot, picked), "A landing spot was accepted before the ejection countdown started")
+	TEST_ASSERT(ejection.start(main_pilot), "The ejection countdown did not start")
+	TEST_ASSERT(!ejection.choose_landing(main_pilot, frame_turf), "The mech's own turf was accepted as a landing spot")
+	TEST_ASSERT(!ejection.choose_landing(main_pilot, far_away), "A landing spot out of range was accepted")
 	// Some test maps keep the test room airless; there the same free floor must be refused as unsafe instead.
 	if(!is_safe_turf(picked, extended_safety_checks = TRUE))
-		TEST_ASSERT(!combined.choose_landing(main_pilot, picked), "An unsafe landing spot was accepted")
-		combined.emergency_eject()
+		TEST_ASSERT(!ejection.choose_landing(main_pilot, picked), "An unsafe landing spot was accepted")
+		ejection.eject()
 		TEST_ASSERT(golden_gardren_capsule_target(main_pilot, frame_turf) != picked, "A capsule was sent to an unsafe spot")
 		return
-	TEST_ASSERT_NULL(combined.landing_blocker(picked), "A free safe floor two tiles away is refused as a landing spot")
-	TEST_ASSERT(combined.choose_landing(main_pilot, picked), "A free landing spot in range was refused")
+	TEST_ASSERT_NULL(ejection.landing_blocker(picked), "A free safe floor two tiles away is refused as a landing spot")
+	TEST_ASSERT(ejection.choose_landing(main_pilot, picked), "A free landing spot in range was refused")
 
-	combined.emergency_eject()
+	ejection.eject()
 	TEST_ASSERT_EQUAL(golden_gardren_capsule_target(main_pilot, frame_turf), picked, "The capsule was not sent to the chosen spot")
-	TEST_ASSERT(!LAZYLEN(combined.eject_landings), "The landing choice outlived the ejection")
+	TEST_ASSERT(!LAZYLEN(ejection.landings), "The landing choice outlived the ejection")
 
 /// Destroying the frame throws the pilots clear instead of deleting them with it.
 /datum/unit_test/golden_gardren_destruction_ejects
@@ -233,6 +235,27 @@
 	var/obj/structure/mecha_wreckage/golden_gardren/wreck = locate() in frame_turf
 	TEST_ASSERT_NOTNULL(wreck, "The destroyed frame left no wreck")
 	qdel(wreck)
+
+/// The lone Golden and Gardren carry the same capsules: the pilot gets the button, and a destroyed half fires its pilot clear.
+/datum/unit_test/golden_gardren_halves_eject
+
+/datum/unit_test/golden_gardren_halves_eject/Run()
+	for(var/half_type in list(/obj/vehicle/sealed/mecha/golden, /obj/vehicle/sealed/mecha/gardren))
+		var/obj/vehicle/sealed/mecha/half = allocate(half_type)
+		var/mob/living/carbon/human/consistent/pilot = allocate(/mob/living/carbon/human/consistent)
+		half.mob_enter(pilot, silent = TRUE)
+		var/turf/half_turf = half.loc
+		TEST_ASSERT(istype(half.cell, /obj/item/stock_parts/power_store/cell/bluespace), "[half] does not come with a bluespace cell")
+		TEST_ASSERT_NOTNULL(LAZYACCESSASSOC(half.occupant_actions, pilot, /datum/action/vehicle/sealed/mecha/golden_gardren_emergency_eject), "The pilot of [half] got no ejection button")
+
+		half.take_damage(half.get_integrity() + 10, BRUTE)
+		TEST_ASSERT(QDELETED(half), "[half_type] survived damage beyond its integrity")
+		TEST_ASSERT(!QDELETED(pilot), "The pilot of [half_type] was deleted together with it")
+		var/turf/landing = golden_gardren_capsule_target(pilot, half_turf)
+		TEST_ASSERT_NOTNULL(landing, "The pilot of [half_type] was not fired clear in a capsule")
+		TEST_ASSERT(landing != half_turf, "The pilot of [half_type] was sent under the wreck despite free turfs around it")
+		for(var/obj/structure/mecha_wreckage/wreck in half_turf)
+			qdel(wreck)
 
 /// The cockpit panel only runs each seat's own commands, whatever the client sends.
 /datum/unit_test/golden_gardren_cockpit_permissions
@@ -346,51 +369,95 @@
 	gardren.mob_enter(gardren_pilot, silent = TRUE)
 	TEST_ASSERT_NOTNULL(LAZYACCESSASSOC(gardren.occupant_actions, gardren_pilot, /datum/action/vehicle/sealed/mecha/golden_gardren_phasing), "The Gardren pilot got no phase shift button")
 
-/// The claw seizes an adjacent target that then rides along, does not let go on a plain resist, and opens when the pilot leaves.
-/datum/unit_test/golden_gardren_claw
+/// The fist seizes an adjacent target that rides along; squeezing chokes and then breaks bones; a click throws the target; a plain resist does not free it.
+/datum/unit_test/golden_gardren_fist
 	priority = TEST_LONGER
 
-/datum/unit_test/golden_gardren_claw/Run()
+/datum/unit_test/golden_gardren_fist/Run()
 	var/obj/vehicle/sealed/mecha/gardren/gardren = allocate(/obj/vehicle/sealed/mecha/gardren)
 	var/mob/living/carbon/human/consistent/pilot = allocate(/mob/living/carbon/human/consistent)
 	var/turf/target_turf = get_step(gardren.loc, EAST)
 	var/mob/living/carbon/human/consistent/target = allocate(/mob/living/carbon/human/consistent, target_turf)
-	// Consistent dummies act instantly; the claw and the escape are timed actions, so both use the live game's timing.
+	// Consistent dummies act instantly; the grab and the escape are timed actions, so both use the live game's timing.
 	for(var/mob/living/carbon/human/consistent/actor as anything in list(pilot, target))
 		actor.add_or_update_variable_actionspeed_modifier(/datum/actionspeed_modifier/base, multiplicative_slowdown = 1)
 	gardren.mob_enter(pilot, silent = TRUE)
 	gardren.setDir(EAST)
-	var/datum/component/golden_gardren_claw/claw = gardren.GetComponent(/datum/component/golden_gardren_claw)
-
-	var/datum/action/claw_button = LAZYACCESSASSOC(gardren.occupant_actions, pilot, /datum/action/vehicle/sealed/mecha/golden_gardren_claw)
-	TEST_ASSERT_NOTNULL(claw_button, "The pilot got no claw button")
-	claw_button.Trigger()
-	TEST_ASSERT(claw.claw_mode, "The claw button did not switch the hands to grabbing")
-
 	pilot.set_combat_mode(TRUE)
+	var/datum/component/golden_gardren_fist/fist = gardren.GetComponent(/datum/component/golden_gardren_fist)
+
+	var/datum/action/fist_button = LAZYACCESSASSOC(gardren.occupant_actions, pilot, /datum/action/vehicle/sealed/mecha/golden_gardren_fist)
+	var/datum/action/squeeze_button = LAZYACCESSASSOC(gardren.occupant_actions, pilot, /datum/action/vehicle/sealed/mecha/golden_gardren_fist_squeeze)
+	TEST_ASSERT_NOTNULL(fist_button, "The pilot got no fist button")
+	TEST_ASSERT_NOTNULL(squeeze_button, "The pilot got no squeeze button")
+	fist_button.Trigger()
+	TEST_ASSERT(fist.grab_mode, "The fist button did not switch the hand to grabbing")
+
 	click_wrapper(pilot, target)
-	TEST_ASSERT_EQUAL(target.get_brute_loss(), 0, "The pilot punched the target in claw mode")
-	TEST_ASSERT_NULL(claw.held, "The claw closed without its wind-up")
+	TEST_ASSERT_EQUAL(target.get_brute_loss(), 0, "The pilot punched the target in grab mode")
+	TEST_ASSERT_NULL(fist.held, "The fist closed without its wind-up")
 	sleep(1.5 SECONDS)
-	TEST_ASSERT_EQUAL(claw.held, target, "The claw did not seize the adjacent target")
+	TEST_ASSERT_EQUAL(fist.held, target, "The fist did not seize the adjacent target")
 	TEST_ASSERT_EQUAL(target.buckled, gardren, "The seized target is not held by the mech")
 	TEST_ASSERT(HAS_TRAIT(target, TRAIT_HANDS_BLOCKED), "The seized target can still use its hands")
 
 	var/datum/action/phasing_button = LAZYACCESSASSOC(gardren.occupant_actions, pilot, /datum/action/vehicle/sealed/mecha/golden_gardren_phasing)
 	phasing_button.Trigger()
 	var/datum/component/golden_gardren_phasing/phasing = gardren.GetComponent(/datum/component/golden_gardren_phasing)
-	TEST_ASSERT(!phasing.active, "The phase shift turned on with a target in the claw")
+	TEST_ASSERT(!phasing.active, "The phase shift turned on with a target in the fist")
 
-	var/turf/next = get_step(target_turf, EAST)
 	TEST_ASSERT_EQUAL(target.loc, gardren.loc, "The seized target was not lifted onto the mech")
-	TEST_ASSERT(gardren.Move(target_turf, EAST), "The mech could not step forward with a target in the claw")
+	TEST_ASSERT(gardren.Move(target_turf, EAST), "The mech could not step forward with a target in the fist")
 	TEST_ASSERT_EQUAL(target.loc, gardren.loc, "The seized target did not ride along with the mech")
 
 	target.resist_buckle()
-	TEST_ASSERT_EQUAL(target.buckled, gardren, "A plain resist got the target out of the claw at once")
+	TEST_ASSERT_EQUAL(target.buckled, gardren, "A plain resist got the target out of the fist at once")
+
+	// The squeeze is driven by its processing tick; the test steps it second by second instead of waiting.
+	squeeze_button.Trigger()
+	TEST_ASSERT(fist.squeezing, "The squeeze button did not start squeezing the held target")
+	TEST_ASSERT(HAS_TRAIT(target, TRAIT_MUTE), "The squeezed target can still speak")
+	fist.process(1)
+	TEST_ASSERT(target.get_oxy_loss() > 0, "The squeeze did not choke the target")
+	TEST_ASSERT_EQUAL(target.get_brute_loss(), 0, "The squeeze crushed the target before it had been held long enough")
+	for(var/second in 1 to 9)
+		fist.process(1)
+	TEST_ASSERT(target.get_brute_loss() > 0, "A long squeeze did not crush the target")
+	var/obj/item/bodypart/chest = target.get_bodypart(BODY_ZONE_CHEST)
+	TEST_ASSERT_NOTNULL(locate(/datum/wound/blunt/bone) in chest.wounds, "A long squeeze did not break any bones")
+
+	var/turf/aim = locate(min(gardren.x + 3, run_loc_floor_top_right.x), gardren.y, gardren.z)
+	var/brute_before = target.get_brute_loss()
+	click_wrapper(pilot, aim)
+	TEST_ASSERT_NULL(fist.held, "A click with a target in the fist did not throw it")
+	TEST_ASSERT_NULL(target.buckled, "The thrown target is still held by the mech")
+	TEST_ASSERT(!fist.squeezing, "The squeeze went on after the target was thrown")
+	TEST_ASSERT(!HAS_TRAIT(target, TRAIT_MUTE) && !HAS_TRAIT(target, TRAIT_HANDS_BLOCKED), "The thrown target kept the fist's restraints")
+	TEST_ASSERT(target.get_brute_loss() > brute_before, "The throw did no damage")
+
+/// When the pilot leaves, the fist opens and puts the held target down in front of the mech.
+/datum/unit_test/golden_gardren_fist_release
+	priority = TEST_LONGER
+
+/datum/unit_test/golden_gardren_fist_release/Run()
+	var/obj/vehicle/sealed/mecha/gardren/gardren = allocate(/obj/vehicle/sealed/mecha/gardren)
+	var/mob/living/carbon/human/consistent/pilot = allocate(/mob/living/carbon/human/consistent)
+	var/turf/target_turf = get_step(gardren.loc, EAST)
+	var/mob/living/carbon/human/consistent/target = allocate(/mob/living/carbon/human/consistent, target_turf)
+	gardren.mob_enter(pilot, silent = TRUE)
+	gardren.setDir(EAST)
+	var/datum/component/golden_gardren_fist/fist = gardren.GetComponent(/datum/component/golden_gardren_fist)
+	var/datum/action/fist_button = LAZYACCESSASSOC(gardren.occupant_actions, pilot, /datum/action/vehicle/sealed/mecha/golden_gardren_fist)
+	fist_button.Trigger()
+	click_wrapper(pilot, target)
+	// Consistent dummies close the fist at once.
+	TEST_ASSERT_EQUAL(fist.held, target, "The fist did not seize the adjacent target")
+	var/datum/action/squeeze_button = LAZYACCESSASSOC(gardren.occupant_actions, pilot, /datum/action/vehicle/sealed/mecha/golden_gardren_fist_squeeze)
+	squeeze_button.Trigger()
 
 	gardren.mob_exit(pilot, silent = TRUE)
-	TEST_ASSERT_NULL(target.buckled, "The claw kept the target after its pilot left")
-	TEST_ASSERT_NULL(claw.held, "The claw still references the target it let go of")
-	TEST_ASSERT(!HAS_TRAIT(target, TRAIT_HANDS_BLOCKED), "The released target still cannot use its hands")
-	TEST_ASSERT_EQUAL(target.loc, next, "The released target was not put down in front of the mech")
+	TEST_ASSERT_NULL(target.buckled, "The fist kept the target after its pilot left")
+	TEST_ASSERT_NULL(fist.held, "The fist still references the target it let go of")
+	TEST_ASSERT(!fist.squeezing, "The fist kept squeezing after its pilot left")
+	TEST_ASSERT(!HAS_TRAIT(target, TRAIT_HANDS_BLOCKED) && !HAS_TRAIT(target, TRAIT_MUTE), "The released target kept the fist's restraints")
+	TEST_ASSERT_EQUAL(target.loc, target_turf, "The released target was not put down in front of the mech")

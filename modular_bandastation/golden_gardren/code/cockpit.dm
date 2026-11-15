@@ -67,7 +67,7 @@
 	data["shield_active"] = mech.shield.active
 	data["shield_charge"] = mech.shield.charge
 	data["shield_max_charge"] = mech.shield.max_charge
-	data["ejecting"] = !!mech.emergency_eject_timer
+	data["ejecting"] = golden_gardren_is_ejecting(mech)
 	data["separate_blocker"] = mech.separate_blocker()
 	var/list/main_pilots = mech.return_drivers()
 	var/list/gunners = mech.return_controllers_with_flag(VEHICLE_CONTROL_EQUIPMENT)
@@ -113,7 +113,8 @@
 		return FALSE
 	switch(action)
 		if("emergency_eject")
-			return mech.start_emergency_eject(user)
+			var/datum/component/golden_gardren_ejection/ejection = mech.GetComponent(/datum/component/golden_gardren_ejection)
+			return ejection?.start(user)
 		if("separate")
 			INVOKE_ASYNC(GLOBAL_PROC, GLOBAL_PROC_REF(golden_gardren_try_separate), mech, user)
 			return TRUE

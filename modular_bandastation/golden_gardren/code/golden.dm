@@ -1,7 +1,7 @@
 /**
  * ## Golden
  *
- * Small gunner of the Golden-Gardren pair, the head of the combined mech. Gygax speed, Marauder-grade armor and an energy shield.
+ * Small gunner of the Golden-Gardren pair, the head of the combined mech. Faster than a Gygax, Marauder-grade armor and an energy shield.
  * Alone it is a regular single-pilot exosuit; it climbs onto the Gardren to form the combined mech.
  * Event-only: spawned by admins, not buildable.
  */
@@ -14,7 +14,8 @@
 	mecha_flags = CAN_STRAFE | IS_ENCLOSED | HAS_LIGHTS | BEACON_TRACKABLE
 	// Reuses the Savannah-Ivanov module bit so combat equipment fits without a new exosuit define.
 	mech_type = EXOSUIT_MODULE_SAVANNAH
-	movedelay = 3
+	// About a tenth faster than a Gygax: with the server's speed scale this is the step that lands on a 4 decisecond move.
+	movedelay = 2.7
 	max_integrity = 200
 	armor_type = /datum/armor/mecha_marauder
 	max_temperature = 30000
@@ -42,6 +43,14 @@
 /obj/vehicle/sealed/mecha/golden/Initialize(mapload, built_manually)
 	. = ..()
 	shield = new(src)
+	AddComponent(/datum/component/golden_gardren_ejection)
+
+/obj/vehicle/sealed/mecha/golden/populate_parts()
+	cell = new /obj/item/stock_parts/power_store/cell/bluespace(src)
+	scanmod = new /obj/item/stock_parts/scanning_module(src)
+	capacitor = new /obj/item/stock_parts/capacitor(src)
+	servo = new /obj/item/stock_parts/servo(src)
+	update_part_values()
 
 /obj/vehicle/sealed/mecha/golden/Destroy()
 	QDEL_NULL(shield)
@@ -50,11 +59,27 @@
 /obj/vehicle/sealed/mecha/golden/generate_actions()
 	. = ..()
 	initialize_passenger_action_type(/datum/action/vehicle/sealed/mecha/golden_gardren_combine)
+	initialize_passenger_action_type(/datum/action/vehicle/sealed/mecha/golden_gardren_emergency_eject)
 	initialize_controller_action_type(/datum/action/vehicle/sealed/mecha/golden_gardren_shield, VEHICLE_CONTROL_EQUIPMENT)
 
 /obj/vehicle/sealed/mecha/golden/remove_occupant(mob/driver)
 	. = ..()
 	shield?.drop_if_unmanned()
+	var/datum/component/golden_gardren_ejection/ejection = GetComponent(/datum/component/golden_gardren_ejection)
+	ejection?.clear_landing_choice(driver)
+
+/// While the ejection countdown runs, the pilot's click picks the landing turf instead of shooting.
+/obj/vehicle/sealed/mecha/golden/on_mouseclick(mob/user, atom/target, list/modifiers)
+	var/datum/component/golden_gardren_ejection/ejection = GetComponent(/datum/component/golden_gardren_ejection)
+	if(ejection?.handle_click(user, target))
+		return COMSIG_MOB_CANCEL_CLICKON
+	return ..()
+
+/// Fires the pilot clear of the wreck in a capsule before the base destruction handles what is left.
+/obj/vehicle/sealed/mecha/golden/atom_destruction(damage_flag)
+	var/datum/component/golden_gardren_ejection/ejection = GetComponent(/datum/component/golden_gardren_ejection)
+	ejection?.eject()
+	return ..()
 
 /obj/vehicle/sealed/mecha/golden/take_damage(damage_amount, damage_type = BRUTE, damage_flag = "", sound_effect = TRUE, attack_dir, armour_penetration = 0)
 	if(shield?.active && damage_amount > 0)

@@ -7,45 +7,58 @@
 /// Capsule flight in deciseconds: short drop, opens at once, vanishes after landing.
 #define GOLDEN_GARDREN_CAPSULE_DELAYS list(POD_TRANSIT = 10, POD_FALLING = 4, POD_OPENING = 5, POD_LEAVING = 10)
 
-/// Starts the ejection countdown. During it each pilot clicks the turf their capsule lands on.
-/datum/action/vehicle/sealed/mecha/golden_gardren_emergency_eject
-	name = "АВАРИЙНОЕ КАТАПУЛЬТИРОВАНИЕ"
-	desc = "Через 5 секунд выстреливает обоих пилотов в капсулах. До выстрела каждый пилот кликом выбирает место посадки: не дальше 5 клеток, в зоне видимости, безопасное. Отменить нельзя."
-	button_icon = 'modular_bandastation/golden_gardren/icons/actions.dmi'
-	button_icon_state = "emergency_eject"
+/**
+ * ## Golden-Gardren emergency ejection
+ *
+ * Rescue capsules of the Golden, the Gardren and the combined mech. The countdown gives every pilot time to click
+ * the turf their capsule lands on; without a choice the capsule lands on a free turf right next to the mech.
+ * The owner routes its pilots' clicks during the countdown, pilots leaving the seat, and its destruction through here.
+ */
+/datum/component/golden_gardren_ejection
+	/// Timer of a running ejection countdown.
+	var/timer
+	/// Assoc list: pilot -> turf they picked for their capsule during the countdown.
+	var/list/landings
+	/// Assoc list: pilot -> landing marker image shown to that pilot only.
+	var/list/markers
 
-/datum/action/vehicle/sealed/mecha/golden_gardren_emergency_eject/Trigger(mob/clicker, trigger_flags)
-	. = ..()
-	if(!.)
-		return
-	var/obj/vehicle/sealed/mecha/golden_gardren/mech = chassis
-	if(!istype(mech) || !(owner in mech.occupants))
-		return
-	mech.start_emergency_eject(owner)
+/datum/component/golden_gardren_ejection/Initialize()
+	if(!istype(parent, /obj/vehicle/sealed/mecha))
+		return COMPONENT_INCOMPATIBLE
 
-/// Starts the ejection countdown and lets the pilots aim their capsules. Returns FALSE if one is already running.
-/obj/vehicle/sealed/mecha/golden_gardren/proc/start_emergency_eject(mob/user)
-	if(emergency_eject_timer)
-		balloon_alert(user, "катапультирование уже идёт!")
-		return FALSE
-	log_message("[key_name(user)] started the emergency ejection.", LOG_MECHA)
-	to_chat(occupants, span_userdanger("АВАРИЙНОЕ КАТАПУЛЬТИРОВАНИЕ через [DisplayTimeText(GOLDEN_GARDREN_EJECT_DELAY)]! Кликните по клетке, куда сядет ваша капсула: не дальше [GOLDEN_GARDREN_EJECT_RANGE] клеток и в зоне видимости. Без выбора капсула сядет рядом с мехом."))
-	playsound(src, 'sound/machines/warning-buzzer.ogg', 75, FALSE)
-	for(var/mob/pilot as anything in occupants)
-		set_landing_cursor(pilot, aiming = TRUE)
-	emergency_eject_timer = addtimer(CALLBACK(src, PROC_REF(emergency_eject)), GOLDEN_GARDREN_EJECT_DELAY, TIMER_STOPPABLE)
-	return TRUE
-
-/// While the countdown runs, a pilot's click picks the landing turf instead of punching or shooting.
-/obj/vehicle/sealed/mecha/golden_gardren/on_mouseclick(mob/user, atom/target, list/modifiers)
-	if(emergency_eject_timer && is_occupant(user))
-		choose_landing(user, target)
-		return COMSIG_MOB_CANCEL_CLICKON
+/datum/component/golden_gardren_ejection/Destroy(force)
+	deltimer(timer)
+	timer = null
+	for(var/mob/pilot as anything in markers?.Copy())
+		clear_landing_choice(pilot)
+	landings = null
 	return ..()
 
+/// Starts the countdown and lets the pilots aim their capsules. Returns FALSE if one is already running.
+/datum/component/golden_gardren_ejection/proc/start(mob/user)
+	var/obj/vehicle/sealed/mecha/mech = parent
+	if(timer)
+		mech.balloon_alert(user, "катапультирование уже идёт!")
+		return FALSE
+	mech.log_message("[key_name(user)] started the emergency ejection.", LOG_MECHA)
+	to_chat(mech.occupants, span_userdanger("АВАРИЙНОЕ КАТАПУЛЬТИРОВАНИЕ через [DisplayTimeText(GOLDEN_GARDREN_EJECT_DELAY)]! Кликните по клетке, куда сядет ваша капсула: не дальше [GOLDEN_GARDREN_EJECT_RANGE] клеток и в зоне видимости. Без выбора капсула сядет рядом с мехом."))
+	playsound(mech, 'sound/machines/warning-buzzer.ogg', 75, FALSE)
+	for(var/mob/pilot as anything in mech.occupants)
+		set_landing_cursor(pilot, aiming = TRUE)
+	timer = addtimer(CALLBACK(src, PROC_REF(eject)), GOLDEN_GARDREN_EJECT_DELAY, TIMER_STOPPABLE)
+	return TRUE
+
+/// While the countdown runs, a pilot's click picks the landing turf instead of punching or shooting. Returns TRUE if the click was taken.
+/datum/component/golden_gardren_ejection/proc/handle_click(mob/user, atom/target)
+	var/obj/vehicle/sealed/mecha/mech = parent
+	if(!timer || !mech.is_occupant(user))
+		return FALSE
+	choose_landing(user, target)
+	return TRUE
+
 /// Returns why a capsule cannot land on [landing], or null if it can.
-/obj/vehicle/sealed/mecha/golden_gardren/proc/landing_blocker(turf/landing)
-	var/turf/center = get_turf(src)
+/datum/component/golden_gardren_ejection/proc/landing_blocker(turf/landing)
+	var/turf/center = get_turf(parent)
 	if(!isturf(landing) || !center || landing.z != center.z)
 		return "сюда не долететь"
 	if(landing == center)
@@ -61,40 +74,41 @@
 	return null
 
 /// Remembers the landing turf a pilot clicked and marks it for that pilot only.
-/obj/vehicle/sealed/mecha/golden_gardren/proc/choose_landing(mob/user, atom/target)
-	if(!emergency_eject_timer || !is_occupant(user))
+/datum/component/golden_gardren_ejection/proc/choose_landing(mob/user, atom/target)
+	var/obj/vehicle/sealed/mecha/mech = parent
+	if(!timer || !mech.is_occupant(user))
 		return FALSE
 	var/turf/landing = get_turf(target)
 	var/blocker = landing_blocker(landing)
 	if(blocker)
-		balloon_alert(user, blocker)
+		mech.balloon_alert(user, blocker)
 		return FALSE
-	for(var/mob/other_pilot as anything in eject_landings)
-		if(other_pilot != user && eject_landings[other_pilot] == landing)
-			balloon_alert(user, "место занято другой капсулой")
+	for(var/mob/other_pilot as anything in landings)
+		if(other_pilot != user && landings[other_pilot] == landing)
+			mech.balloon_alert(user, "место занято другой капсулой")
 			return FALSE
 	remove_landing_marker(user)
-	LAZYSET(eject_landings, user, landing)
+	LAZYSET(landings, user, landing)
 	var/image/marker = image('icons/mob/telegraphing/telegraph.dmi', landing, "target_circle")
 	SET_PLANE_EXPLICIT(marker, ABOVE_GAME_PLANE, landing)
-	LAZYSET(eject_markers, user, marker)
+	LAZYSET(markers, user, marker)
 	user.client?.images += marker
-	balloon_alert(user, "место посадки выбрано")
+	mech.balloon_alert(user, "место посадки выбрано")
 	return TRUE
 
 /// Forgets a pilot's landing choice and gives the regular cursor back.
-/obj/vehicle/sealed/mecha/golden_gardren/proc/clear_landing_choice(mob/user)
+/datum/component/golden_gardren_ejection/proc/clear_landing_choice(mob/user)
 	remove_landing_marker(user)
-	LAZYREMOVE(eject_landings, user)
+	LAZYREMOVE(landings, user)
 	set_landing_cursor(user, aiming = FALSE)
 
-/obj/vehicle/sealed/mecha/golden_gardren/proc/remove_landing_marker(mob/user)
-	var/image/marker = LAZYACCESS(eject_markers, user)
+/datum/component/golden_gardren_ejection/proc/remove_landing_marker(mob/user)
+	var/image/marker = LAZYACCESS(markers, user)
 	if(marker)
 		user.client?.images -= marker
-	LAZYREMOVE(eject_markers, user)
+	LAZYREMOVE(markers, user)
 
-/obj/vehicle/sealed/mecha/golden_gardren/proc/set_landing_cursor(mob/user, aiming)
+/datum/component/golden_gardren_ejection/proc/set_landing_cursor(mob/user, aiming)
 	if(!user.client)
 		return
 	user.client.mouse_override_icon = aiming ? 'icons/effects/mouse_pointers/supplypod_down_target.dmi' : null
@@ -102,20 +116,21 @@
 
 /**
  * Fires every occupant out: in a capsule to the turf they picked if it is still fine, otherwise to the nearest free neighbour.
- * Without [use_capsules] the pilots are put straight on their turfs, used when the frame is deleted outright.
+ * Without [use_capsules] the pilots are put straight on their turfs, used when the mech is deleted outright.
  */
-/obj/vehicle/sealed/mecha/golden_gardren/proc/emergency_eject(use_capsules = TRUE, stun = TRUE)
-	deltimer(emergency_eject_timer)
-	emergency_eject_timer = null
+/datum/component/golden_gardren_ejection/proc/eject(use_capsules = TRUE, stun = TRUE)
+	var/obj/vehicle/sealed/mecha/mech = parent
+	deltimer(timer)
+	timer = null
 	var/list/taken_turfs = list()
 	var/launched = FALSE
-	for(var/mob/living/pilot as anything in occupants?.Copy())
-		var/turf/landing = LAZYACCESS(eject_landings, pilot)
+	for(var/mob/living/pilot as anything in mech.occupants?.Copy())
+		var/turf/landing = LAZYACCESS(landings, pilot)
 		clear_landing_choice(pilot)
 		// The picked turf may have turned unsafe or been taken during the countdown.
 		if(!landing || landing_blocker(landing) || (landing in taken_turfs))
-			landing = find_exit_turf(taken_turfs)
-		mob_exit(pilot, silent = TRUE, forced = TRUE)
+			landing = golden_gardren_find_exit_turf(mech, taken_turfs)
+		mech.mob_exit(pilot, silent = TRUE, forced = TRUE)
 		if(QDELETED(pilot))
 			continue
 		if(stun)
@@ -124,18 +139,18 @@
 		if(!landing)
 			continue
 		taken_turfs += landing
-		log_message("[key_name(pilot)] ejected to [AREACOORD(landing)].", LOG_MECHA)
+		mech.log_message("[key_name(pilot)] ejected to [AREACOORD(landing)].", LOG_MECHA)
 		if(use_capsules)
 			launch_capsule(pilot, landing)
 			launched = TRUE
 		else
 			pilot.forceMove(landing)
 	if(launched)
-		visible_message(span_warning("Из [declent_ru(GENITIVE)] с грохотом вылетают спасательные капсулы!"))
-		playsound(src, 'sound/vehicles/mecha/hydraulic.ogg', 75, TRUE)
+		mech.visible_message(span_warning("Из [mech.declent_ru(GENITIVE)] с грохотом вылетают спасательные капсулы!"))
+		playsound(mech, 'sound/vehicles/mecha/hydraulic.ogg', 75, TRUE)
 
 /// Sends a pilot to [landing] in a rescue capsule that harms nothing where it lands and vanishes after opening.
-/obj/vehicle/sealed/mecha/golden_gardren/proc/launch_capsule(mob/living/pilot, turf/landing)
+/datum/component/golden_gardren_ejection/proc/launch_capsule(mob/living/pilot, turf/landing)
 	return podspawn(list(
 		"target" = landing,
 		"style" = /datum/pod_style/advanced,
@@ -145,12 +160,17 @@
 		"delays" = GOLDEN_GARDREN_CAPSULE_DELAYS,
 	))
 
+/// Whether the ejection countdown of [mech] is running.
+/proc/golden_gardren_is_ejecting(obj/vehicle/sealed/mecha/mech)
+	var/datum/component/golden_gardren_ejection/ejection = mech.GetComponent(/datum/component/golden_gardren_ejection)
+	return !!ejection?.timer
+
 /**
- * Picks a neighbour turf a pilot or a half can be put on: a safe one if there is any, otherwise any passable one.
+ * Picks a turf next to [mech] a pilot or a half can be put on: a safe one if there is any, otherwise any passable one.
  * Turfs in [exclude] are skipped so two things do not land on the same turf. Returns null if no neighbour fits.
  */
-/obj/vehicle/sealed/mecha/golden_gardren/proc/find_exit_turf(list/exclude)
-	var/turf/center = get_turf(src)
+/proc/golden_gardren_find_exit_turf(atom/mech, list/exclude)
+	var/turf/center = get_turf(mech)
 	if(!center)
 		return null
 	var/list/safe_turfs = list()
@@ -167,6 +187,22 @@
 	if(length(passable_turfs))
 		return pick(passable_turfs)
 	return null
+
+/// Starts the ejection countdown. During it each pilot clicks the turf their capsule lands on.
+/datum/action/vehicle/sealed/mecha/golden_gardren_emergency_eject
+	name = "АВАРИЙНОЕ КАТАПУЛЬТИРОВАНИЕ"
+	desc = "Через 5 секунд выстреливает пилотов в капсулах. До выстрела каждый пилот кликом выбирает место посадки: не дальше 5 клеток, в зоне видимости, безопасное. Отменить нельзя."
+	button_icon = 'modular_bandastation/golden_gardren/icons/actions.dmi'
+	button_icon_state = "emergency_eject"
+
+/datum/action/vehicle/sealed/mecha/golden_gardren_emergency_eject/Trigger(mob/clicker, trigger_flags)
+	. = ..()
+	if(!.)
+		return
+	if(!chassis || !(owner in chassis.occupants))
+		return
+	var/datum/component/golden_gardren_ejection/ejection = chassis.GetComponent(/datum/component/golden_gardren_ejection)
+	ejection?.start(owner)
 
 #undef GOLDEN_GARDREN_EJECT_DELAY
 #undef GOLDEN_GARDREN_EJECT_RANGE

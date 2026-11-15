@@ -1,7 +1,8 @@
 /**
  * ## Gardren
  *
- * Big melee body of the Golden-Gardren pair. Gygax speed, Marauder-grade armor, a phase shift and a claw.
+ * Big melee body of the Golden-Gardren pair and the base of the combined mech: its pilot takes the main seat.
+ * Faster than a Gygax, Marauder-grade armor, a phase shift and a Titanfall-style fist.
  * Alone it is a regular single-pilot exosuit; the Golden climbs into its hatch to form the combined mech.
  * Event-only: spawned by admins, not buildable.
  */
@@ -14,7 +15,8 @@
 	mecha_flags = CAN_STRAFE | IS_ENCLOSED | HAS_LIGHTS | BEACON_TRACKABLE
 	// Reuses the Savannah-Ivanov module bit so combat equipment fits without a new exosuit define.
 	mech_type = EXOSUIT_MODULE_SAVANNAH
-	movedelay = 3
+	// About a fifth faster than a Gygax: with the server's speed scale this is the step that lands on a 3.5 decisecond move.
+	movedelay = 2.35
 	max_integrity = 250
 	armor_type = /datum/armor/mecha_marauder
 	max_temperature = 30000
@@ -23,8 +25,8 @@
 	exit_delay = 40
 	wreckage = /obj/structure/mecha_wreckage/gardren
 	equip_by_category = list(
-		MECHA_L_ARM = /obj/item/mecha_parts/mecha_equipment/weapon/energy/plasma,
-		MECHA_R_ARM = null,
+		MECHA_L_ARM = /obj/item/mecha_parts/mecha_equipment/weapon/energy/laser,
+		MECHA_R_ARM = /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/lmg,
 		MECHA_UTILITY = list(),
 		MECHA_POWER = list(),
 		MECHA_ARMOR = list(),
@@ -40,23 +42,48 @@
 /obj/vehicle/sealed/mecha/gardren/Initialize(mapload, built_manually)
 	. = ..()
 	AddComponent(/datum/component/golden_gardren_phasing)
-	AddComponent(/datum/component/golden_gardren_claw)
+	AddComponent(/datum/component/golden_gardren_fist)
+	AddComponent(/datum/component/golden_gardren_ejection)
+
+/obj/vehicle/sealed/mecha/gardren/populate_parts()
+	cell = new /obj/item/stock_parts/power_store/cell/bluespace(src)
+	scanmod = new /obj/item/stock_parts/scanning_module(src)
+	capacitor = new /obj/item/stock_parts/capacitor(src)
+	servo = new /obj/item/stock_parts/servo(src)
+	update_part_values()
 
 /obj/vehicle/sealed/mecha/gardren/generate_actions()
 	. = ..()
 	initialize_passenger_action_type(/datum/action/vehicle/sealed/mecha/golden_gardren_combine)
 	initialize_controller_action_type(/datum/action/vehicle/sealed/mecha/golden_gardren_phasing, VEHICLE_CONTROL_DRIVE)
-	initialize_controller_action_type(/datum/action/vehicle/sealed/mecha/golden_gardren_claw, VEHICLE_CONTROL_MELEE)
+	initialize_passenger_action_type(/datum/action/vehicle/sealed/mecha/golden_gardren_emergency_eject)
+	initialize_controller_action_type(/datum/action/vehicle/sealed/mecha/golden_gardren_fist, VEHICLE_CONTROL_MELEE)
+	initialize_controller_action_type(/datum/action/vehicle/sealed/mecha/golden_gardren_fist_squeeze, VEHICLE_CONTROL_MELEE)
 
 /obj/vehicle/sealed/mecha/gardren/remove_occupant(mob/driver)
 	. = ..()
-	// Nobody left at the controls to hold the claw shut.
+	var/datum/component/golden_gardren_ejection/ejection = GetComponent(/datum/component/golden_gardren_ejection)
+	ejection?.clear_landing_choice(driver)
+	// Nobody left at the controls to hold the fist shut.
 	if(!return_amount_of_controllers_with_flag(VEHICLE_CONTROL_MELEE))
-		golden_gardren_release_claw(src)
+		golden_gardren_release_fist(src)
 
 /obj/vehicle/sealed/mecha/gardren/user_unbuckle_mob(mob/living/buckled_mob, mob/user)
-	if(golden_gardren_claw_intercept_unbuckle(src, buckled_mob, user))
+	if(golden_gardren_fist_intercept_unbuckle(src, buckled_mob, user))
 		return null
+	return ..()
+
+/// While the ejection countdown runs, the pilot's click picks the landing turf instead of punching or shooting.
+/obj/vehicle/sealed/mecha/gardren/on_mouseclick(mob/user, atom/target, list/modifiers)
+	var/datum/component/golden_gardren_ejection/ejection = GetComponent(/datum/component/golden_gardren_ejection)
+	if(ejection?.handle_click(user, target))
+		return COMSIG_MOB_CANCEL_CLICKON
+	return ..()
+
+/// Fires the pilot clear of the wreck in a capsule before the base destruction handles what is left.
+/obj/vehicle/sealed/mecha/gardren/atom_destruction(damage_flag)
+	var/datum/component/golden_gardren_ejection/ejection = GetComponent(/datum/component/golden_gardren_ejection)
+	ejection?.eject()
 	return ..()
 
 /obj/structure/mecha_wreckage/gardren

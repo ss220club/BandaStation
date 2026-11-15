@@ -5,7 +5,7 @@
  * ## Golden-Gardren
  *
  * The combined two-pilot mech. Occupies a single tile so it fits through airlocks, but is drawn one and a half tiles tall.
- * Main seat: movement, fists, the claw, the phase shift and the Golden Ram. Weapons seat: arm weapons, the shield and the missile strike.
+ * Main seat: movement, the fist (punch, grab, throw, squeeze), the phase shift and the Golden Ram. Weapons seat: arm weapons, the shield and the missile strike.
  * When formed from the pair, the Golden and the Gardren are kept docked inside and the frame runs on the Gardren's parts.
  * Event-only: spawned by admins or formed from the pair, not buildable.
  */
@@ -48,12 +48,6 @@
 	var/obj/vehicle/sealed/mecha/gardren/docked_gardren
 	/// Energy shield of the weapons seat.
 	var/datum/golden_gardren_shield/shield
-	/// Timer of a running emergency ejection countdown.
-	var/emergency_eject_timer
-	/// Assoc list: pilot -> turf they picked for their capsule during the ejection countdown.
-	var/list/eject_landings
-	/// Assoc list: pilot -> landing marker image shown to that pilot only.
-	var/list/eject_markers
 	/// Per-seat cockpit panel, created the first time a pilot opens it.
 	var/datum/golden_gardren_cockpit/cockpit
 
@@ -72,13 +66,15 @@
 	// The shield sprite is drawn for a regular mech, so it is stretched over the 48x48 frame.
 	shield = new(src, 1.5, 8, 12)
 	AddComponent(/datum/component/golden_gardren_phasing)
-	AddComponent(/datum/component/golden_gardren_claw)
+	AddComponent(/datum/component/golden_gardren_ejection)
+	AddComponent(/datum/component/golden_gardren_fist)
 
 /obj/vehicle/sealed/mecha/golden_gardren/Destroy()
 	QDEL_NULL(cockpit)
 	QDEL_NULL(shield)
 	// Put the pilots on free turfs instead of the base drop under the frame.
-	emergency_eject(use_capsules = FALSE, stun = FALSE)
+	var/datum/component/golden_gardren_ejection/ejection = GetComponent(/datum/component/golden_gardren_ejection)
+	ejection?.eject(use_capsules = FALSE, stun = FALSE)
 	// The halves exist only as a part of this frame now, so they go down with it.
 	QDEL_NULL(docked_golden)
 	QDEL_NULL(docked_gardren)
@@ -92,7 +88,8 @@
 	initialize_passenger_action_type(/datum/action/vehicle/sealed/mecha/golden_gardren_separate)
 	initialize_controller_action_type(/datum/action/vehicle/sealed/mecha/golden_gardren_ram, VEHICLE_CONTROL_DRIVE)
 	initialize_controller_action_type(/datum/action/vehicle/sealed/mecha/golden_gardren_phasing, VEHICLE_CONTROL_DRIVE)
-	initialize_controller_action_type(/datum/action/vehicle/sealed/mecha/golden_gardren_claw, VEHICLE_CONTROL_MELEE)
+	initialize_controller_action_type(/datum/action/vehicle/sealed/mecha/golden_gardren_fist, VEHICLE_CONTROL_MELEE)
+	initialize_controller_action_type(/datum/action/vehicle/sealed/mecha/golden_gardren_fist_squeeze, VEHICLE_CONTROL_MELEE)
 	initialize_controller_action_type(/datum/action/vehicle/sealed/mecha/mech_view_stats, VEHICLE_CONTROL_EQUIPMENT)
 	initialize_controller_action_type(/datum/action/vehicle/sealed/mecha/golden_gardren_shield, VEHICLE_CONTROL_EQUIPMENT)
 	initialize_controller_action_type(/datum/action/vehicle/sealed/mecha/ivanov_strike/golden_gardren, VEHICLE_CONTROL_EQUIPMENT)
@@ -129,12 +126,13 @@
 /obj/vehicle/sealed/mecha/golden_gardren/remove_occupant(mob/driver)
 	. = ..()
 	// A pilot leaving during the ejection countdown takes no landing choice or marker with them.
-	clear_landing_choice(driver)
+	var/datum/component/golden_gardren_ejection/ejection = GetComponent(/datum/component/golden_gardren_ejection)
+	ejection?.clear_landing_choice(driver)
 	// Without an operator the shield cannot be held.
 	shield?.drop_if_unmanned()
-	// Nobody left at the controls to hold the claw shut.
+	// Nobody left at the controls to hold the fist shut.
 	if(!return_amount_of_controllers_with_flag(VEHICLE_CONTROL_MELEE))
-		golden_gardren_release_claw(src)
+		golden_gardren_release_fist(src)
 
 /// Each seat may only use its own part of the mech panel: weapons belong to the weapons seat, settings to the main seat.
 /obj/vehicle/sealed/mecha/golden_gardren/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
@@ -164,7 +162,15 @@
 
 /// Throws the pilots clear of the wreck before the base destruction handles what is left.
 /obj/vehicle/sealed/mecha/golden_gardren/atom_destruction(damage_flag)
-	emergency_eject()
+	var/datum/component/golden_gardren_ejection/ejection = GetComponent(/datum/component/golden_gardren_ejection)
+	ejection?.eject()
+	return ..()
+
+/// While the ejection countdown runs, a pilot's click picks the landing turf instead of punching or shooting.
+/obj/vehicle/sealed/mecha/golden_gardren/on_mouseclick(mob/user, atom/target, list/modifiers)
+	var/datum/component/golden_gardren_ejection/ejection = GetComponent(/datum/component/golden_gardren_ejection)
+	if(ejection?.handle_click(user, target))
+		return COMSIG_MOB_CANCEL_CLICKON
 	return ..()
 
 /obj/vehicle/sealed/mecha/golden_gardren/update_overlays()
@@ -174,7 +180,7 @@
 		. += shield_overlay
 
 /obj/vehicle/sealed/mecha/golden_gardren/user_unbuckle_mob(mob/living/buckled_mob, mob/user)
-	if(golden_gardren_claw_intercept_unbuckle(src, buckled_mob, user))
+	if(golden_gardren_fist_intercept_unbuckle(src, buckled_mob, user))
 		return null
 	return ..()
 
@@ -237,7 +243,7 @@
 
 /// Stores a half inside the frame: hidden, switched off and not processing until the frame separates.
 /obj/vehicle/sealed/mecha/golden_gardren/proc/dock_component(obj/vehicle/sealed/mecha/component)
-	golden_gardren_release_claw(component)
+	golden_gardren_release_fist(component)
 	var/datum/component/golden_gardren_phasing/phasing = component.GetComponent(/datum/component/golden_gardren_phasing)
 	phasing?.set_active(FALSE)
 	if(component.mecha_flags & LIGHTS_ON)

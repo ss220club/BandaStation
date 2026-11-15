@@ -26,9 +26,9 @@
 		return "здесь нельзя разделиться"
 	if(get_integrity() <= 0 || completely_disabled)
 		return "мех неисправен"
-	if(is_currently_ejecting || emergency_eject_timer || (src in GLOB.golden_gardren_combining))
+	if(is_currently_ejecting || golden_gardren_is_ejecting(src) || (src in GLOB.golden_gardren_combining))
 		return "мех занят"
-	if(!find_exit_turf())
+	if(!golden_gardren_find_exit_turf(src))
 		return "нет места для разделения"
 	return null
 
@@ -70,7 +70,7 @@
  */
 /obj/vehicle/sealed/mecha/golden_gardren/proc/disassemble()
 	var/turf/frame_turf = get_turf(src)
-	var/turf/golden_turf = find_exit_turf()
+	var/turf/golden_turf = golden_gardren_find_exit_turf(src)
 	if(!frame_turf || !golden_turf || QDELETED(docked_golden) || QDELETED(docked_gardren))
 		return FALSE
 	var/obj/vehicle/sealed/mecha/golden/golden = docked_golden
