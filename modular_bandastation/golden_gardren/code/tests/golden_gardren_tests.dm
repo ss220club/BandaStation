@@ -355,6 +355,9 @@
 	var/mob/living/carbon/human/consistent/pilot = allocate(/mob/living/carbon/human/consistent)
 	var/turf/target_turf = get_step(gardren.loc, EAST)
 	var/mob/living/carbon/human/consistent/target = allocate(/mob/living/carbon/human/consistent, target_turf)
+	// Consistent dummies act instantly; the claw and the escape are timed actions, so both use the live game's timing.
+	for(var/mob/living/carbon/human/consistent/actor as anything in list(pilot, target))
+		actor.add_or_update_variable_actionspeed_modifier(/datum/actionspeed_modifier/base, multiplicative_slowdown = 1)
 	gardren.mob_enter(pilot, silent = TRUE)
 	gardren.setDir(EAST)
 	var/datum/component/golden_gardren_claw/claw = gardren.GetComponent(/datum/component/golden_gardren_claw)
@@ -367,7 +370,7 @@
 	pilot.set_combat_mode(TRUE)
 	click_wrapper(pilot, target)
 	TEST_ASSERT_EQUAL(target.get_brute_loss(), 0, "The pilot punched the target in claw mode")
-	// The claw takes a moment to close.
+	TEST_ASSERT_NULL(claw.held, "The claw closed without its wind-up")
 	sleep(1.5 SECONDS)
 	TEST_ASSERT_EQUAL(claw.held, target, "The claw did not seize the adjacent target")
 	TEST_ASSERT_EQUAL(target.buckled, gardren, "The seized target is not held by the mech")
