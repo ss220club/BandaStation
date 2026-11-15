@@ -5,6 +5,7 @@
 
 /obj/item/food/station_food/cookie/cooked
 	abstract_type = /obj/item/food/station_food/cookie/cooked
+	icon_state = "cookie_round"
 	food_flags = FOOD_FINGER_FOOD
 
 /obj/item/food/station_food/cookie/raw
@@ -197,6 +198,7 @@
 
 /obj/item/food/station_food/cookie/cooked/jam
 	abstract_type = /obj/item/food/station_food/cookie/cooked/jam
+	foodtypes = GRAIN|DAIRY|SUGAR|FRUIT
 	name = "shortbread cookie with jam"
 	desc = "Песочное печенье с ягодным джемом. Кисло-сладкая начинка дополняет маслянистое тесто."
 	food_reagents = list(
