@@ -1,0 +1,8 @@
+["breakfast blin"]
+nominative = "блин завтрак"
+genitive = "блина завтрака"
+dative = "блину завтраку"
+accusative = "блин завтрак"
+instrumental = "блином завтраком"
+prepositional = "блине завтраке"
+gender = "male"

@@ -1,0 +1,8 @@
+["meat blini with cucumber"]
+nominative = "мясные блины с огурцом"
+genitive = "мясных блинов с огурцом"
+dative = "мясным блинам с огурцом"
+accusative = "мясные блины с огурцом"
+instrumental = "мясными блинами с огурцом"
+prepositional = "мясных блинах с огурцом"
+gender = "plural"
