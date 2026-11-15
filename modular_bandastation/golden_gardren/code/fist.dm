@@ -210,7 +210,8 @@
 		return FALSE
 	squeezing = TRUE
 	squeeze_time = 0
-	fracture_stage = WOUND_SEVERITY_TRIVIAL
+	// A chest cannot be dislocated, so the first crack is already a fracture.
+	fracture_stage = WOUND_SEVERITY_MODERATE
 	next_fracture_time = GOLDEN_GARDREN_FIST_CRUSH_DELAY
 	ADD_TRAIT(held, TRAIT_MUTE, GOLDEN_GARDREN_FIST_TRAIT)
 	START_PROCESSING(SSobj, src)
