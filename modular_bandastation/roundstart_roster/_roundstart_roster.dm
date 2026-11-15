@@ -1,12 +1,12 @@
 /**
- * Администраторы заранее назначают игрокам должности для ивента.
- * Модуль выдаёт их готовым игрокам до обычного распределения и уведомляет игроков.
+ * Administrators assign event jobs to players before the round starts.
+ * The module notifies players and assigns their jobs if they are ready, before normal job distribution.
  *
- * Интеграция с core — добавление сигналов и их вызовов в наиболее общих/вероятных местах
+ * Core integration uses signals at the relevant job assignment and round lifecycle stages.
  *
- * После успешного старта COMSIG_TICKER_ROUND_STARTING закрывает панель, очищает
- * словарь и отключает подписки.
- * После старта раунда слоты не блокируется
+ * After a successful round start, COMSIG_TICKER_ROUND_STARTING closes the panel, clears
+ * the assignments and unregisters signal handlers.
+ * Job slots are no longer reserved after the round starts.
  */
 GLOBAL_DATUM(roundstart_roster, /datum/modpack/roundstart_roster)
 
