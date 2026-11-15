@@ -257,14 +257,8 @@
 /obj/item/food/station_food/smetannik_choco_raw/make_bakeable()
 	AddComponent(/datum/component/bakeable, /obj/item/food/cake/slavic/smetannik_choco, rand(30 SECONDS, 40 SECONDS), TRUE, TRUE)
 
-
 /obj/item/food/station_food/smetannik_raw/make_bakeable()
 	AddComponent(/datum/component/bakeable, /obj/item/food/cake/slavic/smetannik, rand(30 SECONDS, 40 SECONDS), TRUE, TRUE)
-
-
-
-
-
 
 /obj/item/food/station_food/tvorozhnik_raw/make_bakeable()
 	AddComponent(/datum/component/bakeable, /obj/item/food/cake/slavic/tvorozhnik, rand(30 SECONDS, 40 SECONDS), TRUE, TRUE)

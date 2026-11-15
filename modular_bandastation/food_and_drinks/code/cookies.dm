@@ -297,13 +297,13 @@
 	cooked_result = /obj/item/food/station_food/cookie/cooked/zebra/fish
 
 /obj/item/food/station_food/shortbread_dough/make_processable()
-	AddElement(/datum/element/processable, TOOL_ROLLINGPIN, /obj/item/food/station_food/shortbread_dough_flat, 1, 3 SECONDS, table_required = TRUE, screentip_verb = "Flatten", sound_to_play = SFX_ROLLING_PIN_ROLLING)
+	AddElement(/datum/element/processable, TOOL_ROLLINGPIN, /obj/item/food/station_food/shortbread_dough_flat, 1, 3 SECONDS, table_required = TRUE, screentip_verb = "Flatten", sound_to_play = /datum/sound_effect/rolling_pin_rolling)
 
 /obj/item/food/station_food/shortbread_dough_flat/make_processable()
-	AddElement(/datum/element/processable, TOOL_KNIFE, /obj/item/food/station_food/shortbread_dough_slice, 6, 3 SECONDS, table_required = TRUE, screentip_verb = "Slice", sound_to_play = SFX_KNIFE_SLICE)
+	AddElement(/datum/element/processable, TOOL_KNIFE, /obj/item/food/station_food/shortbread_dough_slice, 6, 3 SECONDS, table_required = TRUE, screentip_verb = "Slice", sound_to_play = /datum/sound_effect/knife_slice)
 
 /obj/item/food/station_food/choco_shortbread_dough/make_processable()
-	AddElement(/datum/element/processable, TOOL_ROLLINGPIN, /obj/item/food/station_food/choco_shortbread_dough_flat, 1, 3 SECONDS, table_required = TRUE, screentip_verb = "Flatten", sound_to_play = SFX_ROLLING_PIN_ROLLING)
+	AddElement(/datum/element/processable, TOOL_ROLLINGPIN, /obj/item/food/station_food/choco_shortbread_dough_flat, 1, 3 SECONDS, table_required = TRUE, screentip_verb = "Flatten", sound_to_play = /datum/sound_effect/rolling_pin_rolling)
 
 /obj/item/food/station_food/choco_shortbread_dough_flat/make_processable()
-	AddElement(/datum/element/processable, TOOL_KNIFE, /obj/item/food/station_food/choco_shortbread_dough_slice, 6, 3 SECONDS, table_required = TRUE, screentip_verb = "Slice", sound_to_play = SFX_KNIFE_SLICE)
+	AddElement(/datum/element/processable, TOOL_KNIFE, /obj/item/food/station_food/choco_shortbread_dough_slice, 6, 3 SECONDS, table_required = TRUE, screentip_verb = "Slice", sound_to_play = /datum/sound_effect/knife_slice)
