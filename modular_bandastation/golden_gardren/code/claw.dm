@@ -144,7 +144,7 @@
 	if(!self_escape && !user.Adjacent(mech))
 		return
 	escaping = TRUE
-	user.visible_message(span_warning(self_escape ? "[user.declent_ru(NOMINATIVE)] пытается вырваться из клешни!" : "[user.declent_ru(NOMINATIVE)] пытается разжать клешню [mech.declent_ru(GENITIVE)]!"))
+	user.visible_message(span_warning((self_escape ? "[user.declent_ru(NOMINATIVE)] пытается вырваться из клешни!" : "[user.declent_ru(NOMINATIVE)] пытается разжать клешню [mech.declent_ru(GENITIVE)]!")))
 	// The held target is carried along, so walking does not reset its own attempt; a rescuer has to keep up with a mech that stands still.
 	var/freed = self_escape \
 		? do_after(user, GOLDEN_GARDREN_CLAW_ESCAPE_TIME, target = mech, timed_action_flags = IGNORE_USER_LOC_CHANGE | IGNORE_TARGET_LOC_CHANGE) \
