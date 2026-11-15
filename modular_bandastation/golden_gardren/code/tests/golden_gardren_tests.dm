@@ -70,32 +70,49 @@
 	click_wrapper(main_pilot, target)
 	TEST_ASSERT(target.get_brute_loss() > 0, "The main seat could not punch with the mech's fists")
 
-/// The shield soaks damage from its own charge, collapses when emptied, cannot be raised right away, and drops without an operator.
+/// The shield soaks damage from its own charge, collapses when emptied and cannot be raised right away.
 /datum/unit_test/golden_gardren_shield
 
 /datum/unit_test/golden_gardren_shield/Run()
 	var/obj/vehicle/sealed/mecha/golden_gardren/combined = allocate(/obj/vehicle/sealed/mecha/golden_gardren)
 	var/mob/living/carbon/human/consistent/operator = allocate(/mob/living/carbon/human/consistent)
+	var/datum/golden_gardren_shield/shield = combined.shield
 	var/start_integrity = combined.get_integrity()
 
-	TEST_ASSERT(combined.toggle_shield(operator), "The shield could not be raised on a charged mech")
+	TEST_ASSERT(shield.toggle(operator), "The shield could not be raised on a charged mech")
 	combined.take_damage(100, BRUTE)
 	TEST_ASSERT_EQUAL(combined.get_integrity(), start_integrity, "Damage within the shield charge reached the hull")
-	TEST_ASSERT_EQUAL(combined.shield_charge, combined.shield_max_charge - 100, "The shield did not spend its charge on the absorbed damage")
+	TEST_ASSERT_EQUAL(shield.charge, shield.max_charge - 100, "The shield did not spend its charge on the absorbed damage")
 
-	combined.take_damage(combined.shield_charge + 50, BRUTE)
-	TEST_ASSERT(!combined.shield_active, "The shield stayed up after its charge ran out")
+	combined.take_damage(shield.charge + 50, BRUTE)
+	TEST_ASSERT(!shield.active, "The shield stayed up after its charge ran out")
 	TEST_ASSERT_EQUAL(combined.get_integrity(), start_integrity - 50, "Damage beyond the shield charge did not reach the hull")
-	TEST_ASSERT(!combined.toggle_shield(operator), "The shield was raised again right after collapsing")
+	TEST_ASSERT(!shield.toggle(operator), "The shield was raised again right after collapsing")
 
-	var/obj/vehicle/sealed/mecha/golden_gardren/manned = allocate(/obj/vehicle/sealed/mecha/golden_gardren)
+/// The gunner of the combined mech and the pilot of the lone Golden raise the shield from their button, and it drops once they leave.
+/datum/unit_test/golden_gardren_shield_operators
+
+/datum/unit_test/golden_gardren_shield_operators/Run()
+	var/obj/vehicle/sealed/mecha/golden_gardren/combined = allocate(/obj/vehicle/sealed/mecha/golden_gardren)
 	var/mob/living/carbon/human/consistent/main_pilot = allocate(/mob/living/carbon/human/consistent)
 	var/mob/living/carbon/human/consistent/gunner = allocate(/mob/living/carbon/human/consistent)
-	manned.mob_enter(main_pilot, silent = TRUE)
-	manned.mob_enter(gunner, silent = TRUE)
-	TEST_ASSERT(manned.toggle_shield(gunner), "The operator could not raise the shield")
-	manned.mob_exit(gunner, silent = TRUE)
-	TEST_ASSERT(!manned.shield_active, "The shield stayed up after the weapons operator left")
+	combined.mob_enter(main_pilot, silent = TRUE)
+	combined.mob_enter(gunner, silent = TRUE)
+	TEST_ASSERT_NULL(LAZYACCESSASSOC(combined.occupant_actions, main_pilot, /datum/action/vehicle/sealed/mecha/golden_gardren_shield), "The main seat got the shield button")
+
+	var/obj/vehicle/sealed/mecha/golden/golden = allocate(/obj/vehicle/sealed/mecha/golden)
+	var/mob/living/carbon/human/consistent/golden_pilot = allocate(/mob/living/carbon/human/consistent)
+	golden.mob_enter(golden_pilot, silent = TRUE)
+
+	for(var/obj/vehicle/sealed/mecha/mech as anything in list(combined, golden))
+		var/mob/living/operator = mech == combined ? gunner : golden_pilot
+		var/datum/golden_gardren_shield/shield = golden_gardren_shield_of(mech)
+		var/datum/action/shield_button = LAZYACCESSASSOC(mech.occupant_actions, operator, /datum/action/vehicle/sealed/mecha/golden_gardren_shield)
+		TEST_ASSERT_NOTNULL(shield_button, "[mech] gave its operator no shield button")
+		shield_button.Trigger()
+		TEST_ASSERT(shield.active, "The operator of [mech] could not raise the shield from the button")
+		mech.mob_exit(operator, silent = TRUE)
+		TEST_ASSERT(!shield.active, "The shield of [mech] stayed up after its operator left")
 
 /// Separation gives back the same halves with their pilots and parts, spreads the damage and leaves no frame behind.
 /datum/unit_test/golden_gardren_separate
@@ -231,9 +248,9 @@
 	var/datum/tgui/gunner_ui = allocate(/datum/tgui, gunner, cockpit, "GoldenGardrenCockpit")
 
 	cockpit.ui_act("toggle_shield", list(), main_ui, main_ui.state)
-	TEST_ASSERT(!combined.shield_active, "The main seat raised the shield")
+	TEST_ASSERT(!combined.shield.active, "The main seat raised the shield")
 	cockpit.ui_act("toggle_shield", list(), gunner_ui, gunner_ui.state)
-	TEST_ASSERT(combined.shield_active, "The weapons seat could not raise the shield")
+	TEST_ASSERT(combined.shield.active, "The weapons seat could not raise the shield")
 
 	var/strafe_before = combined.strafe
 	cockpit.ui_act("toggle_strafe", list(), gunner_ui, gunner_ui.state)
@@ -291,3 +308,86 @@
 	var/obj/effect/pod_landingzone/zone = locate() in landing
 	TEST_ASSERT_NOTNULL(zone, "The drop pod was not sent to the landing spot")
 	TEST_ASSERT_EQUAL(zone.pod, golden.loc, "The landing spot belongs to a different pod")
+
+/// The phase shift belongs to the pilot: it carries the mech through obstacles at an energy cost and keeps the hands idle while on.
+/datum/unit_test/golden_gardren_phasing
+
+/datum/unit_test/golden_gardren_phasing/Run()
+	var/obj/vehicle/sealed/mecha/golden_gardren/combined = allocate(/obj/vehicle/sealed/mecha/golden_gardren)
+	var/mob/living/carbon/human/consistent/main_pilot = allocate(/mob/living/carbon/human/consistent)
+	var/mob/living/carbon/human/consistent/gunner = allocate(/mob/living/carbon/human/consistent)
+	combined.mob_enter(main_pilot, silent = TRUE)
+	combined.mob_enter(gunner, silent = TRUE)
+	TEST_ASSERT_NULL(LAZYACCESSASSOC(combined.occupant_actions, gunner, /datum/action/vehicle/sealed/mecha/golden_gardren_phasing), "The weapons seat got the phase shift button")
+
+	var/turf/start = combined.loc
+	var/turf/blocked = get_step(start, EAST)
+	var/turf/beyond = get_step(blocked, EAST)
+	allocate(/obj/structure/girder, blocked)
+	TEST_ASSERT(!combined.Move(blocked, EAST), "The mech walked into an obstacle without the phase shift")
+
+	var/datum/action/phasing_button = LAZYACCESSASSOC(combined.occupant_actions, main_pilot, /datum/action/vehicle/sealed/mecha/golden_gardren_phasing)
+	TEST_ASSERT_NOTNULL(phasing_button, "The main seat got no phase shift button")
+	phasing_button.Trigger()
+	var/datum/component/golden_gardren_phasing/phasing = combined.GetComponent(/datum/component/golden_gardren_phasing)
+	TEST_ASSERT(phasing.active, "The phase shift did not turn on from the pilot's button")
+
+	var/charge_before = combined.get_charge()
+	TEST_ASSERT(combined.Move(blocked, EAST), "The phasing mech could not pass through an obstacle")
+	TEST_ASSERT(combined.get_charge() < charge_before, "Phasing through an obstacle cost no energy")
+
+	var/mob/living/carbon/human/consistent/target = allocate(/mob/living/carbon/human/consistent, beyond)
+	main_pilot.set_combat_mode(TRUE)
+	click_wrapper(main_pilot, target)
+	TEST_ASSERT_EQUAL(target.get_brute_loss(), 0, "The mech punched while phasing")
+
+	var/obj/vehicle/sealed/mecha/gardren/gardren = allocate(/obj/vehicle/sealed/mecha/gardren)
+	var/mob/living/carbon/human/consistent/gardren_pilot = allocate(/mob/living/carbon/human/consistent)
+	gardren.mob_enter(gardren_pilot, silent = TRUE)
+	TEST_ASSERT_NOTNULL(LAZYACCESSASSOC(gardren.occupant_actions, gardren_pilot, /datum/action/vehicle/sealed/mecha/golden_gardren_phasing), "The Gardren pilot got no phase shift button")
+
+/// The claw seizes an adjacent target that then rides along, does not let go on a plain resist, and opens when the pilot leaves.
+/datum/unit_test/golden_gardren_claw
+	priority = TEST_LONGER
+
+/datum/unit_test/golden_gardren_claw/Run()
+	var/obj/vehicle/sealed/mecha/gardren/gardren = allocate(/obj/vehicle/sealed/mecha/gardren)
+	var/mob/living/carbon/human/consistent/pilot = allocate(/mob/living/carbon/human/consistent)
+	var/turf/target_turf = get_step(gardren.loc, EAST)
+	var/mob/living/carbon/human/consistent/target = allocate(/mob/living/carbon/human/consistent, target_turf)
+	gardren.mob_enter(pilot, silent = TRUE)
+	gardren.setDir(EAST)
+	var/datum/component/golden_gardren_claw/claw = gardren.GetComponent(/datum/component/golden_gardren_claw)
+
+	var/datum/action/claw_button = LAZYACCESSASSOC(gardren.occupant_actions, pilot, /datum/action/vehicle/sealed/mecha/golden_gardren_claw)
+	TEST_ASSERT_NOTNULL(claw_button, "The pilot got no claw button")
+	claw_button.Trigger()
+	TEST_ASSERT(claw.claw_mode, "The claw button did not switch the hands to grabbing")
+
+	pilot.set_combat_mode(TRUE)
+	click_wrapper(pilot, target)
+	TEST_ASSERT_EQUAL(target.get_brute_loss(), 0, "The pilot punched the target in claw mode")
+	// The claw takes a moment to close.
+	sleep(1.5 SECONDS)
+	TEST_ASSERT_EQUAL(claw.held, target, "The claw did not seize the adjacent target")
+	TEST_ASSERT_EQUAL(target.buckled, gardren, "The seized target is not held by the mech")
+	TEST_ASSERT(HAS_TRAIT(target, TRAIT_HANDS_BLOCKED), "The seized target can still use its hands")
+
+	var/datum/action/phasing_button = LAZYACCESSASSOC(gardren.occupant_actions, pilot, /datum/action/vehicle/sealed/mecha/golden_gardren_phasing)
+	phasing_button.Trigger()
+	var/datum/component/golden_gardren_phasing/phasing = gardren.GetComponent(/datum/component/golden_gardren_phasing)
+	TEST_ASSERT(!phasing.active, "The phase shift turned on with a target in the claw")
+
+	var/turf/next = get_step(target_turf, EAST)
+	TEST_ASSERT_EQUAL(target.loc, gardren.loc, "The seized target was not lifted onto the mech")
+	TEST_ASSERT(gardren.Move(target_turf, EAST), "The mech could not step forward with a target in the claw")
+	TEST_ASSERT_EQUAL(target.loc, gardren.loc, "The seized target did not ride along with the mech")
+
+	target.resist_buckle()
+	TEST_ASSERT_EQUAL(target.buckled, gardren, "A plain resist got the target out of the claw at once")
+
+	gardren.mob_exit(pilot, silent = TRUE)
+	TEST_ASSERT_NULL(target.buckled, "The claw kept the target after its pilot left")
+	TEST_ASSERT_NULL(claw.held, "The claw still references the target it let go of")
+	TEST_ASSERT(!HAS_TRAIT(target, TRAIT_HANDS_BLOCKED), "The released target still cannot use its hands")
+	TEST_ASSERT_EQUAL(target.loc, next, "The released target was not put down in front of the mech")

@@ -1,6 +1,9 @@
 #include "_defines.dm"
 #include "_golden_gardren.dm"
 
+#include "code/shield.dm"
+#include "code/phasing.dm"
+#include "code/claw.dm"
 #include "code/golden.dm"
 #include "code/gardren.dm"
 #include "code/golden_gardren.dm"

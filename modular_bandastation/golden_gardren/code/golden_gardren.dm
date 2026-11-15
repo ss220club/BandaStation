@@ -1,13 +1,3 @@
-/// Upkeep drawn from the main cell every second while the shield is up.
-#define GOLDEN_GARDREN_SHIELD_UPKEEP (0.005 * STANDARD_CELL_CHARGE)
-/// Shield points restored every second while the shield recharges.
-#define GOLDEN_GARDREN_SHIELD_RECHARGE_RATE 15
-/// How long after taking a hit or going down the shield starts recharging.
-#define GOLDEN_GARDREN_SHIELD_RECHARGE_DELAY (5 SECONDS)
-/// How long the shield cannot be raised after the operator lowers it.
-#define GOLDEN_GARDREN_SHIELD_TOGGLE_DELAY (3 SECONDS)
-/// How long the shield cannot be raised after it collapses from damage or lack of power.
-#define GOLDEN_GARDREN_SHIELD_COLLAPSE_DELAY (15 SECONDS)
 /// Share of integrity at and below which the pilots are warned that the frame is about to break.
 #define GOLDEN_GARDREN_CRITICAL_INTEGRITY 0.3
 
@@ -15,7 +5,7 @@
  * ## Golden-Gardren
  *
  * The combined two-pilot mech. Occupies a single tile so it fits through airlocks, but is drawn one and a half tiles tall.
- * Main seat: movement, fists and the Golden Ram. Weapons seat: arm weapons, the shield and the missile strike.
+ * Main seat: movement, fists, the claw, the phase shift and the Golden Ram. Weapons seat: arm weapons, the shield and the missile strike.
  * When formed from the pair, the Golden and the Gardren are kept docked inside and the frame runs on the Gardren's parts.
  * Event-only: spawned by admins or formed from the pair, not buildable.
  */
@@ -56,16 +46,8 @@
 	var/obj/vehicle/sealed/mecha/golden/docked_golden
 	/// The Gardren docked inside while combined. Null for an admin-spawned frame.
 	var/obj/vehicle/sealed/mecha/gardren/docked_gardren
-	/// Whether the shield is currently up.
-	var/shield_active = FALSE
-	/// Damage the shield can still absorb.
-	var/shield_charge = 300
-	/// Damage the shield absorbs when fully charged.
-	var/shield_max_charge = 300
-	/// The shield cannot be raised until this runs out.
-	COOLDOWN_DECLARE(shield_toggle_cooldown)
-	/// The shield does not recharge until this runs out.
-	COOLDOWN_DECLARE(shield_recharge_cooldown)
+	/// Energy shield of the weapons seat.
+	var/datum/golden_gardren_shield/shield
 	/// Timer of a running emergency ejection countdown.
 	var/emergency_eject_timer
 	/// Assoc list: pilot -> turf they picked for their capsule during the ejection countdown.
@@ -75,17 +57,26 @@
 	/// Per-seat cockpit panel, created the first time a pilot opens it.
 	var/datum/golden_gardren_cockpit/cockpit
 
+/// One and a half times the armor of the halves (Marauder grade). Melee would come out at 105, so it is capped below full immunity.
 /datum/armor/mecha_golden_gardren
-	melee = 45
-	bullet = 40
-	laser = 35
-	energy = 30
-	bomb = 40
+	melee = 90
+	bullet = 90
+	laser = 90
+	energy = 45
+	bomb = 75
 	fire = 100
 	acid = 100
 
+/obj/vehicle/sealed/mecha/golden_gardren/Initialize(mapload, built_manually)
+	. = ..()
+	// The shield sprite is drawn for a regular mech, so it is stretched over the 48x48 frame.
+	shield = new(src, 1.5, 8, 12)
+	AddComponent(/datum/component/golden_gardren_phasing)
+	AddComponent(/datum/component/golden_gardren_claw)
+
 /obj/vehicle/sealed/mecha/golden_gardren/Destroy()
 	QDEL_NULL(cockpit)
+	QDEL_NULL(shield)
 	// Put the pilots on free turfs instead of the base drop under the frame.
 	emergency_eject(use_capsules = FALSE, stun = FALSE)
 	// The halves exist only as a part of this frame now, so they go down with it.
@@ -100,6 +91,8 @@
 	initialize_passenger_action_type(/datum/action/vehicle/sealed/mecha/golden_gardren_emergency_eject)
 	initialize_passenger_action_type(/datum/action/vehicle/sealed/mecha/golden_gardren_separate)
 	initialize_controller_action_type(/datum/action/vehicle/sealed/mecha/golden_gardren_ram, VEHICLE_CONTROL_DRIVE)
+	initialize_controller_action_type(/datum/action/vehicle/sealed/mecha/golden_gardren_phasing, VEHICLE_CONTROL_DRIVE)
+	initialize_controller_action_type(/datum/action/vehicle/sealed/mecha/golden_gardren_claw, VEHICLE_CONTROL_MELEE)
 	initialize_controller_action_type(/datum/action/vehicle/sealed/mecha/mech_view_stats, VEHICLE_CONTROL_EQUIPMENT)
 	initialize_controller_action_type(/datum/action/vehicle/sealed/mecha/golden_gardren_shield, VEHICLE_CONTROL_EQUIPMENT)
 	initialize_controller_action_type(/datum/action/vehicle/sealed/mecha/ivanov_strike/golden_gardren, VEHICLE_CONTROL_EQUIPMENT)
@@ -138,8 +131,10 @@
 	// A pilot leaving during the ejection countdown takes no landing choice or marker with them.
 	clear_landing_choice(driver)
 	// Without an operator the shield cannot be held.
-	if(shield_active && !return_amount_of_controllers_with_flag(VEHICLE_CONTROL_EQUIPMENT))
-		set_shield(FALSE)
+	shield?.drop_if_unmanned()
+	// Nobody left at the controls to hold the claw shut.
+	if(!return_amount_of_controllers_with_flag(VEHICLE_CONTROL_MELEE))
+		golden_gardren_release_claw(src)
 
 /// Each seat may only use its own part of the mech panel: weapons belong to the weapons seat, settings to the main seat.
 /obj/vehicle/sealed/mecha/golden_gardren/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
@@ -153,25 +148,10 @@
 			return FALSE
 	return ..()
 
-/obj/vehicle/sealed/mecha/golden_gardren/process(seconds_per_tick)
-	. = ..()
-	if(shield_active)
-		if(!cell || !use_energy(GOLDEN_GARDREN_SHIELD_UPKEEP * seconds_per_tick))
-			set_shield(FALSE, collapsed = TRUE)
-		return
-	if(shield_charge < shield_max_charge && COOLDOWN_FINISHED(src, shield_recharge_cooldown))
-		shield_charge = min(shield_max_charge, shield_charge + GOLDEN_GARDREN_SHIELD_RECHARGE_RATE * seconds_per_tick)
-
 /// The shield soaks brute and burn damage from its own charge before it reaches the hull. Crossing into critical damage raises the alarm.
 /obj/vehicle/sealed/mecha/golden_gardren/take_damage(damage_amount, damage_type = BRUTE, damage_flag = "", sound_effect = TRUE, attack_dir, armour_penetration = 0)
-	if(shield_active && damage_amount > 0 && (damage_type == BRUTE || damage_type == BURN))
-		var/absorbed = min(damage_amount, shield_charge)
-		shield_charge -= absorbed
-		damage_amount -= absorbed
-		COOLDOWN_START(src, shield_recharge_cooldown, GOLDEN_GARDREN_SHIELD_RECHARGE_DELAY)
-		playsound(src, 'sound/vehicles/mecha/mech_shield_deflect.ogg', 60, TRUE)
-		if(shield_charge <= 0)
-			set_shield(FALSE, collapsed = TRUE)
+	if(shield?.active && damage_amount > 0)
+		damage_amount = shield.absorb(damage_amount, damage_type)
 		if(damage_amount <= 0)
 			return 0
 	var/critical_integrity = max_integrity * GOLDEN_GARDREN_CRITICAL_INTEGRITY
@@ -187,54 +167,16 @@
 	emergency_eject()
 	return ..()
 
-/// Raises or lowers the shield on the operator's request. Returns TRUE if the state changed.
-/obj/vehicle/sealed/mecha/golden_gardren/proc/toggle_shield(mob/user)
-	if(shield_active)
-		set_shield(FALSE)
-		return TRUE
-	if(!COOLDOWN_FINISHED(src, shield_toggle_cooldown))
-		balloon_alert(user, "щит перезаряжается!")
-		return FALSE
-	if(shield_charge <= 0)
-		balloon_alert(user, "щит разряжен!")
-		return FALSE
-	if(!has_charge(GOLDEN_GARDREN_SHIELD_UPKEEP))
-		balloon_alert(user, "мало энергии!")
-		return FALSE
-	set_shield(TRUE)
-	return TRUE
-
-/// Changes the shield state. A collapse blocks raising it again for longer than a manual shutdown.
-/obj/vehicle/sealed/mecha/golden_gardren/proc/set_shield(new_state, collapsed = FALSE)
-	if(shield_active == new_state)
-		return
-	shield_active = new_state
-	if(shield_active)
-		playsound(src, 'sound/vehicles/mecha/mech_shield_raise.ogg', 50, FALSE)
-		to_chat(occupants, span_notice("Щит поднят."))
-	else
-		COOLDOWN_START(src, shield_toggle_cooldown, collapsed ? GOLDEN_GARDREN_SHIELD_COLLAPSE_DELAY : GOLDEN_GARDREN_SHIELD_TOGGLE_DELAY)
-		COOLDOWN_START(src, shield_recharge_cooldown, GOLDEN_GARDREN_SHIELD_RECHARGE_DELAY)
-		playsound(src, 'sound/vehicles/mecha/mech_shield_drop.ogg', 50, FALSE)
-		to_chat(occupants, collapsed ? span_danger("Щит пробит!") : span_notice("Щит опущен."))
-	log_message("Shield [shield_active ? "raised" : "lowered"][collapsed ? " (collapsed)" : ""], charge [shield_charge].", LOG_MECHA)
-	for(var/mob/occupant as anything in occupants)
-		var/datum/action/shield_button = LAZYACCESSASSOC(occupant_actions, occupant, /datum/action/vehicle/sealed/mecha/golden_gardren_shield)
-		if(shield_button)
-			shield_button.button_icon_state = "mech_defense_mode_[shield_active ? "on" : "off"]"
-			shield_button.build_all_button_icons()
-	update_appearance(UPDATE_OVERLAYS)
-
 /obj/vehicle/sealed/mecha/golden_gardren/update_overlays()
 	. = ..()
-	if(!shield_active)
-		return
-	var/mutable_appearance/shield = mutable_appearance('icons/mob/effects/durand_shield.dmi', "shield")
-	// The shield sprite is drawn for a regular mech, so it is stretched over the 48x48 frame.
-	shield.transform = matrix().Scale(1.5)
-	shield.pixel_w = 8
-	shield.pixel_z = 12
-	. += shield
+	var/shield_overlay = shield?.get_overlay()
+	if(shield_overlay)
+		. += shield_overlay
+
+/obj/vehicle/sealed/mecha/golden_gardren/user_unbuckle_mob(mob/living/buckled_mob, mob/user)
+	if(golden_gardren_claw_intercept_unbuckle(src, buckled_mob, user))
+		return null
+	return ..()
 
 /**
  * Forms the frame from the pair: moves the pilots in, takes over the Gardren's parts and docks both halves.
@@ -295,6 +237,9 @@
 
 /// Stores a half inside the frame: hidden, switched off and not processing until the frame separates.
 /obj/vehicle/sealed/mecha/golden_gardren/proc/dock_component(obj/vehicle/sealed/mecha/component)
+	golden_gardren_release_claw(component)
+	var/datum/component/golden_gardren_phasing/phasing = component.GetComponent(/datum/component/golden_gardren_phasing)
+	phasing?.set_active(FALSE)
 	if(component.mecha_flags & LIGHTS_ON)
 		component.toggle_lights()
 	component.forceMove(src)
@@ -318,9 +263,4 @@
 	welder_salvage = list(/obj/item/stack/sheet/mineral/gold, /obj/item/stack/sheet/plasteel, /obj/item/stack/sheet/iron, /obj/item/stack/rods)
 	salvage_num = 8
 
-#undef GOLDEN_GARDREN_SHIELD_UPKEEP
-#undef GOLDEN_GARDREN_SHIELD_RECHARGE_RATE
-#undef GOLDEN_GARDREN_SHIELD_RECHARGE_DELAY
-#undef GOLDEN_GARDREN_SHIELD_TOGGLE_DELAY
-#undef GOLDEN_GARDREN_SHIELD_COLLAPSE_DELAY
 #undef GOLDEN_GARDREN_CRITICAL_INTEGRITY

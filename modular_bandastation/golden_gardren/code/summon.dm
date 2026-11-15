@@ -108,6 +108,8 @@
 /// The mech fires its jets and climbs out of sight where it stands.
 /obj/item/implant/golden_gardren_summon/proc/take_off(obj/vehicle/sealed/mecha/mech)
 	var/turf/origin = get_turf(mech)
+	// Nobody held in the claw goes up into the sky with it.
+	golden_gardren_release_claw(mech)
 	mech.visible_message(span_warning("[mech.declent_ru(NOMINATIVE)] с рёвом двигателей взмывает в небо!"))
 	playsound(origin, 'sound/vehicles/rocketlaunch.ogg', 80, TRUE)
 	for(var/turf/smoke_turf in range(1, origin))

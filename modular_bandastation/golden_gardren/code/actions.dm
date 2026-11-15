@@ -40,21 +40,6 @@
 	mech.assign_seat(owner, main_seat = to_main_seat)
 	mech.balloon_alert(owner, to_main_seat ? "место пилота" : "место стрелка")
 
-/// Toggles the Golden-Gardren shield. Weapons seat only.
-/datum/action/vehicle/sealed/mecha/golden_gardren_shield
-	name = "Щит"
-	desc = "Поднять или опустить энергощит. Щит гасит урон собственным зарядом, тратит энергию батареи и после пробития долго восстанавливается."
-	button_icon_state = "mech_defense_mode_off"
-
-/datum/action/vehicle/sealed/mecha/golden_gardren_shield/Trigger(mob/clicker, trigger_flags)
-	. = ..()
-	if(!.)
-		return
-	var/obj/vehicle/sealed/mecha/golden_gardren/mech = chassis
-	if(!istype(mech) || !(owner in mech.return_controllers_with_flag(VEHICLE_CONTROL_EQUIPMENT)))
-		return
-	mech.toggle_shield(owner)
-
 /// Missile strike of the weapons seat. Only the operator's own clicks pick targets, the main pilot keeps punching.
 /datum/action/vehicle/sealed/mecha/ivanov_strike/golden_gardren
 	name = "Ракетный удар"

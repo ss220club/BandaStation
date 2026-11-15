@@ -1,7 +1,7 @@
 /**
  * ## Gardren
  *
- * Big melee body of the Golden-Gardren pair. Gygax-class frame with Durand-grade armor.
+ * Big melee body of the Golden-Gardren pair. Gygax speed, Marauder-grade armor, a phase shift and a claw.
  * Alone it is a regular single-pilot exosuit; the Golden climbs into its hatch to form the combined mech.
  * Event-only: spawned by admins, not buildable.
  */
@@ -16,7 +16,7 @@
 	mech_type = EXOSUIT_MODULE_SAVANNAH
 	movedelay = 3
 	max_integrity = 250
-	armor_type = /datum/armor/mecha_durand
+	armor_type = /datum/armor/mecha_marauder
 	max_temperature = 30000
 	force = 25
 	destruction_sleep_duration = 40
@@ -37,9 +37,27 @@
 		MECHA_ARMOR = 1,
 	)
 
+/obj/vehicle/sealed/mecha/gardren/Initialize(mapload, built_manually)
+	. = ..()
+	AddComponent(/datum/component/golden_gardren_phasing)
+	AddComponent(/datum/component/golden_gardren_claw)
+
 /obj/vehicle/sealed/mecha/gardren/generate_actions()
 	. = ..()
 	initialize_passenger_action_type(/datum/action/vehicle/sealed/mecha/golden_gardren_combine)
+	initialize_controller_action_type(/datum/action/vehicle/sealed/mecha/golden_gardren_phasing, VEHICLE_CONTROL_DRIVE)
+	initialize_controller_action_type(/datum/action/vehicle/sealed/mecha/golden_gardren_claw, VEHICLE_CONTROL_MELEE)
+
+/obj/vehicle/sealed/mecha/gardren/remove_occupant(mob/driver)
+	. = ..()
+	// Nobody left at the controls to hold the claw shut.
+	if(!return_amount_of_controllers_with_flag(VEHICLE_CONTROL_MELEE))
+		golden_gardren_release_claw(src)
+
+/obj/vehicle/sealed/mecha/gardren/user_unbuckle_mob(mob/living/buckled_mob, mob/user)
+	if(golden_gardren_claw_intercept_unbuckle(src, buckled_mob, user))
+		return null
+	return ..()
 
 /obj/structure/mecha_wreckage/gardren
 	name = "\improper Gardren wreckage"

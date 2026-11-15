@@ -64,9 +64,9 @@
 	data["max_integrity"] = mech.max_integrity
 	data["charge"] = mech.cell ? mech.cell.charge : 0
 	data["max_charge"] = mech.cell ? mech.cell.maxcharge : 0
-	data["shield_active"] = mech.shield_active
-	data["shield_charge"] = mech.shield_charge
-	data["shield_max_charge"] = mech.shield_max_charge
+	data["shield_active"] = mech.shield.active
+	data["shield_charge"] = mech.shield.charge
+	data["shield_max_charge"] = mech.shield.max_charge
 	data["ejecting"] = !!mech.emergency_eject_timer
 	data["separate_blocker"] = mech.separate_blocker()
 	var/list/main_pilots = mech.return_drivers()
@@ -81,7 +81,7 @@
 		data["force"] = mech.force
 		data["ram_cooldown"] = round(S_TIMER_COOLDOWN_TIMELEFT(mech, COOLDOWN_GOLDEN_GARDREN_RAM) / (1 SECONDS))
 	else if(seat == "weapons")
-		data["shield_ready"] = COOLDOWN_FINISHED(mech, shield_toggle_cooldown)
+		data["shield_ready"] = COOLDOWN_FINISHED(mech.shield, toggle_cooldown)
 		data["strike_cooldown"] = round(S_TIMER_COOLDOWN_TIMELEFT(mech, COOLDOWN_MECHA_MISSILE_STRIKE) / (1 SECONDS))
 		var/list/weapons = list()
 		for(var/slot in list(MECHA_L_ARM, MECHA_R_ARM))
@@ -128,7 +128,7 @@
 		return FALSE
 	switch(action)
 		if("toggle_shield")
-			return mech.toggle_shield(user)
+			return mech.shield.toggle(user)
 		if("reload")
 			var/slot = params["slot"]
 			if(!(slot in list(MECHA_L_ARM, MECHA_R_ARM)))
