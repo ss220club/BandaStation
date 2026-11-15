@@ -7,17 +7,13 @@
 	food_flags = FOOD_FINGER_FOOD
 	name = "syrnik"
 	desc = "Обжаренный сырник с золотистой корочкой и мягкой творожной серединой."
-	icon_state = "syrnik_1"
+	icon_state = "syrnik"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 5,
 		/datum/reagent/consumable/sugar = 3,
 		/datum/reagent/consumable/nutriment/protein = 2,
 	)
 	tastes = list("обжаренный творог" = 2)
-
-/obj/item/food/station_food/syrnik/cooked/Initialize(mapload)
-	. = ..()
-	icon_state = "syrnik_[rand(1, 6)]"
 
 /obj/item/food/station_food/syrnik/raw
 	name = "raw syrnik"
