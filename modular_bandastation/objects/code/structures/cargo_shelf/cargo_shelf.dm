@@ -81,12 +81,15 @@
 		if(1)
 			crate.pixel_y = CARGO_SHELF_VERTICAL_OFFSET * 0
 			crate.layer = BELOW_OBJ_LAYER
+			crate.plane = initial(crate.plane)
 		if(2)
 			crate.pixel_y = CARGO_SHELF_VERTICAL_OFFSET * 1
-			crate.layer = BELOW_OBJ_LAYER + 0.01
+			crate.layer = layer + 0.01
+			crate.plane = FLOAT_PLANE + 1
 		if(3)
 			crate.pixel_y = CARGO_SHELF_VERTICAL_OFFSET * 2
-			crate.layer = ABOVE_MOB_LAYER + 0.02
+			crate.layer = layer + 0.02
+			crate.plane = FLOAT_PLANE + 1
 
 	crates_stored[slot] = crate
 	crate.interaction_flags_atom |= INTERACT_ATOM_MOUSEDROP_IGNORE_ADJACENT
@@ -121,6 +124,7 @@
 		crate.layer = initial(crate.layer)
 		crate.pixel_y = initial(crate.pixel_y)
 		crate.mouse_opacity = initial(crate.mouse_opacity)
+		crate.plane = initial(crate.plane)
 		crate.interaction_flags_atom &= ~INTERACT_ATOM_MOUSEDROP_IGNORE_ADJACENT
 		vis_contents -= crate
 		return TRUE
