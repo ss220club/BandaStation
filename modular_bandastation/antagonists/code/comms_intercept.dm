@@ -19,6 +19,7 @@
 #define COMMS_INTERCEPT_DIRECTION_EVERY 5
 #define COMMS_INTERCEPT_TAP_EMP_TIME (2 MINUTES)
 #define COMMS_INTERCEPT_RECEIVER_EMP_TIME (60 SECONDS)
+#define COMMS_INTERCEPT_EXTRACT_TIME (30 SECONDS)
 #define COMMS_INTERCEPT_MAX_LOG_ENTRIES 400
 /// Extra load on the receiver's area APC while transmitting, shows up on the power monitor
 #define COMMS_INTERCEPT_RECEIVER_LOAD (10 KILO WATTS)
@@ -418,6 +419,7 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 	var/offline_until = 0
 	/// Heard traffic while packets were still being collected, so it has a dump to hand over
 	var/has_data = FALSE
+	var/extracting = FALSE
 
 /obj/item/comms_tap/Destroy()
 	detach()
@@ -479,9 +481,13 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 
 /obj/item/comms_tap/proc/on_relay(datum/source, datum/signal/subspace/signal)
 	SIGNAL_HANDLER
-	if(!is_listening())
-		return
 	if(!istype(signal, /datum/signal/subspace/vocal) || !(signal.frequency in comms_intercept_frequencies()) || !signal.data["message"])
+		return
+	// Pulling the dump off the board drowns the tapped channels in static
+	if(extracting)
+		signal.data["message"] = Gibberish(signal.data["message"], TRUE, 100)
+		return
+	if(!is_listening())
 		return
 	var/datum/objective/comms_intercept/objective = GLOB.comms_intercept
 	if(!objective)
@@ -734,6 +740,12 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 			if(!tap.has_data)
 				balloon_alert(user, "на жучке нет данных!")
 				return ITEM_INTERACT_BLOCKING
+			balloon_alert(user, "снятие дампа...")
+			tap.extracting = TRUE
+			var/extracted = tool.use_tool(src, user, COMMS_INTERCEPT_EXTRACT_TIME, volume = 50)
+			tap.extracting = FALSE
+			if(!extracted || !panel_open || QDELETED(tap) || tap.loc != src || !objective.is_collected())
+				return ITEM_INTERACT_BLOCKING
 			objective.extract_from_tap(tap, user)
 			balloon_alert(user, "дамп снят с жучка")
 			return ITEM_INTERACT_SUCCESS
@@ -777,6 +789,7 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 #undef COMMS_INTERCEPT_DIRECTION_EVERY
 #undef COMMS_INTERCEPT_TAP_EMP_TIME
 #undef COMMS_INTERCEPT_RECEIVER_EMP_TIME
+#undef COMMS_INTERCEPT_EXTRACT_TIME
 #undef COMMS_INTERCEPT_MAX_LOG_ENTRIES
 #undef COMMS_INTERCEPT_RECEIVER_LOAD
 #undef COMMS_INTERCEPT_STATIC_NEAR
