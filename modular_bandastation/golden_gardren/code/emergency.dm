@@ -23,8 +23,8 @@
 	var/list/landings
 	/// Assoc list: pilot -> landing marker image shown to that pilot only.
 	var/list/markers
-	/// Timer of the blow-up of a mech that has taken a lethal blow with pilots inside.
-	var/dying_timer
+	/// Whether the mech has taken a lethal blow with pilots inside and blows up when the countdown runs out.
+	var/dying = FALSE
 
 /datum/component/golden_gardren_ejection/Initialize()
 	if(!istype(parent, /obj/vehicle/sealed/mecha))
@@ -39,8 +39,6 @@
 /datum/component/golden_gardren_ejection/Destroy(force)
 	deltimer(timer)
 	timer = null
-	deltimer(dying_timer)
-	dying_timer = null
 	for(var/mob/pilot as anything in markers?.Copy())
 		clear_landing_choice(pilot)
 	landings = null
@@ -50,30 +48,35 @@
 /datum/component/golden_gardren_ejection/proc/on_take_damage(datum/source, damage_amount, damage_type, damage_flag, sound_effect, attack_dir, armour_penetration)
 	SIGNAL_HANDLER
 	var/obj/vehicle/sealed/mecha/mech = parent
-	if(dying_timer)
+	if(dying)
 		return COMPONENT_NO_TAKE_DAMAGE
 	if(damage_amount < mech.get_integrity() || !LAZYLEN(mech.occupants))
 		return NONE
 	start_dying()
 	return COMPONENT_NO_TAKE_DAMAGE
 
-/// The mech goes down burning: it cannot move or fight, the ejection countdown starts, and it blows up when the countdown runs out.
+/**
+ * The mech goes down burning: it cannot move or fight, and it blows up when the ejection countdown runs out.
+ * A countdown the pilots have already started themselves is not restarted.
+ */
 /datum/component/golden_gardren_ejection/proc/start_dying()
 	var/obj/vehicle/sealed/mecha/mech = parent
+	dying = TRUE
 	mech.update_integrity(1)
 	mech.completely_disabled = TRUE
-	mech.log_message("Took a lethal blow, blowing up in [DisplayTimeText(GOLDEN_GARDREN_EJECT_DELAY)].", LOG_MECHA)
+	mech.log_message("Took a lethal blow, blowing up once the ejection countdown runs out.", LOG_MECHA)
 	mech.visible_message(span_userdanger("[mech.declent_ru(NOMINATIVE)] охвачен огнём и вот-вот взорвётся!"))
 	mech.add_shared_particles(/particles/smoke/burning, "golden_gardren_dying")
 	mech.spark_system?.start()
 	playsound(mech, 'sound/machines/warning-buzzer.ogg', 100, FALSE)
 	start()
-	dying_timer = addtimer(CALLBACK(src, PROC_REF(finish_dying)), GOLDEN_GARDREN_EJECT_DELAY, TIMER_STOPPABLE)
 
-/// The countdown of a dying mech has run out: it is destroyed the regular way, firing out whoever is still inside.
-/datum/component/golden_gardren_ejection/proc/finish_dying()
+/// The countdown has run out: the pilots are fired out, and a dying mech is then destroyed the regular way.
+/datum/component/golden_gardren_ejection/proc/finish_countdown()
 	var/obj/vehicle/sealed/mecha/mech = parent
-	dying_timer = null
+	eject()
+	if(!dying)
+		return
 	mech.remove_shared_particles("golden_gardren_dying")
 	mech.update_integrity(0)
 	mech.atom_destruction(BRUTE)
@@ -93,13 +96,12 @@
 	playsound(mech, 'sound/machines/warning-buzzer.ogg', 75, FALSE)
 	for(var/mob/pilot as anything in mech.occupants)
 		set_landing_cursor(pilot, aiming = TRUE)
-	timer = addtimer(CALLBACK(src, PROC_REF(eject)), GOLDEN_GARDREN_EJECT_DELAY, TIMER_STOPPABLE)
+	timer = addtimer(CALLBACK(src, PROC_REF(finish_countdown)), GOLDEN_GARDREN_EJECT_DELAY, TIMER_STOPPABLE)
 	return TRUE
 
 /// While the countdown runs, a pilot's click picks the landing turf instead of punching or shooting. Returns TRUE if the click was taken.
 /datum/component/golden_gardren_ejection/proc/handle_click(mob/user, atom/target)
-	var/obj/vehicle/sealed/mecha/mech = parent
-	if(!timer || !mech.is_occupant(user))
+	if(!timer)
 		return FALSE
 	choose_landing(user, target)
 	return TRUE

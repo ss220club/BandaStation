@@ -3,8 +3,8 @@
 /// How long the Golden takes to climb onto the Gardren.
 #define GOLDEN_GARDREN_COMBINE_TIME (1.5 SECONDS)
 
-/// Halves of the pair currently in the middle of combining. Blocks a second combination from starting on them.
-GLOBAL_LIST_EMPTY(golden_gardren_combining)
+/// Mechs of the family in the middle of combining, separating or answering a summon. Blocks a second such action from starting on them.
+GLOBAL_LIST_EMPTY(golden_gardren_busy)
 
 // shortcut: on for solo testing on the author's request; switch to FALSE before the PR to the main repository.
 /// Lets a single pilot combine or separate the pair: the other half may be empty and the other pilot is not asked.
@@ -55,10 +55,16 @@ GLOBAL_VAR_INIT(golden_gardren_solo_combine, TRUE)
 		return "нет ни одного пилота"
 	return null
 
-/**
- * Starts combining the half [source] with the other half next to it, on behalf of [initiator].
- * Asks the other pilot unless in solo mode, rechecks everything after the answer and after the animation, then builds the frame.
- */
+/// Returns why a combination that had passed its checks cannot go on after a wait, or null if nothing has changed.
+/proc/golden_gardren_combine_recheck(obj/vehicle/sealed/mecha/golden/golden, obj/vehicle/sealed/mecha/gardren/gardren, mob/living/golden_pilot, mob/living/gardren_pilot, solo)
+	var/blocker = golden_gardren_combine_blocker(golden, gardren, solo)
+	if(blocker)
+		return blocker
+	if(golden_gardren_pilot(golden) != golden_pilot || golden_gardren_pilot(gardren) != gardren_pilot)
+		return "пилоты сменились"
+	return null
+
+/// Finds the other half next to [source] and starts combining with it on behalf of [initiator], keeping both halves busy meanwhile.
 /proc/golden_gardren_try_combine(obj/vehicle/sealed/mecha/source, mob/living/initiator)
 	var/solo = GLOB.golden_gardren_solo_combine
 	var/obj/vehicle/sealed/mecha/golden/golden
@@ -72,62 +78,64 @@ GLOBAL_VAR_INIT(golden_gardren_solo_combine, TRUE)
 	if(!golden || !gardren)
 		source.balloon_alert(initiator, "рядом нет второго меха пары!")
 		return
-	if((golden in GLOB.golden_gardren_combining) || (gardren in GLOB.golden_gardren_combining))
+	if((golden in GLOB.golden_gardren_busy) || (gardren in GLOB.golden_gardren_busy))
 		source.balloon_alert(initiator, "объединение уже идёт!")
 		return
 	var/blocker = golden_gardren_combine_blocker(golden, gardren, solo)
 	if(blocker)
 		source.balloon_alert(initiator, blocker)
 		return
-
 	var/mob/living/golden_pilot = golden_gardren_pilot(golden)
 	var/mob/living/gardren_pilot = golden_gardren_pilot(gardren)
 	if(initiator != golden_pilot && initiator != gardren_pilot)
 		return
-	var/mob/living/partner = initiator == golden_pilot ? gardren_pilot : golden_pilot
 
-	GLOB.golden_gardren_combining += list(golden, gardren)
+	var/list/pair = list(golden, gardren)
+	GLOB.golden_gardren_busy += pair
+	var/failure = golden_gardren_combine(golden, gardren, golden_pilot, gardren_pilot, initiator, solo)
+	GLOB.golden_gardren_busy -= pair
+	if(failure)
+		golden_gardren_notify(list(golden_pilot, gardren_pilot), failure)
+
+/**
+ * Combines the pair: asks the other pilot unless in solo mode, plays the climb, rechecks everything after each wait and builds the frame.
+ * Returns the message for the pilots if the combination fell through, or null if the frame was formed.
+ */
+/proc/golden_gardren_combine(obj/vehicle/sealed/mecha/golden/golden, obj/vehicle/sealed/mecha/gardren/gardren, mob/living/golden_pilot, mob/living/gardren_pilot, mob/living/initiator, solo)
+	var/mob/living/partner = initiator == golden_pilot ? gardren_pilot : golden_pilot
+	var/failure
 	if(partner && !solo)
 		to_chat(initiator, span_notice("Запрос на объединение отправлен пилоту [partner.declent_ru(GENITIVE)]."))
 		var/answer = tgui_alert(partner, "[initiator.declent_ru(NOMINATIVE)] предлагает объединиться в Голден-Гардрен. Согласиться?", "Объединение", list("Да", "Нет"), GOLDEN_GARDREN_CONFIRM_TIME)
 		if(answer != "Да")
-			GLOB.golden_gardren_combining -= list(golden, gardren)
-			if(!QDELETED(initiator))
-				to_chat(initiator, span_warning("Второй пилот не согласился на объединение."))
-			return
+			return "Объединение отменено: получен отказ."
 		// Everything may have changed while waiting for the answer.
-		blocker = golden_gardren_combine_blocker(golden, gardren, solo)
-		if(blocker || golden_gardren_pilot(golden) != golden_pilot || golden_gardren_pilot(gardren) != gardren_pilot)
-			GLOB.golden_gardren_combining -= list(golden, gardren)
-			golden_gardren_notify(list(golden_pilot, gardren_pilot), "Объединение сорвалось: [blocker || "пилоты сменились"].")
-			return
+		failure = golden_gardren_combine_recheck(golden, gardren, golden_pilot, gardren_pilot, solo)
+		if(failure)
+			return "Объединение сорвалось: [failure]."
 
 	gardren.visible_message(span_notice("[golden.declent_ru(NOMINATIVE)] взбирается на плечи [gardren.declent_ru(GENITIVE)]!"))
 	playsound(gardren, 'sound/vehicles/mecha/mechmove03.ogg', 75, TRUE)
 	animate(golden, pixel_x = golden.base_pixel_x + (gardren.x - golden.x) * ICON_SIZE_X, pixel_y = golden.base_pixel_y + (gardren.y - golden.y) * ICON_SIZE_Y + 16, time = GOLDEN_GARDREN_COMBINE_TIME, easing = QUAD_EASING | EASE_OUT)
 	sleep(GOLDEN_GARDREN_COMBINE_TIME)
 
-	blocker = golden_gardren_combine_blocker(golden, gardren, solo)
-	if(blocker || golden_gardren_pilot(golden) != golden_pilot || golden_gardren_pilot(gardren) != gardren_pilot)
-		GLOB.golden_gardren_combining -= list(golden, gardren)
+	failure = golden_gardren_combine_recheck(golden, gardren, golden_pilot, gardren_pilot, solo)
+	if(failure)
 		if(!QDELETED(golden))
 			animate(golden, pixel_x = golden.base_pixel_x, pixel_y = golden.base_pixel_y, time = 0.5 SECONDS)
-		golden_gardren_notify(list(golden_pilot, gardren_pilot), "Объединение сорвалось: [blocker || "пилоты сменились"].")
-		return
+		return "Объединение сорвалось: [failure]."
 
 	var/obj/vehicle/sealed/mecha/golden_gardren/combined = new(gardren.loc, TRUE)
 	combined.setDir(gardren.dir)
 	animate(golden, pixel_x = golden.base_pixel_x, pixel_y = golden.base_pixel_y, time = 0)
 	if(!combined.assemble(golden, gardren, golden_pilot, gardren_pilot))
 		qdel(combined)
-		GLOB.golden_gardren_combining -= list(golden, gardren)
-		golden_gardren_notify(list(golden_pilot, gardren_pilot), "Объединение сорвалось: не удалось пересадить пилотов.")
-		return
-	GLOB.golden_gardren_combining -= list(golden, gardren)
+		return "Объединение сорвалось: не удалось пересадить пилотов."
 	combined.visible_message(span_boldnotice("[combined.declent_ru(NOMINATIVE)] поднимается во весь рост!"))
 	playsound(combined, 'sound/vehicles/mecha/nominal.ogg', 75, TRUE)
+	return null
 
-/// Tells each still existing pilot about the combination outcome.
+/// Tells each still existing pilot that a combination or separation fell through.
 /proc/golden_gardren_notify(list/pilots, message)
 	for(var/mob/living/pilot in pilots)
 		to_chat(pilot, span_warning(message))

@@ -26,7 +26,7 @@
 		return "здесь нельзя разделиться"
 	if(get_integrity() <= 0 || completely_disabled)
 		return "мех неисправен"
-	if(is_currently_ejecting || golden_gardren_is_ejecting(src) || (src in GLOB.golden_gardren_combining))
+	if(is_currently_ejecting || golden_gardren_is_ejecting(src) || (src in GLOB.golden_gardren_busy))
 		return "мех занят"
 	if(!golden_gardren_find_exit_turf(src))
 		return "нет места для разделения"
@@ -42,14 +42,13 @@
 	for(var/mob/living/occupant as anything in combined.occupants)
 		if(occupant != initiator)
 			partner = occupant
-	GLOB.golden_gardren_combining += combined
 	if(partner && !GLOB.golden_gardren_solo_combine)
 		to_chat(initiator, span_notice("Запрос на разделение отправлен пилоту [partner.declent_ru(GENITIVE)]."))
+		GLOB.golden_gardren_busy += combined
 		var/answer = tgui_alert(partner, "[initiator.declent_ru(NOMINATIVE)] предлагает разделиться на Голдена и Гардрена. Согласиться?", "Разделение", list("Да", "Нет"), GOLDEN_GARDREN_SEPARATE_CONFIRM_TIME)
-		GLOB.golden_gardren_combining -= combined
+		GLOB.golden_gardren_busy -= combined
 		if(answer != "Да")
-			if(!QDELETED(initiator))
-				to_chat(initiator, span_warning("Второй пилот не согласился на разделение."))
+			golden_gardren_notify(list(initiator, partner), "Разделение отменено: получен отказ.")
 			return
 		// Everything may have changed while waiting for the answer.
 		if(QDELETED(combined) || !(initiator in combined.occupants) || !(partner in combined.occupants))
@@ -59,8 +58,6 @@
 		if(blocker)
 			golden_gardren_notify(list(initiator, partner), "Разделение сорвалось: [blocker].")
 			return
-	else
-		GLOB.golden_gardren_combining -= combined
 	if(!combined.disassemble())
 		golden_gardren_notify(list(initiator, partner), "Разделение сорвалось: нет места для Голдена.")
 

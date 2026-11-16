@@ -54,7 +54,7 @@
 		balloon_alert(user, blocker)
 		return
 	COOLDOWN_START(src, summon_cooldown, GOLDEN_GARDREN_SUMMON_COOLDOWN)
-	GLOB.golden_gardren_combining += mech
+	GLOB.golden_gardren_busy += mech
 	user.log_message("summoned [mech] from [AREACOORD(mech)] with a summon implant.", LOG_GAME)
 	to_chat(user, span_notice("Сигнал принят: [mech.declent_ru(NOMINATIVE)] вылетает к вам!"))
 	take_off(mech)
@@ -79,9 +79,7 @@
 		return "мех недоступен"
 	if(length(mech.occupants))
 		return "в мехе кто-то есть"
-	if(mech.completely_disabled || mech.is_currently_ejecting || (check_cooldown && (mech in GLOB.golden_gardren_combining)))
-		return "мех занят"
-	if(golden_gardren_is_ejecting(mech))
+	if(mech.completely_disabled || mech.is_currently_ejecting || golden_gardren_is_ejecting(mech) || (check_cooldown && (mech in GLOB.golden_gardren_busy)))
 		return "мех занят"
 	if(!landing)
 		return "нет места для посадки"
@@ -117,14 +115,15 @@
 
 /// After the climb: send the mech down to the summoner, or put it back if anything changed in the meantime.
 /obj/item/implant/golden_gardren_summon/proc/launch(obj/vehicle/sealed/mecha/mech, mob/living/user)
-	GLOB.golden_gardren_combining -= mech
+	GLOB.golden_gardren_busy -= mech
 	if(QDELETED(mech))
 		return
 	animate(mech)
 	mech.pixel_z = mech.base_pixel_z
 	mech.alpha = initial(mech.alpha)
-	var/turf/landing = (QDELETED(user) || user != imp_in) ? null : find_landing(user)
-	var/blocker = (QDELETED(user) || user != imp_in) ? "носитель импланта пропал" : summon_blocker(mech, user, landing, check_cooldown = FALSE)
+	var/summoner_gone = QDELETED(user) || user != imp_in
+	var/turf/landing = summoner_gone ? null : find_landing(user)
+	var/blocker = summoner_gone ? "носитель импланта пропал" : summon_blocker(mech, user, landing, check_cooldown = FALSE)
 	if(blocker)
 		mech.visible_message(span_warning("[mech.declent_ru(NOMINATIVE)] не находит цели и опускается обратно."))
 		if(!QDELETED(user))

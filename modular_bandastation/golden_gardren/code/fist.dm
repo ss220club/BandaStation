@@ -152,10 +152,12 @@ GLOBAL_LIST_INIT(golden_gardren_fist_forbidden, typecacheof(list(
 	var/obj/vehicle/sealed/mecha/mech = parent
 	if(QDELETED(target) || QDELETED(pilot))
 		return "цель пропала"
-	if(!mech.is_occupant(pilot) || !(mech.occupants[pilot] & VEHICLE_CONTROL_MELEE))
+	if(!is_fist_pilot(pilot))
 		return "кулак не у вас"
 	if(held)
 		return "кулак занят"
+	if(!ismovable(target) || target.throwing)
+		return "это не схватить"
 	if(!isturf(mech.loc) || !isturf(target.loc) || !mech.Adjacent(target))
 		return "цель слишком далеко"
 	if(isliving(target))
@@ -185,9 +187,6 @@ GLOBAL_LIST_INIT(golden_gardren_fist_forbidden, typecacheof(list(
 /// Closes the fist on [target] after a short wind-up, rechecking everything once it closes.
 /datum/component/golden_gardren_fist/proc/try_grab(mob/living/pilot, atom/movable/target)
 	var/obj/vehicle/sealed/mecha/mech = parent
-	if(!ismovable(target))
-		mech.balloon_alert(pilot, "это не схватить")
-		return FALSE
 	var/blocker = grab_blocker(pilot, target)
 	if(blocker)
 		mech.balloon_alert(pilot, blocker)
@@ -286,16 +285,23 @@ GLOBAL_LIST_INIT(golden_gardren_fist_forbidden, typecacheof(list(
 	if(!carrying && held && held.loc != mech.loc)
 		forget_held()
 
+/// Opens the fist and returns what it held, free of everything the fist did to it.
+/datum/component/golden_gardren_fist/proc/let_go()
+	var/obj/vehicle/sealed/mecha/mech = parent
+	var/atom/movable/freed = held
+	// Unbuckling a body comes back through on_held_unbuckled(), which forgets it.
+	if(isliving(freed))
+		mech.unbuckle_mob(freed, force = TRUE)
+	else
+		forget_held()
+	return freed
+
 /// Lets go of what the fist holds in front of the mech.
 /datum/component/golden_gardren_fist/proc/release()
 	if(!held)
 		return
 	var/obj/vehicle/sealed/mecha/mech = parent
-	var/atom/movable/dropped = held
-	if(isliving(dropped))
-		mech.unbuckle_mob(dropped, force = TRUE)
-	else
-		forget_held()
+	var/atom/movable/dropped = let_go()
 	var/turf/front = get_step(mech, mech.dir)
 	if(front && !front.is_blocked_turf(exclude_mobs = TRUE) && mech.Adjacent(front))
 		dropped.forceMove(front)
@@ -317,11 +323,7 @@ GLOBAL_LIST_INIT(golden_gardren_fist_forbidden, typecacheof(list(
 	if(HAS_TRAIT(pilot, TRAIT_PACIFISM))
 		mech.balloon_alert(pilot, "вы не хотите никому навредить!")
 		return FALSE
-	var/atom/movable/thrown = held
-	if(isliving(thrown))
-		mech.unbuckle_mob(thrown, force = TRUE)
-	else
-		forget_held()
+	var/atom/movable/thrown = let_go()
 	log_combat(pilot, thrown, "threw with a mech fist", mech)
 	mech.visible_message(span_danger("[mech.declent_ru(NOMINATIVE)] со всей силы швыряет [thrown.declent_ru(ACCUSATIVE)]!"))
 	playsound(mech, 'sound/vehicles/mecha/mechmove04.ogg', 75, TRUE)
@@ -481,18 +483,8 @@ GLOBAL_LIST_INIT(golden_gardren_fist_forbidden, typecacheof(list(
 	update_buttons()
 
 /datum/component/golden_gardren_fist/proc/update_buttons()
-	var/obj/vehicle/sealed/mecha/mech = parent
-	var/fist_state = held ? "fist_holding" : (grab_mode ? "fist_grab" : "fist_punch")
-	var/squeeze_state = squeezing ? "fist_squeeze_on" : "fist_squeeze_off"
-	for(var/mob/occupant as anything in mech.occupants)
-		var/datum/action/fist_button = LAZYACCESSASSOC(mech.occupant_actions, occupant, /datum/action/vehicle/sealed/mecha/golden_gardren_fist)
-		if(fist_button)
-			fist_button.button_icon_state = fist_state
-			fist_button.build_all_button_icons()
-		var/datum/action/squeeze_button = LAZYACCESSASSOC(mech.occupant_actions, occupant, /datum/action/vehicle/sealed/mecha/golden_gardren_fist_squeeze)
-		if(squeeze_button)
-			squeeze_button.button_icon_state = squeeze_state
-			squeeze_button.build_all_button_icons()
+	golden_gardren_update_buttons(parent, /datum/action/vehicle/sealed/mecha/golden_gardren_fist)
+	golden_gardren_update_buttons(parent, /datum/action/vehicle/sealed/mecha/golden_gardren_fist_squeeze)
 
 /**
  * Routes [/atom/movable/proc/user_unbuckle_mob] of a mech with a fist: a held body is not simply unbuckled, it has to break free.
@@ -521,10 +513,14 @@ GLOBAL_LIST_INIT(golden_gardren_fist_forbidden, typecacheof(list(
 	. = ..()
 	if(!.)
 		return
-	if(!chassis || !(owner in chassis.return_controllers_with_flag(VEHICLE_CONTROL_MELEE)))
-		return
-	var/datum/component/golden_gardren_fist/fist = chassis.GetComponent(/datum/component/golden_gardren_fist)
-	fist?.toggle(owner)
+	var/datum/component/golden_gardren_fist/fist = chassis?.GetComponent(/datum/component/golden_gardren_fist)
+	if(fist?.is_fist_pilot(owner))
+		fist.toggle(owner)
+
+/datum/action/vehicle/sealed/mecha/golden_gardren_fist/apply_button_icon(atom/movable/screen/movable/action_button/current_button, force)
+	var/datum/component/golden_gardren_fist/fist = chassis?.GetComponent(/datum/component/golden_gardren_fist)
+	button_icon_state = fist?.held ? "fist_holding" : (fist?.grab_mode ? "fist_grab" : "fist_punch")
+	return ..()
 
 /// Squeezes whatever the fist holds, or eases the grip. The pilot's seat.
 /datum/action/vehicle/sealed/mecha/golden_gardren_fist_squeeze
@@ -537,10 +533,14 @@ GLOBAL_LIST_INIT(golden_gardren_fist_forbidden, typecacheof(list(
 	. = ..()
 	if(!.)
 		return
-	if(!chassis || !(owner in chassis.return_controllers_with_flag(VEHICLE_CONTROL_MELEE)))
-		return
-	var/datum/component/golden_gardren_fist/fist = chassis.GetComponent(/datum/component/golden_gardren_fist)
-	fist?.toggle_squeeze(owner)
+	var/datum/component/golden_gardren_fist/fist = chassis?.GetComponent(/datum/component/golden_gardren_fist)
+	if(fist?.is_fist_pilot(owner))
+		fist.toggle_squeeze(owner)
+
+/datum/action/vehicle/sealed/mecha/golden_gardren_fist_squeeze/apply_button_icon(atom/movable/screen/movable/action_button/current_button, force)
+	var/datum/component/golden_gardren_fist/fist = chassis?.GetComponent(/datum/component/golden_gardren_fist)
+	button_icon_state = "fist_squeeze_[fist?.squeezing ? "on" : "off"]"
+	return ..()
 
 #undef GOLDEN_GARDREN_FIST_GRAB_TIME
 #undef GOLDEN_GARDREN_FIST_ESCAPE_TIME

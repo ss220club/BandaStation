@@ -81,11 +81,17 @@
 	mech.log_message("Phasing [active ? "enabled" : "disabled"].", LOG_MECHA)
 	playsound(mech, 'sound/vehicles/mecha/mechmove03.ogg', 50, TRUE)
 	set_phase_look(active)
-	for(var/mob/occupant as anything in mech.occupants)
-		var/datum/action/phasing_button = LAZYACCESSASSOC(mech.occupant_actions, occupant, /datum/action/vehicle/sealed/mecha/golden_gardren_phasing)
-		if(phasing_button)
-			phasing_button.button_icon_state = "mech_phasing_[active ? "on" : "off"]"
-			phasing_button.build_all_button_icons()
+	golden_gardren_update_buttons(mech, /datum/action/vehicle/sealed/mecha/golden_gardren_phasing)
+
+/// Blurs the mech and makes it half see-through while it phases.
+/datum/component/golden_gardren_phasing/proc/set_phase_look(phasing)
+	var/obj/vehicle/sealed/mecha/mech = parent
+	if(phasing)
+		mech.add_filter("golden_gardren_phasing", 1, gauss_blur_filter(1.5))
+		animate(mech, alpha = 160, time = 0.3 SECONDS)
+		return
+	mech.remove_filter("golden_gardren_phasing")
+	animate(mech, alpha = initial(mech.alpha), time = 0.3 SECONDS)
 
 /// Toggles the phase shift. The pilot's seat: movement belongs to them.
 /datum/action/vehicle/sealed/mecha/golden_gardren_phasing
@@ -102,12 +108,7 @@
 	var/datum/component/golden_gardren_phasing/phasing = chassis.GetComponent(/datum/component/golden_gardren_phasing)
 	phasing?.toggle(owner)
 
-/// Blurs the mech and makes it half see-through while it phases.
-/datum/component/golden_gardren_phasing/proc/set_phase_look(phasing)
-	var/obj/vehicle/sealed/mecha/mech = parent
-	if(phasing)
-		mech.add_filter("golden_gardren_phasing", 1, gauss_blur_filter(1.5))
-		animate(mech, alpha = 160, time = 0.3 SECONDS)
-		return
-	mech.remove_filter("golden_gardren_phasing")
-	animate(mech, alpha = initial(mech.alpha), time = 0.3 SECONDS)
+/datum/action/vehicle/sealed/mecha/golden_gardren_phasing/apply_button_icon(atom/movable/screen/movable/action_button/current_button, force)
+	var/datum/component/golden_gardren_phasing/phasing = chassis?.GetComponent(/datum/component/golden_gardren_phasing)
+	button_icon_state = "mech_phasing_[phasing?.active ? "on" : "off"]"
+	return ..()

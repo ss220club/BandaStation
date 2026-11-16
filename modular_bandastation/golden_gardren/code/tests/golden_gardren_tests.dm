@@ -76,7 +76,7 @@
 /datum/unit_test/golden_gardren_shield/Run()
 	var/obj/vehicle/sealed/mecha/golden_gardren/combined = allocate(/obj/vehicle/sealed/mecha/golden_gardren)
 	var/mob/living/carbon/human/consistent/operator = allocate(/mob/living/carbon/human/consistent)
-	var/datum/golden_gardren_shield/shield = combined.shield
+	var/datum/component/golden_gardren_shield/shield = combined.GetComponent(/datum/component/golden_gardren_shield)
 	var/start_integrity = combined.get_integrity()
 
 	TEST_ASSERT(shield.toggle(operator), "The shield could not be raised on a charged mech")
@@ -106,13 +106,27 @@
 
 	for(var/obj/vehicle/sealed/mecha/mech as anything in list(combined, golden))
 		var/mob/living/operator = mech == combined ? gunner : golden_pilot
-		var/datum/golden_gardren_shield/shield = golden_gardren_shield_of(mech)
+		var/datum/component/golden_gardren_shield/shield = mech.GetComponent(/datum/component/golden_gardren_shield)
 		var/datum/action/shield_button = LAZYACCESSASSOC(mech.occupant_actions, operator, /datum/action/vehicle/sealed/mecha/golden_gardren_shield)
 		TEST_ASSERT_NOTNULL(shield_button, "[mech] gave its operator no shield button")
 		shield_button.Trigger()
 		TEST_ASSERT(shield.active, "The operator of [mech] could not raise the shield from the button")
 		mech.mob_exit(operator, silent = TRUE)
 		TEST_ASSERT(!shield.active, "The shield of [mech] stayed up after its operator left")
+
+/// Changing seats counts as leaving the old one: a shield left without a gunner comes down.
+/datum/unit_test/golden_gardren_seat_swap_drops_shield
+
+/datum/unit_test/golden_gardren_seat_swap_drops_shield/Run()
+	var/obj/vehicle/sealed/mecha/golden_gardren/combined = allocate(/obj/vehicle/sealed/mecha/golden_gardren)
+	var/mob/living/carbon/human/consistent/pilot = allocate(/mob/living/carbon/human/consistent)
+	combined.mob_enter(pilot, silent = TRUE)
+	var/datum/component/golden_gardren_shield/shield = combined.GetComponent(/datum/component/golden_gardren_shield)
+
+	combined.assign_seat(pilot, main_seat = FALSE)
+	TEST_ASSERT(shield.toggle(pilot), "The gunner could not raise the shield")
+	combined.assign_seat(pilot, main_seat = TRUE)
+	TEST_ASSERT(!shield.active, "The shield stayed up after its only operator moved to the main seat")
 
 /// Separation gives back the same halves with their pilots and parts, spreads the damage and leaves no frame behind.
 /datum/unit_test/golden_gardren_separate
@@ -284,11 +298,12 @@
 	var/datum/golden_gardren_cockpit/cockpit = allocate(/datum/golden_gardren_cockpit, combined)
 	var/datum/tgui/main_ui = allocate(/datum/tgui, main_pilot, cockpit, "GoldenGardrenCockpit")
 	var/datum/tgui/gunner_ui = allocate(/datum/tgui, gunner, cockpit, "GoldenGardrenCockpit")
+	var/datum/component/golden_gardren_shield/shield = combined.GetComponent(/datum/component/golden_gardren_shield)
 
 	cockpit.ui_act("toggle_shield", list(), main_ui, main_ui.state)
-	TEST_ASSERT(!combined.shield.active, "The main seat raised the shield")
+	TEST_ASSERT(!shield.active, "The main seat raised the shield")
 	cockpit.ui_act("toggle_shield", list(), gunner_ui, gunner_ui.state)
-	TEST_ASSERT(combined.shield.active, "The weapons seat could not raise the shield")
+	TEST_ASSERT(shield.active, "The weapons seat could not raise the shield")
 
 	var/strafe_before = combined.strafe
 	cockpit.ui_act("toggle_strafe", list(), gunner_ui, gunner_ui.state)

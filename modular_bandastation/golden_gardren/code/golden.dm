@@ -37,12 +37,10 @@
 		MECHA_POWER = 1,
 		MECHA_ARMOR = 1,
 	)
-	/// Energy shield, the same one the Golden operates as the gunner of the combined mech.
-	var/datum/golden_gardren_shield/shield
 
 /obj/vehicle/sealed/mecha/golden/Initialize(mapload, built_manually)
 	. = ..()
-	shield = new(src)
+	AddComponent(/datum/component/golden_gardren_shield)
 	AddComponent(/datum/component/golden_gardren_ejection)
 
 /obj/vehicle/sealed/mecha/golden/populate_parts()
@@ -52,10 +50,6 @@
 	servo = new /obj/item/stock_parts/servo(src)
 	update_part_values()
 
-/obj/vehicle/sealed/mecha/golden/Destroy()
-	QDEL_NULL(shield)
-	return ..()
-
 /obj/vehicle/sealed/mecha/golden/generate_actions()
 	. = ..()
 	initialize_passenger_action_type(/datum/action/vehicle/sealed/mecha/golden_gardren_combine)
@@ -64,9 +58,12 @@
 
 /obj/vehicle/sealed/mecha/golden/remove_occupant(mob/driver)
 	. = ..()
-	shield?.drop_if_unmanned()
+	// A pilot leaving during the ejection countdown takes no landing choice or marker with them.
 	var/datum/component/golden_gardren_ejection/ejection = GetComponent(/datum/component/golden_gardren_ejection)
 	ejection?.clear_landing_choice(driver)
+	// Without an operator the shield cannot be held.
+	var/datum/component/golden_gardren_shield/shield = GetComponent(/datum/component/golden_gardren_shield)
+	shield?.drop_if_unmanned()
 
 /// While the ejection countdown runs, the pilot's click picks the landing turf instead of shooting.
 /obj/vehicle/sealed/mecha/golden/on_mouseclick(mob/user, atom/target, list/modifiers)
@@ -81,18 +78,14 @@
 	ejection?.eject()
 	return ..()
 
+/// The shield soaks brute and burn damage from its own charge before it reaches the hull.
 /obj/vehicle/sealed/mecha/golden/take_damage(damage_amount, damage_type = BRUTE, damage_flag = "", sound_effect = TRUE, attack_dir, armour_penetration = 0)
+	var/datum/component/golden_gardren_shield/shield = GetComponent(/datum/component/golden_gardren_shield)
 	if(shield?.active && damage_amount > 0)
 		damage_amount = shield.absorb(damage_amount, damage_type)
 		if(damage_amount <= 0)
 			return 0
 	return ..()
-
-/obj/vehicle/sealed/mecha/golden/update_overlays()
-	. = ..()
-	var/shield_overlay = shield?.get_overlay()
-	if(shield_overlay)
-		. += shield_overlay
 
 /obj/structure/mecha_wreckage/golden
 	name = "\improper Golden wreckage"

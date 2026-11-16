@@ -6,6 +6,16 @@
 #define GOLDEN_RAM_ENERGY (0.1 * STANDARD_CELL_CHARGE)
 /// Time between Golden Ram uses.
 #define GOLDEN_RAM_COOLDOWN (20 SECONDS)
+/// Burn damage the missile strike deals to everyone on the impact turf and the eight around it.
+#define GOLDEN_GARDREN_MISSILE_BURN 20
+/// Fire stacks the missile strike puts on everyone it burns.
+#define GOLDEN_GARDREN_MISSILE_FIRE_STACKS 3
+
+/// Redraws the buttons of [action_type] for everyone in [mech]. The actions read the state they show from the mech themselves.
+/proc/golden_gardren_update_buttons(obj/vehicle/sealed/mecha/mech, action_type)
+	for(var/mob/occupant as anything in mech.occupants)
+		var/datum/action/button = LAZYACCESSASSOC(mech.occupant_actions, occupant, action_type)
+		button?.build_all_button_icons()
 
 /// Moves the pilot to the other, free seat of the Golden-Gardren.
 /datum/action/vehicle/sealed/mecha/golden_gardren_swap_seat
@@ -74,17 +84,18 @@
 	build_all_button_icons()
 	addtimer(CALLBACK(src, TYPE_PROC_REF(/datum/action/vehicle/sealed/mecha/ivanov_strike, reset_button_icon)), strike_cooldown_time)
 
-/// Missile of the Golden-Gardren strike. On top of the blast it burns everyone and everything on the impact turf and the eight around it.
+/**
+ * Missile of the Golden-Gardren strike. On top of the blast it sets the impact turf and the eight around it on fire,
+ * burns everyone there and leaves the floor broken and scorched.
+ */
 /obj/structure/closet/supplypod/podspawn/golden_gardren_missile
 
 /obj/structure/closet/supplypod/podspawn/golden_gardren_missile/pre_open()
+	// The missile is deleted by the landing itself, so the impact turf is taken first.
 	var/turf/impact = get_turf(src)
 	. = ..()
-	if(impact)
-		golden_gardren_missile_aftermath(impact)
-
-/// Sets the impact turf and its neighbours on fire, burns everyone there and leaves the floor broken and scorched.
-/proc/golden_gardren_missile_aftermath(turf/impact)
+	if(!impact)
+		return
 	for(var/turf/scorched in range(1, impact))
 		if(isopenturf(scorched) && !isspaceturf(scorched))
 			if(scorched == impact || prob(50))
@@ -94,8 +105,8 @@
 			if(!(locate(/obj/effect/hotspot) in scorched))
 				new /obj/effect/hotspot(scorched)
 		for(var/mob/living/victim in scorched)
-			victim.apply_damage(20, BURN, spread_damage = TRUE)
-			victim.adjust_fire_stacks(3)
+			victim.apply_damage(GOLDEN_GARDREN_MISSILE_BURN, BURN, spread_damage = TRUE)
+			victim.adjust_fire_stacks(GOLDEN_GARDREN_MISSILE_FIRE_STACKS)
 			victim.ignite_mob()
 
 /// Golden Ram: a short dash forward that knocks down and throws everyone in the way. Main seat only.
@@ -160,3 +171,5 @@
 #undef GOLDEN_RAM_DAMAGE
 #undef GOLDEN_RAM_ENERGY
 #undef GOLDEN_RAM_COOLDOWN
+#undef GOLDEN_GARDREN_MISSILE_BURN
+#undef GOLDEN_GARDREN_MISSILE_FIRE_STACKS

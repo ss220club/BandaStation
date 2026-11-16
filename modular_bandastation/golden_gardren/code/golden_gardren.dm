@@ -46,8 +46,6 @@
 	var/obj/vehicle/sealed/mecha/golden/docked_golden
 	/// The Gardren docked inside while combined. Null for an admin-spawned frame.
 	var/obj/vehicle/sealed/mecha/gardren/docked_gardren
-	/// Energy shield of the weapons seat.
-	var/datum/golden_gardren_shield/shield
 	/// Per-seat cockpit panel, created the first time a pilot opens it.
 	var/datum/golden_gardren_cockpit/cockpit
 
@@ -64,7 +62,7 @@
 /obj/vehicle/sealed/mecha/golden_gardren/Initialize(mapload, built_manually)
 	. = ..()
 	// The shield sprite is drawn for a regular mech, so it is stretched over the 48x48 frame.
-	shield = new(src, 1.5, 8, 12)
+	AddComponent(/datum/component/golden_gardren_shield, 1.5, 8, 12)
 	AddComponent(/datum/component/golden_gardren_phasing)
 	AddComponent(/datum/component/golden_gardren_ejection)
 	// The bigger frame holds things further out in front of it.
@@ -72,7 +70,6 @@
 
 /obj/vehicle/sealed/mecha/golden_gardren/Destroy()
 	QDEL_NULL(cockpit)
-	QDEL_NULL(shield)
 	// Put the pilots on free turfs instead of the base drop under the frame.
 	var/datum/component/golden_gardren_ejection/ejection = GetComponent(/datum/component/golden_gardren_ejection)
 	ejection?.eject(use_capsules = FALSE, stun = FALSE)
@@ -108,7 +105,15 @@
 	remove_all_equipment_actions(occupant)
 	add_control_flags(occupant, main_seat ? GOLDEN_GARDREN_MAIN_SEAT : GOLDEN_GARDREN_WEAPONS_SEAT)
 	generate_equipment_actions(occupant)
+	drop_unmanned_systems()
 	update_appearance()
+
+/// Lets go of what nobody is left to operate: the shield without a gunner, the fist without a pilot.
+/obj/vehicle/sealed/mecha/golden_gardren/proc/drop_unmanned_systems()
+	var/datum/component/golden_gardren_shield/shield = GetComponent(/datum/component/golden_gardren_shield)
+	shield?.drop_if_unmanned()
+	if(!return_amount_of_controllers_with_flag(VEHICLE_CONTROL_MELEE))
+		golden_gardren_release_fist(src)
 
 // Equipment buttons belong to the weapons seat, not to the seat with mech settings.
 /obj/vehicle/sealed/mecha/golden_gardren/generate_equipment_actions(mob/occupant)
@@ -129,11 +134,7 @@
 	// A pilot leaving during the ejection countdown takes no landing choice or marker with them.
 	var/datum/component/golden_gardren_ejection/ejection = GetComponent(/datum/component/golden_gardren_ejection)
 	ejection?.clear_landing_choice(driver)
-	// Without an operator the shield cannot be held.
-	shield?.drop_if_unmanned()
-	// Nobody left at the controls to hold the fist shut.
-	if(!return_amount_of_controllers_with_flag(VEHICLE_CONTROL_MELEE))
-		golden_gardren_release_fist(src)
+	drop_unmanned_systems()
 
 /// Each seat may only use its own part of the mech panel: weapons belong to the weapons seat, settings to the main seat.
 /obj/vehicle/sealed/mecha/golden_gardren/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
@@ -149,6 +150,7 @@
 
 /// The shield soaks brute and burn damage from its own charge before it reaches the hull. Crossing into critical damage raises the alarm.
 /obj/vehicle/sealed/mecha/golden_gardren/take_damage(damage_amount, damage_type = BRUTE, damage_flag = "", sound_effect = TRUE, attack_dir, armour_penetration = 0)
+	var/datum/component/golden_gardren_shield/shield = GetComponent(/datum/component/golden_gardren_shield)
 	if(shield?.active && damage_amount > 0)
 		damage_amount = shield.absorb(damage_amount, damage_type)
 		if(damage_amount <= 0)
@@ -173,12 +175,6 @@
 	if(ejection?.handle_click(user, target))
 		return COMSIG_MOB_CANCEL_CLICKON
 	return ..()
-
-/obj/vehicle/sealed/mecha/golden_gardren/update_overlays()
-	. = ..()
-	var/shield_overlay = shield?.get_overlay()
-	if(shield_overlay)
-		. += shield_overlay
 
 /obj/vehicle/sealed/mecha/golden_gardren/user_unbuckle_mob(mob/living/buckled_mob, mob/user)
 	if(golden_gardren_fist_intercept_unbuckle(src, buckled_mob, user))
