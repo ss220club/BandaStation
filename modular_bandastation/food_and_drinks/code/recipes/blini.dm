@@ -333,30 +333,14 @@
 	result = /obj/item/food/station_food/meat_blini_ambrosia
 	meal_category = MEAL_MAIN_COURSE
 
-/datum/crafting_recipe/food/station_food/meat_blini_batter
-	name = "Мясное тесто для блинов"
-	reqs = list(
-		/obj/item/food/grown/meatwheat = 1,
-		/obj/item/food/egg = 1,
-		/datum/reagent/water = 10,
-		/obj/item/plate = 1,
-	)
-	result = /obj/item/food/station_food/meat_blini_batter
-	removed_foodtypes = EGG
-	meal_category = MEAL_COMPONENT
-
 /datum/crafting_recipe/food/grill/station_food_meat_blini
 	name = "Мясной блин"
-	reqs = list(/obj/item/food/station_food/meat_blini_raw = 1)
+	reqs = list(/datum/reagent/consumable/pancakebatter/meat = 5)
 	result = /obj/item/food/station_food/meat_blini
+	steps = list(
+		"Смешать в ёмкости 6 ед. желтка, 12 ед. белка, 5 ед. муки, 5 ед. животного белка и 10 ед. воды.",
+		"Выплеснуть жидкое тесто на плиту: 5 ед. на один блин (ПКМ в боевом режиме).",
+		"Обжарить до готовности и снять с плиты.",
+	)
 	dish_category = DISH_PASTRY
 	meal_category = MEAL_SNACK
-
-/datum/crafting_recipe/food/station_food/guide_meat_blini_raw
-	name = "Сырой мясной блин"
-	non_craftable = TRUE
-	reqs = list(/obj/item/food/station_food/meat_blini_batter = 1)
-	result = /obj/item/food/station_food/meat_blini_raw
-	steps = list("Разлить мясное тесто на плите: 3 заготовки.")
-	dish_category = DISH_PASTRY
-	meal_category = MEAL_COMPONENT

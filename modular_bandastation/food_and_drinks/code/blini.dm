@@ -410,45 +410,6 @@
 	crafting_complexity = FOOD_COMPLEXITY_3
 	tastes = list("жареное мясо" = 2, "пряная зелень" = 1)
 
-/obj/item/food/station_food/meat_blini_batter
-	name = "meat blini batter"
-	desc = "Жидкое тесто из мясной пшеницы и яйца. Его разливают на горячую плиту для приготовления мясных блинов."
-	icon_state = "meat_blini_batter"
-	food_reagents = list(
-		/datum/reagent/consumable/nutriment = 6,
-		/datum/reagent/consumable/nutriment/protein = 6,
-	)
-	foodtypes = MEAT|RAW
-	crafting_complexity = FOOD_COMPLEXITY_1
-	tastes = list("сырое мясное тесто" = 1)
-	trash_type = /obj/item/plate
-
-/obj/machinery/griddle/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
-	if(!user.combat_mode && istype(tool, /obj/item/food/station_food/meat_blini_batter))
-		var/obj/item/food/station_food/meat_blini_batter/batter = tool
-		return batter.pour_on_griddle(src, user)
-	return ..()
-
-/obj/item/food/station_food/meat_blini_batter/proc/pour_on_griddle(obj/machinery/griddle/griddle, mob/living/user)
-	if(length(griddle.griddled_objects) + 3 > griddle.max_items)
-		balloon_alert(user, "нужно место для трёх блинов!")
-		return ITEM_INTERACT_BLOCKING
-	if(!user.dropItemToGround(src))
-		return ITEM_INTERACT_BLOCKING
-
-	var/portion_volume = reagents.total_volume / 3
-	for(var/portion in 1 to 3)
-		var/obj/item/food/station_food/meat_blini_raw/pancake = new(griddle)
-		pancake.reagents.clear_reagents()
-		reagents.trans_to(pancake, portion_volume)
-		pancake.pixel_x = (portion - 2) * 8
-		griddle.AddToGrill(pancake, user)
-
-	new /obj/item/plate(griddle.drop_location())
-	to_chat(user, span_notice("Вы разливаете мясное тесто на три блина."))
-	qdel(src)
-	return ITEM_INTERACT_SUCCESS
-
 /obj/item/food/station_food/meat_blini_raw
 	name = "raw meat blin"
 	desc = "Сырая порция мясного теста, разлитая в форме тонкого блина. Перед подачей её нужно обжарить."
@@ -460,3 +421,9 @@
 
 /obj/item/food/station_food/meat_blini_raw/make_grillable()
 	AddComponent(/datum/component/grillable, /obj/item/food/station_food/meat_blini, rand(20 SECONDS, 30 SECONDS), TRUE, TRUE)
+
+/obj/item/food/station_food/meat_blini_raw/food_grilled(datum/source, obj/item/food/grill_result)
+	. = ..()
+	for(var/datum/reagent/consumable/nutriment/nutriment in grill_result.reagents.reagent_list)
+		if(nutriment.carry_food_tastes)
+			nutriment.data = counterlist_normalise(grill_result.tastes.Copy())

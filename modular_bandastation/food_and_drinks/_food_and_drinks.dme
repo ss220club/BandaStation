@@ -1,6 +1,7 @@
 #include "_food_and_drinks.dm"
 
 #include "code/drinks.dm"
+#include "code/pancake_batter.dm"
 #include "code/station_food.dm"
 #include "code/blini.dm"
 #include "code/cookies.dm"
