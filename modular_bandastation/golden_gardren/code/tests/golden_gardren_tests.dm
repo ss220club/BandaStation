@@ -153,6 +153,13 @@
 	TEST_ASSERT(!QDELETED(combined), "A failed separation deleted the frame")
 
 /// Returns the turf a rescue capsule carrying [pilot] is going to land on, or null if the pilot is not in a capsule.
+/// Waits out the burning countdown of a mech that took a lethal blow, up to a little longer than the countdown itself.
+/datum/unit_test/proc/golden_gardren_wait_for_blow_up(obj/vehicle/sealed/mecha/mech)
+	for(var/waited in 1 to 80)
+		if(QDELETED(mech))
+			return
+		sleep(1)
+
 /datum/unit_test/proc/golden_gardren_capsule_target(mob/living/pilot, atom/mech_turf)
 	if(!istype(pilot.loc, /obj/structure/closet/supplypod))
 		return null
@@ -214,8 +221,9 @@
 	TEST_ASSERT_EQUAL(golden_gardren_capsule_target(main_pilot, frame_turf), picked, "The capsule was not sent to the chosen spot")
 	TEST_ASSERT(!LAZYLEN(ejection.landings), "The landing choice outlived the ejection")
 
-/// Destroying the frame throws the pilots clear instead of deleting them with it.
+/// A lethal blow sets the manned frame burning instead of destroying it at once; when it blows up, the pilots are fired clear instead of being deleted with it.
 /datum/unit_test/golden_gardren_destruction_ejects
+	priority = TEST_LONGER
 
 /datum/unit_test/golden_gardren_destruction_ejects/Run()
 	var/obj/vehicle/sealed/mecha/golden_gardren/combined = allocate(/obj/vehicle/sealed/mecha/golden_gardren)
@@ -226,7 +234,11 @@
 	var/turf/frame_turf = combined.loc
 
 	combined.take_damage(combined.get_integrity() + 10, BRUTE)
-	TEST_ASSERT(QDELETED(combined), "The frame survived damage beyond its integrity")
+	TEST_ASSERT(!QDELETED(combined), "The manned frame blew up at once, leaving the pilots no time to aim their capsules")
+	TEST_ASSERT(golden_gardren_is_ejecting(combined), "A lethal blow did not start the ejection countdown")
+	TEST_ASSERT(combined.is_occupant(main_pilot) && combined.is_occupant(gunner), "The pilots were thrown out before the countdown ran out")
+	golden_gardren_wait_for_blow_up(combined)
+	TEST_ASSERT(QDELETED(combined), "The burning frame did not blow up when the countdown ran out")
 	for(var/mob/living/carbon/human/pilot as anything in list(main_pilot, gunner))
 		TEST_ASSERT(!QDELETED(pilot), "A pilot was deleted together with the frame")
 		var/turf/landing = golden_gardren_capsule_target(pilot, frame_turf)
@@ -238,6 +250,7 @@
 
 /// The lone Golden and Gardren carry the same capsules: the pilot gets the button, and a destroyed half fires its pilot clear.
 /datum/unit_test/golden_gardren_halves_eject
+	priority = TEST_LONGER
 
 /datum/unit_test/golden_gardren_halves_eject/Run()
 	for(var/half_type in list(/obj/vehicle/sealed/mecha/golden, /obj/vehicle/sealed/mecha/gardren))
@@ -249,7 +262,9 @@
 		TEST_ASSERT_NOTNULL(LAZYACCESSASSOC(half.occupant_actions, pilot, /datum/action/vehicle/sealed/mecha/golden_gardren_emergency_eject), "The pilot of [half] got no ejection button")
 
 		half.take_damage(half.get_integrity() + 10, BRUTE)
-		TEST_ASSERT(QDELETED(half), "[half_type] survived damage beyond its integrity")
+		TEST_ASSERT(!QDELETED(half) && golden_gardren_is_ejecting(half), "[half_type] blew up at once instead of burning through the ejection countdown")
+		golden_gardren_wait_for_blow_up(half)
+		TEST_ASSERT(QDELETED(half), "[half_type] did not blow up when the countdown ran out")
 		TEST_ASSERT(!QDELETED(pilot), "The pilot of [half_type] was deleted together with it")
 		var/turf/landing = golden_gardren_capsule_target(pilot, half_turf)
 		TEST_ASSERT_NOTNULL(landing, "The pilot of [half_type] was not fired clear in a capsule")

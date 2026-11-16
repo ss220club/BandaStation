@@ -12,6 +12,8 @@
  *
  * Rescue capsules of the Golden, the Gardren and the combined mech. The countdown gives every pilot time to click
  * the turf their capsule lands on; without a choice the capsule lands on a free turf right next to the mech.
+ * A blow that would destroy a manned mech does not destroy it at once: the mech goes down burning and blows up
+ * once the same countdown runs out, so the pilots get the time to aim their capsules.
  * The owner routes its pilots' clicks during the countdown, pilots leaving the seat, and its destruction through here.
  */
 /datum/component/golden_gardren_ejection
@@ -21,26 +23,72 @@
 	var/list/landings
 	/// Assoc list: pilot -> landing marker image shown to that pilot only.
 	var/list/markers
+	/// Timer of the blow-up of a mech that has taken a lethal blow with pilots inside.
+	var/dying_timer
 
 /datum/component/golden_gardren_ejection/Initialize()
 	if(!istype(parent, /obj/vehicle/sealed/mecha))
 		return COMPONENT_INCOMPATIBLE
 
+/datum/component/golden_gardren_ejection/RegisterWithParent()
+	RegisterSignal(parent, COMSIG_ATOM_TAKE_DAMAGE, PROC_REF(on_take_damage))
+
+/datum/component/golden_gardren_ejection/UnregisterFromParent()
+	UnregisterSignal(parent, COMSIG_ATOM_TAKE_DAMAGE)
+
 /datum/component/golden_gardren_ejection/Destroy(force)
 	deltimer(timer)
 	timer = null
+	deltimer(dying_timer)
+	dying_timer = null
 	for(var/mob/pilot as anything in markers?.Copy())
 		clear_landing_choice(pilot)
 	landings = null
 	return ..()
 
-/// Starts the countdown and lets the pilots aim their capsules. Returns FALSE if one is already running.
+/// A blow that would destroy the manned mech puts it into its last countdown instead; a dying mech takes no more damage.
+/datum/component/golden_gardren_ejection/proc/on_take_damage(datum/source, damage_amount, damage_type, damage_flag, sound_effect, attack_dir, armour_penetration)
+	SIGNAL_HANDLER
+	var/obj/vehicle/sealed/mecha/mech = parent
+	if(dying_timer)
+		return COMPONENT_NO_TAKE_DAMAGE
+	if(damage_amount < mech.get_integrity() || !LAZYLEN(mech.occupants))
+		return NONE
+	start_dying()
+	return COMPONENT_NO_TAKE_DAMAGE
+
+/// The mech goes down burning: it cannot move or fight, the ejection countdown starts, and it blows up when the countdown runs out.
+/datum/component/golden_gardren_ejection/proc/start_dying()
+	var/obj/vehicle/sealed/mecha/mech = parent
+	mech.update_integrity(1)
+	mech.completely_disabled = TRUE
+	mech.log_message("Took a lethal blow, blowing up in [DisplayTimeText(GOLDEN_GARDREN_EJECT_DELAY)].", LOG_MECHA)
+	mech.visible_message(span_userdanger("[mech.declent_ru(NOMINATIVE)] охвачен огнём и вот-вот взорвётся!"))
+	mech.add_shared_particles(/particles/smoke/burning, "golden_gardren_dying")
+	mech.spark_system?.start()
+	playsound(mech, 'sound/machines/warning-buzzer.ogg', 100, FALSE)
+	start()
+	dying_timer = addtimer(CALLBACK(src, PROC_REF(finish_dying)), GOLDEN_GARDREN_EJECT_DELAY, TIMER_STOPPABLE)
+
+/// The countdown of a dying mech has run out: it is destroyed the regular way, firing out whoever is still inside.
+/datum/component/golden_gardren_ejection/proc/finish_dying()
+	var/obj/vehicle/sealed/mecha/mech = parent
+	dying_timer = null
+	mech.remove_shared_particles("golden_gardren_dying")
+	mech.update_integrity(0)
+	mech.atom_destruction(BRUTE)
+
+/**
+ * Starts the countdown and lets the pilots aim their capsules. Returns FALSE if one is already running.
+ * Without [user] the countdown was started by the mech itself going down.
+ */
 /datum/component/golden_gardren_ejection/proc/start(mob/user)
 	var/obj/vehicle/sealed/mecha/mech = parent
 	if(timer)
-		mech.balloon_alert(user, "катапультирование уже идёт!")
+		if(user)
+			mech.balloon_alert(user, "катапультирование уже идёт!")
 		return FALSE
-	mech.log_message("[key_name(user)] started the emergency ejection.", LOG_MECHA)
+	mech.log_message("[user ? key_name(user) : "Lethal damage"] started the emergency ejection.", LOG_MECHA)
 	to_chat(mech.occupants, span_userdanger("АВАРИЙНОЕ КАТАПУЛЬТИРОВАНИЕ через [DisplayTimeText(GOLDEN_GARDREN_EJECT_DELAY)]! Кликните по клетке, куда сядет ваша капсула: не дальше [GOLDEN_GARDREN_EJECT_RANGE] клеток и в зоне видимости. Без выбора капсула сядет рядом с мехом."))
 	playsound(mech, 'sound/machines/warning-buzzer.ogg', 75, FALSE)
 	for(var/mob/pilot as anything in mech.occupants)
