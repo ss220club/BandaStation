@@ -33245,7 +33245,6 @@
 /obj/effect/turf_decal/tile/brown/anticorner/contrasted{
 	dir = 8
 	},
-/obj/machinery/light/small/directional/west,
 /obj/effect/turf_decal/delivery,
 /obj/machinery/conveyor{
 	dir = 9;
