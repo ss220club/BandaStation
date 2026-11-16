@@ -4,6 +4,7 @@
  * The Phazon's phasing for the Gardren and the combined mech: while on, the mech passes through walls and other obstacles,
  * every step costs energy, and the hands and weapons cannot be used. Same limits as the Phazon:
  * no phasing into places where teleportation is not allowed or on levels that forbid phasing.
+ * A phasing mech is drawn blurred and half see-through.
  */
 /datum/component/golden_gardren_phasing
 	/// Whether the phase shift is on.
@@ -23,6 +24,7 @@
 
 /datum/component/golden_gardren_phasing/UnregisterFromParent()
 	UnregisterSignal(parent, list(COMSIG_MOVABLE_CAN_PASS_THROUGH, COMSIG_MOVABLE_MOVED, COMSIG_MECHA_MELEE_CLICK, COMSIG_MECHA_EQUIPMENT_CLICK))
+	set_phase_look(FALSE)
 
 /datum/component/golden_gardren_phasing/proc/on_can_pass_through(datum/source, atom/blocker, movement_dir)
 	SIGNAL_HANDLER
@@ -78,6 +80,7 @@
 	active = new_state
 	mech.log_message("Phasing [active ? "enabled" : "disabled"].", LOG_MECHA)
 	playsound(mech, 'sound/vehicles/mecha/mechmove03.ogg', 50, TRUE)
+	set_phase_look(active)
 	for(var/mob/occupant as anything in mech.occupants)
 		var/datum/action/phasing_button = LAZYACCESSASSOC(mech.occupant_actions, occupant, /datum/action/vehicle/sealed/mecha/golden_gardren_phasing)
 		if(phasing_button)
@@ -98,3 +101,13 @@
 		return
 	var/datum/component/golden_gardren_phasing/phasing = chassis.GetComponent(/datum/component/golden_gardren_phasing)
 	phasing?.toggle(owner)
+
+/// Blurs the mech and makes it half see-through while it phases.
+/datum/component/golden_gardren_phasing/proc/set_phase_look(phasing)
+	var/obj/vehicle/sealed/mecha/mech = parent
+	if(phasing)
+		mech.add_filter("golden_gardren_phasing", 1, gauss_blur_filter(1.5))
+		animate(mech, alpha = 160, time = 0.3 SECONDS)
+		return
+	mech.remove_filter("golden_gardren_phasing")
+	animate(mech, alpha = initial(mech.alpha), time = 0.3 SECONDS)

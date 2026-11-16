@@ -354,6 +354,7 @@
 	phasing_button.Trigger()
 	var/datum/component/golden_gardren_phasing/phasing = combined.GetComponent(/datum/component/golden_gardren_phasing)
 	TEST_ASSERT(phasing.active, "The phase shift did not turn on from the pilot's button")
+	TEST_ASSERT_NOTNULL(combined.get_filter("golden_gardren_phasing"), "The phasing mech is not blurred")
 
 	var/charge_before = combined.get_charge()
 	TEST_ASSERT(combined.Move(blocked, EAST), "The phasing mech could not pass through an obstacle")
@@ -461,3 +462,45 @@
 	TEST_ASSERT(!fist.squeezing, "The fist kept squeezing after its pilot left")
 	TEST_ASSERT(!HAS_TRAIT(target, TRAIT_HANDS_BLOCKED) && !HAS_TRAIT(target, TRAIT_MUTE), "The released target kept the fist's restraints")
 	TEST_ASSERT_EQUAL(target.loc, target_turf, "The released target was not put down in front of the mech")
+
+/// The fist takes furniture, carries it in front of the mech and throws it, but leaves items and building parts alone.
+/datum/unit_test/golden_gardren_fist_objects
+
+/datum/unit_test/golden_gardren_fist_objects/Run()
+	var/obj/vehicle/sealed/mecha/gardren/gardren = allocate(/obj/vehicle/sealed/mecha/gardren)
+	var/mob/living/carbon/human/consistent/pilot = allocate(/mob/living/carbon/human/consistent)
+	var/turf/front_turf = get_step(gardren.loc, EAST)
+	gardren.mob_enter(pilot, silent = TRUE)
+	gardren.setDir(EAST)
+	pilot.set_combat_mode(TRUE)
+	var/datum/component/golden_gardren_fist/fist = gardren.GetComponent(/datum/component/golden_gardren_fist)
+	var/datum/action/fist_button = LAZYACCESSASSOC(gardren.occupant_actions, pilot, /datum/action/vehicle/sealed/mecha/golden_gardren_fist)
+	fist_button.Trigger()
+
+	// Consistent dummies close the fist at once.
+	var/obj/item/wrench/wrench = allocate(/obj/item/wrench, front_turf)
+	click_wrapper(pilot, wrench)
+	TEST_ASSERT_NULL(fist.held, "The fist took an ordinary item")
+	var/obj/structure/girder/girder = allocate(/obj/structure/girder, front_turf)
+	click_wrapper(pilot, girder)
+	TEST_ASSERT_NULL(fist.held, "The fist took a building part")
+	qdel(girder)
+
+	var/obj/structure/table/table = allocate(/obj/structure/table, front_turf)
+	var/table_pixel_w = table.pixel_w
+	click_wrapper(pilot, table)
+	TEST_ASSERT_EQUAL(fist.held, table, "The fist did not take a table")
+	TEST_ASSERT(!table.anchored, "The table stayed bolted down in the fist")
+	TEST_ASSERT_EQUAL(table.loc, gardren.loc, "The held table was not lifted onto the mech")
+	TEST_ASSERT(table.pixel_w > table_pixel_w, "The held table is not drawn in front of a mech facing east")
+
+	var/turf/next = get_step(gardren.loc, NORTH)
+	TEST_ASSERT(gardren.Move(next, NORTH), "The mech could not step with a table in the fist")
+	TEST_ASSERT_EQUAL(table.loc, gardren.loc, "The held table did not ride along with the mech")
+	TEST_ASSERT_EQUAL(table.pixel_w, table_pixel_w, "The held table was not moved in front of the mech when it turned")
+
+	var/turf/aim = locate(gardren.x, min(gardren.y + 3, run_loc_floor_top_right.y), gardren.z)
+	click_wrapper(pilot, aim)
+	TEST_ASSERT_NULL(fist.held, "A click with a table in the fist did not throw it")
+	TEST_ASSERT(table.throwing || table.loc != gardren.loc, "The table was not thrown")
+	TEST_ASSERT_EQUAL(table.pixel_w, table_pixel_w, "The thrown table kept the fist's offset")

@@ -67,7 +67,8 @@
 	shield = new(src, 1.5, 8, 12)
 	AddComponent(/datum/component/golden_gardren_phasing)
 	AddComponent(/datum/component/golden_gardren_ejection)
-	AddComponent(/datum/component/golden_gardren_fist)
+	// The bigger frame holds things further out in front of it.
+	AddComponent(/datum/component/golden_gardren_fist, 20)
 
 /obj/vehicle/sealed/mecha/golden_gardren/Destroy()
 	QDEL_NULL(cockpit)

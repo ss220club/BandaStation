@@ -56,6 +56,48 @@
 	// The click was spent on the missile, so the arm weapon must not fire as well.
 	return COMPONENT_CANCEL_EQUIPMENT_CLICK
 
+/// Same as the Savannah-Ivanov strike, but the missile is the Golden-Gardren one: a wider blast that sets the impact area on fire.
+/datum/action/vehicle/sealed/mecha/ivanov_strike/golden_gardren/drop_missile(turf/target_turf)
+	rockets_left--
+	if(rockets_left <= 0)
+		end_missile_targeting()
+	SEND_SOUND(owner, 'sound/machines/beep/triple_beep.ogg')
+	S_TIMER_COOLDOWN_START(chassis, COOLDOWN_MECHA_MISSILE_STRIKE, strike_cooldown_time)
+	podspawn(list(
+		"target" = target_turf,
+		"path" = /obj/structure/closet/supplypod/podspawn/golden_gardren_missile,
+		"style" = /datum/pod_style/missile,
+		"effectMissile" = TRUE,
+		"explosionSize" = list(0, 0, 2, 2),
+	))
+	button_icon_state = "mech_ivanov_cooldown"
+	build_all_button_icons()
+	addtimer(CALLBACK(src, TYPE_PROC_REF(/datum/action/vehicle/sealed/mecha/ivanov_strike, reset_button_icon)), strike_cooldown_time)
+
+/// Missile of the Golden-Gardren strike. On top of the blast it burns everyone and everything on the impact turf and the eight around it.
+/obj/structure/closet/supplypod/podspawn/golden_gardren_missile
+
+/obj/structure/closet/supplypod/podspawn/golden_gardren_missile/pre_open()
+	var/turf/impact = get_turf(src)
+	. = ..()
+	if(impact)
+		golden_gardren_missile_aftermath(impact)
+
+/// Sets the impact turf and its neighbours on fire, burns everyone there and leaves the floor broken and scorched.
+/proc/golden_gardren_missile_aftermath(turf/impact)
+	for(var/turf/scorched in range(1, impact))
+		if(isopenturf(scorched) && !isspaceturf(scorched))
+			if(scorched == impact || prob(50))
+				scorched.break_tile()
+			else
+				scorched.burn_tile()
+			if(!(locate(/obj/effect/hotspot) in scorched))
+				new /obj/effect/hotspot(scorched)
+		for(var/mob/living/victim in scorched)
+			victim.apply_damage(20, BURN, spread_damage = TRUE)
+			victim.adjust_fire_stacks(3)
+			victim.ignite_mob()
+
 /// Golden Ram: a short dash forward that knocks down and throws everyone in the way. Main seat only.
 /datum/action/vehicle/sealed/mecha/golden_gardren_ram
 	name = "Золотой таран"
