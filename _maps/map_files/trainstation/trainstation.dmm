@@ -56974,7 +56974,7 @@
 /obj/item/radio/intercom/directional/south,
 /obj/machinery/light/warm/directional/east,
 /obj/structure/disposalpipe/trunk{
-	dir = 8
+	dir = 1
 	},
 /turf/open/floor/iron,
 /area/station/engineering/break_room)
