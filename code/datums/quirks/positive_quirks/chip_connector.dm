@@ -6,7 +6,6 @@
 	gain_text = span_notice("Вы чувствуете СОЕДИНЕНИЕ.")
 	lose_text = span_danger("Вы больше не чувствуете СОЕДИНЕНИЯ.")
 	medical_record_text = "У пациента установлен кибернетический имплант на затылочной части головы, позволяющий произвольно устанавливать и снимать чипы навыков."
-	mail_goodies = list()
 	var/obj/item/organ/cyberimp/brain/connector/connector
 
 /datum/quirk/chip_connector/New()
