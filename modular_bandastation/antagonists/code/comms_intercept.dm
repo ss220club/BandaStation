@@ -32,9 +32,9 @@
 #define COMMS_RECEIVER_DONE 3
 #define COMMS_RECEIVER_NO_SIGNAL 4
 
-#define COMMS_TAP_STAGE_NONE 0
-#define COMMS_TAP_STAGE_PORT_FOUND 1
-#define COMMS_TAP_STAGE_CONTACTS_STRIPPED 2
+#define COMMS_TAP_SHIELD_WIRES 3
+#define COMMS_TAP_WIRE_TIME (4 SECONDS)
+#define COMMS_TAP_INSERT_TIME (5 SECONDS)
 
 /// One per round. Items are spawned by path, so they look the objective up here
 GLOBAL_DATUM(comms_intercept, /datum/objective/comms_intercept)
@@ -161,6 +161,7 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 	/// Kept here so moving the receiver doesn't reset the upload
 	var/upload_progress = 0
 	var/upload_announced = FALSE
+	var/heads_warned = FALSE
 	var/upload_done = FALSE
 	/// Key dump pulled out of the receiver after the upload
 	var/datum/weakref/disk_ref
@@ -200,7 +201,7 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 	setup(comms_intercept_living_crew())
 
 /datum/objective/comms_intercept/update_explanation_text()
-	explanation_text = "Украдите ключи шифрования станции: подключите сетевой жучок к телекоммуникациям, соберите приёмником [target_amount] пакетов из каналов отделов, получите дамп ключей шифрования через передачу на приёмник или прямо с жучка и вывезите его со станции. Инструкция приложена к оборудованию."
+	explanation_text = "Украдите ключи шифрования телекоммуникаций. Инструкция приложена к оборудованию."
 
 /datum/objective/comms_intercept/check_completion()
 	if(completed)
@@ -253,14 +254,18 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 	return !upload_done && !failed && messages_collected >= target_amount
 
 /// Quiet way out: the installer pulls the dump straight off the tap, skipping the transmission
-/datum/objective/comms_intercept/proc/extract_from_tap(obj/item/comms_tap/tap, mob/living/user)
+/datum/objective/comms_intercept/proc/extract_from_tap(obj/item/comms_tap/tap, mob/living/user, obj/item/disk/computer/blank)
 	upload_done = TRUE
-	var/obj/item/disk/comms_intercept/disk = new(user.drop_location())
-	disk_ref = WEAKREF(disk)
-	user.put_in_hands(disk)
+	write_dump(user, blank)
 	qdel(tap)
 	var/obj/item/comms_intercept_receiver/receiver = receiver_ref?.resolve()
 	receiver?.update_status()
+
+/datum/objective/comms_intercept/proc/write_dump(mob/living/user, obj/item/disk/computer/blank)
+	qdel(blank)
+	var/obj/item/disk/comms_intercept/disk = new(user.drop_location())
+	disk_ref = WEAKREF(disk)
+	user.put_in_hands(disk)
 
 /datum/objective/comms_intercept/proc/give_hints(obj/item/comms_intercept_receiver/receiver)
 	var/percent = messages_collected * 100 / target_amount
@@ -269,6 +274,35 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 	if(percent >= COMMS_INTERCEPT_DIRECTION_PERCENT && (!last_direction_report || messages_collected - last_direction_report >= COMMS_INTERCEPT_DIRECTION_EVERY))
 		last_direction_report = messages_collected
 		report_direction(receiver)
+	if(percent >= COMMS_INTERCEPT_DIRECTION_PERCENT && !heads_warned)
+		heads_warned = TRUE
+		warn_heads()
+
+/// Nobody checks the server logs on their own, so point the heads at them
+/datum/objective/comms_intercept/proc/warn_heads()
+	var/obj/machinery/announcement_system/announcer = get_announcement_system()
+	if(!announcer)
+		return
+	var/static/list/warned_jobs = list(JOB_CAPTAIN, JOB_CHIEF_ENGINEER, JOB_RESEARCH_DIRECTOR)
+	var/list/head_names = list()
+	for(var/mob/living/carbon/human/head as anything in GLOB.human_list)
+		if(head.mind?.assigned_role?.title in warned_jobs)
+			head_names += head.real_name
+	var/list/targets = list()
+	for(var/messenger_ref in GLOB.pda_messengers)
+		var/datum/computer_file/program/messenger/messenger = GLOB.pda_messengers[messenger_ref]
+		if(messenger.computer?.saved_identification in head_names)
+			targets += messenger
+	if(!length(targets))
+		return
+	var/datum/signal/subspace/messaging/tablet_message/signal = new(announcer, list(
+		"fakename" = "Мониторинг телекоммуникаций",
+		"fakejob" = "Автоматическая система оповещения",
+		"message" = "Зафиксирована утечка копий пакетов из каналов отделов. Подробности в журнале серверов телекоммуникаций.",
+		"targets" = targets,
+		"automated" = TRUE,
+	))
+	signal.send_to_receivers()
 
 /datum/objective/comms_intercept/proc/report_direction(obj/item/comms_intercept_receiver/receiver)
 	var/direction = get_direction_text(receiver)
@@ -343,6 +377,7 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 /obj/item/storage/box/syndie_kit/comms_intercept/PopulateContents()
 	new /obj/item/comms_tap(src)
 	new /obj/item/comms_intercept_receiver(src)
+	new /obj/item/disk/computer(src)
 	new /obj/item/paper/guides/antag/comms_intercept(src)
 
 /obj/item/paper/guides/antag/comms_intercept/Initialize(mapload)
@@ -365,16 +400,16 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 	<div style='text-align:center;'>\[syndie_logo width=120]</div>\
 	<div style='background:#7a0000;color:#fff;text-align:center;padding:8px;'>\
 	<div style='font-size:20px;font-weight:bold;letter-spacing:1px;'>КРАЖА КЛЮЧЕЙ ШИФРОВАНИЯ</div>\
-	<div style='font-size:11px;'>Синдикат &middot; оперативная инструкция &middot; только для исполнителя</div>\
+	<div style='font-size:11px;'>Синдикат &middot; инструкция для исполнителя</div>\
 	</div>\
-	<p>Агент, ваша задача — добыть ключи шифрования станции и вывезти их. В готовом виде ключей на станции нет: их нужно собрать из переговоров экипажа.</p>\
+	<p>Нам нужны ключи шифрования станции. Готовых ключей здесь нет, их собирают из переговоров экипажа: жучок слушает каналы, приёмник копит пакеты, а в конце вы записываете их на пустой диск. Диск с дампом надо вывезти.</p>\
 	<div [sub]>Снаряжение</div>\
 	<table [table]>\
-	<tr><th [th]>В наборе</th><th [th]>Нужно найти</th><th [th]>Появится в конце</th></tr>\
-	<tr><td [td]>Сетевой жучок<br>Приёмник перехвата</td><td [td]>Отвёртка<br>Мультитул<br>Кусачки<br>Гаечный ключ</td><td [td]><b>Дамп ключей шифрования.</b> В наборе его нет.</td></tr>\
+	<tr><th [th]>Есть в наборе</th><th [th]>Достать самому</th></tr>\
+	<tr><td [td]>Сетевой жучок<br>Приёмник<br>Пустой диск данных</td><td [td]>Отвёртка<br>Кусачки<br>Гаечный ключ</td></tr>\
 	</table>\
-	<div [note]><b>Дамп — не пустой носитель.</b> Записывать на него ничего не нужно: он появляется сам, когда пакеты собраны и вы завершили этап 3.</div>\
-	<div [sub]>План операции</div>\
+	<div [note]>На диск из набора на этапе 3 запишется дамп. Если диск потерялся, подойдёт любой другой пустой диск данных КПК, их печатают в РНД.</div>\
+	<div [sub]>План</div>\
 	<table style='width:100%;border-collapse:separate;border-spacing:0;margin:8px 0;'><tr>\
 	<td [step]><small>Этап 1</small><br><b>Жучок</b></td>\
 	<td [arrow]>&#9654;</td>\
@@ -384,90 +419,87 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 	<td [arrow]>&#9654;</td>\
 	<td style='background:#7a0000;color:#fff;padding:6px 4px;width:22%;text-align:center;vertical-align:middle;'><small>Этап 4</small><br><b>Эвакуация</b></td>\
 	</tr></table>\
-	Этапы идут строго по порядку. На третьем вы выбираете один из двух способов получить дамп, оба ведут к эвакуации.\
+	Этапы идут по порядку. На третьем выбираете один из двух способов.\
 	<div [stage]><span [badge]>1</span>ЖУЧОК</div>\
-	Жучок ставится в машину телекоммуникаций и слышит только те каналы, которые через неё проходят.\
+	Жучок ставится в машину телекоммуникаций и слышит только те каналы, что идут через неё.\
 	<table [table]>\
-	<tr><th [th] width='40%'>Машина</th><th [th]>Что слышит жучок</th></tr>\
-	<tr><td [td]>Хаб</td><td [td]>Все каналы. Сбор идёт быстрее всего.</td></tr>\
-	<tr><td [td]>Приёмник, шина, сервер</td><td [td]>Только часть каналов. Сбор идёт медленнее.</td></tr>\
+	<tr><th [th] width='40%'>Машина</th><th [th]>Что слышит</th></tr>\
+	<tr><td [td]>Хаб</td><td [td]>Все каналы, сбор быстрее всего.</td></tr>\
+	<tr><td [td]>Приёмник, шина, сервер</td><td [td]>Часть каналов, сбор дольше.</td></tr>\
 	</table>\
 	<div [sub]>Установка</div>\
 	<ol>\
-	<li>Откройте панель машины <b>отвёрткой</b>.</li>\
-	<li>Найдите служебный разъём: вторичная функция <b>мультитула</b>.</li>\
-	<li>Зачистите контакты <b>кусачками</b>.</li>\
-	<li>Вставьте <b>жучок</b>.</li>\
-	<li>Синхронизируйте жучок: ещё раз вторичная функция <b>мультитула</b>.</li>\
-	<li>Закройте панель <b>отвёрткой</b>, чтобы машина не бросалась в глаза.</li>\
+	<li><b>Отвёрткой</b> откройте панель машины.</li>\
+	<li><b>Кусачками</b> перережьте [COMMS_TAP_SHIELD_WIRES] провода экранирования у служебного разъёма.</li>\
+	<li>Вставьте <b>жучок</b>, он сразу начнёт слушать.</li>\
+	<li>Закройте панель <b>отвёрткой</b>.</li>\
 	</ol>\
-	<div [note]><b>Не пропустите шаг 5.</b> Без синхронизации жучок не работает. Синхронизировать его может только тот, кто его вставил.</div>\
-	Если закрыть панель раньше, чем жучок вставлен, шаги 2 и 3 придётся повторить.\
+	Вся установка занимает секунд двадцать. Если закрыли панель до того, как вставили жучок, провода придётся резать заново.\
 	<div [stage]><span [badge]>2</span>ПРИЁМНИК</div>\
-	Приёмник копит пакеты, пока он закреплён, запитан и слышит жучок.\
+	Приёмник собирает пакеты, пока он прикручен к полу, в комнате есть питание и жучок на связи.\
 	<div [sub]>Запуск сбора</div>\
 	<ol>\
-	<li>Выберите помещение станции с питанием. Сами телекоммуникации не подходят.</li>\
-	<li>Закрепите приёмник <b>гаечным ключом</b>.</li>\
-	<li>Проверьте маркер на приёмнике: он должен загореться оранжевым.</li>\
-	<li>Ждите. Сколько пакетов собрано, видно при осмотре приёмника.</li>\
+	<li>Найдите на станции комнату с питанием. В самих телекоммуникациях приёмник не работает.</li>\
+	<li>Прикрутите приёмник <b>гаечным ключом</b>.</li>\
+	<li>На приёмнике должен загореться оранжевый огонёк.</li>\
+	<li>Ждите. Сколько собрано, видно при осмотре приёмника.</li>\
 	</ol>\
-	<div [sub]>Маркер на приёмнике</div>\
+	<div [sub]>Огонёк на приёмнике</div>\
 	<table [table]>\
-	<tr><th [th] width='32%'>Маркер</th><th [th]>Что это значит</th></tr>\
-	<tr><td [td]><span style='color:#e07b00;'>&#9679;</span> <b>Оранжевый</b></td><td [td]>Идёт сбор пакетов</td></tr>\
+	<tr><th [th] width='32%'>Огонёк</th><th [th]>Что значит</th></tr>\
+	<tr><td [td]><span style='color:#e07b00;'>&#9679;</span> <b>Оранжевый</b></td><td [td]>Идёт сбор</td></tr>\
 	<tr><td [td]><span style='color:#d4b000;'>&#9679;</span> <b>Жёлтый</b></td><td [td]>Идёт передача</td></tr>\
-	<tr><td [td]><span style='color:#2e8b57;'>&#9679;</span> <b>Зелёный</b></td><td [td]>Дамп готов, его можно забрать</td></tr>\
-	<tr><td [td]><span style='color:#999;'>&#9675;</span> <b>Не горит</b></td><td [td]>Приёмник не закреплён или обесточен, либо от жучка нет сигнала</td></tr>\
+	<tr><td [td]><span style='color:#2e8b57;'>&#9679;</span> <b>Зелёный</b></td><td [td]>Дамп готов, записывайте</td></tr>\
+	<tr><td [td]><span style='color:#999;'>&#9675;</span> <b>Не горит</b></td><td [td]>Приёмник не прикручен, нет питания или нет связи с жучком</td></tr>\
 	</table>\
 	<div [sub]>Что считается пакетом</div>\
 	<ul>\
-	<li>Сообщение члена экипажа в канале отдела. Общий канал не шифруется и не считается.</li>\
-	<li>От одного человека — не больше одного пакета за полминуты.</li>\
-	<li>Ваши собственные сообщения не считаются.</li>\
+	<li>Сообщение в канале отдела. Общий канал не шифруется и не в счёт.</li>\
+	<li>От одного человека засчитывается не чаще раза в полминуты.</li>\
+	<li>Ваши собственные сообщения не в счёт.</li>\
 	</ul>\
-	<div [note]>Приёмник можно открепить и перенести, собранные пакеты сохранятся.</div>\
+	<div [note]>Приёмник можно открутить и перенести, собранное не пропадёт.</div>\
 	<div [stage]><span [badge]>3</span>ДАМП</div>\
-	Когда пакеты собраны, дамп получают одним из двух способов: передача заметнее, тихое снятие требует вернуться в телекоммуникации.\
+	Пакеты собраны, теперь их нужно записать на пустой диск. Способов два: передача заметнее, а для тихого снятия придётся вернуться в телекоммуникации.\
 	<table [table]>\
 	<tr><th [th] width='24%'></th><th [th]>Передача</th><th [th]>Тихое снятие</th></tr>\
-	<tr><td [td]><b>Где</b></td><td [td]>У приёмника</td><td [td]>У машины с жучком, в телекоммуникациях</td></tr>\
-	<tr><td [td]><b>Сколько</b></td><td [td]>От 2 до 5 минут. Чем ближе приёмник к жучку, тем быстрее.</td><td [td]>Около полминуты</td></tr>\
-	<tr><td [td]><b>Что заметит экипаж</b></td><td [td]>Запись в журнале серверов с направлением на приёмник и частотой, хрип в каналах, нагрузку на сеть, побочный сигнал на радио</td><td [td]>Помехи в каналах жучка, пока идёт снятие. В журнале ничего не останется.</td></tr>\
-	<tr><td [td]><b>Чем рискуете</b></td><td [td]>Приёмник найдут раньше, чем закончится передача</td><td [td]>Вас застанут у стойки</td></tr>\
-	<tr><td [td]><b>Кто может</b></td><td [td]>Запустить — только вы. Забрать готовый дамп — кто угодно.</td><td [td]>Только тот, кто установил жучок</td></tr>\
+	<tr><td [td]><b>Где</b></td><td [td]>У приёмника</td><td [td]>У машины с жучком</td></tr>\
+	<tr><td [td]><b>Сколько</b></td><td [td]>От 2 до 5 минут. Чем ближе приёмник к жучку, тем быстрее.</td><td [td]>Полминуты</td></tr>\
+	<tr><td [td]><b>Что заметят</b></td><td [td]>В журнале серверов появится запись с направлением на приёмник и частотой. В каналах пойдёт хрип, а на радио можно будет поймать сигнал.</td><td [td]>Помехи в каналах жучка, пока снимаете. В журнале ничего не останется.</td></tr>\
+	<tr><td [td]><b>Кто может</b></td><td [td]>Запустить можете только вы. Записать готовый дамп может любой, у кого есть пустой диск.</td><td [td]>Только тот, кто ставил жучок</td></tr>\
 	</table>\
-	<div [sub]>Способ первый: передача</div>\
+	<div [sub]>Передача</div>\
 	<ol>\
-	<li>Нажмите на закреплённый приёмник.</li>\
-	<li>Охраняйте его до конца передачи: если приёмник открепят, обесточат или сломают, она остановится.</li>\
-	<li>Когда маркер станет зелёным, заберите дамп из приёмника.</li>\
+	<li>Нажмите на прикрученный приёмник.</li>\
+	<li>Охраняйте его до конца. Если приёмник открутят, обесточат или сломают, передача встанет.</li>\
+	<li>Огонёк стал зелёным: приложите к приёмнику пустой диск.</li>\
 	</ol>\
-	<div [note]>По завершении машину с жучком выбьет импульсом. Не оставляйте готовый дамп в приёмнике без присмотра.</div>\
-	<div [sub]>Способ второй: тихое снятие</div>\
+	<div [note]>После передачи машину с жучком выбьет импульсом. Готовый дамп в приёмнике без присмотра не оставляйте.</div>\
+	<div [sub]>Тихое снятие</div>\
 	<ol>\
 	<li>Вернитесь к машине с жучком и откройте панель <b>отвёрткой</b>.</li>\
-	<li>Используйте вторичную функцию <b>мультитула</b>.</li>\
-	<li>Не отходите, пока дамп не окажется у вас в руках. Если вас прервут, снятие начнётся заново.</li>\
+	<li>Приложите к машине <b>пустой диск</b>.</li>\
+	<li>Стойте рядом, пока дамп не запишется. Если прервут, придётся начинать заново.</li>\
 	</ol>\
 	<div [stage]><span [badge]>4</span>ЭВАКУАЦИЯ</div>\
-	Задание засчитано, если вы покинули станцию живым и дамп при вас.\
+	Задание выполнено, если вы улетели со станции живым и с дампом.\
 	<ul>\
-	<li>Держите дамп при себе до самого отлёта.</li>\
-	<li>Дампом можно пользоваться сразу: приложите его к гарнитуре, и она получит все каналы отделов. Сам дамп останется у вас.</li>\
-	<li>Если в гарнитуре сменить ключ шифрования, доступ к каналам пропадёт.</li>\
+	<li>Держите дамп при себе до отлёта.</li>\
+	<li>Дамп можно приложить к гарнитуре, и она получит все каналы отделов. Сам дамп останется у вас.</li>\
+	<li>Если поменять в гарнитуре ключ шифрования, каналы пропадут.</li>\
 	</ul>\
 	<div [stage]><span [badge]>!</span>ЕСЛИ ЧТО-ТО ПОШЛО НЕ ТАК</div>\
 	<table [table]>\
 	<tr><th [th] width='38%'>Что случилось</th><th [th]>Что делать</th></tr>\
-	<tr><td [td]>Маркер не загорелся после установки</td><td [td]>Проверьте, что приёмник закреплён и в помещении есть питание. Если да, вы пропустили синхронизацию жучка.</td></tr>\
-	<tr><td [td]>Маркер погас во время сбора</td><td [td]>Жучок сняли или заглушили, либо его машину выключили. Проверьте машину. Заглушённый жучок оживёт сам через пару минут.</td></tr>\
-	<tr><td [td]>Жучок потерян</td><td [td]>Запасной можно приобрести в аплинке. Собранные пакеты никуда не денутся.</td></tr>\
-	<tr><td [td]>Приёмник попал под импульс во время передачи</td><td [td]>Передача сбросится. Подождите минуту и запустите её заново.</td></tr>\
-	<tr><td [td]>Приёмник потерян после сбора</td><td [td]>Остаётся только тихое снятие.</td></tr>\
-	<tr><td [td]>Приёмник уничтожен до конца сбора или с готовым дампом внутри</td><td [td]><b style='color:#7a0000;'>Задание провалено.</b></td></tr>\
+	<tr><td [td]>Огонёк не загорелся</td><td [td]>Проверьте, что приёмник прикручен и в комнате есть питание. Если всё так, проверьте, что жучок вставлен, а машина включена.</td></tr>\
+	<tr><td [td]>Огонёк погас во время сбора</td><td [td]>Жучок сняли или заглушили, или выключили машину. Сходите проверьте. После импульса жучок сам оживёт через пару минут.</td></tr>\
+	<tr><td [td]>Жучок потерян</td><td [td]>Запасной есть в аплинке. Собранное никуда не денется.</td></tr>\
+	<tr><td [td]>Пустого диска нет</td><td [td]>Подойдёт любой пустой диск данных КПК. Его печатают в РНД, а с занятого диска можно удалить файлы в КПК.</td></tr>\
+	<tr><td [td]>Приёмник попал под импульс во время передачи</td><td [td]>Передача начнётся сначала. Подождите минуту и запустите снова.</td></tr>\
+	<tr><td [td]>Приёмник потерян после сбора</td><td [td]>Остаётся тихое снятие.</td></tr>\
+	<tr><td [td]>Приёмник сломали до конца сбора или с дампом внутри</td><td [td]><b style='color:#7a0000;'>Задание провалено.</b></td></tr>\
 	</table>\
-	<div [note]><b>Не затягивайте.</b> Чем дольше идёт перехват, тем заметнее утечка: в журнале серверов копятся записи, и рано или поздно экипаж начнёт искать жучок и приёмник.</div>\
+	<div [note]><b>Не тяните.</b> Чем дольше идёт перехват, тем больше записей в журнале серверов. На трёх четвертях сбора капитан, главный инженер и директор исследований получат сообщение на КПК, и жучок с приёмником начнут искать.</div>\
 	<div style='text-align:center;font-size:11px;font-weight:bold;letter-spacing:2px;color:#7a0000;border-top:2px solid #7a0000;margin-top:14px;padding-top:6px;'>ПОСЛЕ ПРОЧТЕНИЯ УНИЧТОЖИТЬ</div>\
 	</div>"
 
@@ -480,9 +512,19 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 	restricted = TRUE
 	purchasable_from = NONE // handed out through extra_purchasable
 
+/proc/is_comms_dump_carrier(obj/item/tool, mob/living/user, atom/target)
+	if(!istype(tool, /obj/item/disk/computer))
+		return FALSE
+	var/obj/item/disk/computer/disk = tool
+	if(length(disk.stored_files))
+		target.balloon_alert(user, "диск не пуст!")
+		return FALSE
+	return TRUE
+
 /obj/item/disk/comms_intercept
 	name = "encryption key dump"
 	desc = "Носитель с перехваченными ключами шифрования каналов отделов. Подключите к гарнитуре, чтобы получить доступ ко всем каналам."
+	icon_state = "datadisk8"
 
 /obj/item/disk/comms_intercept/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
 	if(!istype(interacting_with, /obj/item/radio/headset))
@@ -515,14 +557,13 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 
 /obj/item/comms_tap
 	name = "network bug"
-	desc = "Крохотный модуль с парой контактов-зажимов и разъёмом для мультитула."
+	desc = "Крохотный модуль с парой контактов-зажимов."
 	icon = 'icons/obj/devices/tracker.dmi'
 	icon_state = "suit_sensor"
 	w_class = WEIGHT_CLASS_TINY
 	var/obj/machinery/telecomms/host
-	/// Only the installer can sync it, anyone else just finds it
+	/// Only the installer can pull the dump off it
 	var/datum/weakref/installer_ref
-	var/calibrated = FALSE
 	var/offline_until = 0
 	/// Heard traffic while packets were still being collected, so it has a dump to hand over
 	var/has_data = FALSE
@@ -544,19 +585,18 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 	if(!machine.panel_open)
 		balloon_alert(user, "панель закрыта!")
 		return ITEM_INTERACT_BLOCKING
-	if(machine.tap_install_stage != COMMS_TAP_STAGE_CONTACTS_STRIPPED)
-		balloon_alert(user, "контакты не подготовлены!")
+	if(machine.tap_shield_wires > 0)
+		balloon_alert(user, "мешает экранирование!")
 		return ITEM_INTERACT_BLOCKING
 	balloon_alert(user, "подключение...")
-	if(!do_after(user, 5 SECONDS, machine) || machine.tap_install_stage != COMMS_TAP_STAGE_CONTACTS_STRIPPED || loc != user || (locate(/obj/item/comms_tap) in machine))
+	if(!do_after(user, COMMS_TAP_INSERT_TIME, machine) || !machine.panel_open || machine.tap_shield_wires > 0 || loc != user || (locate(/obj/item/comms_tap) in machine))
 		return ITEM_INTERACT_BLOCKING
 	if(!user.transferItemToLoc(src, machine))
 		return ITEM_INTERACT_BLOCKING
-	machine.tap_install_stage = COMMS_TAP_STAGE_NONE
 	installer_ref = WEAKREF(user.mind)
 	attach(machine)
 	balloon_alert(user, "жучок подключён")
-	to_chat(user, span_notice("Жучок подключён. Доступные каналы: [jointext(comms_intercept_channel_names(machine), ", ")]. Синхронизируйте его мультитулом (вторичная функция)."))
+	to_chat(user, span_notice("Жучок подключён и слушает каналы: [jointext(comms_intercept_channel_names(machine), ", ")]. Панель лучше закрыть отвёрткой."))
 	return ITEM_INTERACT_SUCCESS
 
 /obj/item/comms_tap/proc/attach(obj/machinery/telecomms/machine)
@@ -564,6 +604,7 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 	RegisterSignal(host, COMSIG_TELECOMMS_RELAY_INFORMATION, PROC_REF(on_relay))
 	RegisterSignal(host, COMSIG_ATOM_EMP_ACT, PROC_REF(on_host_emp))
 	RegisterSignal(host, COMSIG_QDELETING, PROC_REF(on_host_deleted))
+	update_active()
 
 /obj/item/comms_tap/proc/detach()
 	if(!host)
@@ -571,20 +612,19 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 	UnregisterSignal(host, list(COMSIG_TELECOMMS_RELAY_INFORMATION, COMSIG_ATOM_EMP_ACT, COMSIG_QDELETING))
 	host = null
 	installer_ref = null
-	calibrated = FALSE
 	update_active()
 
 /obj/item/comms_tap/proc/update_active()
 	var/datum/objective/comms_intercept/objective = GLOB.comms_intercept
 	if(!objective)
 		return
-	if(host && calibrated)
+	if(host)
 		objective.active_taps |= src
 	else
 		objective.active_taps -= src
 
 /obj/item/comms_tap/proc/is_listening()
-	return host?.on && calibrated && world.time >= offline_until
+	return host?.on && world.time >= offline_until
 
 /obj/item/comms_tap/proc/on_relay(datum/source, datum/signal/subspace/signal)
 	SIGNAL_HANDLER
@@ -616,10 +656,6 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 		forceMove(drop_turf)
 	else
 		detach()
-
-/obj/item/comms_tap/proc/calibrate()
-	calibrated = TRUE
-	update_active()
 
 /obj/item/comms_intercept_receiver
 	name = "intercept receiver"
@@ -659,23 +695,40 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 		else
 			. += span_notice("Сигнал от жучка не поступает.")
 	if(!uploading && objective.is_collected() && user.mind == objective.owner)
-		. += span_notice("Пакеты собраны. Запустите передачу, нажав на закреплённый приёмник, или снимите дамп с жучка мультитулом.")
+		. += span_notice("Пакеты собраны. Запустите передачу, нажав на закреплённый приёмник, или снимите дамп с жучка на пустой диск.")
 	if(uploading)
 		var/upload_time = objective.get_upload_time(src)
 		var/time_left = max(upload_time - objective.upload_progress, 0)
 		. += span_notice("Передача: [round(min(objective.upload_progress * 100 / upload_time, 100))]%, осталось: [DisplayTimeText(time_left, 1)].")
 	if(objective.upload_done && !objective.disk_ref)
-		. += span_notice("Передача завершена, дамп ключей шифрования готов к извлечению.")
+		. += span_notice("Передача завершена, дамп ключей шифрования готов к записи на пустой диск.")
 	if(!anchored)
 		. += span_notice("Приёмник можно закрепить [EXAMINE_HINT("гаечным ключом")].")
 
-/obj/item/comms_intercept_receiver/attack_hand(mob/user, list/modifiers)
-	if(try_extract_disk(user) || try_start_upload(user))
-		return TRUE
-	return ..()
+/// Anyone with an empty disk can write the dump, so security can seize it too
+/obj/item/comms_intercept_receiver/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(!istype(tool, /obj/item/disk/computer) || !GLOB.comms_intercept?.upload_done)
+		return ..()
+	var/obj/item/disk/computer/disk = tool
+	if(!is_comms_dump_carrier(disk, user, src))
+		return ITEM_INTERACT_BLOCKING
+	if(!can_write_dump())
+		balloon_alert(user, "нет готовых данных!")
+		return ITEM_INTERACT_BLOCKING
+	balloon_alert(user, "запись...")
+	if(!do_after(user, 3 SECONDS, src) || !can_write_dump() || disk.loc != user || length(disk.stored_files))
+		return ITEM_INTERACT_BLOCKING
+	GLOB.comms_intercept.write_dump(user, disk)
+	balloon_alert(user, "дамп записан")
+	update_status()
+	return ITEM_INTERACT_SUCCESS
 
-/obj/item/comms_intercept_receiver/attack_self(mob/user, modifiers)
-	if(try_extract_disk(user))
+/obj/item/comms_intercept_receiver/proc/can_write_dump()
+	var/datum/objective/comms_intercept/objective = GLOB.comms_intercept
+	return objective?.upload_done && !objective.disk_ref && objective.receiver_ref?.resolve() == src
+
+/obj/item/comms_intercept_receiver/attack_hand(mob/user, list/modifiers)
+	if(try_start_upload(user))
 		return TRUE
 	return ..()
 
@@ -686,18 +739,6 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 		return FALSE
 	start_upload()
 	balloon_alert(user, "передача запущена")
-	return TRUE
-
-/// Anyone can pull the dump, so security can seize it too
-/obj/item/comms_intercept_receiver/proc/try_extract_disk(mob/user)
-	var/datum/objective/comms_intercept/objective = GLOB.comms_intercept
-	if(!objective?.upload_done || objective.disk_ref || objective.receiver_ref?.resolve() != src)
-		return FALSE
-	var/obj/item/disk/comms_intercept/disk = new(drop_location())
-	objective.disk_ref = WEAKREF(disk)
-	user.put_in_hands(disk)
-	balloon_alert(user, "дамп извлечён")
-	update_status()
 	return TRUE
 
 /obj/item/comms_intercept_receiver/wrench_act(mob/living/user, obj/item/tool)
@@ -819,65 +860,68 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 	. += span_warning("Из динамика доносится [comms_intercept_static_text(comms_intercept_tap_distance(radio_turf, receiver_turf))].")
 
 /obj/machinery/telecomms
-	/// Comms tap install progress, reset when the panel closes
-	var/tap_install_stage = COMMS_TAP_STAGE_NONE
+	/// Reset when the panel closes
+	var/tap_shield_wires = COMMS_TAP_SHIELD_WIRES
 
 /obj/machinery/telecomms/on_set_panel_open(old_value)
 	. = ..()
 	if(!panel_open)
-		tap_install_stage = COMMS_TAP_STAGE_NONE
+		tap_shield_wires = COMMS_TAP_SHIELD_WIRES
 
-/// Board check. Finding a tap, starting an install and syncing a tap are all the same action
-/obj/machinery/telecomms/multitool_act_secondary(mob/living/user, obj/item/tool)
+/obj/machinery/telecomms/examine(mob/user)
+	. = ..()
 	if(!panel_open)
-		return NONE
-	balloon_alert(user, "проверка платы...")
-	if(!tool.use_tool(src, user, 5 SECONDS, volume = 50) || !panel_open)
-		return ITEM_INTERACT_BLOCKING
+		return
+	if(locate(/obj/item/comms_tap) in src)
+		. += span_warning("К служебному разъёму подключён посторонний модуль!")
+		return
+	// Don't teach the crew how to install one
+	if(!is_comms_tappable(src) || !(locate(/obj/item/comms_tap) in user.get_all_contents()))
+		return
+	if(tap_shield_wires > 0)
+		. += span_notice("Служебный разъём закрыт экранированием, проводов: [tap_shield_wires]. Их можно перерезать [EXAMINE_HINT("кусачками")]. Каналы: [jointext(comms_intercept_channel_names(src), ", ")].")
+	else
+		. += span_notice("Служебный разъём открыт, можно вставить жучок.")
+
+/// Quiet extraction, only the installer can pull the dump off the tap
+/obj/machinery/telecomms/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
 	var/obj/item/comms_tap/tap = locate() in src
-	if(tap)
-		var/is_installer = user.mind && tap.installer_ref?.resolve() == user.mind
-		if(!tap.calibrated && is_installer)
-			tap.calibrate()
-			balloon_alert(user, "синхронизация установлена")
-			to_chat(user, span_notice("Синхронизация установлена, жучок начал считывать каналы. Панель лучше закрыть отвёрткой."))
-			return ITEM_INTERACT_SUCCESS
-		var/datum/objective/comms_intercept/objective = GLOB.comms_intercept
-		if(tap.calibrated && is_installer && objective?.is_collected())
-			if(!tap.has_data)
-				balloon_alert(user, "на жучке нет данных!")
-				return ITEM_INTERACT_BLOCKING
-			balloon_alert(user, "снятие дампа...")
-			tap.extracting = TRUE
-			var/extracted = tool.use_tool(src, user, COMMS_INTERCEPT_EXTRACT_TIME, volume = 50)
-			tap.extracting = FALSE
-			if(!extracted || !panel_open || QDELETED(tap) || tap.loc != src || !objective.is_collected())
-				return ITEM_INTERACT_BLOCKING
-			objective.extract_from_tap(tap, user)
-			balloon_alert(user, "дамп снят с жучка")
-			return ITEM_INTERACT_SUCCESS
-		to_chat(user, span_warning("На плате [declent_ru(GENITIVE)] обнаружен посторонний модуль!"))
-		return ITEM_INTERACT_SUCCESS
-	if(!is_comms_tappable(src))
-		balloon_alert(user, "ничего постороннего")
-		return ITEM_INTERACT_SUCCESS
-	tap_install_stage = COMMS_TAP_STAGE_PORT_FOUND
-	balloon_alert(user, "найден служебный разъём")
-	// Only someone carrying a tap gets the next step, board checks shouldn't teach the crew how to install one
-	if(locate(/obj/item/comms_tap) in user.get_all_contents())
-		to_chat(user, span_notice("Найден служебный разъём. Через [declent_ru(ACCUSATIVE)] проходят каналы: [jointext(comms_intercept_channel_names(src), ", ")]. Зачистите контакты кусачками."))
+	if(!istype(tool, /obj/item/disk/computer) || !panel_open || !tap)
+		return ..()
+	var/datum/objective/comms_intercept/objective = GLOB.comms_intercept
+	if(!user.mind || tap.installer_ref?.resolve() != user.mind || !objective?.is_collected())
+		return ..()
+	if(!is_comms_dump_carrier(tool, user, src))
+		return ITEM_INTERACT_BLOCKING
+	if(!tap.has_data)
+		balloon_alert(user, "на жучке нет данных!")
+		return ITEM_INTERACT_BLOCKING
+	balloon_alert(user, "снятие дампа...")
+	tap.extracting = TRUE
+	var/extracted = do_after(user, COMMS_INTERCEPT_EXTRACT_TIME, src)
+	tap.extracting = FALSE
+	var/obj/item/disk/computer/disk = tool
+	if(!extracted || !panel_open || QDELETED(tap) || tap.loc != src || disk.loc != user || length(disk.stored_files) || !objective.is_collected())
+		return ITEM_INTERACT_BLOCKING
+	objective.extract_from_tap(tap, user, disk)
+	balloon_alert(user, "дамп снят с жучка")
 	return ITEM_INTERACT_SUCCESS
 
 /obj/machinery/telecomms/wirecutter_act(mob/living/user, obj/item/tool)
-	if(!panel_open || tap_install_stage != COMMS_TAP_STAGE_PORT_FOUND)
+	if(!panel_open || tap_shield_wires <= 0 || !is_comms_tappable(src) || (locate(/obj/item/comms_tap) in src))
 		return NONE
-	balloon_alert(user, "зачистка контактов...")
-	if(!tool.use_tool(src, user, 3 SECONDS, volume = 50) || tap_install_stage != COMMS_TAP_STAGE_PORT_FOUND)
-		return ITEM_INTERACT_BLOCKING
-	tap_install_stage = COMMS_TAP_STAGE_CONTACTS_STRIPPED
-	balloon_alert(user, "контакты зачищены")
-	if(locate(/obj/item/comms_tap) in user.get_all_contents())
-		to_chat(user, span_notice("Контакты зачищены. Вставьте жучок."))
+	if(!(locate(/obj/item/comms_tap) in user.get_all_contents()))
+		return NONE
+	to_chat(user, span_notice("Вы начинаете перерезать провода экранирования, осталось: [tap_shield_wires]."))
+	while(tool.use_tool(src, user, COMMS_TAP_WIRE_TIME, volume = 50))
+		if(!panel_open || tap_shield_wires <= 0)
+			return ITEM_INTERACT_BLOCKING
+		tap_shield_wires--
+		if(tap_shield_wires <= 0)
+			balloon_alert(user, "разъём открыт")
+			to_chat(user, span_notice("Последний провод перерезан. Вставьте жучок."))
+			break
+		to_chat(user, span_notice("Провод перерезан, осталось: [tap_shield_wires]."))
 	return ITEM_INTERACT_SUCCESS
 
 #undef COMMS_INTERCEPT_PROB
@@ -906,6 +950,6 @@ GLOBAL_VAR_INIT(comms_intercept_assigned, FALSE)
 #undef COMMS_RECEIVER_UPLOADING
 #undef COMMS_RECEIVER_DONE
 #undef COMMS_RECEIVER_NO_SIGNAL
-#undef COMMS_TAP_STAGE_NONE
-#undef COMMS_TAP_STAGE_PORT_FOUND
-#undef COMMS_TAP_STAGE_CONTACTS_STRIPPED
+#undef COMMS_TAP_SHIELD_WIRES
+#undef COMMS_TAP_WIRE_TIME
+#undef COMMS_TAP_INSERT_TIME
