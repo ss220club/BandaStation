@@ -56,12 +56,12 @@
 			),
 		),
 		/datum/emote/living/sigh::key = list(
-			FEMALE = SFX_FEMALE_SIGH,
-			MALE = SFX_MALE_SIGH,
+			FEMALE = /datum/sound_effect/female_sigh,
+			MALE = /datum/sound_effect/male_sigh,
 		),
 		/datum/emote/living/snore::key = list(
-			FEMALE = SFX_SNORE_FEMALE,
-			MALE = SFX_SNORE_MALE,
+			FEMALE = /datum/sound_effect/assoc/snore_female,
+			MALE = /datum/sound_effect/assoc/snore_male,
 		),
 		/datum/emote/living/sniff::key = list(
 			FEMALE = 'sound/mobs/humanoids/human/sniff/female_sniff.ogg',

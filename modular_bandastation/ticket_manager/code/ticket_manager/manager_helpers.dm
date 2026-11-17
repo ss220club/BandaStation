@@ -288,7 +288,11 @@
 
 	var/log_prefix = "[is_pm ? "PM" : "Ticket #[id]"]: [admin_key] → [player_key]:"
 	var/log_message = "[message]"
-	to_chat(GLOB.admins, span_notice("[span_bold(log_prefix)] [log_message]"), MESSAGE_TYPE_ADMINPM)
+
+	for(var/client/admin_client as anything in GLOB.admins)
+		if(needed_ticket.has_staff_access(admin_client))
+			to_chat(admin_client, span_notice("[span_bold(log_prefix)] [log_message]"), MESSAGE_TYPE_ADMINPM)
+
 	log_admin_private("[log_prefix] [log_message]")
 	SSblackbox.LogAhelp(id, TICKET_AHELP_ACTION_REPLY, message, needed_ticket.initiator_client.ckey, admin.ckey)
 

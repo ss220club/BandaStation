@@ -1,0 +1,30 @@
+name: Merge Hold Assign
+
+on:
+  pull_request_target:
+    types: [opened, reopened, synchronize]
+    branches: [master]
+
+permissions:
+  contents: read
+
+env:
+  HOLD_LABEL: ":clock1: На удержании"
+  GH_REPO: ${{ github.repository }}
+
+jobs:
+  merge_hold_assign:
+    if: github.event.pull_request.user.type != 'Bot'
+    runs-on: ubuntu-slim
+    steps:
+      - id: create_token
+        uses: actions/create-github-app-token@v3.3.0
+        with:
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.PRIVATE_KEY }}
+
+      - name: Put the PR on hold
+        env:
+          GH_TOKEN: ${{ steps.create_token.outputs.token }}
+          PR: ${{ github.event.pull_request.number }}
+        run: gh pr edit "$PR" --add-label "$HOLD_LABEL"

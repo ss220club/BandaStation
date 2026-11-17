@@ -6,7 +6,7 @@
 		return TRUE
 	var/damage = rand(1, 9)
 	if (prob(90))
-		playsound(loc, SFX_PUNCH, 25, TRUE, -1)
+		playsound(loc, /datum/sound_effect/punch, 25, TRUE, -1)
 		visible_message(span_danger("[capitalize(user.declent_ru(NOMINATIVE))] пинает [declent_ru(ACCUSATIVE)]!"), \
 						span_userdanger("[capitalize(user.declent_ru(NOMINATIVE))] пинает вас!"), span_hear("Вы слышите противный звук удара плоти о плоть!"), COMBAT_MESSAGE_RANGE, user)
 		to_chat(user, span_danger("Вы пинаете [declent_ru(ACCUSATIVE)]!"))

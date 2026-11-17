@@ -6,7 +6,6 @@
 	medical_record_text = "При физическом осмотре у пациента были обнаружены многочисленные бюджетные протезы внутренних органов. \
 		<b>Известно, что удаление этих органов опасно как для пациента, так и для врача.</b>"
 	hardcore_value = 6
-	mail_goodies = list(/obj/item/storage/organbox)
 
 /datum/quirk/tin_man/add_unique(client/client_source)
 	var/mob/living/carbon/human/human_holder = quirk_holder

@@ -112,17 +112,17 @@
 	can_use_flags = EMOTE_CANUSE_REQUIRE_HANDS
 
 /datum/emote/living/carbon/human/scratch_h
-	key = "scratch_h"
+	key = "scratchhead"
 	message = "scratches their head."
 	can_use_flags = EMOTE_CANUSE_REQUIRE_HANDS
 
 /datum/emote/living/carbon/human/thumb_up
-	key = "thumb_u"
+	key = "thumbsup"
 	message = "gives a thumbs up."
 	can_use_flags = EMOTE_CANUSE_REQUIRE_HANDS
 
 /datum/emote/living/carbon/human/thumb_down
-	key = "thumb_d"
+	key = "thumbsdown"
 	message = "gives a thumbs down."
 	can_use_flags = EMOTE_CANUSE_REQUIRE_HANDS
 
@@ -196,7 +196,7 @@
 /datum/emote/living/carbon/human/wag
 	key = "wag"
 	key_third_person = "wags"
-	message = "wags"
+	message = "their tail." // BANDASTATION EDIT: Fix wag emote
 
 /datum/emote/living/carbon/human/wag/run_emote(mob/user, params, type_override, intentional)
 	. = ..()

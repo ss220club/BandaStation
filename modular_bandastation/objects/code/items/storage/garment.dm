@@ -42,6 +42,7 @@
 		/obj/item/clothing/under/rank/nanotrasen_representative/skirt = 1,
 		/obj/item/clothing/under/rank/nanotrasen_representative/formal = 1,
 		/obj/item/clothing/under/suit/nanotrasen_representative_female_suit = 1,
+		/obj/item/clothing/suit/hooded/wintercoat/nanotrasen_representative = 1
 	)
 	generate_items_inside(items_inside, src)
 

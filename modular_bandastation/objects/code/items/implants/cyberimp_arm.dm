@@ -1,12 +1,9 @@
 /obj/item/organ/cyberimp/arm/toolkit/centcom
 	name = "centcom combat implant"
 	desc = "Мощный кибернетический имплантат военного класса, предназначенный для обеспечения пользователя полезными для боя устройствами из его руки."
-	items_to_create = list(
-		/obj/item/melee/energy/blade/hardlight,
-		/obj/item/gun/medbeam,
-		/obj/item/borg/stun,
-		/obj/item/gun/energy/pulse/pistol/m1911
-	)
+
+/obj/item/organ/cyberimp/arm/toolkit/centcom/get_init_items()
+	return list(/obj/item/melee/energy/blade/hardlight, /obj/item/gun/medbeam, /obj/item/borg/stun, /obj/item/gun/energy/pulse/pistol/m1911)
 
 /obj/item/organ/cyberimp/arm/toolkit/centcom/Extend(obj/item/augment)
 	. = ..()
@@ -17,8 +14,10 @@
 	name = "custom arm implant"
 	desc = "Настраиваемый имплант руки, спроектированный чтобы хранить предмет по желанию пользователя."
 	aug_overlay = "toolkit"
-	items_to_create = list()
 	var/max_w_class = WEIGHT_CLASS_NORMAL
+
+/obj/item/organ/cyberimp/arm/toolkit/custom/get_init_items()
+	return list()
 
 /obj/item/organ/cyberimp/arm/toolkit/custom/screwdriver_act_secondary(mob/living/user, obj/item/tool)
 	if(LAZYLEN(items_list) == 1)

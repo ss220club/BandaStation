@@ -20,6 +20,7 @@
 	suppressor_x_offset = 0
 	suppressor_y_offset = 0
 	recoil = 0.3
+	pressure_threshold = AMMO_CASING_PRESSURE_LOW
 
 /obj/item/gun/ballistic/automatic/pistol/cm23/add_seclight_point()
 	AddComponent(\
@@ -32,3 +33,6 @@
 
 /obj/item/gun/ballistic/automatic/pistol/cm23/no_mag
 	spawnwithmagazine = FALSE
+
+/obj/item/gun/ballistic/automatic/pistol/cm23/sec
+	spawn_magazine_type = /obj/item/ammo_box/magazine/c38/rubber

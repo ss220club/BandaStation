@@ -67,9 +67,9 @@
 		return
 	var/aggression = min(((damage / 800) * (internal_energy / 2500)), 1.0) * 100
 	if(damage >= 300)
-		playsound(src, SFX_SM_DELAM, max(50, aggression), FALSE, 40, 30, falloff_distance = 10)
+		playsound(src, /datum/sound_effect/sm_delam, max(50, aggression), FALSE, 40, 30, falloff_distance = 10)
 	else
-		playsound(src, SFX_SM_CALM, max(50, aggression), FALSE, 25, 25, falloff_distance = 10)
+		playsound(src, /datum/sound_effect/sm_calm, max(50, aggression), FALSE, 25, 25, falloff_distance = 10)
 	var/next_sound = round((100 - aggression) * 5)
 	last_accent_sound = world.time + max(SUPERMATTER_ACCENT_SOUND_MIN_COOLDOWN, next_sound)
 
@@ -128,7 +128,7 @@
 		zap_count += 1
 
 	if(zap_count >= 1)
-		playsound(loc, 'sound/items/weapons/emitter2.ogg', 100, TRUE, extrarange = 10)
+		playsound(loc, 'sound/items/weapons/emitter2.ogg', 60, TRUE, extrarange = 10) // BANDASTATION EDIT: orig volume = 100, less ear damage
 		var/delta_time = (SSmachines.times_fired - last_high_energy_accumulation_perspective_machines) * SSmachines.wait / (1 SECONDS)
 		var/accumulated_energy = accumulate_energy(ZAP_ENERGY_ACCUMULATION_HIGH_ENERGY, energy = clamp(internal_energy * 3200, 6.4e6, 3.2e7) * delta_time)
 		if(accumulated_energy)
@@ -146,7 +146,7 @@
 		supermatter_anomaly_gen(get_ranged_target_turf(src, pick(GLOB.cardinals), rand(5, 10)), PYRO_ANOMALY, 3)
 
 /obj/machinery/power/supermatter_crystal/proc/supermatter_pull(turf/center, pull_range = 3)
-	playsound(center, 'sound/items/weapons/marauder.ogg', 100, TRUE, extrarange = pull_range - world.view)
+	playsound(center, 'sound/items/weapons/marauder.ogg', 60, TRUE, extrarange = pull_range - world.view) // BANDASTATION EDIT: orig volume = 100, less ear damage
 	for(var/atom/movable/movable_atom in orange(pull_range,center))
 		if((movable_atom.anchored || movable_atom.move_resist >= MOVE_FORCE_EXTREMELY_STRONG)) //move resist memes.
 			if(istype(movable_atom, /obj/structure/closet))

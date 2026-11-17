@@ -53,16 +53,20 @@
 	. = ..()
 	// Brain size logic
 	transform = transform.Scale(brain_size)
-	organ_traits.Remove(variant_traits_removed)
-	organ_traits |= variant_traits_added
+	LAZYREMOVE(organ_traits, variant_traits_removed)
+	if(!isnull(variant_traits_added))
+		LAZYOR(organ_traits, variant_traits_added)
 
 /obj/item/organ/brain/on_mob_insert(mob/living/carbon/brain_owner, special = FALSE, movement_flags)
 	. = ..()
 
 	name = initial(name)
 
-	// Special check for if you're trapped in a body you can't control because it's owned by a ling.
-	if(IS_CHANGELING(brain_owner) && !(movement_flags & NO_ID_TRANSFER))
+	// BANDASTATION EDIT: dont transfer vamps to incompatible bodies
+	// Special check for if you're trapped in a body you can't control because it's owned by a ling or is incompatible with you.
+	if((IS_CHANGELING(brain_owner) && !(movement_flags & NO_ID_TRANSFER)) \
+		|| (brainmob?.mind.has_antag_datum(/datum/antagonist/vampire) && (isnull(brain_owner.dna?.species) || !brain_owner.dna?.species?.is_vampire_compatible())))
+	// BANDASTATION EDIT END
 		if(brainmob && !IS_DEAD_OR_FAKING(brain_owner))
 			to_chat(brainmob, span_danger("You can't feel your body! You're still just a brain!"))
 		forceMove(brain_owner)
@@ -216,7 +220,7 @@
 
 /obj/item/organ/brain/proc/check_for_repair(obj/item/item, mob/user)
 	if(damage && item.is_drainable() && item.reagents.has_reagent(/datum/reagent/medicine/mannitol) && (organ_flags & ORGAN_ORGANIC)) //attempt to heal the brain
-		if(brainmob?.health <= HEALTH_THRESHOLD_DEAD) //if the brain is fucked anyway, do nothing
+		if(brainmob?.health <= brainmob?.dead_threshold) //if the brain is fucked anyway, do nothing
 			to_chat(user, span_warning("[src] is far too damaged, there's nothing else we can do for it!"))
 			return TRUE
 

@@ -576,7 +576,7 @@
 	visible_message(span_warning("[src.declent_ru(NOMINATIVE)] разбивается!"),
 		span_danger("Вы слышите звук разбивающегося стекла."))
 
-	playsound(loc, SFX_SHATTER, 50, TRUE)
+	playsound(loc, /datum/sound_effect/shatter, 50, TRUE)
 
 	new frame(loc)
 
@@ -592,7 +592,7 @@
 		return
 	else
 		var/turf/T = get_turf(src)
-		playsound(T, SFX_SHATTER, 50, TRUE)
+		playsound(T, /datum/sound_effect/shatter, 50, TRUE)
 
 		new frame(loc)
 		new glass_shard_type(loc)

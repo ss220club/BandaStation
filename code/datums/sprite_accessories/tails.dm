@@ -32,6 +32,19 @@
 	center = TRUE
 	dimension_x = 36
 
+//cerulean species fish tails
+/datum/sprite_accessory/tails/fish/cerulean
+	name = "Cerulean"
+	icon = 'icons/mob/human/species/cerulean/cerulean_tails.dmi'
+	icon_state = "default"
+	gender_specific = TRUE
+	locked = TRUE
+
+/datum/sprite_accessory/tails/fish/cerulean/skeleton
+	name = "Cerulean Skeleton"
+	icon_state = "skeleton"
+	color_src = NONE
+
 /datum/sprite_accessory/tails/lizard
 	icon = 'icons/mob/human/species/lizard/lizard_tails.dmi'
 	spine_key = SPINE_KEY_LIZARD
@@ -80,6 +93,15 @@
 	icon = 'icons/mob/human/species/monkey/monkey_tail.dmi'
 	icon_state = "default"
 	color_src = FALSE
+
+/datum/sprite_accessory/tails/mouse
+	icon_state = "mouse"
+	color_src = NONE
+	locked = TRUE
+
+/datum/sprite_accessory/tails/mouse/default
+	name = "Mouse"
+	icon = 'icons/mob/human/mouse_features.dmi'
 
 /datum/sprite_accessory/tails/xeno
 	icon_state = "default"

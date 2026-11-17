@@ -26,6 +26,9 @@
 
 /datum/world_topic/status/Run(list/input)
 	. = ..()
+	.["roundtime"] = round_timestamp("hh:mm")
+	.["stationtime"] = .["roundtime"]
+	.["map"] = .["map_name"]
 	var/list/admins = list()
 	for(var/client/C in GLOB.clients)
 		if(!C.holder)

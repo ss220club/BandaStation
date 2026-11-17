@@ -262,8 +262,8 @@
 		span_danger("[capitalize(carp_user.declent_ru(NOMINATIVE))] без каких-либо усилий отбивает [hitting_projectile.declent_ru(ACCUSATIVE)]! [capitalize(carp_user.ru_p_they())] может отражать пули голыми руками!"),
 		span_userdanger("Вы отражаете [hitting_projectile.declent_ru(ACCUSATIVE)]!"),
 	)
-	playsound(carp_user, SFX_BULLET_MISS, 75, TRUE)
-	hitting_projectile.firer = carp_user
+	playsound(carp_user, /datum/sound_effect/bullet_miss, 75, TRUE)
+	hitting_projectile.set_firer(carp_user)
 	hitting_projectile.set_angle(rand(0, 360))//SHING
 	return COMPONENT_BULLET_PIERCED
 
@@ -354,11 +354,11 @@
 		style_factor_points += 20
 
 	// We check for wielded objects. If they're not abstract items or exempt items, we add their weight as a penalty. And their block chance.
-	for(var/obj/item/possibly_a_held_object in human_carp_user.held_items)
+	for(var/obj/item/possibly_a_held_object as anything in human_carp_user.get_held_items())
 		if(possibly_a_held_object.item_flags & (ABSTRACT|HAND_ITEM) && !possibly_a_held_object.block_chance)
 			continue
 
-		if(possibly_a_held_object in exempt_objects)
+		if(is_type_in_list(possibly_a_held_object, exempt_objects))
 			continue
 
 		if(possibly_a_held_object.w_class <= WEIGHT_CLASS_SMALL && !possibly_a_held_object.block_chance)
@@ -416,11 +416,8 @@
 	AddComponent(/datum/component/two_handed, \
 		force_unwielded = 10, \
 		force_wielded = 24, \
+		update_icon_state = TRUE, \
 	)
-
-/obj/item/staff/bostaff/update_icon_state()
-	icon_state = inhand_icon_state = "[base_icon_state][HAS_TRAIT(src, TRAIT_WIELDED)]"
-	return ..()
 
 /obj/item/staff/bostaff/attack(mob/target, mob/living/user, list/modifiers, list/attack_modifiers)
 	add_fingerprint(user)
@@ -459,7 +456,7 @@
 			H.Paralyze(8 SECONDS)
 		if(H.staminaloss && !H.IsSleeping())
 			var/total_health = (H.health - H.staminaloss)
-			if(total_health <= HEALTH_THRESHOLD_CRIT && !IS_UNCONSCIOUS_OR_CRIT(H))
+			if(total_health <= H.crit_threshold && !IS_UNCONSCIOUS_OR_CRIT(H))
 				H.visible_message(span_warning("[capitalize(user.declent_ru(NOMINATIVE))] наносит сокрушительный удар голове [H.declent_ru(GENITIVE)], вырубая [H.ru_p_them()]!"), \
 								span_userdanger("[capitalize(user.declent_ru(NOMINATIVE))] вырубает вас!"), span_hear("Вы слышите противный звук удара по телу!"), null, user)
 				to_chat(user, span_danger("Вы наносите сокрушительный удар голове [H.declent_ru(GENITIVE)], вырубая [H.ru_p_them()]!"))

@@ -3,11 +3,11 @@
 	desc = "Вы верите, что ваше тело - это храм, а его естественная форма - воплощение совершенства. Соответственно, вы презираете идею когда-либо дополнять его неестественными частями, кибернетическими протезами или чем-то подобным."
 	icon = FA_ICON_PERSON_RAYS
 	value = -2
-	quirk_flags = QUIRK_HUMAN_ONLY|QUIRK_MOODLET_BASED
 	gain_text = span_danger("Теперь вам начинает не нравиться идея установки каких-либо имплантатов.")
 	lose_text = span_notice("Может быть, импланты - это не так уж и плохо. Теперь вы нормально относитесь ко всем видам изменения тела.")
 	medical_record_text = "Пациент проявляет негативную реакцию на неестественные части тела и аугментации."
 	hardcore_value = 3
+	mail_weight = 2
 	mail_goodies = list(/obj/item/paper/pamphlet/cybernetics)
 	var/cybernetics_level = 0
 

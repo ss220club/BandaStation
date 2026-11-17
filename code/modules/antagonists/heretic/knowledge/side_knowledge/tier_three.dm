@@ -152,7 +152,7 @@
 	name = "bone-shards"
 	desc = "То, что когда-то казалось обычным человеческим кулаком, теперь превратилось в гнездо острых костяных осколков."
 	color = "#001aff"
-	hitsound = SFX_SHATTER
+	hitsound = /datum/sound_effect/shatter
 	force = 16
 	wound_bonus = -30
 	exposed_wound_bonus = 15

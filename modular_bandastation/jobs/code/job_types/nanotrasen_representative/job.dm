@@ -12,6 +12,7 @@
 	exp_required_type_department = EXP_TYPE_COMMAND
 	exp_granted_type = EXP_TYPE_CREW
 	config_tag = "NANOTRASEN_REPRESENTATIVE"
+	tgui_icon = FA_ICON_PAPERCLIP
 
 	outfit = /datum/outfit/job/nanotrasen_representative
 

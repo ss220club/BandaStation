@@ -99,10 +99,16 @@
 
 	ADD_TRAIT(cast_on, TRAIT_IMMOBILIZED, REF(src))
 
+// BANDASTATION EDIT START: allow custom jaunt exit timing
+	begin_jaunt_exit(cast_on, holder, found_exit) // BANDASTATION EDIT: allow custom jaunt exit timing
+// No empty line here on purpose.
+/// Schedule the exit animation after selecting a safe exit turf and stopping movement.
+/datum/action/cooldown/spell/jaunt/ethereal_jaunt/proc/begin_jaunt_exit(mob/living/cast_on, obj/effect/dummy/phased_mob/spell_jaunt/holder, turf/found_exit)
 	if(2.5 SECONDS - jaunt_in_time <= 0)
 		do_jaunt_in(cast_on, holder, found_exit)
 	else
 		addtimer(CALLBACK(src, PROC_REF(do_jaunt_in), cast_on, holder, found_exit), 2.5 SECONDS - jaunt_in_time)
+// BANDASTATION EDIT END: allow custom jaunt exit timing
 
 /**
  * The wind-up (wind-out?) of exiting the jaunt.

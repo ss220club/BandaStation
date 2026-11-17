@@ -131,16 +131,21 @@
 	icon = 'modular_bandastation/weapon/icons/ranged/ballistic.dmi'
 	recoil = 0.4
 
-/obj/item/gun/ballistic/revolver/cowboy
+/obj/item/gun/ballistic/revolver/syndicate/cowboy
 	icon_state = "cowboy"
 
-/obj/item/gun/ballistic/revolver/badass
+/obj/item/gun/ballistic/revolver/syndicate/badass
 	icon = 'icons/obj/weapons/guns/ballistic.dmi'
 	recoil = 0.3
 
 /obj/item/gun/ballistic/revolver/mateba
 	icon = 'icons/obj/weapons/guns/ballistic.dmi'
 	recoil = 0.2
+
+/obj/item/gun/ballistic/revolver/mateba/old
+	icon = 'modular_bandastation/weapon/icons/ranged/ballistic.dmi'
+	desc = "Полуавтоматический револьвер серии Mateba Model 6 Unica сборки старого образца. Такие уже давно не делают..."
+	icon_state = "mateba_old"
 
 /obj/item/gun/ballistic/revolver/golden
 	icon = 'icons/obj/weapons/guns/ballistic.dmi'
@@ -264,6 +269,15 @@
 /obj/item/gun/ballistic/automatic/battle_rifle
 	recoil = 0.3
 
+/obj/item/gun/ballistic/automatic/battle_rifle/auto
+	name = "NT BR-38/A battle rifle"
+	shots_before_degradation = 30
+	max_shots_before_degradation = 30
+
+/obj/item/gun/ballistic/automatic/battle_rifle/auto/Initialize(mapload)
+	. = ..()
+	AddComponent(/datum/component/automatic_fire, 0.3 SECONDS)
+
 /obj/item/gun/ballistic/automatic/wt550
 	icon = 'modular_bandastation/weapon/icons/ranged/ballistic.dmi'
 	recoil = 0.3
@@ -302,7 +316,13 @@
 
 /obj/item/gun/grenadelauncher
 	icon = 'modular_bandastation/weapon/icons/ranged/ballistic48x32.dmi'
+	worn_icon = 'icons/mob/clothing/back.dmi'
+	worn_icon_state = "cshotgun"
 	SET_BASE_PIXEL(-8, 0)
+
+/obj/item/gun/grenadelauncher/tactical
+	name = "tactical pneumatic grenade launcher"
+	slot_flags = ITEM_SLOT_BACK | ITEM_SLOT_BELT | ITEM_SLOT_SUITSTORE
 
 /obj/item/gun/ballistic/rifle/sniper_rifle
 	icon = 'modular_bandastation/weapon/icons/ranged/ballistic64x32.dmi'
@@ -335,6 +355,43 @@
 
 /obj/item/gun/ballistic/automatic/l6_saw/toy
 	recoil = 0
+
+/obj/item/toy/gun/legacy/examine(mob/user)
+	. = ..()
+	. += "<b>Удивительно качественная модель-игрушка ввиде капсюльного револьвера. Кто мог их сделать?"
+
+/obj/item/toy/gun/legacy/mateba
+	name = "\improper Unica 6 auto-revolver"
+	desc = "Полуавтоматический револьвер Mateba Model 6 Unica сборки старого образца. Такие уже давно не делают..."
+	icon = 'modular_bandastation/weapon/icons/ranged/ballistic.dmi'
+	icon_state = "mateba_old"
+
+/obj/item/toy/gun/legacy/anaconda
+	name = ".44 revolver 'Anaconda'"
+	desc = "Револьвер S&W Python «Анаконда» .44-го калибра. Такие уже давно не делают..."
+	icon = 'modular_bandastation/weapon/icons/ranged/ballistic.dmi'
+	icon_state = "anaconda"
+	inhand_icon_state = "anaconda"
+	lefthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/lefthand.dmi'
+	righthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/righthand.dmi'
+
+/obj/item/toy/gun/legacy/rsh12
+	name = "RSH-12 revolver"
+	desc = "Крупнокалиберный револьвер РШ-12 калибра 12.7мм. Что он тут вообще забыл?..."
+	icon = 'modular_bandastation/weapon/icons/ranged/ballistic.dmi'
+	icon_state = "rsh12"
+	inhand_icon_state = "rsh12"
+	lefthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/lefthand.dmi'
+	righthand_file = 'modular_bandastation/weapon/icons/ranged/inhands/ballistic/righthand.dmi'
+
+/obj/item/gun/energy/laser/scatter/shotty
+	inhand_icon_state = "shotgun_combat"
+	lefthand_file = 'icons/mob/inhands/weapons/64x_guns_left.dmi'
+	righthand_file = 'icons/mob/inhands/weapons/64x_guns_right.dmi'
+	inhand_x_dimension = 64
+	inhand_y_dimension = 64
+	worn_icon = 'icons/mob/clothing/back.dmi'
+	worn_icon_state = "cshotgun"
 
 // Prevents gun sizes from changing due to suppressors
 /obj/item/gun/ballistic/install_suppressor(obj/item/suppressor/new_suppressor)

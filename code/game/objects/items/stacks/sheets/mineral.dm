@@ -47,8 +47,8 @@ GLOBAL_LIST_INIT(sandstone_recipes, list ( \
 	merge_type = /obj/item/stack/sheet/mineral/sandstone
 	walltype = /turf/closed/wall/mineral/sandstone
 	material_type = /datum/material/sandstone
-	drop_sound = SFX_STONE_DROP
-	pickup_sound = SFX_STONE_PICKUP
+	drop_sound = /datum/sound_effect/stone_drop
+	pickup_sound = /datum/sound_effect/stone_pickup
 
 /obj/item/stack/sheet/mineral/sandstone/get_main_recipes()
 	. = ..()
@@ -566,7 +566,6 @@ GLOBAL_LIST_INIT(metalhydrogen_recipes, list(
 /obj/item/stack/sheet/mineral/metal_hydrogen
 	name = "metal hydrogen"
 	icon_state = "sheet-metalhydrogen"
-	worn_icon_state = "sheet-metalhydrogen"
 	worn_icon_state = "sheet-metalhydrogen"
 	inhand_icon_state = "sheet-metalhydrogen"
 	singular_name = "metal hydrogen sheet"

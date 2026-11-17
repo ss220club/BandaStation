@@ -6,5 +6,5 @@
 	req_access = list(ACCESS_HOS)
 
 /obj/structure/displaycase/hos/Initialize(mapload)
-	start_showpiece_type = pick(subtypesof(/obj/item/food/donut))
+	start_showpiece_type = pick(/obj/item/toy/gun/legacy/mateba, /obj/item/toy/gun/legacy/anaconda, /obj/item/toy/gun/legacy/rsh12)
 	return ..()

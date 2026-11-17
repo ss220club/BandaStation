@@ -5,6 +5,7 @@
 #define CATEGORY_CARBON "Гуманоиды"
 #define CATEGORY_HUMAN "Люди"
 #define CATEGORY_ROBOT "Роботы"
+#define CATEGORY_DEXTROUS "Ловкий"
 #define CATEGORY_AI "ИИ"
 #define CATEGORY_MISC "Прочее"
 #define CATEGORY_MOVEMENT "Передвижение"

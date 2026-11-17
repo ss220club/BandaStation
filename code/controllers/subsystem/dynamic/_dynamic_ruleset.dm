@@ -280,6 +280,9 @@
 		var/client/candidate_client = GET_CLIENT(candidate)
 		if(isnull(candidate_client))
 			continue
+		// BANDASTATION EDIT - Respect the lobby preference to opt out of all Dynamic antagonist rolls
+		if(!candidate_client.prefs.read_preference(/datum/preference/toggle/antag_roll))
+			continue
 		if(candidate_client.get_remaining_days(minimum_required_age) > 0)
 			continue
 		if(pref_flag && !(pref_flag in candidate_client.prefs.be_special))

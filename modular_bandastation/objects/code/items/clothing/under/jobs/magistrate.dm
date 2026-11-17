@@ -1,6 +1,6 @@
 /obj/item/clothing/under/rank/magistrate
 	name = "magistrate's uniform"
-	desc = "Fine black cotton pants and white shirt, with a black tie and gold trim."
+	desc = "Изящные чёрные хлопковые брюки и белая рубашка с чёрным галстуком и золотой отделкой."
 	icon = 'modular_bandastation/objects/icons/obj/clothing/under/magistrate.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/under/magistrate.dmi'
 	icon_state = "magistrate"
@@ -8,7 +8,7 @@
 
 /obj/item/clothing/under/rank/magistrate/skirt
 	name = "magistrate's skirt"
-	desc = "A silky black skirt and white shirt, with a black tie and gold trim."
+	desc = "Шелковистая чёрная юбка и белая рубашка с чёрным галстуком и золотой отделкой."
 	icon = 'modular_bandastation/objects/icons/obj/clothing/under/magistrate.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/under/magistrate.dmi'
 	icon_state = "magistrate_skirt"
@@ -16,7 +16,7 @@
 
 /obj/item/clothing/under/rank/magistrate/formal
 	name = "formal magistrate's uniform"
-	desc = "A formal black suit with gold trim and a snazzy red tie, this uniform displays the rank of \"Magistrate\" and bears \"N.S.S. Cyberiad\" on the left shoulder."
+	desc = "Формальный чёрный костюм с золотой отделкой и стильным красным галстуком. На этой униформе указано звание «Магистрат», на левом плече вышито - «ИСН Кибериада»."
 	icon = 'modular_bandastation/objects/icons/obj/clothing/under/magistrate.dmi'
 	worn_icon = 'modular_bandastation/objects/icons/mob/clothing/under/magistrate.dmi'
 	icon_state = "magistrate_formal"

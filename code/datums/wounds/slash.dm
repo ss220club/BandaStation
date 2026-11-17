@@ -22,6 +22,13 @@
 		if(WOUND_SEVERITY_CRITICAL)
 			return span_boldwarning("It's leaking blood from a major [LOWER_TEXT(undiagnosed_name || name)]!!")
 
+/datum/wound/slash/wound_injury(datum/wound/old_wound, attack_direction)
+	var/obj/item/stack/medical/wrap/current_gauze = LAZYACCESS(limb.applied_items, LIMB_ITEM_GAUZE)
+	if(!old_wound && !isnull(current_gauze) && (wound_flags & ACCEPTS_GAUZE))
+		// oops your existing gauze got cut through! need a new one now
+		limb.seep_gauze(initial(current_gauze.absorption_capacity) * 0.8)
+	return ..()
+
 /datum/wound_pregen_data/flesh_slash
 	abstract = TRUE
 
@@ -196,8 +203,7 @@
 			to_chat(user, span_warning("Вы не можете лизать раны без языка!")) // f in chat
 			return
 
-	lick_wounds(user)
-	return TRUE
+	return lick_wounds(user)
 
 /// if a felinid is licking this cut to reduce bleeding
 /datum/wound/slash/flesh/proc/lick_wounds(mob/living/carbon/human/user)
@@ -207,10 +213,13 @@
 			continue
 		user.ForceContractDisease(iter_disease)
 
+	if(user.combat_mode)
+		return FALSE
+
 	user.visible_message(span_notice("[capitalize(user.declent_ru(NOMINATIVE))] начинает лизать раны на [limb.ru_plaintext_zone[PREPOSITIONAL] || limb.plaintext_zone] у [victim.declent_ru(GENITIVE)]."), span_notice("Вы начинаете лизать раны на [limb.ru_plaintext_zone[PREPOSITIONAL] || limb.plaintext_zone] у [victim.declent_ru(GENITIVE)]..."), ignored_mobs=victim)
 	to_chat(victim, span_notice("[capitalize(user.declent_ru(NOMINATIVE))] начинает лизать раны на вашей [limb.ru_plaintext_zone[PREPOSITIONAL] || limb.plaintext_zone]."))
 	if(!do_after(user, base_treat_time, target = victim, extra_checks = CALLBACK(src, PROC_REF(still_exists))))
-		return
+		return FALSE
 
 	user.visible_message(span_notice("[capitalize(user.declent_ru(NOMINATIVE))] лижет раны на [limb.ru_plaintext_zone[PREPOSITIONAL] || limb.plaintext_zone] у [victim.declent_ru(GENITIVE)]."), span_notice("Вы лижете некоторые из ран на [limb.ru_plaintext_zone[PREPOSITIONAL] || limb.plaintext_zone] у [victim.declent_ru(GENITIVE)]"), ignored_mobs=victim)
 	to_chat(victim, span_green("[capitalize(user.declent_ru(NOMINATIVE))] лижет раны на вашей [limb.ru_plaintext_zone[PREPOSITIONAL] || limb.plaintext_zone]!"))
@@ -221,6 +230,8 @@
 		try_handling(user)
 	else if(demotes_to)
 		to_chat(user, span_green("Вы успешно снижаете тяжесть порезов у [user == victim_stored ? "себя" : victim_stored.declent_ru(GENITIVE)]."))
+
+	return TRUE
 
 /datum/wound/slash/flesh/adjust_blood_flow(adjust_by, minimum)
 	. = ..()

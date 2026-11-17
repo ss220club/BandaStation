@@ -2,3 +2,4 @@
 
 #include "code/nukeops.dm"
 #include "code/stealthy.dm"
+#include "code/role_restricted.dm"

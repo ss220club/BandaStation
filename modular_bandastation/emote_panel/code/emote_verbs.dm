@@ -53,6 +53,9 @@ GAME_VERB(/mob/living/carbon/human, emote_crack, "▷ Хрустеть паль�
 GAME_VERB(/mob/living/carbon/human, emote_clap, "▷ Хлопать", "Эмоции")
 	emote("clap", intentional = TRUE)
 
+GAME_VERB(/mob/living/carbon/human, emote_cane_tap, "▷ Стучать тростью", "Эмоции")
+	emote("cane_tap", intentional = TRUE)
+
 /// Action Emotes ///
 GAME_VERB(/mob/living/carbon/human, emote_collapse, "○ Рухнуть", "Эмоции")
 	emote("collapse", intentional = TRUE)

@@ -135,8 +135,8 @@
 
 	if(body_position == STANDING_UP)
 		var/damage_for_each_leg = round((incoming_damage / 2) * damage_softening_multiplier)
-		apply_damage(damage_for_each_leg, BRUTE, BODY_ZONE_L_LEG, wound_bonus = -2.5 * levels)
-		apply_damage(damage_for_each_leg, BRUTE, BODY_ZONE_R_LEG, wound_bonus = -2.5 * levels)
+		apply_damage(damage_for_each_leg, BRUTE, BODY_ZONE_L_LEG)
+		apply_damage(damage_for_each_leg, BRUTE, BODY_ZONE_R_LEG)
 	else
 		apply_damage(incoming_damage, BRUTE, spread_damage = TRUE)
 
@@ -268,10 +268,9 @@
 		if(borg.combat_mode && borg.stat != DEAD)
 			return TRUE
 	//anti-riot equipment is also anti-push
-	for(var/obj/item/I in M.held_items)
-		if(!isclothing(M))
-			if(prob(I.block_chance*2))
-				return
+	for(var/obj/item/I as anything in M.get_held_items())
+		if(!isclothing(M) && prob(I.block_chance*2))
+			return TRUE
 
 /mob/living/proc/can_mobswap_with(mob/other)
 	if (HAS_TRAIT(other, TRAIT_NOMOBSWAP) || HAS_TRAIT(src, TRAIT_NOMOBSWAP))
@@ -315,16 +314,16 @@
 
 /mob/living/get_photo_description(obj/item/camera/camera)
 	var/list/holding = list()
-	var/len = length(held_items)
-	if(len)
-		for(var/obj/item/held_item in held_items)
-			if(!holding.len)
-				holding += "[ru_p_they(TRUE)] держит [held_item.declent_ru(ACCUSATIVE)]"
-			else if(held_items.Find(held_item) == len)
-				holding += ", и [held_item.declent_ru(ACCUSATIVE)]"
-			else
-				holding += ", [held_item.declent_ru(ACCUSATIVE)]"
-	return "На фотографии также имеется [declent_ru(NOMINATIVE)][health < (maxHealth * 0.75) ? " и выглядит немного ранено":""][holding.len ? ". [holding.Join("")].":"."]"
+	var/list/held = get_held_items()
+	for(var/item_position in 1 to length(held))
+		var/obj/item/held_item = held[item_position]
+		if(!length(holding))
+			holding += "[ru_p_they(TRUE)] держит [held_item.declent_ru(ACCUSATIVE)]"
+		else if(item_position != length(held))
+			holding += ", и [held_item.declent_ru(ACCUSATIVE)]"
+		else
+			holding += ", и [held_item.declent_ru(ACCUSATIVE)]"
+	return "На фотографии также имеется [src] [declent_ru(NOMINATIVE)][health < (maxHealth * 0.75) ? ", и выглядит немного ранено":""][holding.len ? ". [holding.Join("")].":"."]"
 
 //Called when we bump onto an obj
 /mob/living/proc/ObjBump(obj/O)
@@ -529,8 +528,8 @@
 
 //mob verbs are a lot faster than object verbs
 //for more info on why this is not atom/pull, see examinate() in mob.dm
-GAME_VERB_CONTEXT(/mob/living, pulled, "Pull", "", null, /atom/movable)
-	VERB_ARG_TYPED(thing_pulled, VERB_ARG_TYPE_MOB | VERB_ARG_TYPE_OBJ, VERB_ARG_SOURCE_VIEW, /atom/movable)
+GAME_VERB_CONTEXT_RANGE(/mob/living, pulled, "Pull", "", null, /atom/movable, oview(1))
+	VERB_ARG_TYPED_RANGE(thing_pulled, VERB_ARG_TYPE_MOB | VERB_ARG_TYPE_OBJ, VERB_ARG_SOURCE_VIEW, /atom/movable, 1)
 	if(istype(thing_pulled) && Adjacent(thing_pulled))
 		start_pulling(thing_pulled)
 
@@ -565,7 +564,7 @@ GAME_VERB_HIDDEN(/mob/living, succumb, "succumb")
 			to_chat(src, span_warning("Вы не можете сдаться смерти! Эта жизнь продолжается."), type=MESSAGE_TYPE_INFO)
 			return
 	log_message("Has [whispered ? "whispered his final words" : "succumbed to death"] with [round(health, 0.1)] points of health!", LOG_ATTACK)
-	adjust_oxy_loss(health - HEALTH_THRESHOLD_DEAD)
+	adjust_oxy_loss(health - dead_threshold)
 	updatehealth()
 	if(!whispered)
 		to_chat(src, span_notice("Вы сдались и отдались смерти."))
@@ -632,7 +631,7 @@ GAME_VERB_PROC(/mob/living, mob_sleep, "Sleep", null)
  * * hand_firsts - boolean that checks the hands of the mob first if TRUE.
  */
 /mob/living/proc/get_idcard(hand_first)
-	if(!length(held_items)) //Early return for mobs without hands.
+	if(!can_hold_items()) //Early return for mobs without hands.
 		return
 	//Check hands
 	var/obj/item/held_item = get_active_held_item()
@@ -721,7 +720,7 @@ GAME_VERB_PROC(/mob/living, mob_sleep, "Sleep", null)
 	if(istype(potential_spine))
 		get_up_time *= potential_spine.athletics_boost_multiplier
 
-	if(!instant && !do_after(src, get_up_time, src, timed_action_flags = (IGNORE_USER_LOC_CHANGE|IGNORE_TARGET_LOC_CHANGE|IGNORE_HELD_ITEM), extra_checks = CALLBACK(src, TYPE_PROC_REF(/mob/living, rest_checks_callback)), interaction_key = DOAFTER_SOURCE_GETTING_UP, cog_icon = null))
+	if(!instant && !do_after(src, get_up_time, src, timed_action_flags = (IGNORE_USER_LOC_CHANGE|IGNORE_TARGET_LOC_CHANGE|IGNORE_HELD_ITEM|HIDE_INTERACTION), extra_checks = CALLBACK(src, TYPE_PROC_REF(/mob/living, rest_checks_callback)), interaction_key = DOAFTER_SOURCE_GETTING_UP))
 		return
 	if(resting || body_position == STANDING_UP || HAS_TRAIT(src, TRAIT_FLOORED))
 		return
@@ -1037,7 +1036,7 @@ GAME_VERB_PROC(/mob/living, mob_sleep, "Sleep", null)
 /mob/living/proc/can_be_revived()
 	if(HAS_TRAIT(src, TRAIT_NODEATH))
 		return TRUE
-	if(health > HEALTH_THRESHOLD_DEAD)
+	if(health > dead_threshold)
 		return TRUE
 	return FALSE
 
@@ -1356,7 +1355,7 @@ GAME_VERB_PROC(/mob/living, mob_sleep, "Sleep", null)
 	return
 
 /mob/living/can_hold_items(obj/item/I)
-	return ..() && HAS_TRAIT(src, TRAIT_CAN_HOLD_ITEMS) && usable_hands
+	return (mobility_flags & MOBILITY_PICKUP) && ..() && usable_hands
 
 /mob/living/can_perform_action(atom/target, action_bitflags)
 	if(!istype(target))
@@ -2030,6 +2029,93 @@ GLOBAL_LIST_EMPTY(fire_appearances)
 	user.visible_message(span_warning("[capitalize(user.declent_ru(NOMINATIVE))] подбирает [declent_ru(ACCUSATIVE)]!"))
 	user.put_in_hands(holder)
 
+/mob/living/update_sight()
+	if(!client)
+		return
+
+	if(stat == DEAD && !HAS_TRAIT(src, TRAIT_CORPSELOCKED))
+		if(SSmapping.level_trait(z, ZTRAIT_NOXRAY))
+			set_sight(NONE)
+		else if(is_secret_level(z))
+			set_sight(initial(sight))
+		else
+			set_sight(SEE_TURFS|SEE_MOBS|SEE_OBJS)
+		set_invis_see(SEE_INVISIBLE_OBSERVER)
+		return
+
+	var/new_sight = restore_initial_sight()
+
+	if(client.eye && client.eye != src)
+		var/atom/atom = client.eye
+		if(atom.update_remote_sight(src)) //returns TRUE if we override all other sight updates.
+			return ..() //still, call sync_lighting_plane_cutoff()
+
+	var/obj/item/organ/eyes/eyes = get_organ_slot(ORGAN_SLOT_EYES)
+	if(eyes)
+		set_invis_see(eyes.see_invisible)
+		if(!isnull(eyes.lighting_cutoff))
+			lighting_cutoff = eyes.lighting_cutoff
+		if(!isnull(eyes.color_cutoffs))
+			lighting_color_cutoffs = blend_cutoff_colors(lighting_color_cutoffs, eyes.color_cutoffs)
+
+	var/obj/item/clothing/glasses/glasses = get_item_by_slot(ITEM_SLOT_EYES)
+	if(istype(glasses) && (glasses.item_flags & IN_INVENTORY))
+		set_invis_see(glasses.invis_override || min(glasses.invis_view, see_invisible))
+		if(!isnull(glasses.lighting_cutoff))
+			lighting_cutoff = max(lighting_cutoff, glasses.lighting_cutoff)
+		if(length(glasses.color_cutoffs))
+			lighting_color_cutoffs = blend_cutoff_colors(lighting_color_cutoffs, glasses.color_cutoffs)
+
+	// An average (ranging from 1 to 100) of the lighting_color_cutoffs values.
+	// Used to avoid the hardcoded lighting cutoff from overly stacking with the more specific lighting color cutoffs from eyes and glasses
+	// (or innate in the case of some mobs), with the exception of night vision I guess.
+	var/avg_light_color_cutoff = (lighting_color_cutoffs[1] + lighting_color_cutoffs[2] + lighting_color_cutoffs[3]) / 3
+
+	if(HAS_TRAIT(src, TRAIT_MESON_VISION))
+		new_sight |= SEE_TURFS
+		lighting_cutoff = max(lighting_cutoff, LIGHTING_CUTOFF_REAL_LOW - avg_light_color_cutoff)
+
+	if(HAS_TRAIT(src, TRAIT_THERMAL_VISION))
+		new_sight |= SEE_MOBS
+		lighting_cutoff = max(lighting_cutoff, LIGHTING_CUTOFF_MEDIUM - avg_light_color_cutoff)
+
+	if(HAS_TRAIT(src, TRAIT_XRAY_VISION))
+		new_sight |= SEE_TURFS|SEE_MOBS|SEE_OBJS
+
+	if(HAS_TRAIT(src, TRAIT_MATERIAL_VISON))
+		new_sight |= SEE_OBJS
+
+	if(SSmapping.level_trait(z, ZTRAIT_NOXRAY))
+		new_sight = NONE
+
+	if(HAS_TRAIT(src, TRAIT_TRUE_NIGHT_VISION))
+		lighting_cutoff = max(lighting_cutoff, LIGHTING_CUTOFF_HIGH)
+
+	if(HAS_TRAIT(src, TRAIT_NIGHT_VISION))
+		lighting_cutoff = max(lighting_cutoff, LIGHTING_CUTOFF_LOW)
+
+	if(HAS_TRAIT(src, TRAIT_ECHOLOCATOR))
+		new_sight |= SEE_MOBS|SEE_TURFS
+		lighting_cutoff = max(lighting_cutoff, LIGHTING_CUTOFF_FULLBRIGHT)
+
+	set_sight(new_sight)
+	return ..()
+
+///Part of the [/mob/living/update_sight()] stack. This shouldn't be used outside of it.
+/mob/living/proc/restore_initial_sight()
+	SHOULD_CALL_PARENT(TRUE)
+	PROTECTED_PROC(TRUE)
+	set_invis_see(initial(see_invisible))
+	lighting_cutoff = initial(lighting_cutoff)
+	lighting_color_cutoffs = list(lighting_cutoff_red, lighting_cutoff_green, lighting_cutoff_blue)
+	var/init_sight = initial(sight)
+	//we cannot see mobs and/or objects unless we have thermals/xray/material vision, but we can still see turfs to navigate around
+	if(HAS_TRAIT(src, TRAIT_MOVE_VENTCRAWLING) && istype(loc, /obj/machinery/atmospherics))
+		init_sight |= SEE_TURFS|BLIND
+	//after the reset above, so handlers can tint the cutoffs
+	init_sight |= SEND_SIGNAL(src, COMSIG_LIVING_RESTORE_INITIAL_SIGHT)
+	return init_sight
+
 /mob/living/proc/mob_try_pickup(mob/living/user, instant=FALSE)
 	if(!ishuman(user) && (user.mob_size <= mob_size || user.num_hands == 0))
 		if (!user.num_hands)
@@ -2037,7 +2123,7 @@ GLOBAL_LIST_EMPTY(fire_appearances)
 		if (user.mob_size <= mob_size)
 			to_chat(user, span_warning("[src] is too big to pick up!"))
 			return
-	if(!user.get_empty_held_indexes())
+	if(!length(user.get_empty_held_indexes()))
 		to_chat(user, span_warning("Ваши руки заняты!"))
 		return FALSE
 	if(buckled)
@@ -2257,7 +2343,7 @@ GLOBAL_LIST_EMPTY(fire_appearances)
  * * amount (int) The amount of change from the base body temperature
  */
 /mob/living/proc/add_body_temperature_change(key_name, amount)
-	body_temp_changes["[key_name]"] = amount
+	LAZYSET(body_temp_changes, "[key_name]", amount)
 
 /**
  * remove_body_temperature_change Removes the modifications to the body temperature
@@ -2268,7 +2354,7 @@ GLOBAL_LIST_EMPTY(fire_appearances)
  * * key_name (str) The unique key for this change that will be removed
  */
 /mob/living/proc/remove_body_temperature_change(key_name)
-	body_temp_changes -= key_name
+	LAZYREMOVE(body_temp_changes, key_name)
 
 /**
  * get_body_temp_normal_change Returns the aggregate change to body temperature
@@ -2276,10 +2362,11 @@ GLOBAL_LIST_EMPTY(fire_appearances)
  * This aggregates all the changes in the body_temp_changes list and returns the result
  */
 /mob/living/proc/get_body_temp_normal_change()
+	if(!body_temp_changes)
+		return 0
 	var/total_change = 0
-	if(body_temp_changes.len)
-		for(var/change in body_temp_changes)
-			total_change += body_temp_changes["[change]"]
+	for(var/change in body_temp_changes)
+		total_change += body_temp_changes["[change]"]
 	return total_change
 
 /**
@@ -2619,7 +2706,7 @@ GLOBAL_LIST_EMPTY(fire_appearances)
 
 /mob/living/perform_hand_swap(held_index)
 	//safeguard for one-handed mobs lol
-	if(length(held_items) == 1)
+	if(get_num_hand_slots() == 1)
 		held_index = 1
 
 	return ..()

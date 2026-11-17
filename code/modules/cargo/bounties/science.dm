@@ -3,12 +3,12 @@
 	name = "Обнаруженные E.X.P.E.R.I-MENTORом девайсы"
 	description = "Пссс, слушайте. Не рассказывайте ассистентам, но мы урезаем им стоимость тех 'странных объектов', что они находят. Найдите одно такое устройство и обследуйте его с помощью E.X.P.E.R.I-MENTORа, после отправьте его нам."
 	reward = CARGO_CRATE_VALUE * 8
-	wanted_types = list(/obj/item/relic = TRUE)
+	wanted_types = list(/obj/item/assembly/relic = TRUE)
 
 /datum/bounty/item/science/relic/applies_to(obj/O)
 	if(!..())
 		return FALSE
-	var/obj/item/relic/experiment = O
+	var/obj/item/assembly/relic/experiment = O
 	if(experiment.activated)
 		return TRUE
 	return
