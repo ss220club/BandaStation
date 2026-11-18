@@ -76,7 +76,7 @@ function SoftwareButtons(props: SoftwareButtonsProps) {
             disabled={!!door_jack}
             icon="plug"
             onClick={() => act(currentSelection, { mode: DOOR_JACK.Cable })}
-            tooltip="Отсоедините кабель. Вставьте в совместимый шлюз."
+            tooltip="Выпустите кабель. Вставьте в совместимый шлюз."
           >
             Вытянуть провод
           </Button>
@@ -124,7 +124,8 @@ function SoftwareButtons(props: SoftwareButtonsProps) {
           <Button
             icon="camera-retro"
             onClick={() => act(currentSelection, { mode: PHOTO_MODE.Camera })}
-            tooltip="Включает камеру. Кликните по области, чтобы сделать снимок."
+            tooltip="Включает и выключает камеру. Кликните по области, чтобы
+            сделать снимок."
           >
             Камера
           </Button>

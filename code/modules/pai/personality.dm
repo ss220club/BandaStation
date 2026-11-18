@@ -19,7 +19,7 @@
 	WRITE_FILE(F["description"], description)
 	WRITE_FILE(F["comments"], comments)
 	WRITE_FILE(F["version"], 1)
-	to_chat(usr, span_boldnotice("Вы сохранили информацию о ПИИ локально."))
+	to_chat(usr, span_boldnotice("Вы сохранили информацию о пИИ локально."))
 	return TRUE
 
 // loads the savefile corresponding to the mob's ckey

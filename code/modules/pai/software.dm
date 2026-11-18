@@ -41,53 +41,53 @@
 		balloon_alert(ui.user, "программное обеспечение недоступно!")
 		return FALSE
 	switch(action)
-		if("Атмосферный датчик")
+		if("Atmospheric Sensor")
 			atmos_analyzer.attack_self(src)
 			return TRUE
-		if("Список членов экипажа")
+		if("Crew Manifest")
 			ai_roster()
 			return TRUE
-		if("Монитор экипажа")
+		if("Crew Monitor")
 			crew_monitor.attack_self(src) // BANDASTATION REPLACEMENT: GLOB.crewmonitor.show(usr, src)
 			return TRUE
-		if("Цифровой мессенджер")
+		if("Digital Messenger")
 			modularInterface?.interact(usr)
 			return TRUE
-		if("Дверной взломщик")
+		if("Door Jack")
 			// Look to door_jack.dm for implementation
 			door_jack(params["mode"])
 			return TRUE
-		if("Слот для ключа шифрования")
+		if("Encryption Slot")
 			balloon_alert(usr, "радиочастоты [!encrypt_mod ? "включены" : "отключены"]")
 			encrypt_mod = !encrypt_mod
 			radio.subspace_transmission = !radio.subspace_transmission
 			return TRUE
-		if("Сканирование хоста")
+		if("Host Scan")
 			host_scan(params["mode"])
 			return TRUE
-		if("Встроенный GPS")
+		if("Internal GPS")
 			internal_gps.attack_self(src)
 			return TRUE
-		if("Музыкальный синтезатор")
+		if("Music Synthesizer")
 			instrument.interact(src)
 			return TRUE
-		if("Медицинский ИЛС")
+		if("Medical HUD")
 			toggle_hud(PAI_TOGGLE_MEDICAL_HUD)
 			return TRUE
-		if("Ведущий новостей")
+		if("Newscaster")
 			newscaster.ui_interact(src)
 			return TRUE
-		if("Модуль фотографии")
+		if("Photography Module")
 			// Look to pai_camera.dm for implementation
 			use_camera(usr, params["mode"])
 			return TRUE
-		if("Удаленный сигнализатор")
+		if("Remote Signaler")
 			signaler.ui_interact(src)
 			return TRUE
-		if("Охранный ИЛС")
+		if("Security HUD")
 			toggle_hud(PAI_TOGGLE_SECURITY_HUD)
 			return TRUE
-		if("Универсальный переводчик")
+		if("Universal Translator")
 			grant_languages()
 			ui.send_full_update()
 			return TRUE
@@ -112,23 +112,23 @@
 	var/datum/hud/pai/pAIhud = hud_used
 	pAIhud?.update_software_buttons()
 	switch(selection)
-		if("Атмосферный датчик")
+		if("Atmospheric Sensor")
 			atmos_analyzer = new(src)
-		if("Цифровой мессенджер")
+		if("Digital Messenger")
 			create_modularInterface()
-		if("Встроенный GPS")
+		if("Internal GPS")
 			internal_gps = new(src)
-		if("Музыкальный синтезатор")
+		if("Music Synthesizer")
 			instrument = new(src)
-		if("Ведущий новостей")
+		if("Newscaster")
 			newscaster = new(src)
 		// BANDASTATION EDIT START
-		if("Монитор экипажа")
+		if("Crew Monitor")
 			crew_monitor = new(src)
 		// BANDASTATION EDIT END
-		if("Модуль фотографии")
+		if("Photography Module")
 			aicamera = new /obj/item/camera/siliconcam/pai_camera(src)
-		if("Удаленный сигнализатор")
+		if("Remote Signaler")
 			signaler = new(src)
 	return TRUE
 
@@ -176,7 +176,7 @@
 		balloon_alert(src, "ДНК не обнаружено!")
 		return FALSE
 	to_chat(src, span_bolddanger(("UE-строка [holder]: [holder.dna.unique_enzymes]")))
-	to_chat(src, span_notice("ДНК [holder.dna.unique_enzymes == master_dna ? "совпадение" : "не соответствует"] сохраненной ДНК мастера."))
+	to_chat(src, span_notice("ДНК [holder.dna.unique_enzymes == master_dna ? "совпадает с" : "не соответствует"] сохраненной ДНК мастера."))
 	return TRUE
 
 /**

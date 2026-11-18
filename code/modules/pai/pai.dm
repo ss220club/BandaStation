@@ -83,21 +83,21 @@
 	// Static lists
 	/// List of all available downloads
 	var/static/list/available_software = list(
-		"Атмосферный датчик" = 5,
-		"Список членов экипажа" = 5,
-		"Цифровой мессенджер" = 5,
-		"Модуль фотографии" = 5,
-		"Слот для ключа шифрования" = 10,
-		"Музыкальный синтезатор" = 10,
-		"Ведущий новостей" = 10,
-		"Удаленный сигнализатор" = 10,
-		"Сканирование хоста" = 20,
-		"Медицинский ИЛС" = 20,
-		"Охранный ИЛС" = 20,
-		"Монитор экипажа" = 35,
-		"Дверной взломщик" = 35,
-		"Встроенный GPS" = 35,
-		"Универсальный переводчик" = 35,
+		"Atmospheric Sensor" = 5,
+		"Crew Manifest" = 5,
+		"Digital Messenger" = 5,
+		"Photography Module" = 5,
+		"Encryption Slot" = 10,
+		"Music Synthesizer" = 10,
+		"Newscaster" = 10,
+		"Remote Signaler" = 10,
+		"Host Scan" = 20,
+		"Medical HUD" = 20,
+		"Security HUD" = 20,
+		"Crew Monitor" = 35,
+		"Door Jack" = 35,
+		"Internal GPS" = 35,
+		"Universal Translator" = 35,
 	)
 	/// List of all possible chasises. TRUE means the pAI can be picked up in this chasis.
 	var/static/list/possible_chassis = list(
@@ -159,10 +159,10 @@
 	location.visible_message(span_danger(get_visible_suicide_message()), null, span_hear(get_blind_suicide_message())) // null in the second arg here because we're sending from the turf
 
 /mob/living/silicon/pai/get_visible_suicide_message()
-	return "На экране [src.declent_ru(GENITIVE)] высвечивается сообщение: \"Удаление основных файлов. Пожалуйста, загрузите новую личность, чтобы продолжать пользоваться функциями устройства ПИИ.\""
+	return "На экране [src.declent_ru(GENITIVE)] высвечивается сообщение: \"Удаление основных файлов. Пожалуйста, загрузите новую личность, чтобы продолжать пользоваться функциями устройства пИИ.\""
 
 /mob/living/silicon/pai/get_blind_suicide_message()
-	return "[capitalize(src.declent_ru(NOMINATIVE))] издает электронный сигнал."
+	return "[capitalize(src.declent_ru(NOMINATIVE))] издаёт электронный сигнал."
 
 /mob/living/silicon/pai/emag_act(mob/user)
 	return handle_emag(user)
@@ -266,7 +266,7 @@
 	SEND_SIGNAL(src, COMSIG_LIVING_HEALTH_UPDATE)
 
 /mob/living/silicon/pai/update_desc(updates)
-	desc = "Голографический аватар из твердого света, представляющий собой ПИИ. В данном случае он выглядит как [chassis]."
+	desc = "Голографический аватар из твёрдого света, представляющий собой пИИ. В данном случае он выглядит как [chassis]."
 	return ..()
 
 /mob/living/silicon/pai/update_icon_state()

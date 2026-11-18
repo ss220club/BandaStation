@@ -236,7 +236,7 @@
 	if(pai)
 		return FALSE
 	if(!(GLOB.ghost_role_flags & GHOSTROLE_SILICONS))
-		balloon_alert(user, "недоступно: занесен в чёрный список НТ")
+		balloon_alert(user, "недоступно: занесён в чёрный список НТ")
 		return FALSE
 	if(request_spam)
 		balloon_alert(user, "запрос отправлен слишком часто")

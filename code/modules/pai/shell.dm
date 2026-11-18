@@ -1,6 +1,6 @@
 /mob/living/silicon/pai/mob_try_pickup(mob/living/user, instant=FALSE)
 	if(!possible_chassis[chassis])
-		to_chat(user, span_warning("[src]'s current form isn't able to be carried!"))
+		to_chat(user, span_warning("Текущая форма [src.declent_ru(GENITIVE)] не может быть перенесена!"))
 		return FALSE
 	return ..()
 
@@ -11,14 +11,14 @@
 	. = ..()
 	update_appearance(UPDATE_ICON_STATE)
 	if(loc != card)
-		visible_message(span_notice("[src] [resting? "lays down for a moment..." : "perks up from the ground."]"))
+		visible_message(span_notice("[src.declent_ru(NOMINATIVE)] [resting? "ложится на мгновение..." : "поднимается с земли."]"))
 
 /mob/living/silicon/pai/wabbajack(what_to_randomize, change_flags = WABBAJACK)
 	if(length(possible_chassis) < 2)
 		return FALSE
 	var/holochassis = pick(possible_chassis - chassis)
 	set_holochassis(holochassis)
-	balloon_alert(src, "[holochassis] composite engaged")
+	balloon_alert(src, "композит [holochassis.declent_ru(GENITIVE)] включён")
 	return TRUE
 
 /**
@@ -35,7 +35,7 @@
 	if(get_turf(src) != get_turf(anchor))
 		return FALSE
 	if(!isturf(loc) && loc != card)
-		balloon_alert(src, "can't do that here")
+		balloon_alert(src, "невозможно сделать")
 		return FALSE
 	return TRUE
 
@@ -56,7 +56,7 @@
 	if(!choice)
 		return FALSE
 	set_holochassis(choice)
-	balloon_alert(src, "[choice] композит включён")
+	balloon_alert(src, "композит [choice.declent_ru(GENITIVE)] включён")
 	update_resting()
 	return TRUE
 

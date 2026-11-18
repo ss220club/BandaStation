@@ -17,7 +17,7 @@ export function DirectiveDisplay(props) {
   const { directives = [], master_name } = data;
   const displayedLaw = directives?.length
     ? decodeHtmlEntities(directives[0])
-    : 'Отсуствуют.';
+    : 'Отсутствуют.';
 
   return (
     <Stack fill vertical>
@@ -34,7 +34,7 @@ export function DirectiveDisplay(props) {
       <Stack.Item grow>
         <Section fill scrollable title="Директивы">
           {!master_name ? (
-            'Отсуствуют.'
+            'Отсутствуют.'
           ) : (
             <LabeledList>
               <LabeledList.Item label="Основная">

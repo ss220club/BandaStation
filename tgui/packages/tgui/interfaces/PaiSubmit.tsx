@@ -18,7 +18,7 @@ const PAI_DESCRIPTION = `Персональные ИИ - это продвину
 
 const PAI_RULES = `От вас ожидается в определённой степени участие в ролевой
 игре. Имейте в виду: если вы не укажете свои данные, вас могут не выбрать.
-Нажмите «ОТПРАВИТЬ», чтобы уведомить ПИИ‑карты о вашей кандидатуре.`;
+Нажмите «ОТПРАВИТЬ», чтобы уведомить пИИ‑карты о вашей кандидатуре.`;
 
 export const PaiSubmit = (props) => {
   const { data } = useBackend<Data>();
@@ -120,7 +120,7 @@ const ButtonsDisplay = (props) => {
         <Stack.Item>
           <Button
             onClick={() => act('save', { comments, description, name })}
-            tooltip="Локально сохраняет данные о ваших кандидатах."
+            tooltip="Локально сохраняет данные вашей кандидатуры."
           >
             СОХРАНИТЬ
           </Button>
@@ -150,7 +150,7 @@ const ButtonsDisplay = (props) => {
         <Stack.Item>
           <Button
             onClick={() => act('withdraw')}
-            tooltip="Отзывает вашу кандидатуру ПИИ, при наличии."
+            tooltip="Отзывает вашу кандидатуру пИИ, при наличии."
           >
             ОТОЗВАТЬ
           </Button>
