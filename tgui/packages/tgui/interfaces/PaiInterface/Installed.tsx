@@ -69,7 +69,7 @@ function SoftwareButtons(props: SoftwareButtonsProps) {
   const { door_jack, languages, master_name } = data;
 
   switch (currentSelection) {
-    case 'Дверной взломщик':
+    case 'Door Jack':
       return (
         <>
           <Button
@@ -98,7 +98,7 @@ function SoftwareButtons(props: SoftwareButtonsProps) {
           </Button>
         </>
       );
-    case 'Сканирование хоста':
+    case 'Host Scan':
       return (
         <>
           <Button
@@ -118,7 +118,7 @@ function SoftwareButtons(props: SoftwareButtonsProps) {
           </Button>
         </>
       );
-    case 'Модуль фотографии':
+    case 'Photography Module':
       return (
         <>
           <Button
@@ -145,7 +145,7 @@ function SoftwareButtons(props: SoftwareButtonsProps) {
           </Button>
         </>
       );
-    case 'Универсальный переводчик':
+    case 'Universal Translator':
       return (
         <Button
           icon="download"

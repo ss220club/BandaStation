@@ -18,7 +18,7 @@
 		return FALSE
 	var/holochassis = pick(possible_chassis - chassis)
 	set_holochassis(holochassis)
-	balloon_alert(src, "композит [holochassis.declent_ru(GENITIVE)] включён")
+	balloon_alert(src, "композит [declent_ru_initial(holochassis, GENITIVE, holochassis)] включён")
 	return TRUE
 
 /**
@@ -56,7 +56,7 @@
 	if(!choice)
 		return FALSE
 	set_holochassis(choice)
-	balloon_alert(src, "композит [choice.declent_ru(GENITIVE)] включён")
+	balloon_alert(src, "композит [declent_ru_initial(choice, GENITIVE, choice)] включён")
 	update_resting()
 	return TRUE
 
