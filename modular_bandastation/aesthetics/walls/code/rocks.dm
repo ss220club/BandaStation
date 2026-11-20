@@ -1,8 +1,3 @@
-#define CONTRASTLESS_ROCKS 'modular_bandastation/aesthetics/walls/icons/rocks/contrastless_rocks.dmi'
-#define CONTRAST_ROCKS 'modular_bandastation/aesthetics/walls/icons/rocks/contrast_rocks.dmi'
-#define DEFAULT_ROCKS 'modular_bandastation/aesthetics/walls/icons/rocks/default_rocks.dmi'
-#define MAPPING_ROCKS 'modular_bandastation/aesthetics/walls/icons/rocks/mapping_rocks.dmi'
-
 #define rock_color(color) MAP_SWITCH(color, null)
 #define rock_icon_state(state) MAP_SWITCH("smoothrocks-0", state)
 #define ROCK_COLOR "#464646"
@@ -135,11 +130,6 @@
 	icon_state = rock_icon_state("icerock2")
 	base_icon_state = "smoothrocks"
 	color = rock_color(ROCK_COLOR_ICE)
-
-#undef CONTRASTLESS_ROCKS
-#undef CONTRAST_ROCKS
-#undef DEFAULT_ROCKS
-#undef MAPPING_ROCKS
 
 #undef rock_color
 #undef ROCK_COLOR

@@ -36,3 +36,13 @@
 
 #define SQUASH_WITH_HANDS_DELAY 1.5 SECONDS
 #define RCD_NO_SKILLCHIP_DELAY_MULTIPLIER 1.5
+
+#define AWAYSTART_WILD_WEST "AWAYSTART_WILD_WEST"
+#define FACTION_WILD_WEST "wild_west"
+
+#define CONTRASTLESS_ROCKS 'modular_bandastation/aesthetics/walls/icons/rocks/contrastless_rocks.dmi'
+#define CONTRAST_ROCKS 'modular_bandastation/aesthetics/walls/icons/rocks/contrast_rocks.dmi'
+#define DEFAULT_ROCKS 'modular_bandastation/aesthetics/walls/icons/rocks/default_rocks.dmi'
+#define MAPPING_ROCKS 'modular_bandastation/aesthetics/walls/icons/rocks/mapping_rocks.dmi'
+
+#define isshadow(A) (is_species(A, /datum/species/shadow))
