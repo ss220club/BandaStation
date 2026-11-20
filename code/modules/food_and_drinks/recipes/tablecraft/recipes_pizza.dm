@@ -41,6 +41,8 @@
 		/obj/item/food/grown/mushroom = 5,
 		/obj/item/food/cheese/wedge = 1,
 	)
+	dish_category = DISH_MUSHROOM // BANDASTATION ADDITION
+	added_foodtypes = parent_type::added_foodtypes|MUSHROOM // BANDASTATION ADDITION
 	result = /obj/item/food/pizza/mushroom/raw
 	unit_test_spawn_extras = list(/obj/item/food/grown/mushroom/chanterelle = 5) //generic mushrooms
 

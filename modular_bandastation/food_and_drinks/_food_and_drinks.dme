@@ -1,3 +1,8 @@
 #include "_food_and_drinks.dm"
 
-#include "code/drinks.dm"
+#include "food/skrell.dm"
+#include "recipes/drinks/drinks.dm"
+#include "recipes/drinks/drinks_skrell.dm"
+#include "recipes/tablecraft/recipes_skrell.dm"
+#include "recipes/tablecraft/recipes_guide.dm"
+#include "recipes/soup_guide.dm"

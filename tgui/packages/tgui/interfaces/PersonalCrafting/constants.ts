@@ -24,6 +24,7 @@ export const TYPE_ICONS = {
   [Food.Sugar]: 'candy-cane',
   [Food.Toxic]: 'biohazard',
   [Food.Vegetables]: 'carrot',
+  [Food.Mushroom]: 'cloud-meatball',
 } as const;
 
 export const CATEGORY_ICONS_CRAFTING = {
@@ -70,6 +71,7 @@ export const CATEGORY_ICONS_COOKING = {
   Meat: 'bacon',
   Mexican: 'earth-americas',
   Mothic: 'shirt',
+  Skrell: 'frog',
   Noodles: 'wheat-awn',
   Pastry: 'cookie',
   Pie: 'chart-pie',
@@ -86,6 +88,7 @@ export const CATEGORY_ICONS_COOKING = {
   Breakfast: 'sun',
   Snack: 'compress',
   Condiment: 'bottle-water',
+  Mushroom: 'cloud-meatball',
 } as const;
 
 // BANDASTATION EDIT START
@@ -112,6 +115,7 @@ export const TYPE_NAMES = {
   [Food.Sugar]: 'Сахарное',
   [Food.Toxic]: 'Токсичное',
   [Food.Vegetables]: 'Овощи',
+  [Food.Mushroom]: 'Грибное',
 } as const;
 
 export const CATEGORY_NAMES = {
@@ -146,6 +150,7 @@ export const CATEGORY_NAMES = {
   'Mexican Food': 'Мексиканская кухня',
   'Misc. Food': 'Прочее',
   'Mothic Food': 'Молиная кухня',
+  'Skrell Food': 'Скреллианская кухня',
   Pastries: 'Кондитерские изделия',
   Pies: 'Пироги',
   Pizzas: 'Пиццы',
@@ -155,5 +160,6 @@ export const CATEGORY_NAMES = {
   Soups: 'Супы',
   Spaghettis: 'Спагетти',
   'Martian Food': 'Марсианская кухня',
+  Mushroom: 'Грибное',
 } as const;
 // BANDASTATION EDIT END
