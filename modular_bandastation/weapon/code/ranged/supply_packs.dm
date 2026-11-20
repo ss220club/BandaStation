@@ -25,8 +25,8 @@
 	cost = CARGO_CRATE_VALUE * 6
 	access_view = ACCESS_SECURITY
 	contains = list(
-		/obj/item/ammo_box/magazine/c9x25mm_pistol = 2,
-		/obj/item/ammo_box/magazine/c9x25mm_pistol/rubber = 2,
+		/obj/item/ammo_box/magazine/c9x25mm_pistol/sec_force = 2,
+		/obj/item/ammo_box/magazine/c9x25mm_pistol/sec_force/rubber = 2,
 		/obj/item/ammo_box/c9x25mm = 1,
 		/obj/item/ammo_box/c9x25mm/rubber = 1,
 	)
@@ -38,8 +38,8 @@
 	cost = CARGO_CRATE_VALUE * 8
 	access_view = ACCESS_SECURITY
 	contains = list(
-		/obj/item/ammo_box/magazine/c9x25mm_pistol/ap = 2,
-		/obj/item/ammo_box/magazine/c9x25mm_pistol/hp = 2,
+		/obj/item/ammo_box/magazine/c9x25mm_pistol/sec_force/ap = 2,
+		/obj/item/ammo_box/magazine/c9x25mm_pistol/sec_force/hp = 2,
 		/obj/item/ammo_box/c9x25mm/ap = 1,
 		/obj/item/ammo_box/c9x25mm/hp = 1,
 	)

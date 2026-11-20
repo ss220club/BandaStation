@@ -9,6 +9,7 @@
 	lock_back_sound = 'sound/items/weapons/gun/pistol/slide_lock.ogg'
 	bolt_drop_sound = 'sound/items/weapons/gun/pistol/slide_drop.ogg'
 	accepted_magazine_type = /obj/item/ammo_box/magazine/c9x25mm_pistol
+	spawn_magazine_type = /obj/item/ammo_box/magazine/c9x25mm_pistol/sec_force
 	special_mags = TRUE
 	suppressor_x_offset = 4
 	suppressor_y_offset = -1
@@ -17,6 +18,15 @@
 /obj/item/gun/ballistic/automatic/pistol/gp9/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/reskinable_item, /datum/atom_skin/gp9)
+
+/obj/item/gun/ballistic/automatic/pistol/gp9/update_overlays()
+	. = ..()
+	if(!mag_display || internal_magazine || !special_mags || !istype(magazine, /obj/item/ammo_box/magazine/c9x25mm_pistol/sec_force))
+		return
+	// Shared 12-round magazines use the existing standard-magazine art on every GP-9 skin.
+	var/standard_mag_icon = /obj/item/ammo_box/magazine/c9x25mm_pistol::icon_state
+	. -= "[icon_state]_mag_[initial(magazine.icon_state)]"
+	. += "[icon_state]_mag_[standard_mag_icon]"
 
 /obj/item/gun/ballistic/automatic/pistol/gp9/add_seclight_point()
 	AddComponent(\
@@ -39,7 +49,7 @@
 	spawnwithmagazine = FALSE
 
 /obj/item/gun/ballistic/automatic/pistol/gp9/sec
-	spawn_magazine_type = /obj/item/ammo_box/magazine/c9x25mm_pistol/rubber
+	spawn_magazine_type = /obj/item/ammo_box/magazine/c9x25mm_pistol/sec_force/rubber
 
 /datum/atom_skin/gp9
 	abstract_type = /datum/atom_skin/gp9

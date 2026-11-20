@@ -305,8 +305,10 @@
 		log_hit_combat(throwingdatum?.get_thrower(), thrown_item)
 		return ..()
 
-	visible_message(span_danger("[capitalize(thrown_item.declent_ru(NOMINATIVE))] врезается в [declent_ru(ACCUSATIVE)]!"),
-		span_userdanger("В вас врезается [thrown_item.declent_ru(NOMINATIVE)]!"))
+	// BANDASTATION EDIT START - Item-specific messages keep the standard thrown-hit checks.
+	visible_message(span_danger(thrown_item.get_throw_hit_message(src)),
+		span_userdanger(thrown_item.get_throw_hit_message(src, victim_message = TRUE)))
+	// BANDASTATION EDIT END
 	if(!thrown_item.throwforce)
 		log_hit_combat(throwingdatum?.get_thrower(), thrown_item)
 		return
