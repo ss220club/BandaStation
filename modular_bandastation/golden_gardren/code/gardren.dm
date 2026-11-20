@@ -7,8 +7,9 @@
  * Event-only: spawned by admins, not buildable.
  */
 /obj/vehicle/sealed/mecha/gardren
+	parent_type = /obj/vehicle/sealed/mecha/golden_gardren_base
 	name = "\improper Gardren"
-	desc = "Массивный экзокостюм ближнего боя с золочёной бронёй и огромными кулаками. Сверху виден стыковочный люк."
+	desc = "Экзокостюм ближнего боя с усиленными кулаками, массивными наплечниками и стыковочным узлом."
 	icon = 'modular_bandastation/golden_gardren/icons/gardren.dmi'
 	icon_state = "gardren"
 	base_icon_state = "gardren"
@@ -43,7 +44,6 @@
 	. = ..()
 	AddComponent(/datum/component/golden_gardren_phasing)
 	AddComponent(/datum/component/golden_gardren_fist)
-	AddComponent(/datum/component/golden_gardren_ejection)
 
 /obj/vehicle/sealed/mecha/gardren/populate_parts()
 	cell = new /obj/item/stock_parts/power_store/cell/bluespace(src)
@@ -62,9 +62,6 @@
 
 /obj/vehicle/sealed/mecha/gardren/remove_occupant(mob/driver)
 	. = ..()
-	// A pilot leaving during the ejection countdown takes no landing choice or marker with them.
-	var/datum/component/golden_gardren_ejection/ejection = GetComponent(/datum/component/golden_gardren_ejection)
-	ejection?.clear_landing_choice(driver)
 	// Nobody left at the controls to hold the fist shut.
 	if(!return_amount_of_controllers_with_flag(VEHICLE_CONTROL_MELEE))
 		golden_gardren_release_fist(src)
@@ -72,19 +69,6 @@
 /obj/vehicle/sealed/mecha/gardren/user_unbuckle_mob(mob/living/buckled_mob, mob/user)
 	if(golden_gardren_fist_intercept_unbuckle(src, buckled_mob, user))
 		return null
-	return ..()
-
-/// While the ejection countdown runs, the pilot's click picks the landing turf instead of punching or shooting.
-/obj/vehicle/sealed/mecha/gardren/on_mouseclick(mob/user, atom/target, list/modifiers)
-	var/datum/component/golden_gardren_ejection/ejection = GetComponent(/datum/component/golden_gardren_ejection)
-	if(ejection?.handle_click(user, target))
-		return COMSIG_MOB_CANCEL_CLICKON
-	return ..()
-
-/// Fires the pilot clear of the wreck in a capsule before the base destruction handles what is left.
-/obj/vehicle/sealed/mecha/gardren/atom_destruction(damage_flag)
-	var/datum/component/golden_gardren_ejection/ejection = GetComponent(/datum/component/golden_gardren_ejection)
-	ejection?.eject()
 	return ..()
 
 /obj/structure/mecha_wreckage/gardren

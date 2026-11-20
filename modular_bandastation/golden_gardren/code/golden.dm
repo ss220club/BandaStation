@@ -6,8 +6,9 @@
  * Event-only: spawned by admins, not buildable.
  */
 /obj/vehicle/sealed/mecha/golden
+	parent_type = /obj/vehicle/sealed/mecha/golden_gardren_base
 	name = "\improper Golden"
-	desc = "Маленький быстрый экзокостюм-стрелок с округлой кабиной, широким визором и спаренными стволами."
+	desc = "Маленький быстрый экзокостюм-стрелок с широким визором и антенной на плече."
 	icon = 'modular_bandastation/golden_gardren/icons/golden.dmi'
 	icon_state = "golden"
 	base_icon_state = "golden"
@@ -41,7 +42,6 @@
 /obj/vehicle/sealed/mecha/golden/Initialize(mapload, built_manually)
 	. = ..()
 	AddComponent(/datum/component/golden_gardren_shield)
-	AddComponent(/datum/component/golden_gardren_ejection)
 
 /obj/vehicle/sealed/mecha/golden/populate_parts()
 	cell = new /obj/item/stock_parts/power_store/cell/bluespace(src)
@@ -58,25 +58,9 @@
 
 /obj/vehicle/sealed/mecha/golden/remove_occupant(mob/driver)
 	. = ..()
-	// A pilot leaving during the ejection countdown takes no landing choice or marker with them.
-	var/datum/component/golden_gardren_ejection/ejection = GetComponent(/datum/component/golden_gardren_ejection)
-	ejection?.clear_landing_choice(driver)
 	// Without an operator the shield cannot be held.
 	var/datum/component/golden_gardren_shield/shield = GetComponent(/datum/component/golden_gardren_shield)
 	shield?.drop_if_unmanned()
-
-/// While the ejection countdown runs, the pilot's click picks the landing turf instead of shooting.
-/obj/vehicle/sealed/mecha/golden/on_mouseclick(mob/user, atom/target, list/modifiers)
-	var/datum/component/golden_gardren_ejection/ejection = GetComponent(/datum/component/golden_gardren_ejection)
-	if(ejection?.handle_click(user, target))
-		return COMSIG_MOB_CANCEL_CLICKON
-	return ..()
-
-/// Fires the pilot clear of the wreck in a capsule before the base destruction handles what is left.
-/obj/vehicle/sealed/mecha/golden/atom_destruction(damage_flag)
-	var/datum/component/golden_gardren_ejection/ejection = GetComponent(/datum/component/golden_gardren_ejection)
-	ejection?.eject()
-	return ..()
 
 /// The shield soaks brute and burn damage from its own charge before it reaches the hull.
 /obj/vehicle/sealed/mecha/golden/take_damage(damage_amount, damage_type = BRUTE, damage_flag = "", sound_effect = TRUE, attack_dir, armour_penetration = 0)

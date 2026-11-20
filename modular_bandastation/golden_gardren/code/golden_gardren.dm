@@ -10,6 +10,7 @@
  * Event-only: spawned by admins or formed from the pair, not buildable.
  */
 /obj/vehicle/sealed/mecha/golden_gardren
+	parent_type = /obj/vehicle/sealed/mecha/golden_gardren_base
 	name = "\improper Golden-Gardren"
 	desc = "Громадная боевая машина: Голден сидит в люке Гардрена, как голова на плечах, и возвышается над обычными мехами. Управляется двумя пилотами."
 	icon = 'modular_bandastation/golden_gardren/icons/golden_gardren.dmi'
@@ -64,7 +65,6 @@
 	// The shield sprite is drawn for a regular mech, so it is stretched over the 48x48 frame.
 	AddComponent(/datum/component/golden_gardren_shield, 1.5, 8, 12)
 	AddComponent(/datum/component/golden_gardren_phasing)
-	AddComponent(/datum/component/golden_gardren_ejection)
 	// The bigger frame holds things further out in front of it.
 	AddComponent(/datum/component/golden_gardren_fist, 20)
 
@@ -131,9 +131,6 @@
 
 /obj/vehicle/sealed/mecha/golden_gardren/remove_occupant(mob/driver)
 	. = ..()
-	// A pilot leaving during the ejection countdown takes no landing choice or marker with them.
-	var/datum/component/golden_gardren_ejection/ejection = GetComponent(/datum/component/golden_gardren_ejection)
-	ejection?.clear_landing_choice(driver)
 	drop_unmanned_systems()
 
 /// Each seat may only use its own part of the mech panel: weapons belong to the weapons seat, settings to the main seat.
@@ -162,19 +159,6 @@
 		log_message("Integrity critical.", LOG_MECHA)
 		to_chat(occupants, span_userdanger("КРИТИЧЕСКИЕ ПОВРЕЖДЕНИЯ! Корпус вот-вот разрушится — готовьтесь к аварийному катапультированию."))
 		playsound(src, 'sound/machines/warning-buzzer.ogg', 75, FALSE)
-
-/// Throws the pilots clear of the wreck before the base destruction handles what is left.
-/obj/vehicle/sealed/mecha/golden_gardren/atom_destruction(damage_flag)
-	var/datum/component/golden_gardren_ejection/ejection = GetComponent(/datum/component/golden_gardren_ejection)
-	ejection?.eject()
-	return ..()
-
-/// While the ejection countdown runs, a pilot's click picks the landing turf instead of punching or shooting.
-/obj/vehicle/sealed/mecha/golden_gardren/on_mouseclick(mob/user, atom/target, list/modifiers)
-	var/datum/component/golden_gardren_ejection/ejection = GetComponent(/datum/component/golden_gardren_ejection)
-	if(ejection?.handle_click(user, target))
-		return COMSIG_MOB_CANCEL_CLICKON
-	return ..()
 
 /obj/vehicle/sealed/mecha/golden_gardren/user_unbuckle_mob(mob/living/buckled_mob, mob/user)
 	if(golden_gardren_fist_intercept_unbuckle(src, buckled_mob, user))
