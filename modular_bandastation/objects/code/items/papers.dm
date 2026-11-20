@@ -1,7 +1,7 @@
 // MARK: Papers
 /obj/item/paper/fine_notice
 	name = "fine notice"
-	desc = "Розовый талон с уведомлением о штрафе СБ."
+	desc = "Письмо счастья! Счастье поступит на счёт СБ после оплаты."
 	icon = 'modular_bandastation/objects/icons/items/fine_notice.dmi'
 	icon_state = "fine_notice"
 	lefthand_file = 'modular_bandastation/objects/icons/items/fine_notice_lefthand.dmi'
