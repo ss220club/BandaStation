@@ -17,10 +17,20 @@ jobs:
   merge_hold:
     runs-on: ubuntu-slim
     steps:
+      - name: Check GitHub App configuration
+        env:
+          HAS_APP_ID: ${{ (vars.APP_CLIENT_ID || secrets.APP_ID) != '' }}
+          HAS_PRIVATE_KEY: ${{ secrets.PRIVATE_KEY != '' }}
+        run: |
+          if [[ "$HAS_APP_ID" != true || "$HAS_PRIVATE_KEY" != true ]]; then
+            echo "::error::Merge Hold requires the Actions variable APP_CLIENT_ID (or legacy secret APP_ID) and the Actions secret PRIVATE_KEY."
+            exit 1
+          fi
+
       - id: create_token
         uses: actions/create-github-app-token@v3.3.0
         with:
-          app-id: ${{ secrets.APP_ID }}
+          client-id: ${{ vars.APP_CLIENT_ID || secrets.APP_ID }}
           private-key: ${{ secrets.PRIVATE_KEY }}
           permission-pull-requests: write
 
