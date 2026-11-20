@@ -1,3 +1,5 @@
 #include "_customization.dm"
 
 #include "code/sprite_accessories/hair.dm"
+#include "code/hair_paint.dm"
+#include "code/hair_paint_editor.dm"

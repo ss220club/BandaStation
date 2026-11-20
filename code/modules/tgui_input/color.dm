@@ -7,8 +7,9 @@
  * * title - The of the picker modal, shown on the top of the TGUI window.
  * * timeout - The timeout of the picker, after which the modal will close and qdel itself. Set to zero for no timeout.
  * * autofocus - The bool that controls if this picker should grab window focus.
+ * * theme - Optional TGUI theme; existing callers retain the generic theme. BANDASTATION ADDITION
  */
-/proc/tgui_color_picker(mob/user, message, title, default = "#000000", timeout = 0, autofocus = TRUE)
+/proc/tgui_color_picker(mob/user, message, title, default = "#000000", timeout = 0, autofocus = TRUE, theme = "generic") // BANDASTATION EDIT - Caller-selected theme
 	if (!user)
 		user = usr
 	if (!istype(user))
@@ -20,7 +21,7 @@
 	// Client does NOT have tgui_input on: Returns regular input
 	if(!user.client.prefs.read_preference(/datum/preference/toggle/tgui_input))
 		return input(user, message, title, default) as color|null
-	var/datum/tgui_color_picker/picker = new(user, message, title, default, timeout, autofocus)
+	var/datum/tgui_color_picker/picker = new(user, message, title, default, timeout, autofocus, theme) // BANDASTATION EDIT - Caller-selected theme
 	picker.ui_interact(user)
 	picker.wait()
 	if (picker)
@@ -49,8 +50,11 @@
 	var/autofocus
 	/// Boolean field describing if the tgui_color_picker was closed by the user.
 	var/closed
+	/// TGUI theme selected by the caller. BANDASTATION ADDITION
+	var/theme = "generic"
 
-/datum/tgui_color_picker/New(mob/user, message, title, default, timeout, autofocus)
+/datum/tgui_color_picker/New(mob/user, message, title, default, timeout, autofocus, theme = "generic") // BANDASTATION EDIT - Caller-selected theme
+	src.theme = theme // BANDASTATION ADDITION - Caller-selected theme
 	src.autofocus = autofocus
 	src.title = title
 	src.default = default
@@ -94,6 +98,7 @@
 	.["title"] = title
 	.["default_color"] = default
 	.["message"] = message
+	.["theme"] = theme // BANDASTATION ADDITION - Caller-selected theme
 
 /datum/tgui_color_picker/ui_data(mob/user)
 	. = list()

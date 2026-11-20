@@ -21,6 +21,7 @@ interface ColorPickerData {
   timeout: number;
   title: string;
   default_color: string;
+  theme?: string; // BANDASTATION ADDITION - Caller-selected theme
 }
 
 type ColorPickerModalProps = any;
@@ -47,7 +48,7 @@ export const ColorPickerModal: React.FC<ColorPickerModalProps> = () => {
       height={message ? 465 : 430}
       title={title}
       width={700}
-      theme="generic"
+      theme={data.theme ?? 'generic'} // BANDASTATION EDIT - Caller-selected theme
     >
       {!!timeout && <Loader value={timeout} />}
       <Window.Content>

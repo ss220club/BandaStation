@@ -50,7 +50,7 @@
 		return .
 
 	if(!is_husked && !(owner?.obscured_slots & HIDEFACIALHAIR) && (head_flags & HEAD_FACIAL_HAIR))
-		. += get_base_facial_hair_overlays(dropped)
+		. += paint_hair_overlays(get_base_facial_hair_overlays(dropped), facial = TRUE) // BANDASTATION EDIT - Local facial-hair painting
 
 	if(is_husked != HUSKED_BURN && !(owner?.obscured_slots & HIDEHAIR))
 		var/obj/item/organ/brain/brain = locate() in src
@@ -180,6 +180,7 @@
 		shared_holder.overlays += hair_overlay
 		shared_holder.overlays += hair_gradient_overlay
 		. += shared_holder
+	. = paint_hair_overlays(.) // BANDASTATION ADDITION - Local hair painting
 	return .
 
 /// Helper for setting hair color of an overlay appropriately
