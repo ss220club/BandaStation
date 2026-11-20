@@ -100,6 +100,7 @@
 /// Helper to allocate a new object with the implied type (the type of the variable it's assigned to) in the corner of the test room
 #define EASY_ALLOCATE(arguments...) allocate(__IMPLIED_TYPE__, run_loc_floor_bottom_left, ##arguments)
 
+// BANDASTATION ADDITION - fines_pro.dm covers PDA citations in the sorted list below.
 // BEGIN_INCLUDE
 #include "aas_configs.dm"
 #include "abductor_baton_spell.dm"
@@ -186,6 +187,7 @@
 #include "emp_flashlight.dm"
 #include "ethereal_revival.dm"
 #include "explosion_action.dm"
+#include "fines_pro.dm"
 #include "firedoor_regions.dm"
 #include "fish_unit_tests.dm"
 #include "flyperson.dm"

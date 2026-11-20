@@ -1,4 +1,19 @@
 // MARK: Papers
+/obj/item/paper/fine_notice
+	name = "fine notice"
+	desc = "Письмо счастья! Счастье поступит на счёт СБ после оплаты."
+	icon = 'modular_bandastation/objects/icons/items/fine_notice.dmi'
+	icon_state = "fine_notice"
+	lefthand_file = 'modular_bandastation/objects/icons/items/fine_notice_lefthand.dmi'
+	righthand_file = 'modular_bandastation/objects/icons/items/fine_notice_righthand.dmi'
+
+/obj/item/paper/fine_notice/ui_static_data(mob/user)
+	. = ..()
+	if(name == initial(name))
+		.[LIST_PAPER_NAME] = capitalize(declent_ru(NOMINATIVE))
+	.[LIST_PAPER_COLOR] = "#ffd6e4"
+	.["compact_layout"] = TRUE
+
 /obj/item/paper/fluff/centcom
 	color = COLOR_BLUE_GRAY
 

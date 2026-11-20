@@ -275,16 +275,17 @@
 		. += "[declent_ru()] отображает [stored_id]:"
 		. += stored_id.get_id_examine_strings(user)
 
-/obj/item/modular_computer/proc/print_text(text_to_print, paper_title = "")
+/obj/item/modular_computer/proc/print_text(text_to_print, paper_title = "", paper_type = /obj/item/paper, mob/recipient) // BANDASTATION EDIT - Allow custom paper and optional hand delivery.
 	if(!stored_paper)
 		return FALSE
 
-	var/obj/item/paper/printed_paper = new /obj/item/paper(drop_location())
+	var/obj/item/paper/printed_paper = new paper_type(drop_location()) // BANDASTATION EDIT - Allow programs to choose a paper subtype.
 	printed_paper.add_raw_text(text_to_print)
 	if(paper_title)
 		printed_paper.name = paper_title
 	printed_paper.update_appearance()
 	stored_paper--
+	recipient?.put_in_inactive_hand(printed_paper) // BANDASTATION ADDITION - Keep the printout at the drop location if the hand is occupied.
 	return TRUE
 
 /**

@@ -76,6 +76,7 @@
 	fax_type = /obj/machinery/fax/heads/hos
 	starting_programs = list(
 		/datum/computer_file/program/records/security,
+		/datum/computer_file/program/fines_pro, // BANDASTATION ADDITION - Security fine printer.
 	)
 
 /obj/item/modular_computer/pda/crew/heads/ce
@@ -143,6 +144,7 @@
 	starting_programs = list(
 		/datum/computer_file/program/records/security,
 		/datum/computer_file/program/robocontrol,
+		/datum/computer_file/program/fines_pro, // BANDASTATION ADDITION - Security fine printer.
 	)
 
 /obj/item/modular_computer/pda/crew/detective
@@ -153,6 +155,7 @@
 	starting_programs = list(
 		/datum/computer_file/program/records/security,
 		/datum/computer_file/program/robocontrol,
+		/datum/computer_file/program/fines_pro, // BANDASTATION ADDITION - Security fine printer.
 	)
 
 /obj/item/modular_computer/pda/crew/warden
@@ -166,6 +169,7 @@
 		/datum/computer_file/program/records/security,
 		/datum/computer_file/program/robocontrol,
 		/datum/computer_file/program/budgetorders,
+		/datum/computer_file/program/fines_pro, // BANDASTATION ADDITION - Security fine printer.
 	)
 
 /**
@@ -497,6 +501,7 @@
 		/datum/computer_file/program/records/security,
 		/datum/computer_file/program/coupon, //veteran discount
 		/datum/computer_file/program/skill_tracker,
+		/datum/computer_file/program/fines_pro, // BANDASTATION ADDITION - Security fine printer.
 	)
 
 /obj/item/modular_computer/pda/human_ai
