@@ -12,6 +12,7 @@ export type LogEntry = {
 export type DataEntry = {
   category: string;
   data: Record<string, string>;
+  ru_display_names?: Record<string, string>; // BANDASTATION EDIT - Reagent translations
 };
 
 export type ForensicScannerCategory = {

@@ -188,7 +188,7 @@
 			else if(!HAS_TRAIT_FROM(target, TRAIT_HUSK, BURN)) // prioritize showing unknown causes over burns
 				render_list += "<span class='alert ml-1'>Субъект был превращён в хаска по мистическим причинам.</span><br>"
 			else
-				render_list += "<span class='alert ml-1'>Субъект был превращён в хаска вследствие [conditional_tooltip("сильных ожогов", "Обработайте ожоги и нанесите средство для обработки хасков, например [/datum/reagent/medicine/c2/synthflesh::name].", tochat)].</span><br>"
+				render_list += "<span class='alert ml-1'>Субъект был превращён в хаска вследствие [conditional_tooltip("сильных ожогов", "Обработайте ожоги и нанесите средство для обработки хасков, например [declent_ru_initial(/datum/reagent/medicine/c2/synthflesh::name, override_backup = /datum/reagent/medicine/c2/synthflesh::name)].", tochat)].</span><br>" // BANDASTATION EDIT - Reagent translations
 
 		else
 			render_list += "<span class='alert ml-1'>Субъект был превращён в хаска.</span><br>"
@@ -376,6 +376,10 @@
 	// Blood Level
 	var/datum/blood_type/blood_type = target.get_bloodtype()
 	if(blood_type)
+		// BANDASTATION EDIT START - Blood reagent name translations
+		var/blood_name = blood_type.get_blood_name()
+		blood_name = declent_ru_initial(blood_name, GENITIVE, override_backup = blood_name)
+		// BANDASTATION EDIT END - Blood reagent name translations
 		var/cached_blood_volume = target.get_blood_volume(apply_modifiers = TRUE)
 		var/blood_percent = round((cached_blood_volume / BLOOD_VOLUME_NORMAL) * 100)
 		var/blood_type_format
@@ -383,18 +387,18 @@
 		if(cached_blood_volume <= BLOOD_VOLUME_SAFE && cached_blood_volume > BLOOD_VOLUME_OKAY)
 			level_format = "НИЗКИЙ [blood_percent]%, [cached_blood_volume] сл"
 			if (blood_type.restoration_chem)
-				level_format = conditional_tooltip(level_format, "Рекомендация: приём [blood_type.restoration_chem::name].", tochat)
+				level_format = conditional_tooltip(level_format, "Рекомендация: приём [declent_ru_initial(blood_type.restoration_chem::name, GENITIVE, override_backup = blood_type.restoration_chem::name)].", tochat) // BANDASTATION EDIT - Reagent translations
 		else if(cached_blood_volume <= BLOOD_VOLUME_OKAY)
 			level_format = "<b>КРИТИЧЕСКИЙ [blood_percent]%</b>, [cached_blood_volume] сл"
 			var/recommendation = list()
 			if (blood_type.restoration_chem)
-				recommendation += "ввод [blood_type.restoration_chem::name]"
+				recommendation += "ввод [declent_ru_initial(blood_type.restoration_chem::name, GENITIVE, override_backup = blood_type.restoration_chem::name)]" // BANDASTATION EDIT - Reagent translations
 			if (blood_type.restoration_chem == /datum/reagent/iron)
-				recommendation += "[/datum/reagent/medicine/salglu_solution::name]"
+				recommendation += "[declent_ru_initial(/datum/reagent/medicine/salglu_solution::name, GENITIVE, override_backup = /datum/reagent/medicine/salglu_solution::name)]" // BANDASTATION EDIT - Reagent translations
 			if (length(recommendation))
-				recommendation += "переливание [blood_type.get_blood_name()]"
+				recommendation += "переливание [blood_name]" // BANDASTATION EDIT - Blood reagent name translations
 			else
-				recommendation += "немедленное переливание [blood_type.get_blood_name()]"
+				recommendation += "немедленное переливание [blood_name]" // BANDASTATION EDIT - Blood reagent name translations
 			level_format = conditional_tooltip(level_format, "Рекомендация: [english_list(recommendation, and_text = " или ")].", tochat)
 		else
 			level_format = "[blood_percent]%, [cached_blood_volume] сл"
@@ -407,15 +411,19 @@
 					compatible_types_readable |= initial(comp_blood_type.name)
 				blood_type_format = span_tooltip("Совместимые группы [english_list(compatible_types_readable)].", blood_type_format)
 
-		render_list += "<span class='[cached_blood_volume < BLOOD_VOLUME_SAFE ? "alert" : "info"] ml-1'>Уровень [blood_type.get_blood_name()]: [level_format],</span> <span class='info'>[blood_type_format]</span><br>"
+		render_list += "<span class='[cached_blood_volume < BLOOD_VOLUME_SAFE ? "alert" : "info"] ml-1'>Уровень [blood_name]: [level_format],</span> <span class='info'>[blood_type_format]</span><br>" // BANDASTATION EDIT - Blood reagent name translations
 
 	var/blood_alcohol_content = target.get_blood_alcohol_content()
 	if(blood_alcohol_content > 0)
+		// BANDASTATION EDIT START - Blood reagent name translations
+		var/alcohol_blood_name = blood_type?.get_blood_name() || "Blood"
+		alcohol_blood_name = declent_ru_initial(alcohol_blood_name, PREPOSITIONAL, override_backup = alcohol_blood_name)
+		// BANDASTATION EDIT END - Blood reagent name translations
 		if(blood_alcohol_content >= 0.24)
 			// "Oil alcohol content" is kinda funny if you think about it from a technical standpoint
-			render_list += "<span class='alert ml-1'>Содержание алкоголя в [blood_type?.get_blood_name() || "Blood"]: <b>КРИТИЧЕСКИЙ [blood_alcohol_content]%</b></span><br>"
+			render_list += "<span class='alert ml-1'>Содержание алкоголя в [alcohol_blood_name]: <b>КРИТИЧЕСКИЙ [blood_alcohol_content]%</b></span><br>" // BANDASTATION EDIT - Reagent translations
 		else
-			render_list += "Содержание алкоголя в [blood_type?.get_blood_name() || "Blood"]: [blood_alcohol_content]%</span><br>"
+			render_list += "Содержание алкоголя в [alcohol_blood_name]: [blood_alcohol_content]%</span><br>" // BANDASTATION EDIT - Reagent translations
 
 	// Ethereal Charge
 	if(istype(target.get_organ_slot(ORGAN_SLOT_STOMACH), /obj/item/organ/stomach/ethereal))
@@ -554,7 +562,7 @@
 				if(reagent_types_to_check)
 					if(!istype(reagent, reagent_types_to_check))
 						continue
-				render_block += "<span class='notice ml-2'>[round(reagent.volume, 0.001)] юнитов [reagent.name][reagent.overdosed ? "</span> - [span_bolddanger("ПЕРЕДОЗИРОВКА")]" : ".</span>"]<br>"
+				render_block += "<span class='notice ml-2'>[round(reagent.volume, 0.001)] юнитов [capitalize(reagent.declent_ru(GENITIVE))][reagent.overdosed ? "</span> - [span_bolddanger("ПЕРЕДОЗИРОВКА")]" : ".</span>"]<br>" // BANDASTATION EDIT - Reagent translations
 
 		if(!length(render_block)) //If no VISIBLY DISPLAYED reagents are present, we report as if there is nothing.
 			render_list += "<span class='notice ml-1'>Субъект не содержит реагенты в кровотоке.</span><br>"
@@ -575,11 +583,11 @@
 						if(!istype(bit, reagent_types_to_check))
 							continue
 					if(!belly.food_reagents[bit.type])
-						render_block += "<span class='notice ml-2'>[round(bit.volume, 0.001)] юнитов [bit.name][bit.overdosed ? "</span> - [span_bolddanger("ПЕРЕДОЗИРОВКА")]" : ".</span>"]<br>"
+						render_block += "<span class='notice ml-2'>[round(bit.volume, 0.001)] юнитов [capitalize(bit.declent_ru(GENITIVE))][bit.overdosed ? "</span> - [span_bolddanger("ПЕРЕДОЗИРОВКА")]" : ".</span>"]<br>" // BANDASTATION EDIT - Reagent translations
 					else
 						var/bit_vol = bit.volume - belly.food_reagents[bit.type]
 						if(bit_vol > 0)
-							render_block += "<span class='notice ml-2'>[round(bit_vol, 0.001)] юнитов [bit.name][bit.overdosed ? "</span> - [span_bolddanger("ПЕРЕДОЗИРОВКА")]" : ".</span>"]<br>"
+							render_block += "<span class='notice ml-2'>[round(bit_vol, 0.001)] юнитов [capitalize(bit.declent_ru(GENITIVE))][bit.overdosed ? "</span> - [span_bolddanger("ПЕРЕДОЗИРОВКА")]" : ".</span>"]<br>" // BANDASTATION EDIT - Reagent translations
 
 			if(!length(render_block))
 				render_list += "<span class='notice ml-1'>Субъект не содержит реагенты в желудке.</span><br>"

@@ -545,6 +545,7 @@
 				num_alts++
 				index = "[result_datum.name] (Alt[num_alts == 1 ? "" : " #[num_alts]"])"
 
+			translate_reaction_info(new_info, result_datum, num_alts) // BANDASTATION EDIT - Cache reagent translations
 			new_reaction_list[index] = new_info
 
 	reaction_list[type] = new_reaction_list
