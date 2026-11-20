@@ -21,16 +21,16 @@ function SystemWallpaper(props) {
   const { data } = useBackend<PaiData>();
   const { emagged } = data;
 
-  const owner = !emagged ? 'NANOTRASEN' : ' SYNDICATE';
+  const owner = !emagged ? 'НАНОТРЕЙЗЕН' : ' СИНДИКАТА';
   const eyebrows = !emagged ? "/\\ ' /\\" : ' \\\\ // ';
 
   const paiAscii = [
     ' ________  ________  ___',
     ' |\\   __  \\|\\   __  \\|\\  \\',
-    ' \\ \\  \\|\\  \\ \\  \\|\\  \\ \\  \\     Interface',
-    '  \\ \\   ____\\ \\   __  \\ \\  \\     Version 2.5',
+    ' \\ \\  \\|\\  \\ \\  \\|\\  \\ \\  \\     Версия',
+    '  \\ \\   ____\\ \\   __  \\ \\  \\     интерфейса 2.5',
     '   \\ \\  \\___|\\ \\  \\ \\  \\ \\  \\',
-    '    \\ \\__\\    \\ \\__\\ \\__\\ \\__\\     Property of',
+    '    \\ \\__\\    \\ \\__\\ \\__\\ \\__\\     Собственность',
     `     \\|__|     \\|__|\\|__|\\|__|      ${owner}`,
     '',
   ].join('\n');
@@ -74,28 +74,28 @@ function SystemInfo(props) {
             disabled={!master_dna}
             icon="dna"
             onClick={() => act('check dna')}
-            tooltip="Verifies your master's DNA. Must be carried in hand."
+            tooltip="Проверяет ДНК вашего хозяина. Необходимо носить в руке."
           >
-            Verify
+            Проверка
           </Button>
           <Button
             icon={screen_image_interface_icon}
             onClick={() => act('change image')}
-            tooltip="Change your display image."
+            tooltip="Сменить изображение на дисплее."
           >
-            Display
+            Дисплей
           </Button>
         </>
       }
       fill
-      title="System Info"
+      title="Системная информация"
     >
       <LabeledList>
-        <LabeledList.Item label="Master">
-          {master_name || 'None.'}
+        <LabeledList.Item label="Мастер">
+          {master_name || 'Отсутствует.'}
         </LabeledList.Item>
-        <LabeledList.Item color={master_dna ? 'red' : ''} label="DNA">
-          {master_dna || 'None.'}
+        <LabeledList.Item color={master_dna ? 'red' : ''} label="ДНК">
+          {master_dna || 'Отсутствует.'}
         </LabeledList.Item>
       </LabeledList>
     </Section>
