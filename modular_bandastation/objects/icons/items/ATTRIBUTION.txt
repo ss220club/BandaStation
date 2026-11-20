@@ -1,0 +1,11 @@
+Талон штрафа — CC BY-SA 3.0.
+https://creativecommons.org/licenses/by-sa/3.0/
+
+Автор адаптации спрайтов для «ШтрафыPRO+» — korneplukviktor-debug.
+
+fine_notice.dmi: доработка спрайтов paper и paper_words из BandaStation.
+Исходник: icons/obj/service/bureaucracy.dmi. Изменены форма и палитра.
+
+fine_notice_lefthand.dmi и fine_notice_righthand.dmi: штатные спрайты
+paper из icons/mob/inhands/items_lefthand.dmi и
+icons/mob/inhands/items_righthand.dmi, окрашенные в розовый.
