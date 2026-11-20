@@ -46,8 +46,11 @@ GLOBAL_LIST_EMPTY(telecomm_machines)
 
 /// relay signal to all linked machinery that are of type [filter]. If signal has been sent [amount] times, stop sending
 /obj/machinery/telecomms/proc/relay_information(datum/signal/subspace/signal, filter, copysig, amount = 20)
+	SHOULD_CALL_PARENT(TRUE) // BANDASTATION ADDITION - Comms intercept
 	if(!on)
 		return
+
+	SEND_SIGNAL(src, COMSIG_TELECOMMS_RELAY_INFORMATION, signal) // BANDASTATION ADDITION - Comms intercept
 
 	if(!filter || !ispath(filter, /obj/machinery/telecomms))
 		CRASH("null or non /obj/machinery/telecomms typepath given as the filter argument! given typepath: [filter]")
