@@ -33,6 +33,23 @@ function updateCharacterName(name) {
   character_name_slot.setAttribute('data-name', name);
 }
 
+const rosterElement = document.getElementById('lobby_roster');
+
+function updateRoster(encodedData) {
+  const data = JSON.parse(encodedData);
+  rosterElement.classList.toggle('hidden', !data.total);
+  rosterElement.replaceChildren();
+  if (data.assigned_job) {
+    rosterElement.append('Назначен администратором: ');
+    const role = document.createElement('strong');
+    // Keep the job title together when it wraps after the assignment label.
+    role.textContent = data.assigned_job.replaceAll(' ', '\u00A0');
+    rosterElement.append(role);
+  } else {
+    rosterElement.textContent = `Ивентовые должности · Занято мест: ${data.total}`;
+  }
+}
+
 const info_placement = document.getElementById('round_info');
 function updateInfo(info) {
   info_placement.innerHTML = info;
