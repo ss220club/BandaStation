@@ -4,8 +4,10 @@
 #define GOLDEN_GARDREN_EJECT_RANGE 5
 /// Knockdown the pilots get once their capsule opens.
 #define GOLDEN_GARDREN_EJECT_KNOCKDOWN (2 SECONDS)
-/// Capsule flight in deciseconds: short drop, opens at once, vanishes after landing.
-#define GOLDEN_GARDREN_CAPSULE_DELAYS list(POD_TRANSIT = 10, POD_FALLING = 4, POD_OPENING = 5, POD_LEAVING = 10)
+/// Time until a launched capsule opens, in three stages.
+#define GOLDEN_GARDREN_CAPSULE_TRANSIT (1 SECONDS)
+#define GOLDEN_GARDREN_CAPSULE_FALL (0.4 SECONDS)
+#define GOLDEN_GARDREN_CAPSULE_OPEN (0.5 SECONDS)
 
 /**
  * ## Golden-Gardren emergency ejection
@@ -71,15 +73,15 @@
 	playsound(mech, 'sound/machines/warning-buzzer.ogg', 100, FALSE)
 	start()
 
-/// The countdown has run out: the pilots are fired out, and a dying mech is then destroyed the regular way.
+/// On a lethal hit the chassis ejects the pilots as part of its destruction.
 /datum/component/golden_gardren_ejection/proc/finish_countdown()
-	var/obj/vehicle/sealed/mecha/mech = parent
-	eject()
 	if(!dying)
+		eject()
 		return
+	var/obj/vehicle/sealed/mecha/mech = parent
 	mech.remove_shared_particles("golden_gardren_dying")
 	mech.update_integrity(0)
-	mech.atom_destruction(BRUTE)
+	mech.atom_destruction()
 
 /**
  * Starts the countdown and lets the pilots aim their capsules. Returns FALSE if one is already running.
@@ -168,7 +170,7 @@
  * Fires every occupant out: in a capsule to the turf they picked if it is still fine, otherwise to the nearest free neighbour.
  * Without [use_capsules] the pilots are put straight on their turfs, used when the mech is deleted outright.
  */
-/datum/component/golden_gardren_ejection/proc/eject(use_capsules = TRUE, stun = TRUE)
+/datum/component/golden_gardren_ejection/proc/eject(use_capsules = TRUE)
 	var/obj/vehicle/sealed/mecha/mech = parent
 	deltimer(timer)
 	timer = null
@@ -176,15 +178,15 @@
 	var/launched = FALSE
 	for(var/mob/living/pilot as anything in mech.occupants?.Copy())
 		var/turf/landing = LAZYACCESS(landings, pilot)
-		clear_landing_choice(pilot)
 		// The picked turf may have turned unsafe or been taken during the countdown.
 		if(!landing || landing_blocker(landing) || (landing in taken_turfs))
 			landing = golden_gardren_find_exit_turf(mech, taken_turfs)
 		mech.mob_exit(pilot, silent = TRUE, forced = TRUE)
 		if(QDELETED(pilot))
 			continue
-		if(stun)
-			pilot.Knockdown(GOLDEN_GARDREN_EJECT_KNOCKDOWN + (use_capsules ? 1.5 SECONDS : 0))
+		if(use_capsules)
+			var/capsule_time = landing ? GOLDEN_GARDREN_CAPSULE_TRANSIT + GOLDEN_GARDREN_CAPSULE_FALL + GOLDEN_GARDREN_CAPSULE_OPEN : 0
+			pilot.Knockdown(GOLDEN_GARDREN_EJECT_KNOCKDOWN + capsule_time)
 		// Without any free turf around the pilot stays where the base exit put them, on the mech's own turf.
 		if(!landing)
 			continue
@@ -207,7 +209,12 @@
 		"spawn" = pilot,
 		"explosionSize" = list(0, 0, 0, 0),
 		"bluespace" = TRUE,
-		"delays" = GOLDEN_GARDREN_CAPSULE_DELAYS,
+		"delays" = list(
+			POD_TRANSIT = GOLDEN_GARDREN_CAPSULE_TRANSIT,
+			POD_FALLING = GOLDEN_GARDREN_CAPSULE_FALL,
+			POD_OPENING = GOLDEN_GARDREN_CAPSULE_OPEN,
+			POD_LEAVING = 1 SECONDS,
+		),
 	))
 
 /// Whether the ejection countdown of [mech] is running.
@@ -241,7 +248,7 @@
 /// Starts the ejection countdown. During it each pilot clicks the turf their capsule lands on.
 /datum/action/vehicle/sealed/mecha/golden_gardren_emergency_eject
 	name = "АВАРИЙНОЕ КАТАПУЛЬТИРОВАНИЕ"
-	desc = "Через 5 секунд выстреливает пилотов в капсулах. До выстрела каждый пилот кликом выбирает место посадки: не дальше 5 клеток, в зоне видимости, безопасное. Отменить нельзя."
+	desc = "Запускает отсчёт до выброса пилотов в капсулах. До выброса каждый пилот может кликом выбрать безопасную клетку посадки поблизости. Отменить нельзя."
 	button_icon = 'modular_bandastation/golden_gardren/icons/actions.dmi'
 	button_icon_state = "emergency_eject"
 
@@ -257,4 +264,6 @@
 #undef GOLDEN_GARDREN_EJECT_DELAY
 #undef GOLDEN_GARDREN_EJECT_RANGE
 #undef GOLDEN_GARDREN_EJECT_KNOCKDOWN
-#undef GOLDEN_GARDREN_CAPSULE_DELAYS
+#undef GOLDEN_GARDREN_CAPSULE_TRANSIT
+#undef GOLDEN_GARDREN_CAPSULE_FALL
+#undef GOLDEN_GARDREN_CAPSULE_OPEN

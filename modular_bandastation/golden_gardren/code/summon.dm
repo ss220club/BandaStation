@@ -6,8 +6,6 @@
 #define GOLDEN_GARDREN_SUMMON_RANGE 2
 /// Drop timings in deciseconds: two seconds of warning over the landing spot, then the fall.
 #define GOLDEN_GARDREN_SUMMON_DELAYS list(POD_TRANSIT = 20, POD_FALLING = 8, POD_OPENING = 1, POD_LEAVING = 1)
-/// From launch to touchdown, in deciseconds.
-#define GOLDEN_GARDREN_SUMMON_FLIGHT 28
 
 /// Returns TRUE for any mech of the Golden-Gardren family.
 /proc/is_golden_gardren_mech(atom/thing)
@@ -27,7 +25,7 @@
 	implant_color = "r"
 	implant_info = "Активируется вручную. Внутри меха пары Голден-Гардрен привязывает имплант к этому меху. \
 		Снаружи вызывает привязанный мех: тот взлетает, где бы ни был, и падает с неба рядом с владельцем. \
-		Мех должен быть пустым; перезарядка — минута."
+		Не стойте на отмеченной клетке посадки. Мех должен быть пустым. Перезарядка — минута."
 	implant_lore = "Экспериментальный маячок ЦК для ивентовых машин. Подаёт сигнал автопилоту меха, \
 		который поднимает машину на реактивной тяге и сбрасывает её по координатам носителя."
 	/// The mech this implant calls.
@@ -136,16 +134,26 @@
 	mech.log_message("Summoned to [AREACOORD(landing)].", LOG_MECHA)
 	podspawn(list(
 		"target" = landing,
+		"path" = /obj/structure/closet/supplypod/podspawn/golden_gardren_summon,
 		"style" = /datum/pod_style/seethrough,
 		"spawn" = mech,
 		"explosionSize" = list(0, 0, 0, 0),
 		"bluespace" = TRUE,
 		"delays" = GOLDEN_GARDREN_SUMMON_DELAYS,
 	))
-	addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(golden_gardren_summon_impact), landing), GOLDEN_GARDREN_SUMMON_FLIGHT)
 
-/// Touchdown: a heavy thud, dust and shaking screens around the landing spot.
-/proc/golden_gardren_summon_impact(turf/landing)
+/// The pod deals a light impact to anyone on the exact landing tile.
+/obj/structure/closet/supplypod/podspawn/golden_gardren_summon
+	damage = 10
+	effectQuiet = TRUE
+
+/obj/structure/closet/supplypod/podspawn/golden_gardren_summon/pre_open()
+	var/turf/landing = get_turf(src)
+	. = ..()
+	if(!landing)
+		return
+	if(isfloorturf(landing))
+		landing.break_tile()
 	playsound(landing, 'sound/effects/meteorimpact.ogg', 100, TRUE)
 	playsound(landing, 'sound/effects/explosion/explosion_distant.ogg', 60, TRUE)
 	new /obj/effect/temp_visual/mook_dust(landing)
@@ -160,4 +168,3 @@
 #undef GOLDEN_GARDREN_SUMMON_TAKEOFF
 #undef GOLDEN_GARDREN_SUMMON_RANGE
 #undef GOLDEN_GARDREN_SUMMON_DELAYS
-#undef GOLDEN_GARDREN_SUMMON_FLIGHT

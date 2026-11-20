@@ -15,14 +15,7 @@
 		mech.cockpit = new(mech)
 	mech.cockpit.ui_interact(owner)
 
-/**
- * ## Golden-Gardren cockpit
- *
- * Separate per-seat panel of the combined mech, apart from the regular mech panel.
- * The data and every action are filtered by the seat of the user on the server side.
- */
 /datum/golden_gardren_cockpit
-	/// The mech this panel belongs to.
 	var/obj/vehicle/sealed/mecha/golden_gardren/mech
 
 /datum/golden_gardren_cockpit/New(obj/vehicle/sealed/mecha/golden_gardren/owner)
@@ -62,8 +55,7 @@
 	data["seat"] = seat
 	data["integrity"] = mech.get_integrity()
 	data["max_integrity"] = mech.max_integrity
-	data["charge"] = mech.cell ? mech.cell.charge : 0
-	data["max_charge"] = mech.cell ? mech.cell.maxcharge : 0
+	data["charge_percent"] = mech.cell?.maxcharge > 0 ? mech.cell.percent() : 0
 	var/datum/component/golden_gardren_shield/shield = mech.GetComponent(/datum/component/golden_gardren_shield)
 	data["shield_active"] = shield.active
 	data["shield_charge"] = shield.charge
@@ -80,27 +72,18 @@
 		data["strafe"] = mech.strafe
 		data["lights"] = !!(mech.mecha_flags & LIGHTS_ON)
 		data["force"] = mech.force
-		data["ram_cooldown"] = round(S_TIMER_COOLDOWN_TIMELEFT(mech, COOLDOWN_GOLDEN_GARDREN_RAM) / (1 SECONDS))
 	else if(seat == "weapons")
 		data["shield_ready"] = COOLDOWN_FINISHED(shield, toggle_cooldown)
-		data["strike_cooldown"] = round(S_TIMER_COOLDOWN_TIMELEFT(mech, COOLDOWN_MECHA_MISSILE_STRIKE) / (1 SECONDS))
 		var/list/weapons = list()
 		for(var/slot in list(MECHA_L_ARM, MECHA_R_ARM))
 			var/obj/item/mecha_parts/mecha_equipment/weapon/weapon = mech.equip_by_category[slot]
 			if(!istype(weapon))
 				continue
-			var/list/weapon_data = list(
+			weapons += list(list(
 				"slot" = slot,
 				"name" = weapon.name,
 				"button" = slot == MECHA_L_ARM ? "ЛКМ" : "ПКМ",
-			)
-			var/obj/item/mecha_parts/mecha_equipment/weapon/ballistic/gun = weapon
-			if(istype(gun))
-				weapon_data["ammo"] = gun.projectiles
-				weapon_data["max_ammo"] = initial(gun.projectiles)
-				weapon_data["reserve"] = gun.projectiles_cache
-				weapon_data["can_reload"] = !gun.disabledreload && gun.projectiles_cache > 0 && gun.projectiles < initial(gun.projectiles)
-			weapons += list(weapon_data)
+			))
 		data["weapons"] = weapons
 	return data
 
@@ -128,16 +111,7 @@
 				mech.toggle_lights(user = user)
 				return TRUE
 		return FALSE
-	switch(action)
-		if("toggle_shield")
-			var/datum/component/golden_gardren_shield/shield = mech.GetComponent(/datum/component/golden_gardren_shield)
-			return shield.toggle(user)
-		if("reload")
-			var/slot = params["slot"]
-			if(!(slot in list(MECHA_L_ARM, MECHA_R_ARM)))
-				return FALSE
-			var/obj/item/mecha_parts/mecha_equipment/weapon/ballistic/gun = mech.equip_by_category[slot]
-			if(!istype(gun) || gun.disabledreload)
-				return FALSE
-			return gun.rearm()
+	if(action == "toggle_shield")
+		var/datum/component/golden_gardren_shield/shield = mech.GetComponent(/datum/component/golden_gardren_shield)
+		return shield.toggle(user)
 	return FALSE

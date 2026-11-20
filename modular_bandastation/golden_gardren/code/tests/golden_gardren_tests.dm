@@ -34,20 +34,24 @@
 	TEST_ASSERT(!QDELETED(main_pilot) && isturf(main_pilot.loc), "The Gardren pilot was not ejected when the frame was destroyed")
 	TEST_ASSERT(!QDELETED(gunner) && isturf(gunner.loc), "The Golden pilot was not ejected when the frame was destroyed")
 
-/// A lone Golden pilot keeps the weapons seat even though they enter the empty frame first.
-/datum/unit_test/golden_gardren_assemble_one_pilot
+/// A lone pilot cannot combine, and two pilots cannot combine without confirming.
+/datum/unit_test/golden_gardren_combine_requires_crew
 
-/datum/unit_test/golden_gardren_assemble_one_pilot/Run()
+/datum/unit_test/golden_gardren_combine_requires_crew/Run()
 	var/mob/living/carbon/human/consistent/gunner = allocate(/mob/living/carbon/human/consistent)
+	var/mob/living/carbon/human/consistent/driver = allocate(/mob/living/carbon/human/consistent)
 	var/obj/vehicle/sealed/mecha/golden/golden = allocate(/obj/vehicle/sealed/mecha/golden)
-	var/obj/vehicle/sealed/mecha/gardren/gardren = allocate(/obj/vehicle/sealed/mecha/gardren)
+	var/obj/vehicle/sealed/mecha/gardren/gardren = allocate(/obj/vehicle/sealed/mecha/gardren, get_step(golden, EAST))
 	golden.mob_enter(gunner, silent = TRUE)
 
 	var/obj/vehicle/sealed/mecha/golden_gardren/combined = allocate(/obj/vehicle/sealed/mecha/golden_gardren, null, TRUE)
-	TEST_ASSERT(combined.assemble(golden, gardren, gunner, null), "Assembly failed with only the Golden pilot")
-	TEST_ASSERT_EQUAL(gunner.loc, combined, "The Golden pilot was not moved into the frame")
-	TEST_ASSERT(!combined.is_driver(gunner), "The Golden pilot took the main seat")
-	TEST_ASSERT(combined.occupants[gunner] & VEHICLE_CONTROL_EQUIPMENT, "The Golden pilot did not get the weapons seat")
+	TEST_ASSERT_NOTNULL(golden_gardren_combine_blocker(golden, gardren), "A lone pilot was offered the combination")
+	TEST_ASSERT(!combined.assemble(golden, gardren, gunner, null), "Assembly succeeded with only one pilot")
+	gardren.mob_enter(driver, silent = TRUE)
+	TEST_ASSERT_NULL(golden_gardren_combine_blocker(golden, gardren), "The pair with two ready pilots cannot request a combination")
+	golden_gardren_try_combine(golden, gunner)
+	TEST_ASSERT_EQUAL(gunner.loc, golden, "The halves combined without a confirmation")
+	TEST_ASSERT(!(golden in GLOB.golden_gardren_busy) && !(gardren in GLOB.golden_gardren_busy), "The cancelled request left the pair busy")
 
 /// The main seat punches with the mech's fists, the weapons seat cannot.
 /datum/unit_test/golden_gardren_melee_seat
@@ -143,6 +147,14 @@
 	TEST_ASSERT(combined.assemble(golden, gardren, gunner, main_pilot), "Assembly failed with both pilots in place")
 
 	combined.take_damage(combined.max_integrity / 2, BRUTE)
+	TEST_ASSERT(combined.use_energy(gardren_cell.maxcharge / 4), "The combined frame could not use the Gardren's battery")
+	combined.mob_exit(gunner, silent = TRUE, forced = TRUE)
+	TEST_ASSERT_NOTNULL(combined.separate_blocker(), "A single occupant was offered a separation")
+	TEST_ASSERT(!combined.disassemble(), "The frame separated with only one pilot")
+	combined.mob_enter(gunner, silent = TRUE)
+	golden_gardren_try_separate(combined, gunner)
+	TEST_ASSERT(!QDELETED(combined), "The frame separated without a confirmation")
+	TEST_ASSERT(!(combined in GLOB.golden_gardren_busy), "The cancelled request left the frame busy")
 	TEST_ASSERT_NULL(combined.separate_blocker(), "A combined frame with room around it refused to separate")
 	TEST_ASSERT(combined.disassemble(), "Separation failed with room around the frame")
 
@@ -153,6 +165,7 @@
 	TEST_ASSERT_EQUAL(main_pilot.loc, gardren, "The main seat pilot did not go back into the Gardren")
 	TEST_ASSERT_EQUAL(gunner.loc, golden, "The weapons seat pilot did not go back into the Golden")
 	TEST_ASSERT_EQUAL(gardren.cell, gardren_cell, "The Gardren did not get its cell back")
+	TEST_ASSERT_EQUAL(gardren_cell.percent(), 75, "Separation changed the remaining battery charge")
 	TEST_ASSERT(!golden.completely_disabled && !gardren.completely_disabled, "A half stayed switched off after separation")
 	TEST_ASSERT_EQUAL(gardren.get_integrity(), round(gardren.max_integrity / 2), "The Gardren did not take its share of the damage")
 	TEST_ASSERT_EQUAL(golden.get_integrity(), round(golden.max_integrity / 2), "The Golden did not take its share of the damage")
@@ -162,6 +175,14 @@
 
 /datum/unit_test/golden_gardren_separate_spawned_frame/Run()
 	var/obj/vehicle/sealed/mecha/golden_gardren/combined = allocate(/obj/vehicle/sealed/mecha/golden_gardren)
+	TEST_ASSERT(istype(combined.cell, /obj/item/stock_parts/power_store/cell/bluespace), "The admin-spawned frame has no bluespace battery")
+	for(var/slot in list(MECHA_L_ARM, MECHA_R_ARM))
+		var/obj/item/mecha_parts/mecha_equipment/weapon/energy/laser/heavy/golden_gardren/laser = combined.equip_by_category[slot]
+		TEST_ASSERT(istype(laser), "An arm of the combined frame has no heavy laser")
+		TEST_ASSERT_EQUAL(laser.equip_cooldown, 1.2 SECONDS, "The heavy laser does not use its shorter firing cooldown")
+		var/charge_before = combined.get_charge()
+		TEST_ASSERT(combined.use_energy(laser.energy_drain), "The battery could not power the laser")
+		TEST_ASSERT_EQUAL(combined.get_charge(), charge_before - laser.energy_drain, "The laser drained the wrong amount of charge")
 	TEST_ASSERT_NOTNULL(combined.separate_blocker(), "An admin-spawned frame offered to separate into free halves")
 	TEST_ASSERT(!combined.disassemble(), "An admin-spawned frame separated into free halves")
 	TEST_ASSERT(!QDELETED(combined), "A failed separation deleted the frame")
@@ -193,10 +214,16 @@
 	combined.mob_enter(gunner, silent = TRUE)
 	var/datum/component/golden_gardren_ejection/ejection = combined.GetComponent(/datum/component/golden_gardren_ejection)
 
+	TEST_ASSERT(ejection.start(main_pilot), "The ejection countdown did not start")
+	var/launch_delay = timeleft(ejection.timer)
 	ejection.eject()
 	var/list/landings = list()
 	for(var/mob/living/carbon/human/pilot as anything in list(main_pilot, gunner))
 		TEST_ASSERT(!combined.is_occupant(pilot), "A pilot stayed inside after the emergency ejection")
+		var/obj/structure/closet/supplypod/capsule = pilot.loc
+		TEST_ASSERT(istype(capsule), "A pilot was not put into a rescue capsule")
+		var/opening_delay = launch_delay + capsule.delays[POD_TRANSIT] + capsule.delays[POD_FALLING] + capsule.delays[POD_OPENING]
+		TEST_ASSERT(opening_delay >= (6.8 SECONDS) && opening_delay <= (7 SECONDS), "The capsule should open about 6.9 seconds after starting the countdown")
 		var/turf/landing = golden_gardren_capsule_target(pilot, combined.loc)
 		TEST_ASSERT_NOTNULL(landing, "A pilot was not put into a rescue capsule")
 		TEST_ASSERT(landing != combined.loc, "A capsule was sent onto the mech itself despite free turfs around it")
@@ -272,7 +299,12 @@
 		var/mob/living/carbon/human/consistent/pilot = allocate(/mob/living/carbon/human/consistent)
 		half.mob_enter(pilot, silent = TRUE)
 		var/turf/half_turf = half.loc
-		TEST_ASSERT(istype(half.cell, /obj/item/stock_parts/power_store/cell/bluespace), "[half] does not come with a bluespace cell")
+		TEST_ASSERT(istype(half.cell, /obj/item/stock_parts/power_store/cell/bluespace), "[half] has no bluespace battery")
+		var/expected_utility_slots = half_type == /obj/vehicle/sealed/mecha/gardren ? 2 : 3
+		TEST_ASSERT_EQUAL(half.max_equip_by_category[MECHA_UTILITY], expected_utility_slots, "[half] lost its chassis-specific slot limit")
+		for(var/slot in list(MECHA_L_ARM, MECHA_R_ARM))
+			var/obj/item/mecha_parts/mecha_equipment/weapon/laser = half.equip_by_category[slot]
+			TEST_ASSERT_EQUAL(laser?.type, /obj/item/mecha_parts/mecha_equipment/weapon/energy/laser, "[half] does not have standard lasers in both arms")
 		TEST_ASSERT_NOTNULL(LAZYACCESSASSOC(half.occupant_actions, pilot, /datum/action/vehicle/sealed/mecha/golden_gardren_emergency_eject), "The pilot of [half] got no ejection button")
 
 		half.take_damage(half.get_integrity() + 10, BRUTE)
@@ -311,10 +343,10 @@
 	cockpit.ui_act("toggle_strafe", list(), main_ui, main_ui.state)
 	TEST_ASSERT(combined.strafe != strafe_before, "The main seat could not toggle strafing")
 
-	TEST_ASSERT(!cockpit.ui_act("reload", list("slot" = "not_a_slot"), gunner_ui, gunner_ui.state), "A reload of a made-up slot was accepted")
-
+	TEST_ASSERT(combined.use_energy(combined.cell.maxcharge / 2), "The mech could not use its battery")
 	var/list/main_data = cockpit.ui_data(main_pilot)
 	TEST_ASSERT(isnull(main_data["weapons"]), "The main seat was sent the weapons seat data")
+	TEST_ASSERT_EQUAL(main_data["charge_percent"], 50, "The cockpit did not show the remaining battery charge")
 	var/list/gunner_data = cockpit.ui_data(gunner)
 	TEST_ASSERT(isnull(gunner_data["strafe"]), "The weapons seat was sent the main seat data")
 	TEST_ASSERT(length(gunner_data["weapons"]), "The weapons seat got no weapon data")
@@ -338,6 +370,8 @@
 
 /// The summon refuses an occupied mech, and an empty one is dropped in a pod next to the summoner, never onto them.
 /datum/unit_test/golden_gardren_summon_drop
+	priority = TEST_LONGER
+	normal_floor_required = TRUE
 
 /datum/unit_test/golden_gardren_summon_drop/Run()
 	var/mob/living/carbon/human/consistent/summoner = allocate(/mob/living/carbon/human/consistent)
@@ -346,7 +380,7 @@
 	var/obj/item/implant/golden_gardren_summon/implant = allocate(/obj/item/implant/golden_gardren_summon)
 	TEST_ASSERT(implant.implant(summoner, null, silent = TRUE, force = TRUE), "The summon implant could not be implanted")
 
-	var/turf/landing = implant.find_landing(summoner)
+	var/turf/open/floor/landing = implant.find_landing(summoner)
 	TEST_ASSERT_NOTNULL(landing, "No landing spot was found around the summoner in the test room")
 	TEST_ASSERT(landing != get_turf(summoner), "The mech was going to land on the summoner")
 	TEST_ASSERT(get_dist(landing, summoner) <= 2, "The landing spot is too far from the summoner")
@@ -361,6 +395,19 @@
 	var/obj/effect/pod_landingzone/zone = locate() in landing
 	TEST_ASSERT_NOTNULL(zone, "The drop pod was not sent to the landing spot")
 	TEST_ASSERT_EQUAL(zone.pod, golden.loc, "The landing spot belongs to a different pod")
+	stowaway.forceMove(landing)
+	var/landing_type = landing.type
+	var/stowaway_health = stowaway.get_brute_loss()
+	var/summoner_health = summoner.get_brute_loss()
+	for(var/waited in 1 to 45)
+		if(golden.loc == landing)
+			break
+		sleep(1)
+	TEST_ASSERT_EQUAL(golden.loc, landing, "The mech did not land on the marked tile")
+	TEST_ASSERT_EQUAL(landing.type, landing_type, "The impact changed the turf type")
+	TEST_ASSERT(landing.broken, "The impact did not crack the floor tile")
+	TEST_ASSERT_EQUAL(stowaway.get_brute_loss() - stowaway_health, 10, "The impact dealt the wrong amount of damage")
+	TEST_ASSERT_EQUAL(summoner.get_brute_loss(), summoner_health, "The impact harmed someone on a neighbouring tile")
 
 /// The phase shift belongs to the pilot: it carries the mech through obstacles at an energy cost and keeps the hands idle while on.
 /datum/unit_test/golden_gardren_phasing

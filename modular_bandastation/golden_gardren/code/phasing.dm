@@ -1,11 +1,4 @@
-/**
- * ## Golden-Gardren phase shift
- *
- * The Phazon's phasing for the Gardren and the combined mech: while on, the mech passes through walls and other obstacles,
- * every step costs energy, and the hands and weapons cannot be used. Same limits as the Phazon:
- * no phasing into places where teleportation is not allowed or on levels that forbid phasing.
- * A phasing mech is drawn blurred and half see-through.
- */
+/// Lets the mech pass through obstacles under the same restrictions as the Phazon.
 /datum/component/golden_gardren_phasing
 	/// Whether the phase shift is on.
 	var/active = FALSE
@@ -96,7 +89,7 @@
 /// Toggles the phase shift. The pilot's seat: movement belongs to them.
 /datum/action/vehicle/sealed/mecha/golden_gardren_phasing
 	name = "Фазовый сдвиг"
-	desc = "Проходить сквозь стены и препятствия. Каждый шаг тратит много энергии; руки и оружие недоступны, пока сдвиг включён."
+	desc = "Проходить сквозь стены и препятствия. Каждый шаг расходует заряд. Во время сдвига руки и оружие недоступны."
 	button_icon_state = "mech_phasing_off"
 
 /datum/action/vehicle/sealed/mecha/golden_gardren_phasing/Trigger(mob/clicker, trigger_flags)

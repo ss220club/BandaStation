@@ -1,5 +1,4 @@
 import {
-  Box,
   Button,
   LabeledList,
   NoticeBox,
@@ -14,18 +13,13 @@ type Weapon = {
   slot: string;
   name: string;
   button: string;
-  ammo?: number;
-  max_ammo?: number;
-  reserve?: number;
-  can_reload?: boolean;
 };
 
 type CockpitData = {
   seat: 'main' | 'weapons' | null;
   integrity: number;
   max_integrity: number;
-  charge: number;
-  max_charge: number;
+  charge_percent: number;
   shield_active: boolean;
   shield_charge: number;
   shield_max_charge: number;
@@ -36,18 +30,13 @@ type CockpitData = {
   strafe?: boolean;
   lights?: boolean;
   force?: number;
-  ram_cooldown?: number;
   shield_ready?: boolean;
-  strike_cooldown?: number;
   weapons?: Weapon[];
 };
 
 const CRITICAL_SHARE = 0.3;
 
 const share = (value: number, max: number) => (max > 0 ? value / max : 0);
-
-const cooldownText = (seconds?: number) =>
-  seconds ? `${seconds} с` : 'готово';
 
 export const GoldenGardrenCockpit = () => {
   const { data } = useBackend<CockpitData>();
@@ -80,7 +69,7 @@ export const GoldenGardrenCockpit = () => {
 const MachineSection = () => {
   const { data } = useBackend<CockpitData>();
   const integrity = share(data.integrity, data.max_integrity);
-  const charge = share(data.charge, data.max_charge);
+  const charge = data.charge_percent / 100;
   const shield = share(data.shield_charge, data.shield_max_charge);
   return (
     <Section title="Машина">
@@ -102,7 +91,7 @@ const MachineSection = () => {
             {Math.round(data.integrity)} / {data.max_integrity}
           </ProgressBar>
         </LabeledList.Item>
-        <LabeledList.Item label="Энергия">
+        <LabeledList.Item label="Заряд батареи">
           <ProgressBar
             value={charge}
             ranges={{
@@ -111,7 +100,7 @@ const MachineSection = () => {
               bad: [-Infinity, 0.2],
             }}
           >
-            {Math.round(charge * 100)}%
+            {Math.round(data.charge_percent)}%
           </ProgressBar>
         </LabeledList.Item>
         <LabeledList.Item label="Щит">
@@ -158,9 +147,6 @@ const MainSeatSection = () => {
           </Button>
         </LabeledList.Item>
         <LabeledList.Item label="Сила удара">{data.force}</LabeledList.Item>
-        <LabeledList.Item label="Золотой таран">
-          {cooldownText(data.ram_cooldown)}
-        </LabeledList.Item>
       </LabeledList>
     </Section>
   );
@@ -185,33 +171,10 @@ const WeaponsSeatSection = () => {
     >
       <LabeledList>
         {weapons.map((weapon) => (
-          <LabeledList.Item
-            key={weapon.slot}
-            label={`${weapon.button}: ${weapon.name}`}
-            buttons={
-              weapon.max_ammo !== undefined && (
-                <Button
-                  icon="rotate"
-                  disabled={!weapon.can_reload}
-                  onClick={() => act('reload', { slot: weapon.slot })}
-                >
-                  Перезарядить
-                </Button>
-              )
-            }
-          >
-            {weapon.max_ammo !== undefined ? (
-              <ProgressBar value={share(weapon.ammo || 0, weapon.max_ammo)}>
-                {weapon.ammo} / {weapon.max_ammo} (запас {weapon.reserve})
-              </ProgressBar>
-            ) : (
-              <Box color="label">энергетическое</Box>
-            )}
+          <LabeledList.Item key={weapon.slot} label={weapon.button}>
+            {weapon.name}
           </LabeledList.Item>
         ))}
-        <LabeledList.Item label="Ракетный удар">
-          {cooldownText(data.strike_cooldown)}
-        </LabeledList.Item>
       </LabeledList>
     </Section>
   );

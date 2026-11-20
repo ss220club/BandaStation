@@ -1,14 +1,6 @@
 /// Share of integrity at and below which the pilots are warned that the frame is about to break.
 #define GOLDEN_GARDREN_CRITICAL_INTEGRITY 0.3
 
-/**
- * ## Golden-Gardren
- *
- * The combined two-pilot mech. Occupies a single tile so it fits through airlocks, but is drawn one and a half tiles tall.
- * Main seat: movement, the fist (punch, grab, throw, squeeze), the phase shift and the Golden Ram. Weapons seat: arm weapons, the shield and the missile strike.
- * When formed from the pair, the Golden and the Gardren are kept docked inside and the frame runs on the Gardren's parts.
- * Event-only: spawned by admins or formed from the pair, not buildable.
- */
 /obj/vehicle/sealed/mecha/golden_gardren
 	parent_type = /obj/vehicle/sealed/mecha/golden_gardren_base
 	name = "\improper Golden-Gardren"
@@ -17,31 +9,18 @@
 	icon_state = "golden_gardren"
 	base_icon_state = "golden_gardren"
 	SET_BASE_PIXEL(-8, 0)
-	mecha_flags = CAN_STRAFE | IS_ENCLOSED | HAS_LIGHTS | BEACON_TRACKABLE
-	// Reuses the Savannah-Ivanov module bit so combat equipment fits without a new exosuit define.
-	mech_type = EXOSUIT_MODULE_SAVANNAH
 	movedelay = 3
 	max_integrity = 450
 	armor_type = /datum/armor/mecha_golden_gardren
-	max_temperature = 30000
 	force = 45
-	destruction_sleep_duration = 40
-	exit_delay = 40
 	max_occupants = 2
 	wreckage = /obj/structure/mecha_wreckage/golden_gardren
 	equip_by_category = list(
-		MECHA_L_ARM = /obj/item/mecha_parts/mecha_equipment/weapon/energy/laser/heavy,
-		MECHA_R_ARM = /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack,
+		MECHA_L_ARM = /obj/item/mecha_parts/mecha_equipment/weapon/energy/laser/heavy/golden_gardren,
+		MECHA_R_ARM = /obj/item/mecha_parts/mecha_equipment/weapon/energy/laser/heavy/golden_gardren,
 		MECHA_UTILITY = list(),
 		MECHA_POWER = list(),
 		MECHA_ARMOR = list(),
-	)
-	max_equip_by_category = list(
-		MECHA_L_ARM = 1,
-		MECHA_R_ARM = 1,
-		MECHA_UTILITY = 3,
-		MECHA_POWER = 1,
-		MECHA_ARMOR = 1,
 	)
 	/// The Golden docked inside while combined. Null for an admin-spawned frame.
 	var/obj/vehicle/sealed/mecha/golden/docked_golden
@@ -72,7 +51,7 @@
 	QDEL_NULL(cockpit)
 	// Put the pilots on free turfs instead of the base drop under the frame.
 	var/datum/component/golden_gardren_ejection/ejection = GetComponent(/datum/component/golden_gardren_ejection)
-	ejection?.eject(use_capsules = FALSE, stun = FALSE)
+	ejection?.eject(use_capsules = FALSE)
 	// The halves exist only as a part of this frame now, so they go down with it.
 	QDEL_NULL(docked_golden)
 	QDEL_NULL(docked_gardren)
@@ -84,13 +63,11 @@
 	initialize_passenger_action_type(/datum/action/vehicle/sealed/mecha/golden_gardren_swap_seat)
 	initialize_passenger_action_type(/datum/action/vehicle/sealed/mecha/golden_gardren_emergency_eject)
 	initialize_passenger_action_type(/datum/action/vehicle/sealed/mecha/golden_gardren_separate)
-	initialize_controller_action_type(/datum/action/vehicle/sealed/mecha/golden_gardren_ram, VEHICLE_CONTROL_DRIVE)
 	initialize_controller_action_type(/datum/action/vehicle/sealed/mecha/golden_gardren_phasing, VEHICLE_CONTROL_DRIVE)
 	initialize_controller_action_type(/datum/action/vehicle/sealed/mecha/golden_gardren_fist, VEHICLE_CONTROL_MELEE)
 	initialize_controller_action_type(/datum/action/vehicle/sealed/mecha/golden_gardren_fist_squeeze, VEHICLE_CONTROL_MELEE)
 	initialize_controller_action_type(/datum/action/vehicle/sealed/mecha/mech_view_stats, VEHICLE_CONTROL_EQUIPMENT)
 	initialize_controller_action_type(/datum/action/vehicle/sealed/mecha/golden_gardren_shield, VEHICLE_CONTROL_EQUIPMENT)
-	initialize_controller_action_type(/datum/action/vehicle/sealed/mecha/ivanov_strike/golden_gardren, VEHICLE_CONTROL_EQUIPMENT)
 
 /// The first pilot in takes the main seat, the second one the weapons seat.
 /obj/vehicle/sealed/mecha/golden_gardren/auto_assign_occupant_flags(mob/new_occupant)
@@ -108,13 +85,6 @@
 	drop_unmanned_systems()
 	update_appearance()
 
-/// Lets go of what nobody is left to operate: the shield without a gunner, the fist without a pilot.
-/obj/vehicle/sealed/mecha/golden_gardren/proc/drop_unmanned_systems()
-	var/datum/component/golden_gardren_shield/shield = GetComponent(/datum/component/golden_gardren_shield)
-	shield?.drop_if_unmanned()
-	if(!return_amount_of_controllers_with_flag(VEHICLE_CONTROL_MELEE))
-		golden_gardren_release_fist(src)
-
 // Equipment buttons belong to the weapons seat, not to the seat with mech settings.
 /obj/vehicle/sealed/mecha/golden_gardren/generate_equipment_actions(mob/occupant)
 	if(!(occupant in occupants) || !(occupants[occupant] & VEHICLE_CONTROL_EQUIPMENT))
@@ -129,10 +99,6 @@
 	for(var/mob/occupant as anything in return_controllers_with_flag(VEHICLE_CONTROL_EQUIPMENT))
 		grant_equipment_action(occupant, equipment)
 
-/obj/vehicle/sealed/mecha/golden_gardren/remove_occupant(mob/driver)
-	. = ..()
-	drop_unmanned_systems()
-
 /// Each seat may only use its own part of the mech panel: weapons belong to the weapons seat, settings to the main seat.
 /obj/vehicle/sealed/mecha/golden_gardren/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
 	var/mob/user = ui?.user
@@ -145,13 +111,8 @@
 			return FALSE
 	return ..()
 
-/// The shield soaks brute and burn damage from its own charge before it reaches the hull. Crossing into critical damage raises the alarm.
+/// Sound the alarm when the frame crosses the critical integrity threshold.
 /obj/vehicle/sealed/mecha/golden_gardren/take_damage(damage_amount, damage_type = BRUTE, damage_flag = "", sound_effect = TRUE, attack_dir, armour_penetration = 0)
-	var/datum/component/golden_gardren_shield/shield = GetComponent(/datum/component/golden_gardren_shield)
-	if(shield?.active && damage_amount > 0)
-		damage_amount = shield.absorb(damage_amount, damage_type)
-		if(damage_amount <= 0)
-			return 0
 	var/critical_integrity = max_integrity * GOLDEN_GARDREN_CRITICAL_INTEGRITY
 	var/was_above_critical = get_integrity() > critical_integrity
 	. = ..()
@@ -160,33 +121,23 @@
 		to_chat(occupants, span_userdanger("КРИТИЧЕСКИЕ ПОВРЕЖДЕНИЯ! Корпус вот-вот разрушится — готовьтесь к аварийному катапультированию."))
 		playsound(src, 'sound/machines/warning-buzzer.ogg', 75, FALSE)
 
-/obj/vehicle/sealed/mecha/golden_gardren/user_unbuckle_mob(mob/living/buckled_mob, mob/user)
-	if(golden_gardren_fist_intercept_unbuckle(src, buckled_mob, user))
-		return null
-	return ..()
-
 /**
  * Forms the frame from the pair: moves the pilots in, takes over the Gardren's parts and docks both halves.
- * Every check must already have passed; either pilot may be missing.
+ * Both pilots must still be at the controls of their original mechs.
  * Returns FALSE and leaves the pair untouched if a pilot could not be moved.
  */
 /obj/vehicle/sealed/mecha/golden_gardren/proc/assemble(obj/vehicle/sealed/mecha/golden/golden, obj/vehicle/sealed/mecha/gardren/gardren, mob/living/golden_pilot, mob/living/gardren_pilot)
-	if(gardren_pilot && !take_pilot_from(gardren, gardren_pilot))
+	if(!golden_gardren_pilot_ready(golden, golden_pilot) || !golden_gardren_pilot_ready(gardren, gardren_pilot))
 		return FALSE
-	if(golden_pilot && !take_pilot_from(golden, golden_pilot))
-		if(gardren_pilot)
-			move_pilot_to(gardren, gardren_pilot)
+	if(!gardren.transfer_pilot(src, gardren_pilot))
 		return FALSE
-	// The seat follows the half the pilot came from, whoever entered first.
-	if(gardren_pilot)
-		assign_seat(gardren_pilot, main_seat = TRUE)
-	if(golden_pilot)
-		assign_seat(golden_pilot, main_seat = FALSE)
+	if(!golden.transfer_pilot(src, golden_pilot))
+		transfer_pilot(gardren, gardren_pilot)
+		return FALSE
+	assign_seat(gardren_pilot, main_seat = TRUE)
+	assign_seat(golden_pilot, main_seat = FALSE)
 
-	for(var/obj/item/stock_parts/part in list(gardren.cell, gardren.scanmod, gardren.capacitor, gardren.servo))
-		part.forceMove(src)
-	gardren.locate_parts()
-	locate_parts()
+	gardren.transfer_stock_parts(src)
 
 	max_integrity = golden.max_integrity + gardren.max_integrity
 	update_integrity(golden.get_integrity() + gardren.get_integrity())
@@ -199,28 +150,6 @@
 	update_appearance()
 	log_message("Combined from [golden] ([key_name(golden_pilot)]) and [gardren] ([key_name(gardren_pilot)]).", LOG_MECHA)
 	return TRUE
-
-/// Moves a pilot from one of the halves into this frame without dropping them on the floor in between.
-/obj/vehicle/sealed/mecha/golden_gardren/proc/take_pilot_from(obj/vehicle/sealed/mecha/source, mob/living/pilot)
-	if(!source.is_occupant(pilot) || pilot.loc != source)
-		return FALSE
-	SStgui.close_user_uis(pilot, source)
-	// Leaving the source makes its Exited() remove the occupant there.
-	if(!mob_enter(pilot, silent = TRUE))
-		return FALSE
-	pilot.update_mouse_pointer()
-	set_mouse_pointer()
-	return TRUE
-
-/// Moves a pilot from this frame into one of the halves. Used to roll back a failed assembly and on separation.
-/obj/vehicle/sealed/mecha/golden_gardren/proc/move_pilot_to(obj/vehicle/sealed/mecha/destination, mob/living/pilot)
-	if(!is_occupant(pilot))
-		return
-	SStgui.close_user_uis(pilot, src)
-	// Leaving this frame makes its Exited() remove the occupant here.
-	destination.mob_enter(pilot, silent = TRUE)
-	pilot.update_mouse_pointer()
-	destination.set_mouse_pointer()
 
 /// Stores a half inside the frame: hidden, switched off and not processing until the frame separates.
 /obj/vehicle/sealed/mecha/golden_gardren/proc/dock_component(obj/vehicle/sealed/mecha/component)
