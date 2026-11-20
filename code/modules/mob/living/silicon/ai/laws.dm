@@ -1,8 +1,12 @@
-
-GAME_VERB_PROC_DESC(/mob/living/silicon/ai, show_laws_verb, "Show Laws", "Check what your laws are privately. Also ensures all synced cyborgs are up to date with your laws, reminds them of your laws.", "AI Commands")
+// BANDASTATION ADD START - Перенос ИИ: личное окно законов ИИ.
+GAME_VERB_PROC_DESC(/mob/living/silicon/ai, show_laws_verb, "Мои законы", "Посмотреть свои действующие законы.", "AI Commands")
 	if(usr.stat == DEAD)
-		return //won't work if dead
+		return
+	if(decentralized)
+		open_neural_laws()
+		return
 	src.show_laws()
+// BANDASTATION ADD END - Перенос ИИ
 
 /mob/living/silicon/ai/try_sync_laws()
 	for(var/mob/living/silicon/robot/borgo in connected_robots)

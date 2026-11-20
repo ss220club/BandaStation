@@ -36,6 +36,9 @@ type Message = {
 };
 
 export type CommsConsoleData = {
+  // BANDASTATION ADD START - Перенос ИИ: доступность печати аварийного кода.
+  canIssueAiControlCode: BooleanLike;
+  // BANDASTATION ADD END - Перенос ИИ
   alertLevel: string;
   alertLevelTick: number;
   aprilFools: BooleanLike;

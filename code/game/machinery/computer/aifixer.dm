@@ -1,6 +1,8 @@
+// BANDASTATION ADD START - Перенос ИИ: русские сообщения восстановления ИИ.
+/** Стационарное устройство восстановления исходного ИИ с intelliCard. */
 /obj/machinery/computer/aifixer
 	name = "\improper AI system integrity restorer"
-	desc = "Used with intelliCards containing nonfunctional AIs to restore them to working order."
+	desc = "Восстанавливает работоспособность повреждённых ИИ, перенесённых на intelliCard."
 	req_access = list(ACCESS_CAPTAIN, ACCESS_ROBOTICS, ACCESS_COMMAND)
 	circuit = /obj/item/circuitboard/computer/aifixer
 	icon_state = MAP_SWITCH("computer", "/obj/machinery/computer/aifixer")
@@ -13,14 +15,16 @@
 	/// Variable dictating if we are in the process of restoring the occupier AI
 	var/restoring = FALSE
 
+/** Проверяет состояние устройства перед открытием панели обслуживания. */
 /obj/machinery/computer/aifixer/screwdriver_act(mob/living/user, obj/item/I)
 	if(occupier)
 		if(machine_stat & (NOPOWER|BROKEN))
-			to_chat(user, span_warning("The screws on [name]'s screen won't budge."))
+			to_chat(user, span_warning("Винты экрана [declent_ru(GENITIVE)] не поддаются."))
 		else
-			to_chat(user, span_warning("The screws on [name]'s screen won't budge and it emits a warning beep."))
+			to_chat(user, span_warning("Винты экрана [declent_ru(GENITIVE)] не поддаются; устройство подаёт предупреждающий сигнал."))
 	else
 		return ..()
+// BANDASTATION ADD END - Перенос ИИ
 
 /obj/machinery/computer/aifixer/ui_interact(mob/user, datum/tgui/ui)
 	. = ..()
@@ -29,6 +33,8 @@
 		ui = new(user, src, "AiRestorer", name)
 		ui.open()
 
+// BANDASTATION ADD START - Перенос ИИ: русские сообщения восстановления ИИ.
+/** Передаёт состояние установленного носителя и доступные операции восстановления ИИ. */
 /obj/machinery/computer/aifixer/ui_data(mob/user)
 	var/list/data = list()
 
@@ -36,7 +42,7 @@
 	data["AI_present"] = FALSE
 	data["error"] = null
 	if(!occupier)
-		data["error"] = "Please transfer an AI unit."
+		data["error"] = "Перенесите ИИ в терминал."
 	else
 		data["AI_present"] = TRUE
 		data["name"] = occupier.name
@@ -47,6 +53,7 @@
 
 	return data
 
+/** Проверяет доступ и неизменность носителя перед выполнением команды восстановления. */
 /obj/machinery/computer/aifixer/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
 	. = ..()
 	if(.)
@@ -58,15 +65,16 @@
 	switch(action)
 		if("PRG_beginReconstruction")
 			if(occupier?.health < 100)
-				to_chat(usr, span_notice("Reconstruction in progress. This will take several minutes."))
+				to_chat(usr, span_notice("Восстановление началось. Это займёт несколько минут."))
 				playsound(src, 'sound/machines/terminal/terminal_prompt_confirm.ogg', 25, FALSE)
 				restoring = TRUE
-				occupier.notify_revival("Your core files are being restored!", source = src)
+				occupier.notify_revival("Ваши системные файлы восстанавливаются!", source = src)
 				. = TRUE
 
+/** Восстанавливает размещённого в устройстве ИИ без подмены исходного носителя. */
 /obj/machinery/computer/aifixer/proc/Fix()
 	if(!use_energy(active_power_usage, force = TRUE))
-		say("Not enough energy. Restoration cancelled.")
+		say("Недостаточно энергии. Восстановление отменено.")
 		return FALSE
 	var/need_mob_update = FALSE
 	need_mob_update += occupier.adjust_oxy_loss(-5, updating_health = FALSE)
@@ -78,8 +86,9 @@
 		occupier.revive()
 		if(!occupier.radio_enabled)
 			occupier.radio_enabled = TRUE
-			to_chat(occupier, span_warning("Your Subspace Transceiver has been enabled!"))
+			to_chat(occupier, span_warning("Ваш подпространственный приёмопередатчик включён!"))
 	return occupier.health < 100
+// BANDASTATION ADD END - Перенос ИИ
 
 /obj/machinery/computer/aifixer/process()
 	if(..())
@@ -106,35 +115,38 @@
 	else if(!IS_UNCONSCIOUS_OR_CRIT(occupier))
 		. += "ai-fixer-full"
 
+// BANDASTATION ADD START - Перенос ИИ: русские сообщения восстановления ИИ.
+/** Обрабатывает штатный перенос через intelliCard с проверкой направления и действительного содержимого носителя. */
 /obj/machinery/computer/aifixer/transfer_ai(interaction, mob/user, mob/living/silicon/ai/AI, obj/item/aicard/card)
 	if(!..())
 		return
 	//Downloading AI from card to terminal.
 	if(interaction == AI_TRANS_FROM_CARD)
 		if(machine_stat & (NOPOWER|BROKEN))
-			to_chat(user, span_alert("[src] is offline and cannot take an AI at this time."))
+			to_chat(user, span_alert("[declent_ru(NOMINATIVE)] отключён и не может принять ИИ."))
 			return
 		AI.forceMove(src)
 		occupier = AI
 		AI.set_control_disabled(TRUE)
 		AI.radio_enabled = FALSE
-		to_chat(AI, span_alert("You have been uploaded to a stationary terminal. Sadly, there is no remote access from here."))
-		to_chat(user, "[span_notice("Transfer successful")]: [AI.name] ([rand(1000,9999)].exe) installed and executed successfully. Local copy has been removed.")
+		to_chat(AI, span_alert("Вы загружены в стационарный терминал. Удалённое управление отсюда недоступно."))
+		to_chat(user, "[span_notice("Перенос завершён")]: [AI.name] ([rand(1000,9999)].exe) установлен и запущен. Копия на карте удалена.")
 		card.AI = null
 		update_appearance()
 
 	else //Uploading AI from terminal to card
 		if(occupier && !restoring)
-			to_chat(occupier, span_notice("You have been downloaded to a mobile storage device. Still no remote access."))
-			to_chat(user, "[span_notice("Transfer successful")]: [occupier.name] ([rand(1000,9999)].exe) removed from host terminal and stored within local memory.")
+			to_chat(occupier, span_notice("Вы выгружены на переносной накопитель. Удалённое управление по-прежнему недоступно."))
+			to_chat(user, "[span_notice("Перенос завершён")]: [occupier.name] ([rand(1000,9999)].exe) снят с терминала и сохранён в памяти карты.")
 			occupier.forceMove(card)
 			card.AI = occupier
 			occupier = null
 			update_appearance()
 		else if (restoring)
-			to_chat(user, span_alert("ERROR: Reconstruction in progress."))
+			to_chat(user, span_alert("ОШИБКА: Выполняется восстановление."))
 		else if (!occupier)
-			to_chat(user, span_alert("ERROR: Unable to locate artificial intelligence."))
+			to_chat(user, span_alert("ОШИБКА: ИИ не обнаружен."))
+// BANDASTATION ADD END - Перенос ИИ
 
 /obj/machinery/computer/aifixer/Destroy()
 	if(occupier)

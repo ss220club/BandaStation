@@ -80,6 +80,9 @@ SUBSYSTEM_DEF(persistence)
 
 ///Collects all data to persist.
 /datum/controller/subsystem/persistence/proc/collect_data()
+	// BANDASTATION ADD START - Перенос ИИ: сохранение рекордов нейросети.
+	SSai_networks.save_benchmark_history()
+	// BANDASTATION ADD END - Перенос ИИ
 	save_wall_engravings()
 	save_prisoner_tattoos()
 	collect_trophies()
