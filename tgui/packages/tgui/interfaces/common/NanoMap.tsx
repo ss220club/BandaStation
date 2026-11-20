@@ -344,7 +344,7 @@ function MapButton(props) {
     if (tracking && props.selected && !hidden) {
       zoomToElement('selected', mapState.scale, 1000, 'linear');
     }
-  }, [posX, posY]);
+  }, [posX, posY, hidden]); // BANDASTATION EDIT - center tracked markers after switching floors
 
   useEffect(() => {
     if (

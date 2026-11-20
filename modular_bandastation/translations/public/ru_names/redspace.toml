@@ -1,0 +1,147 @@
+# MARK: Redspace
+["redspace disturbance sensor"]
+nominative = "датчик возмущения редспейса"
+genitive = "датчика возмущения редспейса"
+dative = "датчику возмущения редспейса"
+accusative = "датчик возмущения редспейса"
+instrumental = "датчиком возмущения редспейса"
+prepositional = "датчике возмущения редспейса"
+gender = "male"
+
+["redspace disturbance counter"]
+nominative = "счётчик возмущения редспейса"
+genitive = "счётчика возмущения редспейса"
+dative = "счётчику возмущения редспейса"
+accusative = "счётчик возмущения редспейса"
+instrumental = "счётчиком возмущения редспейса"
+prepositional = "счётчике возмущения редспейса"
+gender = "male"
+
+["redspace disturbance console"]
+nominative = "консоль возмущения редспейса"
+genitive = "консоли возмущения редспейса"
+dative = "консоли возмущения редспейса"
+accusative = "консоль возмущения редспейса"
+instrumental = "консолью возмущения редспейса"
+prepositional = "консоли возмущения редспейса"
+gender = "female"
+
+["demonic redspace crystal"]
+nominative = "демонический кристалл редспейса"
+genitive = "демонического кристалла редспейса"
+dative = "демоническому кристаллу редспейса"
+accusative = "демонический кристалл редспейса"
+instrumental = "демоническим кристаллом редспейса"
+prepositional = "демоническом кристалле редспейса"
+gender = "male"
+
+["ranged demon"]
+nominative = "демон-стрелок"
+genitive = "демона-стрелка"
+dative = "демону-стрелку"
+accusative = "демона-стрелка"
+instrumental = "демоном-стрелком"
+prepositional = "демоне-стрелке"
+gender = "male"
+
+["demon soldier"]
+nominative = "демон-солдат"
+genitive = "демона-солдата"
+dative = "демону-солдату"
+accusative = "демона-солдата"
+instrumental = "демоном-солдатом"
+prepositional = "демоне-солдате"
+gender = "male"
+
+["minotaur"]
+nominative = "минотавр"
+genitive = "минотавра"
+dative = "минотавру"
+accusative = "минотавра"
+instrumental = "минотавром"
+prepositional = "минотавре"
+gender = "male"
+
+# MARK: Redspace Devourer
+["demonic devourer"]
+nominative = "демонический пожиратель"
+genitive = "демонического пожирателя"
+dative = "демоническому пожирателю"
+accusative = "демонического пожирателя"
+instrumental = "демоническим пожирателем"
+prepositional = "демоническом пожирателе"
+gender = "male"
+
+# MARK: Redspace Beholder
+["mature beholder"]
+nominative = "зрелый демон-бехолдер"
+genitive = "зрелого демона-бехолдера"
+dative = "зрелому демону-бехолдеру"
+accusative = "зрелого демона-бехолдера"
+instrumental = "зрелым демоном-бехолдером"
+prepositional = "зрелом демоне-бехолдере"
+gender = "male"
+
+# MARK: Redspace Ravager
+["ravager"]
+nominative = "опустошитель"
+genitive = "опустошителя"
+dative = "опустошителю"
+accusative = "опустошителя"
+instrumental = "опустошителем"
+prepositional = "опустошителе"
+gender = "male"
+
+["demonic beacon"]
+nominative = "демонический маяк"
+genitive = "демонического маяка"
+dative = "демоническому маяку"
+accusative = "демонический маяк"
+instrumental = "демоническим маяком"
+prepositional = "демоническом маяке"
+gender = "male"
+
+["Demonic Beacon"]
+nominative = "демонический маяк"
+genitive = "демонического маяка"
+dative = "демоническому маяку"
+accusative = "демонический маяк"
+instrumental = "демоническим маяком"
+prepositional = "демоническом маяке"
+gender = "male"
+
+["redspace rift sealer"]
+nominative = "установка закрытия разломов редспейса"
+genitive = "установки закрытия разломов редспейса"
+dative = "установке закрытия разломов редспейса"
+accusative = "установку закрытия разломов редспейса"
+instrumental = "установкой закрытия разломов редспейса"
+prepositional = "установке закрытия разломов редспейса"
+gender = "female"
+
+["Redspace Rift Sealer Board"]
+nominative = "плата установки закрытия разломов редспейса"
+genitive = "платы установки закрытия разломов редспейса"
+dative = "плате установки закрытия разломов редспейса"
+accusative = "плату установки закрытия разломов редспейса"
+instrumental = "платой установки закрытия разломов редспейса"
+prepositional = "плате установки закрытия разломов редспейса"
+gender = "female"
+
+["redspace rift scanner"]
+nominative = "сканер разломов редспейса"
+genitive = "сканера разломов редспейса"
+dative = "сканеру разломов редспейса"
+accusative = "сканер разломов редспейса"
+instrumental = "сканером разломов редспейса"
+prepositional = "сканере разломов редспейса"
+gender = "male"
+
+["Redspace Rift Scanner Board"]
+nominative = "плата сканера разломов редспейса"
+genitive = "платы сканера разломов редспейса"
+dative = "плате сканера разломов редспейса"
+accusative = "плату сканера разломов редспейса"
+instrumental = "платой сканера разломов редспейса"
+prepositional = "плате сканера разломов редспейса"
+gender = "female"

@@ -1,0 +1,191 @@
+#if defined(UNIT_TESTS) || defined(SPACEMAN_DMM)
+
+/datum/unit_test/redspace_rift_sealer
+
+/datum/unit_test/redspace_rift_sealer/Run()
+	var/turf/test_turf = run_loc_floor_bottom_left
+	var/datum/redspace_field_source/hotspot/hotspot = new(0, test_turf, 4, 6, REDSPACE_PROFILE_DEMONIC)
+	hotspot.growth_last_update_at = world.time - (2 MINUTES)
+	var/list/growth_update = hotspot.get_growth_update()
+	if(!growth_update || abs(growth_update[1] - 4.4) > 0.01 || abs(growth_update[2] - 7) > 0.01)
+		qdel(hotspot)
+		return Fail("Hotspots must grow by 0.2 strength and 0.5 radius per minute")
+	qdel(hotspot)
+
+	var/datum/redspace_field_source/hotspot/fractional_radius_source = new(0, test_turf, 1, 1, REDSPACE_PROFILE_DEMONIC)
+	if(!fractional_radius_source.set_radius(1.5, "unit test") || fractional_radius_source.radius != 1.5 || fractional_radius_source.radius_squared != 2.25)
+		qdel(fractional_radius_source)
+		return Fail("Redspace source radii must preserve fractional growth values")
+	qdel(fractional_radius_source)
+
+	if(!SSredspace)
+		return Fail("The redspace subsystem must be available for rift sealer tests")
+
+	var/turf/supported_turf = test_turf
+	if(!SSredspace.is_supported_z(supported_turf.z))
+		supported_turf = locate(1, 1, SSredspace.station_z_levels[1])
+	var/datum/redspace_field_source/hotspot/registered_hotspot = SSredspace.register_hotspot(supported_turf, 4, 6.5)
+	var/obj/machinery/redspace_rift_sealer/sealer = allocate(/obj/machinery/redspace_rift_sealer, supported_turf)
+	if(!registered_hotspot || !sealer)
+		if(registered_hotspot)
+			SSredspace.remove_source(registered_hotspot.source_id, "unit test cleanup")
+		if(sealer)
+			qdel(sealer)
+		return Fail("A nearby rift sealer must join a registered hotspot")
+	if(registered_hotspot.radius_squared != registered_hotspot.radius * registered_hotspot.radius)
+		SSredspace.remove_source(registered_hotspot.source_id, "unit test cleanup")
+		qdel(sealer)
+		return Fail("Registered hotspots must keep radius and radius_squared synchronized")
+	sealer.anchored = TRUE
+	if(!sealer.try_start_sealing())
+		SSredspace.remove_source(registered_hotspot.source_id, "unit test cleanup")
+		qdel(sealer)
+		return Fail("A nearby rift sealer must join a registered hotspot")
+
+	if(!registered_hotspot.sealing_active || registered_hotspot.strength != REDSPACE_RIFT_SEALING_LOW_TARGET_STRENGTH)
+		SSredspace.remove_source(registered_hotspot.source_id, "unit test cleanup")
+		qdel(sealer)
+		return Fail("Sealing a hotspot below seven must raise its strength to seven")
+	if(!(sealer.sealing_shield_overlay in sealer.update_overlays()))
+		SSredspace.remove_source(registered_hotspot.source_id, "unit test cleanup")
+		qdel(sealer)
+		return Fail("An active rift sealer must display its shield overlay")
+	var/sealer_integrity = sealer.get_integrity()
+	for(var/hit in 1 to REDSPACE_RIFT_SEALER_SHIELD_HITS)
+		sealer.take_damage(10, BRUTE, MELEE, FALSE)
+		if(sealer.get_integrity() != sealer_integrity || sealer.sealing_shield_hits != REDSPACE_RIFT_SEALER_SHIELD_HITS - hit)
+			SSredspace.remove_source(registered_hotspot.source_id, "unit test cleanup")
+			qdel(sealer)
+			return Fail("An active rift sealer must block five hits with its sealing shield")
+	sealer.take_damage(10, BRUTE, MELEE, FALSE)
+	if(sealer.get_integrity() >= sealer_integrity || sealer.sealing_shield_hits)
+		SSredspace.remove_source(registered_hotspot.source_id, "unit test cleanup")
+		qdel(sealer)
+		return Fail("A sealing shield must be depleted after five blocked hits")
+	if(sealer.sealing_shield_overlay in sealer.update_overlays())
+		SSredspace.remove_source(registered_hotspot.source_id, "unit test cleanup")
+		qdel(sealer)
+		return Fail("A depleted sealing shield must remove its overlay")
+
+	var/datum/redspace_field_source/stabilizer/test_stabilizer = SSredspace.register_stabilizer_source(supported_turf, -8, REDSPACE_HEX_RADIUS, "unit test")
+	if(!test_stabilizer || SSredspace.calculate_value(supported_turf, SSredspace.get_cell(supported_turf)) != REDSPACE_RIFT_SEALING_LOW_TARGET_STRENGTH)
+		if(test_stabilizer)
+			SSredspace.remove_source(test_stabilizer.source_id, "unit test cleanup")
+		sealer.stop_sealing("unit test cleanup")
+		SSredspace.remove_source(registered_hotspot.source_id, "unit test cleanup")
+		qdel(sealer)
+		return Fail("A low-strength active seal must hold the field at seven despite stabilizer sources")
+	SSredspace.remove_source(test_stabilizer.source_id, "unit test cleanup")
+
+	var/datum/redspace_event_profile/test_profile = new(REDSPACE_STATE_STORM, 100, 100, 100, list())
+	if(SSredspace.get_event_attempt_delay(SSredspace.get_cell(supported_turf), test_profile) != 83)
+		qdel(test_profile)
+		sealer.stop_sealing("unit test cleanup")
+		SSredspace.remove_source(registered_hotspot.source_id, "unit test cleanup")
+		qdel(sealer)
+		return Fail("Automatic redspace events must use the 1.2x sealing cadence multiplier")
+	qdel(test_profile)
+
+	var/mob/living/basic/demon/redspace/test_demon = allocate(/mob/living/basic/demon/redspace, supported_turf)
+	test_demon.ai_controller.force_ai_off()
+	var/turf/human_target_turf = get_step(supported_turf, NORTH)
+	var/mob/living/carbon/human/human_target = allocate(/mob/living/carbon/human, human_target_turf)
+	human_target.mind_initialize()
+	var/mob/living/carbon/human/far_human_target = allocate(/mob/living/carbon/human, get_step(human_target_turf, NORTH))
+	far_human_target.mind_initialize()
+	var/datum/target_source/hearers/redspace_demon/demon_target_source = GET_TARGET_SOURCE(/datum/target_source/hearers/redspace_demon)
+	var/list/demon_candidates = demon_target_source.collect_candidates(test_demon, test_demon.ai_controller, 9)
+	var/datum/targeting_strategy/basic/redspace_demon/demon_targeting = GET_TARGETING_STRATEGY(/datum/targeting_strategy/basic/redspace_demon)
+	var/datum/target_priority_strategy/nearest/redspace_demon/demon_priority = GET_TARGET_PRIORITY_STRATEGY(/datum/target_priority_strategy/nearest/redspace_demon)
+	if(!(sealer in demon_candidates))
+		sealer.stop_sealing("unit test cleanup")
+		SSredspace.remove_source(registered_hotspot.source_id, "unit test cleanup")
+		qdel(sealer)
+		return Fail("Active rift sealers must be available to redspace demon target acquisition")
+	if(!demon_targeting.is_valid_target(test_demon, human_target, 9))
+		sealer.stop_sealing("unit test cleanup")
+		SSredspace.remove_source(registered_hotspot.source_id, "unit test cleanup")
+		qdel(sealer)
+		return Fail("Redspace demons must retain an adjacent human as a valid combat target")
+	var/atom/far_selected = demon_priority.select_target(test_demon.ai_controller, list(sealer, far_human_target))
+	var/atom/near_selected = demon_priority.select_target(test_demon.ai_controller, list(sealer, human_target))
+	if(far_selected != sealer || near_selected != human_target)
+		sealer.stop_sealing("unit test cleanup")
+		SSredspace.remove_source(registered_hotspot.source_id, "unit test cleanup")
+		qdel(sealer)
+		return Fail("Active rift sealer priority must select a distant sealer but an adjacent human (far=[far_selected], near=[near_selected], distance=[get_dist(test_demon, human_target)], human_priority=[demon_priority.get_target_priority(test_demon.ai_controller, human_target)], sealer_priority=[demon_priority.get_target_priority(test_demon.ai_controller, sealer)], active=[sealer.active])")
+
+	SSredspace.processing_sources -= "[registered_hotspot.source_id]"
+	test_demon.ai_controller.set_blackboard_key(BB_CURRENT_TARGET, sealer)
+	sealer.stop_sealing("unit test interruption")
+	if(registered_hotspot.sealing_active || registered_hotspot.strength != 4 || SSredspace.processing_sources["[registered_hotspot.source_id]"] != registered_hotspot || test_demon.ai_controller.blackboard[BB_CURRENT_TARGET])
+		SSredspace.remove_source(registered_hotspot.source_id, "unit test cleanup")
+		qdel(sealer)
+		return Fail("Removing the last sealer must interrupt, restore, resume hotspot processing, and release demon targets")
+
+	SSredspace.remove_source(registered_hotspot.source_id, "unit test cleanup")
+	qdel(sealer)
+
+	for(var/initial_strength in list(7, 8))
+		var/datum/redspace_field_source/hotspot/scenario_hotspot = SSredspace.register_hotspot(supported_turf, initial_strength, 3)
+		var/obj/machinery/redspace_rift_sealer/scenario_sealer = allocate(/obj/machinery/redspace_rift_sealer, supported_turf)
+		var/expected_strength = initial_strength == 7 ? REDSPACE_RIFT_SEALING_LOW_TARGET_STRENGTH : REDSPACE_RIFT_SEALING_TARGET_STRENGTH
+		var/scenario_passed = scenario_hotspot && scenario_sealer && scenario_hotspot.start_sealing(scenario_sealer)
+		if(scenario_passed)
+			scenario_passed = scenario_hotspot.strength == expected_strength && SSredspace.calculate_value(supported_turf, SSredspace.get_cell(supported_turf)) == expected_strength
+		if(scenario_hotspot)
+			scenario_hotspot.stop_sealing("unit test cleanup")
+			scenario_passed = scenario_passed && scenario_hotspot.strength == initial_strength
+			SSredspace.remove_source(scenario_hotspot.source_id, "unit test cleanup")
+		if(scenario_sealer)
+			qdel(scenario_sealer)
+		if(!scenario_passed)
+			return Fail("Sealing strength [initial_strength] must become [expected_strength] and restore on interruption")
+
+	var/obj/machinery/redspace_rift_sealer/destroyed_sealer = allocate(/obj/machinery/redspace_rift_sealer, supported_turf)
+	var/turf/destroyed_sealer_turf = get_turf(destroyed_sealer)
+	destroyed_sealer.deconstruct(FALSE)
+	if(locate(/obj/item/circuitboard/machine/redspace_rift_sealer) in destroyed_sealer_turf)
+		return Fail("Destroying a rift sealer must destroy its circuit board")
+
+/datum/unit_test/redspace_rift_sealer_reuse
+
+/datum/unit_test/redspace_rift_sealer_reuse/Run()
+	var/turf/first_turf = run_loc_floor_bottom_left
+	if(!SSredspace.is_supported_z(first_turf.z))
+		first_turf = locate(1, 1, SSredspace.station_z_levels[1])
+
+	var/datum/redspace_field_source/hotspot/first_hotspot = SSredspace.register_hotspot(first_turf, 4, 2)
+	var/obj/machinery/redspace_rift_sealer/sealer = allocate(/obj/machinery/redspace_rift_sealer, first_turf)
+	var/first_source_id = first_hotspot?.source_id
+	var/datum/redspace_field_source/hotspot/second_hotspot
+	var/failure_reason
+	if(!first_hotspot || !sealer)
+		failure_reason = "The first hotspot and sealer must be available"
+	else
+		sealer.set_anchored(TRUE)
+		if(!sealer.active || sealer.target_source != first_hotspot || !first_hotspot.complete_sealing())
+			failure_reason = "The sealer must close its first hotspot"
+		else if(!sealer.closed || sealer.active || sealer.target_source || SSredspace.field_sources["[first_source_id]"])
+			failure_reason = "A successful seal must remove the first hotspot and leave the sealer idle"
+		else
+			sealer.set_anchored(FALSE)
+			if(sealer.closed)
+				failure_reason = "Unanchoring the sealer must clear its completed state"
+			else
+				second_hotspot = SSredspace.register_hotspot(first_turf, 4, 2)
+				sealer.set_anchored(TRUE)
+				if(!second_hotspot || !sealer.active || sealer.closed || sealer.target_source != second_hotspot)
+					failure_reason = "The reanchored sealer must start closing the next hotspot"
+
+	if(sealer)
+		sealer.stop_sealing("unit test cleanup")
+		qdel(sealer)
+	if(first_hotspot && SSredspace.field_sources["[first_source_id]"] == first_hotspot)
+		SSredspace.remove_source(first_source_id, "unit test cleanup")
+	if(second_hotspot)
+		SSredspace.remove_source(second_hotspot.source_id, "unit test cleanup")
+	if(failure_reason)
+		return Fail(failure_reason)
+
+#endif
