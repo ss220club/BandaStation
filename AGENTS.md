@@ -124,7 +124,7 @@ In this example, the modpack defines `module_can_continue()`. Mark upstream edit
 
 ## Game translation
 
-- Keep object `name` values in English. When translating a name, use one `.toml` fragment per English name in [`modular_bandastation/translations/public/ru_names/`](modular_bandastation/translations/public/ru_names/) and fill in all six Russian grammatical cases. `ru_names.toml` is generated. Edit the fragments to update it.
+- Keep object `name` values in English. Use one `.toml` fragment per English name in [`modular_bandastation/translations/public/ru_names/`](modular_bandastation/translations/public/ru_names/). Fill in `nominative` and add other Russian grammatical cases as needed. Omitted cases fall back to `nominative`. `ru_names.toml` is generated from these fragments.
 - Translate existing item descriptions directly in the DM `desc` field. If an item needs an original description, ask the user to write it. Translate existing or user-provided text.
 - Translate player-facing action messages in chat. Keep logs in English.
 - Translation is encouraged and optional.
