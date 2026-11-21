@@ -53,7 +53,7 @@
 	TEST_ASSERT_EQUAL(gunner.loc, golden, "The halves combined without a confirmation")
 	TEST_ASSERT(!(golden in GLOB.golden_gardren_busy) && !(gardren in GLOB.golden_gardren_busy), "The cancelled request left the pair busy")
 
-/// The main seat punches with the mech's fists, the weapons seat cannot.
+/// Aiming the weapons seat's strike must not intercept the main pilot's punches or fire the arm weapon.
 /datum/unit_test/golden_gardren_melee_seat
 
 /datum/unit_test/golden_gardren_melee_seat/Run()
@@ -62,17 +62,36 @@
 	var/mob/living/carbon/human/consistent/gunner = allocate(/mob/living/carbon/human/consistent)
 	var/mob/living/carbon/human/consistent/target = allocate(/mob/living/carbon/human/consistent, locate(run_loc_floor_bottom_left.x + 1, run_loc_floor_bottom_left.y, run_loc_floor_bottom_left.z))
 	combined.mob_enter(main_pilot, silent = TRUE)
-	combined.mob_enter(gunner, silent = TRUE)
+	TEST_ASSERT(combined.mob_try_enter(gunner), "The second pilot could not board the mech")
 	TEST_ASSERT(combined.is_driver(main_pilot), "The first pilot in did not take the main seat")
+	var/strike_type = /datum/action/vehicle/sealed/mecha/ivanov_strike/golden_gardren
+	TEST_ASSERT_NULL(LAZYACCESSASSOC(combined.occupant_actions, main_pilot, strike_type), "The main seat received the missile strike")
+	var/datum/action/vehicle/sealed/mecha/ivanov_strike/strike = LAZYACCESSASSOC(combined.occupant_actions, gunner, strike_type)
+	TEST_ASSERT_NOTNULL(strike, "The second pilot did not receive the missile strike")
 	combined.setDir(EAST)
 	main_pilot.set_combat_mode(TRUE)
 	gunner.set_combat_mode(TRUE)
+	strike.Trigger(gunner)
+	TEST_ASSERT(strike.aiming_missile, "The gunner could not start targeting")
 
 	click_wrapper(gunner, target)
 	TEST_ASSERT_EQUAL(target.get_brute_loss(), 0, "The weapons seat punched with the mech's fists")
 
 	click_wrapper(main_pilot, target)
 	TEST_ASSERT(target.get_brute_loss() > 0, "The main seat could not punch with the mech's fists")
+	TEST_ASSERT_EQUAL(strike.rockets_left, 3, "The main pilot's click spent a missile strike")
+
+	var/turf/strike_target = get_step(target, EAST)
+	var/charge_before = combined.get_charge()
+	click_wrapper(gunner, strike_target, list(RIGHT_CLICK = 1, BUTTON = RIGHT_CLICK))
+	var/obj/effect/pod_landingzone/zone = locate() in strike_target
+	if(zone?.pod)
+		allocated += zone.pod
+	TEST_ASSERT(istype(zone?.pod, /obj/structure/closet/supplypod/podspawn/golden_gardren_missile), "The gunner did not target a Golden-Gardren missile")
+	TEST_ASSERT_EQUAL(strike.rockets_left, 2, "The gunner's click did not spend a missile strike")
+	TEST_ASSERT_EQUAL(combined.get_charge(), charge_before, "The arm laser fired simultaneously with the strike")
+	combined.mob_exit(gunner, silent = TRUE, forced = TRUE)
+	TEST_ASSERT(QDELETED(strike), "The absent gunner's targeting action was not cleaned up")
 
 /// The shield soaks damage from its own charge, collapses when emptied and cannot be raised right away.
 /datum/unit_test/golden_gardren_shield

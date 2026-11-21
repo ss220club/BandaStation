@@ -36,3 +36,37 @@
 	var/to_main_seat = !mech.is_driver(owner)
 	mech.assign_seat(owner, main_seat = to_main_seat)
 	mech.balloon_alert(owner, to_main_seat ? "место пилота" : "место стрелка")
+
+/datum/action/vehicle/sealed/mecha/ivanov_strike/golden_gardren
+	name = "Ракетный удар"
+	strike_pod_type = /obj/structure/closet/supplypod/podspawn/golden_gardren_missile
+	strike_explosion_size = list(0, 0, 2, 2)
+
+/datum/action/vehicle/sealed/mecha/ivanov_strike/golden_gardren/on_melee_click(datum/source, mob/living/pilot, atom/target, on_cooldown, is_adjacent)
+	return NONE
+
+/datum/action/vehicle/sealed/mecha/ivanov_strike/golden_gardren/on_equipment_click(datum/source, mob/living/pilot, atom/target)
+	if(pilot != owner)
+		return NONE
+	var/datum/component/golden_gardren_phasing/phasing = chassis.GetComponent(/datum/component/golden_gardren_phasing)
+	if(!phasing?.active)
+		..()
+	return COMPONENT_CANCEL_EQUIPMENT_CLICK
+
+/obj/structure/closet/supplypod/podspawn/golden_gardren_missile/pre_open()
+	var/turf/impact = get_turf(src)
+	. = ..()
+	if(!impact)
+		return
+	for(var/turf/scorched in range(1, impact))
+		if(isopenturf(scorched) && !isspaceturf(scorched))
+			if(scorched == impact || prob(50))
+				scorched.break_tile()
+			else
+				scorched.burn_tile()
+			if(!(locate(/obj/effect/hotspot) in scorched))
+				new /obj/effect/hotspot(scorched)
+		for(var/mob/living/victim in scorched)
+			victim.apply_damage(20, BURN, spread_damage = TRUE)
+			victim.adjust_fire_stacks(3)
+			victim.ignite_mob()

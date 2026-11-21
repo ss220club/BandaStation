@@ -5,6 +5,7 @@
 	icon = 'modular_bandastation/golden_gardren/icons/golden.dmi'
 	icon_state = "golden"
 	base_icon_state = "golden"
+	SET_BASE_PIXEL(-4, 0)
 	movedelay = 2.7
 	max_integrity = 200
 	armor_type = /datum/armor/mecha_marauder
@@ -14,7 +15,7 @@
 
 /obj/vehicle/sealed/mecha/golden/Initialize(mapload, built_manually)
 	. = ..()
-	AddComponent(/datum/component/golden_gardren_shield)
+	AddComponent(/datum/component/golden_gardren_shield, 1.25, 4, 8)
 
 /obj/vehicle/sealed/mecha/golden/generate_actions()
 	. = ..()
@@ -27,4 +28,5 @@
 	desc = "Расколотая кабина Голдена с погасшим визором. Восстановить невозможно, но что-то ещё можно снять."
 	icon = 'modular_bandastation/golden_gardren/icons/golden.dmi'
 	icon_state = "golden-broken"
+	SET_BASE_PIXEL(-4, 0)
 	welder_salvage = list(/obj/item/stack/sheet/mineral/gold, /obj/item/stack/sheet/iron, /obj/item/stack/rods)

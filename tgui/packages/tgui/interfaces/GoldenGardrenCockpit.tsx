@@ -31,6 +31,7 @@ type CockpitData = {
   lights?: boolean;
   force?: number;
   shield_ready?: boolean;
+  strike_cooldown?: number;
   weapons?: Weapon[];
 };
 
@@ -175,6 +176,9 @@ const WeaponsSeatSection = () => {
             {weapon.name}
           </LabeledList.Item>
         ))}
+        <LabeledList.Item label="Ракетный удар">
+          {data.strike_cooldown ? `${data.strike_cooldown} с` : 'Готов'}
+        </LabeledList.Item>
       </LabeledList>
     </Section>
   );

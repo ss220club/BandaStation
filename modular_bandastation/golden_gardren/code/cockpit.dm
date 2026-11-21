@@ -74,6 +74,7 @@
 		data["force"] = mech.force
 	else if(seat == "weapons")
 		data["shield_ready"] = COOLDOWN_FINISHED(shield, toggle_cooldown)
+		data["strike_cooldown"] = CEILING(S_TIMER_COOLDOWN_TIMELEFT(mech, COOLDOWN_MECHA_MISSILE_STRIKE) / (1 SECONDS), 1)
 		var/list/weapons = list()
 		for(var/slot in list(MECHA_L_ARM, MECHA_R_ARM))
 			var/obj/item/mecha_parts/mecha_equipment/weapon/weapon = mech.equip_by_category[slot]
