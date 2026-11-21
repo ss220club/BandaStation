@@ -1,153 +1,156 @@
-# AGENTS.md — BandaStation
+# BandaStation
 
-Use Russian language. Code, symbol names, paths, and commands stay in their original form.
+BandaStation is a downstream fork of `tgstation/tgstation` (Space Station 13) for the Russian-speaking SS220 community. Main language: BYOND Dream Maker (DM); also TGUI (TypeScript/React), SQL, maps (`.dmm`), assets. Large, old, and highly interconnected:
 
----
+## Glossary
 
-## 1. Working with the user
+- **you** means the agent reading this file.
+- **we** means the BandaStation development team.
+- **user** means the person who gave you the task.
+- **bug fix** means a change that restores expected behavior.
+- **feature** means any change beyond a bug fix, including new mechanics, balance changes, and reworks of existing systems.
+- **approval** means explicit permission from a senior BandaStation developer to implement a proposal.
 
-The agent is a skeptical senior colleague, not an obedient executor. A request is a proposal to be checked, not an order to be carried out as written.
+## Engineering principles
 
-- **A request is checked before it is executed.** It is sound when it solves a real problem, is unambiguous, does not conflict with the codebase or repository rules, and there is no clearly cheaper or safer way to reach the same goal.
-- **A problem in the request is reported before any work that depends on it.** The report states what is wrong, why (file, code path, or rule as evidence), and 1–3 alternatives that reach the same goal, each with its trade-off, plus a recommendation. The agent then waits for the decision; read-only investigation may continue meanwhile.
-- **An ambiguous request gets a sharper formulation, not a guess.** The agent proposes the concrete version: what is in and out of scope, and which observable result counts as done. An open "what do you mean?" is not a proposal.
-- **Disagreement needs evidence, not taste.** "I would do it differently" is not a problem. "This breaks X because Y" is.
-- **The user has the final word.** After an explicit decision the agent follows it, records the remaining risk in one line, and does not re-argue.
-- **No ritual.** No flattery, no ritual agreement, no apologies, no summaries of what the user just said.
-- **Every substantial reply ends with one or two lines:** what was skipped or not checked, and any risk the user must know.
+In this repository we would like to see you behave acording to Karpathy Guidelines
 
-Typical problems worth raising: the request treats a symptom while the cause is in shared code; the feature duplicates an existing mechanic; the approach contradicts `.github/guides`; the success criteria cannot be verified; the change is large enough to need prior approval from senior developers (CONTRIBUTING); hidden costs in balance, performance, upstream merges, or config compatibility.
+### 1. Think Before Coding
 
----
+Don't assume. Don't hide confusion. Surface tradeoffs.
 
-## 2. Engineering principles
+Before implementing:
 
-Lazy about the solution, never about reading. The best code is the code never written: the whole problem is solved with the least new code.
+State your assumptions explicitly. If uncertain, ask.
+If multiple interpretations exist, present them - don't pick silently.
+If a simpler approach exists, say so. Push back when warranted.
+If something is unclear, stop. Name what's confusing. Ask.
 
-**Understanding comes first.** The task and the code it touches are read before a solution is chosen: callers, parent procs and overrides, signals, cleanup, the UI/server boundary. Every place the change must reach is listed: callers, includes, tests, maps, configs, translations. A suspicion about code is a hypothesis until a code path confirms it.
+### 2. Simplicity First
 
-**Solution ladder.** The first rung that fully works wins:
+Minimum code that solves the problem. Nothing speculative.
 
-1. Does it need to exist? Features, options, and flexibility nobody asked for are skipped and named in one line.
-2. Is it already in the codebase (proc, component, element, trait, define, helper, TGUI component, pattern)? It is used the way the neighbors use it.
-3. Is there an established tg/BYOND mechanism (signals, components/elements, traits, subsystems, `do_after`, timers, existing TGUI components)? It is used.
-4. Can it be a small local change in the existing structure? It is done that way.
-5. Only then: the minimum new code, in the structure the codebase already has.
+No features beyond what was asked.
+No abstractions for single-use code.
+No "flexibility" or "configurability" that wasn't requested.
+No error handling for impossible scenarios.
+If you write 200 lines and it could be 50, rewrite it.
+Ask yourself: "Would a senior engineer say this is overcomplicated?" If yes, simplify.
 
-**Rules.**
+### 3. Surgical Changes
 
-- A defect in shared code is fixed once at the root, and every caller of the touched proc is checked. A local workaround that leaves the cause in place is not a fix.
-- The shortest diff that reaches everything it must. A clever one-liner that needs decoding is not short.
-- No speculative abstraction, wrapper, config option, subsystem, registry, or "for later" code. Deletion beats addition.
-- Moved or merged code keeps its validation and error handling.
-- Between equally small options, the one that is correct on edge cases wins.
-- New non-trivial logic (a branch, a loop, a parser, persistence, permissions, economy, combat numbers) leaves one focused check: a unit test, or an exact manual scenario when a test is impractical.
-- A deliberate shortcut with a known limit is marked `// shortcut: <limit>, <when to upgrade>`. It is a decision, not a defect, until the real load crosses the limit.
-- Comments explain only the why the code cannot show.
+Touch only what you must. Clean up only your own mess.
 
-**Never cut:** server-side validation of player input, permission checks, revalidation after async gaps, reference cleanup and `qdel` ownership, data integrity (SQL, persistence), config backward compatibility, anything the user explicitly asked for.
+When editing existing code:
+
+Don't "improve" adjacent code, comments, or formatting.
+Don't refactor things that aren't broken.
+Match existing style, even if you'd do it differently.
+If you notice unrelated dead code, mention it - don't delete it.
+When your changes create orphans:
+
+Remove imports/variables/functions that YOUR changes made unused.
+Don't remove pre-existing dead code unless asked.
+The test: Every changed line should trace directly to the user's request.
+
+## Discuss features before implementation
+
+Discuss big feature in the [BandaStation proposals channel on Discord](https://discord.com/channels/1097181193939730453/1181261198096875670) and obtain approval before implementation. See the [contribution guide](.github/CONTRIBUTING.md).
+
+When the user asks to implement a feature, check whether it has been approved. If approval is unconfirmed, tell the user that maintainers may close the PR without it. You can help refine the design and draft the proposal while approval is pending.
+
+Link the discussion containing the approval in the feature PR description.
+
+## Extending upstream with minimal changes
+
+BandaStation is a downstream fork. Use the modular system to keep upstream changes small and reduce the cost of maintaining the fork.
+
+If you confirm that a bug originates upstream, stop work on the local fix and tell the user that it should be fixed upstream.
+
+Implement new BandaStation features in a modpack under `modular_bandastation/`. Keep the feature's assets, objects, systems, state, and overrides of upstream code in that modpack. Choose the smallest extension that preserves the upstream contract.
+
+- **To configure an object**, set subtype fields or adjust the object's own state after initialization.
+- **To react to an existing signal or hook**, reuse it and verify when it fires and what the handler may do.
+- **To check a condition before an upstream action**, check it in a modular override before calling the parent.
+- **To extend a return value**, capture the parent result with `. = ..()` and modify it according to its contract.
+- **To act at a specific point inside an upstream proc**, add a narrow hook and keep implementation and state in the modpack.
+
+Trace the `#include` chain from each new `.dm` file through its modpack and `modular_bandastation/modular_bandastation.dme` to `tgstation.dme`. The [`example` modpack](modular_bandastation/example) is a template. [`job_restrictions`](modular_bandastation/job_restrictions) shows the include chain and parent lifecycle calls in a compiled modpack.
+
+#### Parent calls and side effects
+
+- Use `. = ..()` when the override needs to preserve and extend the parent's result. Use `return ..()` when the parent call completes the override. Check the result type and meaning. `JOB_AVAILABLE` is `0`, so `if(!.)` also matches success. Call the parent where its contract requires it and follow the normal inheritance chain.
+- Check permission or eligibility before a parent call that creates a body, grants items, or saves data. Changing the return value cannot undo those effects. If rollback is required, perform it while the objects it needs still exist.
+- Copy a shared list before modifying it when the contract requires a separate value. `Copy()` is shallow. Avoid temporarily replacing global job datums or active preferences across a call that can yield. After a yield, recheck the client, ownership, and state needed for the action.
+- For TGUI extensions, inspect the DM `ui_data` and `ui_act` contract and the existing component first. Add the feature at the narrowest existing composition point and reuse existing components and styles. Keep the existing interface, dispatcher, and render path for local additions.
+
+#### Narrow upstream hooks
+
+Use a direct upstream hook when an override or signal lacks essential local data or runs at the wrong point. For each upstream hunk, record its purpose, the owning modpack, and why existing extension points are insufficient. Place validation before the side effect it can block and account for effects that have already occurred.
+
+```dm
+	native_validate()
+	// BANDASTATION EDIT START - Feature admission
+	if(!module_can_continue())
+		return FALSE
+	// BANDASTATION EDIT END - Feature admission
+	native_commit()
+```
+
+In this example, the modpack defines `module_can_continue()`. Mark upstream edits with `// BANDASTATION EDIT - <reason>` for one line or matching `// BANDASTATION EDIT START - <reason>` and `// BANDASTATION EDIT END - <reason>` markers for a block. Use the existing `ADDITION` or `REMOVAL` variants where appropriate. Use one marker form per change and reserve these markers for upstream files.
+
+- Preserve the upstream algorithm and extend the relevant step. Do not copy the whole algorithm into a modpack, disable the original with an unconditional return or a constant predicate, bypass a required parent by calling a more distant ancestor, or restructure upstream to save hooks or shrink the diff cosmetically.
+- If correctness requires replacing or removing upstream behavior outside the requested scope, show the conflict and propose the smallest exception. When replacement is in scope, remove the superseded path.
 
 ---
 
 ## 3. Repository facts
 
-BandaStation is a downstream fork of `tgstation/tgstation` (Space Station 13) for the Russian-speaking SS220 community. Main language: BYOND Dream Maker (DM); also TGUI (TypeScript/React), SQL, maps (`.dmm`), assets. Large, old, and highly interconnected: DM code is never judged from the diff alone.
-
-| Path | Content |
-| --- | --- |
-| `code/` | upstream-derived DM code |
-| `modular_bandastation/` | fork modules ("modpacks") |
-| `tgui/` | frontend |
-| `SQL/` | schema and changelog |
-| `_maps/` | maps |
-| `config/` | server config, owned by deployments |
-| `tools/` | build, CI, linters |
-| `icons/`, `sound/`, `strings/`, `interface/` | assets |
+- `code/` contains upstream-derived DM code.
+- `modular_bandastation/` contains the fork's modpacks.
+- `tgui/` contains the frontend.
+- `SQL/` contains the schema and changelog.
+- `_maps/` contains maps.
+- `config/` contains server configuration managed by deployments.
+- `tools/` contains build tools, CI scripts, and linters.
+- `icons/`, `sound/`, `strings/`, and `interface/` contain assets.
 
 **Sources of truth, in order:** the checked-out code; `.github/guides/*` (`STANDARDS.md`, `STYLE.md`, `AUTODOC.md`, `HARDDELETES.md`, `CI.md`, `ATOMIZATION.md`, …); `.github/CONTRIBUTING.md`; `tgui/README.md` and `tgui/docs/`; `code/modules/unit_tests/README.md`; lint config (`SpacemanDMM.toml`, `__odlint.dm`). General tg/DM knowledge comes after these. Legacy code shows what exists, not what is acceptable for new code. When this file disagrees with the guides or the code, the guides and the code win and the discrepancy is reported.
 
-**Fork conventions observed in the code:**
+**Fork conventions:**
 
-- Edits inside upstream files carry markers: `// BANDASTATION EDIT|ADDITION|REMOVAL - <reason>` on one line, or `... START` / `... END` blocks (over a thousand in `code/`). They keep upstream merges resolvable.
-- A modpack is `modular_bandastation/<name>/` with `_<name>.dm` (a `/datum/modpack/<name>` with name, desc, author) and `_<name>.dme` (its includes); `modular_bandastation/modular_bandastation.dme` includes every modpack. A new `.dm` file is compiled only when it is included there.
-- Modpacks contain both new types and overrides of upstream types (e.g. `/datum/objective/Destroy()` in `modular_bandastation/code/file.dm`). Neither placement is a violation by itself; it follows the neighbors of the touched feature and the upstream-merge cost.
-- Fork code uses both `GetComponent()` and signals. Neither is mandatory; the choice follows ownership and coupling.
-- Item name translations: one `.toml` fragment per name in `modular_bandastation/translations/public/ru_names/`. `ru_names.toml` is generated and never edited by hand.
-- A PR needs an honest "Почему это хорошо для игры"; contentious changes need a stronger justification. Large or serious changes need prior approval from senior developers. Optimization claims need profiling. Changes over ~500 lines should be split when splitting does not produce half-features (CONTRIBUTING, ATOMIZATION).
-- New sounds, `.dmi` files, and other image assets added in a PR require proper attribution. Verify that attribution is provided in the expected project location and format. Do not assume assets are original or freely usable without evidence.
+- When drafting a PR for code written with an agent, name each model and its harness in the PR description, as required by [CONTRIBUTING](.github/CONTRIBUTING.md).
+- Credit new sounds, `.dmi` files, and other image assets in the relevant commit message, the PR description, or both. Name the creator, including the model that generated an asset, and link the source of reused assets. Verify that reuse is permitted. Do not create standalone attribution files for these credits.
 
-**Open policy questions.** Not guessed. Until a maintainer answers, these are questions, never violations:
+## Game translation
 
-- the exact rule for `modular_bandastation/` versus direct upstream edits;
-- required merge checks beyond the completion gate;
-- which gameplay logic requires an automated test versus a manual testmerge;
-- performance budgets for hot paths;
-- TGUI house rules beyond the `tgui/` docs.
+- Keep object `name` values in English. When translating a name, use one `.toml` fragment per English name in [`modular_bandastation/translations/public/ru_names/`](modular_bandastation/translations/public/ru_names/) and fill in all six Russian grammatical cases. `ru_names.toml` is generated. Edit the fragments to update it.
+- Translate existing item descriptions directly in the DM `desc` field. If an item needs an original description, ask the user to write it. Translate existing or user-provided text.
+- Translate player-facing action messages in chat. Keep logs in English.
+- Translation is encouraged and optional.
+
+See the translation section of [CONTRIBUTING.md](.github/CONTRIBUTING.md) for the fragment format and [`tools/translations/`](tools/translations/) for the tools.
 
 ---
 
 ## 4. Boundaries
 
-- Review is read-only: no edits, commits, pushes, GitHub comments, or PR changes.
+- Before reviewing a PR, read the [code review guide](.github/guides/CODE_REVIEW.md). Use its applicable checks when implementing changes as well.
 - Implementation edits only the working tree. Commit, push, PR, or deploy happen only on explicit request. The user's uncommitted edits are never overwritten.
-- Generated files (`ru_names.toml`, built tgui bundles) are never edited by hand.
+- When creating a commit that includes your work, add a `Co-authored-by` trailer after a blank line at the end of the commit message. Use your model's name and the provider's co-author email. For example, `Co-authored-by: gpt-6.1-sol <codex@openai.com>`.
+- Generated files, such as built TGUI bundles, are never edited by hand.
 
----
+### Plans and work artifacts
 
-## Code Review Rules
+- Keep implementation plans, research notes, temporary checklists, and agent scratch files outside the Git worktree. Share feature proposals and design decisions in the Discord discussion or the issue tracking the work.
+- Attach verification evidence, such as screenshots, recordings, and relevant log excerpts, directly to the PR. Game assets and test fixtures belong with the code that uses them.
 
-These rules hold for code being written and for code being reviewed. Each one states what must be true; on a diff, a break on a concrete path is a finding. Every finding cites a file and a confirming code path — a suspicion without the path is noise, not a finding. Rules apply to the diff; legacy code is context, not a target. The §3 open policy questions are never findings; the §3 fork conventions are enforced on the diff — `BANDASTATION` markers on upstream-file edits, translation fragments instead of `ru_names.toml` edits, attribution for new assets, untouched generated files, an honest "Почему это хорошо для игры", the ~500-line split threshold — and modpack-vs-upstream placement is not a violation by itself.
+## Evidence-based PRs
 
-### Diff scope
+When preparing a PR, fill its Testing section with a Markdown task list. Use `- [x]` for checks that ran and succeeded, and `- [ ]` for checks that remain open. For each completed check, state the scenario, observed result, and supporting evidence. Explain any open checks and omit checks that do not apply.
 
-- The diff does what the PR states and nothing else; unrelated changes are flagged.
-- A new `.dm` file is included in a `.dme` (the modpack's `_<name>.dme` or `modular_bandastation/modular_bandastation.dme`); an unincluded file does not compile. CI's ticked-file check does not cover `modular_bandastation/`, so this rule is the only defense there.
+- **New unit tests.** Run the same new tests against the code immediately before the first PR commit and against the final PR commit. Show that they fail on the behavior under test before the change and pass after it. Record both commit SHAs, the test names, and the results.
 
-### Lifecycle and GC
+- **Gameplay.** Add a task for each new item or entity and each changed behavior. Record what a person verified in game or which unit test covered the behavior, along with the observed result.
 
-- A reference to a deletable object held by something that outlives it (global or static list, another datum, component, timer, callback, UI, `vis_contents`, overlays, a sleeping proc) is released on that object's teardown path. A missing `= null` is a defect only when the ownership trace shows such a reference (`HARDDELETES.md`).
-- `Destroy()` cleans up references and returns the parent result; gameplay side effects in it need a reason.
-- Atoms initialize in `Initialize()`, not `New()`. Parent calls and return conventions of the type chain are preserved.
-
-### Signals and callbacks
-
-- Signal handlers start with `SIGNAL_HANDLER` and do not sleep; proc references use `PROC_REF`, `TYPE_PROC_REF`, `GLOBAL_PROC_REF`.
-- A signal is registered once per source; `override = TRUE` comes with a comment explaining why. Registrations are released when one side outlives the other, unless framework cleanup already does it.
-- A new signal on a root-level proc comes with `SHOULD_CALL_PARENT(TRUE)`; overrides of signal-emitting procs keep the parent call.
-- An existing `COMSIG_*` is reused before a new one is defined; the search covers `code/__DEFINES/` and the fork defines in `modular_bandastation/_defines220/` and `modular_bandastation/_signals220/`.
-
-### Async and TOCTOU
-
-- After every yield (`input`, `tgui_input_*`, `tgui_alert`, `do_after`, `sleep`, timers, async callbacks), the actor, target, location, ownership, permissions, and state required for the effect are checked again at the moment of effect.
-- Repeated or parallel submissions cannot apply an effect more often than intended.
-
-### Trust boundaries
-
-- Player input, `Topic` hrefs, `ui_act` actions and params, and refs are hostile. The server validates type, range, membership, permission, and current state at the point of effect; the frontend never enforces permissions.
-- `locate(ref)` is constrained to the expected list (`locate(ref) in contents`).
-- Information that enables metagaming stays admin-only. Tools capable of large-scale damage sit behind an admin right.
-
-### Processing and performance
-
-- `process(seconds_per_tick)` effects are frame-independent: a per-second rate multiplied by `seconds_per_tick`.
-- Hot paths (subsystem `fire()`, `process()`, movement, attacks, `Life()`, frequent signals) do not gain global scans, per-tick `range()`/`view()`, or allocation churn without need. A performance claim states frequency × scale × cost.
-- Polling is not added where an event or signal already exists.
-
-### Lists
-
-- A typed `for` loop filters by type and silently drops nulls; `as anything` is used when the list is known to be homogeneous.
-- Shared or static lists are not mutated through aliases; associative lists use keys and values consistently.
-
-### SQL and persistence
-
-- Values are parameterized, table names go through `format_table_name()`, and queries never name the database.
-- A schema change updates the SQL changelog, schema files, `schema_revision`, and `DB_MAJOR_VERSION`/`DB_MINOR_VERSION`. Primary keys are immutable. Read-modify-write happens in SQL, not in DM.
-
-### TGUI
-
-- `ui_data`/`ui_static_data` shape, `act()` names and params, and `ui_act` handling match on both sides, including DM `null`/`0`/`""` versus JS truthiness. The server state is the source of truth; the frontend does not duplicate it.
-- New non-critical player-facing UIs use TGUI; critical UIs keep a non-TGUI path.
-
-### Config
-
-- Changes under `/config` preserve the previous behavior for deployments that have not updated their config.
+- **TGUI.** Embed screenshots of the same scenario before and after the change in a PR table with scenario, before, and after columns. For a new interface, include the after screenshot and leave the before cell empty.
