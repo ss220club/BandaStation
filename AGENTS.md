@@ -13,7 +13,7 @@ BandaStation is a downstream fork of `tgstation/tgstation` (Space Station 13) fo
 
 ## Engineering principles
 
-In this repository we would like to see you behave acording to Karpathy Guidelines
+In this repository we would like to see you behave according to Karpathy Guidelines
 
 ### 1. Think Before Coding
 
