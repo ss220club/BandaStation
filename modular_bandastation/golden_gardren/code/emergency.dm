@@ -31,7 +31,7 @@
 	var/smoke_type = /particles/smoke/burning
 	/// Key reserved for this component so other smoke on the mech is unaffected.
 	var/smoke_key
-	/// Whether the chassis also vents smoke during a manual ejection and on capsule launch.
+	/// Whether the failing chassis produces heavier smoke and leaves a cloud at the wreck.
 	var/heavy_smoke = FALSE
 
 /datum/component/golden_gardren_ejection/Initialize(heavy_smoke = FALSE)
@@ -107,8 +107,6 @@
 	mech.log_message("[user ? key_name(user) : "Lethal damage"] started the emergency ejection.", LOG_MECHA)
 	to_chat(mech.occupants, span_userdanger("АВАРИЙНОЕ КАТАПУЛЬТИРОВАНИЕ через [DisplayTimeText(GOLDEN_GARDREN_EJECT_DELAY)]! Кликните по клетке, куда сядет ваша капсула: не дальше [GOLDEN_GARDREN_EJECT_RANGE] клеток и в зоне видимости. Без выбора капсула сядет рядом с мехом."))
 	playsound(mech, 'sound/machines/warning-buzzer.ogg', 75, FALSE)
-	if(heavy_smoke && !dying)
-		mech.add_shared_particles(smoke_type, smoke_key)
 	for(var/mob/pilot as anything in mech.occupants)
 		set_landing_cursor(pilot, aiming = TRUE)
 	timer = addtimer(CALLBACK(src, PROC_REF(finish_countdown)), GOLDEN_GARDREN_EJECT_DELAY, TIMER_STOPPABLE)
@@ -214,7 +212,7 @@
 	if(launched)
 		mech.visible_message(span_warning("Из [mech.declent_ru(GENITIVE)] с грохотом вылетают спасательные капсулы!"))
 		playsound(mech, 'sound/vehicles/mecha/hydraulic.ogg', 75, TRUE)
-	if(heavy_smoke && (launched || destroying))
+	if(heavy_smoke && destroying)
 		var/turf/origin = get_turf(mech)
 		if(origin)
 			new /obj/effect/temp_visual/golden_gardren_smoke(origin)
@@ -280,16 +278,19 @@
 	ejection?.start(owner)
 
 /particles/smoke/burning/golden_gardren
-	count = 96
-	spawning = 7
-	lifespan = 2 SECONDS
-	fade = 1.5 SECONDS
-	position = generator(GEN_VECTOR, list(-10, 4, 0), list(10, 12, 0), UNIFORM_RAND)
-	velocity = generator(GEN_VECTOR, list(-0.8, 0.5, 0), list(0.8, 1.2, 0), UNIFORM_RAND)
+	width = 124
+	height = 144
+	count = 176
+	spawning = 12
+	lifespan = 2.4 SECONDS
+	fade = 1.8 SECONDS
+	scale = list(1.1, 1.1)
+	position = generator(GEN_VECTOR, list(-12, 7, 0), list(12, 19, 0), UNIFORM_RAND)
+	velocity = generator(GEN_VECTOR, list(-1.2, 0.7, 0), list(1.2, 1.6, 0), UNIFORM_RAND)
 
 /particles/smoke/burning/golden_gardren/burst
-	count = 48
-	spawning = 9
+	count = 72
+	spawning = 12
 	lifespan = 1.5 SECONDS
 	fade = 1.2 SECONDS
 	position = generator(GEN_VECTOR, list(-15, -6, 0), list(15, 10, 0), UNIFORM_RAND)
@@ -303,7 +304,7 @@
 /obj/effect/temp_visual/golden_gardren_smoke/Initialize(mapload)
 	. = ..()
 	particles = new /particles/smoke/burning/golden_gardren/burst
-	addtimer(CALLBACK(src, PROC_REF(stop_spawning)), 0.6 SECONDS)
+	addtimer(CALLBACK(src, PROC_REF(stop_spawning)), 0.8 SECONDS)
 
 /obj/effect/temp_visual/golden_gardren_smoke/Destroy()
 	QDEL_NULL(particles)

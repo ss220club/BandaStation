@@ -21,7 +21,7 @@
 	)
 	/// Power source installed when the chassis is spawned.
 	var/factory_cell_type = /obj/item/stock_parts/power_store/cell/bluespace
-	/// Whether the chassis vents extra smoke during emergency ejection and destruction.
+	/// Whether the chassis vents extra smoke when it is destroyed.
 	var/heavy_emergency_smoke = FALSE
 
 /obj/vehicle/sealed/mecha/golden_gardren_base/Initialize(mapload, built_manually)
