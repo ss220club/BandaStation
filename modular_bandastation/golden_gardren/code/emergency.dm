@@ -27,15 +27,27 @@
 	var/list/markers
 	/// Whether the mech has taken a lethal blow with pilots inside and blows up when the countdown runs out.
 	var/dying = FALSE
+	/// Type of visual particles for the countdown.
+	var/smoke_type = /particles/smoke/burning
+	/// Key reserved for this component so other smoke on the mech is unaffected.
+	var/smoke_key
+	/// Whether the chassis also vents smoke during a manual ejection and on capsule launch.
+	var/heavy_smoke = FALSE
 
-/datum/component/golden_gardren_ejection/Initialize()
+/datum/component/golden_gardren_ejection/Initialize(heavy_smoke = FALSE)
 	if(!istype(parent, /obj/vehicle/sealed/mecha))
 		return COMPONENT_INCOMPATIBLE
+	src.heavy_smoke = heavy_smoke
+	if(heavy_smoke)
+		smoke_type = /particles/smoke/burning/golden_gardren
+	smoke_key = "golden_gardren_ejection_[smoke_type]"
 
 /datum/component/golden_gardren_ejection/RegisterWithParent()
 	RegisterSignal(parent, COMSIG_ATOM_TAKE_DAMAGE, PROC_REF(on_take_damage))
 
 /datum/component/golden_gardren_ejection/UnregisterFromParent()
+	var/obj/vehicle/sealed/mecha/mech = parent
+	mech.remove_shared_particles(smoke_key)
 	UnregisterSignal(parent, COMSIG_ATOM_TAKE_DAMAGE)
 
 /datum/component/golden_gardren_ejection/Destroy(force)
@@ -68,7 +80,7 @@
 	mech.completely_disabled = TRUE
 	mech.log_message("Took a lethal blow, blowing up once the ejection countdown runs out.", LOG_MECHA)
 	mech.visible_message(span_userdanger("[mech.declent_ru(NOMINATIVE)] охвачен огнём и вот-вот взорвётся!"))
-	mech.add_shared_particles(/particles/smoke/burning, "golden_gardren_dying")
+	mech.add_shared_particles(smoke_type, smoke_key)
 	mech.spark_system?.start()
 	playsound(mech, 'sound/machines/warning-buzzer.ogg', 100, FALSE)
 	start()
@@ -79,7 +91,6 @@
 		eject()
 		return
 	var/obj/vehicle/sealed/mecha/mech = parent
-	mech.remove_shared_particles("golden_gardren_dying")
 	mech.update_integrity(0)
 	mech.atom_destruction()
 
@@ -96,6 +107,8 @@
 	mech.log_message("[user ? key_name(user) : "Lethal damage"] started the emergency ejection.", LOG_MECHA)
 	to_chat(mech.occupants, span_userdanger("АВАРИЙНОЕ КАТАПУЛЬТИРОВАНИЕ через [DisplayTimeText(GOLDEN_GARDREN_EJECT_DELAY)]! Кликните по клетке, куда сядет ваша капсула: не дальше [GOLDEN_GARDREN_EJECT_RANGE] клеток и в зоне видимости. Без выбора капсула сядет рядом с мехом."))
 	playsound(mech, 'sound/machines/warning-buzzer.ogg', 75, FALSE)
+	if(heavy_smoke && !dying)
+		mech.add_shared_particles(smoke_type, smoke_key)
 	for(var/mob/pilot as anything in mech.occupants)
 		set_landing_cursor(pilot, aiming = TRUE)
 	timer = addtimer(CALLBACK(src, PROC_REF(finish_countdown)), GOLDEN_GARDREN_EJECT_DELAY, TIMER_STOPPABLE)
@@ -170,10 +183,11 @@
  * Fires every occupant out: in a capsule to the turf they picked if it is still fine, otherwise to the nearest free neighbour.
  * Without [use_capsules] the pilots are put straight on their turfs, used when the mech is deleted outright.
  */
-/datum/component/golden_gardren_ejection/proc/eject(use_capsules = TRUE)
+/datum/component/golden_gardren_ejection/proc/eject(use_capsules = TRUE, destroying = FALSE)
 	var/obj/vehicle/sealed/mecha/mech = parent
 	deltimer(timer)
 	timer = null
+	mech.remove_shared_particles(smoke_key)
 	var/list/taken_turfs = list()
 	var/launched = FALSE
 	for(var/mob/living/pilot as anything in mech.occupants?.Copy())
@@ -200,6 +214,10 @@
 	if(launched)
 		mech.visible_message(span_warning("Из [mech.declent_ru(GENITIVE)] с грохотом вылетают спасательные капсулы!"))
 		playsound(mech, 'sound/vehicles/mecha/hydraulic.ogg', 75, TRUE)
+	if(heavy_smoke && (launched || destroying))
+		var/turf/origin = get_turf(mech)
+		if(origin)
+			new /obj/effect/temp_visual/golden_gardren_smoke(origin)
 
 /// Sends a pilot to [landing] in a rescue capsule that harms nothing where it lands and vanishes after opening.
 /datum/component/golden_gardren_ejection/proc/launch_capsule(mob/living/pilot, turf/landing)
@@ -260,6 +278,39 @@
 		return
 	var/datum/component/golden_gardren_ejection/ejection = chassis.GetComponent(/datum/component/golden_gardren_ejection)
 	ejection?.start(owner)
+
+/particles/smoke/burning/golden_gardren
+	count = 96
+	spawning = 7
+	lifespan = 2 SECONDS
+	fade = 1.5 SECONDS
+	position = generator(GEN_VECTOR, list(-10, 4, 0), list(10, 12, 0), UNIFORM_RAND)
+	velocity = generator(GEN_VECTOR, list(-0.8, 0.5, 0), list(0.8, 1.2, 0), UNIFORM_RAND)
+
+/particles/smoke/burning/golden_gardren/burst
+	count = 48
+	spawning = 9
+	lifespan = 1.5 SECONDS
+	fade = 1.2 SECONDS
+	position = generator(GEN_VECTOR, list(-15, -6, 0), list(15, 10, 0), UNIFORM_RAND)
+	velocity = generator(GEN_VECTOR, list(-2, 0, 0), list(2, 0.8, 0), UNIFORM_RAND)
+
+/obj/effect/temp_visual/golden_gardren_smoke
+	name = "cloud of smoke"
+	duration = 3 SECONDS
+	randomdir = FALSE
+
+/obj/effect/temp_visual/golden_gardren_smoke/Initialize(mapload)
+	. = ..()
+	particles = new /particles/smoke/burning/golden_gardren/burst
+	addtimer(CALLBACK(src, PROC_REF(stop_spawning)), 0.6 SECONDS)
+
+/obj/effect/temp_visual/golden_gardren_smoke/Destroy()
+	QDEL_NULL(particles)
+	return ..()
+
+/obj/effect/temp_visual/golden_gardren_smoke/proc/stop_spawning()
+	particles.spawning = 0
 
 #undef GOLDEN_GARDREN_EJECT_DELAY
 #undef GOLDEN_GARDREN_EJECT_RANGE

@@ -16,10 +16,11 @@
 	max_occupants = 2
 	factory_cell_type = /obj/item/stock_parts/power_store/cell/infinite/abductor
 	removable_cell = FALSE
+	heavy_emergency_smoke = TRUE
 	wreckage = /obj/structure/mecha_wreckage/golden_gardren
 	equip_by_category = list(
 		MECHA_L_ARM = /obj/item/mecha_parts/mecha_equipment/weapon/energy/laser/heavy/golden_gardren,
-		MECHA_R_ARM = /obj/item/mecha_parts/mecha_equipment/weapon/energy/laser/heavy/golden_gardren,
+		MECHA_R_ARM = /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/lmg/golden_gardren,
 		MECHA_UTILITY = list(),
 		MECHA_POWER = list(),
 		MECHA_ARMOR = list(),

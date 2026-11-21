@@ -84,14 +84,16 @@
 	TEST_ASSERT_EQUAL(strike.rockets_left, 3, "The main pilot's click spent a missile strike")
 
 	var/turf/strike_target = get_step(target, EAST)
-	var/charge_before = combined.get_charge()
+	var/obj/item/mecha_parts/mecha_equipment/weapon/ballistic/lmg/gun = combined.equip_by_category[MECHA_R_ARM]
+	TEST_ASSERT(istype(gun), "The gunner has no right-arm machine gun")
+	var/loaded_before = gun.projectiles
 	click_wrapper(gunner, strike_target, list(RIGHT_CLICK = 1, BUTTON = RIGHT_CLICK))
 	var/obj/effect/pod_landingzone/zone = locate() in strike_target
 	if(zone?.pod)
 		allocated += zone.pod
 	TEST_ASSERT(istype(zone?.pod, /obj/structure/closet/supplypod/podspawn/golden_gardren_missile), "The gunner did not target a Golden-Gardren missile")
 	TEST_ASSERT_EQUAL(strike.rockets_left, 2, "The gunner's click did not spend a missile strike")
-	TEST_ASSERT_EQUAL(combined.get_charge(), charge_before, "The arm laser fired simultaneously with the strike")
+	TEST_ASSERT_EQUAL(gun.projectiles, loaded_before, "The machine gun fired simultaneously with the strike")
 	combined.mob_exit(gunner, silent = TRUE, forced = TRUE)
 	TEST_ASSERT(QDELETED(strike), "The absent gunner's targeting action was not cleaned up")
 
@@ -200,13 +202,12 @@
 /datum/unit_test/golden_gardren_separate_spawned_frame/Run()
 	var/obj/vehicle/sealed/mecha/golden_gardren/combined = allocate(/obj/vehicle/sealed/mecha/golden_gardren)
 	TEST_ASSERT(istype(combined.cell, /obj/item/stock_parts/power_store/cell/infinite/abductor), "The admin-spawned frame has no void core")
-	for(var/slot in list(MECHA_L_ARM, MECHA_R_ARM))
-		var/obj/item/mecha_parts/mecha_equipment/weapon/energy/laser/heavy/golden_gardren/laser = combined.equip_by_category[slot]
-		TEST_ASSERT(istype(laser), "An arm of the combined frame has no heavy laser")
-		TEST_ASSERT_EQUAL(laser.equip_cooldown, 1 SECONDS, "The heavy laser does not use the one-second cooldown")
-		var/charge_before = combined.get_charge()
-		TEST_ASSERT(combined.use_energy(laser.energy_drain), "The core could not power the laser")
-		TEST_ASSERT_EQUAL(combined.get_charge(), charge_before, "Firing depleted the void core")
+	var/obj/item/mecha_parts/mecha_equipment/weapon/energy/laser/heavy/golden_gardren/laser = combined.equip_by_category[MECHA_L_ARM]
+	TEST_ASSERT(istype(laser), "The combined frame has no heavy laser in the left arm")
+	TEST_ASSERT_EQUAL(laser.equip_cooldown, 1 SECONDS, "The heavy laser does not use the one-second cooldown")
+	var/charge_before = combined.get_charge()
+	TEST_ASSERT(combined.use_energy(laser.energy_drain), "The core could not power the laser")
+	TEST_ASSERT_EQUAL(combined.get_charge(), charge_before, "Firing depleted the void core")
 	TEST_ASSERT_NOTNULL(combined.separate_blocker(), "An admin-spawned frame offered to separate into free halves")
 	TEST_ASSERT(!combined.disassemble(), "An admin-spawned frame separated into free halves")
 	TEST_ASSERT(!QDELETED(combined), "A failed separation deleted the frame")
@@ -239,8 +240,12 @@
 	var/datum/component/golden_gardren_ejection/ejection = combined.GetComponent(/datum/component/golden_gardren_ejection)
 
 	TEST_ASSERT(ejection.start(main_pilot), "The ejection countdown did not start")
+	var/obj/effect/abstract/shared_particle_holder/emitter = locate() in combined.vis_contents
+	TEST_ASSERT(istype(emitter?.particles, /particles/smoke/burning/golden_gardren), "The frame did not start venting smoke during the ejection countdown")
 	var/launch_delay = timeleft(ejection.timer)
 	ejection.eject()
+	TEST_ASSERT(!(emitter in combined.vis_contents), "The countdown emitter stayed on the frame after launch")
+	TEST_ASSERT(locate(/obj/effect/temp_visual/golden_gardren_smoke) in get_turf(combined), "Launching the capsules left no smoke cloud")
 	var/list/landings = list()
 	for(var/mob/living/carbon/human/pilot as anything in list(main_pilot, gunner))
 		TEST_ASSERT(!combined.is_occupant(pilot), "A pilot stayed inside after the emergency ejection")
@@ -303,8 +308,11 @@
 	TEST_ASSERT(!QDELETED(combined), "The manned frame blew up at once, leaving the pilots no time to aim their capsules")
 	TEST_ASSERT(golden_gardren_is_ejecting(combined), "A lethal blow did not start the ejection countdown")
 	TEST_ASSERT(combined.is_occupant(main_pilot) && combined.is_occupant(gunner), "The pilots were thrown out before the countdown ran out")
+	var/obj/effect/abstract/shared_particle_holder/emitter = locate() in combined.vis_contents
+	TEST_ASSERT(istype(emitter?.particles, /particles/smoke/burning/golden_gardren), "The failing frame did not emit heavy smoke")
 	golden_gardren_wait_for_blow_up(combined)
 	TEST_ASSERT(QDELETED(combined), "The burning frame did not blow up when the countdown ran out")
+	TEST_ASSERT(locate(/obj/effect/temp_visual/golden_gardren_smoke) in frame_turf, "The wreck site had no smoke cloud")
 	for(var/mob/living/carbon/human/pilot as anything in list(main_pilot, gunner))
 		TEST_ASSERT(!QDELETED(pilot), "A pilot was deleted together with the frame")
 		var/turf/landing = golden_gardren_capsule_target(pilot, frame_turf)
@@ -328,9 +336,10 @@
 		TEST_ASSERT(istype(half.cell, /obj/item/stock_parts/power_store/cell/bluespace), "[half] has no bluespace battery")
 		var/expected_utility_slots = half_type == /obj/vehicle/sealed/mecha/gardren ? 2 : 3
 		TEST_ASSERT_EQUAL(half.max_equip_by_category[MECHA_UTILITY], expected_utility_slots, "[half] lost its chassis-specific slot limit")
-		for(var/slot in list(MECHA_L_ARM, MECHA_R_ARM))
-			var/obj/item/mecha_parts/mecha_equipment/weapon/laser = half.equip_by_category[slot]
-			TEST_ASSERT_EQUAL(laser?.type, /obj/item/mecha_parts/mecha_equipment/weapon/energy/laser, "[half] does not have standard lasers in both arms")
+		var/obj/item/mecha_parts/mecha_equipment/weapon/laser = half.equip_by_category[MECHA_L_ARM]
+		var/obj/item/mecha_parts/mecha_equipment/weapon/gun = half.equip_by_category[MECHA_R_ARM]
+		TEST_ASSERT_EQUAL(laser?.type, /obj/item/mecha_parts/mecha_equipment/weapon/energy/laser, "[half] does not have a standard laser in its left arm")
+		TEST_ASSERT_EQUAL(gun?.type, /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/lmg, "[half] does not have a standard machine gun in its right arm")
 		TEST_ASSERT_NOTNULL(LAZYACCESSASSOC(half.occupant_actions, pilot, /datum/action/vehicle/sealed/mecha/golden_gardren_emergency_eject), "The pilot of [half] got no ejection button")
 
 		half.take_damage(half.get_integrity() + 10, BRUTE)
@@ -375,7 +384,20 @@
 	TEST_ASSERT_EQUAL(main_data["charge_percent"], 100, "The cockpit did not report a full power source")
 	var/list/gunner_data = cockpit.ui_data(gunner)
 	TEST_ASSERT(isnull(gunner_data["strafe"]), "The weapons seat was sent the main seat data")
-	TEST_ASSERT(length(gunner_data["weapons"]), "The weapons seat got no weapon data")
+	var/list/weapons = gunner_data["weapons"]
+	TEST_ASSERT_EQUAL(length(weapons), 2, "The weapons seat did not get both weapons")
+	var/list/right_weapon = weapons[2]
+	var/list/ammo = right_weapon["ammo"]
+	TEST_ASSERT_EQUAL(LAZYACCESS(ammo, "projectiles_cache"), 900, "The cockpit did not show the increased reserve")
+
+	var/obj/item/mecha_parts/mecha_equipment/weapon/ballistic/lmg/golden_gardren/gun = combined.equip_by_category[MECHA_R_ARM]
+	TEST_ASSERT(istype(gun), "The weapons seat has no machine gun with an extended reserve")
+	gun.projectiles -= gun.projectiles_per_shot
+	var/list/reload_params = list("slot" = MECHA_R_ARM)
+	TEST_ASSERT(!cockpit.ui_act("reload", reload_params, main_ui, main_ui.state), "The main seat reloaded the machine gun")
+	TEST_ASSERT(cockpit.ui_act("reload", reload_params, gunner_ui, gunner_ui.state), "The weapons seat could not reload the machine gun")
+	TEST_ASSERT_EQUAL(gun.projectiles, initial(gun.projectiles), "Reloading did not refill the magazine")
+	TEST_ASSERT_EQUAL(gun.projectiles_cache, 900 - gun.projectiles_per_shot, "Reloading used the wrong amount of reserve ammunition")
 
 /// Activated inside a mech of the pair the summon implant binds to it; a docked half answers through its frame.
 /datum/unit_test/golden_gardren_summon_link

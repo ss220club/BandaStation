@@ -7,7 +7,7 @@
 	exit_delay = 40
 	equip_by_category = list(
 		MECHA_L_ARM = /obj/item/mecha_parts/mecha_equipment/weapon/energy/laser,
-		MECHA_R_ARM = /obj/item/mecha_parts/mecha_equipment/weapon/energy/laser,
+		MECHA_R_ARM = /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/lmg,
 		MECHA_UTILITY = list(),
 		MECHA_POWER = list(),
 		MECHA_ARMOR = list(),
@@ -21,10 +21,12 @@
 	)
 	/// Power source installed when the chassis is spawned.
 	var/factory_cell_type = /obj/item/stock_parts/power_store/cell/bluespace
+	/// Whether the chassis vents extra smoke during emergency ejection and destruction.
+	var/heavy_emergency_smoke = FALSE
 
 /obj/vehicle/sealed/mecha/golden_gardren_base/Initialize(mapload, built_manually)
 	. = ..()
-	AddComponent(/datum/component/golden_gardren_ejection)
+	AddComponent(/datum/component/golden_gardren_ejection, heavy_emergency_smoke)
 
 /obj/vehicle/sealed/mecha/golden_gardren_base/populate_parts()
 	cell = new factory_cell_type(src)
@@ -71,7 +73,7 @@
 
 /obj/vehicle/sealed/mecha/golden_gardren_base/atom_destruction()
 	var/datum/component/golden_gardren_ejection/ejection = GetComponent(/datum/component/golden_gardren_ejection)
-	ejection?.eject()
+	ejection?.eject(destroying = TRUE)
 	return ..()
 
 /// Moves support parts during docking and separation. The cell stays in its chassis.
@@ -94,3 +96,7 @@
 
 /obj/item/mecha_parts/mecha_equipment/weapon/energy/laser/heavy/golden_gardren
 	equip_cooldown = 1 SECONDS
+
+/obj/item/mecha_parts/mecha_equipment/weapon/ballistic/lmg/golden_gardren
+	projectiles_cache = 900
+	projectiles_cache_max = 1800

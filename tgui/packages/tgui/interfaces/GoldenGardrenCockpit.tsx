@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   LabeledList,
   NoticeBox,
@@ -13,6 +14,13 @@ type Weapon = {
   slot: string;
   name: string;
   button: string;
+  ammo?: {
+    projectiles: number;
+    max_magazine: number;
+    projectiles_cache: number;
+    projectiles_cache_max: number | null;
+    disabledreload: boolean | null;
+  };
 };
 
 type CockpitData = {
@@ -172,9 +180,39 @@ const WeaponsSeatSection = () => {
       }
     >
       <LabeledList>
-        {weapons.map((weapon) => (
-          <LabeledList.Item key={weapon.slot} label={weapon.button}>
-            {weapon.name}
+        {weapons.map(({ slot, name, button, ammo }) => (
+          <LabeledList.Item
+            key={slot}
+            label={button}
+            buttons={
+              ammo &&
+              !ammo.disabledreload && (
+                <Button
+                  icon="rotate"
+                  disabled={
+                    ammo.projectiles >= ammo.max_magazine ||
+                    !ammo.projectiles_cache
+                  }
+                  onClick={() => act('reload', { slot })}
+                >
+                  Перезарядить
+                </Button>
+              )
+            }
+          >
+            {name}
+            {ammo && (
+              <>
+                <ProgressBar value={share(ammo.projectiles, ammo.max_magazine)}>
+                  {ammo.projectiles} / {ammo.max_magazine}
+                </ProgressBar>
+                {!!ammo.projectiles_cache_max && (
+                  <Box color="label" mt={0.25}>
+                    Запас {ammo.projectiles_cache} / {ammo.projectiles_cache_max}
+                  </Box>
+                )}
+              </>
+            )}
           </LabeledList.Item>
         ))}
         <LabeledList.Item label="Ракетный удар">

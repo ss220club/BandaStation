@@ -82,11 +82,15 @@
 			var/obj/item/mecha_parts/mecha_equipment/weapon/weapon = mech.equip_by_category[slot]
 			if(!istype(weapon))
 				continue
-			weapons += list(list(
+			var/list/weapon_data = list(
 				"slot" = slot,
 				"name" = weapon.name,
 				"button" = slot == MECHA_L_ARM ? "ЛКМ" : "ПКМ",
-			))
+			)
+			var/obj/item/mecha_parts/mecha_equipment/weapon/ballistic/gun = weapon
+			if(istype(gun))
+				weapon_data["ammo"] = gun.get_snowflake_data()
+			weapons += list(weapon_data)
 		data["weapons"] = weapons
 	return data
 
@@ -114,7 +118,15 @@
 				mech.toggle_lights(user = user)
 				return TRUE
 		return FALSE
-	if(action == "toggle_shield")
-		var/datum/component/golden_gardren_shield/shield = mech.GetComponent(/datum/component/golden_gardren_shield)
-		return shield.toggle(user)
+	switch(action)
+		if("toggle_shield")
+			var/datum/component/golden_gardren_shield/shield = mech.GetComponent(/datum/component/golden_gardren_shield)
+			return shield.toggle(user)
+		if("reload")
+			var/slot = params["slot"]
+			if(slot != MECHA_L_ARM && slot != MECHA_R_ARM)
+				return FALSE
+			var/obj/item/mecha_parts/mecha_equipment/weapon/ballistic/gun = mech.equip_by_category[slot]
+			if(istype(gun) && !gun.disabledreload)
+				return gun.rearm()
 	return FALSE
