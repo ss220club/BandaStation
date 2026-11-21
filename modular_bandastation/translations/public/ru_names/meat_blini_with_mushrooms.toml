@@ -1,0 +1,8 @@
+["meat blini with mushrooms"]
+nominative = "мясные блины с грибами"
+genitive = "мясных блинов с грибами"
+dative = "мясным блинам с грибами"
+accusative = "мясные блины с грибами"
+instrumental = "мясными блинами с грибами"
+prepositional = "мясных блинах с грибами"
+gender = "plural"

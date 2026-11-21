@@ -1,0 +1,8 @@
+["blini with ham and cheese"]
+nominative = "блины с ветчиной и сыром"
+genitive = "блинов с ветчиной и сыром"
+dative = "блинам с ветчиной и сыром"
+accusative = "блины с ветчиной и сыром"
+instrumental = "блинами с ветчиной и сыром"
+prepositional = "блинах с ветчиной и сыром"
+gender = "plural"
