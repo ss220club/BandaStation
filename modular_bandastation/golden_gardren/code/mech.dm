@@ -19,13 +19,15 @@
 		MECHA_POWER = 1,
 		MECHA_ARMOR = 1,
 	)
+	/// Power source installed when the chassis is spawned.
+	var/factory_cell_type = /obj/item/stock_parts/power_store/cell/bluespace
 
 /obj/vehicle/sealed/mecha/golden_gardren_base/Initialize(mapload, built_manually)
 	. = ..()
 	AddComponent(/datum/component/golden_gardren_ejection)
 
 /obj/vehicle/sealed/mecha/golden_gardren_base/populate_parts()
-	cell = new /obj/item/stock_parts/power_store/cell/bluespace(src)
+	cell = new factory_cell_type(src)
 	scanmod = new /obj/item/stock_parts/scanning_module(src)
 	capacitor = new /obj/item/stock_parts/capacitor(src)
 	servo = new /obj/item/stock_parts/servo(src)
@@ -72,8 +74,9 @@
 	ejection?.eject()
 	return ..()
 
-/obj/vehicle/sealed/mecha/golden_gardren_base/proc/transfer_stock_parts(obj/vehicle/sealed/mecha/golden_gardren_base/destination)
-	for(var/obj/item/stock_parts/part in list(cell, scanmod, capacitor, servo))
+/// Moves support parts during docking and separation. The cell stays in its chassis.
+/obj/vehicle/sealed/mecha/golden_gardren_base/proc/transfer_support_parts(obj/vehicle/sealed/mecha/golden_gardren_base/destination)
+	for(var/obj/item/stock_parts/part in list(scanmod, capacitor, servo))
 		part.forceMove(destination)
 	locate_parts()
 	destination.locate_parts()
@@ -90,4 +93,4 @@
 	return TRUE
 
 /obj/item/mecha_parts/mecha_equipment/weapon/energy/laser/heavy/golden_gardren
-	equip_cooldown = 1.2 SECONDS
+	equip_cooldown = 1 SECONDS

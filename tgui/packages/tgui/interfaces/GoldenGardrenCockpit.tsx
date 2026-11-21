@@ -20,6 +20,7 @@ type CockpitData = {
   integrity: number;
   max_integrity: number;
   charge_percent: number;
+  infinite_power: boolean;
   shield_active: boolean;
   shield_charge: number;
   shield_max_charge: number;
@@ -101,7 +102,7 @@ const MachineSection = () => {
               bad: [-Infinity, 0.2],
             }}
           >
-            {Math.round(data.charge_percent)}%
+            {data.infinite_power ? '∞' : `${Math.round(data.charge_percent)}%`}
           </ProgressBar>
         </LabeledList.Item>
         <LabeledList.Item label="Щит">

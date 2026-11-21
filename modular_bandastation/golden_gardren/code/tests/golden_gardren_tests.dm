@@ -9,6 +9,7 @@
 	golden.mob_enter(gunner, silent = TRUE)
 	gardren.mob_enter(main_pilot, silent = TRUE)
 	var/obj/item/stock_parts/power_store/gardren_cell = gardren.cell
+	var/obj/item/stock_parts/scanning_module/gardren_scanner = gardren.scanmod
 	var/expected_max_integrity = golden.max_integrity + gardren.max_integrity
 
 	var/obj/vehicle/sealed/mecha/golden_gardren/combined = allocate(/obj/vehicle/sealed/mecha/golden_gardren, null, TRUE)
@@ -24,8 +25,9 @@
 
 	TEST_ASSERT_EQUAL(golden.loc, combined, "The Golden was not docked into the frame")
 	TEST_ASSERT_EQUAL(gardren.loc, combined, "The Gardren was not docked into the frame")
-	TEST_ASSERT_EQUAL(combined.cell, gardren_cell, "The frame does not run on the Gardren's cell")
-	TEST_ASSERT_NULL(gardren.cell, "The Gardren kept a reference to the cell it handed over")
+	TEST_ASSERT(istype(combined.cell, /obj/item/stock_parts/power_store/cell/infinite/abductor), "The assembled frame has no void core")
+	TEST_ASSERT_EQUAL(gardren_cell.loc, gardren, "The Gardren's cell did not stay with its chassis")
+	TEST_ASSERT_EQUAL(combined.scanmod, gardren_scanner, "The Gardren's scanner was not transferred to the frame")
 	TEST_ASSERT_EQUAL(combined.max_integrity, expected_max_integrity, "The frame's integrity is not the sum of both halves")
 
 	qdel(combined)
@@ -162,11 +164,13 @@
 	golden.mob_enter(gunner, silent = TRUE)
 	gardren.mob_enter(main_pilot, silent = TRUE)
 	var/obj/item/stock_parts/power_store/gardren_cell = gardren.cell
+	TEST_ASSERT(gardren.use_energy(gardren_cell.maxcharge / 4), "The Gardren could not draw power before docking")
 	var/obj/vehicle/sealed/mecha/golden_gardren/combined = allocate(/obj/vehicle/sealed/mecha/golden_gardren, null, TRUE)
 	TEST_ASSERT(combined.assemble(golden, gardren, gunner, main_pilot), "Assembly failed with both pilots in place")
+	var/obj/item/stock_parts/power_store/core = combined.cell
 
 	combined.take_damage(combined.max_integrity / 2, BRUTE)
-	TEST_ASSERT(combined.use_energy(gardren_cell.maxcharge / 4), "The combined frame could not use the Gardren's battery")
+	TEST_ASSERT(combined.use_energy(gardren_cell.maxcharge / 4), "The assembled frame could not draw power")
 	combined.mob_exit(gunner, silent = TRUE, forced = TRUE)
 	TEST_ASSERT_NOTNULL(combined.separate_blocker(), "A single occupant was offered a separation")
 	TEST_ASSERT(!combined.disassemble(), "The frame separated with only one pilot")
@@ -185,6 +189,7 @@
 	TEST_ASSERT_EQUAL(gunner.loc, golden, "The weapons seat pilot did not go back into the Golden")
 	TEST_ASSERT_EQUAL(gardren.cell, gardren_cell, "The Gardren did not get its cell back")
 	TEST_ASSERT_EQUAL(gardren_cell.percent(), 75, "Separation changed the remaining battery charge")
+	TEST_ASSERT(QDELETED(core), "Separation released a reusable void core")
 	TEST_ASSERT(!golden.completely_disabled && !gardren.completely_disabled, "A half stayed switched off after separation")
 	TEST_ASSERT_EQUAL(gardren.get_integrity(), round(gardren.max_integrity / 2), "The Gardren did not take its share of the damage")
 	TEST_ASSERT_EQUAL(golden.get_integrity(), round(golden.max_integrity / 2), "The Golden did not take its share of the damage")
@@ -194,14 +199,14 @@
 
 /datum/unit_test/golden_gardren_separate_spawned_frame/Run()
 	var/obj/vehicle/sealed/mecha/golden_gardren/combined = allocate(/obj/vehicle/sealed/mecha/golden_gardren)
-	TEST_ASSERT(istype(combined.cell, /obj/item/stock_parts/power_store/cell/bluespace), "The admin-spawned frame has no bluespace battery")
+	TEST_ASSERT(istype(combined.cell, /obj/item/stock_parts/power_store/cell/infinite/abductor), "The admin-spawned frame has no void core")
 	for(var/slot in list(MECHA_L_ARM, MECHA_R_ARM))
 		var/obj/item/mecha_parts/mecha_equipment/weapon/energy/laser/heavy/golden_gardren/laser = combined.equip_by_category[slot]
 		TEST_ASSERT(istype(laser), "An arm of the combined frame has no heavy laser")
-		TEST_ASSERT_EQUAL(laser.equip_cooldown, 1.2 SECONDS, "The heavy laser does not use its shorter firing cooldown")
+		TEST_ASSERT_EQUAL(laser.equip_cooldown, 1 SECONDS, "The heavy laser does not use the one-second cooldown")
 		var/charge_before = combined.get_charge()
-		TEST_ASSERT(combined.use_energy(laser.energy_drain), "The battery could not power the laser")
-		TEST_ASSERT_EQUAL(combined.get_charge(), charge_before - laser.energy_drain, "The laser drained the wrong amount of charge")
+		TEST_ASSERT(combined.use_energy(laser.energy_drain), "The core could not power the laser")
+		TEST_ASSERT_EQUAL(combined.get_charge(), charge_before, "Firing depleted the void core")
 	TEST_ASSERT_NOTNULL(combined.separate_blocker(), "An admin-spawned frame offered to separate into free halves")
 	TEST_ASSERT(!combined.disassemble(), "An admin-spawned frame separated into free halves")
 	TEST_ASSERT(!QDELETED(combined), "A failed separation deleted the frame")
@@ -287,6 +292,7 @@
 
 /datum/unit_test/golden_gardren_destruction_ejects/Run()
 	var/obj/vehicle/sealed/mecha/golden_gardren/combined = allocate(/obj/vehicle/sealed/mecha/golden_gardren)
+	var/obj/item/stock_parts/power_store/core = combined.cell
 	var/mob/living/carbon/human/consistent/main_pilot = allocate(/mob/living/carbon/human/consistent)
 	var/mob/living/carbon/human/consistent/gunner = allocate(/mob/living/carbon/human/consistent)
 	combined.mob_enter(main_pilot, silent = TRUE)
@@ -306,6 +312,7 @@
 		TEST_ASSERT(landing != frame_turf, "A pilot was sent under the wreck despite free turfs around it")
 	var/obj/structure/mecha_wreckage/golden_gardren/wreck = locate() in frame_turf
 	TEST_ASSERT_NOTNULL(wreck, "The destroyed frame left no wreck")
+	TEST_ASSERT(QDELETED(core), "The wreck left behind a recoverable void core")
 	qdel(wreck)
 
 /// The lone Golden and Gardren carry the same capsules: the pilot gets the button, and a destroyed half fires its pilot clear.
@@ -362,10 +369,10 @@
 	cockpit.ui_act("toggle_strafe", list(), main_ui, main_ui.state)
 	TEST_ASSERT(combined.strafe != strafe_before, "The main seat could not toggle strafing")
 
-	TEST_ASSERT(combined.use_energy(combined.cell.maxcharge / 2), "The mech could not use its battery")
 	var/list/main_data = cockpit.ui_data(main_pilot)
 	TEST_ASSERT(isnull(main_data["weapons"]), "The main seat was sent the weapons seat data")
-	TEST_ASSERT_EQUAL(main_data["charge_percent"], 50, "The cockpit did not show the remaining battery charge")
+	TEST_ASSERT(main_data["infinite_power"], "The cockpit did not identify the infinite power source")
+	TEST_ASSERT_EQUAL(main_data["charge_percent"], 100, "The cockpit did not report a full power source")
 	var/list/gunner_data = cockpit.ui_data(gunner)
 	TEST_ASSERT(isnull(gunner_data["strafe"]), "The weapons seat was sent the main seat data")
 	TEST_ASSERT(length(gunner_data["weapons"]), "The weapons seat got no weapon data")
@@ -433,6 +440,9 @@
 
 /datum/unit_test/golden_gardren_phasing/Run()
 	var/obj/vehicle/sealed/mecha/golden_gardren/combined = allocate(/obj/vehicle/sealed/mecha/golden_gardren)
+	qdel(combined.cell)
+	allocate(/obj/item/stock_parts/power_store/cell/high, combined)
+	combined.locate_parts()
 	var/mob/living/carbon/human/consistent/main_pilot = allocate(/mob/living/carbon/human/consistent)
 	var/mob/living/carbon/human/consistent/gunner = allocate(/mob/living/carbon/human/consistent)
 	combined.mob_enter(main_pilot, silent = TRUE)

@@ -413,7 +413,7 @@
 		return
 
 	var/list/stock_parts = list()
-	if(cell)
+	if(cell && removable_cell)
 		stock_parts += cell
 	if(scanmod)
 		stock_parts += scanmod
@@ -603,7 +603,7 @@
 				equipment.detach(loc)
 				qdel(equipment)
 
-		if(cell)
+		if(cell && removable_cell)
 			wreck.crowbar_salvage += cell
 			cell.forceMove(wreck)
 			cell.use(rand(0, cell.charge), TRUE)

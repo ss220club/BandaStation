@@ -80,7 +80,7 @@
 
 	undock_component(gardren, frame_turf)
 	undock_component(golden, golden_turf)
-	transfer_stock_parts(gardren)
+	transfer_support_parts(gardren)
 	gardren.update_integrity(max(1, round(gardren.max_integrity * integrity_share)))
 	golden.update_integrity(max(1, round(golden.max_integrity * integrity_share)))
 

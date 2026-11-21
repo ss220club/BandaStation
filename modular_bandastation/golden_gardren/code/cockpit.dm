@@ -55,7 +55,9 @@
 	data["seat"] = seat
 	data["integrity"] = mech.get_integrity()
 	data["max_integrity"] = mech.max_integrity
-	data["charge_percent"] = mech.cell?.maxcharge > 0 ? mech.cell.percent() : 0
+	var/infinite_power = istype(mech.cell, /obj/item/stock_parts/power_store/cell/infinite)
+	data["infinite_power"] = infinite_power
+	data["charge_percent"] = infinite_power ? 100 : (mech.cell?.maxcharge > 0 ? mech.cell.percent() : 0)
 	var/datum/component/golden_gardren_shield/shield = mech.GetComponent(/datum/component/golden_gardren_shield)
 	data["shield_active"] = shield.active
 	data["shield_charge"] = shield.charge

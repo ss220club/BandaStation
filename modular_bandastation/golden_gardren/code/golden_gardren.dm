@@ -14,6 +14,8 @@
 	armor_type = /datum/armor/mecha_golden_gardren
 	force = 45
 	max_occupants = 2
+	factory_cell_type = /obj/item/stock_parts/power_store/cell/infinite/abductor
+	removable_cell = FALSE
 	wreckage = /obj/structure/mecha_wreckage/golden_gardren
 	equip_by_category = list(
 		MECHA_L_ARM = /obj/item/mecha_parts/mecha_equipment/weapon/energy/laser/heavy/golden_gardren,
@@ -138,7 +140,9 @@
 	assign_seat(gardren_pilot, main_seat = TRUE)
 	assign_seat(golden_pilot, main_seat = FALSE)
 
-	gardren.transfer_stock_parts(src)
+	if(!cell)
+		cell = new factory_cell_type(src)
+	gardren.transfer_support_parts(src)
 
 	max_integrity = golden.max_integrity + gardren.max_integrity
 	update_integrity(golden.get_integrity() + gardren.get_integrity())

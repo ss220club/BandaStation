@@ -49,6 +49,8 @@
 	var/equipment_disabled = FALSE
 	/// Keeps track of the mech's cell
 	var/obj/item/stock_parts/power_store/cell
+	/// Whether the installed cell can be removed during maintenance or salvaged after destruction.
+	var/removable_cell = TRUE
 	/// Keeps track of the mech's scanning module
 	var/obj/item/stock_parts/scanning_module/scanmod
 	/// Keeps track of the mech's capacitor
@@ -604,7 +606,8 @@
 		spark_system.start()
 		var/damage_energy_consumption = 0.005 * STANDARD_CELL_CHARGE * seconds_per_tick
 		use_energy(damage_energy_consumption)
-		cell.maxcharge -= min(damage_energy_consumption, cell.maxcharge)
+		if(!istype(cell, /obj/item/stock_parts/power_store/cell/infinite))
+			cell.maxcharge -= min(damage_energy_consumption, cell.maxcharge)
 
 /obj/vehicle/sealed/mecha/proc/process_cabin_air(seconds_per_tick)
 	if(!(internal_damage & MECHA_INT_TEMP_CONTROL) && cabin_air && cabin_air.return_volume() > 0)
