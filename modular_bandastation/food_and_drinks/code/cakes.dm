@@ -3,6 +3,8 @@
 	icon = 'modular_bandastation/food_and_drinks/icons/station_food.dmi'
 	inhand_icon_state = null
 	venue_value = FOOD_PRICE_CHEAP
+	foodtypes = DAIRY|SUGAR|GRAIN
+	crafting_complexity = FOOD_COMPLEXITY_3
 	yield = 6
 
 /obj/item/food/cake/slavic/on_craft_completion(list/components, datum/crafting_recipe/current_recipe, atom/crafter)
@@ -16,6 +18,8 @@
 	icon = 'modular_bandastation/food_and_drinks/icons/station_food.dmi'
 	inhand_icon_state = null
 	venue_value = FOOD_PRICE_CHEAP
+	foodtypes = DAIRY|SUGAR|GRAIN
+	crafting_complexity = FOOD_COMPLEXITY_2
 
 /obj/item/food/cake/slavic/smetannik_choco
 	slice_type = /obj/item/food/cakeslice/slavic/smetannik_choco
@@ -27,8 +31,6 @@
 		/datum/reagent/consumable/sugar = 14,
 		/datum/reagent/consumable/nutriment/protein = 4,
 	)
-	foodtypes = DAIRY|SUGAR|GRAIN
-	crafting_complexity = FOOD_COMPLEXITY_3
 	tastes = list("сметанный крем" = 2, "шоколадный бисквит" = 1)
 
 /obj/item/food/cakeslice/slavic/smetannik_choco
@@ -40,8 +42,6 @@
 		/datum/reagent/consumable/sugar = 3,
 		/datum/reagent/consumable/nutriment/protein = 2,
 	)
-	foodtypes = DAIRY|SUGAR|GRAIN
-	crafting_complexity = FOOD_COMPLEXITY_2
 	tastes = list("сметанный крем" = 2, "шоколадный бисквит" = 1)
 
 /obj/item/food/station_food/smetannik_choco_raw
@@ -68,8 +68,6 @@
 		/datum/reagent/consumable/sugar = 12,
 		/datum/reagent/consumable/nutriment/protein = 4,
 	)
-	foodtypes = DAIRY|SUGAR|GRAIN
-	crafting_complexity = FOOD_COMPLEXITY_3
 	tastes = list("сметанный крем" = 2, "бисквит" = 1)
 
 /obj/item/food/cakeslice/slavic/smetannik
@@ -81,8 +79,6 @@
 		/datum/reagent/consumable/sugar = 2,
 		/datum/reagent/consumable/nutriment/protein = 2,
 	)
-	foodtypes = DAIRY|SUGAR|GRAIN
-	crafting_complexity = FOOD_COMPLEXITY_2
 	tastes = list("сметанный крем" = 2, "бисквит" = 1)
 
 /obj/item/food/station_food/smetannik_raw
@@ -138,8 +134,6 @@
 		/datum/reagent/consumable/sugar = 2,
 		/datum/reagent/consumable/nutriment/protein = 2,
 	)
-	foodtypes = DAIRY|SUGAR|GRAIN
-	crafting_complexity = FOOD_COMPLEXITY_2
 	tastes = list("запечённый творог" = 2, "сладкое тесто" = 1)
 
 /obj/item/food/cakeslice/slavic/tvorozhnik_berries
@@ -153,7 +147,6 @@
 		/datum/reagent/consumable/nutriment/protein = 2,
 	)
 	foodtypes = DAIRY|SUGAR|GRAIN|FRUIT
-	crafting_complexity = FOOD_COMPLEXITY_2
 	tastes = list("запечённый творог" = 2, "ягоды" = 1)
 
 /obj/item/food/cakeslice/slavic/tvorozhnik_condensed_milk
@@ -166,8 +159,6 @@
 		/datum/reagent/consumable/sugar = 3,
 		/datum/reagent/consumable/nutriment/protein = 2,
 	)
-	foodtypes = DAIRY|SUGAR|GRAIN
-	crafting_complexity = FOOD_COMPLEXITY_2
 	tastes = list("запечённый творог" = 2, "сгущённое молоко" = 1)
 
 /obj/item/food/cakeslice/slavic/tvorozhnik_berry_smetana
@@ -181,7 +172,6 @@
 		/datum/reagent/consumable/nutriment/protein = 3,
 	)
 	foodtypes = DAIRY|SUGAR|GRAIN|FRUIT
-	crafting_complexity = FOOD_COMPLEXITY_2
 	tastes = list("запечённый творог" = 2, "ягоды" = 1)
 
 /obj/item/food/cake/slavic/tvorozhnik
@@ -195,8 +185,6 @@
 		/datum/reagent/consumable/sugar = 9,
 		/datum/reagent/consumable/nutriment/protein = 9,
 	)
-	foodtypes = DAIRY|SUGAR|GRAIN
-	crafting_complexity = FOOD_COMPLEXITY_3
 	tastes = list("запечённый творог" = 2, "сладкое тесто" = 1)
 	max_volume = 100
 
@@ -212,7 +200,6 @@
 		/datum/reagent/consumable/nutriment/protein = 9,
 	)
 	foodtypes = DAIRY|SUGAR|FRUIT|GRAIN
-	crafting_complexity = FOOD_COMPLEXITY_3
 	tastes = list("запечённый творог" = 2, "ягоды" = 1)
 
 /obj/item/food/cake/slavic/tvorozhnik_condensed_milk
@@ -226,8 +213,6 @@
 		/datum/reagent/consumable/sugar = 12,
 		/datum/reagent/consumable/nutriment/protein = 9,
 	)
-	foodtypes = DAIRY|SUGAR|GRAIN
-	crafting_complexity = FOOD_COMPLEXITY_3
 	tastes = list("запечённый творог" = 2, "сгущённое молоко" = 1)
 
 /obj/item/food/cake/slavic/tvorozhnik_berry_smetana
@@ -242,7 +227,6 @@
 		/datum/reagent/consumable/nutriment/protein = 12,
 	)
 	foodtypes = DAIRY|SUGAR|FRUIT|GRAIN
-	crafting_complexity = FOOD_COMPLEXITY_3
 	tastes = list("запечённый творог" = 2, "ягоды" = 1)
 
 /obj/item/food/station_food/tvorozhnik_raw
