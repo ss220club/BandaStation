@@ -4,6 +4,7 @@
 	crafting_complexity = FOOD_COMPLEXITY_2
 
 /obj/item/food/station_food/cookie/cooked
+	name = "shortbread cookie"
 	abstract_type = /obj/item/food/station_food/cookie/cooked
 	icon_state = "cookie_round"
 	food_flags = FOOD_FINGER_FOOD

@@ -5,6 +5,12 @@
 	venue_value = FOOD_PRICE_CHEAP
 	yield = 6
 
+/obj/item/food/cake/slavic/on_craft_completion(list/components, datum/crafting_recipe/current_recipe, atom/crafter)
+	. = ..()
+	if(istype(current_recipe, /datum/crafting_recipe/food/station_food))
+		var/datum/crafting_recipe/food/station_food/recipe = current_recipe
+		recipe.return_ingredient_bowls(components, src)
+
 /obj/item/food/cakeslice/slavic
 	abstract_type = /obj/item/food/cakeslice/slavic
 	icon = 'modular_bandastation/food_and_drinks/icons/station_food.dmi'
@@ -14,7 +20,7 @@
 /obj/item/food/cake/slavic/smetannik_choco
 	slice_type = /obj/item/food/cakeslice/slavic/smetannik_choco
 	name = "chocolate sour cream cake"
-	desc = "Шоколадный сметанник с мягкими коржами и сметанным кремом. Умеренная кислинка дополняет насыщенный шоколадный вкус."
+	desc = "Шоколадный сметанник с мягким коржиком и сметанным кремом. Умеренная кислинка дополняет насыщенный шоколадный вкус."
 	icon_state = "smetannik_choco"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 18,
@@ -27,7 +33,7 @@
 
 /obj/item/food/cakeslice/slavic/smetannik_choco
 	name = "chocolate sour cream cake slice"
-	desc = "Кусок шоколадного сметанника с мягкими коржами и нежным сметанным кремом."
+	desc = "Кусок шоколадного сметанника с мягким коржиком и нежным сметанным кремом."
 	icon_state = "smetannik_choco_slice"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 3,
@@ -55,7 +61,7 @@
 /obj/item/food/cake/slavic/smetannik
 	slice_type = /obj/item/food/cakeslice/slavic/smetannik
 	name = "sour cream cake"
-	desc = "Сметанник с мягкими коржами и нежным кремом. Лёгкая кислинка сметаны оттеняет сладость выпечки."
+	desc = "Сметанник с мягким коржиком и нежным кремом. Лёгкая кислинка сметаны оттеняет сладость выпечки."
 	icon_state = "smetannik"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 18,
@@ -68,7 +74,7 @@
 
 /obj/item/food/cakeslice/slavic/smetannik
 	name = "sour cream cake slice"
-	desc = "Порционный кусок сметанника с мягкими коржами и сметанным кремом."
+	desc = "Порционный кусок сметанника с мягким коржиком и сметанным кремом."
 	icon_state = "smetannik_slice"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 3,

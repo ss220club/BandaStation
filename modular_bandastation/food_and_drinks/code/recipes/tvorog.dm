@@ -2,7 +2,7 @@
 	name = "Сметана"
 	reqs = list(
 		/datum/reagent/consumable/cream = 10,
-		/obj/item/plate = 1,
+		/obj/item/reagent_containers/cup/bowl = 1,
 		/datum/reagent/consumable/yoghurt = 5,
 	)
 	result = /obj/item/food/station_food/smetana
@@ -25,7 +25,6 @@
 		/obj/item/food/station_food/tvorog = 1,
 		/obj/item/food/station_food/smetana = 1,
 		/datum/reagent/consumable/sugar = 5,
-		/obj/item/plate = 1,
 	)
 	result = /obj/item/food/station_food/tvorog_porridge
 	added_foodtypes = SUGAR
@@ -38,7 +37,6 @@
 		/obj/item/food/station_food/smetana = 1,
 		/datum/reagent/consumable/sugar = 5,
 		/obj/item/food/grown/pumpkin = 1,
-		/obj/item/plate = 1,
 	)
 	result = /obj/item/food/station_food/tvorog_pumpkin
 	added_foodtypes = SUGAR
@@ -51,7 +49,6 @@
 		/obj/item/food/station_food/smetana = 1,
 		/datum/reagent/consumable/sugar = 5,
 		/obj/item/food/chocolatebar = 1,
-		/obj/item/plate = 1,
 	)
 	result = /obj/item/food/station_food/tvorog_chocolate
 	removed_foodtypes = JUNKFOOD
@@ -64,7 +61,6 @@
 		/obj/item/food/station_food/smetana = 1,
 		/datum/reagent/consumable/sugar = 5,
 		/obj/item/food/grown/citrus/orange = 1,
-		/obj/item/plate = 1,
 	)
 	result = /obj/item/food/station_food/tvorog_orange
 	added_foodtypes = SUGAR
@@ -78,7 +74,6 @@
 		/datum/reagent/consumable/sugar = 5,
 		/obj/item/food/grown/cherries = 1,
 		/obj/item/food/chocolatebar = 1,
-		/obj/item/plate = 1,
 	)
 	result = /obj/item/food/station_food/tvorog_cherry
 	removed_foodtypes = JUNKFOOD
@@ -89,7 +84,7 @@
 	reqs = list(
 		/datum/reagent/consumable/milk = 5,
 		/datum/reagent/consumable/sugar = 15,
-		/obj/item/plate = 1,
+		/obj/item/reagent_containers/cup/bowl = 1,
 	)
 	result = /obj/item/food/station_food/condensed_milk
 	added_foodtypes = DAIRY|SUGAR
@@ -104,7 +99,6 @@
 		/obj/item/food/grown/citrus/lemon = 1,
 		/obj/item/food/grown/berries = 1,
 		/obj/item/food/grown/citrus/orange = 1,
-		/obj/item/plate = 1,
 	)
 	result = /obj/item/food/station_food/tvorog_fruit
 	added_foodtypes = SUGAR
@@ -117,7 +111,6 @@
 		/obj/item/food/station_food/smetana = 1,
 		/datum/reagent/consumable/sugar = 5,
 		/obj/item/food/grown/banana = 1,
-		/obj/item/plate = 1,
 	)
 	result = /obj/item/food/station_food/tvorog_banana
 	added_foodtypes = SUGAR
@@ -130,7 +123,6 @@
 		/obj/item/food/station_food/smetana = 1,
 		/datum/reagent/consumable/sugar = 5,
 		/obj/item/food/grown/berries = 1,
-		/obj/item/plate = 1,
 	)
 	result = /obj/item/food/station_food/tvorog_berries
 	added_foodtypes = SUGAR
@@ -145,7 +137,6 @@
 		/obj/item/food/grown/korta_nut = 1,
 		/obj/item/food/station_food/cookie/cooked = 1,
 		/datum/reagent/consumable/honey = 5,
-		/obj/item/plate = 1,
 	)
 	result = /obj/item/food/station_food/tvorog_nuts_honey
 	unit_test_spawn_extras = list(
@@ -162,7 +153,6 @@
 		/obj/item/food/grown/apple = 1,
 		/obj/item/food/grown/berries = 1,
 		/obj/item/food/grown/korta_nut = 1,
-		/obj/item/plate = 1,
 	)
 	result = /obj/item/food/station_food/tvorog_apple_berries
 	added_foodtypes = SUGAR
@@ -172,10 +162,10 @@
 	name = "Творог"
 	reqs = list(
 		/datum/reagent/consumable/cream = 5,
-		/obj/item/rag = 1,
 		/datum/reagent/toxin/bad_food = 2,
 	)
 	result = /obj/item/food/station_food/tvorog
+	tool_paths = list(/obj/item/stack/sheet/cloth)
 	added_foodtypes = DAIRY
 	meal_category = MEAL_COMPONENT
 

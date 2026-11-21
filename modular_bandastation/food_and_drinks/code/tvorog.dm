@@ -10,7 +10,7 @@
 	foodtypes = DAIRY
 	crafting_complexity = FOOD_COMPLEXITY_2
 	tastes = list("сливочная кислинка" = 1)
-	trash_type = /obj/item/plate
+	trash_type = /obj/item/reagent_containers/cup/bowl
 
 /obj/item/food/station_food/tvorog_porridge
 	name = "cottage cheese porridge"
@@ -25,7 +25,7 @@
 	foodtypes = DAIRY|SUGAR
 	crafting_complexity = FOOD_COMPLEXITY_3
 	tastes = list("творог" = 2, "сметана и сахар" = 1)
-	trash_type = /obj/item/plate
+	trash_type = /obj/item/reagent_containers/cup/bowl
 
 /obj/item/food/station_food/tvorog_pumpkin
 	name = "cottage cheese with pumpkin"
@@ -40,7 +40,7 @@
 	foodtypes = DAIRY|SUGAR|VEGETABLES
 	crafting_complexity = FOOD_COMPLEXITY_3
 	tastes = list("творог" = 2, "тыква" = 1)
-	trash_type = /obj/item/plate
+	trash_type = /obj/item/reagent_containers/cup/bowl
 
 /obj/item/food/station_food/tvorog_chocolate
 	name = "cottage cheese with chocolate"
@@ -55,7 +55,7 @@
 	foodtypes = DAIRY|SUGAR
 	crafting_complexity = FOOD_COMPLEXITY_3
 	tastes = list("творог" = 2, "шоколад" = 1)
-	trash_type = /obj/item/plate
+	trash_type = /obj/item/reagent_containers/cup/bowl
 
 /obj/item/food/station_food/tvorog_orange
 	name = "cottage cheese with orange"
@@ -70,7 +70,7 @@
 	foodtypes = DAIRY|SUGAR|FRUIT|ORANGES
 	crafting_complexity = FOOD_COMPLEXITY_3
 	tastes = list("творог" = 2, "апельсин" = 1)
-	trash_type = /obj/item/plate
+	trash_type = /obj/item/reagent_containers/cup/bowl
 
 /obj/item/food/station_food/tvorog_cherry
 	name = "cottage cheese with cherry"
@@ -85,7 +85,7 @@
 	foodtypes = DAIRY|SUGAR|FRUIT
 	crafting_complexity = FOOD_COMPLEXITY_3
 	tastes = list("творог" = 2, "вишня" = 1)
-	trash_type = /obj/item/plate
+	trash_type = /obj/item/reagent_containers/cup/bowl
 
 /obj/item/food/station_food/condensed_milk
 	name = "condensed milk"
@@ -98,7 +98,7 @@
 	foodtypes = DAIRY|SUGAR
 	crafting_complexity = FOOD_COMPLEXITY_1
 	tastes = list("сладкое молоко" = 2, "сливки" = 1)
-	trash_type = /obj/item/plate
+	trash_type = /obj/item/reagent_containers/cup/bowl
 
 /obj/item/food/station_food/tvorog_fruit
 	name = "cottage cheese with fruit"
@@ -113,7 +113,7 @@
 	foodtypes = DAIRY|SUGAR|FRUIT|ORANGES
 	crafting_complexity = FOOD_COMPLEXITY_4
 	tastes = list("творог" = 2, "цитрусовые и ягоды" = 1)
-	trash_type = /obj/item/plate
+	trash_type = /obj/item/reagent_containers/cup/bowl
 
 /obj/item/food/station_food/tvorog_banana
 	name = "cottage cheese with banana"
@@ -128,7 +128,7 @@
 	foodtypes = DAIRY|SUGAR|FRUIT
 	crafting_complexity = FOOD_COMPLEXITY_3
 	tastes = list("творог" = 2, "банан" = 1)
-	trash_type = /obj/item/plate
+	trash_type = /obj/item/reagent_containers/cup/bowl
 
 /obj/item/food/station_food/tvorog_berries
 	name = "cottage cheese with berries"
@@ -143,7 +143,7 @@
 	foodtypes = DAIRY|SUGAR|FRUIT
 	crafting_complexity = FOOD_COMPLEXITY_3
 	tastes = list("творог" = 2, "ягоды" = 1)
-	trash_type = /obj/item/plate
+	trash_type = /obj/item/reagent_containers/cup/bowl
 
 /obj/item/food/station_food/tvorog_nuts_honey
 	name = "cottage cheese with nuts and honey"
@@ -159,7 +159,7 @@
 	foodtypes = DAIRY|SUGAR|NUTS|GRAIN
 	crafting_complexity = FOOD_COMPLEXITY_4
 	tastes = list("творог" = 2, "орехи и мёд" = 1)
-	trash_type = /obj/item/plate
+	trash_type = /obj/item/reagent_containers/cup/bowl
 
 /obj/item/food/station_food/tvorog_apple_berries
 	name = "cottage cheese with apple and berries"
@@ -174,7 +174,7 @@
 	foodtypes = DAIRY|SUGAR|FRUIT|NUTS
 	crafting_complexity = FOOD_COMPLEXITY_4
 	tastes = list("творог" = 2, "яблоко и ягоды" = 1)
-	trash_type = /obj/item/plate
+	trash_type = /obj/item/reagent_containers/cup/bowl
 
 /obj/item/food/station_food/tvorog
 	name = "cottage cheese"

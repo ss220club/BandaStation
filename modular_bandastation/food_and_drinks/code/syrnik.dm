@@ -108,3 +108,12 @@
 
 /obj/item/food/station_food/syrnik/raw/make_grillable()
 	AddComponent(/datum/component/grillable, /obj/item/food/station_food/syrnik/cooked, rand(30 SECONDS, 40 SECONDS), TRUE, TRUE)
+
+/obj/item/food/station_food/syrnik/raw/food_grilled(datum/source, obj/item/food/grill_result)
+	. = ..()
+	grill_result.reagents.convert_reagent(/datum/reagent/consumable/flour, /datum/reagent/consumable/nutriment)
+	grill_result.reagents.convert_reagent(/datum/reagent/consumable/eggyolk, /datum/reagent/consumable/nutriment/protein)
+	grill_result.reagents.convert_reagent(/datum/reagent/consumable/eggwhite, /datum/reagent/consumable/nutriment/protein)
+	for(var/datum/reagent/consumable/nutriment/nutriment in grill_result.reagents.reagent_list)
+		if(nutriment.carry_food_tastes)
+			nutriment.data = counterlist_normalise(grill_result.tastes.Copy())

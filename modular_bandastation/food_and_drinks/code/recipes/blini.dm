@@ -103,7 +103,7 @@
 	name = "Блины с ветчиной и сыром"
 	reqs = list(
 		/obj/item/food/pancakes = 2,
-		/obj/item/food/meat/steak/plain/pig = 2,
+		/obj/item/food/meat/bacon = 2,
 		/obj/item/food/cheese/wedge = 1,
 	)
 	result = /obj/item/food/station_food/blini_ham_cheese
@@ -126,7 +126,7 @@
 	name = "Блины с мясом"
 	reqs = list(
 		/obj/item/food/pancakes = 2,
-		/obj/item/food/patty/plain = 2,
+		/obj/item/food/meat/cutlet/plain = 2,
 		/obj/item/food/grown/herbs = 1,
 	)
 	result = /obj/item/food/station_food/blini_meat

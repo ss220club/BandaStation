@@ -7,7 +7,7 @@
 		/datum/reagent/consumable/sugar = 5,
 	)
 	result = /obj/item/food/station_food/syrnik/raw
-	added_foodtypes = SUGAR
+	added_foodtypes = SUGAR|RAW
 	removed_foodtypes = MEAT|EGG
 	meal_category = MEAL_BREAKFAST
 

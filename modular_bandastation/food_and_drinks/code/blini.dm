@@ -140,7 +140,7 @@
 
 /obj/item/food/station_food/blini_ham_cheese
 	name = "blini with ham and cheese"
-	desc = "Блины с ветчиной и сыром. Солоноватая мясная начинка дополнена мягким сыром."
+	desc = "Блины с обжаренным беконом и мягким сыром."
 	icon_state = "blini_ham_cheese"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 8,
@@ -149,8 +149,8 @@
 	)
 	foodtypes = GRAIN|MEAT|DAIRY|BREAKFAST
 	crafting_complexity = FOOD_COMPLEXITY_3
-	tastes = list("тонкий блин" = 2, "свинина и сыр" = 1)
-	custom_materials = list(/datum/material/meat = MEATDISH_MATERIAL_AMOUNT * 6)
+	tastes = list("тонкий блин" = 2, "бекон и сыр" = 1)
+	custom_materials = list(/datum/material/meat = MEATDISH_MATERIAL_AMOUNT * 2)
 
 /obj/item/food/station_food/blini_fish_cucumber
 	name = "blini with fish"
@@ -167,7 +167,7 @@
 
 /obj/item/food/station_food/blini_meat
 	name = "blini with meat"
-	desc = "Румяные блинчики с начинкой из обжаренного фарша."
+	desc = "Румяные блинчики с начинкой из обжаренного мяса."
 	icon_state = "blini_meat"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 8,
@@ -176,7 +176,7 @@
 	)
 	foodtypes = GRAIN|MEAT|VEGETABLES
 	crafting_complexity = FOOD_COMPLEXITY_3
-	tastes = list("тонкий блин" = 2, "обжаренный фарш" = 1)
+	tastes = list("тонкий блин" = 2, "жареное мясо" = 1)
 	custom_materials = list(/datum/material/meat = MEATDISH_MATERIAL_AMOUNT * 2)
 
 /obj/item/food/station_food/blini_potato_mushroom
@@ -413,7 +413,7 @@
 /obj/item/food/station_food/meat_blini_raw
 	name = "raw meat blin"
 	desc = "Сырая порция мясного теста, разлитая в форме тонкого блина. Перед подачей её нужно обжарить."
-	icon_state = "meat_blini"
+	icon_state = "meat_blini_raw"
 	food_reagents = list(/datum/reagent/consumable/nutriment = 2, /datum/reagent/consumable/nutriment/protein = 2)
 	tastes = list("сырое мясное тесто" = 1)
 	foodtypes = MEAT | RAW
