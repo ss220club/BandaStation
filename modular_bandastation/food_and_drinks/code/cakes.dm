@@ -9,8 +9,8 @@
 
 /obj/item/food/cake/slavic/on_craft_completion(list/components, datum/crafting_recipe/current_recipe, atom/crafter)
 	. = ..()
-	if(istype(current_recipe, /datum/crafting_recipe/food/station_food))
-		var/datum/crafting_recipe/food/station_food/recipe = current_recipe
+	if(istype(current_recipe, /datum/crafting_recipe/food/slavic))
+		var/datum/crafting_recipe/food/slavic/recipe = current_recipe
 		recipe.return_ingredient_bowls(components, src)
 
 /obj/item/food/cakeslice/slavic
@@ -44,7 +44,7 @@
 	)
 	tastes = list("сметанный крем" = 2, "шоколадный бисквит" = 1)
 
-/obj/item/food/station_food/smetannik_choco_raw
+/obj/item/food/slavic/smetannik_choco_raw
 	name = "raw chocolate sour cream cake"
 	desc = "Заготовка шоколадного сметанника из теста и сметаны. Перед подачей её нужно испечь."
 	icon_state = "smetannik_choco_raw"
@@ -81,7 +81,7 @@
 	)
 	tastes = list("сметанный крем" = 2, "бисквит" = 1)
 
-/obj/item/food/station_food/smetannik_raw
+/obj/item/food/slavic/smetannik_raw
 	name = "raw sour cream cake"
 	desc = "Заготовка сметанника из теста и сметаны. Готова к выпечке в духовке."
 	icon_state = "smetannik_raw"
@@ -95,7 +95,7 @@
 	tastes = list("сырое тесто" = 2, "сметана" = 1)
 	foodtypes_removed_when_cooked = RAW
 
-/obj/item/food/station_food/blini_cake
+/obj/item/food/slavic/blini_cake
 	name = "blini cake"
 	desc = "Торт из тонких блинов, прослоенных сладкой сметаной, с шоколадом и ягодами."
 	icon_state = "blini_cake"
@@ -109,7 +109,7 @@
 	crafting_complexity = FOOD_COMPLEXITY_4
 	tastes = list("тонкие блины" = 2, "сладкая сметана" = 1, "шоколад" = 1, "ягоды" = 1)
 
-/obj/item/food/station_food/meat_blini_pie
+/obj/item/food/slavic/meat_blini_pie
 	name = "meat blini pie"
 	desc = "Слоёный пирог из мясных блинов со стейком, грибами, луком и кетчупом."
 	icon_state = "meat_blini_pie"
@@ -229,7 +229,7 @@
 	foodtypes = DAIRY|SUGAR|FRUIT|GRAIN
 	tastes = list("запечённый творог" = 2, "ягоды" = 1)
 
-/obj/item/food/station_food/tvorozhnik_raw
+/obj/item/food/slavic/tvorozhnik_raw
 	name = "raw cottage cheese cake"
 	desc = "Сырая творожная масса с мукой, яйцом, сахаром и сметаной, подготовленная для выпечки пирога."
 	icon_state = "tvorozhnik_raw"
@@ -244,11 +244,11 @@
 	tastes = list("сырое творожное тесто" = 1)
 	foodtypes_removed_when_cooked = RAW
 
-/obj/item/food/station_food/smetannik_choco_raw/make_bakeable()
+/obj/item/food/slavic/smetannik_choco_raw/make_bakeable()
 	AddComponent(/datum/component/bakeable, /obj/item/food/cake/slavic/smetannik_choco, rand(30 SECONDS, 40 SECONDS), TRUE, TRUE)
 
-/obj/item/food/station_food/smetannik_raw/make_bakeable()
+/obj/item/food/slavic/smetannik_raw/make_bakeable()
 	AddComponent(/datum/component/bakeable, /obj/item/food/cake/slavic/smetannik, rand(30 SECONDS, 40 SECONDS), TRUE, TRUE)
 
-/obj/item/food/station_food/tvorozhnik_raw/make_bakeable()
+/obj/item/food/slavic/tvorozhnik_raw/make_bakeable()
 	AddComponent(/datum/component/bakeable, /obj/item/food/cake/slavic/tvorozhnik, rand(30 SECONDS, 40 SECONDS), TRUE, TRUE)

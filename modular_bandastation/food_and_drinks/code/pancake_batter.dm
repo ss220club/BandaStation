@@ -8,7 +8,7 @@
 	description = "Жидкое мясное тесто для блинов. Пять единиц на горячей плите превращаются в один блин."
 	taste_description = "сырое мясное тесто"
 	color = "#B87970"
-	pancake_type = /obj/item/food/station_food/meat_blini_raw
+	pancake_type = /obj/item/food/slavic/meat_blini_raw
 
 /** Water-based meat batter, distinct from the milk-based ordinary pancake recipe. */
 /datum/chemical_reaction/food/meat_pancakebatter
