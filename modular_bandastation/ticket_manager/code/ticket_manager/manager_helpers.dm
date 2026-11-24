@@ -18,6 +18,9 @@
 	if(needed_ticket.has_staff_access(user))
 		return TRUE
 
+	if(!needed_ticket.has_user_access(user))
+		return FALSE
+
 	if(!needed_ticket.admin_replied)
 		to_chat(
 			user,
