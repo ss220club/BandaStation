@@ -45,8 +45,8 @@
 
 /datum/reagent/drug/cocaine/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, metabolization_ratio)
 	. = ..()
-	var/high_message = pick("Вы чувствуете себя нервозно.", "Вы чувствуете, что должны действовать быстро.", "Вы чувствуете, что нужно сделать шаг вперёд.")
 	if(SPT_PROB(2.5, seconds_per_tick))
+		var/high_message = pick("Вы чувствуете себя нервозно.", "Вы чувствуете, что должны действовать быстро.", "Вы чувствуете, что нужно сделать шаг вперёд.")
 		to_chat(affected_mob, span_notice("[high_message]"))
 	affected_mob.add_mood_event("zoinked", /datum/mood_event/stimulant_heavy, name)
 	affected_mob.AdjustStun(-15 * metabolization_ratio * seconds_per_tick)
@@ -55,7 +55,7 @@
 	affected_mob.AdjustImmobilized(-15 * metabolization_ratio * seconds_per_tick)
 	affected_mob.AdjustParalyzed(-15 * metabolization_ratio * seconds_per_tick)
 	var/need_mob_update
-	need_mob_update += affected_mob.adjust_organ_loss(ORGAN_SLOT_HEART, (rand(1, 2) * unhealthy_multiplier) * metabolization_ratio * seconds_per_tick, required_organ_flag = affected_organ_flags)
+	need_mob_update += affected_mob.adjust_organ_loss(ORGAN_SLOT_BRAIN, (rand(1, 2) * unhealthy_multiplier) * metabolization_ratio * seconds_per_tick, required_organ_flag = affected_organ_flags)
 	if(need_mob_update)
 		. = UPDATE_MOB_HEALTH
 	if(SPT_PROB(2.5, seconds_per_tick))
@@ -75,8 +75,8 @@
 			affected_mob.visible_message(span_danger("[affected_mob] падает на пол!"))
 			affected_mob.Paralyze(5.5 SECONDS * unhealthy_multiplier, TRUE)
 			affected_mob.drop_all_held_items()
-	need_mob_update = affected_mob.adjust_tox_loss(1 * metabolization_ratio * seconds_per_tick, updating_health = FALSE, required_biotype = affected_biotype)
-	need_mob_update += affected_mob.adjust_organ_loss(ORGAN_SLOT_HEART, (rand(5, 10) / 10) * metabolization_ratio * seconds_per_tick, required_organ_flag = affected_organ_flags)
+	need_mob_update = affected_mob.adjust_tox_loss(1 * metabolization_ratio * seconds_per_tick * unhealthy_multiplier, updating_health = FALSE, required_biotype = affected_biotype)
+	need_mob_update += affected_mob.adjust_organ_loss(ORGAN_SLOT_HEART, (rand(5, 10) / 10 * unhealthy_multiplier) * metabolization_ratio * seconds_per_tick, required_organ_flag = affected_organ_flags)
 	affected_mob.set_jitter_if_lower(5 SECONDS * unhealthy_multiplier)
 	if(need_mob_update)
 		return UPDATE_MOB_HEALTH
