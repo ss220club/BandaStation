@@ -1780,6 +1780,8 @@
 /obj/structure/disposalpipe/segment{
 	dir = 2
 	},
+/obj/effect/mapping_helpers/airlock/access/all/engineering/general,
+/obj/effect/mapping_helpers/airlock/unres,
 /turf/open/floor/catwalk_floor,
 /area/station/maintenance/starboard/aft)
 "aFN" = (
@@ -17091,7 +17093,6 @@
 /obj/machinery/door/airlock/maintenance_hatch{
 	name = "Engineering Maintenance Hatch"
 	},
-/obj/effect/mapping_helpers/airlock/unres,
 /obj/structure/disposalpipe/segment,
 /turf/open/floor/iron,
 /area/station/engineering/engine_smes)
@@ -18092,6 +18093,7 @@
 /obj/structure/cable,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/effect/mapping_helpers/airlock/access/all/engineering/general,
 /turf/open/floor/plating,
 /area/station/maintenance/starboard/aft)
 "gft" = (
@@ -37091,15 +37093,13 @@
 /obj/structure/cable,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/machinery/door/airlock/maintenance/external{
-	name = "Escape Pod Hallway"
-	},
-/obj/effect/mapping_helpers/airlock/unres{
-	dir = 4
-	},
 /obj/structure/disposalpipe/segment{
 	dir = 8
 	},
+/obj/machinery/door/airlock/maintenance{
+	name = "Medbay Maintenance"
+	},
+/obj/effect/mapping_helpers/airlock/access/all/medical/general,
 /turf/open/floor/catwalk_floor,
 /area/station/medical/medbay/central)
 "mAY" = (
@@ -37623,15 +37623,6 @@
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /turf/open/floor/iron/white,
 /area/station/medical/storage)
-"mKG" = (
-/obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
-/obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
-/obj/machinery/door/airlock/maintenance_hatch{
-	name = "Maintenance Hatch"
-	},
-/obj/structure/cable,
-/turf/open/floor/catwalk_floor,
-/area/station/maintenance/fore/upper)
 "mKN" = (
 /obj/effect/turf_decal/siding/thinplating{
 	dir = 6
@@ -39183,6 +39174,10 @@
 	name = "Maintenance Hatch"
 	},
 /obj/structure/disposalpipe/segment{
+	dir = 8
+	},
+/obj/effect/mapping_helpers/airlock/access/all/engineering/general,
+/obj/effect/mapping_helpers/airlock/unres{
 	dir = 8
 	},
 /turf/open/floor/catwalk_floor,
@@ -42557,6 +42552,7 @@
 	name = "Maintenance Hatch"
 	},
 /obj/structure/cable,
+/obj/effect/mapping_helpers/airlock/access/all/engineering/maintenance,
 /turf/open/floor/catwalk_floor,
 /area/station/maintenance/department/security)
 "opt" = (
@@ -45937,11 +45933,11 @@
 /turf/open/floor/iron/white,
 /area/station/science/lab)
 "puI" = (
-/obj/effect/mapping_helpers/airlock/access/all/science/xenobio,
 /obj/structure/cable,
 /obj/machinery/door/airlock/maintenance_hatch{
 	name = "Maintenance Hatch"
 	},
+/obj/effect/mapping_helpers/airlock/access/all/engineering/maintenance,
 /turf/open/floor/catwalk_floor,
 /area/station/maintenance/aft/greater)
 "puK" = (
@@ -57337,7 +57333,7 @@
 /obj/effect/mapping_helpers/airlock/unres{
 	dir = 4
 	},
-/obj/effect/mapping_helpers/airlock/access/all/engineering/maintenance,
+/obj/effect/mapping_helpers/airlock/access/any/science/maintenance,
 /turf/open/floor/plating,
 /area/station/maintenance/aft/greater)
 "tpL" = (
@@ -63126,6 +63122,7 @@
 /obj/structure/cable,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/scrubbers/hidden/layer2,
 /obj/machinery/atmospherics/pipe/smart/manifold4w/supply/hidden/layer4,
+/obj/effect/mapping_helpers/airlock/access/all/engineering/general,
 /turf/open/floor/plating,
 /area/station/maintenance/department/science)
 "voZ" = (
@@ -97360,7 +97357,7 @@ cSz
 cSz
 cSz
 wqt
-mKG
+lwi
 nfl
 myn
 kZv

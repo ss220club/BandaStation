@@ -51,12 +51,12 @@ map cyberiad
 endmap
 
 map kilostation
-	maxplayers 40
+	maxplayers 35
 	votable
 endmap
 
 map trainstation
-	minplayers 30
+	maxplayers 35
 	votable
 endmap
 
