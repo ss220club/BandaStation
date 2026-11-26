@@ -1143,7 +1143,7 @@
 /obj/effect/turf_decal/siding/dark/corner{
 	dir = 8
 	},
-/obj/item/food/cornchips/random,
+/obj/item/food/chips/corn/random,
 /obj/structure/table/reinforced/titaniumglass,
 /obj/structure/extinguisher_cabinet/directional/east,
 /turf/open/floor/iron/dark/herringbone,
@@ -1189,7 +1189,7 @@
 /obj/effect/turf_decal/siding/dark/corner{
 	dir = 8
 	},
-/obj/item/food/cornchips/random,
+/obj/item/food/chips/corn/random,
 /obj/structure/table/reinforced/titaniumglass,
 /turf/open/floor/iron/dark/herringbone,
 /area/shuttle/escape)

@@ -87,12 +87,6 @@ Behavior that's still missing from this component that original food items had t
 	RegisterSignal(parent, COMSIG_ATOM_FINALIZE_MATERIAL_EFFECTS, PROC_REF(on_material_effects))
 	RegisterSignal(parent, COMSIG_ATOM_FINALIZE_REMOVE_MATERIAL_EFFECTS, PROC_REF(on_remove_material_effects))
 
-	if(isturf(parent))
-		RegisterSignal(parent, COMSIG_ATOM_ENTERED, PROC_REF(on_entered))
-	else
-		var/static/list/loc_connections = list(COMSIG_ATOM_ENTERED = PROC_REF(on_entered))
-		AddComponent(/datum/component/connect_loc_behalf, parent, loc_connections)
-
 	if(isitem(parent))
 		RegisterSignal(parent, COMSIG_ITEM_ATTACK, PROC_REF(UseFromHand))
 		RegisterSignal(parent, COMSIG_ITEM_USED_AS_INGREDIENT, PROC_REF(used_to_customize))
@@ -740,13 +734,6 @@ Behavior that's still missing from this component that original food items had t
 		var/satisfaction_text = pick("рыгает от удовольствия.", "тявкает, требуя добавки!", "дважды гавкает.", "смотрит на место, где была пища.")
 		doggy.manual_emote(satisfaction_text)
 		qdel(food)
-
-///Ability to feed food to puppers
-/datum/component/edible/proc/on_entered(datum/source, atom/movable/arrived, atom/old_loc, list/atom/old_locs)
-	SIGNAL_HANDLER
-	if(QDELETED(parent))
-		return
-	SEND_SIGNAL(parent, COMSIG_FOOD_CROSSED, arrived, bitecount)
 
 ///Response to being used to customize something
 /datum/component/edible/proc/used_to_customize(datum/source, atom/customized)

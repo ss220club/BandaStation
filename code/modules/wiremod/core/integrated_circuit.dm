@@ -564,7 +564,7 @@ GLOBAL_LIST_EMPTY_TYPED(integrated_circuits, /obj/item/integrated_circuit)
 				port.set_input(marker.marked_atom)
 				return TRUE
 
-			var/user_input = port.handle_manual_input(usr, params["input"])
+			var/user_input = port.handle_manual_input(usr, sanitize(params["input"])) // BANDASTATION EDIT - Player input reaches circuit values and logs as raw text
 			if(isnull(user_input))
 				return TRUE
 			port.set_input(user_input)

@@ -41,33 +41,30 @@ function splitMessage(message: string) {
   const wrapper = document.createElement('div');
   wrapper.innerHTML = clean;
 
-  const textParts: string[] = [];
-  let blockElement: ReactNode | null;
-  for (const node of Array.from(wrapper.childNodes)) {
-    if (node.nodeType === Node.TEXT_NODE) {
-      textParts.push(node.textContent || '');
-    } else if (
-      node.nodeType === Node.ELEMENT_NODE &&
-      isInlineTag((node as HTMLElement).tagName.toLowerCase())
-    ) {
-      textParts.push((node as HTMLElement).outerHTML);
-    } else if (node.nodeType === Node.ELEMENT_NODE) {
-      if (!blockElement) {
-        const element = node as HTMLElement;
-        const props: Record<string, any> = {};
-        for (const attribute of Array.from(element.attributes)) {
-          props[attribute.name] = attribute.value;
-        }
-        blockElement = createElement(element.tagName.toLowerCase(), props);
-      }
+  // Text nodes must stay inside the sanitized markup: textContent decodes
+  // entities, and re-inserting it as HTML turns escaped text back into tags.
+  let blockElement: ReactNode = null;
+  for (const element of Array.from(wrapper.children)) {
+    const tagName = element.tagName.toLowerCase();
+    if (isInlineTag(tagName)) {
+      continue;
     }
+
+    if (!blockElement) {
+      const props: Record<string, string> = {};
+      for (const attribute of Array.from(element.attributes)) {
+        props[attribute.name] = attribute.value;
+      }
+      blockElement = createElement(tagName, props);
+    }
+    element.remove();
   }
 
   return {
-    textElements: textParts.length > 0 && (
-      <Box as="span" dangerouslySetInnerHTML={{ __html: textParts.join('') }} />
+    textElements: wrapper.hasChildNodes() && (
+      <Box as="span" dangerouslySetInnerHTML={{ __html: wrapper.innerHTML }} />
     ),
-    blockElement: blockElement,
+    blockElement,
   };
 }
 

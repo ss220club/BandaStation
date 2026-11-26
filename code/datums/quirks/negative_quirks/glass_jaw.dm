@@ -7,6 +7,7 @@
 	lose_text = span_notice("Ваша челюсть, кажется, вновь встала на место.")
 	medical_record_text = "Пациента абсурдно легко вырубить. Не подпускайте его к боксерскому рингу."
 	hardcore_value = 4
+	mail_weight = 2
 	mail_goodies = list(
 		/obj/item/clothing/gloves/boxing,
 		/obj/item/clothing/mask/luchador/rudos,

@@ -92,6 +92,8 @@
 		if(vent_parent && (vent_parent.members.len || vent_parent.other_atmos_machines))
 			ventcrawl_target.flick_overlay_static(image('icons/effects/vent_indicator.dmi', "arrow", ABOVE_MOB_LAYER, dir = get_dir(src.loc, ventcrawl_target.loc)), 2 SECONDS)
 			visible_message(span_notice("[capitalize(declent_ru(NOMINATIVE))] начинает залазить в вентиляцию...") ,span_notice("Вы начинаете залазить в вентиляцию..."))
+			if((ventcrawl_target.airs[1].temperature < BODYTEMP_COLD_WARNING_1) || (BODYTEMP_HEAT_WARNING_1 < ventcrawl_target.airs[1].temperature))
+				balloon_alert(src, "ощущается [ventcrawl_target.airs[1].temperature < BODYTEMP_COLD_WARNING_1 ? "холодно!" : "горячо!"]")
 			if(!do_after(src, 2.5 SECONDS, target = ventcrawl_target, extra_checks = CALLBACK(src, PROC_REF(can_enter_vent), ventcrawl_target)))
 				return
 			if(has_client && isnull(client))

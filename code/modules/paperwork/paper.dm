@@ -676,7 +676,13 @@ GAME_VERB_SRC(/obj/item/paper, rename, usr, "Rename paper", null)
 			// Safe to assume there are writing implement details as user.can_write(...) fails with an invalid writing implement.
 			var/writing_implement_data = holding.get_writing_implement_details()
 
-			var/datum/paper_input/target_paper_input = locate(params["paper_input_ref"])
+			// BANDASTATION EDIT START - The ref comes from the client, only inputs of this paper may be written
+			var/datum/paper_input/target_paper_input
+			for(var/datum/paper_input/root as anything in raw_text_inputs)
+				target_paper_input = root.find_input_by_ref(params["paper_input_ref"])
+				if(target_paper_input)
+					break
+			// BANDASTATION EDIT END
 			var/field_id = text2num(params["field_id"])
 
 			var/successful_input = FALSE
@@ -795,6 +801,17 @@ GAME_VERB_SRC(/obj/item/paper, rename, usr, "Rename paper", null)
 		UNTYPED_LIST_ADD(children_as_lists, child.to_list(include_ref))
 
 	return children_as_lists
+
+// BANDASTATION ADDITION START - Resolves a client-provided ref to an input of this tree only
+/datum/paper_input/proc/find_input_by_ref(input_ref)
+	if(REF(src) == input_ref)
+		return src
+	for(var/datum/paper_input/child as anything in children)
+		var/datum/paper_input/match = child.find_input_by_ref(input_ref)
+		if(match)
+			return match
+	return null
+// BANDASTATION ADDITION END
 
 /datum/paper_input/proc/add_child_to_field(datum/paper_input/new_child, input_field_id)
 	var/regex/input_field_regex = new(@"\[input_field(?:\]|\s+autofill_type=\w+\])", "gm")

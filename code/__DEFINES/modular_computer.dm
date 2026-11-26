@@ -101,6 +101,10 @@
 #define PDA_THEME_TERMINAL "ntos_terminal"
 #define PDA_THEME_BIRD "neutral"
 
+// BANDASTATION ADDITION START - TSF PDA theme
+#define PDA_THEME_TSF "TSF"
+// BANDASTATION ADDITION END
+
 ///Emagged/Syndicate NtOS (SyndiOS) PDA theme
 #define PDA_THEME_SYNDICATE "syndicate"
 
@@ -139,6 +143,10 @@
 #define PDA_THEME_ABDUCTOR_NAME "Alien"
 #define PDA_THEME_BIRD_NAME "Bird"
 
+// BANDASTATION ADDITION START - TSF PDA theme
+#define PDA_THEME_TSF_NAME "ТСФ"
+// BANDASTATION ADDITION END
+
 
 ///List of PDA themes that are accessible to everyone by default.
 GLOBAL_LIST_INIT(default_pda_themes, list(
@@ -148,6 +156,9 @@ GLOBAL_LIST_INIT(default_pda_themes, list(
 	PDA_THEME_SYNTH_NAME = PDA_THEME_SYNTH,
 	PDA_THEME_TERMINAL_NAME = PDA_THEME_TERMINAL,
 	PDA_THEME_BIRD_NAME = PDA_THEME_BIRD,
+	// BANDASTATION ADDITION START - TSF PDA theme
+	PDA_THEME_TSF_NAME = PDA_THEME_TSF,
+	// BANDASTATION ADDITION END
 ))
 
 ///List of PDA themes that are accessible to everyone by default.
@@ -165,6 +176,9 @@ GLOBAL_LIST_INIT(pda_name_to_theme, list(
 	PDA_THEME_ROULETTE_NAME = PDA_THEME_ROULETTE,
 	PDA_THEME_ABDUCTOR_NAME = PDA_THEME_ABDUCTOR,
 	PDA_THEME_BIRD_NAME = PDA_THEME_BIRD,
+	// BANDASTATION ADDITION START - TSF PDA theme
+	PDA_THEME_TSF_NAME = PDA_THEME_TSF,
+	// BANDASTATION ADDITION END
 ))
 
 ///List of unlockable PDA themes, keyed by their database ID.
