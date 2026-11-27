@@ -241,8 +241,7 @@ GLOBAL_LIST_INIT(skrell_overdose_thresholds, list(
 	if(trauma_to_remove && !preexisting_earthsblood_pacifism)
 		qdel(trauma_to_remove)
 		if(show_message && was_active_overdose)
-			var/reagent_name = earthsblood_chem ? earthsblood_chem.name : "Крови Земли"
-			to_chat(organ_owner, span_notice("Концентрация реагента [reagent_name] снизилась до безопасного уровня, пацифизм отступил."))
+			to_chat(organ_owner, span_notice("Концентрация Крови Земли снизилась до безопасного уровня, пацифизм отступил."))
 
 /// Синхронный сброс урона мозгу, сердцу, печени и токсинам после тика защищенного реагента
 /obj/item/organ/liver/skrell/proc/flush_organ_protection(mob/living/carbon/organ_owner)
@@ -326,7 +325,7 @@ GLOBAL_LIST_INIT(skrell_overdose_thresholds, list(
 			organ_owner.drop_all_held_items()
 		if(SPT_PROB(12, seconds_per_tick))
 			organ_owner.Paralyze(2 SECONDS)
-			to_chat(organ_owner, span_warning("Ваше тело пронзает электрический спазм, сковывая мышцы!"))
+			to_chat(organ_owner, span_warning("Ваше тело пронзает электрический ток, вызывая спазм, который сковывает мышцы!"))
 			playsound(organ_owner, /datum/sound_effect/sparks, 30, TRUE, SHORT_RANGE_SOUND_EXTRARANGE)
 		return consume_and_stop_tick(organ_owner, chem, seconds_per_tick)
 

@@ -23,7 +23,7 @@
 
 /obj/item/food/grown/ximikoa
 	seed = /obj/item/seeds/ximikoa
-	name = "ксими'коа"
+	name = "ximikoa"
 	desc = "Эти извивающиеся красные стебли, напоминающие земляных червей, растут в водах болот Куорргла."
 	icon_state = "ximikoa_fruits"
 	bite_consumption_mod = 0.25
@@ -59,7 +59,7 @@
 /obj/item/food/grown/mushroom/gomoa
 	seed = /obj/item/seeds/gomoa
 	bite_consumption_mod = 1
-	name = "кластер Гомоа"
+	name = "gomoa cluster"
 	desc = "Это не только один из основных ингредиентов основного продукта питания скреллов, но и биолюминесцентные свойства его спор используются при создании сложных узоров на «Ко'ем» — валюте скреллов."
 	icon_state = "gomoa"
 	tastes = list("mushroom" = 1, "silver" = 2)

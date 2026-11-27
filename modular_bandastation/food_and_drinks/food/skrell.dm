@@ -841,7 +841,7 @@
 
 /obj/item/food/skrell/ambrosia_deus_tart_slice
 	name = "ambrosia deus tart slice"
-	desc = "Светящийся кусочек восхитительного торта с амброзией деус."
+	desc = "Светящийся кусочек восхитительного торта с амброзией божественной."
 	icon_state = "deus_tart_slice"
 	food_reagents = list(
 		/datum/reagent/consumable/nutriment = 2,
