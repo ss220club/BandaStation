@@ -1,0 +1,4 @@
+author: "IWantSomeFish"
+delete-after: True
+changes:
+  - rscadd: "Юрист переименован в агента внутренних дел, получил МЩ, а также защищен от бытия антагонистом."
