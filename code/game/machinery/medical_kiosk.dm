@@ -249,7 +249,10 @@
 			sickness_data = "\nName: [disease.name].\nType: [disease.spread_text].\nStage: [disease.stage]/[disease.max_stages].\nCure: [cure_text]"
 
 	if(patient.can_bleed()) //Blood levels Information
-		blood_name = LOWER_TEXT(blood_type.get_blood_name())
+		// BANDASTATION EDIT START - Blood reagent name translations
+		blood_name = blood_type.get_blood_name()
+		blood_name = LOWER_TEXT(declent_ru_initial(blood_name, override_backup = blood_name))
+		// BANDASTATION EDIT END - Blood reagent name translations
 		if(patient.is_bleeding())
 			bleed_status = " Patient is currently bleeding!"
 
@@ -261,7 +264,7 @@
 			else if(!HAS_TRAIT(patient, TRAIT_NOHUNGER))
 				treatments += "a large meal"
 			if(blood_type.restoration_chem)
-				treatments += "[LOWER_TEXT(blood_type.restoration_chem::name)] supplements"
+				treatments += "[LOWER_TEXT(declent_ru_initial(blood_type.restoration_chem::name, override_backup = blood_type.restoration_chem::name))] supplements" // BANDASTATION EDIT - Reagent translations
 				if(blood_percent <= 60 && blood_type.restoration_chem == /datum/reagent/iron)
 					treatments += "saline-glucose immediately"
 

@@ -36,6 +36,7 @@ export function ForensicLogs(props: ForensicLogsProps) {
                 <ForensicLog
                   logCategoryId={dataEntry.category}
                   log={dataEntry.data}
+                  displayNames={dataEntry.ru_display_names /* BANDASTATION EDIT - Reagent translations */}
                   iconName={category.uiIcon}
                   iconColor={category.uiIconColor}
                 />
@@ -49,6 +50,7 @@ export function ForensicLogs(props: ForensicLogsProps) {
 }
 
 type ForensicLogProps = {
+  displayNames?: Record<string, string>; // BANDASTATION EDIT - Reagent translations
   logCategoryId: string;
   log: Record<string, string>;
   iconName: string;
@@ -56,7 +58,7 @@ type ForensicLogProps = {
 };
 
 function ForensicLog(props: ForensicLogProps) {
-  const { logCategoryId, log, iconName, iconColor } = props;
+  const { logCategoryId, log, iconName, iconColor, displayNames } = props; // BANDASTATION EDIT - Reagent translations
   if (logCategoryId === 'Fingerprints')
     return (
       <PrintsLogFormatter log={log} iconName={iconName} iconColor={iconColor} />
@@ -65,6 +67,7 @@ function ForensicLog(props: ForensicLogProps) {
   if (logCategoryId === 'Reagents')
     return (
       <ReagentsLogFormatter
+        displayNames={displayNames /* BANDASTATION EDIT - Reagent translations */}
         log={log}
         iconName={iconName}
         iconColor={iconColor}
@@ -91,6 +94,7 @@ function ForensicLog(props: ForensicLogProps) {
 }
 
 type LogFormatterProprs = {
+  displayNames?: Record<string, string>; // BANDASTATION EDIT - Reagent translations
   log: Record<string, string>;
   iconName: string;
   iconColor: string;
@@ -139,7 +143,7 @@ function PrintsLogFormatter(props: LogFormatterProprs) {
 }
 
 function ReagentsLogFormatter(props: LogFormatterProprs) {
-  const { log, iconName, iconColor } = props;
+  const { log, iconName, iconColor, displayNames } = props; // BANDASTATION EDIT - Reagent translations
   return (
     <LabeledList>
       {Object.keys(log).map((reagent) => (
@@ -148,7 +152,7 @@ function ReagentsLogFormatter(props: LogFormatterProprs) {
           label={
             <>
               <Icon name={iconName} mr={1} color={iconColor} />
-              {reagent}
+              {displayNames?.[reagent] ?? reagent /* BANDASTATION EDIT - Reagent translations */}
             </>
           }
         >

@@ -1,6 +1,7 @@
 $ErrorActionPreference = 'Stop'
 
 $phrase = ($args -join ' ').Trim()
+$phrase = $phrase -replace '^(?:\\(?:improper|proper)\s+)+', ''
 if (-not $phrase) { Write-Error 'empty phrase - select text or pass a phrase'; exit 1 }
 
 $q = { '"{0}"' -f ($args[0].Replace('\', '\\').Replace('"', '\"')) }

@@ -222,7 +222,7 @@
 				var/datum/chemical_reaction/sub_reaction = sub_reactions[sub_index]
 				//Subreactions sweep (if any)
 				for(var/datum/reagent/sub_reagent as anything in sub_reaction.required_reagents)
-					tooltip += "[sub_reaction.required_reagents[sub_reagent]]u [sub_reagent::name]\n"
+					tooltip += "[sub_reaction.required_reagents[sub_reagent]]u [declent_ru_initial(sub_reagent::name, override_backup = sub_reagent::name)]\n" // BANDASTATION EDIT - Reagent translations
 					tooltip_bool = TRUE
 			data["reagent_mode_recipe"]["reactants"] += list(list("name" = reagent::name, "id" = reagent, "ratio" = reaction.required_reagents[reagent], "color" = color_r, "tooltipBool" = tooltip_bool, "tooltip" = tooltip))
 
@@ -238,7 +238,7 @@
 				var/datum/chemical_reaction/sub_reaction = sub_reactions[1]
 				//Subreactions sweep (if any)
 				for(var/datum/reagent/sub_reagent as anything in sub_reaction.required_reagents)
-					tooltip += "[sub_reaction.required_reagents[sub_reagent]]u [sub_reagent::name]\n"
+					tooltip += "[sub_reaction.required_reagents[sub_reagent]]u [declent_ru_initial(sub_reagent::name, override_backup = sub_reagent::name)]\n" // BANDASTATION EDIT - Reagent translations
 					tooltip_bool = TRUE
 			data["reagent_mode_recipe"]["catalysts"] += list(list("name" = reagent::name, "id" = reagent, "ratio" = reaction.required_catalysts[reagent], "color" = color_r, "tooltipBool" = tooltip_bool, "tooltip" = tooltip))
 		data["reagent_mode_recipe"]["isColdRecipe"] = reaction.is_cold_recipe
@@ -288,7 +288,7 @@
 			ui_reaction_id = text2path(params["id"])
 			return TRUE
 		if("search_reagents")
-			var/input_reagent = tgui_input_list(usr, "Select reagent", "Reagent", GLOB.name2reagent)
+			var/input_reagent = tgui_input_reagent_name(usr, "Select reagent", "Reagent") // BANDASTATION EDIT - Bilingual reagent search (translations)
 			input_reagent = get_reagent_type_from_product_string(input_reagent) //from string to type
 			var/datum/reagent/reagent = GLOB.chemical_reagents_list[input_reagent]
 			if(!reagent)

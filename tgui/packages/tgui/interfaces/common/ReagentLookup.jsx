@@ -13,7 +13,7 @@ export const ReagentLookup = (props) => {
     <LabeledList>
       <LabeledList.Item label="Reagent">
         <Icon name="circle" mr={1} color={reagent.reagentCol} />
-        {reagent.name}
+        {reagent.ru_display_name || reagent.name} {/* BANDASTATION EDIT - Translated reagent names */}
         <Button
           ml={1}
           icon="wifi"
