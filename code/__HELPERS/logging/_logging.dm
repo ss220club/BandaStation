@@ -235,14 +235,12 @@ GLOBAL_LIST_INIT(testing_global_profiler, list("_PROFILE_NAME" = "Global"))
 	else
 		. += "*no key*"
 
+	// BANDASTATION EDIT START - Escape mob names, they end up in admin chat as HTML
 	if(include_name)
-		if(M)
-			if(M.real_name)
-				. += "/([M.real_name])"
-			else if(M.name)
-				. += "/([M.name])"
-		else if(fallback_name)
-			. += "/([fallback_name])"
+		var/shown_name = M ? (M.real_name || M.name) : fallback_name
+		if(shown_name)
+			. += "/([replacetext(replacetext(shown_name, "<", "&lt;"), ">", "&gt;")])"
+	// BANDASTATION EDIT END
 
 	return .
 
