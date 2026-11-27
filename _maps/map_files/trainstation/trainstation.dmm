@@ -14776,10 +14776,6 @@
 	pixel_x = -7;
 	pixel_y = 7
 	},
-/obj/item/food/cornchips/blue{
-	pixel_x = 7;
-	pixel_y = 4
-	},
 /turf/open/floor/iron/white/textured,
 /area/station/commons/fitness/recreation/pool)
 "eZF" = (
