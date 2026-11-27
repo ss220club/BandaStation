@@ -41,6 +41,13 @@
 			open_interview()
 		return
 
+	if(href_list["toggle_antag_roll"])
+		var/datum/preference/toggle/antag_roll/antag_roll_preference = GLOB.preference_entries[/datum/preference/toggle/antag_roll]
+		var/new_value = !client.prefs.read_preference(/datum/preference/toggle/antag_roll)
+		client.prefs.write_preference(antag_roll_preference, new_value)
+		SStitle.title_output(client, new_value, "toggleAntagRoll")
+		return
+
 	if(href_list["toggle_ready"])
 		if(SSticker.current_state >= GAME_STATE_SETTING_UP)
 			to_chat(usr, span_warning("Игра уже начинается!"))
@@ -53,7 +60,8 @@
 
 		var/prefs_specie = client.prefs.read_preference(/datum/preference/choiced/species)
 		var/list/prefs_jobs = client.prefs.job_preferences
-		if(!prefs_specie || !islist(prefs_jobs) || !length(prefs_jobs))
+		var/has_roster_assignment = SEND_SIGNAL(SSjob, COMSIG_BYPASS_JOB_PREFERENCES, src) & BYPASS_JOB_PREFERENCES
+		if(!prefs_specie || !islist(prefs_jobs) || (!length(prefs_jobs) && !has_roster_assignment))
 			to_chat(usr, span_boldwarning("Ошибка настроек персонажа. Выберите предпочитаемую должность."))
 			return
 
@@ -139,5 +147,10 @@
 		log_admin("[key_name(usr)] set the pre-game delay to [DisplayTimeText(time)].")
 		BLACKBOX_LOG_ADMIN_VERB("Delay Game Start")
 
-	else if(href_list["titleReady"] && check_rights_for(client, R_ADMIN|R_DEBUG))
-		SStitle.title_output(client, "true", "toggleAdmin")
+	else if(href_list["roundstart_roster"])
+		GLOB.roundstart_roster?.open_lobby_list(src)
+
+	else if(href_list["titleReady"])
+		if(check_rights_for(client, R_ADMIN|R_DEBUG))
+			SStitle.title_output(client, "true", "toggleAdmin")
+		GLOB.roundstart_roster?.update_lobby_player(client)

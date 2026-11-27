@@ -1165,8 +1165,8 @@
 
 /datum/dynamic_ruleset/midround/from_living/traitor/false_alarm()
 	priority_announce(
-		"Attention crew, it appears that someone on your station has hijacked your telecommunications and broadcasted an unknown signal.",
-		"[command_name()] High-Priority Update",
+		"Внимание, экипаж! Похоже, кто‑то на вашей станции захватил системы связи и транслирует неизвестный сигнал.",
+		"[command_name()] Высокоприоритетное обновление",
 	)
 
 /datum/dynamic_ruleset/midround/from_living/traitor/mass
@@ -1212,7 +1212,7 @@
 	candidate.add_antag_datum(/datum/antagonist/malf_ai)
 	if(!prob(33) || !isAI(candidate.current))
 		return
-	priority_announce("Ion storm detected near the station. Please check all AI-controlled equipment for errors.", "Anomaly Alert", ANNOUNCER_IONSTORM)
+	priority_announce("Вблизи станции обнаружена ионная буря. Пожалуйста, проверьте всё оборудование, управляемое ИИ, на наличие ошибок.", "Обнаружена аномалия", ANNOUNCER_IONSTORM)
 	var/mob/living/silicon/new_malf_ai = candidate.current
 	var/obj/machinery/ai_law_rack/base/rack = new_malf_ai.get_law_rack()
 	rack?.scramble_ai_rack(

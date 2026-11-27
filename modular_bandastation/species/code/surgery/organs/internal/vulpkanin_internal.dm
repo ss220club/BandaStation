@@ -3,10 +3,24 @@
 	desc = "Длинный и более чувствительный язык, может различить больше вкусов."
 	icon_state = "tongue"
 	taste_sensitivity = 10
-	modifies_speech = FALSE
+	modifies_speech = TRUE
 	languages_native = list(/datum/language/canilunzt)
 	liked_foodtypes = RAW | MEAT | SEAFOOD
 	disliked_foodtypes =  FRUIT | NUTS | GROSS | GRAIN
+	var/static/list/speech_replacements = list(
+		"r" = list("rr", "rrr", "rrrr"),
+		"R" = list("RR", "RRR", "RRRR"),
+		"р" = list("рр", "ррр", "рррр"),
+		"Р" = list("РР", "РРР", "РРРР"),
+	)
+
+/obj/item/organ/tongue/vulpkanin/Initialize(mapload)
+	. = ..()
+	AddComponent(\
+		/datum/component/speechmod,\
+		replacements = speech_replacements,\
+		should_modify_speech = CALLBACK(src, PROC_REF(should_modify_speech))\
+	)
 
 /obj/item/organ/tongue/get_possible_languages()
 	return ..() + /datum/language/canilunzt

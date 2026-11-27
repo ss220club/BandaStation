@@ -23,12 +23,10 @@
 	custom_price = PAYCHECK_CREW * 4
 	/// How much damage to do unwielded
 	var/force_unwielded = 10
-	/// How much damage to do wielded
-	var/force_wielded = 20
 
 /obj/item/sledgehammer/Initialize(mapload)
 	. = ..()
-	AddComponent(/datum/component/two_handed, force_unwielded = force_unwielded, force_wielded = force_wielded, icon_wielded = "[base_icon_state]1")
+	AddComponent(/datum/component/two_handed, force_unwielded = force_unwielded, force_wielded = force_wielded, update_icon_state = TRUE)
 	AddComponent(/datum/component/stamina_cost_per_hit,\
 		stamina_cost = 12,\
 		stamina_cost_wielded = 10,\

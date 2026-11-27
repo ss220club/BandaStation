@@ -42,11 +42,9 @@
 	gain_text = span_warning("Вы слышите отвратительный, скрипучий голос у себя в голове. Он требует от вас выполнения одного небольшого задания...")
 	antagonist = owner.mind.has_antag_datum(/datum/antagonist/obsessed)
 	antagonist.trauma = src
-	RegisterSignal(obsession, COMSIG_MOB_EYECONTACT, PROC_REF(stare))
-	RegisterSignal(obsession, COMSIG_QDELETING, PROC_REF(obession_deleted))
 	. = ..()
 	//antag stuff//
-	antagonist.forge_objectives(obsession.mind)
+	set_obsession(obsession) // BANDASTATION CHANGE: share setup with cryo replacements.
 	antagonist.greet()
 	log_game("[key_name(antagonist)] has developed an obsession with [key_name(obsession)].")
 	RegisterSignal(owner, COMSIG_CARBON_HELPED, PROC_REF(on_hug))
@@ -56,6 +54,24 @@
 	RegisterSignal(owner, COMSIG_MOB_MIND_TRANSFERRED_INTO, PROC_REF(on_mind_gain))
 	owner.apply_status_effect(/datum/status_effect/desensitized, REF(src), DESENSITIZED_THRESHOLD)
 	owner.apply_status_effect(/datum/status_effect/speech/stutter/obsession, INFINITY)
+
+// BANDASTATION ADDITION - Start
+/// Set the character we are obsessed with and recreate this role's tasks with fresh progress.
+/datum/brain_trauma/special/obsessed/proc/set_obsession(mob/living/new_obsession, list/blacklist)
+	if(obsession)
+		UnregisterSignal(obsession, list(COMSIG_MOB_EYECONTACT, COMSIG_QDELETING))
+	obsession = new_obsession
+	RegisterSignal(obsession, COMSIG_MOB_EYECONTACT, PROC_REF(stare))
+	RegisterSignal(obsession, COMSIG_QDELETING, PROC_REF(obession_deleted))
+	viewing = FALSE
+	total_time_creeping = 0 SECONDS
+	time_spent_away = 0 SECONDS
+	time_spend_creeping = 0 SECONDS
+	witnessed_death = FALSE
+	owner.clear_mood_event("creeping")
+	QDEL_LIST(antagonist.objectives)
+	antagonist.forge_objectives(obsession.mind, blacklist = blacklist)
+// BANDASTATION ADDITION - End
 
 /datum/brain_trauma/special/obsessed/on_life(seconds_per_tick)
 	if(isnull(obsession))
@@ -222,7 +238,7 @@
 
 	INVOKE_ASYNC(antagonist, TYPE_PROC_REF(/datum/antagonist, restore_datum), the_mind)
 
-/datum/brain_trauma/special/obsessed/proc/find_obsession()
+/datum/brain_trauma/special/obsessed/proc/find_obsession(list/blacklist) // BANDASTATION ADDITION: exclude characters leaving the round.
 	var/list/generic_pool = list()
 	var/list/special_pool = list()
 
@@ -233,6 +249,8 @@
 	)
 
 	for(var/datum/mind/crewmember as anything in get_crewmember_minds())
+		if(crewmember in blacklist) // BANDASTATION ADDITION
+			continue
 		if(!ishuman(crewmember.current) || crewmember.current.stat == DEAD || crewmember.current == owner || !GET_CLIENT(crewmember.current))
 			continue
 

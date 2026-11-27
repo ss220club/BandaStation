@@ -14,6 +14,13 @@ function toggleReady(setReady) {
   toggleGoodBadClass(readyElement, setReady === '1'); // YES. Byond sends true/false like a "1"/"0"
 }
 
+function toggleAntagRoll(enabled) {
+  const antagRollElement = document.querySelector('.lobby-toggle_antag_roll');
+  if (antagRollElement) {
+    toggleGoodBadClass(antagRollElement, enabled === '1');
+  }
+}
+
 const noticeElement = document.getElementById('container_notice');
 function updateNotice(notice) {
   const emptyNotice = notice === undefined;
@@ -24,6 +31,23 @@ function updateNotice(notice) {
 const character_name_slot = document.getElementById('character_name');
 function updateCharacterName(name) {
   character_name_slot.setAttribute('data-name', name);
+}
+
+const rosterElement = document.getElementById('lobby_roster');
+
+function updateRoster(encodedData) {
+  const data = JSON.parse(encodedData);
+  rosterElement.classList.toggle('hidden', !data.total);
+  rosterElement.replaceChildren();
+  if (data.assigned_job) {
+    rosterElement.append('Назначен администратором: ');
+    const role = document.createElement('strong');
+    // Keep the job title together when it wraps after the assignment label.
+    role.textContent = data.assigned_job.replaceAll(' ', '\u00A0');
+    rosterElement.append(role);
+  } else {
+    rosterElement.textContent = `Ивентовые должности · Занято мест: ${data.total}`;
+  }
 }
 
 const info_placement = document.getElementById('round_info');

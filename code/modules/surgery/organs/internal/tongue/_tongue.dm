@@ -507,10 +507,11 @@
 
 		// all occurrences of characters "eiou" (case-insensitive) are replaced with "r"
 		message = replacetext(message, regex(@"[eiou]", "ig"), "r")
+		message = replacetext(message, regex(@"[еёиоуыэюяЕЁИОУЫЭЮЯ]", "g"), "р") // BANDASTATION EDIT: Cyrillic support
 		// all characters other than "zhrgbmna .!?-" (case-insensitive) are stripped
-		message = replacetext(message, regex(@"[^zhrgbmna.!?-\s]", "ig"), "")
+		message = replacetext(message, regex(@"[^zhrgbmnaзхргбмнаЗХРГБМНА.!?-\s]", "ig"), "") // BANDASTATION EDIT: Cyrillic support
 		// multiple spaces are replaced with a single (whitespace is trimmed)
-		message = replacetext(message, regex(@"(\s+)", "g"), " ")
+		// message = replacetext(message, regex(@"(\s+)", "g"), " ") // BANDASTATION EDIT: moved below, collapsing here shifts word indexes when a word is fully stripped
 
 		var/list/old_words = splittext(message, " ")
 		var/list/new_words = list()
@@ -526,6 +527,7 @@
 			new_words[i] = translated_word_list[i] ? translated_word_list[i] : new_words[i]
 
 		message = new_words.Join(" ")
+		message = replacetext(message, regex(@"(\s+)", "g"), " ") // BANDASTATION EDIT: moved from above
 		message = capitalize(message)
 		speech_args[SPEECH_MESSAGE] = message
 
@@ -544,7 +546,7 @@
 	voice_filter = @{"[0:a] asplit [out0][out2]; [out0] asetrate=%SAMPLE_RATE%*0.8,aresample=%SAMPLE_RATE%,atempo=1/0.8,aformat=channel_layouts=mono [p0]; [out2] asetrate=%SAMPLE_RATE%*1.2,aresample=%SAMPLE_RATE%,atempo=1/1.2,aformat=channel_layouts=mono[p2]; [p0][0][p2] amix=inputs=3"}
 	emote_sounds = list(
 		/datum/emote/living/deathgasp::key = 'sound/mobs/non-humanoids/hiss/hiss6.ogg',
-		/datum/emote/living/carbon/hiss::key = SFX_HISS,
+		/datum/emote/living/carbon/hiss::key = /datum/sound_effect/hiss,
 		/datum/emote/living/scream::key = 'sound/mobs/non-humanoids/hiss/hiss5.ogg',
 	)
 
@@ -563,7 +565,7 @@
 	if(hivemind)
 		return
 
-	playsound(owner, SFX_HISS, 25, TRUE, TRUE)
+	playsound(owner, /datum/sound_effect/hiss, 25, TRUE, TRUE)
 
 /obj/item/organ/tongue/bone
 	name = "bone \"tongue\""
@@ -735,7 +737,7 @@
 	disliked_foodtypes = CLOTH
 	languages_native = list(/datum/language/monkey)
 	emote_sounds = list(
-		/datum/emote/living/scream::key = SFX_SCREECH,
+		/datum/emote/living/scream::key = /datum/sound_effect/screech,
 	)
 
 /obj/item/organ/tongue/moth

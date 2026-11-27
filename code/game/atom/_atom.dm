@@ -185,6 +185,9 @@
 		overlays.Cut()
 
 	LAZYNULL(managed_overlays)
+	// SSvis_overlays shares these between atoms and deletes them on its own, so don't hold them while we wait in the gc queue
+	if(managed_vis_overlays)
+		managed_vis_overlays = null
 	if(ai_controller)
 		QDEL_NULL(ai_controller)
 	if(light)
@@ -978,6 +981,8 @@
 	active_hud.screentip_text.maptext_y = 10 - (extra_lines > 0 ? 11 + 9 * (extra_lines - 1): 0)
 
 /atom/proc/set_hover_maptext(client/client, datum/hud/active_hud, new_maptext)
+	usr = null // we are sticking `usr = null` on anything with MeasureText now.
+
 	var/map_height
 	WXH_TO_HEIGHT(client.MeasureText(new_maptext, null, active_hud.screentip_text.maptext_width), map_height)
 	active_hud.screentip_text.maptext = new_maptext

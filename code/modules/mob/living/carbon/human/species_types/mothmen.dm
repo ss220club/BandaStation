@@ -80,6 +80,12 @@
 			SPECIES_PERK_DESC = "Моли могут поедать одежду, чтобы временно подкрепиться.",
 		),
 		list(
+			SPECIES_PERK_TYPE = SPECIES_POSITIVE_PERK,
+			SPECIES_PERK_ICON = "hand-spock",
+			SPECIES_PERK_NAME = "Handy",
+			SPECIES_PERK_DESC = "Moths have extra hands on the front of their chests.",
+		),
+		list(
 			SPECIES_PERK_TYPE = SPECIES_NEGATIVE_PERK,
 			SPECIES_PERK_ICON = "fire",
 			SPECIES_PERK_NAME = "Опаленные крылья",
@@ -93,6 +99,12 @@
 				от офицеров службы безопасности или сварочных аппаратов. Сварочные \
 				маски полностью спасают от вспышек.",
 		),
+		list(
+			SPECIES_PERK_TYPE = SPECIES_NEGATIVE_PERK,
+			SPECIES_PERK_ICON = "face-dizzy",
+			SPECIES_PERK_NAME = "Fragile",
+			SPECIES_PERK_DESC = "Moth anatomy is fragile at their size, it's easier to seriously hurt them."
+		)
 	)
 
 	return to_add

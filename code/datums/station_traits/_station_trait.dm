@@ -94,15 +94,14 @@ GLOBAL_LIST_EMPTY(lobby_station_traits)
 	RegisterSignal(lobby_button, COMSIG_QDELETING, PROC_REF(on_lobby_button_destroyed))
 	lobby_button.update_appearance(UPDATE_ICON)
 
-/// Called when our lobby button is clicked on
-/datum/station_trait/proc/on_lobby_button_click(atom/movable/screen/lobby/button/sign_up/lobby_button, location, control, params, mob/dead/new_player/user)
-	SIGNAL_HANDLER
+/// Called when a player clicks this trait's lobby button.
+/// Return a string to show as feedback in the lobby UI.
+/datum/station_trait/proc/on_lobby_button_click(mob/dead/new_player/player)
 	return
 
-/// Called when our lobby button tries to update its appearance
-/datum/station_trait/proc/on_lobby_button_update_icon(atom/movable/screen/lobby/button/sign_up/lobby_button, updates)
-	SIGNAL_HANDLER
-	return
+/// Returns the tooltip text for this trait's lobby button
+/datum/station_trait/proc/get_lobby_description()
+	return report_message
 
 /// Don't hold references to deleted buttons
 /datum/station_trait/proc/on_lobby_button_destroyed(atom/movable/screen/lobby/button/sign_up/lobby_button)

@@ -3,9 +3,9 @@
 	bluespace = TRUE
 	explosionSize = list(0,0,0,0)
 	fallingSound = null
-	landingSound = SFX_PORTAL_CREATED
-	openingSound = SFX_PORTAL_ENTER
-	leavingSound = SFX_PORTAL_CLOSE
+	landingSound = /datum/sound_effect/portal_created
+	openingSound = /datum/sound_effect/portal_enter
+	leavingSound = /datum/sound_effect/portal_close
 	pod_flags = FIRST_SOUNDS
 
 /obj/structure/closet/supplypod/teleporter/set_style(chosenStyle)

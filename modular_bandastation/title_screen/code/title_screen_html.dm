@@ -36,6 +36,7 @@
 						<div class="lobby-name">
 							<label class="lobby_element lobby-collapse" for="hide_menu"></label>
 							<span id="character_name" data-loading="[SStitle.subsystem_loading]" data-name="[player_name]"></span>
+							<a id="lobby_roster" class="hidden" href="byond://?src=[REF(player)];roundstart_roster=1" title="Посмотреть занятые ивентовые должности"></a>
 							<div id="logo" data-loaded="[round(loading_percentage)]%">
 								<img src="[SSassets.transport.get_asset_url("ss220_logo.png")]">
 							</div>
@@ -90,9 +91,11 @@
 	if(discord_linked && !player.client.interviewee)
 		if(!SSticker || SSticker.current_state <= GAME_STATE_PREGAME)
 			html += create_button(player, "toggle_ready", "Готов", advanced_classes = "[player.ready == PLAYER_READY_TO_PLAY ? "good" : "bad"] checkbox")
+			html += create_button(player, "toggle_antag_roll", "Антагонисты", tooltip = "Разрешить выбирать вас для ролей антагонистов", advanced_classes = "[player.client.prefs.read_preference(/datum/preference/toggle/antag_roll) ? "good" : "bad"] checkbox")
 			html += create_public_traits(player)
 		else
 			html += create_button(player, "late_join", "Присоединиться")
+			html += create_button(player, "toggle_antag_roll", "Антагонисты", tooltip = "Разрешить выбирать вас для ролей антагонистов", advanced_classes = "[player.client.prefs.read_preference(/datum/preference/toggle/antag_roll) ? "good" : "bad"] checkbox")
 			html += create_public_traits(player)
 
 		html += create_button(player, "observe", "Наблюдать")

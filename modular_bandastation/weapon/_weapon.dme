@@ -38,6 +38,7 @@
 #include "code/ranged/ballistic/nanotrasen/pistols/cm23.dm"
 #include "code/ranged/ballistic/nanotrasen/pistols/cm70.dm"
 #include "code/ranged/ballistic/nanotrasen/pistols/cm357.dm"
+#include "code/ranged/ballistic/nanotrasen/pistols/pdh.dm"
 #include "code/ranged/ballistic/nanotrasen/smgs/cm5.dm"
 #include "code/ranged/ballistic/nanotrasen/rifles/cm82.dm"
 #include "code/ranged/ballistic/nanotrasen/rifles/f4.dm"
@@ -78,3 +79,4 @@
 #include "code/ranged/energy/awaymission_gun.dm"
 #include "code/ranged/energy/eg_14.dm"
 #include "code/ranged/energy/pulse.dm"
+#include "code/ranged/energy/laser.dm"

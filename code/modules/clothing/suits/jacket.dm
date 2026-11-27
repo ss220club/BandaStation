@@ -13,6 +13,7 @@
 		)
 	body_parts_covered = CHEST|GROIN|ARMS
 	cold_protection = CHEST|GROIN|ARMS
+	bodyshapes_with_variations = NONE
 	min_cold_protection_temperature = FIRE_SUIT_MIN_TEMP_PROTECT
 	species_exception = list(/datum/species/golem)
 	item_flags = CAN_BE_OVERSLOT
@@ -47,7 +48,7 @@
 
 /obj/item/clothing/suit/toggle/jacket/sweater
 	name = "sweater jacket"
-	desc = "A sweater jacket."
+	desc = "Куртка-свитер, или свитер-куртка."
 	icon = 'icons/map_icons/clothing/suit/_suit.dmi'
 	icon_state = "/obj/item/clothing/suit/toggle/jacket/sweater"
 	post_init_icon_state = "sweater"
@@ -58,7 +59,7 @@
 
 /obj/item/clothing/suit/toggle/jacket/trenchcoat
 	name = "trenchcoat"
-	desc = "A multi-purpose trenchcoat."
+	desc = "Тренч на все случаи жизни."
 	icon = 'icons/map_icons/clothing/suit/_suit.dmi'
 	icon_state = "/obj/item/clothing/suit/toggle/jacket/trenchcoat"
 	post_init_icon_state = "trenchcoat"
@@ -69,6 +70,7 @@
 	blood_overlay_type = "coat"
 	flags_inv = HIDEBELT
 	clothing_flags = parent_type::clothing_flags | CARP_STYLE_FACTOR // I know kung-fu
+	supports_variations_flags = CLOTHING_CERULEAN_MASK_INBETWEEN
 
 /obj/item/clothing/suit/toggle/jacket/trenchcoat/Initialize(mapload)
 	. = ..()
@@ -76,7 +78,7 @@
 
 /obj/item/clothing/suit/jacket/blazer
 	name = "blazer jacket"
-	desc = "A blazer jacket."
+	desc = "Самый обычный пиджак."
 	icon = 'icons/map_icons/clothing/suit/_suit.dmi'
 	icon_state = "/obj/item/clothing/suit/jacket/blazer"
 	post_init_icon_state = "blazer"
@@ -88,7 +90,7 @@
 
 /obj/item/clothing/suit/jacket/oversized
 	name = "oversized jacket"
-	desc = "An oversized jacket."
+	desc = "Эта куртка вам слишком большая."
 	icon = 'icons/map_icons/clothing/suit/_suit.dmi'
 	icon_state = "/obj/item/clothing/suit/jacket/oversized"
 	post_init_icon_state = "jacket_oversized"
@@ -96,10 +98,12 @@
 	greyscale_config_worn = /datum/greyscale_config/jacket_oversized/worn
 	greyscale_colors = "#414344"
 	flags_1 = IS_PLAYER_COLORABLE_1
+	bodyshapes_with_variations = BODYSHAPE_CERULEAN
+	supports_variations_flags = CLOTHING_CERULEAN_MASK_INBETWEEN
 
 /obj/item/clothing/suit/jacket/fancy
 	name = "fancy fur coat"
-	desc = "Rated 10 out of 10 in Cosmo for best coat brand."
+	desc = "10 из 10 от Cosmo - лучший бренд пальто."
 	icon = 'icons/map_icons/clothing/suit/_suit.dmi'
 	icon_state = "/obj/item/clothing/suit/jacket/fancy"
 	post_init_icon_state = "fancy_coat"
@@ -114,7 +118,7 @@
 
 /obj/item/clothing/suit/jacket/bomber
 	name = "bomber jacket"
-	desc = "Aviators not included."
+	desc = "Авиаторы в комплекте не идут."
 	icon_state = "bomberjacket"
 	inhand_icon_state = "brownjsuit"
 
@@ -124,7 +128,7 @@
 
 /obj/item/clothing/suit/jacket/leather
 	name = "leather jacket"
-	desc = "Pompadour not included."
+	desc = "Помпадур в комплекте не идёт."
 	icon_state = "leatherjacket"
 	inhand_icon_state = "hostrench"
 	resistance_flags = NONE
@@ -136,12 +140,24 @@
 
 /obj/item/clothing/suit/jacket/leather/biker
 	name = "biker jacket"
-	desc = "You think I'm not even worth a single dollar, but I feel like a millionare."
+	desc = "Думаешь, я не стою и доллара - а я чувствую себя миллионером."
 	icon_state = "leatherjacket_biker"
+
+/obj/item/clothing/suit/jacket/leather/armored
+	desc = "Кожа настолько толстая, что под ней почти не чувствуется подкладка. И она <b>чертовски громкая!</b>"
+	icon = /obj/item/clothing/suit/toggle/jacket/sweater::icon
+	icon_state = /obj/item/clothing/suit/toggle/jacket/sweater::icon_state
+	worn_icon = 'icons/mob/clothing/suits/jacket.dmi'
+	worn_icon_state = "leatherjacket_p"
+	armor_type = /datum/armor/wintercoat_security
+
+/obj/item/clothing/suit/jacket/leather/armored/Initialize(mapload)
+	. = ..()
+	allowed += GLOB.security_vest_allowed
 
 /obj/item/clothing/suit/jacket/puffer
 	name = "puffer jacket"
-	desc = "A thick jacket with a rubbery, water-resistant shell."
+	desc = "Плотная куртка с прорезиненной водостойкой оболочкой."
 	icon_state = "pufferjacket"
 	inhand_icon_state = "hostrench"
 	armor_type = /datum/armor/jacket_puffer
@@ -151,7 +167,7 @@
 
 /obj/item/clothing/suit/jacket/puffer/vest
 	name = "puffer vest"
-	desc = "A thick vest with a rubbery, water-resistant shell."
+	desc = "Плотный жилет с прорезиненной водостойкой оболочкой."
 	icon_state = "puffervest"
 	inhand_icon_state = "armor"
 	body_parts_covered = CHEST|GROIN
@@ -163,7 +179,7 @@
 
 /obj/item/clothing/suit/jacket/miljacket
 	name = "military jacket"
-	desc = "A canvas jacket styled after classical American military garb. Feels sturdy, yet comfortable."
+	desc = "Брезентовая куртка в стиле классической американской военной формы. Кажется прочной, но удобной."
 	icon_state = "militaryjacket"
 	inhand_icon_state = null
 
@@ -173,7 +189,7 @@
 
 /obj/item/clothing/suit/jacket/letterman
 	name = "letterman jacket"
-	desc = "A classic brown letterman jacket. Looks pretty hot and heavy."
+	desc = "Классическая коричневая леттерман-куртка. Выглядит довольно жаркой и тяжёлой."
 	icon_state = "letterman"
 	inhand_icon_state = null
 	species_exception = list(/datum/species/golem)
@@ -184,7 +200,7 @@
 
 /obj/item/clothing/suit/jacket/letterman_red
 	name = "red letterman jacket"
-	desc = "A letterman jacket in a sick red color. Radical."
+	desc = "Леттерман-куртка в офигенном красном цвете. Радикально."
 	icon_state = "letterman_red"
 	inhand_icon_state = null
 	species_exception = list(/datum/species/golem)
@@ -195,7 +211,7 @@
 
 /obj/item/clothing/suit/jacket/letterman_syndie
 	name = "blood-red letterman jacket"
-	desc = "Oddly, this jacket seems to have a large S on the back..."
+	desc = "Как ни странно, на спине этой куртки, кажется, красуется большая буква S..."
 	icon_state = "letterman_s"
 	inhand_icon_state = null
 	species_exception = list(/datum/species/golem)
@@ -206,7 +222,7 @@
 
 /obj/item/clothing/suit/jacket/letterman_nanotrasen
 	name = "blue letterman jacket"
-	desc = "A blue letterman jacket with a proud Nanotrasen N on the back. The tag says that it was made in Space China."
+	desc = "Синяя леттерман-куртка с гордой буквой N от Нанотрейзен на спине. На бирке указано, что она сделана в Космическом Китае."
 	icon_state = "letterman_n"
 	inhand_icon_state = null
 	species_exception = list(/datum/species/golem)

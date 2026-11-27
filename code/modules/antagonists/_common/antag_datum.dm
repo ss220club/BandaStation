@@ -599,6 +599,7 @@ GLOBAL_LIST_EMPTY(antagonists)
 	custom_objective.owner = owner
 	custom_objective.explanation_text = custom_objective_text
 	custom_objective.completed = TRUE
+	hijack_speed = max(hijack_speed, 0.5)
 
 	if (retain_existing)
 		objectives.Insert(1, custom_objective)
@@ -618,6 +619,8 @@ GLOBAL_LIST_EMPTY(antagonists)
 		objectives.Insert(1, custom_objective)
 
 	can_assign_self_objectives = FALSE
+	// BANDASTATION EDIT: notify operations when an agent changes their objectives.
+	SEND_SIGNAL(src, COMSIG_ANTAGONIST_OBJECTIVES_CHANGED)
 	owner.announce_objectives()
 
 	return TRUE

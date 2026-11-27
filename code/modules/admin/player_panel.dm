@@ -80,7 +80,9 @@
 
 					body += "</td><td align='center'>";
 
-					body += "<font size='2'><b>"+job+" "+name+"</b><br><b>Real name "+real_name+"</b><br><b>Played by "+key+" ("+ip+")</b><br><b>Old names: "+old_names+"</b></font>";
+					// BANDASTATION EDIT START - These values are decoded text, they must be set via textContent and never concatenated into HTML
+					body += "<font size='2' class='player-details'><b></b><br><b></b><br><b></b><br><b></b></font>";
+					// BANDASTATION EDIT END
 
 					body += "</td><td align='center'>";
 
@@ -102,6 +104,13 @@
 
 
 					span.innerHTML = body
+					// BANDASTATION EDIT START - see the player-details placeholder above
+					var details = span.querySelectorAll(".player-details b");
+					details\[0\].textContent = job+" "+name;
+					details\[1\].textContent = "Real name "+real_name;
+					details\[2\].textContent = "Played by "+key+" ("+ip+")";
+					details\[3\].textContent = "Old names: "+old_names;
+					// BANDASTATION EDIT END
 				}
 
 				function clearAll(){

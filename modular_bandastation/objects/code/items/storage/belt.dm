@@ -337,29 +337,6 @@
 	new /obj/item/grenade/spawnergrenade/clown(src)
 	new /obj/item/restraints/handcuffs/fake(src)
 
-/obj/item/storage/belt/holster/ert
-	name = "ERT operative holster"
-	desc = "Большая наплечная кобура, в которой можно хранить практически любое небольшое огнестрельное оружие и патроны к нему. Эта кобура предназначена специально для пистолетов."
-	icon_state = "syndicate_holster"
-	inhand_icon_state = "syndicate_holster"
-	worn_icon_state = "syndicate_holster"
-	w_class = WEIGHT_CLASS_BULKY
-	storage_type = /datum/storage/holster/nukie/cowboy
-
-/obj/item/storage/belt/holster/ert/full_gp9r/PopulateContents()
-	generate_items_inside(list(
-		/obj/item/ammo_box/magazine/c9x25mm_pistol/stendo/ap = 1,
-		/obj/item/ammo_box/magazine/c9x25mm_pistol/stendo/hp = 1,
-		/obj/item/gun/ballistic/automatic/pistol/gp9/spec = 1,
-	),src)
-
-/obj/item/storage/belt/holster/ert/full_gamma_commander/PopulateContents()
-	generate_items_inside(list(
-		/obj/item/gun/energy/pulse/pistol/taserless/loyal = 1,
-		/obj/item/ammo_box/magazine/smgm9mm = 1,
-		/obj/item/gun/ballistic/automatic/proto/unrestricted = 1,
-	),src)
-
 /obj/item/storage/belt/military/holster
 	name = "army belt with holster"
 	desc = "Тактический штурмовой пояс с кобурой, используемый военными."

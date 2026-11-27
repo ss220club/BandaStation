@@ -13,6 +13,7 @@
 	new /obj/item/radio/headset/heads/captain(src)
 	new /obj/item/door_remote/captain(src)
 	new /obj/item/megaphone/command(src)
+	new /obj/item/assembly/flash/handheld(src)
 
 /obj/structure/closet/secure_closet/captains/populate_contents_immediate()
 	new /obj/item/gun/energy/e_gun(src)
@@ -73,7 +74,7 @@
 	. = ..()
 
 	// Traitor steal objectives
-	new /obj/item/gun/energy/e_gun/hos(src)
+	new /obj/item/choice_beacon/weapon/hos(src) //BANDASTATION EDIT: Weapon choices for HoS & BS
 	new /obj/item/pinpointer/nuke(src)
 
 	new /obj/item/storage/photo_album/hos(src)

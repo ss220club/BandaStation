@@ -1,0 +1,71 @@
+name: Merge Hold Verify
+
+on:
+  schedule:
+    - cron: "37 */3 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  HOLD_LABEL: ":clock1: На удержании"
+  MERGE_DELAY_HOURS: 24
+  GH_REPO: ${{ github.repository }}
+
+jobs:
+  merge_hold:
+    runs-on: ubuntu-slim
+    steps:
+      - id: create_token
+        uses: actions/create-github-app-token@v3.3.0
+        with:
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.PRIVATE_KEY }}
+
+      - name: Fetch open PRs with their labels and reviews
+        env:
+          GH_TOKEN: ${{ steps.create_token.outputs.token }}
+        run: |
+          # shellcheck disable=SC2016 # $owner and $name are GraphQL variables, not shell ones
+          gh api graphql -f owner="${GH_REPO%/*}" -f name="${GH_REPO#*/}" \
+            --jq '.data.repository.pullRequests.nodes' -f query='
+            query($owner: String!, $name: String!) {
+              repository(owner: $owner, name: $name) {
+                pullRequests(states: OPEN, first: 100) {
+                  nodes {
+                    number
+                    author { __typename }
+                    labels(first: 50) { nodes { name } }
+                    latestOpinionatedReviews(first: 50) { nodes { state submittedAt authorCanPushToRepository } }
+                  }
+                }
+              }
+            }' > "$RUNNER_TEMP/prs.json"
+
+      # A PR is held unless a reviewer with push access approved it at least MERGE_DELAY_HOURS ago.
+      # Writes "<number> add|remove" for every PR whose label does not match that rule.
+      - name: Decide which PRs need the label changed
+        run: |
+          jq -r --argjson now "$(date +%s)" --argjson hours "$MERGE_DELAY_HOURS" --arg label "$HOLD_LABEL" '
+            .[]
+            | select(.author.__typename != "Bot")
+            | ([ .latestOpinionatedReviews.nodes[]
+                  | select(.state == "APPROVED" and .authorCanPushToRepository)
+                  | .submittedAt | fromdateiso8601
+                ] | min) as $since
+            | ($since != null and $now - $since >= $hours * 3600) as $released
+            | any(.labels.nodes[]; .name == $label) as $held
+            | select($released == $held)
+            | "\(.number) \(if $held then "remove" else "add" end)"' \
+            "$RUNNER_TEMP/prs.json" > "$RUNNER_TEMP/changes.txt"
+          cat "$RUNNER_TEMP/changes.txt"
+
+      - name: Apply the label changes
+        env:
+          GH_TOKEN: ${{ steps.create_token.outputs.token }}
+        run: |
+          while read -r pr action; do
+            echo "#$pr: $action $HOLD_LABEL"
+            gh pr edit "$pr" "--$action-label" "$HOLD_LABEL"
+          done < "$RUNNER_TEMP/changes.txt"

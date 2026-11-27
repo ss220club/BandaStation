@@ -856,10 +856,14 @@ GLOBAL_LIST_EMPTY(possible_items)
 	martyr_compatible = TRUE
 
 /datum/objective/destroy/find_target(dupe_search_range, list/blacklist)
-	var/list/possible_targets = active_ais(TRUE)
-	possible_targets -= blacklist
-	var/mob/living/silicon/ai/target_ai = pick(possible_targets)
-	target = target_ai.mind
+	// BANDASTATION EDIT START: blacklists contain minds, while active_ais returns bodies.
+	var/list/possible_targets = list()
+	for(var/mob/living/silicon/ai/candidate as anything in active_ais(TRUE))
+		if(!(candidate.mind in blacklist))
+			possible_targets += candidate
+	var/mob/living/silicon/ai/target_ai = DEFAULTPICK(possible_targets, null)
+	target = target_ai?.mind
+	// BANDASTATION EDIT END
 	update_explanation_text()
 	return target
 

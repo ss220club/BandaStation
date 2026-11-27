@@ -226,4 +226,38 @@ GLOBAL_LIST_INIT(heavy_pirate_gangs, init_pirate_gangs(is_heavy = TRUE))
 	response_received = "ЭТОГО БУДЕТ ДОСТАТОЧНО, ПОМНИТЕ, КТО ЯВЛЯЕТСЯ ВАШИМ ВЛАДЕЛЬЦЕМ!!!"
 	response_rejected = "ГЛУПОЕ РЕШЕНИЕ, Я СДЕЛАЮ ИЗ ТВОЕЙ ТУШКИ ОБРАЗЕЦ ДЛЯ ПОДРАЖАНИЯ!!! (кто-нибудь помнит, как управлять нашим кораблём?)"
 	response_too_late = "ТЫ УЖЕ В ОСАДЕ, ШУТ, ТЫ БЕЗМОЗГЛЫЙ ИЛИ НЕВЕЖЕСТВЕННЫЙ?!"
-	response_not_enough = "ТЫ СЧИТАЕШЬ МЕНЯ ШУТОМ? ТЫ, ТУХЛОЕ МЯСО!!! (я забыл, как управлять кораблем, зараза)."
+	response_not_enough = "ТЫ СЧИТАЕШЬ МЕНЯ ШУТОМ? ТЫ, ТУХЛОЕ МЯСО!!! (я забыл, как управлять кораблем, зараза)"
+
+//wicked assh*le ceruleans that pretend to be a different pirate team
+/datum/pirate_gang/siren
+	name = "Siren Shimai"
+	ship_template_id = "siren"
+	ship_name_pool = "siren_names"
+	announcement_color = "purple"
+
+/datum/pirate_gang/siren/generate_message(payoff)
+	false_flag()
+	. = ..()
+	reveal_yourself()
+
+/datum/pirate_gang/siren/proc/false_flag()
+	var/static/list/pirate_gangs = (GLOB.light_pirate_gangs + GLOB.heavy_pirate_gangs)
+	var/datum/pirate_gang/gang_to_imitate = pick(pirate_gangs - src)
+	threat_title = gang_to_imitate.threat_title
+	threat_content = gang_to_imitate.threat_content
+	ship_name = pick(strings(PIRATE_NAMES_FILE, gang_to_imitate.ship_name_pool))
+	possible_answers = gang_to_imitate.possible_answers
+
+/datum/pirate_gang/siren/proc/reveal_yourself()
+	ship_name = pick(strings(PIRATE_NAMES_FILE, ship_name_pool))
+	var/static/list/note_symbols = list("\u266A", "\u2669", "\u266B")
+	response_received = "[pick(note_symbols)] Фу-фу~! Вы попались на удочку. Мы вовсе не [ship_name]! [pick(note_symbols)] \n\
+		[pick(note_symbols)] Наше следующее шоу профинансировано. Сайонара! [pick(note_symbols)]"
+	response_rejected = "[pick(note_symbols)] Вы, должно быть, считаете себя такими умными. [pick(note_symbols)] \n\
+		[pick(note_symbols)] [station_name()], похоже, идеально нам подходит!~ [pick(note_symbols)]"
+	response_too_late = "[pick(note_symbols)] Сюрприз!~ [pick(note_symbols)] \n\
+		[pick(note_symbols)] ...Ох- не волнуйтесь, автографы бесплатны! [pick(note_symbols)]"
+	response_not_enough = "[pick(note_symbols)] Попались!~ Н-но этого явно недостаточно, бака! [pick(note_symbols)] \n\
+		[pick(note_symbols)] Обсудим оплату после шоу. [pick(note_symbols)]"
+	arrival_announcement = "[pick(note_symbols)] Готовы сыграть в величайшем шоу своей жизни? [pick(note_symbols)]\n\
+		[pick(note_symbols)] Анкору суру хима ва най! [pick(note_symbols)]"

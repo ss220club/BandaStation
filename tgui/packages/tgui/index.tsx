@@ -6,6 +6,7 @@
 
 // Themes
 import './styles/main.scss';
+import './styles/themes/TSF.scss'; // BANDASTATION ADDITION - TSF PDA theme
 import './styles/themes/paper220.scss';
 import './styles/themes/ss220.scss';
 

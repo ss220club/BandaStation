@@ -319,6 +319,14 @@
 	icon_state = "sa-casing"
 	caliber = CALIBER_456MAG
 
+// MARK: .50 AE
+/obj/item/ammo_casing/a50ae/lowpower
+	name = ".50AE special +P bullet casing"
+	desc = "Пистолетный патрон калибра .50AE +P."
+	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
+	icon_state = "sr-casing"
+	projectile_type = /obj/projectile/bullet/a50ae/lowpower
+
 // MARK: 10mm
 /obj/item/ammo_casing/c10mm/rubber
 	name = "10mm rubber bullet casing"

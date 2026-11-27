@@ -289,7 +289,7 @@
 	new /obj/structure/void_conduit(affected_turf)
 	source.dropItemToGround(sword)
 	qdel(sword)
-	playsound(source, SFX_SHATTER, 50, FALSE)
+	playsound(source, /datum/sound_effect/shatter, 50, FALSE)
 
 /datum/heretic_knowledge/ultimate/void_final
 	name = "Вальс Конца Времен"
@@ -421,8 +421,8 @@
 		span_danger("Буря Пустоты, окружающая [ascended_heretic.declent_ru(GENITIVE)] отклоняет [hitting_projectile.declent_ru(ACCUSATIVE)]!"),
 		span_userdanger("Буря Пустоты защитила вас от [hitting_projectile.declent_ru(ACCUSATIVE)]!"),
 	)
-	playsound(ascended_heretic, SFX_VOID_DEFLECT, 75, TRUE)
-	hitting_projectile.firer = ascended_heretic
+	playsound(ascended_heretic, /datum/sound_effect/void_deflect, 75, TRUE)
+	hitting_projectile.set_firer(ascended_heretic)
 	if(prob(75))
 		hitting_projectile.set_angle(get_angle(hitting_projectile.firer, hitting_projectile.fired_from))
 	else

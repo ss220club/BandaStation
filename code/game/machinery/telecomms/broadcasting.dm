@@ -166,6 +166,9 @@
 
 	for(var/obj/item/radio/called_radio as anything in radios)
 		called_radio.on_receive_message(data)
+		if(called_radio.runechat_on_receive) // show runechat above this radio
+			for(var/mob/radio_hearer as anything in mob_only_listeners(get_hearers_in_LOS(called_radio.canhear_range, called_radio)))
+				LAZYSET(virt.runechat_anchors, radio_hearer, called_radio)
 	var/list/message_mods = data["mods"]
 	var/tts_radio_id = LAZYACCESS(message_mods, MODE_TTS_IDENTIFIER)
 	var/should_do_modular_radio_tts = should_queue_radio()
@@ -183,7 +186,7 @@
 			for(var/mob/possible_hearer in radio_hearers)
 				if(can_hear_radio_tts(possible_hearer, frequency))
 					LAZYADD(receive_radios[radio_ref], WEAKREF(possible_hearer))
-			// BANDASTATION EDIT START: Spatial TTS
+			// BANDASTATION EDIT END: Spatial TTS
 
 	else
 		receive = get_hearers_in_radio_ranges(radios)
@@ -207,28 +210,40 @@
 
 	// BANDASTATION EDIT START: TTS radio playback
 	if(should_do_modular_radio_tts && length(receive_radios))
+		// A mob in range of several radios hears the message once, from the closest one: a worn headset wins over a nearby intercom.
+		// Ghost radio plays unpositioned, the same as a radio worn by the listener.
+		var/list/radio_by_hearer = list()
+		var/list/distance_by_hearer = list()
 		for(var/radio_ref in receive_radios)
-			if(!length(receive_radios[radio_ref]))
+			var/datum/weakref/radio_weakref = radio_ref == TTS_GHOST_RADIO ? null : radio_ref
+			var/atom/radio_source = radio_weakref?.resolve()
+			var/turf/radio_turf = get_turf(radio_source)
+			if(radio_weakref && !radio_turf)
 				continue
-			var/atom/radio_source
-			if(radio_ref != TTS_GHOST_RADIO)
-				var/datum/weakref/radio_weakref = radio_ref
-				radio_source = radio_weakref.resolve()
-				if(QDELETED(radio_source))
-					continue
-			var/list/radio_listeners = list()
-			for(var/hearer_ref in receive_radios[radio_ref])
-				var/datum/weakref/hearer_weakref = hearer_ref
-				var/mob/radio_listener = hearer_weakref.resolve()
+			for(var/datum/weakref/hearer_ref as anything in receive_radios[radio_ref])
+				var/mob/radio_listener = hearer_ref.resolve()
 				if(!radio_listener)
 					continue
+				var/distance = radio_turf ? get_dist(radio_turf, get_turf(radio_listener)) : 0
+				if(!isnull(distance_by_hearer[radio_listener]) && distance_by_hearer[radio_listener] <= distance)
+					continue
+				distance_by_hearer[radio_listener] = distance
+				radio_by_hearer[radio_listener] = radio_source || TTS_GHOST_RADIO
+
+		var/list/hearers_by_radio = list()
+		for(var/mob/radio_listener as anything in radio_by_hearer)
+			LAZYADD(hearers_by_radio[radio_by_hearer[radio_listener]], radio_listener)
+		for(var/radio_key in hearers_by_radio)
+			var/atom/radio_source = radio_key == TTS_GHOST_RADIO ? null : radio_key
+			var/list/listeners_by_message = list()
+			for(var/mob/radio_listener as anything in hearers_by_radio[radio_key])
 				var/message_to_tts = isobserver(radio_listener) ? message : radio_listener.translate_language(virt, language, message, spans, message_mods)
 				if(message_to_tts == message)
 					message_to_tts = LAZYACCESS(message_mods, MODE_TTS_MESSAGE_OVERRIDE) || message_to_tts
-				LAZYADD(radio_listeners[message_to_tts], radio_listener)
-			for(var/message_to_tts in radio_listeners)
+				LAZYADD(listeners_by_message[message_to_tts], radio_listener)
+			for(var/message_to_tts in listeners_by_message)
 				virt.cast_tts(
-					radio_listeners[message_to_tts],
+					listeners_by_message[message_to_tts],
 					message_to_tts,
 					location = radio_source,
 					is_local = !isnull(radio_source),
@@ -246,6 +261,7 @@
 			continue
 		spans -= blacklisted_spans
 		hearer.Hear(virt, language, message, frequency, data["frequency_name"], data["frequency_color"], spans, message_mods, message_range = INFINITY)
+	virt.runechat_anchors = null // runechat is already made
 
 	// This following recording is intended for research and feedback in the use of department radio channels
 	if(length(receive))

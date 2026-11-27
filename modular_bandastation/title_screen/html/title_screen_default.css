@@ -518,6 +518,27 @@ html.loading {
   }
 }
 
+#lobby_roster {
+  margin-top: 0.33rem;
+  font-size: 0.85rem;
+  font-weight: normal;
+  line-height: 1.4;
+  color: var(--color-text-translucent);
+
+  overflow-wrap: anywhere;
+
+  &::after {
+    content: " ›";
+    color: var(--color-text-accent);
+  }
+
+  &:hover,
+  &:focus-visible,
+  strong {
+    color: var(--color-text-accent);
+  }
+}
+
 /**
  * MARK: Collapse button
  */

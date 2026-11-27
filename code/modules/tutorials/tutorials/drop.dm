@@ -50,7 +50,7 @@
 	switch (stage)
 		if (STAGE_DROP_ITEM)
 			show_instruction(keybinding_message(
-				/datum/keybinding/mob/drop_item,
+				/datum/keybinding/dextrous/drop_item,
 				"Нажмите '%KEY%', чтобы выбросить предмет с руки",
 				"Кликните по '<b>DROP</b>', чтобы выбросить предмет с руки",
 			))

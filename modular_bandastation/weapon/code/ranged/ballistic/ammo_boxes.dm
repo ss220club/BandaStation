@@ -302,7 +302,7 @@
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "38box"
 	w_class = WEIGHT_CLASS_SMALL
-	caliber = CALIBER_38
+	caliber = CALIBER_357_38
 	ammo_type = /obj/item/ammo_casing/c38
 	max_ammo = 25
 
@@ -343,7 +343,7 @@
 	icon = 'modular_bandastation/weapon/icons/ranged/ammo.dmi'
 	icon_state = "357box"
 	w_class = WEIGHT_CLASS_SMALL
-	caliber = CALIBER_357
+	caliber = CALIBER_357_38
 	ammo_type = /obj/item/ammo_casing/c357
 	max_ammo = 20
 
@@ -393,6 +393,12 @@
 	desc = parent_type::desc + "<br>Серая полоска указывает на то, что в ней должны храниться бронебойные боеприпасы."
 	icon_state = "45box-ap"
 	ammo_type = /obj/item/ammo_casing/c45/ap
+
+/obj/item/ammo_box/c45/incendiary
+	name = "ammo box (.45 incendiary)"
+	desc = parent_type::desc + "<br>Красная полоска указывает на то, что в ней должны храниться зажигательные боеприпасы."
+	icon_state = "45box-incendiary"
+	ammo_type = /obj/item/ammo_casing/c45/inc
 
 // MARK: 10mm
 /obj/item/ammo_box/c10mm
