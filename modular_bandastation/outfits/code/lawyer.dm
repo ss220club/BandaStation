@@ -14,3 +14,5 @@
 	l_hand = /obj/item/storage/briefcase/lawyer
 
 	chameleon_extras = /obj/item/stamp/law
+
+	implants = list(/obj/item/implant/mindshield)

@@ -248,13 +248,13 @@
 	{
 		"code": "NT-LD-05",
 		"category": "Юридический отдел",
-		"name": "Отчет юриста",
+		"name": "Отчет АВД",
 		"info": "markdown/ld/nt_ld_05.md"
 	},
 	{
 		"code": "NT-LD-06",
 		"category": "Юридический отдел",
-		"name": "Бланк жалоб юриста",
+		"name": "Бланк жалоб АВД",
 		"info": "markdown/ld/nt_ld_06.md"
 	},
 	{
