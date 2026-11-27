@@ -5832,7 +5832,7 @@
 /area/station/hallway/primary/tram/right)
 "ccJ" = (
 /obj/effect/turf_decal/sand/plating,
-/obj/machinery/portable_atmospherics/canister/air,
+/obj/effect/spawner/random/engineering/canister,
 /turf/open/floor/plating,
 /area/station/maintenance/aft/greater)
 "ccK" = (
