@@ -644,6 +644,10 @@
 	armour_penetration = 40
 	wound_falloff_tile = -1
 
+/obj/projectile/bullet/a50ae/lowpower
+	name = ".50AE special +P bullet"
+	damage = 35
+
 //MARK: Shotgun shells
 /obj/projectile/bullet/shotgun_breaching/on_hit(atom/target, blocked = 0, pierce_hit)
 	if(istype(target, /obj/structure/blob) || istype(target, /obj/structure/carp_rift) || istype(target, /obj/vehicle))

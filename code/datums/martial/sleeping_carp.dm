@@ -262,8 +262,8 @@
 		span_danger("[capitalize(carp_user.declent_ru(NOMINATIVE))] без каких-либо усилий отбивает [hitting_projectile.declent_ru(ACCUSATIVE)]! [capitalize(carp_user.ru_p_they())] может отражать пули голыми руками!"),
 		span_userdanger("Вы отражаете [hitting_projectile.declent_ru(ACCUSATIVE)]!"),
 	)
-	playsound(carp_user, SFX_BULLET_MISS, 75, TRUE)
-	hitting_projectile.firer = carp_user
+	playsound(carp_user, /datum/sound_effect/bullet_miss, 75, TRUE)
+	hitting_projectile.set_firer(carp_user)
 	hitting_projectile.set_angle(rand(0, 360))//SHING
 	return COMPONENT_BULLET_PIERCED
 

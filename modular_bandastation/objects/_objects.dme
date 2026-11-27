@@ -64,6 +64,7 @@
 #include "code/items/clothing/suits/wintercoats.dm"
 #include "code/items/clothing/suits/carnival.dm"
 #include "code/items/clothing/under/under.dm"
+#include "code/items/clothing/under/inferno.dm"
 #include "code/items/clothing/under/carnival.dm"
 #include "code/items/clothing/under/jobs/blueshield.dm"
 #include "code/items/clothing/under/jobs/centcom.dm"
@@ -135,3 +136,7 @@
 #include "code/structures/crates_lockers/closets/secure/centcom.dm"
 
 #include "code/mecha/mecha.dm"
+
+#include "code/structures/cargo_shelf/cargo_shelf.dm"
+#include "code/structures/cargo_shelf/cargo_shelf_part.dm"
+#include "code/structures/cargo_shelf/cargo_shelf_crafting.dm"

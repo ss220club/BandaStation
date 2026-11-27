@@ -76,7 +76,7 @@
 	energy blast. While the heat and power drain limit it to one use, it can still allow an operator to engage targets that ballistic ammunition \
 	would have difficulty with."
 	icon_state = "pshell"
-	projectile_type = /obj/projectile/beam/pulse/shotgun
+	projectile_type = /obj/projectile/beam/laser/pulse/shotgun
 	custom_materials = list(/datum/material/iron = SHEET_MATERIAL_AMOUNT * 0.8, /datum/material/glass = SHEET_MATERIAL_AMOUNT * 0.65, /datum/material/uranium = SMALL_MATERIAL_AMOUNT * 0.6)
 
 /obj/item/ammo_casing/shotgun/frag12
@@ -97,9 +97,8 @@
 
 /obj/item/ammo_casing/shotgun/buckshot/old
 	projectile_type = /obj/projectile/bullet/pellet/shotgun_buckshot/old
-	can_misfire = TRUE
 	misfire_increment = 2
-	integrity_damage = 4
+	casing_pressure = AMMO_CASING_PRESSURE_EXTREME //Little too much powder in there
 
 /obj/item/ammo_casing/shotgun/buckshot/old/fire_casing(atom/target, mob/living/user, params, distro, quiet, zone_override, spread, atom/fired_from)
 	. = ..()

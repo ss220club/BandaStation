@@ -1,0 +1,4 @@
+author: "PetyaFX"
+delete-after: True
+changes:
+  - bugfix: "Язык зомби теперь корректно обрабатывает кириллицу."

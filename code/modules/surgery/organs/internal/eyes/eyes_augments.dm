@@ -619,6 +619,7 @@
 			COMSIG_QDELETING,
 			COMSIG_ATOM_UPDATE_APPEARANCE,
 			COMSIG_LIVING_POST_UPDATE_TRANSFORM,
+			COMSIG_LIVING_CHAT_INDICATOR_UPDATED,
 			COMSIG_MOB_EQUIPPED_ITEM,
 			COMSIG_MOB_UNEQUIPPED_ITEM,
 			COMSIG_LIVING_UPDATE_OFFSETS,
@@ -682,6 +683,7 @@
 		RegisterSignal(source, COMSIG_ATOM_NO_LONGER_PULLED, PROC_REF(refresh_overlay))
 		RegisterSignal(source, COMSIG_LIVING_GET_PULLED, PROC_REF(refresh_overlay))
 		// BANDASTATION EDIT END: Fix image pos after grab
+		RegisterSignal(source, COMSIG_LIVING_CHAT_INDICATOR_UPDATED, PROC_REF(refresh_overlay))
 
 	mob_overlays[source] = make_overlay(source)
 	owner.client?.images |= mob_overlays[source]

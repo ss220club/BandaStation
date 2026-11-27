@@ -5,4 +5,5 @@
 	value = 8
 	mob_trait = TRAIT_SELF_AWARE
 	medical_record_text = "Пациент демонстрирует удивительную способность к самодиагностике."
+	mail_weight = 1
 	mail_goodies = list(/obj/item/clothing/neck/stethoscope, /obj/item/skillchip/entrails_reader)

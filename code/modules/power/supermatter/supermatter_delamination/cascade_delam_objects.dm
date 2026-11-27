@@ -142,7 +142,7 @@
 /obj/cascade_portal/Bumped(atom/movable/hit_object)
 	consume(hit_object)
 	new /obj/effect/particle_effect/sparks(loc)
-	playsound(loc, SFX_SPARKS, 50, TRUE, SHORT_RANGE_SOUND_EXTRARANGE)
+	playsound(loc, /datum/sound_effect/sparks, 50, TRUE, SHORT_RANGE_SOUND_EXTRARANGE)
 
 /**
  * Proc to consume the objects colliding with the portal
@@ -172,7 +172,7 @@
 		consumed_mob.flash_act(1, TRUE, TRUE)
 
 		new /obj/effect/particle_effect/sparks(consumed_object)
-		playsound(consumed_object, SFX_SPARKS, 50, TRUE, SHORT_RANGE_SOUND_EXTRARANGE)
+		playsound(consumed_object, /datum/sound_effect/sparks, 50, TRUE, SHORT_RANGE_SOUND_EXTRARANGE)
 	else if(isitem(consumed_object))
 		consumed_object.visible_message(span_danger("[capitalize(consumed_object.declent_ru(NOMINATIVE))] ударяется о [src.declent_ru(ACCUSATIVE)] и исчезает из виду."), null,
 			span_hear("Вы слышите громкий треск, когда небольшое искажение проходит сквозь вас."))

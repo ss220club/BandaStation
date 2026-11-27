@@ -16,7 +16,7 @@
 	throw_range = 5
 	sharpness = SHARP_EDGED
 	w_class = WEIGHT_CLASS_SMALL
-	hitsound = SFX_SWING_HIT
+	hitsound = /datum/sound_effect/swing_hit
 	armour_penetration = 35
 	light_system = OVERLAY_LIGHT
 	light_range = 6 //TWICE AS BRIGHT AS A REGULAR ESWORD
@@ -40,7 +40,7 @@
 	var/list/possible_colors = list("red", "blue", "green", "purple")
 	// BANDASTATION EDIT START
 	var/hit_wield = 'sound/items/weapons/blade1.ogg'
-	var/hit_unwield = SFX_SWING_HIT
+	var/hit_unwield = /datum/sound_effect/swing_hit
 	var/bypass_nodrop = FALSE
 	// BANDASTATION EDIT END
 

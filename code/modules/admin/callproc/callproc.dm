@@ -103,7 +103,7 @@ ADMIN_VERB(advanced_proc_call, R_DEBUG, "Advanced ProcCall", "Call a proc on any
 	var/targetselected = FALSE
 	var/returnval
 
-	switch(tgui_alert(usr,"Proc owned by something?",,list("Yes","No")))
+	switch(alert(usr, "Proc owned by something?", "", "Yes", "No")) // BANDASTATION EDIT - Native dialog: a TGUI confirmation can be forged by a script in the client
 		if("Yes")
 			targetselected = TRUE
 			var/list/value = vv_get_value(default_class = VV_ATOM_REFERENCE, classes = list(VV_ATOM_REFERENCE, VV_DATUM_REFERENCE, VV_MOB_REFERENCE, VV_CLIENT, VV_MARKED_DATUM, VV_TEXT_LOCATE, VV_PROCCALL_RETVAL))

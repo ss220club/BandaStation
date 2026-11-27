@@ -8,6 +8,7 @@
     - /obj
   skip_files:
     - _maps/map_files/tramstation/maintenance_modules
+    - _maps/bandastation/automapper/templates/tramstation/maintenance_modules # BANDASTATION EDIT: skip maint modules
     - _maps/modular_generic
     - _maps/shuttles/emergency/emergency_scrapheap
     - _maps/templates

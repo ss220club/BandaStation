@@ -431,6 +431,14 @@ GAME_VERB_SRC(/obj/item/paper, rename, usr, "Rename paper", null)
 		return
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
+		var/list/writing_info = get_viewer_writing_implement_details(user)
+		if(writing_info)
+			add_writer(user, writing_info, update = FALSE)
+
+		ui = new(user, src, "PaperSheet", name)
+		if(!ui.open())
+			ui_close(user)
+			return
 		/**
 		 * these signals are for checking whether the ui viewer is holding a writing tool.
 		 * (whether they are holding a writing tool matters for the state of the ui)
@@ -445,12 +453,7 @@ GAME_VERB_SRC(/obj/item/paper, rename, usr, "Rename paper", null)
 			COMSIG_MOB_SWAP_HANDS,
 			COMSIG_MOB_TRANSFORMING_ITEM, // specifically for pens
 		), PROC_REF(viewer_writing_state_change))
-		var/list/writing_info = get_viewer_writing_implement_details(user)
-		if(writing_info)
-			add_writer(user, writing_info, update = FALSE)
-
-		ui = new(user, src, "PaperSheet", name)
-		ui.open()
+		RegisterSignal(user, COMSIG_MOB_LOGOUT, TYPE_PROC_REF(/datum, ui_close))
 		// please see the above comment if you want to re-enable autoupdate
 		ui.set_autoupdate(FALSE)
 
@@ -463,6 +466,7 @@ GAME_VERB_SRC(/obj/item/paper, rename, usr, "Rename paper", null)
 		COMSIG_MOB_EQUIPPED_ITEM,
 		COMSIG_MOB_SWAP_HANDS,
 		COMSIG_MOB_TRANSFORMING_ITEM,
+		COMSIG_MOB_LOGOUT,
 	))
 
 /// Generically check if we are holding a writing tool to update our writer status
@@ -672,7 +676,13 @@ GAME_VERB_SRC(/obj/item/paper, rename, usr, "Rename paper", null)
 			// Safe to assume there are writing implement details as user.can_write(...) fails with an invalid writing implement.
 			var/writing_implement_data = holding.get_writing_implement_details()
 
-			var/datum/paper_input/target_paper_input = locate(params["paper_input_ref"])
+			// BANDASTATION EDIT START - The ref comes from the client, only inputs of this paper may be written
+			var/datum/paper_input/target_paper_input
+			for(var/datum/paper_input/root as anything in raw_text_inputs)
+				target_paper_input = root.find_input_by_ref(params["paper_input_ref"])
+				if(target_paper_input)
+					break
+			// BANDASTATION EDIT END
 			var/field_id = text2num(params["field_id"])
 
 			var/successful_input = FALSE
@@ -690,7 +700,7 @@ GAME_VERB_SRC(/obj/item/paper, rename, usr, "Rename paper", null)
 			if(!successful_input)
 				return FALSE
 
-			playsound(src, SFX_WRITING_PEN, 50, TRUE, SHORT_RANGE_SOUND_EXTRARANGE, SOUND_FALLOFF_EXPONENT + 3, ignore_walls = FALSE)
+			playsound(src, /datum/sound_effect/writing_pen, 50, TRUE, SHORT_RANGE_SOUND_EXTRARANGE, SOUND_FALLOFF_EXPONENT + 3, ignore_walls = FALSE)
 
 			log_paper("[key_name(user)] wrote to [name]: \"[paper_input]\"")
 			to_chat(user, "You have added to your paper masterpiece!");
@@ -791,6 +801,17 @@ GAME_VERB_SRC(/obj/item/paper, rename, usr, "Rename paper", null)
 		UNTYPED_LIST_ADD(children_as_lists, child.to_list(include_ref))
 
 	return children_as_lists
+
+// BANDASTATION ADDITION START - Resolves a client-provided ref to an input of this tree only
+/datum/paper_input/proc/find_input_by_ref(input_ref)
+	if(REF(src) == input_ref)
+		return src
+	for(var/datum/paper_input/child as anything in children)
+		var/datum/paper_input/match = child.find_input_by_ref(input_ref)
+		if(match)
+			return match
+	return null
+// BANDASTATION ADDITION END
 
 /datum/paper_input/proc/add_child_to_field(datum/paper_input/new_child, input_field_id)
 	var/regex/input_field_regex = new(@"\[input_field(?:\]|\s+autofill_type=\w+\])", "gm")

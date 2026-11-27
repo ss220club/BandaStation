@@ -52,11 +52,6 @@
 	. = ..()
 	AddComponent(/datum/component/reskinable_item, /datum/atom_skin/ladon)
 
-/obj/item/gun/ballistic/automatic/pistol/pdh/ladon/blueshield
-	name = "PDH-A1-M 'Ladon'"
-	desc = parent_type::desc + "<br>Модифицированный для стрельбы с уменьшенной летальной силой."
-	projectile_damage_multiplier = 0.6
-
 /datum/atom_skin/ladon
 	abstract_type = /datum/atom_skin/ladon
 	change_base_icon_state = TRUE
@@ -76,7 +71,7 @@
 
 /obj/item/gun/ballistic/automatic/pistol/pdh/hos
 	name = "PDH-A2-NR 'Osprey'"
-	desc = parent_type::desc + "<br>Модифицированный 'Osprey' под более распространенный калибр .357 с уменьшенной летальной силой."
+	desc = parent_type::desc + "<br>Модифицированный 'Osprey' под более распространенный калибр .357 с уменьшенной летальной силой. Часто выдается в качестве личного оружия главы службы безопасности на научных объектах Нанотрейзен."
 	icon_state = "pdh"
 	projectile_damage_multiplier = 0.5
 	accepted_magazine_type = /obj/item/ammo_box/magazine/c357

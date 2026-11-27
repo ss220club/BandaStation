@@ -567,13 +567,6 @@ required_map = "tramstation.dmm"
 coordinates = [112, 85, 2]
 trait_name = "Station"
 
-[templates.tramstation_ce_photocopier]
-map_files = ["tramstation_ce_photocopier.dmm"]
-directory = "_maps/bandastation/automapper/templates/tramstation/"
-required_map = "tramstation.dmm"
-coordinates = [123, 87, 1]
-trait_name = "Station"
-
 [templates.tramstation_rd_photocopier]
 map_files = ["tramstation_rd_photocopier.dmm"]
 directory = "_maps/bandastation/automapper/templates/tramstation/"

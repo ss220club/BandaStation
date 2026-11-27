@@ -62,7 +62,7 @@
 	if(ratio >= cult_risen_threshold && !cult_risen) /// BANDASTATION EDIT - Cult thresholds rebalance
 		for(var/datum/mind/mind as anything in members)
 			if(mind.current)
-				SEND_SOUND(mind.current, sound(SFX_HALLUCINATION_I_SEE_YOU)) /// BANDASTATION EDIT - Cult Sounds
+				SEND_SOUND(mind.current, sound(/datum/sound_effect/hallucination_i_see_you)) /// BANDASTATION EDIT - Cult Sounds
 				to_chat(mind.current, span_cult_large(span_warning("Покров слабеет с ростом культа - ваши глаза начинают светиться...")))
 				mind.current.AddElement(/datum/element/cult_eyes)
 		cult_risen = TRUE
@@ -71,7 +71,7 @@
 	if(ratio >= cult_ascended_threshold && !cult_ascendent) /// BANDASTATION EDIT - Cult thresholds rebalance
 		for(var/datum/mind/mind as anything in members)
 			if(mind.current)
-				SEND_SOUND(mind.current, sound(SFX_HALLUCINATION_I_M_HERE)) /// BANDASTATION EDIT - Cult Sounds
+				SEND_SOUND(mind.current, sound(/datum/sound_effect/hallucination_i_m_here)) /// BANDASTATION EDIT - Cult Sounds
 				to_chat(mind.current, span_cult_large(span_warning("Ваш культ набирает силу, и приближается красная жатва - вы не сможете долго скрывать свою истинную природу!!")))
 				mind.current.apply_status_effect(/datum/status_effect/cult_halo)
 		cult_ascendent = TRUE
@@ -185,7 +185,7 @@
 			continue
 
 		to_chat(cultist.current, span_bold(span_cult_large("[marker] отмечает [blood_target] в [target_area] как главный приоритет культа. Доберитесь туда немедленно!")))
-		SEND_SOUND(cultist.current, sound(SFX_HALLUCINATION_OVER_HERE, 0, 1, 75))
+		SEND_SOUND(cultist.current, sound(/datum/sound_effect/hallucination_over_here, 0, 1, 75))
 		cultist.current.client.images += blood_target_image
 		if (cultist.current.hud_used)
 			var/atom/movable/screen/navigate_arrow/arrow = cultist.current.hud_used.add_screen_object(/atom/movable/screen/navigate_arrow, HUD_CULTIST_ARROW, HUD_GROUP_INFO, update_screen = TRUE)

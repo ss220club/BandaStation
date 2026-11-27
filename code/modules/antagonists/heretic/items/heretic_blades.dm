@@ -63,7 +63,7 @@
 		user.balloon_alert(user, "невозможно сбежать!")
 		if(escape_attempts > 2)
 			to_chat(user, span_hypnophrase(span_big("Трусливые овцы будут зарезаны!")))
-			playsound(src, SFX_SHATTER, 70, TRUE)
+			playsound(src, /datum/sound_effect/shatter, 70, TRUE)
 			var/obj/item/bodypart/to_remove = user.get_active_hand()
 			to_remove.dismember()
 			deltimer(escape_timer)
@@ -91,7 +91,7 @@
 			to_chat(user, span_warning("Вы разбиваете [declent_ru(ACCUSATIVE)], но ваша мольба остается без ответа."))
 	else
 		to_chat(user,span_warning("Вы разбиваете [declent_ru(ACCUSATIVE)]."))
-	playsound(src, SFX_SHATTER, 70, TRUE) //copied from the code for smashing a glass sheet onto the ground to turn it into a shard
+	playsound(src, /datum/sound_effect/shatter, 70, TRUE) //copied from the code for smashing a glass sheet onto the ground to turn it into a shard
 	qdel(src)
 
 /obj/item/melee/sickly_blade/afterattack(atom/target, mob/user, list/modifiers, list/attack_modifiers)
@@ -276,7 +276,7 @@
 	if(prob(15))
 		to_chat(user, span_cult_large(pick("\"Нетронутый разум? Забавно.\"", "\" Я думаю, что не стоит прилагать усилий, чтобы остановить тебя.\"", "\"Продолжай. Мне всё равно.\"", "\"Скоро, ты будешь принадлежать мне.\"")))
 		user.apply_damage(5, BURN, user.get_active_hand())
-		playsound(src, SFX_SEAR, 25, TRUE)
+		playsound(src, /datum/sound_effect/sear, 25, TRUE)
 		to_chat(user, span_danger("Ваша рука обжигается.")) // Nar nar might not care but their essence still doesn't like you
 	else if(prob(15))
 		to_chat(user, span_big(span_hypnophrase("LW'NAFH'NAHOR UH'ENAH'YMG EPGOKA AH NAFL MGEMPGAH'EHYE")))

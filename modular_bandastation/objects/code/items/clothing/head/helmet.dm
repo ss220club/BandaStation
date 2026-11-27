@@ -87,8 +87,8 @@
 	alt_toggle_message = "You push down the NVG on your helmet."
 	actions_types = list(/datum/action/item_action/toggle)
 
-	visor_toggle_up_sound = SFX_VISOR_UP
-	visor_toggle_down_sound = SFX_VISOR_DOWN
+	visor_toggle_up_sound = /datum/sound_effect/visor_up
+	visor_toggle_down_sound = /datum/sound_effect/visor_down
 
 	var/nvg_active = FALSE
 

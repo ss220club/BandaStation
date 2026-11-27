@@ -113,7 +113,7 @@
 	/// Cyclelinking for airlocks that aren't on the same x or y coord as the target.
 	var/closeOtherId
 	var/obj/machinery/door/airlock/closeOther
-	var/list/obj/machinery/door/airlock/close_others = list()
+	var/list/obj/machinery/door/airlock/close_others
 	var/obj/item/electronics/airlock/electronics
 	COOLDOWN_DECLARE(shockCooldown)
 	/// Any papers pinned to the airlock
@@ -122,7 +122,6 @@
 	var/obj/item/seal
 	/// Controls if the door closes quickly or not. FALSE = the door autocloses in 1.5 seconds, TRUE = 8 seconds - see autoclose_in()
 	var/normalspeed = TRUE
-	var/cutAiWire = FALSE
 	var/autoname = FALSE
 	var/doorOpen = 'sound/machines/airlock/airlock.ogg'
 	var/doorClose = 'sound/machines/airlock/airlockclose.ogg'
@@ -217,10 +216,8 @@
 /obj/machinery/door/airlock/proc/update_other_id()
 	for(var/obj/machinery/door/airlock/Airlock as anything in SSmachines.get_machines_by_type_and_subtypes(/obj/machinery/door/airlock))
 		if(Airlock.closeOtherId == closeOtherId && Airlock != src)
-			if(!(Airlock in close_others))
-				close_others += Airlock
-			if(!(src in Airlock.close_others))
-				Airlock.close_others += src
+			LAZYOR(close_others, Airlock)
+			LAZYOR(Airlock.close_others, src)
 
 /obj/machinery/door/airlock/proc/cyclelinkairlock()
 	if (cyclelinkedairlock)
@@ -310,8 +307,8 @@
 	if(close_others) //remove this airlock from the list of every linked airlock
 		closeOtherId = null
 		for(var/obj/machinery/door/airlock/otherlock as anything in close_others)
-			otherlock.close_others -= src
-		close_others.Cut()
+			LAZYREMOVE(otherlock.close_others, src)
+		LAZYNULL(close_others)
 	QDEL_NULL(note)
 	QDEL_NULL(seal)
 	var/datum/atom_hud/data/diagnostic/diag_hud = GLOB.huds[DATA_HUD_DIAGNOSTIC]
@@ -334,7 +331,7 @@
 	if(issilicon(user) || !iscarbon(user))
 		return ..()
 
-	if(isElectrified() && shock(user, 100))
+	if(isElectrified() && shock(user, allow_modifiers = FALSE))
 		return
 
 	if(SEND_SIGNAL(user, COMSIG_CARBON_BUMPED_AIRLOCK_OPEN, src) & STOP_BUMP)
@@ -483,7 +480,7 @@
 /obj/machinery/door/airlock/proc/regainBackupPower()
 	set_backup_outage(0 SECONDS)
 
-/obj/machinery/door/airlock/shock(mob/living/shocking, chance, shock_source, siemens_coeff)
+/obj/machinery/door/airlock/shock(mob/living/shocking, chance, shock_source, siemens_coeff, allow_modifiers)
 	if(!hasPower()) // unpowered, no shock
 		return FALSE
 	if(!isliving(shocking))
@@ -877,7 +874,7 @@
 			attack_ai(user) //bring up airlock dialog
 
 /obj/machinery/door/airlock/attack_animal(mob/user, list/modifiers)
-	if(isElectrified() && shock(user, 100))
+	if(isElectrified() && shock(user, allow_modifiers = FALSE))
 		return
 	return ..()
 
@@ -889,7 +886,7 @@
 	if(.)
 		return
 	if(!HAS_SILICON_ACCESS(user))
-		if(isElectrified() && shock(user, 100))
+		if(isElectrified() && shock(user, allow_modifiers = FALSE))
 			return
 
 	if(ishuman(user) && prob(40) && density)
@@ -1089,7 +1086,7 @@
 	return ITEM_INTERACT_SUCCESS
 
 /obj/machinery/door/airlock/attacked_by(obj/item/attacking_item, mob/living/user, list/modifiers, list/attack_modifiers)
-	if(!HAS_SILICON_ACCESS(user) && isElectrified() && (attacking_item.obj_flags & CONDUCTS_ELECTRICITY) && shock(user, 75))
+	if(!HAS_SILICON_ACCESS(user) && isElectrified() && (attacking_item.obj_flags & CONDUCTS_ELECTRICITY) && shock(user, 75, allow_modifiers = FALSE))
 		return ATTACK_FAILED
 	return ..()
 
@@ -1293,7 +1290,7 @@
 		return
 
 	var/check_electrified = isElectrified() //setting this so we can check if the mob got shocked during the do_after below
-	if(check_electrified && shock(user,100))
+	if(check_electrified && shock(user, allow_modifiers = FALSE))
 		return //it's like sticking a fork in a power socket
 
 	if(!density)//already open
@@ -1317,7 +1314,7 @@
 
 	prying_so_hard = FALSE
 
-	if(check_electrified && shock(user, 100))
+	if(check_electrified && shock(user, allow_modifiers = FALSE))
 		return
 
 	open(BYPASS_DOOR_CHECKS, user)
@@ -1555,7 +1552,7 @@
 	loseBackupPower()
 
 /obj/machinery/door/airlock/attack_alien(mob/living/carbon/alien/adult/user, list/modifiers)
-	if(isElectrified() && shock(user, 100)) //Mmm, fried xeno!
+	if(isElectrified() && shock(user, allow_modifiers = FALSE)) //Mmm, fried xeno!
 		add_fingerprint(user)
 		return
 	if(!density) //Already open
@@ -2495,7 +2492,7 @@
 			new /obj/effect/temp_visual/cult/sac(loc)
 			var/atom/throwtarget
 			throwtarget = get_edge_target_turf(src, get_dir(src, get_step_away(L, src)))
-			SEND_SOUND(L, sound(SFX_HALLUCINATION_TURN_AROUND,0,1,50))
+			SEND_SOUND(L, sound(/datum/sound_effect/hallucination_turn_around,0,1,50))
 			flash_color(L, flash_color=COLOR_CULT_RED, flash_time=20)
 			L.Paralyze(40)
 			L.throw_at(throwtarget, 5, 1)

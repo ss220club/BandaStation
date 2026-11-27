@@ -197,7 +197,7 @@
 
 ADMIN_VERB(sdql2_query, R_DEBUG, "SDQL2 Query", "Run a SDQL2 query.", ADMIN_CATEGORY_DEBUG)
 	VERB_ARG(query_text, VERB_ARG_TYPE_MESSAGE, VERB_ARG_SOURCE_INPUT)
-	var/prompt = tgui_alert(user, "Run SDQL2 Query?", "SDQL2", list("Yes", "Cancel"))
+	var/prompt = alert(user, "Run SDQL2 Query?", "SDQL2", "Yes", "Cancel") // BANDASTATION EDIT - Native dialog: a TGUI confirmation can be forged by a script in the client
 	if (prompt != "Yes")
 		return
 	var/list/results = world.SDQL2_query(query_text, key_name_admin(user), "[key_name(user)]")
@@ -209,7 +209,9 @@ ADMIN_VERB(sdql2_query, R_DEBUG, "SDQL2 Query", "Run a SDQL2 query.", ADMIN_CATE
 /world/proc/SDQL2_query(query_text, log_entry1, log_entry2, silent = FALSE)
 	var/query_log = "executed SDQL query(s): \"[query_text]\"."
 	if(!silent)
-		message_admins("[log_entry1] [query_log]")
+		// BANDASTATION EDIT START - Query text would render as HTML in every admin chat
+		message_admins("[log_entry1] [html_encode(query_log)]")
+		// BANDASTATION EDIT END
 	query_log = "[log_entry2] [query_log]"
 	usr.log_message(query_log, LOG_ADMIN)
 	NOTICE(query_log)

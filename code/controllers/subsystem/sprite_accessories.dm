@@ -101,6 +101,7 @@ SUBSYSTEM_DEF(accessories) // just 'accessories' for brevity
 	feature_list[FEATURE_TAIL_FISH] = INIT_ACCESSORY(/datum/sprite_accessory/tails/fish)
 	feature_list[FEATURE_TAIL_MONKEY] = INIT_ACCESSORY(/datum/sprite_accessory/tails/monkey)
 	feature_list[FEATURE_TAIL_XENO] = INIT_ACCESSORY(/datum/sprite_accessory/tails/xeno)
+	feature_list[FEATURE_TAIL_MOUSE] = INIT_ACCESSORY(/datum/sprite_accessory/tails/mouse)
 
 	/// BANDASTATION ADDITION START - Species
 	//  vulpkanin

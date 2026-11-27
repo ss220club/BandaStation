@@ -75,6 +75,10 @@ SUBSYSTEM_DEF(ticker)
 	var/atom/movable/screen/reboot_timer/reboot_hud
 	/// ID of round reboot timer, if it exists
 	var/reboot_timer = null
+	/// Assoc list of ckey to list of jobs to what priority they are ready for
+	var/list/ready_jobs = list()
+	/// Formatted version of the ready jobs for display to the players
+	var/list/reported_jobs = list()
 
 /datum/controller/subsystem/ticker/Initialize()
 	var/list/provisional_title_music = flist("[global.config.directory]/title_music/sounds/")
@@ -859,6 +863,28 @@ SUBSYSTEM_DEF(ticker)
 	if(override)
 		for(var/mob/dead/new_player/new_player as anything in GLOB.new_player_list)
 			new_player?.client.playtitlemusic()
+
+/datum/controller/subsystem/ticker/proc/update_aggregate_ready_report()
+	var/list/job_to_score = list()
+	for(var/ckey, job_info in SSticker.ready_jobs)
+		for(var/job_title, priority in job_info)
+			job_to_score[job_title] += (priority == JP_HIGH ? 1 : priority == JP_MEDIUM ? 0.5 : 0.125)
+
+	reported_jobs.Cut()
+	for(var/job_title, score in job_to_score)
+		// only one or two people have the job on "low", so the chance of it showing up is, well, low.
+		// low enough that we'll just skip reporting it entirely, to avoid useless spam.
+		if(score < 0.5)
+			continue
+
+		var/datum/job/job_datum = SSjob.get_job(job_title)
+		// can happen from removed jobs
+		if(isnull(job_datum))
+			continue
+
+		reported_jobs[job_datum] = vector(floor(score * 0.5), ceil(score))
+
+	sortTim(reported_jobs, GLOBAL_PROC_REF(cmp_job_display_with_departments_asc))
 
 #undef ROUND_START_MUSIC_LIST
 #undef SS_TICKER_TRAIT

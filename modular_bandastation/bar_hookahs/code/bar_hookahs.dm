@@ -308,7 +308,7 @@
 
 	QDEL_LIST(food_items)
 	visible_message(span_warning("[capitalize(src.declent_ru(NOMINATIVE))] с треском разлетается на осколки!"))
-	playsound(src, SFX_SHATTER, 50)
+	playsound(src, /datum/sound_effect/shatter, 50)
 	return ..()
 
 /obj/item/hookah/pickup(mob/user)
