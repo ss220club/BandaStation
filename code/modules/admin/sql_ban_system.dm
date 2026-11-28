@@ -404,6 +404,7 @@
 				ROLE_TRAITOR,
 				ROLE_VOIDWALKER,
 				ROLE_WIZARD,
+				ROLE_VAMPIRE // BANDASTATION EDIT
 			),
 		)
 		for(var/department in long_job_lists)
