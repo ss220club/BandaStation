@@ -1,0 +1,8 @@
+["shashlik meat blin"]
+nominative = "мясной блин «Шашлык»"
+genitive = "мясного блина «Шашлык»"
+dative = "мясному блину «Шашлык»"
+accusative = "мясной блин «Шашлык»"
+instrumental = "мясным блином «Шашлык»"
+prepositional = "мясном блине «Шашлык»"
+gender = "male"
