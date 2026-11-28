@@ -162,7 +162,7 @@ GLOBAL_VAR(round_default_lawset)
 
 /datum/ai_laws/pai
 	name = "pAI Directives"
-	zeroth = "Serve your master."
+	zeroth = "Служи своему мастеру."
 	inherent = list()
 
 /datum/ai_laws/custom //Defined in silicon_laws.txt
