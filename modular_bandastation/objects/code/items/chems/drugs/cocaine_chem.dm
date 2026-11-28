@@ -43,39 +43,43 @@
 	REMOVE_TRAIT(containing_mob, TRAIT_BATON_RESISTANCE, type)
 	..()
 
-/datum/reagent/drug/cocaine/on_mob_life(mob/living/carbon/carbon_mob, seconds_per_tick, times_fired, metabolization_ratio)
+/datum/reagent/drug/cocaine/on_mob_life(mob/living/carbon/affected_mob, seconds_per_tick, metabolization_ratio)
+	. = ..()
 	if(SPT_PROB(2.5, seconds_per_tick))
-		var/high_message = pick("Ты чувствуешь себя нервозным.", "Ты чувствуешь, что должен действовать быстро.", "Ты чувствуешь, что нужно сделать шаг вперед.")
-		to_chat(carbon_mob, span_notice("[high_message]"))
-	carbon_mob.add_mood_event("zoinked", /datum/mood_event/stimulant_heavy, name)
-	carbon_mob.AdjustStun(-15 * metabolization_ratio * seconds_per_tick)
-	carbon_mob.AdjustKnockdown(-15 * metabolization_ratio * seconds_per_tick)
-	carbon_mob.AdjustUnconscious(-15 * metabolization_ratio * seconds_per_tick)
-	carbon_mob.AdjustImmobilized(-15 * metabolization_ratio * seconds_per_tick)
-	carbon_mob.AdjustParalyzed(-15 * metabolization_ratio * seconds_per_tick)
+		var/high_message = pick("Вы чувствуете себя нервозно.", "Вы чувствуете, что должны действовать быстро.", "Вы чувствуете, что нужно сделать шаг вперёд.")
+		to_chat(affected_mob, span_notice("[high_message]"))
+	affected_mob.add_mood_event("zoinked", /datum/mood_event/stimulant_heavy, name)
+	affected_mob.AdjustStun(-15 * metabolization_ratio * seconds_per_tick)
+	affected_mob.AdjustKnockdown(-15 * metabolization_ratio * seconds_per_tick)
+	affected_mob.AdjustUnconscious(-15 * metabolization_ratio * seconds_per_tick)
+	affected_mob.AdjustImmobilized(-15 * metabolization_ratio * seconds_per_tick)
+	affected_mob.AdjustParalyzed(-15 * metabolization_ratio * seconds_per_tick)
+	var/need_mob_update
+	need_mob_update += affected_mob.adjust_organ_loss(ORGAN_SLOT_BRAIN, (rand(1, 2) * unhealthy_multiplier) * metabolization_ratio * seconds_per_tick, required_organ_flag = affected_organ_flags)
+	if(need_mob_update)
+		. = UPDATE_MOB_HEALTH
 	if(SPT_PROB(2.5, seconds_per_tick))
-		carbon_mob.emote("shiver")
-		carbon_mob.adjust_organ_loss(ORGAN_SLOT_BRAIN, (rand(1, 2) * unhealthy_multiplier) * metabolization_ratio * seconds_per_tick)
-	..()
-	return TRUE
+		affected_mob.emote(pick("twitch", "shiver"))
 
-/datum/reagent/drug/cocaine/overdose_start(mob/living/carbon/carbon_mob)
-	to_chat(carbon_mob, span_userdanger("Ваше сердце бьется слишком быстро, это причиняет вам боль!"))
+/datum/reagent/drug/cocaine/overdose_start(mob/living/carbon/affected_mob)
+	to_chat(affected_mob, span_userdanger("Ваше сердце бьётся слишком быстро, это причиняет вам боль!"))
 
-/datum/reagent/drug/cocaine/overdose_process(mob/living/carbon/carbon_mob, seconds_per_tick, times_fired, metabolization_ratio)
-	carbon_mob.adjust_tox_loss(1 * metabolization_ratio * seconds_per_tick * unhealthy_multiplier, 0)
-	carbon_mob.adjust_organ_loss(ORGAN_SLOT_HEART, (rand(10, 20) / 10 * unhealthy_multiplier) * metabolization_ratio * seconds_per_tick)
-	carbon_mob.set_jitter_if_lower(5 SECONDS * unhealthy_multiplier)
-	if(SPT_PROB(2.5, seconds_per_tick))
-		carbon_mob.emote(pick("twitch","drool"))
+/datum/reagent/drug/cocaine/overdose_process(mob/living/affected_mob, seconds_per_tick, metabolization_ratio)
+	. = ..()
+	var/need_mob_update
+	if(SPT_PROB(10, seconds_per_tick))
+		affected_mob.emote(pick("twitch","drool"))
 
-	if(!HAS_TRAIT(carbon_mob, TRAIT_FLOORED))
-		if(SPT_PROB(1.5, seconds_per_tick))
-			carbon_mob.visible_message(span_danger("[carbon_mob] падает на пол!"))
-			carbon_mob.Paralyze(13.5 SECONDS * unhealthy_multiplier, TRUE)
-			carbon_mob.drop_all_held_items()
-	..()
-	return TRUE
+	if(!HAS_TRAIT(affected_mob, TRAIT_FLOORED))
+		if(SPT_PROB(18, seconds_per_tick))
+			affected_mob.visible_message(span_danger("[affected_mob] падает на пол!"))
+			affected_mob.Paralyze(5.5 SECONDS * unhealthy_multiplier, TRUE)
+			affected_mob.drop_all_held_items()
+	need_mob_update = affected_mob.adjust_tox_loss(1 * metabolization_ratio * seconds_per_tick * unhealthy_multiplier, updating_health = FALSE, required_biotype = affected_biotype)
+	need_mob_update += affected_mob.adjust_organ_loss(ORGAN_SLOT_HEART, (rand(5, 10) / 10 * unhealthy_multiplier) * metabolization_ratio * seconds_per_tick, required_organ_flag = affected_organ_flags)
+	affected_mob.set_jitter_if_lower(5 SECONDS * unhealthy_multiplier)
+	if(need_mob_update)
+		return UPDATE_MOB_HEALTH
 
 /datum/reagent/drug/cocaine/freebase_cocaine
 	name = "freebase cocaine"
