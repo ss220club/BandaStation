@@ -1,0 +1,8 @@
+["fine notice"]
+nominative = "уведомление о штрафе"
+genitive = "уведомления о штрафе"
+dative = "уведомлению о штрафе"
+accusative = "уведомление о штрафе"
+instrumental = "уведомлением о штрафе"
+prepositional = "уведомлении о штрафе"
+gender = "neuter"

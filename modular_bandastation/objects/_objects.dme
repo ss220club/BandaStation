@@ -16,6 +16,7 @@
 #include "code/items/instruments.dm"
 #include "code/items/material_pouch.dm"
 #include "code/items/papers.dm"
+#include "code/items/fines_pro.dm"
 #include "code/items/pen.dm"
 #include "code/items/pig.dm"
 #include "code/items/role_tablet_presets.dm"

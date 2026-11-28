@@ -1,5 +1,6 @@
 export type PaperContext = {
   // ui_static_data
+  compact_layout?: boolean; // BANDASTATION ADDITION - Compact reading mode for fine notices.
   default_pen_color: string;
   default_pen_font: string;
   max_length: number;
