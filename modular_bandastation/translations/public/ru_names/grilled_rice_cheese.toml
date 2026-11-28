@@ -1,0 +1,8 @@
+["grilled rice cheese sandwich"]
+nominative = "жареный рисовый сэндвич с сыром"
+genitive = "жареного рисового сэндвича с сыром"
+dative = "жареному рисовому сэндвичу с сыром"
+accusative = "жареный рисовый сэндвич с сыром"
+instrumental = "жареным рисовым сэндвичем с сыром"
+prepositional = "жареном рисовом сэндвиче с сыром"
+gender = "male"

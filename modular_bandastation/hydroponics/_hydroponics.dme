@@ -1,3 +1,5 @@
 #include "_hydroponics.dm"
 
 #include "code/biogenerator_designs.dm"
+#include "grown/skrell_seeds.dm"
+#include "plant_genes.dm"

@@ -1045,7 +1045,7 @@
 		/datum/reagent/consumable/nutriment/vitamin = 4,
 	)
 	tastes = list("beef" = 3, "sour cream" = 1, "salt" = 1, "pepper" = 1)
-	foodtypes = MEAT | VEGETABLES | DAIRY
+	foodtypes = MEAT | VEGETABLES | DAIRY | MUSHROOM // BANDASTATION ADDITION
 
 	w_class = WEIGHT_CLASS_SMALL
 	//basic ingredients, but a lot of them. just covering costs here
@@ -1063,7 +1063,7 @@
 		/datum/reagent/consumable/nutriment/vitamin = 6,
 	)
 	tastes = list("beef" = 3, "mushrooms" = 1, "pancetta" = 1)
-	foodtypes = MEAT | VEGETABLES | GRAIN
+	foodtypes = MEAT | VEGETABLES | GRAIN | MUSHROOM // BANDASTATION ADDITION
 	w_class = WEIGHT_CLASS_NORMAL
 	venue_value = FOOD_PRICE_EXOTIC
 	crafting_complexity = FOOD_COMPLEXITY_5
@@ -1082,7 +1082,7 @@
 		/datum/reagent/consumable/nutriment/vitamin = 2,
 	)
 	tastes = list("beef" = 3, "mushrooms" = 1, "pancetta" = 1)
-	foodtypes = MEAT | VEGETABLES | GRAIN
+	foodtypes = MEAT | VEGETABLES | GRAIN | MUSHROOM  // BANDASTATION ADDITION
 	w_class = WEIGHT_CLASS_SMALL
 	venue_value = FOOD_PRICE_NORMAL
 	crafting_complexity = FOOD_COMPLEXITY_5
@@ -1098,7 +1098,7 @@
 		/datum/reagent/consumable/nutriment/vitamin = 6,
 	)
 	tastes = list("beef" = 3, "mushrooms" = 1, "pancetta" = 1)
-	foodtypes = MEAT | VEGETABLES | NUTS
+	foodtypes = MEAT | VEGETABLES | NUTS | MUSHROOM  // BANDASTATION ADDITION
 	w_class = WEIGHT_CLASS_NORMAL
 	venue_value = FOOD_PRICE_EXOTIC
 	crafting_complexity = FOOD_COMPLEXITY_5
@@ -1117,7 +1117,7 @@
 		/datum/reagent/consumable/nutriment/vitamin = 2,
 	)
 	tastes = list("beef" = 3, "mushrooms" = 1, "pancetta" = 1)
-	foodtypes = MEAT | VEGETABLES | NUTS
+	foodtypes = MEAT | VEGETABLES | NUTS | MUSHROOM  // BANDASTATION ADDITION
 	w_class = WEIGHT_CLASS_SMALL
 	venue_value = FOOD_PRICE_NORMAL
 	crafting_complexity = FOOD_COMPLEXITY_5
@@ -1236,7 +1236,7 @@
 		/datum/reagent/consumable/nutriment/vitamin = 4,
 	)
 	tastes = list("sausage" = 1, "bacon" = 1, "egg" = 1, "tomato" = 1, "mushrooms" = 1, "bread" = 1, "beans" = 1)
-	foodtypes = MEAT|VEGETABLES|GRAIN|DAIRY|FRIED|BREAKFAST|EGG
+	foodtypes = MEAT|VEGETABLES|GRAIN|DAIRY|FRIED|BREAKFAST|EGG|MUSHROOM  // BANDASTATION ADDITION
 	w_class = WEIGHT_CLASS_SMALL
 	venue_value = FOOD_PRICE_EXOTIC
 	crafting_complexity = FOOD_COMPLEXITY_5

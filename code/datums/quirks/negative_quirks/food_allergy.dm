@@ -9,6 +9,7 @@ GLOBAL_LIST_INIT(possible_food_allergies, list(
 	"Морепродукты" = SEAFOOD,
 	"Сахар" = SUGAR,
 	"Овощи" = VEGETABLES,
+	"Грибы" = MUSHROOM,  // BANDASTATION ADDITION
 ))
 
 /datum/quirk/item_quirk/food_allergic
