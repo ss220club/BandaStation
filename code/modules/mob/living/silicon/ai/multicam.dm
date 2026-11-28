@@ -236,9 +236,14 @@ GLOBAL_DATUM(ai_camera_room_landmark, /obj/effect/landmark/ai_multicam_room)
 	else
 		start_multicam()
 
+// BANDASTATION ADD START - Перенос ИИ: документация изменённого API.
+/** Запускает многокамерный просмотр с учётом размещения ИИ в физическом ядре. */
+// BANDASTATION ADD END - Перенос ИИ
 /mob/living/silicon/ai/proc/start_multicam()
-	if(multicam_on || aiRestorePowerRoutine || !isturf(loc))
+	// BANDASTATION ADD START - Перенос ИИ: работа multicam из физического ядра.
+	if(multicam_on || aiRestorePowerRoutine || !in_network_core())
 		return
+	// BANDASTATION ADD END - Перенос ИИ
 	if(!GLOB.ai_camera_room_landmark)
 		to_chat(src, span_warning("This function is not available at this time."))
 		return

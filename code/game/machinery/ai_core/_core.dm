@@ -207,6 +207,9 @@ That prevents a few funky behaviors.
 			return FALSE
 	return TRUE
 
+// BANDASTATION ADD START - Перенос ИИ: документация изменённого API.
+/** Обрабатывает штатный перенос через intelliCard с проверкой направления и действительного содержимого носителя. */
+// BANDASTATION ADD END - Перенос ИИ
 /obj/structure/ai_core/transfer_ai(interaction, mob/user, mob/living/silicon/ai/AI, obj/item/aicard/card)
 	if(state != CORE_STATE_FINISHED || !..())
 		return
@@ -222,6 +225,9 @@ That prevents a few funky behaviors.
 		AI.set_control_disabled(FALSE)
 		AI.radio_enabled = TRUE
 		AI.forceMove(loc) // to replace the terminal.
+		// BANDASTATION ADD START - Перенос ИИ: подключение ИИ после загрузки с карты.
+		AI.initialize_decentralized_ai()
+		// BANDASTATION ADD END - Перенос ИИ
 		to_chat(AI, span_notice("You have been uploaded to a stationary terminal. Remote device connection restored."))
 		to_chat(user, "[span_boldnotice("Transfer successful")]: [AI.name] ([rand(1000,9999)].exe) installed and executed successfully. Local copy has been removed.")
 		card.AI = null
