@@ -54,7 +54,7 @@
 	savefile_key = "facial_style_name"
 	savefile_identifier = PREFERENCE_CHARACTER
 	category = PREFERENCE_CATEGORY_FEATURES
-	main_feature_name = "Лицевая растительность"
+	main_feature_name = "Борода" // BANDASTATION EDIT - Keep room for colour and paint buttons
 	should_generate_icons = TRUE
 	relevant_head_flag = HEAD_FACIAL_HAIR
 

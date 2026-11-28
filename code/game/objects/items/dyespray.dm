@@ -50,6 +50,19 @@
 		dye_organ(target, user)
 		return
 
+	// BANDASTATION ADDITION START - Pixel painting uses the same in-round dye tool
+	var/paint_mode = tgui_alert(user, "Как покрасить?", "Окрашивание", list("Градиент", "Рисунок"))
+	if(!paint_mode)
+		return
+	if(!user.can_perform_action(src, NEED_DEXTERITY) || !IsReachableBy(user) || !target.IsReachableBy(user))
+		return
+	if(paint_mode == "Рисунок")
+		human_target.open_hair_paint_editor(user, facial = what_to_dye == "Facial Hair", spray = src)
+		return
+	if(paint_mode != "Градиент")
+		return
+	// BANDASTATION ADDITION END
+
 	var/list/choices = what_to_dye == "Hair" ? SSaccessories.hair_gradients_list : SSaccessories.facial_hair_gradients_list
 	var/new_grad_style = tgui_input_list(user, "Choose a color pattern", "Character Preference", choices)
 	if(isnull(new_grad_style))
