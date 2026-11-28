@@ -126,8 +126,9 @@
 
 /obj/item/choice_beacon/weapon/security_pistol/generate_display_names()
 	selectable_gun_types = list(
-		"Пистолет GP-9 9x25мм" = /obj/item/storage/toolbox/guncase/ntcase/pistol/gp9/sec,
-		"Энергетический пистолет дизейблер" = /obj/item/gun/energy/disabler,
+		"МК-58 «Регламент»" = /obj/item/storage/toolbox/guncase/ntcase/pistol/sec_force/mk58,
+		"ПС-3 «Гюрза»" = /obj/item/storage/toolbox/guncase/ntcase/pistol/sec_force/viper,
+		"Энергетический пистолет дизейблер" = /obj/item/storage/toolbox/guncase/ntcase/pistol/disabler,
 	)
 	return selectable_gun_types
 
