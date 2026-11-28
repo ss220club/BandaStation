@@ -20,12 +20,6 @@
 	. = ..()
 	UnregisterSignal(remove_from, COMSIG_MOVABLE_MOVED)
 
-/datum/action/cooldown/spell/jaunt/shadow_walk/enter_jaunt(mob/living/jaunter, turf/loc_override)
-	var/obj/effect/dummy/phased_mob/shadow/shadow = ..()
-	if(istype(shadow))
-		shadow.light_max = light_threshold
-	return shadow
-
 /datum/action/cooldown/spell/jaunt/shadow_walk/can_cast_spell(feedback = TRUE)
 	. = ..()
 	if(!.)
@@ -62,6 +56,12 @@
 	COOLDOWN_DECLARE(light_step_cooldown)
 	/// Has the jaunter recently received a warning about light?
 	var/light_alert_given = FALSE
+	/// How long the jaunter can remain in light before being forced out
+	var/light_grace_period = 5 SECONDS
+	/// Remaining time before the jaunt is forcibly ended by light
+	var/light_time_remaining = 0
+	/// Last whole second shown in the light warning
+	var/last_light_second = 0
 
 /obj/effect/dummy/phased_mob/shadow/Initialize(mapload)
 	. = ..()
@@ -76,29 +76,29 @@
 	if(!jaunter || jaunter.loc != src)
 		qdel(src)
 		return
-
 	if(check_light_level(T))
-		eject_jaunter(TRUE)
-
-	if(!QDELETED(jaunter) && isliving(jaunter)) //heal in the dark
+		if(!light_time_remaining)
+			light_time_remaining = light_grace_period
+			last_light_second = CEILING(light_time_remaining / 10, 1)
+			to_chat(jaunter, span_warning("Ваша нематериальность искажается под светом и разрушится через [last_light_second] секунд."))
+		var/current_second = CEILING(light_time_remaining / 10, 1)
+		if(current_second != last_light_second)
+			last_light_second = current_second
+			to_chat(jaunter, span_warning("Ваша нематериальность искажается под светом и разрушится через [current_second] секунд."))
+		new /obj/effect/temp_visual/shadow_phase_smoke(T)
+		light_time_remaining -= seconds_per_tick
+		if(light_time_remaining <= 0)
+			eject_jaunter(TRUE)
+	else
+		light_time_remaining = 0
+		last_light_second = 0
+	if(!QDELETED(jaunter) && isliving(jaunter))
 		var/mob/living/living_jaunter = jaunter
 		living_jaunter.heal_overall_damage(brute = (healing_rate * seconds_per_tick), burn = (healing_rate * seconds_per_tick), required_bodytype = BODYTYPE_ORGANIC)
 
-/obj/effect/dummy/phased_mob/shadow/relaymove(mob/living/user, direction)
-	var/turf/oldloc = loc
-	. = ..()
-	if(loc != oldloc)
-		if(check_light_level(loc))
-			eject_jaunter(TRUE)
-
-/obj/effect/dummy/phased_mob/shadow/phased_check(mob/living/user, direction)
-	. = ..()
-	if(. && isspaceturf(.))
-		to_chat(user, span_warning("It really would not be wise to go into space."))
-		return FALSE
-	if(check_light_level(.))
-		if(!light_step_warning())
-			return FALSE
+/obj/effect/dummy/phased_mob/shadow/proc/reset_light_state()
+	light_time_remaining = 0
+	last_light_second = 0
 
 /obj/effect/dummy/phased_mob/shadow/eject_jaunter(forced_out = FALSE)
 	var/turf/reveal_turf = get_turf(src)
@@ -124,27 +124,6 @@
 /obj/effect/dummy/phased_mob/shadow/proc/check_light_level(atom/location_to_check)
 	var/turf/light_turf = get_turf(location_to_check)
 	return light_turf.check_lumcount_above(light_max) // jaunt ends on TRUE
-
-/**
- * Checks if the user should receive a warning that they're moving into light.
- *
- * Checks the cooldown for the warning message on moving into the light.
- * If the message has been displayed, and the cooldown (delay period) is complete, returns TRUE.
- */
-
-/obj/effect/dummy/phased_mob/shadow/proc/light_step_warning()
-	if(!light_alert_given) //Give the user a warning that they're leaving the darkness
-		balloon_alert(jaunter, "leaving the shadows...")
-		light_alert_given = TRUE
-		COOLDOWN_START(src, light_step_cooldown, 0.75 SECONDS)
-		addtimer(CALLBACK(src, PROC_REF(reactivate_light_alert)), 1 SECONDS) //You get a .5 second window to bypass the warning before it comes back
-		return FALSE
-
-	if(!COOLDOWN_FINISHED(src, light_step_cooldown))
-		return FALSE
-
-	light_alert_given = FALSE
-	return TRUE //Our jaunter is ignoring the warning, so we proceed
 
 /**
  * Sets light_alert_given to false.
