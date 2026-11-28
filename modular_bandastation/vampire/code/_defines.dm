@@ -11,7 +11,6 @@
 #define VAMPIRE_NULLIFICATION_CAP 120 // the maximum amount a vampire can be nullified naturally.
 #define VAMPIRE_COMPLETE_NULLIFICATION 100 // the point of nullification where vampires can no longer use abilities.
 
-#define ROLE_VAMPIRE "Vampire"
 #define HUD_MOB_VAMPIRE_BLOOD "mob_vampire_blood"
 
 /// Sent to a vampire spell to deduct its configured blood cost.

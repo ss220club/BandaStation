@@ -20,6 +20,8 @@
 #define ROLE_WIZARD "Wizard"
 #define ROLE_SPY "Spy"
 
+#define ROLE_VAMPIRE "Vampire" // BANDASTATION EDIT
+
 // Midround roles
 #define ROLE_ABDUCTOR "Abductor"
 #define ROLE_ALIEN "Xenomorph"
